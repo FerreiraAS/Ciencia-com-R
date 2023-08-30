@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="15.1 RSS | Ciência com " />
+<meta property="og:type" content="book" />
+
+<meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+<meta name="github-repo" content="rstudio/bookdown-demo" />
+
+<meta name="author" content="Arthur de Sá Ferreira" />
+
+<meta name="date" content="2023-08-28" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>">
+
+<title>15.1 RSS | Ciência com </title>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#sobre" id="toc-sobre">Sobre</a></li>
+<li class="has-sub"><a href="1-computacao-estatistica.html#computacao-estatistica" id="toc-computacao-estatistica"><span class="toc-section-number">1</span> <strong>Computação estatística</strong></a>
+<ul>
+<li class="has-sub"><a href="1.1-inicio.html#inicio" id="toc-inicio"><span class="toc-section-number">1.1</span> Por onde começar</a>
+<ul>
+<li><a href="1.1-inicio.html#o-que-são-scripts" id="toc-o-que-são-scripts"><span class="toc-section-number">1.1.1</span> O que são scripts?</a></li>
+<li><a href="1.1-inicio.html#quais-práticas-são-recomendadas-na-redação-de-scripts" id="toc-quais-práticas-são-recomendadas-na-redação-de-scripts"><span class="toc-section-number">1.1.2</span> Quais práticas são recomendadas na redação de scripts?</a></li>
+<li><a href="1.1-inicio.html#o-que-pode-ser-compartilhado" id="toc-o-que-pode-ser-compartilhado"><span class="toc-section-number">1.1.3</span> O que pode ser compartilhado?</a></li>
+<li><a href="1.1-inicio.html#como-preparar-os-scripts-para-compartilhamento" id="toc-como-preparar-os-scripts-para-compartilhamento"><span class="toc-section-number">1.1.4</span> Como preparar os scripts para compartilhamento?</a></li>
+</ul></li>
+<li><a href="1.2-instale.html#instale" id="toc-instale"><span class="toc-section-number">1.2</span> Instale R e R Studio</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-unidade-analise.html#unidade-analise" id="toc-unidade-analise"><span class="toc-section-number">2</span> <strong>Unidade de análise</strong></a>
+<ul>
+<li class="has-sub"><a href="2.1-definicao.html#definicao" id="toc-definicao"><span class="toc-section-number">2.1</span> Definição</a>
+<ul>
+<li><a href="2.1-definicao.html#o-que-é-uma-unidade-de-análise" id="toc-o-que-é-uma-unidade-de-análise"><span class="toc-section-number">2.1.1</span> O que é uma unidade de análise?</a></li>
+</ul></li>
+<li class="has-sub"><a href="2.2-pareamento.html#pareamento" id="toc-pareamento"><span class="toc-section-number">2.2</span> Pareamento</a>
+<ul>
+<li><a href="2.2-pareamento.html#o-que-é-pareamento" id="toc-o-que-é-pareamento"><span class="toc-section-number">2.2.1</span> O que é pareamento?</a></li>
+</ul></li>
+<li class="has-sub"><a href="2.3-medidas.html#medidas" id="toc-medidas"><span class="toc-section-number">2.3</span> Medidas únicas ou múltiplas</a>
+<ul>
+<li><a href="2.3-medidas.html#como-podem-ser-coletadas-as-informações-da-unidade-de-análise" id="toc-como-podem-ser-coletadas-as-informações-da-unidade-de-análise"><span class="toc-section-number">2.3.1</span> Como podem ser coletadas as informações da unidade de análise?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="3-tabulacao-dados.html#tabulacao-dados" id="toc-tabulacao-dados"><span class="toc-section-number">3</span> <strong>Tabulação de dados</strong></a>
+<ul>
+<li class="has-sub"><a href="3.1-planilhas.html#planilhas" id="toc-planilhas"><span class="toc-section-number">3.1</span> Planilhas eletrônicas</a>
+<ul>
+<li><a href="3.1-planilhas.html#qual-a-organização-de-uma-tabela-de-dados" id="toc-qual-a-organização-de-uma-tabela-de-dados"><span class="toc-section-number">3.1.1</span> Qual a organização de uma tabela de dados?</a></li>
+<li><a href="3.1-planilhas.html#qual-a-estrutura-básica-de-uma-tabela-para-análise-estatística" id="toc-qual-a-estrutura-básica-de-uma-tabela-para-análise-estatística"><span class="toc-section-number">3.1.2</span> Qual a estrutura básica de uma tabela para análise estatística?</a></li>
+<li><a href="3.1-planilhas.html#o-que-usar-para-organizar-tabelas-para-análise-computadorizada" id="toc-o-que-usar-para-organizar-tabelas-para-análise-computadorizada"><span class="toc-section-number">3.1.3</span> O que usar para organizar tabelas para análise computadorizada?</a></li>
+<li><a href="3.1-planilhas.html#o-que-não-usar-para-organizar-tabelas-para-análise-computadorizada" id="toc-o-que-não-usar-para-organizar-tabelas-para-análise-computadorizada"><span class="toc-section-number">3.1.4</span> O que <em>não</em> usar para organizar tabelas para análise computadorizada?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="4-dados.html#dados" id="toc-dados"><span class="toc-section-number">4</span> <strong>Dados</strong></a>
+<ul>
+<li class="has-sub"><a href="4.1-dados-1.html#dados-1" id="toc-dados-1"><span class="toc-section-number">4.1</span> Dados</a>
+<ul>
+<li><a href="4.1-dados-1.html#o-que-são-dados" id="toc-o-que-são-dados"><span class="toc-section-number">4.1.1</span> O que são dados?</a></li>
+</ul></li>
+<li class="has-sub"><a href="4.2-dados-perdidos.html#dados-perdidos" id="toc-dados-perdidos"><span class="toc-section-number">4.2</span> Dados perdidos</a>
+<ul>
+<li><a href="4.2-dados-perdidos.html#o-que-são-dados-perdidos" id="toc-o-que-são-dados-perdidos"><span class="toc-section-number">4.2.1</span> O que são dados perdidos?</a></li>
+<li><a href="4.2-dados-perdidos.html#qual-o-problema-de-um-estudo-ter-dados-perdidos" id="toc-qual-o-problema-de-um-estudo-ter-dados-perdidos"><span class="toc-section-number">4.2.2</span> Qual o problema de um estudo ter dados perdidos?</a></li>
+<li><a href="4.2-dados-perdidos.html#quais-os-mecanismos-geradores-de-dados-perdidos" id="toc-quais-os-mecanismos-geradores-de-dados-perdidos"><span class="toc-section-number">4.2.3</span> Quais os mecanismos geradores de dados perdidos?</a></li>
+<li><a href="4.2-dados-perdidos.html#como-identificar-o-mecanismo-gerador-de-dados-perdidos" id="toc-como-identificar-o-mecanismo-gerador-de-dados-perdidos"><span class="toc-section-number">4.2.4</span> Como identificar o mecanismo gerador de dados perdidos?</a></li>
+<li><a href="4.2-dados-perdidos.html#que-estratégias-podem-ser-utilizadas-na-coleta-de-dados-quando-há-expectativa-de-perda-amostral" id="toc-que-estratégias-podem-ser-utilizadas-na-coleta-de-dados-quando-há-expectativa-de-perda-amostral"><span class="toc-section-number">4.2.5</span> Que estratégias podem ser utilizadas na coleta de dados quando há expectativa de perda amostral?</a></li>
+<li><a href="4.2-dados-perdidos.html#que-estratégias-podem-ser-utilizadas-na-análise-de-dados-quando-há-dados-perdidos" id="toc-que-estratégias-podem-ser-utilizadas-na-análise-de-dados-quando-há-dados-perdidos"><span class="toc-section-number">4.2.6</span> Que estratégias podem ser utilizadas na análise de dados quando há dados perdidos?</a></li>
+<li><a href="4.2-dados-perdidos.html#que-estratégias-podem-ser-utilizadas-na-redação-de-estudos-em-que-há-dados-perdidos" id="toc-que-estratégias-podem-ser-utilizadas-na-redação-de-estudos-em-que-há-dados-perdidos"><span class="toc-section-number">4.2.7</span> Que estratégias podem ser utilizadas na redação de estudos em que há dados perdidos?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="5-variaveis-fatores.html#variaveis-fatores" id="toc-variaveis-fatores"><span class="toc-section-number">5</span> <strong>Variáveis e fatores</strong></a>
+<ul>
+<li class="has-sub"><a href="5.1-variaveis.html#variaveis" id="toc-variaveis"><span class="toc-section-number">5.1</span> Variáveis</a>
+<ul>
+<li><a href="5.1-variaveis.html#o-que-são-variáveis" id="toc-o-que-são-variáveis"><span class="toc-section-number">5.1.1</span> O que são variáveis?</a></li>
+<li><a href="5.1-variaveis.html#como-são-classificadas-as-variáveis" id="toc-como-são-classificadas-as-variáveis"><span class="toc-section-number">5.1.2</span> Como são classificadas as variáveis?</a></li>
+<li><a href="5.1-variaveis.html#por-que-é-importante-classificar-as-variáveis-corretamente" id="toc-por-que-é-importante-classificar-as-variáveis-corretamente"><span class="toc-section-number">5.1.3</span> Por que é importante classificar as variáveis corretamente?</a></li>
+</ul></li>
+<li class="has-sub"><a href="5.2-transformacao.html#transformacao" id="toc-transformacao"><span class="toc-section-number">5.2</span> Transformação de variáveis</a>
+<ul>
+<li><a href="5.2-transformacao.html#o-que-é-transformação-de-variáveis-contínuas" id="toc-o-que-é-transformação-de-variáveis-contínuas"><span class="toc-section-number">5.2.1</span> O que é transformação de variáveis contínuas?</a></li>
+<li><a href="5.2-transformacao.html#por-que-transformar-variáveis" id="toc-por-que-transformar-variáveis"><span class="toc-section-number">5.2.2</span> Por que transformar variáveis?</a></li>
+<li><a href="5.2-transformacao.html#quais-transformações-podem-ser-aplicadas" id="toc-quais-transformações-podem-ser-aplicadas"><span class="toc-section-number">5.2.3</span> Quais transformações podem ser aplicadas?</a></li>
+</ul></li>
+<li class="has-sub"><a href="5.3-dicotomizacao.html#dicotomizacao" id="toc-dicotomizacao"><span class="toc-section-number">5.3</span> Dicotomização de variáveis</a>
+<ul>
+<li><a href="5.3-dicotomizacao.html#é-recomendado-categorizar-ou-dicotomizar-variáveis-contínuas" id="toc-é-recomendado-categorizar-ou-dicotomizar-variáveis-contínuas"><span class="toc-section-number">5.3.1</span> É recomendado categorizar ou dicotomizar variáveis contínuas?</a></li>
+<li><a href="5.3-dicotomizacao.html#quais-métodos-podem-ser-usados-para-dicotomizar-variáveis-contínuas" id="toc-quais-métodos-podem-ser-usados-para-dicotomizar-variáveis-contínuas"><span class="toc-section-number">5.3.2</span> Quais métodos podem ser usados para dicotomizar variáveis contínuas?</a></li>
+</ul></li>
+<li class="has-sub"><a href="5.4-fatores.html#fatores" id="toc-fatores"><span class="toc-section-number">5.4</span> Fatores</a>
+<ul>
+<li><a href="5.4-fatores.html#o-que-são-fatores" id="toc-o-que-são-fatores"><span class="toc-section-number">5.4.1</span> O que são fatores?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="6-distribuicoes-parametros.html#distribuicoes-parametros" id="toc-distribuicoes-parametros"><span class="toc-section-number">6</span> <strong>Distribuições e parâmetros</strong></a>
+<ul>
+<li class="has-sub"><a href="6.1-distribuicoes.html#distribuicoes" id="toc-distribuicoes"><span class="toc-section-number">6.1</span> Distribuições</a>
+<ul>
+<li><a href="6.1-distribuicoes.html#o-que-são-distribuições" id="toc-o-que-são-distribuições"><span class="toc-section-number">6.1.1</span> O que são distribuições?</a></li>
+</ul></li>
+<li class="has-sub"><a href="6.2-parametros.html#parametros" id="toc-parametros"><span class="toc-section-number">6.2</span> Parâmetros</a>
+<ul>
+<li><a href="6.2-parametros.html#o-que-são-parâmetros" id="toc-o-que-são-parâmetros"><span class="toc-section-number">6.2.1</span> O que são parâmetros?</a></li>
+<li><a href="6.2-parametros.html#quais-são-os-parâmetros-mais-comuns" id="toc-quais-são-os-parâmetros-mais-comuns"><span class="toc-section-number">6.2.2</span> Quais são os parâmetros mais comuns?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="7-tabelas-figuras.html#tabelas-figuras" id="toc-tabelas-figuras"><span class="toc-section-number">7</span> <strong>Tabelas e Figuras</strong></a>
+<ul>
+<li class="has-sub"><a href="7.1-tabelas.html#tabelas" id="toc-tabelas"><span class="toc-section-number">7.1</span> Tabelas</a>
+<ul>
+<li><a href="7.1-tabelas.html#por-que-usar-tabelas" id="toc-por-que-usar-tabelas"><span class="toc-section-number">7.1.1</span> Por que usar tabelas?</a></li>
+<li><a href="7.1-tabelas.html#como-construir-a-tabela-1" id="toc-como-construir-a-tabela-1"><span class="toc-section-number">7.1.2</span> Como construir a Tabela 1?</a></li>
+<li><a href="7.1-tabelas.html#como-construir-a-tabela-2" id="toc-como-construir-a-tabela-2"><span class="toc-section-number">7.1.3</span> Como construir a Tabela 2?</a></li>
+</ul></li>
+<li class="has-sub"><a href="7.2-figuras.html#figuras" id="toc-figuras"><span class="toc-section-number">7.2</span> Figuras</a>
+<ul>
+<li><a href="7.2-figuras.html#o-que-são-figuras" id="toc-o-que-são-figuras"><span class="toc-section-number">7.2.1</span> O que são figuras?</a></li>
+<li><a href="7.2-figuras.html#como-construir-uma-figura" id="toc-como-construir-uma-figura"><span class="toc-section-number">7.2.2</span> Como construir uma figura?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="8-analise-exploratoria.html#analise-exploratoria" id="toc-analise-exploratoria"><span class="toc-section-number">8</span> <strong>Análise exploratória</strong></a>
+<ul>
+<li class="has-sub"><a href="8.1-descritiva.html#descritiva" id="toc-descritiva"><span class="toc-section-number">8.1</span> Análise descritiva</a>
+<ul>
+<li><a href="8.1-descritiva.html#o-que-é-análise-descritiva" id="toc-o-que-é-análise-descritiva"><span class="toc-section-number">8.1.1</span> O que é análise descritiva?</a></li>
+<li><a href="8.1-descritiva.html#o-que-são-quantis" id="toc-o-que-são-quantis"><span class="toc-section-number">8.1.2</span> O que são quantis?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="9-analise-regresaao.html#analise-regresaao" id="toc-analise-regresaao"><span class="toc-section-number">9</span> <strong>Análise de regressão</strong></a>
+<ul>
+<li class="has-sub"><a href="9.1-multivariavel-multivariada.html#multivariavel-multivariada" id="toc-multivariavel-multivariada"><span class="toc-section-number">9.1</span> Multivariável vs. Multivariada</a>
+<ul>
+<li><a href="9.1-multivariavel-multivariada.html#o-que-são-as-análises-de-regressão-multivariável-e-multivariada" id="toc-o-que-são-as-análises-de-regressão-multivariável-e-multivariada"><span class="toc-section-number">9.1.1</span> O que são as análises de regressão multivariável e multivariada?</a></li>
+</ul></li>
+<li class="has-sub"><a href="9.2-selecao.html#selecao" id="toc-selecao"><span class="toc-section-number">9.2</span> Seleção de variáveis</a>
+<ul>
+<li><a href="9.2-selecao.html#correlação-bivariada-pode-ser-usada-para-seleção-de-variáveis" id="toc-correlação-bivariada-pode-ser-usada-para-seleção-de-variáveis"><span class="toc-section-number">9.2.1</span> Correlação bivariada pode ser usada para seleção de variáveis?</a></li>
+<li><a href="9.2-selecao.html#o-que-pode-ser-feito-para-reduzir-o-número-de-variáveis-candidatas-a-um-modelo-multivariável" id="toc-o-que-pode-ser-feito-para-reduzir-o-número-de-variáveis-candidatas-a-um-modelo-multivariável"><span class="toc-section-number">9.2.2</span> O que pode ser feito para reduzir o número de variáveis candidatas a um modelo multivariável?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="10-delineamento-estudos.html#delineamento-estudos" id="toc-delineamento-estudos"><span class="toc-section-number">10</span> <strong>Delineamento de estudos</strong></a>
+<ul>
+<li class="has-sub"><a href="10.1-classificacao.html#classificacao" id="toc-classificacao"><span class="toc-section-number">10.1</span> Classificação</a>
+<ul>
+<li><a href="10.1-classificacao.html#como-podem-ser-classificados-os-estudos-científicos" id="toc-como-podem-ser-classificados-os-estudos-científicos"><span class="toc-section-number">10.1.1</span> Como podem ser classificados os estudos científicos?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="11-desempenho-diagnostico.html#desempenho-diagnostico" id="toc-desempenho-diagnostico"><span class="toc-section-number">11</span> <strong>Desempenho diagnóstico</strong></a>
+<ul>
+<li class="has-sub"><a href="11.1-curvas-roc.html#curvas-roc" id="toc-curvas-roc"><span class="toc-section-number">11.1</span> Curvas ROC</a>
+<ul>
+<li><a href="11.1-curvas-roc.html#como-analisar-o-desempenho-diagnóstico-em-desfechos-com-distribuição-trimodal-na-população" id="toc-como-analisar-o-desempenho-diagnóstico-em-desfechos-com-distribuição-trimodal-na-população"><span class="toc-section-number">11.1.1</span> Como analisar o desempenho diagnóstico em desfechos com distribuição trimodal na população?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="12-ensaios-clínicos-aleatorizados.html#ensaios-clínicos-aleatorizados" id="toc-ensaios-clínicos-aleatorizados"><span class="toc-section-number">12</span> <strong>Ensaios clínicos aleatorizados</strong></a>
+<ul>
+<li class="has-sub"><a href="12.1-caracteristicas.html#caracteristicas" id="toc-caracteristicas"><span class="toc-section-number">12.1</span> Características</a>
+<ul>
+<li><a href="12.1-caracteristicas.html#quais-são-as-características-dos-ensaios-clínnicos-randomizados" id="toc-quais-são-as-características-dos-ensaios-clínnicos-randomizados"><span class="toc-section-number">12.1.1</span> Quais são as características dos ensaios clínnicos randomizados?</a></li>
+</ul></li>
+<li class="has-sub"><a href="12.2-comparacao-linha-de-base.html#comparacao-linha-de-base" id="toc-comparacao-linha-de-base"><span class="toc-section-number">12.2</span> Comparação na linha de base</a>
+<ul>
+<li><a href="12.2-comparacao-linha-de-base.html#quais-estratégias-podem-ser-adotadas-sobre-comparação-entre-grupos-na-linha-de-base-em-ensaios-clínicos-randomizados" id="toc-quais-estratégias-podem-ser-adotadas-sobre-comparação-entre-grupos-na-linha-de-base-em-ensaios-clínicos-randomizados"><span class="toc-section-number">12.2.1</span> Quais estratégias podem ser adotadas sobre comparação entre grupos na linha de base em ensaios clínicos randomizados?</a></li>
+<li><a href="12.2-comparacao-linha-de-base.html#por-quê-não-se-deve-comparar-grupos-na-linha-de-base-em-ensaios-clínicos-randomizados" id="toc-por-quê-não-se-deve-comparar-grupos-na-linha-de-base-em-ensaios-clínicos-randomizados"><span class="toc-section-number">12.2.2</span> Por quê não se deve comparar grupos na linha de base em ensaios clínicos randomizados?</a></li>
+</ul></li>
+<li class="has-sub"><a href="12.3-comparacao-pre-pos.html#comparacao-pre-pos" id="toc-comparacao-pre-pos"><span class="toc-section-number">12.3</span> Análises de comparação</a>
+<ul>
+<li><a href="12.3-comparacao-pre-pos.html#que-modelos-podem-ser-utilizados-para-comparações" id="toc-que-modelos-podem-ser-utilizados-para-comparações"><span class="toc-section-number">12.3.1</span> Que modelos podem ser utilizados para comparações?</a></li>
+</ul></li>
+<li class="has-sub"><a href="12.4-ajuste-de-covariaveis.html#ajuste-de-covariaveis" id="toc-ajuste-de-covariaveis"><span class="toc-section-number">12.4</span> Ajuste de covariáveis</a>
+<ul>
+<li><a href="12.4-ajuste-de-covariaveis.html#quais-variáveis-devem-ser-utilizadas-no-ajuste-de-covariáveis" id="toc-quais-variáveis-devem-ser-utilizadas-no-ajuste-de-covariáveis"><span class="toc-section-number">12.4.1</span> Quais variáveis devem ser utilizadas no ajuste de covariáveis?</a></li>
+<li><a href="12.4-ajuste-de-covariaveis.html#quais-os-benefícios-do-ajuste-de-covariáveis" id="toc-quais-os-benefícios-do-ajuste-de-covariáveis"><span class="toc-section-number">12.4.2</span> Quais os benefícios do ajuste de covariáveis?</a></li>
+<li><a href="12.4-ajuste-de-covariaveis.html#quais-os-riscos-do-ajuste-de-covariáveis" id="toc-quais-os-riscos-do-ajuste-de-covariáveis"><span class="toc-section-number">12.4.3</span> Quais os riscos do ajuste de covariáveis?</a></li>
+<li><a href="12.4-ajuste-de-covariaveis.html#como-lidar-com-os-dados-perdidos-em-covariáveis" id="toc-como-lidar-com-os-dados-perdidos-em-covariáveis"><span class="toc-section-number">12.4.4</span> Como lidar com os dados perdidos em covariáveis?</a></li>
+</ul></li>
+<li class="has-sub"><a href="12.5-interacao.html#interacao" id="toc-interacao"><span class="toc-section-number">12.5</span> Interação</a>
+<ul>
+<li><a href="12.5-interacao.html#o-que-é-efeito-de-interação" id="toc-o-que-é-efeito-de-interação"><span class="toc-section-number">12.5.1</span> O que é efeito de interação?</a></li>
+<li><a href="12.5-interacao.html#quando-usar-o-termo-de-interação" id="toc-quando-usar-o-termo-de-interação"><span class="toc-section-number">12.5.2</span> Quando usar o termo de interação?</a></li>
+<li><a href="12.5-interacao.html#por-que-analisar-o-efeito-de-interação" id="toc-por-que-analisar-o-efeito-de-interação"><span class="toc-section-number">12.5.3</span> Por que analisar o efeito de interação?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="13-meta-analises.html#meta-analises" id="toc-meta-analises"><span class="toc-section-number">13</span> <strong>Meta-análises</strong></a>
+<ul>
+<li class="has-sub"><a href="13.1-interpretacao.html#interpretacao" id="toc-interpretacao"><span class="toc-section-number">13.1</span> Interpretação</a>
+<ul>
+<li><a href="13.1-interpretacao.html#como-avaliar-a-variação-do-tamanho-do-efeito" id="toc-como-avaliar-a-variação-do-tamanho-do-efeito"><span class="toc-section-number">13.1.1</span> Como avaliar a variação do tamanho do efeito?</a></li>
+<li><a href="13.1-interpretacao.html#como-avaliar-a-heterogeneidade-entre-os-estudos" id="toc-como-avaliar-a-heterogeneidade-entre-os-estudos"><span class="toc-section-number">13.1.2</span> Como avaliar a heterogeneidade entre os estudos?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="14-redacao.html#redacao" id="toc-redacao"><span class="toc-section-number">14</span> <strong>Redação estatística</strong></a>
+<ul>
+<li class="has-sub"><a href="14.1-diretrizes.html#diretrizes" id="toc-diretrizes"><span class="toc-section-number">14.1</span> Diretrizes</a>
+<ul>
+<li><a href="14.1-diretrizes.html#quais-diretrizes-estão-disponíveis" id="toc-quais-diretrizes-estão-disponíveis"><span class="toc-section-number">14.1.1</span> Quais diretrizes estão disponíveis?</a></li>
+</ul></li>
+<li class="has-sub"><a href="14.2-checklists.html#checklists" id="toc-checklists"><span class="toc-section-number">14.2</span> Checklists</a>
+<ul>
+<li><a href="14.2-checklists.html#o-que-são-checklists" id="toc-o-que-são-checklists"><span class="toc-section-number">14.2.1</span> O que são <em>checklists</em>?</a></li>
+<li><a href="14.2-checklists.html#por-que-usar-checklists" id="toc-por-que-usar-checklists"><span class="toc-section-number">14.2.2</span> Por que usar <em>checklists</em>?</a></li>
+<li><a href="14.2-checklists.html#quais-checklists-estão-disponíveis" id="toc-quais-checklists-estão-disponíveis"><span class="toc-section-number">14.2.3</span> Quais <em>checklists</em> estão disponíveis?</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="15-fontes-externas.html#fontes-externas" id="toc-fontes-externas"><span class="toc-section-number">15</span> <strong>Fontes externas</strong></a>
+<ul>
+<li><a href="15.1-rss.html#rss" id="toc-rss"><span class="toc-section-number">15.1</span> RSS</a></li>
+<li><a href="15.2-bmj.html#bmj" id="toc-bmj"><span class="toc-section-number">15.2</span> BMJ</a></li>
+<li><a href="15.3-jama.html#jama" id="toc-jama"><span class="toc-section-number">15.3</span> JAMA</a></li>
+<li><a href="15.4-aha-asa.html#aha-asa" id="toc-aha-asa"><span class="toc-section-number">15.4</span> AHA/ASA</a></li>
+<li><a href="15.5-npg.html#npg" id="toc-npg"><span class="toc-section-number">15.5</span> NPG</a></li>
+<li><a href="15.6-wiley.html#wiley" id="toc-wiley"><span class="toc-section-number">15.6</span> Wiley</a></li>
+</ul></li>
+<li><a href="16-pacotes.html#pacotes" id="toc-pacotes"><span class="toc-section-number">16</span> <strong>Pacotes R</strong></a></li>
+<li><a href="referências.html#referências" id="toc-referências">Referências</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="rss" class="section level2" number="15.1">
+<h2><span class="header-section-number">15.1</span> RSS</h2>
+<ul>
+<li><a href="https://royal-statistical-society.github.io/datavisguide/"><em>Best Practices for Data Visualisation | Royal Statistical Society</em></a></li>
+</ul>
+<p><br></p>
+</div>
+<p style="text-align: center;">
+<a href="15-fontes-externas.html"><button class="btn btn-default">Previous</button></a>
+<a href="15.2-bmj.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

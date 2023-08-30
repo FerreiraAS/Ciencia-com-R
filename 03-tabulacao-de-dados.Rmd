@@ -1,0 +1,233 @@
+# **Tabulação de dados** {#tabulacao-dados}
+
+<br>
+
+## Planilhas eletrônicas {#planilhas}
+
+<br>
+
+### Qual a organização de uma tabela de dados?
+
+-   Cada variável possui sua própria coluna (vertical).[@tierney2023]
+
+-   Cada observação possui sua própria linha (horizontal).[@tierney2023]
+
+-   Cada valor possui sua própria célula (linha, coluna).[@tierney2023]
+
+<br>
+
+### Qual a estrutura básica de uma tabela para análise estatística? {.tabset}
+
+-   Use apenas uma planilha para conter todas as informações coletadas. Evite múltiplas abas no mesmo arquivo, assim como múltiplos arquivos quando possível.[@broman2018]
+
+-   Use apenas 1 (uma) linha de cabeçalho para nomear os fatores e variáveis do seu estudo.[@broman2018]
+
+-   Tipicamente, cada linha representa um participante e cada coluna representa uma variável ou fator do estudo. Estudos com medidas repetidas dos participantes podem conter múltiplas linhas para o mesmo participante (repetindo os dados na mesma coluna, conhecido como *formato curto*) ou só uma linha para o participante (repetindo os dados em colunas separadas, conhecido como *formato longo* ).[@Juluru2015]
+
+<br>
+
+#### `r library(fontawesome); fa("square-check", fill = "green", margin_right = "0.1em")` *Recomendado*
+
+```{r tabela.0, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+# atribui rótulos para a tabela de dados
+N <- 5
+M <- 4
+
+# cria a tabela de exemplos
+table.0 <- matrix("dado", nrow = N, ncol = M)
+
+colnames(table.0) <- paste0("V", seq(1:M))
+for (i in 1:N) {
+  for (j in 1:M) {
+    table.0[i, j] <-
+      paste0("$$X", "_{", as.character(i), ",", as.character(j), "}$$")
+  }
+}
+
+# exibe a tabela
+kableExtra::kable(table.0,
+      align = "c",
+      format = "html",
+      escape = FALSE,
+      booktabs = TRUE) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = T,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    background = "#2C3E50",
+    bold = TRUE,
+    color = "white"
+  )
+```
+
+<br>
+
+### O que usar para organizar tabelas para análise computadorizada?
+
+-   Seja consistente em: códigos para as variáveis categóricas; códigos para dados perdidos; nomes das variáveis; identificadores de participantes; nome dos arquivos; formato de datas; uso de caracteres de espaço.[@broman2018; @Juluru2015]
+
+-   Use recursos para validação de dados antes e durante a digitação de dados.[@broman2018; @Juluru2015]
+
+::: blue
+`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *data.table*[@data.table] fornece a função *melt* para reorganizar a tabela em diferentes formatos. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cran.r-project.org/web/packages/data.table/index.html)
+:::
+
+<br>
+
+### O que *não* usar para organizar tabelas para análise computadorizada? {.tabset}
+
+-   Não deixe células em branco: substitua dados perdidos por um código sistemático (ex.: NA [*not available*]).[@broman2018]
+
+-   Não inclua análises estatísticas ou gráficos nas tabelas de dados brutos.[@broman2018]
+
+-   Não utilize cores como informação. Se necessário, crie colunas adicionais - variáveis instrumentais ou auxiliares - para identificar a infomação de modo que possa ser analisada.[@broman2018]
+
+-   Não use células mescladas.
+
+-   Delete linhas e/ou colunas totalmente em branco (sem unidades de análise e/ou sem variáveis).
+
+<br>
+
+```{r tabela.1, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+# cria a tabela de exemplos
+table.1 <- matrix(NA, nrow = 10, ncol = 2)
+
+# atribui rótulos para a tabela de dados
+colnames(table.1) <- c("ID", "Data.Coleta")
+
+# preenche a tabela com identificação da unidade de análise
+table.1[, 1] <- seq(1:10)
+
+# preenche a tabela com maus exemplos
+table.1[, 2] <- as.character(Sys.Date() + seq(1:10))
+
+# preenche a tabela com melhores exemplos
+table.1[, 2] <-
+  format(as.Date(table.1[, 2], origin = "1950-01-01"), "%d-%m-%Y")
+```
+
+```{r tabela.2, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+# cria a tabela de exemplos
+table.2 <- matrix(NA, nrow = 10, ncol = 4)
+
+# atribui rótulos para a tabela de dados
+colnames(table.2) <-
+  c("ID", "Estado Civil", "Estado.Civil", "Estado.Civil.Cod")
+
+# preenche a tabela com identificação da unidade de análise
+table.2[, 1] <- seq(1:10)
+
+# preenche a tabela com maus exemplos (&nbsp; representa o caracter " " em HTML)
+table.2[, 2] <-
+  c(
+    "casado",
+    "Casado",
+    "&nbsp;casado",
+    "Solteiro",
+    "&nbsp;Casado",
+    "&nbsp;solteiro",
+    "solteiro",
+    "Solteiro&nbsp;",
+    "&nbsp;casado",
+    "&nbsp;Solteiro&nbsp;"
+  )
+
+# preenche a tabela com melhores exemplos
+# altera para caixa baixa
+table.2[, 3] <- tolower(table.2[, 2])
+# remove espaços em branco
+table.2[, 3] <-
+  trimws(table.2[, 3], which = "both", whitespace = "[\t\r\n]")
+# remove espaço em branco de HTML
+table.2[, 3] <- gsub("&nbsp;", "", table.2[, 3])
+# converte em fator codificado
+table.2[, 4] <- factor(table.2[, 3])
+```
+
+```{r tabela.3, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+# cria a tabela de exemplos
+table.3 <- matrix(NA, nrow = 10, ncol = 3)
+
+# preenche a tabela com identificação da unidade de análise
+table.3[, 1] <- seq(1:10)
+
+# atribui rótulos para a tabela de dados
+colnames(table.3) <- c("ID", "Filhos", "Filhos")
+
+# preenche a tabela com maus exemplos
+table.3[, 2] <-
+  c("NA", 1, "NaN", "N/A", "N.A.", 0, "", "na", "n.a.", "999")
+
+# preenche a tabela com código único
+table.3[, 3] <-
+  gsub("NA|NaN|N/A|N.A.|na|n.a.|\t\r\n|^$|\\d{3}", NA, table.3[, 2])
+```
+
+#### `r library(fontawesome); fa("square-check", fill = "green", margin_right = "0.1em")` *Recomendado*
+
+```{r tabela.recomendada, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+# cria a tabela de exemplos
+table.final <-
+  data.frame(table.1[, 1], table.1[, 2], table.2[, 3], table.3[, 3])
+colnames(table.final) <-
+  c("ID", "Data.Coleta", "Estado.Civil", "Numero.Filhos")
+
+# exibe a tabela
+kableExtra::kable(table.final,
+      align = "l",
+      format = "html",
+      escape = FALSE,
+      booktabs = TRUE) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = T,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    background = "#2C3E50",
+    bold = TRUE,
+    color = "white"
+  )
+```
+
+<br>
+
+<!--script for generating HORIZONTAL LINE-->
+
+<hr style="height:2px;border-width:0;color:#2C3E50;background-color:#2C3E50">
+
+<a style="float:right" href="#top"><b>Início `r library(fontawesome); fa("circle-up")`</b></a>
+
+#### `r library(fontawesome); fa("xmark", fill = "red", margin_right = "0.1em")` *Evite*
+
+```{r tabela.evite, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+# cria a tabela de exemplos
+table.final <-
+  data.frame(table.1[, 1], table.1[, 2], table.2[, 2], table.3[, 2])
+colnames(table.final) <-
+  c("ID", "Data de Coleta", "Estado Civil", "Número de Filhos")
+
+# exibe a tabela
+kableExtra::kable(table.final,
+      align = "l",
+      format = "html",
+      escape = FALSE,
+      booktabs = TRUE) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = T,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    background = "#2C3E50",
+    bold = TRUE,
+    color = "white"
+  )
+```
+
+<br>

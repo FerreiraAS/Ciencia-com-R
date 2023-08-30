@@ -1,0 +1,35 @@
+---
+title: '**Ciência com `r library(fontawesome); fa("r-project", height = "1.5em", width = "1.5em", fill = "steelblue", margin_right = "0.1em")`**'
+author: "Arthur de Sá Ferreira"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+bibliography: [references.bib, grateful-refs.bib, packages.bib]
+link-citations: yes
+csl: american-medical-association-10th-edition.csl
+github-repo: rstudio/bookdown-demo
+always_allow_html: true
+geometry: "top=3cm,left=3cm,right=2cm,bottom=2cm"
+---
+
+```{r packages, echo = FALSE, results = 'hide', include = FALSE}
+library("dplyr")
+library("webshot")
+webshot::install_phantomjs()
+```
+
+# Sobre {-}
+
+<div>
+
+<center><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/main/thumbs/RStudio.png" width="10%" height="10%"/> Esta página foi desenvolvida em [**`r R.version$version.string`**](https://www.rstudio.com) usando [**R markdown**](https://rmarkdown.rstudio.com)</center>
+
+</div>
+
+<br>

@@ -1,0 +1,70 @@
+# **Computação estatística** {#computacao-estatistica}
+
+<br>
+
+## Por onde começar {#inicio}
+
+<br>
+
+### O que são scripts?
+
+-   Um **R script** é um arquivo de texto contendo (quase) os mesmos comandos que você digitaria na linha de comando do R. (Quase) refere-se ao fato de que se você estiver usando sink() para enviar a saída para um arquivo, você terá que incluir alguns comandos em print() para obter a mesma saída da linha de comando ([CRAN](https://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_scrpt.html)).
+
+<br>
+
+### Quais práticas são recomendadas na redação de scripts?
+
+-   Use nomes consistentes para as variáveis.[@SchwabSimon2021]
+
+-   Defina os tipos de variáveis adequatamente no banco de dados.[@SchwabSimon2021]
+
+-   Defina constantes - isto é, variáveis de valor fixo - ao invés de digitar valores.[@SchwabSimon2021]
+
+-   Use e cite os pacotes disponíveis para suas análises.[@SchwabSimon2021]
+
+-   Controle as versões do script.[@Eglen2017; @SchwabSimon2021]
+
+-   Teste o script antes de sua utilização.[@SchwabSimon2021]
+
+-   Conduza revisão por pares do código durante a redacão (digitação em dupla).[@SchwabSimon2021]
+
+<br>
+
+### O que pode ser compartilhado?
+
+-   Idealmente, todos os scripts, pacotes/biliotecas e dados necessários para outros reproduzirem seus dados.[@Eglen2017]
+
+-   Minimamente, partes importantes incluindo implementações de novos algoritmos e dados que permitam reproduzir um resultado importante.[@Eglen2017]
+
+<br>
+
+### Como preparar os scripts para compartilhamento?
+
+-   Crie links persistentes para versões do seu script.[@Eglen2017]
+
+-   Escolha uma licença apropriada para garantir como outros usarão seus scripts.[@Eglen2017]
+
+-   Providencie a documentação sobre seu script (ex.: arquivos *README*).[@Eglen2017]
+
+-   Compartilhar todos os pacotes relacionados à sua análise.[@Zhao2023]
+
+::: blue
+`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *formatR*[@formatR] fornece funções para formatar um ou mais scripts. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cran.r-project.org/web/packages/formatR/index.html)
+:::
+
+::: blue
+`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *pkglite*[@pkglite] permite submeter documentos eletrônicos com todos os pacotes necessários. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cran.rstudio.com/web/packages/pkglite/index.html)
+:::
+
+<br>
+
+## Instale R e R Studio {#instale}
+
+```{r R, echo = FALSE, include = TRUE, results = 'asis', screenshot.opts = list(delay = 5)}
+knitr::include_url("https://posit.co/download/rstudio-desktop/",
+  height = "600px")
+```
+
+[Download](https://posit.co/download/rstudio-desktop/)
+
+<br>
