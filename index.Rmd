@@ -18,6 +18,12 @@ always_allow_html: true
 geometry: "top=3cm,left=3cm,right=2cm,bottom=2cm"
 ---
 
+```{r nojekyll, results = "hide", include= FALSE}
+if(!file.exists(".nojekyll")) {
+  file.create('.nojekyll')
+}
+```
+
 ```{r packages, echo = FALSE, results = 'hide', include = FALSE}
 library("dplyr")
 library("webshot")
@@ -28,7 +34,13 @@ webshot::install_phantomjs()
 
 <div>
 
-<center><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/main/thumbs/RStudio.png" width="10%" height="10%"/> Esta página foi desenvolvida em [**`r R.version$version.string`**](https://www.rstudio.com) usando [**R markdown**](https://rmarkdown.rstudio.com)</center>
+<center><img src="https://github.com/rstudio/hex-stickers/blob/580e9bada770756d25dbd3696159744d1e9c9251/PNG/rmarkdown.png?raw=true" width="10%" height="10%"/> <br> Página desenvolvida usando [**Rmarkdown**](https://rmarkdown.rstudio.com)</center>
+
+<center><img src="https://github.com/rstudio/hex-stickers/blob/580e9bada770756d25dbd3696159744d1e9c9251/PNG/bookdown.png?raw=true" width="10%" height="10%"/> <br> Livro desenvolvido usando [**Bookdown**](https://bookdown.org/)</center>
+
+<center><img src="https://yihui.org/images/logo-tinytex.png" width="10%" height="10%"/> <br> E-book desenvolvido usando [**TinyTeX**](https://yihui.org/tinytex/)</center>
+
+<center><img src="https://github.com/rstudio/hex-stickers/blob/580e9bada770756d25dbd3696159744d1e9c9251/PNG/RStudio.png?raw=true" width="10%" height="10%"/> <br> Projeto desenvolvido usando [**RStudio**](https://posit.co/products/open-source/rstudio/)</center>
 
 </div>
 
