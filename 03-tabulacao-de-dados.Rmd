@@ -16,7 +16,7 @@
 
 <br>
 
-### Qual a estrutura básica de uma tabela para análise estatística? {.tabset}
+### Qual a estrutura básica de uma tabela para análise estatística?
 
 -   Use apenas uma planilha para conter todas as informações coletadas. Evite múltiplas abas no mesmo arquivo, assim como múltiplos arquivos quando possível.[@broman2018]
 
@@ -25,8 +25,6 @@
 -   Tipicamente, cada linha representa um participante e cada coluna representa uma variável ou fator do estudo. Estudos com medidas repetidas dos participantes podem conter múltiplas linhas para o mesmo participante (repetindo os dados na mesma coluna, conhecido como *formato curto*) ou só uma linha para o participante (repetindo os dados em colunas separadas, conhecido como *formato longo* ).[@Juluru2015]
 
 <br>
-
-#### `r library(fontawesome); fa("square-check", fill = "green", margin_right = "0.1em")` *Recomendado*
 
 ```{r tabela.0, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
 # atribui rótulos para a tabela de dados
@@ -71,13 +69,15 @@ kableExtra::kable(table.0,
 
 -   Use recursos para validação de dados antes e durante a digitação de dados.[@broman2018; @Juluru2015]
 
+<br>
+
 ::: blue
 `r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *data.table*[@data.table] fornece a função *melt* para reorganizar a tabela em diferentes formatos. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cran.r-project.org/web/packages/data.table/index.html)
 :::
 
 <br>
 
-### O que *não* usar para organizar tabelas para análise computadorizada? {.tabset}
+### O que *não* usar para organizar tabelas para análise computadorizada?
 
 -   Não deixe células em branco: substitua dados perdidos por um código sistemático (ex.: NA [*not available*]).[@broman2018]
 
@@ -166,7 +166,7 @@ table.3[, 3] <-
   gsub("NA|NaN|N/A|N.A.|na|n.a.|\t\r\n|^$|\\d{3}", NA, table.3[, 2])
 ```
 
-#### `r library(fontawesome); fa("square-check", fill = "green", margin_right = "0.1em")` *Recomendado*
+`r library(fontawesome); fa("square-check", fill = "green", margin_right = "0.1em")` *Recomendado*
 
 ```{r tabela.recomendada, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
 # cria a tabela de exemplos
@@ -196,13 +196,7 @@ kableExtra::kable(table.final,
 
 <br>
 
-<!--script for generating HORIZONTAL LINE-->
-
-<hr style="height:2px;border-width:0;color:#2C3E50;background-color:#2C3E50">
-
-<a style="float:right" href="#top"><b>Início `r library(fontawesome); fa("circle-up")`</b></a>
-
-#### `r library(fontawesome); fa("xmark", fill = "red", margin_right = "0.1em")` *Evite*
+`r library(fontawesome); fa("xmark", fill = "red", margin_right = "0.1em")` *Evite*
 
 ```{r tabela.evite, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
 # cria a tabela de exemplos

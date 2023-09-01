@@ -48,6 +48,8 @@
 
 -   Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise ('dado perdido' = 1, 'dado observado' = 0).[@Heymans2022]
 
+<br>
+
 ::: blue
 `r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *misty*[@misty] fornece a função *na.test* para executar o Little's Missing Completely at Random (MCAR) test[@little1988]. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cran.r-project.org/web/packages/misty/index.html)
 :::
@@ -81,6 +83,8 @@
 -   A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares - preditoras do desfecho e não dos dados perdidos - estão disponíveis.[@carpenter2021]
 
 -   Em dados longitudinais co um pequeno número de 'ondas' (medidas repetidas) e poucas variáveis, para análise com modelos de regressão univariados, a imputação via especificação condicional completa - também conhecido como imputação multivariada por equações encadeadas (*multivaraite imputation by chained equations*, MICE) - é eficiente do ponto de vista computacional e possui acurácia e precisão para estimação de parâmetros.[@Cao2022; @Heymans2022]
+
+<br>
 
 ::: blue
 `r library(fontawesome); fa("r-project", margin_right = "0.1em")` Os pacotes *mice*[@mice] e *miceadds*[@miceadds] fornecem funções para imputação de dados [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cran.r-project.org/web/packages/mice/index.html) [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cran.r-project.org/web/packages/miceadds/index.html)

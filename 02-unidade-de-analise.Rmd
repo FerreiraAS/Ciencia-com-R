@@ -14,8 +14,6 @@
 
 <br>
 
-<br>
-
 ## Pareamento {#pareamento}
 
 <br>
@@ -36,7 +34,7 @@
 
 <br>
 
-### Como podem ser coletadas as informações da unidade de análise? {.tabset}
+### Como podem ser coletadas as informações da unidade de análise?
 
 -   Da unidade de análise podem ser coletadas informações em medidas únicas, repetidas, seriadas ou múltiplas.
 
@@ -91,6 +89,8 @@ kableExtra::kable(head(table.1, n = 10L), align = "c", format = "html", booktabs
 ```
 
 -   A medida única da pressão arterial sistólica no braço esquerdo resulta em um valor pontual. O valor pontual será considerado representativo da variável para a unidade de análise (ex.: **`r VAR.1[k1]` mmHg** para o participante **\#`r k1`**). Medidas únicas obtidas de diferentes unidades de análise podem ser consideradas independentes se observadas outras condições na coleta de dados.
+
+<br>
 
 ```{r medidas-unicas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
 ```
@@ -155,6 +155,8 @@ kableExtra::kable(head(table.2, n = 10L), align = "c", format = "html", booktabs
 
 -   A medida repetida da pressão arterial no braço esquerdo, resultando em um conjunto de valores pontuais (ex.: **`r VAR.1[k2]` mmHg**, **`r VAR.2[k2]` mmHg** e **`r VAR.3[k2]` mmHg** para o participante **\#`r k2`**). As medidas repetidas podem ser tabuladas separadamente, por exemplo para análise da confiabilidade de obtenção dessa medida.
 
+<br>
+
 ```{r medidas-repetidas-separadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
 ```
 
@@ -213,7 +215,11 @@ kableExtra::kable(head(table.3, n = 10L), align = "c", format = "html", booktabs
   kableExtra::row_spec(k2, background = "#E6E6E6", bold = TRUE)
 ```
 
+<br>
+
 -   As medidas repetidas podem ser agregadas por algum parâmetro --- ex.: média, mediana, máximo, mínimo, entre outros---, observando-se a relevância biológica, clínica e/ou metodológica desta escolha. O valor agregado será considerado representativo da variável para a unidade de análise (ex.: média = **`r round(VAR.aggr[k2], digits = 0)` mmHg** para o participante **\#`r k2`**). Medidas agregadas obtidas de diferentes unidades de análise podem ser consideradas independentes se observadas outras condições na coleta de dados.
+
+<br>
 
 ```{r medidas-repetidas-agregadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
 ```
@@ -311,7 +317,11 @@ kableExtra::kable(head(table.4, n = 10L), align = "c", format = "html", booktabs
   kableExtra::row_spec(1:3, background = "#E6E6E6", bold = TRUE)
 ```
 
+<br>
+
 -   Medidas seriadas são possivelmente relacionadas e, portanto, dependentes na mesma unidade de análise. Por exemplo, a medida seriada da pressão arterial no braço esquerdo, em intervalos tipicamente regulares (ex.: **`r table.4[1,3]` mmHg**, **`r table.4[2,3]` mmHg** e **`r table.4[3,3]` mmHg** em **`r 1` min**, **`r 2` min** e **`r 3` min**, respectivamente, para o participante **#1**).
+
+<br>
 
 ```{r medidas-seriadas-separadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
 ```
@@ -406,7 +416,11 @@ kableExtra::kable(head(table.5, n = 10L), align = "c", format = "html", booktabs
   kableExtra::row_spec(1, background = "#E6E6E6", bold = TRUE)
 ```
 
+<br>
+
 -   Medidas seriadas também agregadas por parâmetros --- ex.: máximo, mínimo, amplitude --- são consideradas representativas da variação temporal ou de uma característica de interesse (ex.: amplitude = **`r table.5[1,2]` mmHg** para o participante **#1**).
+
+<br>
 
 ```{r medidas-seriadas-agregadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
 ```
@@ -468,6 +482,8 @@ kableExtra::kable(head(table.6, n = 10L), align = "c", format = "html", booktabs
 ```
 
 -   A medida de pressão arterial bilateral resulta em um conjunto de valores pontuais (ex.: braço esquerdo = **`r round(VAR.1[k4], digits = 0)` mmHg**, braço direito = **`r round(VAR.2[k4], digits = 0)` mmHg** para o participante **\#`r k4`**). Neste caso, ambos os valores pontuais são considerados representativos daquela unidade de análise. Medidas múltiplas também são possivelmente relacionadas e portanto são dependentes na mesma unidade de análise. Medidas múltiplas podem ser obtidas de modo repetido para análise agregada ou seriada.
+
+<br>
 
 ```{r medidas-multiplas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
 ```
