@@ -43,21 +43,27 @@ for (i in 1:N) {
 }
 
 # exibe a tabela
-kableExtra::kable(table.0,
-      align = "c",
-      format = "html",
-      escape = FALSE,
-      booktabs = TRUE) %>%
+kableExtra::kable(
+  table.0,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE
+) %>%
   kableExtra::kable_styling(
+    latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = T,
     position = "center"
   ) %>%
   kableExtra::row_spec(
     0,
-    background = "#2C3E50",
     bold = TRUE,
-    color = "white"
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::row_spec(
+    dim(table.0)[1],
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
   )
 ```
 
@@ -176,21 +182,27 @@ colnames(table.final) <-
   c("ID", "Data.Coleta", "Estado.Civil", "Numero.Filhos")
 
 # exibe a tabela
-kableExtra::kable(table.final,
-      align = "l",
-      format = "html",
-      escape = FALSE,
-      booktabs = TRUE) %>%
+kableExtra::kable(
+  table.final,
+  align = "l",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE
+) %>%
   kableExtra::kable_styling(
+    latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = T,
     position = "center"
   ) %>%
   kableExtra::row_spec(
     0,
-    background = "#2C3E50",
     bold = TRUE,
-    color = "white"
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::row_spec(
+    dim(table.final)[1],
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
   )
 ```
 
@@ -206,21 +218,27 @@ colnames(table.final) <-
   c("ID", "Data de Coleta", "Estado Civil", "Número de Filhos")
 
 # exibe a tabela
-kableExtra::kable(table.final,
-      align = "l",
-      format = "html",
-      escape = FALSE,
-      booktabs = TRUE) %>%
+kableExtra::kable(
+  table.final,
+  align = "l",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE
+) %>%
   kableExtra::kable_styling(
+    latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = T,
     position = "center"
-  ) %>%
+) %>%
   kableExtra::row_spec(
     0,
-    background = "#2C3E50",
     bold = TRUE,
-    color = "white"
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::row_spec(
+    dim(table.final)[1],
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
   )
 ```
 

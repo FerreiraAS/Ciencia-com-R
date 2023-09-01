@@ -73,18 +73,24 @@ colnames(table.1) <-
   c("Unidade de análise", "Pressão arterial, braço esquerdo (mmHg)")
 
 # exibe as 10 linhas iniciais da tabela de dados
-kableExtra::kable(head(table.1, n = 10L), align = "c", format = "html", booktabs = TRUE) %>%
+kableExtra::kable(
+  head(table.1, n = 10L),
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE
+) %>%
   kableExtra::kable_styling(
+    latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = T,
     position = "center"
   ) %>%
-  kableExtra::row_spec(
-    0,
-    background = "#2C3E50",
-    bold = TRUE,
-    color = "white"
-  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(10,
+                       bold = TRUE,
+                       extra_css = "border-bottom: 1px solid") %>%
   kableExtra::row_spec(k1, background = "#E6E6E6", bold = TRUE)
 ```
 
@@ -138,18 +144,24 @@ colnames(table.2) <-
   )
 
 # exibe as 10 linhas iniciais da tabela de dados
-kableExtra::kable(head(table.2, n = 10L), align = "c", format = "html", booktabs = TRUE) %>%
+kableExtra::kable(
+  head(table.2, n = 10L),
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE
+) %>%
   kableExtra::kable_styling(
+    latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = T,
     position = "center"
   ) %>%
-  kableExtra::row_spec(
-    0,
-    background = "#2C3E50",
-    bold = TRUE,
-    color = "white"
-  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(10,
+                       bold = TRUE,
+                       extra_css = "border-bottom: 1px solid") %>%
   kableExtra::row_spec(k2, background = "#E6E6E6", bold = TRUE)
 ```
 
@@ -200,18 +212,24 @@ colnames(table.3) <-
     "Pressão arterial, braço esquerdo (mmHg) média")
 
 # exibe as 10 linhas iniciais da tabela de dados
-kableExtra::kable(head(table.3, n = 10L), align = "c", format = "html", booktabs = TRUE) %>%
+kableExtra::kable(
+  head(table.3, n = 10L),
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE
+) %>%
   kableExtra::kable_styling(
+    latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = T,
     position = "center"
   ) %>%
-  kableExtra::row_spec(
-    0,
-    background = "#2C3E50",
-    bold = TRUE,
-    color = "white"
-  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(10,
+                       bold = TRUE,
+                       extra_css = "border-bottom: 1px solid") %>%
   kableExtra::row_spec(k2, background = "#E6E6E6", bold = TRUE)
 ```
 
@@ -302,18 +320,24 @@ colnames(table.4) <-
 row.names(table.4) <- NULL
 
 # exibe as 10 linhas iniciais da tabela de dados
-kableExtra::kable(head(table.4, n = 10L), align = "c", format = "html", booktabs = TRUE) %>%
+kableExtra::kable(
+  head(table.4, n = 10L),
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE
+) %>%
   kableExtra::kable_styling(
+    latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = T,
     position = "center"
   ) %>%
-  kableExtra::row_spec(
-    0,
-    background = "#2C3E50",
-    bold = TRUE,
-    color = "white"
-  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(10,
+                       bold = TRUE,
+                       extra_css = "border-bottom: 1px solid") %>%
   kableExtra::row_spec(1:3, background = "#E6E6E6", bold = TRUE)
 ```
 
@@ -401,18 +425,24 @@ colnames(table.5) <-
     "Pressão arterial, braço esquerdo (mmHg) amplitude")
 
 # exibe as 10 linhas iniciais da tabela de dados
-kableExtra::kable(head(table.5, n = 10L), align = "c", format = "html", booktabs = TRUE) %>%
+kableExtra::kable(
+  head(table.5, n = 10L),
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE
+) %>%
   kableExtra::kable_styling(
+    latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = T,
     position = "center"
   ) %>%
-  kableExtra::row_spec(
-    0,
-    background = "#2C3E50",
-    bold = TRUE,
-    color = "white"
-  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(10,
+                       bold = TRUE,
+                       extra_css = "border-bottom: 1px solid") %>%
   kableExtra::row_spec(1, background = "#E6E6E6", bold = TRUE)
 ```
 
@@ -466,18 +496,24 @@ colnames(table.6) <-
   )
 
 # exibe as 10 linhas iniciais da tabela de dados
-kableExtra::kable(head(table.6, n = 10L), align = "c", format = "html", booktabs = TRUE) %>%
+kableExtra::kable(
+  head(table.6, n = 10L),
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE
+) %>%
   kableExtra::kable_styling(
+    latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = T,
     position = "center"
   ) %>%
-  kableExtra::row_spec(
-    0,
-    background = "#2C3E50",
-    bold = TRUE,
-    color = "white"
-  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(10,
+                       bold = TRUE,
+                       extra_css = "border-bottom: 1px solid") %>%
   kableExtra::row_spec(k4, background = "#E6E6E6", bold = TRUE)
 ```
 
