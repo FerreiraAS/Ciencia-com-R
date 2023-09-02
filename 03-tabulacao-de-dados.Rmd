@@ -38,7 +38,7 @@ colnames(table.0) <- paste0("V", seq(1:M))
 for (i in 1:N) {
   for (j in 1:M) {
     table.0[i, j] <-
-      paste0("$$X", "_{", as.character(i), ",", as.character(j), "}$$")
+        paste0("$x", "_{", as.character(i), ",", as.character(j), "}$")
   }
 }
 
@@ -47,7 +47,9 @@ kableExtra::kable(
   table.0,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
-  booktabs = TRUE
+  booktabs = TRUE,
+  linesep = "",
+  escape = F
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -62,8 +64,7 @@ kableExtra::kable(
   ) %>%
   kableExtra::row_spec(
     dim(table.0)[1],
-    bold = TRUE,
-    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+    extra_css = "border-bottom: 1px solid"
   )
 ```
 
@@ -131,14 +132,14 @@ table.2[, 2] <-
   c(
     "casado",
     "Casado",
-    "&nbsp;casado",
+    " casado",
     "Solteiro",
-    "&nbsp;Casado",
-    "&nbsp;solteiro",
+    " Casado",
+    " solteiro",
     "solteiro",
-    "Solteiro&nbsp;",
-    "&nbsp;casado",
-    "&nbsp;Solteiro&nbsp;"
+    "Solteiro ",
+    " casado",
+    " Solteiro "
   )
 
 # preenche a tabela com melhores exemplos
@@ -186,7 +187,8 @@ kableExtra::kable(
   table.final,
   align = "l",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
-  booktabs = TRUE
+  booktabs = TRUE,
+  linesep = ""
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -201,8 +203,7 @@ kableExtra::kable(
   ) %>%
   kableExtra::row_spec(
     dim(table.final)[1],
-    bold = TRUE,
-    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+    extra_css = "border-bottom: 1px solid"
   )
 ```
 
@@ -222,7 +223,8 @@ kableExtra::kable(
   table.final,
   align = "l",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
-  booktabs = TRUE
+  booktabs = TRUE,
+  linesep = ""
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -237,8 +239,7 @@ kableExtra::kable(
   ) %>%
   kableExtra::row_spec(
     dim(table.final)[1],
-    bold = TRUE,
-    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+    extra_css = "border-bottom: 1px solid"
   )
 ```
 

@@ -4,6 +4,7 @@ bookdown::gitbook:
   table_css: false
   config:
     toc:
+      number_sections: true
       before: |
         <li><a href="./">Ciência com R</a></li>
       after: |
@@ -23,6 +24,8 @@ bookdown::gitbook:
       search: yes
 
 bookdown::pdf_book:
+  toc: true
+  number_sections: true
   includes:
     in_header: preamble.tex
   latex_engine: xelatex
