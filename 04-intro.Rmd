@@ -60,3 +60,36 @@
 
 <br>
 
+## Instalação {#instalacao}
+
+<br>
+
+- [**`r R.version$version.string`**](https://cran.rstudio.com/)
+
+<br>
+
+- [**RStudio**](https://posit.co/downloads/)
+
+<br>
+
+- **Pacotes**
+
+```{r pacotes-instalador, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "hide"}
+if (!require("remotes", character.only = TRUE, quietly = TRUE))
+  install.packages("remotes", character.only = TRUE)
+library("remotes", character.only = TRUE)
+
+if (!require("grateful", character.only = TRUE, quietly = TRUE))
+  remotes::install_github("Pakillo/grateful")
+library("grateful", character.only = TRUE)
+
+if (!require("emo", character.only = TRUE, quietly = TRUE))
+  devtools::install_github("hadley/emo"
+  )
+```
+
+```{r pacotes-citacao, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+grateful::cite_packages(output = "paragraph", citation.style = "american-medical-association-10th-edition.csl", bib.file = "grateful-refs.bib", dependencies = FALSE, out.dir = getwd())
+```
+
+<br>

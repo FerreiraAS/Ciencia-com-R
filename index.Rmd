@@ -1,20 +1,22 @@
 ---
-title: '**Ciência com `r library(fontawesome); fa("r-project", height = "1.5em", width = "1.5em", fill = "steelblue", margin_right = "0.1em")`**'
+title: '**Ciência com `r library(fontawesome); fa("r-project", height = "1.25em", width = "1.25em", fill = "steelblue", margin_right = "0.1em")`**'
 
 author: '&copy; `r format(Sys.Date(), "%Y")` by Arthur de Sá Ferreira <a id="cy-effective-orcid-url" class="underline"s href="https://orcid.org/0000-0001-7014-2002" target="orcid.widget" rel="me noopener noreferrer" style="vertical-align: top"><br><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width: 1em; margin-inline-start: 0.0em" alt="ORCID iD icon"/> https://orcid.org/0000-0001-7014-2002 </a>'
 
 date: 'Atualizado em `r format(Sys.Date(), "%d/%m/%Y")` <br> <a href="https://zenodo.org/badge/latestdoi/685181979"><img src="https://zenodo.org/badge/685181979.svg" alt="DOI"></a>'
 
 site: bookdown::bookdown_site
-documentclass: book
 url: https://ferreiraas.github.io/R-Book/
 github-repo: https://github.com/FerreiraAS/R-Book
-# cover-image: R-Book-Cover.png
+
+cover-image: "R-Book-Cover.png"
+
 geometry: "top=3cm,left=3cm,right=2cm,bottom=2cm"
 bibliography: [references.bib, grateful-refs.bib, packages.bib]
 link-citations: yes
 csl: american-medical-association-10th-edition.csl
 always_allow_html: true
+documentclass: book
 ---
 
 ```{r nojekyll, results = "hide", include= FALSE}
@@ -29,30 +31,36 @@ library("webshot")
 # webshot::install_phantomjs()
 ```
 
-# {-}
+```{r cover-generator, echo = FALSE, include = FALSE}
+source("book-cover.R")
+```
 
 <br>
 
+# Sobre o livro {-}
+
+```{r cover-site, fig.align = 'center', echo = FALSE, include = identical(knitr:::pandoc_to(), 'html'), fig.link = 'R-Book-Cover.png', out.width = "50%"}
+knitr::include_graphics('R-Book-Cover.png', dpi = NA)
+```
+   
 <br>
 
-<br>
-
-```{css echo = FALSE}
+```{css citation, echo = FALSE}
 .boxBorder {
      border: 2px solid black;
-     padding: 12px;
+     padding: 5px;
      outline-offset: 5px;
    }
 ```
 
-<div class="boxBorder">
-
 Como citar:
 
-Ferreira, Arthur de Sá. **Ciência com R**. Rio de Janeiro: 1a edição, 2023. [doi: 10.5281/zenodo.8320233](https://zenodo.org/badge/latestdoi/685181979)
+<div class="boxBorder">
+
+Ferreira, Arthur de Sá. **Ciência com R**. Rio de Janeiro: 1a edição, 2023. 55p. [doi: 10.5281/zenodo.8320233](https://zenodo.org/badge/latestdoi/685181979)
 
 </div>
 
 <br>
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />Esta obra está licenciada com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Atribuição-NãoComercial 4.0 Internacional</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />Esta obra está licenciada com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Atribuição-NãoComercial 4.0 Internacional</a>

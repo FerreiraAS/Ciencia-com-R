@@ -1,0 +1,1 @@
+pdftools::pdf_combine(c("docs/R-Book-Cover.pdf", "docs/R-Book.pdf"), output = "docs/R-Book.pdf")
