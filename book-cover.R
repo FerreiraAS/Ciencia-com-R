@@ -14,7 +14,7 @@ for(i in 1:2){
                    width = W,
                    height = H)
   }
-  par(mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0), bg = "#004B88")
+  par(mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0), bg = "#0B508C")
   plot(1, type = "n", xlab = "", ylab = "", xlim = c(0,W), ylim = c(0,H))
   
   # author name
