@@ -14,19 +14,18 @@ for(i in 1:2){
                    width = W,
                    height = H)
   }
-  par(mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))
-  
+  par(mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0), bg = "#004B88")
   plot(1, type = "n", xlab = "", ylab = "", xlim = c(0,W), ylim = c(0,H))
   
   # author name
-  text(x = W, y = H - H/9, labels = "Arthur de Sá Ferreira", pos = 2, cex = 1.5)
+  text(x = W, y = H - 0.5, labels = "Arthur de Sá Ferreira", pos = 2, cex = 1.5, col = "white")
   
   # book title
-  text(x = W, y = H/2, labels = "Ciência com R", pos = 2, cex = 3)
-  lines(x = (W - 4):W, y = rep(H/2 - 0.5, 5), lwd = 4)
-  
+  text(x = W, y = H/1.5, labels = "Ciência com R", pos = 2, cex = 4, col = "white")
+
   # author name
-  text(x = W/2, y = H - H/1, labels = format(Sys.Date(), "%Y"), adj = c(0,0), cex = 1)
+  text(x = W/2, y = H - H/1 - 0.1, labels = format(Sys.Date(), "%Y"), adj = c(0,0), cex = 1, col = "white")
   
+  source("cover-image.R")
   dev.off()
 }
