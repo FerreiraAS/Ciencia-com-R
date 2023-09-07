@@ -121,6 +121,13 @@
   pdfcreator={LaTeX via pandoc}}
 
 \title{\textbf{Ciência com R}}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Perguntas e respostas para pesquisadores e analistas de dados}
 \author{© 2023 by Arthur de Sá Ferreira https://orcid.org/0000-0001-7014-2002}
 \date{Atualizado em 07/09/2023}
 
@@ -159,12 +166,12 @@ A versão online desta obra está licenciada com uma Licença Creative Commons A
 \section{Por onde começar}\label{inicio}}
 
 \hypertarget{o-que-suxe3o-r-scripts}{%
-\subsection{\texorpdfstring{O que são \emph{R scripts}?}{O que são R scripts?}}\label{o-que-suxe3o-r-scripts}}
+\subsection{O que são R scripts?}\label{o-que-suxe3o-r-scripts}}
 
 \begin{itemize}
 \tightlist
 \item
-  Um \textbf{R script} é um arquivo de texto contendo (quase) os mesmos comandos que você digitaria na linha de comando do R. (Quase) refere-se ao fato de que se você estiver usando \emph{sink()} para enviar a saída para um arquivo, você terá que incluir alguns comandos em \emph{print()} para obter a mesma saída da linha de comando (\href{https://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_scrpt.html}{CRAN}).
+  Um R script é um arquivo de texto contendo (quase) os mesmos comandos que você digitaria na linha de comando do R. (Quase) refere-se ao fato de que se você estiver usando \emph{sink()} para enviar a saída para um arquivo, você terá que incluir alguns comandos em \emph{print()} para obter a mesma saída da linha de comando (\href{https://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_scrpt.html}{CRAN}).
 \end{itemize}
 
 \hypertarget{quais-pruxe1ticas-suxe3o-recomendadas-na-redauxe7uxe3o-de-r-scripts}{%
@@ -1418,28 +1425,28 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \section{Checklists}\label{checklists}}
 
 \hypertarget{o-que-suxe3o-checklists}{%
-\subsection{\texorpdfstring{O que são \emph{checklists}?}{O que são checklists?}}\label{o-que-suxe3o-checklists}}
+\subsection{O que são checklists?}\label{o-que-suxe3o-checklists}}
 
 \begin{itemize}
 \tightlist
 \item
-  \emph{Checklists} são listas que podem ser utilizadas por autores, revisores ou editores, durante as fases de planejamento ou apresentação, para redação ou revisão de textos que relatam anaálises estatísticas.
+  Checklists são listas que podem ser utilizadas por autores, revisores ou editores, durante as fases de planejamento ou apresentação, para redação ou revisão de textos que relatam anaálises estatísticas.
 \end{itemize}
 
 \hypertarget{por-que-usar-checklists}{%
-\subsection{\texorpdfstring{Por que usar \emph{checklists}?}{Por que usar checklists?}}\label{por-que-usar-checklists}}
+\subsection{Por que usar checklists?}\label{por-que-usar-checklists}}
 
 \begin{itemize}
 \item
-  \emph{Checklists} têm sido recomendados para melhorar o relato das análses realizadas, aumentar a transparência do estudo e reprodutibilidade dos achados.\textsuperscript{\protect\hyperlink{ref-Gardner1986}{112}}
+  Checklists têm sido recomendados para melhorar o relato das análses realizadas, aumentar a transparência do estudo e reprodutibilidade dos achados.\textsuperscript{\protect\hyperlink{ref-Gardner1986}{112}}
 \item
   Trabalhos acadêmicos que relatam análises de dados devem ser passar por revisão por pares que inclua apreciação da análise estatóstica, e sua adequaçào ao delineamento do estudo e instrumentos utilizados.\textsuperscript{\protect\hyperlink{ref-Mascha2017}{113}}
 \item
-  \emph{Checklists} não são suficientes para garantir a qualidade técnica da pesquisa, mas podem conitribuir para a revisão por pares.\textsuperscript{\protect\hyperlink{ref-Mascha2017}{113}}
+  Checklists não são suficientes para garantir a qualidade técnica da pesquisa, mas podem conitribuir para a revisão por pares.\textsuperscript{\protect\hyperlink{ref-Mascha2017}{113}}
 \end{itemize}
 
 \hypertarget{quais-checklists-estuxe3o-disponuxedveis}{%
-\subsection{\texorpdfstring{Quais \emph{checklists} estão disponíveis?}{Quais checklists estão disponíveis?}}\label{quais-checklists-estuxe3o-disponuxedveis}}
+\subsection{Quais checklists estão disponíveis?}\label{quais-checklists-estuxe3o-disponuxedveis}}
 
 \begin{itemize}
 \item
