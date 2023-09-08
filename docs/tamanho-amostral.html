@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>15 Delineamento de estudos | Ciência com </title>
+  <title>10 Tamanho da amostra | Ciência com </title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="15 Delineamento de estudos | Ciência com " />
+  <meta property="og:title" content="10 Tamanho da amostra | Ciência com " />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/R-Book/R-Book-Cover.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/R-Book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="15 Delineamento de estudos | Ciência com " />
+  <meta name="twitter:title" content="10 Tamanho da amostra | Ciência com " />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/R-Book/R-Book-Cover.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="analise-regresaao.html"/>
-<link rel="next" href="vieses.html"/>
+<link rel="prev" href="analise-exploratoria.html"/>
+<link rel="next" href="teste-hipotese.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -332,180 +332,18 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="delineamento-estudos" class="section level1 hasAnchor" number="15">
-<h1><span class="header-section-number">15</span> <strong>Delineamento de estudos</strong><a href="delineamento-estudos.html#delineamento-estudos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><br></p>
-<div id="classificacao" class="section level2 hasAnchor" number="15.1">
-<h2><span class="header-section-number">15.1</span> Classificação<a href="delineamento-estudos.html#classificacao" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="como-podem-ser-classificados-os-estudos-científicos" class="section level3 hasAnchor" number="15.1.1">
-<h3><span class="header-section-number">15.1.1</span> Como podem ser classificados os estudos científicos?<a href="delineamento-estudos.html#como-podem-ser-classificados-os-estudos-científicos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Estudos científicos podem ser classificados em <em>básicos</em>, <em>observacionais</em>, <em>experimentais</em>, <em>acurácia diagnóstica</em>, <em>propriedades psicométricas</em>, <em>avaliação econômica</em> e <em>revisões de literatura</em>:<span class="citation"><sup><a href="#ref-Grant2009">80</a>–<a href="#ref-chipman2022">89</a></sup></span></li>
-</ul>
-<p><br></p>
-<ul>
-<li><em>Estudos básicos</em><span class="citation"><sup><a href="#ref-Süt2014">81</a>,<a href="#ref-Chidambaram2019">86</a></sup></span>
-<ul>
-<li>Genética</li>
-<li>Celular</li>
-<li>Experimentos com animais</li>
-<li>Desenvolvimento de métodos</li>
-</ul></li>
-</ul>
-<p><br></p>
-<ul>
-<li><em>Estudos de simulação computacional</em><span class="citation"><sup><a href="#ref-Erdemir2020">87</a>,<a href="#ref-chipman2022">89</a></sup></span></li>
-</ul>
-<p><br></p>
-<ul>
-<li><em>Estudos observacionais</em><span class="citation"><sup><a href="#ref-Süt2014">81</a>,<a href="#ref-Chidambaram2019">86</a></sup></span>
-<ul>
-<li>Descritivo
-<ul>
-<li>Estudo de caso</li>
-<li>Série de casos</li>
-<li>Transversal</li>
-</ul></li>
-<li>Analítico
-<ul>
-<li>Transversal</li>
-<li>Caso-Controle
-<ul>
-<li>Caso-Controle aninhado</li>
-<li>Caso-Coorte</li>
-</ul></li>
-<li>Coorte prospectiva ou retrospectiva</li>
-</ul></li>
-</ul></li>
-</ul>
-<p><br></p>
-<ul>
-<li><em>Estudos de acurácia diagnóstica</em><span class="citation"><sup><a href="#ref-Chassé2019">85</a>,<a href="#ref-Yang2021">88</a></sup></span>
-<ul>
-<li>Transversal</li>
-<li>Caso-Controle</li>
-<li>Comparativo</li>
-<li>Totalmente pareado</li>
-<li>Parcialmente pareado com subgrupo aleatório</li>
-<li>Parcialmente pareado com subgrupo não aleatório</li>
-<li>Não pareado aleatório</li>
-<li>Não pareado não aleatório</li>
-</ul></li>
-</ul>
-<p><br></p>
-<ul>
-<li><em>Estudos de propriedades psicométricas</em><span class="citation"><sup><a href="#ref-Souza2017">82</a>,<a href="#ref-echevarría-guanilo2019">84</a></sup></span>
-<ul>
-<li>Validade</li>
-<li>Confiabilidade</li>
-<li>Concordância</li>
-</ul></li>
-</ul>
-<p><br></p>
-<ul>
-<li><em>Estudos quase-experimentais</em><span class="citation"><sup><a href="#ref-reeves2017">83</a></sup></span>
-<ul>
-<li>Quase-aleatorizado controlado</li>
-<li>Estimação de variável instrumental</li>
-<li>Discontinnuidade de regressão</li>
-<li>Série temporal interrompida controlada</li>
-<li>Série temporal interrompida</li>
-<li>Diferença</li>
-</ul></li>
-</ul>
-<p><br></p>
-<ul>
-<li><em>Estudos experimentais</em><span class="citation"><sup><a href="#ref-Süt2014">81</a>,<a href="#ref-Chidambaram2019">86</a></sup></span>
-<ul>
-<li>Fases I a IV
-<ul>
-<li>Aleatorizado controlado</li>
-<li>Não-aleatorizado controlado</li>
-<li>Autocontrolado</li>
-<li>Cruzado</li>
-<li>Fatorial</li>
-</ul></li>
-<li>Campo</li>
-<li>Comunitário</li>
-</ul></li>
-</ul>
-<p><br></p>
-<ul>
-<li><em>Estudos de avaliação econômica</em><span class="citation"><sup><a href="#ref-Süt2014">81</a></sup></span>
-<ul>
-<li>Análise de custo</li>
-<li>Análise de minimização de custo</li>
-<li>Análise de custo-utilidade</li>
-<li>Análise de custo-efetividade</li>
-<li>Análise de custo-benefício</li>
-</ul></li>
-</ul>
-<p><br></p>
-<ul>
-<li><em>Estudos de revisão</em><span class="citation"><sup><a href="#ref-Grant2009">80</a></sup></span>
-<ul>
-<li>Crítica</li>
-<li>Narrativa</li>
-<li>Mapeamento</li>
-<li>Sistemática</li>
-<li>Meta-análise</li>
-<li>Mista</li>
-<li>Visão geral</li>
-<li>Sistemática qualitativa</li>
-<li>Rápida</li>
-<li>Escopo</li>
-<li>Estado-da-arte</li>
-<li>Busca e revisão sistemática</li>
-<li>Sistematizada</li>
-<li>Guarda-chuva</li>
-</ul></li>
-</ul>
+<div id="tamanho-amostral" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> <strong>Tamanho da amostra</strong><a href="tamanho-amostral.html#tamanho-amostral" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
 
-</div>
-</div>
-</div>
-<h3>Referências<a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-Grant2009" class="csl-entry">
-<div class="csl-left-margin">80. </div><div class="csl-right-inline">Grant MJ, Booth A. A typology of reviews: an analysis of 14 review types and associated methodologies. <em>Health Information &amp; Libraries Journal</em>. 2009;26(2):91-108. doi:<a href="https://doi.org/10.1111/j.1471-1842.2009.00848.x">10.1111/j.1471-1842.2009.00848.x</a></div>
-</div>
-<div id="ref-Süt2014" class="csl-entry">
-<div class="csl-left-margin">81. </div><div class="csl-right-inline">Sut N. Study designs in medicine. <em>Balkan Medical Journal</em>. 2015;31(4):273-277. doi:<a href="https://doi.org/10.5152/balkanmedj.2014.1408">10.5152/balkanmedj.2014.1408</a></div>
-</div>
-<div id="ref-Souza2017" class="csl-entry">
-<div class="csl-left-margin">82. </div><div class="csl-right-inline">Souza AC de, Alexandre NMC, Guirardello E de B, Souza AC de, Alexandre NMC, Guirardello E de B. Propriedades psicométricas na avaliação de instrumentos: avaliação da confiabilidade e da validade. <em>Epidemiologia e Serviços de Saúde</em>. 2017;26(3):649-659. doi:<a href="https://doi.org/10.5123/s1679-49742017000300022">10.5123/s1679-49742017000300022</a></div>
-</div>
-<div id="ref-reeves2017" class="csl-entry">
-<div class="csl-left-margin">83. </div><div class="csl-right-inline">Reeves BC, Wells GA, Waddington H. Quasi-experimental study designs series<span></span>paper 5: a checklist for classifying studies evaluating the effects on health interventions<span></span>a taxonomy without labels. <em>Journal of Clinical Epidemiology</em>. 2017;89:30-42. doi:<a href="https://doi.org/10.1016/j.jclinepi.2017.02.016">10.1016/j.jclinepi.2017.02.016</a></div>
-</div>
-<div id="ref-echevarría-guanilo2019" class="csl-entry">
-<div class="csl-left-margin">84. </div><div class="csl-right-inline">Echevarría-Guanilo ME, Gonçalves N, Romanoski PJ. PSYCHOMETRIC PROPERTIES OF MEASUREMENT INSTRUMENTS: CONCEPTUAL BASIS AND EVALUATION METHODS - PART II. <em>Texto &amp; Contexto - Enfermagem</em>. 2019;28. doi:<a href="https://doi.org/10.1590/1980-265x-tce-2017-0311">10.1590/1980-265x-tce-2017-0311</a></div>
-</div>
-<div id="ref-Chassé2019" class="csl-entry">
-<div class="csl-left-margin">85. </div><div class="csl-right-inline">Chassé M, Fergusson DA. Diagnostic Accuracy Studies. <em>Seminars in Nuclear Medicine</em>. 2019;49(2):87-93. doi:<a href="https://doi.org/10.1053/j.semnuclmed.2018.11.005">10.1053/j.semnuclmed.2018.11.005</a></div>
-</div>
-<div id="ref-Chidambaram2019" class="csl-entry">
-<div class="csl-left-margin">86. </div><div class="csl-right-inline">Chidambaram AG, Josephson M. Clinical research study designs: The essentials. <em>PEDIATRIC INVESTIGATION</em>. 2019;3(4):245-252. doi:<a href="https://doi.org/10.1002/ped4.12166">10.1002/ped4.12166</a></div>
-</div>
-<div id="ref-Erdemir2020" class="csl-entry">
-<div class="csl-left-margin">87. </div><div class="csl-right-inline">Erdemir A, Mulugeta L, Ku JP, et al. Credible practice of modeling and simulation in healthcare: ten rules from a multidisciplinary perspective. <em>Journal of Translational Medicine</em>. 2020;18(1). doi:<a href="https://doi.org/10.1186/s12967-020-02540-4">10.1186/s12967-020-02540-4</a></div>
-</div>
-<div id="ref-Yang2021" class="csl-entry">
-<div class="csl-left-margin">88. </div><div class="csl-right-inline">Yang B, Olsen M, Vali Y, et al. Study designs for comparative diagnostic test accuracy: A methodological review and classification scheme. <em>Journal of Clinical Epidemiology</em>. 2021;138:128-138. doi:<a href="https://doi.org/10.1016/j.jclinepi.2021.04.013">10.1016/j.jclinepi.2021.04.013</a></div>
-</div>
-<div id="ref-chipman2022" class="csl-entry">
-<div class="csl-left-margin">89. </div><div class="csl-right-inline">Chipman H, Bingham D. Let’s practice what we preach: Planning and interpreting simulation studies with design and analysis of experiments. <em>Canadian Journal of Statistics</em>. 2022;50(4):1228-1249. doi:<a href="https://doi.org/10.1002/cjs.11719">10.1002/cjs.11719</a></div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="analise-regresaao.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="vieses.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analise-exploratoria.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="teste-hipotese.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
