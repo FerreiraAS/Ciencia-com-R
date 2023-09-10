@@ -83,7 +83,7 @@ kableExtra::kable(
   kableExtra::kable_styling(
     latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = T,
+    full_width = ifelse(knitr::is_html_output(), T, T),
     position = "center"
   ) %>%
   kableExtra::row_spec(0,
@@ -154,7 +154,7 @@ kableExtra::kable(
   kableExtra::kable_styling(
     latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = T,
+    full_width = ifelse(knitr::is_html_output(), T, T),
     position = "center"
   ) %>%
   kableExtra::row_spec(0,
@@ -222,7 +222,7 @@ kableExtra::kable(
   kableExtra::kable_styling(
     latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = T,
+    full_width = ifelse(knitr::is_html_output(), T, T),
     position = "center"
   ) %>%
   kableExtra::row_spec(0,
@@ -330,7 +330,7 @@ kableExtra::kable(
   kableExtra::kable_styling(
     latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = T,
+    full_width = ifelse(knitr::is_html_output(), T, T),
     position = "center"
   ) %>%
   kableExtra::row_spec(0,
@@ -435,7 +435,7 @@ kableExtra::kable(
   kableExtra::kable_styling(
     latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = T,
+    full_width = ifelse(knitr::is_html_output(), T, T),
     position = "center"
   ) %>%
   kableExtra::row_spec(0,
@@ -506,7 +506,7 @@ kableExtra::kable(
   kableExtra::kable_styling(
     latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = T,
+    full_width = ifelse(knitr::is_html_output(), T, T),
     position = "center"
   ) %>%
   kableExtra::row_spec(0,
