@@ -21,10 +21,10 @@ for(i in 1:2){
   source("cover-image.R")
   
   # author name
-  text(x = W, y = H - 0.5, labels = "Arthur de Sá Ferreira", pos = 2, cex = 1.5, col = "white")
+  text(x = W, y = H - 0.5, labels = "Arthur de Sá Ferreira", pos = 2, cex = 2, col = "white")
   
   # book title
-  text(x = W, y = H/2 + 2.0, labels = substitute(paste(bold("Ciência com R"))), pos = 2, cex = 4.5, col = "white")
+  text(x = W, y = H/2 + 2.0, labels = substitute(paste(bold("Ciência com R"))), pos = 2, cex = 5, col = "white")
 
   # book subtitle
   text(x = W, y = H/2 + 1.25, labels = substitute(paste(italic("Perguntas e respostas para pesquisadores e analistas de dados"))), pos = 2, cex = 1.5, col = "white")
