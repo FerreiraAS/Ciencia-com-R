@@ -4,13 +4,13 @@ H <- 11.7
 for(i in 1:2){
   
   if(i == 1){
-    grDevices::png(file = "Cover_1.png",
+    grDevices::png(file = "Cover_4.png",
                    width = W,
                    height = H,
                    units = "in",
                    res = 300)
   } else {
-    grDevices::pdf(file = "Cover_1.pdf",
+    grDevices::pdf(file = "Cover_4.pdf",
                    width = W,
                    height = H)
   }
@@ -45,7 +45,7 @@ for(i in 1:2){
   
   # book title
   text(x = W, y = H/2 + 2.0, labels = substitute(paste(bold("Ciência com R"))), pos = 2, cex = 5, col = "white")
-
+  
   # book subtitle
   text(x = W, y = H/2 + 1.25, labels = substitute(paste(italic("Perguntas e respostas para pesquisadores e analistas de dados"))), pos = 2, cex = 1.5, col = "white")
   
