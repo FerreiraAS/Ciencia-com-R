@@ -26,8 +26,8 @@ for(i in 1:2){
   # book subtitle
   text(x = W, y = H/1.5 + 1.0, labels = substitute(paste(italic("Perguntas e respostas para pesquisadores e analistas de dados"))), pos = 2, cex = 1.5, col = "white")
   
-  # author name
-  text(x = W/2, y = H - H/1 - 0.1, labels = format(Sys.Date(), "%Y"), adj = c(0,0), cex = 1, col = "white")
+  # year
+  text(x = W/2, y = -0.2, labels = format(Sys.Date(), "%Y"), adj = c(0,0), cex = 1, col = "white")
   
   source("cover-image.R")
   dev.off()

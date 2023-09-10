@@ -147,7 +147,7 @@
 
 Como citar:
 
-Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. 69p. \href{https://zenodo.org/badge/latestdoi/685181979}{doi: 10.5281/zenodo.8320233}
+Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. 75p. \href{https://zenodo.org/badge/latestdoi/685181979}{doi: 10.5281/zenodo.8320233}
 
 A versão online desta obra está licenciada com uma Licença Creative Commons Atribuição-NãoComercial 4.0 Internacional.
 
@@ -183,95 +183,6 @@ Componho o corpo editoral dos periódicos internacionais e nacionais: \href{http
 \chapter*{Prefácio}\label{prefuxe1cio}}
 \addcontentsline{toc}{chapter}{Prefácio}
 
-\hypertarget{computacao-estatistica}{%
-\chapter{\texorpdfstring{\textbf{Computação estatística}}{Computação estatística}}\label{computacao-estatistica}}
-
-\hypertarget{inicio}{%
-\section{Por onde começar}\label{inicio}}
-
-\hypertarget{o-que-uxe9-r}{%
-\subsection{O que é R?}\label{o-que-uxe9-r}}
-
-\begin{itemize}
-\tightlist
-\item
-  R é um programa de computador com linguagem computacional direcionada para análise estatística.\textsuperscript{\protect\hyperlink{ref-ihaka1996}{1}}
-\end{itemize}
-
-\hypertarget{o-que-suxe3o-scripts}{%
-\subsection{O que são scripts?}\label{o-que-suxe3o-scripts}}
-
-\begin{itemize}
-\tightlist
-\item
-  Um script é um arquivo de texto contendo (quase) os mesmos comandos que você digitaria na linha de comando do R. (Quase) refere-se ao fato de que se você estiver usando \emph{sink()} para enviar a saída para um arquivo, você terá que incluir alguns comandos em \emph{print()} para obter a mesma saída da linha de comando (\href{https://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_scrpt.html}{CRAN}).
-\end{itemize}
-
-\hypertarget{quais-pruxe1ticas-suxe3o-recomendadas-na-redauxe7uxe3o-de-scripts}{%
-\subsection{Quais práticas são recomendadas na redação de scripts?}\label{quais-pruxe1ticas-suxe3o-recomendadas-na-redauxe7uxe3o-de-scripts}}
-
-\begin{itemize}
-\item
-  Use nomes consistentes para as variáveis.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{2}}
-\item
-  Defina os tipos de variáveis adequatamente no banco de dados.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{2}}
-\item
-  Defina constantes - isto é, variáveis de valor fixo - ao invés de digitar valores.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{2}}
-\item
-  Use e cite os pacotes disponíveis para suas análises.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{2}}
-\item
-  Controle as versões do script.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{2},\protect\hyperlink{ref-Eglen2017}{3}}
-\item
-  Teste o script antes de sua utilização.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{2}}
-\item
-  Conduza revisão por pares do código durante a redacão (digitação em dupla).\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{2}}
-\end{itemize}
-
-\hypertarget{o-que-pode-ser-compartilhado}{%
-\subsection{O que pode ser compartilhado?}\label{o-que-pode-ser-compartilhado}}
-
-\begin{itemize}
-\item
-  Idealmente, todos os scripts, pacotes/biliotecas e dados necessários para outros reproduzirem seus dados.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{3}}
-\item
-  Minimamente, partes importantes incluindo implementações de novos algoritmos e dados que permitam reproduzir um resultado importante.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{3}}
-\end{itemize}
-
-\hypertarget{como-preparar-os-scripts-para-compartilhamento}{%
-\subsection{Como preparar os scripts para compartilhamento?}\label{como-preparar-os-scripts-para-compartilhamento}}
-
-\begin{itemize}
-\item
-  Crie links persistentes para versões do seu script.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{3}}
-\item
-  Escolha uma licença apropriada para garantir como outros usarão seus scripts.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{3}}
-\item
-  Providencie a documentação sobre seu script (ex.: arquivos \emph{README}).\textsuperscript{\protect\hyperlink{ref-Eglen2017}{3}}
-\item
-  Compartilhar todos os pacotes relacionados à sua análise.\textsuperscript{\protect\hyperlink{ref-Zhao2023}{4}}
-\end{itemize}
-
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{formatR}\textsuperscript{\protect\hyperlink{ref-formatR}{5}} fornece funções para formatar um ou mais scripts. \href{https://cran.r-project.org/web/packages/formatR/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
-
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{pkglite}\textsuperscript{\protect\hyperlink{ref-pkglite}{6}} permite submeter documentos eletrônicos com todos os pacotes necessários. \href{https://cran.rstudio.com/web/packages/pkglite/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
-
-\hypertarget{instalacao}{%
-\section{Instalação}\label{instalacao}}
-
-\begin{itemize}
-\item
-  \href{https://cran.rstudio.com/}{\textbf{R version 4.3.1 (2023-06-16)}}
-\item
-  \href{https://posit.co/downloads/}{\textbf{RStudio}}
-\item
-  \textbf{Pacotes}
-\end{itemize}
-
-We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the following R packages: bookdown v. 0.35\textsuperscript{\protect\hyperlink{ref-bookdown2016}{8},\protect\hyperlink{ref-bookdown2023}{9}}, devtools v. 2.4.5\textsuperscript{\protect\hyperlink{ref-devtools}{10}}, emo v. 0.0.0.9000\textsuperscript{\protect\hyperlink{ref-emo}{11}}, fontawesome v. 0.5.2\textsuperscript{\protect\hyperlink{ref-fontawesome}{12}}, kableExtra v. 1.3.4.9000\textsuperscript{\protect\hyperlink{ref-kableExtra}{13}}, knitr v. 1.43\textsuperscript{\protect\hyperlink{ref-knitr2014}{14}--\protect\hyperlink{ref-knitr2023}{16}}, remotes v. 2.4.2.1\textsuperscript{\protect\hyperlink{ref-remotes}{17}}, rmarkdown v. 2.24\textsuperscript{\protect\hyperlink{ref-rmarkdown2018}{18}--\protect\hyperlink{ref-rmarkdown2023}{20}}, tidyverse v. 2.0.0\textsuperscript{\protect\hyperlink{ref-tidyverse}{21}}, webshot v. 0.5.5\textsuperscript{\protect\hyperlink{ref-webshot}{22}}.
-
-\hypertarget{conceitos-fundamentais}{%
-\chapter{\texorpdfstring{\textbf{Conceitos fundamentais}}{Conceitos fundamentais}}\label{conceitos-fundamentais}}
-
 \hypertarget{unidade-analise}{%
 \chapter{\texorpdfstring{\textbf{Unidade de análise}}{Unidade de análise}}\label{unidade-analise}}
 
@@ -283,9 +194,9 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  A unidade de análise de pesquisas na área de saúde geralmente é o indivíduo. Outras possibilidades são instituições em estudos multicêntricos (ex.: hospitais, clínicas) ou estudos publicados em meta-análises (ex.: ensaios clínicos).\textsuperscript{\protect\hyperlink{ref-Altman1997}{23}}
+  A unidade de análise de pesquisas na área de saúde geralmente é o indivíduo. Outras possibilidades são instituições em estudos multicêntricos (ex.: hospitais, clínicas) ou estudos publicados em meta-análises (ex.: ensaios clínicos).\textsuperscript{\protect\hyperlink{ref-Altman1997}{1}}
 \item
-  É fundamental identificar corretamente a unidade de análise para evitar inflação do tamanho da amostra (ex.: medidas bilaterais resultando em o dobro de participantes), violações de suposições dos testes de hipótese (ex.: independência entre medidas e/ou unidade de análise) e resultados espúrios em testes de hipótese (ex.: p-valores menores que aqueles observados se a amostra não estivesse inflada).\textsuperscript{\protect\hyperlink{ref-Altman1997}{23},\protect\hyperlink{ref-Matthews1990}{24}}
+  É fundamental identificar corretamente a unidade de análise para evitar inflação do tamanho da amostra (ex.: medidas bilaterais resultando em o dobro de participantes), violações de suposições dos testes de hipótese (ex.: independência entre medidas e/ou unidade de análise) e resultados espúrios em testes de hipótese (ex.: p-valores menores que aqueles observados se a amostra não estivesse inflada).\textsuperscript{\protect\hyperlink{ref-Altman1997}{1},\protect\hyperlink{ref-Matthews1990}{2}}
 \end{itemize}
 
 \hypertarget{pareamento}{%
@@ -296,13 +207,13 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Pareamento significa que para cada participante de um grupo (por exemplo, com alguma condição clínica), existe um (ou mais) participantes (por exemplo, grupo controle) que possui características iguais ou similares relativas a algumas variáveis de interesse.\textsuperscript{\protect\hyperlink{ref-Bland1994}{25}}
+  Pareamento significa que para cada participante de um grupo (por exemplo, com alguma condição clínica), existe um (ou mais) participantes (por exemplo, grupo controle) que possui características iguais ou similares relativas a algumas variáveis de interesse.\textsuperscript{\protect\hyperlink{ref-Bland1994}{3}}
 \item
-  As variáveis escolhidas para pareamento devem ter relação com as variáveis de desfecho, mas não são de interesse elas mesmas.\textsuperscript{\protect\hyperlink{ref-Bland1994}{25}}
+  As variáveis escolhidas para pareamento devem ter relação com as variáveis de desfecho, mas não são de interesse elas mesmas.\textsuperscript{\protect\hyperlink{ref-Bland1994}{3}}
 \item
-  O ajuste por pareamento deve ser incluído nas análises estatísticas mesmo que as variáveis de pareamento não sejam consideradas prognósticas ou confundidores na amostra estudada.\textsuperscript{\protect\hyperlink{ref-Bland1994}{25}}
+  O ajuste por pareamento deve ser incluído nas análises estatísticas mesmo que as variáveis de pareamento não sejam consideradas prognósticas ou confundidores na amostra estudada.\textsuperscript{\protect\hyperlink{ref-Bland1994}{3}}
 \item
-  A ausência de evidência estatística de diferença entre grupos não é considerada pareamento.\textsuperscript{\protect\hyperlink{ref-Bland1994}{25}}
+  A ausência de evidência estatística de diferença entre grupos não é considerada pareamento.\textsuperscript{\protect\hyperlink{ref-Bland1994}{3}}
 \end{itemize}
 
 \hypertarget{medidas}{%
@@ -479,7 +390,7 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 \begin{itemize}
 \tightlist
 \item
-  ``Tudo são dados''.\textsuperscript{\protect\hyperlink{ref-Olson2021}{26}}
+  ``Tudo são dados''.\textsuperscript{\protect\hyperlink{ref-Olson2021}{4}}
 \end{itemize}
 
 \hypertarget{o-que-suxe3o-dados-primuxe1rios-e-secunduxe1rios}{%
@@ -487,9 +398,9 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Dados primários são dados originais coletados intencionalmente para uma determinada análise exploratória ou inferencial planejada a priori.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Dados primários são dados originais coletados intencionalmente para uma determinada análise exploratória ou inferencial planejada a priori.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \item
-  Dados secundários compreendem dados coletados inicialmente para análises de um estudo, e são subsequentemente utilizados para outras análises.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Dados secundários compreendem dados coletados inicialmente para análises de um estudo, e são subsequentemente utilizados para outras análises.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \end{itemize}
 
 \hypertarget{dados-perdidos}{%
@@ -501,7 +412,7 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 \begin{itemize}
 \tightlist
 \item
-  Dados perdidos são dados não coletados de um ou mais participantes, para uma ou mais variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
+  Dados perdidos são dados não coletados de um ou mais participantes, para uma ou mais variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2007}{6}}
 \end{itemize}
 
 \hypertarget{qual-o-problema-de-um-estudo-ter-dados-perdidos}{%
@@ -509,11 +420,11 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Uma grande quantidade de dados perdidos pode comprometer a integridade científica do estudo, considerando-se que o tamanho da amostra foi estimado para observar um determinado tamanho de efeito mínimo.\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
+  Uma grande quantidade de dados perdidos pode comprometer a integridade científica do estudo, considerando-se que o tamanho da amostra foi estimado para observar um determinado tamanho de efeito mínimo.\textsuperscript{\protect\hyperlink{ref-Altman2007}{6}}
 \item
-  Perda de participantes no estudo por dados perdidos pode reduzir o poder estatístico (erro tipo II).\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
+  Perda de participantes no estudo por dados perdidos pode reduzir o poder estatístico (erro tipo II).\textsuperscript{\protect\hyperlink{ref-Altman2007}{6}}
 \item
-  Não existe solução globalmente satisfatória para o problema de dados perdidos.\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
+  Não existe solução globalmente satisfatória para o problema de dados perdidos.\textsuperscript{\protect\hyperlink{ref-Altman2007}{6}}
 \end{itemize}
 
 \hypertarget{quais-os-mecanismos-geradores-de-dados-perdidos}{%
@@ -521,11 +432,11 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Dados perdidos completamente ao acaso (MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29},\protect\hyperlink{ref-carpenter2021}{30}}
+  Dados perdidos completamente ao acaso (MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{7},\protect\hyperlink{ref-carpenter2021}{8}}
 \item
-  Dados perdidos ao acaso (MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29},\protect\hyperlink{ref-carpenter2021}{30}}
+  Dados perdidos ao acaso (MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{7},\protect\hyperlink{ref-carpenter2021}{8}}
 \item
-  Dados perdidos não ao acaso (MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29},\protect\hyperlink{ref-carpenter2021}{30}}
+  Dados perdidos não ao acaso (MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{7},\protect\hyperlink{ref-carpenter2021}{8}}
 \end{itemize}
 
 \hypertarget{como-identificar-o-mecanismo-gerador-de-dados-perdidos}{%
@@ -533,12 +444,12 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Por definição, não é possível avaliar se os dados foram perdidos ao acaso (MAR) ou não (MNAR).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29}}
+  Por definição, não é possível avaliar se os dados foram perdidos ao acaso (MAR) ou não (MNAR).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{7}}
 \item
-  Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise (`dado perdido' = 1, `dado observado' = 0).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29}}
+  Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise (`dado perdido' = 1, `dado observado' = 0).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{7}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{31}} fornece a função \emph{na.test} para executar o Little's Missing Completely at Random (MCAR) test\textsuperscript{\protect\hyperlink{ref-little1988}{32}}. \href{https://cran.r-project.org/web/packages/misty/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{9}} fornece a função \emph{na.test} para executar o Little's Missing Completely at Random (MCAR) test\textsuperscript{\protect\hyperlink{ref-little1988}{10}}. \href{https://cran.r-project.org/web/packages/misty/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \hypertarget{que-estratuxe9gias-podem-ser-utilizadas-na-coleta-de-dados-quando-huxe1-expectativa-de-perda-amostral}{%
 \subsection{Que estratégias podem ser utilizadas na coleta de dados quando há expectativa de perda amostral?}\label{que-estratuxe9gias-podem-ser-utilizadas-na-coleta-de-dados-quando-huxe1-expectativa-de-perda-amostral}}
@@ -546,7 +457,7 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 \begin{itemize}
 \tightlist
 \item
-  Na expectativa de ocorrência de dados perdidos, recomenda-se ampliar o tamanho da amostra com um \% correspondente à tal estimativa - embora ainda não corriga potenciais vieses pela perda.\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
+  Na expectativa de ocorrência de dados perdidos, recomenda-se ampliar o tamanho da amostra com um \% correspondente à tal estimativa - embora ainda não corriga potenciais vieses pela perda.\textsuperscript{\protect\hyperlink{ref-Altman2007}{6}}
 \end{itemize}
 
 \hypertarget{que-estratuxe9gias-podem-ser-utilizadas-na-anuxe1lise-de-dados-quando-huxe1-dados-perdidos}{%
@@ -554,25 +465,25 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Na ocorrência de dados perdidos, a análise mais comum compreende apenas os `casos completos', com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
+  Na ocorrência de dados perdidos, a análise mais comum compreende apenas os `casos completos', com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).\textsuperscript{\protect\hyperlink{ref-Altman2007}{6}}
 \item
-  A análise de dados completos é válida quando pode se argumentar que que a probabiidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{30}}
+  A análise de dados completos é válida quando pode se argumentar que que a probabiidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{8}}
 \item
-  A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{30}}
+  A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{8}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{33}} fornece a função \emph{complete.cases} para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados. \href{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/stats-package.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{11}} fornece a função \emph{complete.cases} para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados. \href{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/stats-package.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \begin{itemize}
 \item
-  Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
+  Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.\textsuperscript{\protect\hyperlink{ref-Altman2007}{6}}
 \item
-  A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares - preditoras do desfecho e não dos dados perdidos - estão disponíveis.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{30}}
+  A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares - preditoras do desfecho e não dos dados perdidos - estão disponíveis.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{8}}
 \item
-  Em dados longitudinais co um pequeno número de `ondas' (medidas repetidas) e poucas variáveis, para análise com modelos de regressão univariados, a imputação via especificação condicional completa - também conhecido como imputação multivariada por equações encadeadas (\emph{multivaraite imputation by chained equations}, MICE) - é eficiente do ponto de vista computacional e possui acurácia e precisão para estimação de parâmetros.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29},\protect\hyperlink{ref-Cao2022}{34}}
+  Em dados longitudinais co um pequeno número de `ondas' (medidas repetidas) e poucas variáveis, para análise com modelos de regressão univariados, a imputação via especificação condicional completa - também conhecido como imputação multivariada por equações encadeadas (\emph{multivaraite imputation by chained equations}, MICE) - é eficiente do ponto de vista computacional e possui acurácia e precisão para estimação de parâmetros.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{7},\protect\hyperlink{ref-Cao2022}{12}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{35}} e \emph{miceadds}\textsuperscript{\protect\hyperlink{ref-miceadds}{36}} fornecem funções para imputação de dados \href{https://cran.r-project.org/web/packages/mice/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}} \href{https://cran.r-project.org/web/packages/miceadds/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{13}} e \emph{miceadds}\textsuperscript{\protect\hyperlink{ref-miceadds}{14}} fornecem funções para imputação de dados \href{https://cran.r-project.org/web/packages/mice/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}} \href{https://cran.r-project.org/web/packages/miceadds/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \hypertarget{que-estratuxe9gias-podem-ser-utilizadas-na-redauxe7uxe3o-de-estudos-em-que-huxe1-dados-perdidos}{%
 \subsection{Que estratégias podem ser utilizadas na redação de estudos em que há dados perdidos?}\label{que-estratuxe9gias-podem-ser-utilizadas-na-redauxe7uxe3o-de-estudos-em-que-huxe1-dados-perdidos}}
@@ -580,7 +491,7 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 \begin{itemize}
 \tightlist
 \item
-  Informar: o número de participantes com dados perdidos; diferenças nas taxas de dados perdidos entre os braços do estudo; os motivos dos dados perdidos; o fluxo de participantes; quaisquer diferenças entre os participantes com e sem dados perdidos; o padrão de ausência (por exemplo, se é aleatória); os métodos para tratamento de dados perdidos das variáveis em análise; os resultados de quaisquer análises de sensibilidade; as implicações dos dados perdidos na interpretação do resultados.\textsuperscript{\protect\hyperlink{ref-Akl2015}{37}}
+  Informar: o número de participantes com dados perdidos; diferenças nas taxas de dados perdidos entre os braços do estudo; os motivos dos dados perdidos; o fluxo de participantes; quaisquer diferenças entre os participantes com e sem dados perdidos; o padrão de ausência (por exemplo, se é aleatória); os métodos para tratamento de dados perdidos das variáveis em análise; os resultados de quaisquer análises de sensibilidade; as implicações dos dados perdidos na interpretação do resultados.\textsuperscript{\protect\hyperlink{ref-Akl2015}{15}}
 \end{itemize}
 
 \hypertarget{variaveis-fatores}{%
@@ -594,9 +505,9 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Variáveis são informações que podem variar entre medidas em diferentes indivíduos ou repetições.\textsuperscript{\protect\hyperlink{ref-Altman1999}{38}}
+  Variáveis são informações que podem variar entre medidas em diferentes indivíduos ou repetições.\textsuperscript{\protect\hyperlink{ref-Altman1999}{16}}
 \item
-  Variáveis definem características de uma amostra extraída da população, tipicamente observados por aplicação de métodos de amostragem (isto é, seleção) da população de interesse.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Variáveis definem características de uma amostra extraída da população, tipicamente observados por aplicação de métodos de amostragem (isto é, seleção) da população de interesse.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \end{itemize}
 
 \hypertarget{como-suxe3o-classificadas-as-variuxe1veis}{%
@@ -604,11 +515,11 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Quanto à informação: Quantitativa ou qualitativa.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27},\protect\hyperlink{ref-Ali2016}{39}--\protect\hyperlink{ref-kaliyadan2019}{41}}
+  Quanto à informação: Quantitativa ou qualitativa.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5},\protect\hyperlink{ref-Ali2016}{17}--\protect\hyperlink{ref-kaliyadan2019}{19}}
 \item
-  Quanto ao conteúdo: contínua (intervalo ou razão; discreta ou contínua), categórica ordinal (numérica discreta ou nominal) ou categórica nominal (multinominal ou dicotômica).\textsuperscript{\protect\hyperlink{ref-vetter2017}{27},\protect\hyperlink{ref-Ali2016}{39}--\protect\hyperlink{ref-kaliyadan2019}{41}}
+  Quanto ao conteúdo: contínua (intervalo ou razão; discreta ou contínua), categórica ordinal (numérica discreta ou nominal) ou categórica nominal (multinominal ou dicotômica).\textsuperscript{\protect\hyperlink{ref-vetter2017}{5},\protect\hyperlink{ref-Ali2016}{17}--\protect\hyperlink{ref-kaliyadan2019}{19}}
 \item
-  Quanto à interpretação: dependente (desfecho), independente (preditora, covariável, confundidora, controle), mediadora, moderadora, modificadora ou auxiliar.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27},\protect\hyperlink{ref-Ali2016}{39}--\protect\hyperlink{ref-kaliyadan2019}{41}}
+  Quanto à interpretação: dependente (desfecho), independente (preditora, covariável, confundidora, controle), mediadora, moderadora, modificadora ou auxiliar.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5},\protect\hyperlink{ref-Ali2016}{17}--\protect\hyperlink{ref-kaliyadan2019}{19}}
 \end{itemize}
 
 \hypertarget{por-que-uxe9-importante-classificar-as-variuxe1veis-corretamente}{%
@@ -617,7 +528,7 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 \begin{itemize}
 \tightlist
 \item
-  Identificar corrtamente os tipos de variáveis da pesquisa é uma das etapas da escolha dos métodos estatísticos adequados para as análises e reprentações no texto, tabelas e gráficos.\textsuperscript{\protect\hyperlink{ref-Dettori2018}{40}}
+  Identificar corrtamente os tipos de variáveis da pesquisa é uma das etapas da escolha dos métodos estatísticos adequados para as análises e reprentações no texto, tabelas e gráficos.\textsuperscript{\protect\hyperlink{ref-Dettori2018}{18}}
 \end{itemize}
 
 \hypertarget{transformacao}{%
@@ -628,9 +539,9 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Transformação significa aplicar uma função matemática à variável medida em sua unidade original.\textsuperscript{\protect\hyperlink{ref-Bland1996}{42}}
+  Transformação significa aplicar uma função matemática à variável medida em sua unidade original.\textsuperscript{\protect\hyperlink{ref-Bland1996}{20}}
 \item
-  A transformação visa atender aos pressupostos dos modelos estatísticos quanto à distribuição da variável, em geral a distribuição Gaussiana.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27},\protect\hyperlink{ref-Bland1996}{42}}
+  A transformação visa atender aos pressupostos dos modelos estatísticos quanto à distribuição da variável, em geral a distribuição Gaussiana.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5},\protect\hyperlink{ref-Bland1996}{20}}
 \end{itemize}
 
 \hypertarget{por-que-transformar-variuxe1veis}{%
@@ -638,9 +549,9 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Muitos procedimentos estatísticos supõem que as variáveis - ou seus termos de erro, mais especificamente - são normalmente distribuídas. A violação dessa suposição pode aumentar suas chances de cometer um erro do tipo I ou II.\textsuperscript{\protect\hyperlink{ref-osborne2010}{43}}
+  Muitos procedimentos estatísticos supõem que as variáveis - ou seus termos de erro, mais especificamente - são normalmente distribuídas. A violação dessa suposição pode aumentar suas chances de cometer um erro do tipo I ou II.\textsuperscript{\protect\hyperlink{ref-osborne2010}{21}}
 \item
-  Mesmo quando se está usando análises consideradas ``robustas'' para violações dessas suposições ou testes não paramétricos (que não assumem explicitamente termos de erro normalmente distribuídos), atender a essas questões pode melhorar os resultados das análises (por exemplo, Zimmerman, 1995).\textsuperscript{\protect\hyperlink{ref-osborne2010}{43}}
+  Mesmo quando se está usando análises consideradas ``robustas'' para violações dessas suposições ou testes não paramétricos (que não assumem explicitamente termos de erro normalmente distribuídos), atender a essas questões pode melhorar os resultados das análises (por exemplo, Zimmerman, 1995).\textsuperscript{\protect\hyperlink{ref-osborne2010}{21}}
 \end{itemize}
 
 \hypertarget{quais-transformauxe7uxf5es-podem-ser-aplicadas}{%
@@ -648,16 +559,16 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Distribuições com assimetria à direita: raiz quadrada, logaritmo natural, logaritmo base 10, transformação inversa.\textsuperscript{\protect\hyperlink{ref-osborne2010}{43}}
+  Distribuições com assimetria à direita: raiz quadrada, logaritmo natural, logaritmo base 10, transformação inversa.\textsuperscript{\protect\hyperlink{ref-osborne2010}{21}}
 \item
-  Distribuições com assimetria à esquerda: reflexão e raiz quadrada, reflexão e logaritmo natural, reflexão e logaritmo base 10, reflexão e transformação inversa.\textsuperscript{\protect\hyperlink{ref-osborne2010}{43}}
+  Distribuições com assimetria à esquerda: reflexão e raiz quadrada, reflexão e logaritmo natural, reflexão e logaritmo base 10, reflexão e transformação inversa.\textsuperscript{\protect\hyperlink{ref-osborne2010}{21}}
 \item
-  Transformação arco-seno.\textsuperscript{\protect\hyperlink{ref-osborne2010}{43}}
+  Transformação arco-seno.\textsuperscript{\protect\hyperlink{ref-osborne2010}{21}}
 \item
-  Transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{44}}
+  Transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{22}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{45}} fornece a função \emph{box.cox} para executar a transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{44}} \href{https://cran.r-project.org/web/packages/MASS/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{23}} fornece a função \emph{box.cox} para executar a transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{22}} \href{https://cran.r-project.org/web/packages/MASS/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \hypertarget{dicotomizacao}{%
 \section{Dicotomização de variáveis}\label{dicotomizacao}}
@@ -667,21 +578,21 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Categorizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de categorizar (ou dicotomizar), priorize as variáveis contínuas.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}--\protect\hyperlink{ref-Collins2016}{48}}
+  Categorizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de categorizar (ou dicotomizar), priorize as variáveis contínuas.\textsuperscript{\protect\hyperlink{ref-Altman2006}{24}--\protect\hyperlink{ref-Collins2016}{26}}
 \item
-  Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}--\protect\hyperlink{ref-Collins2016}{48}}
+  Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.\textsuperscript{\protect\hyperlink{ref-Altman2006}{24}--\protect\hyperlink{ref-Collins2016}{26}}
 \item
-  Dicotomização causa perda de informação e consequentemente à perda de poder estatístico para detectar efeitos.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}}
+  Dicotomização causa perda de informação e consequentemente perda de poder estatístico para detectar efeitos.\textsuperscript{\protect\hyperlink{ref-Altman2006}{24}}
 \item
-  Dicotomização também classifica indivíduos com valores próximos na variável contínua como indivíduos em pontos opostos e extremos, artificialmente sugerindo que são muito diferentes.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}}
+  Dicotomização também classifica indivíduos com valores próximos na variável contínua como indivíduos em pontos opostos e extremos, artificialmente sugerindo que são muito diferentes.\textsuperscript{\protect\hyperlink{ref-Altman2006}{24}}
 \item
-  Dicotomização pode diminuir a variabilidade das variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}}
+  Dicotomização pode diminuir a variabilidade das variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2006}{24}}
 \item
-  Dicotomização pode ocultar não-linearidades presentes na variável contínua.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}}
+  Dicotomização pode ocultar não-linearidades presentes na variável contínua.\textsuperscript{\protect\hyperlink{ref-Altman2006}{24}}
 \item
-  A mediana, embora amplamente utilizada, não é um bom parâmetro para dicotomizar variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}}
+  A mediana, embora amplamente utilizada, não é um bom parâmetro para dicotomizar variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2006}{24}}
 \item
-  Caso exista um ponto de corte ou limiar verdadeiro que discrimina dois ou mais grupos, identificá-lo ainda pode ser um desafio.\textsuperscript{\protect\hyperlink{ref-Prince2017}{49}}
+  Caso exista um ponto de corte ou limiar verdadeiro que discrimina dois ou mais grupos, identificá-lo ainda pode ser um desafio.\textsuperscript{\protect\hyperlink{ref-Prince2017}{27}}
 \end{itemize}
 
 \hypertarget{quais-muxe9todos-podem-ser-usados-para-dicotomizar-variuxe1veis-contuxednuas}{%
@@ -690,7 +601,7 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 \begin{itemize}
 \tightlist
 \item
-  Em termos de tabelas de contingência 2x2, os seguints métodos permitem\textsuperscript{\protect\hyperlink{ref-Prince2017}{49}} a identificação do limiar verdadeiro: Youden,\textsuperscript{\protect\hyperlink{ref-YOUDEN1950}{50}} Gini Index,\textsuperscript{\protect\hyperlink{ref-strobl2007}{51}} estatística qui-quadrado,\textsuperscript{\protect\hyperlink{ref-pearson1900}{52}} risco relativo\textsuperscript{\protect\hyperlink{ref-Greiner2000}{53}} e kappa\textsuperscript{\protect\hyperlink{ref-fleiss1971}{54}}.
+  Em termos de tabelas de contingência 2x2, os seguintes métodos permitem\textsuperscript{\protect\hyperlink{ref-Prince2017}{27}} a identificação do limiar verdadeiro: Youden,\textsuperscript{\protect\hyperlink{ref-YOUDEN1950}{28}} Gini Index,\textsuperscript{\protect\hyperlink{ref-strobl2007}{29}} estatística qui-quadrado,\textsuperscript{\protect\hyperlink{ref-pearson1900}{30}} risco relativo\textsuperscript{\protect\hyperlink{ref-Greiner2000}{31}} e kappa\textsuperscript{\protect\hyperlink{ref-fleiss1971}{32}}.
 \end{itemize}
 
 \hypertarget{fatores}{%
@@ -705,6 +616,18 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
   {[}REF{]}.
 \end{itemize}
 
+\hypertarget{questuxf5es-fundamentais}{%
+\chapter{\texorpdfstring{\textbf{Pensamento estatístico}}{Pensamento estatístico}}\label{questuxf5es-fundamentais}}
+
+\hypertarget{amostragem}{%
+\section{Amostragem}\label{amostragem}}
+
+\hypertarget{aleatorizacao}{%
+\section{Aleatorização}\label{aleatorizacao}}
+
+\hypertarget{probabilidade}{%
+\section{Probabilidade}\label{probabilidade}}
+
 \hypertarget{distribuicoes-parametros}{%
 \chapter{\texorpdfstring{\textbf{Distribuições e parâmetros}}{Distribuições e parâmetros}}\label{distribuicoes-parametros}}
 
@@ -717,7 +640,7 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 \begin{itemize}
 \tightlist
 \item
-  Uma distribuiçào estatística é uma função que descreve os valores possíveis ou o intervalo de valores de uma variável (eixo horizontal) e a frwquência com que cada valor é observado (eixo vertical).\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Uma distribuição estatística é uma função que descreve os valores possíveis ou o intervalo de valores de uma variável (eixo horizontal) e a frequência com que cada valor é observado (eixo vertical).\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \end{itemize}
 
 \hypertarget{o-que-uxe9-a-distribuiuxe7uxe3o-normal}{%
@@ -743,11 +666,11 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Histogramas.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Histogramas.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \item
-  Gráficos Q-Q.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Gráficos Q-Q.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \item
-  testes de hipótese de Kolmogorov-Smirnov, Shapiro-Wilk, Anderson-Darling.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  testes de hipótese de Kolmogorov-Smirnov, Shapiro-Wilk, Anderson-Darling.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \end{itemize}
 
 \hypertarget{parametros}{%
@@ -758,9 +681,9 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Parâmetros são informações que definem um modelo teórico, como propriedades de uma coleção de indivíduos.\textsuperscript{\protect\hyperlink{ref-Altman1999}{38}}
+  Parâmetros são informações que definem um modelo teórico, como propriedades de uma coleção de indivíduos.\textsuperscript{\protect\hyperlink{ref-Altman1999}{16}}
 \item
-  Parâmetros definem características de uma população inteira, tipicamente não observados por ser inviável ter acesso a todos os indivíduos que constituem tal população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Parâmetros definem características de uma população inteira, tipicamente não observados por ser inviável ter acesso a todos os indivíduos que constituem tal população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \end{itemize}
 
 \hypertarget{quais-suxe3o-os-paruxe2metros-mais-comuns}{%
@@ -768,14 +691,100 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Parâmetros de tendência central: médial, mediana, moda.\textsuperscript{\protect\hyperlink{ref-kanji2006}{55}}
+  Parâmetros de tendência central: médial, mediana, moda.\textsuperscript{\protect\hyperlink{ref-kanji2006}{33}}
 \item
-  Parâmetros de dispersão: variância, desvio-padrão, amplitude, intervalo interquartil, intervalo de confiança.\textsuperscript{\protect\hyperlink{ref-kanji2006}{55}}
+  Parâmetros de dispersão: variância, desvio-padrão, amplitude, intervalo interquartil, intervalo de confiança.\textsuperscript{\protect\hyperlink{ref-kanji2006}{33}}
 \item
-  Parâmetos de proporção: frequência absoluta, frequência relativa.\textsuperscript{\protect\hyperlink{ref-kanji2006}{55}}
+  Parâmetos de proporção: frequência absoluta, frequência relativa.\textsuperscript{\protect\hyperlink{ref-kanji2006}{33}}
 \item
-  Parâmetros de distribuição: assimetria, curtose.\textsuperscript{\protect\hyperlink{ref-kanji2006}{55}}
+  Parâmetros de distribuição: assimetria, curtose.\textsuperscript{\protect\hyperlink{ref-kanji2006}{33}}
 \end{itemize}
+
+\hypertarget{computacao-estatistica}{%
+\chapter{\texorpdfstring{\textbf{Computação estatística}}{Computação estatística}}\label{computacao-estatistica}}
+
+\hypertarget{inicio}{%
+\section{Por onde começar}\label{inicio}}
+
+\hypertarget{o-que-uxe9-r}{%
+\subsection{O que é R?}\label{o-que-uxe9-r}}
+
+\begin{itemize}
+\tightlist
+\item
+  R é um programa de computador com linguagem computacional direcionada para análise estatística.\textsuperscript{\protect\hyperlink{ref-ihaka1996}{34}}
+\end{itemize}
+
+\hypertarget{o-que-suxe3o-scripts}{%
+\subsection{O que são scripts?}\label{o-que-suxe3o-scripts}}
+
+\begin{itemize}
+\tightlist
+\item
+  Um script é um arquivo de texto contendo (quase) os mesmos comandos que você digitaria na linha de comando do R. (Quase) refere-se ao fato de que se você estiver usando \emph{sink()} para enviar a saída para um arquivo, você terá que incluir alguns comandos em \emph{print()} para obter a mesma saída da linha de comando (\href{https://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_scrpt.html}{CRAN}).
+\end{itemize}
+
+\hypertarget{quais-pruxe1ticas-suxe3o-recomendadas-na-redauxe7uxe3o-de-scripts}{%
+\subsection{Quais práticas são recomendadas na redação de scripts?}\label{quais-pruxe1ticas-suxe3o-recomendadas-na-redauxe7uxe3o-de-scripts}}
+
+\begin{itemize}
+\item
+  Use nomes consistentes para as variáveis.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{35}}
+\item
+  Defina os tipos de variáveis adequatamente no banco de dados.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{35}}
+\item
+  Defina constantes - isto é, variáveis de valor fixo - ao invés de digitar valores.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{35}}
+\item
+  Use e cite os pacotes disponíveis para suas análises.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{35}}
+\item
+  Controle as versões do script.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{35},\protect\hyperlink{ref-Eglen2017}{36}}
+\item
+  Teste o script antes de sua utilização.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{35}}
+\item
+  Conduza revisão por pares do código durante a redacão (digitação em dupla).\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{35}}
+\end{itemize}
+
+\hypertarget{o-que-pode-ser-compartilhado}{%
+\subsection{O que pode ser compartilhado?}\label{o-que-pode-ser-compartilhado}}
+
+\begin{itemize}
+\item
+  Idealmente, todos os scripts, pacotes/biliotecas e dados necessários para outros reproduzirem seus dados.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{36}}
+\item
+  Minimamente, partes importantes incluindo implementações de novos algoritmos e dados que permitam reproduzir um resultado importante.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{36}}
+\end{itemize}
+
+\hypertarget{como-preparar-os-scripts-para-compartilhamento}{%
+\subsection{Como preparar os scripts para compartilhamento?}\label{como-preparar-os-scripts-para-compartilhamento}}
+
+\begin{itemize}
+\item
+  Crie links persistentes para versões do seu script.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{36}}
+\item
+  Escolha uma licença apropriada para garantir como outros usarão seus scripts.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{36}}
+\item
+  Providencie a documentação sobre seu script (ex.: arquivos \emph{README}).\textsuperscript{\protect\hyperlink{ref-Eglen2017}{36}}
+\item
+  Compartilhar todos os pacotes relacionados à sua análise.\textsuperscript{\protect\hyperlink{ref-Zhao2023}{37}}
+\end{itemize}
+
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{formatR}\textsuperscript{\protect\hyperlink{ref-formatR}{38}} fornece funções para formatar um ou mais scripts. \href{https://cran.r-project.org/web/packages/formatR/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{pkglite}\textsuperscript{\protect\hyperlink{ref-pkglite}{39}} permite submeter documentos eletrônicos com todos os pacotes necessários. \href{https://cran.rstudio.com/web/packages/pkglite/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+
+\hypertarget{instalacao}{%
+\section{Instalação}\label{instalacao}}
+
+\begin{itemize}
+\item
+  \href{https://cran.rstudio.com/}{\textbf{R version 4.3.1 (2023-06-16)}}
+\item
+  \href{https://posit.co/downloads/}{\textbf{RStudio}}
+\item
+  \textbf{Pacotes}
+\end{itemize}
+
+We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{40}} and the following R packages: bookdown v. 0.35\textsuperscript{\protect\hyperlink{ref-bookdown2016}{41},\protect\hyperlink{ref-bookdown2023}{42}}, devtools v. 2.4.5\textsuperscript{\protect\hyperlink{ref-devtools}{43}}, emo v. 0.0.0.9000\textsuperscript{\protect\hyperlink{ref-emo}{44}}, fontawesome v. 0.5.2\textsuperscript{\protect\hyperlink{ref-fontawesome}{45}}, kableExtra v. 1.3.4.9000\textsuperscript{\protect\hyperlink{ref-kableExtra}{46}}, knitr v. 1.43\textsuperscript{\protect\hyperlink{ref-knitr2014}{47}--\protect\hyperlink{ref-knitr2023}{49}}, remotes v. 2.4.2.1\textsuperscript{\protect\hyperlink{ref-remotes}{50}}, rmarkdown v. 2.24\textsuperscript{\protect\hyperlink{ref-rmarkdown2018}{51}--\protect\hyperlink{ref-rmarkdown2023}{53}}, tidyverse v. 2.0.0\textsuperscript{\protect\hyperlink{ref-tidyverse}{54}}, webshot v. 0.5.5\textsuperscript{\protect\hyperlink{ref-webshot}{55}}.
 
 \hypertarget{tabulacao-dados}{%
 \chapter{\texorpdfstring{\textbf{Tabulação de dados}}{Tabulação de dados}}\label{tabulacao-dados}}
@@ -800,7 +809,7 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 
 \begin{itemize}
 \item
-  Use apenas uma planilha para conter todas as informações coletadas. Evite múltiplas abas no mesmo arquivo, assim como múltiplos arquivos quando possível.\textsuperscript{\protect\hyperlink{ref-broman2018}{57}}
+  Em geral, use apenas uma planilha para conter todas as informações coletadas. Evite múltiplas abas no mesmo arquivo, assim como múltiplos arquivos quando possível.\textsuperscript{\protect\hyperlink{ref-broman2018}{57}}
 \item
   Use apenas 1 (uma) linha de cabeçalho para nomear os fatores e variáveis do seu estudo.\textsuperscript{\protect\hyperlink{ref-broman2018}{57}}
 \item
@@ -896,12 +905,30 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  A análise descritiva utiliza métodos para calcular, descrever e resumiros dados coletados da(s) amostra(s) de modo que sejam interpretadas adequatamente.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  A análise descritiva utiliza métodos para calcular, descrever e resumir os dados coletados da(s) amostra(s) de modo que sejam interpretadas adequatamente.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \item
-  As análises descritivas geralmente compreendem a apresentação quntitativa (numérica) em tabelas e/ou gráficos.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  As análises descritivas geralmente compreendem a apresentação quantitativa (numérica) em tabelas e/ou gráficos.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \end{itemize}
 
 \includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{dataExplorer}\textsuperscript{\protect\hyperlink{ref-DataExplorer}{60}} fornece a função \emph{create\_report} para executar análise explotarória. \href{https://cran.r-project.org/web/packages/DataExplorer/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+
+\hypertarget{que-paruxe2metros-populacionais-podem-ser-estimados}{%
+\subsection{Que parâmetros populacionais podem ser estimados?}\label{que-paruxe2metros-populacionais-podem-ser-estimados}}
+
+\begin{itemize}
+\item
+  Proporções.{[}REF{]}
+\item
+  Tendência central.{[}REF{]}
+\item
+  Dispersão.{[}REF{]}
+\item
+  Extremos.{[}REF{]}
+\item
+  Proporções.{[}REF{]}
+\item
+  Intervalos de confiança.{[}REF{]}
+\end{itemize}
 
 \hypertarget{o-que-suxe3o-quantis}{%
 \subsection{O que são quantis?}\label{o-que-suxe3o-quantis}}
@@ -921,7 +948,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
   Centis dividem a amostra em 100 grupos tal que 1\% das observações ficam em cada grupo.\textsuperscript{\protect\hyperlink{ref-Altman1994}{61}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-base}{7}} fornece a função \emph{quantile} para executar análise de percentis. \href{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-base}{40}} fornece a função \emph{quantile} para executar análise de percentis. \href{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \hypertarget{tabelas-graficos-fluxogramas}{%
 \chapter{\texorpdfstring{\textbf{Tabelas, Gráficos e Fluxogramas}}{Tabelas, Gráficos e Fluxogramas}}\label{tabelas-graficos-fluxogramas}}
@@ -960,6 +987,15 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \end{itemize}
 
 \includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-table1}{65}} fornece funções para construção da `Tabela 2' \href{https://cran.r-project.org/web/packages/table1/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+
+\hypertarget{como-exportar-a-tabela-para-o-manuscrito}{%
+\subsection{Como exportar a tabela para o manuscrito?}\label{como-exportar-a-tabela-para-o-manuscrito}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
 
 \hypertarget{graficos}{%
 \section{Gráficos}\label{graficos}}
@@ -1020,6 +1056,15 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{ggsci}\textsuperscript{\protect\hyperlink{ref-ggsci}{73}} fornece palhetas de cores inspiradas em publicações científicas para uso em gráficos \href{https://cran.r-project.org/web/packages/ggsci/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
+\hypertarget{como-exportar-o-gruxe1fico-para-o-manuscrito}{%
+\subsection{Como exportar o gráfico para o manuscrito?}\label{como-exportar-o-gruxe1fico-para-o-manuscrito}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
 \hypertarget{fluxogramas}{%
 \section{Fluxogramas}\label{fluxogramas}}
 
@@ -1056,20 +1101,83 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Na análise inferencial são utilizados dados da(s) amostra(s) para fazer uma inferência válida (isto é, estimativa) sobre os parâmetros populacionais desconhecidos.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Na análise inferencial são utilizados dados da(s) amostra(s) para fazer uma inferência válida (isto é, estimativa) sobre os parâmetros populacionais desconhecidos.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \end{itemize}
 
-\hypertarget{testes-parametricos-nuxe3o-parametricos}{%
-\section{Testes paramétricos e não-paramétricos}\label{testes-parametricos-nuxe3o-parametricos}}
+\hypertarget{o-que-uxe9-uma-anuxe1lise-ad-hoc}{%
+\subsection{O que é uma análise ad hoc?}\label{o-que-uxe9-uma-anuxe1lise-ad-hoc}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{o-que-uxe9-uma-anuxe1lise-post-hoc}{%
+\subsection{O que é uma análise post hoc?}\label{o-que-uxe9-uma-anuxe1lise-post-hoc}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{tamanho-efeito}{%
+\section{Tamanho do efeito}\label{tamanho-efeito}}
+
+\hypertarget{o-que-uxe9-o-tamanho-do-efeito}{%
+\subsection{O que é o tamanho do efeito?}\label{o-que-uxe9-o-tamanho-do-efeito}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{p-valor}{%
+\section{P-valor}\label{p-valor}}
+
+\hypertarget{o-que-uxe9-o-p-valor}{%
+\subsection{O que é o P-valor?}\label{o-que-uxe9-o-p-valor}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{erros-inferencia}{%
+\section{Erros de inferência}\label{erros-inferencia}}
+
+\hypertarget{o-que-uxe9-erro-tipo-i}{%
+\subsection{O que é erro tipo I?}\label{o-que-uxe9-erro-tipo-i}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{o-que-uxe9-erro-tipo-ii}{%
+\subsection{O que é erro tipo II?}\label{o-que-uxe9-erro-tipo-ii}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{tipos-testes-inferenciais}{%
+\section{Tipos de testes inferencias}\label{tipos-testes-inferenciais}}
 
 \hypertarget{o-que-uxe9-um-teste-paramuxe9trico}{%
 \subsection{O que é um teste paramétrico?}\label{o-que-uxe9-um-teste-paramuxe9trico}}
 
 \begin{itemize}
 \item
-  Testes paramétricos possuem suposições sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Testes paramétricos possuem suposições sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \item
-  Testes paramétricos assumem que os dados foram amostrados de uma distribuição normal.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Testes paramétricos assumem que os dados foram amostrados de uma distribuição normal.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \end{itemize}
 
 \hypertarget{o-que-uxe9-um-teste-nuxe3o-paramuxe9trico}{%
@@ -1078,7 +1186,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Testes não-paramétricos fazem poucas suposições, ou menos rigorosas, sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Testes não-paramétricos fazem poucas suposições, ou menos rigorosas, sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \end{itemize}
 
 \hypertarget{por-que-os-testes-paramuxe9tricos-suxe3o-preferidos}{%
@@ -1087,7 +1195,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Em geral, testes paramétricos são mais robustos (isto é, possuem menores erros tipo I e II) que seus testes não-paramétricos correspondentes.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
+  Em geral, testes paramétricos são mais robustos (isto é, possuem menores erros tipo I e II) que seus testes não-paramétricos correspondentes.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \end{itemize}
 
 \hypertarget{analise-comparacao}{%
@@ -1141,6 +1249,49 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
   Use simulações de dados para identificar qual(is) variável(is) está(ão) causando problemas de convergência do ajuste do modelo.\textsuperscript{\protect\hyperlink{ref-Sun1996}{80}}
 \end{itemize}
 
+\hypertarget{analise-desempenho-diagnostico}{%
+\chapter{\texorpdfstring{\textbf{Análise de desempenho diagnóstico}}{Análise de desempenho diagnóstico}}\label{analise-desempenho-diagnostico}}
+
+\hypertarget{tabelas-2x2}{%
+\section{Tabelas 2x2}\label{tabelas-2x2}}
+
+\hypertarget{como-analisar-o-desempenho-diagnuxf3stico-em-tabelas-2x2}{%
+\subsection{Como analisar o desempenho diagnóstico em tabelas 2x2?}\label{como-analisar-o-desempenho-diagnuxf3stico-em-tabelas-2x2}}
+
+\begin{itemize}
+\item
+  Acurácia.{[}REF{]}
+\item
+  Sensibilidade.{[}REF{]}
+\item
+  Especificidade.{[}REF{]}
+\item
+  Valor preditivo positivo{[}REF{]}
+\item
+  Valor preditivo negativo.{[}REF{]}
+\end{itemize}
+
+\hypertarget{curvas-roc}{%
+\section{Curvas ROC}\label{curvas-roc}}
+
+\hypertarget{como-analisar-o-desempenho-diagnuxf3stico-em-desfechos-com-distribuiuxe7uxe3o-trimodal-na-populauxe7uxe3o}{%
+\subsection{Como analisar o desempenho diagnóstico em desfechos com distribuição trimodal na população?}\label{como-analisar-o-desempenho-diagnuxf3stico-em-desfechos-com-distribuiuxe7uxe3o-trimodal-na-populauxe7uxe3o}}
+
+\begin{itemize}
+\tightlist
+\item
+  Limiares duplos podem ser utilizados para análise de desempenho diagnóstico de testes com distribuição trimodal.\textsuperscript{\protect\hyperlink{ref-ferreira2021}{81}}
+\end{itemize}
+
+\hypertarget{analise-concordancia-confiabilidade}{%
+\chapter{\texorpdfstring{\textbf{Análise de concordância e confiabilidade}}{Análise de concordância e confiabilidade}}\label{analise-concordancia-confiabilidade}}
+
+\hypertarget{concordancia}{%
+\section{Concordância}\label{concordancia}}
+
+\hypertarget{confiabilidade}{%
+\section{Confiabilidade}\label{confiabilidade}}
+
 \hypertarget{delineamento-estudos}{%
 \chapter{\texorpdfstring{\textbf{Delineamento de estudos}}{Delineamento de estudos}}\label{delineamento-estudos}}
 
@@ -1153,13 +1304,13 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Estudos científicos podem ser classificados em \emph{básicos}, \emph{observacionais}, \emph{experimentais}, \emph{acurácia diagnóstica}, \emph{propriedades psicométricas}, \emph{avaliação econômica} e \emph{revisões de literatura}:\textsuperscript{\protect\hyperlink{ref-Grant2009}{81}--\protect\hyperlink{ref-chipman2022}{90}}
+  Estudos científicos podem ser classificados em \emph{básicos}, \emph{observacionais}, \emph{experimentais}, \emph{acurácia diagnóstica}, \emph{propriedades psicométricas}, \emph{avaliação econômica} e \emph{revisões de literatura}:\textsuperscript{\protect\hyperlink{ref-Grant2009}{82}--\protect\hyperlink{ref-chipman2022}{91}}
 \end{itemize}
 
 \begin{itemize}
 \tightlist
 \item
-  \emph{Estudos básicos}\textsuperscript{\protect\hyperlink{ref-Suxfct2014}{82},\protect\hyperlink{ref-Chidambaram2019}{87}}
+  \emph{Estudos básicos}\textsuperscript{\protect\hyperlink{ref-Suxfct2014}{83},\protect\hyperlink{ref-Chidambaram2019}{88}}
 
   \begin{itemize}
   \tightlist
@@ -1177,13 +1328,13 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  \emph{Estudos de simulação computacional}\textsuperscript{\protect\hyperlink{ref-Erdemir2020}{88},\protect\hyperlink{ref-chipman2022}{90}}
+  \emph{Estudos de simulação computacional}\textsuperscript{\protect\hyperlink{ref-Erdemir2020}{89},\protect\hyperlink{ref-chipman2022}{91}}
 \end{itemize}
 
 \begin{itemize}
 \tightlist
 \item
-  \emph{Estudos observacionais}\textsuperscript{\protect\hyperlink{ref-Suxfct2014}{82},\protect\hyperlink{ref-Chidambaram2019}{87}}
+  \emph{Estudos observacionais}\textsuperscript{\protect\hyperlink{ref-Suxfct2014}{83},\protect\hyperlink{ref-Chidambaram2019}{88}}
 
   \begin{itemize}
   \tightlist
@@ -1225,7 +1376,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  \emph{Estudos de acurácia diagnóstica}\textsuperscript{\protect\hyperlink{ref-Chassuxe92019}{86},\protect\hyperlink{ref-Yang2021}{89}}
+  \emph{Estudos de acurácia diagnóstica}\textsuperscript{\protect\hyperlink{ref-Chassuxe92019}{87},\protect\hyperlink{ref-Yang2021}{90}}
 
   \begin{itemize}
   \tightlist
@@ -1251,7 +1402,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  \emph{Estudos de propriedades psicométricas}\textsuperscript{\protect\hyperlink{ref-Souza2017}{83},\protect\hyperlink{ref-echevarruxeda-guanilo2019}{85}}
+  \emph{Estudos de propriedades psicométricas}\textsuperscript{\protect\hyperlink{ref-Souza2017}{84},\protect\hyperlink{ref-echevarruxeda-guanilo2019}{86}}
 
   \begin{itemize}
   \tightlist
@@ -1267,7 +1418,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  \emph{Estudos quase-experimentais}\textsuperscript{\protect\hyperlink{ref-reeves2017}{84}}
+  \emph{Estudos quase-experimentais}\textsuperscript{\protect\hyperlink{ref-reeves2017}{85}}
 
   \begin{itemize}
   \tightlist
@@ -1289,7 +1440,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  \emph{Estudos experimentais}\textsuperscript{\protect\hyperlink{ref-Suxfct2014}{82},\protect\hyperlink{ref-Chidambaram2019}{87}}
+  \emph{Estudos experimentais}\textsuperscript{\protect\hyperlink{ref-Suxfct2014}{83},\protect\hyperlink{ref-Chidambaram2019}{88}}
 
   \begin{itemize}
   \tightlist
@@ -1319,7 +1470,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  \emph{Estudos de avaliação econômica}\textsuperscript{\protect\hyperlink{ref-Suxfct2014}{82}}
+  \emph{Estudos de avaliação econômica}\textsuperscript{\protect\hyperlink{ref-Suxfct2014}{83}}
 
   \begin{itemize}
   \tightlist
@@ -1339,7 +1490,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  \emph{Estudos de revisão}\textsuperscript{\protect\hyperlink{ref-Grant2009}{81}}
+  \emph{Estudos de revisão}\textsuperscript{\protect\hyperlink{ref-Grant2009}{82}}
 
   \begin{itemize}
   \tightlist
@@ -1382,21 +1533,6 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \hypertarget{vieses}{%
 \chapter{\texorpdfstring{\textbf{Vieses}}{Vieses}}\label{vieses}}
-
-\hypertarget{desempenho-diagnostico}{%
-\chapter{\texorpdfstring{\textbf{Desempenho diagnóstico}}{Desempenho diagnóstico}}\label{desempenho-diagnostico}}
-
-\hypertarget{curvas-roc}{%
-\section{Curvas ROC}\label{curvas-roc}}
-
-\hypertarget{como-analisar-o-desempenho-diagnuxf3stico-em-desfechos-com-distribuiuxe7uxe3o-trimodal-na-populauxe7uxe3o}{%
-\subsection{Como analisar o desempenho diagnóstico em desfechos com distribuição trimodal na população?}\label{como-analisar-o-desempenho-diagnuxf3stico-em-desfechos-com-distribuiuxe7uxe3o-trimodal-na-populauxe7uxe3o}}
-
-\begin{itemize}
-\tightlist
-\item
-  Limiares duplos podem ser utilizados para análise de desempenho diagnóstico de testes com distribuição trimodal.\textsuperscript{\protect\hyperlink{ref-ferreira2021}{91}}
-\end{itemize}
 
 \hypertarget{ensaios-cluxednicos-aleatorizados}{%
 \chapter{\texorpdfstring{\textbf{Ensaios clínicos aleatorizados}}{Ensaios clínicos aleatorizados}}\label{ensaios-cluxednicos-aleatorizados}}
@@ -1719,225 +1855,225 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{0}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-ihaka1996}{}}%
-\CSLLeftMargin{1. }%
-\CSLRightInline{Ihaka R, Gentleman R. R: A language for data analysis and graphics. \emph{Journal of Computational and Graphical Statistics}. 1996;5(3):299. doi:\href{https://doi.org/10.2307/1390807}{10.2307/1390807}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-SchwabSimon2021}{}}%
-\CSLLeftMargin{2. }%
-\CSLRightInline{Schwab, Simon, Held, Leonhard. Statistical programming: Small mistakes, big impacts. \emph{Wiley-Blackwell Publishing, Inc}. 2021. doi:\href{https://doi.org/10.5167/UZH-205154}{10.5167/UZH-205154}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Eglen2017}{}}%
-\CSLLeftMargin{3. }%
-\CSLRightInline{Eglen SJ, Marwick B, Halchenko YO, et al. Toward standard practices for sharing computer code and programs in neuroscience. \emph{Nature Neuroscience}. 2017;20(6):770-773. doi:\href{https://doi.org/10.1038/nn.4550}{10.1038/nn.4550}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Zhao2023}{}}%
-\CSLLeftMargin{4. }%
-\CSLRightInline{Zhao Y, Xiao N, Anderson K, Zhang Y. Electronic common technical document submission with analysis using R. \emph{Clinical Trials}. 2022;20(1):89-92. doi:\href{https://doi.org/10.1177/17407745221123244}{10.1177/17407745221123244}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-formatR}{}}%
-\CSLLeftMargin{5. }%
-\CSLRightInline{Xie Y. formatR: Format r code automatically. 2022. \href{https://CRAN.R-project.org/package=formatR}{https://CRAN.R-project.org/package=formatR.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-pkglite}{}}%
-\CSLLeftMargin{6. }%
-\CSLRightInline{Xiao N, Zhang Y, Anderson K. Pkglite: Compact package representations. 2022. \href{https://CRAN.R-project.org/package=pkglite}{https://CRAN.R-project.org/package=pkglite.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-base}{}}%
-\CSLLeftMargin{7. }%
-\CSLRightInline{R Core Team. \emph{{R}: A Language and Environment for Statistical Computing}. Vienna, Austria: R Foundation for Statistical Computing; 2023. \href{https://www.R-project.org/}{https://www.R-project.org/.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-bookdown2016}{}}%
-\CSLLeftMargin{8. }%
-\CSLRightInline{Xie Y. \emph{Bookdown: Authoring Books and Technical Documents with {R} Markdown}. Boca Raton, Florida: Chapman; Hall/CRC; 2016. \href{https://bookdown.org/yihui/bookdown}{https://bookdown.org/yihui/bookdown.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-bookdown2023}{}}%
-\CSLLeftMargin{9. }%
-\CSLRightInline{Xie Y. \emph{{bookdown}: Authoring Books and Technical Documents with r Markdown}.; 2023. \href{https://github.com/rstudio/bookdown}{https://github.com/rstudio/bookdown.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-devtools}{}}%
-\CSLLeftMargin{10. }%
-\CSLRightInline{Wickham H, Hester J, Chang W, Bryan J. \emph{{devtools}: Tools to Make Developing r Packages Easier}.; 2022. \href{https://CRAN.R-project.org/package=devtools}{https://CRAN.R-project.org/package=devtools.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-emo}{}}%
-\CSLLeftMargin{11. }%
-\CSLRightInline{Wickham H, François R, D'Agostino McGowan L. \emph{{emo}: Easily Insert {``{Emoji}''}}.; 2023. \href{https://github.com/hadley/emo}{https://github.com/hadley/emo.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-fontawesome}{}}%
-\CSLLeftMargin{12. }%
-\CSLRightInline{Iannone R. \emph{{fontawesome}: Easily Work with {``{Font Awesome}''} Icons}.; 2023. \href{https://CRAN.R-project.org/package=fontawesome}{https://CRAN.R-project.org/package=fontawesome.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-kableExtra}{}}%
-\CSLLeftMargin{13. }%
-\CSLRightInline{Zhu H. \emph{{kableExtra}: Construct Complex Table with {``{kable}''} and Pipe Syntax}.; 2023.}
-
-\leavevmode\vadjust pre{\hypertarget{ref-knitr2014}{}}%
-\CSLLeftMargin{14. }%
-\CSLRightInline{Xie Y. Knitr: A comprehensive tool for reproducible research in {R}. In: Stodden V, Leisch F, Peng RD, eds. \emph{Implementing Reproducible Computational Research}. Chapman; Hall/CRC; 2014.}
-
-\leavevmode\vadjust pre{\hypertarget{ref-knitr2015}{}}%
-\CSLLeftMargin{15. }%
-\CSLRightInline{Xie Y. \emph{Dynamic Documents with {R} and Knitr}. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC; 2015. \href{https://yihui.org/knitr/}{https://yihui.org/knitr/.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-knitr2023}{}}%
-\CSLLeftMargin{16. }%
-\CSLRightInline{Xie Y. \emph{{knitr}: A General-Purpose Package for Dynamic Report Generation in r}.; 2023. \href{https://yihui.org/knitr/}{https://yihui.org/knitr/.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-remotes}{}}%
-\CSLLeftMargin{17. }%
-\CSLRightInline{Csárdi G, Hester J, Wickham H, Chang W, Morgan M, Tenenbaum D. \emph{{remotes}: R Package Installation from Remote Repositories, Including {``{GitHub}''}}.; 2023. \href{https://CRAN.R-project.org/package=remotes}{https://CRAN.R-project.org/package=remotes.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-rmarkdown2018}{}}%
-\CSLLeftMargin{18. }%
-\CSLRightInline{Xie Y, Allaire JJ, Grolemund G. \emph{R Markdown: The Definitive Guide}. Boca Raton, Florida: Chapman; Hall/CRC; 2018. \href{https://bookdown.org/yihui/rmarkdown}{https://bookdown.org/yihui/rmarkdown.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-rmarkdown2020}{}}%
-\CSLLeftMargin{19. }%
-\CSLRightInline{Xie Y, Dervieux C, Riederer E. \emph{R Markdown Cookbook}. Boca Raton, Florida: Chapman; Hall/CRC; 2020. \href{https://bookdown.org/yihui/rmarkdown-cookbook}{https://bookdown.org/yihui/rmarkdown-cookbook.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-rmarkdown2023}{}}%
-\CSLLeftMargin{20. }%
-\CSLRightInline{Allaire J, Xie Y, Dervieux C, et al. \emph{{rmarkdown}: Dynamic Documents for r}.; 2023. \href{https://github.com/rstudio/rmarkdown}{https://github.com/rstudio/rmarkdown.}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-tidyverse}{}}%
-\CSLLeftMargin{21. }%
-\CSLRightInline{Wickham H, Averick M, Bryan J, et al. Welcome to the {tidyverse}. \emph{Journal of Open Source Software}. 2019;4(43):1686. doi:\href{https://doi.org/10.21105/joss.01686}{10.21105/joss.01686}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-webshot}{}}%
-\CSLLeftMargin{22. }%
-\CSLRightInline{Chang W. \emph{{webshot}: Take Screenshots of Web Pages}.; 2023. \href{https://CRAN.R-project.org/package=webshot}{https://CRAN.R-project.org/package=webshot.}}
-
 \leavevmode\vadjust pre{\hypertarget{ref-Altman1997}{}}%
-\CSLLeftMargin{23. }%
+\CSLLeftMargin{1. }%
 \CSLRightInline{Altman DG, Bland JM. Statistics Notes: Units of analysis. \emph{BMJ}. 1997;314(7098):1874-1874. doi:\href{https://doi.org/10.1136/bmj.314.7098.1874}{10.1136/bmj.314.7098.1874}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Matthews1990}{}}%
-\CSLLeftMargin{24. }%
+\CSLLeftMargin{2. }%
 \CSLRightInline{Matthews JN, Altman DG, Campbell MJ, Royston P. Analysis of serial measurements in medical research. \emph{BMJ}. 1990;300(6719):230-235. doi:\href{https://doi.org/10.1136/bmj.300.6719.230}{10.1136/bmj.300.6719.230}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Bland1994}{}}%
-\CSLLeftMargin{25. }%
+\CSLLeftMargin{3. }%
 \CSLRightInline{Bland JM, Altman DG. Statistics notes: Matching. \emph{BMJ}. 1994;309(6962):1128-1128. doi:\href{https://doi.org/10.1136/bmj.309.6962.1128}{10.1136/bmj.309.6962.1128}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Olson2021}{}}%
-\CSLLeftMargin{26. }%
+\CSLLeftMargin{4. }%
 \CSLRightInline{Olson K. What Are Data? \emph{Qualitative Health Research}. 2021;31(9):1567-1569. doi:\href{https://doi.org/10.1177/10497323211015960}{10.1177/10497323211015960}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-vetter2017}{}}%
-\CSLLeftMargin{27. }%
+\CSLLeftMargin{5. }%
 \CSLRightInline{Vetter TR. Fundamentals of Research Data and Variables. \emph{Anesthesia \& Analgesia}. 2017;125(4):1375-1380. doi:\href{https://doi.org/10.1213/ane.0000000000002370}{10.1213/ane.0000000000002370}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Altman2007}{}}%
-\CSLLeftMargin{28. }%
+\CSLLeftMargin{6. }%
 \CSLRightInline{Altman DG, Bland JM. Missing data. \emph{BMJ}. 2007;334(7590):424-424. doi:\href{https://doi.org/10.1136/bmj.38977.682025.2c}{10.1136/bmj.38977.682025.2c}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Heymans2022}{}}%
-\CSLLeftMargin{29. }%
+\CSLLeftMargin{7. }%
 \CSLRightInline{Heymans MW, Twisk JWR. Handling missing data in clinical research. \emph{Journal of Clinical Epidemiology}. September 2022. doi:\href{https://doi.org/10.1016/j.jclinepi.2022.08.016}{10.1016/j.jclinepi.2022.08.016}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-carpenter2021}{}}%
-\CSLLeftMargin{30. }%
+\CSLLeftMargin{8. }%
 \CSLRightInline{Carpenter JR, Smuk M. Missing data: A statistical framework for practice. \emph{Biometrical Journal}. 2021;63(5):915-947. doi:\href{https://doi.org/10.1002/bimj.202000196}{10.1002/bimj.202000196}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-misty}{}}%
-\CSLLeftMargin{31. }%
+\CSLLeftMargin{9. }%
 \CSLRightInline{Yanagida T. Misty: Miscellaneous functions 't. yanagida'. 2023. \href{https://CRAN.R-project.org/package=misty}{https://CRAN.R-project.org/package=misty.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-little1988}{}}%
-\CSLLeftMargin{32. }%
+\CSLLeftMargin{10. }%
 \CSLRightInline{Little RJA. A Test of Missing Completely at Random for Multivariate Data with Missing Values. \emph{Journal of the American Statistical Association}. 1988;83(404):1198-1202. doi:\href{https://doi.org/10.1080/01621459.1988.10478722}{10.1080/01621459.1988.10478722}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-stats}{}}%
-\CSLLeftMargin{33. }%
+\CSLLeftMargin{11. }%
 \CSLRightInline{R Core Team. R: A language and environment for statistical computing. 2022. \href{https://www.R-project.org/}{https://www.R-project.org/.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Cao2022}{}}%
-\CSLLeftMargin{34. }%
+\CSLLeftMargin{12. }%
 \CSLRightInline{Cao Y, Allore H, Vander Wyk B, Gutman R. Review and evaluation of imputation methods for multivariate longitudinal data with mixed{-}type incomplete variables. \emph{Statistics in Medicine}. October 2022. doi:\href{https://doi.org/10.1002/sim.9592}{10.1002/sim.9592}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-mice}{}}%
-\CSLLeftMargin{35. }%
+\CSLLeftMargin{13. }%
 \CSLRightInline{Buuren S van, Groothuis-Oudshoorn K. {\textbraceleft}Mice{\textbraceright}: Multivariate imputation by chained equations in r. 2011;45:1-67. doi:\href{https://doi.org/10.18637/jss.v045.i03}{10.18637/jss.v045.i03}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-miceadds}{}}%
-\CSLLeftMargin{36. }%
+\CSLLeftMargin{14. }%
 \CSLRightInline{Robitzsch A, Grund S. Miceadds: Some additional multiple imputation functions, especially for 'mice'. 2023. \href{https://CRAN.R-project.org/package=miceadds}{https://CRAN.R-project.org/package=miceadds.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Akl2015}{}}%
-\CSLLeftMargin{37. }%
+\CSLLeftMargin{15. }%
 \CSLRightInline{Akl EA, Shawwa K, Kahale LA, et al. Reporting missing participant data in randomised trials: systematic survey of the methodological literature and a proposed guide. \emph{BMJ Open}. 2015;5(12):e008431. doi:\href{https://doi.org/10.1136/bmjopen-2015-008431}{10.1136/bmjopen-2015-008431}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Altman1999}{}}%
-\CSLLeftMargin{38. }%
+\CSLLeftMargin{16. }%
 \CSLRightInline{Altman DG, Bland JM. Statistics notes Variables and parameters. \emph{BMJ}. 1999;318(7199):1667-1667. doi:\href{https://doi.org/10.1136/bmj.318.7199.1667}{10.1136/bmj.318.7199.1667}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Ali2016}{}}%
-\CSLLeftMargin{39. }%
+\CSLLeftMargin{17. }%
 \CSLRightInline{Ali Z, Bhaskar Sb. Basic statistical tools in research and data analysis. \emph{Indian Journal of Anaesthesia}. 2016;60(9):662. doi:\href{https://doi.org/10.4103/0019-5049.190623}{10.4103/0019-5049.190623}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Dettori2018}{}}%
-\CSLLeftMargin{40. }%
+\CSLLeftMargin{18. }%
 \CSLRightInline{Dettori JR, Norvell DC. The Anatomy of Data. \emph{Global Spine Journal}. 2018;8(3):311-313. doi:\href{https://doi.org/10.1177/2192568217746998}{10.1177/2192568217746998}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-kaliyadan2019}{}}%
-\CSLLeftMargin{41. }%
+\CSLLeftMargin{19. }%
 \CSLRightInline{Kaliyadan F, Kulkarni V. Types of variables, descriptive statistics, and sample size. \emph{Indian Dermatology Online Journal}. 2019;10(1):82. doi:\href{https://doi.org/10.4103/idoj.idoj_468_18}{10.4103/idoj.idoj\_468\_18}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Bland1996}{}}%
-\CSLLeftMargin{42. }%
+\CSLLeftMargin{20. }%
 \CSLRightInline{Bland JM, Altman DG. Statistics Notes: Transforming data. \emph{BMJ}. 1996;312(7033):770-770. doi:\href{https://doi.org/10.1136/bmj.312.7033.770}{10.1136/bmj.312.7033.770}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-osborne2010}{}}%
-\CSLLeftMargin{43. }%
+\CSLLeftMargin{21. }%
 \CSLRightInline{Osborne J. Improving your data transformations: Applying the box-cox transformation. \emph{University of Massachusetts Amherst}. 2010. doi:\href{https://doi.org/10.7275/QBPC-GK17}{10.7275/QBPC-GK17}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-box1964}{}}%
-\CSLLeftMargin{44. }%
+\CSLLeftMargin{22. }%
 \CSLRightInline{Box GEP, Cox DR. An Analysis of Transformations. \emph{Journal of the Royal Statistical Society: Series B (Methodological)}. 1964;26(2):211-243. doi:\href{https://doi.org/10.1111/j.2517-6161.1964.tb00553.x}{10.1111/j.2517-6161.1964.tb00553.x}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MASS}{}}%
-\CSLLeftMargin{45. }%
+\CSLLeftMargin{23. }%
 \CSLRightInline{Venables WN, Ripley BD. Modern applied statistics with s. 2002. \href{https://www.stats.ox.ac.uk/pub/MASS4/}{https://www.stats.ox.ac.uk/pub/MASS4/.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Altman2006}{}}%
-\CSLLeftMargin{46. }%
+\CSLLeftMargin{24. }%
 \CSLRightInline{Altman DG, Royston P. The cost of dichotomising continuous variables. \emph{BMJ}. 2006;332(7549):1080.1. doi:\href{https://doi.org/10.1136/bmj.332.7549.1080}{10.1136/bmj.332.7549.1080}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Royston2006}{}}%
-\CSLLeftMargin{47. }%
+\CSLLeftMargin{25. }%
 \CSLRightInline{Royston P, Altman DG, Sauerbrei W. Dichotomizing continuous predictors in multiple regression: a bad idea. \emph{Statistics in Medicine}. 2005;25(1):127-141. doi:\href{https://doi.org/10.1002/sim.2331}{10.1002/sim.2331}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Collins2016}{}}%
-\CSLLeftMargin{48. }%
+\CSLLeftMargin{26. }%
 \CSLRightInline{Collins GS, Ogundimu EO, Cook JA, Manach YL, Altman DG. Quantifying the impact of different approaches for handling continuous predictors on the performance of a prognostic model. \emph{Statistics in Medicine}. 2016;35(23):4124-4135. doi:\href{https://doi.org/10.1002/sim.6986}{10.1002/sim.6986}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Prince2017}{}}%
-\CSLLeftMargin{49. }%
+\CSLLeftMargin{27. }%
 \CSLRightInline{Nelson SLP, Ramakrishnan V, Nietert PJ, Kamen DL, Ramos PS, Wolf BJ. An evaluation of common methods for dichotomization of continuous variables to discriminate disease status. \emph{Communications in Statistics - Theory and Methods}. 2017;46(21):10823-10834. doi:\href{https://doi.org/10.1080/03610926.2016.1248783}{10.1080/03610926.2016.1248783}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-YOUDEN1950}{}}%
-\CSLLeftMargin{50. }%
+\CSLLeftMargin{28. }%
 \CSLRightInline{Youden WJ. Index for rating diagnostic tests. \emph{Cancer}. 1950;3(1):32-35. doi:\href{https://doi.org/10.1002/1097-0142(1950)3:1\%3C32::aid-cncr2820030106\%3E3.0.co;2-3}{10.1002/1097-0142(1950)3:1\textless32::aid-cncr2820030106\textgreater3.0.co;2-3}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-strobl2007}{}}%
-\CSLLeftMargin{51. }%
+\CSLLeftMargin{29. }%
 \CSLRightInline{Strobl C, Boulesteix AL, Augustin T. Unbiased split selection for classification trees based on the Gini Index. \emph{Computational Statistics \& Data Analysis}. 2007;52(1):483-501. doi:\href{https://doi.org/10.1016/j.csda.2006.12.030}{10.1016/j.csda.2006.12.030}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-pearson1900}{}}%
-\CSLLeftMargin{52. }%
+\CSLLeftMargin{30. }%
 \CSLRightInline{Pearson K. X. {\emph{On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling}}. \emph{The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science}. 1900;50(302):157-175. doi:\href{https://doi.org/10.1080/14786440009463897}{10.1080/14786440009463897}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Greiner2000}{}}%
-\CSLLeftMargin{53. }%
+\CSLLeftMargin{31. }%
 \CSLRightInline{Greiner M, Pfeiffer D, Smith RD. Principles and practical application of the receiver-operating characteristic analysis for diagnostic tests. \emph{Preventive Veterinary Medicine}. 2000;45(1-2):23-41. doi:\href{https://doi.org/10.1016/s0167-5877(00)00115-x}{10.1016/s0167-5877(00)00115-x}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-fleiss1971}{}}%
-\CSLLeftMargin{54. }%
+\CSLLeftMargin{32. }%
 \CSLRightInline{Fleiss JL. Measuring nominal scale agreement among many raters. \emph{Psychological Bulletin}. 1971;76(5):378-382. doi:\href{https://doi.org/10.1037/h0031619}{10.1037/h0031619}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-kanji2006}{}}%
-\CSLLeftMargin{55. }%
+\CSLLeftMargin{33. }%
 \CSLRightInline{Kanji G. 100 statistical tests. 2006. doi:\href{https://doi.org/10.4135/9781849208499}{10.4135/9781849208499}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-ihaka1996}{}}%
+\CSLLeftMargin{34. }%
+\CSLRightInline{Ihaka R, Gentleman R. R: A language for data analysis and graphics. \emph{Journal of Computational and Graphical Statistics}. 1996;5(3):299. doi:\href{https://doi.org/10.2307/1390807}{10.2307/1390807}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-SchwabSimon2021}{}}%
+\CSLLeftMargin{35. }%
+\CSLRightInline{Schwab, Simon, Held, Leonhard. Statistical programming: Small mistakes, big impacts. \emph{Wiley-Blackwell Publishing, Inc}. 2021. doi:\href{https://doi.org/10.5167/UZH-205154}{10.5167/UZH-205154}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Eglen2017}{}}%
+\CSLLeftMargin{36. }%
+\CSLRightInline{Eglen SJ, Marwick B, Halchenko YO, et al. Toward standard practices for sharing computer code and programs in neuroscience. \emph{Nature Neuroscience}. 2017;20(6):770-773. doi:\href{https://doi.org/10.1038/nn.4550}{10.1038/nn.4550}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Zhao2023}{}}%
+\CSLLeftMargin{37. }%
+\CSLRightInline{Zhao Y, Xiao N, Anderson K, Zhang Y. Electronic common technical document submission with analysis using R. \emph{Clinical Trials}. 2022;20(1):89-92. doi:\href{https://doi.org/10.1177/17407745221123244}{10.1177/17407745221123244}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-formatR}{}}%
+\CSLLeftMargin{38. }%
+\CSLRightInline{Xie Y. formatR: Format r code automatically. 2022. \href{https://CRAN.R-project.org/package=formatR}{https://CRAN.R-project.org/package=formatR.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-pkglite}{}}%
+\CSLLeftMargin{39. }%
+\CSLRightInline{Xiao N, Zhang Y, Anderson K. Pkglite: Compact package representations. 2022. \href{https://CRAN.R-project.org/package=pkglite}{https://CRAN.R-project.org/package=pkglite.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-base}{}}%
+\CSLLeftMargin{40. }%
+\CSLRightInline{R Core Team. \emph{{R}: A Language and Environment for Statistical Computing}. Vienna, Austria: R Foundation for Statistical Computing; 2023. \href{https://www.R-project.org/}{https://www.R-project.org/.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-bookdown2016}{}}%
+\CSLLeftMargin{41. }%
+\CSLRightInline{Xie Y. \emph{Bookdown: Authoring Books and Technical Documents with {R} Markdown}. Boca Raton, Florida: Chapman; Hall/CRC; 2016. \href{https://bookdown.org/yihui/bookdown}{https://bookdown.org/yihui/bookdown.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-bookdown2023}{}}%
+\CSLLeftMargin{42. }%
+\CSLRightInline{Xie Y. \emph{{bookdown}: Authoring Books and Technical Documents with r Markdown}.; 2023. \href{https://github.com/rstudio/bookdown}{https://github.com/rstudio/bookdown.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-devtools}{}}%
+\CSLLeftMargin{43. }%
+\CSLRightInline{Wickham H, Hester J, Chang W, Bryan J. \emph{{devtools}: Tools to Make Developing r Packages Easier}.; 2022. \href{https://CRAN.R-project.org/package=devtools}{https://CRAN.R-project.org/package=devtools.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-emo}{}}%
+\CSLLeftMargin{44. }%
+\CSLRightInline{Wickham H, François R, D'Agostino McGowan L. \emph{{emo}: Easily Insert {``{Emoji}''}}.; 2023. \href{https://github.com/hadley/emo}{https://github.com/hadley/emo.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-fontawesome}{}}%
+\CSLLeftMargin{45. }%
+\CSLRightInline{Iannone R. \emph{{fontawesome}: Easily Work with {``{Font Awesome}''} Icons}.; 2023. \href{https://CRAN.R-project.org/package=fontawesome}{https://CRAN.R-project.org/package=fontawesome.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-kableExtra}{}}%
+\CSLLeftMargin{46. }%
+\CSLRightInline{Zhu H. \emph{{kableExtra}: Construct Complex Table with {``{kable}''} and Pipe Syntax}.; 2023.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-knitr2014}{}}%
+\CSLLeftMargin{47. }%
+\CSLRightInline{Xie Y. Knitr: A comprehensive tool for reproducible research in {R}. In: Stodden V, Leisch F, Peng RD, eds. \emph{Implementing Reproducible Computational Research}. Chapman; Hall/CRC; 2014.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-knitr2015}{}}%
+\CSLLeftMargin{48. }%
+\CSLRightInline{Xie Y. \emph{Dynamic Documents with {R} and Knitr}. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC; 2015. \href{https://yihui.org/knitr/}{https://yihui.org/knitr/.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-knitr2023}{}}%
+\CSLLeftMargin{49. }%
+\CSLRightInline{Xie Y. \emph{{knitr}: A General-Purpose Package for Dynamic Report Generation in r}.; 2023. \href{https://yihui.org/knitr/}{https://yihui.org/knitr/.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-remotes}{}}%
+\CSLLeftMargin{50. }%
+\CSLRightInline{Csárdi G, Hester J, Wickham H, Chang W, Morgan M, Tenenbaum D. \emph{{remotes}: R Package Installation from Remote Repositories, Including {``{GitHub}''}}.; 2023. \href{https://CRAN.R-project.org/package=remotes}{https://CRAN.R-project.org/package=remotes.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-rmarkdown2018}{}}%
+\CSLLeftMargin{51. }%
+\CSLRightInline{Xie Y, Allaire JJ, Grolemund G. \emph{R Markdown: The Definitive Guide}. Boca Raton, Florida: Chapman; Hall/CRC; 2018. \href{https://bookdown.org/yihui/rmarkdown}{https://bookdown.org/yihui/rmarkdown.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-rmarkdown2020}{}}%
+\CSLLeftMargin{52. }%
+\CSLRightInline{Xie Y, Dervieux C, Riederer E. \emph{R Markdown Cookbook}. Boca Raton, Florida: Chapman; Hall/CRC; 2020. \href{https://bookdown.org/yihui/rmarkdown-cookbook}{https://bookdown.org/yihui/rmarkdown-cookbook.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-rmarkdown2023}{}}%
+\CSLLeftMargin{53. }%
+\CSLRightInline{Allaire J, Xie Y, Dervieux C, et al. \emph{{rmarkdown}: Dynamic Documents for r}.; 2023. \href{https://github.com/rstudio/rmarkdown}{https://github.com/rstudio/rmarkdown.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-tidyverse}{}}%
+\CSLLeftMargin{54. }%
+\CSLRightInline{Wickham H, Averick M, Bryan J, et al. Welcome to the {tidyverse}. \emph{Journal of Open Source Software}. 2019;4(43):1686. doi:\href{https://doi.org/10.21105/joss.01686}{10.21105/joss.01686}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-webshot}{}}%
+\CSLLeftMargin{55. }%
+\CSLRightInline{Chang W. \emph{{webshot}: Take Screenshots of Web Pages}.; 2023. \href{https://CRAN.R-project.org/package=webshot}{https://CRAN.R-project.org/package=webshot.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-tierney2023}{}}%
 \CSLLeftMargin{56. }%
@@ -2039,49 +2175,49 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \CSLLeftMargin{80. }%
 \CSLRightInline{Sun GW, Shook TL, Kay GL. Inappropriate use of bivariable analysis to screen risk factors for use in multivariable analysis. \emph{Journal of Clinical Epidemiology}. 1996;49(8):907-916. doi:\href{https://doi.org/10.1016/0895-4356(96)00025-x}{10.1016/0895-4356(96)00025-x}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-Grant2009}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-ferreira2021}{}}%
 \CSLLeftMargin{81. }%
+\CSLRightInline{Ferreira ADS, Meziat-Filho N, Ferreira APA. Double threshold receiver operating characteristic plot for three-modal continuous predictors. \emph{Computational Statistics}. 2021;36(3):2231-2245. doi:\href{https://doi.org/10.1007/s00180-021-01080-9}{10.1007/s00180-021-01080-9}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Grant2009}{}}%
+\CSLLeftMargin{82. }%
 \CSLRightInline{Grant MJ, Booth A. A typology of reviews: an analysis of 14 review types and associated methodologies. \emph{Health Information \& Libraries Journal}. 2009;26(2):91-108. doi:\href{https://doi.org/10.1111/j.1471-1842.2009.00848.x}{10.1111/j.1471-1842.2009.00848.x}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Suxfct2014}{}}%
-\CSLLeftMargin{82. }%
+\CSLLeftMargin{83. }%
 \CSLRightInline{Sut N. Study designs in medicine. \emph{Balkan Medical Journal}. 2015;31(4):273-277. doi:\href{https://doi.org/10.5152/balkanmedj.2014.1408}{10.5152/balkanmedj.2014.1408}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Souza2017}{}}%
-\CSLLeftMargin{83. }%
+\CSLLeftMargin{84. }%
 \CSLRightInline{Souza AC de, Alexandre NMC, Guirardello E de B, Souza AC de, Alexandre NMC, Guirardello E de B. Propriedades psicométricas na avaliação de instrumentos: avaliação da confiabilidade e da validade. \emph{Epidemiologia e Serviços de Saúde}. 2017;26(3):649-659. doi:\href{https://doi.org/10.5123/s1679-49742017000300022}{10.5123/s1679-49742017000300022}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-reeves2017}{}}%
-\CSLLeftMargin{84. }%
+\CSLLeftMargin{85. }%
 \CSLRightInline{Reeves BC, Wells GA, Waddington H. Quasi-experimental study designs series{\textemdash}paper 5: a checklist for~classifying studies evaluating the effects on health interventions{\textemdash}a taxonomy without labels. \emph{Journal of Clinical Epidemiology}. 2017;89:30-42. doi:\href{https://doi.org/10.1016/j.jclinepi.2017.02.016}{10.1016/j.jclinepi.2017.02.016}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-echevarruxeda-guanilo2019}{}}%
-\CSLLeftMargin{85. }%
+\CSLLeftMargin{86. }%
 \CSLRightInline{Echevarría-Guanilo ME, Gonçalves N, Romanoski PJ. PSYCHOMETRIC PROPERTIES OF MEASUREMENT INSTRUMENTS: CONCEPTUAL BASIS AND EVALUATION METHODS - PART II. \emph{Texto \& Contexto - Enfermagem}. 2019;28. doi:\href{https://doi.org/10.1590/1980-265x-tce-2017-0311}{10.1590/1980-265x-tce-2017-0311}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Chassuxe92019}{}}%
-\CSLLeftMargin{86. }%
+\CSLLeftMargin{87. }%
 \CSLRightInline{Chassé M, Fergusson DA. Diagnostic Accuracy Studies. \emph{Seminars in Nuclear Medicine}. 2019;49(2):87-93. doi:\href{https://doi.org/10.1053/j.semnuclmed.2018.11.005}{10.1053/j.semnuclmed.2018.11.005}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Chidambaram2019}{}}%
-\CSLLeftMargin{87. }%
+\CSLLeftMargin{88. }%
 \CSLRightInline{Chidambaram AG, Josephson M. Clinical research study designs: The essentials. \emph{PEDIATRIC INVESTIGATION}. 2019;3(4):245-252. doi:\href{https://doi.org/10.1002/ped4.12166}{10.1002/ped4.12166}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Erdemir2020}{}}%
-\CSLLeftMargin{88. }%
+\CSLLeftMargin{89. }%
 \CSLRightInline{Erdemir A, Mulugeta L, Ku JP, et al. Credible practice of modeling and simulation in healthcare: ten rules from a multidisciplinary perspective. \emph{Journal of Translational Medicine}. 2020;18(1). doi:\href{https://doi.org/10.1186/s12967-020-02540-4}{10.1186/s12967-020-02540-4}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Yang2021}{}}%
-\CSLLeftMargin{89. }%
+\CSLLeftMargin{90. }%
 \CSLRightInline{Yang B, Olsen M, Vali Y, et al. Study designs for comparative diagnostic test accuracy: A methodological review and classification scheme. \emph{Journal of Clinical Epidemiology}. 2021;138:128-138. doi:\href{https://doi.org/10.1016/j.jclinepi.2021.04.013}{10.1016/j.jclinepi.2021.04.013}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-chipman2022}{}}%
-\CSLLeftMargin{90. }%
-\CSLRightInline{Chipman H, Bingham D. Let's practice what we preach: Planning and interpreting simulation studies with design and analysis of experiments. \emph{Canadian Journal of Statistics}. 2022;50(4):1228-1249. doi:\href{https://doi.org/10.1002/cjs.11719}{10.1002/cjs.11719}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-ferreira2021}{}}%
 \CSLLeftMargin{91. }%
-\CSLRightInline{Ferreira ADS, Meziat-Filho N, Ferreira APA. Double threshold receiver operating characteristic plot for three-modal continuous predictors. \emph{Computational Statistics}. 2021;36(3):2231-2245. doi:\href{https://doi.org/10.1007/s00180-021-01080-9}{10.1007/s00180-021-01080-9}}
+\CSLRightInline{Chipman H, Bingham D. Let's practice what we preach: Planning and interpreting simulation studies with design and analysis of experiments. \emph{Canadian Journal of Statistics}. 2022;50(4):1228-1249. doi:\href{https://doi.org/10.1002/cjs.11719}{10.1002/cjs.11719}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Bruce2022}{}}%
 \CSLLeftMargin{92. }%
