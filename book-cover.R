@@ -21,7 +21,7 @@ for(i in 1:2){
   text(x = W, y = H - 0.5, labels = "Arthur de Sá Ferreira", pos = 2, cex = 1.5, col = "white")
   
   # book title
-  text(x = W, y = H/1.5 + 1.5, labels = "Ciência com R", pos = 2, cex = 4, col = "white")
+  text(x = W, y = H/1.5 + 2.0, labels = "Ciência com R", pos = 2, cex = 4, col = "white")
 
   # book subtitle
   text(x = W, y = H/1.5 + 1.0, labels = substitute(paste(italic("Perguntas e respostas para pesquisadores e analistas de dados"))), pos = 2, cex = 1.5, col = "white")
