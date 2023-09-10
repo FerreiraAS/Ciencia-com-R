@@ -272,114 +272,6 @@ We used R version 4.3.1\textsuperscript{\protect\hyperlink{ref-base}{7}} and the
 \hypertarget{conceitos-fundamentais}{%
 \chapter{\texorpdfstring{\textbf{Conceitos fundamentais}}{Conceitos fundamentais}}\label{conceitos-fundamentais}}
 
-\hypertarget{tabulacao-dados}{%
-\chapter{\texorpdfstring{\textbf{Tabulação de dados}}{Tabulação de dados}}\label{tabulacao-dados}}
-
-\hypertarget{planilhas}{%
-\section{Planilhas eletrônicas}\label{planilhas}}
-
-\hypertarget{qual-a-organizauxe7uxe3o-de-uma-tabela-de-dados}{%
-\subsection{Qual a organização de uma tabela de dados?}\label{qual-a-organizauxe7uxe3o-de-uma-tabela-de-dados}}
-
-\begin{itemize}
-\item
-  Cada variável possui sua própria coluna (vertical).\textsuperscript{\protect\hyperlink{ref-tierney2023}{23}}
-\item
-  Cada observação possui sua própria linha (horizontal).\textsuperscript{\protect\hyperlink{ref-tierney2023}{23}}
-\item
-  Cada valor possui sua própria célula (linha, coluna).\textsuperscript{\protect\hyperlink{ref-tierney2023}{23}}
-\end{itemize}
-
-\hypertarget{qual-a-estrutura-buxe1sica-de-uma-tabela-para-anuxe1lise-estatuxedstica}{%
-\subsection{Qual a estrutura básica de uma tabela para análise estatística?}\label{qual-a-estrutura-buxe1sica-de-uma-tabela-para-anuxe1lise-estatuxedstica}}
-
-\begin{itemize}
-\item
-  Use apenas uma planilha para conter todas as informações coletadas. Evite múltiplas abas no mesmo arquivo, assim como múltiplos arquivos quando possível.\textsuperscript{\protect\hyperlink{ref-broman2018}{24}}
-\item
-  Use apenas 1 (uma) linha de cabeçalho para nomear os fatores e variáveis do seu estudo.\textsuperscript{\protect\hyperlink{ref-broman2018}{24}}
-\item
-  Tipicamente, cada linha representa um participante e cada coluna representa uma variável ou fator do estudo. Estudos com medidas repetidas dos participantes podem conter múltiplas linhas para o mesmo participante (repetindo os dados na mesma coluna, conhecido como \emph{formato curto}) ou só uma linha para o participante (repetindo os dados em colunas separadas, conhecido como \emph{formato longo} ).\textsuperscript{\protect\hyperlink{ref-Juluru2015}{25}}
-\end{itemize}
-
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
-\toprule
-\textbf{V1} & \textbf{V2} & \textbf{V3} & \textbf{V4}\\
-\midrule
-\cellcolor{gray!6}{$x_{1,1}$} & \cellcolor{gray!6}{$x_{1,2}$} & \cellcolor{gray!6}{$x_{1,3}$} & \cellcolor{gray!6}{$x_{1,4}$}\\
-$x_{2,1}$ & $x_{2,2}$ & $x_{2,3}$ & $x_{2,4}$\\
-\cellcolor{gray!6}{$x_{3,1}$} & \cellcolor{gray!6}{$x_{3,2}$} & \cellcolor{gray!6}{$x_{3,3}$} & \cellcolor{gray!6}{$x_{3,4}$}\\
-$x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
-\cellcolor{gray!6}{$x_{5,1}$} & \cellcolor{gray!6}{$x_{5,2}$} & \cellcolor{gray!6}{$x_{5,3}$} & \cellcolor{gray!6}{$x_{5,4}$}\\
-\bottomrule
-\end{tabu}
-
-\hypertarget{o-que-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}{%
-\subsection{O que usar para organizar tabelas para análise computadorizada?}\label{o-que-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}}
-
-\begin{itemize}
-\item
-  Seja consistente em: códigos para as variáveis categóricas; códigos para dados perdidos; nomes das variáveis; identificadores de participantes; nome dos arquivos; formato de datas; uso de caracteres de espaço.\textsuperscript{\protect\hyperlink{ref-broman2018}{24},\protect\hyperlink{ref-Juluru2015}{25}}
-\item
-  Use recursos para validação de dados antes e durante a digitação de dados.\textsuperscript{\protect\hyperlink{ref-broman2018}{24},\protect\hyperlink{ref-Juluru2015}{25}}
-\end{itemize}
-
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{26}} fornece a função \emph{melt} para reorganizar a tabela em diferentes formatos. \href{https://cran.r-project.org/web/packages/data.table/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
-
-\hypertarget{o-que-nuxe3o-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}{%
-\subsection{O que não usar para organizar tabelas para análise computadorizada?}\label{o-que-nuxe3o-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}}
-
-\begin{itemize}
-\item
-  Não deixe células em branco: substitua dados perdidos por um código sistemático (ex.: NA {[}\emph{not available}{]}).\textsuperscript{\protect\hyperlink{ref-broman2018}{24}}
-\item
-  Não inclua análises estatísticas ou gráficos nas tabelas de dados brutos.\textsuperscript{\protect\hyperlink{ref-broman2018}{24}}
-\item
-  Não utilize cores como informação. Se necessário, crie colunas adicionais - variáveis instrumentais ou auxiliares - para identificar a infomação de modo que possa ser analisada.\textsuperscript{\protect\hyperlink{ref-broman2018}{24}}
-\item
-  Não use células mescladas.
-\item
-  Delete linhas e/ou colunas totalmente em branco (sem unidades de análise e/ou sem variáveis).
-\end{itemize}
-
-\includegraphics[width=0.88em,height=1em]{R-Book_files/figure-latex/fa-icon-498f1ccbaa0f3566ccdbb6a21bcf16d6.pdf} \emph{Recomendado}
-
-\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X}
-\toprule
-\textbf{ID} & \textbf{Data.Coleta} & \textbf{Estado.Civil} & \textbf{Numero.Filhos}\\
-\midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{10-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-2 & 11-09-2023 & casado & 1\\
-\cellcolor{gray!6}{3} & \cellcolor{gray!6}{12-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-4 & 13-09-2023 & solteiro & NA\\
-\cellcolor{gray!6}{5} & \cellcolor{gray!6}{14-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-6 & 15-09-2023 & solteiro & 0\\
-\cellcolor{gray!6}{7} & \cellcolor{gray!6}{16-09-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{NA}\\
-8 & 17-09-2023 & solteiro & NA\\
-\cellcolor{gray!6}{9} & \cellcolor{gray!6}{18-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-10 & 19-09-2023 & solteiro & NA\\
-\bottomrule
-\end{tabu}
-
-\includegraphics[width=0.75em,height=1em]{R-Book_files/figure-latex/fa-icon-9fc2fad5de7ecb3bef7fec427240f50c.pdf} \emph{Evite}
-
-\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X}
-\toprule
-\textbf{ID} & \textbf{Data de Coleta} & \textbf{Estado Civil} & \textbf{Número de Filhos}\\
-\midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{10-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-2 & 11-09-2023 & Casado & 1\\
-\cellcolor{gray!6}{3} & \cellcolor{gray!6}{12-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NaN}\\
-4 & 13-09-2023 & Solteiro & N/A\\
-\cellcolor{gray!6}{5} & \cellcolor{gray!6}{14-09-2023} & \cellcolor{gray!6}{Casado} & \cellcolor{gray!6}{N.A.}\\
-6 & 15-09-2023 & solteiro & 0\\
-\cellcolor{gray!6}{7} & \cellcolor{gray!6}{16-09-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{}\\
-8 & 17-09-2023 & Solteiro & na\\
-\cellcolor{gray!6}{9} & \cellcolor{gray!6}{18-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{n.a.}\\
-10 & 19-09-2023 & Solteiro & 999\\
-\bottomrule
-\end{tabu}
-
 \hypertarget{unidade-analise}{%
 \chapter{\texorpdfstring{\textbf{Unidade de análise}}{Unidade de análise}}\label{unidade-analise}}
 
@@ -391,9 +283,9 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  A unidade de análise de pesquisas na área de saúde geralmente é o indivíduo. Outras possibilidades são instituições em estudos multicêntricos (ex.: hospitais, clínicas) ou estudos publicados em meta-análises (ex.: ensaios clínicos).\textsuperscript{\protect\hyperlink{ref-Altman1997}{27}}
+  A unidade de análise de pesquisas na área de saúde geralmente é o indivíduo. Outras possibilidades são instituições em estudos multicêntricos (ex.: hospitais, clínicas) ou estudos publicados em meta-análises (ex.: ensaios clínicos).\textsuperscript{\protect\hyperlink{ref-Altman1997}{23}}
 \item
-  É fundamental identificar corretamente a unidade de análise para evitar inflação do tamanho da amostra (ex.: medidas bilaterais resultando em o dobro de participantes), violações de suposições dos testes de hipótese (ex.: independência entre medidas e/ou unidade de análise) e resultados espúrios em testes de hipótese (ex.: p-valores menores que aqueles observados se a amostra não estivesse inflada).\textsuperscript{\protect\hyperlink{ref-Altman1997}{27},\protect\hyperlink{ref-Matthews1990}{28}}
+  É fundamental identificar corretamente a unidade de análise para evitar inflação do tamanho da amostra (ex.: medidas bilaterais resultando em o dobro de participantes), violações de suposições dos testes de hipótese (ex.: independência entre medidas e/ou unidade de análise) e resultados espúrios em testes de hipótese (ex.: p-valores menores que aqueles observados se a amostra não estivesse inflada).\textsuperscript{\protect\hyperlink{ref-Altman1997}{23},\protect\hyperlink{ref-Matthews1990}{24}}
 \end{itemize}
 
 \hypertarget{pareamento}{%
@@ -404,13 +296,13 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Pareamento significa que para cada participante de um grupo (por exemplo, com alguma condição clínica), existe um (ou mais) participantes (por exemplo, grupo controle) que possui características iguais ou similares relativas a algumas variáveis de interesse.\textsuperscript{\protect\hyperlink{ref-Bland1994}{29}}
+  Pareamento significa que para cada participante de um grupo (por exemplo, com alguma condição clínica), existe um (ou mais) participantes (por exemplo, grupo controle) que possui características iguais ou similares relativas a algumas variáveis de interesse.\textsuperscript{\protect\hyperlink{ref-Bland1994}{25}}
 \item
-  As variáveis escolhidas para pareamento devem ter relação com as variáveis de desfecho, mas não são de interesse elas mesmas.\textsuperscript{\protect\hyperlink{ref-Bland1994}{29}}
+  As variáveis escolhidas para pareamento devem ter relação com as variáveis de desfecho, mas não são de interesse elas mesmas.\textsuperscript{\protect\hyperlink{ref-Bland1994}{25}}
 \item
-  O ajuste por pareamento deve ser incluído nas análises estatísticas mesmo que as variáveis de pareamento não sejam consideradas prognósticas ou confundidores na amostra estudada.\textsuperscript{\protect\hyperlink{ref-Bland1994}{29}}
+  O ajuste por pareamento deve ser incluído nas análises estatísticas mesmo que as variáveis de pareamento não sejam consideradas prognósticas ou confundidores na amostra estudada.\textsuperscript{\protect\hyperlink{ref-Bland1994}{25}}
 \item
-  A ausência de evidência estatística de diferença entre grupos não é considerada pareamento.\textsuperscript{\protect\hyperlink{ref-Bland1994}{29}}
+  A ausência de evidência estatística de diferença entre grupos não é considerada pareamento.\textsuperscript{\protect\hyperlink{ref-Bland1994}{25}}
 \end{itemize}
 
 \hypertarget{medidas}{%
@@ -587,7 +479,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  ``Tudo são dados''.\textsuperscript{\protect\hyperlink{ref-Olson2021}{30}}
+  ``Tudo são dados''.\textsuperscript{\protect\hyperlink{ref-Olson2021}{26}}
 \end{itemize}
 
 \hypertarget{o-que-suxe3o-dados-primuxe1rios-e-secunduxe1rios}{%
@@ -595,9 +487,9 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Dados primários são dados originais coletados intencionalmente para uma determinada análise exploratória ou inferencial planejada a priori.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Dados primários são dados originais coletados intencionalmente para uma determinada análise exploratória ou inferencial planejada a priori.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \item
-  Dados secundários compreendem dados coletados inicialmente para análises de um estudo, e são subsequentemente utilizados para outras análises.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Dados secundários compreendem dados coletados inicialmente para análises de um estudo, e são subsequentemente utilizados para outras análises.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \end{itemize}
 
 \hypertarget{dados-perdidos}{%
@@ -609,7 +501,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Dados perdidos são dados não coletados de um ou mais participantes, para uma ou mais variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2007}{32}}
+  Dados perdidos são dados não coletados de um ou mais participantes, para uma ou mais variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
 \end{itemize}
 
 \hypertarget{qual-o-problema-de-um-estudo-ter-dados-perdidos}{%
@@ -617,11 +509,11 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Uma grande quantidade de dados perdidos pode comprometer a integridade científica do estudo, considerando-se que o tamanho da amostra foi estimado para observar um determinado tamanho de efeito mínimo.\textsuperscript{\protect\hyperlink{ref-Altman2007}{32}}
+  Uma grande quantidade de dados perdidos pode comprometer a integridade científica do estudo, considerando-se que o tamanho da amostra foi estimado para observar um determinado tamanho de efeito mínimo.\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
 \item
-  Perda de participantes no estudo por dados perdidos pode reduzir o poder estatístico (erro tipo II).\textsuperscript{\protect\hyperlink{ref-Altman2007}{32}}
+  Perda de participantes no estudo por dados perdidos pode reduzir o poder estatístico (erro tipo II).\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
 \item
-  Não existe solução globalmente satisfatória para o problema de dados perdidos.\textsuperscript{\protect\hyperlink{ref-Altman2007}{32}}
+  Não existe solução globalmente satisfatória para o problema de dados perdidos.\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
 \end{itemize}
 
 \hypertarget{quais-os-mecanismos-geradores-de-dados-perdidos}{%
@@ -629,11 +521,11 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Dados perdidos completamente ao acaso (MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{33},\protect\hyperlink{ref-carpenter2021}{34}}
+  Dados perdidos completamente ao acaso (MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29},\protect\hyperlink{ref-carpenter2021}{30}}
 \item
-  Dados perdidos ao acaso (MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{33},\protect\hyperlink{ref-carpenter2021}{34}}
+  Dados perdidos ao acaso (MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29},\protect\hyperlink{ref-carpenter2021}{30}}
 \item
-  Dados perdidos não ao acaso (MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{33},\protect\hyperlink{ref-carpenter2021}{34}}
+  Dados perdidos não ao acaso (MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29},\protect\hyperlink{ref-carpenter2021}{30}}
 \end{itemize}
 
 \hypertarget{como-identificar-o-mecanismo-gerador-de-dados-perdidos}{%
@@ -641,12 +533,12 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Por definição, não é possível avaliar se os dados foram perdidos ao acaso (MAR) ou não (MNAR).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{33}}
+  Por definição, não é possível avaliar se os dados foram perdidos ao acaso (MAR) ou não (MNAR).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29}}
 \item
-  Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise (`dado perdido' = 1, `dado observado' = 0).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{33}}
+  Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise (`dado perdido' = 1, `dado observado' = 0).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{35}} fornece a função \emph{na.test} para executar o Little's Missing Completely at Random (MCAR) test\textsuperscript{\protect\hyperlink{ref-little1988}{36}}. \href{https://cran.r-project.org/web/packages/misty/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{31}} fornece a função \emph{na.test} para executar o Little's Missing Completely at Random (MCAR) test\textsuperscript{\protect\hyperlink{ref-little1988}{32}}. \href{https://cran.r-project.org/web/packages/misty/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \hypertarget{que-estratuxe9gias-podem-ser-utilizadas-na-coleta-de-dados-quando-huxe1-expectativa-de-perda-amostral}{%
 \subsection{Que estratégias podem ser utilizadas na coleta de dados quando há expectativa de perda amostral?}\label{que-estratuxe9gias-podem-ser-utilizadas-na-coleta-de-dados-quando-huxe1-expectativa-de-perda-amostral}}
@@ -654,7 +546,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Na expectativa de ocorrência de dados perdidos, recomenda-se ampliar o tamanho da amostra com um \% correspondente à tal estimativa - embora ainda não corriga potenciais vieses pela perda.\textsuperscript{\protect\hyperlink{ref-Altman2007}{32}}
+  Na expectativa de ocorrência de dados perdidos, recomenda-se ampliar o tamanho da amostra com um \% correspondente à tal estimativa - embora ainda não corriga potenciais vieses pela perda.\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
 \end{itemize}
 
 \hypertarget{que-estratuxe9gias-podem-ser-utilizadas-na-anuxe1lise-de-dados-quando-huxe1-dados-perdidos}{%
@@ -662,25 +554,25 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Na ocorrência de dados perdidos, a análise mais comum compreende apenas os `casos completos', com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).\textsuperscript{\protect\hyperlink{ref-Altman2007}{32}}
+  Na ocorrência de dados perdidos, a análise mais comum compreende apenas os `casos completos', com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
 \item
-  A análise de dados completos é válida quando pode se argumentar que que a probabiidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{34}}
+  A análise de dados completos é válida quando pode se argumentar que que a probabiidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{30}}
 \item
-  A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{34}}
+  A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{30}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{37}} fornece a função \emph{complete.cases} para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados. \href{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/stats-package.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{33}} fornece a função \emph{complete.cases} para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados. \href{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/stats-package.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \begin{itemize}
 \item
-  Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.\textsuperscript{\protect\hyperlink{ref-Altman2007}{32}}
+  Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.\textsuperscript{\protect\hyperlink{ref-Altman2007}{28}}
 \item
-  A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares - preditoras do desfecho e não dos dados perdidos - estão disponíveis.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{34}}
+  A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares - preditoras do desfecho e não dos dados perdidos - estão disponíveis.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{30}}
 \item
-  Em dados longitudinais co um pequeno número de `ondas' (medidas repetidas) e poucas variáveis, para análise com modelos de regressão univariados, a imputação via especificação condicional completa - também conhecido como imputação multivariada por equações encadeadas (\emph{multivaraite imputation by chained equations}, MICE) - é eficiente do ponto de vista computacional e possui acurácia e precisão para estimação de parâmetros.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{33},\protect\hyperlink{ref-Cao2022}{38}}
+  Em dados longitudinais co um pequeno número de `ondas' (medidas repetidas) e poucas variáveis, para análise com modelos de regressão univariados, a imputação via especificação condicional completa - também conhecido como imputação multivariada por equações encadeadas (\emph{multivaraite imputation by chained equations}, MICE) - é eficiente do ponto de vista computacional e possui acurácia e precisão para estimação de parâmetros.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{29},\protect\hyperlink{ref-Cao2022}{34}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{39}} e \emph{miceadds}\textsuperscript{\protect\hyperlink{ref-miceadds}{40}} fornecem funções para imputação de dados \href{https://cran.r-project.org/web/packages/mice/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}} \href{https://cran.r-project.org/web/packages/miceadds/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{35}} e \emph{miceadds}\textsuperscript{\protect\hyperlink{ref-miceadds}{36}} fornecem funções para imputação de dados \href{https://cran.r-project.org/web/packages/mice/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}} \href{https://cran.r-project.org/web/packages/miceadds/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \hypertarget{que-estratuxe9gias-podem-ser-utilizadas-na-redauxe7uxe3o-de-estudos-em-que-huxe1-dados-perdidos}{%
 \subsection{Que estratégias podem ser utilizadas na redação de estudos em que há dados perdidos?}\label{que-estratuxe9gias-podem-ser-utilizadas-na-redauxe7uxe3o-de-estudos-em-que-huxe1-dados-perdidos}}
@@ -688,7 +580,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Informar: o número de participantes com dados perdidos; diferenças nas taxas de dados perdidos entre os braços do estudo; os motivos dos dados perdidos; o fluxo de participantes; quaisquer diferenças entre os participantes com e sem dados perdidos; o padrão de ausência (por exemplo, se é aleatória); os métodos para tratamento de dados perdidos das variáveis em análise; os resultados de quaisquer análises de sensibilidade; as implicações dos dados perdidos na interpretação do resultados.\textsuperscript{\protect\hyperlink{ref-Akl2015}{41}}
+  Informar: o número de participantes com dados perdidos; diferenças nas taxas de dados perdidos entre os braços do estudo; os motivos dos dados perdidos; o fluxo de participantes; quaisquer diferenças entre os participantes com e sem dados perdidos; o padrão de ausência (por exemplo, se é aleatória); os métodos para tratamento de dados perdidos das variáveis em análise; os resultados de quaisquer análises de sensibilidade; as implicações dos dados perdidos na interpretação do resultados.\textsuperscript{\protect\hyperlink{ref-Akl2015}{37}}
 \end{itemize}
 
 \hypertarget{variaveis-fatores}{%
@@ -702,9 +594,9 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Variáveis são informações que podem variar entre medidas em diferentes indivíduos ou repetições.\textsuperscript{\protect\hyperlink{ref-Altman1999}{42}}
+  Variáveis são informações que podem variar entre medidas em diferentes indivíduos ou repetições.\textsuperscript{\protect\hyperlink{ref-Altman1999}{38}}
 \item
-  Variáveis definem características de uma amostra extraída da população, tipicamente observados por aplicação de métodos de amostragem (isto é, seleção) da população de interesse.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Variáveis definem características de uma amostra extraída da população, tipicamente observados por aplicação de métodos de amostragem (isto é, seleção) da população de interesse.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \end{itemize}
 
 \hypertarget{como-suxe3o-classificadas-as-variuxe1veis}{%
@@ -712,11 +604,11 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Quanto à informação: Quantitativa ou qualitativa.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31},\protect\hyperlink{ref-Ali2016}{43}--\protect\hyperlink{ref-kaliyadan2019}{45}}
+  Quanto à informação: Quantitativa ou qualitativa.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27},\protect\hyperlink{ref-Ali2016}{39}--\protect\hyperlink{ref-kaliyadan2019}{41}}
 \item
-  Quanto ao conteúdo: contínua (intervalo ou razão; discreta ou contínua), categórica ordinal (numérica discreta ou nominal) ou categórica nominal (multinominal ou dicotômica).\textsuperscript{\protect\hyperlink{ref-vetter2017}{31},\protect\hyperlink{ref-Ali2016}{43}--\protect\hyperlink{ref-kaliyadan2019}{45}}
+  Quanto ao conteúdo: contínua (intervalo ou razão; discreta ou contínua), categórica ordinal (numérica discreta ou nominal) ou categórica nominal (multinominal ou dicotômica).\textsuperscript{\protect\hyperlink{ref-vetter2017}{27},\protect\hyperlink{ref-Ali2016}{39}--\protect\hyperlink{ref-kaliyadan2019}{41}}
 \item
-  Quanto à interpretação: dependente (desfecho), independente (preditora, covariável, confundidora, controle), mediadora, moderadora, modificadora ou auxiliar.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31},\protect\hyperlink{ref-Ali2016}{43}--\protect\hyperlink{ref-kaliyadan2019}{45}}
+  Quanto à interpretação: dependente (desfecho), independente (preditora, covariável, confundidora, controle), mediadora, moderadora, modificadora ou auxiliar.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27},\protect\hyperlink{ref-Ali2016}{39}--\protect\hyperlink{ref-kaliyadan2019}{41}}
 \end{itemize}
 
 \hypertarget{por-que-uxe9-importante-classificar-as-variuxe1veis-corretamente}{%
@@ -725,7 +617,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Identificar corrtamente os tipos de variáveis da pesquisa é uma das etapas da escolha dos métodos estatísticos adequados para as análises e reprentações no texto, tabelas e gráficos.\textsuperscript{\protect\hyperlink{ref-Dettori2018}{44}}
+  Identificar corrtamente os tipos de variáveis da pesquisa é uma das etapas da escolha dos métodos estatísticos adequados para as análises e reprentações no texto, tabelas e gráficos.\textsuperscript{\protect\hyperlink{ref-Dettori2018}{40}}
 \end{itemize}
 
 \hypertarget{transformacao}{%
@@ -736,9 +628,9 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Transformação significa aplicar uma função matemática à variável medida em sua unidade original.\textsuperscript{\protect\hyperlink{ref-Bland1996}{46}}
+  Transformação significa aplicar uma função matemática à variável medida em sua unidade original.\textsuperscript{\protect\hyperlink{ref-Bland1996}{42}}
 \item
-  A transformação visa atender aos pressupostos dos modelos estatísticos quanto à distribuição da variável, em geral a distribuição Gaussiana.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31},\protect\hyperlink{ref-Bland1996}{46}}
+  A transformação visa atender aos pressupostos dos modelos estatísticos quanto à distribuição da variável, em geral a distribuição Gaussiana.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27},\protect\hyperlink{ref-Bland1996}{42}}
 \end{itemize}
 
 \hypertarget{por-que-transformar-variuxe1veis}{%
@@ -746,9 +638,9 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Muitos procedimentos estatísticos supõem que as variáveis - ou seus termos de erro, mais especificamente - são normalmente distribuídas. A violação dessa suposição pode aumentar suas chances de cometer um erro do tipo I ou II.\textsuperscript{\protect\hyperlink{ref-osborne2010}{47}}
+  Muitos procedimentos estatísticos supõem que as variáveis - ou seus termos de erro, mais especificamente - são normalmente distribuídas. A violação dessa suposição pode aumentar suas chances de cometer um erro do tipo I ou II.\textsuperscript{\protect\hyperlink{ref-osborne2010}{43}}
 \item
-  Mesmo quando se está usando análises consideradas ``robustas'' para violações dessas suposições ou testes não paramétricos (que não assumem explicitamente termos de erro normalmente distribuídos), atender a essas questões pode melhorar os resultados das análises (por exemplo, Zimmerman, 1995).\textsuperscript{\protect\hyperlink{ref-osborne2010}{47}}
+  Mesmo quando se está usando análises consideradas ``robustas'' para violações dessas suposições ou testes não paramétricos (que não assumem explicitamente termos de erro normalmente distribuídos), atender a essas questões pode melhorar os resultados das análises (por exemplo, Zimmerman, 1995).\textsuperscript{\protect\hyperlink{ref-osborne2010}{43}}
 \end{itemize}
 
 \hypertarget{quais-transformauxe7uxf5es-podem-ser-aplicadas}{%
@@ -756,16 +648,16 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Distribuições com assimetria à direita: raiz quadrada, logaritmo natural, logaritmo base 10, transformação inversa.\textsuperscript{\protect\hyperlink{ref-osborne2010}{47}}
+  Distribuições com assimetria à direita: raiz quadrada, logaritmo natural, logaritmo base 10, transformação inversa.\textsuperscript{\protect\hyperlink{ref-osborne2010}{43}}
 \item
-  Distribuições com assimetria à esquerda: reflexão e raiz quadrada, reflexão e logaritmo natural, reflexão e logaritmo base 10, reflexão e transformação inversa.\textsuperscript{\protect\hyperlink{ref-osborne2010}{47}}
+  Distribuições com assimetria à esquerda: reflexão e raiz quadrada, reflexão e logaritmo natural, reflexão e logaritmo base 10, reflexão e transformação inversa.\textsuperscript{\protect\hyperlink{ref-osborne2010}{43}}
 \item
-  Transformação arco-seno.\textsuperscript{\protect\hyperlink{ref-osborne2010}{47}}
+  Transformação arco-seno.\textsuperscript{\protect\hyperlink{ref-osborne2010}{43}}
 \item
-  Transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{48}}
+  Transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{44}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{49}} fornece a função \emph{box.cox} para executar a transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{48}} \href{https://cran.r-project.org/web/packages/MASS/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{45}} fornece a função \emph{box.cox} para executar a transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{44}} \href{https://cran.r-project.org/web/packages/MASS/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \hypertarget{dicotomizacao}{%
 \section{Dicotomização de variáveis}\label{dicotomizacao}}
@@ -775,21 +667,21 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Categorizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de categorizar (ou dicotomizar), priorize as variáveis contínuas.\textsuperscript{\protect\hyperlink{ref-Altman2006}{50}--\protect\hyperlink{ref-Collins2016}{52}}
+  Categorizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de categorizar (ou dicotomizar), priorize as variáveis contínuas.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}--\protect\hyperlink{ref-Collins2016}{48}}
 \item
-  Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.\textsuperscript{\protect\hyperlink{ref-Altman2006}{50}--\protect\hyperlink{ref-Collins2016}{52}}
+  Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}--\protect\hyperlink{ref-Collins2016}{48}}
 \item
-  Dicotomização causa perda de informação e consequentemente à perda de poder estatístico para detectar efeitos.\textsuperscript{\protect\hyperlink{ref-Altman2006}{50}}
+  Dicotomização causa perda de informação e consequentemente à perda de poder estatístico para detectar efeitos.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}}
 \item
-  Dicotomização também classifica indivíduos com valores próximos na variável contínua como indivíduos em pontos opostos e extremos, artificialmente sugerindo que são muito diferentes.\textsuperscript{\protect\hyperlink{ref-Altman2006}{50}}
+  Dicotomização também classifica indivíduos com valores próximos na variável contínua como indivíduos em pontos opostos e extremos, artificialmente sugerindo que são muito diferentes.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}}
 \item
-  Dicotomização pode diminuir a variabilidade das variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2006}{50}}
+  Dicotomização pode diminuir a variabilidade das variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}}
 \item
-  Dicotomização pode ocultar não-linearidades presentes na variável contínua.\textsuperscript{\protect\hyperlink{ref-Altman2006}{50}}
+  Dicotomização pode ocultar não-linearidades presentes na variável contínua.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}}
 \item
-  A mediana, embora amplamente utilizada, não é um bom parâmetro para dicotomizar variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2006}{50}}
+  A mediana, embora amplamente utilizada, não é um bom parâmetro para dicotomizar variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2006}{46}}
 \item
-  Caso exista um ponto de corte ou limiar verdadeiro que discrimina dois ou mais grupos, identificá-lo ainda pode ser um desafio.\textsuperscript{\protect\hyperlink{ref-Prince2017}{53}}
+  Caso exista um ponto de corte ou limiar verdadeiro que discrimina dois ou mais grupos, identificá-lo ainda pode ser um desafio.\textsuperscript{\protect\hyperlink{ref-Prince2017}{49}}
 \end{itemize}
 
 \hypertarget{quais-muxe9todos-podem-ser-usados-para-dicotomizar-variuxe1veis-contuxednuas}{%
@@ -798,7 +690,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Em termos de tabelas de contingência 2x2, os seguints métodos permitem\textsuperscript{\protect\hyperlink{ref-Prince2017}{53}} a identificação do limiar verdadeiro: Youden,\textsuperscript{\protect\hyperlink{ref-YOUDEN1950}{54}} Gini Index,\textsuperscript{\protect\hyperlink{ref-strobl2007}{55}} estatística qui-quadrado,\textsuperscript{\protect\hyperlink{ref-pearson1900}{56}} risco relativo\textsuperscript{\protect\hyperlink{ref-Greiner2000}{57}} e kappa\textsuperscript{\protect\hyperlink{ref-fleiss1971}{58}}.
+  Em termos de tabelas de contingência 2x2, os seguints métodos permitem\textsuperscript{\protect\hyperlink{ref-Prince2017}{49}} a identificação do limiar verdadeiro: Youden,\textsuperscript{\protect\hyperlink{ref-YOUDEN1950}{50}} Gini Index,\textsuperscript{\protect\hyperlink{ref-strobl2007}{51}} estatística qui-quadrado,\textsuperscript{\protect\hyperlink{ref-pearson1900}{52}} risco relativo\textsuperscript{\protect\hyperlink{ref-Greiner2000}{53}} e kappa\textsuperscript{\protect\hyperlink{ref-fleiss1971}{54}}.
 \end{itemize}
 
 \hypertarget{fatores}{%
@@ -825,7 +717,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Uma distribuiçào estatística é uma função que descreve os valores possíveis ou o intervalo de valores de uma variável (eixo horizontal) e a frwquência com que cada valor é observado (eixo vertical).\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Uma distribuiçào estatística é uma função que descreve os valores possíveis ou o intervalo de valores de uma variável (eixo horizontal) e a frwquência com que cada valor é observado (eixo vertical).\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \end{itemize}
 
 \hypertarget{o-que-uxe9-a-distribuiuxe7uxe3o-normal}{%
@@ -851,11 +743,11 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Histogramas.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Histogramas.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \item
-  Gráficos Q-Q.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Gráficos Q-Q.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \item
-  testes de hipótese de Kolmogorov-Smirnov, Shapiro-Wilk, Anderson-Darling.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  testes de hipótese de Kolmogorov-Smirnov, Shapiro-Wilk, Anderson-Darling.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \end{itemize}
 
 \hypertarget{parametros}{%
@@ -866,9 +758,9 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Parâmetros são informações que definem um modelo teórico, como propriedades de uma coleção de indivíduos.\textsuperscript{\protect\hyperlink{ref-Altman1999}{42}}
+  Parâmetros são informações que definem um modelo teórico, como propriedades de uma coleção de indivíduos.\textsuperscript{\protect\hyperlink{ref-Altman1999}{38}}
 \item
-  Parâmetros definem características de uma população inteira, tipicamente não observados por ser inviável ter acesso a todos os indivíduos que constituem tal população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Parâmetros definem características de uma população inteira, tipicamente não observados por ser inviável ter acesso a todos os indivíduos que constituem tal população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \end{itemize}
 
 \hypertarget{quais-suxe3o-os-paruxe2metros-mais-comuns}{%
@@ -876,17 +768,122 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Parâmetros de tendência central: médial, mediana, moda.\textsuperscript{\protect\hyperlink{ref-kanji2006}{59}}
+  Parâmetros de tendência central: médial, mediana, moda.\textsuperscript{\protect\hyperlink{ref-kanji2006}{55}}
 \item
-  Parâmetros de dispersão: variância, desvio-padrão, amplitude, intervalo interquartil, intervalo de confiança.\textsuperscript{\protect\hyperlink{ref-kanji2006}{59}}
+  Parâmetros de dispersão: variância, desvio-padrão, amplitude, intervalo interquartil, intervalo de confiança.\textsuperscript{\protect\hyperlink{ref-kanji2006}{55}}
 \item
-  Parâmetos de proporção: frequência absoluta, frequência relativa.\textsuperscript{\protect\hyperlink{ref-kanji2006}{59}}
+  Parâmetos de proporção: frequência absoluta, frequência relativa.\textsuperscript{\protect\hyperlink{ref-kanji2006}{55}}
 \item
-  Parâmetros de distribuição: assimetria, curtose.\textsuperscript{\protect\hyperlink{ref-kanji2006}{59}}
+  Parâmetros de distribuição: assimetria, curtose.\textsuperscript{\protect\hyperlink{ref-kanji2006}{55}}
 \end{itemize}
 
-\hypertarget{tamanho-amostral}{%
-\chapter{\texorpdfstring{\textbf{Tamanho da amostra}}{Tamanho da amostra}}\label{tamanho-amostral}}
+\hypertarget{tabulacao-dados}{%
+\chapter{\texorpdfstring{\textbf{Tabulação de dados}}{Tabulação de dados}}\label{tabulacao-dados}}
+
+\hypertarget{planilhas}{%
+\section{Planilhas eletrônicas}\label{planilhas}}
+
+\hypertarget{qual-a-organizauxe7uxe3o-de-uma-tabela-de-dados}{%
+\subsection{Qual a organização de uma tabela de dados?}\label{qual-a-organizauxe7uxe3o-de-uma-tabela-de-dados}}
+
+\begin{itemize}
+\item
+  Cada variável possui sua própria coluna (vertical).\textsuperscript{\protect\hyperlink{ref-tierney2023}{56}}
+\item
+  Cada observação possui sua própria linha (horizontal).\textsuperscript{\protect\hyperlink{ref-tierney2023}{56}}
+\item
+  Cada valor possui sua própria célula (linha, coluna).\textsuperscript{\protect\hyperlink{ref-tierney2023}{56}}
+\end{itemize}
+
+\hypertarget{qual-a-estrutura-buxe1sica-de-uma-tabela-para-anuxe1lise-estatuxedstica}{%
+\subsection{Qual a estrutura básica de uma tabela para análise estatística?}\label{qual-a-estrutura-buxe1sica-de-uma-tabela-para-anuxe1lise-estatuxedstica}}
+
+\begin{itemize}
+\item
+  Use apenas uma planilha para conter todas as informações coletadas. Evite múltiplas abas no mesmo arquivo, assim como múltiplos arquivos quando possível.\textsuperscript{\protect\hyperlink{ref-broman2018}{57}}
+\item
+  Use apenas 1 (uma) linha de cabeçalho para nomear os fatores e variáveis do seu estudo.\textsuperscript{\protect\hyperlink{ref-broman2018}{57}}
+\item
+  Tipicamente, cada linha representa um participante e cada coluna representa uma variável ou fator do estudo. Estudos com medidas repetidas dos participantes podem conter múltiplas linhas para o mesmo participante (repetindo os dados na mesma coluna, conhecido como \emph{formato curto}) ou só uma linha para o participante (repetindo os dados em colunas separadas, conhecido como \emph{formato longo} ).\textsuperscript{\protect\hyperlink{ref-Juluru2015}{58}}
+\end{itemize}
+
+\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{V1} & \textbf{V2} & \textbf{V3} & \textbf{V4}\\
+\midrule
+\cellcolor{gray!6}{$x_{1,1}$} & \cellcolor{gray!6}{$x_{1,2}$} & \cellcolor{gray!6}{$x_{1,3}$} & \cellcolor{gray!6}{$x_{1,4}$}\\
+$x_{2,1}$ & $x_{2,2}$ & $x_{2,3}$ & $x_{2,4}$\\
+\cellcolor{gray!6}{$x_{3,1}$} & \cellcolor{gray!6}{$x_{3,2}$} & \cellcolor{gray!6}{$x_{3,3}$} & \cellcolor{gray!6}{$x_{3,4}$}\\
+$x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
+\cellcolor{gray!6}{$x_{5,1}$} & \cellcolor{gray!6}{$x_{5,2}$} & \cellcolor{gray!6}{$x_{5,3}$} & \cellcolor{gray!6}{$x_{5,4}$}\\
+\bottomrule
+\end{tabu}
+
+\hypertarget{o-que-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}{%
+\subsection{O que usar para organizar tabelas para análise computadorizada?}\label{o-que-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}}
+
+\begin{itemize}
+\item
+  Seja consistente em: códigos para as variáveis categóricas; códigos para dados perdidos; nomes das variáveis; identificadores de participantes; nome dos arquivos; formato de datas; uso de caracteres de espaço.\textsuperscript{\protect\hyperlink{ref-broman2018}{57},\protect\hyperlink{ref-Juluru2015}{58}}
+\item
+  Use recursos para validação de dados antes e durante a digitação de dados.\textsuperscript{\protect\hyperlink{ref-broman2018}{57},\protect\hyperlink{ref-Juluru2015}{58}}
+\end{itemize}
+
+\includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{59}} fornece a função \emph{melt} para reorganizar a tabela em diferentes formatos. \href{https://cran.r-project.org/web/packages/data.table/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+
+\hypertarget{o-que-nuxe3o-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}{%
+\subsection{O que não usar para organizar tabelas para análise computadorizada?}\label{o-que-nuxe3o-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}}
+
+\begin{itemize}
+\item
+  Não deixe células em branco: substitua dados perdidos por um código sistemático (ex.: NA {[}\emph{not available}{]}).\textsuperscript{\protect\hyperlink{ref-broman2018}{57}}
+\item
+  Não inclua análises estatísticas ou gráficos nas tabelas de dados brutos.\textsuperscript{\protect\hyperlink{ref-broman2018}{57}}
+\item
+  Não utilize cores como informação. Se necessário, crie colunas adicionais - variáveis instrumentais ou auxiliares - para identificar a infomação de modo que possa ser analisada.\textsuperscript{\protect\hyperlink{ref-broman2018}{57}}
+\item
+  Não use células mescladas.
+\item
+  Delete linhas e/ou colunas totalmente em branco (sem unidades de análise e/ou sem variáveis).
+\end{itemize}
+
+\includegraphics[width=0.88em,height=1em]{R-Book_files/figure-latex/fa-icon-498f1ccbaa0f3566ccdbb6a21bcf16d6.pdf} \emph{Recomendado}
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X}
+\toprule
+\textbf{ID} & \textbf{Data.Coleta} & \textbf{Estado.Civil} & \textbf{Numero.Filhos}\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{10-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+2 & 11-09-2023 & casado & 1\\
+\cellcolor{gray!6}{3} & \cellcolor{gray!6}{12-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+4 & 13-09-2023 & solteiro & NA\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{14-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+6 & 15-09-2023 & solteiro & 0\\
+\cellcolor{gray!6}{7} & \cellcolor{gray!6}{16-09-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{NA}\\
+8 & 17-09-2023 & solteiro & NA\\
+\cellcolor{gray!6}{9} & \cellcolor{gray!6}{18-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+10 & 19-09-2023 & solteiro & NA\\
+\bottomrule
+\end{tabu}
+
+\includegraphics[width=0.75em,height=1em]{R-Book_files/figure-latex/fa-icon-9fc2fad5de7ecb3bef7fec427240f50c.pdf} \emph{Evite}
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X}
+\toprule
+\textbf{ID} & \textbf{Data de Coleta} & \textbf{Estado Civil} & \textbf{Número de Filhos}\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{10-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+2 & 11-09-2023 & Casado & 1\\
+\cellcolor{gray!6}{3} & \cellcolor{gray!6}{12-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NaN}\\
+4 & 13-09-2023 & Solteiro & N/A\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{14-09-2023} & \cellcolor{gray!6}{Casado} & \cellcolor{gray!6}{N.A.}\\
+6 & 15-09-2023 & solteiro & 0\\
+\cellcolor{gray!6}{7} & \cellcolor{gray!6}{16-09-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{}\\
+8 & 17-09-2023 & Solteiro & na\\
+\cellcolor{gray!6}{9} & \cellcolor{gray!6}{18-09-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{n.a.}\\
+10 & 19-09-2023 & Solteiro & 999\\
+\bottomrule
+\end{tabu}
 
 \hypertarget{analise-exploratoria}{%
 \chapter{\texorpdfstring{\textbf{Análise exploratória}}{Análise exploratória}}\label{analise-exploratoria}}
@@ -899,9 +896,9 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  A análise descritiva utiliza métodos para calcular, descrever e resumiros dados coletados da(s) amostra(s) de modo que sejam interpretadas adequatamente.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  A análise descritiva utiliza métodos para calcular, descrever e resumiros dados coletados da(s) amostra(s) de modo que sejam interpretadas adequatamente.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \item
-  As análises descritivas geralmente compreendem a apresentação quntitativa (numérica) em tabelas e/ou gráficos.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  As análises descritivas geralmente compreendem a apresentação quntitativa (numérica) em tabelas e/ou gráficos.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \end{itemize}
 
 \includegraphics[width=1.13em,height=1em]{R-Book_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{dataExplorer}\textsuperscript{\protect\hyperlink{ref-DataExplorer}{60}} fornece a função \emph{create\_report} para executar análise explotarória. \href{https://cran.r-project.org/web/packages/DataExplorer/index.html}{\includegraphics[width=1em,height=1em]{R-Book_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
@@ -1059,7 +1056,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Na análise inferencial são utilizados dados da(s) amostra(s) para fazer uma inferência válida (isto é, estimativa) sobre os parâmetros populacionais desconhecidos.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Na análise inferencial são utilizados dados da(s) amostra(s) para fazer uma inferência válida (isto é, estimativa) sobre os parâmetros populacionais desconhecidos.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \end{itemize}
 
 \hypertarget{testes-parametricos-nuxe3o-parametricos}{%
@@ -1070,9 +1067,9 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Testes paramétricos possuem suposições sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Testes paramétricos possuem suposições sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \item
-  Testes paramétricos assumem que os dados foram amostrados de uma distribuição normal.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Testes paramétricos assumem que os dados foram amostrados de uma distribuição normal.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \end{itemize}
 
 \hypertarget{o-que-uxe9-um-teste-nuxe3o-paramuxe9trico}{%
@@ -1081,7 +1078,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Testes não-paramétricos fazem poucas suposições, ou menos rigorosas, sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Testes não-paramétricos fazem poucas suposições, ou menos rigorosas, sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \end{itemize}
 
 \hypertarget{por-que-os-testes-paramuxe9tricos-suxe3o-preferidos}{%
@@ -1090,7 +1087,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{itemize}
 \tightlist
 \item
-  Em geral, testes paramétricos são mais robustos (isto é, possuem menores erros tipo I e II) que seus testes não-paramétricos correspondentes.\textsuperscript{\protect\hyperlink{ref-vetter2017}{31}}
+  Em geral, testes paramétricos são mais robustos (isto é, possuem menores erros tipo I e II) que seus testes não-paramétricos correspondentes.\textsuperscript{\protect\hyperlink{ref-vetter2017}{27}}
 \end{itemize}
 
 \hypertarget{analise-comparacao}{%
@@ -1376,6 +1373,12 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
     Guarda-chuva
   \end{itemize}
 \end{itemize}
+
+\hypertarget{tamanho-amostral}{%
+\chapter{\texorpdfstring{\textbf{Tamanho da amostra}}{Tamanho da amostra}}\label{tamanho-amostral}}
+
+\hypertarget{reamostragem}{%
+\chapter{\texorpdfstring{\textbf{Reamostragem}}{Reamostragem}}\label{reamostragem}}
 
 \hypertarget{vieses}{%
 \chapter{\texorpdfstring{\textbf{Vieses}}{Vieses}}\label{vieses}}
@@ -1804,153 +1807,153 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \CSLLeftMargin{22. }%
 \CSLRightInline{Chang W. \emph{{webshot}: Take Screenshots of Web Pages}.; 2023. \href{https://CRAN.R-project.org/package=webshot}{https://CRAN.R-project.org/package=webshot.}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-tierney2023}{}}%
-\CSLLeftMargin{23. }%
-\CSLRightInline{Tierney N, Cook D. Expanding Tidy Data Principles to Facilitate Missing Data Exploration, Visualization and Assessment of Imputations. \emph{Journal of Statistical Software}. 2023;105(7). doi:\href{https://doi.org/10.18637/jss.v105.i07}{10.18637/jss.v105.i07}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-broman2018}{}}%
-\CSLLeftMargin{24. }%
-\CSLRightInline{Broman KW, Woo KH. Data Organization in Spreadsheets. \emph{The American Statistician}. 2018;72(1):2-10. doi:\href{https://doi.org/10.1080/00031305.2017.1375989}{10.1080/00031305.2017.1375989}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Juluru2015}{}}%
-\CSLLeftMargin{25. }%
-\CSLRightInline{Juluru K, Eng J. Use of Spreadsheets for Research Data Collection and Preparation: \emph{Academic Radiology}. 2015;22(12):1592-1599. doi:\href{https://doi.org/10.1016/j.acra.2015.08.024}{10.1016/j.acra.2015.08.024}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-data.table}{}}%
-\CSLLeftMargin{26. }%
-\CSLRightInline{Dowle M, Srinivasan A. Data.table: Extension of `data.frame`. 2023. \href{https://CRAN.R-project.org/package=data.table}{https://CRAN.R-project.org/package=data.table.}}
-
 \leavevmode\vadjust pre{\hypertarget{ref-Altman1997}{}}%
-\CSLLeftMargin{27. }%
+\CSLLeftMargin{23. }%
 \CSLRightInline{Altman DG, Bland JM. Statistics Notes: Units of analysis. \emph{BMJ}. 1997;314(7098):1874-1874. doi:\href{https://doi.org/10.1136/bmj.314.7098.1874}{10.1136/bmj.314.7098.1874}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Matthews1990}{}}%
-\CSLLeftMargin{28. }%
+\CSLLeftMargin{24. }%
 \CSLRightInline{Matthews JN, Altman DG, Campbell MJ, Royston P. Analysis of serial measurements in medical research. \emph{BMJ}. 1990;300(6719):230-235. doi:\href{https://doi.org/10.1136/bmj.300.6719.230}{10.1136/bmj.300.6719.230}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Bland1994}{}}%
-\CSLLeftMargin{29. }%
+\CSLLeftMargin{25. }%
 \CSLRightInline{Bland JM, Altman DG. Statistics notes: Matching. \emph{BMJ}. 1994;309(6962):1128-1128. doi:\href{https://doi.org/10.1136/bmj.309.6962.1128}{10.1136/bmj.309.6962.1128}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Olson2021}{}}%
-\CSLLeftMargin{30. }%
+\CSLLeftMargin{26. }%
 \CSLRightInline{Olson K. What Are Data? \emph{Qualitative Health Research}. 2021;31(9):1567-1569. doi:\href{https://doi.org/10.1177/10497323211015960}{10.1177/10497323211015960}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-vetter2017}{}}%
-\CSLLeftMargin{31. }%
+\CSLLeftMargin{27. }%
 \CSLRightInline{Vetter TR. Fundamentals of Research Data and Variables. \emph{Anesthesia \& Analgesia}. 2017;125(4):1375-1380. doi:\href{https://doi.org/10.1213/ane.0000000000002370}{10.1213/ane.0000000000002370}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Altman2007}{}}%
-\CSLLeftMargin{32. }%
+\CSLLeftMargin{28. }%
 \CSLRightInline{Altman DG, Bland JM. Missing data. \emph{BMJ}. 2007;334(7590):424-424. doi:\href{https://doi.org/10.1136/bmj.38977.682025.2c}{10.1136/bmj.38977.682025.2c}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Heymans2022}{}}%
-\CSLLeftMargin{33. }%
+\CSLLeftMargin{29. }%
 \CSLRightInline{Heymans MW, Twisk JWR. Handling missing data in clinical research. \emph{Journal of Clinical Epidemiology}. September 2022. doi:\href{https://doi.org/10.1016/j.jclinepi.2022.08.016}{10.1016/j.jclinepi.2022.08.016}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-carpenter2021}{}}%
-\CSLLeftMargin{34. }%
+\CSLLeftMargin{30. }%
 \CSLRightInline{Carpenter JR, Smuk M. Missing data: A statistical framework for practice. \emph{Biometrical Journal}. 2021;63(5):915-947. doi:\href{https://doi.org/10.1002/bimj.202000196}{10.1002/bimj.202000196}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-misty}{}}%
-\CSLLeftMargin{35. }%
+\CSLLeftMargin{31. }%
 \CSLRightInline{Yanagida T. Misty: Miscellaneous functions 't. yanagida'. 2023. \href{https://CRAN.R-project.org/package=misty}{https://CRAN.R-project.org/package=misty.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-little1988}{}}%
-\CSLLeftMargin{36. }%
+\CSLLeftMargin{32. }%
 \CSLRightInline{Little RJA. A Test of Missing Completely at Random for Multivariate Data with Missing Values. \emph{Journal of the American Statistical Association}. 1988;83(404):1198-1202. doi:\href{https://doi.org/10.1080/01621459.1988.10478722}{10.1080/01621459.1988.10478722}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-stats}{}}%
-\CSLLeftMargin{37. }%
+\CSLLeftMargin{33. }%
 \CSLRightInline{R Core Team. R: A language and environment for statistical computing. 2022. \href{https://www.R-project.org/}{https://www.R-project.org/.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Cao2022}{}}%
-\CSLLeftMargin{38. }%
+\CSLLeftMargin{34. }%
 \CSLRightInline{Cao Y, Allore H, Vander Wyk B, Gutman R. Review and evaluation of imputation methods for multivariate longitudinal data with mixed{-}type incomplete variables. \emph{Statistics in Medicine}. October 2022. doi:\href{https://doi.org/10.1002/sim.9592}{10.1002/sim.9592}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-mice}{}}%
-\CSLLeftMargin{39. }%
+\CSLLeftMargin{35. }%
 \CSLRightInline{Buuren S van, Groothuis-Oudshoorn K. {\textbraceleft}Mice{\textbraceright}: Multivariate imputation by chained equations in r. 2011;45:1-67. doi:\href{https://doi.org/10.18637/jss.v045.i03}{10.18637/jss.v045.i03}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-miceadds}{}}%
-\CSLLeftMargin{40. }%
+\CSLLeftMargin{36. }%
 \CSLRightInline{Robitzsch A, Grund S. Miceadds: Some additional multiple imputation functions, especially for 'mice'. 2023. \href{https://CRAN.R-project.org/package=miceadds}{https://CRAN.R-project.org/package=miceadds.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Akl2015}{}}%
-\CSLLeftMargin{41. }%
+\CSLLeftMargin{37. }%
 \CSLRightInline{Akl EA, Shawwa K, Kahale LA, et al. Reporting missing participant data in randomised trials: systematic survey of the methodological literature and a proposed guide. \emph{BMJ Open}. 2015;5(12):e008431. doi:\href{https://doi.org/10.1136/bmjopen-2015-008431}{10.1136/bmjopen-2015-008431}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Altman1999}{}}%
-\CSLLeftMargin{42. }%
+\CSLLeftMargin{38. }%
 \CSLRightInline{Altman DG, Bland JM. Statistics notes Variables and parameters. \emph{BMJ}. 1999;318(7199):1667-1667. doi:\href{https://doi.org/10.1136/bmj.318.7199.1667}{10.1136/bmj.318.7199.1667}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Ali2016}{}}%
-\CSLLeftMargin{43. }%
+\CSLLeftMargin{39. }%
 \CSLRightInline{Ali Z, Bhaskar Sb. Basic statistical tools in research and data analysis. \emph{Indian Journal of Anaesthesia}. 2016;60(9):662. doi:\href{https://doi.org/10.4103/0019-5049.190623}{10.4103/0019-5049.190623}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Dettori2018}{}}%
-\CSLLeftMargin{44. }%
+\CSLLeftMargin{40. }%
 \CSLRightInline{Dettori JR, Norvell DC. The Anatomy of Data. \emph{Global Spine Journal}. 2018;8(3):311-313. doi:\href{https://doi.org/10.1177/2192568217746998}{10.1177/2192568217746998}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-kaliyadan2019}{}}%
-\CSLLeftMargin{45. }%
+\CSLLeftMargin{41. }%
 \CSLRightInline{Kaliyadan F, Kulkarni V. Types of variables, descriptive statistics, and sample size. \emph{Indian Dermatology Online Journal}. 2019;10(1):82. doi:\href{https://doi.org/10.4103/idoj.idoj_468_18}{10.4103/idoj.idoj\_468\_18}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Bland1996}{}}%
-\CSLLeftMargin{46. }%
+\CSLLeftMargin{42. }%
 \CSLRightInline{Bland JM, Altman DG. Statistics Notes: Transforming data. \emph{BMJ}. 1996;312(7033):770-770. doi:\href{https://doi.org/10.1136/bmj.312.7033.770}{10.1136/bmj.312.7033.770}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-osborne2010}{}}%
-\CSLLeftMargin{47. }%
+\CSLLeftMargin{43. }%
 \CSLRightInline{Osborne J. Improving your data transformations: Applying the box-cox transformation. \emph{University of Massachusetts Amherst}. 2010. doi:\href{https://doi.org/10.7275/QBPC-GK17}{10.7275/QBPC-GK17}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-box1964}{}}%
-\CSLLeftMargin{48. }%
+\CSLLeftMargin{44. }%
 \CSLRightInline{Box GEP, Cox DR. An Analysis of Transformations. \emph{Journal of the Royal Statistical Society: Series B (Methodological)}. 1964;26(2):211-243. doi:\href{https://doi.org/10.1111/j.2517-6161.1964.tb00553.x}{10.1111/j.2517-6161.1964.tb00553.x}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MASS}{}}%
-\CSLLeftMargin{49. }%
+\CSLLeftMargin{45. }%
 \CSLRightInline{Venables WN, Ripley BD. Modern applied statistics with s. 2002. \href{https://www.stats.ox.ac.uk/pub/MASS4/}{https://www.stats.ox.ac.uk/pub/MASS4/.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Altman2006}{}}%
-\CSLLeftMargin{50. }%
+\CSLLeftMargin{46. }%
 \CSLRightInline{Altman DG, Royston P. The cost of dichotomising continuous variables. \emph{BMJ}. 2006;332(7549):1080.1. doi:\href{https://doi.org/10.1136/bmj.332.7549.1080}{10.1136/bmj.332.7549.1080}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Royston2006}{}}%
-\CSLLeftMargin{51. }%
+\CSLLeftMargin{47. }%
 \CSLRightInline{Royston P, Altman DG, Sauerbrei W. Dichotomizing continuous predictors in multiple regression: a bad idea. \emph{Statistics in Medicine}. 2005;25(1):127-141. doi:\href{https://doi.org/10.1002/sim.2331}{10.1002/sim.2331}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Collins2016}{}}%
-\CSLLeftMargin{52. }%
+\CSLLeftMargin{48. }%
 \CSLRightInline{Collins GS, Ogundimu EO, Cook JA, Manach YL, Altman DG. Quantifying the impact of different approaches for handling continuous predictors on the performance of a prognostic model. \emph{Statistics in Medicine}. 2016;35(23):4124-4135. doi:\href{https://doi.org/10.1002/sim.6986}{10.1002/sim.6986}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Prince2017}{}}%
-\CSLLeftMargin{53. }%
+\CSLLeftMargin{49. }%
 \CSLRightInline{Nelson SLP, Ramakrishnan V, Nietert PJ, Kamen DL, Ramos PS, Wolf BJ. An evaluation of common methods for dichotomization of continuous variables to discriminate disease status. \emph{Communications in Statistics - Theory and Methods}. 2017;46(21):10823-10834. doi:\href{https://doi.org/10.1080/03610926.2016.1248783}{10.1080/03610926.2016.1248783}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-YOUDEN1950}{}}%
-\CSLLeftMargin{54. }%
+\CSLLeftMargin{50. }%
 \CSLRightInline{Youden WJ. Index for rating diagnostic tests. \emph{Cancer}. 1950;3(1):32-35. doi:\href{https://doi.org/10.1002/1097-0142(1950)3:1\%3C32::aid-cncr2820030106\%3E3.0.co;2-3}{10.1002/1097-0142(1950)3:1\textless32::aid-cncr2820030106\textgreater3.0.co;2-3}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-strobl2007}{}}%
-\CSLLeftMargin{55. }%
+\CSLLeftMargin{51. }%
 \CSLRightInline{Strobl C, Boulesteix AL, Augustin T. Unbiased split selection for classification trees based on the Gini Index. \emph{Computational Statistics \& Data Analysis}. 2007;52(1):483-501. doi:\href{https://doi.org/10.1016/j.csda.2006.12.030}{10.1016/j.csda.2006.12.030}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-pearson1900}{}}%
-\CSLLeftMargin{56. }%
+\CSLLeftMargin{52. }%
 \CSLRightInline{Pearson K. X. {\emph{On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling}}. \emph{The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science}. 1900;50(302):157-175. doi:\href{https://doi.org/10.1080/14786440009463897}{10.1080/14786440009463897}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Greiner2000}{}}%
-\CSLLeftMargin{57. }%
+\CSLLeftMargin{53. }%
 \CSLRightInline{Greiner M, Pfeiffer D, Smith RD. Principles and practical application of the receiver-operating characteristic analysis for diagnostic tests. \emph{Preventive Veterinary Medicine}. 2000;45(1-2):23-41. doi:\href{https://doi.org/10.1016/s0167-5877(00)00115-x}{10.1016/s0167-5877(00)00115-x}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-fleiss1971}{}}%
-\CSLLeftMargin{58. }%
+\CSLLeftMargin{54. }%
 \CSLRightInline{Fleiss JL. Measuring nominal scale agreement among many raters. \emph{Psychological Bulletin}. 1971;76(5):378-382. doi:\href{https://doi.org/10.1037/h0031619}{10.1037/h0031619}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-kanji2006}{}}%
-\CSLLeftMargin{59. }%
+\CSLLeftMargin{55. }%
 \CSLRightInline{Kanji G. 100 statistical tests. 2006. doi:\href{https://doi.org/10.4135/9781849208499}{10.4135/9781849208499}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-tierney2023}{}}%
+\CSLLeftMargin{56. }%
+\CSLRightInline{Tierney N, Cook D. Expanding Tidy Data Principles to Facilitate Missing Data Exploration, Visualization and Assessment of Imputations. \emph{Journal of Statistical Software}. 2023;105(7). doi:\href{https://doi.org/10.18637/jss.v105.i07}{10.18637/jss.v105.i07}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-broman2018}{}}%
+\CSLLeftMargin{57. }%
+\CSLRightInline{Broman KW, Woo KH. Data Organization in Spreadsheets. \emph{The American Statistician}. 2018;72(1):2-10. doi:\href{https://doi.org/10.1080/00031305.2017.1375989}{10.1080/00031305.2017.1375989}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Juluru2015}{}}%
+\CSLLeftMargin{58. }%
+\CSLRightInline{Juluru K, Eng J. Use of Spreadsheets for Research Data Collection and Preparation: \emph{Academic Radiology}. 2015;22(12):1592-1599. doi:\href{https://doi.org/10.1016/j.acra.2015.08.024}{10.1016/j.acra.2015.08.024}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-data.table}{}}%
+\CSLLeftMargin{59. }%
+\CSLRightInline{Dowle M, Srinivasan A. Data.table: Extension of `data.frame`. 2023. \href{https://CRAN.R-project.org/package=data.table}{https://CRAN.R-project.org/package=data.table.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-DataExplorer}{}}%
 \CSLLeftMargin{60. }%
