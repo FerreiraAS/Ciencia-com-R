@@ -4,13 +4,13 @@ H <- 11.7
 for(i in 1:2){
   
   if(i == 1){
-    grDevices::png(file = "R-Book-Cover.png",
+    grDevices::png(file = "Cover_1.png",
                    width = W,
                    height = H,
                    units = "in",
                    res = 300)
   } else {
-    grDevices::pdf(file = "R-Book-Cover.pdf",
+    grDevices::pdf(file = "Cover_1.pdf",
                    width = W,
                    height = H)
   }
@@ -18,7 +18,27 @@ for(i in 1:2){
   plot(1, type = "n", xlab = "", ylab = "", xlim = c(0,W), ylim = c(0,H))
   
   # background image
-  source("cover-image.R")
+  rmd.files <- list.files(getwd(), ".Rmd")
+  phrases <- c()
+  for(i in 1:length(rmd.files)){
+    content <- readLines(rmd.files[i])
+    lines <- stringr::str_extract(content, "^\\### \\**")
+    select.lines <- content[!is.na(lines)]
+    clean.lines <- gsub("\\### \\**", "", select.lines) 
+    clean.lines <- gsub(" $\\*", "", clean.lines)
+    phrases <- c(phrases, clean.lines)
+  }
+  phrases <- phrases[!duplicated(phrases)]
+  texto <- paste0(phrases, collapse = " ")
+  rectangleWidth <- W
+  s <- texto
+  n <- nchar(s)
+  for(i in n:1) {
+    wrappeds <- paste0(strwrap(s, i), collapse = "\n")
+    if(strwidth(wrappeds) < rectangleWidth) break
+  }
+  textHeight <- strheight(wrappeds)
+  text(W/2, H/2, labels = wrappeds, col = "gray22")
   
   # author name
   text(x = W, y = H - 0.5, labels = "Arthur de Sá Ferreira", pos = 2, cex = 2, col = "white")
