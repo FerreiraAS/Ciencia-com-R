@@ -24,5 +24,4 @@ for(i in n:1) {
 
 textHeight <- strheight(wrappeds)
 
-rect(-1, -0.2 + 0.25, rectangleWidth + 1, textHeight + 0.2 + 0.25, col = "#5ABFBF", lwd = NA)     
-text(W/2, H/3.5 + 1.4, wrappeds, col = "black")
+text(W/2, H/2, labels = wrappeds, col = "gray20")
