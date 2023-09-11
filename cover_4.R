@@ -17,19 +17,17 @@ for(i in 1:2){
   par(mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0), bg = "black")
   plot(1, type = "n", xlab = "", ylab = "", xlim = c(0,W), ylim = c(0,H))
   
-  # background image
-  rmd.files <- list.files(getwd(), ".Rmd")
-  phrases <- c()
-  for(i in 1:length(rmd.files)){
-    content <- readLines(rmd.files[i])
-    lines <- stringr::str_extract(content, "^\\### \\**")
-    select.lines <- content[!is.na(lines)]
-    clean.lines <- gsub("\\### \\**", "", select.lines) 
-    clean.lines <- gsub(" $\\*", "", clean.lines)
-    phrases <- c(phrases, clean.lines)
-  }
-  phrases <- phrases[!duplicated(phrases)]
-  texto <- paste0(phrases, collapse = " ")
+  # sobre o autor
+  author <- png::readPNG("ASF.png")
+  rasterImage(author, xleft = W/2 - 1, ybottom = H/2 - 1, xright = W/2 + 1, ytop = H/2 + 1)
+
+  texto <- "Obtive minha Graduação em Fisioterapia pela Universidade Federal do Rio de Janeiro (UFRJ, 1999), Formação em Acupuntura pela Academia Brasileira de Arte e Ciência Oriental (ABACO, 2001), Mestrado em Engenharia Biomédica pela Universidade Federal do Rio de Janeiro (UFRJ, 2002) e Doutorado em Engenharia Biomédica pela Universidade Federal do Rio de Janeiro (UFRJ, 2006).
+  Tenho experiência em docência no ensino superior, atuando com professor da graduação em cursos de Fisioterapia, Enfermagem e Odontologia, entre outros (2001-atual); pós-graduação lato sensu em Fisioterapia (2001-atual) e stricto sensu em Ciências da Reabilitação (2010-atual).
+  Sou professor adjunto do Centro Universitário Augusto Motta (UNISUAM), pesquisador dos Programas de Pós-graduação em Ciências da Reabilitação (PPGCR) e Desenvolvimento Local (PPGD) e Coordenador do Comitê de Ética em Pesquisa (CEP) (2020-atual).
+  Fundei o Laboratório de Simulação Computacional e Modelagem em Reabilitação (LSCMR), onde desenvolvo projetos de pesquisa principalmente nos seguintes temas: Bioestatística, Modelagem e simulação computacional, Processamento de sinais biomédicos, Movimento funcional humano, Medicina tradicional (chinesa), Distúrbios musculoesqueléticos, Doenças cardiovasculares e Doenças respiratórias.
+  Sou membro efetivo da Associação Brasileira de Pesquisa e Pós-Graduação em Fisioterapia (ABRAPG-FT) (2007-atual), Committee on Publication Ethics (COPE) (2018-atual), Consórcio Acadêmico Brasileiro de Saúde Integrativa (CABSIN) (2019-atual) e Royal Statistical Society (RSS) (2021-atual).
+  Componho o corpo editoral dos periódicos internacionais e nacionais: Scientific Reports, Frontiers in Rehabilitation Sciences, Evidence-Based Complementary and Alternative Medicine, Chinese Journal of Integrative Medicine, Journal of Integrative Medicine, Fisioterapia e Pesquisa."
+  
   rectangleWidth <- W
   s <- texto
   n <- nchar(s)
@@ -38,19 +36,7 @@ for(i in 1:2){
     if(strwidth(wrappeds) < rectangleWidth) break
   }
   textHeight <- strheight(wrappeds)
-  text(W/2, H/2, labels = wrappeds, col = "gray25")
-  
-  # author name
-  text(x = W, y = H - 0.5, labels = "Arthur de Sá Ferreira", pos = 2, cex = 2, col = "white")
-  
-  # book title
-  text(x = W, y = H/2 + 2.0, labels = substitute(paste(bold("Ciência com R"))), pos = 2, cex = 5, col = "white")
-  
-  # book subtitle
-  text(x = W, y = H/2 + 1.25, labels = substitute(paste(italic("Perguntas e respostas para pesquisadores e analistas de dados"))), pos = 2, cex = 1.5, col = "white")
-  
-  # year
-  text(x = W/2, y = -0.2, labels = format(Sys.Date(), "%Y"), adj = c(0,0), cex = 1, col = "white")
+  text(W/2, H/5, labels = wrappeds, col = "white")
   
   dev.off()
 }
