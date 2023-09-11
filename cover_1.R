@@ -44,8 +44,8 @@ for(i in 1:2){
   text(x = W, y = H - 0.5, labels = substitute(paste(bold("Arthur de Sá Ferreira"))), pos = 2, cex = 2, col = "white")
   
   # book title
-  rect(xleft = 0,  ybottom = H/2 + 2.0 - 1, xright = W, ytop = H/2 + 2.0 + 1, col = "black")
-  text(x = W, y = H/2 + 2.0, labels = substitute(paste(bold("Ciência com R"))), pos = 2, cex = 5, col = "yellow")
+  rect(xleft = 0,  ybottom = H/2 + 2.0 - 1.16, xright = W, ytop = H/2 + 2.0 + 1, col = "black")
+  text(x = W, y = H/2 + 2.0, labels = substitute(paste(bold("Ciência com    "))), pos = 2, cex = 5, col = "yellow")
   text(x = W, y = H/2 + 2.0, labels = substitute(paste(bold("R"))), pos = 2, cex = 5, col = "#3363B0")
   
   # book subtitle
