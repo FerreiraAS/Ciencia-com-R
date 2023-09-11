@@ -50,8 +50,7 @@ for(i in 1:2){
   
   # book subtitle
   text(x = W, y = H/2 + 1.25, labels = substitute(paste(italic("Perguntas e respostas para pesquisadores e analistas de dados"))), pos = 2, cex = 1.5, col = "white")
-  text(x = W, y = H/2 + 1.25, labels = substitute(paste(italic("pesquisadores e analistas de dados"))), pos = 2, cex = 1.5, col = "#3363B0")
-  
+
   # year
   text(x = W/2, y = -0.2, labels = format(Sys.Date(), "%Y"), adj = c(0,0), cex = 1, col = "white")
   
