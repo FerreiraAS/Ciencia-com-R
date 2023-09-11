@@ -41,7 +41,8 @@ for(i in 1:2){
   text(W/2, H/2, labels = wrappeds, col = "gray25")
   
   # author name
-  text(x = W, y = H - 0.5, labels = substitute(paste(bold("Arthur de Sá Ferreira"))), pos = 2, cex = 2, col = "white")
+  rect(xleft = 0,  ybottom = H - 0.8, xright = W, ytop = H, col = "black")
+  text(x = W, y = H - 0.4, labels = substitute(paste(bold("Arthur de Sá Ferreira"))), pos = 2, cex = 2, col = "white")
   
   # book title
   rect(xleft = 0,  ybottom = H/2 + 2.0 - 1.16, xright = W, ytop = H/2 + 2.0 + 1, col = "black")
@@ -52,6 +53,7 @@ for(i in 1:2){
   text(x = W, y = H/2 + 1.25, labels = substitute(paste(italic("Perguntas e respostas para pesquisadores e analistas de dados"))), pos = 2, cex = 1.5, col = "white")
 
   # year
+  rect(xleft = 0,  ybottom = -0.5, xright = W, ytop = 0.3, col = "black")
   text(x = W/2, y = -0.2, labels = format(Sys.Date(), "%Y"), adj = c(0,0), cex = 1, col = "white")
   
   dev.off()
