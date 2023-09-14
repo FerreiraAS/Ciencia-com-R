@@ -38,7 +38,7 @@ for(i in 1:2){
     if(strwidth(wrappeds) < rectangleWidth) break
   }
   textHeight <- strheight(wrappeds)
-  text(W/2, H/2, labels = wrappeds, col = "gray25")
+  text(W/2, H/2, labels = wrappeds, col = "gray35")
   
   # author name
   rect(xleft = 0,  ybottom = H - 0.8, xright = W, ytop = H, col = "black")
