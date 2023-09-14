@@ -55,7 +55,7 @@ for(i in 1:2){
 
   # year
 #  rect(xleft = 0 - 10,  ybottom = -0.5, xright = W + 10, ytop = 0.3, col = "black")
-  text(x = W/2, y = -0.2, labels = format(Sys.Date(), "%Y"), adj = c(0,0), cex = 1, col = "white")
+  text(x = W/2, y = -0.2, labels = format(Sys.Date(), "%Y"), adj = c(0,0), cex = 1.5, col = "white")
   
   dev.off()
 }
