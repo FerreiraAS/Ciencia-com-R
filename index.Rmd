@@ -30,6 +30,12 @@ if(!file.exists(".nojekyll")) {
 }
 ```
 
+```{r copy-file, results = "hide", include= FALSE}
+file.copy(from="Ciência-com-R.pptx", to="docs/Ciência-com-R.pptx", 
+          overwrite = TRUE, recursive = FALSE, 
+          copy.mode = TRUE)
+```
+
 ```{r packages, echo = FALSE, results = 'hide', include = FALSE}
 library("dplyr")
 library("webshot")
