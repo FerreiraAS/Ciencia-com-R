@@ -55,6 +55,69 @@
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
   
@@ -351,6 +414,10 @@ div.csl-indent {
 <li class="chapter" data-level="15.3.1" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#correlação-bivariada-pode-ser-usada-para-seleção-de-variáveis"><i class="fa fa-check"></i><b>15.3.1</b> Correlação bivariada pode ser usada para seleção de variáveis?</a></li>
 <li class="chapter" data-level="15.3.2" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#o-que-pode-ser-feito-para-reduzir-o-número-de-variáveis-candidatas-a-um-modelo-multivariável"><i class="fa fa-check"></i><b>15.3.2</b> O que pode ser feito para reduzir o número de variáveis candidatas a um modelo multivariável?</a></li>
 </ul></li>
+<li class="chapter" data-level="15.4" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#testes-de-associação"><i class="fa fa-check"></i><b>15.4</b> Testes de associação</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#quais-testes-podem-ser-usados-em-análise-de-associação"><i class="fa fa-check"></i><b>15.4.1</b> Quais testes podem ser usados em análise de associação?</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="analise-desempenho-diagnostico.html"><a href="analise-desempenho-diagnostico.html"><i class="fa fa-check"></i><b>16</b> <strong>Desempenho diagnóstico</strong></a>
 <ul>
@@ -561,19 +628,19 @@ div.csl-indent {
 <div id="quais-problemas-de-pesquisa-são-investigados-com-estudos-de-conncordância-e-confiabilidade" class="section level3 hasAnchor" number="17.1.1">
 <h3><span class="header-section-number">17.1.1</span> Quais problemas de pesquisa são investigados com estudos de conncordância e confiabilidade?<a href="analise-concordancia-confiabilidade.html#quais-problemas-de-pesquisa-são-investigados-com-estudos-de-conncordância-e-confiabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Quão reprodutíveis são as mensurações?<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
-<li><p>Os diferentes métodos medem a mesma coisa em média?<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
-<li><p>Existe viés entre as medidas de diferentes métodos (isto é, medem a mesma coisa em média)?<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
-<li><p>Um método pode substituir o outro?<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
+<li><p>Quão reprodutíveis são as mensurações?<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
+<li><p>Os diferentes métodos medem a mesma coisa em média?<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
+<li><p>Existe viés entre as medidas de diferentes métodos (isto é, medem a mesma coisa em média)?<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
+<li><p>Um método pode substituir o outro?<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quais-fontes-de-variabilidade-comumente-invetigadas" class="section level3 hasAnchor" number="17.1.2">
 <h3><span class="header-section-number">17.1.2</span> Quais fontes de variabilidade comumente invetigadas?<a href="analise-concordancia-confiabilidade.html#quais-fontes-de-variabilidade-comumente-invetigadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Intra/Entre sujeitos.<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
-<li><p>Intra/Entre repetições.<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
-<li><p>Intra/Entre observadores.<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
+<li><p>Intra/Entre sujeitos.<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
+<li><p>Intra/Entre repetições.<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
+<li><p>Intra/Entre observadores.<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -584,17 +651,17 @@ div.csl-indent {
 <div id="quais-métodos-são-adequados-para-análise-de-concordância" class="section level3 hasAnchor" number="17.2.1">
 <h3><span class="header-section-number">17.2.1</span> Quais métodos são adequados para análise de concordância?<a href="analise-concordancia-confiabilidade.html#quais-métodos-são-adequados-para-análise-de-concordância" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Gráfico de dispersão com a reta de regressão.<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
-<li><p>Gráfico de limites de concordância (média dos testes vs. diferença entre testes) com a reta de regressão do viés e respectivo intervalo de confiança.<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
+<li><p>Gráfico de dispersão com a reta de regressão.<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
+<li><p>Gráfico de limites de concordância (média dos testes vs. diferença entre testes) com a reta de regressão do viés e respectivo intervalo de confiança.<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quais-métodos-não-são-adequados-para-análise-de-concordância" class="section level3 hasAnchor" number="17.2.2">
 <h3><span class="header-section-number">17.2.2</span> Quais métodos não são adequados para análise de concordância?<a href="analise-concordancia-confiabilidade.html#quais-métodos-não-são-adequados-para-análise-de-concordância" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Comparação de médias: dois métodos apresentarem médias similares - isto é, ‘sem diferença estatística’ após um teste inferencial de hipótese nula <span class="math inline">\(H_{0}:\mu_{1} = \mu_{2}\)</span> - não informa sobre a concordância deles. Métodos com maior erro de medida tendem a ter menos chance de rejeição da hipótese nula.<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
-<li><p>Correlação bivariada: o coeficiente de correlação dependente tanto da variação entre indivíduos (isto é, entre os valores verdadeiros) quanto da variação intraindividual (isto é, erro de medida). Se a variância dos erros de medida de ambos os métodos não for pequena comparadas à variância dos valores verdadeiros, o tamanho do efeito da correlação será pequeno mesmo que os métodos possuam boa concordância.<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
-<li><p>Regressão linear: o teste da hipótese nula da inclinação da reta de regressão (<span class="math inline">\(H_{0}:\beta = 0\)</span>) é equivalente a testar a correlação bivariada (<span class="math inline">\(H_{0}:\rho = 0\)</span>).<span class="citation"><sup><a href="#ref-altman1983">89</a></sup></span></p></li>
+<li><p>Comparação de médias: dois métodos apresentarem médias similares - isto é, ‘sem diferença estatística’ após um teste inferencial de hipótese nula <span class="math inline">\(H_{0}:\mu_{1} = \mu_{2}\)</span> - não informa sobre a concordância deles. Métodos com maior erro de medida tendem a ter menos chance de rejeição da hipótese nula.<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
+<li><p>Correlação bivariada: o coeficiente de correlação dependente tanto da variação entre indivíduos (isto é, entre os valores verdadeiros) quanto da variação intraindividual (isto é, erro de medida). Se a variância dos erros de medida de ambos os métodos não for pequena comparadas à variância dos valores verdadeiros, o tamanho do efeito da correlação será pequeno mesmo que os métodos possuam boa concordância.<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
+<li><p>Regressão linear: o teste da hipótese nula da inclinação da reta de regressão (<span class="math inline">\(H_{0}:\beta = 0\)</span>) é equivalente a testar a correlação bivariada (<span class="math inline">\(H_{0}:\rho = 0\)</span>).<span class="citation"><sup><a href="#ref-altman1983">92</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -608,7 +675,7 @@ div.csl-indent {
 <h3> <strong>Referências</strong><a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-altman1983" class="csl-entry">
-<div class="csl-left-margin">89. </div><div class="csl-right-inline">Altman DG, Bland JM. Measurement in medicine: The analysis of method comparison studies. <em>The Statistician</em>. 1983;32(3):307. doi:<a href="https://doi.org/10.2307/2987937">10.2307/2987937</a></div>
+<div class="csl-left-margin">92. </div><div class="csl-right-inline">Altman DG, Bland JM. Measurement in medicine: The analysis of method comparison studies. <em>The Statistician</em>. 1983;32(3):307. doi:<a href="https://doi.org/10.2307/2987937">10.2307/2987937</a></div>
 </div>
 </div>
             </section>
