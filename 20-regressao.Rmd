@@ -1,0 +1,83 @@
+# **Regressão** {#analise-inferencial-regressao}
+
+<br>
+
+## Análise de regressão {#analise-regressao}
+
+<br>
+
+### O que é análise de regressão?
+
+-   .[REF]
+
+<br>
+
+### Como preparar as variáveis categóricas para análise de regressão?
+
+-   Variáveis fictícias (*dummy*) compreendem variáveis criadas para introduzir, nos mdelos de regressão, informações contidas em outras variáveis que não podem ser medidas em escala numérica.[@suits1957]
+
+-   Variáveis categóricas nominais, com 2 ou mais níveis, devem ser subdivididas em variáveis fictícias dicotômicas para ser usada em modelos de regressão.[@Healy1995]
+
+-   Cada nível da variável categórica nominal será convertido em uma nova variável fictícias dicotômica, tal que a nova variável dicotômica assume valor 1 para a presença do nível correspondente e 0 em qualquer outro caso.[@Healy1995]
+
+<br>
+
+## Regressão simples, multivariável e multivariada {#multivariavel-multivariada}
+
+<br>
+
+### O que são as análises de regressão simples, multivariável e multivariada?
+
+-   A análise de regressão simples consiste em modelos estatísticos com 1 variável dependente (desfecho) e 1 variável independente (preditor).[@Hidalgo2013]
+
+-   A análise multivariável (ou múltiplo) consiste em modelos estatísticos com 1 variável dependente (desfecho) e duas ou mais variáveis independentes.[@Hidalgo2013]
+
+-   A análise multivariada consiste em modelos estatísticos com 2 ou mais variáveis dependente (desfechos) e duas ou mais variáveis independentes.[@Hidalgo2013]
+
+<br>
+
+::: blue
+`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *modelsummary*[@modelsummary] fornece as funções *modelsummary* e *modelplot* para gerar tabelas e gráficos de coeficientes de regressão. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cloud.r-project.org/web/packages/modelsummary/index.html)
+:::
+
+<br>
+
+### Quais testes podem ser usados em análise de associação multivariável?
+
+-   .[REF]
+
+<br>
+
+## Seleção de variáveis {#selecao}
+
+<br>
+
+### Correlação bivariada pode ser usada para seleção de variáveis em modelos de regressão multivariável?
+
+-   Seleção bivariada de variáveis - isto é, aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável - é um dos erros mais comuns na literatura.[@Dales1978; @Sun1996]
+
+-   A seleção bivariada de variáveis torna o modelo mais suscetível a otimismo no ajuste se as variáveis de confundimento não são adequadamente controladas.[@Dales1978; @Sun1996]
+
+<br>
+
+### Por que métodos de regressão gradual não são recomendados para seleção de variáveis em modelos de regressão multivariável?
+
+-   Métodos diferentes de regressão gradual podem produzir diferentes seleções de variáveis de um mesmo banco de dados.[@Healy1995]
+
+-   Nenhum método de regressão gradual garante a seleção ótima de variáveis de um banco de dados.[@Healy1995]
+
+-   As regras de término da regressão baseadas em p-valor tendem a ser arbitrárias.[@Healy1995]
+
+<br>
+
+### O que pode ser feito para reduzir o número de variáveis candidatas em modelos de regressão multivariável?
+
+-   Verifique a existência de multicolinearidade entre as variáveis candidatas.[@Sun1996]
+
+-   Em caso de uma proporção baixa entre o número de participantes e de variáveis, use o conhecimento prévio da literatura para selecionar um pequeno conjunto de variáveis candidatas.[@Sun1996]
+
+-   Colapse categorias com contagem nula (células com valor igual a 0) de variáveis candidatas.[@Sun1996]
+
+-   Use simulações de dados para identificar qual(is) variável(is) está(ão) causando problemas de convergência do ajuste do modelo.[@Sun1996]
+
+<br>

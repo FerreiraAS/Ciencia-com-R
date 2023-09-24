@@ -8,6 +8,102 @@
 
 ### O que é análise de correlação?
 
-- .[REF]
+-   .[REF]
+
+<br>
+
+### Qual é a interpretação das medidas de correlação?
+
+-   Os valores de correlação estão no intervalo $[-1; 1]$.[@khamis2008; @allison2022]
+
+-   Valores de correlação positivos representam uma relação direta entre as variáveis, tal que valores maiores de uma variável estão associados a valores maiores de outra variável.[@khamis2008; @allison2022]
+
+-   Valores de correlação negativos representam uma relação indireta (ou inversa) entre as variáveis, tal que valores maiores (menores) de uma variável estão associados a valores maiores (menores) de outra variável.[@khamis2008; @allison2022]
+
+-   Valores de correlação próximos de $0$ representam a inexistência de relação entre as variáveis.[@khamis2008; @allison2022]
+
+<br>
+
+### Quais precauções devem ser tomadas na interpretação de medidas de correlação?
+
+-  Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação causa-efeito entre as variáveis.[@khamis2008]
+
+-  Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação de concordância ou confiabilidade entre as variáveis.[@khamis2008]
+
+<br>
+
+### Quais testes podem ser usados para análises de correlação?
+
+-   Coeficiente de correlação de Pearson ($r$).[@khamis2008; @allison2022]
+
+    -   O coeficiente de correlação de Pearson ($r$) avalia a força e direção da relação linear entre duas variáveis quantitativas.[@khamis2008; @allison2022]
+
+    -   Tipo: paramétrico.[@khamis2008; @allison2022]
+
+    -   Hipóteses:[@allison2022]
+
+        -   Nula ($H_{0}$): $r=0$
+
+        -   Alternativa ($H_{1}$): $r≠0$
+
+    -   Tamanho do efeito:[@khamis2008; @allison2022]
+
+        -   Coeficiente de correlação de Pearson ($r$)
+
+<br>
+
+::: blue
+`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *stats*[@stats-2] fornece a função *cor.test* para calcular o coeficiente de correlação de Pearson ($r$). [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://rdocumentation.org/packages/stats/versions/3.6.2)
+:::
+
+<br>
+
+-   Coeficiente de correlação ponto-bisserial ($r_{s}$).[@khamis2008]
+
+    -   O coeficiente de correlação ponto-bisserial ($r_{s}$) avalia a força e direção da relação linear entre uma variáveis quantitativas e outra dicotômica.[@khamis2008]
+
+    -   Tipo: paramétrico.[@khamis2008]
+
+    -   Hipóteses:[@khamis2008]
+
+        -   Nula ($H_{0}$): $r_{s}=0$
+
+        -   Alternativa ($H_{1}$): $r_{s}≠0$
+
+    -   Tamanho do efeito:[@khamis2008]
+
+        -   Coeficiente de correlação ponto-bisserial ($r_{s}$)
+
+<br>
+
+::: blue
+`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *stats*[@stats-2] fornece a função *cor.test* para calcular o coeficiente de correlação ponto-bisserial ($r_{s}$). [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://rdocumentation.org/packages/stats/versions/3.6.2)
+:::
+
+<br>
+
+-   Coeficiente de correlação de Spearman ($\rho$).[@khamis2008; @allison2022]
+
+    -   O coeficiente de correlação de Spearman ($\rho$) avalia a força e direção da relação monotônica entre duas variáveis quantitativas.[@khamis2008; @allison2022]
+
+    -   O coeficiente de correlação de Spearman ($\rho$) pode ser também definida como a correlação de Pearson ($r$) entre as classificações (*ranks*) das duas variáveis quantitativas.[@khamis2008; @allison2022]
+
+    -   Tipo: não-paramétrico.[@khamis2008; @allison2022]
+
+    -   Hipóteses:[@khamis2008; @allison2022]
+
+        -   Nula ($H_{0}$): $\rho=0$
+
+        -   Alternativa ($H_{1}$): $\rho≠0$
+
+    -   Tamanho do efeito:[@khamis2008; @allison2022]
+
+        -   Coeficiente de correlação de Spearman ($\rho$)
+
+<br>
+
+::: blue
+`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *stats*[@stats-2] fornece a função *cor.test* para calcular o coeficiente de correlação de Speaman $\rho$. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://rdocumentation.org/packages/stats/versions/3.6.2)
+:::
 
 <br>
