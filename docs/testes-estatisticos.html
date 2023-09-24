@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Ciência com R</title>
+  <title>Capítulo 13 Testes estatísticos | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Ciência com R" />
+  <meta property="og:title" content="Capítulo 13 Testes estatísticos | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciência com R/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/R-Book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 13 Testes estatísticos | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciência com R/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="sobre-o-autor.html"/>
+<link rel="prev" href="selecao-analise.html"/>
+<link rel="next" href="analise-comparacao.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -629,38 +629,235 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><strong>Ciência com R</strong></h1>
-<h2 class="subtitle"><em>Perguntas e respostas para pesquisadores e analistas de dados</em></h2>
-<p class="author"><em>© 2023 by Arthur de Sá Ferreira <a id="cy-effective-orcid-url" class="underline"s href="https://orcid.org/0000-0001-7014-2002" target="orcid.widget" rel="me noopener noreferrer" style="vertical-align: top"><br><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width: 1em; margin-inline-start: 0.0em" alt="ORCID iD icon"/> https://orcid.org/0000-0001-7014-2002 </a></em></p>
-<p class="date"><em>Atualizado em 24/09/2023 <br> <a href="https://zenodo.org/badge/latestdoi/685181979"><img src="https://zenodo.org/badge/685181979.svg" alt="DOI"></a></em></p>
-</div>
-<div id="sobre-o-livro" class="section level1 unnumbered hasAnchor">
-<h1>Sobre o livro<a href="index.html#sobre-o-livro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><a href="Cover_1.png" target="_blank"><img src="Cover_1.png" width="100%" style="display: block; margin: auto;" /></a></p>
+<div id="testes-estatisticos" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">Capítulo 13</span> <strong>Testes estatísticos</strong><a href="testes-estatisticos.html#testes-estatisticos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<style type="text/css">
-.boxBorder {
-     border: 2px solid black;
-     padding: 5px;
-     outline-offset: 5px;
-   }
-</style>
-<p>Como citar:</p>
-<div class="boxBorder">
-<p>Ferreira, Arthur de Sá. <strong>Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados</strong>. Rio de Janeiro: 1a edição, 2023. 94p. <a href="https://zenodo.org/badge/latestdoi/685181979">doi: 10.5281/zenodo.8320233</a></p>
+<div id="testes-analise-inferencial" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Testes estatísticos para análise inferencial<a href="testes-estatisticos.html#testes-analise-inferencial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="quais-testes-podem-ser-usados-em-análise-de-associação-bivariada" class="section level3 hasAnchor" number="13.1.1">
+<h3><span class="header-section-number">13.1.1</span> Quais testes podem ser usados em análise de associação bivariada?<a href="testes-estatisticos.html#quais-testes-podem-ser-usados-em-análise-de-associação-bivariada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Qui-quadrado (<span class="math inline">\(\chi^2\)</span>)</p>
+<ul>
+<li><p>O teste qui-quadrado (<span class="math inline">\(\chi^2\)</span>) avalia uma hipótese global se a relação entre duas variáveis e/ou fatores é independente ou associada.<span class="citation"><sup><a href="#ref-Kim2017a">82</a></sup></span></p></li>
+<li><p>O teste qui-quadrado é utilizado para comparar a distribuição de uma variável categórica em uma amostra ou grupo com a distribuição em outro. Se a distribuição da variável categórica não for muito diferente nos diferentes grupos, pode-se concluir que a distribuição da variável categórica não está relacionada com a variável dos grupos. Pode-se também concluir que a variável categórica e os grupos são independentes.<span class="citation"><sup><a href="#ref-Kim2017a">82</a></sup></span></p></li>
+<li><p>Tipo: não paramétrico.<span class="citation"><sup><a href="#ref-Kim2017a">82</a>,<a href="#ref-McHugh2013">83</a></sup></span></p></li>
+<li><p>Suposições:<span class="citation"><sup><a href="#ref-Kim2017a">82</a>,<a href="#ref-McHugh2013">83</a></sup></span></p>
+<ul>
+<li><p>As variáveis são ordinais ou categóricas nominais, de modo que as células representem frequência.</p></li>
+<li><p>Os níveis dos fatores (variáveis categóricas) são mutuamente exclusivos.</p></li>
+<li><p>Tamanho de amostra grande e adequado porque é baseado em uma abordagem de aproximação.</p></li>
+<li><p>Menos de 20% das células com frequências esperadas &lt; 5</p></li>
+<li><p>Nenhuma célula com frequência esperada &lt; 1.</p></li>
+</ul></li>
+<li><p>Hipóteses:<span class="citation"><sup><a href="#ref-Kim2017a">82</a></sup></span></p>
+<ul>
+<li><p>Nula (<span class="math inline">\(H_{0}\)</span>): independente (sem associação)</p></li>
+<li><p>Alternativa (<span class="math inline">\(H_{1}\)</span>): não independente (associação)</p></li>
+</ul></li>
+<li><p>Tamanho do efeito:<span class="citation"><sup><a href="#ref-Kim2017a">82</a></sup></span></p>
+<ul>
+<li><p>Phi (<span class="math inline">\(\phi\)</span>), para tabelas de contingência 2x2</p></li>
+<li><p>Razão de chances (<span class="math inline">\(RC\)</span> ou <span class="math inline">\(OR\)</span>), para tabelas de contingência 2x2</p></li>
+<li><p>Cramer V (<span class="math inline">\(V\)</span>), para tabelas de contingência NxM</p></li>
+</ul></li>
+</ul></li>
+<li><p>Teste exato de Fisher</p>
+<ul>
+<li><p>O teste exato de Fisher avalia a hipótese nula de independência aplicando a distribuição hipergeométrica dos números nas células da tabela.<span class="citation"><sup><a href="#ref-Kim2017a">82</a></sup></span></p></li>
+<li><p>Hipóteses:<span class="citation"><sup><a href="#ref-Kim2017a">82</a>,<a href="#ref-McHugh2013">83</a></sup></span></p>
+<ul>
+<li><p>Nula (<span class="math inline">\(H_{0}\)</span>): independente (sem associação)</p></li>
+<li><p>Alternativa (<span class="math inline">\(H_{1}\)</span>): não independente (associação)</p></li>
+</ul></li>
+<li><p>Tamanho do efeito:<span class="citation"><sup><a href="#ref-Kim2017a">82</a>,<a href="#ref-McHugh2013">83</a></sup></span></p>
+<ul>
+<li><p>Phi (<span class="math inline">\(\phi\)</span>), para tabelas de contingência 2x2</p></li>
+<li><p>Razão de chances (<span class="math inline">\(RC\)</span> ou <span class="math inline">\(OR\)</span>), para tabelas de contingência 2x2</p></li>
+<li><p>Cramer V (<span class="math inline">\(V\)</span>), para tabelas de contingência NxM</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><br></p>
+<div class="blue">
+<p><svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:0.1em;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> O pacote <em>gtsummary</em><span class="citation"><sup><a href="#ref-gtsummary">84</a></sup></span> fornece a função <em>tbl_cross</em> para criar uma tabela NxM. <a href="https://cran.r-project.org/web/packages/gtsummary/index.html"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:0.1em;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V32c0-17.7-14.3-32-32-32H352zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"/></svg></a></p>
 </div>
 <p><br></p>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />A versão online desta obra está licenciada com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Atribuição-NãoComercial 4.0 Internacional.</a></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="testes-estatisticos.html#cb1-1" tabindex="-1"></a><span class="co"># carrega os pacotes</span></span>
+<span id="cb1-2"><a href="testes-estatisticos.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb1-3"><a href="testes-estatisticos.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;gtsummary&quot;</span>)</span>
+<span id="cb1-4"><a href="testes-estatisticos.html#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="testes-estatisticos.html#cb1-5" tabindex="-1"></a><span class="co"># tabela 2x2</span></span>
+<span id="cb1-6"><a href="testes-estatisticos.html#cb1-6" tabindex="-1"></a>tbl_cross <span class="ot">&lt;-</span> <span class="co"># banco de dados tbl_cross &lt;- # banco de dados</span></span>
+<span id="cb1-7"><a href="testes-estatisticos.html#cb1-7" tabindex="-1"></a>trial <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="testes-estatisticos.html#cb1-8" tabindex="-1"></a>    <span class="co"># cria a tabela de contingência</span></span>
+<span id="cb1-9"><a href="testes-estatisticos.html#cb1-9" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">tbl_cross</span>(<span class="at">row =</span> trt, <span class="at">col =</span> response, <span class="at">statistic =</span> <span class="st">&quot;{n}&quot;</span>, <span class="at">digits =</span> <span class="dv">0</span>, <span class="at">percent =</span> <span class="st">&quot;cell&quot;</span>,</span>
+<span id="cb1-10"><a href="testes-estatisticos.html#cb1-10" tabindex="-1"></a>    <span class="at">margin =</span> <span class="fu">c</span>(<span class="st">&quot;row&quot;</span>, <span class="st">&quot;column&quot;</span>), <span class="at">missing =</span> <span class="st">&quot;no&quot;</span>, <span class="at">missing_text =</span> <span class="st">&quot;Dados perdidos&quot;</span>,</span>
+<span id="cb1-11"><a href="testes-estatisticos.html#cb1-11" tabindex="-1"></a>    <span class="at">margin_text =</span> <span class="st">&quot;Total&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-12"><a href="testes-estatisticos.html#cb1-12" tabindex="-1"></a>    <span class="co"># calcula o p-valor do teste</span></span>
+<span id="cb1-13"><a href="testes-estatisticos.html#cb1-13" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">add_p</span>(<span class="at">test =</span> <span class="st">&quot;chisq.test&quot;</span>, <span class="at">pvalue_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_pvalue</span>(x, <span class="at">digits =</span> <span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-14"><a href="testes-estatisticos.html#cb1-14" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_header</span>(<span class="at">p.value =</span> <span class="st">&quot;**P-valor**&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-15"><a href="testes-estatisticos.html#cb1-15" tabindex="-1"></a>    <span class="co"># calcula o tamanho do efeito</span></span>
+<span id="cb1-16"><a href="testes-estatisticos.html#cb1-16" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">modify_table_styling</span>(<span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">footnote =</span> <span class="fu">as.character</span>(rstatix<span class="sc">::</span><span class="fu">cramer_v</span>(trt,</span>
+<span id="cb1-17"><a href="testes-estatisticos.html#cb1-17" tabindex="-1"></a>    response))) <span class="sc">%&gt;%</span></span>
+<span id="cb1-18"><a href="testes-estatisticos.html#cb1-18" tabindex="-1"></a>    <span class="co"># formata o título em negrito</span></span>
+<span id="cb1-19"><a href="testes-estatisticos.html#cb1-19" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">bold_labels</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-20"><a href="testes-estatisticos.html#cb1-20" tabindex="-1"></a>    <span class="co"># cria título da tabela</span></span>
+<span id="cb1-21"><a href="testes-estatisticos.html#cb1-21" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">modify_caption</span>(<span class="st">&quot;**Teste Qui-quadrado (com correção de Yates)**&quot;</span>)</span>
+<span id="cb1-22"><a href="testes-estatisticos.html#cb1-22" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="testes-estatisticos.html#cb1-23" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
+<span id="cb1-24"><a href="testes-estatisticos.html#cb1-24" tabindex="-1"></a>tbl_cross <span class="sc">%&gt;%</span></span>
+<span id="cb1-25"><a href="testes-estatisticos.html#cb1-25" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">as_hux_table</span>()</span></code></pre></div>
+</details>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-1">
+<caption style="caption-side: top; text-align: center;"><span id="tab:unnamed-chunk-1">Tabela 13.1: </span> **Teste Qui-quadrado (com correção de Yates)**</caption><col><col><col><col><col><tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>Tumor Response</strong></p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p>0</p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p>1</p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>Total</strong></p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong><strong>P-valor</strong></strong></p>
+</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">Chemotherapy Treatment</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.637</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 15pt; font-weight: normal;">Drug A</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">67</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">28</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">95</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 15pt; font-weight: normal;">Drug B</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">65</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">33</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">98</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">Total</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">132</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">61</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">193</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
+<tr>
+<td colspan="5" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Pearson's Chi-squared test</td></tr>
+</table>
 
+<p><br></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="testes-estatisticos.html#cb2-1" tabindex="-1"></a><span class="co"># carrega os pacotes</span></span>
+<span id="cb2-2"><a href="testes-estatisticos.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb2-3"><a href="testes-estatisticos.html#cb2-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;gtsummary&quot;</span>)</span>
+<span id="cb2-4"><a href="testes-estatisticos.html#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="testes-estatisticos.html#cb2-5" tabindex="-1"></a><span class="co"># tabela 2x2</span></span>
+<span id="cb2-6"><a href="testes-estatisticos.html#cb2-6" tabindex="-1"></a>tbl_cross <span class="ot">&lt;-</span> <span class="co"># banco de dados tbl_cross &lt;- # banco de dados</span></span>
+<span id="cb2-7"><a href="testes-estatisticos.html#cb2-7" tabindex="-1"></a>trial <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="testes-estatisticos.html#cb2-8" tabindex="-1"></a>    <span class="co"># cria a tabela de contingência</span></span>
+<span id="cb2-9"><a href="testes-estatisticos.html#cb2-9" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">tbl_cross</span>(<span class="at">row =</span> trt, <span class="at">col =</span> response, <span class="at">statistic =</span> <span class="st">&quot;{n}&quot;</span>, <span class="at">digits =</span> <span class="dv">0</span>, <span class="at">percent =</span> <span class="st">&quot;cell&quot;</span>,</span>
+<span id="cb2-10"><a href="testes-estatisticos.html#cb2-10" tabindex="-1"></a>    <span class="at">margin =</span> <span class="fu">c</span>(<span class="st">&quot;row&quot;</span>, <span class="st">&quot;column&quot;</span>), <span class="at">missing =</span> <span class="st">&quot;no&quot;</span>, <span class="at">missing_text =</span> <span class="st">&quot;Dados perdidos&quot;</span>,</span>
+<span id="cb2-11"><a href="testes-estatisticos.html#cb2-11" tabindex="-1"></a>    <span class="at">margin_text =</span> <span class="st">&quot;Total&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-12"><a href="testes-estatisticos.html#cb2-12" tabindex="-1"></a>    <span class="co"># calcula o p-valor do teste</span></span>
+<span id="cb2-13"><a href="testes-estatisticos.html#cb2-13" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">add_p</span>(<span class="at">test =</span> <span class="st">&quot;chisq.test.no.correct&quot;</span>, <span class="at">pvalue_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_pvalue</span>(x,</span>
+<span id="cb2-14"><a href="testes-estatisticos.html#cb2-14" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-15"><a href="testes-estatisticos.html#cb2-15" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_header</span>(<span class="at">p.value =</span> <span class="st">&quot;**P-valor**&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="testes-estatisticos.html#cb2-16" tabindex="-1"></a>    <span class="co"># calcula o tamanho do efeito</span></span>
+<span id="cb2-17"><a href="testes-estatisticos.html#cb2-17" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">modify_table_styling</span>(<span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">footnote =</span> <span class="fu">as.character</span>(rstatix<span class="sc">::</span><span class="fu">cramer_v</span>(trt,</span>
+<span id="cb2-18"><a href="testes-estatisticos.html#cb2-18" tabindex="-1"></a>    response))) <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="testes-estatisticos.html#cb2-19" tabindex="-1"></a>    <span class="co"># formata o título em negrito</span></span>
+<span id="cb2-20"><a href="testes-estatisticos.html#cb2-20" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">bold_labels</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-21"><a href="testes-estatisticos.html#cb2-21" tabindex="-1"></a>    <span class="co"># cria título da tabela</span></span>
+<span id="cb2-22"><a href="testes-estatisticos.html#cb2-22" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">modify_caption</span>(<span class="st">&quot;**Teste Qui-quadrado**&quot;</span>)</span>
+<span id="cb2-23"><a href="testes-estatisticos.html#cb2-23" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="testes-estatisticos.html#cb2-24" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
+<span id="cb2-25"><a href="testes-estatisticos.html#cb2-25" tabindex="-1"></a>tbl_cross <span class="sc">%&gt;%</span></span>
+<span id="cb2-26"><a href="testes-estatisticos.html#cb2-26" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">as_hux_table</span>()</span></code></pre></div>
+</details>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-2">
+<caption style="caption-side: top; text-align: center;"><span id="tab:unnamed-chunk-2">Tabela 13.2: </span> **Teste Qui-quadrado**</caption><col><col><col><col><col><tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>Tumor Response</strong></p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p>0</p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p>1</p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>Total</strong></p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong><strong>P-valor</strong></strong></p>
+</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">Chemotherapy Treatment</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.530</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 15pt; font-weight: normal;">Drug A</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">67</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">28</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">95</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 15pt; font-weight: normal;">Drug B</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">65</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">33</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">98</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">Total</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">132</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">61</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">193</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
+<tr>
+<td colspan="5" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Pearson's Chi-squared test</td></tr>
+</table>
+
+<p><br></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="testes-estatisticos.html#cb3-1" tabindex="-1"></a><span class="co"># carrega os pacotes</span></span>
+<span id="cb3-2"><a href="testes-estatisticos.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb3-3"><a href="testes-estatisticos.html#cb3-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;gtsummary&quot;</span>)</span>
+<span id="cb3-4"><a href="testes-estatisticos.html#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="testes-estatisticos.html#cb3-5" tabindex="-1"></a><span class="co"># tabela 2x2</span></span>
+<span id="cb3-6"><a href="testes-estatisticos.html#cb3-6" tabindex="-1"></a>tbl_cross <span class="ot">&lt;-</span> <span class="co"># banco de dados tbl_cross &lt;- # banco de dados</span></span>
+<span id="cb3-7"><a href="testes-estatisticos.html#cb3-7" tabindex="-1"></a>trial <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="testes-estatisticos.html#cb3-8" tabindex="-1"></a>    <span class="co"># cria a tabela de contingência</span></span>
+<span id="cb3-9"><a href="testes-estatisticos.html#cb3-9" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">tbl_cross</span>(<span class="at">row =</span> trt, <span class="at">col =</span> response, <span class="at">statistic =</span> <span class="st">&quot;{n}&quot;</span>, <span class="at">digits =</span> <span class="dv">0</span>, <span class="at">percent =</span> <span class="st">&quot;cell&quot;</span>,</span>
+<span id="cb3-10"><a href="testes-estatisticos.html#cb3-10" tabindex="-1"></a>    <span class="at">margin =</span> <span class="fu">c</span>(<span class="st">&quot;row&quot;</span>, <span class="st">&quot;column&quot;</span>), <span class="at">missing =</span> <span class="st">&quot;no&quot;</span>, <span class="at">missing_text =</span> <span class="st">&quot;Dados perdidos&quot;</span>,</span>
+<span id="cb3-11"><a href="testes-estatisticos.html#cb3-11" tabindex="-1"></a>    <span class="at">margin_text =</span> <span class="st">&quot;Total&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="testes-estatisticos.html#cb3-12" tabindex="-1"></a>    <span class="co"># calcula o p-valor do teste</span></span>
+<span id="cb3-13"><a href="testes-estatisticos.html#cb3-13" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">add_p</span>(<span class="at">test =</span> <span class="st">&quot;fisher.test&quot;</span>, <span class="at">pvalue_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_pvalue</span>(x, <span class="at">digits =</span> <span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="testes-estatisticos.html#cb3-14" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_header</span>(<span class="at">p.value =</span> <span class="st">&quot;**P-valor**&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-15"><a href="testes-estatisticos.html#cb3-15" tabindex="-1"></a>    <span class="co"># calcula o tamanho do efeito</span></span>
+<span id="cb3-16"><a href="testes-estatisticos.html#cb3-16" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">modify_table_styling</span>(<span class="at">rows =</span> <span class="cn">NULL</span>, <span class="at">footnote =</span> <span class="fu">as.character</span>(rstatix<span class="sc">::</span><span class="fu">cramer_v</span>(trt,</span>
+<span id="cb3-17"><a href="testes-estatisticos.html#cb3-17" tabindex="-1"></a>    response))) <span class="sc">%&gt;%</span></span>
+<span id="cb3-18"><a href="testes-estatisticos.html#cb3-18" tabindex="-1"></a>    <span class="co"># formata o título em negrito</span></span>
+<span id="cb3-19"><a href="testes-estatisticos.html#cb3-19" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">bold_labels</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-20"><a href="testes-estatisticos.html#cb3-20" tabindex="-1"></a>    <span class="co"># cria título da tabela</span></span>
+<span id="cb3-21"><a href="testes-estatisticos.html#cb3-21" tabindex="-1"></a>gtsummary<span class="sc">::</span><span class="fu">modify_caption</span>(<span class="st">&quot;**Teste exato de Fisher**&quot;</span>)</span>
+<span id="cb3-22"><a href="testes-estatisticos.html#cb3-22" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="testes-estatisticos.html#cb3-23" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
+<span id="cb3-24"><a href="testes-estatisticos.html#cb3-24" tabindex="-1"></a>tbl_cross <span class="sc">%&gt;%</span></span>
+<span id="cb3-25"><a href="testes-estatisticos.html#cb3-25" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">as_hux_table</span>()</span></code></pre></div>
+</details>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-3">
+<caption style="caption-side: top; text-align: center;"><span id="tab:unnamed-chunk-3">Tabela 13.3: </span> **Teste exato de Fisher**</caption><col><col><col><col><col><tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>Tumor Response</strong></p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p>0</p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p>1</p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>Total</strong></p>
+</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong><strong>P-valor</strong></strong></p>
+</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">Chemotherapy Treatment</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.540</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 15pt; font-weight: normal;">Drug A</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">67</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">28</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">95</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 15pt; font-weight: normal;">Drug B</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">65</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">33</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">98</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">Total</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">132</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">61</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">193</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
+<tr>
+<td colspan="5" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Fisher's exact test</td></tr>
+</table>
+
+<p><br></p>
+
+</div>
+</div>
+</div>
+<h3> <strong>Referências</strong><a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-Kim2017a" class="csl-entry">
+<div class="csl-left-margin">82. </div><div class="csl-right-inline">Kim HY. Statistical notes for clinical researchers: Chi-squared test and Fisher’s exact test. <em>Restorative Dentistry &amp; Endodontics</em>. 2017;42(2):152. doi:<a href="https://doi.org/10.5395/rde.2017.42.2.152">10.5395/rde.2017.42.2.152</a></div>
+</div>
+<div id="ref-McHugh2013" class="csl-entry">
+<div class="csl-left-margin">83. </div><div class="csl-right-inline">McHugh ML. The chi-square test of independence. <em>Biochemia Medica</em>. 2013:143-149. doi:<a href="https://doi.org/10.11613/bm.2013.018">10.11613/bm.2013.018</a></div>
+</div>
+<div id="ref-gtsummary" class="csl-entry">
+<div class="csl-left-margin">84. </div><div class="csl-right-inline">Sjoberg DD, Whiting K, Curry M, Lavery JA, Larmarange J. Reproducible summary tables with the gtsummary package. 2021;13:570-580. doi:<a href="https://doi.org/10.32614/RJ-2021-053">10.32614/RJ-2021-053</a></div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="sobre-o-autor.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="selecao-analise.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analise-comparacao.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
