@@ -391,7 +391,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="13.1" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html#testes-analise-inferencial"><i class="fa fa-check"></i><b>13.1</b> Testes estatísticos para análise inferencial</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html#qui-quadrado-chi2"><i class="fa fa-check"></i><b>13.1.1</b> Qui-quadrado (<span class="math inline">\(\chi^2\)</span>)</a></li>
+<li class="chapter" data-level="13.1.1" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html#teste-de-qui-quadrado-chi2"><i class="fa fa-check"></i><b>13.1.1</b> Teste de Qui-quadrado (<span class="math inline">\(\chi^2\)</span>)</a></li>
 <li class="chapter" data-level="13.1.2" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html#teste-exato-de-fisher"><i class="fa fa-check"></i><b>13.1.2</b> Teste exato de Fisher</a></li>
 </ul></li>
 </ul></li>
@@ -658,9 +658,58 @@ div.csl-indent {
 <div id="quais-testes-podem-ser-usados-para-análises-de-associação-bivariável" class="section level3 hasAnchor" number="16.2.2">
 <h3><span class="header-section-number">16.2.2</span> Quais testes podem ser usados para análises de associação bivariável?<a href="analise-inferencial-associacao.html#quais-testes-podem-ser-usados-para-análises-de-associação-bivariável" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Teste Qui-quadrado (<span class="math inline">\(\chi^2\)</span>).<span class="citation"><sup><a href="#ref-Kim2017a">82</a>,<a href="#ref-McHugh2013">83</a></sup></span></p></li>
-<li><p>Teste Exato de Fisher (<span class="math inline">\(\chi^2\)</span>).<span class="citation"><sup><a href="#ref-Kim2017a">82</a>,<a href="#ref-McHugh2013">83</a></sup></span></p></li>
+<li><p>Teste Qui-quadrado (<span class="math inline">\(\chi^2\)</span>).<span class="citation"><sup><a href="#ref-McHugh2013">82</a>,<a href="#ref-Kim2017a">83</a></sup></span></p>
+<ul>
+<li><p>O teste qui-quadrado (<span class="math inline">\(\chi^2\)</span>) avalia uma hipótese global se a relação entre duas variáveis e/ou fatores é independente ou associada.<span class="citation"><sup><a href="#ref-Kim2017a">83</a></sup></span></p></li>
+<li><p>O teste qui-quadrado é utilizado para comparar a distribuição de uma variável categórica em uma amostra ou grupo com a distribuição em outro. Se a distribuição da variável categórica não for muito diferente nos diferentes grupos, pode-se concluir que a distribuição da variável categórica não está relacionada com a variável dos grupos. Pode-se também concluir que a variável categórica e os grupos são independentes.<span class="citation"><sup><a href="#ref-Kim2017a">83</a></sup></span></p></li>
+<li><p>Tipo: não paramétrico.<span class="citation"><sup><a href="#ref-McHugh2013">82</a>,<a href="#ref-Kim2017a">83</a></sup></span></p></li>
+<li><p>Suposições:<span class="citation"><sup><a href="#ref-McHugh2013">82</a>,<a href="#ref-Kim2017a">83</a></sup></span></p>
+<ul>
+<li><p>As variáveis são ordinais ou categóricas nominais, de modo que as células representem frequência.</p></li>
+<li><p>Os níveis dos fatores (variáveis categóricas) são mutuamente exclusivos.</p></li>
+<li><p>Tamanho de amostra grande e adequado porque é baseado em uma abordagem de aproximação.</p></li>
+<li><p>Menos de 20% das células com frequências esperadas &lt; 5</p></li>
+<li><p>Nenhuma célula com frequência esperada &lt; 1.</p></li>
+</ul></li>
+<li><p>Hipóteses:<span class="citation"><sup><a href="#ref-Kim2017a">83</a></sup></span></p>
+<ul>
+<li><p>Nula (<span class="math inline">\(H_{0}\)</span>): independente (sem associação)</p></li>
+<li><p>Alternativa (<span class="math inline">\(H_{1}\)</span>): não independente (associação)</p></li>
+</ul></li>
+<li><p>Tamanho do efeito:<span class="citation"><sup><a href="#ref-Kim2017a">83</a></sup></span></p>
+<ul>
+<li><p>Phi (<span class="math inline">\(\phi\)</span>), para tabelas de contingência 2x2</p></li>
+<li><p>Razão de chances (<span class="math inline">\(RC\)</span> ou <span class="math inline">\(OR\)</span>), para tabelas de contingência 2x2</p></li>
+<li><p>Cramer V (<span class="math inline">\(V\)</span>), para tabelas de contingência NxM</p></li>
+</ul></li>
+</ul></li>
 </ul>
+<p><br></p>
+<div class="blue">
+<p><svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:0.1em;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> O pacote <em>gtsummary</em><span class="citation"><sup><a href="#ref-gtsummary">84</a></sup></span> fornece a função <em>tbl_cross</em> para criar uma tabela NxM. <a href="https://cran.r-project.org/web/packages/gtsummary/index.html"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:0.1em;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V32c0-17.7-14.3-32-32-32H352zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"/></svg></a></p>
+</div>
+<p><br></p>
+<ul>
+<li><p>Teste Exato de Fisher (<span class="math inline">\(\chi^2\)</span>).<span class="citation"><sup><a href="#ref-McHugh2013">82</a>,<a href="#ref-Kim2017a">83</a></sup></span></p>
+<ul>
+<li><p>O teste exato de Fisher avalia a hipótese nula de independência aplicando a distribuição hipergeométrica dos números nas células da tabela.<span class="citation"><sup><a href="#ref-Kim2017a">83</a></sup></span></p></li>
+<li><p>Hipóteses:<span class="citation"><sup><a href="#ref-McHugh2013">82</a>,<a href="#ref-Kim2017a">83</a></sup></span></p>
+<ul>
+<li><p>Nula (<span class="math inline">\(H_{0}\)</span>): independente (sem associação)</p></li>
+<li><p>Alternativa (<span class="math inline">\(H_{1}\)</span>): não independente (associação)</p></li>
+</ul></li>
+<li><p>Tamanho do efeito:<span class="citation"><sup><a href="#ref-McHugh2013">82</a>,<a href="#ref-Kim2017a">83</a></sup></span></p>
+<ul>
+<li><p>Phi (<span class="math inline">\(\phi\)</span>), para tabelas de contingência 2x2</p></li>
+<li><p>Razão de chances (<span class="math inline">\(RC\)</span> ou <span class="math inline">\(OR\)</span>), para tabelas de contingência 2x2</p></li>
+<li><p>Cramer V (<span class="math inline">\(V\)</span>), para tabelas de contingência NxM</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><br></p>
+<div class="blue">
+<p><svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:0.1em;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> O pacote <em>gtsummary</em><span class="citation"><sup><a href="#ref-gtsummary">84</a></sup></span> fornece a função <em>tbl_cross</em> para criar uma tabela NxM. <a href="https://cran.r-project.org/web/packages/gtsummary/index.html"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:0.1em;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V32c0-17.7-14.3-32-32-32H352zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"/></svg></a></p>
+</div>
 <p><br></p>
 </div>
 </div>
@@ -714,11 +763,14 @@ div.csl-indent {
 </div>
 <h3> <strong>Referências</strong><a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-Kim2017a" class="csl-entry">
-<div class="csl-left-margin">82. </div><div class="csl-right-inline">Kim HY. Statistical notes for clinical researchers: Chi-squared test and Fisher’s exact test. <em>Restorative Dentistry &amp; Endodontics</em>. 2017;42(2):152. doi:<a href="https://doi.org/10.5395/rde.2017.42.2.152">10.5395/rde.2017.42.2.152</a></div>
-</div>
 <div id="ref-McHugh2013" class="csl-entry">
-<div class="csl-left-margin">83. </div><div class="csl-right-inline">McHugh ML. The chi-square test of independence. <em>Biochemia Medica</em>. 2013:143-149. doi:<a href="https://doi.org/10.11613/bm.2013.018">10.11613/bm.2013.018</a></div>
+<div class="csl-left-margin">82. </div><div class="csl-right-inline">McHugh ML. The chi-square test of independence. <em>Biochemia Medica</em>. 2013:143-149. doi:<a href="https://doi.org/10.11613/bm.2013.018">10.11613/bm.2013.018</a></div>
+</div>
+<div id="ref-Kim2017a" class="csl-entry">
+<div class="csl-left-margin">83. </div><div class="csl-right-inline">Kim HY. Statistical notes for clinical researchers: Chi-squared test and Fisher’s exact test. <em>Restorative Dentistry &amp; Endodontics</em>. 2017;42(2):152. doi:<a href="https://doi.org/10.5395/rde.2017.42.2.152">10.5395/rde.2017.42.2.152</a></div>
+</div>
+<div id="ref-gtsummary" class="csl-entry">
+<div class="csl-left-margin">84. </div><div class="csl-right-inline">Sjoberg DD, Whiting K, Curry M, Lavery JA, Larmarange J. Reproducible summary tables with the gtsummary package. 2021;13:570-580. doi:<a href="https://doi.org/10.32614/RJ-2021-053">10.32614/RJ-2021-053</a></div>
 </div>
 <div id="ref-Hidalgo2013" class="csl-entry">
 <div class="csl-left-margin">85. </div><div class="csl-right-inline">Hidalgo B, Goodman M. Multivariate or Multivariable Regression? <em>American Journal of Public Health</em>. 2013;103(1):39-40. doi:<a href="https://doi.org/10.2105/ajph.2012.300897">10.2105/ajph.2012.300897</a></div>
