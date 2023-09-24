@@ -6,65 +6,39 @@
 
 <br>
 
-### Quais testes podem ser usados em análise de associação bivariada?
+### Qui-quadrado ($\chi^2$)
 
--   Qui-quadrado ($\chi^2$)
+-   O teste qui-quadrado ($\chi^2$) avalia uma hipótese global se a relação entre duas variáveis e/ou fatores é independente ou associada.[@Kim2017a]
 
-    -   O teste qui-quadrado ($\chi^2$) avalia uma hipótese global se a relação entre duas variáveis e/ou fatores é independente ou associada.[@Kim2017a]
+-   O teste qui-quadrado é utilizado para comparar a distribuição de uma variável categórica em uma amostra ou grupo com a distribuição em outro. Se a distribuição da variável categórica não for muito diferente nos diferentes grupos, pode-se concluir que a distribuição da variável categórica não está relacionada com a variável dos grupos. Pode-se também concluir que a variável categórica e os grupos são independentes.[@Kim2017a]
 
-    -   O teste qui-quadrado é utilizado para comparar a distribuição de uma variável categórica em uma amostra ou grupo com a distribuição em outro. Se a distribuição da variável categórica não for muito diferente nos diferentes grupos, pode-se concluir que a distribuição da variável categórica não está relacionada com a variável dos grupos. Pode-se também concluir que a variável categórica e os grupos são independentes.[@Kim2017a]
+-   Tipo: não paramétrico.[@McHugh2013; @Kim2017a]
 
-    -   Tipo: não paramétrico.[@McHugh2013; @Kim2017a]
+-   Suposições:[@McHugh2013; @Kim2017a]
 
-    -   Suposições:[@McHugh2013; @Kim2017a]
+    -   As variáveis são ordinais ou categóricas nominais, de modo que as células representem frequência.
 
-        -   As variáveis são ordinais ou categóricas nominais, de modo que as células representem frequência.
+    -   Os níveis dos fatores (variáveis categóricas) são mutuamente exclusivos.
 
-        -   Os níveis dos fatores (variáveis categóricas) são mutuamente exclusivos.
+    -   Tamanho de amostra grande e adequado porque é baseado em uma abordagem de aproximação.
 
-        -   Tamanho de amostra grande e adequado porque é baseado em uma abordagem de aproximação.
+    -   Menos de 20% das células com frequências esperadas \< 5
 
-        -   Menos de 20% das células com frequências esperadas \< 5
+    -   Nenhuma célula com frequência esperada \< 1.
 
-        -   Nenhuma célula com frequência esperada \< 1.
+-   Hipóteses:[@Kim2017a]
 
-    -   Hipóteses:[@Kim2017a]
+    -   Nula ($H_{0}$): independente (sem associação)
 
-        -   Nula ($H_{0}$): independente (sem associação)
+    -   Alternativa ($H_{1}$): não independente (associação)
 
-        -   Alternativa ($H_{1}$): não independente (associação)
+-   Tamanho do efeito:[@Kim2017a]
 
-    -   Tamanho do efeito:[@Kim2017a]
+    -   Phi ($\phi$), para tabelas de contingência 2x2
 
-        -   Phi ($\phi$), para tabelas de contingência 2x2
+    -   Razão de chances ($RC$ ou $OR$), para tabelas de contingência 2x2
 
-        -   Razão de chances ($RC$ ou $OR$), para tabelas de contingência 2x2
-
-        -   Cramer V ($V$), para tabelas de contingência NxM
-
--   Teste exato de Fisher
-
-    -   O teste exato de Fisher avalia a hipótese nula de independência aplicando a distribuição hipergeométrica dos números nas células da tabela.[@Kim2017a]
-
-    -   Hipóteses:[@McHugh2013; @Kim2017a]
-
-        -   Nula ($H_{0}$): independente (sem associação)
-
-        -   Alternativa ($H_{1}$): não independente (associação)
-
-    -   Tamanho do efeito:[@McHugh2013; @Kim2017a]
-
-        -   Phi ($\phi$), para tabelas de contingência 2x2
-
-        -   Razão de chances ($RC$ ou $OR$), para tabelas de contingência 2x2
-
-        -   Cramer V ($V$), para tabelas de contingência NxM
-
-<br>
-
-::: blue
-`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *gtsummary*[@gtsummary] fornece a função *tbl_cross* para criar uma tabela NxM. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cran.r-project.org/web/packages/gtsummary/index.html)
-:::
+    -   Cramer V ($V$), para tabelas de contingência NxM
 
 <br>
 
@@ -106,7 +80,7 @@ tbl_cross <-
     gtsummary::bold_labels() %>%
     # cria título da tabela
     gtsummary::modify_caption(
-        "**Teste Qui-quadrado (com correção de Yates)**"
+        "Teste Qui-quadrado (com correção de Yates)"
         )
 
 # exibe a tabela
@@ -154,13 +128,39 @@ tbl_cross <-
     gtsummary::bold_labels() %>%
     # cria título da tabela
     gtsummary::modify_caption(
-        "**Teste Qui-quadrado**"
+        "Teste Qui-quadrado"
         )
 
 # exibe a tabela
 tbl_cross %>%
   gtsummary::as_hux_table()
 ```
+
+<br>
+
+### Teste exato de Fisher
+
+-   O teste exato de Fisher avalia a hipótese nula de independência aplicando a distribuição hipergeométrica dos números nas células da tabela.[@Kim2017a]
+
+-   Hipóteses:[@McHugh2013; @Kim2017a]
+
+    -   Nula ($H_{0}$): independente (sem associação)
+
+    -   Alternativa ($H_{1}$): não independente (associação)
+
+-   Tamanho do efeito:[@McHugh2013; @Kim2017a]
+
+    -   Phi ($\phi$), para tabelas de contingência 2x2
+
+    -   Razão de chances ($RC$ ou $OR$), para tabelas de contingência 2x2
+
+    -   Cramer V ($V$), para tabelas de contingência NxM
+
+<br>
+
+::: blue
+`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *gtsummary*[@gtsummary] fornece a função *tbl_cross* para criar uma tabela NxM. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cran.r-project.org/web/packages/gtsummary/index.html)
+:::
 
 <br>
 
@@ -202,7 +202,7 @@ tbl_cross <-
     gtsummary::bold_labels() %>%
     # cria título da tabela
     gtsummary::modify_caption(
-        "**Teste exato de Fisher**"
+        "Teste exato de Fisher"
         )
 
 # exibe a tabela
@@ -211,4 +211,3 @@ tbl_cross %>%
 ```
 
 <br>
-

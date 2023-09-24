@@ -1727,86 +1727,52 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \hypertarget{testes-analise-inferencial}{%
 \section{Testes estatísticos para análise inferencial}\label{testes-analise-inferencial}}
 
-\hypertarget{quais-testes-podem-ser-usados-em-anuxe1lise-de-associauxe7uxe3o-bivariada}{%
-\subsection{Quais testes podem ser usados em análise de associação bivariada?}\label{quais-testes-podem-ser-usados-em-anuxe1lise-de-associauxe7uxe3o-bivariada}}
+\hypertarget{qui-quadrado-chi2}{%
+\subsection{\texorpdfstring{Qui-quadrado (\(\chi^2\))}{Qui-quadrado (\textbackslash chi\^{}2)}}\label{qui-quadrado-chi2}}
 
 \begin{itemize}
 \item
-  Qui-quadrado (\(\chi^2\))
+  O teste qui-quadrado (\(\chi^2\)) avalia uma hipótese global se a relação entre duas variáveis e/ou fatores é independente ou associada.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82}}
+\item
+  O teste qui-quadrado é utilizado para comparar a distribuição de uma variável categórica em uma amostra ou grupo com a distribuição em outro. Se a distribuição da variável categórica não for muito diferente nos diferentes grupos, pode-se concluir que a distribuição da variável categórica não está relacionada com a variável dos grupos. Pode-se também concluir que a variável categórica e os grupos são independentes.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82}}
+\item
+  Tipo: não paramétrico.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82},\protect\hyperlink{ref-McHugh2013}{83}}
+\item
+  Suposições:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82},\protect\hyperlink{ref-McHugh2013}{83}}
 
   \begin{itemize}
   \item
-    O teste qui-quadrado (\(\chi^2\)) avalia uma hipótese global se a relação entre duas variáveis e/ou fatores é independente ou associada.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82}}
+    As variáveis são ordinais ou categóricas nominais, de modo que as células representem frequência.
   \item
-    O teste qui-quadrado é utilizado para comparar a distribuição de uma variável categórica em uma amostra ou grupo com a distribuição em outro. Se a distribuição da variável categórica não for muito diferente nos diferentes grupos, pode-se concluir que a distribuição da variável categórica não está relacionada com a variável dos grupos. Pode-se também concluir que a variável categórica e os grupos são independentes.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82}}
+    Os níveis dos fatores (variáveis categóricas) são mutuamente exclusivos.
   \item
-    Tipo: não paramétrico.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82},\protect\hyperlink{ref-McHugh2013}{83}}
+    Tamanho de amostra grande e adequado porque é baseado em uma abordagem de aproximação.
   \item
-    Suposições:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82},\protect\hyperlink{ref-McHugh2013}{83}}
-
-    \begin{itemize}
-    \item
-      As variáveis são ordinais ou categóricas nominais, de modo que as células representem frequência.
-    \item
-      Os níveis dos fatores (variáveis categóricas) são mutuamente exclusivos.
-    \item
-      Tamanho de amostra grande e adequado porque é baseado em uma abordagem de aproximação.
-    \item
-      Menos de 20\% das células com frequências esperadas \textless{} 5
-    \item
-      Nenhuma célula com frequência esperada \textless{} 1.
-    \end{itemize}
+    Menos de 20\% das células com frequências esperadas \textless{} 5
   \item
-    Hipóteses:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82}}
-
-    \begin{itemize}
-    \item
-      Nula (\(H_{0}\)): independente (sem associação)
-    \item
-      Alternativa (\(H_{1}\)): não independente (associação)
-    \end{itemize}
-  \item
-    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82}}
-
-    \begin{itemize}
-    \item
-      Phi (\(\phi\)), para tabelas de contingência 2x2
-    \item
-      Razão de chances (\(RC\) ou \(OR\)), para tabelas de contingência 2x2
-    \item
-      Cramer V (\(V\)), para tabelas de contingência NxM
-    \end{itemize}
+    Nenhuma célula com frequência esperada \textless{} 1.
   \end{itemize}
 \item
-  Teste exato de Fisher
+  Hipóteses:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82}}
 
   \begin{itemize}
   \item
-    O teste exato de Fisher avalia a hipótese nula de independência aplicando a distribuição hipergeométrica dos números nas células da tabela.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82}}
+    Nula (\(H_{0}\)): independente (sem associação)
   \item
-    Hipóteses:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82},\protect\hyperlink{ref-McHugh2013}{83}}
+    Alternativa (\(H_{1}\)): não independente (associação)
+  \end{itemize}
+\item
+  Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82}}
 
-    \begin{itemize}
-    \item
-      Nula (\(H_{0}\)): independente (sem associação)
-    \item
-      Alternativa (\(H_{1}\)): não independente (associação)
-    \end{itemize}
+  \begin{itemize}
   \item
-    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82},\protect\hyperlink{ref-McHugh2013}{83}}
-
-    \begin{itemize}
-    \item
-      Phi (\(\phi\)), para tabelas de contingência 2x2
-    \item
-      Razão de chances (\(RC\) ou \(OR\)), para tabelas de contingência 2x2
-    \item
-      Cramer V (\(V\)), para tabelas de contingência NxM
-    \end{itemize}
+    Phi (\(\phi\)), para tabelas de contingência 2x2
+  \item
+    Razão de chances (\(RC\) ou \(OR\)), para tabelas de contingência 2x2
+  \item
+    Cramer V (\(V\)), para tabelas de contingência NxM
   \end{itemize}
 \end{itemize}
-
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{gtsummary}\textsuperscript{\protect\hyperlink{ref-gtsummary}{84}} fornece a função \emph{tbl\_cross} para criar uma tabela NxM. \href{https://cran.r-project.org/web/packages/gtsummary/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1830,7 +1796,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
     \CommentTok{\# formata o título em negrito}
 \NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{bold\_labels}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
     \CommentTok{\# cria título da tabela}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}\StringTok{"**Teste Qui{-}quadrado (com correção de Yates)**"}\NormalTok{)}
+\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}\StringTok{"Teste Qui{-}quadrado (com correção de Yates)"}\NormalTok{)}
 
 \CommentTok{\# exibe a tabela}
 \NormalTok{tbl\_cross }\SpecialCharTok{\%\textgreater{}\%}
@@ -1848,7 +1814,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{centerbox}
 \begin{threeparttable}
 \captionsetup{justification=centering,singlelinecheck=off}
-\caption{\label{tab:unnamed-chunk-1} **Teste Qui-quadrado (com correção de Yates)**}
+\caption{\label{tab:unnamed-chunk-1} Teste Qui-quadrado (com correção de Yates)}
  \setlength{\tabcolsep}{0pt}
 \begin{tabular}{l l l l l}
 
@@ -1958,7 +1924,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
     \CommentTok{\# formata o título em negrito}
 \NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{bold\_labels}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
     \CommentTok{\# cria título da tabela}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}\StringTok{"**Teste Qui{-}quadrado**"}\NormalTok{)}
+\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}\StringTok{"Teste Qui{-}quadrado"}\NormalTok{)}
 
 \CommentTok{\# exibe a tabela}
 \NormalTok{tbl\_cross }\SpecialCharTok{\%\textgreater{}\%}
@@ -1976,7 +1942,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{centerbox}
 \begin{threeparttable}
 \captionsetup{justification=centering,singlelinecheck=off}
-\caption{\label{tab:unnamed-chunk-2} **Teste Qui-quadrado**}
+\caption{\label{tab:unnamed-chunk-2} Teste Qui-quadrado}
  \setlength{\tabcolsep}{0pt}
 \begin{tabular}{l l l l l}
 
@@ -2063,6 +2029,36 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \end{table}
  
 
+\hypertarget{teste-exato-de-fisher}{%
+\subsection{Teste exato de Fisher}\label{teste-exato-de-fisher}}
+
+\begin{itemize}
+\item
+  O teste exato de Fisher avalia a hipótese nula de independência aplicando a distribuição hipergeométrica dos números nas células da tabela.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82}}
+\item
+  Hipóteses:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82},\protect\hyperlink{ref-McHugh2013}{83}}
+
+  \begin{itemize}
+  \item
+    Nula (\(H_{0}\)): independente (sem associação)
+  \item
+    Alternativa (\(H_{1}\)): não independente (associação)
+  \end{itemize}
+\item
+  Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82},\protect\hyperlink{ref-McHugh2013}{83}}
+
+  \begin{itemize}
+  \item
+    Phi (\(\phi\)), para tabelas de contingência 2x2
+  \item
+    Razão de chances (\(RC\) ou \(OR\)), para tabelas de contingência 2x2
+  \item
+    Cramer V (\(V\)), para tabelas de contingência NxM
+  \end{itemize}
+\end{itemize}
+
+\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{gtsummary}\textsuperscript{\protect\hyperlink{ref-gtsummary}{84}} fornece a função \emph{tbl\_cross} para criar uma tabela NxM. \href{https://cran.r-project.org/web/packages/gtsummary/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# carrega os pacotes}
@@ -2085,7 +2081,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
     \CommentTok{\# formata o título em negrito}
 \NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{bold\_labels}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
     \CommentTok{\# cria título da tabela}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}\StringTok{"**Teste exato de Fisher**"}\NormalTok{)}
+\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}\StringTok{"Teste exato de Fisher"}\NormalTok{)}
 
 \CommentTok{\# exibe a tabela}
 \NormalTok{tbl\_cross }\SpecialCharTok{\%\textgreater{}\%}
@@ -2103,7 +2099,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{centerbox}
 \begin{threeparttable}
 \captionsetup{justification=centering,singlelinecheck=off}
-\caption{\label{tab:unnamed-chunk-3} **Teste exato de Fisher**}
+\caption{\label{tab:unnamed-chunk-3} Teste exato de Fisher}
  \setlength{\tabcolsep}{0pt}
 \begin{tabular}{l l l l l}
 
@@ -2245,6 +2241,16 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \tightlist
 \item
   .{[}REF{]}
+\end{itemize}
+
+\hypertarget{quais-testes-podem-ser-usados-para-anuxe1lises-de-associauxe7uxe3o-bivariuxe1vel}{%
+\subsection{Quais testes podem ser usados para análises de associação bivariável?}\label{quais-testes-podem-ser-usados-para-anuxe1lises-de-associauxe7uxe3o-bivariuxe1vel}}
+
+\begin{itemize}
+\item
+  Teste Qui-quadrado (\(\chi^2\)).\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82},\protect\hyperlink{ref-McHugh2013}{83}}
+\item
+  Teste Exato de Fisher (\(\chi^2\)).\textsuperscript{\protect\hyperlink{ref-Kim2017a}{82},\protect\hyperlink{ref-McHugh2013}{83}}
 \end{itemize}
 
 \hypertarget{multivariavel-multivariada}{%
