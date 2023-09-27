@@ -8,12 +8,92 @@
 
 ### O que é análise exploratória de dados?
 
--   .[REF]
+-   Análise exploratória deve ser separada da análise inferencial de testes de hipóteses; a decisão sobre os modelos a testar deve ser feita *a priori*.[@zuur2009]
+
+-   A condução de análise exploratória de dados pode ajudar a identificar padrões e pode prientar trabalhos futuros, mas os resultados não devem ser interpretatos como inferências sobre uma população.[@zuur2009]
+
+- A análise exploratória não deve ser usada para definir as questões e hipóteses científicas do estudo.[@zuur2009]
+
+-   Cada combinação de problema de pesquisa e delineamento de estudo pode demandar um plano de análise exploratório distinto.[@zuur2009]
 
 <br>
 
 ::: blue
 `r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *explore*[@explore] fornece funções para análise exploratória interativa. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://cran.r-project.org/web/packages/explore/vignettes/explore.html)
 :::
+
+<br>
+
+### Quais etapas constituem a análise exploratória de dados?
+
+-   Verifique a existência e/ou influência de valores discrepantes ("fora da curva" ou *outliers*):[@zuur2009]
+
+    -   Boxplots
+
+<br>
+
+::: blue
+`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *graphics*[@graphics] fornece a função *boxplot* para construção de boxplots. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot)
+:::
+
+<br>
+
+-  Verifique a homocedasticidade (homogeneidade da variância):[@zuur2009]
+
+    -   Boxplots condicionais (por fator de análise)
+    
+    - Análise dos resíduos do modelo de regressão
+    
+        - Gráfico resíduos vs. valores ajustados
+
+<br>
+
+-  Verifique a normalidade da distribuição dos dados:[@zuur2009]
+
+    -   Histograma das variáveis (por fator de análise)
+    
+    - Histograma dos resíduos da regressão
+    
+<br>
+
+-  Verifique a existência de grande quantidade de valores 0:[@zuur2009]
+
+    -   Histograma das variáveis (por fator de análise)
+    
+<br>
+
+-  Verifique a existência de colinearidade entre variáveis independentes de um modelo de regressão:[@zuur2009]
+
+    - Fator de inflação de variância (*variance inflation factor*, VIF)
+    
+    - Coeficiente de correlação de Pearson ($r$)
+    
+    - Gráfico de dispersão entre variáveis
+    
+<br>
+
+-  Verifique possíveis relações entre as variáveis dependente(s) e independente(s) de um modelo de regressão:[@zuur2009]
+
+    - Gráfico de dispersão entre variáveis independente e dependente
+    
+<br>
+
+-  Verifique possíveis interações entre as variáveis dependente(s) de um modelo de regressão:[@zuur2009]
+
+    - Gráfico *coplot* de dispersão entre variáveis dependentes
+
+<br>
+
+::: blue
+`r library(fontawesome); fa("r-project", margin_right = "0.1em")` O pacote *graphics*[@graphics] fornece a função *coplot* para construção de coplots. [`r library(fontawesome); fa("up-right-from-square", margin_right = "0.1em")`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot)
+:::
+
+<br>
+
+-  Verifique por dependência entre variáveis de um modelo de regressão:[@zuur2009]
+
+    - Gráfico de série temporal das variáveis
+    
+    - Gráfico de autocorrelação entre as variáveis
 
 <br>

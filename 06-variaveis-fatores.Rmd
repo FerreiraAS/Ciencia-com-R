@@ -43,9 +43,9 @@
     -   Modificadora
 
     -   Auxiliar
-    
+
     -   Indicadora
-    
+
 <br>
 
 ### Por que é importante classificar as variáveis corretamente?
@@ -54,7 +54,7 @@
 
 <br>
 
-## Transformação de variáveis {#transformacao}
+## Transformação de variáveis contínuas {#transformacao}
 
 <br>
 
@@ -112,18 +112,53 @@
 
 <br>
 
-## Dicotomização de variáveis {#dicotomizacao}
+## Categorização de variáveis contínuas {#categorizacao}
 
 <br>
 
+### O que é catogorização de uma variável?
+
+-   .[REF]
+
+<br>
+
+### Por que não é recomendado categorizar variáveis contínuas?
+
+-   Nenhum dos argumentos usados para defender a categorização de variáveis se sustenta sob uma análise técnica rigorosa.[@MacCallum2002]
+
+-   Categorizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de categorizar, priorize as variáveis contínuas.[@Altman2006; @Royston2006; @Collins2016]
+
+-   Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.[@Altman2006; @Royston2006; @Collins2016]
+
+-   Caso exista um ponto de corte ou limiar verdadeiro que discrimine três ou mais grupos independentes, identificar tal ponto de corte ainda é um desafio.[@Prince2017]
+
+-   Categorização de variáveis contínuas aumenta a quantidade de testes de hipótese para comparações pareadas entre os quantis, inflando portanto o erro tipo I.[@Bennette2012]
+
+- Categorização de variáveis contínuas requer uma função teórica que pressupõe a homogeneidade da varia'vel dentro dos grupos, levando tanto a uma perda de poder como a uma estimativa imprecisa.[@Bennette2012]
+
+- Categorização de variáveis contínuas pode dificultar a comparação d resultados entre estudos devido aos pontos de corte baseados em dados de um banco usados para definir as categorias.[@Bennette2012]
+
+<br>
+
+### Quais sào as alternativaas à categorização de variáveis contínuas?
+
+- Análise com os dados das variável na escala de medida original .[@MacCallum2002]
+
+- Análise com modelos de regressão com pesos locais (*lowess*) tais como *splines* e polinômios fracionais.[@MacCallum2002]
+
+<br>
+
+## Dicotomização de variáveis contínuas {#dicotomizacao}
+
+<br>
 
 ### O que são variáveis dicotômicas?
 
-- Variáveis dicotômicas (ou binárias) podem representar categorias naturais tipo "presente/ausente", "sim/não".[REF]
+-   Variáveis dicotômicas (ou binárias) podem representar categorias naturais tipo "presente/ausente", "sim/não".[REF]
 
-- Variáveis dicotômicas podem representar categorias fictícias, criadas a partir de variáveis multinominais, em que cada nível é convertido em uma variável dicotômica *dummy*.[REF]
+-   Variáveis dicotômicas podem representar categorias fictícias, criadas a partir de variáveis multinominais, em que cada nível é convertido em uma variável dicotômica *dummy*.[REF]
 
-- Geralmente são representadas por "1" e "0".[REF]
+-   Geralmente são representadas por "1" e "0".[REF]
 
 <br>
 
@@ -141,11 +176,11 @@
 
 <br>
 
-### Por que não é recomendado categorizar ou dicotomizar variáveis contínuas?
+### Por que não é recomendado dicotomizar variáveis contínuas?
 
--   Nenhum dos argumentos usados para defender a categorização ou dicotomização de variáveis se sustenta sob uma análise técnica rigorosa.[@MacCallum2002]
+-   Nenhum dos argumentos usados para defender a dicotomização de variáveis se sustenta sob uma análise técnica rigorosa.[@MacCallum2002]
 
--   Categorizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de categorizar (ou dicotomizar), priorize as variáveis contínuas.[@Altman2006; @Royston2006; @Collins2016]
+-   Dicotomizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de dicotomizar, priorize as variáveis contínuas.[@Altman2006; @Royston2006; @Collins2016]
 
 -   Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.[@Altman2006; @Royston2006; @Collins2016]
 
@@ -159,7 +194,7 @@
 
 -   A média ou a mediana, embora amplamente utilizadas, não são bons parâmetros para dicotomizar variáveis.[@Altman2006; @Fedorov2009]
 
--   Caso exista um ponto de corte ou limiar verdadeiro que discrimina dois ou mais grupos, identificar tal ponto de corte ainda é um desafio.[@Prince2017]
+-   Caso exista um ponto de corte ou limiar verdadeiro que discrimine dois grupos independentes, identificar tal ponto de corte ainda é um desafio.[@Prince2017]
 
 <br>
 
@@ -193,15 +228,15 @@
 
 ### O que são fatores?
 
-- Fator é um sinônimo de variável categórica.[REF]
+-   Fator é um sinônimo de variável categórica.[REF]
 
-- Na modelagem, fator é sinônimo de variável preditora, em particular quando se refere à modelagem de efeitos fixos e aleatórios – os fatores (variáveis) são fatores fixos ou fatores aleatórios.[REF]
+-   Na modelagem, fator é sinônimo de variável preditora, em particular quando se refere à modelagem de efeitos fixos e aleatórios -- os fatores (variáveis) são fatores fixos ou fatores aleatórios.[REF]
 
 <br>
 
 ### O que são níveis de um fator?
 
-- Níveis de um fator são as possíveis categorias que descrevem um fator.[REF]
+-   Níveis de um fator são as possíveis categorias que descrevem um fator.[REF]
 
 <br>
 

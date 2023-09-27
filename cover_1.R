@@ -37,7 +37,7 @@ for(i in 1:2){
     wrappeds <- paste0(strwrap(s, i), collapse = "\n")
     if(strwidth(wrappeds) < rectangleWidth) break
   }
-  wrappeds <- paste(wrappeds, wrappeds)
+#  wrappeds <- paste(wrappeds, wrappeds)
   textHeight <- strheight(wrappeds)
   text(W/2, H/2, labels = wrappeds, col = "gray25")
   
