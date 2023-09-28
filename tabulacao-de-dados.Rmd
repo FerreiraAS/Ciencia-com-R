@@ -20,7 +20,7 @@
 
 ### Qual a estrutura básica de uma tabela para análise estatística?
 
--   Em geral, use apenas uma planilha para conter todas as informações coletadas. Evite múltiplas abas no mesmo arquivo, assim como múltiplos arquivos quando possível.[@broman2018]
+-   Use apenas 1 (uma) planilha eletrônica para conter todas as informações coletadas. Evite múltiplas abas no mesmo arquivo, assim como múltiplos arquivos quando possível.[@broman2018]
 
 -   Use apenas 1 (uma) linha de cabeçalho para nomear os fatores e variáveis do seu estudo.[@broman2018]
 
@@ -28,7 +28,7 @@
 
 <br>
 
-```{r tabela.0, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r tabela-0, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 # atribui rótulos para a tabela de dados
 N <- 5
 M <- 4
@@ -51,7 +51,8 @@ kableExtra::kable(
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = F
+  escape = F,
+  caption = "Estrutura básica de uma tabela de dados."
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -102,13 +103,9 @@ kableExtra::kable(
 
 <br>
 
-<br>
-
 ### O que é recomendado e o que deve ser evitado na organização das tabelas para análise?
 
-<br>
-
-```{r tabela.1, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r tabela-1, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 # cria a tabela de exemplos
 table.1 <- matrix(NA, nrow = 10, ncol = 2)
 
@@ -126,7 +123,7 @@ table.1[, 2] <-
   format(as.Date(table.1[, 2], origin = "1950-01-01"), "%d-%m-%Y")
 ```
 
-```{r tabela.2, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r tabela-2, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 # cria a tabela de exemplos
 table.2 <- matrix(NA, nrow = 10, ncol = 4)
 
@@ -164,7 +161,7 @@ table.2[, 3] <- gsub("&nbsp;", "", table.2[, 3])
 table.2[, 4] <- factor(table.2[, 3])
 ```
 
-```{r tabela.3, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r tabela-3, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 # cria a tabela de exemplos
 table.3 <- matrix(NA, nrow = 10, ncol = 3)
 
@@ -183,9 +180,7 @@ table.3[, 3] <-
   gsub("NA|NaN|N/A|N.A.|na|n.a.|\t\r\n|^$|\\d{3}", NA, table.3[, 2])
 ```
 
-`r library(fontawesome); fa("square-check", fill = "green", margin_right = "0.1em")` *Recomendado*
-
-```{r tabela.recomendada, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r tabela-recomendada, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 # cria a tabela de exemplos
 table.final <-
   data.frame(table.1[, 1], table.1[, 2], table.2[, 3], table.3[, 3])
@@ -198,7 +193,8 @@ kableExtra::kable(
   align = "l",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  linesep = ""
+  linesep = "",
+  caption = "Formatação recomendada para tabela de dados."
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -219,9 +215,7 @@ kableExtra::kable(
 
 <br>
 
-`r library(fontawesome); fa("xmark", fill = "red", margin_right = "0.1em")` *Evite*
-
-```{r tabela.evite, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r tabela-evite, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 # cria a tabela de exemplos
 table.final <-
   data.frame(table.1[, 1], table.1[, 2], table.2[, 2], table.3[, 2])
@@ -234,7 +228,8 @@ kableExtra::kable(
   align = "l",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  linesep = ""
+  linesep = "",
+  caption = "Formatação não recomendada para tabela de dados."
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),

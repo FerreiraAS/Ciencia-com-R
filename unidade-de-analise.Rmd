@@ -8,7 +8,9 @@
 
 ### O que é unidade de análise?
 
--   A unidade de análise (ou unidade experimental) de pesquisas na área de saúde geralmente é o indivíduo. Outras possibilidades são instituições em estudos multicêntricos (ex.: hospitais, clínicas) ou estudos publicados em meta-análises (ex.: ensaios clínicos).[@Altman1997]
+-   A unidade de análise (ou unidade experimental) de pesquisas na área de saúde geralmente é o indivíduo.[@Altman1997]
+
+-   A unidade de análise também pode ser a instituição em estudos multicêntricos (ex.: hospitais, clínicas) ou um estudo publicado em meta-análise (ex.: ensaios clínicos).[@Altman1997]
 
 -   É fundamental identificar corretamente a unidade de análise para evitar inflação do tamanho da amostra (ex.: medidas bilaterais resultando em o dobro de participantes), violações de suposições dos testes de hipótese (ex.: independência entre medidas e/ou unidade de análise) e resultados espúrios em testes de hipótese (ex.: p-valores menores que aqueles observados se a amostra não estivesse inflada).[@Altman1997; @Matthews1990]
 
@@ -26,7 +28,7 @@
 
 #### Medidas únicas
 
-```{r k1, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "hide"}
+```{r k1, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "hide"}
 # sorteia participante para relatar no texto
 set.seed(1)
 k1 <- sample(1:10, 1)
@@ -62,7 +64,8 @@ kableExtra::kable(
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  linesep = ""
+  linesep = "",
+  caption = "Tabela de dados bruto com medidas únicas."
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -82,14 +85,14 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-unicas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r medidas-unicas, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 ```
 
 <br>
 
 #### Medidas repetidas
 
-```{r k2, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "hide"}
+```{r k2, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "hide"}
 # sorteia participante para relatar no texto
 set.seed(2)
 k2 <- sample(1:10, 1)
@@ -133,7 +136,8 @@ kableExtra::kable(
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  linesep = ""
+  linesep = "",
+  caption = "Tabela de dados bruto com medidas repetidas."
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -153,7 +157,7 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-repetidas-separadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r medidas-repetidas-separadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 ```
 
 ```{r medidas-repetidas-agregadas, include = FALSE, echo = FALSE, results = "hide"}
@@ -201,7 +205,8 @@ kableExtra::kable(
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  linesep = ""
+  linesep = "",
+  caption = "Tabela de dados bruto com medidas repetidas agregadas."
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -223,7 +228,7 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-repetidas-agregadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r medidas-repetidas-agregadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 ```
 
 <br>
@@ -236,7 +241,7 @@ kableExtra::kable(
 
 #### Medidas seriadas
 
-```{r k3, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "hide"}
+```{r k3, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "hide"}
 # sorteia participante para relatar no texto
 set.seed(2)
 k2 <- sample(1:10, 1)
@@ -315,7 +320,8 @@ kableExtra::kable(
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  linesep = ""
+  linesep = "",
+  caption = "Tabela de dados bruto com medidas seriadas não agregadas."
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -337,7 +343,7 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-seriadas-separadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r medidas-seriadas-separadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 ```
 
 ```{r medidas-seriadas-agregadas, include = FALSE, echo = FALSE, results = "hide"}
@@ -420,7 +426,8 @@ kableExtra::kable(
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  linesep = ""
+  linesep = "",
+  caption = "Tabela de dados bruto com medidas seriadas não agregadas."
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -442,7 +449,7 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-seriadas-agregadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r medidas-seriadas-agregadas, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 ```
 
 <br>
@@ -455,7 +462,7 @@ kableExtra::kable(
 
 #### Medidas múltiplas
 
-```{r k4, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "hide"}
+```{r k4, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "hide"}
 # sorteia participante para relatar no texto
 set.seed(4)
 k4 <- sample(1:10, 1)
@@ -497,7 +504,8 @@ kableExtra::kable(
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  linesep = ""
+  linesep = "",
+  caption = "Tabela de dados bruto com medidas múltiplas."
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -517,7 +525,7 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-multiplas, echo = FALSE, warning = FALSE, message = FALSE, fig.align='center', results = "asis"}
+```{r medidas-multiplas, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 ```
 
 <br>
