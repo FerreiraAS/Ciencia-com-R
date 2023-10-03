@@ -134,8 +134,11 @@
 \usepackage{pdfpages}
 \usepackage[portuguese]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{titlesec}
 
 \AtBeginDocument{\let\maketitle\relax}
+
+\frontmatter
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -187,14 +190,15 @@
 \includepdf[pages={1},noautoscale=false, fitpaper=true, width=8.27in, height=11.69in, frame=false, trim=0mm 0mm 0mm 0mm, clip, offset=0mm 0mm]{Cover_1.pdf}
 \newpage
 
+\includepdf[pages={1},noautoscale=false, fitpaper=true, width=8.27in, height=11.69in, frame=false, trim=0mm 0mm 0mm 0mm, clip, offset=0mm 0mm]{Cover_2.pdf}
+\newpage
+
 {
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{sobre-o-livro}{%
-\chapter*{Sobre o livro}\label{sobre-o-livro}}
-\addcontentsline{toc}{chapter}{Sobre o livro}
-
+\mainmatter
+\clearpage
 \markboth{}{}
 
 Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. 107p. \href{https://zenodo.org/badge/latestdoi/685181979}{doi: 10.5281/zenodo.8320233}
@@ -214,44 +218,6 @@ Brochura: ISBN
 E-book: ISBN
 
 A versão online desta obra está licenciada com uma Licença Creative Commons Atribuição-NãoComercial 4.0 Internacional.
-
-\hypertarget{dedicatuxf3ria}{%
-\chapter*{Dedicatória}\label{dedicatuxf3ria}}
-\addcontentsline{toc}{chapter}{Dedicatória}
-
-\markboth{DEDICATÓRIA}{}
-
-Esta obra é dedicada a todos que, em princípio, buscam conhecimento para melhorar a qualidade da pesquisa científica - seja a sua própria, a de colegas ou a de desconhecidos - mas, em última análise, desejam mesmo prover melhores condições de saúde e desenvolvimento da sociedade.
-
-\hypertarget{prefuxe1cio}{%
-\chapter*{Prefácio}\label{prefuxe1cio}}
-\addcontentsline{toc}{chapter}{Prefácio}
-
-\markboth{}{}
-
-No âmbito da análise estatística de dados, os processos envolvidos são marcados por uma série de escolhas críticas. Estas decisões abrangem considerações metodológicas e ações operacionais que moldam toda a jornada analítica. Deve-se selecionar, cuidadosamente, um delineamento de estudo para enfrentar os desafios únicos colocados por um projeto de pesquisa. Além disso, a escolha de métodos estatísticos adequados para lidar com os dados gerados pelo delineamento escolhido tem um peso importante. Estas decisões necessitam de uma base construída sobre as evidências mais convincentes da literatura existente e na adesão a práticas sólidas de investigação.
-
-Interpretar os resultados destas análises não é uma tarefa simples. Confiar apenas na formação educacional convencional, no bom senso e na intuição para decifrar tabelas e gráficos pode revelar-se inadequado. Interpretações errôneas podem gerar consequências indesejáveis, incluindo a utilização de testes diagnósticos imprecisos ou o endosso de tratamentos ineficazes.
-
-Este livro emerge do reconhecimento desses desafios.
-
-A proposta gira em torno da organização de um compêndio abrangente de métodos e técnicas de ponta para análise estatística de dados em pesquisa científica, apresentados em formato de perguntas e respostas. Esse formato promove um diálogo direto e objetivo com o leitor, respondendo a dúvidas comumente colocadas por alunos de graduação, pós-graduação, mestrado e doutorado, bem como por pesquisadores.
-
-O objetivo geral de cada capítulo é elucidar questões fundamentais: \emph{``O que é?''}, \emph{``Por que usar?''}, \emph{``Quando usar?''}, \emph{``Quando não usar?''} e \emph{``Como fazer?''}. Em cada capítulo, questões específicas são propostas e respondidas sistematicamente, permitindo uma maior elaboração do conteúdo.
-
-Os capítulos foram organizados para seguir uma progressão de conceitos e aplicações. Embora sejam fragmentados para maior clareza instrucional, as referências cruzadas ajudam a mitigar a fragmentação do conteúdo e reforçar a interconexão dos tópicos.
-
-O público-alvo compreende pesquisadores, professores, analistas de dados, profissionais e estudantes que regularmente lidam com a tomada de decisões em pesquisa. Os estudantes de pós-graduação encontrarão aqui uma obra repleta de exemplos para adaptar na análise dos dados de seus projetos de pesquisa. Professores de graduação e pós-graduação terão acesso a uma obra didática de referência, direcionada para seus alunos. Pesquisadores e analistas de dados iniciantes descobrirão um valioso acervo de informações e referências para a construção de projetos e manuscritos. Pesquisadores e os cientistas mais experientes podem recorrer às referências e esclarecimentos mais atuais sobre vieses, paradoxos, mitos e mal práticas em pesquisa. E mesmo os leitores não familiarizados ainda com as técncias de análise de dados em pesquisa terão a oportunidade de apreciar o papel fundamental de colocar e responder perguntas na busca do conhecimento científico.
-
-Arthur de Sá Ferreira, DSc
-
-\hypertarget{agradecimentos}{%
-\chapter*{Agradecimentos}\label{agradecimentos}}
-\addcontentsline{toc}{chapter}{Agradecimentos}
-
-\markboth{}{}
-
-Este trabalho não seria possível sem o apoio e suporte da minha esposa Daniele, minha irmâ Mônica, meu pai José e meus filhos Giovanna, Victor e Lucas.
 
 \hypertarget{sobre-o-autor}{%
 \chapter*{Sobre o Autor}\label{sobre-o-autor}}
@@ -282,6 +248,44 @@ Componho o corpo editorial e de revisores de periódicos nacionais e internacion
 0000-0001-7014-2002
 
 \href{https://publons.com/researcher/F-6831-2012}{~F-6831-2012}
+
+\hypertarget{dedicatuxf3ria}{%
+\chapter*{Dedicatória}\label{dedicatuxf3ria}}
+\addcontentsline{toc}{chapter}{Dedicatória}
+
+\markboth{DEDICATÓRIA}{}
+
+Esta obra é dedicada a todos que, em princípio, buscam conhecimento para melhorar a qualidade da pesquisa científica - seja a sua própria, a de colegas ou a de desconhecidos - mas, em última análise, desejam mesmo prover melhores condições de saúde e desenvolvimento da sociedade.
+
+\hypertarget{prefuxe1cio}{%
+\chapter*{Prefácio}\label{prefuxe1cio}}
+\addcontentsline{toc}{chapter}{Prefácio}
+
+\markboth{}{}
+
+No âmbito da análise estatística de dados, os processos envolvidos são marcados por uma série de escolhas críticas. Estas decisões abrangem considerações metodológicas e ações operacionais que moldam toda a jornada analítica. Deve-se selecionar, cuidadosamente, um delineamento de estudo para enfrentar os desafios únicos colocados por um projeto de pesquisa. Além disso, a escolha de métodos estatísticos adequados para lidar com os dados gerados pelo delineamento escolhido tem um peso importante. Estas decisões necessitam de uma base construída sobre as evidências mais convincentes da literatura existente e na adesão a práticas sólidas de investigação.
+
+Interpretar os resultados destas análises não é uma tarefa simples. Confiar apenas na formação educacional convencional, no bom senso e na intuição para decifrar tabelas e gráficos pode revelar-se inadequado. Interpretações errôneas podem gerar consequências indesejáveis, incluindo a utilização de testes diagnósticos imprecisos ou o endosso de tratamentos ineficazes.
+
+Este livro emerge do reconhecimento desses desafios.
+
+A proposta gira em torno da organização de um compêndio abrangente de métodos e técnicas de ponta, para análise estatística de dados em pesquisa científica, apresentados em formato de perguntas e respostas. Esse formato promove um diálogo direto e objetivo com o leitor, respondendo a dúvidas comumente colocadas por alunos de graduação, pós-graduação, mestrado e doutorado, bem como por pesquisadores.
+
+O objetivo geral de cada capítulo é elucidar as questões metodológicas fundamentais: \emph{``O que é?''}, \emph{``Por que usar?''}, \emph{``Quando usar?''}, \emph{``Quando não usar?''} e \emph{``Como fazer?''}. Em cada capítulo, diversas questões específicas são propostas e respondidas sistematicamente, permitindo ao leitor uma melhor elaboração do conteúdo e resultado do seu trabalho.
+
+Os capítulos foram organizados para seguir uma progressão de conceitos e aplicações. Embora sejam fragmentados para maior clareza instrucional, as referências cruzadas ajudam a mitigar a fragmentação do conteúdo e reforçar a interconexão dos tópicos.
+
+O público-alvo compreende pesquisadores, professores, analistas de dados, profissionais e estudantes que regularmente lidam com a tomada de decisões em pesquisa. Os estudantes de pós-graduação encontrarão aqui uma obra repleta de exemplos para adaptar na análise dos dados de seus projetos de pesquisa. Professores de graduação e pós-graduação terão acesso a uma obra didática de referência, direcionada para seus alunos. Pesquisadores e analistas de dados iniciantes descobrirão um valioso acervo de informações e referências para a construção de projetos e manuscritos. Pesquisadores e os cientistas mais experientes podem recorrer às referências e esclarecimentos mais atuais sobre vieses, paradoxos, mitos e mal práticas em pesquisa. E mesmo os leitores não familiarizados ainda com as técnicas de análise de dados em pesquisa terão a oportunidade de apreciar o papel fundamental de colocar e responder suas perguntas na busca do conhecimento científico.
+
+Arthur de Sá Ferreira, DSc
+
+\hypertarget{agradecimentos}{%
+\chapter*{Agradecimentos}\label{agradecimentos}}
+\addcontentsline{toc}{chapter}{Agradecimentos}
+
+\markboth{}{}
+
+Este trabalho não seria possível sem o apoio e suporte da minha esposa Daniele, minha irmâ Mônica, meu pai José e meus filhos Giovanna, Victor e Lucas.
 
 \hypertarget{unidade-analise}{%
 \chapter{\texorpdfstring{\textbf{Unidade de análise}}{Unidade de análise}}\label{unidade-analise}}
@@ -3916,8 +3920,9 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
   \href{https://journals.physiology.org/topic/advances-collections/reporting-statistics?seriesKey=\&tagCode=\&}{\emph{Reporting Statistics}}
 \end{itemize}
 
-\hypertarget{referencias}{%
-\chapter{\texorpdfstring{\textbf{Referências}}{Referências}}\label{referencias}}
+\hypertarget{referuxeancias}{%
+\chapter*{\texorpdfstring{\textbf{Referências}}{Referências}}\label{referuxeancias}}
+\addcontentsline{toc}{chapter}{\textbf{Referências}}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{0}{0}
@@ -4545,5 +4550,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \includepdf[pages={1},noautoscale=false, fitpaper=true, width=8.3in, height=11.7in, frame=false, trim=0mm 0mm 0mm 0mm, clip, offset=0mm 0mm]{Cover_4.pdf}
 \newpage
+
+\backmatter
 
 \end{document}

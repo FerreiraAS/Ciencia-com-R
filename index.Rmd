@@ -48,17 +48,22 @@ library("webshot")
 
 ```{r cover-generator, echo = FALSE, include = FALSE, eval = knitr::is_html_output(), cache = TRUE}
 source("cover_1.R", local = knitr::knit_global())
+source("cover_2.R", local = knitr::knit_global())
 source("cover_4.R", local = knitr::knit_global())
 ```
 
 <br>
 
-# Sobre o livro {-}
+```{r sobre, echo = FALSE, results = "asis", eval = knitr::is_html_output()}
+cat('# Sobre o livro {-}')
+```
 
 <!--script for generating HORIZONTAL LINE-->
 <hr style="height:2px;border-width:0;color:black;background-color:black">
 
 ```{=latex}
+\mainmatter
+\clearpage
 \markboth{}{}
 ```
 
