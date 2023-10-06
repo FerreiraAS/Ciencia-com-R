@@ -215,7 +215,7 @@
 \makeatother
 \subtitle{Perguntas e respostas para pesquisadores e analistas de dados}
 \author{© 2023 by Arthur de Sá Ferreira https://orcid.org/0000-0001-7014-2002}
-\date{Atualizado em 05/10/2023}
+\date{Atualizado em 06/10/2023}
 
 \begin{document}
 \maketitle
@@ -289,6 +289,8 @@ Componho o corpo editorial e de revisores de periódicos nacionais e internacion
 \markboth{}{}
 
 Esta obra é dedicada a todos que, em princípio, buscam conhecimento para melhorar a qualidade da pesquisa científica - seja a sua própria, a de colegas ou a de desconhecidos - mas, em última análise, desejam mesmo prover melhores condições de saúde e desenvolvimento da sociedade.
+
+Dedico também ao leitor eventual que chegou aqui por acaso.
 
 \hypertarget{prefuxe1cio}{%
 \chapter*{Prefácio}\label{prefuxe1cio}}
@@ -622,7 +624,12 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornec
   Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise (`dado perdido' = 1, `dado observado' = 0).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{7}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{9}} fornece a função \emph{na.test} para executar o Little's Missing Completely at Random (MCAR) test\textsuperscript{\protect\hyperlink{ref-little1988}{10}}. \href{https://cran.r-project.org/web/packages/misty/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{9}} fornece a função \href{https://www.rdocumentation.org/packages/misty/versions/0.5.0/topics/na.test}{\emph{na.test}} para executar o Little's Missing Completely at Random (MCAR) test\textsuperscript{\protect\hyperlink{ref-little1988}{10}}.
+
+\end{infobox}
 
 \hypertarget{que-estratuxe9gias-podem-ser-utilizadas-na-coleta-de-dados-quando-huxe1-expectativa-de-perda-amostral}{%
 \subsection{Que estratégias podem ser utilizadas na coleta de dados quando há expectativa de perda amostral?}\label{que-estratuxe9gias-podem-ser-utilizadas-na-coleta-de-dados-quando-huxe1-expectativa-de-perda-amostral}}
@@ -645,7 +652,12 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornec
   A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{8}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{11}} fornece a função \emph{complete.cases} para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados. \href{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/stats-package.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{11}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/complete.cases}{\emph{complete.cases}} para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados.
+
+\end{infobox}
 
 \begin{itemize}
 \item
@@ -656,7 +668,12 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornec
   Em dados longitudinais com um pequeno número de `ondas' (medidas repetidas) e poucas variáveis, para análise com modelos de regressão univariados, a imputação via especificação condicional completa - também conhecido como imputação multivariada por equações encadeadas (\emph{multivaraite imputation by chained equations}, MICE) - é eficiente do ponto de vista computacional e possui acurácia e precisão para estimação de parâmetros.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{7},\protect\hyperlink{ref-Cao2022}{12}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{13}} e \emph{miceadds}\textsuperscript{\protect\hyperlink{ref-miceadds}{14}} fornecem funções para imputação de dados \href{https://cran.r-project.org/web/packages/mice/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}} \href{https://cran.r-project.org/web/packages/miceadds/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{13}} e \emph{miceadds}\textsuperscript{\protect\hyperlink{ref-miceadds}{14}} fornecem funções \href{https://www.rdocumentation.org/packages/mice/versions/3.16.0/topics/mice}{\emph{mice}} e \href{https://www.rdocumentation.org/packages/miceadds/versions/3.16-18/topics/mi.anova}{\emph{mi.anova}} para imputação multivariada por equações encadeadas, respectivamente, para imputação de dados.
+
+\end{infobox}
 
 \hypertarget{que-estratuxe9gias-podem-ser-utilizadas-na-redauxe7uxe3o-de-estudos-em-que-huxe1-dados-perdidos}{%
 \subsection{Que estratégias podem ser utilizadas na redação de estudos em que há dados perdidos?}\label{que-estratuxe9gias-podem-ser-utilizadas-na-redauxe7uxe3o-de-estudos-em-que-huxe1-dados-perdidos}}
@@ -813,7 +830,12 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornec
   Dicotomização.
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{25}} fornece a função \emph{box.cox} para executar a transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{24}} \href{https://cran.r-project.org/web/packages/MASS/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{25}} fornece a função \href{https://www.rdocumentation.org/packages/MASS/versions/7.3-58.3/topics/boxcox}{\emph{boxcox}} para executar a transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{24}}
+
+\end{infobox}
 
 \hypertarget{categorizacao}{%
 \section{Categorização de variáveis contínuas}\label{categorizacao}}
@@ -965,7 +987,12 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornec
   Níveis de um fator são as possíveis categorias que descrevem um fator.{[}REF{]}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{37}} fornece a função \emph{as\_factor} para converter uma variável em fator. \href{https://cran.r-project.org/web/packages/forcats/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{37}} fornece a função \href{https://www.rdocumentation.org/packages/forcats/versions/1.0.0/topics/as_factor}{\emph{as\_factor}} para converter uma variável em fator.
+
+\end{infobox}
 
 \hypertarget{distribuicoes-parametros}{%
 \chapter{\texorpdfstring{\textbf{Distribuições e parâmetros}}{Distribuições e parâmetros}}\label{distribuicoes-parametros}}
@@ -1110,7 +1137,12 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornec
   \end{itemize}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-base}{41}} fornece a função \emph{quantile} para executar análise de percentis. \href{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-base}{41}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile}{\emph{quantile}} para executar análise de percentis.
+
+\end{infobox}
 
 \hypertarget{outliers}{%
 \section{Valores discrepantes}\label{outliers}}
@@ -1200,7 +1232,12 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
   Use recursos para validação de dados antes e durante a digitação de dados.\textsuperscript{\protect\hyperlink{ref-broman2018}{44},\protect\hyperlink{ref-Juluru2015}{45}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{46}} fornece a função \emph{melt} para reorganizar a tabela em diferentes formatos. \href{https://cran.r-project.org/web/packages/data.table/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{46}} fornece a função \href{https://www.rdocumentation.org/packages/data.table/versions/1.14.8/topics/melt.data.table}{\emph{melt.data.table}} para reorganizar a tabela em diferentes formatos.
+
+\end{infobox}
 
 \hypertarget{o-que-nuxe3o-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}{%
 \subsection{O que não usar para organizar tabelas para análise computadorizada?}\label{o-que-nuxe3o-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}}
@@ -1229,16 +1266,16 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \toprule
 \textbf{ID} & \textbf{Data.Coleta} & \textbf{Estado.Civil} & \textbf{Numero.Filhos}\\
 \midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{06-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-2 & 07-10-2023 & casado & 1\\
-\cellcolor{gray!6}{3} & \cellcolor{gray!6}{08-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-4 & 09-10-2023 & solteiro & NA\\
-\cellcolor{gray!6}{5} & \cellcolor{gray!6}{10-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-6 & 11-10-2023 & solteiro & 0\\
-\cellcolor{gray!6}{7} & \cellcolor{gray!6}{12-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{NA}\\
-8 & 13-10-2023 & solteiro & NA\\
-\cellcolor{gray!6}{9} & \cellcolor{gray!6}{14-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-10 & 15-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{07-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+2 & 08-10-2023 & casado & 1\\
+\cellcolor{gray!6}{3} & \cellcolor{gray!6}{09-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+4 & 10-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{11-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+6 & 12-10-2023 & solteiro & 0\\
+\cellcolor{gray!6}{7} & \cellcolor{gray!6}{13-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{NA}\\
+8 & 14-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{9} & \cellcolor{gray!6}{15-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+10 & 16-10-2023 & solteiro & NA\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -1251,16 +1288,16 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \toprule
 \textbf{ID} & \textbf{Data de Coleta} & \textbf{Estado Civil} & \textbf{Número de Filhos}\\
 \midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{06-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-2 & 07-10-2023 & Casado & 1\\
-\cellcolor{gray!6}{3} & \cellcolor{gray!6}{08-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NaN}\\
-4 & 09-10-2023 & Solteiro & N/A\\
-\cellcolor{gray!6}{5} & \cellcolor{gray!6}{10-10-2023} & \cellcolor{gray!6}{Casado} & \cellcolor{gray!6}{N.A.}\\
-6 & 11-10-2023 & solteiro & 0\\
-\cellcolor{gray!6}{7} & \cellcolor{gray!6}{12-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{}\\
-8 & 13-10-2023 & Solteiro & na\\
-\cellcolor{gray!6}{9} & \cellcolor{gray!6}{14-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{n.a.}\\
-10 & 15-10-2023 & Solteiro & 999\\
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{07-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+2 & 08-10-2023 & Casado & 1\\
+\cellcolor{gray!6}{3} & \cellcolor{gray!6}{09-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NaN}\\
+4 & 10-10-2023 & Solteiro & N/A\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{11-10-2023} & \cellcolor{gray!6}{Casado} & \cellcolor{gray!6}{N.A.}\\
+6 & 12-10-2023 & solteiro & 0\\
+\cellcolor{gray!6}{7} & \cellcolor{gray!6}{13-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{}\\
+8 & 14-10-2023 & Solteiro & na\\
+\cellcolor{gray!6}{9} & \cellcolor{gray!6}{15-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{n.a.}\\
+10 & 16-10-2023 & Solteiro & 999\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -1339,6 +1376,18 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \hypertarget{o-que-uxe9-regressuxe3o-para-a-muxe9dia}{%
 \subsection{O que é regressão para a média?}\label{o-que-uxe9-regressuxe3o-para-a-muxe9dia}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{jogador}{%
+\section{Falácia do jogador}\label{jogador}}
+
+\hypertarget{o-que-uxe9-faluxe1cia-do-jogador}{%
+\subsection{O que é falácia do jogador?}\label{o-que-uxe9-faluxe1cia-do-jogador}}
 
 \begin{itemize}
 \tightlist
@@ -2089,7 +2138,26 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
   A heterogeneidade entre estudos é explicada de modo mais confiável utilizando dados de pacientes individuais, uma vez que a direção verdadeira da modificação de efeito não pode ser observada a partir de dados agregados no estudo.\textsuperscript{\protect\hyperlink{ref-degrooth2023}{83}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{metagear}\textsuperscript{\protect\hyperlink{ref-metagear}{84}} fornece funções para condução e análise de revisões sistemáticas \href{https://cran.r-project.org/web/packages/metagear/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{metagear}\textsuperscript{\protect\hyperlink{ref-metagear}{84}} fornece funções para condução e análise de revisões sistemáticas
+
+\end{infobox}
+
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{metagear}\textsuperscript{\protect\hyperlink{ref-metagear}{84}} fornece a função \href{https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA}{\emph{plot\_PRISMA}} para gerar o fluxograma de uma revisão sistemática de acordo com o \emph{Preferred Reporting Items for Systematic Reviews and Meta-Analyses}\textsuperscript{\protect\hyperlink{ref-Moher2015}{85}}.
+
+\end{infobox}
+
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{PRISMA2020}\textsuperscript{\protect\hyperlink{ref-PRISMA2020-2}{86},\protect\hyperlink{ref-PRISMA2020}{87}} fornece a função \href{https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram}{\emph{PRISMA\_flowdiagram}} para elaboração do fluxograma de revisões sistemáticas no formato padrão.
+
+\end{infobox}
 
 \hypertarget{vieses}{%
 \chapter{\texorpdfstring{\textbf{Vieses}}{Vieses}}\label{vieses}}
@@ -2117,21 +2185,21 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-dwivedi2019}{85}}
+  .\textsuperscript{\protect\hyperlink{ref-dwivedi2019}{88}}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-Dwivedi2022}{86}}
+  .\textsuperscript{\protect\hyperlink{ref-Dwivedi2022}{89}}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-Kim2017}{87}}
+  .\textsuperscript{\protect\hyperlink{ref-Kim2017}{90}}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-marusteri2010}{88}}
+  .\textsuperscript{\protect\hyperlink{ref-marusteri2010}{91}}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-mishra2019}{89}}
+  .\textsuperscript{\protect\hyperlink{ref-mishra2019}{92}}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-ray2021}{90}}
+  .\textsuperscript{\protect\hyperlink{ref-ray2021}{93}}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-nayak2011}{91}}
+  .\textsuperscript{\protect\hyperlink{ref-nayak2011}{94}}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-shankar2014}{92}}
+  .\textsuperscript{\protect\hyperlink{ref-shankar2014}{95}}
 \end{itemize}
 
 \hypertarget{analise-inicial-dados}{%
@@ -2166,7 +2234,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
     Documentação e relatório da análise inicial de dados
   \end{itemize}
 \item
-  A análise inicial de dados não deve ser confundida com análise exploratória\textsuperscript{\protect\hyperlink{ref-Ferketich1986}{93}}, nem deve ser utilizada para hipotetizar após os dados serem coletados (conhecido como \emph{Hypothesizing After Results are Known}, HARKing)\textsuperscript{\protect\hyperlink{ref-Kerr1998}{94}}.
+  A análise inicial de dados não deve ser confundida com análise exploratória\textsuperscript{\protect\hyperlink{ref-Ferketich1986}{96}}, nem deve ser utilizada para hipotetizar após os dados serem coletados (conhecido como \emph{Hypothesizing After Results are Known}, HARKing)\textsuperscript{\protect\hyperlink{ref-Kerr1998}{97}}.
 \end{itemize}
 
 \hypertarget{como-conduzir-uma-anuxe1lise-inicial-de-dados}{%
@@ -2192,15 +2260,15 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 
 \begin{itemize}
 \item
-  Registros duplicados, que devem ser excluídos para não inflar a amostra.\textsuperscript{\protect\hyperlink{ref-huebner2016}{95}}
+  Registros duplicados, que devem ser excluídos para não inflar a amostra.\textsuperscript{\protect\hyperlink{ref-huebner2016}{98}}
 \item
-  Codificação 0 ou 1 para variáveis dicotômicas para representar a direção esperada da associação entre elas.\textsuperscript{\protect\hyperlink{ref-huebner2016}{95}}
+  Codificação 0 ou 1 para variáveis dicotômicas para representar a direção esperada da associação entre elas.\textsuperscript{\protect\hyperlink{ref-huebner2016}{98}}
 \item
-  Ordenação cronológica de variáveis com registros temporais (retrospectivos ou prospectivos).\textsuperscript{\protect\hyperlink{ref-huebner2016}{95}}
+  Ordenação cronológica de variáveis com registros temporais (retrospectivos ou prospectivos).\textsuperscript{\protect\hyperlink{ref-huebner2016}{98}}
 \item
-  A distribuição das variáveis para verificação das suposições das análises planejadas.\textsuperscript{\protect\hyperlink{ref-huebner2016}{95}}
+  A distribuição das variáveis para verificação das suposições das análises planejadas.\textsuperscript{\protect\hyperlink{ref-huebner2016}{98}}
 \item
-  Ocorrência de efeitos teto e piso nas variáveis.\textsuperscript{\protect\hyperlink{ref-huebner2016}{95}}
+  Ocorrência de efeitos teto e piso nas variáveis.\textsuperscript{\protect\hyperlink{ref-huebner2016}{98}}
 \end{itemize}
 
 \hypertarget{analise-exploratoria-dados}{%
@@ -2223,7 +2291,12 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
   Cada combinação de problema de pesquisa e delineamento de estudo pode demandar um plano de análise exploratório distinto.\textsuperscript{\protect\hyperlink{ref-zuur2009}{42}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{explore}\textsuperscript{\protect\hyperlink{ref-explore}{96}} fornece funções para análise exploratória interativa. \href{https://cran.r-project.org/web/packages/explore/vignettes/explore.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{explore}\textsuperscript{\protect\hyperlink{ref-explore}{99}} fornece a função \href{https://www.rdocumentation.org/packages/explore/versions/1.0.2/topics/explore}{\emph{explore}} para análise exploratória de um banco de dados.
+
+\end{infobox}
 
 \hypertarget{quais-etapas-constituem-a-anuxe1lise-exploratuxf3ria-de-dados}{%
 \subsection{Quais etapas constituem a análise exploratória de dados?}\label{quais-etapas-constituem-a-anuxe1lise-exploratuxf3ria-de-dados}}
@@ -2239,7 +2312,12 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
   \end{itemize}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{graphics}\textsuperscript{\protect\hyperlink{ref-graphics}{97}} fornece a função \emph{boxplot} para construção de boxplots. \href{https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{graphics}\textsuperscript{\protect\hyperlink{ref-graphics}{100}} fornece a função \href{https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot}{\emph{boxplot}} para construção de gráficos \emph{boxplot}.
+
+\end{infobox}
 
 \begin{itemize}
 \item
@@ -2314,7 +2392,12 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
   \end{itemize}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{graphics}\textsuperscript{\protect\hyperlink{ref-graphics}{97}} fornece a função \emph{coplot} para construção de coplots. \href{https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{graphics}\textsuperscript{\protect\hyperlink{ref-graphics}{100}} fornece a função \href{https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/coplot}{\emph{coplot}} para construção de gráficos \emph{boxplot} condicionais.
+
+\end{infobox}
 
 \begin{itemize}
 \item
@@ -2347,7 +2430,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \begin{infobox}{Rlogo}
 \textbf{Atenção!}
 
-O pacote \emph{dataExplorer}\textsuperscript{\protect\hyperlink{ref-DataExplorer}{98}} fornece a função \href{https://www.rdocumentation.org/packages/DataExplorer/versions/0.8.2/topics/create_report}{\emph{create\_report}} para executar análise exploratória.
+O pacote \emph{dataExplorer}\textsuperscript{\protect\hyperlink{ref-DataExplorer}{101}} fornece a função \href{https://www.rdocumentation.org/packages/DataExplorer/versions/0.8.2/topics/create_report}{\emph{create\_report}} para executar análise exploratória.
 
 \end{infobox}
 
@@ -2360,7 +2443,7 @@ O pacote \emph{dataExplorer}\textsuperscript{\protect\hyperlink{ref-DataExplorer
 \begin{itemize}
 \tightlist
 \item
-  Tabelas complementam o texto (e vice-versa), e podem apresentar os dados de modo mais acessível e informativo.\textsuperscript{\protect\hyperlink{ref-Inskip2017}{99}}
+  Tabelas complementam o texto (e vice-versa), e podem apresentar os dados de modo mais acessível e informativo.\textsuperscript{\protect\hyperlink{ref-Inskip2017}{102}}
 \end{itemize}
 
 \hypertarget{como-exportar-a-tabela-para-o-manuscrito}{%
@@ -2405,22 +2488,22 @@ O pacote \emph{dataExplorer}\textsuperscript{\protect\hyperlink{ref-DataExplorer
 
 \begin{itemize}
 \item
-  A Tabela 1 geralmente é utilizada para descrever as características da amostra estudada, possibilitando a análise de ameaças à validade interna e/ou externa ao estudo.\textsuperscript{\protect\hyperlink{ref-Hayes-Larson2019}{100}}
+  A Tabela 1 geralmente é utilizada para descrever as características da amostra estudada, possibilitando a análise de ameaças à validade interna e/ou externa ao estudo.\textsuperscript{\protect\hyperlink{ref-Hayes-Larson2019}{103}}
 \item
-  Inclua na tabela: título ou legenda, uma síntese descritiva (geralmente por meio de parâmetros descritivos), intervalos de confiança e/ou p-valores conforme necessário para adequada interpretação.\textsuperscript{\protect\hyperlink{ref-Inskip2017}{99},\protect\hyperlink{ref-Kwak2021}{101}}
+  Inclua na tabela: título ou legenda, uma síntese descritiva (geralmente por meio de parâmetros descritivos), intervalos de confiança e/ou p-valores conforme necessário para adequada interpretação.\textsuperscript{\protect\hyperlink{ref-Inskip2017}{102},\protect\hyperlink{ref-Kwak2021}{104}}
 \end{itemize}
 
 \begin{infobox}{Rlogo}
 \textbf{Atenção!}
 
-O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-table1}{102}} fornece a função \href{https://www.rdocumentation.org/packages/table1/versions/1.4.3/topics/table1}{\emph{table1}} para construção da tabela.
+O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-table1}{105}} fornece a função \href{https://www.rdocumentation.org/packages/table1/versions/1.4.3/topics/table1}{\emph{table1}} para construção da tabela.
 
 \end{infobox}
 
 \begin{infobox}{Rlogo}
 \textbf{Atenção!}
 
-O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{103}} fornece as funções \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/as_flextable}{\emph{as\_flextable}} e \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/save_as_docx}{\emph{save\_as\_docx}} para salvar tabelas em formato DOCX.
+O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{106}} fornece as funções \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/as_flextable}{\emph{as\_flextable}} e \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/save_as_docx}{\emph{save\_as\_docx}} para salvar tabelas em formato DOCX.
 
 \end{infobox}
 
@@ -2442,20 +2525,20 @@ O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{103}} f
 \begin{itemize}
 \tightlist
 \item
-  A Tabela 2 pode ser utilizada para apresentar estimativas de múltiplos efeitos ajustados de um mesmo modelo estatístico.\textsuperscript{\protect\hyperlink{ref-Westreich2013}{104}}
+  A Tabela 2 pode ser utilizada para apresentar estimativas de múltiplos efeitos ajustados de um mesmo modelo estatístico.\textsuperscript{\protect\hyperlink{ref-Westreich2013}{107}}
 \end{itemize}
 
 \begin{infobox}{Rlogo}
 \textbf{Atenção!}
 
-O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-table1}{102}} fornece a função \href{https://www.rdocumentation.org/packages/table1/versions/1.4.3/topics/table1}{\emph{table1}} para construção da tabela.
+O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-table1}{105}} fornece a função \href{https://www.rdocumentation.org/packages/table1/versions/1.4.3/topics/table1}{\emph{table1}} para construção da tabela.
 
 \end{infobox}
 
 \begin{infobox}{Rlogo}
 \textbf{Atenção!}
 
-O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{103}} fornece as funções \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/as_flextable}{\emph{as\_flextable}} e \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/save_as_docx}{\emph{save\_as\_docx}} para salvar tabelas em formato DOCX.
+O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{106}} fornece as funções \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/as_flextable}{\emph{as\_flextable}} e \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/save_as_docx}{\emph{save\_as\_docx}} para salvar tabelas em formato DOCX.
 
 \end{infobox}
 
@@ -2468,7 +2551,7 @@ O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{103}} f
 \begin{itemize}
 \tightlist
 \item
-  Gráficos são utilizados para apresentar dados (geralmente em grande quantidade) de modo mais intuitivo e fácil de compreender.\textsuperscript{\protect\hyperlink{ref-Park2022}{105}}
+  Gráficos são utilizados para apresentar dados (geralmente em grande quantidade) de modo mais intuitivo e fácil de compreender.\textsuperscript{\protect\hyperlink{ref-Park2022}{108}}
 \end{itemize}
 
 \hypertarget{que-elementos-incluir-em-gruxe1ficos}{%
@@ -2477,13 +2560,13 @@ O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{103}} f
 \begin{itemize}
 \tightlist
 \item
-  Título, eixos horizontal e vertical com respectivas unidades, escalas em intervalos representativos das variáveis, legenda com símbolos, síntese descritiva dos valores e respectiva margem de erro, conforme necessário para adequada interpretação.\textsuperscript{\protect\hyperlink{ref-Park2022}{105}}
+  Título, eixos horizontal e vertical com respectivas unidades, escalas em intervalos representativos das variáveis, legenda com símbolos, síntese descritiva dos valores e respectiva margem de erro, conforme necessário para adequada interpretação.\textsuperscript{\protect\hyperlink{ref-Park2022}{108}}
 \end{itemize}
 
 \begin{infobox}{Rlogo}
 \textbf{Atenção!}
 
-Os pacotes \emph{ggplot2}\textsuperscript{\protect\hyperlink{ref-ggplot2}{106}}, \emph{plotly}\textsuperscript{\protect\hyperlink{ref-plotly}{107}} e \emph{corrplot}\textsuperscript{\protect\hyperlink{ref-corrplot}{108}} fornecem diversas funções para construção de gráficos tais como \href{https://www.rdocumentation.org/packages/ggplot2/versions/3.4.3/topics/ggplot}{\emph{ggplot}}, \href{https://www.rdocumentation.org/packages/plotly/versions/4.10.2/topics/plot_ly}{\emph{plot\_ly}} e \href{https://www.rdocumentation.org/packages/corrplot/versions/0.92/topics/corrplot}{\emph{corrplot}} respectivamente.
+Os pacotes \emph{ggplot2}\textsuperscript{\protect\hyperlink{ref-ggplot2}{109}}, \emph{plotly}\textsuperscript{\protect\hyperlink{ref-plotly}{110}} e \emph{corrplot}\textsuperscript{\protect\hyperlink{ref-corrplot}{111}} fornecem diversas funções para construção de gráficos tais como \href{https://www.rdocumentation.org/packages/ggplot2/versions/3.4.3/topics/ggplot}{\emph{ggplot}}, \href{https://www.rdocumentation.org/packages/plotly/versions/4.10.2/topics/plot_ly}{\emph{plot\_ly}} e \href{https://www.rdocumentation.org/packages/corrplot/versions/0.92/topics/corrplot}{\emph{corrplot}} respectivamente.
 
 \end{infobox}
 
@@ -2492,15 +2575,15 @@ Os pacotes \emph{ggplot2}\textsuperscript{\protect\hyperlink{ref-ggplot2}{106}},
 
 \begin{itemize}
 \item
-  Barras de erro ajudam ao autor a apresentar as informações que descrevem os dados (por exemplo, em uma análise descritiva) ou sobre as inferências ou conclusões tomadas a partir de dados.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{109}}
+  Barras de erro ajudam ao autor a apresentar as informações que descrevem os dados (por exemplo, em uma análise descritiva) ou sobre as inferências ou conclusões tomadas a partir de dados.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{112}}
 \item
-  Barras de erro mais longas representam mais imprecisão (maiores erros), enquanto barras mais curtas representam mais precisão na estimativa.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{109}}
+  Barras de erro mais longas representam mais imprecisão (maiores erros), enquanto barras mais curtas representam mais precisão na estimativa.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{112}}
 \item
-  Barras de erro descritivas geralmente apresentam a amplitude (mínimo-máximo) ou desvio-padrão.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{109}}
+  Barras de erro descritivas geralmente apresentam a amplitude (mínimo-máximo) ou desvio-padrão.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{112}}
 \item
-  Barras de erro inferenciais geralmente apresentam o erro-padrão ou intervalo de confiança (por exemplo, de 95\%).\textsuperscript{\protect\hyperlink{ref-Cumming2007}{109}}
+  Barras de erro inferenciais geralmente apresentam o erro-padrão ou intervalo de confiança (por exemplo, de 95\%).\textsuperscript{\protect\hyperlink{ref-Cumming2007}{112}}
 \item
-  O comprimento das barras de erro sugere graficamente a imprecisão dos dados do estudo, uma vez que o valor verdadeiro da população pode estar em qualquer nível do intervalo da barra.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{109}}
+  O comprimento das barras de erro sugere graficamente a imprecisão dos dados do estudo, uma vez que o valor verdadeiro da população pode estar em qualquer nível do intervalo da barra.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{112}}
 \end{itemize}
 
 \hypertarget{quais-suxe3o-as-boas-pruxe1ticas-na-elaborauxe7uxe3o-de-gruxe1ficos}{%
@@ -2508,30 +2591,30 @@ Os pacotes \emph{ggplot2}\textsuperscript{\protect\hyperlink{ref-ggplot2}{106}},
 
 \begin{itemize}
 \item
-  O tamanho da amostra total e subgrupos, se houver, deve estar descrito na figura ou na sua legenda.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{109}}
+  O tamanho da amostra total e subgrupos, se houver, deve estar descrito na figura ou na sua legenda.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{112}}
 \item
-  Para análise inferencial de figuras, as barras de erro representadas por erro-padrão ou intervalo de confiança são preferíveis à amplitude ou desvio-padrão.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{109}}
+  Para análise inferencial de figuras, as barras de erro representadas por erro-padrão ou intervalo de confiança são preferíveis à amplitude ou desvio-padrão.\textsuperscript{\protect\hyperlink{ref-Cumming2007}{112}}
 \item
-  Evite gráficos de barra e mostre a distribuição dos dados sempre que possível.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{110}}
+  Evite gráficos de barra e mostre a distribuição dos dados sempre que possível.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{113}}
 \item
-  Exiba os pontos de dados em boxplots.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{110}}
+  Exiba os pontos de dados em boxplots.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{113}}
 \item
-  Use \emph{jitter} simétrico em gráficos de pontos para permitir a visualização de todos os dados.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{110}}
+  Use \emph{jitter} simétrico em gráficos de pontos para permitir a visualização de todos os dados.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{113}}
 \item
-  Prefira palhetas de cor adaptadas para daltônicos.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{110}}
+  Prefira palhetas de cor adaptadas para daltônicos.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{113}}
 \end{itemize}
 
 \begin{infobox}{Rlogo}
 \textbf{Atenção!}
 
-O pacote \emph{ggsci}\textsuperscript{\protect\hyperlink{ref-ggsci}{111}} fornece palhetas de cores tais como \href{https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_lancet}{\emph{pal\_lancet}}, \href{https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_nejm}{\emph{pal\_nejm}} e \href{https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_npg}{\emph{pal\_npg}} inspiradas em publicações científicas para uso em gráficos.
+O pacote \emph{ggsci}\textsuperscript{\protect\hyperlink{ref-ggsci}{114}} fornece palhetas de cores tais como \href{https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_lancet}{\emph{pal\_lancet}}, \href{https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_nejm}{\emph{pal\_nejm}} e \href{https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_npg}{\emph{pal\_npg}} inspiradas em publicações científicas para uso em gráficos.
 
 \end{infobox}
 
 \begin{infobox}{Rlogo}
 \textbf{Atenção!}
 
-O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece a função \href{https://www.rdocumentation.org/packages/tiff/versions/0.1-11/topics/writeTIFF}{\emph{writeTIFF}} para exportar gráficos em formato TIFF.
+O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{115}} fornece a função \href{https://www.rdocumentation.org/packages/tiff/versions/0.1-11/topics/writeTIFF}{\emph{writeTIFF}} para exportar gráficos em formato TIFF.
 
 \end{infobox}
 
@@ -2547,7 +2630,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \begin{itemize}
 \tightlist
 \item
-  Hipótese científica é uma ideia que pode ser testada.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{113}}
+  Hipótese científica é uma ideia que pode ser testada.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{116}}
 \end{itemize}
 
 \hypertarget{quais-suxe3o-as-principais-fontes-de-ideias-para-gerar-hipuxf3teses-cientuxedficas}{%
@@ -2555,17 +2638,17 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Revisão das práticas atuais.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{114}}
+  Revisão das práticas atuais.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{117}}
 \item
-  Desafio a ideias aceitas.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{114}}
+  Desafio a ideias aceitas.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{117}}
 \item
-  Conflito entre ideias divergentes.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{114}}
+  Conflito entre ideias divergentes.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{117}}
 \item
-  Variações regionais, temporais e populacionais.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{114}}
+  Variações regionais, temporais e populacionais.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{117}}
 \item
-  Experiências dos próprios pesquisadores.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{114}}
+  Experiências dos próprios pesquisadores.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{117}}
 \item
-  Imaginação sem fronteiras ou limites convencionais.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{114}}
+  Imaginação sem fronteiras ou limites convencionais.\textsuperscript{\protect\hyperlink{ref-Vandenbroucke2018}{117}}
 \end{itemize}
 
 \hypertarget{erros-inferencia}{%
@@ -2576,13 +2659,13 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Teste (clássico) de significância da hipótese nula.\textsuperscript{\protect\hyperlink{ref-lakens2018}{115}}
+  Teste (clássico) de significância da hipótese nula.\textsuperscript{\protect\hyperlink{ref-lakens2018}{118}}
 \item
-  Teste de mínimos efeitos.\textsuperscript{\protect\hyperlink{ref-lakens2018}{115}}
+  Teste de mínimos efeitos.\textsuperscript{\protect\hyperlink{ref-lakens2018}{118}}
 \item
-  Teste de equivalência.\textsuperscript{\protect\hyperlink{ref-lakens2018}{115}}
+  Teste de equivalência.\textsuperscript{\protect\hyperlink{ref-lakens2018}{118}}
 \item
-  Teste de inferioridade.\textsuperscript{\protect\hyperlink{ref-lakens2018}{115}}
+  Teste de inferioridade.\textsuperscript{\protect\hyperlink{ref-lakens2018}{118}}
 \item
   Teste de não-inferioridade.{[}REF{]}
 \item
@@ -2599,7 +2682,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \item
   Na análise inferencial são utilizados dados da(s) amostra(s) para fazer uma inferência válida (isto é, estimativa) sobre os parâmetros populacionais desconhecidos.\textsuperscript{\protect\hyperlink{ref-vetter2017}{5}}
 \item
-  No paradigma de Jerzy Neyman e Egon Pearson, um teste de hipótese científica envolve a tomada de decisão sobre hipóteses nulas (\(H_{0}\)) e alternativa (\(H_{1}\)) concorrentes e mutuamente exclusivas.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{113}}
+  No paradigma de Jerzy Neyman e Egon Pearson, um teste de hipótese científica envolve a tomada de decisão sobre hipóteses nulas (\(H_{0}\)) e alternativa (\(H_{1}\)) concorrentes e mutuamente exclusivas.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{116}}
 \end{itemize}
 
 \hypertarget{o-que-uxe9-hipuxf3tese-nula}{%
@@ -2631,7 +2714,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \item
   Não se conclui sobre a hipótese alternativa (\(H_{1}\)).\textsuperscript{\protect\hyperlink{ref-kanji2006}{38}}
 \item
-  Para testar a hipótese nula, deve-se selecionar o nível de significância crítica (p-valor de corte); a probabilidade de rejeitarmos uma hipótese nula verdadeira (\(\alpha\)); e a probabilidade de não rejeitarmos uma hipótese nula falsa (\(\beta\)).\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{113}}
+  Para testar a hipótese nula, deve-se selecionar o nível de significância crítica (p-valor de corte); a probabilidade de rejeitarmos uma hipótese nula verdadeira (\(\alpha\)); e a probabilidade de não rejeitarmos uma hipótese nula falsa (\(\beta\)).\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{116}}
 \end{itemize}
 
 \hypertarget{o-que-reportar-apuxf3s-um-teste-de-hipuxf3tese}{%
@@ -2639,9 +2722,9 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  P-valores, como estimativa da significância estatística.\textsuperscript{\protect\hyperlink{ref-Sullivan2012}{116}}
+  P-valores, como estimativa da significância estatística.\textsuperscript{\protect\hyperlink{ref-Sullivan2012}{119}}
 \item
-  Tamanho do efeito, como estimativa de significância substantiva (clínica).\textsuperscript{\protect\hyperlink{ref-Sullivan2012}{116}}
+  Tamanho do efeito, como estimativa de significância substantiva (clínica).\textsuperscript{\protect\hyperlink{ref-Sullivan2012}{119}}
 \end{itemize}
 
 \hypertarget{erros-de-inferuxeancia}{%
@@ -2653,7 +2736,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \begin{itemize}
 \tightlist
 \item
-  Um erro de inferência é a tomada de decisão incorreta, seja a favor ou contra a hipótese nula.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{113}}
+  Um erro de inferência é a tomada de decisão incorreta, seja a favor ou contra a hipótese nula.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{116}}
 \end{itemize}
 
 \hypertarget{o-que-uxe9-erro-tipo-i}{%
@@ -2662,7 +2745,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \begin{itemize}
 \tightlist
 \item
-  Erro tipo I significa a rejeição de uma hipótese nula (\(H_{0}\)) quando esta é verdadeira.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{113}}
+  Erro tipo I significa a rejeição de uma hipótese nula (\(H_{0}\)) quando esta é verdadeira.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{116}}
 \end{itemize}
 
 \hypertarget{o-que-uxe9-erro-tipo-ii}{%
@@ -2671,7 +2754,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \begin{itemize}
 \tightlist
 \item
-  Erro tipo II significa a não rejeição de uma hipótese nula (\(H_{0}\)) quando esta é falsa.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{113}}
+  Erro tipo II significa a não rejeição de uma hipótese nula (\(H_{0}\)) quando esta é falsa.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{116}}
 \end{itemize}
 
 \hypertarget{o-que-uxe9-poder-do-teste}{%
@@ -2679,9 +2762,9 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Poder do teste é a probabilidade de rejeitar a hipótese nula (\(H_{0}\)) quando esta é falsa.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{113}}
+  Poder do teste é a probabilidade de rejeitar a hipótese nula (\(H_{0}\)) quando esta é falsa.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{116}}
 \item
-  Poder do teste pode ser calculado como (\(1 - \beta\)).\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{113}}
+  Poder do teste pode ser calculado como (\(1 - \beta\)).\textsuperscript{\protect\hyperlink{ref-Curran-Everett2009}{116}}
 \end{itemize}
 
 \hypertarget{qual-a-relauxe7uxe3o-entre-os-erros-tipo-i-e-ii}{%
@@ -2702,7 +2785,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \begin{itemize}
 \tightlist
 \item
-  Tamanho do efeito quantifica a magnitude de um efeito real da análise, expressando uma importância descritiva dos resultados.\textsuperscript{\protect\hyperlink{ref-Kim2015}{117}}
+  Tamanho do efeito quantifica a magnitude de um efeito real da análise, expressando uma importância descritiva dos resultados.\textsuperscript{\protect\hyperlink{ref-Kim2015}{120}}
 \end{itemize}
 
 \hypertarget{como-interpretar-um-tamanho-do-efeito}{%
@@ -2711,7 +2794,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \begin{itemize}
 \tightlist
 \item
-  Tamanhos de efeito podem ser comparadores entre diferentes estudos.\textsuperscript{\protect\hyperlink{ref-Sullivan2012}{116}}
+  Tamanhos de efeito podem ser comparadores entre diferentes estudos.\textsuperscript{\protect\hyperlink{ref-Sullivan2012}{119}}
 \end{itemize}
 
 \hypertarget{quais-suxe3o-os-tipos-de-tamanho-do-efeito}{%
@@ -2719,7 +2802,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Diferenças padronizadas entre grupos:\textsuperscript{\protect\hyperlink{ref-Sullivan2012}{116},\protect\hyperlink{ref-Kim2015}{117}}
+  Diferenças padronizadas entre grupos:\textsuperscript{\protect\hyperlink{ref-Sullivan2012}{119},\protect\hyperlink{ref-Kim2015}{120}}
 
   \begin{itemize}
   \item
@@ -2732,7 +2815,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
     Risco relativo ou razão de risco (\(RR\))
   \end{itemize}
 \item
-  Medidas de associação:\textsuperscript{\protect\hyperlink{ref-Sullivan2012}{116},\protect\hyperlink{ref-Kim2015}{117}}
+  Medidas de associação:\textsuperscript{\protect\hyperlink{ref-Sullivan2012}{119},\protect\hyperlink{ref-Kim2015}{120}}
 
   \begin{itemize}
   \item
@@ -2748,7 +2831,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \begin{itemize}
 \tightlist
 \item
-  .\textsuperscript{\protect\hyperlink{ref-Kim2015}{117}}
+  .\textsuperscript{\protect\hyperlink{ref-Kim2015}{120}}
 \end{itemize}
 
 \hypertarget{p-valor}{%
@@ -2849,13 +2932,13 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Os valores de correlação estão no intervalo \([-1; 1]\).\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+  Os valores de correlação estão no intervalo \([-1; 1]\).\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 \item
-  Valores de correlação positivos representam uma relação direta entre as variáveis, tal que valores maiores de uma variável estão associados a valores maiores de outra variável.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+  Valores de correlação positivos representam uma relação direta entre as variáveis, tal que valores maiores de uma variável estão associados a valores maiores de outra variável.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 \item
-  Valores de correlação negativos representam uma relação indireta (ou inversa) entre as variáveis, tal que valores maiores (menores) de uma variável estão associados a valores maiores (menores) de outra variável.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+  Valores de correlação negativos representam uma relação indireta (ou inversa) entre as variáveis, tal que valores maiores (menores) de uma variável estão associados a valores maiores (menores) de outra variável.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 \item
-  Valores de correlação próximos de \(0\) representam a inexistência de relação entre as variáveis.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+  Valores de correlação próximos de \(0\) representam a inexistência de relação entre as variáveis.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 \end{itemize}
 
 \hypertarget{quais-precauuxe7uxf5es-devem-ser-tomadas-na-interpretauxe7uxe3o-de-medidas-de-correlauxe7uxe3o}{%
@@ -2863,9 +2946,9 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação causa-efeito entre as variáveis.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118}}
+  Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação causa-efeito entre as variáveis.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121}}
 \item
-  Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação de concordância ou confiabilidade entre as variáveis.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118}}
+  Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação de concordância ou confiabilidade entre as variáveis.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121}}
 \end{itemize}
 
 \hypertarget{quais-testes-podem-ser-usados-para-anuxe1lises-de-correlauxe7uxe3o}{%
@@ -2873,15 +2956,15 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Coeficiente de correlação de Pearson (\(r\)).\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+  Coeficiente de correlação de Pearson (\(r\)).\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 
   \begin{itemize}
   \item
-    O coeficiente de correlação de Pearson (\(r\)) avalia a força e direção da relação linear entre duas variáveis quantitativas.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    O coeficiente de correlação de Pearson (\(r\)) avalia a força e direção da relação linear entre duas variáveis quantitativas.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
   \item
-    Tipo: paramétrico.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    Tipo: paramétrico.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
   \item
-    Hipóteses:\textsuperscript{\protect\hyperlink{ref-allison2022}{119}}
+    Hipóteses:\textsuperscript{\protect\hyperlink{ref-allison2022}{122}}
 
     \begin{itemize}
     \item
@@ -2890,7 +2973,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
       Alternativa (\(H_{1}\)): \(r≠0\)
     \end{itemize}
   \item
-    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 
     \begin{itemize}
     \tightlist
@@ -2900,19 +2983,24 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
   \end{itemize}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornece a função \emph{cor.test} para calcular o coeficiente de correlação de Pearson (\(r\)). \href{https://rdocumentation.org/packages/stats/versions/3.6.2}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornece a função fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test}{\emph{cor.test}} para calcular o coeficiente de correlação de Pearson (\(r\)).
+
+\end{infobox}
 
 \begin{itemize}
 \item
-  Coeficiente de correlação ponto-bisserial (\(r_{s}\)).\textsuperscript{\protect\hyperlink{ref-khamis2008}{118}}
+  Coeficiente de correlação ponto-bisserial (\(r_{s}\)).\textsuperscript{\protect\hyperlink{ref-khamis2008}{121}}
 
   \begin{itemize}
   \item
-    O coeficiente de correlação ponto-bisserial (\(r_{s}\)) avalia a força e direção da relação linear entre uma variável quantitativa e outra dicotômica.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118}}
+    O coeficiente de correlação ponto-bisserial (\(r_{s}\)) avalia a força e direção da relação linear entre uma variável quantitativa e outra dicotômica.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121}}
   \item
-    Tipo: paramétrico.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118}}
+    Tipo: paramétrico.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121}}
   \item
-    Hipóteses:\textsuperscript{\protect\hyperlink{ref-khamis2008}{118}}
+    Hipóteses:\textsuperscript{\protect\hyperlink{ref-khamis2008}{121}}
 
     \begin{itemize}
     \item
@@ -2921,7 +3009,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
       Alternativa (\(H_{1}\)): \(r_{s}≠0\)
     \end{itemize}
   \item
-    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-khamis2008}{118}}
+    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-khamis2008}{121}}
 
     \begin{itemize}
     \tightlist
@@ -2931,21 +3019,26 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
   \end{itemize}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornece a função \emph{cor.test} para calcular o coeficiente de correlação ponto-bisserial (\(r_{s}\)). \href{https://rdocumentation.org/packages/stats/versions/3.6.2}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornece a função fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test}{\emph{cor.test}} para calcular o coeficiente de correlação ponto-bisserial (\(r_{s}\)).
+
+\end{infobox}
 
 \begin{itemize}
 \item
-  Coeficiente de correlação de Spearman (\(\rho\)).\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+  Coeficiente de correlação de Spearman (\(\rho\)).\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 
   \begin{itemize}
   \item
-    O coeficiente de correlação de Spearman (\(\rho\)) avalia a força e direção da relação monotônica entre duas variáveis quantitativas.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    O coeficiente de correlação de Spearman (\(\rho\)) avalia a força e direção da relação monotônica entre duas variáveis quantitativas.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
   \item
-    O coeficiente de correlação de Spearman (\(\rho\)) pode ser também definida como a correlação de Pearson (\(r\)) entre as classificações (\emph{ranks}) das duas variáveis quantitativas.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    O coeficiente de correlação de Spearman (\(\rho\)) pode ser também definida como a correlação de Pearson (\(r\)) entre as classificações (\emph{ranks}) das duas variáveis quantitativas.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
   \item
-    Tipo: não-paramétrico.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    Tipo: não-paramétrico.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
   \item
-    Hipóteses:\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    Hipóteses:\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 
     \begin{itemize}
     \item
@@ -2954,7 +3047,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
       Alternativa (\(H_{1}\)): \(\rho≠0\)
     \end{itemize}
   \item
-    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 
     \begin{itemize}
     \tightlist
@@ -2964,7 +3057,12 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
   \end{itemize}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornece a função \emph{cor.test} para calcular o coeficiente de correlação de Spearman \(\rho\). \href{https://rdocumentation.org/packages/stats/versions/3.6.2}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornece a função fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test}{\emph{cor.test}} para calcular o coeficiente de correlação de Spearman (\(\rho\)).
+
+\end{infobox}
 
 \hypertarget{analise-inferencial-associacao}{%
 \chapter{\texorpdfstring{\textbf{Associação}}{Associação}}\label{analise-inferencial-associacao}}
@@ -2998,17 +3096,17 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Teste Qui-quadrado (\(\chi^2\)).\textsuperscript{\protect\hyperlink{ref-McHugh2013}{120},\protect\hyperlink{ref-Kim2017a}{121}}
+  Teste Qui-quadrado (\(\chi^2\)).\textsuperscript{\protect\hyperlink{ref-McHugh2013}{123},\protect\hyperlink{ref-Kim2017a}{124}}
 
   \begin{itemize}
   \item
-    O teste qui-quadrado (\(\chi^2\)) avalia uma hipótese global se a relação entre duas variáveis e/ou fatores é independente ou associada.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{121}}
+    O teste qui-quadrado (\(\chi^2\)) avalia uma hipótese global se a relação entre duas variáveis e/ou fatores é independente ou associada.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{124}}
   \item
-    O teste qui-quadrado é utilizado para comparar a distribuição de uma variável categórica em uma amostra ou grupo com a distribuição em outro. Se a distribuição da variável categórica não for muito diferente nos diferentes grupos, pode-se concluir que a distribuição da variável categórica não está relacionada com a variável dos grupos. Pode-se também concluir que a variável categórica e os grupos são independentes.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{121}}
+    O teste qui-quadrado é utilizado para comparar a distribuição de uma variável categórica em uma amostra ou grupo com a distribuição em outro. Se a distribuição da variável categórica não for muito diferente nos diferentes grupos, pode-se concluir que a distribuição da variável categórica não está relacionada com a variável dos grupos. Pode-se também concluir que a variável categórica e os grupos são independentes.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{124}}
   \item
-    Tipo: não paramétrico.\textsuperscript{\protect\hyperlink{ref-McHugh2013}{120},\protect\hyperlink{ref-Kim2017a}{121}}
+    Tipo: não paramétrico.\textsuperscript{\protect\hyperlink{ref-McHugh2013}{123},\protect\hyperlink{ref-Kim2017a}{124}}
   \item
-    Suposições:\textsuperscript{\protect\hyperlink{ref-McHugh2013}{120},\protect\hyperlink{ref-Kim2017a}{121}}
+    Suposições:\textsuperscript{\protect\hyperlink{ref-McHugh2013}{123},\protect\hyperlink{ref-Kim2017a}{124}}
 
     \begin{itemize}
     \item
@@ -3023,7 +3121,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
       Nenhuma célula com frequência esperada \textless{} 1.
     \end{itemize}
   \item
-    Hipóteses:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{121}}
+    Hipóteses:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{124}}
 
     \begin{itemize}
     \item
@@ -3032,7 +3130,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
       Alternativa (\(H_{1}\)): não independente (associação)
     \end{itemize}
   \item
-    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{121}}
+    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-Kim2017a}{124}}
 
     \begin{itemize}
     \item
@@ -3045,17 +3143,22 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
   \end{itemize}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{gtsummary}\textsuperscript{\protect\hyperlink{ref-gtsummary}{122}} fornece a função \emph{tbl\_cross} para criar uma tabela NxM. \href{https://cran.r-project.org/web/packages/gtsummary/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{gtsummary}\textsuperscript{\protect\hyperlink{ref-gtsummary}{125}} fornece a função \href{https://www.rdocumentation.org/packages/gtsummary/versions/1.6.3/topics/tbl_cross}{\emph{tbl\_cross}} para criar uma tabela NxM.
+
+\end{infobox}
 
 \begin{itemize}
 \item
-  Teste Exato de Fisher (\(\chi^2\)).\textsuperscript{\protect\hyperlink{ref-McHugh2013}{120},\protect\hyperlink{ref-Kim2017a}{121}}
+  Teste Exato de Fisher (\(\chi^2\)).\textsuperscript{\protect\hyperlink{ref-McHugh2013}{123},\protect\hyperlink{ref-Kim2017a}{124}}
 
   \begin{itemize}
   \item
-    O teste exato de Fisher avalia a hipótese nula de independência aplicando a distribuição hipergeométrica dos números nas células da tabela.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{121}}
+    O teste exato de Fisher avalia a hipótese nula de independência aplicando a distribuição hipergeométrica dos números nas células da tabela.\textsuperscript{\protect\hyperlink{ref-Kim2017a}{124}}
   \item
-    Hipóteses:\textsuperscript{\protect\hyperlink{ref-McHugh2013}{120},\protect\hyperlink{ref-Kim2017a}{121}}
+    Hipóteses:\textsuperscript{\protect\hyperlink{ref-McHugh2013}{123},\protect\hyperlink{ref-Kim2017a}{124}}
 
     \begin{itemize}
     \item
@@ -3064,7 +3167,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
       Alternativa (\(H_{1}\)): não independente (associação)
     \end{itemize}
   \item
-    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-McHugh2013}{120},\protect\hyperlink{ref-Kim2017a}{121}}
+    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-McHugh2013}{123},\protect\hyperlink{ref-Kim2017a}{124}}
 
     \begin{itemize}
     \item
@@ -3077,21 +3180,26 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
   \end{itemize}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{gtsummary}\textsuperscript{\protect\hyperlink{ref-gtsummary}{122}} fornece a função \emph{tbl\_cross} para criar uma tabela NxM. \href{https://cran.r-project.org/web/packages/gtsummary/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{gtsummary}\textsuperscript{\protect\hyperlink{ref-gtsummary}{125}} fornece a função \href{https://www.rdocumentation.org/packages/gtsummary/versions/1.6.3/topics/tbl_cross}{\emph{tbl\_cross}} para criar uma tabela NxM.
+
+\end{infobox}
 
 \begin{itemize}
 \item
-  Kendall \(\tau\).\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+  Kendall \(\tau\).\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 
   \begin{itemize}
   \item
-    O coeficiente Kendall \(\tau\) avalia a força e direção da relação monotônica entre duas variáveis quantitativas ou qualitativas.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    O coeficiente Kendall \(\tau\) avalia a força e direção da relação monotônica entre duas variáveis quantitativas ou qualitativas.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
   \item
-    O coeficiente Kendall \(\tau\) é definido como a porporção de todos os pares concordantes menos a proporção de todos os pares discordantes.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    O coeficiente Kendall \(\tau\) é definido como a porporção de todos os pares concordantes menos a proporção de todos os pares discordantes.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
   \item
-    Tipo: não-paramétrico.\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    Tipo: não-paramétrico.\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
   \item
-    Hipóteses:\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    Hipóteses:\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 
     \begin{itemize}
     \item
@@ -3100,7 +3208,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
       Alternativa (\(H_{1}\)): \(\tau≠0\)
     \end{itemize}
   \item
-    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-khamis2008}{118},\protect\hyperlink{ref-allison2022}{119}}
+    Tamanho do efeito:\textsuperscript{\protect\hyperlink{ref-khamis2008}{121},\protect\hyperlink{ref-allison2022}{122}}
 
     \begin{itemize}
     \tightlist
@@ -3110,7 +3218,12 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
   \end{itemize}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornece a função \emph{cor.test} para calcular o coeficiente Kendall \(\tau\) \href{https://rdocumentation.org/packages/stats/versions/3.6.2}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{3}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test}{\emph{cor.test}} para calcular o coeficiente Kendall \(\tau\).
+
+\end{infobox}
 
 \hypertarget{analise-inferencial-regressao}{%
 \chapter{\texorpdfstring{\textbf{Regressão}}{Regressão}}\label{analise-inferencial-regressao}}
@@ -3132,14 +3245,19 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Variáveis fictícias (\emph{dummy}) compreendem variáveis criadas para introduzir, nos modelos de regressão, informações contidas em outras variáveis que não podem ser medidas em escala numérica.\textsuperscript{\protect\hyperlink{ref-suits1957}{123}}
+  Variáveis fictícias (\emph{dummy}) compreendem variáveis criadas para introduzir, nos modelos de regressão, informações contidas em outras variáveis que não podem ser medidas em escala numérica.\textsuperscript{\protect\hyperlink{ref-suits1957}{126}}
 \item
-  Variáveis categóricas nominais, com 2 ou mais níveis, devem ser subdivididas em variáveis fictícias dicotômicas para ser usada em modelos de regressão.\textsuperscript{\protect\hyperlink{ref-Healy1995}{124}}
+  Variáveis categóricas nominais, com 2 ou mais níveis, devem ser subdivididas em variáveis fictícias dicotômicas para ser usada em modelos de regressão.\textsuperscript{\protect\hyperlink{ref-Healy1995}{127}}
 \item
-  Cada nível da variável categórica nominal será convertido em uma nova variável fictícias dicotômica, tal que a nova variável dicotômica assume valor 1 para a presença do nível correspondente e 0 em qualquer outro caso.\textsuperscript{\protect\hyperlink{ref-Healy1995}{124}}
+  Cada nível da variável categórica nominal será convertido em uma nova variável fictícias dicotômica, tal que a nova variável dicotômica assume valor 1 para a presença do nível correspondente e 0 em qualquer outro caso.\textsuperscript{\protect\hyperlink{ref-Healy1995}{127}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{fastDummies}\textsuperscript{\protect\hyperlink{ref-fastDummies}{125}} fornece a funçãao \emph{dummy\_cols} para preparar as variáveis categóricas fictícias para análise de regressão. \href{https://cran.r-project.org/web/packages/fastDummies/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{fastDummies}\textsuperscript{\protect\hyperlink{ref-fastDummies}{128}} fornece a funçãao \href{https://www.rdocumentation.org/packages/fastDummies/versions/1.7.3/topics/dummy_columns}{\emph{dummy\_cols}} para preparar as variáveis categóricas fictícias para análise de regressão.
+
+\end{infobox}
 
 \hypertarget{multivariavel-multivariada}{%
 \section{Regressão simples, multivariável e multivariada}\label{multivariavel-multivariada}}
@@ -3149,14 +3267,19 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  A análise de regressão simples consiste em modelos estatísticos com 1 variável dependente (desfecho) e 1 variável independente (preditor).\textsuperscript{\protect\hyperlink{ref-Hidalgo2013}{126}}
+  A análise de regressão simples consiste em modelos estatísticos com 1 variável dependente (desfecho) e 1 variável independente (preditor).\textsuperscript{\protect\hyperlink{ref-Hidalgo2013}{129}}
 \item
-  A análise multivariável (ou múltiplo) consiste em modelos estatísticos com 1 variável dependente (desfecho) e duas ou mais variáveis independentes.\textsuperscript{\protect\hyperlink{ref-Hidalgo2013}{126}}
+  A análise multivariável (ou múltiplo) consiste em modelos estatísticos com 1 variável dependente (desfecho) e duas ou mais variáveis independentes.\textsuperscript{\protect\hyperlink{ref-Hidalgo2013}{129}}
 \item
-  A análise multivariada consiste em modelos estatísticos com 2 ou mais variáveis dependente (desfechos) e duas ou mais variáveis independentes.\textsuperscript{\protect\hyperlink{ref-Hidalgo2013}{126}}
+  A análise multivariada consiste em modelos estatísticos com 2 ou mais variáveis dependente (desfechos) e duas ou mais variáveis independentes.\textsuperscript{\protect\hyperlink{ref-Hidalgo2013}{129}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{modelsummary}\textsuperscript{\protect\hyperlink{ref-modelsummary}{127}} fornece as funções \emph{modelsummary} e \emph{modelplot} para gerar tabelas e gráficos de coeficientes de regressão. \href{https://cloud.r-project.org/web/packages/modelsummary/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
+
+O pacote \emph{modelsummary}\textsuperscript{\protect\hyperlink{ref-modelsummary}{130}} fornece as funções \href{https://www.rdocumentation.org/packages/modelsummary/versions/1.4.1/topics/modelsummary}{\emph{modelsummary}} e \href{https://www.rdocumentation.org/packages/modelsummary/versions/1.4.1/topics/modelplot}{\emph{modelplot}} para gerar tabelas e gráficos de coeficientes de regressão.
+
+\end{infobox}
 
 \hypertarget{quais-testes-podem-ser-usados-em-anuxe1lise-de-associauxe7uxe3o-multivariuxe1vel}{%
 \subsection{Quais testes podem ser usados em análise de associação multivariável?}\label{quais-testes-podem-ser-usados-em-anuxe1lise-de-associauxe7uxe3o-multivariuxe1vel}}
@@ -3230,7 +3353,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-Baron1986}{128}}
+  .\textsuperscript{\protect\hyperlink{ref-Baron1986}{131}}
 \item
   .\textsuperscript{\protect\hyperlink{ref-Bours2023}{75}}
 \end{itemize}
@@ -3240,7 +3363,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-Baron1986}{128}}
+  .\textsuperscript{\protect\hyperlink{ref-Baron1986}{131}}
 \item
   .\textsuperscript{\protect\hyperlink{ref-Bours2023}{75}}
 \end{itemize}
@@ -3250,7 +3373,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-Baron1986}{128}}
+  .\textsuperscript{\protect\hyperlink{ref-Baron1986}{131}}
 \item
   .\textsuperscript{\protect\hyperlink{ref-Bours2023}{75}}
 \end{itemize}
@@ -3260,7 +3383,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-Baron1986}{128}}
+  .\textsuperscript{\protect\hyperlink{ref-Baron1986}{131}}
 \item
   .\textsuperscript{\protect\hyperlink{ref-Bours2023}{75}}
 \end{itemize}
@@ -3270,7 +3393,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  .\textsuperscript{\protect\hyperlink{ref-Baron1986}{128}}
+  .\textsuperscript{\protect\hyperlink{ref-Baron1986}{131}}
 \item
   .\textsuperscript{\protect\hyperlink{ref-Bours2023}{75}}
 \end{itemize}
@@ -3283,9 +3406,9 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Seleção bivariada de variáveis - isto é, aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável - é um dos erros mais comuns na literatura.\textsuperscript{\protect\hyperlink{ref-Dales1978}{129},\protect\hyperlink{ref-Sun1996}{130}}
+  Seleção bivariada de variáveis - isto é, aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável - é um dos erros mais comuns na literatura.\textsuperscript{\protect\hyperlink{ref-Dales1978}{132},\protect\hyperlink{ref-Sun1996}{133}}
 \item
-  A seleção bivariada de variáveis torna o modelo mais suscetível a otimismo no ajuste se as variáveis de confundimento não são adequadamente controladas.\textsuperscript{\protect\hyperlink{ref-Dales1978}{129},\protect\hyperlink{ref-Sun1996}{130}}
+  A seleção bivariada de variáveis torna o modelo mais suscetível a otimismo no ajuste se as variáveis de confundimento não são adequadamente controladas.\textsuperscript{\protect\hyperlink{ref-Dales1978}{132},\protect\hyperlink{ref-Sun1996}{133}}
 \end{itemize}
 
 \hypertarget{por-que-muxe9todos-de-regressuxe3o-gradual-nuxe3o-suxe3o-recomendados-para-seleuxe7uxe3o-de-variuxe1veis-em-modelos-de-regressuxe3o-multivariuxe1vel}{%
@@ -3293,11 +3416,11 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Métodos diferentes de regressão gradual podem produzir diferentes seleções de variáveis de um mesmo banco de dados.\textsuperscript{\protect\hyperlink{ref-Healy1995}{124}}
+  Métodos diferentes de regressão gradual podem produzir diferentes seleções de variáveis de um mesmo banco de dados.\textsuperscript{\protect\hyperlink{ref-Healy1995}{127}}
 \item
-  Nenhum método de regressão gradual garante a seleção ótima de variáveis de um banco de dados.\textsuperscript{\protect\hyperlink{ref-Healy1995}{124}}
+  Nenhum método de regressão gradual garante a seleção ótima de variáveis de um banco de dados.\textsuperscript{\protect\hyperlink{ref-Healy1995}{127}}
 \item
-  As regras de término da regressão baseadas em p-valor tendem a ser arbitrárias.\textsuperscript{\protect\hyperlink{ref-Healy1995}{124}}
+  As regras de término da regressão baseadas em p-valor tendem a ser arbitrárias.\textsuperscript{\protect\hyperlink{ref-Healy1995}{127}}
 \end{itemize}
 
 \hypertarget{o-que-pode-ser-feito-para-reduzir-o-nuxfamero-de-variuxe1veis-candidatas-em-modelos-de-regressuxe3o-multivariuxe1vel}{%
@@ -3305,13 +3428,13 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Verifique a existência de multicolinearidade entre as variáveis candidatas.\textsuperscript{\protect\hyperlink{ref-Sun1996}{130}}
+  Verifique a existência de multicolinearidade entre as variáveis candidatas.\textsuperscript{\protect\hyperlink{ref-Sun1996}{133}}
 \item
-  Em caso de uma proporção baixa entre o número de participantes e de variáveis, use o conhecimento prévio da literatura para selecionar um pequeno conjunto de variáveis candidatas.\textsuperscript{\protect\hyperlink{ref-Sun1996}{130}}
+  Em caso de uma proporção baixa entre o número de participantes e de variáveis, use o conhecimento prévio da literatura para selecionar um pequeno conjunto de variáveis candidatas.\textsuperscript{\protect\hyperlink{ref-Sun1996}{133}}
 \item
-  Colapse categorias com contagem nula (células com valor igual a 0) de variáveis candidatas.\textsuperscript{\protect\hyperlink{ref-Sun1996}{130}}
+  Colapse categorias com contagem nula (células com valor igual a 0) de variáveis candidatas.\textsuperscript{\protect\hyperlink{ref-Sun1996}{133}}
 \item
-  Use simulações de dados para identificar qual(is) variável(is) está(ão) causando problemas de convergência do ajuste do modelo.\textsuperscript{\protect\hyperlink{ref-Sun1996}{130}}
+  Use simulações de dados para identificar qual(is) variável(is) está(ão) causando problemas de convergência do ajuste do modelo.\textsuperscript{\protect\hyperlink{ref-Sun1996}{133}}
 \end{itemize}
 
 \hypertarget{analise-redes}{%
@@ -3330,7 +3453,7 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \end{itemize}
 
 \hypertarget{paradoxos-estatisticos}{%
-\chapter{\texorpdfstring{\textbf{Paradoxos estatísticos}}{Paradoxos estatísticos}}\label{paradoxos-estatisticos}}
+\chapter{\texorpdfstring{\textbf{Paradoxos e falácias}}{Paradoxos e falácias}}\label{paradoxos-estatisticos}}
 
 \hypertarget{paradoxos}{%
 \section{Paradoxos estatísticos}\label{paradoxos}}
@@ -3342,6 +3465,141 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \tightlist
 \item
   .{[}REF{]}
+\end{itemize}
+
+\hypertarget{abelson}{%
+\section{Paradoxo de Abelson}\label{abelson}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-abelson1985}{134}}
+\end{itemize}
+
+\hypertarget{Berkson}{%
+\section{Paradoxo de Berkson}\label{Berkson}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-berkson1946}{135}}
+\end{itemize}
+
+\hypertarget{ellsberg}{%
+\section{Paradoxo de Ellsberg}\label{ellsberg}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-ellsberg1961}{136}}
+\end{itemize}
+
+\hypertarget{freedman}{%
+\section{Paradoxo de Freedman}\label{freedman}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-freedman1983}{137},\protect\hyperlink{ref-freedman1989}{138}}
+\end{itemize}
+
+\hypertarget{hand}{%
+\section{Paradoxo de Hand}\label{hand}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-hand1992}{139}}
+\end{itemize}
+
+\hypertarget{lindley}{%
+\section{Paradoxo de Lindley}\label{lindley}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-lindley1957}{140}}
+\end{itemize}
+
+\hypertarget{lord}{%
+\section{Paradoxo de Lord}\label{lord}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-lord1967}{141},\protect\hyperlink{ref-lord1969}{142}}
+\end{itemize}
+
+\hypertarget{proebsting}{%
+\section{Paradoxo de Proebsting}\label{proebsting}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{simpson}{%
+\section{Paradoxo de Simpson}\label{simpson}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-simpson1951}{143},\protect\hyperlink{ref-blyth1972}{144}}
+\end{itemize}
+
+\hypertarget{stein}{%
+\section{Paradoxo de Stein}\label{stein}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-stein1956}{145}}
+\end{itemize}
+
+\hypertarget{okie}{%
+\section{Paradoxo de Okie}\label{okie}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{acuracia}{%
+\section{Paradoxo da acurácia}\label{acuracia}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{elevador}{%
+\section{Paradoxo do elevador}\label{elevador}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-de1996}{146}}
+\end{itemize}
+
+\hypertarget{falso-positivo}{%
+\section{Paradoxo do falso positivo}\label{falso-positivo}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
+\end{itemize}
+
+\hypertarget{amizade}{%
+\section{Paradoxo da amizade}\label{amizade}}
+
+\begin{itemize}
+\tightlist
+\item
+  .\textsuperscript{\protect\hyperlink{ref-feld1991}{147}}
 \end{itemize}
 
 \hypertarget{testes-estatisticos}{%
@@ -3746,9 +4004,9 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  R é um programa de computador com linguagem computacional direcionada para análise estatística.\textsuperscript{\protect\hyperlink{ref-ihaka1996}{131}}
+  R é um programa de computador com linguagem computacional direcionada para análise estatística.\textsuperscript{\protect\hyperlink{ref-ihaka1996}{148}}
 \item
-  \href{https://cran.rstudio.com/}{R version 4.3.1 (2023-06-16)}.\textsuperscript{\protect\hyperlink{ref-ihaka1996}{131}}
+  \href{https://cran.rstudio.com/}{R version 4.3.1 (2023-06-16)}.\textsuperscript{\protect\hyperlink{ref-ihaka1996}{148}}
 \end{itemize}
 
 \hypertarget{o-que-suxe3o-scripts}{%
@@ -3765,19 +4023,19 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Use nomes consistentes para as variáveis.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{132}}
+  Use nomes consistentes para as variáveis.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{149}}
 \item
-  Defina os tipos de variáveis adequadamente no banco de dados.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{132}}
+  Defina os tipos de variáveis adequadamente no banco de dados.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{149}}
 \item
-  Defina constantes - isto é, variáveis de valor fixo - ao invés de digitar valores.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{132}}
+  Defina constantes - isto é, variáveis de valor fixo - ao invés de digitar valores.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{149}}
 \item
-  Use e cite os pacotes disponíveis para suas análises.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{132}}
+  Use e cite os pacotes disponíveis para suas análises.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{149}}
 \item
-  Controle as versões do script.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{132},\protect\hyperlink{ref-Eglen2017}{133}}
+  Controle as versões do script.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{149},\protect\hyperlink{ref-Eglen2017}{150}}
 \item
-  Teste o script antes de sua utilização.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{132}}
+  Teste o script antes de sua utilização.\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{149}}
 \item
-  Conduza revisão por pares do código durante a redação (digitação em dupla).\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{132}}
+  Conduza revisão por pares do código durante a redação (digitação em dupla).\textsuperscript{\protect\hyperlink{ref-SchwabSimon2021}{149}}
 \end{itemize}
 
 \hypertarget{o-que-pode-ser-compartilhado}{%
@@ -3785,9 +4043,9 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Idealmente, todos os scripts, pacotes/bibliotecas e dados necessários para outros reproduzirem seus dados.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{133}}
+  Idealmente, todos os scripts, pacotes/bibliotecas e dados necessários para outros reproduzirem seus dados.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{150}}
 \item
-  Minimamente, partes importantes incluindo implementações de novos algoritmos e dados que permitam reproduzir um resultado importante.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{133}}
+  Minimamente, partes importantes incluindo implementações de novos algoritmos e dados que permitam reproduzir um resultado importante.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{150}}
 \end{itemize}
 
 \hypertarget{como-preparar-os-scripts-para-compartilhamento}{%
@@ -3795,18 +4053,21 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Crie links persistentes para versões do seu script.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{133}}
+  Crie links persistentes para versões do seu script.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{150}}
 \item
-  Escolha uma licença apropriada para garantir como outros usarão seus scripts.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{133}}
+  Escolha uma licença apropriada para garantir como outros usarão seus scripts.\textsuperscript{\protect\hyperlink{ref-Eglen2017}{150}}
 \item
-  Providencie a documentação sobre seu script (ex.: arquivos \emph{README}).\textsuperscript{\protect\hyperlink{ref-Eglen2017}{133}}
+  Providencie a documentação sobre seu script (ex.: arquivos \emph{README}).\textsuperscript{\protect\hyperlink{ref-Eglen2017}{150}}
 \item
-  Compartilhar todos os pacotes relacionados à sua análise.\textsuperscript{\protect\hyperlink{ref-Zhao2023}{134}}
+  Compartilhar todos os pacotes relacionados à sua análise.\textsuperscript{\protect\hyperlink{ref-Zhao2023}{151}}
 \end{itemize}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{formatR}\textsuperscript{\protect\hyperlink{ref-formatR}{135}} fornece funções para formatar um ou mais scripts. \href{https://cran.r-project.org/web/packages/formatR/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+\begin{infobox}{Rlogo}
+\textbf{Atenção!}
 
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{pkglite}\textsuperscript{\protect\hyperlink{ref-pkglite}{136}} permite submeter documentos eletrônicos com todos os pacotes necessários. \href{https://cran.rstudio.com/web/packages/pkglite/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
+O pacote \emph{formatR}\textsuperscript{\protect\hyperlink{ref-formatR}{152}} fornece a função \href{https://www.rdocumentation.org/packages/formatR/versions/1.14/topics/tidy_source}{\emph{tidy\_source}} para formatar um R script.
+
+\end{infobox}
 
 \hypertarget{que-programas-de-computador-gratuitos-podem-ser-usados-para-anuxe1lise-estatuxedstica-com-r}{%
 \subsection{Que programas de computador gratuitos podem ser usados para análise estatística com R?}\label{que-programas-de-computador-gratuitos-podem-ser-usados-para-anuxe1lise-estatuxedstica-com-r}}
@@ -3815,9 +4076,21 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \item
   \href{https://posit.co/downloads/}{RStudio}
 \item
-  \href{https://jasp-stats.org}{JASP}.\textsuperscript{\protect\hyperlink{ref-love2019}{137}}
+  \href{https://jasp-stats.org}{JASP}.\textsuperscript{\protect\hyperlink{ref-love2019}{153}}
 \item
-  \href{https://www.jamovi.org}{jamovi}.\textsuperscript{\protect\hyperlink{ref-sahin2020}{138}}
+  \href{https://www.jamovi.org}{jamovi}.\textsuperscript{\protect\hyperlink{ref-sahin2020}{154}}
+\end{itemize}
+
+\hypertarget{manuscritos-reprodutiveis}{%
+\section{Manuscritos reprodutíveis}\label{manuscritos-reprodutiveis}}
+
+\hypertarget{o-que-suxe3o-manuscritos-reprodutuxedveis}{%
+\subsection{O que são manuscritos reprodutíveis?}\label{o-que-suxe3o-manuscritos-reprodutuxedveis}}
+
+\begin{itemize}
+\tightlist
+\item
+  .{[}REF{]}
 \end{itemize}
 
 \hypertarget{simulacao-computacional}{%
@@ -3838,55 +4111,52 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \hypertarget{redacao}{%
 \chapter{\texorpdfstring{\textbf{Redação estatística}}{Redação estatística}}\label{redacao}}
 
-\hypertarget{manuscritos-reprodutiveis}{%
-\section{Manuscritos reprodutíveis}\label{manuscritos-reprodutiveis}}
+\hypertarget{diretrizes}{%
+\section{Diretrizes}\label{diretrizes}}
 
-\hypertarget{o-que-suxe3o-manuscritos-reprodutuxedveis}{%
-\subsection{O que são manuscritos reprodutíveis?}\label{o-que-suxe3o-manuscritos-reprodutuxedveis}}
+\hypertarget{o-que-uxe9-a-rede-equator}{%
+\subsection{O que é a rede EQUATOR?}\label{o-que-uxe9-a-rede-equator}}
 
 \begin{itemize}
 \tightlist
 \item
-  .{[}REF{]}
+  A rede \emph{Enhancing the Quality and Transparency of health research} \href{https://www.equator-network.org}{EQUATOR Network} disponibiliza diretrizes para a redação de manuscritos de acordo com seus respectivos delineamentos de estudo.\textsuperscript{\protect\hyperlink{ref-Altman2008}{155}}
 \end{itemize}
-
-\hypertarget{diretrizes}{%
-\section{Diretrizes}\label{diretrizes}}
 
 \hypertarget{quais-diretrizes-estuxe3o-disponuxedveis}{%
 \subsection{Quais diretrizes estão disponíveis?}\label{quais-diretrizes-estuxe3o-disponuxedveis}}
 
 \begin{itemize}
 \item
-  \emph{Review of guidance papers on regression modeling in statistical series of medical journals}.\textsuperscript{\protect\hyperlink{ref-Wallisch2022}{139}}
+  \emph{Review of guidance papers on regression modeling in statistical series of medical journals}.\textsuperscript{\protect\hyperlink{ref-Wallisch2022}{156}}
 \item
-  \emph{Principles and recommendations for incorporating estimands into clinical study protocol templates}.\textsuperscript{\protect\hyperlink{ref-Lynggaard2022}{140}}
+  \emph{Principles and recommendations for incorporating estimands into clinical study protocol templates}.\textsuperscript{\protect\hyperlink{ref-Lynggaard2022}{157}}
 \item
-  \emph{How to write statistical analysis section in medical research}.\textsuperscript{\protect\hyperlink{ref-Dwivedi2022}{86}}
+  \emph{How to write statistical analysis section in medical research}.\textsuperscript{\protect\hyperlink{ref-Dwivedi2022}{89}}
 \item
-  \emph{Recommendations for Statistical Reporting in Cardiovascular Medicine: A Special Report From the American Heart Association}.\textsuperscript{\protect\hyperlink{ref-Althouse2021}{141}}
+  \emph{Recommendations for Statistical Reporting in Cardiovascular Medicine: A Special Report From the American Heart Association}.\textsuperscript{\protect\hyperlink{ref-Althouse2021}{158}}
 \item
-  \emph{Framework for the treatment and reporting of missing data in observational studies: The Treatment And Reporting of Missing data in Observational Studies framework}.\textsuperscript{\protect\hyperlink{ref-Lee2021}{142}}
+  \emph{Framework for the treatment and reporting of missing data in observational studies: The Treatment And Reporting of Missing data in Observational Studies framework}.\textsuperscript{\protect\hyperlink{ref-Lee2021}{159}}
 \item
-  \emph{Guidelines for reporting of figures and tables for clinical research in urology}.\textsuperscript{\protect\hyperlink{ref-Vickers2020}{143}}
+  \emph{Guidelines for reporting of figures and tables for clinical research in urology}.\textsuperscript{\protect\hyperlink{ref-Vickers2020}{160}}
 \item
-  \emph{Who is in this study, anyway? Guidelines for a useful Table 1}.\textsuperscript{\protect\hyperlink{ref-Hayes-Larson2019}{100}}
+  \emph{Who is in this study, anyway? Guidelines for a useful Table 1}.\textsuperscript{\protect\hyperlink{ref-Hayes-Larson2019}{103}}
 \item
-  \emph{Guidelines for Reporting of Statistics for Clinical Research in Urology}.\textsuperscript{\protect\hyperlink{ref-assel2019}{144}}
+  \emph{Guidelines for Reporting of Statistics for Clinical Research in Urology}.\textsuperscript{\protect\hyperlink{ref-assel2019}{161}}
 \item
-  \emph{Reveal, Don't Conceal: Transforming Data Visualization to Improve Transparency}.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{110}}
+  \emph{Reveal, Don't Conceal: Transforming Data Visualization to Improve Transparency}.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{113}}
 \item
-  \emph{Guidelines for the Content of Statistical Analysis Plans in Clinical Trials}.\textsuperscript{\protect\hyperlink{ref-Gamble2017}{145}}
+  \emph{Guidelines for the Content of Statistical Analysis Plans in Clinical Trials}.\textsuperscript{\protect\hyperlink{ref-Gamble2017}{162}}
 \item
-  \emph{Basic statistical reporting for articles published in Biomedical Journals: The `'Statistical Analyses and Methods in the Published Literature'' or the SAMPL Guidelines}.\textsuperscript{\protect\hyperlink{ref-Lang2015}{146}}
+  \emph{Basic statistical reporting for articles published in Biomedical Journals: The `'Statistical Analyses and Methods in the Published Literature'' or the SAMPL Guidelines}.\textsuperscript{\protect\hyperlink{ref-Lang2015}{163}}
 \item
-  \emph{Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm}.\textsuperscript{\protect\hyperlink{ref-Weissgerber2015}{147}}
+  \emph{Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm}.\textsuperscript{\protect\hyperlink{ref-Weissgerber2015}{164}}
 \item
-  \emph{STRengthening analytical thinking for observational studies: the STRATOS initiative}.\textsuperscript{\protect\hyperlink{ref-Sauerbrei2014}{148}}
+  \emph{STRengthening analytical thinking for observational studies: the STRATOS initiative}.\textsuperscript{\protect\hyperlink{ref-Sauerbrei2014}{165}}
 \item
-  \emph{Research methods and reporting}.\textsuperscript{\protect\hyperlink{ref-groves2008}{149}}
+  \emph{Research methods and reporting}.\textsuperscript{\protect\hyperlink{ref-groves2008}{166}}
 \item
-  \emph{How to ensure your paper is rejected by the statistical reviewer}.\textsuperscript{\protect\hyperlink{ref-stratton2005}{150}}
+  \emph{How to ensure your paper is rejected by the statistical reviewer}.\textsuperscript{\protect\hyperlink{ref-stratton2005}{167}}
 \end{itemize}
 
 \hypertarget{checklists}{%
@@ -3906,11 +4176,11 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  Checklists têm sido recomendados para melhorar o relato das análises realizadas, aumentar a transparência do estudo e reprodutibilidade dos achados.\textsuperscript{\protect\hyperlink{ref-Gardner1986}{151}}
+  Checklists têm sido recomendados para melhorar o relato das análises realizadas, aumentar a transparência do estudo e reprodutibilidade dos achados.\textsuperscript{\protect\hyperlink{ref-Gardner1986}{168}}
 \item
-  Trabalhos acadêmicos que relatam análises de dados devem ser passar por revisão por pares que inclua apreciação da análise estatística, e sua adequação ao delineamento do estudo e instrumentos utilizados.\textsuperscript{\protect\hyperlink{ref-Mascha2017}{152}}
+  Trabalhos acadêmicos que relatam análises de dados devem ser passar por revisão por pares que inclua apreciação da análise estatística, e sua adequação ao delineamento do estudo e instrumentos utilizados.\textsuperscript{\protect\hyperlink{ref-Mascha2017}{169}}
 \item
-  Checklists não são suficientes para garantir a qualidade técnica da pesquisa, mas podem contribuir para a revisão por pares.\textsuperscript{\protect\hyperlink{ref-Mascha2017}{152}}
+  Checklists não são suficientes para garantir a qualidade técnica da pesquisa, mas podem contribuir para a revisão por pares.\textsuperscript{\protect\hyperlink{ref-Mascha2017}{169}}
 \end{itemize}
 
 \hypertarget{quais-checklists-estuxe3o-disponuxedveis}{%
@@ -3918,36 +4188,12 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 
 \begin{itemize}
 \item
-  \emph{A CHecklist for statistical Assessment of Medical Papers (the CHAMP statement): explanation and elaboration}.\textsuperscript{\protect\hyperlink{ref-Mansournia2021}{153}}
+  \emph{A CHecklist for statistical Assessment of Medical Papers (the CHAMP statement): explanation and elaboration}.\textsuperscript{\protect\hyperlink{ref-Mansournia2021}{170}}
 \item
-  \emph{Checklist for clinical applicability of subgroup analysis}.\textsuperscript{\protect\hyperlink{ref-Gil-Sierra2020}{154}}
+  \emph{Checklist for clinical applicability of subgroup analysis}.\textsuperscript{\protect\hyperlink{ref-Gil-Sierra2020}{171}}
 \item
-  \emph{Evidence‐based statistical analysis and methods in biomedical research (SAMBR) checklists according to design features}.\textsuperscript{\protect\hyperlink{ref-dwivedi2019}{85}}
+  \emph{Evidence‐based statistical analysis and methods in biomedical research (SAMBR) checklists according to design features}.\textsuperscript{\protect\hyperlink{ref-dwivedi2019}{88}}
 \end{itemize}
-
-\hypertarget{fluxogramas}{%
-\section{Fluxogramas}\label{fluxogramas}}
-
-\hypertarget{o-que-suxe3o-fluxogramas}{%
-\subsection{O que são fluxogramas?}\label{o-que-suxe3o-fluxogramas}}
-
-\begin{itemize}
-\tightlist
-\item
-  Fluxogramas são figuras que apresentam as etapas de um estudo.
-\end{itemize}
-
-\hypertarget{que-fluxogramas-podem-ser-incluuxeddos}{%
-\subsection{Que fluxogramas podem ser incluídos?}\label{que-fluxogramas-podem-ser-incluuxeddos}}
-
-\begin{itemize}
-\item
-  Inclua fluxogramas com o delineamento aplicado no estudo.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{110}}
-\item
-  A \href{https://www.equator-network.org}{EQUATOR Network} disponibiliza modelos de fluxogramas para os mais diversos delineamentos de estudo.\textsuperscript{\protect\hyperlink{ref-Altman2008}{155}}
-\end{itemize}
-
-\includegraphics[width=1.13em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-743c64b9ba893ee22ddca6ba87c98316.pdf} O pacote \emph{PRISMA2020}\textsuperscript{\protect\hyperlink{ref-PRISMA2020-2}{156},\protect\hyperlink{ref-PRISMA2020}{157}} fornece funções para elaboração do fluxograma de revisões sistemáticas no formato padrão \href{https://cran.r-project.org/web/packages/PRISMA2020/index.html}{\includegraphics[width=1em,height=1em]{Ciência-com-R_files/figure-latex/fa-icon-816f2f8c5de1688221ea8be20e4de069.pdf}}
 
 \hypertarget{fontes-externas}{%
 \chapter{\texorpdfstring{\textbf{Fontes externas}}{Fontes externas}}\label{fontes-externas}}
@@ -4370,297 +4616,353 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{112}} fornece 
 \CSLLeftMargin{84. }%
 \CSLRightInline{Lajeunesse MJ. Facilitating systematic reviews, data extraction, and meta-analysis with the metagear package for r. 2016;7:323-330.}
 
-\leavevmode\vadjust pre{\hypertarget{ref-dwivedi2019}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-Moher2015}{}}%
 \CSLLeftMargin{85. }%
+\CSLRightInline{Moher D, Shamseer L, Clarke M, et al. Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement. \emph{Systematic Reviews}. 2015;4(1). doi:\href{https://doi.org/10.1186/2046-4053-4-1}{10.1186/2046-4053-4-1}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-PRISMA2020-2}{}}%
+\CSLLeftMargin{86. }%
+\CSLRightInline{Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:\href{https://doi.org/10.1002/cl2.1230}{10.1002/cl2.1230}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-PRISMA2020}{}}%
+\CSLLeftMargin{87. }%
+\CSLRightInline{Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:\href{https://doi.org/10.1002/cl2.1230}{10.1002/cl2.1230}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-dwivedi2019}{}}%
+\CSLLeftMargin{88. }%
 \CSLRightInline{Dwivedi AK, Shukla R. Evidence{-}based statistical analysis and methods in biomedical research (SAMBR) checklists according to design features. \emph{CANCER REPORTS}. 2019;3(4). doi:\href{https://doi.org/10.1002/cnr2.1211}{10.1002/cnr2.1211}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Dwivedi2022}{}}%
-\CSLLeftMargin{86. }%
+\CSLLeftMargin{89. }%
 \CSLRightInline{Dwivedi AK. How to Write Statistical Analysis Section in Medical Research. \emph{Journal of Investigative Medicine}. 2022;70(8):1759-1770. doi:\href{https://doi.org/10.1136/jim-2022-002479}{10.1136/jim-2022-002479}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Kim2017}{}}%
-\CSLLeftMargin{87. }%
+\CSLLeftMargin{90. }%
 \CSLRightInline{Kim N, Fischer AH, Dyring-Andersen B, Rosner B, Okoye GA. Research Techniques Made Simple: Choosing Appropriate Statistical Methods for Clinical Research. \emph{Journal of Investigative Dermatology}. 2017;137(10):e173-e178. doi:\href{https://doi.org/10.1016/j.jid.2017.08.007}{10.1016/j.jid.2017.08.007}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-marusteri2010}{}}%
-\CSLLeftMargin{88. }%
+\CSLLeftMargin{91. }%
 \CSLRightInline{Marusteri M, Bacarea V. Comparing groups for statistical differences: How to choose the right statistical test? \emph{Biochemia Medica}. 2010:15-32. doi:\href{https://doi.org/10.11613/bm.2010.004}{10.11613/bm.2010.004}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-mishra2019}{}}%
-\CSLLeftMargin{89. }%
+\CSLLeftMargin{92. }%
 \CSLRightInline{Mishra P, Pandey C, Singh U, Keshri A, Sabaretnam M. Selection of appropriate statistical methods for data analysis. \emph{Annals of Cardiac Anaesthesia}. 2019;22(3):297. doi:\href{https://doi.org/10.4103/aca.aca_248_18}{10.4103/aca.aca\_248\_18}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-ray2021}{}}%
-\CSLLeftMargin{90. }%
+\CSLLeftMargin{93. }%
 \CSLRightInline{Ray A, Najmi A, Sadasivam B. How to choose and interpret a statistical test? An update for budding researchers. \emph{Journal of Family Medicine and Primary Care}. 2021;10(8):2763. doi:\href{https://doi.org/10.4103/jfmpc.jfmpc_433_21}{10.4103/jfmpc.jfmpc\_433\_21}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-nayak2011}{}}%
-\CSLLeftMargin{91. }%
+\CSLLeftMargin{94. }%
 \CSLRightInline{Nayak B, Hazra A. How to choose the right statistical test? \emph{Indian Journal of Ophthalmology}. 2011;59(2):85. doi:\href{https://doi.org/10.4103/0301-4738.77005}{10.4103/0301-4738.77005}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-shankar2014}{}}%
-\CSLLeftMargin{92. }%
+\CSLLeftMargin{95. }%
 \CSLRightInline{Shankar S, Singh R. Demystifying statistics: How to choose a statistical test? \emph{Indian Journal of Rheumatology}. 2014;9(2):77-81. doi:\href{https://doi.org/10.1016/j.injr.2014.04.002}{10.1016/j.injr.2014.04.002}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Ferketich1986}{}}%
-\CSLLeftMargin{93. }%
+\CSLLeftMargin{96. }%
 \CSLRightInline{Ferketich S, Verran J. Technical Notes. \emph{Western Journal of Nursing Research}. 1986;8(4):464-466. doi:\href{https://doi.org/10.1177/019394598600800409}{10.1177/019394598600800409}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Kerr1998}{}}%
-\CSLLeftMargin{94. }%
+\CSLLeftMargin{97. }%
 \CSLRightInline{Kerr NL. HARKing: Hypothesizing After the Results are Known. \emph{Personality and Social Psychology Review}. 1998;2(3):196-217. doi:\href{https://doi.org/10.1207/s15327957pspr0203_4}{10.1207/s15327957pspr0203\_4}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-huebner2016}{}}%
-\CSLLeftMargin{95. }%
+\CSLLeftMargin{98. }%
 \CSLRightInline{Huebner M, Vach W, Cessie S le. A systematic approach to initial data analysis is good research practice. \emph{The Journal of Thoracic and Cardiovascular Surgery}. 2016;151(1):25-27. doi:\href{https://doi.org/10.1016/j.jtcvs.2015.09.085}{10.1016/j.jtcvs.2015.09.085}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-explore}{}}%
-\CSLLeftMargin{96. }%
+\CSLLeftMargin{99. }%
 \CSLRightInline{Krasser R. Explore: Simplifies exploratory data analysis. 2023. \href{https://CRAN.R-project.org/package=explore}{https://CRAN.R-project.org/package=explore.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-graphics}{}}%
-\CSLLeftMargin{97. }%
+\CSLLeftMargin{100. }%
 \CSLRightInline{R Core Team. R: A language and environment for statistical computing. 2023. \href{https://www.R-project.org/}{https://www.R-project.org/.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-DataExplorer}{}}%
-\CSLLeftMargin{98. }%
+\CSLLeftMargin{101. }%
 \CSLRightInline{Cui B. DataExplorer: Automate data exploration and treatment. 2020. \href{https://CRAN.R-project.org/package=DataExplorer}{https://CRAN.R-project.org/package=DataExplorer.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Inskip2017}{}}%
-\CSLLeftMargin{99. }%
+\CSLLeftMargin{102. }%
 \CSLRightInline{Inskip H, Ntani G, Westbury L, et al. Getting started with tables. \emph{Archives of Public Health}. 2017;75(1). doi:\href{https://doi.org/10.1186/s13690-017-0180-1}{10.1186/s13690-017-0180-1}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Hayes-Larson2019}{}}%
-\CSLLeftMargin{100. }%
+\CSLLeftMargin{103. }%
 \CSLRightInline{Hayes-Larson E, Kezios KL, Mooney SJ, Lovasi G. Who is in this study, anyway? Guidelines for a useful Table~1. \emph{Journal of Clinical Epidemiology}. 2019;114:125-132. doi:\href{https://doi.org/10.1016/j.jclinepi.2019.06.011}{10.1016/j.jclinepi.2019.06.011}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Kwak2021}{}}%
-\CSLLeftMargin{101. }%
+\CSLLeftMargin{104. }%
 \CSLRightInline{Kwak SG, Kang H, Kim JH, et al. The principles of presenting statistical results: Table. \emph{Korean Journal of Anesthesiology}. 2021;74(2):115-119. doi:\href{https://doi.org/10.4097/kja.20582}{10.4097/kja.20582}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-table1}{}}%
-\CSLLeftMargin{102. }%
+\CSLLeftMargin{105. }%
 \CSLRightInline{Rich B. table1: Tables of descriptive statistics in HTML. 2023. \href{https://CRAN.R-project.org/package=table1}{https://CRAN.R-project.org/package=table1.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-flextable}{}}%
-\CSLLeftMargin{103. }%
+\CSLLeftMargin{106. }%
 \CSLRightInline{Gohel D, Skintzos P. Flextable: Functions for tabular reporting. 2023. \href{https://CRAN.R-project.org/package=flextable}{https://CRAN.R-project.org/package=flextable.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Westreich2013}{}}%
-\CSLLeftMargin{104. }%
+\CSLLeftMargin{107. }%
 \CSLRightInline{Westreich D, Greenland S. The Table 2 Fallacy: Presenting and Interpreting Confounder and Modifier Coefficients. \emph{American Journal of Epidemiology}. 2013;177(4):292-298. doi:\href{https://doi.org/10.1093/aje/kws412}{10.1093/aje/kws412}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Park2022}{}}%
-\CSLLeftMargin{105. }%
+\CSLLeftMargin{108. }%
 \CSLRightInline{Park JH, Lee DK, Kang H, et al. The principles of presenting statistical results using figures. \emph{Korean Journal of Anesthesiology}. 2022;75(2):139-150. doi:\href{https://doi.org/10.4097/kja.21508}{10.4097/kja.21508}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-ggplot2}{}}%
-\CSLLeftMargin{106. }%
+\CSLLeftMargin{109. }%
 \CSLRightInline{Wickham H. ggplot2: Elegant graphics for data analysis. 2016. \href{https://ggplot2.tidyverse.org}{https://ggplot2.tidyverse.org.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-plotly}{}}%
-\CSLLeftMargin{107. }%
+\CSLLeftMargin{110. }%
 \CSLRightInline{Sievert C. Interactive web-based data visualization with r, plotly, and shiny. 2020. \href{https://plotly-r.com}{https://plotly-r.com.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-corrplot}{}}%
-\CSLLeftMargin{108. }%
+\CSLLeftMargin{111. }%
 \CSLRightInline{Wei T, Simko V. R package 'corrplot': Visualization of a correlation matrix. 2021. \href{https://github.com/taiyun/corrplot}{https://github.com/taiyun/corrplot.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Cumming2007}{}}%
-\CSLLeftMargin{109. }%
+\CSLLeftMargin{112. }%
 \CSLRightInline{Cumming G, Fidler F, Vaux DL. Error bars in experimental biology. \emph{The Journal of Cell Biology}. 2007;177(1):7-11. doi:\href{https://doi.org/10.1083/jcb.200611141}{10.1083/jcb.200611141}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Weissgerber2019}{}}%
-\CSLLeftMargin{110. }%
+\CSLLeftMargin{113. }%
 \CSLRightInline{Weissgerber TL, Winham SJ, Heinzen EP, et al. Reveal, Don{'}t Conceal. \emph{Circulation}. 2019;140(18):1506-1518. doi:\href{https://doi.org/10.1161/circulationaha.118.037777}{10.1161/circulationaha.118.037777}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-ggsci}{}}%
-\CSLLeftMargin{111. }%
+\CSLLeftMargin{114. }%
 \CSLRightInline{Xiao N. Ggsci: Scientific journal and sci-fi themed color palettes for 'ggplot2'. 2023. \href{https://CRAN.R-project.org/package=ggsci}{https://CRAN.R-project.org/package=ggsci.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-tiff}{}}%
-\CSLLeftMargin{112. }%
+\CSLLeftMargin{115. }%
 \CSLRightInline{Urbanek S, Johnson K. Tiff: Read and write TIFF images. 2022. \href{https://CRAN.R-project.org/package=tiff}{https://CRAN.R-project.org/package=tiff.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Curran-Everett2009}{}}%
-\CSLLeftMargin{113. }%
+\CSLLeftMargin{116. }%
 \CSLRightInline{Curran-Everett D. Explorations in statistics: hypothesis tests and {\emph{P}} values. \emph{Advances in Physiology Education}. 2009;33(2):81-86. doi:\href{https://doi.org/10.1152/advan.90218.2008}{10.1152/advan.90218.2008}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Vandenbroucke2018}{}}%
-\CSLLeftMargin{114. }%
+\CSLLeftMargin{117. }%
 \CSLRightInline{Vandenbroucke JP, Pearce N. From ideas to studies: how to get ideas and sharpen them into research questions. \emph{Clinical Epidemiology}. 2018;Volume 10:253-264. doi:\href{https://doi.org/10.2147/clep.s142940}{10.2147/clep.s142940}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-lakens2018}{}}%
-\CSLLeftMargin{115. }%
+\CSLLeftMargin{118. }%
 \CSLRightInline{Lakens D, Scheel AM, Isager PM. Equivalence Testing for Psychological Research: A Tutorial. \emph{Advances in Methods and Practices in Psychological Science}. 2018;1(2):259-269. doi:\href{https://doi.org/10.1177/2515245918770963}{10.1177/2515245918770963}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Sullivan2012}{}}%
-\CSLLeftMargin{116. }%
+\CSLLeftMargin{119. }%
 \CSLRightInline{Sullivan GM, Feinn R. Using Effect Size{\textemdash}or Why the {\emph{P}} Value Is Not Enough. \emph{Journal of Graduate Medical Education}. 2012;4(3):279-282. doi:\href{https://doi.org/10.4300/jgme-d-12-00156.1}{10.4300/jgme-d-12-00156.1}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Kim2015}{}}%
-\CSLLeftMargin{117. }%
+\CSLLeftMargin{120. }%
 \CSLRightInline{Kim HY. Statistical notes for clinical researchers: effect size. \emph{Restorative Dentistry \& Endodontics}. 2015;40(4):328. doi:\href{https://doi.org/10.5395/rde.2015.40.4.328}{10.5395/rde.2015.40.4.328}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-khamis2008}{}}%
-\CSLLeftMargin{118. }%
+\CSLLeftMargin{121. }%
 \CSLRightInline{Khamis H. Measures of Association: How to Choose? \emph{Journal of Diagnostic Medical Sonography}. 2008;24(3):155-162. doi:\href{https://doi.org/10.1177/8756479308317006}{10.1177/8756479308317006}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-allison2022}{}}%
-\CSLLeftMargin{119. }%
+\CSLLeftMargin{122. }%
 \CSLRightInline{Allison JS, Santana L, (Jaco) Visagie IJH. A primer on simple measures of association taught at undergraduate level. \emph{Teaching Statistics}. 2022;44(3):96-103. doi:\href{https://doi.org/10.1111/test.12307}{10.1111/test.12307}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-McHugh2013}{}}%
-\CSLLeftMargin{120. }%
+\CSLLeftMargin{123. }%
 \CSLRightInline{McHugh ML. The chi-square test of independence. \emph{Biochemia Medica}. 2013:143-149. doi:\href{https://doi.org/10.11613/bm.2013.018}{10.11613/bm.2013.018}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Kim2017a}{}}%
-\CSLLeftMargin{121. }%
+\CSLLeftMargin{124. }%
 \CSLRightInline{Kim HY. Statistical notes for clinical researchers: Chi-squared test and Fisher's exact test. \emph{Restorative Dentistry \& Endodontics}. 2017;42(2):152. doi:\href{https://doi.org/10.5395/rde.2017.42.2.152}{10.5395/rde.2017.42.2.152}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-gtsummary}{}}%
-\CSLLeftMargin{122. }%
+\CSLLeftMargin{125. }%
 \CSLRightInline{Sjoberg DD, Whiting K, Curry M, Lavery JA, Larmarange J. Reproducible summary tables with the gtsummary package. 2021;13:570-580. doi:\href{https://doi.org/10.32614/RJ-2021-053}{10.32614/RJ-2021-053}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-suits1957}{}}%
-\CSLLeftMargin{123. }%
+\CSLLeftMargin{126. }%
 \CSLRightInline{Suits DB. Use of Dummy Variables in Regression Equations. \emph{Journal of the American Statistical Association}. 1957;52(280):548-551. doi:\href{https://doi.org/10.1080/01621459.1957.10501412}{10.1080/01621459.1957.10501412}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Healy1995}{}}%
-\CSLLeftMargin{124. }%
+\CSLLeftMargin{127. }%
 \CSLRightInline{Healy MJ. Statistics from the inside. 16. Multiple regression (2). \emph{Archives of Disease in Childhood}. 1995;73(3):270-274. doi:\href{https://doi.org/10.1136/adc.73.3.270}{10.1136/adc.73.3.270}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-fastDummies}{}}%
-\CSLLeftMargin{125. }%
+\CSLLeftMargin{128. }%
 \CSLRightInline{Kaplan J. fastDummies: Fast creation of dummy (binary) columns and rows from categorical variables. 2023. \href{https://CRAN.R-project.org/package=fastDummies}{https://CRAN.R-project.org/package=fastDummies.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Hidalgo2013}{}}%
-\CSLLeftMargin{126. }%
+\CSLLeftMargin{129. }%
 \CSLRightInline{Hidalgo B, Goodman M. Multivariate or Multivariable Regression? \emph{American Journal of Public Health}. 2013;103(1):39-40. doi:\href{https://doi.org/10.2105/ajph.2012.300897}{10.2105/ajph.2012.300897}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-modelsummary}{}}%
-\CSLLeftMargin{127. }%
+\CSLLeftMargin{130. }%
 \CSLRightInline{Arel-Bundock V. {\textbraceleft}Modelsummary{\textbraceright}: Data and model summaries in {\textbraceleft}r{\textbraceright}. 2022;103. doi:\href{https://doi.org/10.18637/jss.v103.i01}{10.18637/jss.v103.i01}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Baron1986}{}}%
-\CSLLeftMargin{128. }%
+\CSLLeftMargin{131. }%
 \CSLRightInline{Baron RM, Kenny DA. The moderator{\textendash}mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations. \emph{Journal of Personality and Social Psychology}. 1986;51(6):1173-1182. doi:\href{https://doi.org/10.1037/0022-3514.51.6.1173}{10.1037/0022-3514.51.6.1173}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Dales1978}{}}%
-\CSLLeftMargin{129. }%
+\CSLLeftMargin{132. }%
 \CSLRightInline{DALES LG, URY HK. An Improper Use of Statistical Significance Testing in Studying Covariables. \emph{International Journal of Epidemiology}. 1978;7(4):373-376. doi:\href{https://doi.org/10.1093/ije/7.4.373}{10.1093/ije/7.4.373}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Sun1996}{}}%
-\CSLLeftMargin{130. }%
+\CSLLeftMargin{133. }%
 \CSLRightInline{Sun GW, Shook TL, Kay GL. Inappropriate use of bivariable analysis to screen risk factors for use in multivariable analysis. \emph{Journal of Clinical Epidemiology}. 1996;49(8):907-916. doi:\href{https://doi.org/10.1016/0895-4356(96)00025-x}{10.1016/0895-4356(96)00025-x}}
 
+\leavevmode\vadjust pre{\hypertarget{ref-abelson1985}{}}%
+\CSLLeftMargin{134. }%
+\CSLRightInline{Abelson RP. A variance explanation paradox: When a little is a lot. \emph{Psychological Bulletin}. 1985;97(1):129-133. doi:\href{https://doi.org/10.1037/0033-2909.97.1.129}{10.1037/0033-2909.97.1.129}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-berkson1946}{}}%
+\CSLLeftMargin{135. }%
+\CSLRightInline{Berkson J. Limitations of the application of fourfold table analysis to hospital data. \emph{Biometrics Bulletin}. 1946;2(3):47. doi:\href{https://doi.org/10.2307/3002000}{10.2307/3002000}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-ellsberg1961}{}}%
+\CSLLeftMargin{136. }%
+\CSLRightInline{Ellsberg D. Risk, ambiguity, and the savage axioms. \emph{The Quarterly Journal of Economics}. 1961;75(4):643. doi:\href{https://doi.org/10.2307/1884324}{10.2307/1884324}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-freedman1983}{}}%
+\CSLLeftMargin{137. }%
+\CSLRightInline{Freedman DA, Freedman DA. A Note on Screening Regression Equations. \emph{The American Statistician}. 1983;37(2):152-155. doi:\href{https://doi.org/10.1080/00031305.1983.10482729}{10.1080/00031305.1983.10482729}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-freedman1989}{}}%
+\CSLLeftMargin{138. }%
+\CSLRightInline{Freedman LS, Pee D. Return to a note on screening regression equations. \emph{The American Statistician}. 1989;43(4):279. doi:\href{https://doi.org/10.2307/2685389}{10.2307/2685389}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-hand1992}{}}%
+\CSLLeftMargin{139. }%
+\CSLRightInline{Hand DJ. On Comparing Two Treatments. \emph{The American Statistician}. 1992;46(3):190-192. doi:\href{https://doi.org/10.1080/00031305.1992.10475881}{10.1080/00031305.1992.10475881}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-lindley1957}{}}%
+\CSLLeftMargin{140. }%
+\CSLRightInline{LINDLEY DV. A STATISTICAL PARADOX. \emph{Biometrika}. 1957;44(1-2):187-192. doi:\href{https://doi.org/10.1093/biomet/44.1-2.187}{10.1093/biomet/44.1-2.187}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-lord1967}{}}%
+\CSLLeftMargin{141. }%
+\CSLRightInline{Lord FM. A paradox in the interpretation of group comparisons. \emph{Psychological Bulletin}. 1967;68(5):304-305. doi:\href{https://doi.org/10.1037/h0025105}{10.1037/h0025105}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-lord1969}{}}%
+\CSLLeftMargin{142. }%
+\CSLRightInline{Lord FM. Statistical adjustments when comparing preexisting groups. \emph{Psychological Bulletin}. 1969;72(5):336-337. doi:\href{https://doi.org/10.1037/h0028108}{10.1037/h0028108}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-simpson1951}{}}%
+\CSLLeftMargin{143. }%
+\CSLRightInline{Simpson EH. The Interpretation of Interaction in Contingency Tables. \emph{Journal of the Royal Statistical Society: Series B (Methodological)}. 1951;13(2):238-241. doi:\href{https://doi.org/10.1111/j.2517-6161.1951.tb00088.x}{10.1111/j.2517-6161.1951.tb00088.x}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-blyth1972}{}}%
+\CSLLeftMargin{144. }%
+\CSLRightInline{Blyth CR. On Simpson's Paradox and the Sure-Thing Principle. \emph{Journal of the American Statistical Association}. 1972;67(338):364-366. doi:\href{https://doi.org/10.1080/01621459.1972.10482387}{10.1080/01621459.1972.10482387}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-stein1956}{}}%
+\CSLLeftMargin{145. }%
+\CSLRightInline{Stein C. INADMISSIBILITY OF THE USUAL ESTIMATOR FOR THE MEAN OF a MULTIVARIATE NORMAL DISTRIBUTION. In: University of California Press; 1956:197-206. doi:\href{https://doi.org/10.1525/9780520313880-018}{10.1525/9780520313880-018}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-de1996}{}}%
+\CSLLeftMargin{146. }%
+\CSLRightInline{De S, Sen A. The generalised Gamow-Stern problem. \emph{The Mathematical Gazette}. 1996;80(488):345-348. doi:\href{https://doi.org/10.2307/3619568}{10.2307/3619568}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-feld1991}{}}%
+\CSLLeftMargin{147. }%
+\CSLRightInline{Feld SL. Why Your Friends Have More Friends Than You Do. \emph{American Journal of Sociology}. 1991;96(6):1464-1477. doi:\href{https://doi.org/10.1086/229693}{10.1086/229693}}
+
 \leavevmode\vadjust pre{\hypertarget{ref-ihaka1996}{}}%
-\CSLLeftMargin{131. }%
+\CSLLeftMargin{148. }%
 \CSLRightInline{Ihaka R, Gentleman R. R: A language for data analysis and graphics. \emph{Journal of Computational and Graphical Statistics}. 1996;5(3):299. doi:\href{https://doi.org/10.2307/1390807}{10.2307/1390807}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-SchwabSimon2021}{}}%
-\CSLLeftMargin{132. }%
+\CSLLeftMargin{149. }%
 \CSLRightInline{Schwab, Simon, Held, Leonhard. Statistical programming: Small mistakes, big impacts. \emph{Wiley-Blackwell Publishing, Inc}. 2021. doi:\href{https://doi.org/10.5167/UZH-205154}{10.5167/UZH-205154}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Eglen2017}{}}%
-\CSLLeftMargin{133. }%
+\CSLLeftMargin{150. }%
 \CSLRightInline{Eglen SJ, Marwick B, Halchenko YO, et al. Toward standard practices for sharing computer code and programs in neuroscience. \emph{Nature Neuroscience}. 2017;20(6):770-773. doi:\href{https://doi.org/10.1038/nn.4550}{10.1038/nn.4550}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Zhao2023}{}}%
-\CSLLeftMargin{134. }%
+\CSLLeftMargin{151. }%
 \CSLRightInline{Zhao Y, Xiao N, Anderson K, Zhang Y. Electronic common technical document submission with analysis using R. \emph{Clinical Trials}. 2022;20(1):89-92. doi:\href{https://doi.org/10.1177/17407745221123244}{10.1177/17407745221123244}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-formatR}{}}%
-\CSLLeftMargin{135. }%
+\CSLLeftMargin{152. }%
 \CSLRightInline{Xie Y. formatR: Format r code automatically. 2022. \href{https://CRAN.R-project.org/package=formatR}{https://CRAN.R-project.org/package=formatR.}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-pkglite}{}}%
-\CSLLeftMargin{136. }%
-\CSLRightInline{Xiao N, Zhang Y, Anderson K. Pkglite: Compact package representations. 2022. \href{https://CRAN.R-project.org/package=pkglite}{https://CRAN.R-project.org/package=pkglite.}}
-
 \leavevmode\vadjust pre{\hypertarget{ref-love2019}{}}%
-\CSLLeftMargin{137. }%
+\CSLLeftMargin{153. }%
 \CSLRightInline{Love J, Selker R, Marsman M, et al. {\textbf{JASP}}: Graphical Statistical Software for Common Statistical Designs. \emph{Journal of Statistical Software}. 2019;88(2). doi:\href{https://doi.org/10.18637/jss.v088.i02}{10.18637/jss.v088.i02}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-sahin2020}{}}%
-\CSLLeftMargin{138. }%
-\CSLRightInline{ŞAHİN M, AYBEK E. Jamovi: An easy to use statistical software for the social scientists. \emph{International Journal of Assessment Tools in Education}. 2020;6(4):670-692. doi:\href{https://doi.org/10.21449/ijate.661803}{10.21449/ijate.661803}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Wallisch2022}{}}%
-\CSLLeftMargin{139. }%
-\CSLRightInline{Wallisch C, Bach P, Hafermann L, et al. Review of guidance papers on regression modeling in statistical series of medical journals. Mathes T, ed. \emph{PLOS ONE}. 2022;17(1):e0262918. doi:\href{https://doi.org/10.1371/journal.pone.0262918}{10.1371/journal.pone.0262918}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Lynggaard2022}{}}%
-\CSLLeftMargin{140. }%
-\CSLRightInline{Lynggaard H, Bell J, Lösch C, et al. Principles and recommendations for incorporating estimands into clinical study protocol templates. \emph{Trials}. 2022;23(1). doi:\href{https://doi.org/10.1186/s13063-022-06515-2}{10.1186/s13063-022-06515-2}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Althouse2021}{}}%
-\CSLLeftMargin{141. }%
-\CSLRightInline{Althouse AD, Below JE, Claggett BL, et al. Recommendations for Statistical Reporting in Cardiovascular Medicine: A Special Report From the American Heart Association. \emph{Circulation}. 2021;144(4). doi:\href{https://doi.org/10.1161/circulationaha.121.055393}{10.1161/circulationaha.121.055393}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Lee2021}{}}%
-\CSLLeftMargin{142. }%
-\CSLRightInline{Lee KJ, Tilling KM, Cornish RP, et al. Framework for the treatment and reporting of missing data in observational studies: The Treatment And Reporting of Missing data in Observational Studies framework. \emph{Journal of Clinical Epidemiology}. 2021;134:79-88. doi:\href{https://doi.org/10.1016/j.jclinepi.2021.01.008}{10.1016/j.jclinepi.2021.01.008}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Vickers2020}{}}%
-\CSLLeftMargin{143. }%
-\CSLRightInline{Vickers AJ, Assel MJ, Sjoberg DD, et al. Guidelines for Reporting of Figures and Tables for Clinical Research in Urology. \emph{Urology}. 2020;142:1-13. doi:\href{https://doi.org/10.1016/j.urology.2020.05.002}{10.1016/j.urology.2020.05.002}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-assel2019}{}}%
-\CSLLeftMargin{144. }%
-\CSLRightInline{Assel M, Sjoberg D, Elders A, et al. Guidelines for Reporting of Statistics for Clinical Research in Urology. \emph{Journal of Urology}. 2019;201(3):595-604. doi:\href{https://doi.org/10.1097/ju.0000000000000001}{10.1097/ju.0000000000000001}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Gamble2017}{}}%
-\CSLLeftMargin{145. }%
-\CSLRightInline{Gamble C, Krishan A, Stocken D, et al. Guidelines for the Content of Statistical Analysis Plans in Clinical Trials. \emph{JAMA}. 2017;318(23):2337. doi:\href{https://doi.org/10.1001/jama.2017.18556}{10.1001/jama.2017.18556}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Lang2015}{}}%
-\CSLLeftMargin{146. }%
-\CSLRightInline{Lang TA, Altman DG. Basic statistical reporting for articles published in Biomedical Journals: The {``}Statistical Analyses and Methods in the Published Literature{''} or the SAMPL Guidelines. \emph{International Journal of Nursing Studies}. 2015;52(1):5-9. doi:\href{https://doi.org/10.1016/j.ijnurstu.2014.09.006}{10.1016/j.ijnurstu.2014.09.006}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Weissgerber2015}{}}%
-\CSLLeftMargin{147. }%
-\CSLRightInline{Weissgerber TL, Milic NM, Winham SJ, Garovic VD. Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm. \emph{PLOS Biology}. 2015;13(4):e1002128. doi:\href{https://doi.org/10.1371/journal.pbio.1002128}{10.1371/journal.pbio.1002128}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Sauerbrei2014}{}}%
-\CSLLeftMargin{148. }%
-\CSLRightInline{Sauerbrei W, Abrahamowicz M, Altman DG, Cessie S, Carpenter J. STRengthening Analytical Thinking for Observational Studies: the STRATOS initiative. \emph{Statistics in Medicine}. 2014;33(30):5413-5432. doi:\href{https://doi.org/10.1002/sim.6265}{10.1002/sim.6265}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-groves2008}{}}%
-\CSLLeftMargin{149. }%
-\CSLRightInline{Groves T. Research methods and reporting. \emph{BMJ}. 2008;337(oct22 1):a2201-a2201. doi:\href{https://doi.org/10.1136/bmj.a2201}{10.1136/bmj.a2201}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-stratton2005}{}}%
-\CSLLeftMargin{150. }%
-\CSLRightInline{Stratton IM, Neil A. How to ensure your paper is rejected by the statistical reviewer. \emph{Diabetic Medicine}. 2005;22(4):371-373. doi:\href{https://doi.org/10.1111/j.1464-5491.2004.01443.x}{10.1111/j.1464-5491.2004.01443.x}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Gardner1986}{}}%
-\CSLLeftMargin{151. }%
-\CSLRightInline{Gardner MJ, Machin D, Campbell MJ. Use of check lists in assessing the statistical content of medical studies. \emph{BMJ}. 1986;292(6523):810-812. doi:\href{https://doi.org/10.1136/bmj.292.6523.810}{10.1136/bmj.292.6523.810}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Mascha2017}{}}%
-\CSLLeftMargin{152. }%
-\CSLRightInline{Mascha EJ, Vetter TR. The Statistical Checklist and Statistical Review. \emph{Anesthesia \& Analgesia}. 2017;124(3):719-721. doi:\href{https://doi.org/10.1213/ane.0000000000001863}{10.1213/ane.0000000000001863}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Mansournia2021}{}}%
-\CSLLeftMargin{153. }%
-\CSLRightInline{Mansournia MA, Collins GS, Nielsen RO, et al. A CHecklist for statistical Assessment of Medical Papers (the CHAMP statement): explanation and elaboration. \emph{British Journal of Sports Medicine}. 2021;55(18):1009-1017. doi:\href{https://doi.org/10.1136/bjsports-2020-103652}{10.1136/bjsports-2020-103652}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-Gil-Sierra2020}{}}%
 \CSLLeftMargin{154. }%
-\CSLRightInline{Gil-Sierra MD, Fénix-Caballero S, Abdel kader-Martin L, et al. Checklist for clinical applicability of subgroup analysis. \emph{Journal of Clinical Pharmacy and Therapeutics}. 2019;45(3):530-538. doi:\href{https://doi.org/10.1111/jcpt.13102}{10.1111/jcpt.13102}}
+\CSLRightInline{ŞAHİN M, AYBEK E. Jamovi: An easy to use statistical software for the social scientists. \emph{International Journal of Assessment Tools in Education}. 2020;6(4):670-692. doi:\href{https://doi.org/10.21449/ijate.661803}{10.21449/ijate.661803}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Altman2008}{}}%
 \CSLLeftMargin{155. }%
 \CSLRightInline{Altman DG, Simera I, Hoey J, Moher D, Schulz K. EQUATOR: reporting guidelines for health research. \emph{The Lancet}. 2008;371(9619):1149-1150. doi:\href{https://doi.org/10.1016/s0140-6736(08)60505-x}{10.1016/s0140-6736(08)60505-x}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-PRISMA2020-2}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-Wallisch2022}{}}%
 \CSLLeftMargin{156. }%
-\CSLRightInline{Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:\href{https://doi.org/10.1002/cl2.1230}{10.1002/cl2.1230}}
+\CSLRightInline{Wallisch C, Bach P, Hafermann L, et al. Review of guidance papers on regression modeling in statistical series of medical journals. Mathes T, ed. \emph{PLOS ONE}. 2022;17(1):e0262918. doi:\href{https://doi.org/10.1371/journal.pone.0262918}{10.1371/journal.pone.0262918}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-PRISMA2020}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-Lynggaard2022}{}}%
 \CSLLeftMargin{157. }%
-\CSLRightInline{Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:\href{https://doi.org/10.1002/cl2.1230}{10.1002/cl2.1230}}
+\CSLRightInline{Lynggaard H, Bell J, Lösch C, et al. Principles and recommendations for incorporating estimands into clinical study protocol templates. \emph{Trials}. 2022;23(1). doi:\href{https://doi.org/10.1186/s13063-022-06515-2}{10.1186/s13063-022-06515-2}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Althouse2021}{}}%
+\CSLLeftMargin{158. }%
+\CSLRightInline{Althouse AD, Below JE, Claggett BL, et al. Recommendations for Statistical Reporting in Cardiovascular Medicine: A Special Report From the American Heart Association. \emph{Circulation}. 2021;144(4). doi:\href{https://doi.org/10.1161/circulationaha.121.055393}{10.1161/circulationaha.121.055393}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Lee2021}{}}%
+\CSLLeftMargin{159. }%
+\CSLRightInline{Lee KJ, Tilling KM, Cornish RP, et al. Framework for the treatment and reporting of missing data in observational studies: The Treatment And Reporting of Missing data in Observational Studies framework. \emph{Journal of Clinical Epidemiology}. 2021;134:79-88. doi:\href{https://doi.org/10.1016/j.jclinepi.2021.01.008}{10.1016/j.jclinepi.2021.01.008}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Vickers2020}{}}%
+\CSLLeftMargin{160. }%
+\CSLRightInline{Vickers AJ, Assel MJ, Sjoberg DD, et al. Guidelines for Reporting of Figures and Tables for Clinical Research in Urology. \emph{Urology}. 2020;142:1-13. doi:\href{https://doi.org/10.1016/j.urology.2020.05.002}{10.1016/j.urology.2020.05.002}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-assel2019}{}}%
+\CSLLeftMargin{161. }%
+\CSLRightInline{Assel M, Sjoberg D, Elders A, et al. Guidelines for Reporting of Statistics for Clinical Research in Urology. \emph{Journal of Urology}. 2019;201(3):595-604. doi:\href{https://doi.org/10.1097/ju.0000000000000001}{10.1097/ju.0000000000000001}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Gamble2017}{}}%
+\CSLLeftMargin{162. }%
+\CSLRightInline{Gamble C, Krishan A, Stocken D, et al. Guidelines for the Content of Statistical Analysis Plans in Clinical Trials. \emph{JAMA}. 2017;318(23):2337. doi:\href{https://doi.org/10.1001/jama.2017.18556}{10.1001/jama.2017.18556}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Lang2015}{}}%
+\CSLLeftMargin{163. }%
+\CSLRightInline{Lang TA, Altman DG. Basic statistical reporting for articles published in Biomedical Journals: The {``}Statistical Analyses and Methods in the Published Literature{''} or the SAMPL Guidelines. \emph{International Journal of Nursing Studies}. 2015;52(1):5-9. doi:\href{https://doi.org/10.1016/j.ijnurstu.2014.09.006}{10.1016/j.ijnurstu.2014.09.006}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Weissgerber2015}{}}%
+\CSLLeftMargin{164. }%
+\CSLRightInline{Weissgerber TL, Milic NM, Winham SJ, Garovic VD. Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm. \emph{PLOS Biology}. 2015;13(4):e1002128. doi:\href{https://doi.org/10.1371/journal.pbio.1002128}{10.1371/journal.pbio.1002128}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Sauerbrei2014}{}}%
+\CSLLeftMargin{165. }%
+\CSLRightInline{Sauerbrei W, Abrahamowicz M, Altman DG, Cessie S, Carpenter J. STRengthening Analytical Thinking for Observational Studies: the STRATOS initiative. \emph{Statistics in Medicine}. 2014;33(30):5413-5432. doi:\href{https://doi.org/10.1002/sim.6265}{10.1002/sim.6265}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-groves2008}{}}%
+\CSLLeftMargin{166. }%
+\CSLRightInline{Groves T. Research methods and reporting. \emph{BMJ}. 2008;337(oct22 1):a2201-a2201. doi:\href{https://doi.org/10.1136/bmj.a2201}{10.1136/bmj.a2201}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-stratton2005}{}}%
+\CSLLeftMargin{167. }%
+\CSLRightInline{Stratton IM, Neil A. How to ensure your paper is rejected by the statistical reviewer. \emph{Diabetic Medicine}. 2005;22(4):371-373. doi:\href{https://doi.org/10.1111/j.1464-5491.2004.01443.x}{10.1111/j.1464-5491.2004.01443.x}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Gardner1986}{}}%
+\CSLLeftMargin{168. }%
+\CSLRightInline{Gardner MJ, Machin D, Campbell MJ. Use of check lists in assessing the statistical content of medical studies. \emph{BMJ}. 1986;292(6523):810-812. doi:\href{https://doi.org/10.1136/bmj.292.6523.810}{10.1136/bmj.292.6523.810}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Mascha2017}{}}%
+\CSLLeftMargin{169. }%
+\CSLRightInline{Mascha EJ, Vetter TR. The Statistical Checklist and Statistical Review. \emph{Anesthesia \& Analgesia}. 2017;124(3):719-721. doi:\href{https://doi.org/10.1213/ane.0000000000001863}{10.1213/ane.0000000000001863}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Mansournia2021}{}}%
+\CSLLeftMargin{170. }%
+\CSLRightInline{Mansournia MA, Collins GS, Nielsen RO, et al. A CHecklist for statistical Assessment of Medical Papers (the CHAMP statement): explanation and elaboration. \emph{British Journal of Sports Medicine}. 2021;55(18):1009-1017. doi:\href{https://doi.org/10.1136/bjsports-2020-103652}{10.1136/bjsports-2020-103652}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Gil-Sierra2020}{}}%
+\CSLLeftMargin{171. }%
+\CSLRightInline{Gil-Sierra MD, Fénix-Caballero S, Abdel kader-Martin L, et al. Checklist for clinical applicability of subgroup analysis. \emph{Journal of Clinical Pharmacy and Therapeutics}. 2019;45(3):530-538. doi:\href{https://doi.org/10.1111/jcpt.13102}{10.1111/jcpt.13102}}
 
 \end{CSLReferences}
 
