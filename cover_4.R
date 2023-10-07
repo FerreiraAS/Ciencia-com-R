@@ -14,7 +14,7 @@ for(i in 1:2){
                    width = W,
                    height = H)
   }
-  par(mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0), bg = "black")
+  par(mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0), omi = c(0, 0, 0, 0), mai = c(0, 0, 0, 0), bg = "black")
   plot(1, type = "n", xlab = "", ylab = "", xlim = c(0,W), ylim = c(0,H))
   
   texto <- "Você está pronto para desbloquear o poder da análise estatística de dados e elevar sua pesquisa a novos patamares? Não procure mais. Em \"Ciência com R\", o Dr. Arthur de Sá Ferreira, um pesquisador experiente, oferece um guia indispensável que capacitará pesquisadores, analistas de dados e estudantes a tomarem decisões informadas e baseadas em evidências em seus empreendimentos científicos.

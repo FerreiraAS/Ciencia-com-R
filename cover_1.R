@@ -14,7 +14,7 @@ for(i in 1:2){
                    width = W,
                    height = H)
   }
-  par(mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0), bg = "black")
+  par(mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0), omi = c(0, 0, 0, 0), mai = c(0, 0, 0, 0), bg = "black")
   plot(1, type = "n", xlab = "", ylab = "", xlim = c(0,W), ylim = c(0,H))
   
   # background image
