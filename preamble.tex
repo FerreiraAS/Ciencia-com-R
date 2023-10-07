@@ -1,18 +1,19 @@
-\usepackage{booktabs}
-\usepackage{geometry}
-\usepackage[linktoc=all]{hyperref}
-\usepackage[notransparent]{svg}
-\usepackage{pdfpages}
-\usepackage[portuguese]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{titlesec}
 \usepackage{academicons}
+\usepackage[portuguese]{babel}
+\usepackage{booktabs}
+\usepackage{draftwatermark}
 \usepackage{fontspec}
 \usepackage{fontawesome5}
-\usepackage{xcolor}
+\usepackage{geometry}
 \usepackage{graphicx}
+\usepackage{letltxmacro}
+\usepackage[linktoc=all]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\usepackage[notransparent]{svg}
+\usepackage{titlesec}
+\usepackage{xcolor}
 
-\usepackage{draftwatermark}
 \SetWatermarkLightness{0.9}
 \SetWatermarkText{RASCUNHO}
 \SetWatermarkScale{1}
@@ -48,5 +49,14 @@
   \end{blackbox}
   \end{itemize}
   }
+
+
+\LetLtxMacro\Oldfootnote\footnote
+\newcommand{\EnableFootNotes}{%
+  \LetLtxMacro\footnote\Oldfootnote%
+}
+\newcommand{\DisableFootNotes}{%
+  \renewcommand{\footnote}[2][]{\relax}
+}
 
 \frontmatter

@@ -127,21 +127,22 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
-\usepackage{booktabs}
-\usepackage{geometry}
-\usepackage[linktoc=all]{hyperref}
-\usepackage[notransparent]{svg}
-\usepackage{pdfpages}
-\usepackage[portuguese]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{titlesec}
 \usepackage{academicons}
+\usepackage[portuguese]{babel}
+\usepackage{booktabs}
+\usepackage{draftwatermark}
 \usepackage{fontspec}
 \usepackage{fontawesome5}
-\usepackage{xcolor}
+\usepackage{geometry}
 \usepackage{graphicx}
+\usepackage{letltxmacro}
+\usepackage[linktoc=all]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\usepackage[notransparent]{svg}
+\usepackage{titlesec}
+\usepackage{xcolor}
 
-\usepackage{draftwatermark}
 \SetWatermarkLightness{0.9}
 \SetWatermarkText{RASCUNHO}
 \SetWatermarkScale{1}
@@ -177,6 +178,15 @@
   \end{blackbox}
   \end{itemize}
   }
+
+
+\LetLtxMacro\Oldfootnote\footnote
+\newcommand{\EnableFootNotes}{%
+  \LetLtxMacro\footnote\Oldfootnote%
+}
+\newcommand{\DisableFootNotes}{%
+  \renewcommand{\footnote}[2][]{\relax}
+}
 
 \frontmatter
 \usepackage{booktabs}
@@ -222,7 +232,7 @@
 \makeatother
 \subtitle{Perguntas e respostas para pesquisadores e analistas de dados}
 \author{© 2023 by Arthur de Sá Ferreira https://orcid.org/0000-0001-7014-2002}
-\date{Atualizado em 06/10/2023}
+\date{Atualizado em 07/10/2023}
 
 \begin{document}
 \maketitle
@@ -237,6 +247,8 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
+\DisableFootNotes
+
 \mainmatter
 \clearpage
 \markboth{}{}
@@ -335,6 +347,8 @@ Este trabalho não seria possível sem o apoio e suporte da minha esposa Daniele
 
 \markboth{}{}
 \par\noindent\rule{\textwidth}{0.05in}
+
+\EnableFootNotes
 
 \hypertarget{pensamento-estatistico}{%
 \chapter{\texorpdfstring{\textbf{Pensamento estatístico}}{Pensamento estatístico}}\label{pensamento-estatistico}}
@@ -734,8 +748,6 @@ Este trabalho não seria possível sem o apoio e suporte da minha esposa Daniele
 \end{table}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/aggregate}{\emph{aggregate}} para agregar medidas repetidas utilizando uma função personalizada.
 
 \end{infobox}
@@ -800,8 +812,6 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} forne
 \end{table}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/aggregate}{\emph{aggregate}} para agregar medidas repetidas utilizando uma função personalizada.
 
 \end{infobox}
@@ -838,8 +848,6 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} forne
 \end{table}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/aggregate}{\emph{aggregate}} para agregar medidas repetidas utilizando uma função personalizada.
 
 \end{infobox}
@@ -916,8 +924,6 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} forne
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{24}} fornece a função \href{https://www.rdocumentation.org/packages/misty/versions/0.5.0/topics/na.test}{\emph{na.test}} para executar o Little's Missing Completely at Random (MCAR) test\textsuperscript{\protect\hyperlink{ref-little1988}{25}}.
 
 \end{infobox}
@@ -944,8 +950,6 @@ O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{24}} fornece
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{26}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/complete.cases}{\emph{complete.cases}} para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados.
 
 \end{infobox}
@@ -960,8 +964,6 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{26}} fornece
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{28}} e \emph{miceadds}\textsuperscript{\protect\hyperlink{ref-miceadds}{29}} fornecem funções \href{https://www.rdocumentation.org/packages/mice/versions/3.16.0/topics/mice}{\emph{mice}} e \href{https://www.rdocumentation.org/packages/miceadds/versions/3.16-18/topics/mi.anova}{\emph{mi.anova}} para imputação multivariada por equações encadeadas, respectivamente, para imputação de dados.
 
 \end{infobox}
@@ -1122,8 +1124,6 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{28}} e \emph
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{40}} fornece a função \href{https://www.rdocumentation.org/packages/MASS/versions/7.3-58.3/topics/boxcox}{\emph{boxcox}} para executar a transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{39}}
 
 \end{infobox}
@@ -1279,8 +1279,6 @@ O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{40}} fornece a
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{52}} fornece a função \href{https://www.rdocumentation.org/packages/forcats/versions/1.0.0/topics/as_factor}{\emph{as\_factor}} para converter uma variável em fator.
 
 \end{infobox}
@@ -1429,8 +1427,6 @@ O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{52}} for
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-base}{56}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile}{\emph{quantile}} para executar análise de percentis.
 
 \end{infobox}
@@ -1524,8 +1520,6 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{61}} fornece a função \href{https://www.rdocumentation.org/packages/data.table/versions/1.14.8/topics/melt.data.table}{\emph{melt.data.table}} para reorganizar a tabela em diferentes formatos.
 
 \end{infobox}
@@ -1557,16 +1551,16 @@ O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{61
 \toprule
 \textbf{ID} & \textbf{Data.Coleta} & \textbf{Estado.Civil} & \textbf{Numero.Filhos}\\
 \midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{07-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-2 & 08-10-2023 & casado & 1\\
-\cellcolor{gray!6}{3} & \cellcolor{gray!6}{09-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-4 & 10-10-2023 & solteiro & NA\\
-\cellcolor{gray!6}{5} & \cellcolor{gray!6}{11-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-6 & 12-10-2023 & solteiro & 0\\
-\cellcolor{gray!6}{7} & \cellcolor{gray!6}{13-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{NA}\\
-8 & 14-10-2023 & solteiro & NA\\
-\cellcolor{gray!6}{9} & \cellcolor{gray!6}{15-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-10 & 16-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{08-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+2 & 09-10-2023 & casado & 1\\
+\cellcolor{gray!6}{3} & \cellcolor{gray!6}{10-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+4 & 11-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{12-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+6 & 13-10-2023 & solteiro & 0\\
+\cellcolor{gray!6}{7} & \cellcolor{gray!6}{14-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{NA}\\
+8 & 15-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{9} & \cellcolor{gray!6}{16-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+10 & 17-10-2023 & solteiro & NA\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -1579,16 +1573,16 @@ O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{61
 \toprule
 \textbf{ID} & \textbf{Data de Coleta} & \textbf{Estado Civil} & \textbf{Número de Filhos}\\
 \midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{07-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-2 & 08-10-2023 & Casado & 1\\
-\cellcolor{gray!6}{3} & \cellcolor{gray!6}{09-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NaN}\\
-4 & 10-10-2023 & Solteiro & N/A\\
-\cellcolor{gray!6}{5} & \cellcolor{gray!6}{11-10-2023} & \cellcolor{gray!6}{Casado} & \cellcolor{gray!6}{N.A.}\\
-6 & 12-10-2023 & solteiro & 0\\
-\cellcolor{gray!6}{7} & \cellcolor{gray!6}{13-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{}\\
-8 & 14-10-2023 & Solteiro & na\\
-\cellcolor{gray!6}{9} & \cellcolor{gray!6}{15-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{n.a.}\\
-10 & 16-10-2023 & Solteiro & 999\\
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{08-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+2 & 09-10-2023 & Casado & 1\\
+\cellcolor{gray!6}{3} & \cellcolor{gray!6}{10-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NaN}\\
+4 & 11-10-2023 & Solteiro & N/A\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{12-10-2023} & \cellcolor{gray!6}{Casado} & \cellcolor{gray!6}{N.A.}\\
+6 & 13-10-2023 & solteiro & 0\\
+\cellcolor{gray!6}{7} & \cellcolor{gray!6}{14-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{}\\
+8 & 15-10-2023 & Solteiro & na\\
+\cellcolor{gray!6}{9} & \cellcolor{gray!6}{16-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{n.a.}\\
+10 & 17-10-2023 & Solteiro & 999\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -2334,22 +2328,16 @@ O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{61
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{metagear}\textsuperscript{\protect\hyperlink{ref-metagear}{98}} fornece funções para condução e análise de revisões sistemáticas
 
 \end{infobox}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{metagear}\textsuperscript{\protect\hyperlink{ref-metagear}{98}} fornece a função \href{https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA}{\emph{plot\_PRISMA}} para gerar o fluxograma de uma revisão sistemática de acordo com o \emph{Preferred Reporting Items for Systematic Reviews and Meta-Analyses}\textsuperscript{\protect\hyperlink{ref-Moher2015}{99}}.
 
 \end{infobox}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{PRISMA2020}\textsuperscript{\protect\hyperlink{ref-PRISMA2020-2}{100},\protect\hyperlink{ref-PRISMA2020}{101}} fornece a função \href{https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram}{\emph{PRISMA\_flowdiagram}} para elaboração do fluxograma de revisões sistemáticas no formato padrão.
 
 \end{infobox}
@@ -2494,8 +2482,6 @@ O pacote \emph{PRISMA2020}\textsuperscript{\protect\hyperlink{ref-PRISMA2020-2}{
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{explore}\textsuperscript{\protect\hyperlink{ref-explore}{113}} fornece a função \href{https://www.rdocumentation.org/packages/explore/versions/1.0.2/topics/explore}{\emph{explore}} para análise exploratória de um banco de dados.
 
 \end{infobox}
@@ -2515,8 +2501,6 @@ O pacote \emph{explore}\textsuperscript{\protect\hyperlink{ref-explore}{113}} fo
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{graphics}\textsuperscript{\protect\hyperlink{ref-graphics}{114}} fornece a função \href{https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot}{\emph{boxplot}} para construção de gráficos \emph{boxplot}.
 
 \end{infobox}
@@ -2595,8 +2579,6 @@ O pacote \emph{graphics}\textsuperscript{\protect\hyperlink{ref-graphics}{114}} 
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{graphics}\textsuperscript{\protect\hyperlink{ref-graphics}{114}} fornece a função \href{https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/coplot}{\emph{coplot}} para construção de gráficos \emph{boxplot} condicionais.
 
 \end{infobox}
@@ -2630,8 +2612,6 @@ O pacote \emph{graphics}\textsuperscript{\protect\hyperlink{ref-graphics}{114}} 
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{dataExplorer}\textsuperscript{\protect\hyperlink{ref-DataExplorer}{115}} fornece a função \href{https://www.rdocumentation.org/packages/DataExplorer/versions/0.8.2/topics/create_report}{\emph{create\_report}} para executar análise exploratória.
 
 \end{infobox}
@@ -2696,15 +2676,11 @@ O pacote \emph{dataExplorer}\textsuperscript{\protect\hyperlink{ref-DataExplorer
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-table1}{119}} fornece a função \href{https://www.rdocumentation.org/packages/table1/versions/1.4.3/topics/table1}{\emph{table1}} para construção da tabela.
 
 \end{infobox}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{120}} fornece as funções \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/as_flextable}{\emph{as\_flextable}} e \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/save_as_docx}{\emph{save\_as\_docx}} para salvar tabelas em formato DOCX.
 
 \end{infobox}
@@ -2731,15 +2707,11 @@ O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{120}} f
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-table1}{119}} fornece a função \href{https://www.rdocumentation.org/packages/table1/versions/1.4.3/topics/table1}{\emph{table1}} para construção da tabela.
 
 \end{infobox}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{120}} fornece as funções \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/as_flextable}{\emph{as\_flextable}} e \href{https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/save_as_docx}{\emph{save\_as\_docx}} para salvar tabelas em formato DOCX.
 
 \end{infobox}
@@ -2766,8 +2738,6 @@ O pacote \emph{table1}\textsuperscript{\protect\hyperlink{ref-flextable}{120}} f
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 Os pacotes \emph{ggplot2}\textsuperscript{\protect\hyperlink{ref-ggplot2}{123}}, \emph{plotly}\textsuperscript{\protect\hyperlink{ref-plotly}{124}} e \emph{corrplot}\textsuperscript{\protect\hyperlink{ref-corrplot}{125}} fornecem diversas funções para construção de gráficos tais como \href{https://www.rdocumentation.org/packages/ggplot2/versions/3.4.3/topics/ggplot}{\emph{ggplot}}, \href{https://www.rdocumentation.org/packages/plotly/versions/4.10.2/topics/plot_ly}{\emph{plot\_ly}} e \href{https://www.rdocumentation.org/packages/corrplot/versions/0.92/topics/corrplot}{\emph{corrplot}} respectivamente.
 
 \end{infobox}
@@ -2807,15 +2777,11 @@ Os pacotes \emph{ggplot2}\textsuperscript{\protect\hyperlink{ref-ggplot2}{123}},
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{ggsci}\textsuperscript{\protect\hyperlink{ref-ggsci}{128}} fornece palhetas de cores tais como \href{https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_lancet}{\emph{pal\_lancet}}, \href{https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_nejm}{\emph{pal\_nejm}} e \href{https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_npg}{\emph{pal\_npg}} inspiradas em publicações científicas para uso em gráficos.
 
 \end{infobox}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{129}} fornece a função \href{https://www.rdocumentation.org/packages/tiff/versions/0.1-11/topics/writeTIFF}{\emph{writeTIFF}} para exportar gráficos em formato TIFF.
 
 \end{infobox}
@@ -3169,8 +3135,6 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{129}} fornece 
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{formatR}\textsuperscript{\protect\hyperlink{ref-formatR}{139}} fornece a função \href{https://www.rdocumentation.org/packages/formatR/versions/1.14/topics/tidy_source}{\emph{tidy\_source}} para formatar um R script.
 
 \end{infobox}
@@ -3274,8 +3238,6 @@ O pacote \emph{formatR}\textsuperscript{\protect\hyperlink{ref-formatR}{139}} fo
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} fornece a função fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test}{\emph{cor.test}} para calcular o coeficiente de correlação de Pearson (\(r\)).
 
 \end{infobox}
@@ -3310,8 +3272,6 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} forne
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} fornece a função fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test}{\emph{cor.test}} para calcular o coeficiente de correlação ponto-bisserial (\(r_{s}\)).
 
 \end{infobox}
@@ -3348,8 +3308,6 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} forne
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} fornece a função fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test}{\emph{cor.test}} para calcular o coeficiente de correlação de Spearman (\(\rho\)).
 
 \end{infobox}
@@ -3434,8 +3392,6 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} forne
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{gtsummary}\textsuperscript{\protect\hyperlink{ref-gtsummary}{146}} fornece a função \href{https://www.rdocumentation.org/packages/gtsummary/versions/1.6.3/topics/tbl_cross}{\emph{tbl\_cross}} para criar uma tabela NxM.
 
 \end{infobox}
@@ -3471,8 +3427,6 @@ O pacote \emph{gtsummary}\textsuperscript{\protect\hyperlink{ref-gtsummary}{146}
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{gtsummary}\textsuperscript{\protect\hyperlink{ref-gtsummary}{146}} fornece a função \href{https://www.rdocumentation.org/packages/gtsummary/versions/1.6.3/topics/tbl_cross}{\emph{tbl\_cross}} para criar uma tabela NxM.
 
 \end{infobox}
@@ -3509,8 +3463,6 @@ O pacote \emph{gtsummary}\textsuperscript{\protect\hyperlink{ref-gtsummary}{146}
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test}{\emph{cor.test}} para calcular o coeficiente Kendall \(\tau\).
 
 \end{infobox}
@@ -3543,8 +3495,6 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{18}} forne
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{fastDummies}\textsuperscript{\protect\hyperlink{ref-fastDummies}{149}} fornece a funçãao \href{https://www.rdocumentation.org/packages/fastDummies/versions/1.7.3/topics/dummy_columns}{\emph{dummy\_cols}} para preparar as variáveis categóricas fictícias para análise de regressão.
 
 \end{infobox}
@@ -3565,8 +3515,6 @@ O pacote \emph{fastDummies}\textsuperscript{\protect\hyperlink{ref-fastDummies}{
 \end{itemize}
 
 \begin{infobox}{Rlogo}
-\textbf{Atenção!}
-
 O pacote \emph{modelsummary}\textsuperscript{\protect\hyperlink{ref-modelsummary}{151}} fornece as funções \href{https://www.rdocumentation.org/packages/modelsummary/versions/1.4.1/topics/modelsummary}{\emph{modelsummary}} e \href{https://www.rdocumentation.org/packages/modelsummary/versions/1.4.1/topics/modelplot}{\emph{modelplot}} para gerar tabelas e gráficos de coeficientes de regressão.
 
 \end{infobox}
@@ -4349,6 +4297,8 @@ O pacote \emph{modelsummary}\textsuperscript{\protect\hyperlink{ref-modelsummary
 \hypertarget{referuxeancias}{%
 \chapter*{\texorpdfstring{\textbf{Referências}}{Referências}}\label{referuxeancias}}
 \addcontentsline{toc}{chapter}{\textbf{Referências}}
+
+\DisableFootNotes
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{0}{0}
