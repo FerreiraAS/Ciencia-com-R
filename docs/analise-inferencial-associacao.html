@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 23 Associação | Ciência com R</title>
+  <title>Capítulo 24 Associação | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 23 Associação | Ciência com R" />
+  <meta property="og:title" content="Capítulo 24 Associação | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciência com R/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/R-Book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 23 Associação | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 24 Associação | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciência com R/Cover_1.png" />
@@ -53,6 +53,14 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/d3-3.3.8/d3.min.js"></script>
+<script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+<link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+<script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/chromatography-0.1/chromatography.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.10/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -172,32 +180,28 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="parte-1---estatística-aplicada.html"><a href="parte-1---estatística-aplicada.html"><i class="fa fa-check"></i><strong>PARTE 1 - Estatística Aplicada</strong></a></li>
 <li class="chapter" data-level="1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html"><i class="fa fa-check"></i><b>1</b> <strong>Pensamento estatístico</strong></a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#estatisica-pesquisa"><i class="fa fa-check"></i><b>1.1</b> Estatística e pesquisa científica</a>
+<li class="chapter" data-level="1.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#espacos-eventos"><i class="fa fa-check"></i><b>1.1</b> Espaços amostrais e eventos</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#qual-a-contribuição-da-estatística-para-pesquisa"><i class="fa fa-check"></i><b>1.1.1</b> Qual a contribuição da estatística para pesquisa?</a></li>
+<li class="chapter" data-level="1.1.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-espaço-amostral"><i class="fa fa-check"></i><b>1.1.1</b> O que é espaço amostral?</a></li>
+<li class="chapter" data-level="1.1.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-evento"><i class="fa fa-check"></i><b>1.1.2</b> O que é evento?</a></li>
+<li class="chapter" data-level="1.1.3" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-espaço-de-eventos"><i class="fa fa-check"></i><b>1.1.3</b> O que é espaço de eventos?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#espacos-eventos"><i class="fa fa-check"></i><b>1.2</b> Espaços amostrais e eventos</a>
+<li class="chapter" data-level="1.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#probabilidade-ciondicional"><i class="fa fa-check"></i><b>1.2</b> Probabilidade condicional</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-espaço-amostral"><i class="fa fa-check"></i><b>1.2.1</b> O que é espaço amostral?</a></li>
-<li class="chapter" data-level="1.2.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-evento"><i class="fa fa-check"></i><b>1.2.2</b> O que é evento?</a></li>
-<li class="chapter" data-level="1.2.3" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-espaço-de-eventos"><i class="fa fa-check"></i><b>1.2.3</b> O que é espaço de eventos?</a></li>
+<li class="chapter" data-level="1.2.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-probabilidade-condicional"><i class="fa fa-check"></i><b>1.2.1</b> O que é probabilidade condicional?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#probabilidade-ciondicional"><i class="fa fa-check"></i><b>1.3</b> Probabilidade condicional</a>
+<li class="chapter" data-level="1.3" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#lei-grandes-numeros"><i class="fa fa-check"></i><b>1.3</b> Leis dos grandes números</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-probabilidade-condicional"><i class="fa fa-check"></i><b>1.3.1</b> O que é probabilidade condicional?</a></li>
+<li class="chapter" data-level="1.3.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-a-lei-fraca-dos-grandes-números"><i class="fa fa-check"></i><b>1.3.1</b> O que é a lei fraca dos grandes números?</a></li>
+<li class="chapter" data-level="1.3.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-a-lei-forte-dos-grandes-números"><i class="fa fa-check"></i><b>1.3.2</b> O que é a lei forte dos grandes números?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#lei-grandes-numeros"><i class="fa fa-check"></i><b>1.4</b> Leis dos grandes números</a>
+<li class="chapter" data-level="1.4" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#teorema-central-limite"><i class="fa fa-check"></i><b>1.4</b> Teorema central do limite</a>
 <ul>
-<li class="chapter" data-level="1.4.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-a-lei-fraca-dos-grandes-números"><i class="fa fa-check"></i><b>1.4.1</b> O que é a lei fraca dos grandes números?</a></li>
-<li class="chapter" data-level="1.4.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-a-lei-forte-dos-grandes-números"><i class="fa fa-check"></i><b>1.4.2</b> O que é a lei forte dos grandes números?</a></li>
+<li class="chapter" data-level="1.4.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-teorema-central-do-limite"><i class="fa fa-check"></i><b>1.4.1</b> O que é teorema central do limite?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#teorema-central-limite"><i class="fa fa-check"></i><b>1.5</b> Teorema central do limite</a>
+<li class="chapter" data-level="1.5" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#regressao-media"><i class="fa fa-check"></i><b>1.5</b> Regressão para a média</a>
 <ul>
-<li class="chapter" data-level="1.5.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-teorema-central-do-limite"><i class="fa fa-check"></i><b>1.5.1</b> O que é teorema central do limite?</a></li>
-</ul></li>
-<li class="chapter" data-level="1.6" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#regressao-media"><i class="fa fa-check"></i><b>1.6</b> Regressão para a média</a>
-<ul>
-<li class="chapter" data-level="1.6.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-regressão-para-a-média"><i class="fa fa-check"></i><b>1.6.1</b> O que é regressão para a média?</a></li>
+<li class="chapter" data-level="1.5.1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#o-que-é-regressão-para-a-média"><i class="fa fa-check"></i><b>1.5.1</b> O que é regressão para a média?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="paradoxos-estatisticos.html"><a href="paradoxos-estatisticos.html"><i class="fa fa-check"></i><b>2</b> <strong>Paradoxos estatísticos</strong></a>
@@ -494,235 +498,242 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-3---estatística-epidemiologia.html"><a href="parte-3---estatística-epidemiologia.html"><i class="fa fa-check"></i><strong>PARTE 3 - Estatística &amp; Epidemiologia</strong></a></li>
-<li class="chapter" data-level="17" data-path="selecao-testes.html"><a href="selecao-testes.html"><i class="fa fa-check"></i><b>17</b> <strong>Seleção de testes</strong></a>
+<li class="chapter" data-level="17" data-path="estatistica-epidemiologia.html"><a href="estatistica-epidemiologia.html"><i class="fa fa-check"></i><b>17</b> <strong>Estatística com Epidemiologia</strong></a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="selecao-testes.html"><a href="selecao-testes.html#escolha-analise-inferencial"><i class="fa fa-check"></i><b>17.1</b> Escolha de testes para análise inferencial</a>
+<li class="chapter" data-level="17.1" data-path="estatistica-epidemiologia.html"><a href="estatistica-epidemiologia.html#estatisica-pesquisa"><i class="fa fa-check"></i><b>17.1</b> Estatística e pesquisa científica</a>
 <ul>
-<li class="chapter" data-level="17.1.1" data-path="selecao-testes.html"><a href="selecao-testes.html#como-selecionar-os-testes-para-a-análise-estatística-inferencial"><i class="fa fa-check"></i><b>17.1.1</b> Como selecionar os testes para a análise estatística inferencial?</a></li>
+<li class="chapter" data-level="17.1.1" data-path="estatistica-epidemiologia.html"><a href="estatistica-epidemiologia.html#qual-a-relação-entre-estatística-e-metodologia-para-pesquisa-científica"><i class="fa fa-check"></i><b>17.1.1</b> Qual a relação entre estatística e metodologia para pesquisa científica?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="analise-exploratoria-dados.html"><a href="analise-exploratoria-dados.html"><i class="fa fa-check"></i><b>18</b> <strong>Análise exploratória de dados</strong></a>
+<li class="chapter" data-level="18" data-path="selecao-testes.html"><a href="selecao-testes.html"><i class="fa fa-check"></i><b>18</b> <strong>Seleção de testes</strong></a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="analise-exploratoria-dados.html"><a href="analise-exploratoria-dados.html#analise-exploratoria"><i class="fa fa-check"></i><b>18.1</b> Análise exploratória de dados</a>
+<li class="chapter" data-level="18.1" data-path="selecao-testes.html"><a href="selecao-testes.html#escolha-analise-inferencial"><i class="fa fa-check"></i><b>18.1</b> Escolha de testes para análise inferencial</a>
 <ul>
-<li class="chapter" data-level="18.1.1" data-path="analise-exploratoria-dados.html"><a href="analise-exploratoria-dados.html#o-que-é-análise-exploratória-de-dados"><i class="fa fa-check"></i><b>18.1.1</b> O que é análise exploratória de dados?</a></li>
-<li class="chapter" data-level="18.1.2" data-path="analise-exploratoria-dados.html"><a href="analise-exploratoria-dados.html#quais-etapas-constituem-a-análise-exploratória-de-dados"><i class="fa fa-check"></i><b>18.1.2</b> Quais etapas constituem a análise exploratória de dados?</a></li>
+<li class="chapter" data-level="18.1.1" data-path="selecao-testes.html"><a href="selecao-testes.html#como-selecionar-os-testes-para-a-análise-estatística-inferencial"><i class="fa fa-check"></i><b>18.1.1</b> Como selecionar os testes para a análise estatística inferencial?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="analise-descritiva.html"><a href="analise-descritiva.html"><i class="fa fa-check"></i><b>19</b> <strong>Análise descritiva</strong></a>
+<li class="chapter" data-level="19" data-path="analise-exploratoria-dados.html"><a href="analise-exploratoria-dados.html"><i class="fa fa-check"></i><b>19</b> <strong>Análise exploratória de dados</strong></a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#descritiva"><i class="fa fa-check"></i><b>19.1</b> Análise descritiva</a>
+<li class="chapter" data-level="19.1" data-path="analise-exploratoria-dados.html"><a href="analise-exploratoria-dados.html#analise-exploratoria"><i class="fa fa-check"></i><b>19.1</b> Análise exploratória de dados</a>
 <ul>
-<li class="chapter" data-level="19.1.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#o-que-é-análise-descritiva"><i class="fa fa-check"></i><b>19.1.1</b> O que é análise descritiva?</a></li>
-</ul></li>
-<li class="chapter" data-level="19.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#tabelas"><i class="fa fa-check"></i><b>19.2</b> Tabelas</a>
-<ul>
-<li class="chapter" data-level="19.2.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#por-que-usar-tabelas"><i class="fa fa-check"></i><b>19.2.1</b> Por que usar tabelas?</a></li>
-</ul></li>
-<li class="chapter" data-level="19.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#tabela-1"><i class="fa fa-check"></i><b>19.3</b> Tabela 1</a>
-<ul>
-<li class="chapter" data-level="19.3.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#o-que-é-a-tabela-1"><i class="fa fa-check"></i><b>19.3.1</b> O que é a ‘Tabela 1’?</a></li>
-<li class="chapter" data-level="19.3.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#qual-a-utilidade-da-tabela-1"><i class="fa fa-check"></i><b>19.3.2</b> Qual a utilidade da ‘Tabela 1’?</a></li>
-<li class="chapter" data-level="19.3.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-construir-a-tabela-1"><i class="fa fa-check"></i><b>19.3.3</b> Como construir a Tabela 1?</a></li>
-</ul></li>
-<li class="chapter" data-level="19.4" data-path="analise-descritiva.html"><a href="analise-descritiva.html#tabela-2"><i class="fa fa-check"></i><b>19.4</b> Tabela 2</a>
-<ul>
-<li class="chapter" data-level="19.4.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#o-que-é-a-tabela-2"><i class="fa fa-check"></i><b>19.4.1</b> O que é a ‘Tabela 2’?</a></li>
-<li class="chapter" data-level="19.4.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#qual-a-utilidade-da-tabela-2"><i class="fa fa-check"></i><b>19.4.2</b> Qual a utilidade da ‘Tabela 2’?</a></li>
-<li class="chapter" data-level="19.4.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-construir-a-tabela-2"><i class="fa fa-check"></i><b>19.4.3</b> Como construir a Tabela 2?</a></li>
-</ul></li>
-<li class="chapter" data-level="19.5" data-path="analise-descritiva.html"><a href="analise-descritiva.html#graficos"><i class="fa fa-check"></i><b>19.5</b> Gráficos</a>
-<ul>
-<li class="chapter" data-level="19.5.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#o-que-são-gráficos"><i class="fa fa-check"></i><b>19.5.1</b> O que são gráficos?</a></li>
-<li class="chapter" data-level="19.5.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#qual-a-utilidade-dos-gráficos"><i class="fa fa-check"></i><b>19.5.2</b> Qual a utilidade dos gráficos?</a></li>
-<li class="chapter" data-level="19.5.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#que-elementos-incluir-em-gráficos"><i class="fa fa-check"></i><b>19.5.3</b> Que elementos incluir em gráficos?</a></li>
-<li class="chapter" data-level="19.5.4" data-path="analise-descritiva.html"><a href="analise-descritiva.html#para-que-servem-as-barras-de-erro-em-gráficos"><i class="fa fa-check"></i><b>19.5.4</b> Para que servem as barras de erro em gráficos?</a></li>
-<li class="chapter" data-level="19.5.5" data-path="analise-descritiva.html"><a href="analise-descritiva.html#quais-são-as-boas-práticas-na-elaboração-de-gráficos"><i class="fa fa-check"></i><b>19.5.5</b> Quais são as boas práticas na elaboração de gráficos?</a></li>
+<li class="chapter" data-level="19.1.1" data-path="analise-exploratoria-dados.html"><a href="analise-exploratoria-dados.html#o-que-é-análise-exploratória-de-dados"><i class="fa fa-check"></i><b>19.1.1</b> O que é análise exploratória de dados?</a></li>
+<li class="chapter" data-level="19.1.2" data-path="analise-exploratoria-dados.html"><a href="analise-exploratoria-dados.html#quais-etapas-constituem-a-análise-exploratória-de-dados"><i class="fa fa-check"></i><b>19.1.2</b> Quais etapas constituem a análise exploratória de dados?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="analise-inferencial.html"><a href="analise-inferencial.html"><i class="fa fa-check"></i><b>20</b> <strong>Análise inferencial</strong></a>
+<li class="chapter" data-level="20" data-path="analise-descritiva.html"><a href="analise-descritiva.html"><i class="fa fa-check"></i><b>20</b> <strong>Análise descritiva</strong></a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#ideias-hipoteses"><i class="fa fa-check"></i><b>20.1</b> Hipóteses científicas</a>
+<li class="chapter" data-level="20.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#descritiva"><i class="fa fa-check"></i><b>20.1</b> Análise descritiva</a>
 <ul>
-<li class="chapter" data-level="20.1.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-hipótese-científica"><i class="fa fa-check"></i><b>20.1.1</b> O que é hipótese científica?</a></li>
-<li class="chapter" data-level="20.1.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#quais-são-as-principais-fontes-de-ideias-para-gerar-hipóteses-científicas"><i class="fa fa-check"></i><b>20.1.2</b> Quais são as principais fontes de ideias para gerar hipóteses científicas?</a></li>
+<li class="chapter" data-level="20.1.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#o-que-é-análise-descritiva"><i class="fa fa-check"></i><b>20.1.1</b> O que é análise descritiva?</a></li>
 </ul></li>
-<li class="chapter" data-level="20.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#inferencial"><i class="fa fa-check"></i><b>20.2</b> Análise inferencial</a>
+<li class="chapter" data-level="20.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#tabelas"><i class="fa fa-check"></i><b>20.2</b> Tabelas</a>
 <ul>
-<li class="chapter" data-level="20.2.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-análise-inferencial"><i class="fa fa-check"></i><b>20.2.1</b> O que é análise inferencial?</a></li>
-<li class="chapter" data-level="20.2.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-hipótese-nula"><i class="fa fa-check"></i><b>20.2.2</b> O que é hipótese nula?</a></li>
-<li class="chapter" data-level="20.2.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-hipótese-alternativa"><i class="fa fa-check"></i><b>20.2.3</b> O que é hipótese alternativa?</a></li>
-<li class="chapter" data-level="20.2.4" data-path="analise-inferencial.html"><a href="analise-inferencial.html#qual-hipótese-está-sendo-testada"><i class="fa fa-check"></i><b>20.2.4</b> Qual hipótese está sendo testada?</a></li>
-<li class="chapter" data-level="20.2.5" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-reportar-após-um-teste-de-hipótese"><i class="fa fa-check"></i><b>20.2.5</b> O que reportar após um teste de hipótese?</a></li>
+<li class="chapter" data-level="20.2.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#por-que-usar-tabelas"><i class="fa fa-check"></i><b>20.2.1</b> Por que usar tabelas?</a></li>
 </ul></li>
-<li class="chapter" data-level="20.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#tipos-analises-inferenciais"><i class="fa fa-check"></i><b>20.3</b> Tipos de análises inferenciais</a>
+<li class="chapter" data-level="20.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#tabela-1"><i class="fa fa-check"></i><b>20.3</b> Tabela 1</a>
 <ul>
-<li class="chapter" data-level="20.3.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-uma-análise-ad-hoc"><i class="fa fa-check"></i><b>20.3.1</b> O que é uma análise ad hoc?</a></li>
-<li class="chapter" data-level="20.3.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-uma-análise-post-hoc"><i class="fa fa-check"></i><b>20.3.2</b> O que é uma análise post hoc?</a></li>
+<li class="chapter" data-level="20.3.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#o-que-é-a-tabela-1"><i class="fa fa-check"></i><b>20.3.1</b> O que é a ‘Tabela 1’?</a></li>
+<li class="chapter" data-level="20.3.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#qual-a-utilidade-da-tabela-1"><i class="fa fa-check"></i><b>20.3.2</b> Qual a utilidade da ‘Tabela 1’?</a></li>
+<li class="chapter" data-level="20.3.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-construir-a-tabela-1"><i class="fa fa-check"></i><b>20.3.3</b> Como construir a Tabela 1?</a></li>
 </ul></li>
-<li class="chapter" data-level="20.4" data-path="analise-inferencial.html"><a href="analise-inferencial.html#erros-inferencia"><i class="fa fa-check"></i><b>20.4</b> Testes de hipóteses</a>
+<li class="chapter" data-level="20.4" data-path="analise-descritiva.html"><a href="analise-descritiva.html#tabela-2"><i class="fa fa-check"></i><b>20.4</b> Tabela 2</a>
 <ul>
-<li class="chapter" data-level="20.4.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#quais-são-os-tipos-de-teste-de-hipóteses"><i class="fa fa-check"></i><b>20.4.1</b> Quais são os tipos de teste de hipóteses?</a></li>
-<li class="chapter" data-level="20.4.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-são-resultados-positivos-em-teste-de-hipótese"><i class="fa fa-check"></i><b>20.4.2</b> O que são resultados ‘positivos’ em teste de hipótese?</a></li>
-<li class="chapter" data-level="20.4.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-são-resultados-negativos-em-teste-de-hipótese"><i class="fa fa-check"></i><b>20.4.3</b> O que são resultados ‘negativos’ em teste de hipótese?</a></li>
-<li class="chapter" data-level="20.4.4" data-path="analise-inferencial.html"><a href="analise-inferencial.html#qual-a-importância-de-resultados-negativos"><i class="fa fa-check"></i><b>20.4.4</b> Qual a importância de resultados ‘negativos’?</a></li>
+<li class="chapter" data-level="20.4.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#o-que-é-a-tabela-2"><i class="fa fa-check"></i><b>20.4.1</b> O que é a ‘Tabela 2’?</a></li>
+<li class="chapter" data-level="20.4.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#qual-a-utilidade-da-tabela-2"><i class="fa fa-check"></i><b>20.4.2</b> Qual a utilidade da ‘Tabela 2’?</a></li>
+<li class="chapter" data-level="20.4.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-construir-a-tabela-2"><i class="fa fa-check"></i><b>20.4.3</b> Como construir a Tabela 2?</a></li>
 </ul></li>
-<li class="chapter" data-level="20.5" data-path="analise-inferencial.html"><a href="analise-inferencial.html#erros-de-inferência"><i class="fa fa-check"></i><b>20.5</b> Erros de inferência</a>
+<li class="chapter" data-level="20.5" data-path="analise-descritiva.html"><a href="analise-descritiva.html#graficos"><i class="fa fa-check"></i><b>20.5</b> Gráficos</a>
 <ul>
-<li class="chapter" data-level="20.5.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-são-erros-de-inferência-estatística"><i class="fa fa-check"></i><b>20.5.1</b> O que são erros de inferência estatística?</a></li>
-<li class="chapter" data-level="20.5.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-erro-tipo-i"><i class="fa fa-check"></i><b>20.5.2</b> O que é erro tipo I?</a></li>
-<li class="chapter" data-level="20.5.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-erro-tipo-ii"><i class="fa fa-check"></i><b>20.5.3</b> O que é erro tipo II?</a></li>
-<li class="chapter" data-level="20.5.4" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-poder-do-teste"><i class="fa fa-check"></i><b>20.5.4</b> O que é poder do teste?</a></li>
-<li class="chapter" data-level="20.5.5" data-path="analise-inferencial.html"><a href="analise-inferencial.html#qual-a-relação-entre-os-erros-tipo-i-e-ii"><i class="fa fa-check"></i><b>20.5.5</b> Qual a relação entre os erros tipo I e II?</a></li>
-</ul></li>
-<li class="chapter" data-level="20.6" data-path="analise-inferencial.html"><a href="analise-inferencial.html#p-valor"><i class="fa fa-check"></i><b>20.6</b> P-valor</a>
-<ul>
-<li class="chapter" data-level="20.6.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-o-p-valor"><i class="fa fa-check"></i><b>20.6.1</b> O que é o P-valor?</a></li>
-</ul></li>
-<li class="chapter" data-level="20.7" data-path="analise-inferencial.html"><a href="analise-inferencial.html#tamanho-efeito"><i class="fa fa-check"></i><b>20.7</b> Tamanho do efeito</a>
-<ul>
-<li class="chapter" data-level="20.7.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-o-tamanho-do-efeito"><i class="fa fa-check"></i><b>20.7.1</b> O que é o tamanho do efeito?</a></li>
-<li class="chapter" data-level="20.7.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#como-interpretar-um-tamanho-do-efeito"><i class="fa fa-check"></i><b>20.7.2</b> Como interpretar um tamanho do efeito?</a></li>
-<li class="chapter" data-level="20.7.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#quais-são-os-tipos-de-tamanho-do-efeito"><i class="fa fa-check"></i><b>20.7.3</b> Quais são os tipos de tamanho do efeito?</a></li>
-<li class="chapter" data-level="20.7.4" data-path="analise-inferencial.html"><a href="analise-inferencial.html#como-converter-um-tamanho-de-efeito-em-outro"><i class="fa fa-check"></i><b>20.7.4</b> Como converter um tamanho de efeito em outro?</a></li>
-</ul></li>
-<li class="chapter" data-level="20.8" data-path="analise-inferencial.html"><a href="analise-inferencial.html#p-valor-e-tamanho-do-efeito"><i class="fa fa-check"></i><b>20.8</b> P-valor e tamanho do efeito</a>
-<ul>
-<li class="chapter" data-level="20.8.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#como-interpretar-p-valor-e-tamanho-do-efeito"><i class="fa fa-check"></i><b>20.8.1</b> Como interpretar P-valor e tamanho do efeito?</a></li>
-</ul></li>
-<li class="chapter" data-level="20.9" data-path="analise-inferencial.html"><a href="analise-inferencial.html#parametric-naoparametrico"><i class="fa fa-check"></i><b>20.9</b> Teste paramétrico e não paramétrico</a>
-<ul>
-<li class="chapter" data-level="20.9.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-um-teste-paramétrico"><i class="fa fa-check"></i><b>20.9.1</b> O que é um teste paramétrico?</a></li>
-<li class="chapter" data-level="20.9.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-um-teste-não-paramétrico"><i class="fa fa-check"></i><b>20.9.2</b> O que é um teste não paramétrico?</a></li>
-<li class="chapter" data-level="20.9.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#por-que-os-testes-paramétricos-são-preferidos"><i class="fa fa-check"></i><b>20.9.3</b> Por que os testes paramétricos são preferidos?</a></li>
+<li class="chapter" data-level="20.5.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#o-que-são-gráficos"><i class="fa fa-check"></i><b>20.5.1</b> O que são gráficos?</a></li>
+<li class="chapter" data-level="20.5.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#qual-a-utilidade-dos-gráficos"><i class="fa fa-check"></i><b>20.5.2</b> Qual a utilidade dos gráficos?</a></li>
+<li class="chapter" data-level="20.5.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#que-elementos-incluir-em-gráficos"><i class="fa fa-check"></i><b>20.5.3</b> Que elementos incluir em gráficos?</a></li>
+<li class="chapter" data-level="20.5.4" data-path="analise-descritiva.html"><a href="analise-descritiva.html#para-que-servem-as-barras-de-erro-em-gráficos"><i class="fa fa-check"></i><b>20.5.4</b> Para que servem as barras de erro em gráficos?</a></li>
+<li class="chapter" data-level="20.5.5" data-path="analise-descritiva.html"><a href="analise-descritiva.html#quais-são-as-boas-práticas-na-elaboração-de-gráficos"><i class="fa fa-check"></i><b>20.5.5</b> Quais são as boas práticas na elaboração de gráficos?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="analise-comparacao.html"><a href="analise-comparacao.html"><i class="fa fa-check"></i><b>21</b> <strong>Comparação</strong></a>
+<li class="chapter" data-level="21" data-path="analise-inferencial.html"><a href="analise-inferencial.html"><i class="fa fa-check"></i><b>21</b> <strong>Análise inferencial</strong></a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="analise-comparacao.html"><a href="analise-comparacao.html#analise-inferencial-comparacao"><i class="fa fa-check"></i><b>21.1</b> Análise inferencial de comparação</a>
+<li class="chapter" data-level="21.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#ideias-hipoteses"><i class="fa fa-check"></i><b>21.1</b> Hipóteses científicas</a>
 <ul>
-<li class="chapter" data-level="21.1.1" data-path="analise-comparacao.html"><a href="analise-comparacao.html#o-que-é-análise-de-comparação-de-dados"><i class="fa fa-check"></i><b>21.1.1</b> O que é análise de comparação de dados?</a></li>
+<li class="chapter" data-level="21.1.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-hipótese-científica"><i class="fa fa-check"></i><b>21.1.1</b> O que é hipótese científica?</a></li>
+<li class="chapter" data-level="21.1.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#quais-são-as-principais-fontes-de-ideias-para-gerar-hipóteses-científicas"><i class="fa fa-check"></i><b>21.1.2</b> Quais são as principais fontes de ideias para gerar hipóteses científicas?</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#inferencial"><i class="fa fa-check"></i><b>21.2</b> Análise inferencial</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-análise-inferencial"><i class="fa fa-check"></i><b>21.2.1</b> O que é análise inferencial?</a></li>
+<li class="chapter" data-level="21.2.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-hipótese-nula"><i class="fa fa-check"></i><b>21.2.2</b> O que é hipótese nula?</a></li>
+<li class="chapter" data-level="21.2.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-hipótese-alternativa"><i class="fa fa-check"></i><b>21.2.3</b> O que é hipótese alternativa?</a></li>
+<li class="chapter" data-level="21.2.4" data-path="analise-inferencial.html"><a href="analise-inferencial.html#qual-hipótese-está-sendo-testada"><i class="fa fa-check"></i><b>21.2.4</b> Qual hipótese está sendo testada?</a></li>
+<li class="chapter" data-level="21.2.5" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-reportar-após-um-teste-de-hipótese"><i class="fa fa-check"></i><b>21.2.5</b> O que reportar após um teste de hipótese?</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#tipos-analises-inferenciais"><i class="fa fa-check"></i><b>21.3</b> Tipos de análises inferenciais</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-uma-análise-ad-hoc"><i class="fa fa-check"></i><b>21.3.1</b> O que é uma análise ad hoc?</a></li>
+<li class="chapter" data-level="21.3.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-uma-análise-post-hoc"><i class="fa fa-check"></i><b>21.3.2</b> O que é uma análise post hoc?</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="analise-inferencial.html"><a href="analise-inferencial.html#erros-inferencia"><i class="fa fa-check"></i><b>21.4</b> Testes de hipóteses</a>
+<ul>
+<li class="chapter" data-level="21.4.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#quais-são-os-tipos-de-teste-de-hipóteses"><i class="fa fa-check"></i><b>21.4.1</b> Quais são os tipos de teste de hipóteses?</a></li>
+<li class="chapter" data-level="21.4.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-são-resultados-positivos-em-teste-de-hipótese"><i class="fa fa-check"></i><b>21.4.2</b> O que são resultados ‘positivos’ em teste de hipótese?</a></li>
+<li class="chapter" data-level="21.4.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-são-resultados-negativos-em-teste-de-hipótese"><i class="fa fa-check"></i><b>21.4.3</b> O que são resultados ‘negativos’ em teste de hipótese?</a></li>
+<li class="chapter" data-level="21.4.4" data-path="analise-inferencial.html"><a href="analise-inferencial.html#qual-a-importância-de-resultados-negativos"><i class="fa fa-check"></i><b>21.4.4</b> Qual a importância de resultados ‘negativos’?</a></li>
+</ul></li>
+<li class="chapter" data-level="21.5" data-path="analise-inferencial.html"><a href="analise-inferencial.html#erros-de-inferência"><i class="fa fa-check"></i><b>21.5</b> Erros de inferência</a>
+<ul>
+<li class="chapter" data-level="21.5.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-são-erros-de-inferência-estatística"><i class="fa fa-check"></i><b>21.5.1</b> O que são erros de inferência estatística?</a></li>
+<li class="chapter" data-level="21.5.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-erro-tipo-i"><i class="fa fa-check"></i><b>21.5.2</b> O que é erro tipo I?</a></li>
+<li class="chapter" data-level="21.5.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-erro-tipo-ii"><i class="fa fa-check"></i><b>21.5.3</b> O que é erro tipo II?</a></li>
+<li class="chapter" data-level="21.5.4" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-poder-do-teste"><i class="fa fa-check"></i><b>21.5.4</b> O que é poder do teste?</a></li>
+<li class="chapter" data-level="21.5.5" data-path="analise-inferencial.html"><a href="analise-inferencial.html#qual-a-relação-entre-os-erros-tipo-i-e-ii"><i class="fa fa-check"></i><b>21.5.5</b> Qual a relação entre os erros tipo I e II?</a></li>
+</ul></li>
+<li class="chapter" data-level="21.6" data-path="analise-inferencial.html"><a href="analise-inferencial.html#p-valor"><i class="fa fa-check"></i><b>21.6</b> P-valor</a>
+<ul>
+<li class="chapter" data-level="21.6.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-o-p-valor"><i class="fa fa-check"></i><b>21.6.1</b> O que é o P-valor?</a></li>
+</ul></li>
+<li class="chapter" data-level="21.7" data-path="analise-inferencial.html"><a href="analise-inferencial.html#tamanho-efeito"><i class="fa fa-check"></i><b>21.7</b> Tamanho do efeito</a>
+<ul>
+<li class="chapter" data-level="21.7.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-o-tamanho-do-efeito"><i class="fa fa-check"></i><b>21.7.1</b> O que é o tamanho do efeito?</a></li>
+<li class="chapter" data-level="21.7.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#como-interpretar-um-tamanho-do-efeito"><i class="fa fa-check"></i><b>21.7.2</b> Como interpretar um tamanho do efeito?</a></li>
+<li class="chapter" data-level="21.7.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#quais-são-os-tipos-de-tamanho-do-efeito"><i class="fa fa-check"></i><b>21.7.3</b> Quais são os tipos de tamanho do efeito?</a></li>
+<li class="chapter" data-level="21.7.4" data-path="analise-inferencial.html"><a href="analise-inferencial.html#como-converter-um-tamanho-de-efeito-em-outro"><i class="fa fa-check"></i><b>21.7.4</b> Como converter um tamanho de efeito em outro?</a></li>
+</ul></li>
+<li class="chapter" data-level="21.8" data-path="analise-inferencial.html"><a href="analise-inferencial.html#p-valor-e-tamanho-do-efeito"><i class="fa fa-check"></i><b>21.8</b> P-valor e tamanho do efeito</a>
+<ul>
+<li class="chapter" data-level="21.8.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#como-interpretar-p-valor-e-tamanho-do-efeito"><i class="fa fa-check"></i><b>21.8.1</b> Como interpretar P-valor e tamanho do efeito?</a></li>
+</ul></li>
+<li class="chapter" data-level="21.9" data-path="analise-inferencial.html"><a href="analise-inferencial.html#parametric-naoparametrico"><i class="fa fa-check"></i><b>21.9</b> Teste paramétrico e não paramétrico</a>
+<ul>
+<li class="chapter" data-level="21.9.1" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-um-teste-paramétrico"><i class="fa fa-check"></i><b>21.9.1</b> O que é um teste paramétrico?</a></li>
+<li class="chapter" data-level="21.9.2" data-path="analise-inferencial.html"><a href="analise-inferencial.html#o-que-é-um-teste-não-paramétrico"><i class="fa fa-check"></i><b>21.9.2</b> O que é um teste não paramétrico?</a></li>
+<li class="chapter" data-level="21.9.3" data-path="analise-inferencial.html"><a href="analise-inferencial.html#por-que-os-testes-paramétricos-são-preferidos"><i class="fa fa-check"></i><b>21.9.3</b> Por que os testes paramétricos são preferidos?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html"><i class="fa fa-check"></i><b>22</b> <strong>Correlação</strong></a>
+<li class="chapter" data-level="22" data-path="analise-comparacao.html"><a href="analise-comparacao.html"><i class="fa fa-check"></i><b>22</b> <strong>Comparação</strong></a>
 <ul>
-<li class="chapter" data-level="22.1" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html#analise-correlacao"><i class="fa fa-check"></i><b>22.1</b> Análise de correlação</a>
+<li class="chapter" data-level="22.1" data-path="analise-comparacao.html"><a href="analise-comparacao.html#analise-inferencial-comparacao"><i class="fa fa-check"></i><b>22.1</b> Análise inferencial de comparação</a>
 <ul>
-<li class="chapter" data-level="22.1.1" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html#o-que-é-análise-de-correlação"><i class="fa fa-check"></i><b>22.1.1</b> O que é análise de correlação?</a></li>
-<li class="chapter" data-level="22.1.2" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html#qual-é-a-interpretação-das-medidas-de-correlação"><i class="fa fa-check"></i><b>22.1.2</b> Qual é a interpretação das medidas de correlação?</a></li>
-<li class="chapter" data-level="22.1.3" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html#quais-precauções-devem-ser-tomadas-na-interpretação-de-medidas-de-correlação"><i class="fa fa-check"></i><b>22.1.3</b> Quais precauções devem ser tomadas na interpretação de medidas de correlação?</a></li>
-<li class="chapter" data-level="22.1.4" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html#quais-testes-podem-ser-usados-para-análises-de-correlação"><i class="fa fa-check"></i><b>22.1.4</b> Quais testes podem ser usados para análises de correlação?</a></li>
+<li class="chapter" data-level="22.1.1" data-path="analise-comparacao.html"><a href="analise-comparacao.html#o-que-é-análise-de-comparação-de-dados"><i class="fa fa-check"></i><b>22.1.1</b> O que é análise de comparação de dados?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html"><i class="fa fa-check"></i><b>23</b> <strong>Associação</strong></a>
+<li class="chapter" data-level="23" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html"><i class="fa fa-check"></i><b>23</b> <strong>Correlação</strong></a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#analise-associacao"><i class="fa fa-check"></i><b>23.1</b> Análise de associação</a>
+<li class="chapter" data-level="23.1" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html#analise-correlacao"><i class="fa fa-check"></i><b>23.1</b> Análise de correlação</a>
 <ul>
-<li class="chapter" data-level="23.1.1" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#o-que-é-análise-de-associação"><i class="fa fa-check"></i><b>23.1.1</b> O que é análise de associação?</a></li>
-</ul></li>
-<li class="chapter" data-level="23.2" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#bivariada"><i class="fa fa-check"></i><b>23.2</b> Associação bivariada</a>
-<ul>
-<li class="chapter" data-level="23.2.1" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#o-que-são-análises-de-associação-bivariada"><i class="fa fa-check"></i><b>23.2.1</b> O que são análises de associação bivariada?</a></li>
-<li class="chapter" data-level="23.2.2" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#quais-testes-podem-ser-usados-para-análises-de-associação-bivariada"><i class="fa fa-check"></i><b>23.2.2</b> Quais testes podem ser usados para análises de associação bivariada?</a></li>
+<li class="chapter" data-level="23.1.1" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html#o-que-é-análise-de-correlação"><i class="fa fa-check"></i><b>23.1.1</b> O que é análise de correlação?</a></li>
+<li class="chapter" data-level="23.1.2" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html#qual-é-a-interpretação-das-medidas-de-correlação"><i class="fa fa-check"></i><b>23.1.2</b> Qual é a interpretação das medidas de correlação?</a></li>
+<li class="chapter" data-level="23.1.3" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html#quais-precauções-devem-ser-tomadas-na-interpretação-de-medidas-de-correlação"><i class="fa fa-check"></i><b>23.1.3</b> Quais precauções devem ser tomadas na interpretação de medidas de correlação?</a></li>
+<li class="chapter" data-level="23.1.4" data-path="analise-inferencial-correlacao.html"><a href="analise-inferencial-correlacao.html#quais-testes-podem-ser-usados-para-análises-de-correlação"><i class="fa fa-check"></i><b>23.1.4</b> Quais testes podem ser usados para análises de correlação?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html"><i class="fa fa-check"></i><b>24</b> <strong>Regressão</strong></a>
+<li class="chapter" data-level="24" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html"><i class="fa fa-check"></i><b>24</b> <strong>Associação</strong></a>
 <ul>
-<li class="chapter" data-level="24.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#analise-regressao"><i class="fa fa-check"></i><b>24.1</b> Análise de regressão</a>
+<li class="chapter" data-level="24.1" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#analise-associacao"><i class="fa fa-check"></i><b>24.1</b> Análise de associação</a>
 <ul>
-<li class="chapter" data-level="24.1.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-análise-de-regressão"><i class="fa fa-check"></i><b>24.1.1</b> O que é análise de regressão?</a></li>
-<li class="chapter" data-level="24.1.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#como-preparar-as-variáveis-categóricas-para-análise-de-regressão"><i class="fa fa-check"></i><b>24.1.2</b> Como preparar as variáveis categóricas para análise de regressão?</a></li>
+<li class="chapter" data-level="24.1.1" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#o-que-é-análise-de-associação"><i class="fa fa-check"></i><b>24.1.1</b> O que é análise de associação?</a></li>
 </ul></li>
-<li class="chapter" data-level="24.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#multivariavel-multivariada"><i class="fa fa-check"></i><b>24.2</b> Regressão simples, multivariável e multivariada</a>
+<li class="chapter" data-level="24.2" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#bivariada"><i class="fa fa-check"></i><b>24.2</b> Associação bivariada</a>
 <ul>
-<li class="chapter" data-level="24.2.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-são-as-análises-de-regressão-simples-multivariável-e-multivariada"><i class="fa fa-check"></i><b>24.2.1</b> O que são as análises de regressão simples, multivariável e multivariada?</a></li>
-<li class="chapter" data-level="24.2.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#quais-testes-podem-ser-usados-em-análise-de-associação-multivariável"><i class="fa fa-check"></i><b>24.2.2</b> Quais testes podem ser usados em análise de associação multivariável?</a></li>
-</ul></li>
-<li class="chapter" data-level="24.3" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#efeito-principal"><i class="fa fa-check"></i><b>24.3</b> Efeito principal</a>
-<ul>
-<li class="chapter" data-level="24.3.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-modificação-de-efeito"><i class="fa fa-check"></i><b>24.3.1</b> O que é modificação de efeito?</a></li>
-<li class="chapter" data-level="24.3.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-um-modificador-de-efeito"><i class="fa fa-check"></i><b>24.3.2</b> O que é um modificador de efeito?</a></li>
-</ul></li>
-<li class="chapter" data-level="24.4" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#modificacao"><i class="fa fa-check"></i><b>24.4</b> Efeito de modificação</a>
-<ul>
-<li class="chapter" data-level="24.4.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-modificação"><i class="fa fa-check"></i><b>24.4.1</b> O que é modificação?</a></li>
-<li class="chapter" data-level="24.4.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-um-modificador-de-efeito-1"><i class="fa fa-check"></i><b>24.4.2</b> O que é um modificador de efeito?</a></li>
-</ul></li>
-<li class="chapter" data-level="24.5" data-path="ensaios-clínicos-aleatorizados.html"><a href="ensaios-clínicos-aleatorizados.html#interacao"><i class="fa fa-check"></i><b>24.5</b> Efeito de interação</a>
-<ul>
-<li class="chapter" data-level="24.5.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-interação"><i class="fa fa-check"></i><b>24.5.1</b> O que é interação?</a></li>
-</ul></li>
-<li class="chapter" data-level="24.6" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#mediacao"><i class="fa fa-check"></i><b>24.6</b> Efeito de mediação</a>
-<ul>
-<li class="chapter" data-level="24.6.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-mediação"><i class="fa fa-check"></i><b>24.6.1</b> O que é mediação?</a></li>
-<li class="chapter" data-level="24.6.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-um-mediador-de-efeito"><i class="fa fa-check"></i><b>24.6.2</b> O que é um mediador de efeito?</a></li>
-<li class="chapter" data-level="24.6.3" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-efeito-direto"><i class="fa fa-check"></i><b>24.6.3</b> O que é efeito direto?</a></li>
-<li class="chapter" data-level="24.6.4" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-efeito-indireto"><i class="fa fa-check"></i><b>24.6.4</b> O que é efeito indireto?</a></li>
-<li class="chapter" data-level="24.6.5" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-efeito-total"><i class="fa fa-check"></i><b>24.6.5</b> O que é efeito total?</a></li>
-</ul></li>
-<li class="chapter" data-level="24.7" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#selecao"><i class="fa fa-check"></i><b>24.7</b> Seleção de variáveis</a>
-<ul>
-<li class="chapter" data-level="24.7.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#correlação-bivariada-pode-ser-usada-para-seleção-de-variáveis-em-modelos-de-regressão-multivariável"><i class="fa fa-check"></i><b>24.7.1</b> Correlação bivariada pode ser usada para seleção de variáveis em modelos de regressão multivariável?</a></li>
-<li class="chapter" data-level="24.7.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#por-que-métodos-de-regressão-gradual-não-são-recomendados-para-seleção-de-variáveis-em-modelos-de-regressão-multivariável"><i class="fa fa-check"></i><b>24.7.2</b> Por que métodos de regressão gradual não são recomendados para seleção de variáveis em modelos de regressão multivariável?</a></li>
-<li class="chapter" data-level="24.7.3" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-pode-ser-feito-para-reduzir-o-número-de-variáveis-candidatas-em-modelos-de-regressão-multivariável"><i class="fa fa-check"></i><b>24.7.3</b> O que pode ser feito para reduzir o número de variáveis candidatas em modelos de regressão multivariável?</a></li>
+<li class="chapter" data-level="24.2.1" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#o-que-são-análises-de-associação-bivariada"><i class="fa fa-check"></i><b>24.2.1</b> O que são análises de associação bivariada?</a></li>
+<li class="chapter" data-level="24.2.2" data-path="analise-inferencial-associacao.html"><a href="analise-inferencial-associacao.html#quais-testes-podem-ser-usados-para-análises-de-associação-bivariada"><i class="fa fa-check"></i><b>24.2.2</b> Quais testes podem ser usados para análises de associação bivariada?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="analise-redes.html"><a href="analise-redes.html"><i class="fa fa-check"></i><b>25</b> <strong>Redes</strong></a>
+<li class="chapter" data-level="25" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html"><i class="fa fa-check"></i><b>25</b> <strong>Regressão</strong></a>
 <ul>
-<li class="chapter" data-level="25.1" data-path="analise-redes.html"><a href="analise-redes.html#redes"><i class="fa fa-check"></i><b>25.1</b> Análise de redes</a>
+<li class="chapter" data-level="25.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#analise-regressao"><i class="fa fa-check"></i><b>25.1</b> Análise de regressão</a>
 <ul>
-<li class="chapter" data-level="25.1.1" data-path="analise-redes.html"><a href="analise-redes.html#o-que-é-análise-de-rede"><i class="fa fa-check"></i><b>25.1.1</b> O que é análise de rede?</a></li>
+<li class="chapter" data-level="25.1.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-análise-de-regressão"><i class="fa fa-check"></i><b>25.1.1</b> O que é análise de regressão?</a></li>
+<li class="chapter" data-level="25.1.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#como-preparar-as-variáveis-categóricas-para-análise-de-regressão"><i class="fa fa-check"></i><b>25.1.2</b> Como preparar as variáveis categóricas para análise de regressão?</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#multivariavel-multivariada"><i class="fa fa-check"></i><b>25.2</b> Regressão simples, multivariável e multivariada</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-são-as-análises-de-regressão-simples-multivariável-e-multivariada"><i class="fa fa-check"></i><b>25.2.1</b> O que são as análises de regressão simples, multivariável e multivariada?</a></li>
+<li class="chapter" data-level="25.2.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#quais-testes-podem-ser-usados-em-análise-de-associação-multivariável"><i class="fa fa-check"></i><b>25.2.2</b> Quais testes podem ser usados em análise de associação multivariável?</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#efeito-principal"><i class="fa fa-check"></i><b>25.3</b> Efeito principal</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-modificação-de-efeito"><i class="fa fa-check"></i><b>25.3.1</b> O que é modificação de efeito?</a></li>
+<li class="chapter" data-level="25.3.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-um-modificador-de-efeito"><i class="fa fa-check"></i><b>25.3.2</b> O que é um modificador de efeito?</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#modificacao"><i class="fa fa-check"></i><b>25.4</b> Efeito de modificação</a>
+<ul>
+<li class="chapter" data-level="25.4.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-modificação"><i class="fa fa-check"></i><b>25.4.1</b> O que é modificação?</a></li>
+<li class="chapter" data-level="25.4.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-um-modificador-de-efeito-1"><i class="fa fa-check"></i><b>25.4.2</b> O que é um modificador de efeito?</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="ensaios-clínicos-aleatorizados.html"><a href="ensaios-clínicos-aleatorizados.html#interacao"><i class="fa fa-check"></i><b>25.5</b> Efeito de interação</a>
+<ul>
+<li class="chapter" data-level="25.5.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-interação"><i class="fa fa-check"></i><b>25.5.1</b> O que é interação?</a></li>
+</ul></li>
+<li class="chapter" data-level="25.6" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#mediacao"><i class="fa fa-check"></i><b>25.6</b> Efeito de mediação</a>
+<ul>
+<li class="chapter" data-level="25.6.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-mediação"><i class="fa fa-check"></i><b>25.6.1</b> O que é mediação?</a></li>
+<li class="chapter" data-level="25.6.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-um-mediador-de-efeito"><i class="fa fa-check"></i><b>25.6.2</b> O que é um mediador de efeito?</a></li>
+<li class="chapter" data-level="25.6.3" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-efeito-direto"><i class="fa fa-check"></i><b>25.6.3</b> O que é efeito direto?</a></li>
+<li class="chapter" data-level="25.6.4" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-efeito-indireto"><i class="fa fa-check"></i><b>25.6.4</b> O que é efeito indireto?</a></li>
+<li class="chapter" data-level="25.6.5" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-é-efeito-total"><i class="fa fa-check"></i><b>25.6.5</b> O que é efeito total?</a></li>
+</ul></li>
+<li class="chapter" data-level="25.7" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#selecao"><i class="fa fa-check"></i><b>25.7</b> Seleção de variáveis</a>
+<ul>
+<li class="chapter" data-level="25.7.1" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#correlação-bivariada-pode-ser-usada-para-seleção-de-variáveis-em-modelos-de-regressão-multivariável"><i class="fa fa-check"></i><b>25.7.1</b> Correlação bivariada pode ser usada para seleção de variáveis em modelos de regressão multivariável?</a></li>
+<li class="chapter" data-level="25.7.2" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#por-que-métodos-de-regressão-gradual-não-são-recomendados-para-seleção-de-variáveis-em-modelos-de-regressão-multivariável"><i class="fa fa-check"></i><b>25.7.2</b> Por que métodos de regressão gradual não são recomendados para seleção de variáveis em modelos de regressão multivariável?</a></li>
+<li class="chapter" data-level="25.7.3" data-path="analise-inferencial-regressao.html"><a href="analise-inferencial-regressao.html#o-que-pode-ser-feito-para-reduzir-o-número-de-variáveis-candidatas-em-modelos-de-regressão-multivariável"><i class="fa fa-check"></i><b>25.7.3</b> O que pode ser feito para reduzir o número de variáveis candidatas em modelos de regressão multivariável?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html"><i class="fa fa-check"></i><b>26</b> <strong>Testes estatísticos</strong></a>
+<li class="chapter" data-level="26" data-path="analise-redes.html"><a href="analise-redes.html"><i class="fa fa-check"></i><b>26</b> <strong>Redes</strong></a>
 <ul>
-<li class="chapter" data-level="26.1" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html#teste-de-qui-quadrado-chi2"><i class="fa fa-check"></i><b>26.1</b> Teste de Qui-quadrado (<span class="math inline">\(\chi^2\)</span>)</a></li>
-<li class="chapter" data-level="26.2" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html#teste-exato-de-fisher"><i class="fa fa-check"></i><b>26.2</b> Teste exato de Fisher</a></li>
+<li class="chapter" data-level="26.1" data-path="analise-redes.html"><a href="analise-redes.html#redes"><i class="fa fa-check"></i><b>26.1</b> Análise de redes</a>
+<ul>
+<li class="chapter" data-level="26.1.1" data-path="analise-redes.html"><a href="analise-redes.html#o-que-é-análise-de-rede"><i class="fa fa-check"></i><b>26.1.1</b> O que é análise de rede?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html"><i class="fa fa-check"></i><b>27</b> <strong>Testes estatísticos</strong></a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html#teste-de-qui-quadrado-chi2"><i class="fa fa-check"></i><b>27.1</b> Teste de Qui-quadrado (<span class="math inline">\(\chi^2\)</span>)</a></li>
+<li class="chapter" data-level="27.2" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html#teste-exato-de-fisher"><i class="fa fa-check"></i><b>27.2</b> Teste exato de Fisher</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-4---produção-bibliográfica.html"><a href="parte-4---produção-bibliográfica.html"><i class="fa fa-check"></i><strong>PARTE 4 - Produção Bibliográfica</strong></a></li>
-<li class="chapter" data-level="27" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html"><i class="fa fa-check"></i><b>27</b> <strong>Computação estatística</strong></a>
+<li class="chapter" data-level="28" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html"><i class="fa fa-check"></i><b>28</b> <strong>Computação estatística</strong></a>
 <ul>
-<li class="chapter" data-level="27.1" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#inicio"><i class="fa fa-check"></i><b>27.1</b> Programa de computador</a>
+<li class="chapter" data-level="28.1" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#inicio"><i class="fa fa-check"></i><b>28.1</b> Programa de computador</a>
 <ul>
-<li class="chapter" data-level="27.1.1" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#o-que-é-r"><i class="fa fa-check"></i><b>27.1.1</b> O que é R?</a></li>
-<li class="chapter" data-level="27.1.2" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#o-que-é-rstudio"><i class="fa fa-check"></i><b>27.1.2</b> O que é RStudio?</a></li>
+<li class="chapter" data-level="28.1.1" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#o-que-é-r"><i class="fa fa-check"></i><b>28.1.1</b> O que é R?</a></li>
+<li class="chapter" data-level="28.1.2" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#o-que-é-rstudio"><i class="fa fa-check"></i><b>28.1.2</b> O que é RStudio?</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#inicio"><i class="fa fa-check"></i><b>27.2</b> Scripts computacionais</a>
+<li class="chapter" data-level="28.2" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#inicio"><i class="fa fa-check"></i><b>28.2</b> Scripts computacionais</a>
 <ul>
-<li class="chapter" data-level="27.2.1" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#o-que-são-scripts"><i class="fa fa-check"></i><b>27.2.1</b> O que são scripts?</a></li>
-<li class="chapter" data-level="27.2.2" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#quais-práticas-são-recomendadas-na-redação-de-scripts"><i class="fa fa-check"></i><b>27.2.2</b> Quais práticas são recomendadas na redação de scripts?</a></li>
-<li class="chapter" data-level="27.2.3" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#o-que-pode-ser-compartilhado"><i class="fa fa-check"></i><b>27.2.3</b> O que pode ser compartilhado?</a></li>
-<li class="chapter" data-level="27.2.4" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#como-preparar-os-scripts-para-compartilhamento"><i class="fa fa-check"></i><b>27.2.4</b> Como preparar os scripts para compartilhamento?</a></li>
-<li class="chapter" data-level="27.2.5" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#que-programas-de-computador-gratuitos-podem-ser-usados-para-análise-estatística-com-r"><i class="fa fa-check"></i><b>27.2.5</b> Que programas de computador gratuitos podem ser usados para análise estatística com R?</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="28" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html"><i class="fa fa-check"></i><b>28</b> <strong>Reprodutibilidade em ciência</strong></a>
-<ul>
-<li class="chapter" data-level="28.1" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html#reprodutibilidade"><i class="fa fa-check"></i><b>28.1</b> Reprodutibilidade</a>
-<ul>
-<li class="chapter" data-level="28.1.1" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html#o-que-é-reprodutibilidade"><i class="fa fa-check"></i><b>28.1.1</b> O que é reprodutibilidade?</a></li>
-</ul></li>
-<li class="chapter" data-level="28.2" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html#manuscritos-reprodutíveis"><i class="fa fa-check"></i><b>28.2</b> Manuscritos reprodutíveis</a>
-<ul>
-<li class="chapter" data-level="28.2.1" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html#o-que-são-manuscritos-reprodutíveis"><i class="fa fa-check"></i><b>28.2.1</b> O que são manuscritos reprodutíveis?</a></li>
-<li class="chapter" data-level="28.2.2" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html#como-manuscritos-reprodutíveis-contribuem-para-a-ciência"><i class="fa fa-check"></i><b>28.2.2</b> Como manuscritos reprodutíveis contribuem para a ciência ?</a></li>
+<li class="chapter" data-level="28.2.1" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#o-que-são-scripts"><i class="fa fa-check"></i><b>28.2.1</b> O que são scripts?</a></li>
+<li class="chapter" data-level="28.2.2" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#quais-práticas-são-recomendadas-na-redação-de-scripts"><i class="fa fa-check"></i><b>28.2.2</b> Quais práticas são recomendadas na redação de scripts?</a></li>
+<li class="chapter" data-level="28.2.3" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#o-que-pode-ser-compartilhado"><i class="fa fa-check"></i><b>28.2.3</b> O que pode ser compartilhado?</a></li>
+<li class="chapter" data-level="28.2.4" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#como-preparar-os-scripts-para-compartilhamento"><i class="fa fa-check"></i><b>28.2.4</b> Como preparar os scripts para compartilhamento?</a></li>
+<li class="chapter" data-level="28.2.5" data-path="computacao-estatistica.html"><a href="computacao-estatistica.html#que-programas-de-computador-gratuitos-podem-ser-usados-para-análise-estatística-com-r"><i class="fa fa-check"></i><b>28.2.5</b> Que programas de computador gratuitos podem ser usados para análise estatística com R?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="29" data-path="redacao.html"><a href="redacao.html"><i class="fa fa-check"></i><b>29</b> <strong>Redação estatística</strong></a>
+<li class="chapter" data-level="29" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html"><i class="fa fa-check"></i><b>29</b> <strong>Reprodutibilidade em ciência</strong></a>
 <ul>
-<li class="chapter" data-level="29.1" data-path="redacao.html"><a href="redacao.html#plano-analise-estatistica"><i class="fa fa-check"></i><b>29.1</b> Plano de anális estatística</a>
+<li class="chapter" data-level="29.1" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html#reprodutibilidade"><i class="fa fa-check"></i><b>29.1</b> Reprodutibilidade</a>
 <ul>
-<li class="chapter" data-level="29.1.1" data-path="redacao.html"><a href="redacao.html#o-que-é-plano-de-análise-estatística"><i class="fa fa-check"></i><b>29.1.1</b> O que é plano de análise estatística?</a></li>
+<li class="chapter" data-level="29.1.1" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html#o-que-é-reprodutibilidade"><i class="fa fa-check"></i><b>29.1.1</b> O que é reprodutibilidade?</a></li>
 </ul></li>
-<li class="chapter" data-level="29.2" data-path="redacao.html"><a href="redacao.html#diretrizes"><i class="fa fa-check"></i><b>29.2</b> Diretrizes</a>
+<li class="chapter" data-level="29.2" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html#manuscritos-reprodutíveis"><i class="fa fa-check"></i><b>29.2</b> Manuscritos reprodutíveis</a>
 <ul>
-<li class="chapter" data-level="29.2.1" data-path="redacao.html"><a href="redacao.html#por-que-usar-diretrizes"><i class="fa fa-check"></i><b>29.2.1</b> Por que usar diretrizes?</a></li>
-<li class="chapter" data-level="29.2.2" data-path="redacao.html"><a href="redacao.html#quais-diretrizes-estão-disponíveis"><i class="fa fa-check"></i><b>29.2.2</b> Quais diretrizes estão disponíveis?</a></li>
+<li class="chapter" data-level="29.2.1" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html#o-que-são-manuscritos-reprodutíveis"><i class="fa fa-check"></i><b>29.2.1</b> O que são manuscritos reprodutíveis?</a></li>
+<li class="chapter" data-level="29.2.2" data-path="manuscritos-reprodutiveis.html"><a href="manuscritos-reprodutiveis.html#como-manuscritos-reprodutíveis-contribuem-para-a-ciência"><i class="fa fa-check"></i><b>29.2.2</b> Como manuscritos reprodutíveis contribuem para a ciência ?</a></li>
 </ul></li>
-<li class="chapter" data-level="29.3" data-path="redacao.html"><a href="redacao.html#checklists"><i class="fa fa-check"></i><b>29.3</b> Checklists</a>
+</ul></li>
+<li class="chapter" data-level="30" data-path="redacao.html"><a href="redacao.html"><i class="fa fa-check"></i><b>30</b> <strong>Redação estatística</strong></a>
 <ul>
-<li class="chapter" data-level="29.3.1" data-path="redacao.html"><a href="redacao.html#por-que-usar-checklists"><i class="fa fa-check"></i><b>29.3.1</b> Por que usar checklists?</a></li>
-<li class="chapter" data-level="29.3.2" data-path="redacao.html"><a href="redacao.html#quais-checklists-estão-disponíveis"><i class="fa fa-check"></i><b>29.3.2</b> Quais checklists estão disponíveis?</a></li>
+<li class="chapter" data-level="30.1" data-path="redacao.html"><a href="redacao.html#plano-analise-estatistica"><i class="fa fa-check"></i><b>30.1</b> Plano de anális estatística</a>
+<ul>
+<li class="chapter" data-level="30.1.1" data-path="redacao.html"><a href="redacao.html#o-que-é-plano-de-análise-estatística"><i class="fa fa-check"></i><b>30.1.1</b> O que é plano de análise estatística?</a></li>
+</ul></li>
+<li class="chapter" data-level="30.2" data-path="redacao.html"><a href="redacao.html#diretrizes"><i class="fa fa-check"></i><b>30.2</b> Diretrizes</a>
+<ul>
+<li class="chapter" data-level="30.2.1" data-path="redacao.html"><a href="redacao.html#por-que-usar-diretrizes"><i class="fa fa-check"></i><b>30.2.1</b> Por que usar diretrizes?</a></li>
+<li class="chapter" data-level="30.2.2" data-path="redacao.html"><a href="redacao.html#quais-diretrizes-estão-disponíveis"><i class="fa fa-check"></i><b>30.2.2</b> Quais diretrizes estão disponíveis?</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="redacao.html"><a href="redacao.html#checklists"><i class="fa fa-check"></i><b>30.3</b> Checklists</a>
+<ul>
+<li class="chapter" data-level="30.3.1" data-path="redacao.html"><a href="redacao.html#por-que-usar-checklists"><i class="fa fa-check"></i><b>30.3.1</b> Por que usar checklists?</a></li>
+<li class="chapter" data-level="30.3.2" data-path="redacao.html"><a href="redacao.html#quais-checklists-estão-disponíveis"><i class="fa fa-check"></i><b>30.3.2</b> Quais checklists estão disponíveis?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i><strong>BIBLIOGRAFIA</strong></a></li>
@@ -759,32 +770,32 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="analise-inferencial-associacao" class="section level1 hasAnchor" number="23">
-<h1><span class="header-section-number">Capítulo 23</span> <strong>Associação</strong><a href="analise-inferencial-associacao.html#analise-inferencial-associacao" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="analise-inferencial-associacao" class="section level1 hasAnchor" number="24">
+<h1><span class="header-section-number">Capítulo 24</span> <strong>Associação</strong><a href="analise-inferencial-associacao.html#analise-inferencial-associacao" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="analise-associacao" class="section level2 hasAnchor" number="23.1">
-<h2><span class="header-section-number">23.1</span> Análise de associação<a href="analise-inferencial-associacao.html#analise-associacao" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="analise-associacao" class="section level2 hasAnchor" number="24.1">
+<h2><span class="header-section-number">24.1</span> Análise de associação<a href="analise-inferencial-associacao.html#analise-associacao" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-análise-de-associação" class="section level3 hasAnchor" number="23.1.1">
-<h3><span class="header-section-number">23.1.1</span> O que é análise de associação?<a href="analise-inferencial-associacao.html#o-que-é-análise-de-associação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-é-análise-de-associação" class="section level3 hasAnchor" number="24.1.1">
+<h3><span class="header-section-number">24.1.1</span> O que é análise de associação?<a href="analise-inferencial-associacao.html#o-que-é-análise-de-associação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>.[REF]</li>
 </ul>
 <p><br></p>
 </div>
 </div>
-<div id="bivariada" class="section level2 hasAnchor" number="23.2">
-<h2><span class="header-section-number">23.2</span> Associação bivariada<a href="analise-inferencial-associacao.html#bivariada" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bivariada" class="section level2 hasAnchor" number="24.2">
+<h2><span class="header-section-number">24.2</span> Associação bivariada<a href="analise-inferencial-associacao.html#bivariada" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-são-análises-de-associação-bivariada" class="section level3 hasAnchor" number="23.2.1">
-<h3><span class="header-section-number">23.2.1</span> O que são análises de associação bivariada?<a href="analise-inferencial-associacao.html#o-que-são-análises-de-associação-bivariada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-são-análises-de-associação-bivariada" class="section level3 hasAnchor" number="24.2.1">
+<h3><span class="header-section-number">24.2.1</span> O que são análises de associação bivariada?<a href="analise-inferencial-associacao.html#o-que-são-análises-de-associação-bivariada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>.[REF]</li>
 </ul>
 <p><br></p>
 </div>
-<div id="quais-testes-podem-ser-usados-para-análises-de-associação-bivariada" class="section level3 hasAnchor" number="23.2.2">
-<h3><span class="header-section-number">23.2.2</span> Quais testes podem ser usados para análises de associação bivariada?<a href="analise-inferencial-associacao.html#quais-testes-podem-ser-usados-para-análises-de-associação-bivariada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-testes-podem-ser-usados-para-análises-de-associação-bivariada" class="section level3 hasAnchor" number="24.2.2">
+<h3><span class="header-section-number">24.2.2</span> Quais testes podem ser usados para análises de associação bivariada?<a href="analise-inferencial-associacao.html#quais-testes-podem-ser-usados-para-análises-de-associação-bivariada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Teste Qui-quadrado (<span class="math inline">\(\chi^2\)</span>).<span class="citation"><sup><a href="#ref-McHugh2013">141</a>,<a href="#ref-Kim2017a">142</a></sup></span></p>
 <ul>
@@ -858,7 +869,7 @@ div.csl-indent {
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats-2">18</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test"><em>cor.test</em></a> para calcular o coeficiente Kendall <span class="math inline">\(\tau\)</span>.</p>
+<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats-2">17</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test"><em>cor.test</em></a> para calcular o coeficiente Kendall <span class="math inline">\(\tau\)</span>.</p>
 </div>
 <p><br></p>
 
@@ -868,7 +879,7 @@ div.csl-indent {
 <h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-stats-2" class="csl-entry">
-<div class="csl-left-margin">18. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
+<div class="csl-left-margin">17. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
 </div>
 <div id="ref-khamis2008" class="csl-entry">
 <div class="csl-left-margin">139. </div><div class="csl-right-inline">Khamis H. Measures of Association: How to Choose? <em>Journal of Diagnostic Medical Sonography</em>. 2008;24(3):155-162. doi:<a href="https://doi.org/10.1177/8756479308317006">10.1177/8756479308317006</a></div>
