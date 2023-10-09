@@ -30,5 +30,5 @@ for(i in 1:2){
   # year
   text(x = W/2, y = 0, labels = format(Sys.Date(), "%Y"), adj = c(0,0), cex = 1.5, col = "black")
   
-  dev.off()
+  grDevices::dev.off()
 }

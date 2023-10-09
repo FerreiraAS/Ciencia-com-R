@@ -50,24 +50,24 @@ ggplot2::ggplot(df) +
     vjust = vjust,
     orientation = orientation
   ) +
-  ggtext::geom_textbox(width = unit(0.93, "npc"),
+  ggtext::geom_textbox(width = grid::unit(0.93, "npc"),
                        box.colour = "black") +
   ggplot2::scale_discrete_identity(aesthetics = c("color", "fill", "orientation")) +
   ggplot2::xlim(0, 8.27) + ggplot2::ylim(0, 11.69) +
-  theme_void() +
-  theme(
+  ggplot2::theme_void() +
+  ggplot2::theme(
     legend.position = "none",
-    panel.background = element_rect(fill = 'black', colour = 'black')
+    panel.background = ggplot2::element_rect(fill = 'black', colour = 'black')
   )
 
-dev.off()
+grDevices::dev.off()
 
 # save PDF
 grDevices::pdf(file = "Cover_4.pdf",
                width = W,
                height = H)
 img <- png::readPNG("Cover_4.png")
-img <- as.raster(img[, , 1:3])
+img <- grDevices::as.raster(img[, , 1:3])
 par(
   mar = c(0, 0, 0, 0),
   oma = c(0, 0, 0, 0),
@@ -76,4 +76,4 @@ par(
   bg = "black"
 )
 plot(img)
-dev.off()
+grDevices::dev.off()
