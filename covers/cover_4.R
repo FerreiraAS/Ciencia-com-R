@@ -21,7 +21,7 @@ texto <-
   Tome decisões informadas, evite armadilhas e destaque-se em sua pesquisa científica com \"Ciência com R\". Os insights profundos do Dr. [Seu Nome] permitirão que você transforme seus dados em descobertas significativas, colocando você no caminho da excelência em pesquisa."
 
 grDevices::png(
-  file = "Cover_4.png",
+  file = "images/Cover_4.png",
   width = W,
   height = H,
   units = "in",
@@ -63,10 +63,10 @@ ggplot2::ggplot(df) +
 grDevices::dev.off()
 
 # save PDF
-grDevices::pdf(file = "Cover_4.pdf",
+grDevices::pdf(file = "covers/Cover_4.pdf",
                width = W,
                height = H)
-img <- png::readPNG("Cover_4.png")
+img <- png::readPNG("images/Cover_4.png")
 img <- grDevices::as.raster(img[, , 1:3])
 par(
   mar = c(0, 0, 0, 0),

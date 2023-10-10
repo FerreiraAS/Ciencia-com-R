@@ -7,7 +7,7 @@ bookdown::gitbook:
   code_summary: "R Script"
   code_overflow: "wrap"
   highlight: tango
-  css: style.css
+  css: css/style.css
   table_css: false
   config:
     toc:
@@ -38,9 +38,9 @@ bookdown::pdf_book:
   toc: true
   number_sections: true
   includes:
-    in_header: preamble.tex
-    before_body: [cover_1.tex, cover_2.tex]
-    after_body: cover_4.tex
+    in_header: tex/preamble.tex
+    before_body: [tex/cover_1.tex, tex/cover_2.tex]
+    after_body: tex/cover_4.tex
   latex_engine: xelatex
   keep_tex: yes
 
@@ -48,7 +48,7 @@ bookdown::epub_book: default
 
 officedown::rpptx_document:
   slide_level: 2
-  reference_doc: template.pptx
+  reference_doc: templates/template.pptx
 
 officedown::rdocx_document:
   tables:

@@ -4,13 +4,13 @@ H <- 11.69
 for(i in 1:2){
   
   if(i == 1){
-    grDevices::png(file = "Cover_1.png",
+    grDevices::png(file = "images/Cover_1.png",
                    width = W,
                    height = H,
                    units = "in",
                    res = 300)
   } else {
-    grDevices::pdf(file = "Cover_1.pdf",
+    grDevices::pdf(file = "covers/Cover_1.pdf",
                    width = W,
                    height = H)
   }

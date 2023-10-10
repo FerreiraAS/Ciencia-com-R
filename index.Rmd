@@ -8,7 +8,7 @@ author: '&copy; `r format(Sys.Date(), "%Y")` by Arthur de Sá Ferreira <a id="cy
 date: 'Atualizado em `r format(Sys.Date(), "%d/%m/%Y")` <br> <a href="https://zenodo.org/badge/latestdoi/685181979"><img src="https://zenodo.org/badge/685181979.svg" alt="DOI"></a>'
 
 url: 'https://ferreiraas.github.io/Ciência com R/'
-cover-image: "Cover_1.png"
+cover-image: "images/Cover_1.png"
 
 description:
    'Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos.'
@@ -17,7 +17,7 @@ site: bookdown::bookdown_site
 github-repo: 'https://github.com/FerreiraAS/R-Book'
 
 geometry: "top=3cm,left=3cm,right=2cm,bottom=2cm"
-bibliography: [references.bib, grateful-refs.bib, packages.bib]
+bibliography: [bib/grateful-refs.bib, bib/packages.bib, bib/references.bib]
 link-citations: yes
 csl: american-medical-association-10th-edition.csl
 always_allow_html: true
@@ -51,9 +51,9 @@ library("webshot")
 ```
 
 ```{r cover-generator, echo = FALSE, include = FALSE, eval = knitr::is_html_output(), cache = TRUE}
-source("cover_1.R", local = knitr::knit_global())
-source("cover_2.R", local = knitr::knit_global())
-source("cover_4.R", local = knitr::knit_global())
+source("covers/cover_1.R", local = knitr::knit_global())
+source("covers/cover_2.R", local = knitr::knit_global())
+source("covers/cover_4.R", local = knitr::knit_global())
 ```
 
 <br>
@@ -71,8 +71,8 @@ cat('# Sobre o livro {-}')
 \markboth{}{}
 ```
 
-```{r cover-one, fig.align = 'right', echo = FALSE, include = identical(knitr:::pandoc_to(), 'html'), fig.link = 'Cover_1.png', out.width = "100%"}
-knitr::include_graphics('Cover_1.png', dpi = NA)
+```{r cover-one, fig.align = 'right', echo = FALSE, include = identical(knitr:::pandoc_to(), 'html'), fig.link = 'images/Cover_1.png', out.width = "100%"}
+knitr::include_graphics('images/Cover_1.png', dpi = NA)
 ```
    
 ```{css citation, echo = FALSE}
