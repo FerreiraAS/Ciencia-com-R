@@ -19,7 +19,7 @@ github-repo: 'https://github.com/FerreiraAS/R-Book'
 geometry: "top=3cm,left=3cm,right=2cm,bottom=2cm"
 bibliography: [bib/grateful-refs.bib, bib/packages.bib, bib/references.bib]
 link-citations: yes
-csl: american-medical-association-10th-edition.csl
+csl: csl/american-medical-association-10th-edition.csl
 always_allow_html: true
 documentclass: book
 ---
@@ -32,16 +32,6 @@ documentclass: book
 if(!file.exists(".nojekyll")) {
   file.create('.nojekyll')
 }
-```
-
-```{r copy-file, results = "hide", include = FALSE}
-file.copy(from="Ciência-com-R.pptx", to="docs/Ciência-com-R.pptx", 
-          overwrite = TRUE, recursive = FALSE, 
-          copy.mode = TRUE)
-
-file.copy(from="Ciência-com-R.docx", to="docs/Ciência-com-R.docx", 
-          overwrite = TRUE, recursive = FALSE, 
-          copy.mode = TRUE)
 ```
 
 ```{r packages, echo = FALSE, results = 'hide', include = FALSE}
@@ -74,17 +64,10 @@ cat('# Sobre o livro {-}')
 ```{r cover-one, fig.align = 'right', echo = FALSE, include = identical(knitr:::pandoc_to(), 'html'), fig.link = 'images/Cover_1.png', out.width = "100%"}
 knitr::include_graphics('images/Cover_1.png', dpi = NA)
 ```
-   
-```{css citation, echo = FALSE}
-.boxBorder {
-     border: 2px solid black;
-     padding: 5px
-   }
-```
 
 <div class="boxBorder">
 
-Ferreira, Arthur de Sá. **Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados**. Rio de Janeiro: 1a edição, 2023. `r paste0(pdftools::pdf_info("docs/Ciência-com-R.pdf")$pages, "p.")` [doi: 10.5281/zenodo.8320233](https://zenodo.org/badge/latestdoi/685181979)
+Ferreira, Arthur de Sá. **Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados**. Rio de Janeiro: 1a edição, 2023. `r try(paste0(pdftools::pdf_info("docs/Ciencia-com-R.pdf")$pages, "p."), silent = TRUE)` [doi: 10.5281/zenodo.8320233](https://zenodo.org/badge/latestdoi/685181979)
 
 </div>
 
@@ -119,4 +102,16 @@ cat('E-book: ISBN')
 if(knitr::is_html_output()){
    cat('<center>[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fferreiraas.github.io%2FCiencia-com-R%2F&count_bg=%232C3E50&title_bg=%2375A5D5&icon=&icon_color=%23000000&title=Visitas&edge_flat=false)](https://hits.seeyoufarm.com)</center>')
 }
+```
+
+```{r copy-file, results = "hide", include = FALSE}
+# PPTX file
+file.copy(from="Ciencia-com-R.pptx", to="docs/Ciencia-com-R.pptx", 
+          overwrite = TRUE, recursive = FALSE, copy.mode = TRUE)
+try(unlink("Ciencia-com-R.pptx"), silent = TRUE)
+
+# DOCX file
+file.copy(from="Ciencia-com-R.docx", to="docs/Ciencia-com-R.docx", 
+          overwrite = TRUE, recursive = FALSE, copy.mode = TRUE)
+try(unlink("Ciencia-com-R.docx"), silent = TRUE)
 ```

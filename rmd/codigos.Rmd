@@ -1,0 +1,58 @@
+# **R Scripts** {#scripts}
+
+<br>
+
+## R scripts para download {#lista-scripts}
+
+<br>
+
+```{r scripts, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+
+library("tidyr")
+
+scripts <-
+  list.files(
+    file.path(getwd(), "R"),
+    full.names = TRUE,
+    include.dirs = TRUE,
+    recursive = TRUE,
+    pattern = ".R"
+  )
+
+scripts.down <-
+  list.files(
+    file.path(getwd(), "R"),
+    full.names = FALSE,
+    include.dirs = TRUE,
+    recursive = TRUE,
+    pattern = ".R"
+  )
+
+scripts.tbl <- data.frame(
+  'Análise' = basename(dirname(scripts)),
+  'Script' = paste0('[', basename(scripts), '](', file.path("R", scripts.down), ')')
+)
+
+# exibe a tabela
+kableExtra::kable(
+  scripts.tbl,
+   align = "c",
+   booktabs = TRUE,
+   format = ifelse(knitr::is_html_output(), "html", "latex"),
+   linesep = "",
+   escape = F,
+   caption = "R scripts disponíveis para download."
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("striped"),
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), T, T),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(dim(scripts.tbl)[1],
+                       extra_css = "border-bottom: 1px solid")
+
+```
