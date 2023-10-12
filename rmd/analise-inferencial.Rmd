@@ -118,8 +118,7 @@
 
 -   Testes não-paramétricos apresentam menor poder estatístico (maior erro tipo II) comparados aos testes paramétricos correspondentes.[@Ali2016]
 
-<br>
-## Análise inferencial {#inferencial}
+<br> \## Análise inferencial {#inferencial}
 
 <br>
 
@@ -151,47 +150,39 @@
 
 <br>
 
-## Erros de inferência
-
-<br>
-
-### O que são erros de inferência estatística?
-
--   Um erro de inferência é a tomada de decisão incorreta, seja a favor ou contra a hipótese nula.[@Curran-Everett2009]
-
-<br>
-
-### O que é erro amostral?
-
--   .[REF]
-
-<br>
-
-### O que é erro tipo I?
-
--   Erro tipo I significa a rejeição de uma hipótese nula ($H_{0}$) quando esta é verdadeira.[@Curran-Everett2009]
-
-<br>
-
-### O que é erro tipo II?
-
--   Erro tipo II significa a não rejeição de uma hipótese nula ($H_{0}$) quando esta é falsa.[@Curran-Everett2009]
-
-<br>
-
-### Qual a relação entre os erros tipo I e II?
-
--   .[REF]
-
-<br>
-
 ## P-valor {#p-valor}
 
 <br>
 
 ### O que é o P-valor?
 
--   .[REF]
+-   P-valor é a probabilidade, assumindo-se um dado modelo estatístico, de que um efeito calculado a partir dos dados seria igual ou mais extremo do que o seu valor observado.[@wasserstein2016]
+
+### Como interpretar o P-valor?
+
+-   P-valores podem indicar quantitativamente a incompatibilidade entre os dados obtidos e o modelo estatístico especificado a priori (geralmente constituído pela hipótese nula $H_{0}$).[@wasserstein2016]
+
+-   P-valores menores/maiores do que o nível de significância estatístico pré-estabelecido não devem ser utilizados como única fonte de informação para tomada de decisão em ciência.[@wasserstein2016]
+
+-   P-valor sozinho não provê informação suficiente sobre a evidência sobre um modelo teórico. A sua interpretação correta requer uma descrição ampla sobre o delineamento, métodos e análises estatísticas aplicados no estudo.[@wasserstein2016]
+
+<br>
+
+### O que o P-valor não é?
+
+-   P-valor não representa a probabilidade de que a hipótese nula $H_{0}$) seja verdadeira, nem a probabilidade de que os dados tenham sido produzidos pelo acaso.[@wasserstein2016]
+
+-   P-valor não mede o tamanho do efeito ou a relevância da sua observação.[@wasserstein2016]
+
+<br>
+
+### Quais são os complementos ou alternativas ao P-valor?
+
+-   Intervalos de confiança, credibilidade ou predição.[@wasserstein2016]
+
+-   Razão de verossimilhança.[@wasserstein2016]
+
+-   Métodos Bayesianos, fator Bayes.[@wasserstein2016]
 
 <br>
 
@@ -245,46 +236,88 @@
 
 -   Evidência estatística de significância não provê informação sobre a magnitude do efeito observado e não necessariamente implica que o efeito é robusto.[@Landis2012]
 
+<br> \## Poder do teste {#poder-teste}
+
 <br>
 
-## Poder do estudo {#poder-estudo}
+### Ausência de evidência ou evidência de ausência?
+
+-  Em estudos (geralmente com amostras grandes), resultados estatisticamente significativos (com P-valores menores do limiar pré-estabelecido, $P<\alpha$) podem não ser clinicamente relevantes.[@altman1995]
+
+- Em estudos (geralmente com amostras pequenas), resultados estatisticamente não significativos (com P-valores iguais ou maiores do limiar pré-estabelecido, $P≥\alpha$) não devem ser interpretados como evidência de inexistência do efeito.[@altman1995]
+
+- Geralmente é razoável aceitar uma nova conclusão apenas quando há dados a seu favor ('resultados positivos'). Também é razoável questionar se apenas a ausência de dados a seu favor ('resultados negativos') justifica suficientemente a rejeição de tal conclusão.[@altman1995]
 
 <br>
 
 ### O que é poder do teste?
 
--   Poder do teste é a probabilidade de rejeitar a hipótese nula ($H_{0}$) quando esta é falsa.[@Curran-Everett2009]
+-   Poder do teste é a probabilidade de rejeitar corretamente a hipótese nula ($H_{0}$) quando esta é falsa.[@Curran-Everett2009]
 
 -   Poder do teste pode ser calculado como ($1 - \beta$).[@Curran-Everett2009]
 
 <br>
 
-### O que é análise de poder do estudo?
+### O que é análise de poder do teste?
 
 -   Poder é a probabilidade de que um dado tamanho de efeito será observado em um experimento futuro sob um conjunto de hipóteses - tamanho de efeito real e erro tipo I - para um dado tamanho de amostra.[@heckman2022]
 
-- O objetivo geral da análise de poder ao projetar um estudo é escolher um tamanho de amostra que controle os 2 tipos de erros de inferência estatística: tipo I ($\alpha$, resultado falso-positivo) e tipo II ($\beta$, resultado falso-negativo).[@heckman2022]
+-   O objetivo geral da análise de poder ao projetar um estudo é escolher um tamanho de amostra que controle os 2 tipos de erros de inferência estatística: tipo I ($\alpha$, resultado falso-positivo) e tipo II ($\beta$, resultado falso-negativo).[@heckman2022]
 
-- Numericamente, o poder de um estudo é calculado como $1-\beta$ e reportado em valor percentual.[@heckman2022]
-
-<br>
-
-### Quando realizar a análise de poder do estudo?
-
-- Na fase de projeto de pesquisa: a análise de poder para determinar o tamanho da amostra objetiva que o tamanho da amostra permita uma probabilidade razoável de detectar um efeito significativo pré-especificado.[@heckman2022]
-
-- Após a coleta de dados: a análise de poder objetiva informar estudos futuros a respeito do tamanho da amostra necessário para a detectação de um efeito significativo pré-especificado.[@heckman2022]
+-   Numericamente, o poder de um estudo é calculado como $1-\beta$ e reportado em valor percentual.[@heckman2022]
 
 <br>
 
-### Porque a análise de poder do estudo *post hoc* é inadequada?
+### Quando realizar a análise de poder do teste?
 
-- A análise do poder é teoricamente incorreta, uma vez que a probabilidade calculada $1-\beta$ expressa a probabilidade de um evento futuro, o que não é mais relevante quando o evento de interesse já ocorreu.[@heckman2022]
+-   Na fase de projeto de pesquisa: a análise de poder para determinar o tamanho da amostra objetiva que o tamanho da amostra permita uma probabilidade razoável de detectar um efeito significativo pré-especificado.[@heckman2022]
+
+-   Após a coleta de dados: a análise de poder objetiva informar estudos futuros a respeito do tamanho da amostra necessário para a detectação de um efeito significativo pré-especificado.[@heckman2022]
+
+<br>
+
+### Porque a análise de poder do teste *post hoc* é inadequada?
+
+-   A análise do poder é teoricamente incorreta, uma vez que a probabilidade calculada $1-\beta$ expressa a probabilidade de um evento futuro, o que não é mais relevante quando o evento de interesse já ocorreu.[@Cummings2003; @heckman2022]
 
 <br>
 
 ### O que pode ser realizado ao invés da análise de poder?
 
-- Após a coleta e análise de dados, recomenda-se realizar a análise e interpretação dos resultados a partir do tamanho do efeito e do seu intervalo de confiança no nível de significância $\alpha$ pré-estabelecido.[@heckman2022]
+-   Após a coleta e análise de dados, recomenda-se realizar a análise e interpretação dos resultados a partir do tamanho do efeito e do seu intervalo de confiança no nível de significância $\alpha$ pré-estabelecido.[@heckman2022]
+
+<br>
+
+## Erros de inferência
+
+<br>
+
+### O que são erros de inferência estatística?
+
+-   Um erro de inferência é a tomada de decisão incorreta, seja a favor ou contra a hipótese nula.[@Curran-Everett2009]
+
+<br>
+
+### O que é erro amostral?
+
+-   .[REF]
+
+<br>
+
+### O que é erro tipo I?
+
+-   Erro tipo I significa a rejeição de uma hipótese nula ($H_{0}$) quando esta é verdadeira.[@Curran-Everett2009]
+
+<br>
+
+### O que é erro tipo II?
+
+-   Erro tipo II significa a não rejeição de uma hipótese nula ($H_{0}$) quando esta é falsa.[@Curran-Everett2009]
+
+<br>
+
+### Qual a relação entre os erros tipo I e II?
+
+-   .[REF]
 
 <br>

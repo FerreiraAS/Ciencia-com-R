@@ -8,18 +8,21 @@
 
 ### O que é análise exploratória de dados?
 
+-  Análise exploratória de dados consiste em um processo iterativo de elaboração e interpretação de síntese de dados, tabelas e gráficos, considerando os aspectos teóricos do estudo.[@Ferketich1986]
+
 -   Análise exploratória deve ser separada da análise inferencial de testes de hipóteses; a decisão sobre os modelos a testar deve ser feita *a priori*.[@zuur2009]
+
+<br>
+
+### Por que conduzir a análise exploratória de dados?
 
 -   A condução de análise exploratória de dados pode ajudar a identificar padrões e pode orientar trabalhos futuros, mas os resultados não devem ser interpretados como inferências sobre uma população.[@zuur2009]
 
-- A análise exploratória não deve ser usada para definir as questões e hipóteses científicas do estudo.[@zuur2009]
-
--   Cada combinação de problema de pesquisa e delineamento de estudo pode demandar um plano de análise exploratório distinto.[@zuur2009]
+-   A análise exploratória não deve ser usada para definir as questões e hipóteses científicas do estudo.[@zuur2009]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-
 O pacote *explore*[@explore] fornece a função [*explore*](https://www.rdocumentation.org/packages/explore/versions/1.0.2/topics/explore) para análise exploratória de um banco de dados.
 :::
 
@@ -27,76 +30,78 @@ O pacote *explore*[@explore] fornece a função [*explore*](https://www.rdocumen
 
 ### Quais etapas constituem a análise exploratória de dados?
 
--   Verifique a existência e/ou influência de valores discrepantes ("fora da curva" ou *outliers*):[@zuur2009]
+-   Cada combinação de problema de pesquisa e delineamento de estudo pode demandar um plano de análise exploratório distinto.[@zuur2009]
+
+-   Verifique a existência e/ou influência de valores discrepantes ("fora da curva" ou *outliers*):[@Ferketich1986; @zuur2009]
 
     -   Boxplots
+
+    -   Gráficos quantil-quantil (Q-Q)
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-
 O pacote *graphics*[@graphics] fornece a função [*boxplot*](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot) para construção de gráficos *boxplot*.
 :::
 
 <br>
 
--  Verifique a homocedasticidade (homogeneidade da variância):[@zuur2009]
+-   Verifique a homocedasticidade (homogeneidade da variância):[@zuur2009]
 
     -   Boxplots condicionais (por fator de análise)
-    
-    - Análise dos resíduos do modelo de regressão
-    
-    - Gráfico resíduos vs. valores ajustados
+
+    -   Análise dos resíduos do modelo de regressão
+
+    -   Gráfico resíduos vs. valores ajustados
 
 <br>
 
--  Verifique a normalidade da distribuição dos dados:[@zuur2009]
+-   Verifique a normalidade da distribuição dos dados:[@zuur2009]
 
     -   Histograma das variáveis (por fator de análise)
-    
-    - Histograma dos resíduos da regressão
-    
+
+    -   Histograma dos resíduos da regressão
+
 <br>
 
--  Verifique a existência de grande quantidade de valores 0:[@zuur2009]
+-   Verifique a existência de grande quantidade de valores 0:[@zuur2009]
 
     -   Histograma das variáveis (por fator de análise)
-    
+
 <br>
 
--  Verifique a existência de colinearidade entre variáveis independentes de um modelo de regressão:[@zuur2009]
+-   Verifique a existência de colinearidade entre variáveis independentes de um modelo de regressão:[@zuur2009]
 
-    - Fator de inflação de variância (*variance inflation factor*, VIF)
-    
-    - Coeficiente de correlação de Pearson ($r$)
-    
-    - Gráfico de dispersão entre variáveis
-    
+    -   Fator de inflação de variância (*variance inflation factor*, VIF)
+
+    -   Coeficiente de correlação de Pearson ($r$)
+
+    -   Gráfico de dispersão entre variáveis
+
 <br>
 
--  Verifique possíveis relações entre as variáveis dependente(s) e independente(s) de um modelo de regressão:[@zuur2009]
+-   Verifique possíveis relações entre as variáveis dependente(s) e independente(s) de um modelo de regressão:[@zuur2009]
 
-    - Gráfico de dispersão entre variáveis independente e dependente
-    
+    -   Gráfico de dispersão entre variáveis independente e dependente
+
 <br>
 
--  Verifique possíveis interações entre as variáveis dependente(s) de um modelo de regressão:[@zuur2009]
+-   Verifique possíveis interações entre as variáveis dependente(s) de um modelo de regressão:[@zuur2009]
 
-    - Gráfico *coplot* de dispersão entre variáveis dependentes
+    -   Gráfico *coplot* de dispersão entre variáveis dependentes
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-
 O pacote *graphics*[@graphics] fornece a função [*coplot*](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/coplot) para construção de gráficos *boxplot* condicionais.
 :::
 
 <br>
 
--  Verifique por dependência entre variáveis de um modelo de regressão:[@zuur2009]
+-   Verifique por dependência entre variáveis de um modelo de regressão:[@zuur2009]
 
-    - Gráfico de série temporal das variáveis
-    
-    - Gráfico de autocorrelação entre as variáveis
+    -   Gráfico de série temporal das variáveis
+
+    -   Gráfico de autocorrelação entre as variáveis
 
 <br>
