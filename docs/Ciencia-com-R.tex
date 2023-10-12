@@ -133,6 +133,7 @@
 \usepackage{draftwatermark}
 \usepackage{fontspec}
 \usepackage{fontawesome5}
+\usepackage{float}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{letltxmacro}
@@ -234,7 +235,7 @@
 \makeatother
 \subtitle{Perguntas e respostas para pesquisadores e analistas de dados}
 \author{© 2023 by Arthur de Sá Ferreira https://orcid.org/0000-0001-7014-2002}
-\date{Atualizado em 11/10/2023}
+\date{Atualizado em 12/10/2023}
 
 \begin{document}
 \maketitle
@@ -255,7 +256,7 @@
 \clearpage
 \markboth{}{}
 
-Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. \href{https://zenodo.org/badge/latestdoi/685181979}{doi: 10.5281/zenodo.8320233}
+Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. 131p. \href{https://zenodo.org/badge/latestdoi/685181979}{doi: 10.5281/zenodo.8320233}
 
 \vspace*{\fill}
 
@@ -1542,16 +1543,16 @@ O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{60
 \toprule
 \textbf{ID} & \textbf{Data.Coleta} & \textbf{Estado.Civil} & \textbf{Numero.Filhos}\\
 \midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{12-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-2 & 13-10-2023 & casado & 1\\
-\cellcolor{gray!6}{3} & \cellcolor{gray!6}{14-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-4 & 15-10-2023 & solteiro & NA\\
-\cellcolor{gray!6}{5} & \cellcolor{gray!6}{16-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-6 & 17-10-2023 & solteiro & 0\\
-\cellcolor{gray!6}{7} & \cellcolor{gray!6}{18-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{NA}\\
-8 & 19-10-2023 & solteiro & NA\\
-\cellcolor{gray!6}{9} & \cellcolor{gray!6}{20-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-10 & 21-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{13-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+2 & 14-10-2023 & casado & 1\\
+\cellcolor{gray!6}{3} & \cellcolor{gray!6}{15-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+4 & 16-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{17-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+6 & 18-10-2023 & solteiro & 0\\
+\cellcolor{gray!6}{7} & \cellcolor{gray!6}{19-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{NA}\\
+8 & 20-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{9} & \cellcolor{gray!6}{21-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+10 & 22-10-2023 & solteiro & NA\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -1564,16 +1565,16 @@ O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{60
 \toprule
 \textbf{ID} & \textbf{Data de Coleta} & \textbf{Estado Civil} & \textbf{Número de Filhos}\\
 \midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{12-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-2 & 13-10-2023 & Casado & 1\\
-\cellcolor{gray!6}{3} & \cellcolor{gray!6}{14-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NaN}\\
-4 & 15-10-2023 & Solteiro & N/A\\
-\cellcolor{gray!6}{5} & \cellcolor{gray!6}{16-10-2023} & \cellcolor{gray!6}{Casado} & \cellcolor{gray!6}{N.A.}\\
-6 & 17-10-2023 & solteiro & 0\\
-\cellcolor{gray!6}{7} & \cellcolor{gray!6}{18-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{}\\
-8 & 19-10-2023 & Solteiro & na\\
-\cellcolor{gray!6}{9} & \cellcolor{gray!6}{20-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{n.a.}\\
-10 & 21-10-2023 & Solteiro & 999\\
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{13-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+2 & 14-10-2023 & Casado & 1\\
+\cellcolor{gray!6}{3} & \cellcolor{gray!6}{15-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NaN}\\
+4 & 16-10-2023 & Solteiro & N/A\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{17-10-2023} & \cellcolor{gray!6}{Casado} & \cellcolor{gray!6}{N.A.}\\
+6 & 18-10-2023 & solteiro & 0\\
+\cellcolor{gray!6}{7} & \cellcolor{gray!6}{19-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{}\\
+8 & 20-10-2023 & Solteiro & na\\
+\cellcolor{gray!6}{9} & \cellcolor{gray!6}{21-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{n.a.}\\
+10 & 22-10-2023 & Solteiro & 999\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -4365,35 +4366,78 @@ O pacote \emph{formatR}\textsuperscript{\protect\hyperlink{ref-formatR}{159}} fo
 \hypertarget{lista-scripts}{%
 \section{R scripts para download}\label{lista-scripts}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{cat}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"\#\#\# "}\NormalTok{, scripts.tbl}\SpecialCharTok{$}\NormalTok{Análise[}\DecValTok{1}\NormalTok{]))}
-\end{Highlighting}
-\end{Shaded}
+\begin{table}
 
-\hypertarget{concordancia-1}{%
-\subsection{Concordância}\label{concordancia-1}}
+\caption{\label{tab:print-html}R scripts disponíveis para análise de concordância}
+\centering
+\begin{tabu} to \linewidth {>{\centering}X>{}c}
+\toprule
+\textbf{Análise} & \textbf{Script}\\
+\midrule
+\cellcolor{gray!6}{Concordância} & \href{NA}{\cellcolor{gray!6}{reliability-kappa-icc.R}}\\
+\bottomrule
+\end{tabu}
+\end{table}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{table}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{print}\NormalTok{(knitr}\SpecialCharTok{::}\FunctionTok{read\_chunk}\NormalTok{(links[}\DecValTok{1}\NormalTok{]))}
-\end{Highlighting}
-\end{Shaded}
+\caption{\label{tab:print-html}R scripts disponíveis para análise de desempenho diagnóstico}
+\centering
+\begin{tabu} to \linewidth {>{\centering}X>{}c}
+\toprule
+\textbf{Análise} & \textbf{Script}\\
+\midrule
+\cellcolor{gray!6}{Desempenho diagnóstico} & \href{NA}{\cellcolor{gray!6}{diag-stats.R}}\\
+Desempenho diagnóstico & \href{NA}{dtROC.R}\\
+\cellcolor{gray!6}{Desempenho diagnóstico} & \href{NA}{\cellcolor{gray!6}{stROC.R}}\\
+\bottomrule
+\end{tabu}
+\end{table}
 
-\$\texttt{unnamed-chunk-5}
-NULL
+\begin{table}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\caption{\label{tab:print-html}R scripts disponíveis para análise de ensaio clínico aleatorizado}
+\centering
+\begin{tabu} to \linewidth {>{\centering}X>{}c}
+\toprule
+\textbf{Análise} & \textbf{Script}\\
+\midrule
+\cellcolor{gray!6}{Ensaio clínico aleatorizado} & \href{NA}{\cellcolor{gray!6}{RCT-Figure1.R}}\\
+Ensaio clínico aleatorizado & \href{NA}{RCT-Missingness.R}\\
+\cellcolor{gray!6}{Ensaio clínico aleatorizado} & \href{NA}{\cellcolor{gray!6}{RCT-Table1.R}}\\
+Ensaio clínico aleatorizado & \href{NA}{RCT-Table2a.R}\\
+\cellcolor{gray!6}{Ensaio clínico aleatorizado} & \href{NA}{\cellcolor{gray!6}{RCT-Table2b.R}}\\
+Ensaio clínico aleatorizado & \href{NA}{RCT-Table3.R}\\
+\bottomrule
+\end{tabu}
+\end{table}
+
+\begin{table}
+
+\caption{\label{tab:print-html}R scripts disponíveis para análise de ensaio cruzado}
+\centering
+\begin{tabu} to \linewidth {>{\centering}X>{}c}
+\toprule
+\textbf{Análise} & \textbf{Script}\\
+\midrule
+\cellcolor{gray!6}{Ensaio cruzado} & \href{NA}{\cellcolor{gray!6}{crossover.R}}\\
+Ensaio cruzado & \href{NA}{RSTR-crossover-trial.R}\\
+\bottomrule
+\end{tabu}
+\end{table}
+
+\begin{table}
+
+\caption{\label{tab:print-html}R scripts disponíveis para análise de mediação}
+\centering
+\begin{tabu} to \linewidth {>{\centering}X>{}c}
+\toprule
+\textbf{Análise} & \textbf{Script}\\
+\midrule
+\cellcolor{gray!6}{Mediação} & \href{NA}{\cellcolor{gray!6}{mediation-analysis.R}}\\
+\bottomrule
+\end{tabu}
+\end{table}
 
 \hypertarget{manuscritos-reprodutiveis}{%
 \chapter{\texorpdfstring{\textbf{Manuscritos reprodutíveis}}{Manuscritos reprodutíveis}}\label{manuscritos-reprodutiveis}}

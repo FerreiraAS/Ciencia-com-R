@@ -33,37 +33,39 @@ scripts.tbl <- data.frame(
 )
 ```
 
-```{r print-html, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, eval = knitr::is_html_output()}
+```{r print-html, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
 
 library("tidyr")
 
-# exibe a tabela
-kableExtra::kable(
-  scripts.tbl,
-   align = "c",
-   booktabs = TRUE,
-   format = ifelse(knitr::is_html_output(), "html", "latex"),
-   linesep = "",
-   escape = F,
-   caption = "R scripts disponíveis para download."
-) %>%
-  kableExtra::kable_styling(
-    latex_options = c("striped"),
-    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), T, T),
-    position = "center"
+for (i in 1:length(unique(scripts.tbl$Análise))) {
+  idx <- which(unique(scripts.tbl$Análise)[i] == scripts.tbl$Análise)
+  tabs <- scripts.tbl[idx, ]
+  rownames(tabs) <- NULL
+  # exibe a tabela
+  print(kableExtra::kable(
+    tabs,
+    align = "c",
+    booktabs = TRUE,
+    format = ifelse(knitr::is_html_output(), "html", "latex"),
+    linesep = "",
+    escape = F,
+    caption = paste0("R scripts disponíveis para análise de ", tolower(unique(scripts.tbl$Análise)[i]))
   ) %>%
-  kableExtra::row_spec(0,
-                       bold = TRUE,
-                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
-  kableExtra::row_spec(dim(scripts.tbl)[1],
-                       extra_css = "border-bottom: 1px solid") %>%
-  kableExtra::column_spec(2, link = links)
-```
-
-```{r print-pdf, echo = TRUE, include = TRUE, results = "asis", warning = FALSE, message = FALSE, fig.align = 'center', tidy = TRUE, eval = !knitr::is_html_output()}
-cat(paste0("### ", scripts.tbl$Análise[1]))
-cat('\n\n')
-print(knitr::read_chunk(links[1]))
-cat('\n\n')
+    kableExtra::kable_styling(
+      latex_options = c("striped"),
+      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+      full_width = ifelse(knitr::is_html_output(), T, T),
+      position = "center"
+    ) %>%
+    kableExtra::row_spec(0,
+                         bold = TRUE,
+                         extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+    kableExtra::row_spec(length(idx),
+                         extra_css = "border-bottom: 1px solid") %>%
+    kableExtra::column_spec(2, link = ifelse(knitr::is_html_output(), links[idx], NA)),
+  quote = FALSE,)
+  cat("\n")
+  cat("\n")
+  cat("<br>")
+}
 ```
