@@ -125,7 +125,7 @@ dtROC <-
       
       # DOUBLE-THRESHOLD (unique combinations)
       ranks <-
-        order(1 - SPE, SEN, t(dt[1, ]) - t(dt[2, ]), decreasing = FALSE) # sort vectors simultaneously by 1-SPE, then SEN, then threshold width
+        order(1 - SPE, SEN, t(dt[1,]) - t(dt[2,]), decreasing = FALSE) # sort vectors simultaneously by 1-SPE, then SEN, then threshold width
       SPE <- SPE[ranks] # reorder vectors
       SEN <- SEN[ranks] # reorder vectors
       dt <- dt[, ranks] # reorder matrix

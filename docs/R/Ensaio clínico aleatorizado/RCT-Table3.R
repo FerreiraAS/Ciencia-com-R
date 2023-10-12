@@ -45,9 +45,9 @@ TABLE.3 <-
     bw.diff <- matrix("", nrow = length(t.labels), ncol = 1)
     rownames(bw.diff) <- t.labels
     colnames(bw.diff) <- rep("", 1)
-    cross.tab.res[1, ] <-
+    cross.tab.res[1,] <-
       rep(levels(bw.factor), each = length(c.labels))
-    cross.tab.res[2, ] <- rep(c.labels, nlevels(bw.factor))
+    cross.tab.res[2,] <- rep(c.labels, nlevels(bw.factor))
     
     # calcula e preenche o N e o DESFECHO da tabela de resultados
     z.p <- c()
@@ -90,7 +90,7 @@ TABLE.3 <-
         rbind(z.p, paste("z=", format(round(
           z.score, digits = 3
         ), nsmall = 3), ", p", p.value, sep = ""))
-      cross.tab.res[i + 2, ] <- desfecho
+      cross.tab.res[i + 2,] <- desfecho
     }
     bw.diff[, 1] <- rbind("", "", z.p)
     

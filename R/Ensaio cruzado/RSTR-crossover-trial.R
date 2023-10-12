@@ -4,12 +4,10 @@ rm(list = ls(all = TRUE))
 # INSTALA E ABRE OS PACOTES UTILIZADOS
 # most packages work fine if installed from CRAN
 packs.cran <-
-  c(
-    "dplyr",
+  c("dplyr",
     "readxl",
     "table1",
-    "flextable"
-  )
+    "flextable")
 for (i in 1:length(packs.cran)) {
   if (!require(packs.cran[i], character.only = TRUE, quietly = TRUE))
     install.packages(packs.cran[i], character.only = TRUE)
@@ -49,8 +47,6 @@ banco_RSTR$Celula_VM_Depois_F2 <- a * X + b
 
 # REMOVE LINES with no participants included
 banco_RSTR <- banco_RSTR[complete.cases(banco_RSTR[, 1:14]),]
-
-# #################################################
 
 # LABEL FACTORS
 banco_RSTR$sequence <-
@@ -92,16 +88,12 @@ label(banco_RSTR$Raça) <- "Race"
 
 attach(banco_RSTR)
 
-# #################################################
-
 # GENERATE TABLE 1 (part 1)
 tbl1 <- table1(~  Idade + Peso + Altura + IMC + Sexo + Raça,
                data = banco_RSTR)
 # Convert to flextable
 t1flex(tbl1) %>%
   save_as_docx(path = "Table 1.docx")
-
-# #################################################
 
 test <- crossover.test(
   sequence = sequence,
@@ -136,8 +128,6 @@ flextable(as.data.frame(table2, row.names = rownames(table2))) %>%
   ) %>%
   save_as_docx(path = "Table 2 - ROM.docx")
 
-# #################################################
-
 test <- crossover.test(
   sequence = sequence,
   AB = "Stretching - Myofascial release",
@@ -170,8 +160,6 @@ flextable(as.data.frame(table2, row.names = rownames(table2))) %>%
     sep = "\n"
   ) %>%
   save_as_docx(path = "Table 2 - EMG BF.docx")
-
-# #################################################
 
 test <- crossover.test(
   sequence = sequence,
@@ -206,8 +194,6 @@ flextable(as.data.frame(table2, row.names = rownames(table2))) %>%
   ) %>%
   save_as_docx(path = "Table 2 - EMG VM.docx")
 
-# #################################################
-
 test <- crossover.test(
   sequence = sequence,
   AB = "Stretching - Myofascial release",
@@ -241,8 +227,6 @@ flextable(as.data.frame(table2, row.names = rownames(table2))) %>%
   ) %>%
   save_as_docx(path = "Table 2 - Dinamometria BF.docx")
 
-# #################################################
-
 test <- crossover.test(
   sequence = sequence,
   AB = "Stretching - Myofascial release",
@@ -275,7 +259,5 @@ flextable(as.data.frame(table2, row.names = rownames(table2))) %>%
     sep = "\n"
   ) %>%
   save_as_docx(path = "Table 2 - Dinamometria VM.docx")
-
-# #################################################
 
 detach(banco_RSTR)

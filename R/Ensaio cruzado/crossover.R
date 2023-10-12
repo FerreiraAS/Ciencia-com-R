@@ -16,7 +16,6 @@ crossover.test <-
            mean.imput,
            alpha,
            carryover.alpha) {
-
     # mean imputation of missing values
     missings <- c()
     banco <- data.frame(pre_F1, post_F1, pre_F2, post_F2)

@@ -114,13 +114,16 @@ stROC <-
         # no ties
         cutoff <-
           round(as.numeric(T1[indexes]), digits = 3) # retain threshold
-        sen <- as.numeric(SEN[indexes]) # retain sensitivity at threshold
-        spe <- as.numeric(SPE[indexes]) # retain specificity at threshold
+        sen <-
+          as.numeric(SEN[indexes]) # retain sensitivity at threshold
+        spe <-
+          as.numeric(SPE[indexes]) # retain specificity at threshold
         ties.values <- "NA"
       }
       if (length(indexes) > 1) {
         # there are ties
-        ties.values <- cbind(T1[indexes], SEN[indexes], SPE[indexes])
+        ties.values <-
+          cbind(T1[indexes], SEN[indexes], SPE[indexes])
         colnames(ties.values) <- c("CUTOFF", "SEN", "SPE")
         ifelse(ties == "max.sen", index <-
                  which.max(ties.values[, 2]), "") # resume ties and locate optimal threshold
@@ -154,7 +157,8 @@ stROC <-
             Youden.J = Youden
           )
         results[1, 1] <- cutoff
-        results[1, 2] <- format(round(AUC, digits = 3), nsmall = 3) # AUC
+        results[1, 2] <-
+          format(round(AUC, digits = 3), nsmall = 3) # AUC
         results[1, 4] <-
           format(round(sen, digits = 3), nsmall = 3) # sensitivity
         results[1, 6] <-

@@ -35,7 +35,7 @@ raters.data <- rbind(maria, michele)
 balanced.data.1 <- complete.cases(maria)
 balanced.data.2 <- complete.cases(michele)
 balanced.data <- rep(balanced.data.1 == balanced.data.2, 2)
-raters.data <- raters.data[balanced.data, ]
+raters.data <- raters.data[balanced.data,]
 variables <- seq(1:dim(raters.data)[2])[c(4)]
 data <- rbind(maria, michele)[balanced.data, variables]
 ID <- seq(1:(sum(balanced.data == TRUE) / 2))
@@ -135,8 +135,8 @@ data <- rbind(maria, michele)[balanced.data, variables]
 inter.df <- data.frame(NA)
 
 # SELECT DATA FOR EACH RATER
-rater1 <- data[which(data$Examinador == names[1]), ]
-rater2 <- data[which(data$Examinador == names[2]), ]
+rater1 <- data[which(data$Examinador == names[1]),]
+rater2 <- data[which(data$Examinador == names[2]),]
 
 for (i in 1:n.raters) {
   print(paste("Rater: ", toupper(names[i]), sep = ""), quote = FALSE)
@@ -164,7 +164,7 @@ for (i in 1:n.raters) {
       quote = FALSE
     )
     model <- ICC(temp, alpha)
-    print(rbind(model[[1]][2, ], model[[1]][5, ]), quote = FALSE)
+    print(rbind(model[[1]][2,], model[[1]][5,]), quote = FALSE)
     
     # store data for interrater reliability (AVERAGE OF TRIALS)
     avg.trials <- rowMeans(temp)
@@ -255,7 +255,7 @@ for (i in 1:length(variables)) {
     quote = FALSE
   )
   model <- ICC(temp, alpha)
-  print(rbind(model[[1]][2, ], model[[1]][5, ]), quote = FALSE)
+  print(rbind(model[[1]][2,], model[[1]][5,]), quote = FALSE)
   print("", quote = FALSE)
   print("", quote = FALSE)
 }

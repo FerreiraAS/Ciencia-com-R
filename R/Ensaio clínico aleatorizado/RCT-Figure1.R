@@ -47,7 +47,7 @@ FIGURE.1 <-
     # decide como lidar com os dados perdidos
     if (missing == "complete.cases") {
       include <- complete.cases(dataset)
-      dataset <- dataset[include == TRUE, ]
+      dataset <- dataset[include == TRUE,]
       bw.factor <- bw.factor[include == TRUE]
       ID_M <- rep(seq(1:length(bw.factor)), length(wt.labels))
       TIME_M <-

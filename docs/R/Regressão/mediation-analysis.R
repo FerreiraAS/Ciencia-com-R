@@ -36,7 +36,7 @@ datasets <- list(T1 = banco_med)
 # Manipulation vs. Myofascial (1 vs. 2)
 banco_med <-
   banco_med[which(banco_med[, col.interv] == 1 |
-                    banco_med[, col.interv] == 2), ]
+                    banco_med[, col.interv] == 2),]
 Intervention <-
   factor(Intervention, levels = c(1, 2), labels = c(1, 0))
 

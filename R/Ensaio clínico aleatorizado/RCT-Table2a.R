@@ -97,7 +97,7 @@ TABLE.2a <-
     # decide como lidar com os dados perdidos
     if (missing == "complete.cases") {
       include <- complete.cases(dataset)
-      dataset <- dataset[include == TRUE, ]
+      dataset <- dataset[include == TRUE,]
       bw.factor <- bw.factor[include == TRUE]
       ID_M <- rep(seq(1:length(bw.factor)), length(wt.labels))
       TIME_M <-
@@ -245,10 +245,10 @@ TABLE.2a <-
           ))
       }
     }
-    mix.mod.res[1, ] <- rep(wt.labels, each = nlevels(bw.factor))
-    mix.mod.res[2, ] <- rep(levels(bw.factor), length(wt.labels))
-    mix.mod.res[3, ] <- N
-    mix.mod.res[4, ] <- desfecho
+    mix.mod.res[1,] <- rep(wt.labels, each = nlevels(bw.factor))
+    mix.mod.res[2,] <- rep(levels(bw.factor), length(wt.labels))
+    mix.mod.res[3,] <- N
+    mix.mod.res[4,] <- desfecho
     
     # p-valores para efeito de interação
     p.value <- mod1.aov[4, 4]
@@ -292,7 +292,7 @@ TABLE.2a <-
         p.value <-
           paste("=", format(round(p.value, digits = 3), nsmall = 3), sep = "")
       }
-      model.res[i - 1, ] <-
+      model.res[i - 1,] <-
         paste(
           "Main effect: F(",
           format(round(mod1.aov[i, 1], digits = 0), nsmall = 0),
@@ -317,8 +317,8 @@ TABLE.2a <-
     wt.pvalues <- c()
     for (i in 1:nlevels(bw.factor)) {
       group.data <-
-        mult.within[mult.within[, 2] == levels(bw.factor)[i], ]
-      group.data <- group.data[1:(length(wt.labels) - 1), ]
+        mult.within[mult.within[, 2] == levels(bw.factor)[i],]
+      group.data <- group.data[1:(length(wt.labels) - 1),]
       # reverse signs due to mult.within order
       estimate <-
         -round(as.numeric(group.data[, 3]), digits = n.digits)
@@ -349,12 +349,12 @@ TABLE.2a <-
                  )), "")
       }
     }
-    wt.diff[1, ] <-
+    wt.diff[1,] <-
       rep(paste(wt.labels[-1], wt.labels[1], sep = " - "), times = nlevels(bw.factor))
-    wt.diff[2, ] <-
+    wt.diff[2,] <-
       rep(levels(bw.factor), each = length(wt.labels) - 1)
-    wt.diff[4, ] <- wt
-    wt.diff[5, ] <- wt.pvalues
+    wt.diff[4,] <- wt
+    wt.diff[5,] <- wt.pvalues
     
     # calcula e preenche a subtabela BETWEEN-GROUP (NEW LINEAR MIXED MODEL: CHANGE WITH BASELINE AS COVARIATE)
     bw <- c()
@@ -476,12 +476,12 @@ TABLE.2a <-
           estimate, " (", lower, " to ", upper, ")", sep = ""
         )))
     }
-    bw.diff[1, ] <-
+    bw.diff[1,] <-
       rep(paste(wt.labels[-1], wt.labels[1], sep = " - "), by = length(wt.labels) - 1)
-    bw.diff[2, ] <- rep(names, length(wt.labels) - 1)
-    bw.diff[4, ] <- bw
-    bw.diff[5, ] <- bw.pvalues
-    bw.diff[6, ] <- smd.values
+    bw.diff[2,] <- rep(names, length(wt.labels) - 1)
+    bw.diff[4,] <- bw
+    bw.diff[5,] <- bw.pvalues
+    bw.diff[6,] <- smd.values
     
     # apresenta os resultados na tela
     print(
@@ -503,7 +503,9 @@ TABLE.2a <-
     print("", quote = FALSE)
     
     # missingness analysis
-	try(missing.data(dataset = dataset, variables = variables, covariate = covariate))
+    try(missing.data(dataset = dataset,
+                     variables = variables,
+                     covariate = covariate))
     
     # separate outputs in multiple calls
     pb1 = txtProgressBar(min = 0,
