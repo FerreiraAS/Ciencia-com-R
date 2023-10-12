@@ -33,7 +33,7 @@ scripts.tbl <- data.frame(
 )
 ```
 
-```{r print-html, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r print-codigos, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
 
 library("tidyr")
 
@@ -41,31 +41,16 @@ for (i in 1:length(unique(scripts.tbl$Análise))) {
   idx <- which(unique(scripts.tbl$Análise)[i] == scripts.tbl$Análise)
   tabs <- scripts.tbl[idx, ]
   rownames(tabs) <- NULL
-  # exibe a tabela
-  print(kableExtra::kable(
-    tabs,
-    align = "c",
-    booktabs = TRUE,
-    format = ifelse(knitr::is_html_output(), "html", "latex"),
-    linesep = "",
-    escape = F,
-    caption = paste0("R scripts disponíveis para análise de ", tolower(unique(scripts.tbl$Análise)[i]))
-  ) %>%
-    kableExtra::kable_styling(
-      latex_options = c("striped"),
-      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-      full_width = ifelse(knitr::is_html_output(), T, T),
-      position = "center"
-    ) %>%
-    kableExtra::row_spec(0,
-                         bold = TRUE,
-                         extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
-    kableExtra::row_spec(length(idx),
-                         extra_css = "border-bottom: 1px solid") %>%
-    kableExtra::column_spec(2, link = ifelse(knitr::is_html_output(), links[idx], NA)),
-  quote = FALSE,)
-  cat("\n")
-  cat("\n")
+  cat('\n\n')
   cat("<br>")
+  cat('\n\n')
+  cat(paste0('### ', unique(scripts.tbl$Análise)[i]))
+  cat('\n\n')
+  cat("<br>")
+  cat('\n\n')
+  cat(paste0("- [", tabs[, 2], "](https://github.com/FerreiraAS/Ciencia-com-R/", links[idx], ")", " \n\n"))
+  cat("\n\n")
+  cat("<br>")
+  cat('\n\n')
 }
 ```
