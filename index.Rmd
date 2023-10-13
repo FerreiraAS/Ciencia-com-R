@@ -42,6 +42,18 @@ library("dplyr")
 library("webshot")
 ```
 
+```{r copy-file, echo = FALSE, results = "hide", include = FALSE}
+# PPTX file
+file.copy(from="Ciencia-com-R.pptx", to="docs/Ciencia-com-R.pptx", 
+          overwrite = TRUE, recursive = FALSE, copy.mode = TRUE)
+try(unlink("Ciencia-com-R.pptx"), silent = TRUE)
+
+# DOCX file
+file.copy(from="Ciencia-com-R.docx", to="docs/Ciencia-com-R.docx", 
+          overwrite = TRUE, recursive = FALSE, copy.mode = TRUE)
+try(unlink("Ciencia-com-R.docx"), silent = TRUE)
+```
+
 ```{r cover-generator, echo = FALSE, include = FALSE, eval = knitr::is_html_output(), cache = TRUE}
 source("covers/cover_1.R", local = knitr::knit_global())
 source("covers/cover_2.R", local = knitr::knit_global())
@@ -49,10 +61,19 @@ source("covers/cover_4.R", local = knitr::knit_global())
 ```
 
 ```{r sobre, echo = FALSE, results = "asis", eval = knitr::is_html_output()}
-cat('# Sobre o livro {-}')
+cat('# Capa {-}')
 ```
 
 <br>
+
+```{r capa, fig.align = 'right', echo = FALSE, results = "asis", include = identical(knitr:::pandoc_to(), 'html'), eval = knitr::is_html_output()}
+
+cat('\n\n')
+cat('<center>')
+cat('![](images/Cover_1.png)')
+cat('\n\n')
+cat('</center>')
+```
 
 ```{=latex}
 \mainmatter
@@ -60,9 +81,17 @@ cat('# Sobre o livro {-}')
 \markboth{}{}
 ```
 
+<div class="boxBorder">
+
+Ferreira, Arthur de Sá. **Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados**. Rio de Janeiro: 1a edição, 2023. `r try(paste0(pdftools::pdf_info("docs/Ciencia-com-R.pdf")$pages, "p."), silent = TRUE)` [doi: 10.5281/zenodo.8320233](https://doi.org/10.5281/zenodo.8320233)
+
+</div>
+
 ```{=latex}
 \vspace*{\fill}
 ```
+
+<br>
 
 ```{r ficha, echo = FALSE, results = "asis", eval = !knitr::is_html_output()}
 cat('Copyright © 2023 Arthur de Sá Ferreira')
@@ -80,18 +109,6 @@ cat('E-book: ISBN')
 ```
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />A versão online desta obra está licenciada com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Atribuição-NãoComercial 4.0 Internacional.</a>
-
-```{r copy-file, echo = FALSE, results = "hide", include = FALSE}
-# PPTX file
-file.copy(from="Ciencia-com-R.pptx", to="docs/Ciencia-com-R.pptx", 
-          overwrite = TRUE, recursive = FALSE, copy.mode = TRUE)
-try(unlink("Ciencia-com-R.pptx"), silent = TRUE)
-
-# DOCX file
-file.copy(from="Ciencia-com-R.docx", to="docs/Ciencia-com-R.docx", 
-          overwrite = TRUE, recursive = FALSE, copy.mode = TRUE)
-try(unlink("Ciencia-com-R.docx"), silent = TRUE)
-```
 
 ```{r visit-counter, echo = FALSE, results = "asis"}
 if(knitr::is_html_output()){
