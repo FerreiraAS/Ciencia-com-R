@@ -4,15 +4,21 @@
 \par\noindent\rule{\textwidth}{0.05in}
 ```
 
-```{r capa, fig.align = 'right', echo = FALSE, results = "asis", include = identical(knitr:::pandoc_to(), 'html'), fig.link = 'images/Cover_1.png', out.width = "50%", eval = knitr::is_html_output()}
+```{r capa, fig.align = 'right', echo = FALSE, results = "asis", include = identical(knitr:::pandoc_to(), 'html'), eval = knitr::is_html_output()}
 
 cat('# Capa {-}')
 
 cat('\n\n')
 cat('<center>')
 cat('<br>')
-knitr::include_graphics('images/Cover_1.png', dpi = NA)
+cat('![](images/Cover_1.png)')
 cat('\n\n')
 cat('</center>')
 cat('<br>')
 ```
+
+<div class="boxBorder">
+
+Ferreira, Arthur de Sá. **Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados**. Rio de Janeiro: 1a edição, 2023. `r try(paste0(pdftools::pdf_info("docs/Ciencia-com-R.pdf")$pages, "p."), silent = TRUE)` [doi: 10.5281/zenodo.8320233](https://doi.org/10.5281/zenodo.8320233)
+
+</div>
