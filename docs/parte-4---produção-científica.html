@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 14 Meta-análises | Ciência com R</title>
+  <title>PARTE 4 - Produção científica | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 14 Meta-análises | Ciência com R" />
+  <meta property="og:title" content="PARTE 4 - Produção científica | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 14 Meta-análises | Ciência com R" />
+  <meta name="twitter:title" content="PARTE 4 - Produção científica | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="analise-concordancia-confiabilidade.html"/>
-<link rel="next" href="vieses-metodologicos.html"/>
+<link rel="prev" href="paradoxos-estatisticos.html"/>
+<link rel="next" href="computacao-estatistica.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -818,88 +818,19 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="meta-analises" class="section level1 hasAnchor" number="14">
-<h1><span class="header-section-number">Capítulo 14</span> <strong>Meta-análises</strong><a href="meta-analises.html#meta-analises" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><br></p>
-<div id="meta-analise" class="section level2 hasAnchor" number="14.1">
-<h2><span class="header-section-number">14.1</span> Meta-análise<a href="meta-analises.html#meta-analise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-é-meta-análise" class="section level3 hasAnchor" number="14.1.1">
-<h3><span class="header-section-number">14.1.1</span> O que é meta-análise?<a href="meta-analises.html#o-que-é-meta-análise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>.[]</li>
-</ul>
-<p><br></p>
-</div>
-</div>
-<div id="interpretacao" class="section level2 hasAnchor" number="14.2">
-<h2><span class="header-section-number">14.2</span> Interpretação de efeitos em meta-análise<a href="meta-analises.html#interpretacao" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="como-avaliar-a-variação-do-tamanho-do-efeito" class="section level3 hasAnchor" number="14.2.1">
-<h3><span class="header-section-number">14.2.1</span> Como avaliar a variação do tamanho do efeito?<a href="meta-analises.html#como-avaliar-a-variação-do-tamanho-do-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>O intervalo de predição contém informação sobre a variação do tamanho do efeito.<span class="citation"><sup><a href="#ref-Borenstein2022">92</a></sup></span></p></li>
-<li><p>Se o intervalo de predição não contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que (a) o tratamento funciona igualmente bem em todas as populações, ou que ele funciona melhor em algumas populações do que em outras.<span class="citation"><sup><a href="#ref-Borenstein2022">92</a></sup></span></p></li>
-<li><p>Se o intervalo de predição contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que o tratamento pode ser benéfico em algumas populações, mas prejudicial em outras, de modo que a estimativa pontual (geralmente a média) torna-se amplamente irrelevante. Nesse caso, é recomendado investigar em que populações o tratamento seria benéfico e em quais causaria danos.<span class="citation"><sup><a href="#ref-Borenstein2022">92</a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="como-avaliar-a-heterogeneidade-entre-os-estudos" class="section level3 hasAnchor" number="14.2.2">
-<h3><span class="header-section-number">14.2.2</span> Como avaliar a heterogeneidade entre os estudos?<a href="meta-analises.html#como-avaliar-a-heterogeneidade-entre-os-estudos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>A heterogeneidade - variação não-aleatória - no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo <span class="math inline">\(I^{2}\)</span>.<span class="citation"><sup><a href="#ref-Borenstein2022">92</a>,<a href="#ref-Rücker2008">93</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> representa qual proporção da variância observada reflete a variância nos efeitos verdadeiros em vez do erro de amostragem.<span class="citation"><sup><a href="#ref-Borenstein2022">92</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> não depende da quantidade de estudos incluídos na meta-análise. Entretanto, <span class="math inline">\(I^{2}\)</span> aumenta com a quantidade de participantes incluídos nos estudos meta-analisados.<span class="citation"><sup><a href="#ref-Rücker2008">93</a></sup></span></p></li>
-<li><p>A heterogeneidade entre estudos é explicada de modo mais confiável utilizando dados de pacientes individuais, uma vez que a direção verdadeira da modificação de efeito não pode ser observada a partir de dados agregados no estudo.<span class="citation"><sup><a href="#ref-degrooth2023">94</a></sup></span></p></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>metagear</em><span class="citation"><sup><a href="#ref-metagear">95</a></sup></span> fornece funções para condução e análise de revisões sistemáticas</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>metagear</em><span class="citation"><sup><a href="#ref-metagear">95</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA"><em>plot_PRISMA</em></a> para gerar o fluxograma de uma revisão sistemática de acordo com o <em>Preferred Reporting Items for Systematic Reviews and Meta-Analyses</em><span class="citation"><sup><a href="#ref-Moher2015">96</a></sup></span>.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>PRISMA2020</em><span class="citation"><sup><a href="#ref-PRISMA2020-2">97</a>,<a href="#ref-PRISMA2020">98</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram"><em>PRISMA_flowdiagram</em></a> para elaboração do fluxograma de revisões sistemáticas no formato padrão.</p>
-</div>
-<p><br></p>
+<div id="parte-4---produção-científica" class="section level1 unnumbered hasAnchor">
+<h1><strong>PARTE 4 - Produção científica</strong><a href="parte-4---produção-científica.html#parte-4---produção-científica" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!--script for generating HORIZONTAL LINE-->
+<hr style="height:5px;border-width:0;color:black;background-color:black">
 
-</div>
-</div>
-</div>
-<h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-Borenstein2022" class="csl-entry">
-<div class="csl-left-margin">92. </div><div class="csl-right-inline">Borenstein M. In a meta-analysis, the I-squared statistic does not tell us how much the effect size varies. <em>Journal of Clinical Epidemiology</em>. October 2022. doi:<a href="https://doi.org/10.1016/j.jclinepi.2022.10.003">10.1016/j.jclinepi.2022.10.003</a></div>
-</div>
-<div id="ref-Rücker2008" class="csl-entry">
-<div class="csl-left-margin">93. </div><div class="csl-right-inline">Rücker G, Schwarzer G, Carpenter JR, Schumacher M. Undue reliance on I 2 in assessing heterogeneity may mislead. <em>BMC Medical Research Methodology</em>. 2008;8(1). doi:<a href="https://doi.org/10.1186/1471-2288-8-79">10.1186/1471-2288-8-79</a></div>
-</div>
-<div id="ref-degrooth2023" class="csl-entry">
-<div class="csl-left-margin">94. </div><div class="csl-right-inline">Grooth HJ de, Parienti JJ. Heterogeneity between studies can be explained more reliably with individual patient data. <em>Intensive Care Medicine</em>. July 2023. doi:<a href="https://doi.org/10.1007/s00134-023-07163-z">10.1007/s00134-023-07163-z</a></div>
-</div>
-<div id="ref-metagear" class="csl-entry">
-<div class="csl-left-margin">95. </div><div class="csl-right-inline">Lajeunesse MJ. Facilitating systematic reviews, data extraction, and meta-analysis with the metagear package for r. 2016;7:323-330.</div>
-</div>
-<div id="ref-Moher2015" class="csl-entry">
-<div class="csl-left-margin">96. </div><div class="csl-right-inline">Moher D, Shamseer L, Clarke M, et al. Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement. <em>Systematic Reviews</em>. 2015;4(1). doi:<a href="https://doi.org/10.1186/2046-4053-4-1">10.1186/2046-4053-4-1</a></div>
-</div>
-<div id="ref-PRISMA2020-2" class="csl-entry">
-<div class="csl-left-margin">97. </div><div class="csl-right-inline">Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:<a href="https://doi.org/10.1002/cl2.1230">10.1002/cl2.1230</a></div>
-</div>
-<div id="ref-PRISMA2020" class="csl-entry">
-<div class="csl-left-margin">98. </div><div class="csl-right-inline">Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:<a href="https://doi.org/10.1002/cl2.1230">10.1002/cl2.1230</a></div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="analise-concordancia-confiabilidade.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="vieses-metodologicos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="paradoxos-estatisticos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="computacao-estatistica.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

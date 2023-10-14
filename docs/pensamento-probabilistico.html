@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 14 Meta-análises | Ciência com R</title>
+  <title>Capítulo 1 Pensamento probabilístico | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 14 Meta-análises | Ciência com R" />
+  <meta property="og:title" content="Capítulo 1 Pensamento probabilístico | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 14 Meta-análises | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 1 Pensamento probabilístico | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="analise-concordancia-confiabilidade.html"/>
-<link rel="next" href="vieses-metodologicos.html"/>
+<link rel="prev" href="parte-1---estatística-aplicada.html"/>
+<link rel="next" href="pensamento-estatistico.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -818,52 +818,168 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="meta-analises" class="section level1 hasAnchor" number="14">
-<h1><span class="header-section-number">Capítulo 14</span> <strong>Meta-análises</strong><a href="meta-analises.html#meta-analises" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="pensamento-probabilistico" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Capítulo 1</span> <strong>Pensamento probabilístico</strong><a href="pensamento-probabilistico.html#pensamento-probabilistico" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="meta-analise" class="section level2 hasAnchor" number="14.1">
-<h2><span class="header-section-number">14.1</span> Meta-análise<a href="meta-analises.html#meta-analise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="experimento" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Experimento<a href="pensamento-probabilistico.html#experimento" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-meta-análise" class="section level3 hasAnchor" number="14.1.1">
-<h3><span class="header-section-number">14.1.1</span> O que é meta-análise?<a href="meta-analises.html#o-que-é-meta-análise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-é-um-experimento" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> O que é um experimento?<a href="pensamento-probabilistico.html#o-que-é-um-experimento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>.[]</li>
+<li><p>Um experimento é um processo de medição ou simulação cujo resultado é chamado de desfecho.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>Em um experimento aleatório, o desfecho é imprevisível.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>Tentativa se refere a uma repetição de um experimento aleatório.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 </div>
-<div id="interpretacao" class="section level2 hasAnchor" number="14.2">
-<h2><span class="header-section-number">14.2</span> Interpretação de efeitos em meta-análise<a href="meta-analises.html#interpretacao" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="espacos-eventos" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Espaços amostrais e eventos<a href="pensamento-probabilistico.html#espacos-eventos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="como-avaliar-a-variação-do-tamanho-do-efeito" class="section level3 hasAnchor" number="14.2.1">
-<h3><span class="header-section-number">14.2.1</span> Como avaliar a variação do tamanho do efeito?<a href="meta-analises.html#como-avaliar-a-variação-do-tamanho-do-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-é-evento" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> O que é evento?<a href="pensamento-probabilistico.html#o-que-é-evento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>O intervalo de predição contém informação sobre a variação do tamanho do efeito.<span class="citation"><sup><a href="#ref-Borenstein2022">92</a></sup></span></p></li>
-<li><p>Se o intervalo de predição não contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que (a) o tratamento funciona igualmente bem em todas as populações, ou que ele funciona melhor em algumas populações do que em outras.<span class="citation"><sup><a href="#ref-Borenstein2022">92</a></sup></span></p></li>
-<li><p>Se o intervalo de predição contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que o tratamento pode ser benéfico em algumas populações, mas prejudicial em outras, de modo que a estimativa pontual (geralmente a média) torna-se amplamente irrelevante. Nesse caso, é recomendado investigar em que populações o tratamento seria benéfico e em quais causaria danos.<span class="citation"><sup><a href="#ref-Borenstein2022">92</a></sup></span></p></li>
+<li><p>Um evento <span class="math inline">\(E\)</span> é um único desfecho ou uma coleção de desfechos.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>Um evento <span class="math inline">\(E\)</span> é um subconjunto do espaço amostral <span class="math inline">\(S\)</span> de um experimento.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
-<div id="como-avaliar-a-heterogeneidade-entre-os-estudos" class="section level3 hasAnchor" number="14.2.2">
-<h3><span class="header-section-number">14.2.2</span> Como avaliar a heterogeneidade entre os estudos?<a href="meta-analises.html#como-avaliar-a-heterogeneidade-entre-os-estudos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-é-espaço-de-eventos" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> O que é espaço de eventos?<a href="pensamento-probabilistico.html#o-que-é-espaço-de-eventos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>A heterogeneidade - variação não-aleatória - no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo <span class="math inline">\(I^{2}\)</span>.<span class="citation"><sup><a href="#ref-Borenstein2022">92</a>,<a href="#ref-Rücker2008">93</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> representa qual proporção da variância observada reflete a variância nos efeitos verdadeiros em vez do erro de amostragem.<span class="citation"><sup><a href="#ref-Borenstein2022">92</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> não depende da quantidade de estudos incluídos na meta-análise. Entretanto, <span class="math inline">\(I^{2}\)</span> aumenta com a quantidade de participantes incluídos nos estudos meta-analisados.<span class="citation"><sup><a href="#ref-Rücker2008">93</a></sup></span></p></li>
-<li><p>A heterogeneidade entre estudos é explicada de modo mais confiável utilizando dados de pacientes individuais, uma vez que a direção verdadeira da modificação de efeito não pode ser observada a partir de dados agregados no estudo.<span class="citation"><sup><a href="#ref-degrooth2023">94</a></sup></span></p></li>
+<li><p>A união de dois eventos <span class="math inline">\(E_{1} \cup E_{2}\)</span> é o conjunto de todos os desfechos que estão em ambos.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>A intersecção de dois eventos <span class="math inline">\(E_{1} \cap E_{2}\)</span>, ou evento conjunto, é o conjunto de todos os desfechos que estão em ambos os eventos.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>O complemento de um evento <span class="math inline">\(E^C\)</span> consiste em todos os desfechos que não estão incluídos no evento <span class="math inline">\(E\)</span>.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
 </ul>
 <p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>metagear</em><span class="citation"><sup><a href="#ref-metagear">95</a></sup></span> fornece funções para condução e análise de revisões sistemáticas</p>
 </div>
+<div id="o-que-é-espaço-amostral" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> O que é espaço amostral?<a href="pensamento-probabilistico.html#o-que-é-espaço-amostral" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>O espaço amostral <span class="math inline">\(S\)</span> de um experimento aleatório é definido como o conjunto de todos os desfechos possíveis de um experimento.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>Em probabilidade discreta, o espaço amostral <span class="math inline">\(S\)</span> pode ser enumerado e contato.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+</ul>
 <p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>metagear</em><span class="citation"><sup><a href="#ref-metagear">95</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA"><em>plot_PRISMA</em></a> para gerar o fluxograma de uma revisão sistemática de acordo com o <em>Preferred Reporting Items for Systematic Reviews and Meta-Analyses</em><span class="citation"><sup><a href="#ref-Moher2015">96</a></sup></span>.</p>
 </div>
+</div>
+<div id="probabilidade" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Probabilidade<a href="pensamento-probabilistico.html#probabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>PRISMA2020</em><span class="citation"><sup><a href="#ref-PRISMA2020-2">97</a>,<a href="#ref-PRISMA2020">98</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram"><em>PRISMA_flowdiagram</em></a> para elaboração do fluxograma de revisões sistemáticas no formato padrão.</p>
+<div id="o-que-é-probabilidade" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> O que é probabilidade?<a href="pensamento-probabilistico.html#o-que-é-probabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Com um espaço amostral <span class="math inline">\(S\)</span> finito e não vazio de desfechos igualmente prováveis, a probabilidade de um evento <span class="math inline">\(E\)</span> é a razão entre o número de desfechos no evento <span class="math inline">\(E\)</span> e o número de desfechos no espaço amostral <span class="math inline">\(S\)</span>.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>Um evento <span class="math inline">\(E\)</span> impossível não contém um desfecho e, portanto, nunca ocorre: <span class="math inline">\(P(E)=0\)</span>.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>Um evento <span class="math inline">\(E\)</span> é certo consiste em qualquer um dos desfechos possíveis e, portanto, sempre ocorre: <span class="math inline">\(P(E)=1\)</span>.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+</ul>
+<p><br></p>
 </div>
+<div id="quais-são-os-axiomas-da-probabilidade" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Quais são os axiomas da probabilidade?<a href="pensamento-probabilistico.html#quais-são-os-axiomas-da-probabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>A probabilidade de um evento é um número real que satisfaz os seguintes axiomas:<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p>
+<ul>
+<li><p>Axioma I. Probabilidades de um evento <span class="math inline">\(E\)</span> são números não-negativos: <span class="math inline">\(P(E)≥0\)</span>.</p></li>
+<li><p>Axioma II. Probabilidade de todos os eventos do espaço amostral <span class="math inline">\(A\)</span> ocorrerem é 100%: <span class="math inline">\(P(S)=1\)</span>.</p></li>
+<li><p>Axioma III. A probabilidade de um conjunto <em>k</em> de eventos mutuamente exclusivos é igual a soma da probabilidade de cada evento: <span class="math inline">\(P(E_{1} \cup E_{2} \cup ... E_{k}) = P(E_{1}) + P(E_{2}) + ... + P(E_{k})\)</span>.</p></li>
+</ul></li>
+<li><p>Os axiomas possuem as seguintes consequências:<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p>
+<ul>
+<li><p>A soma da probabilidade de dois eventos que dividem o espaço amostral é 100%: <span class="math inline">\(P(E)+P(E)^C=1\)</span>.</p></li>
+<li><p>O valor máximo de probabilidade de um evento é 100%: <span class="math inline">\(P(S)≤1\)</span>.</p></li>
+<li><p>A probabilidade é uma função não descrescente do número de desfeschos de um evento.</p></li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="independencia-probabilidade" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Independência e probabilidade<a href="pensamento-probabilistico.html#independencia-probabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-independência-em-estatística" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> O que é independência em estatística?<a href="pensamento-probabilistico.html#o-que-é-independência-em-estatística" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Em experimentos aleatórios, é comum assumir que os eventos de tentativas separadas são independentes devido a independência física de eventos e experimentos.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>Se a ocorrência do evento <span class="math inline">\(E_{1}\)</span> não tiver efeito na ocorrência do evento <span class="math inline">\(E_{2}\)</span>, os eventos <span class="math inline">\(E_{1}\)</span> e <span class="math inline">\(E_{2}\)</span> são considerados estatisticamente independentes.</p></li>
+<li><p>Eventos são mutuamente exclusivos, ou disjuntos, se a ocorrência de um exclui a ocorrência dos outros.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>Se dois eventos <span class="math inline">\(E_{1}\)</span> e <span class="math inline">\(E_{2}\)</span> são mutuamente exclusivos, então os eventos <span class="math inline">\(E_{1}\)</span> e <span class="math inline">\(E_{2}\)</span> não podem ocorrer ao mesmo tempo e, portanto, são eventos dependentes.</p></li>
+<li><p>Em experimentos independentes, o desfecho de uma tentativa é independente dos desfechos de outras tentativas, passadas e/ou futuras. Uma tentativa em um experimento aleatório é independente se a probabilidade de cada desfecho possível não mudar de tentativa para tentativa.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="o-que-é-probabilidade-marginal" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> O que é probabilidade marginal?<a href="pensamento-probabilistico.html#o-que-é-probabilidade-marginal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Probabilidade marginal é a probabilidade de ocorrência de um evento <span class="math inline">\(E\)</span> independentemente da(s) probabilidade(s) de outro(s) evento(s).<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="o-que-é-probabilidade-conjunta" class="section level3 hasAnchor" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> O que é probabilidade conjunta?<a href="pensamento-probabilistico.html#o-que-é-probabilidade-conjunta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Probabilidade conjunta é a probabilidade de ocorrência de dois ou mais eventos independentes <span class="math inline">\(E_{1}\)</span>, <span class="math inline">\(E_{2}\)</span>, …, <span class="math inline">\(E_{k}\)</span>, independentemente da(s) probabilidade(s) de outro(s) evento(s).<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>Se a probabilidade conjunta dos eventos é nula (<span class="math inline">\(E_{1} \cup E_{2} = 0\)</span>), esses dois eventos <span class="math inline">\(E_{1}\)</span> e <span class="math inline">\(E_{2}\)</span> são mutuamente exclusivos ou disjuntos.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="o-que-é-probabilidade-condicional" class="section level3 hasAnchor" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> O que é probabilidade condicional?<a href="pensamento-probabilistico.html#o-que-é-probabilidade-condicional" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Probabilidade condicional é a probabilidade de ocorrência do evento <span class="math inline">\(E_{2}\)</span> quando se sabe que o evento <span class="math inline">\(E_{1}\)</span> já ocorreu <span class="math inline">\(P(E_{2} | E_{1})\)</span>.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>A probabilidade condicional <span class="math inline">\(P(E_{2} | E_{1})\)</span> representa que a ocorrência do evento <span class="math inline">\(E_{1}\)</span> fornece informação sobre a ocorrência do evento <span class="math inline">\(E_{2}\)</span>.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+<li><p>Se a ocorrência do evento <span class="math inline">\(E_{1}\)</span> tiver alguma influência na ocorrência do evento <span class="math inline">\(E_{2}\)</span>, então a probabilidade condicional do evento <span class="math inline">\(E_{2}\)</span> dado o evento <span class="math inline">\(E_{1}\)</span> pode ser maior ou menor do que a probabilidade marginal.<span class="citation"><sup><a href="#ref-grami2023">1</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="lei-grandes-numeros" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Leis dos grandes números<a href="pensamento-probabilistico.html#lei-grandes-numeros" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-a-lei-dos-grandes-números" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> O que é a lei dos grandes números?<a href="pensamento-probabilistico.html#o-que-é-a-lei-dos-grandes-números" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="lei-pequenos-numeros" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Leis dos pequenos números<a href="pensamento-probabilistico.html#lei-pequenos-numeros" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-a-lei-dos-pequenos-números" class="section level3 hasAnchor" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> O que é a lei dos pequenos números?<a href="pensamento-probabilistico.html#o-que-é-a-lei-dos-pequenos-números" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>A crença exagerada na probabilidade de replicar com sucesso os achados de um estudo, pela tendência de se considerar uma amostra como representativa da população.<span class="citation"><sup><a href="#ref-tversky1971">2</a></sup></span></p></li>
+<li><p>A crença na lei dos pequenos números se refere à tendência de superestimar a estabilidade das estimativas provenientes de estudos com amostras pequenas.<span class="citation"><sup><a href="#ref-bishop2022">3</a></sup></span></p></li>
+<li><p>Quando se percebe uma padrão, pode não ser possível identificar se tal padrão é real.<span class="citation"><sup><a href="#ref-guy1988">4</a></sup></span></p>
+<ul>
+<li><p>1a Lei Forte dos Pequenos Números: “Não há pequenos números suficientes para atender às muitas demandas que lhes são feitas”.<span class="citation"><sup><a href="#ref-guy1988">4</a></sup></span></p></li>
+<li><p>2a Lei Forte dos Pequenos Números: “Quando dois números parecem iguais, não são necessariamente assim”.<span class="citation"><sup><a href="#ref-guy1990">5</a></sup></span></p></li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="lei-numeros-anomals" class="section level2 hasAnchor" number="1.7">
+<h2><span class="header-section-number">1.7</span> Leis dos números anômalos<a href="pensamento-probabilistico.html#lei-numeros-anomals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-a-lei-dos-números-anômalos" class="section level3 hasAnchor" number="1.7.1">
+<h3><span class="header-section-number">1.7.1</span> O que é a lei dos números anômalos?<a href="pensamento-probabilistico.html#o-que-é-a-lei-dos-números-anômalos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="teorema-central-limite" class="section level2 hasAnchor" number="1.8">
+<h2><span class="header-section-number">1.8</span> Teorema central do limite<a href="pensamento-probabilistico.html#teorema-central-limite" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-teorema-central-do-limite" class="section level3 hasAnchor" number="1.8.1">
+<h3><span class="header-section-number">1.8.1</span> O que é teorema central do limite?<a href="pensamento-probabilistico.html#o-que-é-teorema-central-do-limite" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
 <p><br></p>
 
 </div>
@@ -871,26 +987,20 @@ div.csl-indent {
 </div>
 <h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-Borenstein2022" class="csl-entry">
-<div class="csl-left-margin">92. </div><div class="csl-right-inline">Borenstein M. In a meta-analysis, the I-squared statistic does not tell us how much the effect size varies. <em>Journal of Clinical Epidemiology</em>. October 2022. doi:<a href="https://doi.org/10.1016/j.jclinepi.2022.10.003">10.1016/j.jclinepi.2022.10.003</a></div>
+<div id="ref-grami2023" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Grami A. Discrete probability. In: Elsevier; 2023:285-305. doi:<a href="https://doi.org/10.1016/b978-0-12-820656-0.00016-2">10.1016/b978-0-12-820656-0.00016-2</a></div>
 </div>
-<div id="ref-Rücker2008" class="csl-entry">
-<div class="csl-left-margin">93. </div><div class="csl-right-inline">Rücker G, Schwarzer G, Carpenter JR, Schumacher M. Undue reliance on I 2 in assessing heterogeneity may mislead. <em>BMC Medical Research Methodology</em>. 2008;8(1). doi:<a href="https://doi.org/10.1186/1471-2288-8-79">10.1186/1471-2288-8-79</a></div>
+<div id="ref-tversky1971" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Tversky A, Kahneman D. Belief in the law of small numbers. <em>Psychological Bulletin</em>. 1971;76(2):105-110. doi:<a href="https://doi.org/10.1037/h0031322">10.1037/h0031322</a></div>
 </div>
-<div id="ref-degrooth2023" class="csl-entry">
-<div class="csl-left-margin">94. </div><div class="csl-right-inline">Grooth HJ de, Parienti JJ. Heterogeneity between studies can be explained more reliably with individual patient data. <em>Intensive Care Medicine</em>. July 2023. doi:<a href="https://doi.org/10.1007/s00134-023-07163-z">10.1007/s00134-023-07163-z</a></div>
+<div id="ref-bishop2022" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Bishop DVM, Thompson J, Parker AJ. Can we shift belief in the <span>‘</span>Law of Small Numbers<span>’</span>? <em>Royal Society Open Science</em>. 2022;9(3). doi:<a href="https://doi.org/10.1098/rsos.211028">10.1098/rsos.211028</a></div>
 </div>
-<div id="ref-metagear" class="csl-entry">
-<div class="csl-left-margin">95. </div><div class="csl-right-inline">Lajeunesse MJ. Facilitating systematic reviews, data extraction, and meta-analysis with the metagear package for r. 2016;7:323-330.</div>
+<div id="ref-guy1988" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Guy RK. The strong law of small numbers. <em>The American Mathematical Monthly</em>. 1988;95(8):697. doi:<a href="https://doi.org/10.2307/2322249">10.2307/2322249</a></div>
 </div>
-<div id="ref-Moher2015" class="csl-entry">
-<div class="csl-left-margin">96. </div><div class="csl-right-inline">Moher D, Shamseer L, Clarke M, et al. Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement. <em>Systematic Reviews</em>. 2015;4(1). doi:<a href="https://doi.org/10.1186/2046-4053-4-1">10.1186/2046-4053-4-1</a></div>
-</div>
-<div id="ref-PRISMA2020-2" class="csl-entry">
-<div class="csl-left-margin">97. </div><div class="csl-right-inline">Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:<a href="https://doi.org/10.1002/cl2.1230">10.1002/cl2.1230</a></div>
-</div>
-<div id="ref-PRISMA2020" class="csl-entry">
-<div class="csl-left-margin">98. </div><div class="csl-right-inline">Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:<a href="https://doi.org/10.1002/cl2.1230">10.1002/cl2.1230</a></div>
+<div id="ref-guy1990" class="csl-entry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Guy RK. The Second Strong Law of Small Numbers. <em>Mathematics Magazine</em>. 1990;63(1):3-20. doi:<a href="https://doi.org/10.1080/0025570x.1990.11977475">10.1080/0025570x.1990.11977475</a></div>
 </div>
 </div>
             </section>
@@ -898,8 +1008,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="analise-concordancia-confiabilidade.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="vieses-metodologicos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="parte-1---estatística-aplicada.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pensamento-estatistico.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
