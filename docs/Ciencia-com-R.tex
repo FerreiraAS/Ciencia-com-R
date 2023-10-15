@@ -264,7 +264,7 @@
 \clearpage
 \markboth{}{}
 
-Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. 131p. \href{https://doi.org/10.5281/zenodo.8320233}{doi: 10.5281/zenodo.8320233}
+Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. 133p. \href{https://doi.org/10.5281/zenodo.8320233}{doi: 10.5281/zenodo.8320233}
 
 \vspace*{\fill}
 
@@ -1019,6 +1019,11 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{12}} forne
   Dados perdidos são dados não coletados de um ou mais participantes, para uma ou mais variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2007}{15}}
 \end{itemize}
 
+\begin{infobox}{images/Rlogo}
+O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{16}} fornece a função \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/na}{\emph{is.na}} para identificar que elementos de um objeto são dados perdidos.
+
+\end{infobox}
+
 \hypertarget{qual-o-problema-de-um-estudo-ter-dados-perdidos}{%
 \subsection{Qual o problema de um estudo ter dados perdidos?}\label{qual-o-problema-de-um-estudo-ter-dados-perdidos}}
 
@@ -1036,11 +1041,11 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{12}} forne
 
 \begin{itemize}
 \item
-  Dados perdidos completamente ao acaso (\emph{missing completely at random}, MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{16},\protect\hyperlink{ref-carpenter2021}{17}}
+  Dados perdidos completamente ao acaso (\emph{missing completely at random}, MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{17},\protect\hyperlink{ref-carpenter2021}{18}}
 \item
-  Dados perdidos ao acaso (\emph{missing at random}, MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{16},\protect\hyperlink{ref-carpenter2021}{17}}
+  Dados perdidos ao acaso (\emph{missing at random}, MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{17},\protect\hyperlink{ref-carpenter2021}{18}}
 \item
-  Dados perdidos não ao acaso (\emph{missing not at random}, MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{16},\protect\hyperlink{ref-carpenter2021}{17}}
+  Dados perdidos não ao acaso (\emph{missing not at random}, MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{17},\protect\hyperlink{ref-carpenter2021}{18}}
 \end{itemize}
 
 \hypertarget{como-identificar-o-mecanismo-gerador-de-dados-perdidos-em-um-banco-de-dados}{%
@@ -1048,13 +1053,13 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{12}} forne
 
 \begin{itemize}
 \item
-  Por definição, não é possível avaliar se os dados foram perdidos ao acaso (MAR) ou não (MNAR).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{16}}
+  Por definição, não é possível avaliar se os dados foram perdidos ao acaso (MAR) ou não (MNAR).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{17}}
 \item
-  Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise (`dado perdido' = 1, `dado observado' = 0).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{16}}
+  Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise (`dado perdido' = 1, `dado observado' = 0).\textsuperscript{\protect\hyperlink{ref-Heymans2022}{17}}
 \end{itemize}
 
 \begin{infobox}{images/Rlogo}
-O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{18}} fornece a função \href{https://www.rdocumentation.org/packages/misty/versions/0.5.0/topics/na.test}{\emph{na.test}} para executar o Little's Missing Completely at Random (MCAR) test\textsuperscript{\protect\hyperlink{ref-little1988}{19}}.
+O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{19}} fornece a função \href{https://www.rdocumentation.org/packages/misty/versions/0.5.0/topics/na.test}{\emph{na.test}} para executar o Little's Missing Completely at Random (MCAR) test\textsuperscript{\protect\hyperlink{ref-little1988}{20}}.
 
 \end{infobox}
 
@@ -1074,13 +1079,18 @@ O pacote \emph{misty}\textsuperscript{\protect\hyperlink{ref-misty}{18}} fornece
 \item
   Na ocorrência de dados perdidos, a análise mais comum compreende apenas os `casos completos', com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).\textsuperscript{\protect\hyperlink{ref-Altman2007}{15}}
 \item
-  A análise de dados completos é válida quando pode se argumentar que que a probabilidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{17}}
+  A análise de dados completos é válida quando pode se argumentar que que a probabilidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{18}}
 \item
-  A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{17}}
+  A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{18}}
 \end{itemize}
 
 \begin{infobox}{images/Rlogo}
-O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{20}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/complete.cases}{\emph{complete.cases}} para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados.
+O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{16}} fornece a função \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/na.fail}{\emph{na.omit}} para remover dados perdidos de um objeto em um banco de dados.
+
+\end{infobox}
+
+\begin{infobox}{images/Rlogo}
+O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{21}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/complete.cases}{\emph{complete.cases}} para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados.
 
 \end{infobox}
 
@@ -1088,13 +1098,13 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats}{20}} fornece
 \item
   Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.\textsuperscript{\protect\hyperlink{ref-Altman2007}{15}}
 \item
-  A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares - preditoras do desfecho e não dos dados perdidos - estão disponíveis.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{17}}
+  A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares - preditoras do desfecho e não dos dados perdidos - estão disponíveis.\textsuperscript{\protect\hyperlink{ref-carpenter2021}{18}}
 \item
-  Em dados longitudinais com um pequeno número de `ondas' (medidas repetidas) e poucas variáveis, para análise com modelos de regressão univariados, a imputação via especificação condicional completa - também conhecido como imputação multivariada por equações encadeadas (\emph{multivaraite imputation by chained equations}, MICE) - é eficiente do ponto de vista computacional e possui acurácia e precisão para estimação de parâmetros.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{16},\protect\hyperlink{ref-Cao2022}{21}}
+  Em dados longitudinais com um pequeno número de `ondas' (medidas repetidas) e poucas variáveis, para análise com modelos de regressão univariados, a imputação via especificação condicional completa - também conhecido como imputação multivariada por equações encadeadas (\emph{multivaraite imputation by chained equations}, MICE) - é eficiente do ponto de vista computacional e possui acurácia e precisão para estimação de parâmetros.\textsuperscript{\protect\hyperlink{ref-Heymans2022}{17},\protect\hyperlink{ref-Cao2022}{22}}
 \end{itemize}
 
 \begin{infobox}{images/Rlogo}
-Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph{miceadds}\textsuperscript{\protect\hyperlink{ref-miceadds}{23}} fornecem funções \href{https://www.rdocumentation.org/packages/mice/versions/3.16.0/topics/mice}{\emph{mice}} e \href{https://www.rdocumentation.org/packages/miceadds/versions/3.16-18/topics/mi.anova}{\emph{mi.anova}} para imputação multivariada por equações encadeadas, respectivamente, para imputação de dados.
+Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{23}} e \emph{miceadds}\textsuperscript{\protect\hyperlink{ref-miceadds}{24}} fornecem funções \href{https://www.rdocumentation.org/packages/mice/versions/3.16.0/topics/mice}{\emph{mice}} e \href{https://www.rdocumentation.org/packages/miceadds/versions/3.16-18/topics/mi.anova}{\emph{mi.anova}} para imputação multivariada por equações encadeadas, respectivamente, para imputação de dados.
 
 \end{infobox}
 
@@ -1104,7 +1114,7 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
 \begin{itemize}
 \tightlist
 \item
-  Informar: o número de participantes com dados perdidos; diferenças nas taxas de dados perdidos entre os braços do estudo; os motivos dos dados perdidos; o fluxo de participantes; quaisquer diferenças entre os participantes com e sem dados perdidos; o padrão de ausência (por exemplo, se é aleatória); os métodos para tratamento de dados perdidos das variáveis em análise; os resultados de quaisquer análises de sensibilidade; as implicações dos dados perdidos na interpretação do resultados.\textsuperscript{\protect\hyperlink{ref-Akl2015}{24}}
+  Informar: o número de participantes com dados perdidos; diferenças nas taxas de dados perdidos entre os braços do estudo; os motivos dos dados perdidos; o fluxo de participantes; quaisquer diferenças entre os participantes com e sem dados perdidos; o padrão de ausência (por exemplo, se é aleatória); os métodos para tratamento de dados perdidos das variáveis em análise; os resultados de quaisquer análises de sensibilidade; as implicações dos dados perdidos na interpretação do resultados.\textsuperscript{\protect\hyperlink{ref-Akl2015}{25}}
 \end{itemize}
 
 \hypertarget{metadados}{%
@@ -1115,9 +1125,9 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
 
 \begin{itemize}
 \item
-  Metadados são informações técnicas relacionadas às variáveis do estudo, tais como rótulos, limites de valores plausíveis, códigos para dados perdidos e unidades de medida.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  Metadados são informações técnicas relacionadas às variáveis do estudo, tais como rótulos, limites de valores plausíveis, códigos para dados perdidos e unidades de medida.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 \item
-  Metadados também são informações relacionadas ao delineamento e/ou protocolo do estudo, recrutamento dos participantes, e métodos para realização das medidas.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  Metadados também são informações relacionadas ao delineamento e/ou protocolo do estudo, recrutamento dos participantes, e métodos para realização das medidas.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 \end{itemize}
 
 \hypertarget{variaveis-fatores}{%
@@ -1131,7 +1141,7 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
 
 \begin{itemize}
 \item
-  Variáveis são informações que podem variar entre medidas em diferentes indivíduos e/ou repetições.\textsuperscript{\protect\hyperlink{ref-Altman1999}{26}}
+  Variáveis são informações que podem variar entre medidas em diferentes indivíduos e/ou repetições.\textsuperscript{\protect\hyperlink{ref-Altman1999}{27}}
 \item
   Variáveis definem características de uma amostra extraída da população, tipicamente observados por aplicação de métodos de amostragem (isto é, seleção) da população de interesse.\textsuperscript{\protect\hyperlink{ref-vetter2017}{14}}
 \end{itemize}
@@ -1141,7 +1151,7 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
 
 \begin{itemize}
 \item
-  Quanto à informação:\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Ali2016}{27}--\protect\hyperlink{ref-kaliyadan2019}{29}}
+  Quanto à informação:\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Ali2016}{28}--\protect\hyperlink{ref-kaliyadan2019}{30}}
 
   \begin{itemize}
   \item
@@ -1150,7 +1160,7 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
     Qualitativa
   \end{itemize}
 \item
-  Quanto ao conteúdo:\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Ali2016}{27}--\protect\hyperlink{ref-kaliyadan2019}{29}}
+  Quanto ao conteúdo:\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Ali2016}{28}--\protect\hyperlink{ref-kaliyadan2019}{30}}
 
   \begin{itemize}
   \item
@@ -1161,7 +1171,7 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
     Categórica nominal (multinominal ou dicotômica)
   \end{itemize}
 \item
-  Quanto à interpretação:\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Ali2016}{27}--\protect\hyperlink{ref-kaliyadan2019}{29}}
+  Quanto à interpretação:\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Ali2016}{28}--\protect\hyperlink{ref-kaliyadan2019}{30}}
 
   \begin{itemize}
   \item
@@ -1181,13 +1191,28 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
   \end{itemize}
 \end{itemize}
 
+\begin{infobox}{images/Rlogo}
+O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{16}} fornece a função \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/class}{\emph{class}} para identificar qual é o tipo do objeto.
+
+\end{infobox}
+
+\begin{infobox}{images/Rlogo}
+O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{16}} fornece as funções \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric}{\emph{as.numeric}} e \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/character}{\emph{as.character}} para criar objetos numéricos e categóricos, respectivamente.
+
+\end{infobox}
+
+\begin{infobox}{images/Rlogo}
+O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{16}} fornece as funções \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/as.Date}{\emph{as.Date}} e \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/logical}{\emph{as.logical}} para criar objetos em formato de data e lógicos (VERDADEIRO, FALSO), respectivamente.
+
+\end{infobox}
+
 \hypertarget{por-que-uxe9-importante-classificar-as-variuxe1veis}{%
 \subsection{Por que é importante classificar as variáveis?}\label{por-que-uxe9-importante-classificar-as-variuxe1veis}}
 
 \begin{itemize}
 \tightlist
 \item
-  Identificar corretamente os tipos de variáveis da pesquisa é uma das etapas da escolha dos métodos estatísticos adequados para as análises e representações no texto, tabelas e gráficos.\textsuperscript{\protect\hyperlink{ref-Dettori2018}{28}}
+  Identificar corretamente os tipos de variáveis da pesquisa é uma das etapas da escolha dos métodos estatísticos adequados para as análises e representações no texto, tabelas e gráficos.\textsuperscript{\protect\hyperlink{ref-Dettori2018}{29}}
 \end{itemize}
 
 \hypertarget{transformacao}{%
@@ -1198,11 +1223,11 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
 
 \begin{itemize}
 \item
-  Transformação significa aplicar uma função matemática à variável medida em sua unidade original.\textsuperscript{\protect\hyperlink{ref-Bland1996}{30}}
+  Transformação significa aplicar uma função matemática à variável medida em sua unidade original.\textsuperscript{\protect\hyperlink{ref-Bland1996}{31}}
 \item
-  A transformação visa atender aos pressupostos dos modelos estatísticos quanto à distribuição da variável, em geral a distribuição gaussiana.\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Bland1996}{30}}
+  A transformação visa atender aos pressupostos dos modelos estatísticos quanto à distribuição da variável, em geral a distribuição gaussiana.\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Bland1996}{31}}
 \item
-  A dicotomização pode ser interpretada como um caso particular de agrupamento.\textsuperscript{\protect\hyperlink{ref-Fedorov2009}{31}}
+  A dicotomização pode ser interpretada como um caso particular de agrupamento.\textsuperscript{\protect\hyperlink{ref-Fedorov2009}{32}}
 \end{itemize}
 
 \hypertarget{por-que-transformar-variuxe1veis}{%
@@ -1210,9 +1235,9 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
 
 \begin{itemize}
 \item
-  Muitos procedimentos estatísticos supõem que as variáveis - ou seus termos de erro, mais especificamente - são normalmente distribuídas. A violação dessa suposição pode aumentar suas chances de cometer um erro do tipo I ou II.\textsuperscript{\protect\hyperlink{ref-osborne2010}{32}}
+  Muitos procedimentos estatísticos supõem que as variáveis - ou seus termos de erro, mais especificamente - são normalmente distribuídas. A violação dessa suposição pode aumentar suas chances de cometer um erro do tipo I ou II.\textsuperscript{\protect\hyperlink{ref-osborne2010}{33}}
 \item
-  Mesmo quando se está usando análises consideradas robustas para violações dessas suposições ou testes não paramétricos (que não assumem explicitamente termos de erro normalmente distribuídos), atender a essas questões pode melhorar os resultados das análises (por exemplo, Zimmerman, 1995).\textsuperscript{\protect\hyperlink{ref-osborne2010}{32}}
+  Mesmo quando se está usando análises consideradas robustas para violações dessas suposições ou testes não paramétricos (que não assumem explicitamente termos de erro normalmente distribuídos), atender a essas questões pode melhorar os resultados das análises (por exemplo, Zimmerman, 1995).\textsuperscript{\protect\hyperlink{ref-osborne2010}{33}}
 \end{itemize}
 
 \hypertarget{quais-transformauxe7uxf5es-podem-ser-aplicadas}{%
@@ -1220,7 +1245,7 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
 
 \begin{itemize}
 \item
-  Distribuições com assimetria à direita:\textsuperscript{\protect\hyperlink{ref-osborne2010}{32}}
+  Distribuições com assimetria à direita:\textsuperscript{\protect\hyperlink{ref-osborne2010}{33}}
 
   \begin{itemize}
   \item
@@ -1233,7 +1258,7 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
     Transformação inversa
   \end{itemize}
 \item
-  Distribuições com assimetria à esquerda:\textsuperscript{\protect\hyperlink{ref-osborne2010}{32}}
+  Distribuições com assimetria à esquerda:\textsuperscript{\protect\hyperlink{ref-osborne2010}{33}}
 
   \begin{itemize}
   \item
@@ -1246,15 +1271,15 @@ Os pacotes \emph{mice}\textsuperscript{\protect\hyperlink{ref-mice}{22}} e \emph
     Reflexão e transformação inversa
   \end{itemize}
 \item
-  Transformação arco-seno.\textsuperscript{\protect\hyperlink{ref-osborne2010}{32}}
+  Transformação arco-seno.\textsuperscript{\protect\hyperlink{ref-osborne2010}{33}}
 \item
-  Transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{33}}
+  Transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{34}}
 \item
   Dicotomização.
 \end{itemize}
 
 \begin{infobox}{images/Rlogo}
-O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{34}} fornece a função \href{https://www.rdocumentation.org/packages/MASS/versions/7.3-58.3/topics/boxcox}{\emph{boxcox}} para executar a transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{33}}
+O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{35}} fornece a função \href{https://www.rdocumentation.org/packages/MASS/versions/7.3-58.3/topics/boxcox}{\emph{boxcox}} para executar a transformação de Box-Cox.\textsuperscript{\protect\hyperlink{ref-box1964}{34}}
 
 \end{infobox}
 
@@ -1275,19 +1300,19 @@ O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{34}} fornece a
 
 \begin{itemize}
 \item
-  Nenhum dos argumentos usados para defender a categorização de variáveis se sustenta sob uma análise técnica rigorosa.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35}}
+  Nenhum dos argumentos usados para defender a categorização de variáveis se sustenta sob uma análise técnica rigorosa.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36}}
 \item
-  Categorizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de categorizar, priorize as variáveis contínuas.\textsuperscript{\protect\hyperlink{ref-Altman2006}{36}--\protect\hyperlink{ref-Collins2016}{38}}
+  Categorizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de categorizar, priorize as variáveis contínuas.\textsuperscript{\protect\hyperlink{ref-Altman2006}{37}--\protect\hyperlink{ref-Collins2016}{39}}
 \item
-  Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.\textsuperscript{\protect\hyperlink{ref-Altman2006}{36}--\protect\hyperlink{ref-Collins2016}{38}}
+  Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.\textsuperscript{\protect\hyperlink{ref-Altman2006}{37}--\protect\hyperlink{ref-Collins2016}{39}}
 \item
-  Caso exista um ponto de corte ou limiar verdadeiro que discrimine três ou mais grupos independentes, identificar tal ponto de corte ainda é um desafio.\textsuperscript{\protect\hyperlink{ref-Prince2017}{39}}
+  Caso exista um ponto de corte ou limiar verdadeiro que discrimine três ou mais grupos independentes, identificar tal ponto de corte ainda é um desafio.\textsuperscript{\protect\hyperlink{ref-Prince2017}{40}}
 \item
-  Categorização de variáveis contínuas aumenta a quantidade de testes de hipótese para comparações pareadas entre os quantis, inflando, portanto, o erro tipo I.\textsuperscript{\protect\hyperlink{ref-Bennette2012}{40}}
+  Categorização de variáveis contínuas aumenta a quantidade de testes de hipótese para comparações pareadas entre os quantis, inflando, portanto, o erro tipo I.\textsuperscript{\protect\hyperlink{ref-Bennette2012}{41}}
 \item
-  Categorização de variáveis contínuas requer uma função teórica que pressupõe a homogeneidade da variável dentro dos grupos, levando tanto a uma perda de poder como a uma estimativa imprecisa.\textsuperscript{\protect\hyperlink{ref-Bennette2012}{40}}
+  Categorização de variáveis contínuas requer uma função teórica que pressupõe a homogeneidade da variável dentro dos grupos, levando tanto a uma perda de poder como a uma estimativa imprecisa.\textsuperscript{\protect\hyperlink{ref-Bennette2012}{41}}
 \item
-  Categorização de variáveis contínuas pode dificultar a comparação de resultados entre estudos devido aos pontos de corte baseados em dados de um banco usados para definir as categorias.\textsuperscript{\protect\hyperlink{ref-Bennette2012}{40}}
+  Categorização de variáveis contínuas pode dificultar a comparação de resultados entre estudos devido aos pontos de corte baseados em dados de um banco usados para definir as categorias.\textsuperscript{\protect\hyperlink{ref-Bennette2012}{41}}
 \end{itemize}
 
 \hypertarget{quais-suxe3o-as-alternativas-uxe0-categorizauxe7uxe3o-de-variuxe1veis-contuxednuas}{%
@@ -1295,9 +1320,9 @@ O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{34}} fornece a
 
 \begin{itemize}
 \item
-  Análise com os dados das variáveis na escala de medida original.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35}}
+  Análise com os dados das variáveis na escala de medida original.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36}}
 \item
-  Análise com modelos de regressão com pesos locais (\emph{lowess}) tais como \emph{splines} e polinômios fracionais.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35}}
+  Análise com modelos de regressão com pesos locais (\emph{lowess}) tais como \emph{splines} e polinômios fracionais.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36}}
 \end{itemize}
 
 \hypertarget{dicotomizacao}{%
@@ -1320,15 +1345,15 @@ O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{34}} fornece a
 
 \begin{itemize}
 \item
-  O argumento principal para dicotomização de variáveis é que tal procedimento facilita e simplifica a apresentação dos resultados, principalmente para o público em geral.\textsuperscript{\protect\hyperlink{ref-Fedorov2009}{31}}
+  O argumento principal para dicotomização de variáveis é que tal procedimento facilita e simplifica a apresentação dos resultados, principalmente para o público em geral.\textsuperscript{\protect\hyperlink{ref-Fedorov2009}{32}}
 \item
-  Os pesquisadores não conhecem as consequências estatísticas da dicotomização.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35}}
+  Os pesquisadores não conhecem as consequências estatísticas da dicotomização.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36}}
 \item
-  Os pesquisadores não conhecem os métodos adequados de análise não-paramétrica, não-linear e robusta.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35}}
+  Os pesquisadores não conhecem os métodos adequados de análise não-paramétrica, não-linear e robusta.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36}}
 \item
-  As categorias representam características existentes dos participantes da pesquisa, de modo que as análises devam ser feitas por grupos e não por indivíduos.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35}}
+  As categorias representam características existentes dos participantes da pesquisa, de modo que as análises devam ser feitas por grupos e não por indivíduos.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36}}
 \item
-  A confiabilidade da(s) variável(eis) medida(s) é baixa e, portanto, categorizar os participantes resultaria em uma medida mais confiável.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35}}
+  A confiabilidade da(s) variável(eis) medida(s) é baixa e, portanto, categorizar os participantes resultaria em uma medida mais confiável.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36}}
 \end{itemize}
 
 \hypertarget{por-que-nuxe3o-uxe9-recomendado-dicotomizar-variuxe1veis-contuxednuas}{%
@@ -1336,23 +1361,23 @@ O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{34}} fornece a
 
 \begin{itemize}
 \item
-  Nenhum dos argumentos usados para defender a dicotomização de variáveis se sustenta sob uma análise técnica rigorosa.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35}}
+  Nenhum dos argumentos usados para defender a dicotomização de variáveis se sustenta sob uma análise técnica rigorosa.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36}}
 \item
-  Dicotomizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de dicotomizar, priorize as variáveis contínuas.\textsuperscript{\protect\hyperlink{ref-Altman2006}{36}--\protect\hyperlink{ref-Collins2016}{38}}
+  Dicotomizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de dicotomizar, priorize as variáveis contínuas.\textsuperscript{\protect\hyperlink{ref-Altman2006}{37}--\protect\hyperlink{ref-Collins2016}{39}}
 \item
-  Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.\textsuperscript{\protect\hyperlink{ref-Altman2006}{36}--\protect\hyperlink{ref-Collins2016}{38}}
+  Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.\textsuperscript{\protect\hyperlink{ref-Altman2006}{37}--\protect\hyperlink{ref-Collins2016}{39}}
 \item
-  Dicotomização causa perda de informação e consequentemente perda de poder estatístico para detectar efeitos.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35},\protect\hyperlink{ref-Altman2006}{36}}
+  Dicotomização causa perda de informação e consequentemente perda de poder estatístico para detectar efeitos.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36},\protect\hyperlink{ref-Altman2006}{37}}
 \item
-  Dicotomização também classifica indivíduos com valores próximos na variável contínua como indivíduos em pontos opostos e extremos, artificialmente sugerindo que são muito diferentes.\textsuperscript{\protect\hyperlink{ref-Altman2006}{36}}
+  Dicotomização também classifica indivíduos com valores próximos na variável contínua como indivíduos em pontos opostos e extremos, artificialmente sugerindo que são muito diferentes.\textsuperscript{\protect\hyperlink{ref-Altman2006}{37}}
 \item
-  Dicotomização pode diminuir a variabilidade das variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2006}{36}}
+  Dicotomização pode diminuir a variabilidade das variáveis.\textsuperscript{\protect\hyperlink{ref-Altman2006}{37}}
 \item
-  Dicotomização pode ocultar não-linearidades presentes na variável contínua.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35},\protect\hyperlink{ref-Altman2006}{36}}
+  Dicotomização pode ocultar não-linearidades presentes na variável contínua.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36},\protect\hyperlink{ref-Altman2006}{37}}
 \item
-  A média ou a mediana, embora amplamente utilizadas, não são bons parâmetros para dicotomizar variáveis.\textsuperscript{\protect\hyperlink{ref-Fedorov2009}{31},\protect\hyperlink{ref-Altman2006}{36}}
+  A média ou a mediana, embora amplamente utilizadas, não são bons parâmetros para dicotomizar variáveis.\textsuperscript{\protect\hyperlink{ref-Fedorov2009}{32},\protect\hyperlink{ref-Altman2006}{37}}
 \item
-  Caso exista um ponto de corte ou limiar verdadeiro que discrimine dois grupos independentes, identificar tal ponto de corte ainda é um desafio.\textsuperscript{\protect\hyperlink{ref-Prince2017}{39}}
+  Caso exista um ponto de corte ou limiar verdadeiro que discrimine dois grupos independentes, identificar tal ponto de corte ainda é um desafio.\textsuperscript{\protect\hyperlink{ref-Prince2017}{40}}
 \end{itemize}
 
 \hypertarget{quais-cenuxe1rios-legitimam-a-dicotomizauxe7uxe3o-das-variuxe1veis-contuxednuas}{%
@@ -1360,9 +1385,9 @@ O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{34}} fornece a
 
 \begin{itemize}
 \item
-  Quando existem dados e/ou análises que suportem a existência - não apenas a suposição ou teorização - de categorias com um ponto de corte claro e com significado entre elas.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35}}
+  Quando existem dados e/ou análises que suportem a existência - não apenas a suposição ou teorização - de categorias com um ponto de corte claro e com significado entre elas.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36}}
 \item
-  Quando a distribuição da variável contínua é muito assimétrica, de modo que uma grande quantidade de observações está em um dos extremos da escala.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{35}}
+  Quando a distribuição da variável contínua é muito assimétrica, de modo que uma grande quantidade de observações está em um dos extremos da escala.\textsuperscript{\protect\hyperlink{ref-MacCallum2002}{36}}
 \end{itemize}
 
 \hypertarget{quais-muxe9todos-suxe3o-usados-para-dicotomizar-variuxe1veis-contuxednuas}{%
@@ -1370,19 +1395,19 @@ O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{34}} fornece a
 
 \begin{itemize}
 \item
-  Em termos de tabelas de contingência 2x2, os seguintes métodos permitem\textsuperscript{\protect\hyperlink{ref-Prince2017}{39}} a identificação do limiar verdadeiro:
+  Em termos de tabelas de contingência 2x2, os seguintes métodos permitem\textsuperscript{\protect\hyperlink{ref-Prince2017}{40}} a identificação do limiar verdadeiro:
 
   \begin{itemize}
   \item
-    Youden.\textsuperscript{\protect\hyperlink{ref-YOUDEN1950}{41}}
+    Youden.\textsuperscript{\protect\hyperlink{ref-YOUDEN1950}{42}}
   \item
-    Gini Index.\textsuperscript{\protect\hyperlink{ref-strobl2007}{42}}
+    Gini Index.\textsuperscript{\protect\hyperlink{ref-strobl2007}{43}}
   \item
-    Estatística qui-quadrado (\(\chi^2\)).\textsuperscript{\protect\hyperlink{ref-pearson1900}{43}}
+    Estatística qui-quadrado (\(\chi^2\)).\textsuperscript{\protect\hyperlink{ref-pearson1900}{44}}
   \item
-    Risco relativo (\(RR\)).\textsuperscript{\protect\hyperlink{ref-Greiner2000}{44}}
+    Risco relativo (\(RR\)).\textsuperscript{\protect\hyperlink{ref-Greiner2000}{45}}
   \item
-    Kappa (\(\kappa\)).\textsuperscript{\protect\hyperlink{ref-fleiss1971}{45}}.
+    Kappa (\(\kappa\)).\textsuperscript{\protect\hyperlink{ref-fleiss1971}{46}}.
   \end{itemize}
 \end{itemize}
 
@@ -1401,6 +1426,11 @@ O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{34}} fornece a
   Fatores são variáveis controladas pelos pesquisadores em um experimento para determinar seu efeito na(s) variável(ies) de resposta. Um fator pode assumir apenas um pequeno número de valores, conhecidos como níveis. Os fatores podem ser uma variável categórica ou baseados em uma variável contínua, mas usam apenas um número limitado de valores escolhidos pelos experimentadores.{[}REF{]}
 \end{itemize}
 
+\begin{infobox}{images/Rlogo}
+O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{16}} fornece a função \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/factor}{\emph{as.factor}} para converter uma variável em fator.
+
+\end{infobox}
+
 \hypertarget{o-que-suxe3o-nuxedveis-de-um-fator}{%
 \subsection{O que são níveis de um fator?}\label{o-que-suxe3o-nuxedveis-de-um-fator}}
 
@@ -1411,7 +1441,7 @@ O pacote \emph{MASS}\textsuperscript{\protect\hyperlink{ref-MASS}{34}} fornece a
 \end{itemize}
 
 \begin{infobox}{images/Rlogo}
-O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{46}} fornece a função \href{https://www.rdocumentation.org/packages/forcats/versions/1.0.0/topics/as_factor}{\emph{as\_factor}} para converter uma variável em fator.
+O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{16}} fornece as funções \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/levels}{\emph{levels}} e \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/nlevels}{\emph{nlevels}} para listar os níveis e a quantidade deles em um fator.
 
 \end{infobox}
 
@@ -1444,9 +1474,9 @@ O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{46}} for
 
 \begin{itemize}
 \item
-  A distribuição normal (ou gaussiana) é uma distribuição com desvios simétricos positivos e negativos em torno de um valor central.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27}}
+  A distribuição normal (ou gaussiana) é uma distribuição com desvios simétricos positivos e negativos em torno de um valor central.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28}}
 \item
-  Em uma distribuição normal, o intervalo de 1 desvio-padrão (±1DP) inclui cerca de 68\% dos dados; de 2 desvios-padrão (±2DP) cerca de 95\% dos dados; e no intervalo de 3 desvios-padrão (±3DP) cerca de 99\% dos dados.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27}}
+  Em uma distribuição normal, o intervalo de 1 desvio-padrão (±1DP) inclui cerca de 68\% dos dados; de 2 desvios-padrão (±2DP) cerca de 95\% dos dados; e no intervalo de 3 desvios-padrão (±3DP) cerca de 99\% dos dados.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28}}
 \end{itemize}
 
 \hypertarget{o-que-suxe3o-distribuiuxe7uxf5es-nuxe3o-normais}{%
@@ -1487,7 +1517,7 @@ O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{46}} for
 
 \begin{itemize}
 \item
-  Parâmetros são informações que definem um modelo teórico, como propriedades de uma coleção de indivíduos.\textsuperscript{\protect\hyperlink{ref-Altman1999}{26}}
+  Parâmetros são informações que definem um modelo teórico, como propriedades de uma coleção de indivíduos.\textsuperscript{\protect\hyperlink{ref-Altman1999}{27}}
 \item
   Parâmetros definem características de uma população inteira, tipicamente não observados por ser inviável ter acesso a todos os indivíduos que constituem tal população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{14}}
 \end{itemize}
@@ -1497,15 +1527,15 @@ O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{46}} for
 
 \begin{itemize}
 \item
-  Parâmetros de tendência central.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47}}
+  Parâmetros de tendência central.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47}}
 \item
-  Parâmetros de dispersão.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47},\protect\hyperlink{ref-Curran-Everett2008}{48}}
+  Parâmetros de dispersão.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47},\protect\hyperlink{ref-Curran-Everett2008}{48}}
 \item
-  Parâmetros de proporção.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47},\protect\hyperlink{ref-Altman1994}{49},\protect\hyperlink{ref-Altman1994}{49}}
+  Parâmetros de proporção.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47},\protect\hyperlink{ref-Altman1994}{49},\protect\hyperlink{ref-Altman1994}{49}}
 \item
   Parâmetros de distribuição.\textsuperscript{\protect\hyperlink{ref-kanji2006}{47}}
 \item
-  Parâmetros de extremos.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27}}
+  Parâmetros de extremos.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28}}
 \end{itemize}
 
 \hypertarget{valores-esperados}{%
@@ -1516,11 +1546,11 @@ O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{46}} for
 
 \begin{itemize}
 \item
-  \emph{Média}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47}}
+  \emph{Média}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47}}
 \item
-  \emph{Mediana}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47}}
+  \emph{Mediana}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47}}
 \item
-  \emph{Moda}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47}}
+  \emph{Moda}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47}}
 \end{itemize}
 
 \hypertarget{que-paruxe2metros-de-dispersuxe3o-podem-ser-estimados}{%
@@ -1528,17 +1558,17 @@ O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{46}} for
 
 \begin{itemize}
 \item
-  \emph{Variância}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47}}
+  \emph{Variância}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47}}
 \item
   \emph{Desvio-padrão}: Estima a variabilidade entre as observações e a média amostra, e estima a variabilidade na população.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2008}{48}}
 \item
   \emph{Erro-padrão}: Estima a variabilidade teórica entre médias amostrais.\textsuperscript{\protect\hyperlink{ref-Curran-Everett2008}{48}}
 \item
-  \emph{Amplitude}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47}}
+  \emph{Amplitude}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47}}
 \item
-  \emph{Intervalo interquartil}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47}}
+  \emph{Intervalo interquartil}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47}}
 \item
-  \emph{Intervalo de confiança}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47}}
+  \emph{Intervalo de confiança}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47}}
 \end{itemize}
 
 \hypertarget{que-paruxe2metros-de-proporuxe7uxe3o-podem-ser-estimados}{%
@@ -1546,11 +1576,11 @@ O pacote \emph{forcats}\textsuperscript{\protect\hyperlink{ref-forcats}{46}} for
 
 \begin{itemize}
 \item
-  \emph{Frequência absoluta}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47},\protect\hyperlink{ref-Altman1994}{49}}
+  \emph{Frequência absoluta}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47},\protect\hyperlink{ref-Altman1994}{49}}
 \item
-  \emph{Frequência relativa}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47},\protect\hyperlink{ref-Altman1994}{49}}
+  \emph{Frequência relativa}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47},\protect\hyperlink{ref-Altman1994}{49}}
 \item
-  \emph{Percentil}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27},\protect\hyperlink{ref-kanji2006}{47},\protect\hyperlink{ref-Altman1994}{49}}
+  \emph{Percentil}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28},\protect\hyperlink{ref-kanji2006}{47},\protect\hyperlink{ref-Altman1994}{49}}
 \item
   \emph{Quantil}: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem.\textsuperscript{\protect\hyperlink{ref-Altman1994}{49}}
 \end{itemize}
@@ -1575,9 +1605,9 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-base}{50}} fornece 
 
 \begin{itemize}
 \item
-  \emph{Mínimo}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27}}
+  \emph{Mínimo}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28}}
 \item
-  \emph{Máximo}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27}}
+  \emph{Máximo}.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28}}
 \end{itemize}
 
 \begin{infobox}{images/Rlogo}
@@ -1752,11 +1782,11 @@ O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{55
 
 \begin{itemize}
 \item
-  Análise inicial de dados\textsuperscript{\protect\hyperlink{ref-chatfield1986}{56}} é uma sequência de procedimentos que visam principalmente a transparência e integridade das pré-condições do estudo para conduzir a análise estatística apropriada de modo responsável para responder aos problemas da pesquisa.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  Análise inicial de dados\textsuperscript{\protect\hyperlink{ref-chatfield1986}{56}} é uma sequência de procedimentos que visam principalmente a transparência e integridade das pré-condições do estudo para conduzir a análise estatística apropriada de modo responsável para responder aos problemas da pesquisa.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 \item
-  O objetivo da análise inicial de dados é propiciar dados prontos para análise estatística, incluindo informações confiáveis sobre as propriedades dos dados.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  O objetivo da análise inicial de dados é propiciar dados prontos para análise estatística, incluindo informações confiáveis sobre as propriedades dos dados.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 \item
-  A análise inicial de dados pode ser dividida nas seguintes etapas:\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  A análise inicial de dados pode ser dividida nas seguintes etapas:\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 
   \begin{itemize}
   \item
@@ -1781,17 +1811,17 @@ O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{55
 
 \begin{itemize}
 \item
-  Desenvolva um plano de análise inicial de dados consistente com os objetivos da pesquisa. Por exemplo, verifique a distribuição e escala das variáveis, procure por observações não-usuais ou improváveis, avalie possíveis padrões de dados perdidos.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  Desenvolva um plano de análise inicial de dados consistente com os objetivos da pesquisa. Por exemplo, verifique a distribuição e escala das variáveis, procure por observações não-usuais ou improváveis, avalie possíveis padrões de dados perdidos.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 \item
-  Não altere diretamente os dados de uma tabela obtida de uma fonte. Use scripts para implementar eventuais alterações, de modo a manter o registro de todas as modificações realizadas no banco de dados.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  Não altere diretamente os dados de uma tabela obtida de uma fonte. Use scripts para implementar eventuais alterações, de modo a manter o registro de todas as modificações realizadas no banco de dados.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 \item
-  Use os metadados do estudo para guiar a análise inicial dos dados e compartilhe com os dados para maior transparência e reprodutibilidade.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  Use os metadados do estudo para guiar a análise inicial dos dados e compartilhe com os dados para maior transparência e reprodutibilidade.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 \item
-  Representação gráfica dos dados pode ajudar a identificar características e padrões no banco de dados, tais como suposições e tendências.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  Representação gráfica dos dados pode ajudar a identificar características e padrões no banco de dados, tais como suposições e tendências.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 \item
-  Verifique a frequência e proporção de dados perdidos em cada variável, e depois examine por padrões de dados perdidos simultaneamente por duas ou mais variáveis.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  Verifique a frequência e proporção de dados perdidos em cada variável, e depois examine por padrões de dados perdidos simultaneamente por duas ou mais variáveis.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 \item
-  Verifique a frequência e proporção de dados perdidos em cada variável, e depois examine por padrões de dados perdidos simultaneamente por duas ou mais variáveis.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{25}}
+  Verifique a frequência e proporção de dados perdidos em cada variável, e depois examine por padrões de dados perdidos simultaneamente por duas ou mais variáveis.\textsuperscript{\protect\hyperlink{ref-Baillie2022}{26}}
 \item
   Exclusão de dados \emph{ad hoc} baseada no desfecho pode influenciar os resultados do estudo, portanto os critérios de exclusão de dados antes da análise estatística (descritiva e/ou inferencial) devem ser reportados.\textsuperscript{\protect\hyperlink{ref-Landis2012}{59}}
 \end{itemize}
@@ -3471,9 +3501,9 @@ O pacote \emph{ggsci}\textsuperscript{\protect\hyperlink{ref-ggsci}{124}} fornec
 
 \begin{itemize}
 \item
-  A hipótese nula (\(H_{0}\)) é a hipótese sob teste em análises inferenciais.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27}}
+  A hipótese nula (\(H_{0}\)) é a hipótese sob teste em análises inferenciais.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28}}
 \item
-  Pode-se concluir sobre rejeitar ou não rejeitar a hipótese nula (\(H_{0}\)).\textsuperscript{\protect\hyperlink{ref-Ali2016}{27}}
+  Pode-se concluir sobre rejeitar ou não rejeitar a hipótese nula (\(H_{0}\)).\textsuperscript{\protect\hyperlink{ref-Ali2016}{28}}
 \item
   Não se conclui sobre a hipótese alternativa (\(H_{1}\)).\textsuperscript{\protect\hyperlink{ref-kanji2006}{47}}
 \item
@@ -3536,7 +3566,7 @@ O pacote \emph{ggsci}\textsuperscript{\protect\hyperlink{ref-ggsci}{124}} fornec
 \item
   Testes paramétricos possuem suposições sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{14}}
 \item
-  Testes paramétricos assumem que: a variável é quantitativa numérica (contínua); os dados foram amostrados de uma população com distribuição normal; a variância da(S) amostra(s) é igual à da população; as amostras foram selecionadas de modo aleatório na população; os valores de cada amostra são independentes entre si.\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Ali2016}{27}}
+  Testes paramétricos assumem que: a variável é quantitativa numérica (contínua); os dados foram amostrados de uma população com distribuição normal; a variância da(S) amostra(s) é igual à da população; as amostras foram selecionadas de modo aleatório na população; os valores de cada amostra são independentes entre si.\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Ali2016}{28}}
 \end{itemize}
 
 \hypertarget{o-que-uxe9-um-teste-nuxe3o-paramuxe9trico}{%
@@ -3544,9 +3574,9 @@ O pacote \emph{ggsci}\textsuperscript{\protect\hyperlink{ref-ggsci}{124}} fornec
 
 \begin{itemize}
 \item
-  Testes não-paramétricos fazem poucas suposições, ou menos rigorosas, sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Ali2016}{27}}
+  Testes não-paramétricos fazem poucas suposições, ou menos rigorosas, sobre as características e/ou parâmetros da distribuição dos dados na população.\textsuperscript{\protect\hyperlink{ref-vetter2017}{14},\protect\hyperlink{ref-Ali2016}{28}}
 \item
-  Testes não-paramétricos são úteis quando as suposições de normalidade não podem ser sustentadas.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27}}
+  Testes não-paramétricos são úteis quando as suposições de normalidade não podem ser sustentadas.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28}}
 \end{itemize}
 
 \hypertarget{por-que-os-testes-paramuxe9tricos-suxe3o-preferidos}{%
@@ -3556,7 +3586,7 @@ O pacote \emph{ggsci}\textsuperscript{\protect\hyperlink{ref-ggsci}{124}} fornec
 \item
   Em geral, testes paramétricos são mais robustos (isto é, possuem menores erros tipo I e II) que seus testes não-paramétricos correspondentes.\textsuperscript{\protect\hyperlink{ref-vetter2017}{14}}
 \item
-  Testes não-paramétricos apresentam menor poder estatístico (maior erro tipo II) comparados aos testes paramétricos correspondentes.\textsuperscript{\protect\hyperlink{ref-Ali2016}{27}}
+  Testes não-paramétricos apresentam menor poder estatístico (maior erro tipo II) comparados aos testes paramétricos correspondentes.\textsuperscript{\protect\hyperlink{ref-Ali2016}{28}}
 \end{itemize}
 
 \#\# Análise inferencial \{\#inferencial\}
@@ -5021,129 +5051,129 @@ O pacote \emph{tiff}\textsuperscript{\protect\hyperlink{ref-tiff}{182}} fornece 
 \CSLLeftMargin{15. }%
 \CSLRightInline{Altman DG, Bland JM. Missing data. \emph{BMJ}. 2007;334(7590):424-424. doi:\href{https://doi.org/10.1136/bmj.38977.682025.2c}{10.1136/bmj.38977.682025.2c}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-Heymans2022}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-base-2}{}}%
 \CSLLeftMargin{16. }%
+\CSLRightInline{R Core Team. R: A language and environment for statistical computing. 2023. \href{https://www.R-project.org/}{https://www.R-project.org/.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Heymans2022}{}}%
+\CSLLeftMargin{17. }%
 \CSLRightInline{Heymans MW, Twisk JWR. Handling missing data in clinical research. \emph{Journal of Clinical Epidemiology}. September 2022. doi:\href{https://doi.org/10.1016/j.jclinepi.2022.08.016}{10.1016/j.jclinepi.2022.08.016}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-carpenter2021}{}}%
-\CSLLeftMargin{17. }%
+\CSLLeftMargin{18. }%
 \CSLRightInline{Carpenter JR, Smuk M. Missing data: A statistical framework for practice. \emph{Biometrical Journal}. 2021;63(5):915-947. doi:\href{https://doi.org/10.1002/bimj.202000196}{10.1002/bimj.202000196}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-misty}{}}%
-\CSLLeftMargin{18. }%
+\CSLLeftMargin{19. }%
 \CSLRightInline{Yanagida T. Misty: Miscellaneous functions 't. yanagida'. 2023. \href{https://CRAN.R-project.org/package=misty}{https://CRAN.R-project.org/package=misty.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-little1988}{}}%
-\CSLLeftMargin{19. }%
+\CSLLeftMargin{20. }%
 \CSLRightInline{Little RJA. A Test of Missing Completely at Random for Multivariate Data with Missing Values. \emph{Journal of the American Statistical Association}. 1988;83(404):1198-1202. doi:\href{https://doi.org/10.1080/01621459.1988.10478722}{10.1080/01621459.1988.10478722}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-stats}{}}%
-\CSLLeftMargin{20. }%
+\CSLLeftMargin{21. }%
 \CSLRightInline{R Core Team. R: A language and environment for statistical computing. 2022. \href{https://www.R-project.org/}{https://www.R-project.org/.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Cao2022}{}}%
-\CSLLeftMargin{21. }%
+\CSLLeftMargin{22. }%
 \CSLRightInline{Cao Y, Allore H, Vander Wyk B, Gutman R. Review and evaluation of imputation methods for multivariate longitudinal data with mixed{-}type incomplete variables. \emph{Statistics in Medicine}. October 2022. doi:\href{https://doi.org/10.1002/sim.9592}{10.1002/sim.9592}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-mice}{}}%
-\CSLLeftMargin{22. }%
+\CSLLeftMargin{23. }%
 \CSLRightInline{Buuren S van, Groothuis-Oudshoorn K. {\textbraceleft}Mice{\textbraceright}: Multivariate imputation by chained equations in r. 2011;45:1-67. doi:\href{https://doi.org/10.18637/jss.v045.i03}{10.18637/jss.v045.i03}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-miceadds}{}}%
-\CSLLeftMargin{23. }%
+\CSLLeftMargin{24. }%
 \CSLRightInline{Robitzsch A, Grund S. Miceadds: Some additional multiple imputation functions, especially for 'mice'. 2023. \href{https://CRAN.R-project.org/package=miceadds}{https://CRAN.R-project.org/package=miceadds.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Akl2015}{}}%
-\CSLLeftMargin{24. }%
+\CSLLeftMargin{25. }%
 \CSLRightInline{Akl EA, Shawwa K, Kahale LA, et al. Reporting missing participant data in randomised trials: systematic survey of the methodological literature and a proposed guide. \emph{BMJ Open}. 2015;5(12):e008431. doi:\href{https://doi.org/10.1136/bmjopen-2015-008431}{10.1136/bmjopen-2015-008431}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Baillie2022}{}}%
-\CSLLeftMargin{25. }%
+\CSLLeftMargin{26. }%
 \CSLRightInline{Baillie M, Cessie S le, Schmidt CO, Lusa L, Huebner M. Ten simple rules for initial data analysis. \emph{PLOS Computational Biology}. 2022;18(2):e1009819. doi:\href{https://doi.org/10.1371/journal.pcbi.1009819}{10.1371/journal.pcbi.1009819}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Altman1999}{}}%
-\CSLLeftMargin{26. }%
+\CSLLeftMargin{27. }%
 \CSLRightInline{Altman DG, Bland JM. Statistics notes Variables and parameters. \emph{BMJ}. 1999;318(7199):1667-1667. doi:\href{https://doi.org/10.1136/bmj.318.7199.1667}{10.1136/bmj.318.7199.1667}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Ali2016}{}}%
-\CSLLeftMargin{27. }%
+\CSLLeftMargin{28. }%
 \CSLRightInline{Ali Z, Bhaskar Sb. Basic statistical tools in research and data analysis. \emph{Indian Journal of Anaesthesia}. 2016;60(9):662. doi:\href{https://doi.org/10.4103/0019-5049.190623}{10.4103/0019-5049.190623}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Dettori2018}{}}%
-\CSLLeftMargin{28. }%
+\CSLLeftMargin{29. }%
 \CSLRightInline{Dettori JR, Norvell DC. The Anatomy of Data. \emph{Global Spine Journal}. 2018;8(3):311-313. doi:\href{https://doi.org/10.1177/2192568217746998}{10.1177/2192568217746998}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-kaliyadan2019}{}}%
-\CSLLeftMargin{29. }%
+\CSLLeftMargin{30. }%
 \CSLRightInline{Kaliyadan F, Kulkarni V. Types of variables, descriptive statistics, and sample size. \emph{Indian Dermatology Online Journal}. 2019;10(1):82. doi:\href{https://doi.org/10.4103/idoj.idoj_468_18}{10.4103/idoj.idoj\_468\_18}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Bland1996}{}}%
-\CSLLeftMargin{30. }%
+\CSLLeftMargin{31. }%
 \CSLRightInline{Bland JM, Altman DG. Statistics Notes: Transforming data. \emph{BMJ}. 1996;312(7033):770-770. doi:\href{https://doi.org/10.1136/bmj.312.7033.770}{10.1136/bmj.312.7033.770}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Fedorov2009}{}}%
-\CSLLeftMargin{31. }%
+\CSLLeftMargin{32. }%
 \CSLRightInline{Fedorov V, Mannino F, Zhang R. Consequences of dichotomization. \emph{Pharmaceutical Statistics}. 2009;8(1):50-61. doi:\href{https://doi.org/10.1002/pst.331}{10.1002/pst.331}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-osborne2010}{}}%
-\CSLLeftMargin{32. }%
+\CSLLeftMargin{33. }%
 \CSLRightInline{Osborne J. Improving your data transformations: Applying the box-cox transformation. \emph{University of Massachusetts Amherst}. 2010. doi:\href{https://doi.org/10.7275/QBPC-GK17}{10.7275/QBPC-GK17}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-box1964}{}}%
-\CSLLeftMargin{33. }%
+\CSLLeftMargin{34. }%
 \CSLRightInline{Box GEP, Cox DR. An Analysis of Transformations. \emph{Journal of the Royal Statistical Society: Series B (Methodological)}. 1964;26(2):211-243. doi:\href{https://doi.org/10.1111/j.2517-6161.1964.tb00553.x}{10.1111/j.2517-6161.1964.tb00553.x}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MASS}{}}%
-\CSLLeftMargin{34. }%
+\CSLLeftMargin{35. }%
 \CSLRightInline{Venables WN, Ripley BD. Modern applied statistics with s. 2002. \href{https://www.stats.ox.ac.uk/pub/MASS4/}{https://www.stats.ox.ac.uk/pub/MASS4/.}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MacCallum2002}{}}%
-\CSLLeftMargin{35. }%
+\CSLLeftMargin{36. }%
 \CSLRightInline{MacCallum RC, Zhang S, Preacher KJ, Rucker DD. On the practice of dichotomization of quantitative variables. \emph{Psychological Methods}. 2002;7(1):19-40. doi:\href{https://doi.org/10.1037/1082-989x.7.1.19}{10.1037/1082-989x.7.1.19}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Altman2006}{}}%
-\CSLLeftMargin{36. }%
+\CSLLeftMargin{37. }%
 \CSLRightInline{Altman DG, Royston P. The cost of dichotomising continuous variables. \emph{BMJ}. 2006;332(7549):1080.1. doi:\href{https://doi.org/10.1136/bmj.332.7549.1080}{10.1136/bmj.332.7549.1080}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Royston2006}{}}%
-\CSLLeftMargin{37. }%
+\CSLLeftMargin{38. }%
 \CSLRightInline{Royston P, Altman DG, Sauerbrei W. Dichotomizing continuous predictors in multiple regression: a bad idea. \emph{Statistics in Medicine}. 2005;25(1):127-141. doi:\href{https://doi.org/10.1002/sim.2331}{10.1002/sim.2331}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Collins2016}{}}%
-\CSLLeftMargin{38. }%
+\CSLLeftMargin{39. }%
 \CSLRightInline{Collins GS, Ogundimu EO, Cook JA, Manach YL, Altman DG. Quantifying the impact of different approaches for handling continuous predictors on the performance of a prognostic model. \emph{Statistics in Medicine}. 2016;35(23):4124-4135. doi:\href{https://doi.org/10.1002/sim.6986}{10.1002/sim.6986}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Prince2017}{}}%
-\CSLLeftMargin{39. }%
+\CSLLeftMargin{40. }%
 \CSLRightInline{Nelson SLP, Ramakrishnan V, Nietert PJ, Kamen DL, Ramos PS, Wolf BJ. An evaluation of common methods for dichotomization of continuous variables to discriminate disease status. \emph{Communications in Statistics - Theory and Methods}. 2017;46(21):10823-10834. doi:\href{https://doi.org/10.1080/03610926.2016.1248783}{10.1080/03610926.2016.1248783}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Bennette2012}{}}%
-\CSLLeftMargin{40. }%
+\CSLLeftMargin{41. }%
 \CSLRightInline{Bennette C, Vickers A. Against quantiles: categorization of continuous variables in epidemiologic research, and its discontents. \emph{BMC Medical Research Methodology}. 2012;12(1). doi:\href{https://doi.org/10.1186/1471-2288-12-21}{10.1186/1471-2288-12-21}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-YOUDEN1950}{}}%
-\CSLLeftMargin{41. }%
+\CSLLeftMargin{42. }%
 \CSLRightInline{Youden WJ. Index for rating diagnostic tests. \emph{Cancer}. 1950;3(1):32-35. doi:\href{https://doi.org/10.1002/1097-0142(1950)3:1\%3C32::aid-cncr2820030106\%3E3.0.co;2-3}{10.1002/1097-0142(1950)3:1\textless32::aid-cncr2820030106\textgreater3.0.co;2-3}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-strobl2007}{}}%
-\CSLLeftMargin{42. }%
+\CSLLeftMargin{43. }%
 \CSLRightInline{Strobl C, Boulesteix AL, Augustin T. Unbiased split selection for classification trees based on the Gini Index. \emph{Computational Statistics \& Data Analysis}. 2007;52(1):483-501. doi:\href{https://doi.org/10.1016/j.csda.2006.12.030}{10.1016/j.csda.2006.12.030}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-pearson1900}{}}%
-\CSLLeftMargin{43. }%
+\CSLLeftMargin{44. }%
 \CSLRightInline{Pearson K. X. {\emph{On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling}}. \emph{The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science}. 1900;50(302):157-175. doi:\href{https://doi.org/10.1080/14786440009463897}{10.1080/14786440009463897}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Greiner2000}{}}%
-\CSLLeftMargin{44. }%
+\CSLLeftMargin{45. }%
 \CSLRightInline{Greiner M, Pfeiffer D, Smith RD. Principles and practical application of the receiver-operating characteristic analysis for diagnostic tests. \emph{Preventive Veterinary Medicine}. 2000;45(1-2):23-41. doi:\href{https://doi.org/10.1016/s0167-5877(00)00115-x}{10.1016/s0167-5877(00)00115-x}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-fleiss1971}{}}%
-\CSLLeftMargin{45. }%
-\CSLRightInline{Fleiss JL. Measuring nominal scale agreement among many raters. \emph{Psychological Bulletin}. 1971;76(5):378-382. doi:\href{https://doi.org/10.1037/h0031619}{10.1037/h0031619}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-forcats}{}}%
 \CSLLeftMargin{46. }%
-\CSLRightInline{Wickham H. Forcats: Tools for working with categorical variables (factors). 2023. \href{https://CRAN.R-project.org/package=forcats}{https://CRAN.R-project.org/package=forcats.}}
+\CSLRightInline{Fleiss JL. Measuring nominal scale agreement among many raters. \emph{Psychological Bulletin}. 1971;76(5):378-382. doi:\href{https://doi.org/10.1037/h0031619}{10.1037/h0031619}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-kanji2006}{}}%
 \CSLLeftMargin{47. }%
