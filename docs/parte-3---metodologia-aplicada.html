@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 29 Computação estatística | Ciência com R</title>
+  <title>PARTE 3 - Metodologia Aplicada | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 29 Computação estatística | Ciência com R" />
+  <meta property="og:title" content="PARTE 3 - Metodologia Aplicada | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 29 Computação estatística | Ciência com R" />
+  <meta name="twitter:title" content="PARTE 3 - Metodologia Aplicada | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="manuscritos-reprodutiveis.html"/>
-<link rel="next" href="scripts-para-download.html"/>
+<link rel="prev" href="analise-redes.html"/>
+<link rel="next" href="simulacao-computacional.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -827,125 +827,19 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="computacao-estatistica" class="section level1 hasAnchor" number="29">
-<h1><span class="header-section-number">Capítulo 29</span> <strong>Computação estatística</strong><a href="computacao-estatistica.html#computacao-estatistica" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><br></p>
-<div id="inicio" class="section level2 hasAnchor" number="29.1">
-<h2><span class="header-section-number">29.1</span> Programa de computador<a href="computacao-estatistica.html#inicio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-é-r" class="section level3 hasAnchor" number="29.1.1">
-<h3><span class="header-section-number">29.1.1</span> O que é R?<a href="computacao-estatistica.html#o-que-é-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>R é um programa de computador com linguagem computacional direcionada para análise estatística.<span class="citation"><sup><a href="#ref-ihaka1996">181</a></sup></span></p></li>
-<li><p>R está disponível em <a href="(https://cran.r-project.org)">Comprehensive R Archive Network (CRAN)</a>.</p></li>
-<li><p>R R version 4.3.1 (2023-06-16).</p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="o-que-é-rstudio" class="section level3 hasAnchor" number="29.1.2">
-<h3><span class="header-section-number">29.1.2</span> O que é RStudio?<a href="computacao-estatistica.html#o-que-é-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>RStudio é um ambiente de desenvolvimento integrado (<em>integrated development environment</em>, IDE) desenvolvido visando a reprodutibilidade e a simplicidade para a criação e disseminação de conhecimento.<span class="citation"><sup><a href="#ref-racine2011">182</a></sup></span></p></li>
-<li><p>As principais características do RStudio incluem um ambiente de edição com abas para acesso rápido a arquivos, comandos e resultados; histórico de comandos previamente utilizados; ferramentas para visualização de bancos de dados e elaboração de scripts e gráficos e tabelas.<span class="citation"><sup><a href="#ref-racine2011">182</a></sup></span></p></li>
-<li><p>RStudio está disponível em <a href="https://posit.co/download/rstudio-desktop/">Posit</a>.</p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="por-que-usar-r" class="section level3 hasAnchor" number="29.1.3">
-<h3><span class="header-section-number">29.1.3</span> Por que usar R?<a href="computacao-estatistica.html#por-que-usar-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>R é o software de maior abrangência de métodos estatísticos, possui sintaxe que permite análises estatísticas reproduzíveis e está disponível gratuitamente no website CRAN (<a href="http://cran.r-project.org/" class="uri">http://cran.r-project.org/</a>).<span class="citation"><sup><a href="#ref-mair2016">41</a></sup></span></li>
-</ul>
-<p><br></p>
-</div>
-<div id="que-programas-de-computador-podem-ser-usados-para-análise-estatística-com-r" class="section level3 hasAnchor" number="29.1.4">
-<h3><span class="header-section-number">29.1.4</span> Que programas de computador podem ser usados para análise estatística com R?<a href="computacao-estatistica.html#que-programas-de-computador-podem-ser-usados-para-análise-estatística-com-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p><a href="https://jasp-stats.org">JASP</a>.<span class="citation"><sup><a href="#ref-love2019">183</a></sup></span></p></li>
-<li><p><a href="https://www.jamovi.org">jamovi</a>.<span class="citation"><sup><a href="#ref-sahin2020">184</a></sup></span></p></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>Os pacotes <em>jmv</em><span class="citation"><sup><a href="#ref-jmv">185</a></sup></span> e <em>jmvconnect</em><span class="citation"><sup><a href="#ref-jmvconnect">186</a></sup></span> fornecem funções para análise descritiva e inferencial com interface com jamovi.</p>
-</div>
-<p><br>
-## Scripts computacionais</p>
-<p><br></p>
-</div>
-<div id="o-que-são-scripts" class="section level3 hasAnchor" number="29.1.5">
-<h3><span class="header-section-number">29.1.5</span> O que são scripts?<a href="computacao-estatistica.html#o-que-são-scripts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Um script é um arquivo de texto contendo (quase) os mesmos comandos que você digitaria na linha de comando do R. (Quase) refere-se ao fato de que se você estiver usando <em>sink()</em> para enviar a saída para um arquivo, você terá que incluir alguns comandos em <em>print()</em> para obter a mesma saída da linha de comando (<a href="https://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_scrpt.html">CRAN</a>).</li>
-</ul>
-<p><br></p>
-</div>
-<div id="quais-práticas-são-recomendadas-na-redação-de-scripts" class="section level3 hasAnchor" number="29.1.6">
-<h3><span class="header-section-number">29.1.6</span> Quais práticas são recomendadas na redação de scripts?<a href="computacao-estatistica.html#quais-práticas-são-recomendadas-na-redação-de-scripts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Use nomes consistentes para as variáveis.<span class="citation"><sup><a href="#ref-SchwabSimon2021">187</a></sup></span></p></li>
-<li><p>Defina os tipos de variáveis adequadamente no banco de dados.<span class="citation"><sup><a href="#ref-SchwabSimon2021">187</a></sup></span></p></li>
-<li><p>Defina constantes - isto é, variáveis de valor fixo - ao invés de digitar valores.<span class="citation"><sup><a href="#ref-SchwabSimon2021">187</a></sup></span></p></li>
-<li><p>Use e cite os pacotes disponíveis para suas análises.<span class="citation"><sup><a href="#ref-SchwabSimon2021">187</a></sup></span></p></li>
-<li><p>Controle as versões do script.<span class="citation"><sup><a href="#ref-Eglen2017">176</a>,<a href="#ref-SchwabSimon2021">187</a></sup></span></p></li>
-<li><p>Teste o script antes de sua utilização.<span class="citation"><sup><a href="#ref-SchwabSimon2021">187</a></sup></span></p></li>
-<li><p>Conduza revisão por pares do código durante a redação (digitação em dupla).<span class="citation"><sup><a href="#ref-SchwabSimon2021">187</a></sup></span></p></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>grateful</em><span class="citation"><sup><a href="#ref-grateful">188</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/grateful/versions/0.2.0/topics/cite_packages"><em>cite_packages</em></a> para citar os pacotes utilizados em um projeto R.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>formatR</em><span class="citation"><sup><a href="#ref-formatR">189</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/formatR/versions/1.14/topics/tidy_source"><em>tidy_source</em></a> para formatar um R script.</p>
-</div>
-<p><br></p>
+<div id="parte-3---metodologia-aplicada" class="section level1 unnumbered hasAnchor">
+<h1><strong>PARTE 3 - Metodologia Aplicada</strong><a href="parte-3---metodologia-aplicada.html#parte-3---metodologia-aplicada" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!--script for generating HORIZONTAL LINE-->
+<hr style="height:5px;border-width:0;color:black;background-color:black">
 
-</div>
-</div>
-</div>
-<h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-mair2016" class="csl-entry">
-<div class="csl-left-margin">41. </div><div class="csl-right-inline">Mair P. Thou shalt be reproducible! A technology perspective. <em>Frontiers in Psychology</em>. 2016;7. doi:<a href="https://doi.org/10.3389/fpsyg.2016.01079">10.3389/fpsyg.2016.01079</a></div>
-</div>
-<div id="ref-Eglen2017" class="csl-entry">
-<div class="csl-left-margin">176. </div><div class="csl-right-inline">Eglen SJ, Marwick B, Halchenko YO, et al. Toward standard practices for sharing computer code and programs in neuroscience. <em>Nature Neuroscience</em>. 2017;20(6):770-773. doi:<a href="https://doi.org/10.1038/nn.4550">10.1038/nn.4550</a></div>
-</div>
-<div id="ref-ihaka1996" class="csl-entry">
-<div class="csl-left-margin">181. </div><div class="csl-right-inline">Ihaka R, Gentleman R. R: A language for data analysis and graphics. <em>Journal of Computational and Graphical Statistics</em>. 1996;5(3):299. doi:<a href="https://doi.org/10.2307/1390807">10.2307/1390807</a></div>
-</div>
-<div id="ref-racine2011" class="csl-entry">
-<div class="csl-left-margin">182. </div><div class="csl-right-inline">Racine JS. RStudio: A Platform<span>-</span>Independent IDE for R and Sweave. <em>Journal of Applied Econometrics</em>. 2011;27(1):167-172. doi:<a href="https://doi.org/10.1002/jae.1278">10.1002/jae.1278</a></div>
-</div>
-<div id="ref-love2019" class="csl-entry">
-<div class="csl-left-margin">183. </div><div class="csl-right-inline">Love J, Selker R, Marsman M, et al. <span><strong>JASP</strong></span>: Graphical Statistical Software for Common Statistical Designs. <em>Journal of Statistical Software</em>. 2019;88(2). doi:<a href="https://doi.org/10.18637/jss.v088.i02">10.18637/jss.v088.i02</a></div>
-</div>
-<div id="ref-sahin2020" class="csl-entry">
-<div class="csl-left-margin">184. </div><div class="csl-right-inline">ŞAHİN M, AYBEK E. Jamovi: An easy to use statistical software for the social scientists. <em>International Journal of Assessment Tools in Education</em>. 2020;6(4):670-692. doi:<a href="https://doi.org/10.21449/ijate.661803">10.21449/ijate.661803</a></div>
-</div>
-<div id="ref-jmv" class="csl-entry">
-<div class="csl-left-margin">185. </div><div class="csl-right-inline">Selker R, Love J, Dropmann D. Jmv: The ’jamovi’ analyses. 2023. <a href="https://CRAN.R-project.org/package=jmv">https://CRAN.R-project.org/package=jmv.</a></div>
-</div>
-<div id="ref-jmvconnect" class="csl-entry">
-<div class="csl-left-margin">186. </div><div class="csl-right-inline">Love J. Jmvconnect: Connect to the ’jamovi’ statistical spreadsheet. 2022. <a href="https://CRAN.R-project.org/package=jmvconnect">https://CRAN.R-project.org/package=jmvconnect.</a></div>
-</div>
-<div id="ref-SchwabSimon2021" class="csl-entry">
-<div class="csl-left-margin">187. </div><div class="csl-right-inline">Schwab, Simon, Held, Leonhard. Statistical programming: Small mistakes, big impacts. <em>Wiley-Blackwell Publishing, Inc</em>. 2021. doi:<a href="https://doi.org/10.5167/UZH-205154">10.5167/UZH-205154</a></div>
-</div>
-<div id="ref-grateful" class="csl-entry">
-<div class="csl-left-margin">188. </div><div class="csl-right-inline">Francisco Rodríguez-Sánchez, Connor P. Jackson, Shaurita D. Hutchins. Grateful: Facilitate citation of r packages. 2023. <a href="https://github.com/Pakillo/grateful">https://github.com/Pakillo/grateful.</a></div>
-</div>
-<div id="ref-formatR" class="csl-entry">
-<div class="csl-left-margin">189. </div><div class="csl-right-inline">Xie Y. formatR: Format r code automatically. 2022. <a href="https://CRAN.R-project.org/package=formatR">https://CRAN.R-project.org/package=formatR.</a></div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="manuscritos-reprodutiveis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="scripts-para-download.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analise-redes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simulacao-computacional.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
