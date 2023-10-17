@@ -26,6 +26,9 @@ papersize: a4
 lot: yes
 lof: yes
 ---
+```{r, results = "hide", include = FALSE}
+options(tinytex.compile.min_times = 3)
+```
 
 ```{=latex}
 \DisableFootNotes
@@ -67,7 +70,6 @@ cat('# Capa {-}')
 <br>
 
 ```{r capa, fig.align = 'right', echo = FALSE, results = "asis", include = identical(knitr:::pandoc_to(), 'html'), eval = knitr::is_html_output()}
-
 cat('\n\n')
 cat('<center>')
 cat('![](images/Cover_1.png)')
@@ -76,7 +78,6 @@ cat('</center>')
 ```
 
 ```{=latex}
-\mainmatter
 \clearpage
 \markboth{}{}
 ```

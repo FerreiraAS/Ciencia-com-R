@@ -140,6 +140,7 @@
 \usepackage{letltxmacro}
 \usepackage{lmodern}
 \usepackage{longtable}
+\usepackage{minitoc}
 \usepackage[spaces,obeyspaces,hyphens]{url}
 \usepackage{pdfpages}
 \usepackage[notransparent]{svg}
@@ -197,6 +198,15 @@
   \renewcommand{\footnote}[2][]{\relax}
 }
 
+\RequirePackage{minitoc}
+\dominitoc
+
+\setcounter{minitocdepth}{2}
+\setlength{\mtcindent}{24pt}
+\renewcommand{\mtcfont}{\small\rm}
+\renewcommand{\mtcSfont}{\small\bf}
+
+% unnumbered chapters and roman page numbering
 \frontmatter
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -241,7 +251,7 @@
 \makeatother
 \subtitle{Perguntas e respostas para pesquisadores e analistas de dados}
 \author{© 2023 by Arthur de Sá Ferreira https://orcid.org/0000-0001-7014-2002}
-\date{Atualizado em 16/10/2023}
+\date{Atualizado em 17/10/2023}
 
 \begin{document}
 \maketitle
@@ -260,11 +270,10 @@
 \listoftables
 \DisableFootNotes
 
-\mainmatter
 \clearpage
 \markboth{}{}
 
-Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. 141p. \href{https://doi.org/10.5281/zenodo.8320233}{doi: 10.5281/zenodo.8320233}
+Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. 140p. \href{https://doi.org/10.5281/zenodo.8320233}{doi: 10.5281/zenodo.8320233}
 
 \vspace*{\fill}
 
@@ -281,8 +290,6 @@ Brochura: ISBN
 E-book: ISBN
 
 A versão online desta obra está licenciada com uma Licença Creative Commons Atribuição-NãoComercial 4.0 Internacional.
-
-\cftaddtitleline{toc}{chapter}{\rule{\textwidth}{0.4pt}}{}
 
 \hypertarget{sobre-o-autor}{%
 \chapter*{Sobre o autor}\label{sobre-o-autor}}
@@ -354,6 +361,9 @@ O público-alvo compreende pesquisadores, professores, analistas de dados, profi
 
 Arthur de Sá Ferreira, DSc
 
+% normal chapter numbering and arabic page numbering
+\mainmatter
+
 \cftaddtitleline{toc}{chapter}{\rule{\textwidth}{0.4pt}}{}
 
 \hypertarget{parte-1---pensamento-cientuxedfico}{%
@@ -367,6 +377,8 @@ Arthur de Sá Ferreira, DSc
 
 \hypertarget{pensamento-probabilistico}{%
 \chapter{\texorpdfstring{\textbf{Pensamento probabilístico}}{Pensamento probabilístico}}\label{pensamento-probabilistico}}
+
+\minitoc
 
 \hypertarget{experimento}{%
 \section{Experimento}\label{experimento}}
@@ -915,11 +927,11 @@ O pacote \emph{pwr}\textsuperscript{\protect\hyperlink{ref-pwr}{8}} fornece a fu
 
 \begin{figure}
 
-{\centering \includegraphics{Ciencia-com-R_files/figure-latex/unnamed-chunk-1-1} 
+{\centering \includegraphics{Ciencia-com-R_files/figure-latex/unnamed-chunk-2-1} 
 
 }
 
-\caption{Mapa mental da relação entre o pensamento estatístico e o pensamento metodológico.}\label{fig:unnamed-chunk-1}
+\caption{Mapa mental da relação entre o pensamento estatístico e o pensamento metodológico.}\label{fig:unnamed-chunk-2}
 \end{figure}
 
 \hypertarget{delineamento-estudos}{%
@@ -2200,16 +2212,16 @@ O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{89
 \toprule
 \textbf{ID} & \textbf{Data.Coleta} & \textbf{Estado.Civil} & \textbf{Numero.Filhos}\\
 \midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{17-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-2 & 18-10-2023 & casado & 1\\
-\cellcolor{gray!6}{3} & \cellcolor{gray!6}{19-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-4 & 20-10-2023 & solteiro & NA\\
-\cellcolor{gray!6}{5} & \cellcolor{gray!6}{21-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-6 & 22-10-2023 & solteiro & 0\\
-\cellcolor{gray!6}{7} & \cellcolor{gray!6}{23-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{NA}\\
-8 & 24-10-2023 & solteiro & NA\\
-\cellcolor{gray!6}{9} & \cellcolor{gray!6}{25-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-10 & 26-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{18-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+2 & 19-10-2023 & casado & 1\\
+\cellcolor{gray!6}{3} & \cellcolor{gray!6}{20-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+4 & 21-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{22-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+6 & 23-10-2023 & solteiro & 0\\
+\cellcolor{gray!6}{7} & \cellcolor{gray!6}{24-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{NA}\\
+8 & 25-10-2023 & solteiro & NA\\
+\cellcolor{gray!6}{9} & \cellcolor{gray!6}{26-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+10 & 27-10-2023 & solteiro & NA\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -2222,16 +2234,16 @@ O pacote \emph{data.table}\textsuperscript{\protect\hyperlink{ref-data.table}{89
 \toprule
 \textbf{ID} & \textbf{Data de Coleta} & \textbf{Estado Civil} & \textbf{Número de Filhos}\\
 \midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{17-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
-2 & 18-10-2023 & Casado & 1\\
-\cellcolor{gray!6}{3} & \cellcolor{gray!6}{19-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NaN}\\
-4 & 20-10-2023 & Solteiro & N/A\\
-\cellcolor{gray!6}{5} & \cellcolor{gray!6}{21-10-2023} & \cellcolor{gray!6}{Casado} & \cellcolor{gray!6}{N.A.}\\
-6 & 22-10-2023 & solteiro & 0\\
-\cellcolor{gray!6}{7} & \cellcolor{gray!6}{23-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{}\\
-8 & 24-10-2023 & Solteiro & na\\
-\cellcolor{gray!6}{9} & \cellcolor{gray!6}{25-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{n.a.}\\
-10 & 26-10-2023 & Solteiro & 999\\
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{18-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NA}\\
+2 & 19-10-2023 & Casado & 1\\
+\cellcolor{gray!6}{3} & \cellcolor{gray!6}{20-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{NaN}\\
+4 & 21-10-2023 & Solteiro & N/A\\
+\cellcolor{gray!6}{5} & \cellcolor{gray!6}{22-10-2023} & \cellcolor{gray!6}{Casado} & \cellcolor{gray!6}{N.A.}\\
+6 & 23-10-2023 & solteiro & 0\\
+\cellcolor{gray!6}{7} & \cellcolor{gray!6}{24-10-2023} & \cellcolor{gray!6}{solteiro} & \cellcolor{gray!6}{}\\
+8 & 25-10-2023 & Solteiro & na\\
+\cellcolor{gray!6}{9} & \cellcolor{gray!6}{26-10-2023} & \cellcolor{gray!6}{casado} & \cellcolor{gray!6}{n.a.}\\
+10 & 27-10-2023 & Solteiro & 999\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -3205,7 +3217,7 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{45}} forne
 \begin{centerbox}
 \begin{threeparttable}
 \captionsetup{justification=centering,singlelinecheck=off}
-\caption{\label{tab:unnamed-chunk-2} Teste Qui-quadrado (com correção de Yates)}
+\caption{\label{tab:unnamed-chunk-3} Teste Qui-quadrado (com correção de Yates)}
  \setlength{\tabcolsep}{0pt}
 \begin{tabular}{l l l l l}
 
@@ -3333,7 +3345,7 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{45}} forne
 \begin{centerbox}
 \begin{threeparttable}
 \captionsetup{justification=centering,singlelinecheck=off}
-\caption{\label{tab:unnamed-chunk-3} Teste Qui-quadrado (sem correção de Yates)}
+\caption{\label{tab:unnamed-chunk-4} Teste Qui-quadrado (sem correção de Yates)}
  \setlength{\tabcolsep}{0pt}
 \begin{tabular}{l l l l l}
 
@@ -3463,7 +3475,7 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{45}} forne
 \begin{centerbox}
 \begin{threeparttable}
 \captionsetup{justification=centering,singlelinecheck=off}
-\caption{\label{tab:unnamed-chunk-4} Teste exato de Fisher}
+\caption{\label{tab:unnamed-chunk-5} Teste exato de Fisher}
  \setlength{\tabcolsep}{0pt}
 \begin{tabular}{l l l l l}
 
@@ -5944,8 +5956,6 @@ O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{49}} fornece
 \end{CSLReferences}
 
 \newpage
-
-\backmatter
 
 \includepdf[pages={1},noautoscale=false, fitpaper=true, width=8.27in, height=11.69in, frame=false, trim=0mm 0mm 0mm 0mm, clip, offset=0mm 0mm]{covers/Cover_4.pdf}
 

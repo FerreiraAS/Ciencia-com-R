@@ -10,6 +10,7 @@
 \usepackage{letltxmacro}
 \usepackage{lmodern}
 \usepackage{longtable}
+\usepackage{minitoc}
 \usepackage[spaces,obeyspaces,hyphens]{url}
 \usepackage{pdfpages}
 \usepackage[notransparent]{svg}
@@ -67,4 +68,13 @@
   \renewcommand{\footnote}[2][]{\relax}
 }
 
+% table of contents within each chapter
+\RequirePackage{minitoc}
+\dominitoc
+\setcounter{minitocdepth}{2}
+\setlength{\mtcindent}{24pt}
+\renewcommand{\mtcfont}{\small\rm}
+\renewcommand{\mtcSfont}{\small\bf}
+
+% unnumbered chapters and roman page numbering
 \frontmatter
