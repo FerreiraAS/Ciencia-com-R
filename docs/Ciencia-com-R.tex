@@ -128,7 +128,6 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
-\usepackage{academicons}
 % to display math functions
 \usepackage{amsmath}
 % to use Portuguese-Brazil
@@ -136,13 +135,13 @@
 \usepackage{booktabs}
 \usepackage{draftwatermark}
 \usepackage[T1]{fontenc}
-\usepackage{fontspec}
+\usepackage{lmodern}
+\usepackage{academicons}
 \usepackage{fontawesome5}
 \usepackage{float}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{letltxmacro}
-\usepackage{lmodern}
 \usepackage{longtable}
 \usepackage{minitoc}
 \usepackage[spaces,obeyspaces,hyphens]{url}
@@ -156,6 +155,7 @@
 \usepackage[linktoc=all]{hyperref}
 
 % set font typeset
+\usepackage{fontspec}
 \setmainfont{Times New Roman}
 
 \makeatletter
@@ -164,7 +164,7 @@
 
 \SetWatermarkLightness{0.9}
 \SetWatermarkText{RASCUNHO}
-\SetWatermarkScale{1}
+\SetWatermarkScale{0.9}
 
 \AtBeginDocument{\let\maketitle\relax}
 
@@ -279,7 +279,7 @@
 \clearpage
 \markboth{}{}
 
-Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. 136p. \href{https://doi.org/10.5281/zenodo.8320233}{doi: 10.5281/zenodo.8320233}
+Ferreira, Arthur de Sá. \textbf{Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados}. Rio de Janeiro: 1a edição, 2023. 133p. \href{https://doi.org/10.5281/zenodo.8320233}{doi: 10.5281/zenodo.8320233}
 
 \vspace*{\fill}
 
@@ -3211,26 +3211,44 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{45}} forne
 \FunctionTok{library}\NormalTok{(}\StringTok{"gtsummary"}\NormalTok{)}
 
 \CommentTok{\# tabela 2x2}
-\NormalTok{tbl\_cross }\OtherTok{\textless{}{-}} \CommentTok{\# banco de dados tbl\_cross \textless{}{-} \# banco de dados}
-\NormalTok{trial }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# cria a tabela de contingência}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{tbl\_cross}\NormalTok{(}\AttributeTok{row =}\NormalTok{ trt, }\AttributeTok{col =}\NormalTok{ response, }\AttributeTok{statistic =} \StringTok{"\{n\}"}\NormalTok{, }\AttributeTok{digits =} \DecValTok{0}\NormalTok{, }\AttributeTok{percent =} \StringTok{"cell"}\NormalTok{,}
-    \AttributeTok{margin =} \FunctionTok{c}\NormalTok{(}\StringTok{"row"}\NormalTok{, }\StringTok{"column"}\NormalTok{), }\AttributeTok{missing =} \StringTok{"no"}\NormalTok{, }\AttributeTok{missing\_text =} \StringTok{"Dados perdidos"}\NormalTok{,}
-    \AttributeTok{margin\_text =} \StringTok{"Total"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# calcula o p{-}valor do teste}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{add\_p}\NormalTok{(}\AttributeTok{test =} \StringTok{"chisq.test"}\NormalTok{, }\AttributeTok{pvalue\_fun =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{style\_pvalue}\NormalTok{(x, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{    gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_header}\NormalTok{(}\AttributeTok{p.value =} \StringTok{"**P{-}valor**"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# calcula o tamanho do efeito}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_table\_styling}\NormalTok{(}\AttributeTok{rows =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{footnote =} \FunctionTok{as.character}\NormalTok{(rstatix}\SpecialCharTok{::}\FunctionTok{cramer\_v}\NormalTok{(trt,}
-\NormalTok{    response))) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# formata o título em negrito}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{bold\_labels}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# cria título da tabela}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}\StringTok{"Teste Qui{-}quadrado (com correção de Yates)"}\NormalTok{)}
+\NormalTok{tbl\_cross }\OtherTok{\textless{}{-}}
+  \CommentTok{\# banco de dados}
+\NormalTok{  trial }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# cria a tabela de contingência}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{tbl\_cross}\NormalTok{(}
+    \AttributeTok{row =}\NormalTok{ trt,}
+    \AttributeTok{col =}\NormalTok{ response,}
+    \AttributeTok{statistic =} \StringTok{"\{n\}"}\NormalTok{,}
+    \AttributeTok{digits =} \DecValTok{0}\NormalTok{,}
+    \AttributeTok{percent =} \StringTok{"cell"}\NormalTok{,}
+    \AttributeTok{margin =} \FunctionTok{c}\NormalTok{(}\StringTok{"row"}\NormalTok{, }\StringTok{"column"}\NormalTok{),}
+    \AttributeTok{missing =} \StringTok{"no"}\NormalTok{,}
+    \AttributeTok{missing\_text =} \StringTok{"Dados perdidos"}\NormalTok{,}
+    \AttributeTok{margin\_text =} \StringTok{"Total"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# calcula o p{-}valor do teste}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{add\_p}\NormalTok{(}
+    \AttributeTok{test =} \StringTok{"chisq.test"}\NormalTok{,}
+    \AttributeTok{pvalue\_fun =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{style\_pvalue}\NormalTok{(x, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_header}\NormalTok{(}
+    \AttributeTok{p.value =} \StringTok{"**P{-}valor**"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# calcula o tamanho do efeito}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_table\_styling}\NormalTok{(}
+    \AttributeTok{rows =} \ConstantTok{NULL}\NormalTok{,}
+    \AttributeTok{footnote =} \FunctionTok{as.character}\NormalTok{(rstatix}\SpecialCharTok{::}\FunctionTok{cramer\_v}\NormalTok{(trt, response))}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# formata o título em negrito}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{bold\_labels}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# cria título da tabela}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}
+    \StringTok{"Teste Qui{-}quadrado (com correção de Yates)"}
+\NormalTok{  )}
 
 \CommentTok{\# exibe a tabela}
 \NormalTok{tbl\_cross }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{    gtsummary}\SpecialCharTok{::}\FunctionTok{as\_hux\_table}\NormalTok{()}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{as\_hux\_table}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3338,27 +3356,44 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{45}} forne
 \FunctionTok{library}\NormalTok{(}\StringTok{"gtsummary"}\NormalTok{)}
 
 \CommentTok{\# tabela 2x2}
-\NormalTok{tbl\_cross }\OtherTok{\textless{}{-}} \CommentTok{\# banco de dados tbl\_cross \textless{}{-} \# banco de dados}
-\NormalTok{trial }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# cria a tabela de contingência}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{tbl\_cross}\NormalTok{(}\AttributeTok{row =}\NormalTok{ trt, }\AttributeTok{col =}\NormalTok{ response, }\AttributeTok{statistic =} \StringTok{"\{n\}"}\NormalTok{, }\AttributeTok{digits =} \DecValTok{0}\NormalTok{, }\AttributeTok{percent =} \StringTok{"cell"}\NormalTok{,}
-    \AttributeTok{margin =} \FunctionTok{c}\NormalTok{(}\StringTok{"row"}\NormalTok{, }\StringTok{"column"}\NormalTok{), }\AttributeTok{missing =} \StringTok{"no"}\NormalTok{, }\AttributeTok{missing\_text =} \StringTok{"Dados perdidos"}\NormalTok{,}
-    \AttributeTok{margin\_text =} \StringTok{"Total"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# calcula o p{-}valor do teste}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{add\_p}\NormalTok{(}\AttributeTok{test =} \StringTok{"chisq.test.no.correct"}\NormalTok{, }\AttributeTok{pvalue\_fun =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{style\_pvalue}\NormalTok{(x,}
-    \AttributeTok{digits =} \DecValTok{3}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{    gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_header}\NormalTok{(}\AttributeTok{p.value =} \StringTok{"**P{-}valor**"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# calcula o tamanho do efeito}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_table\_styling}\NormalTok{(}\AttributeTok{rows =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{footnote =} \FunctionTok{as.character}\NormalTok{(rstatix}\SpecialCharTok{::}\FunctionTok{cramer\_v}\NormalTok{(trt,}
-\NormalTok{    response))) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# formata o título em negrito}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{bold\_labels}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# cria título da tabela}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}\StringTok{"Teste Qui{-}quadrado (sem correção de Yates)"}\NormalTok{)}
+\NormalTok{tbl\_cross }\OtherTok{\textless{}{-}}
+  \CommentTok{\# banco de dados}
+\NormalTok{  trial }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# cria a tabela de contingência}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{tbl\_cross}\NormalTok{(}
+    \AttributeTok{row =}\NormalTok{ trt,}
+    \AttributeTok{col =}\NormalTok{ response,}
+    \AttributeTok{statistic =} \StringTok{"\{n\}"}\NormalTok{,}
+    \AttributeTok{digits =} \DecValTok{0}\NormalTok{,}
+    \AttributeTok{percent =} \StringTok{"cell"}\NormalTok{,}
+    \AttributeTok{margin =} \FunctionTok{c}\NormalTok{(}\StringTok{"row"}\NormalTok{, }\StringTok{"column"}\NormalTok{),}
+    \AttributeTok{missing =} \StringTok{"no"}\NormalTok{,}
+    \AttributeTok{missing\_text =} \StringTok{"Dados perdidos"}\NormalTok{,}
+    \AttributeTok{margin\_text =} \StringTok{"Total"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# calcula o p{-}valor do teste}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{add\_p}\NormalTok{(}
+    \AttributeTok{test =} \StringTok{"chisq.test.no.correct"}\NormalTok{,}
+    \AttributeTok{pvalue\_fun =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{style\_pvalue}\NormalTok{(x, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_header}\NormalTok{(}
+    \AttributeTok{p.value =} \StringTok{"**P{-}valor**"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# calcula o tamanho do efeito}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_table\_styling}\NormalTok{(}
+    \AttributeTok{rows =} \ConstantTok{NULL}\NormalTok{,}
+    \AttributeTok{footnote =} \FunctionTok{as.character}\NormalTok{(rstatix}\SpecialCharTok{::}\FunctionTok{cramer\_v}\NormalTok{(trt, response))}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# formata o título em negrito}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{bold\_labels}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# cria título da tabela}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}
+    \StringTok{"Teste Qui{-}quadrado (sem correção de Yates)"}
+\NormalTok{  )}
 
 \CommentTok{\# exibe a tabela}
 \NormalTok{tbl\_cross }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{    gtsummary}\SpecialCharTok{::}\FunctionTok{as\_hux\_table}\NormalTok{()}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{as\_hux\_table}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3469,26 +3504,44 @@ O pacote \emph{stats}\textsuperscript{\protect\hyperlink{ref-stats-2}{45}} forne
 \FunctionTok{library}\NormalTok{(}\StringTok{"gtsummary"}\NormalTok{)}
 
 \CommentTok{\# tabela 2x2}
-\NormalTok{tbl\_cross }\OtherTok{\textless{}{-}} \CommentTok{\# banco de dados tbl\_cross \textless{}{-} \# banco de dados}
-\NormalTok{trial }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# cria a tabela de contingência}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{tbl\_cross}\NormalTok{(}\AttributeTok{row =}\NormalTok{ trt, }\AttributeTok{col =}\NormalTok{ response, }\AttributeTok{statistic =} \StringTok{"\{n\}"}\NormalTok{, }\AttributeTok{digits =} \DecValTok{0}\NormalTok{, }\AttributeTok{percent =} \StringTok{"cell"}\NormalTok{,}
-    \AttributeTok{margin =} \FunctionTok{c}\NormalTok{(}\StringTok{"row"}\NormalTok{, }\StringTok{"column"}\NormalTok{), }\AttributeTok{missing =} \StringTok{"no"}\NormalTok{, }\AttributeTok{missing\_text =} \StringTok{"Dados perdidos"}\NormalTok{,}
-    \AttributeTok{margin\_text =} \StringTok{"Total"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# calcula o p{-}valor do teste}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{add\_p}\NormalTok{(}\AttributeTok{test =} \StringTok{"fisher.test"}\NormalTok{, }\AttributeTok{pvalue\_fun =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{style\_pvalue}\NormalTok{(x, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{    gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_header}\NormalTok{(}\AttributeTok{p.value =} \StringTok{"**P{-}valor**"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# calcula o tamanho do efeito}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_table\_styling}\NormalTok{(}\AttributeTok{rows =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{footnote =} \FunctionTok{as.character}\NormalTok{(rstatix}\SpecialCharTok{::}\FunctionTok{cramer\_v}\NormalTok{(trt,}
-\NormalTok{    response))) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# formata o título em negrito}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{bold\_labels}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# cria título da tabela}
-\NormalTok{gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}\StringTok{"Teste exato de Fisher"}\NormalTok{)}
+\NormalTok{tbl\_cross }\OtherTok{\textless{}{-}}
+  \CommentTok{\# banco de dados}
+\NormalTok{  trial }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# cria a tabela de contingência}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{tbl\_cross}\NormalTok{(}
+    \AttributeTok{row =}\NormalTok{ trt,}
+    \AttributeTok{col =}\NormalTok{ response,}
+    \AttributeTok{statistic =} \StringTok{"\{n\}"}\NormalTok{,}
+    \AttributeTok{digits =} \DecValTok{0}\NormalTok{,}
+    \AttributeTok{percent =} \StringTok{"cell"}\NormalTok{,}
+    \AttributeTok{margin =} \FunctionTok{c}\NormalTok{(}\StringTok{"row"}\NormalTok{, }\StringTok{"column"}\NormalTok{),}
+    \AttributeTok{missing =} \StringTok{"no"}\NormalTok{,}
+    \AttributeTok{missing\_text =} \StringTok{"Dados perdidos"}\NormalTok{,}
+    \AttributeTok{margin\_text =} \StringTok{"Total"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# calcula o p{-}valor do teste}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{add\_p}\NormalTok{(}
+    \AttributeTok{test =} \StringTok{"fisher.test"}\NormalTok{,}
+    \AttributeTok{pvalue\_fun =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{style\_pvalue}\NormalTok{(x, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_header}\NormalTok{(}
+    \AttributeTok{p.value =} \StringTok{"**P{-}valor**"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# calcula o tamanho do efeito}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_table\_styling}\NormalTok{(}
+    \AttributeTok{rows =} \ConstantTok{NULL}\NormalTok{,}
+    \AttributeTok{footnote =} \FunctionTok{as.character}\NormalTok{(rstatix}\SpecialCharTok{::}\FunctionTok{cramer\_v}\NormalTok{(trt, response))}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# formata o título em negrito}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{bold\_labels}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# cria título da tabela}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{modify\_caption}\NormalTok{(}
+    \StringTok{"Teste exato de Fisher"}
+\NormalTok{  )}
 
 \CommentTok{\# exibe a tabela}
 \NormalTok{tbl\_cross }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{    gtsummary}\SpecialCharTok{::}\FunctionTok{as\_hux\_table}\NormalTok{()}
+\NormalTok{  gtsummary}\SpecialCharTok{::}\FunctionTok{as\_hux\_table}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4955,6 +5008,11 @@ O pacote \emph{formatR}\textsuperscript{\protect\hyperlink{ref-formatR}{197}} fo
 
 \end{infobox}
 
+\begin{infobox}{images/Rlogo}
+O pacote \emph{styler}\textsuperscript{\protect\hyperlink{ref-styler}{198}} fornece a função \href{https://www.rdocumentation.org/packages/styler/versions/1.10.1/topics/style_file}{\emph{style\_file}} para formatar um R script.
+
+\end{infobox}
+
 \hypertarget{scripts-para-download}{%
 \chapter{\texorpdfstring{\textbf{Scripts para download}}{Scripts para download}}\label{scripts-para-download}}
 
@@ -5082,35 +5140,35 @@ O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{49}} fornece
 
 \begin{itemize}
 \item
-  \emph{Review of guidance papers on regression modeling in statistical series of medical journals}.\textsuperscript{\protect\hyperlink{ref-Wallisch2022}{198}}
+  \emph{Review of guidance papers on regression modeling in statistical series of medical journals}.\textsuperscript{\protect\hyperlink{ref-Wallisch2022}{199}}
 \item
-  \emph{Principles and recommendations for incorporating estimands into clinical study protocol templates}.\textsuperscript{\protect\hyperlink{ref-Lynggaard2022}{199}}
+  \emph{Principles and recommendations for incorporating estimands into clinical study protocol templates}.\textsuperscript{\protect\hyperlink{ref-Lynggaard2022}{200}}
 \item
   \emph{How to write statistical analysis section in medical research}.\textsuperscript{\protect\hyperlink{ref-Dwivedi2022}{129}}
 \item
-  \emph{Recommendations for Statistical Reporting in Cardiovascular Medicine: A Special Report From the American Heart Association}.\textsuperscript{\protect\hyperlink{ref-Althouse2021}{200}}
+  \emph{Recommendations for Statistical Reporting in Cardiovascular Medicine: A Special Report From the American Heart Association}.\textsuperscript{\protect\hyperlink{ref-Althouse2021}{201}}
 \item
-  \emph{Framework for the treatment and reporting of missing data in observational studies: The Treatment And Reporting of Missing data in Observational Studies framework}.\textsuperscript{\protect\hyperlink{ref-Lee2021}{201}}
+  \emph{Framework for the treatment and reporting of missing data in observational studies: The Treatment And Reporting of Missing data in Observational Studies framework}.\textsuperscript{\protect\hyperlink{ref-Lee2021}{202}}
 \item
-  \emph{Guidelines for reporting of figures and tables for clinical research in urology}.\textsuperscript{\protect\hyperlink{ref-Vickers2020}{202}}
+  \emph{Guidelines for reporting of figures and tables for clinical research in urology}.\textsuperscript{\protect\hyperlink{ref-Vickers2020}{203}}
 \item
   \emph{Who is in this study, anyway? Guidelines for a useful Table 1}.\textsuperscript{\protect\hyperlink{ref-Hayes-Larson2019}{103}}
 \item
-  \emph{Guidelines for Reporting of Statistics for Clinical Research in Urology}.\textsuperscript{\protect\hyperlink{ref-assel2019}{203}}
+  \emph{Guidelines for Reporting of Statistics for Clinical Research in Urology}.\textsuperscript{\protect\hyperlink{ref-assel2019}{204}}
 \item
   \emph{Reveal, Don't Conceal: Transforming Data Visualization to Improve Transparency}.\textsuperscript{\protect\hyperlink{ref-Weissgerber2019}{111}}
 \item
-  \emph{Guidelines for the Content of Statistical Analysis Plans in Clinical Trials}.\textsuperscript{\protect\hyperlink{ref-Gamble2017}{204}}
+  \emph{Guidelines for the Content of Statistical Analysis Plans in Clinical Trials}.\textsuperscript{\protect\hyperlink{ref-Gamble2017}{205}}
 \item
-  \emph{Basic statistical reporting for articles published in Biomedical Journals: The `'Statistical Analyses and Methods in the Published Literature'' or the SAMPL Guidelines}.\textsuperscript{\protect\hyperlink{ref-Lang2015}{205}}
+  \emph{Basic statistical reporting for articles published in Biomedical Journals: The `'Statistical Analyses and Methods in the Published Literature'' or the SAMPL Guidelines}.\textsuperscript{\protect\hyperlink{ref-Lang2015}{206}}
 \item
-  \emph{Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm}.\textsuperscript{\protect\hyperlink{ref-Weissgerber2015}{206}}
+  \emph{Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm}.\textsuperscript{\protect\hyperlink{ref-Weissgerber2015}{207}}
 \item
-  \emph{STRengthening analytical thinking for observational studies: the STRATOS initiative}.\textsuperscript{\protect\hyperlink{ref-Sauerbrei2014}{207}}
+  \emph{STRengthening analytical thinking for observational studies: the STRATOS initiative}.\textsuperscript{\protect\hyperlink{ref-Sauerbrei2014}{208}}
 \item
-  \emph{Research methods and reporting}.\textsuperscript{\protect\hyperlink{ref-groves2008}{208}}
+  \emph{Research methods and reporting}.\textsuperscript{\protect\hyperlink{ref-groves2008}{209}}
 \item
-  \emph{How to ensure your paper is rejected by the statistical reviewer}.\textsuperscript{\protect\hyperlink{ref-stratton2005}{209}}
+  \emph{How to ensure your paper is rejected by the statistical reviewer}.\textsuperscript{\protect\hyperlink{ref-stratton2005}{210}}
 \end{itemize}
 
 \hypertarget{listas-de-verificauxe7uxe3o}{%
@@ -5119,9 +5177,9 @@ O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{49}} fornece
 
 \begin{itemize}
 \item
-  \emph{A CHecklist for statistical Assessment of Medical Papers (the CHAMP statement): explanation and elaboration}.\textsuperscript{\protect\hyperlink{ref-Mansournia2021}{210}}
+  \emph{A CHecklist for statistical Assessment of Medical Papers (the CHAMP statement): explanation and elaboration}.\textsuperscript{\protect\hyperlink{ref-Mansournia2021}{211}}
 \item
-  \emph{Checklist for clinical applicability of subgroup analysis}.\textsuperscript{\protect\hyperlink{ref-Gil-Sierra2020}{211}}
+  \emph{Checklist for clinical applicability of subgroup analysis}.\textsuperscript{\protect\hyperlink{ref-Gil-Sierra2020}{212}}
 \item
   \emph{Evidence‐based statistical analysis and methods in biomedical research (SAMBR) checklists according to design features}.\textsuperscript{\protect\hyperlink{ref-dwivedi2019}{128}}
 \end{itemize}
@@ -5185,7 +5243,7 @@ O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{49}} fornece
 \begin{itemize}
 \tightlist
 \item
-  \emph{Enhancing the Quality and Transparency of health research} \href{https://www.equator-network.org}{EQUATOR Network}.\textsuperscript{\protect\hyperlink{ref-Altman2008}{212}}
+  \emph{Enhancing the Quality and Transparency of health research} \href{https://www.equator-network.org}{EQUATOR Network}.\textsuperscript{\protect\hyperlink{ref-Altman2008}{213}}
 \end{itemize}
 
 \hypertarget{journal-of-the-amercan-medical-association}{%
@@ -6024,64 +6082,68 @@ O pacote \emph{base}\textsuperscript{\protect\hyperlink{ref-base-2}{49}} fornece
 \CSLLeftMargin{197. }%
 \CSLRightInline{Xie Y. formatR: Format r code automatically. 2022. \href{https://CRAN.R-project.org/package=formatR}{https://CRAN.R-project.org/package=formatR.}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-Wallisch2022}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-styler}{}}%
 \CSLLeftMargin{198. }%
+\CSLRightInline{Müller K, Walthert L. Styler: Non-invasive pretty printing of r code. 2023. \href{https://CRAN.R-project.org/package=styler}{https://CRAN.R-project.org/package=styler.}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Wallisch2022}{}}%
+\CSLLeftMargin{199. }%
 \CSLRightInline{Wallisch C, Bach P, Hafermann L, et al. Review of guidance papers on regression modeling in statistical series of medical journals. Mathes T, ed. \emph{PLOS ONE}. 2022;17(1):e0262918. doi:\href{https://doi.org/10.1371/journal.pone.0262918}{10.1371/journal.pone.0262918}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Lynggaard2022}{}}%
-\CSLLeftMargin{199. }%
+\CSLLeftMargin{200. }%
 \CSLRightInline{Lynggaard H, Bell J, Lösch C, et al. Principles and recommendations for incorporating estimands into clinical study protocol templates. \emph{Trials}. 2022;23(1). doi:\href{https://doi.org/10.1186/s13063-022-06515-2}{10.1186/s13063-022-06515-2}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Althouse2021}{}}%
-\CSLLeftMargin{200. }%
+\CSLLeftMargin{201. }%
 \CSLRightInline{Althouse AD, Below JE, Claggett BL, et al. Recommendations for Statistical Reporting in Cardiovascular Medicine: A Special Report From the American Heart Association. \emph{Circulation}. 2021;144(4). doi:\href{https://doi.org/10.1161/circulationaha.121.055393}{10.1161/circulationaha.121.055393}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Lee2021}{}}%
-\CSLLeftMargin{201. }%
+\CSLLeftMargin{202. }%
 \CSLRightInline{Lee KJ, Tilling KM, Cornish RP, et al. Framework for the treatment and reporting of missing data in observational studies: The Treatment And Reporting of Missing data in Observational Studies framework. \emph{Journal of Clinical Epidemiology}. 2021;134:79-88. doi:\href{https://doi.org/10.1016/j.jclinepi.2021.01.008}{10.1016/j.jclinepi.2021.01.008}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Vickers2020}{}}%
-\CSLLeftMargin{202. }%
+\CSLLeftMargin{203. }%
 \CSLRightInline{Vickers AJ, Assel MJ, Sjoberg DD, et al. Guidelines for Reporting of Figures and Tables for Clinical Research in Urology. \emph{Urology}. 2020;142:1-13. doi:\href{https://doi.org/10.1016/j.urology.2020.05.002}{10.1016/j.urology.2020.05.002}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-assel2019}{}}%
-\CSLLeftMargin{203. }%
+\CSLLeftMargin{204. }%
 \CSLRightInline{Assel M, Sjoberg D, Elders A, et al. Guidelines for Reporting of Statistics for Clinical Research in Urology. \emph{Journal of Urology}. 2019;201(3):595-604. doi:\href{https://doi.org/10.1097/ju.0000000000000001}{10.1097/ju.0000000000000001}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Gamble2017}{}}%
-\CSLLeftMargin{204. }%
+\CSLLeftMargin{205. }%
 \CSLRightInline{Gamble C, Krishan A, Stocken D, et al. Guidelines for the Content of Statistical Analysis Plans in Clinical Trials. \emph{JAMA}. 2017;318(23):2337. doi:\href{https://doi.org/10.1001/jama.2017.18556}{10.1001/jama.2017.18556}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Lang2015}{}}%
-\CSLLeftMargin{205. }%
+\CSLLeftMargin{206. }%
 \CSLRightInline{Lang TA, Altman DG. Basic statistical reporting for articles published in Biomedical Journals: The {``}Statistical Analyses and Methods in the Published Literature{''} or the SAMPL Guidelines. \emph{International Journal of Nursing Studies}. 2015;52(1):5-9. doi:\href{https://doi.org/10.1016/j.ijnurstu.2014.09.006}{10.1016/j.ijnurstu.2014.09.006}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Weissgerber2015}{}}%
-\CSLLeftMargin{206. }%
+\CSLLeftMargin{207. }%
 \CSLRightInline{Weissgerber TL, Milic NM, Winham SJ, Garovic VD. Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm. \emph{PLOS Biology}. 2015;13(4):e1002128. doi:\href{https://doi.org/10.1371/journal.pbio.1002128}{10.1371/journal.pbio.1002128}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Sauerbrei2014}{}}%
-\CSLLeftMargin{207. }%
+\CSLLeftMargin{208. }%
 \CSLRightInline{Sauerbrei W, Abrahamowicz M, Altman DG, Cessie S, Carpenter J. STRengthening Analytical Thinking for Observational Studies: the STRATOS initiative. \emph{Statistics in Medicine}. 2014;33(30):5413-5432. doi:\href{https://doi.org/10.1002/sim.6265}{10.1002/sim.6265}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-groves2008}{}}%
-\CSLLeftMargin{208. }%
+\CSLLeftMargin{209. }%
 \CSLRightInline{Groves T. Research methods and reporting. \emph{BMJ}. 2008;337(oct22 1):a2201-a2201. doi:\href{https://doi.org/10.1136/bmj.a2201}{10.1136/bmj.a2201}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-stratton2005}{}}%
-\CSLLeftMargin{209. }%
+\CSLLeftMargin{210. }%
 \CSLRightInline{Stratton IM, Neil A. How to ensure your paper is rejected by the statistical reviewer. \emph{Diabetic Medicine}. 2005;22(4):371-373. doi:\href{https://doi.org/10.1111/j.1464-5491.2004.01443.x}{10.1111/j.1464-5491.2004.01443.x}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Mansournia2021}{}}%
-\CSLLeftMargin{210. }%
+\CSLLeftMargin{211. }%
 \CSLRightInline{Mansournia MA, Collins GS, Nielsen RO, et al. A CHecklist for statistical Assessment of Medical Papers (the CHAMP statement): explanation and elaboration. \emph{British Journal of Sports Medicine}. 2021;55(18):1009-1017. doi:\href{https://doi.org/10.1136/bjsports-2020-103652}{10.1136/bjsports-2020-103652}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Gil-Sierra2020}{}}%
-\CSLLeftMargin{211. }%
+\CSLLeftMargin{212. }%
 \CSLRightInline{Gil-Sierra MD, Fénix-Caballero S, Abdel kader-Martin L, et al. Checklist for clinical applicability of subgroup analysis. \emph{Journal of Clinical Pharmacy and Therapeutics}. 2019;45(3):530-538. doi:\href{https://doi.org/10.1111/jcpt.13102}{10.1111/jcpt.13102}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Altman2008}{}}%
-\CSLLeftMargin{212. }%
+\CSLLeftMargin{213. }%
 \CSLRightInline{Altman DG, Simera I, Hoey J, Moher D, Schulz K. EQUATOR: reporting guidelines for health research. \emph{The Lancet}. 2008;371(9619):1149-1150. doi:\href{https://doi.org/10.1016/s0140-6736(08)60505-x}{10.1016/s0140-6736(08)60505-x}}
 
 \end{CSLReferences}
