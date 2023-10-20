@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 17 Correlação | Ciência com R</title>
+  <title>Capítulo 30 Scripts compartilhados | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 17 Correlação | Ciência com R" />
+  <meta property="og:title" content="Capítulo 30 Scripts compartilhados | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 17 Correlação | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 30 Scripts compartilhados | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="analise-comparacao.html"/>
-<link rel="next" href="analise-inferencial-associacao.html"/>
+<link rel="prev" href="manuscritos-reprodutiveis.html"/>
+<link rel="next" href="redacao.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -850,120 +850,86 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="analise-inferencial-correlacao" class="section level1 hasAnchor" number="17">
-<h1><span class="header-section-number">Capítulo 17</span> <strong>Correlação</strong><a href="analise-inferencial-correlacao.html#analise-inferencial-correlacao" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="scripts-compartilhados" class="section level1 hasAnchor" number="30">
+<h1><span class="header-section-number">Capítulo 30</span> <strong>Scripts compartilhados</strong><a href="scripts-compartilhados.html#scripts-compartilhados" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="analise-correlacao" class="section level2 hasAnchor" number="17.1">
-<h2><span class="header-section-number">17.1</span> Análise de correlação<a href="analise-inferencial-correlacao.html#analise-correlacao" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-análise-de-correlação" class="section level3 hasAnchor" number="17.1.1">
-<h3><span class="header-section-number">17.1.1</span> O que é análise de correlação?<a href="analise-inferencial-correlacao.html#o-que-é-análise-de-correlação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="concordancia-e-confiabilidade" class="section level2 hasAnchor" number="30.1">
+<h2><span class="header-section-number">30.1</span> Concordância e Confiabilidade<a href="scripts-compartilhados.html#concordancia-e-confiabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
 <ul>
-<li>.[REF]</li>
+<li><a href="R/Concordância%20e%20Confiabilidade/reliability-kappa-icc.R">reliability-kappa-icc.R</a></li>
 </ul>
+<p><br></p>
 <p><br></p>
 </div>
-<div id="qual-é-a-interpretação-das-medidas-de-correlação" class="section level3 hasAnchor" number="17.1.2">
-<h3><span class="header-section-number">17.1.2</span> Qual é a interpretação das medidas de correlação?<a href="analise-inferencial-correlacao.html#qual-é-a-interpretação-das-medidas-de-correlação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="descricao" class="section level2 hasAnchor" number="30.2">
+<h2><span class="header-section-number">30.2</span> Descrição<a href="scripts-compartilhados.html#descricao" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
 <ul>
-<li><p>Os valores de correlação estão no intervalo <span class="math inline">\([-1; 1]\)</span>.<span class="citation"><sup><a href="#ref-barkan2015">55</a>,<a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Valores de correlação positivos representam uma relação direta entre as variáveis, tal que valores maiores de uma variável estão associados a valores maiores de outra variável.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Valores de correlação negativos representam uma relação indireta (ou inversa) entre as variáveis, tal que valores maiores (menores) de uma variável estão associados a valores maiores (menores) de outra variável.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Valores de correlação próximos de <span class="math inline">\(0\)</span> representam a inexistência de relação entre as variáveis.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
+<li><p><a href="R/Descrição/extracolumn-es.R">extracolumn-es.R</a></p></li>
+<li><p><a href="R/Descrição/extracolumn-N.R">extracolumn-N.R</a></p></li>
+<li><p><a href="R/Descrição/extracolumn-p.R">extracolumn-p.R</a></p></li>
+<li><p><a href="R/Descrição/pilotdata_gopal.R">pilotdata_gopal.R</a></p></li>
 </ul>
 <p><br></p>
-</div>
-<div id="quais-precauções-devem-ser-tomadas-na-interpretação-de-medidas-de-correlação" class="section level3 hasAnchor" number="17.1.3">
-<h3><span class="header-section-number">17.1.3</span> Quais precauções devem ser tomadas na interpretação de medidas de correlação?<a href="analise-inferencial-correlacao.html#quais-precauções-devem-ser-tomadas-na-interpretação-de-medidas-de-correlação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação causa-efeito entre as variáveis.<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p></li>
-<li><p>Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação de concordância ou confiabilidade entre as variáveis.<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p></li>
-</ul>
 <p><br></p>
 </div>
-<div id="quais-testes-podem-ser-usados-para-análises-de-correlação" class="section level3 hasAnchor" number="17.1.4">
-<h3><span class="header-section-number">17.1.4</span> Quais testes podem ser usados para análises de correlação?<a href="analise-inferencial-correlacao.html#quais-testes-podem-ser-usados-para-análises-de-correlação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="desempenho-diagnostico" class="section level2 hasAnchor" number="30.3">
+<h2><span class="header-section-number">30.3</span> Desempenho diagnóstico<a href="scripts-compartilhados.html#desempenho-diagnostico" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
 <ul>
-<li><p>Coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>).<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li><p>O coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>) avalia a força e direção da relação linear entre duas variáveis quantitativas.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Tipo: paramétrico.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Hipóteses:<span class="citation"><sup><a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li><p>Nula (<span class="math inline">\(H_{0}\)</span>): <span class="math inline">\(r=0\)</span></p></li>
-<li><p>Alternativa (<span class="math inline">\(H_{1}\)</span>): <span class="math inline">\(r≠0\)</span></p></li>
-</ul></li>
-<li><p>Tamanho do efeito:<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li>Coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>)</li>
-</ul></li>
-</ul></li>
+<li><p><a href="R/Desempenho%20diagnóstico/diag-stats.R">diag-stats.R</a></p></li>
+<li><p><a href="R/Desempenho%20diagnóstico/dtROC.R">dtROC.R</a></p></li>
+<li><p><a href="R/Desempenho%20diagnóstico/stROC.R">stROC.R</a></p></li>
 </ul>
+<p><br></p>
+<p><br></p>
+</div>
+<div id="ensaio-clinico-aleatorizado" class="section level2 hasAnchor" number="30.4">
+<h2><span class="header-section-number">30.4</span> Ensaio clínico aleatorizado<a href="scripts-compartilhados.html#ensaio-clinico-aleatorizado" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<ul>
+<li><p><a href="R/Ensaio%20clínico%20aleatorizado/RCT-Figure1.R">RCT-Figure1.R</a></p></li>
+<li><p><a href="R/Ensaio%20clínico%20aleatorizado/RCT-Missingness.R">RCT-Missingness.R</a></p></li>
+<li><p><a href="R/Ensaio%20clínico%20aleatorizado/RCT-Table1.R">RCT-Table1.R</a></p></li>
+<li><p><a href="R/Ensaio%20clínico%20aleatorizado/RCT-Table2a.R">RCT-Table2a.R</a></p></li>
+<li><p><a href="R/Ensaio%20clínico%20aleatorizado/RCT-Table2b.R">RCT-Table2b.R</a></p></li>
+<li><p><a href="R/Ensaio%20clínico%20aleatorizado/RCT-Table3.R">RCT-Table3.R</a></p></li>
+</ul>
+<p><br></p>
+<p><br></p>
+</div>
+<div id="ensaio-cruzado" class="section level2 hasAnchor" number="30.5">
+<h2><span class="header-section-number">30.5</span> Ensaio cruzado<a href="scripts-compartilhados.html#ensaio-cruzado" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<ul>
+<li><p><a href="R/Ensaio%20cruzado/crossover.R">crossover.R</a></p></li>
+<li><p><a href="R/Ensaio%20cruzado/RSTR-crossover-trial.R">RSTR-crossover-trial.R</a></p></li>
+</ul>
+<p><br></p>
+<p><br></p>
+</div>
+<div id="regressão" class="section level2 hasAnchor" number="30.6">
+<h2><span class="header-section-number">30.6</span> Regressão<a href="scripts-compartilhados.html#regressão" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<ul>
+<li><p><a href="R/Regressão/mediation-analysis.R">mediation-analysis.R</a></p></li>
+<li><p><a href="R/Regressão/regression-diagnosis.R">regression-diagnosis.R</a></p></li>
+</ul>
+<p><br></p>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats-2">33</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test"><em>cor.test</em></a> para calcular o coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>).</p>
-</div>
-<p><br></p>
-<ul>
-<li><p>Coeficiente de correlação ponto-bisserial (<span class="math inline">\(r_{s}\)</span>).<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p>
-<ul>
-<li><p>O coeficiente de correlação ponto-bisserial (<span class="math inline">\(r_{s}\)</span>) avalia a força e direção da relação linear entre uma variável quantitativa e outra dicotômica.<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p></li>
-<li><p>Tipo: paramétrico.<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p></li>
-<li><p>Hipóteses:<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p>
-<ul>
-<li><p>Nula (<span class="math inline">\(H_{0}\)</span>): <span class="math inline">\(r_{s}=0\)</span></p></li>
-<li><p>Alternativa (<span class="math inline">\(H_{1}\)</span>): <span class="math inline">\(r_{s}≠0\)</span></p></li>
-</ul></li>
-<li><p>Tamanho do efeito:<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p>
-<ul>
-<li>Coeficiente de correlação ponto-bisserial (<span class="math inline">\(r_{s}\)</span>)</li>
-</ul></li>
-</ul></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats-2">33</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test"><em>cor.test</em></a> para calcular o coeficiente de correlação ponto-bisserial (<span class="math inline">\(r_{s}\)</span>).</p>
-</div>
-<p><br></p>
-<ul>
-<li><p>Coeficiente de correlação de Spearman (<span class="math inline">\(\rho\)</span>).<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li><p>O coeficiente de correlação de Spearman (<span class="math inline">\(\rho\)</span>) avalia a força e direção da relação monotônica entre duas variáveis quantitativas.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>O coeficiente de correlação de Spearman (<span class="math inline">\(\rho\)</span>) pode ser também definida como a correlação de Pearson (<span class="math inline">\(r\)</span>) entre as classificações (<em>ranks</em>) das duas variáveis quantitativas.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Tipo: não-paramétrico.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Hipóteses:<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li><p>Nula (<span class="math inline">\(H_{0}\)</span>): <span class="math inline">\(\rho=0\)</span></p></li>
-<li><p>Alternativa (<span class="math inline">\(H_{1}\)</span>): <span class="math inline">\(\rho≠0\)</span></p></li>
-</ul></li>
-<li><p>Tamanho do efeito:<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li>Coeficiente de correlação de Spearman (<span class="math inline">\(\rho\)</span>)</li>
-</ul></li>
-</ul></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats-2">33</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test"><em>cor.test</em></a> para calcular o coeficiente de correlação de Spearman (<span class="math inline">\(\rho\)</span>).</p>
+<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base-2">37</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/source"><em>source</em></a> para abrir um arquivo .R com script e executar seus comandos.</p>
 </div>
 <p><br></p>
 
 </div>
 </div>
-</div>
 <h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-stats-2" class="csl-entry">
-<div class="csl-left-margin">33. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
-</div>
-<div id="ref-barkan2015" class="csl-entry">
-<div class="csl-left-margin">55. </div><div class="csl-right-inline">Barkan H. Statistics in clinical research: Important considerations. <em>Annals of Cardiac Anaesthesia</em>. 2015;18(1):74. doi:<a href="https://doi.org/10.4103/0971-9784.148325">10.4103/0971-9784.148325</a></div>
-</div>
-<div id="ref-khamis2008" class="csl-entry">
-<div class="csl-left-margin">130. </div><div class="csl-right-inline">Khamis H. Measures of Association: How to Choose? <em>Journal of Diagnostic Medical Sonography</em>. 2008;24(3):155-162. doi:<a href="https://doi.org/10.1177/8756479308317006">10.1177/8756479308317006</a></div>
-</div>
-<div id="ref-allison2022" class="csl-entry">
-<div class="csl-left-margin">131. </div><div class="csl-right-inline">Allison JS, Santana L, (Jaco) Visagie IJH. A primer on simple measures of association taught at undergraduate level. <em>Teaching Statistics</em>. 2022;44(3):96-103. doi:<a href="https://doi.org/10.1111/test.12307">10.1111/test.12307</a></div>
+<div id="ref-base-2" class="csl-entry">
+<div class="csl-left-margin">37. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
 </div>
 </div>
             </section>
@@ -971,8 +937,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="analise-comparacao.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="analise-inferencial-associacao.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="manuscritos-reprodutiveis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="redacao.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

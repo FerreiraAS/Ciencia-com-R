@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 17 Correlação | Ciência com R</title>
+  <title>Capítulo 22 Delineamento de estudos | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 17 Correlação | Ciência com R" />
+  <meta property="og:title" content="Capítulo 22 Delineamento de estudos | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 17 Correlação | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 22 Delineamento de estudos | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="analise-comparacao.html"/>
-<link rel="next" href="analise-inferencial-associacao.html"/>
+<link rel="prev" href="parte-4---metodologia-aplicada.html"/>
+<link rel="next" href="simulacao-computacional.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -850,102 +850,158 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="analise-inferencial-correlacao" class="section level1 hasAnchor" number="17">
-<h1><span class="header-section-number">Capítulo 17</span> <strong>Correlação</strong><a href="analise-inferencial-correlacao.html#analise-inferencial-correlacao" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="delineamento-estudos" class="section level1 hasAnchor" number="22">
+<h1><span class="header-section-number">Capítulo 22</span> <strong>Delineamento de estudos</strong><a href="delineamento-estudos.html#delineamento-estudos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="analise-correlacao" class="section level2 hasAnchor" number="17.1">
-<h2><span class="header-section-number">17.1</span> Análise de correlação<a href="analise-inferencial-correlacao.html#analise-correlacao" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="delineamento-estudos" class="section level2 hasAnchor" number="22.1">
+<h2><span class="header-section-number">22.1</span> Delineamento de estudos<a href="delineamento-estudos.html#delineamento-estudos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-análise-de-correlação" class="section level3 hasAnchor" number="17.1.1">
-<h3><span class="header-section-number">17.1.1</span> O que é análise de correlação?<a href="analise-inferencial-correlacao.html#o-que-é-análise-de-correlação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="como-podem-ser-classificados-os-estudos-científicos" class="section level3 hasAnchor" number="22.1.1">
+<h3><span class="header-section-number">22.1.1</span> Como podem ser classificados os estudos científicos?<a href="delineamento-estudos.html#como-podem-ser-classificados-os-estudos-científicos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Estudos científicos podem ser classificados em <em>básicos</em>, <em>observacionais</em>, <em>experimentais</em>, <em>acurácia diagnóstica</em>, <em>propriedades psicométricas</em>, <em>avaliação econômica</em> e <em>revisões de literatura</em>:<span class="citation"><sup><a href="#ref-Grant2009">146</a>–<a href="#ref-chipman2022">155</a></sup></span></p></li>
+<li><p><em>Estudos básicos</em><span class="citation"><sup><a href="#ref-Süt2014">147</a>,<a href="#ref-Chidambaram2019">152</a></sup></span></p>
+<ul>
+<li><p>Genética</p></li>
+<li><p>Celular</p></li>
+<li><p>Experimentos com animais</p></li>
+<li><p>Desenvolvimento de métodos</p></li>
+</ul></li>
+<li><p><em>Estudos de simulação computacional</em><span class="citation"><sup><a href="#ref-Erdemir2020">153</a>,<a href="#ref-chipman2022">155</a></sup></span></p></li>
+<li><p><em>Estudos observacionais</em><span class="citation"><sup><a href="#ref-Süt2014">147</a>,<a href="#ref-Chidambaram2019">152</a></sup></span></p>
+<ul>
+<li><p>Descritivo</p>
+<ul>
+<li><p>Estudo de caso</p></li>
+<li><p>Série de casos</p></li>
+<li><p>Transversal</p></li>
+</ul></li>
+<li><p>Analítico</p>
+<ul>
+<li><p>Transversal</p></li>
+<li><p>Caso-Controle</p>
+<ul>
+<li><p>Caso-Controle aninhado</p></li>
+<li><p>Caso-Coorte</p></li>
+</ul></li>
+</ul></li>
+<li><p>Coorte prospectiva ou retrospectiva</p></li>
+</ul></li>
+<li><p><em>Estudos de desempenho diagnóstico</em><span class="citation"><sup><a href="#ref-Chassé2019">151</a>,<a href="#ref-Yang2021">154</a></sup></span></p>
+<ul>
+<li><p>Transversal</p></li>
+<li><p>Caso-Controle</p></li>
+<li><p>Comparativo</p></li>
+<li><p>Totalmente pareado</p></li>
+<li><p>Parcialmente pareado com subgrupo aleatório</p></li>
+<li><p>Parcialmente pareado com subgrupo não aleatório</p></li>
+<li><p>Não pareado aleatório</p></li>
+<li><p>Não pareado não aleatório</p></li>
+</ul></li>
+<li><p><em>Estudos de propriedades psicométricas</em><span class="citation"><sup><a href="#ref-Souza2017">148</a>,<a href="#ref-echevarría-guanilo2019">150</a></sup></span></p>
+<ul>
+<li><p>Validade</p></li>
+<li><p>Confiabilidade</p></li>
+<li><p>Concordância</p></li>
+</ul></li>
+<li><p><em>Estudos quase-experimentais</em><span class="citation"><sup><a href="#ref-reeves2017">149</a></sup></span></p>
+<ul>
+<li><p>Quase-aleatorizado controlado</p></li>
+<li><p>Estimação de variável instrumental</p></li>
+<li><p>Descontinuidade de regressão</p></li>
+<li><p>Série temporal interrompida controlada</p></li>
+<li><p>Série temporal interrompida</p></li>
+<li><p>Diferença</p></li>
+</ul></li>
+<li><p><em>Estudos experimentais</em><span class="citation"><sup><a href="#ref-Süt2014">147</a>,<a href="#ref-Chidambaram2019">152</a></sup></span></p>
+<ul>
+<li><p>Fases I a IV</p>
+<ul>
+<li><p>Aleatorizado controlado</p></li>
+<li><p>Não-aleatorizado controlado</p></li>
+<li><p>Autocontrolado</p></li>
+<li><p>Cruzado</p></li>
+<li><p>Fatorial</p></li>
+</ul></li>
+<li><p>Campo</p></li>
+<li><p>Comunitário</p></li>
+</ul></li>
+<li><p><em>Estudos de avaliação econômica</em><span class="citation"><sup><a href="#ref-Süt2014">147</a></sup></span></p>
+<ul>
+<li><p>Análise de custo</p></li>
+<li><p>Análise de minimização de custo</p></li>
+<li><p>Análise de custo-utilidade</p></li>
+<li><p>Análise de custo-efetividade</p></li>
+<li><p>Análise de custo-benefício</p></li>
+</ul></li>
+<li><p><em>Estudos de revisão</em><span class="citation"><sup><a href="#ref-Grant2009">146</a></sup></span></p>
+<ul>
+<li><p>Estado-da-arte</p></li>
+<li><p>Narrativa</p></li>
+<li><p>Crítica</p></li>
+<li><p>Mapeamento</p></li>
+<li><p>Escopo</p></li>
+<li><p>Busca e revisão sistemática</p></li>
+<li><p>Sistematizada</p></li>
+<li><p>Sistemática</p>
+<ul>
+<li><p>Meta-análise</p></li>
+<li><p>Bibliométrica.<span class="citation"><sup><a href="#ref-donthu2021">156</a>,<a href="#ref-lim2023">157</a></sup></span></p></li>
+</ul></li>
+<li><p>Sistemática qualitativa</p></li>
+<li><p>Mista</p></li>
+<li><p>Visão geral</p></li>
+<li><p>Rápida</p></li>
+<li><p>Guarda-chuva</p></li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="pareamento" class="section level2 hasAnchor" number="22.2">
+<h2><span class="header-section-number">22.2</span> Pareamento<a href="delineamento-estudos.html#pareamento" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-pareamento" class="section level3 hasAnchor" number="22.2.1">
+<h3><span class="header-section-number">22.2.1</span> O que é pareamento?<a href="delineamento-estudos.html#o-que-é-pareamento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Pareamento significa que para cada participante de um grupo (por exemplo, com alguma condição clínica), existe um (ou mais) participantes (por exemplo, grupo controle) que possui características iguais ou similares relativas a algumas variáveis de interesse.<span class="citation"><sup><a href="#ref-Bland1994">158</a></sup></span></p></li>
+<li><p>As variáveis escolhidas para pareamento devem ter relação com as variáveis de desfecho, mas não são de interesse elas mesmas.<span class="citation"><sup><a href="#ref-Bland1994">158</a></sup></span></p></li>
+<li><p>O ajuste por pareamento deve ser incluído nas análises estatísticas mesmo que as variáveis de pareamento não sejam consideradas prognósticas ou confundidores na amostra estudada.<span class="citation"><sup><a href="#ref-Bland1994">158</a></sup></span></p></li>
+<li><p>A ausência de evidência estatística de diferença entre grupos não é considerada pareamento.<span class="citation"><sup><a href="#ref-Bland1994">158</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="aleatorização" class="section level2 hasAnchor" number="22.3">
+<h2><span class="header-section-number">22.3</span> Aleatorização<a href="delineamento-estudos.html#aleatorização" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+<div id="o-que-é-aleatorização" class="section level3 hasAnchor" number="22.3.1">
+<h3><span class="header-section-number">22.3.1</span> O que é aleatorização?<a href="delineamento-estudos.html#o-que-é-aleatorização" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><br></p>
+</div>
+</div>
+<div id="alocacao" class="section level2 hasAnchor" number="22.4">
+<h2><span class="header-section-number">22.4</span> Alocação<a href="delineamento-estudos.html#alocacao" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-alocação" class="section level3 hasAnchor" number="22.4.1">
+<h3><span class="header-section-number">22.4.1</span> O que é alocação?<a href="delineamento-estudos.html#o-que-é-alocação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>.[REF]</li>
 </ul>
 <p><br></p>
 </div>
-<div id="qual-é-a-interpretação-das-medidas-de-correlação" class="section level3 hasAnchor" number="17.1.2">
-<h3><span class="header-section-number">17.1.2</span> Qual é a interpretação das medidas de correlação?<a href="analise-inferencial-correlacao.html#qual-é-a-interpretação-das-medidas-de-correlação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="cegamento" class="section level2 hasAnchor" number="22.5">
+<h2><span class="header-section-number">22.5</span> Cegamento<a href="delineamento-estudos.html#cegamento" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><p>Os valores de correlação estão no intervalo <span class="math inline">\([-1; 1]\)</span>.<span class="citation"><sup><a href="#ref-barkan2015">55</a>,<a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Valores de correlação positivos representam uma relação direta entre as variáveis, tal que valores maiores de uma variável estão associados a valores maiores de outra variável.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Valores de correlação negativos representam uma relação indireta (ou inversa) entre as variáveis, tal que valores maiores (menores) de uma variável estão associados a valores maiores (menores) de outra variável.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Valores de correlação próximos de <span class="math inline">\(0\)</span> representam a inexistência de relação entre as variáveis.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
+<li>.[REF]</li>
 </ul>
 <p><br></p>
-</div>
-<div id="quais-precauções-devem-ser-tomadas-na-interpretação-de-medidas-de-correlação" class="section level3 hasAnchor" number="17.1.3">
-<h3><span class="header-section-number">17.1.3</span> Quais precauções devem ser tomadas na interpretação de medidas de correlação?<a href="analise-inferencial-correlacao.html#quais-precauções-devem-ser-tomadas-na-interpretação-de-medidas-de-correlação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação causa-efeito entre as variáveis.<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p></li>
-<li><p>Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação de concordância ou confiabilidade entre as variáveis.<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="quais-testes-podem-ser-usados-para-análises-de-correlação" class="section level3 hasAnchor" number="17.1.4">
-<h3><span class="header-section-number">17.1.4</span> Quais testes podem ser usados para análises de correlação?<a href="analise-inferencial-correlacao.html#quais-testes-podem-ser-usados-para-análises-de-correlação" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>).<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li><p>O coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>) avalia a força e direção da relação linear entre duas variáveis quantitativas.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Tipo: paramétrico.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Hipóteses:<span class="citation"><sup><a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li><p>Nula (<span class="math inline">\(H_{0}\)</span>): <span class="math inline">\(r=0\)</span></p></li>
-<li><p>Alternativa (<span class="math inline">\(H_{1}\)</span>): <span class="math inline">\(r≠0\)</span></p></li>
-</ul></li>
-<li><p>Tamanho do efeito:<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li>Coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>)</li>
-</ul></li>
-</ul></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats-2">33</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test"><em>cor.test</em></a> para calcular o coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>).</p>
-</div>
-<p><br></p>
-<ul>
-<li><p>Coeficiente de correlação ponto-bisserial (<span class="math inline">\(r_{s}\)</span>).<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p>
-<ul>
-<li><p>O coeficiente de correlação ponto-bisserial (<span class="math inline">\(r_{s}\)</span>) avalia a força e direção da relação linear entre uma variável quantitativa e outra dicotômica.<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p></li>
-<li><p>Tipo: paramétrico.<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p></li>
-<li><p>Hipóteses:<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p>
-<ul>
-<li><p>Nula (<span class="math inline">\(H_{0}\)</span>): <span class="math inline">\(r_{s}=0\)</span></p></li>
-<li><p>Alternativa (<span class="math inline">\(H_{1}\)</span>): <span class="math inline">\(r_{s}≠0\)</span></p></li>
-</ul></li>
-<li><p>Tamanho do efeito:<span class="citation"><sup><a href="#ref-khamis2008">130</a></sup></span></p>
-<ul>
-<li>Coeficiente de correlação ponto-bisserial (<span class="math inline">\(r_{s}\)</span>)</li>
-</ul></li>
-</ul></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats-2">33</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test"><em>cor.test</em></a> para calcular o coeficiente de correlação ponto-bisserial (<span class="math inline">\(r_{s}\)</span>).</p>
-</div>
-<p><br></p>
-<ul>
-<li><p>Coeficiente de correlação de Spearman (<span class="math inline">\(\rho\)</span>).<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li><p>O coeficiente de correlação de Spearman (<span class="math inline">\(\rho\)</span>) avalia a força e direção da relação monotônica entre duas variáveis quantitativas.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>O coeficiente de correlação de Spearman (<span class="math inline">\(\rho\)</span>) pode ser também definida como a correlação de Pearson (<span class="math inline">\(r\)</span>) entre as classificações (<em>ranks</em>) das duas variáveis quantitativas.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Tipo: não-paramétrico.<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p></li>
-<li><p>Hipóteses:<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li><p>Nula (<span class="math inline">\(H_{0}\)</span>): <span class="math inline">\(\rho=0\)</span></p></li>
-<li><p>Alternativa (<span class="math inline">\(H_{1}\)</span>): <span class="math inline">\(\rho≠0\)</span></p></li>
-</ul></li>
-<li><p>Tamanho do efeito:<span class="citation"><sup><a href="#ref-khamis2008">130</a>,<a href="#ref-allison2022">131</a></sup></span></p>
-<ul>
-<li>Coeficiente de correlação de Spearman (<span class="math inline">\(\rho\)</span>)</li>
-</ul></li>
-</ul></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats-2">33</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test"><em>cor.test</em></a> para calcular o coeficiente de correlação de Spearman (<span class="math inline">\(\rho\)</span>).</p>
-</div>
+<div id="o-que-é-cegamento" class="section level3 hasAnchor" number="22.5.1">
+<h3><span class="header-section-number">22.5.1</span> O que é cegamento?<a href="delineamento-estudos.html#o-que-é-cegamento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><br></p>
 
 </div>
@@ -953,17 +1009,44 @@ div.csl-indent {
 </div>
 <h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-stats-2" class="csl-entry">
-<div class="csl-left-margin">33. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
+<div id="ref-Grant2009" class="csl-entry">
+<div class="csl-left-margin">146. </div><div class="csl-right-inline">Grant MJ, Booth A. A typology of reviews: an analysis of 14 review types and associated methodologies. <em>Health Information &amp; Libraries Journal</em>. 2009;26(2):91-108. doi:<a href="https://doi.org/10.1111/j.1471-1842.2009.00848.x">10.1111/j.1471-1842.2009.00848.x</a></div>
 </div>
-<div id="ref-barkan2015" class="csl-entry">
-<div class="csl-left-margin">55. </div><div class="csl-right-inline">Barkan H. Statistics in clinical research: Important considerations. <em>Annals of Cardiac Anaesthesia</em>. 2015;18(1):74. doi:<a href="https://doi.org/10.4103/0971-9784.148325">10.4103/0971-9784.148325</a></div>
+<div id="ref-Süt2014" class="csl-entry">
+<div class="csl-left-margin">147. </div><div class="csl-right-inline">Sut N. Study designs in medicine. <em>Balkan Medical Journal</em>. 2015;31(4):273-277. doi:<a href="https://doi.org/10.5152/balkanmedj.2014.1408">10.5152/balkanmedj.2014.1408</a></div>
 </div>
-<div id="ref-khamis2008" class="csl-entry">
-<div class="csl-left-margin">130. </div><div class="csl-right-inline">Khamis H. Measures of Association: How to Choose? <em>Journal of Diagnostic Medical Sonography</em>. 2008;24(3):155-162. doi:<a href="https://doi.org/10.1177/8756479308317006">10.1177/8756479308317006</a></div>
+<div id="ref-Souza2017" class="csl-entry">
+<div class="csl-left-margin">148. </div><div class="csl-right-inline">Souza AC de, Alexandre NMC, Guirardello E de B, Souza AC de, Alexandre NMC, Guirardello E de B. Propriedades psicométricas na avaliação de instrumentos: avaliação da confiabilidade e da validade. <em>Epidemiologia e Serviços de Saúde</em>. 2017;26(3):649-659. doi:<a href="https://doi.org/10.5123/s1679-49742017000300022">10.5123/s1679-49742017000300022</a></div>
 </div>
-<div id="ref-allison2022" class="csl-entry">
-<div class="csl-left-margin">131. </div><div class="csl-right-inline">Allison JS, Santana L, (Jaco) Visagie IJH. A primer on simple measures of association taught at undergraduate level. <em>Teaching Statistics</em>. 2022;44(3):96-103. doi:<a href="https://doi.org/10.1111/test.12307">10.1111/test.12307</a></div>
+<div id="ref-reeves2017" class="csl-entry">
+<div class="csl-left-margin">149. </div><div class="csl-right-inline">Reeves BC, Wells GA, Waddington H. Quasi-experimental study designs series<span></span>paper 5: a checklist for classifying studies evaluating the effects on health interventions<span></span>a taxonomy without labels. <em>Journal of Clinical Epidemiology</em>. 2017;89:30-42. doi:<a href="https://doi.org/10.1016/j.jclinepi.2017.02.016">10.1016/j.jclinepi.2017.02.016</a></div>
+</div>
+<div id="ref-echevarría-guanilo2019" class="csl-entry">
+<div class="csl-left-margin">150. </div><div class="csl-right-inline">Echevarría-Guanilo ME, Gonçalves N, Romanoski PJ. PSYCHOMETRIC PROPERTIES OF MEASUREMENT INSTRUMENTS: CONCEPTUAL BASIS AND EVALUATION METHODS - PART II. <em>Texto &amp; Contexto - Enfermagem</em>. 2019;28. doi:<a href="https://doi.org/10.1590/1980-265x-tce-2017-0311">10.1590/1980-265x-tce-2017-0311</a></div>
+</div>
+<div id="ref-Chassé2019" class="csl-entry">
+<div class="csl-left-margin">151. </div><div class="csl-right-inline">Chassé M, Fergusson DA. Diagnostic Accuracy Studies. <em>Seminars in Nuclear Medicine</em>. 2019;49(2):87-93. doi:<a href="https://doi.org/10.1053/j.semnuclmed.2018.11.005">10.1053/j.semnuclmed.2018.11.005</a></div>
+</div>
+<div id="ref-Chidambaram2019" class="csl-entry">
+<div class="csl-left-margin">152. </div><div class="csl-right-inline">Chidambaram AG, Josephson M. Clinical research study designs: The essentials. <em>PEDIATRIC INVESTIGATION</em>. 2019;3(4):245-252. doi:<a href="https://doi.org/10.1002/ped4.12166">10.1002/ped4.12166</a></div>
+</div>
+<div id="ref-Erdemir2020" class="csl-entry">
+<div class="csl-left-margin">153. </div><div class="csl-right-inline">Erdemir A, Mulugeta L, Ku JP, et al. Credible practice of modeling and simulation in healthcare: ten rules from a multidisciplinary perspective. <em>Journal of Translational Medicine</em>. 2020;18(1). doi:<a href="https://doi.org/10.1186/s12967-020-02540-4">10.1186/s12967-020-02540-4</a></div>
+</div>
+<div id="ref-Yang2021" class="csl-entry">
+<div class="csl-left-margin">154. </div><div class="csl-right-inline">Yang B, Olsen M, Vali Y, et al. Study designs for comparative diagnostic test accuracy: A methodological review and classification scheme. <em>Journal of Clinical Epidemiology</em>. 2021;138:128-138. doi:<a href="https://doi.org/10.1016/j.jclinepi.2021.04.013">10.1016/j.jclinepi.2021.04.013</a></div>
+</div>
+<div id="ref-chipman2022" class="csl-entry">
+<div class="csl-left-margin">155. </div><div class="csl-right-inline">Chipman H, Bingham D. Let’s practice what we preach: Planning and interpreting simulation studies with design and analysis of experiments. <em>Canadian Journal of Statistics</em>. 2022;50(4):1228-1249. doi:<a href="https://doi.org/10.1002/cjs.11719">10.1002/cjs.11719</a></div>
+</div>
+<div id="ref-donthu2021" class="csl-entry">
+<div class="csl-left-margin">156. </div><div class="csl-right-inline">Donthu N, Kumar S, Mukherjee D, Pandey N, Lim WM. How to conduct a bibliometric analysis: An overview and guidelines. <em>Journal of Business Research</em>. 2021;133:285-296. doi:<a href="https://doi.org/10.1016/j.jbusres.2021.04.070">10.1016/j.jbusres.2021.04.070</a></div>
+</div>
+<div id="ref-lim2023" class="csl-entry">
+<div class="csl-left-margin">157. </div><div class="csl-right-inline">Lim WM, Kumar S. Guidelines for interpreting the results of bibliometric analysis: A sensemaking approach. <em>Global Business and Organizational Excellence</em>. August 2023. doi:<a href="https://doi.org/10.1002/joe.22229">10.1002/joe.22229</a></div>
+</div>
+<div id="ref-Bland1994" class="csl-entry">
+<div class="csl-left-margin">158. </div><div class="csl-right-inline">Bland JM, Altman DG. Statistics notes: Matching. <em>BMJ</em>. 1994;309(6962):1128-1128. doi:<a href="https://doi.org/10.1136/bmj.309.6962.1128">10.1136/bmj.309.6962.1128</a></div>
 </div>
 </div>
             </section>
@@ -971,8 +1054,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="analise-comparacao.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="analise-inferencial-associacao.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="parte-4---metodologia-aplicada.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simulacao-computacional.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
