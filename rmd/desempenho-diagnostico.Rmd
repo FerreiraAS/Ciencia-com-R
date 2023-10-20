@@ -31,7 +31,7 @@ cross.table <-
     c(
       '$VP$', '$FN$', '$VP+FN$',
       '$FP$', '$VN$', '$FP+VN$',
-      '$VP+FP$', '$FN+VN$', '$VP+VN+FP+FN$'
+      '$VP+FP$', '$FN+VN$', '$N=VP+VN+FP+FN$'
     ),
     nrow = 3,
     ncol = 3,
@@ -71,7 +71,7 @@ kableExtra::kable(
 
 -   Tabelas de confusão também podem ser visualizadas em formato de árvores de frequência.[@steckelberg2004]
 
-```{r frequency-tree, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Árvore de frequência do desempenho diagnóstico de uma tabela de confusão 2x2 representando um método novo (dicotômico) comparado ao método padrão-ouro ou referência (dictômico)."}
+```{r frequency-tree, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Árvore de frequência do desempenho diagnóstico de uma tabela de confusão 2x2 representando um método novo (dicotômico) comparado ao método padrão-ouro ou referência (dicotômico)."}
 # generate data
 gold.std <- rbinom(n = 100, size = 1, prob = 0.5)
 new.test <- rbinom(n = 100, size = 1, prob = 0.5)
@@ -125,7 +125,7 @@ O pacote *riskyr*[@riskyr] fornece a função [plot_prism](https://www.rdocument
 
 -   Valor preditivo negativo ($VPN$): Proporção de controles corretamente identificados como verdadeiro-negativos.[@greenhalgh1997b]
 
--   Razão de verosimilhança ($RV$).[@greenhalgh1997b]
+-   Razão de verossimilhança ($RV$).[@greenhalgh1997b]
 
 <br>
 
@@ -136,7 +136,7 @@ cross.table <-
     c(
       '$VP$', '$FN$', '$VP+FN$', '$SEN = \\frac{VP}{VP+FN}$',
       '$FP$', '$VN$', '$FP+VN$', '$ESP = \\frac{VN}{VN+FP}$',
-      '$VP+FP$', '$FN+VN$', '$VP+VN+FP+FN$', '',
+      '$VP+FP$', '$FN+VN$', '$N=VP+VN+FP+FN$', '',
       '$VPP = \\frac{VP}{VP+FP}$', '$VPN = \\frac{VN}{VN+FN}$', '', '$ACU = \\frac{VP+VN}{VP+VN+FP+FN}$'
     ),
     nrow = 4,
@@ -200,7 +200,7 @@ O pacote *proc*[@pROC] fornece a função [*plot.roc*](https://www.rdocumentatio
 
 -   A área sob a curva AUC varia no intervalo $[0.5; 1]$, com valores mais elevados indicando melhor discriminação ou desempenho do modelo de classificação.[@de2022]
 
--   As interpretações qualitativas (isto é, pobre/fraca/baixa, moderada/razoável/aceitável, boa ou muito boa/alta/excelebt) dos valores de área sob a curva são arbitrários e não devem ser considerados isoladamente.[@de2022]
+-   As interpretações qualitativas (isto é: pobre/fraca/baixa, moderada/razoável/aceitável, boa ou muito boa/alta/excelente) dos valores de área sob a curva são arbitrários e não devem ser considerados isoladamente.[@de2022]
 
 -   Modelos de classificação com valores altos de área sob a curva podem ser enganosos se os valores preditos por esses modelos não estiverem adequadamente calibrados.[@de2022]
 
@@ -216,11 +216,11 @@ O pacote *proc*[@pROC] fornece a função [*plot.roc*](https://www.rdocumentatio
 
 <br>
 
-### Que itens devem ser verificados na interpretação de um etudo de validade?
+### Que itens devem ser verificados na interpretação de um estudo de validade?
 
 -   O novo teste foi comparado junto ao método padrão-ouro.[@greenhalgh1997b]
 
--   As probabildidades pontuais estimadas que caracterizam o desempenho diagnóstico do novo teste são altas e adequadas para sua aplicação clínica.[@greenhalgh1997b]
+-   As probabilidades pontuais estimadas que caracterizam o desempenho diagnóstico do novo teste são altas e adequadas para sua aplicação clínica.[@greenhalgh1997b]
 
 -   Os intervalos de confiança estimados para as probabilidades do novo teste são estreitos e adequadas para sua aplicação clínica.[@greenhalgh1997b]
 
