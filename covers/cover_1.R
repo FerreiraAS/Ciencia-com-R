@@ -18,7 +18,7 @@ for(i in 1:2){
   plot(1, type = "n", xlab = "", ylab = "", xlim = c(0,W), ylim = c(0,H))
   
   # background image
-  rmd.files <- list.files(getwd(), ".Rmd")
+  rmd.files <- list.files(file.path(getwd(), "rmd"), ".Rmd", full.names = TRUE)
   phrases <- c()
   for(i in 1:length(rmd.files)){
     content <- readLines(rmd.files[i])
