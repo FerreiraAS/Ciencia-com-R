@@ -6,23 +6,41 @@
 
 <br>
 
+### O que é uma tabela de confusão 2x2?
+
+-   Tabela de confusão é uma matriz de 2 linhas por 2 colunas que permite analisar o desempenho de classificação de uma variável dicotômica (padrão-ouro ou referência) versus outra variável dicotômica (novo teste).[@steckelberg2004]
+
+<br>
+
 ### Como analisar o desempenho diagnóstico em tabelas 2x2?
 
-- Verdadeiro-positivo ($VP$): caso com a condição presente e corretamente identificado como tal.[@greenhalgh1997b]
+-   Verdadeiro-positivo ($VP$): caso com a condição presente e corretamente identificado como tal.[@greenhalgh1997b]
 
-- Falso-negativo ($FN$): caso com a condição presente e erroneamente identificado como ausente.[@greenhalgh1997b]
+-   Falso-negativo ($FN$): caso com a condição presente e erroneamente identificado como ausente.[@greenhalgh1997b]
 
-- Verdadeiro-negativo ($VN$): controle sem a condição presente e corretamente identificados como tal.[@greenhalgh1997b]
+-   Verdadeiro-negativo ($VN$): controle sem a condição presente e corretamente identificados como tal.[@greenhalgh1997b]
 
-- Falso-positivo ($FP$): controle sem a condição presente e erroneamente identificado como presente.[@greenhalgh1997b]
+-   Falso-positivo ($FP$): controle sem a condição presente e erroneamente identificado como presente.[@greenhalgh1997b]
 
 <br>
 
 ```{r crosstable, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 
-cross.table <- matrix(c('$VP$', '$FN$', '$FP$', '$VN$'), nrow = 2, ncol = 2, byrow = FALSE)
-rownames(cross.table) <- c("Teste positivo", "Teste negativo")
-colnames(cross.table) <- c("Condição presente", "Condição ausente")
+cross.table <-
+  matrix(
+    c(
+      '$VP$', '$FN$', '$VP+FN$',
+      '$FP$', '$VN$', '$FP+VN$',
+      '$VP+FP$', '$FN+VN$', '$VP+VN+FP+FN$'
+    ),
+    nrow = 3,
+    ncol = 3,
+    byrow = FALSE
+  )
+rownames(cross.table) <-
+  c("Teste positivo", "Teste negativo", "Total")
+colnames(cross.table) <-
+  c("Condição presente", "Condição ausente", "Total")
 
 # exibe a tabela de dados
 kableExtra::kable(
@@ -43,9 +61,53 @@ kableExtra::kable(
   kableExtra::row_spec(0,
                        bold = TRUE,
                        extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec((dim(cross.table)[1] - 1),
+                       extra_css = "border-bottom: 1px solid") %>%
   kableExtra::row_spec(dim(cross.table)[1],
                        extra_css = "border-bottom: 1px solid")
 ```
+
+-   Tabelas de confusão também podem ser visualizadas em formato de árvores de frequência.[@steckelberg2004]
+
+```{r frequency-tree, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Árvore de frequência do desempenho diagnóstico de uma tabela de confusão 2x2 representando um método novo (dicotômico) comparado ao método padrão-ouro ou referência (dictômico)."}
+# generate data
+gold.std <- rbinom(n = 100, size = 1, prob = 0.5)
+new.test <- rbinom(n = 100, size = 1, prob = 0.5)
+dataset <- data.frame("Padrão-ouro" = gold.std,
+                      "Novo teste" = new.test)
+
+# change labels
+my_txt <-
+  riskyr::init_txt(
+    cond_lbl = "Padrão-ouro",
+    cond_true_lbl = "Presente",
+    cond_false_lbl = "Ausente",
+    hi_lbl = "VP",
+    mi_lbl = "FN",
+    fa_lbl = "FP",
+    cr_lbl = "VN"
+  )
+
+# plot the frequency tree
+riskyr::plot_prism(
+  dataset,
+  by = "cd",
+  show_accu = TRUE,
+  main = NULL,
+  sub = NULL,
+  col_pal = riskyr::pal_bw,
+  f_lbl = "nam",
+  p_lbl = "no",
+  lbl_txt = my_txt,
+  f_lwd = .5
+)
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *riskyr*[@riskyr] fornece a função [plot_prism](https://www.rdocumentation.org/packages/riskyr/versions/0.4.0/topics/plot_prism) para construir árvores de frequência a partir de diferentes cenários.
+:::
 
 <br>
 
@@ -61,15 +123,27 @@ kableExtra::kable(
 
 -   Valor preditivo negativo ($VPN$): Proporção de controles corretamente identificados como verdadeiro-negativos.[@greenhalgh1997b]
 
-- Razão de verosimilhança ($RV$).[@greenhalgh1997b]
+-   Razão de verosimilhança ($RV$).[@greenhalgh1997b]
 
 <br>
 
 ```{r crosstable-prob, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 
-cross.table <- matrix(c('$VP$', '$FN$', '$SEN = \\frac{VP}{VP+FN}$', '$FP$', '$VN$', '$ESP = \\frac{VN}{VN+FP}$', '$VPP = \\frac{VP}{VP+FP}$', '$VPN = \\frac{VN}{VN+FN}$', '$ACU = \\frac{VP+VN}{VP+VN+FP+FN}$'), nrow = 3, ncol = 3, byrow = FALSE)
-rownames(cross.table) <- c("Teste positivo", "Teste negativo", "Probabilidades")
-colnames(cross.table) <- c("Condição presente", "Condição ausente", "Probabilidades")
+cross.table <-
+  matrix(
+    c(
+      '$VP$', '$FN$', '$VP+FN$', '$SEN = \\frac{VP}{VP+FN}$',
+      '$FP$', '$VN$', '$FP+VN$', '$ESP = \\frac{VN}{VN+FP}$',
+      '$VP+FP$', '$FN+VN$', '$VP+VN+FP+FN$', '',
+      '$VPP = \\frac{VP}{VP+FP}$', '$VPN = \\frac{VN}{VN+FN}$', '', '$ACU = \\frac{VP+VN}{VP+VN+FP+FN}$'
+    ),
+    nrow = 4,
+    ncol = 4,
+    byrow = FALSE
+  )
+
+rownames(cross.table) <- c("Teste positivo", "Teste negativo", "Total", "Probabilidades")
+colnames(cross.table) <- c("Condição presente", "Condição ausente", "Total", "Probabilidades")
 
 # exibe a tabela de dados
 kableExtra::kable(
@@ -90,11 +164,17 @@ kableExtra::kable(
   kableExtra::row_spec(0,
                        bold = TRUE,
                        extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
-  kableExtra::row_spec(dim(cross.table)[1] - 1,
-                       extra_css = "border-bottom: 1px solid")  %>%
+  kableExtra::row_spec((dim(cross.table)[1] - 1),
+                       extra_css = "border-bottom: 1px solid") %>%
   kableExtra::row_spec(dim(cross.table)[1],
                        extra_css = "border-bottom: 1px solid")
 ```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *riskyr*[@riskyr] fornece a função [comp_prob](https://www.rdocumentation.org/packages/riskyr/versions/0.4.0/topics/comp_prob) para calcular 13 probabilidades relacionadas ao desempenho diagnóstico.
+:::
 
 <br>
 
@@ -136,18 +216,18 @@ O pacote *proc*[@pROC] fornece a função [*plot.roc*](https://www.rdocumentatio
 
 ### Que itens devem ser verificados na interpretação de um etudo de validade?
 
-- O novo teste foi comparado junto ao método padrão-ouro.[@greenhalgh1997b]
+-   O novo teste foi comparado junto ao método padrão-ouro.[@greenhalgh1997b]
 
-- As probabildidades pontuais estimadas que caracterizam o desempenho diagnóstico do novo teste são altas e adequadas para sua aplicação clínica.[@greenhalgh1997b]
+-   As probabildidades pontuais estimadas que caracterizam o desempenho diagnóstico do novo teste são altas e adequadas para sua aplicação clínica.[@greenhalgh1997b]
 
-- Os intervalos de confiança estimados para as probabilidades do novo teste são estreitos e adequadas para sua aplicação clínica.[@greenhalgh1997b]
+-   Os intervalos de confiança estimados para as probabilidades do novo teste são estreitos e adequadas para sua aplicação clínica.[@greenhalgh1997b]
 
-- O novo teste possui adequada confiabilidade intra/inter examinadores.[@greenhalgh1997b]
+-   O novo teste possui adequada confiabilidade intra/inter examinadores.[@greenhalgh1997b]
 
-- O estudo de validação incluiu um espectro adequado da amostra.[@greenhalgh1997b]
+-   O estudo de validação incluiu um espectro adequado da amostra.[@greenhalgh1997b]
 
-- Todos os participantes realizaram ambos o novo teste e o padrão-ouro no estudo de validação.[@greenhalgh1997b]
+-   Todos os participantes realizaram ambos o novo teste e o padrão-ouro no estudo de validação.[@greenhalgh1997b]
 
-- Os examinadores do novo teste estavam cegados para o resultado do teste padrão-ouro.[@greenhalgh1997b]
+-   Os examinadores do novo teste estavam cegados para o resultado do teste padrão-ouro.[@greenhalgh1997b]
 
 <br>

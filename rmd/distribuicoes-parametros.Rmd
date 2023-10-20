@@ -8,43 +8,61 @@
 
 ### O que são distribuições de probabilidade?
 
-- Uma distribuição estatística é uma função que descreve os valores possíveis ou o intervalo de valores de uma variável (eixo horizontal) e a frequência com que cada valor é observado (eixo vertical).[@vetter2017]
+-   Uma distribuição de probabilidade é uma função que descreve os valores possíveis ou o intervalo de valores de uma variável (eixo horizontal) e a frequência com que cada valor é observado (eixo vertical).[@vetter2017]
 
 <br>
 
 ### Quais características definem uma distribuição?
 
-- Uma distribuição pode ser definida por modelos matemáticos e caracterizada por sua tendência central, dispersão, simetria, curtose.
+-   Uma distribuição pode ser definida por modelos matemáticos e caracterizada por sua tendência central, dispersão, simetria e curtose.
+
+<br>
+
+### Quais são as funções de uma distribuição?
+
+-   Função de massa de probabilidade (*probability mass function*, pmf).[REF]
+
+-   Função de distribuição cumulativa (*cumulative distribution function*, cdf).[REF]
+
+-   Função quantílicas (*quantile function*, qf).[REF]
+
+-   Função geradora de números aleatórios (*random function*, rf).[REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats-3] fornece funções de distribuição de probabilidade (p), funções de densidade (d), funções quantílicas (q) e funções geradores de números aleatórios (r) para as distribuições [normal](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal), [Student t](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/TDist), [binomial](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial), [qui-quadrado](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Chisquare), [uniforme](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Uniform), dentre outras.
+:::
 
 <br>
 
 ### O que é a distribuição normal?
 
-- A distribuição normal (ou gaussiana) é uma distribuição com desvios simétricos positivos e negativos em torno de um valor central.[@Ali2016]
+-   A distribuição normal (ou gaussiana) é uma distribuição com desvios simétricos positivos e negativos em torno de um valor central.[@Ali2016]
 
-- Em uma distribuição normal, o intervalo de 1 desvio-padrão (±1DP) inclui cerca de 68% dos dados; de 2 desvios-padrão (±2DP) cerca de 95% dos dados; e no intervalo de 3 desvios-padrão (±3DP) cerca de 99% dos dados.[@Ali2016]
+-   Em uma distribuição normal, o intervalo de 1 desvio-padrão (±1DP) inclui cerca de 68% dos dados; de 2 desvios-padrão (±2DP) cerca de 95% dos dados; e no intervalo de 3 desvios-padrão (±3DP) cerca de 99% dos dados.[@Ali2016]
 
 <br>
 
 ### O que são distribuições não-normais?
 
-- .[REF]
+-   .[REF]
 
 <br>
 
 ### Que métodos podem ser utilizados para identificar a normalidade da distribuição?
 
-- Histogramas.[@vetter2017]
+-   Histogramas.[@vetter2017]
 
-- Gráficos Q-Q.[@vetter2017]
+-   Gráficos Q-Q.[@vetter2017]
 
-- Testes de hipótese nula:[@vetter2017]
+-   Testes de hipótese nula:[@vetter2017]
 
-    - Kolmogorov-Smirnov
-    
-    - Shapiro-Wilk
-    
-    - Anderson-Darling
+    -   Kolmogorov-Smirnov
+
+    -   Shapiro-Wilk
+
+    -   Anderson-Darling
 
 <br>
 
@@ -56,7 +74,7 @@
 
 -   Parâmetros são informações que definem um modelo teórico, como propriedades de uma coleção de indivíduos.[@Altman1999]
 
-- Parâmetros definem características de uma população inteira, tipicamente não observados por ser inviável ter acesso a todos os indivíduos que constituem tal população.[@vetter2017]
+-   Parâmetros definem características de uma população inteira, tipicamente não observados por ser inviável ter acesso a todos os indivíduos que constituem tal população.[@vetter2017]
 
 <br>
 
@@ -65,7 +83,7 @@
 -   Parâmetros de tendência central.[@kanji2006; @Ali2016]
 
 -   Parâmetros de dispersão.[@kanji2006; @Ali2016; @Curran-Everett2008]
-    
+
 -   Parâmetros de proporção.[@Altman1994; @kanji2006; @Ali2016; @Altman1994]
 
 -   Parâmetros de distribuição.[@kanji2006]
@@ -81,9 +99,9 @@
 ### Que parâmetros de tendência central podem ser estimados?
 
 -   *Média*.[@kanji2006; @Ali2016]
-    
+
 -   *Mediana*.[@kanji2006; @Ali2016]
-    
+
 -   *Moda*.[@kanji2006; @Ali2016]
 
 <br>
@@ -91,35 +109,33 @@
 ### Que parâmetros de dispersão podem ser estimados?
 
 -   *Variância*.[@kanji2006; @Ali2016]
-    
+
 -   *Desvio-padrão*: Estima a variabilidade entre as observações e a média amostra, e estima a variabilidade na população.[@Curran-Everett2008]
-    
+
 -   *Erro-padrão*: Estima a variabilidade teórica entre médias amostrais.[@Curran-Everett2008]
-    
+
 -   *Amplitude*.[@kanji2006; @Ali2016]
-    
+
 -   *Intervalo interquartil*.[@kanji2006; @Ali2016]
-    
+
 -   *Intervalo de confiança*.[@kanji2006; @Ali2016]
-    
+
 <br>
 
 ### Que parâmetros de proporção podem ser estimados?
 
 -   *Frequência absoluta*.[@Altman1994; @kanji2006; @Ali2016]
-    
+
 -   *Frequência relativa*.[@Altman1994; @kanji2006; @Ali2016]
-    
+
 -   *Percentil*.[@Altman1994; @kanji2006; @Ali2016]
-    
+
 -   *Quantil*: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem.[@Altman1994]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-
 O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile) para executar análise de percentis.
-
 :::
 
 <br>
@@ -127,23 +143,21 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 ### Que parâmetros de distribuição podem ser estimados?
 
 -   *Assimetria*.[@kanji2006]
-    
+
 -   *Curtose*.[@kanji2006]
-    
+
 <br>
 
 ### Que parâmetros extremos podem ser estimados?
 
 -   *Mínimo*.[@Ali2016]
-    
+
 -   *Máximo*.[@Ali2016]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-
 O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile) para executar análise de percentis.
-
 :::
 
 <br>
@@ -162,12 +176,12 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 ### Como conduzir análises com valores discrepantes?
 
-- Erros de observação e de medição são uma justificativa válida para descartar observações discrepantes.[@zuur2009]
+-   Erros de observação e de medição são uma justificativa válida para descartar observações discrepantes.[@zuur2009]
 
-- Valores discrepantes na variável de desfecho podem exigir uma abordagem mais refinada, especialmente quando representam uma variação real na variável que está sendo medida.[@zuur2009]
+-   Valores discrepantes na variável de desfecho podem exigir uma abordagem mais refinada, especialmente quando representam uma variação real na variável que está sendo medida.[@zuur2009]
 
-- Valores discrepantes em uma (co)variável podem surgir devido a um projeto experimental inadequado; nesse caso, abandonar a observação ou transformar a covariável são opções adequadas.[@zuur2009]
+-   Valores discrepantes em uma (co)variável podem surgir devido a um projeto experimental inadequado; nesse caso, abandonar a observação ou transformar a covariável são opções adequadas.[@zuur2009]
 
-- É importante reportar se existem valores discrepantes e como foram tratados.[@zuur2009]
+-   É importante reportar se existem valores discrepantes e como foram tratados.[@zuur2009]
 
 <br>
