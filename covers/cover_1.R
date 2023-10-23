@@ -54,7 +54,7 @@ text(W / 2, H / 2, labels = wrappeds, col = "gray25")
 text(
   x = W,
   y = H - 0.5,
-  labels = substitute(paste(bold(
+  labels = substitute(paste(grDevices::bold(
     "Arthur de Sá Ferreira"
   ))),
   pos = 2,
@@ -66,7 +66,7 @@ text(
 text(
   x = W,
   y = H / 2 + 2 - 1,
-  labels = substitute(paste(bold("Ciência com   "))),
+  labels = substitute(paste(grDevices::bold("Ciência com   "))),
   pos = 2,
   cex = 6.5,
   col = "yellow"
@@ -74,7 +74,7 @@ text(
 text(
   x = W,
   y = H / 2 + 2 - 1,
-  labels = substitute(paste(bold("R"))),
+  labels = substitute(paste(grDevices::bold("R"))),
   pos = 2,
   cex = 6.5,
   col = "#3363B0"
@@ -85,7 +85,7 @@ text(
   x = W,
   y = H / 2 + 3 - 2.75,
   labels = substitute(paste(
-    italic("Perguntas e respostas para pesquisadores e analistas de dados")
+    grDevices::italic("Perguntas e respostas para pesquisadores e analistas de dados")
   )),
   pos = 2,
   cex = 1.5,
@@ -97,7 +97,7 @@ text(
   x = W / 2,
   y = 0,
   labels = format(Sys.Date(), "%Y"),
-  adj = c(0, 0),
+  adj = c(0.5, 0.5),
   cex = 1.5,
   col = "white"
 )
