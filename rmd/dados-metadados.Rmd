@@ -74,7 +74,7 @@ O pacote *misty*[@misty] fornece a função [*na.test*](https://www.rdocumentati
 
 ### Que estratégias podem ser utilizadas na coleta de dados quando há expectativa de perda amostral?
 
--   Na expectativa de ocorrência de perda amostral, com consequente ocorrência de dados perdidos, recomenda-se ampliar o tamanho da amostra com um % correspondente à tal estimativa - embora ainda não corrija potenciais vieses pela perda.[@Altman2007]
+-   Na expectativa de ocorrência de perda amostral, com consequente ocorrência de dados perdidos, recomenda-se ampliar o tamanho da amostra com um percentual correspondente a tal estimativa (ex.: 10%), embora ainda não corrija potenciais vieses pela perda.[@Altman2007]
 
 <br>
 
@@ -82,7 +82,7 @@ O pacote *misty*[@misty] fornece a função [*na.test*](https://www.rdocumentati
 
 -   Na ocorrência de dados perdidos, a análise mais comum compreende apenas os 'casos completos', com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).[@Altman2007]
 
--   A análise de dados completos é válida quando pode se argumentar que que a probabilidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.[@carpenter2021]
+-   A análise de dados completos é válida quando pode-se argumentar que que a probabilidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.[@carpenter2021]
 
 -   A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.[@carpenter2021]
 
@@ -100,11 +100,13 @@ O pacote *stats*[@stats] fornece a função [*complete.cases*](https://www.rdocu
 
 <br>
 
--   Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.[@Altman2007]
-
 -   A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares - preditoras do desfecho e não dos dados perdidos - estão disponíveis.[@carpenter2021]
 
--   Em dados longitudinais com um pequeno número de 'ondas' (medidas repetidas) e poucas variáveis, para análise com modelos de regressão univariados, a imputação via especificação condicional completa - também conhecido como imputação multivariada por equações encadeadas (*multivaraite imputation by chained equations*, MICE) - é eficiente do ponto de vista computacional e possui acurácia e precisão para estimação de parâmetros.[@Cao2022; @Heymans2022]
+-   Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.[@Altman2007]
+
+-   Modelos lineares e logísticos podem ser utilizados para imputar dados perdidos em variáveis contínuas e dicotômicas, respectivamente.[@austin2023]
+
+-   Os métodos de imputação de dados mais robustos incluem a imputação multivariada por equações encadeadas (*multivariate imputation by chained equations*, MICE)[@mice] e a correspondência média preditiva (*predictive mean matching*, PMM)[@rubin1986; @little1988a].
 
 <br>
 
