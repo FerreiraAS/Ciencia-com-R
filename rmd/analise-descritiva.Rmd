@@ -15,7 +15,25 @@
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *dataExplorer*[@DataExplorer] fornece a função [*create_report*](https://www.rdocumentation.org/packages/DataExplorer/versions/0.8.2/topics/create_report) para executar análise exploratória.
+O pacote *explore*[@explore] fornece a função [*explore*](https://www.rdocumentation.org/packages/explore/versions/1.0.2/topics/explore) para análise exploratória de um banco de dados.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *dataMaid*[@dataMaid] fornece a função [*makeDataReport*](https://www.rdocumentation.org/packages/dataMaid/versions/1.4.1/topics/makeDataReport) para criar um relatório de análise exploratória de um banco de dados.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *DataExplorer*[@DataExplorer-2] fornece a função [*create_report*](https://www.rdocumentation.org/packages/DataExplorer/versions/0.8.2/topics/create_report) para criar um relatório de análise exploratória de um banco de dados.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *SmartEDA*[@SmartEDA] fornece a função [*ExpReport*](https://www.rdocumentation.org/packages/SmartEDA/versions/0.3.9/topics/ExpReport) para criar um relatório de análise exploratória de um banco de dados.
 :::
 
 <br>
@@ -42,6 +60,12 @@ O pacote *dataExplorer*[@DataExplorer] fornece a função [*create_report*](http
 
 <br>
 
+### Que informações incluir nas tabelas?
+
+-   Título ou legenda, uma síntese descritiva (geralmente por meio de parâmetros descritivos), intervalos de confiança e/ou p-valores conforme necessário para adequada interpretação.[@Inskip2017; @Kwak2021]
+
+<br>
+
 ## Tabela 1 {#tabela-1}
 
 <br>
@@ -64,18 +88,28 @@ O pacote *dataExplorer*[@DataExplorer] fornece a função [*create_report*](http
 
 -   Avaliar a generalização (validade externa) das conclusões do estudo.[@chen2020]
 
-<br>x
+<br>
 
-### Como construir a Tabela 1?
+### O que é a falácia da 'Tabela 1'?
+
+-   Falácia da Tabela 1 ocorre pela interpretação errônea dos P-valores na comparação entre grupos, na linha de base, de um ensaio clínco aleatorizado.[@pijls2022]
+
+<br>
+
+### Como construir a 'Tabela 1'?
 
 -   A Tabela 1 geralmente é utilizada para descrever as características da amostra estudada, possibilitando a análise de ameaças à validade interna e/ou externa ao estudo.[@greenhalgh1997; @Hayes-Larson2019]
-
--   Inclua na tabela: título ou legenda, uma síntese descritiva (geralmente por meio de parâmetros descritivos), intervalos de confiança e/ou p-valores conforme necessário para adequada interpretação.[@Inskip2017; @Kwak2021]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *table1*[@table1] fornece a função [*table1*](https://www.rdocumentation.org/packages/table1/versions/1.4.3/topics/table1) para construção da tabela.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *gtsummary*[@gtsummary-2] fornece a função [*tbl_summary*](https://www.rdocumentation.org/packages/gtsummary/versions/1.6.3/topics/tbl_summary) para construção da 'Tabela 1' com dados descritivos.
 :::
 
 <br>
@@ -96,7 +130,17 @@ O pacote *table1*[@table1] fornece a função [*table1*](https://www.rdocumentat
 
 <br>
 
-### Como construir a Tabela 2?
+### O que é a falácia da 'Tabela 2'?
+
+-   A Tabela 2 pode induzir ao erro de interpretação pelas estimativas de efeitos para covariáveis do modelo também serem utilizados para controlar a confusão da exposição.[@Westreich2013; @bandoli2018]
+
+-   Ao apresentar estimativas de efeito ajustadas para covariáveis juntamente com a estimativa de efeito ajustada para a exposição primária, a Tabela 2 sugere implicitamente que todas estas estimativas podem ser interpretadas de forma semelhante, se não de forma idêntica, como estimativa do efeito total.[@Westreich2013; @bandoli2018]
+
+-   A falácia da Tabela 2 pode ser evitada limitando-se a tabela a estimativas das medidas primárias do efeito de exposição nos diferentes modelos, com as covariáveis secundárias de "ajuste" relatadas em uma nota de rodapé, juntamente com a forma como foram categorizadas ou modeladas.[@Westreich2013]
+
+<br>
+
+### Como construir a 'Tabela 2'?
 
 -   A Tabela 2 pode ser utilizada para apresentar estimativas de múltiplos efeitos ajustados de um mesmo modelo estatístico.[@Westreich2013]
 
@@ -104,6 +148,12 @@ O pacote *table1*[@table1] fornece a função [*table1*](https://www.rdocumentat
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *table1*[@table1] fornece a função [*table1*](https://www.rdocumentation.org/packages/table1/versions/1.4.3/topics/table1) para construção da tabela.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *gtsummary*[@gtsummary-2] fornece a função [*tbl_summary*](https://www.rdocumentation.org/packages/gtsummary/versions/1.6.3/topics/tbl_summary) para construção da 'Tabela 2'.
 :::
 
 <br>
