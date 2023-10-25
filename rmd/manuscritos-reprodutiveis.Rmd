@@ -52,7 +52,7 @@ Os pacotes *jmv*[@jmv] e *jmvconnect*[@jmvconnect] fornecem funções para anál
 
 ### O que são manuscritos reprodutíveis?
 
-- Manuscritos reprodutíveis - manuscritos executáveis ou relatórios dinâmicos - permitem a produção de um manuscrito completo a partir da integração do banco de dados da(s) amostra(s), do(s) script(s) de análise estatística (incluindo comentários para sua interpretação), dos pacotes ou bibliotecas utilizados, das fontes e referências bibliográficas citadas, além dos demais elementos textuais (tabelas, gráficos) - todos gerados dinamicamente.[@hinsen2011]
+-   Manuscritos reprodutíveis - manuscritos executáveis ou relatórios dinâmicos - permitem a produção de um manuscrito completo a partir da integração do banco de dados da(s) amostra(s), do(s) script(s) de análise estatística (incluindo comentários para sua interpretação), dos pacotes ou bibliotecas utilizados, das fontes e referências bibliográficas citadas, além dos demais elementos textuais (tabelas, gráficos) - todos gerados dinamicamente.[@hinsen2011]
 
 -   O trabalho com RMarkdown[@R-rmarkdown] permite um fluxo de dados totalmente transparente, desde o conjunto de dados coletados até o manuscrito finalizado. Todos os aspectos do fluxo de dados podem ser incorporados em blocos de R script (*chunk*), exibindo tanto o R script quando o respectivo texto, tabelas e figuras formatadas no estilo científico de interesse.[@holmes2021]
 
@@ -75,9 +75,7 @@ O pacote *officedown*[@officedown] fornece as funções [*rdocx_document*](https
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-
 O pacote *bookdown*[@bookdown] fornece as funções [*pdf_book*](https://www.rdocumentation.org/packages/bookdown/versions/0.35/topics/pdf_book), [*bs4_book*](https://www.rdocumentation.org/packages/bookdown/versions/0.35/topics/bs4_book) e [*epub_book*](https://www.rdocumentation.org/packages/bookdown/versions/0.35/topics/epub_book) para criar arquivos PDF, HTML e EPUB, respectivamente, com o conteúdo criado no manuscrito reprodutível.
-
 :::
 
 <br>
@@ -102,7 +100,7 @@ O pacote *projects*[@projects] fornece a função [*setup_projects*](https://www
 
 -   "Scripts são dados".[@hinsen2011]
 
-- Scripts permitem ao usuário se concentrar nas tarefas mais importantes da computação e utilizar pacotes ou bibliotecas para executar as funções mais básicas com maior eficiência.[@hinsen2011]
+-   Scripts permitem ao usuário se concentrar nas tarefas mais importantes da computação e utilizar pacotes ou bibliotecas para executar as funções mais básicas com maior eficiência.[@hinsen2011]
 
 -   Um script é um arquivo de texto contendo (quase) os mesmos comandos que você digitaria na linha de comando do R. (Quase) refere-se ao fato de que se você estiver usando *sink()* para enviar a saída para um arquivo, você terá que incluir alguns comandos em *print()* para obter a mesma saída da linha de comando ([CRAN](https://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_scrpt.html)).
 
@@ -156,7 +154,19 @@ O pacote *styler*[@styler] fornece a função [*style_file*](https://www.rdocume
 
 <br>
 
-### Como preparar R scripts para compartilhamento?
+### Como preparar dados para compartilhamento?
+
+-   .[REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *synthpop*[@synthpop] fornece a função [*syn*](https://www.rdocumentation.org/packages/synthpop/versions/1.8-0/topics/syn) para criar bancos de dados sintéticos a partir de um banco de dados real.
+:::
+
+<br>
+
+### Como preparar scripts para compartilhamento?
 
 -   Documente em um arquivo README os arquivos disponíveis e os pré-requisitos necessários para executar o código (ex.: pacotes e respectivas versões). Uma lista de configurações (hardware e software) que foram usadas para rodar o código pode ajudar na reprodução dos resultados.[@hofner2015]
 
