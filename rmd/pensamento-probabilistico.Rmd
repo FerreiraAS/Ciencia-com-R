@@ -16,11 +16,45 @@
 
 <br>
 
-## Espaços amostrais e eventos {#espacos-eventos}
+## Espaços amostrais e eventos discretos {#espacos-eventos-discretos}
 
 <br>
 
-### O que é evento?
+### O que é espaço amostral discreto?
+
+-   O espaço amostral $S$ de um experimento aleatório é definido como o conjunto de todos os desfechos possíveis de um experimento.[@grami2023]
+
+-   Em probabilidade discreta, o espaço amostral $S$ pode ser enumerado e contato.[@grami2023]
+
+<br>
+
+```{r espaco-amostral-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Espaço amostral: Todas as faces de um dado."}
+
+# para reprodutibilidade
+set.seed(1234)
+
+# simula o lançamento de dado
+lançamentos <- tidydice::roll_dice(
+        times = 1000,
+        rounds = 1,
+        success = 4)
+# remove lances duplicados
+lançamentos <- lançamentos[!duplicated(lançamentos$result), ]
+# coloca em ordem
+lançamentos <- lançamentos[order(lançamentos$result), ]
+
+espaço.amostral <- tidydice::plot_dice(
+    lançamentos,
+    fill_success = NA
+    ) + ggplot2::ggtitle("") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+gridExtra::grid.arrange(espaço.amostral, nrow = 1)
+```
+
+<br>
+
+### O que é evento discreto?
 
 -   Um evento $E$ é um único desfecho ou uma coleção de desfechos.[@grami2023]
 
@@ -28,7 +62,33 @@
 
 <br>
 
-### O que é espaço de eventos?
+```{r evento-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de evento do experimento de 1 lançamento de 1 dado."}
+
+# para reprodutibilidade
+set.seed(1234)
+
+# simula 1 lançamento de 1 dado
+evento <- tidydice::plot_dice(
+    tidydice::roll_dice(
+        times = 1,
+        rounds = 1,
+        success = 4),
+    fill_success = "grey"
+    ) + ggplot2::ggtitle("") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+espaço.amostral <- tidydice::plot_dice(
+    lançamentos,
+    fill_success = "grey"
+    ) + ggplot2::ggtitle("") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+gridExtra::grid.arrange(evento, espaço.amostral, nrow = 2)
+```
+
+<br>
+
+### O que é espaço de eventos discretos?
 
 -   A união de dois eventos $E_{1} \cup E_{2}$ é o conjunto de todos os desfechos que estão em ambos.[@grami2023]
 
@@ -38,11 +98,60 @@
 
 <br>
 
-### O que é espaço amostral?
+```{r espaco-eventos-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Espaço de eventos: União dos eventos face = 3 e face = 4 de um dado."}
 
--   O espaço amostral $S$ de um experimento aleatório é definido como o conjunto de todos os desfechos possíveis de um experimento.[@grami2023]
+# para reprodutibilidade
+set.seed(1234)
 
--   Em probabilidade discreta, o espaço amostral $S$ pode ser enumerado e contato.[@grami2023]
+# simula o lançamento de dado
+lançamentos <- tidydice::roll_dice(
+        times = 1000,
+        rounds = 1,
+        success = c(3,4))
+# remove lances duplicados
+lançamentos <- lançamentos[!duplicated(lançamentos$result), ]
+# coloca em ordem
+lançamentos <- lançamentos[order(lançamentos$result), ]
+
+espaço.amostral <- tidydice::plot_dice(
+    lançamentos,
+    fill_success = "grey"
+    ) + ggplot2::ggtitle("") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+# seleciona espaço de eventos
+lançamentos <- lançamentos[lançamentos$result == 3 | lançamentos$result == 4, ]
+
+espaço.eventos <- tidydice::plot_dice(
+    lançamentos,
+    fill_success = "grey"
+    ) + ggplot2::ggtitle("") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+gridExtra::grid.arrange(espaço.eventos, espaço.amostral, nrow = 2)
+```
+
+<br>
+
+## Espaços amostrais e eventos contínuos {#espacos-eventos-continuos}
+
+<br>
+
+### O que é espaço amostral contínuo?
+
+- .[REF]
+
+<br>
+
+### O que é evento contínuo?
+
+- .[REF]
+
+<br>
+
+### O que é espaço de eventos contínuo?
+
+- .[REF]
 
 <br>
 
@@ -53,6 +162,58 @@
 ### O que é probabilidade?
 
 -   Com um espaço amostral $S$ finito e não vazio de desfechos igualmente prováveis, a probabilidade de um evento $E$ é a razão entre o número de desfechos no evento $E$ e o número de desfechos no espaço amostral $S$.[@grami2023]
+
+<br>
+
+```{r probabilidade-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Evento (face = 4). Direita: Experimentos de 1 lançamento de 1 dado (superior), 3 lançamentos de 1 dado (central), 10 lançamentos de 1 dado (inferior)."}
+
+# para reprodutibilidade
+set.seed(1234)
+
+# simula 1 lançamento de 1 dado
+evento <- tidydice::plot_dice(
+    tidydice::roll_dice(
+        times = 1,
+        rounds = 1,
+        success = 4),
+    fill_success = "grey"
+    ) + ggplot2::ggtitle("Evento") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+# simula 1 lançamento de 1 dado
+p1 <- tidydice::plot_dice(
+    tidydice::roll_dice(
+        times = 1,
+        rounds = 1,
+        success = 4),
+    fill_success = "grey"
+    ) + ggplot2::ggtitle("1 lançamento de 1 dado") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+# simula 3 lançamentos de 1 dado
+p3 <-tidydice::plot_dice(
+    tidydice::roll_dice(
+        times = 3,
+        rounds = 1,
+        success = 4),
+    fill_success = "grey"
+    ) + ggplot2::ggtitle("3 lançamentos de 1 dado") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+# simula 10 lançamentos de 1 dado
+p10 <- tidydice::plot_dice(
+    tidydice::roll_dice(
+        times = 10,
+        rounds = 1,
+        success = 4),
+    fill_success = "grey"
+    ) + ggplot2::ggtitle("10 lançamentos de 1 dado") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+gridExtra::grid.arrange(evento, p1, evento, p3, evento, p10, nrow = 3)
+```
+
+<br>
 
 -   Um evento $E$ impossível não contém um desfecho e, portanto, nunca ocorre: $P(E)=0$.[@grami2023]
 
