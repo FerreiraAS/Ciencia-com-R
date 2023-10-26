@@ -90,6 +90,8 @@ gridExtra::grid.arrange(evento, espaço.amostral, nrow = 2)
 
 ### O que é espaço de eventos discretos?
 
+-   Um espaço de eventos $E_{s}$ também é um subconjunto do espaço amostral $S$ de um experimento.[@grami2023]
+
 -   A união de dois eventos $E_{1} \cup E_{2}$ é o conjunto de todos os desfechos que estão em ambos.[@grami2023]
 
 -   A intersecção de dois eventos $E_{1} \cap E_{2}$, ou evento conjunto, é o conjunto de todos os desfechos que estão em ambos os eventos.[@grami2023]
@@ -163,9 +165,51 @@ gridExtra::grid.arrange(espaço.eventos, espaço.amostral, nrow = 2)
 
 -   Com um espaço amostral $S$ finito e não vazio de desfechos igualmente prováveis, a probabilidade de um evento $E$ é a razão entre o número de desfechos no evento $E$ e o número de desfechos no espaço amostral $S$.[@grami2023]
 
+-   Um evento $E$ impossível não contém um desfecho e, portanto, nunca ocorre: $P(E)=0$.[@grami2023]
+
+-   Um evento $E$ é certo consiste em qualquer um dos desfechos possíveis e, portanto, sempre ocorre: $P(E)=1$.[@grami2023]
+
 <br>
 
-```{r probabilidade-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Evento (face = 4). Direita: Experimentos de 1 lançamento de 1 dado (superior), 3 lançamentos de 1 dado (central), 10 lançamentos de 1 dado (inferior)."}
+### Quais são os axiomas da probabilidade?
+
+-   A probabilidade de um evento é um número real que satisfaz os seguintes axiomas:[@grami2023]
+
+    -   Axioma I. Probabilidades de um evento $E$ são números não-negativos: $P(E)≥0$.
+
+    -   Axioma II. Probabilidade de todos os eventos do espaço amostral $A$ ocorrerem é 100%: $P(S)=1$.
+
+    -   Axioma III. A probabilidade de um conjunto *k* de eventos mutuamente exclusivos é igual a soma da probabilidade de cada evento: $P(E_{1} \cup E_{2} \cup ... E_{k}) = P(E_{1}) + P(E_{2}) + ... + P(E_{k})$.
+
+-   Os axiomas possuem as seguintes consequências:[@grami2023]
+
+    -   A soma da probabilidade de dois eventos que dividem o espaço amostral é 100%: $P(E)+P(E)^C=1$.
+
+    -   O valor máximo de probabilidade de um evento é 100%: $P(S)≤1$.
+
+    -   A probabilidade é uma função não decrescente do número de desfechos de um evento.
+
+<br>
+
+## Independência e probabilidade {#independencia-probabilidade}
+
+<br>
+
+### O que é independência em estatística?
+
+-   Em experimentos aleatórios, é comum assumir que os eventos de tentativas separadas são independentes devido a independência física de eventos e experimentos.[@grami2023]
+
+-   Se a ocorrência do evento $E_{1}$ não tiver efeito na ocorrência do evento $E_{2}$, os eventos $E_{1}$ e $E_{2}$ são considerados estatisticamente independentes.
+
+-   Eventos são mutuamente exclusivos, ou disjuntos, se a ocorrência de um exclui a ocorrência dos outros.[@grami2023]
+
+-   Se dois eventos $E_{1}$ e $E_{2}$ são mutuamente exclusivos, então os eventos $E_{1}$ e $E_{2}$ não podem ocorrer ao mesmo tempo e, portanto, são eventos dependentes.
+
+-   Em experimentos independentes, o desfecho de uma tentativa é independente dos desfechos de outras tentativas, passadas e/ou futuras. Uma tentativa em um experimento aleatório é independente se a probabilidade de cada desfecho possível não mudar de tentativa para tentativa.[@grami2023]
+
+<br>
+
+```{r independencia-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Evento (face = 4). Direita: Experimentos de 1 lançamento de 1 dado (superior), 3 lançamentos de 1 dado (central), 10 lançamentos de 1 dado (inferior)."}
 
 # para reprodutibilidade
 set.seed(1234)
@@ -212,50 +256,6 @@ p10 <- tidydice::plot_dice(
 
 gridExtra::grid.arrange(evento, p1, evento, p3, evento, p10, nrow = 3)
 ```
-
-<br>
-
--   Um evento $E$ impossível não contém um desfecho e, portanto, nunca ocorre: $P(E)=0$.[@grami2023]
-
--   Um evento $E$ é certo consiste em qualquer um dos desfechos possíveis e, portanto, sempre ocorre: $P(E)=1$.[@grami2023]
-
-<br>
-
-### Quais são os axiomas da probabilidade?
-
--   A probabilidade de um evento é um número real que satisfaz os seguintes axiomas:[@grami2023]
-
-    -   Axioma I. Probabilidades de um evento $E$ são números não-negativos: $P(E)≥0$.
-
-    -   Axioma II. Probabilidade de todos os eventos do espaço amostral $A$ ocorrerem é 100%: $P(S)=1$.
-
-    -   Axioma III. A probabilidade de um conjunto *k* de eventos mutuamente exclusivos é igual a soma da probabilidade de cada evento: $P(E_{1} \cup E_{2} \cup ... E_{k}) = P(E_{1}) + P(E_{2}) + ... + P(E_{k})$.
-
--   Os axiomas possuem as seguintes consequências:[@grami2023]
-
-    -   A soma da probabilidade de dois eventos que dividem o espaço amostral é 100%: $P(E)+P(E)^C=1$.
-
-    -   O valor máximo de probabilidade de um evento é 100%: $P(S)≤1$.
-
-    -   A probabilidade é uma função não decrescente do número de desfechos de um evento.
-
-<br>
-
-## Independência e probabilidade {#independencia-probabilidade}
-
-<br>
-
-### O que é independência em estatística?
-
--   Em experimentos aleatórios, é comum assumir que os eventos de tentativas separadas são independentes devido a independência física de eventos e experimentos.[@grami2023]
-
--   Se a ocorrência do evento $E_{1}$ não tiver efeito na ocorrência do evento $E_{2}$, os eventos $E_{1}$ e $E_{2}$ são considerados estatisticamente independentes.
-
--   Eventos são mutuamente exclusivos, ou disjuntos, se a ocorrência de um exclui a ocorrência dos outros.[@grami2023]
-
--   Se dois eventos $E_{1}$ e $E_{2}$ são mutuamente exclusivos, então os eventos $E_{1}$ e $E_{2}$ não podem ocorrer ao mesmo tempo e, portanto, são eventos dependentes.
-
--   Em experimentos independentes, o desfecho de uma tentativa é independente dos desfechos de outras tentativas, passadas e/ou futuras. Uma tentativa em um experimento aleatório é independente se a probabilidade de cada desfecho possível não mudar de tentativa para tentativa.[@grami2023]
 
 <br>
 
