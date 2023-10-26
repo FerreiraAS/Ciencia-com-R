@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 11 Análise inicial de dados | Ciência com R</title>
+  <title>Capítulo 3 Vieses e paradoxos estatísticos | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 11 Análise inicial de dados | Ciência com R" />
+  <meta property="og:title" content="Capítulo 3 Vieses e paradoxos estatísticos | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 11 Análise inicial de dados | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 3 Vieses e paradoxos estatísticos | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tabulacao-dados.html"/>
-<link rel="next" href="analise-exploratoria-dados.html"/>
+<link rel="prev" href="pensamento-estatistico.html"/>
+<link rel="next" href="pensamento-metodologico.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -920,51 +920,132 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="analise-inicial-dados" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Capítulo 11</span> <strong>Análise inicial de dados</strong><a href="analise-inicial-dados.html#analise-inicial-dados" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="vieses-paradoxos-estatísticos" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Capítulo 3</span> <strong>Vieses e paradoxos estatísticos</strong><a href="vieses-paradoxos-estatísticos.html#vieses-paradoxos-estatísticos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="analise-inicial" class="section level2 hasAnchor" number="11.1">
-<h2><span class="header-section-number">11.1</span> Análise inicial de dados<a href="analise-inicial-dados.html#analise-inicial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="vieses-estatisticos" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Vieses estatísticos<a href="vieses-paradoxos-estatísticos.html#vieses-estatisticos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-análise-inicial-de-dados" class="section level3 hasAnchor" number="11.1.1">
-<h3><span class="header-section-number">11.1.1</span> O que é análise inicial de dados?<a href="analise-inicial-dados.html#o-que-é-análise-inicial-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-são-vieses-estatísticos" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> O que são vieses estatísticos?<a href="vieses-paradoxos-estatísticos.html#o-que-são-vieses-estatísticos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Análise inicial de dados<span class="citation"><sup><a href="#ref-chatfield1986">89</a></sup></span> é uma sequência de procedimentos que visam principalmente a transparência e integridade das pré-condições do estudo para conduzir a análise estatística apropriada de modo responsável para responder aos problemas da pesquisa.<span class="citation"><sup><a href="#ref-Baillie2022">52</a></sup></span></p></li>
-<li><p>O objetivo da análise inicial de dados é propiciar dados prontos para análise estatística, incluindo informações confiáveis sobre as propriedades dos dados.<span class="citation"><sup><a href="#ref-Baillie2022">52</a></sup></span></p></li>
-<li><p>A análise inicial de dados pode ser dividida nas seguintes etapas:<span class="citation"><sup><a href="#ref-Baillie2022">52</a></sup></span></p>
-<ul>
-<li><p>Configuração dos metadados</p></li>
-<li><p>Limpeza dos dados</p></li>
-<li><p>Verificação dos dados</p></li>
-<li><p>Relatório inicial dos dados</p></li>
-<li><p>Refinamento e atualização do plano de análise estatística</p></li>
-<li><p>Documentação e relatório da análise inicial de dados</p></li>
-</ul></li>
-<li><p>A análise inicial de dados não deve ser confundida com análise exploratória<span class="citation"><sup><a href="#ref-Ferketich1986">90</a></sup></span>, nem deve ser utilizada para hipotetizar após os dados serem coletados (conhecido como <em>Hypothesizing After Results are Known</em>, HARKing)<span class="citation"><sup><a href="#ref-Kerr1998">91</a></sup></span>.</p></li>
+<li>.[REF]</li>
 </ul>
 <p><br></p>
 </div>
-<div id="como-conduzir-uma-análise-inicial-de-dados" class="section level3 hasAnchor" number="11.1.2">
-<h3><span class="header-section-number">11.1.2</span> Como conduzir uma análise inicial de dados?<a href="analise-inicial-dados.html#como-conduzir-uma-análise-inicial-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="paradoxos" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Paradoxos estatísticos<a href="vieses-paradoxos-estatísticos.html#paradoxos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-são-paradoxos-estatísticos" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> O que são paradoxos estatísticos?<a href="vieses-paradoxos-estatísticos.html#o-que-são-paradoxos-estatísticos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Desenvolva um plano de análise inicial de dados consistente com os objetivos da pesquisa. Por exemplo, verifique a distribuição e escala das variáveis, procure por observações não-usuais ou improváveis, avalie possíveis padrões de dados perdidos.<span class="citation"><sup><a href="#ref-Baillie2022">52</a></sup></span></p></li>
-<li><p>Não altere diretamente os dados de uma tabela obtida de uma fonte. Use scripts para implementar eventuais alterações, de modo a manter o registro de todas as modificações realizadas no banco de dados.<span class="citation"><sup><a href="#ref-Baillie2022">52</a></sup></span></p></li>
-<li><p>Use os metadados do estudo para guiar a análise inicial dos dados e compartilhe com os dados para maior transparência e reprodutibilidade.<span class="citation"><sup><a href="#ref-Baillie2022">52</a></sup></span></p></li>
-<li><p>Representação gráfica dos dados pode ajudar a identificar características e padrões no banco de dados, tais como suposições e tendências.<span class="citation"><sup><a href="#ref-Baillie2022">52</a></sup></span></p></li>
-<li><p>Verifique a frequência e proporção de dados perdidos em cada variável, e depois examine por padrões de dados perdidos simultaneamente por duas ou mais variáveis.<span class="citation"><sup><a href="#ref-Baillie2022">52</a></sup></span></p></li>
-<li><p>Verifique a frequência e proporção de dados perdidos em cada variável, e depois examine por padrões de dados perdidos simultaneamente por duas ou mais variáveis.<span class="citation"><sup><a href="#ref-Baillie2022">52</a></sup></span></p></li>
-<li><p>Exclusão de dados <em>ad hoc</em> baseada no desfecho pode influenciar os resultados do estudo, portanto os critérios de exclusão de dados antes da análise estatística (descritiva e/ou inferencial) devem ser reportados.<span class="citation"><sup><a href="#ref-Landis2012">92</a></sup></span></p></li>
+<li>.[REF]</li>
 </ul>
 <p><br></p>
 </div>
-<div id="quais-problemas-podem-ser-detectados-na-análise-inicial-de-dados" class="section level3 hasAnchor" number="11.1.3">
-<h3><span class="header-section-number">11.1.3</span> Quais problemas podem ser detectados na análise inicial de dados?<a href="analise-inicial-dados.html#quais-problemas-podem-ser-detectados-na-análise-inicial-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="abelson" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> O que é o paradoxo de Abelson?<a href="vieses-paradoxos-estatísticos.html#abelson" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Registros duplicados, que devem ser excluídos para não inflar a amostra.<span class="citation"><sup><a href="#ref-huebner2016">93</a></sup></span></p></li>
-<li><p>Codificação 0 ou 1 para variáveis dicotômicas para representar a direção esperada da associação entre elas.<span class="citation"><sup><a href="#ref-huebner2016">93</a></sup></span></p></li>
-<li><p>Ordenação cronológica de variáveis com registros temporais (retrospectivos ou prospectivos).<span class="citation"><sup><a href="#ref-huebner2016">93</a></sup></span></p></li>
-<li><p>A distribuição das variáveis para verificação das suposições das análises planejadas.<span class="citation"><sup><a href="#ref-huebner2016">93</a></sup></span></p></li>
-<li><p>Ocorrência de efeitos teto e piso nas variáveis.<span class="citation"><sup><a href="#ref-huebner2016">93</a></sup></span></p></li>
+<li>.<span class="citation"><sup><a href="#ref-abelson1985">14</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="Berkson" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> O que é o paradoxo de Berkson?<a href="vieses-paradoxos-estatísticos.html#Berkson" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-berkson1946">15</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="ellsberg" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> O que é o paradoxo de Ellsberg?<a href="vieses-paradoxos-estatísticos.html#ellsberg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-ellsberg1961">16</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="freedman" class="section level3 hasAnchor" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> O que é o paradoxo de Freedman?<a href="vieses-paradoxos-estatísticos.html#freedman" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-freedman1983">17</a>,<a href="#ref-freedman1989">18</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="hand" class="section level3 hasAnchor" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> O que é o paradoxo de Hand?<a href="vieses-paradoxos-estatísticos.html#hand" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-hand1992">19</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="lindley" class="section level3 hasAnchor" number="3.2.7">
+<h3><span class="header-section-number">3.2.7</span> O que é o paradoxo de Lindley?<a href="vieses-paradoxos-estatísticos.html#lindley" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-lindley1957">20</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="lord" class="section level3 hasAnchor" number="3.2.8">
+<h3><span class="header-section-number">3.2.8</span> O que é o paradoxo de Lord?<a href="vieses-paradoxos-estatísticos.html#lord" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-lord1967">21</a>,<a href="#ref-lord1969">22</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="proebsting" class="section level3 hasAnchor" number="3.2.9">
+<h3><span class="header-section-number">3.2.9</span> O que é o paradoxo de Proebsting?<a href="vieses-paradoxos-estatísticos.html#proebsting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+</div>
+<div id="simpson" class="section level3 hasAnchor" number="3.2.10">
+<h3><span class="header-section-number">3.2.10</span> O que é o paradoxo de Simpson?<a href="vieses-paradoxos-estatísticos.html#simpson" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-simpson1951">23</a>,<a href="#ref-blyth1972">24</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="stein" class="section level3 hasAnchor" number="3.2.11">
+<h3><span class="header-section-number">3.2.11</span> O que é o paradoxo de Stein?<a href="vieses-paradoxos-estatísticos.html#stein" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-stein1956">25</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="okie" class="section level3 hasAnchor" number="3.2.12">
+<h3><span class="header-section-number">3.2.12</span> O que é o paradoxo de Okie?<a href="vieses-paradoxos-estatísticos.html#okie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+</div>
+<div id="acuracia" class="section level3 hasAnchor" number="3.2.13">
+<h3><span class="header-section-number">3.2.13</span> O que é o paradoxo da acurácia?<a href="vieses-paradoxos-estatísticos.html#acuracia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+</div>
+<div id="elevador" class="section level3 hasAnchor" number="3.2.14">
+<h3><span class="header-section-number">3.2.14</span> O que é o paradoxo do elevador?<a href="vieses-paradoxos-estatísticos.html#elevador" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-de1996">26</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="falso-positivo" class="section level3 hasAnchor" number="3.2.15">
+<h3><span class="header-section-number">3.2.15</span> O que é o paradoxo do falso positivo?<a href="vieses-paradoxos-estatísticos.html#falso-positivo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+</div>
+<div id="amizade" class="section level3 hasAnchor" number="3.2.16">
+<h3><span class="header-section-number">3.2.16</span> O que é o paradoxo da amizade?<a href="vieses-paradoxos-estatísticos.html#amizade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-feld1991">27</a></sup></span></li>
 </ul>
 <p><br></p>
 
@@ -973,23 +1054,47 @@ div.csl-indent {
 </div>
 <h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-Baillie2022" class="csl-entry">
-<div class="csl-left-margin">52. </div><div class="csl-right-inline">Baillie M, Cessie S le, Schmidt CO, Lusa L, Huebner M. Ten simple rules for initial data analysis. <em>PLOS Computational Biology</em>. 2022;18(2):e1009819. doi:<a href="https://doi.org/10.1371/journal.pcbi.1009819">10.1371/journal.pcbi.1009819</a></div>
+<div id="ref-abelson1985" class="csl-entry">
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Abelson RP. A variance explanation paradox: When a little is a lot. <em>Psychological Bulletin</em>. 1985;97(1):129-133. doi:<a href="https://doi.org/10.1037/0033-2909.97.1.129">10.1037/0033-2909.97.1.129</a></div>
 </div>
-<div id="ref-chatfield1986" class="csl-entry">
-<div class="csl-left-margin">89. </div><div class="csl-right-inline">Chatfield C. Exploratory data analysis. <em>European Journal of Operational Research</em>. 1986;23(1):5-13. doi:<a href="https://doi.org/10.1016/0377-2217(86)90209-2">10.1016/0377-2217(86)90209-2</a></div>
+<div id="ref-berkson1946" class="csl-entry">
+<div class="csl-left-margin">15. </div><div class="csl-right-inline">Berkson J. Limitations of the application of fourfold table analysis to hospital data. <em>Biometrics Bulletin</em>. 1946;2(3):47. doi:<a href="https://doi.org/10.2307/3002000">10.2307/3002000</a></div>
 </div>
-<div id="ref-Ferketich1986" class="csl-entry">
-<div class="csl-left-margin">90. </div><div class="csl-right-inline">Ferketich S, Verran J. Technical Notes. <em>Western Journal of Nursing Research</em>. 1986;8(4):464-466. doi:<a href="https://doi.org/10.1177/019394598600800409">10.1177/019394598600800409</a></div>
+<div id="ref-ellsberg1961" class="csl-entry">
+<div class="csl-left-margin">16. </div><div class="csl-right-inline">Ellsberg D. Risk, ambiguity, and the savage axioms. <em>The Quarterly Journal of Economics</em>. 1961;75(4):643. doi:<a href="https://doi.org/10.2307/1884324">10.2307/1884324</a></div>
 </div>
-<div id="ref-Kerr1998" class="csl-entry">
-<div class="csl-left-margin">91. </div><div class="csl-right-inline">Kerr NL. HARKing: Hypothesizing After the Results are Known. <em>Personality and Social Psychology Review</em>. 1998;2(3):196-217. doi:<a href="https://doi.org/10.1207/s15327957pspr0203_4">10.1207/s15327957pspr0203_4</a></div>
+<div id="ref-freedman1983" class="csl-entry">
+<div class="csl-left-margin">17. </div><div class="csl-right-inline">Freedman DA, Freedman DA. A Note on Screening Regression Equations. <em>The American Statistician</em>. 1983;37(2):152-155. doi:<a href="https://doi.org/10.1080/00031305.1983.10482729">10.1080/00031305.1983.10482729</a></div>
 </div>
-<div id="ref-Landis2012" class="csl-entry">
-<div class="csl-left-margin">92. </div><div class="csl-right-inline">Landis SC, Amara SG, Asadullah K, et al. A call for transparent reporting to optimize the predictive value of preclinical research. <em>Nature</em>. 2012;490(7419):187-191. doi:<a href="https://doi.org/10.1038/nature11556">10.1038/nature11556</a></div>
+<div id="ref-freedman1989" class="csl-entry">
+<div class="csl-left-margin">18. </div><div class="csl-right-inline">Freedman LS, Pee D. Return to a note on screening regression equations. <em>The American Statistician</em>. 1989;43(4):279. doi:<a href="https://doi.org/10.2307/2685389">10.2307/2685389</a></div>
 </div>
-<div id="ref-huebner2016" class="csl-entry">
-<div class="csl-left-margin">93. </div><div class="csl-right-inline">Huebner M, Vach W, Cessie S le. A systematic approach to initial data analysis is good research practice. <em>The Journal of Thoracic and Cardiovascular Surgery</em>. 2016;151(1):25-27. doi:<a href="https://doi.org/10.1016/j.jtcvs.2015.09.085">10.1016/j.jtcvs.2015.09.085</a></div>
+<div id="ref-hand1992" class="csl-entry">
+<div class="csl-left-margin">19. </div><div class="csl-right-inline">Hand DJ. On Comparing Two Treatments. <em>The American Statistician</em>. 1992;46(3):190-192. doi:<a href="https://doi.org/10.1080/00031305.1992.10475881">10.1080/00031305.1992.10475881</a></div>
+</div>
+<div id="ref-lindley1957" class="csl-entry">
+<div class="csl-left-margin">20. </div><div class="csl-right-inline">LINDLEY DV. A STATISTICAL PARADOX. <em>Biometrika</em>. 1957;44(1-2):187-192. doi:<a href="https://doi.org/10.1093/biomet/44.1-2.187">10.1093/biomet/44.1-2.187</a></div>
+</div>
+<div id="ref-lord1967" class="csl-entry">
+<div class="csl-left-margin">21. </div><div class="csl-right-inline">Lord FM. A paradox in the interpretation of group comparisons. <em>Psychological Bulletin</em>. 1967;68(5):304-305. doi:<a href="https://doi.org/10.1037/h0025105">10.1037/h0025105</a></div>
+</div>
+<div id="ref-lord1969" class="csl-entry">
+<div class="csl-left-margin">22. </div><div class="csl-right-inline">Lord FM. Statistical adjustments when comparing preexisting groups. <em>Psychological Bulletin</em>. 1969;72(5):336-337. doi:<a href="https://doi.org/10.1037/h0028108">10.1037/h0028108</a></div>
+</div>
+<div id="ref-simpson1951" class="csl-entry">
+<div class="csl-left-margin">23. </div><div class="csl-right-inline">Simpson EH. The Interpretation of Interaction in Contingency Tables. <em>Journal of the Royal Statistical Society: Series B (Methodological)</em>. 1951;13(2):238-241. doi:<a href="https://doi.org/10.1111/j.2517-6161.1951.tb00088.x">10.1111/j.2517-6161.1951.tb00088.x</a></div>
+</div>
+<div id="ref-blyth1972" class="csl-entry">
+<div class="csl-left-margin">24. </div><div class="csl-right-inline">Blyth CR. On Simpson’s Paradox and the Sure-Thing Principle. <em>Journal of the American Statistical Association</em>. 1972;67(338):364-366. doi:<a href="https://doi.org/10.1080/01621459.1972.10482387">10.1080/01621459.1972.10482387</a></div>
+</div>
+<div id="ref-stein1956" class="csl-entry">
+<div class="csl-left-margin">25. </div><div class="csl-right-inline">Stein C. INADMISSIBILITY OF THE USUAL ESTIMATOR FOR THE MEAN OF a MULTIVARIATE NORMAL DISTRIBUTION. In: University of California Press; 1956:197-206. doi:<a href="https://doi.org/10.1525/9780520313880-018">10.1525/9780520313880-018</a></div>
+</div>
+<div id="ref-de1996" class="csl-entry">
+<div class="csl-left-margin">26. </div><div class="csl-right-inline">De S, Sen A. The generalised Gamow-Stern problem. <em>The Mathematical Gazette</em>. 1996;80(488):345-348. doi:<a href="https://doi.org/10.2307/3619568">10.2307/3619568</a></div>
+</div>
+<div id="ref-feld1991" class="csl-entry">
+<div class="csl-left-margin">27. </div><div class="csl-right-inline">Feld SL. Why Your Friends Have More Friends Than You Do. <em>American Journal of Sociology</em>. 1991;96(6):1464-1477. doi:<a href="https://doi.org/10.1086/229693">10.1086/229693</a></div>
 </div>
 </div>
             </section>
@@ -997,8 +1102,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="tabulacao-dados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="analise-exploratoria-dados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pensamento-estatistico.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pensamento-metodologico.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
