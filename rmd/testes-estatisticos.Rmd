@@ -1,0 +1,224 @@
+# **Testes estatísticos** {#testes-estatisticos}
+
+<br>
+
+## Scripts compartilhados
+
+<br>
+
+```{r scripts, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE}
+formatR::tidy_dir(file.path(getwd(), "R"), recursive = TRUE)
+
+scripts <-
+  list.files(
+    file.path(getwd(), "R"),
+    full.names = TRUE,
+    include.dirs = TRUE,
+    recursive = TRUE,
+    pattern = ".R"
+  )
+
+scripts.down <-
+  list.files(
+    file.path(getwd(), "R"),
+    full.names = FALSE,
+    include.dirs = TRUE,
+    recursive = TRUE,
+    pattern = ".R"
+  )
+
+links <- file.path("R", scripts.down)
+
+scripts.tbl <- data.frame(
+  'Análise' = basename(dirname(scripts)),
+  'Script' = basename(scripts)
+)
+```
+
+```{r print-codigos, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+
+library("tidyr")
+
+for (i in 1:length(unique(scripts.tbl$Análise))) {
+  idx <- which(unique(scripts.tbl$Análise)[i] == scripts.tbl$Análise)
+  tabs <- scripts.tbl[idx, ]
+  rownames(tabs) <- NULL
+  cat('\n\n')
+  cat("<br>")
+  cat('\n\n')
+  cat(paste0('### ', unique(scripts.tbl$Análise)[i]))
+  cat('\n\n')
+  cat("<br>")
+  cat('\n\n')
+  if(knitr::is_html_output()){
+    cat(paste0("- [", tabs[, 2], "](", links[idx], ")", " \n\n"))
+  } else {
+    cat(paste0("- [", tabs[, 2], "](https://github.com/FerreiraAS/Ciencia-com-R/blob/main/", links[idx], ")", " \n\n"))
+  }
+  cat("\n\n")
+  cat("<br>")
+  cat('\n\n')
+}
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+
+O pacote *base*[@base-2] fornece a função [*source*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/source) para abrir um arquivo .R com script e executar seus comandos.
+
+:::
+
+<br>
+
+## Testes de Qui-quadrado ($\chi^2$)
+
+<br>
+
+```{r, echo = TRUE, include = TRUE, results = "asis", warning = FALSE, message = FALSE, fig.align = 'center', tidy = 'styler', tidy.opts = list(strict=FALSE)}
+# carrega os pacotes
+library("dplyr")
+library("gtsummary")
+
+# tabela 2x2
+tbl_cross <-
+    # banco de dados
+    trial %>%
+    # cria a tabela de contingência
+    gtsummary::tbl_cross(
+        row = trt,
+        col = response,
+        statistic = "{n}",
+        digits = 0,
+        percent = "cell",
+        margin = c("row", "column"),
+        missing = "no",
+        missing_text = "Dados perdidos",
+        margin_text = "Total"
+        ) %>%
+    # calcula o p-valor do teste
+    gtsummary::add_p(
+        test = "chisq.test",
+        pvalue_fun = function(x) style_pvalue(x, digits = 3)
+        ) %>%
+    gtsummary::modify_header(
+        p.value = "**P-valor**"
+        ) %>%
+    # calcula o tamanho do efeito
+    gtsummary::modify_table_styling(
+        rows = NULL,
+        footnote = as.character(rstatix::cramer_v(trt, response))
+        ) %>%
+    # formata o título em negrito
+    gtsummary::bold_labels() %>%
+    # cria título da tabela
+    gtsummary::modify_caption(
+        "Teste Qui-quadrado (com correção de Yates)"
+        )
+
+# exibe a tabela
+tbl_cross %>%
+  gtsummary::as_hux_table()
+```
+
+<br>
+
+```{r, echo = TRUE, include = TRUE, results = "asis", warning = FALSE, message = FALSE, fig.align = 'center', tidy = 'styler', tidy.opts = list(strict=FALSE)}
+# carrega os pacotes
+library("dplyr")
+library("gtsummary")
+
+# tabela 2x2
+tbl_cross <-
+    # banco de dados
+    trial %>%
+    # cria a tabela de contingência
+    gtsummary::tbl_cross(
+        row = trt,
+        col = response,
+        statistic = "{n}",
+        digits = 0,
+        percent = "cell",
+        margin = c("row", "column"),
+        missing = "no",
+        missing_text = "Dados perdidos",
+        margin_text = "Total"
+        ) %>%
+    # calcula o p-valor do teste
+    gtsummary::add_p(
+        test = "chisq.test.no.correct",
+        pvalue_fun = function(x) style_pvalue(x, digits = 3)
+        ) %>%
+    gtsummary::modify_header(
+        p.value = "**P-valor**"
+        ) %>%
+    # calcula o tamanho do efeito
+    gtsummary::modify_table_styling(
+        rows = NULL,
+        footnote = as.character(rstatix::cramer_v(trt, response))
+        ) %>%
+    # formata o título em negrito
+    gtsummary::bold_labels() %>%
+    # cria título da tabela
+    gtsummary::modify_caption(
+        "Teste Qui-quadrado (sem correção de Yates)"
+        )
+
+# exibe a tabela
+tbl_cross %>%
+  gtsummary::as_hux_table()
+```
+
+<br>
+
+## Teste exato de Fisher
+
+<br>
+
+```{r, echo = TRUE, include = TRUE, results = "asis", warning = FALSE, message = FALSE, fig.align = 'center', tidy = 'styler', tidy.opts = list(strict=FALSE)}
+# carrega os pacotes
+library("dplyr")
+library("gtsummary")
+
+# tabela 2x2
+tbl_cross <-
+    # banco de dados
+    trial %>%
+    # cria a tabela de contingência
+    gtsummary::tbl_cross(
+        row = trt,
+        col = response,
+        statistic = "{n}",
+        digits = 0,
+        percent = "cell",
+        margin = c("row", "column"),
+        missing = "no",
+        missing_text = "Dados perdidos",
+        margin_text = "Total"
+        ) %>%
+    # calcula o p-valor do teste
+    gtsummary::add_p(
+        test = "fisher.test",
+        pvalue_fun = function(x) style_pvalue(x, digits = 3)
+        ) %>%
+    gtsummary::modify_header(
+        p.value = "**P-valor**"
+        ) %>%
+    # calcula o tamanho do efeito
+    gtsummary::modify_table_styling(
+        rows = NULL,
+        footnote = as.character(rstatix::cramer_v(trt, response))
+        ) %>%
+    # formata o título em negrito
+    gtsummary::bold_labels() %>%
+    # cria título da tabela
+    gtsummary::modify_caption(
+        "Teste exato de Fisher"
+        )
+
+# exibe a tabela
+tbl_cross %>%
+  gtsummary::as_hux_table()
+```
+
+<br>

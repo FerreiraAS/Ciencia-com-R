@@ -2,223 +2,228 @@
 
 <br>
 
-## Scripts compartilhados
+## Programa de computador {#inicio}
 
 <br>
 
-```{r scripts, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE}
-formatR::tidy_dir(file.path(getwd(), "R"), recursive = TRUE)
+### O que é R?
 
-scripts <-
-  list.files(
-    file.path(getwd(), "R"),
-    full.names = TRUE,
-    include.dirs = TRUE,
-    recursive = TRUE,
-    pattern = ".R"
-  )
+-   R é um programa de computador com linguagem computacional direcionada para análise estatística.[@ihaka1996]
 
-scripts.down <-
-  list.files(
-    file.path(getwd(), "R"),
-    full.names = FALSE,
-    include.dirs = TRUE,
-    recursive = TRUE,
-    pattern = ".R"
-  )
+-   R está disponível em [Comprehensive R Archive Network (CRAN)]((https://cran.r-project.org)).
 
-links <- file.path("R", scripts.down)
+-   `r R.version$version.string`.
 
-scripts.tbl <- data.frame(
-  'Análise' = basename(dirname(scripts)),
-  'Script' = basename(scripts)
-)
-```
+<br>
 
-```{r print-codigos, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+### O que é RStudio?
 
-library("tidyr")
+-   RStudio é um ambiente de desenvolvimento integrado (*integrated development environment*, IDE) desenvolvido visando a reprodutibilidade e a simplicidade para a criação e disseminação de conhecimento.[@racine2011]
 
-for (i in 1:length(unique(scripts.tbl$Análise))) {
-  idx <- which(unique(scripts.tbl$Análise)[i] == scripts.tbl$Análise)
-  tabs <- scripts.tbl[idx, ]
-  rownames(tabs) <- NULL
-  cat('\n\n')
-  cat("<br>")
-  cat('\n\n')
-  cat(paste0('### ', unique(scripts.tbl$Análise)[i]))
-  cat('\n\n')
-  cat("<br>")
-  cat('\n\n')
-  if(knitr::is_html_output()){
-    cat(paste0("- [", tabs[, 2], "](", links[idx], ")", " \n\n"))
-  } else {
-    cat(paste0("- [", tabs[, 2], "](https://github.com/FerreiraAS/Ciencia-com-R/blob/main/", links[idx], ")", " \n\n"))
-  }
-  cat("\n\n")
-  cat("<br>")
-  cat('\n\n')
-}
-```
+-   As principais características do RStudio incluem um ambiente de edição com abas para acesso rápido a arquivos, comandos e resultados; histórico de comandos previamente utilizados; ferramentas para visualização de bancos de dados e elaboração de scripts e gráficos e tabelas.[@racine2011]
+
+-   RStudio está disponível em [Posit](https://posit.co/download/rstudio-desktop/).
+
+<br>
+
+### Por que usar R?
+
+-   R é o software de maior abrangência de métodos estatísticos, possui sintaxe que permite análises estatísticas reproduzíveis e está disponível gratuitamente no website CRAN (<http://cran.r-project.org/>).[@mair2016]
+
+<br>
+
+### Que programas de computador podem ser usados para análise estatística com R?
+
+-   [JASP](https://jasp-stats.org).[@love2019]
+
+-   [jamovi](https://www.jamovi.org).[@sahin2020]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-
-O pacote *base*[@base-2] fornece a função [*source*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/source) para abrir um arquivo .R com script e executar seus comandos.
-
+Os pacotes *jmv*[@jmv] e *jmvconnect*[@jmvconnect] fornecem funções para análise descritiva e inferencial com interface com jamovi.
 :::
 
 <br>
 
-## Testes de Qui-quadrado ($\chi^2$)
+## Scripts computacionais
 
 <br>
 
-```{r, echo = TRUE, include = TRUE, results = "asis", warning = FALSE, message = FALSE, fig.align = 'center', tidy = 'styler', tidy.opts = list(strict=FALSE)}
-# carrega os pacotes
-library("dplyr")
-library("gtsummary")
+### O que são scripts?
 
-# tabela 2x2
-tbl_cross <-
-    # banco de dados
-    trial %>%
-    # cria a tabela de contingência
-    gtsummary::tbl_cross(
-        row = trt,
-        col = response,
-        statistic = "{n}",
-        digits = 0,
-        percent = "cell",
-        margin = c("row", "column"),
-        missing = "no",
-        missing_text = "Dados perdidos",
-        margin_text = "Total"
-        ) %>%
-    # calcula o p-valor do teste
-    gtsummary::add_p(
-        test = "chisq.test",
-        pvalue_fun = function(x) style_pvalue(x, digits = 3)
-        ) %>%
-    gtsummary::modify_header(
-        p.value = "**P-valor**"
-        ) %>%
-    # calcula o tamanho do efeito
-    gtsummary::modify_table_styling(
-        rows = NULL,
-        footnote = as.character(rstatix::cramer_v(trt, response))
-        ) %>%
-    # formata o título em negrito
-    gtsummary::bold_labels() %>%
-    # cria título da tabela
-    gtsummary::modify_caption(
-        "Teste Qui-quadrado (com correção de Yates)"
-        )
+-   "Scripts são dados".[@hinsen2011]
 
-# exibe a tabela
-tbl_cross %>%
-  gtsummary::as_hux_table()
-```
+-   Scripts permitem ao usuário se concentrar nas tarefas mais importantes da computação e utilizar pacotes ou bibliotecas para executar as funções mais básicas com maior eficiência.[@hinsen2011]
+
+-   Um script é um arquivo de texto contendo (quase) os mesmos comandos que você digitaria na linha de comando do R. (Quase) refere-se ao fato de que se você estiver usando *sink()* para enviar a saída para um arquivo, você terá que incluir alguns comandos em *print()* para obter a mesma saída da linha de comando ([CRAN](https://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_scrpt.html)).
 
 <br>
 
-```{r, echo = TRUE, include = TRUE, results = "asis", warning = FALSE, message = FALSE, fig.align = 'center', tidy = 'styler', tidy.opts = list(strict=FALSE)}
-# carrega os pacotes
-library("dplyr")
-library("gtsummary")
+### Quais práticas são recomendadas na redação de scripts?
 
-# tabela 2x2
-tbl_cross <-
-    # banco de dados
-    trial %>%
-    # cria a tabela de contingência
-    gtsummary::tbl_cross(
-        row = trt,
-        col = response,
-        statistic = "{n}",
-        digits = 0,
-        percent = "cell",
-        margin = c("row", "column"),
-        missing = "no",
-        missing_text = "Dados perdidos",
-        margin_text = "Total"
-        ) %>%
-    # calcula o p-valor do teste
-    gtsummary::add_p(
-        test = "chisq.test.no.correct",
-        pvalue_fun = function(x) style_pvalue(x, digits = 3)
-        ) %>%
-    gtsummary::modify_header(
-        p.value = "**P-valor**"
-        ) %>%
-    # calcula o tamanho do efeito
-    gtsummary::modify_table_styling(
-        rows = NULL,
-        footnote = as.character(rstatix::cramer_v(trt, response))
-        ) %>%
-    # formata o título em negrito
-    gtsummary::bold_labels() %>%
-    # cria título da tabela
-    gtsummary::modify_caption(
-        "Teste Qui-quadrado (sem correção de Yates)"
-        )
+-   Use nomes consistentes para as variáveis.[@SchwabSimon2021]
 
-# exibe a tabela
-tbl_cross %>%
-  gtsummary::as_hux_table()
-```
+-   Defina os tipos de variáveis adequadamente no banco de dados.[@SchwabSimon2021]
+
+-   Defina constantes - isto é, variáveis de valor fixo - ao invés de digitar valores.[@SchwabSimon2021]
+
+-   Use e cite os pacotes disponíveis para suas análises.[@SchwabSimon2021]
+
+-   Controle as versões do script.[@Eglen2017; @SchwabSimon2021]
+
+-   Teste o script antes de sua utilização.[@SchwabSimon2021]
+
+-   Conduza revisão por pares do código durante a redação (digitação em dupla).[@SchwabSimon2021]
 
 <br>
 
-## Teste exato de Fisher
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *formatR*[@formatR] fornece a função [*tidy_source*](https://www.rdocumentation.org/packages/formatR/versions/1.14/topics/tidy_source) para formatar um R script.
+:::
 
 <br>
 
-```{r, echo = TRUE, include = TRUE, results = "asis", warning = FALSE, message = FALSE, fig.align = 'center', tidy = 'styler', tidy.opts = list(strict=FALSE)}
-# carrega os pacotes
-library("dplyr")
-library("gtsummary")
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *styler*[@styler] fornece a função [*style_file*](https://www.rdocumentation.org/packages/styler/versions/1.10.1/topics/style_file) para formatar um R script.
+:::
 
-# tabela 2x2
-tbl_cross <-
-    # banco de dados
-    trial %>%
-    # cria a tabela de contingência
-    gtsummary::tbl_cross(
-        row = trt,
-        col = response,
-        statistic = "{n}",
-        digits = 0,
-        percent = "cell",
-        margin = c("row", "column"),
-        missing = "no",
-        missing_text = "Dados perdidos",
-        margin_text = "Total"
-        ) %>%
-    # calcula o p-valor do teste
-    gtsummary::add_p(
-        test = "fisher.test",
-        pvalue_fun = function(x) style_pvalue(x, digits = 3)
-        ) %>%
-    gtsummary::modify_header(
-        p.value = "**P-valor**"
-        ) %>%
-    # calcula o tamanho do efeito
-    gtsummary::modify_table_styling(
-        rows = NULL,
-        footnote = as.character(rstatix::cramer_v(trt, response))
-        ) %>%
-    # formata o título em negrito
-    gtsummary::bold_labels() %>%
-    # cria título da tabela
-    gtsummary::modify_caption(
-        "Teste exato de Fisher"
-        )
+<br>
 
-# exibe a tabela
-tbl_cross %>%
-  gtsummary::as_hux_table()
-```
+## Compartilhamento
+
+<br>
+
+### O que pode ser compartilhado?
+
+-   Idealmente, todos os scripts, pacotes/bibliotecas e dados necessários para outros reproduzirem seus dados.[@Eglen2017]
+
+-   Minimamente, partes importantes incluindo implementações de novos algoritmos e dados que permitam reproduzir um resultado importante.[@Eglen2017]
+
+<br>
+
+### Como preparar dados para compartilhamento?
+
+-   .[REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *synthpop*[@synthpop] fornece a função [*syn*](https://www.rdocumentation.org/packages/synthpop/versions/1.8-0/topics/syn) para criar bancos de dados sintéticos a partir de um banco de dados real.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *grateful*[@grateful] fornece a função [*cite_packages*](https://www.rdocumentation.org/packages/grateful/versions/0.2.0/topics/cite_packages) para citar os pacotes utilizados em um projeto R.
+:::
+
+<br>
+
+### Como preparar scripts para compartilhamento?
+
+-   Documente em um arquivo README os arquivos disponíveis e os pré-requisitos necessários para executar o código (ex.: pacotes e respectivas versões). Uma lista de configurações (hardware e software) que foram usadas para rodar o código pode ajudar na reprodução dos resultados.[@hofner2015]
+
+-   Crie links persistentes para versões do seu script.[@Eglen2017]
+
+-   Defina uma semente para o gerador de números aleatórios em scripts com métodos computacionais que dependem da geração de números pseudoaleatórios.[@hofner2015]
+
+-   Escolha uma licença apropriada para garantir como outros usarão seus scripts.[@Eglen2017]
+
+-   Compartilhe todos os pacotes relacionados à sua análise.[@Zhao2023]
+
+-   Providencie a documentação sobre seu script (ex.: arquivo README).[@Eglen2017]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base-5] fornece a função [*set.seed*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Random) para especificar uma semente para reprodutibilidade de computações que envolvem números aleatórios.
+:::
+
+<br>
+
+### O que incluir no arquivo README?
+
+-   Título do manuscrito.[@hofner2015]
+
+-   Autores do manuscrito.[@hofner2015]
+
+-   Principais responsáveis pela escrita do script e quaisquer outras pessoas que fizeram contribuições substanciais para o desenvolvimento do script.[@hofner2015]
+
+-   Endereço de e-mail do autor ou contribuidor a quem devem ser direcionadas dúvidas, comentários, sugestões e bugs sobre o script.[@hofner2015]
+
+-   Lista de configurações nas quais o script foi testado, tais com nome e versão do programa, pacotes e plataforma.[@hofner2015]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *utils*[@utils] fornece a função [*sessionInfo*](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/sessionInfo) para descrever as características do programa, pacotes e plataforma da sessão atual.
+:::
+
+<br>
+
+## Manuscritos reprodutíveis {#relatórios-dinamicos}
+
+<br>
+
+### O que são manuscritos reprodutíveis?
+
+-   Manuscritos reprodutíveis - manuscritos executáveis ou relatórios dinâmicos - permitem a produção de um manuscrito completo a partir da integração do banco de dados da(s) amostra(s), do(s) script(s) de análise estatística (incluindo comentários para sua interpretação), dos pacotes ou bibliotecas utilizados, das fontes e referências bibliográficas citadas, além dos demais elementos textuais (tabelas, gráficos) - todos gerados dinamicamente.[@hinsen2011]
+
+-   O trabalho com RMarkdown[@R-rmarkdown] permite um fluxo de dados totalmente transparente, desde o conjunto de dados coletados até o manuscrito finalizado. Todos os aspectos do fluxo de dados podem ser incorporados em blocos de R script (*chunk*), exibindo tanto o R script quando o respectivo texto, tabelas e figuras formatadas no estilo científico de interesse.[@holmes2021]
+
+-   O RMarkdown[@R-rmarkdown] foi projetado especificamente para relatórios dinâmicos onde a análise é realizada em R e oferece uma flexibilidade incrível por meio de uma linguagem de marcação.[@mair2016]
+
+<br>
+
+### Por que usar manuscritos reprodutíveis?
+
+-   No processo tradicional de redação científica há muitas etapas de copiar e colar não reproduzíveis envolvidas. Documentos dinâmicos combinam uma ferramenta de processamento de texto com o R script que produz o texto/tabela/figura a ser incorporado no manuscrito.[@mair2016]
+
+-   Ao trabalhar com relatórios dinâmicos, é possível extrair o mesmo script usado para análise estatística. Os documentos podem ser compilados em vários formatos de saída e salvos como DOCX, PPTX e PDF.[@mair2016]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *officedown*[@officedown] fornece as funções [*rdocx_document*](https://www.rdocumentation.org/packages/officedown/versions/0.3.0/topics/rdocx_document) e [*rpptx_document*](https://www.rdocumentation.org/packages/officedown/versions/0.3.0/topics/rpptx_document) para criar arquivos DOCX e PPTX, respectivamente, com o conteúdo criado no manuscrito reprodutível.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *bookdown*[@bookdown] fornece as funções [*pdf_book*](https://www.rdocumentation.org/packages/bookdown/versions/0.35/topics/pdf_book), [*bs4_book*](https://www.rdocumentation.org/packages/bookdown/versions/0.35/topics/bs4_book) e [*epub_book*](https://www.rdocumentation.org/packages/bookdown/versions/0.35/topics/epub_book) para criar arquivos PDF, HTML e EPUB, respectivamente, com o conteúdo criado no manuscrito reprodutível.
+:::
+
+<br>
+
+### Como manuscritos reprodutíveis contribuem para a ciência?
+
+-   O compartilhamento de bancos de dados e seus scripts de análise estatística permitem a adoção de práticas reprodutíveis, tais como a reanálise dos dados.[@ioannidis2014]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *projects*[@projects] fornece a função [*setup_projects*](https://www.rdocumentation.org/packages/projects/versions/2.1.3/topics/setup_projects) para criar um projeto com arquivos organizados em diretórios.
+:::
+
+<br>
+
+### Como exportar tabelas em formato DOCX?
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *table1*[@flextable] fornece as funções [*as_flextable*](https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/as_flextable) e [*save_as_docx*](https://www.rdocumentation.org/packages/flextable/versions/0.9.2/topics/save_as_docx) para salvar tabelas em formato DOCX.
+:::
+
+<br>
+
+### Como exportar figuras em formato TIFF?
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *tiff*[@tiff] fornece a função [*writeTIFF*](https://www.rdocumentation.org/packages/tiff/versions/0.1-11/topics/writeTIFF) para exportar gráficos em formato TIFF.
+:::
 
 <br>
