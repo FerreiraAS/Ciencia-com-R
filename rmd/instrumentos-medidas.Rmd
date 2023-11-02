@@ -155,9 +155,9 @@ kableExtra::kable(
   kableExtra::row_spec(k2, background = "#E6E6E6", bold = TRUE)
 ```
 
--   A medida repetida da pressão arterial no braço esquerdo resulta em um conjunto de valores pontuais (ex.: **`r VAR.1[k2]` mmHg**, **`r VAR.2[k2]` mmHg** e **`r VAR.3[k2]` mmHg** para o participante **\#`r k2`**).
-
 - As medidas repetidas podem ser tabuladas separadamente, por exemplo para análise da confiabilidade de obtenção dessa medida.[REF]
+
+-   A medida repetida da pressão arterial no braço esquerdo resulta em um conjunto de valores pontuais (ex.: **`r VAR.1[k2]` mmHg**, **`r VAR.2[k2]` mmHg** e **`r VAR.3[k2]` mmHg** para o participante **\#`r k2`**).
 
 <br>
 
@@ -230,9 +230,9 @@ kableExtra::kable(
 
 -   As medidas repetidas podem ser agregadas por algum parâmetro --- ex.: média, mediana, máximo, mínimo, entre outros ---, observando-se a relevância biológica, clínica e/ou metodológica desta escolha.[REF]
 
-O valor agregado será considerado representativo da variável para a unidade de análise (ex.: média = **`r round(VAR.aggr[k2], digits = 0)` mmHg** para o participante **\#`r k2`**).[REF]
-
 - Medidas agregadas obtidas de diferentes unidades de análise podem ser consideradas independentes se observadas outras condições na coleta de dados.[REF]
+
+- O valor agregado será considerado representativo da variável para a unidade de análise (ex.: média = **`r round(VAR.aggr[k2], digits = 0)` mmHg** para o participante **\#`r k2`**).[REF]
 
 <br>
 
@@ -346,8 +346,6 @@ kableExtra::kable(
                        extra_css = "border-bottom: 1px solid") %>%
   kableExtra::row_spec(1:3, background = "#E6E6E6", bold = TRUE)
 ```
-
-<br>
 
 -   Medidas seriadas são possivelmente relacionadas e, portanto, dependentes na mesma unidade de análise.[REF]
 
@@ -535,9 +533,9 @@ kableExtra::kable(
   kableExtra::row_spec(k4, background = "#E6E6E6", bold = TRUE)
 ```
 
--   A medida de pressão arterial bilateral resulta em um conjunto de valores pontuais (ex.: braço esquerdo = **`r round(VAR.1[k4], digits = 0)` mmHg**, braço direito = **`r round(VAR.2[k4], digits = 0)` mmHg** para o participante **\#`r k4`**). Neste caso, ambos os valores pontuais são considerados representativos daquela unidade de análise.
-
 - Medidas múltiplas também são possivelmente relacionadas e, portanto, são dependentes na mesma unidade de análise. Medidas múltiplas podem ser obtidas de modo repetido para análise agregada ou seriada.[REF]
+
+-   A medida de pressão arterial bilateral resulta em um conjunto de valores pontuais (ex.: braço esquerdo = **`r round(VAR.1[k4], digits = 0)` mmHg**, braço direito = **`r round(VAR.2[k4], digits = 0)` mmHg** para o participante **\#`r k4`**). Neste caso, ambos os valores pontuais são considerados representativos daquela unidade de análise.
 
 <br>
 
@@ -566,6 +564,8 @@ O pacote *stats*[@stats-2] fornece a função [*aggregate*](https://www.rdocumen
 
 ## Acurácia e precisão
 
+<br>
+
 ### O que é acurácia?
 
 -   .[REF]
@@ -585,13 +585,13 @@ set.seed(1234)
 
 # target board function
 target_board <- function(title) {
-  plot(0, 0, cex = 24, pch = 21, bg = "grey", col = "black", axes = F, main = title, xlab = NA, ylab = NA)
+  plot(0, 0, cex = 24, pch = 21, bg = grDevices::gray(level = 0.6, alpha = 1), col = "black", axes = F, main = title, xlab = NA, ylab = NA)
   points(0, 0, cex = 21, pch = 21, bg = "white", col = "white")
-  points(0, 0, cex = 18, pch = 21, bg = "grey", col = "grey")
+  points(0, 0, cex = 18, pch = 21, bg = grDevices::gray(level = 0.5, alpha = 1), col = grDevices::gray(level = 0.5, alpha = 1))
   points(0, 0, cex = 15, pch = 21, bg = "white", col = "white")
-  points(0, 0, cex = 12, pch = 21, bg = "grey", col = "grey")
+  points(0, 0, cex = 12, pch = 21, bg = grDevices::gray(level = 0.4, alpha = 1), col = grDevices::gray(level = 0.4, alpha = 1))
   points(0, 0, cex = 9, pch = 21, bg = "white", col = "white")
-  points(0, 0, cex = 6, pch = 21, bg = "grey", col = "grey")
+  points(0, 0, cex = 6, pch = 21, bg = grDevices::gray(level = 0.3, alpha = 1), col = grDevices::gray(level = 0.3, alpha = 1))
   points(0, 0, cex = 3, pch = 21, bg = "white", col = "white")
 }
 
