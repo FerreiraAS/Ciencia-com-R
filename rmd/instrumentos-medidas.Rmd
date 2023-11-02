@@ -564,3 +564,71 @@ O pacote *stats*[@stats-2] fornece a função [*aggregate*](https://www.rdocumen
 
 <br>
 
+## Acurácia e precisão
+
+### O que é acurácia?
+
+-   .[REF]
+
+<br>
+
+### O que é precisão?
+
+-   .[REF]
+
+<br>
+
+```{r acuracia-precisao, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.cap = "Acurácia e precisão como propriedades de uma medida."}
+
+# para reprodutibilidade
+set.seed(1234)
+
+# target board function
+target_board <- function(title) {
+  plot(0, 0, cex = 24, pch = 21, bg = "grey", col = "black", axes = F, main = title, xlab = NA, ylab = NA)
+  points(0, 0, cex = 21, pch = 21, bg = "white", col = "white")
+  points(0, 0, cex = 18, pch = 21, bg = "grey", col = "grey")
+  points(0, 0, cex = 15, pch = 21, bg = "white", col = "white")
+  points(0, 0, cex = 12, pch = 21, bg = "grey", col = "grey")
+  points(0, 0, cex = 9, pch = 21, bg = "white", col = "white")
+  points(0, 0, cex = 6, pch = 21, bg = "grey", col = "grey")
+  points(0, 0, cex = 3, pch = 21, bg = "white", col = "white")
+}
+
+# 2 by 2 grid
+par(mfrow = c(2, 2))
+
+# remove extra white space
+par(mar = c(1, 1, 1.5, 1))
+
+target_board(title = "Acurácia alta, Precisão alta")
+m <- 0
+sd <- 0.1
+x <- runif(n = 10, min = m - sd, max = m + sd)
+y <- runif(n = 10, min = m - sd, max = m + sd)
+points(x, y, pch = 4, lwd = 2, cex = 1.5, col = "black")
+
+target_board(title = "Acurácia baixa, Precisão alta")
+m <- 0 + 0.3
+sd <- 0.1
+x <- runif(n = 10, min = m - sd, max = m + sd)
+y <- runif(n = 10, min = m - sd, max = m + sd)
+points(x, y, pch = 4, lwd = 2, cex = 1.5, col = "black")
+
+target_board(title = "Acurácia alta, Precisão baixa")
+m <- 0
+sd <- 0.3
+x <- runif(n = 10, min = m - sd, max = m + sd)
+y <- runif(n = 10, min = m - sd, max = m + sd)
+points(x, y, pch = 4, lwd = 2, cex = 1.5, col = "black")
+
+target_board(title = "Acurácia baixa, Precisão baixa")
+m <- 0 + 0.3
+sd <- 0.3
+x <- runif(n = 10, min = m - sd, max = m + sd)
+y <- runif(n = 10, min = m - sd, max = m + sd)
+points(x, y, pch = 4, lwd = 2, cex = 1.5, col = "black")
+
+```
+
+<br>
