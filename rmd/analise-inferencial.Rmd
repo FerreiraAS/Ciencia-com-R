@@ -56,6 +56,74 @@
 
 <br>
 
+## Erros de inferência
+
+<br>
+
+### O que são erros de inferência estatística?
+
+-   Um erro de inferência é a tomada de decisão incorreta, seja a favor ou contra a hipótese nula $H_{0}$.[@Curran-Everett2009]
+
+```{r erros-interencia, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
+
+cross.table.erros <-
+  matrix(
+    c(
+      'Decisão correta', 'Decisão incorreta \n (erro tipo II)',
+      'Decisão incorreta \n (erro tipo I)', 'Decisão correta'
+    ),
+    nrow = 2,
+    ncol = 2,
+    byrow = FALSE
+  )
+rownames(cross.table.erros) <-
+  c("Hipótese nula $H_{0}$ \n foi rejeitada", "Hipótese nula $H_{0}$ \n não foi rejeitada")
+colnames(cross.table.erros) <-
+  c("Hipótese nula $H_{0}$ \n é falsa", "Hipótese nula $H_{0}$ \n é verdadeira")
+
+# exibe a tabela de dados
+kableExtra::kable(
+  cross.table.erros,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE,
+  caption = "Tabela de erros de inferência estatística."
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), T, T),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(dim(cross.table.erros)[1],
+                       extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+### O que é erro tipo I?
+
+-   Erro tipo I significa a rejeição de uma hipótese nula ($H_{0}$) quando esta é verdadeira.[@Curran-Everett2009]
+
+<br>
+
+### O que é erro tipo II?
+
+-   Erro tipo II significa a não rejeição de uma hipótese nula ($H_{0}$) quando esta é falsa.[@Curran-Everett2009]
+
+<br>
+
+### Qual a relação entre os erros tipo I e II?
+
+-   .[REF]
+
+<br>
+
 ## Testes de hipóteses {#erros-inferencia}
 
 <br>
@@ -198,12 +266,6 @@ O pacote *stats*[@stats-2] fornece a função [*p.adjust*](https://www.rdocument
 
 <br>
 
-### Como interpretar um tamanho do efeito?
-
--   Tamanhos de efeito podem ser comparadores entre diferentes estudos.[@Sullivan2012]
-
-<br>
-
 ### Quais são os tipos de tamanho do efeito?
 
 -   Diferenças padronizadas entre grupos:[@Sullivan2012; @Kim2015]
@@ -227,6 +289,18 @@ O pacote *stats*[@stats-2] fornece a função [*p.adjust*](https://www.rdocument
 ### Como converter um tamanho de efeito em outro?
 
 -   .[@Kim2015]
+
+<br>
+
+### Como interpretar um tamanho do efeito?
+
+-   Tamanhos de efeito podem ser comparadores entre diferentes estudos.[@Sullivan2012]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*cohen.ES*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/cohen.ES) para obter os tamanhos de efeito "pequeno", "médio" e "grande" para diversos testes de hipóteses.
+:::
 
 <br>
 
@@ -272,74 +346,6 @@ O pacote *stats*[@stats-2] fornece a função [*p.adjust*](https://www.rdocument
 
 <br>
 
-## Erros de inferência
-
-<br>
-
-### O que são erros de inferência estatística?
-
--   Um erro de inferência é a tomada de decisão incorreta, seja a favor ou contra a hipótese nula.[@Curran-Everett2009]
-
-```{r erros-interencia, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
-
-cross.table.erros <-
-  matrix(
-    c(
-      'Decisão correta', 'Decisão incorreta \n (erro tipo II)',
-      'Decisão incorreta \n (erro tipo I)', 'Decisão correta'
-    ),
-    nrow = 2,
-    ncol = 2,
-    byrow = FALSE
-  )
-rownames(cross.table.erros) <-
-  c("Hipótese nula $H_{0}$ \n foi rejeitada", "Hipótese nula $H_{0}$ \n não foi rejeitada")
-colnames(cross.table.erros) <-
-  c("Hipótese nula $H_{0}$ \n é falsa", "Hipótese nula $H_{0}$ \n é verdadeira")
-
-# exibe a tabela de dados
-kableExtra::kable(
-  cross.table.erros,
-  align = "c",
-  format = ifelse(knitr::is_html_output(), "html", "latex"),
-  booktabs = TRUE,
-  linesep = "",
-  escape = FALSE,
-  caption = "Tabela de erros de inferência estatística."
-) %>%
-  kableExtra::kable_styling(
-    latex_options = c("basic"),
-    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), T, T),
-    position = "center"
-  ) %>%
-  kableExtra::row_spec(0,
-                       bold = TRUE,
-                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
-  kableExtra::row_spec(dim(cross.table.erros)[1],
-                       extra_css = "border-bottom: 1px solid")
-```
-
-<br>
-
-### O que é erro tipo I?
-
--   Erro tipo I significa a rejeição de uma hipótese nula ($H_{0}$) quando esta é verdadeira.[@Curran-Everett2009]
-
-<br>
-
-### O que é erro tipo II?
-
--   Erro tipo II significa a não rejeição de uma hipótese nula ($H_{0}$) quando esta é falsa.[@Curran-Everett2009]
-
-<br>
-
-### Qual a relação entre os erros tipo I e II?
-
--   .[REF]
-
-<br>
-
 ## Interpretação de análise inferencial
 
 <br>
@@ -358,7 +364,7 @@ kableExtra::kable(
 
 ### O que é significância estatística?
 
--   A expressão "significância estatística" sugere apenas que um experimento merece ser repetido, uma vez que um baixo P-valor (calculado a partir dos dados, modelos e demais suposições do estudo) sugere ser improvável que os dados coletados sejam coletados no contexto de que a hipótese nula $H_{0}$ assumida é verdadeira.[@aylmerfisher1926]
+-   A expressão "significância estatística"[@latter1902] ou "evidência estatística de signficância" sugere apenas que um experimento merece ser repetido, uma vez que um baixo P-valor (calculado a partir dos dados, modelos e demais suposições do estudo) sugere ser improvável que os dados coletados sejam coletados no contexto de que a hipótese nula $H_{0}$ assumida é verdadeira.[@aylmerfisher1926]
 
 <br>
 

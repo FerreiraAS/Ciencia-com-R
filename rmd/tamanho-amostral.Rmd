@@ -8,6 +8,8 @@
 
 ### O que é tamanho da amostra?
 
+- Tamanho da amostra é a quantidade $n$ de participantes (ou unidades dde análise) nessecárias para conduzir um estudo afim de testar uma hipótese.[@rodríguezdeláguila2014]
+
 -   .[@Banerjee2010]
 
 <br>
@@ -18,13 +20,53 @@
 
 <br>
 
+### Quais fatores devem ser considerados para determinar o tamanho da amostra?
+
+- Tamanho da população: O tamanho da amostra depende parcialmente do tamanho da população de origem. Geralmente assume-se que a população tem tamanho desconhecido ou infinito. Em alguns estudos serão amostradas populações de tamanho finito ($N$ inferior a 100.000 indivíduos), geralmente em pesquisas descritivas, em que esse tamanho deve ser incorporado nos cálculos.[@rodríguezdeláguila2014]
+
+- Delinamento do estudo.[rodriguezdelaguila2014]
+
+- Quantidade e características (dependende vs. indepentende) dos grupos de participantes do estudo.[rodriguezdelaguila2014]
+
+- Erros tipo I ($\alpha$) e tipo II ($\beta$).[rodriguezdelaguila2014]
+
+- Tipo de variável a ser observada (contínua, intervalo, ordinal, nominal, dicotômica).[rodriguezdelaguila2014]
+
+- Tamanho de efeito mínimo a ser observado.[rodriguezdelaguila2014]
+
+- Variabilidade da(s) variável(eis) coletada(s).[rodriguezdelaguila2014]
+
+- Lateralidade do teste de hipótese (uni- ou bicaudais).[rodriguezdelaguila2014]
+
+- Perdas de dados durante a coleta e/ou acompanhamento dos participantes do estudo.[rodriguezdelaguila2014]
+
+<br>
+
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *longpower*[@longpower] fornece a função [*power.mmrm*](https://www.rdocumentation.org/packages/longpower/versions/1.0.24/topics/power.mmrm) para calcular o tamanho da amostra para eatudos com análises por modelo de regressão misto linear.
+O pacote *pwr*[@pwr] fornece a função [*plot.power.htest*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/plot.power.htest) para apresentar graficamente a relação entre o tamanho da amostra e o poder de testes de hipóteses.
 :::
 
 <br>
 
-### Como é determinado o tamanho da amostra de um estudo?
+### Quais aspectos éticos estão envolvidos no tamanho da amostra?
+
+- Determinar a priori o tamanho da amostra pode diminuir o risco de realizar testes ou intervenções desnecessários, de desperdício de recursos (tempo e dinheiro) associados e, por outro lado, de coletar dados insuficientes para testar as hipóteses do estudo.[@rodríguezdeláguila2014]
+
+-   O tratamento ético dos participantes do estudo, portanto, não exige que se considere se o poder do estudo é inferior à meta convencional de 80% ou 90%.[@Bacchetti2005]
+
+-   Estudos com poder <80% não são necessariamente antiéticos.[@Bacchetti2005]
+
+-   Grandes estudos podem ser desejáveis por outras razões que não as éticas.[@Bacchetti2005]
+
+<br>
+
+### Como é calculado o tamanho da amostra de um estudo?
+
+- O tamamho amostral pode ser calculado por meio de fórmulas matemáticas que tendem a assegurar margens de erros tipos I ($\alpha$) e II ($\beta$) para a estimação dos parâmetros populacionais a partir dos dados amostrais.[@rodríguezdeláguila2014]
+
+- Estudo-piloto --- realizados nas mesmas condições do estudo, mas envolvendo um tamanho de amostra limitado --- pode ser útil na estimativa do tamanho da amostra a partir do tamanho do efeito estimado.[@rodríguezdeláguila2014]
+
+- O tamanho da amostra deve ser calculado para cada um dos objtivos primários e/ou secundários, sendo escolhido o maior tamanho de amostra calculado para o estudo.[@rodríguezdeláguila2014]
 
 -   Geralmente é recomendado ser cético em relação às regras práticas para o tamanho da amostra, tais como a proporção entre o número de variáveis (ou eventos) e de participantes.[@van2022a]
 
@@ -36,12 +78,143 @@ O pacote *pwr*[@pwr] fornece a função [*cohen.ES*](https://www.rdocumentation.
 
 <br>
 
-### Quais aspectos éticos estão envolvidos no tamanho da amostra?
+## Cálculo do tamanho da amostra
 
--   O tratamento ético dos participantes do estudo, portanto, não exige que se considere se o poder do estudo é inferior à meta convencional de 80% ou 90%.[@Bacchetti2005]
+<br>
 
--   Estudos com poder \<80% não são necessariamente antiéticos.[@Bacchetti2005]
+### Como calcular o tamanho da amostra?
 
--   Grandes estudos podem ser desejáveis por outras razões que não as éticas.[@Bacchetti2005]
+- 
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.2p.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.2p.test) para cálculo do tamanho da amostra para testes de proporção balanceados (2 amostras com mesmo número de participantes).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.2p2n.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.2p.test) para cálculo do tamanho da amostra para testes de proporção não balanceados (2 amostras com diferente número de participantes).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.anova.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.anova.test) para cálculo do tamanho da amostra para testes de análise de variância balanceados (3 ou mais amostras com mesmo número de participantes).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.chisq.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.chisq.test) para cálculo do tamanho da amostra para testes de qui-quadrado $\chi^2$.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.f2.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.f2.test) para cálculo do tamanho da amostra para testes com modelo linear geral.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.norm.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.norm.test) para cálculo do tamanho da amostra para a média de uma distribuição normal com variância conhecida.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.p.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.p.test) para cálculo do tamanho da amostra para testes de proporção (1 amostra).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.r.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.r.test) para cálculo do tamanho da amostra para testes de correlação (1 amostra).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.t.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.t.test) para cálculo do tamanho da amostra para testes *t* de diferença de 1 amostra, 2 amostras dependentes ou 2 amostras independentes (grupos balanceados).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.t2n.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.t2n.test) para cálculo do tamanho da amostra para testes *t* de diferença de 2 amostras independentes (grupos não balanceados).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *longpower*[@longpower] fornece a função [*power.mmrm*](https://www.rdocumentation.org/packages/longpower/versions/1.0.24/topics/power.mmrm) para calcular o tamanho da amostra para estudos com análises por modelo de regressão misto linear.
+:::
+
+<br>
+
+## Perdas de amostra
+
+<br>
+
+### O que é perda de amostra?
+
+-  Perda de amostra(s) --- isto é, participante(s) ou unidade(s) de análise --- pode ocorrer durante a coleta e/ou acompanhamento dos participantes do estudo.[@rodríguezdeláguila2014]
+
+- Perda amostral pode ocorrer por: abandono ou desistência do participante, perda de contato com o participante, perda de informação, ocorrência de eventos adversos, morte do participante, entre outros.[@rodríguezdeláguila2014]
+
+<br>
+
+### Por que a perda de amostra é um problema?
+
+- A perda de amostra pode levar a uma redução do poder do estudo, aumentando a probabilidade de erro tipo II ($\beta$).[REF]
+
+- A perda de amostra pode levar a um viés de seleção, pois os participantes que permanecem no estudo podem ser diferentes daqueles que foram perdidos.[REF]
+
+<br>
+
+### Como evitar perda de amostra?
+
+- A perda de amostra pode ser evitada por meio de um planejamento cuidadoso do estudo, incluindo a definição de critérios de inclusão e exclusão claros e apropriados, bem como a definição de estratégias para minimizar a perda de amostra.[REF]
+
+- A perda de amostra pode ser compensada pelo aumento do tamanho da amostra, desde que o aumento seja suficiente para manter o poder do estudo.[@rodríguezdeláguila2014]
+
+<br>
+
+## Ajustes no tamanho da amostra
+
+<br>
+
+### Por que ajustar o tamanho da amostra?
+
+- O tamanho da amostra pode ser ajustado durante o estudo para compensar a perda de amostra, desde que o aumento seja suficiente para manter o poder do estudo.[@rodríguezdeláguila2014]
+
+### Como ajustar para perda amostral?
+
+- Aumentar o tamanho da amostra estimada $n$ pela porcentagem $d$ de perdas esperada ou prevista, para obter o tamanho da amostra efetiva $n'$ com base na equação \@ref(eq:samplesizeadj1):[@rodríguezdeláguila2014]
+
+\begin{equation}
+(\#eq:samplesizeadj1)
+n' = \dfrac{n}{1-d}
+\end{equation}
+
+<br>
+
+### Como ajustar para confiabilidade?
+
+- .[REF]
+
+<br>
+
+## Justificativa do tamanho da amostra
+
+<br>
+
+### Como justificar o tamanho da amostra de um estudo?
+
+- Em estudos que envolvem condições raras, pode ser difícil recrutar o número necessário de participantes devido à limitada dispomnibilidade de casos da população. Mesmo assim, é aconselhável determinar o tamanho da amostra.[@rodríguezdeláguila2014]
+
+- Quando um estudo deste tipo não é possível, as considerações referentes ao tamanho da amostra são justificadas de acordo com o número máximo de pacientes que podem ser recrutados no decorrer do estudo.[@rodríguezdeláguila2014]
 
 <br>

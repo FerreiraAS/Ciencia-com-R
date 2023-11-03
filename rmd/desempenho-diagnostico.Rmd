@@ -115,17 +115,40 @@ O pacote *riskyr*[@riskyr] fornece a função [*plot_prism*](https://www.rdocume
 
 ### Quais probabilidades caracterizam o desempenho diagnóstico de um teste em tabelas 2x2?
 
--   Sensibilidade ($SEN$): Proporção de verdadeiro-positivos dentre aqueles com a condição.[@greenhalgh1997b]
+-   Sensibilidade ($SEN$), equação \@ref(eq:sen): Proporção de verdadeiro-positivos dentre aqueles com a condição.[@greenhalgh1997b]
 
--   Especificidade ($ESP$): Proporção de verdadeiro-negativos dentre aqueles sem a condição.[@greenhalgh1997b]
+\begin{equation}
+(\#eq:sen)
+SEN = \dfrac{VP}{VP+FN}
+\end{equation}
 
--   Acurácia ($ACU$): Proporção de casos e controle corretamente identificados.[@greenhalgh1997b]
+-   Especificidade ($ESP$), equação \@ref(eq:esp): Proporção de verdadeiro-negativos dentre aqueles sem a condição.[@greenhalgh1997b]
 
--   Valor preditivo positivo ($VPP$): Proporção de casos corretamente identificados como verdadeiro-positivos.[@greenhalgh1997b]
+\begin{equation}
+(\#eq:esp)
+ESP = \dfrac{VN}{VN+FP}
+\end{equation}
 
--   Valor preditivo negativo ($VPN$): Proporção de controles corretamente identificados como verdadeiro-negativos.[@greenhalgh1997b]
+-   Acurácia ($ACU$), equação \@ref(eq:acu): Proporção de casos e controle corretamente identificados.[@greenhalgh1997b]
 
--   Razão de verossimilhança ($RV$).[@greenhalgh1997b]
+\begin{equation}
+(\#eq:acu)
+ACU = \dfrac{VP+VN}{VP+VN+FP+FN}
+\end{equation}
+
+-   Valor preditivo positivo ($VPP$), equação \@ref(eq:vpp): Proporção de casos corretamente identificados como verdadeiro-positivos.[@greenhalgh1997b]
+
+\begin{equation}
+(\#eq:vpp)
+VPP = \dfrac{VP}{VP+FP}
+\end{equation}
+
+-   Valor preditivo negativo ($VPN$), equação \@ref(eq:vpn): Proporção de controles corretamente identificados como verdadeiro-negativos.[@greenhalgh1997b]
+
+\begin{equation}
+(\#eq:vpn)
+VPN = \dfrac{VN}{VN+FN}
+\end{equation}
 
 <br>
 
