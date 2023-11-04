@@ -69,3 +69,76 @@ O pacote *bookdown*[@bookdown-2] fornece as funções [*gitbook*](https://www.rd
 -   Replicabilidade é a habilidade de se obter conclusões iguais ou similares quando um experimento é repetido.[@hofner2015; @mair2016]
 
 <br>
+
+## Compartilhamento
+
+<br>
+
+### O que pode ser compartilhado?
+
+-   Idealmente, todos os scripts, pacotes/bibliotecas e dados necessários para outros reproduzirem seus dados.[@Eglen2017]
+
+-   Minimamente, partes importantes incluindo implementações de novos algoritmos e dados que permitam reproduzir um resultado importante.[@Eglen2017]
+
+<br>
+
+### Como preparar dados para compartilhamento?
+
+-   .[REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *synthpop*[@synthpop] fornece a função [*syn*](https://www.rdocumentation.org/packages/synthpop/versions/1.8-0/topics/syn) para criar bancos de dados sintéticos a partir de um banco de dados real.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *grateful*[@grateful] fornece a função [*cite_packages*](https://www.rdocumentation.org/packages/grateful/versions/0.2.0/topics/cite_packages) para citar os pacotes utilizados em um projeto R.
+:::
+
+<br>
+
+### Como preparar scripts para compartilhamento?
+
+-   Documente em um arquivo README os arquivos disponíveis e os pré-requisitos necessários para executar o código (ex.: pacotes e respectivas versões). Uma lista de configurações (hardware e software) que foram usadas para rodar o código pode ajudar na reprodução dos resultados.[@hofner2015]
+
+-   Crie links persistentes para versões do seu script.[@Eglen2017]
+
+-   Defina uma semente para o gerador de números aleatórios em scripts com métodos computacionais que dependem da geração de números pseudoaleatórios.[@hofner2015]
+
+-   Escolha uma licença apropriada para garantir como outros usarão seus scripts.[@Eglen2017]
+
+-   Compartilhe todos os pacotes relacionados à sua análise.[@Zhao2023]
+
+-   Providencie a documentação sobre seu script (ex.: arquivo README).[@Eglen2017]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base-5] fornece a função [*set.seed*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Random) para especificar uma semente para reprodutibilidade de computações que envolvem números aleatórios.
+:::
+
+<br>
+
+### O que incluir no arquivo README?
+
+-   Título do manuscrito.[@hofner2015]
+
+-   Autores do manuscrito.[@hofner2015]
+
+-   Principais responsáveis pela escrita do script e quaisquer outras pessoas que fizeram contribuições substanciais para o desenvolvimento do script.[@hofner2015]
+
+-   Endereço de e-mail do autor ou contribuidor a quem devem ser direcionadas dúvidas, comentários, sugestões e bugs sobre o script.[@hofner2015]
+
+-   Lista de configurações nas quais o script foi testado, tais com nome e versão do programa, pacotes e plataforma.[@hofner2015]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *utils*[@utils] fornece a função [*sessionInfo*](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/sessionInfo) para descrever as características do programa, pacotes e plataforma da sessão atual.
+:::
+
+<br>
+
