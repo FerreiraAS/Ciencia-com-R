@@ -642,3 +642,60 @@ points(x, y, pch = 4, lwd = 2, cex = 1.5, col = "black")
 ```
 
 <br>
+
+## Viés e variabilidade {#vies-variabilidade}
+
+<br>
+
+### Qual é a relação entre viés e variabilidade?
+
+-   .[REF]
+
+<br>
+
+```{r vies-variabilidade, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.cap = "Acurácia e precisão como propriedades de uma medida."}
+
+# para reprodutibilidade
+set.seed(1234)
+
+# target board function
+target_board <- function(title) {
+  plot(0, 0, cex = 31, pch = 21, bg = grDevices::gray(level = 0.6, alpha = 1), col = "black", axes = F, main = title, xlab = NA, ylab = NA)
+  points(0, 0, cex = 27, pch = 21, bg = "white", col = "white")
+  points(0, 0, cex = 23, pch = 21, bg = grDevices::gray(level = 0.5, alpha = 1), col = grDevices::gray(level = 0.5, alpha = 1))
+  points(0, 0, cex = 19, pch = 21, bg = "white", col = "white")
+  points(0, 0, cex = 15, pch = 21, bg = grDevices::gray(level = 0.4, alpha = 1), col = grDevices::gray(level = 0.4, alpha = 1))
+  points(0, 0, cex = 11, pch = 21, bg = "white", col = "white")
+  points(0, 0, cex = 7, pch = 21, bg = grDevices::gray(level = 0.3, alpha = 1), col = grDevices::gray(level = 0.3, alpha = 1))
+  points(0, 0, cex = 3, pch = 21, bg = "white", col = "white")
+}
+
+# 2 by 2 grid
+par(mfrow = c(1, 3))
+
+# remove extra white space
+par(mar = c(1, 1, 1.5, 1))
+
+target_board(title = "Viés alto, Variância baixa")
+m <- 0 + 0.3
+sd <- 0.1
+x <- runif(n = 10, min = m - sd, max = m + sd)
+y <- runif(n = 10, min = m - sd, max = m + sd)
+points(x, y, pch = 4, lwd = 2, cex = 1.5, col = "black")
+
+target_board(title = "Viés baixo, Variância alta")
+m <- 0
+sd <- 0.2
+x <- runif(n = 10, min = m - sd, max = m + sd)
+y <- runif(n = 10, min = m - sd, max = m + sd)
+points(x, y, pch = 4, lwd = 2, cex = 1.5, col = "black")
+
+target_board(title = "Viés baixo, Variância baixa")
+m <- 0
+sd <- 0.1
+x <- runif(n = 10, min = m - sd, max = m + sd)
+y <- runif(n = 10, min = m - sd, max = m + sd)
+points(x, y, pch = 4, lwd = 2, cex = 1.5, col = "black")
+```
+
+<br>
