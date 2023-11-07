@@ -1245,6 +1245,10 @@ div.csl-indent {
 <li>.<span class="citation"><sup><a href="#ref-Kim2015">156</a></sup></span></li>
 </ul>
 <p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>effectsize</em><span class="citation"><sup><a href="#ref-effectsize">157</a></sup></span> fornece diversas funções para conversão de diferentes estimativas de tamanhos de efeito.</p>
+</div>
+<p><br></p>
 </div>
 <div id="como-interpretar-um-tamanho-do-efeito" class="section level3 hasAnchor" number="15.6.4">
 <h3><span class="header-section-number">15.6.4</span> Como interpretar um tamanho do efeito?<a href="analise-inferencial.html#como-interpretar-um-tamanho-do-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1253,7 +1257,15 @@ div.csl-indent {
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/cohen.ES"><em>cohen.ES</em></a> para obter os tamanhos de efeito “pequeno”, “médio” e “grande” para diversos testes de hipóteses.</p>
+<p>O pacote <em>effectsize</em><span class="citation"><sup><a href="#ref-effectsize">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/effectsize/versions/0.8.3/topics/rules"><em>rules</em></a> para criar regras de interpretação de tamanhos de efeito.</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>effectsize</em><span class="citation"><sup><a href="#ref-effectsize">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/effectsize/versions/0.8.3/topics/interpret"><em>interpret</em></a> para interpretar os tamanhos de efeito com base em uma lista de regras pré-definidas.</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/cohen.ES"><em>cohen.ES</em></a> para obter os tamanhos de efeito “pequeno”, “médio” e “grande” para diversos testes de hipóteses.</p>
 </div>
 <p><br></p>
 </div>
@@ -1272,61 +1284,61 @@ div.csl-indent {
 <div id="o-que-é-análise-de-poder-do-teste" class="section level3 hasAnchor" number="15.7.2">
 <h3><span class="header-section-number">15.7.2</span> O que é análise de poder do teste?<a href="analise-inferencial.html#o-que-é-análise-de-poder-do-teste" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Poder é a probabilidade de que um dado tamanho de efeito será observado em um experimento futuro sob um conjunto de hipóteses - tamanho de efeito real e erro tipo I - para um dado tamanho de amostra.<span class="citation"><sup><a href="#ref-heckman2022">158</a></sup></span></p></li>
-<li><p>O objetivo geral da análise de poder ao projetar um estudo é escolher um tamanho de amostra que controle os 2 tipos de erros de inferência estatística: tipo I (<span class="math inline">\(\alpha\)</span>, resultado falso-positivo) e tipo II (<span class="math inline">\(\beta\)</span>, resultado falso-negativo).<span class="citation"><sup><a href="#ref-heckman2022">158</a></sup></span></p></li>
-<li><p>Numericamente, o poder de um estudo é calculado como <span class="math inline">\(1-\beta\)</span> e reportado em valor percentual.<span class="citation"><sup><a href="#ref-heckman2022">158</a></sup></span></p></li>
+<li><p>Poder é a probabilidade de que um dado tamanho de efeito será observado em um experimento futuro sob um conjunto de hipóteses - tamanho de efeito real e erro tipo I - para um dado tamanho de amostra.<span class="citation"><sup><a href="#ref-heckman2022">159</a></sup></span></p></li>
+<li><p>O objetivo geral da análise de poder ao projetar um estudo é escolher um tamanho de amostra que controle os 2 tipos de erros de inferência estatística: tipo I (<span class="math inline">\(\alpha\)</span>, resultado falso-positivo) e tipo II (<span class="math inline">\(\beta\)</span>, resultado falso-negativo).<span class="citation"><sup><a href="#ref-heckman2022">159</a></sup></span></p></li>
+<li><p>Numericamente, o poder de um estudo é calculado como <span class="math inline">\(1-\beta\)</span> e reportado em valor percentual.<span class="citation"><sup><a href="#ref-heckman2022">159</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quando-realizar-a-análise-de-poder-do-teste" class="section level3 hasAnchor" number="15.7.3">
 <h3><span class="header-section-number">15.7.3</span> Quando realizar a análise de poder do teste?<a href="analise-inferencial.html#quando-realizar-a-análise-de-poder-do-teste" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Na fase de projeto de pesquisa: a análise de poder para determinar o tamanho da amostra objetiva que o tamanho da amostra permita uma probabilidade razoável de detectar um efeito significativo pré-especificado.<span class="citation"><sup><a href="#ref-heckman2022">158</a></sup></span></p></li>
-<li><p>Após a coleta de dados: a análise de poder objetiva informar estudos futuros a respeito do tamanho da amostra necessário para a detecção de um efeito significativo pré-especificado.<span class="citation"><sup><a href="#ref-heckman2022">158</a></sup></span></p></li>
+<li><p>Na fase de projeto de pesquisa: a análise de poder para determinar o tamanho da amostra objetiva que o tamanho da amostra permita uma probabilidade razoável de detectar um efeito significativo pré-especificado.<span class="citation"><sup><a href="#ref-heckman2022">159</a></sup></span></p></li>
+<li><p>Após a coleta de dados: a análise de poder objetiva informar estudos futuros a respeito do tamanho da amostra necessário para a detecção de um efeito significativo pré-especificado.<span class="citation"><sup><a href="#ref-heckman2022">159</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.2p.test"><em>pwr.2p.test</em></a> para cálculo do poder do teste de proporção balanceado (2 amostras com mesmo número de participantes).</p>
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.2p.test"><em>pwr.2p.test</em></a> para cálculo do poder do teste de proporção balanceado (2 amostras com mesmo número de participantes).</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.2p.test"><em>pwr.2p2n.test</em></a> para cálculo do do poder do teste de proporção não balanceado (2 amostras com diferente número de participantes).</p>
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.2p.test"><em>pwr.2p2n.test</em></a> para cálculo do do poder do teste de proporção não balanceado (2 amostras com diferente número de participantes).</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.anova.test"><em>pwr.anova.test</em></a> para cálculo do poder do teste de análise de variância balanceado (3 ou mais amostras com mesmo número de participantes).</p>
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.anova.test"><em>pwr.anova.test</em></a> para cálculo do poder do teste de análise de variância balanceado (3 ou mais amostras com mesmo número de participantes).</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.chisq.test"><em>pwr.chisq.test</em></a> para cálculo do poder do teste de qui-quadrado <span class="math inline">\(\chi^2\)</span>.</p>
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.chisq.test"><em>pwr.chisq.test</em></a> para cálculo do poder do teste de qui-quadrado <span class="math inline">\(\chi^2\)</span>.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.f2.test"><em>pwr.f2.test</em></a> para cálculo do poder do teste com modelo linear geral.</p>
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.f2.test"><em>pwr.f2.test</em></a> para cálculo do poder do teste com modelo linear geral.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.norm.test"><em>pwr.norm.test</em></a> para cálculo do poder do teste de média de uma distribuição normal com variância conhecida.</p>
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.norm.test"><em>pwr.norm.test</em></a> para cálculo do poder do teste de média de uma distribuição normal com variância conhecida.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.p.test"><em>pwr.p.test</em></a> para cálculo do poder do teste de proporção (1 amostra).</p>
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.p.test"><em>pwr.p.test</em></a> para cálculo do poder do teste de proporção (1 amostra).</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.r.test"><em>pwr.r.test</em></a> para cálculo do do poder to teste de correlação (1 amostra).</p>
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.r.test"><em>pwr.r.test</em></a> para cálculo do do poder to teste de correlação (1 amostra).</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.t.test"><em>pwr.t.test</em></a> para cálculo do poder do teste <em>t</em> de diferença de 1 amostra, 2 amostras dependentes ou 2 amostras independentes (grupos balanceados).</p>
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.t.test"><em>pwr.t.test</em></a> para cálculo do poder do teste <em>t</em> de diferença de 1 amostra, 2 amostras dependentes ou 2 amostras independentes (grupos balanceados).</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">157</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.t2n.test"><em>pwr.t2n.test</em></a> para cálculo do poder do teste <em>t</em> de diferença de 2 amostras independentes (grupos não balanceados).</p>
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">158</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.t2n.test"><em>pwr.t2n.test</em></a> para cálculo do poder do teste <em>t</em> de diferença de 2 amostras independentes (grupos não balanceados).</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>longpower</em><span class="citation"><sup><a href="#ref-longpower">159</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/longpower/versions/1.0.24/topics/power.mmrm"><em>power.mmrm</em></a> para calcular o poder de testes com análises por modelo de regressão linear misto.</p>
+<p>O pacote <em>longpower</em><span class="citation"><sup><a href="#ref-longpower">160</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/longpower/versions/1.0.24/topics/power.mmrm"><em>power.mmrm</em></a> para calcular o poder de testes com análises por modelo de regressão linear misto.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
@@ -1357,14 +1369,14 @@ div.csl-indent {
 <div id="por-que-a-análise-de-poder-do-teste-post-hoc-é-inadequada" class="section level3 hasAnchor" number="15.7.4">
 <h3><span class="header-section-number">15.7.4</span> Por que a análise de poder do teste <em>post hoc</em> é inadequada?<a href="analise-inferencial.html#por-que-a-análise-de-poder-do-teste-post-hoc-é-inadequada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>A análise do poder é teoricamente incorreta, uma vez que a probabilidade calculada <span class="math inline">\(1-\beta\)</span> expressa a probabilidade de um evento futuro, o que não é mais relevante quando o evento de interesse já ocorreu.<span class="citation"><sup><a href="#ref-Cummings2003">123</a>,<a href="#ref-heckman2022">158</a></sup></span></li>
+<li>A análise do poder é teoricamente incorreta, uma vez que a probabilidade calculada <span class="math inline">\(1-\beta\)</span> expressa a probabilidade de um evento futuro, o que não é mais relevante quando o evento de interesse já ocorreu.<span class="citation"><sup><a href="#ref-Cummings2003">123</a>,<a href="#ref-heckman2022">159</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-pode-ser-realizado-ao-invés-da-análise-de-poder" class="section level3 hasAnchor" number="15.7.5">
 <h3><span class="header-section-number">15.7.5</span> O que pode ser realizado ao invés da análise de poder?<a href="analise-inferencial.html#o-que-pode-ser-realizado-ao-invés-da-análise-de-poder" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Após a coleta e análise de dados, recomenda-se realizar a análise e interpretação dos resultados a partir do tamanho do efeito e do seu intervalo de confiança no nível de significância <span class="math inline">\(\alpha\)</span> pré-estabelecido.<span class="citation"><sup><a href="#ref-heckman2022">158</a></sup></span></li>
+<li>Após a coleta e análise de dados, recomenda-se realizar a análise e interpretação dos resultados a partir do tamanho do efeito e do seu intervalo de confiança no nível de significância <span class="math inline">\(\alpha\)</span> pré-estabelecido.<span class="citation"><sup><a href="#ref-heckman2022">159</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
@@ -1464,25 +1476,25 @@ Decisão correta
 <div id="o-que-são-resultados-positivos-e-negativos-em-teste-de-hipótese" class="section level3 hasAnchor" number="15.9.2">
 <h3><span class="header-section-number">15.9.2</span> O que são resultados ‘positivos’ e ‘negativos’ em teste de hipótese?<a href="analise-inferencial.html#o-que-são-resultados-positivos-e-negativos-em-teste-de-hipótese" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Resultados ‘positivos’ compreendem um P-valor dentro da zona crítica estatisticamente significativa (ex.: P &lt; 0,05 ou outro ponto de corte) e sugerem que os autores rejeitem a hipótese nula <span class="math inline">\(H_{0}\)</span>, confirmando assim sua hipótese científica.<span class="citation"><sup><a href="#ref-greenhalgh1997a">160</a></sup></span></p></li>
-<li><p>Resultados ‘negativos’ compreendem um P-valor fora da zona crítica estatisticamente significativa (ex.: P ≥ 0,05 ou outro ponto de corte) e sugerem que os autores não rejeitem a hipótese nula <span class="math inline">\(H_{0}\)</span> porque o efeito observado é nulo, ou porque o estudo não possui poder suficiente para detectá-lo, não permitindo portanto afirmar a hipótese científica.<span class="citation"><sup><a href="#ref-greenhalgh1997a">160</a></sup></span></p></li>
+<li><p>Resultados ‘positivos’ compreendem um P-valor dentro da zona crítica estatisticamente significativa (ex.: P &lt; 0,05 ou outro ponto de corte) e sugerem que os autores rejeitem a hipótese nula <span class="math inline">\(H_{0}\)</span>, confirmando assim sua hipótese científica.<span class="citation"><sup><a href="#ref-greenhalgh1997a">161</a></sup></span></p></li>
+<li><p>Resultados ‘negativos’ compreendem um P-valor fora da zona crítica estatisticamente significativa (ex.: P ≥ 0,05 ou outro ponto de corte) e sugerem que os autores não rejeitem a hipótese nula <span class="math inline">\(H_{0}\)</span> porque o efeito observado é nulo, ou porque o estudo não possui poder suficiente para detectá-lo, não permitindo portanto afirmar a hipótese científica.<span class="citation"><sup><a href="#ref-greenhalgh1997a">161</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="qual-a-importância-de-resultados-negativos" class="section level3 hasAnchor" number="15.9.3">
 <h3><span class="header-section-number">15.9.3</span> Qual a importância de resultados ‘negativos’?<a href="analise-inferencial.html#qual-a-importância-de-resultados-negativos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Conhecer resultados negativos contribui com uma visão mais ampla do campo de estudo junto aos resultados positivos.<span class="citation"><sup><a href="#ref-weintraub2016">161</a></sup></span></p></li>
-<li><p>Resultados negativos permitem um melhor planejamento das pesquisas futuras e pode aumentar suas chances de sucesso.<span class="citation"><sup><a href="#ref-weintraub2016">161</a></sup></span></p></li>
+<li><p>Conhecer resultados negativos contribui com uma visão mais ampla do campo de estudo junto aos resultados positivos.<span class="citation"><sup><a href="#ref-weintraub2016">162</a></sup></span></p></li>
+<li><p>Resultados negativos permitem um melhor planejamento das pesquisas futuras e pode aumentar suas chances de sucesso.<span class="citation"><sup><a href="#ref-weintraub2016">162</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="ausência-de-evidência-ou-evidência-de-ausência" class="section level3 hasAnchor" number="15.9.4">
 <h3><span class="header-section-number">15.9.4</span> Ausência de evidência ou evidência de ausência?<a href="analise-inferencial.html#ausência-de-evidência-ou-evidência-de-ausência" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Em estudos (geralmente com amostras grandes), resultados estatisticamente significativos (com P-valores menores do limiar pré-estabelecido, <span class="math inline">\(P&lt;\alpha\)</span>) podem não ser clinicamente relevantes.<span class="citation"><sup><a href="#ref-altman1995">162</a></sup></span></p></li>
-<li><p>Em estudos (geralmente com amostras pequenas), resultados estatisticamente não significativos (com P-valores iguais ou maiores do limiar pré-estabelecido, <span class="math inline">\(P≥\alpha\)</span>) não devem ser interpretados como evidência de inexistência do efeito.<span class="citation"><sup><a href="#ref-altman1995">162</a></sup></span></p></li>
-<li><p>Geralmente é razoável aceitar uma nova conclusão apenas quando há dados a seu favor (‘resultados positivos’). Também é razoável questionar se apenas a ausência de dados a seu favor (‘resultados negativos’) justifica suficientemente a rejeição de tal conclusão.<span class="citation"><sup><a href="#ref-altman1995">162</a></sup></span></p></li>
+<li><p>Em estudos (geralmente com amostras grandes), resultados estatisticamente significativos (com P-valores menores do limiar pré-estabelecido, <span class="math inline">\(P&lt;\alpha\)</span>) podem não ser clinicamente relevantes.<span class="citation"><sup><a href="#ref-altman1995">163</a></sup></span></p></li>
+<li><p>Em estudos (geralmente com amostras pequenas), resultados estatisticamente não significativos (com P-valores iguais ou maiores do limiar pré-estabelecido, <span class="math inline">\(P≥\alpha\)</span>) não devem ser interpretados como evidência de inexistência do efeito.<span class="citation"><sup><a href="#ref-altman1995">163</a></sup></span></p></li>
+<li><p>Geralmente é razoável aceitar uma nova conclusão apenas quando há dados a seu favor (‘resultados positivos’). Também é razoável questionar se apenas a ausência de dados a seu favor (‘resultados negativos’) justifica suficientemente a rejeição de tal conclusão.<span class="citation"><sup><a href="#ref-altman1995">163</a></sup></span></p></li>
 </ul>
 <p><br></p>
 
@@ -1554,23 +1566,26 @@ Decisão correta
 <div id="ref-Kim2015" class="csl-entry">
 <div class="csl-left-margin">156. </div><div class="csl-right-inline">Kim HY. Statistical notes for clinical researchers: effect size. <em>Restorative Dentistry &amp; Endodontics</em>. 2015;40(4):328. doi:<a href="https://doi.org/10.5395/rde.2015.40.4.328">10.5395/rde.2015.40.4.328</a></div>
 </div>
+<div id="ref-effectsize" class="csl-entry">
+<div class="csl-left-margin">157. </div><div class="csl-right-inline">Ben-Shachar MS, Lüdecke D, Makowski D. <span></span>E<span></span>ffectsize: Estimation of effect size indices and standardized parameters. 2020;5:2815. doi:<a href="https://doi.org/10.21105/joss.02815">10.21105/joss.02815</a></div>
+</div>
 <div id="ref-pwr" class="csl-entry">
-<div class="csl-left-margin">157. </div><div class="csl-right-inline">Champely S. Pwr: Basic functions for power analysis. 2020. <a href="https://CRAN.R-project.org/package=pwr">https://CRAN.R-project.org/package=pwr.</a></div>
+<div class="csl-left-margin">158. </div><div class="csl-right-inline">Champely S. Pwr: Basic functions for power analysis. 2020. <a href="https://CRAN.R-project.org/package=pwr">https://CRAN.R-project.org/package=pwr.</a></div>
 </div>
 <div id="ref-heckman2022" class="csl-entry">
-<div class="csl-left-margin">158. </div><div class="csl-right-inline">Heckman MG, Davis JM, Crowson CS. Post Hoc Power Calculations: An Inappropriate Method for Interpreting the Findings of a Research Study. <em>The Journal of Rheumatology</em>. 2022;49(8):867-870. doi:<a href="https://doi.org/10.3899/jrheum.211115">10.3899/jrheum.211115</a></div>
+<div class="csl-left-margin">159. </div><div class="csl-right-inline">Heckman MG, Davis JM, Crowson CS. Post Hoc Power Calculations: An Inappropriate Method for Interpreting the Findings of a Research Study. <em>The Journal of Rheumatology</em>. 2022;49(8):867-870. doi:<a href="https://doi.org/10.3899/jrheum.211115">10.3899/jrheum.211115</a></div>
 </div>
 <div id="ref-longpower" class="csl-entry">
-<div class="csl-left-margin">159. </div><div class="csl-right-inline">Iddi S, Donohue MC. Power and sample size for longitudinal models in r-the longpower package and shiny app. 2022;14:264-281.</div>
+<div class="csl-left-margin">160. </div><div class="csl-right-inline">Iddi S, Donohue MC. Power and sample size for longitudinal models in r-the longpower package and shiny app. 2022;14:264-281.</div>
 </div>
 <div id="ref-greenhalgh1997a" class="csl-entry">
-<div class="csl-left-margin">160. </div><div class="csl-right-inline">Greenhalgh T. How to read a paper: Statistics for the non-statistician. II: <span>̈</span>Significant<span>̈</span> relations and their pitfalls. <em>BMJ</em>. 1997;315(7105):422-425. doi:<a href="https://doi.org/10.1136/bmj.315.7105.422">10.1136/bmj.315.7105.422</a></div>
+<div class="csl-left-margin">161. </div><div class="csl-right-inline">Greenhalgh T. How to read a paper: Statistics for the non-statistician. II: <span>̈</span>Significant<span>̈</span> relations and their pitfalls. <em>BMJ</em>. 1997;315(7105):422-425. doi:<a href="https://doi.org/10.1136/bmj.315.7105.422">10.1136/bmj.315.7105.422</a></div>
 </div>
 <div id="ref-weintraub2016" class="csl-entry">
-<div class="csl-left-margin">161. </div><div class="csl-right-inline">Weintraub PG. The Importance of Publishing Negative Results. <em>Journal of Insect Science</em>. 2016;16(1):109. doi:<a href="https://doi.org/10.1093/jisesa/iew092">10.1093/jisesa/iew092</a></div>
+<div class="csl-left-margin">162. </div><div class="csl-right-inline">Weintraub PG. The Importance of Publishing Negative Results. <em>Journal of Insect Science</em>. 2016;16(1):109. doi:<a href="https://doi.org/10.1093/jisesa/iew092">10.1093/jisesa/iew092</a></div>
 </div>
 <div id="ref-altman1995" class="csl-entry">
-<div class="csl-left-margin">162. </div><div class="csl-right-inline">Altman DG, Bland JM. Statistics notes: Absence of evidence is not evidence of absence. <em>BMJ</em>. 1995;311(7003):485-485. doi:<a href="https://doi.org/10.1136/bmj.311.7003.485">10.1136/bmj.311.7003.485</a></div>
+<div class="csl-left-margin">163. </div><div class="csl-right-inline">Altman DG, Bland JM. Statistics notes: Absence of evidence is not evidence of absence. <em>BMJ</em>. 1995;311(7003):485-485. doi:<a href="https://doi.org/10.1136/bmj.311.7003.485">10.1136/bmj.311.7003.485</a></div>
 </div>
 </div>
             </section>
