@@ -14,7 +14,7 @@
 
 ### Quais características definem uma distribuição?
 
--   Uma distribuição pode ser definida por modelos matemáticos e caracterizada por sua tendência central, dispersão, simetria e curtose.
+-   Uma distribuição pode ser definida por modelos matemáticos e caracterizada por parâmetros de tendência central, dispersão, simetria e curtose.
 
 <br>
 
@@ -36,11 +36,40 @@ O pacote *stats*[@stats-3] fornece funções de distribuição de probabilidade 
 
 <br>
 
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *ggfortify*[@ggfortify] fornece a função [ggdistribution](https://www.rdocumentation.org/packages/ggfortify/versions/0.4.16/topics/ggdistribution) para criar gráficos de distribuição de probabilidade (p), funções de densidade (d), funções quantílicas (q) e funções geradores de números aleatórios (r) para as distribuições.
+:::
+
+<br>
+
 ### O que é a distribuição normal?
 
 -   A distribuição normal (ou gaussiana) é uma distribuição com desvios simétricos positivos e negativos em torno de um valor central.[@Ali2016]
 
 -   Em uma distribuição normal, o intervalo de 1 desvio-padrão (±1DP) inclui cerca de 68% dos dados; de 2 desvios-padrão (±2DP) cerca de 95% dos dados; e no intervalo de 3 desvios-padrão (±3DP) cerca de 99% dos dados.[@Ali2016]
+
+<br>
+
+```{r distribuicao-normal, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições e funções de probabilidade"}
+
+scaleFUN <- function(x) sprintf("%.2f", x)
+
+# normal
+d1 <- ggfortify::ggdistribution(dnorm,
+                                seq(-3, 3, 0.1),
+                                mean = 0,
+                                sd = 1,
+                                main = "NORMAL: Distribuição de probabilidade") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() + ggplot2::theme(aspect.ratio = 1)
+
+p1 <- ggfortify::ggdistribution(pnorm,
+                                seq(-3, 3, 0.1),
+                                mean = 0,
+                                sd = 1,
+                                main = "NORMAL: Função de distribuição cumulativa") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() + ggplot2::theme(aspect.ratio = 1)
+
+ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 2, align = "h")
+
+```
 
 <br>
 
