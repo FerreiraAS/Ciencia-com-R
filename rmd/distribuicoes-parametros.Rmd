@@ -59,13 +59,13 @@ d1 <- ggfortify::ggdistribution(dnorm,
                                 seq(-3, 3, 0.1),
                                 mean = 0,
                                 sd = 1,
-                                main = "NORMAL: Distribuição de probabilidade") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() + ggplot2::theme(aspect.ratio = 1)
+                                main = "Distribuição de probabilidade") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() + ggplot2::theme(aspect.ratio = 1)
 
 p1 <- ggfortify::ggdistribution(pnorm,
                                 seq(-3, 3, 0.1),
                                 mean = 0,
                                 sd = 1,
-                                main = "NORMAL: Função de distribuição cumulativa") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() + ggplot2::theme(aspect.ratio = 1)
+                                main = "Função de distribuição cumulativa") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() + ggplot2::theme(aspect.ratio = 1)
 
 ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 2, align = "h")
 
@@ -107,6 +107,12 @@ ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 
 
 <br>
 
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base-6] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
+:::
+
+<br>
+
 ### Que parâmetros podem ser estimados?
 
 -   Parâmetros de tendência central.[@kanji2006; @Ali2016]
@@ -118,6 +124,12 @@ ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 
 -   Parâmetros de distribuição.[@kanji2006]
 
 -   Parâmetros de extremos.[@Ali2016]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base-6] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
+:::
 
 <br>
 
@@ -161,6 +173,12 @@ ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 
 
 <br>
 
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base-6] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
+:::
+
+<br>
+
 ### Que parâmetros de dispersão podem ser estimados?
 
 -   *Variância*.[@kanji2006; @Ali2016]
@@ -177,6 +195,18 @@ ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 
 
 <br>
 
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base-6] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats-4] fornece a função [*confint*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/confint) para calcular o intervalo de confiança em um nível de significância $\alpha$.
+:::
+
+<br>
+
 ### Que parâmetros de proporção podem ser estimados?
 
 -   *Frequência absoluta*.[@Altman1994; @kanji2006; @Ali2016]
@@ -186,6 +216,18 @@ ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 
 -   *Percentil*.[@Altman1994; @kanji2006; @Ali2016]
 
 -   *Quantil*: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem.[@Altman1994]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base-6] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base-6] fornece a função [*table*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table) para calcular proporções.
+:::
 
 <br>
 
@@ -212,7 +254,7 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile) para executar análise de percentis.
+O pacote *base*[@base-6] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
 :::
 
 <br>

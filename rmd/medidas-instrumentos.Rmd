@@ -232,7 +232,7 @@ kableExtra::kable(
 
 - Medidas agregadas obtidas de diferentes unidades de análise podem ser consideradas independentes se observadas outras condições na coleta de dados.[REF]
 
-- O valor agregado será considerado representativo da variável para a unidade de análise (ex.: média = **`r round(VAR.aggr[k2], digits = 0)` mmHg** para o participante **\#`r k2`**).[REF]
+- O valor agregado será considerado representativo da variável para a unidade de análise (ex.: média = **`r round(VAR.aggr[k2], digits = 0)` mmHg** para o participante **\#`r k2`**).
 
 <br>
 
@@ -595,13 +595,13 @@ set.seed(1234)
 
 # target board function
 target_board <- function(title) {
-  plot(0, 0, cex = 24, pch = 21, bg = grDevices::gray(level = 0.6, alpha = 1), col = "black", axes = F, main = title, xlab = NA, ylab = NA)
+  plot(0, 0, cex = 24, pch = 21, bg = grDevices::gray(level = 0.8, alpha = 1), col = "black", axes = F, main = title, xlab = NA, ylab = NA)
   points(0, 0, cex = 21, pch = 21, bg = "white", col = "white")
-  points(0, 0, cex = 18, pch = 21, bg = grDevices::gray(level = 0.5, alpha = 1), col = grDevices::gray(level = 0.5, alpha = 1))
+  points(0, 0, cex = 18, pch = 21, bg = grDevices::gray(level = 0.7, alpha = 1), col = grDevices::gray(level = 0.7, alpha = 1))
   points(0, 0, cex = 15, pch = 21, bg = "white", col = "white")
-  points(0, 0, cex = 12, pch = 21, bg = grDevices::gray(level = 0.4, alpha = 1), col = grDevices::gray(level = 0.4, alpha = 1))
+  points(0, 0, cex = 12, pch = 21, bg = grDevices::gray(level = 0.6, alpha = 1), col = grDevices::gray(level = 0.6, alpha = 1))
   points(0, 0, cex = 9, pch = 21, bg = "white", col = "white")
-  points(0, 0, cex = 6, pch = 21, bg = grDevices::gray(level = 0.3, alpha = 1), col = grDevices::gray(level = 0.3, alpha = 1))
+  points(0, 0, cex = 6, pch = 21, bg = grDevices::gray(level = 0.5, alpha = 1), col = grDevices::gray(level = 0.5, alpha = 1))
   points(0, 0, cex = 3, pch = 21, bg = "white", col = "white")
 }
 
@@ -653,20 +653,20 @@ points(x, y, pch = 4, lwd = 2, cex = 1.5, col = "black")
 
 <br>
 
-```{r vies-variabilidade, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.cap = "Acurácia e precisão como propriedades de uma medida."}
+```{r vies-variabilidade, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.cap = "Viés e variabilidade de uma medida."}
 
 # para reprodutibilidade
 set.seed(1234)
 
 # target board function
 target_board <- function(title) {
-  plot(0, 0, cex = 31, pch = 21, bg = grDevices::gray(level = 0.6, alpha = 1), col = "black", axes = F, main = title, xlab = NA, ylab = NA)
+  plot(0, 0, cex = 31, pch = 21, bg = grDevices::gray(level = 0.8, alpha = 1), col = "black", axes = F, main = title, xlab = NA, ylab = NA)
   points(0, 0, cex = 27, pch = 21, bg = "white", col = "white")
-  points(0, 0, cex = 23, pch = 21, bg = grDevices::gray(level = 0.5, alpha = 1), col = grDevices::gray(level = 0.5, alpha = 1))
+  points(0, 0, cex = 23, pch = 21, bg = grDevices::gray(level = 0.7, alpha = 1), col = grDevices::gray(level = 0.7, alpha = 1))
   points(0, 0, cex = 19, pch = 21, bg = "white", col = "white")
-  points(0, 0, cex = 15, pch = 21, bg = grDevices::gray(level = 0.4, alpha = 1), col = grDevices::gray(level = 0.4, alpha = 1))
+  points(0, 0, cex = 15, pch = 21, bg = grDevices::gray(level = 0.6, alpha = 1), col = grDevices::gray(level = 0.6, alpha = 1))
   points(0, 0, cex = 11, pch = 21, bg = "white", col = "white")
-  points(0, 0, cex = 7, pch = 21, bg = grDevices::gray(level = 0.3, alpha = 1), col = grDevices::gray(level = 0.3, alpha = 1))
+  points(0, 0, cex = 7, pch = 21, bg = grDevices::gray(level = 0.5, alpha = 1), col = grDevices::gray(level = 0.5, alpha = 1))
   points(0, 0, cex = 3, pch = 21, bg = "white", col = "white")
 }
 
