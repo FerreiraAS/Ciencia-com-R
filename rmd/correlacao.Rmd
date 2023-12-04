@@ -30,6 +30,18 @@
 
 -   Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação de concordância ou confiabilidade entre as variáveis.[@khamis2008]
 
+-   Uma escala de medição grosseira (isto é, com representação agregada do constructo na coleta de dados) pode subestimar o tamanho do efeito da correlação $r$ em de cerca de 13% e do coeficiente de determinação $R^2$ de cerca de 30%.[@aguinis2008] Neste caso, a correlação desatenuada $r_{x'y'}$ pode ser calculada pela equação \@ref(eq:r-corrected), utilizando a correlação observada $r_{xy}$ e os fatores de correção $r_{xx'}$ e $r_{yy'}$ para o número de intervalos nas variáveis X e Y, respectivamennte:[@aguinis2008]
+
+\begin{equation}
+(\#eq:r-corrected)
+r_{x'y'} = \dfrac{r_{xy}}{r_{xx'}r_{yy'}}
+\end{equation}
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *psychmeta*[@psychmeta] fornece a função [*correct_r_coarseness*](https://www.rdocumentation.org/packages/psychmeta/versions/2.6.5/topics/correct_r_coarseness) para calcular o coeficiente de correlação desatenuado ($r_{x'y'}$).
+:::
+
 <br>
 
 ### Quais testes podem ser usados para análises de correlação?
