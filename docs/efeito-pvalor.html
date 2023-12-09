@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 36 Meta-análise | Ciência com R</title>
+  <title>Capítulo 16 Tamanho do efeito e P-valor | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 36 Meta-análise | Ciência com R" />
+  <meta property="og:title" content="Capítulo 16 Tamanho do efeito e P-valor | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 36 Meta-análise | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 16 Tamanho do efeito e P-valor | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="analise-concordancia-confiabilidade.html"/>
-<link rel="next" href="redacao.html"/>
+<link rel="prev" href="analise-inferencial.html"/>
+<link rel="next" href="parte-3---estatística-aplicada.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -1052,52 +1052,112 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="meta-analise" class="section level1 hasAnchor" number="36">
-<h1><span class="header-section-number">Capítulo 36</span> <strong>Meta-análise</strong><a href="meta-analise.html#meta-analise" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="efeito-pvalor" class="section level1 hasAnchor" number="16">
+<h1><span class="header-section-number">Capítulo 16</span> <strong>Tamanho do efeito e P-valor</strong><a href="efeito-pvalor.html#efeito-pvalor" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="meta-analise" class="section level2 hasAnchor" number="36.1">
-<h2><span class="header-section-number">36.1</span> Meta-análise<a href="meta-analise.html#meta-analise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="tamanho-efeito" class="section level2 hasAnchor" number="16.1">
+<h2><span class="header-section-number">16.1</span> Tamanho do efeito<a href="efeito-pvalor.html#tamanho-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-meta-análise" class="section level3 hasAnchor" number="36.1.1">
-<h3><span class="header-section-number">36.1.1</span> O que é meta-análise?<a href="meta-analise.html#o-que-é-meta-análise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-é-o-tamanho-do-efeito" class="section level3 hasAnchor" number="16.1.1">
+<h3><span class="header-section-number">16.1.1</span> O que é o tamanho do efeito?<a href="efeito-pvalor.html#o-que-é-o-tamanho-do-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Tamanho do efeito quantifica a magnitude de um efeito real da análise, expressando uma importância descritiva dos resultados.<span class="citation"><sup><a href="#ref-Kim2015">167</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="quais-são-os-tipos-de-tamanho-do-efeito" class="section level3 hasAnchor" number="16.1.2">
+<h3><span class="header-section-number">16.1.2</span> Quais são os tipos de tamanho do efeito?<a href="efeito-pvalor.html#quais-são-os-tipos-de-tamanho-do-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Diferenças padronizadas entre grupos:<span class="citation"><sup><a href="#ref-Sullivan2012">155</a>,<a href="#ref-Kim2015">167</a></sup></span></p>
+<ul>
+<li><p>Cohen’s d</p></li>
+<li><p>Glass’s <span class="math inline">\(\Delta\)</span></p></li>
+<li><p>Razão de chances (<span class="math inline">\(RC\)</span> ou <span class="math inline">\(OR\)</span>)</p></li>
+<li><p>Risco relativo ou razão de risco (<span class="math inline">\(RR\)</span>)</p></li>
+</ul></li>
+<li><p>Medidas de associação:<span class="citation"><sup><a href="#ref-Sullivan2012">155</a>,<a href="#ref-Kim2015">167</a></sup></span></p>
+<ul>
+<li><p>Coeficiente de correlação de Pearson (<span class="math inline">\(r\)</span>)</p></li>
+<li><p>Coeficiente de determinação (<span class="math inline">\(R^2\)</span>)</p></li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+<div id="como-converter-um-tamanho-de-efeito-em-outro" class="section level3 hasAnchor" number="16.1.3">
+<h3><span class="header-section-number">16.1.3</span> Como converter um tamanho de efeito em outro?<a href="efeito-pvalor.html#como-converter-um-tamanho-de-efeito-em-outro" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-Kim2015">167</a></sup></span></li>
+</ul>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>effectsize</em><span class="citation"><sup><a href="#ref-effectsize">168</a></sup></span> fornece diversas funções para conversão de diferentes estimativas de tamanhos de efeito.</p>
+</div>
+<p><br></p>
+</div>
+<div id="como-interpretar-um-tamanho-do-efeito" class="section level3 hasAnchor" number="16.1.4">
+<h3><span class="header-section-number">16.1.4</span> Como interpretar um tamanho do efeito?<a href="efeito-pvalor.html#como-interpretar-um-tamanho-do-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Tamanhos de efeito podem ser comparadores entre diferentes estudos.<span class="citation"><sup><a href="#ref-Sullivan2012">155</a></sup></span></li>
+</ul>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>effectsize</em><span class="citation"><sup><a href="#ref-effectsize">168</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/effectsize/versions/0.8.3/topics/rules"><em>rules</em></a> para criar regras de interpretação de tamanhos de efeito.</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>effectsize</em><span class="citation"><sup><a href="#ref-effectsize">168</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/effectsize/versions/0.8.3/topics/interpret"><em>interpret</em></a> para interpretar os tamanhos de efeito com base em uma lista de regras pré-definidas.</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>pwr</em><span class="citation"><sup><a href="#ref-pwr">160</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/cohen.ES"><em>cohen.ES</em></a> para obter os tamanhos de efeito “pequeno”, “médio” e “grande” para diversos testes de hipóteses.</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="p-valor" class="section level2 hasAnchor" number="16.2">
+<h2><span class="header-section-number">16.2</span> P-valor<a href="efeito-pvalor.html#p-valor" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-o-p-valor" class="section level3 hasAnchor" number="16.2.1">
+<h3><span class="header-section-number">16.2.1</span> O que é o P-valor?<a href="efeito-pvalor.html#o-que-é-o-p-valor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>P-valor é a probabilidade, assumindo-se um dado modelo estatístico, de que um efeito calculado a partir dos dados seria igual ou mais extremo do que o seu valor observado.<span class="citation"><sup><a href="#ref-wasserstein2016">169</a></sup></span></p></li>
+<li><p>P-valor é uma variável aleatória que possui distribuição uniforme quando a hipótese nula <span class="math inline">\(H_{0}\)</span> é verdadeira.<span class="citation"><sup><a href="#ref-altman2017">170</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="como-interpretar-o-p-valor" class="section level3 hasAnchor" number="16.2.2">
+<h3><span class="header-section-number">16.2.2</span> Como interpretar o P-valor?<a href="efeito-pvalor.html#como-interpretar-o-p-valor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>P-valores podem indicar quantitativamente a incompatibilidade entre os dados obtidos e o modelo estatístico especificado a priori (geralmente constituído pela hipótese nula <span class="math inline">\(H_{0}\)</span>).<span class="citation"><sup><a href="#ref-wasserstein2016">169</a></sup></span></p></li>
+<li><p>P-valores menores/maiores do que o nível de significância estatístico pré-estabelecido não devem ser utilizados como única fonte de informação para tomada de decisão em ciência.<span class="citation"><sup><a href="#ref-wasserstein2016">169</a></sup></span></p></li>
+<li><p>P-valor resulta da coleta e análise de dados, e assim quantifica a plausibilidade dos dados observados sob a hipótese nula <span class="math inline">\(H_{0}\)</span>.<span class="citation"><sup><a href="#ref-heinze2016">171</a></sup></span></p></li>
+<li><p>P-valores abaixo de um nível de significância estatística pré-especificado representam que um experimento merece ser repetido, com a rejeição da hipótese nula <span class="math inline">\(H_{0}\)</span>) justificada apenas quando experimentos adicionais frequentemente reportem igualmente resultados positivos (rejeição da hipótese nula <span class="math inline">\(H_{0}\)</span>).<span class="citation"><sup><a href="#ref-goodman2016">163</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="o-que-o-p-valor-não-é" class="section level3 hasAnchor" number="16.2.3">
+<h3><span class="header-section-number">16.2.3</span> O que o P-valor não é?<a href="efeito-pvalor.html#o-que-o-p-valor-não-é" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>P-valor não representa a probabilidade de que a hipótese nula <span class="math inline">\(H_{0}\)</span>) seja verdadeira, nem a probabilidade de que os dados tenham sido produzidos pelo acaso.<span class="citation"><sup><a href="#ref-wasserstein2016">169</a></sup></span></p></li>
+<li><p>P-valor não mede o tamanho do efeito ou a relevância da sua observação.<span class="citation"><sup><a href="#ref-wasserstein2016">169</a></sup></span></p></li>
+<li><p>P-valor sozinho não provê informação suficiente sobre a evidência sobre um modelo teórico. A sua interpretação correta requer uma descrição ampla sobre o delineamento, métodos e análises estatísticas aplicados no estudo.<span class="citation"><sup><a href="#ref-wasserstein2016">169</a></sup></span></p></li>
+<li><p>Evidência estatística de significância não provê informação sobre a magnitude do efeito observado e não necessariamente implica que o efeito é robusto.<span class="citation"><sup><a href="#ref-Landis2012">121</a>,<a href="#ref-altman2017">170</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="qual-a-origem-do-p005" class="section level3 hasAnchor" number="16.2.4">
+<h3><span class="header-section-number">16.2.4</span> Qual a origem do ‘P&lt;0,05’?<a href="efeito-pvalor.html#qual-a-origem-do-p005" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>.[REF]</li>
 </ul>
-<p><br></p>
 </div>
-</div>
-<div id="interpretacao" class="section level2 hasAnchor" number="36.2">
-<h2><span class="header-section-number">36.2</span> Interpretação de efeitos em meta-análise<a href="meta-analise.html#interpretacao" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="como-avaliar-a-variação-do-tamanho-do-efeito" class="section level3 hasAnchor" number="36.2.1">
-<h3><span class="header-section-number">36.2.1</span> Como avaliar a variação do tamanho do efeito?<a href="meta-analise.html#como-avaliar-a-variação-do-tamanho-do-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-os-complementos-ou-alternativas-ao-p-valor" class="section level3 hasAnchor" number="16.2.5">
+<h3><span class="header-section-number">16.2.5</span> Quais são os complementos ou alternativas ao P-valor?<a href="efeito-pvalor.html#quais-são-os-complementos-ou-alternativas-ao-p-valor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>O intervalo de predição contém informação sobre a variação do tamanho do efeito.<span class="citation"><sup><a href="#ref-Borenstein2022">262</a></sup></span></p></li>
-<li><p>Se o intervalo de predição não contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que (a) o tratamento funciona igualmente bem em todas as populações, ou que ele funciona melhor em algumas populações do que em outras.<span class="citation"><sup><a href="#ref-Borenstein2022">262</a></sup></span></p></li>
-<li><p>Se o intervalo de predição contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que o tratamento pode ser benéfico em algumas populações, mas prejudicial em outras, de modo que a estimativa pontual (geralmente a média) torna-se amplamente irrelevante. Nesse caso, é recomendado investigar em que populações o tratamento seria benéfico e em quais causaria danos.<span class="citation"><sup><a href="#ref-Borenstein2022">262</a></sup></span></p></li>
+<li><p>Intervalos de confiança, credibilidade ou predição.<span class="citation"><sup><a href="#ref-wasserstein2016">169</a></sup></span></p></li>
+<li><p>Razão de verossimilhança.<span class="citation"><sup><a href="#ref-wasserstein2016">169</a></sup></span></p></li>
+<li><p>Métodos Bayesianos, fator Bayes.<span class="citation"><sup><a href="#ref-wasserstein2016">169</a></sup></span></p></li>
 </ul>
-<p><br></p>
-</div>
-<div id="como-avaliar-a-heterogeneidade-entre-os-estudos" class="section level3 hasAnchor" number="36.2.2">
-<h3><span class="header-section-number">36.2.2</span> Como avaliar a heterogeneidade entre os estudos?<a href="meta-analise.html#como-avaliar-a-heterogeneidade-entre-os-estudos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>A heterogeneidade - variação não-aleatória - no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo <span class="math inline">\(I^{2}\)</span>.<span class="citation"><sup><a href="#ref-Borenstein2022">262</a>,<a href="#ref-Rücker2008">263</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> representa qual proporção da variância observada reflete a variância nos efeitos verdadeiros em vez do erro de amostragem.<span class="citation"><sup><a href="#ref-Borenstein2022">262</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> não depende da quantidade de estudos incluídos na meta-análise. Entretanto, <span class="math inline">\(I^{2}\)</span> aumenta com a quantidade de participantes incluídos nos estudos meta-analisados.<span class="citation"><sup><a href="#ref-Rücker2008">263</a></sup></span></p></li>
-<li><p>A heterogeneidade entre estudos é explicada de modo mais confiável utilizando dados de pacientes individuais, uma vez que a direção verdadeira da modificação de efeito não pode ser observada a partir de dados agregados no estudo.<span class="citation"><sup><a href="#ref-degrooth2023">264</a></sup></span></p></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>metagear</em><span class="citation"><sup><a href="#ref-metagear">265</a></sup></span> fornece funções para condução e análise de revisões sistemáticas.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>metagear</em><span class="citation"><sup><a href="#ref-metagear">265</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA"><em>plot_PRISMA</em></a> para gerar o fluxograma de uma revisão sistemática de acordo com o <em>Preferred Reporting Items for Systematic Reviews and Meta-Analyses</em><span class="citation"><sup><a href="#ref-Moher2015">266</a></sup></span>.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>PRISMA2020</em><span class="citation"><sup><a href="#ref-PRISMA2020-2">267</a>,<a href="#ref-PRISMA2020">268</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram"><em>PRISMA_flowdiagram</em></a> para elaboração do fluxograma de revisões sistemáticas no formato padrão.</p>
-</div>
 <p><br></p>
 
 </div>
@@ -1105,26 +1165,32 @@ div.csl-indent {
 </div>
 <h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-Borenstein2022" class="csl-entry">
-<div class="csl-left-margin">262. </div><div class="csl-right-inline">Borenstein M. In a meta-analysis, the I-squared statistic does not tell us how much the effect size varies. <em>Journal of Clinical Epidemiology</em>. October 2022. doi:<a href="https://doi.org/10.1016/j.jclinepi.2022.10.003">10.1016/j.jclinepi.2022.10.003</a></div>
+<div id="ref-Landis2012" class="csl-entry">
+<div class="csl-left-margin">121. </div><div class="csl-right-inline">Landis SC, Amara SG, Asadullah K, et al. A call for transparent reporting to optimize the predictive value of preclinical research. <em>Nature</em>. 2012;490(7419):187-191. doi:<a href="https://doi.org/10.1038/nature11556">10.1038/nature11556</a></div>
 </div>
-<div id="ref-Rücker2008" class="csl-entry">
-<div class="csl-left-margin">263. </div><div class="csl-right-inline">Rücker G, Schwarzer G, Carpenter JR, Schumacher M. Undue reliance on I 2 in assessing heterogeneity may mislead. <em>BMC Medical Research Methodology</em>. 2008;8(1). doi:<a href="https://doi.org/10.1186/1471-2288-8-79">10.1186/1471-2288-8-79</a></div>
+<div id="ref-Sullivan2012" class="csl-entry">
+<div class="csl-left-margin">155. </div><div class="csl-right-inline">Sullivan GM, Feinn R. Using Effect Size<span></span>or Why the <span><em>P</em></span> Value Is Not Enough. <em>Journal of Graduate Medical Education</em>. 2012;4(3):279-282. doi:<a href="https://doi.org/10.4300/jgme-d-12-00156.1">10.4300/jgme-d-12-00156.1</a></div>
 </div>
-<div id="ref-degrooth2023" class="csl-entry">
-<div class="csl-left-margin">264. </div><div class="csl-right-inline">Grooth HJ de, Parienti JJ. Heterogeneity between studies can be explained more reliably with individual patient data. <em>Intensive Care Medicine</em>. July 2023. doi:<a href="https://doi.org/10.1007/s00134-023-07163-z">10.1007/s00134-023-07163-z</a></div>
+<div id="ref-pwr" class="csl-entry">
+<div class="csl-left-margin">160. </div><div class="csl-right-inline">Champely S. Pwr: Basic functions for power analysis. 2020. <a href="https://CRAN.R-project.org/package=pwr">https://CRAN.R-project.org/package=pwr.</a></div>
 </div>
-<div id="ref-metagear" class="csl-entry">
-<div class="csl-left-margin">265. </div><div class="csl-right-inline">Lajeunesse MJ. Facilitating systematic reviews, data extraction, and meta-analysis with the metagear package for r. 2016;7:323-330.</div>
+<div id="ref-goodman2016" class="csl-entry">
+<div class="csl-left-margin">163. </div><div class="csl-right-inline">Goodman SN. Aligning statistical and scientific reasoning. <em>Science</em>. 2016;352(6290):1180-1181. doi:<a href="https://doi.org/10.1126/science.aaf5406">10.1126/science.aaf5406</a></div>
 </div>
-<div id="ref-Moher2015" class="csl-entry">
-<div class="csl-left-margin">266. </div><div class="csl-right-inline">Moher D, Shamseer L, Clarke M, et al. Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement. <em>Systematic Reviews</em>. 2015;4(1). doi:<a href="https://doi.org/10.1186/2046-4053-4-1">10.1186/2046-4053-4-1</a></div>
+<div id="ref-Kim2015" class="csl-entry">
+<div class="csl-left-margin">167. </div><div class="csl-right-inline">Kim HY. Statistical notes for clinical researchers: effect size. <em>Restorative Dentistry &amp; Endodontics</em>. 2015;40(4):328. doi:<a href="https://doi.org/10.5395/rde.2015.40.4.328">10.5395/rde.2015.40.4.328</a></div>
 </div>
-<div id="ref-PRISMA2020-2" class="csl-entry">
-<div class="csl-left-margin">267. </div><div class="csl-right-inline">Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:<a href="https://doi.org/10.1002/cl2.1230">10.1002/cl2.1230</a></div>
+<div id="ref-effectsize" class="csl-entry">
+<div class="csl-left-margin">168. </div><div class="csl-right-inline">Ben-Shachar MS, Lüdecke D, Makowski D. <span></span>E<span></span>ffectsize: Estimation of effect size indices and standardized parameters. 2020;5:2815. doi:<a href="https://doi.org/10.21105/joss.02815">10.21105/joss.02815</a></div>
 </div>
-<div id="ref-PRISMA2020" class="csl-entry">
-<div class="csl-left-margin">268. </div><div class="csl-right-inline">Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:<a href="https://doi.org/10.1002/cl2.1230">10.1002/cl2.1230</a></div>
+<div id="ref-wasserstein2016" class="csl-entry">
+<div class="csl-left-margin">169. </div><div class="csl-right-inline">Wasserstein RL, Lazar NA. The ASA Statement on <span><em>p</em></span>-Values: Context, Process, and Purpose. <em>The American Statistician</em>. 2016;70(2):129-133. doi:<a href="https://doi.org/10.1080/00031305.2016.1154108">10.1080/00031305.2016.1154108</a></div>
+</div>
+<div id="ref-altman2017" class="csl-entry">
+<div class="csl-left-margin">170. </div><div class="csl-right-inline">Altman N, Krzywinski M. P values and the search for significance. <em>Nature Methods</em>. 2017;14(1):3-4. doi:<a href="https://doi.org/10.1038/nmeth.4120">10.1038/nmeth.4120</a></div>
+</div>
+<div id="ref-heinze2016" class="csl-entry">
+<div class="csl-left-margin">171. </div><div class="csl-right-inline">Heinze G, Dunkler D. Five myths about variable selection. <em>Transplant International</em>. 2016;30(1):6-10. doi:<a href="https://doi.org/10.1111/tri.12895">10.1111/tri.12895</a></div>
 </div>
 </div>
             </section>
@@ -1132,8 +1198,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="analise-concordancia-confiabilidade.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="redacao.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analise-inferencial.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parte-3---estatística-aplicada.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

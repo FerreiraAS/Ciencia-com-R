@@ -1,0 +1,119 @@
+# **Tamanho do efeito e P-valor** {#efeito-pvalor}
+
+<br>
+
+## Tamanho do efeito {#tamanho-efeito}
+
+<br>
+
+### O que é o tamanho do efeito?
+
+-   Tamanho do efeito quantifica a magnitude de um efeito real da análise, expressando uma importância descritiva dos resultados.[@Kim2015]
+
+<br>
+
+### Quais são os tipos de tamanho do efeito?
+
+-   Diferenças padronizadas entre grupos:[@Sullivan2012; @Kim2015]
+
+    -   Cohen's d
+
+    -   Glass's $\Delta$
+
+    -   Razão de chances ($RC$ ou $OR$)
+
+    -   Risco relativo ou razão de risco ($RR$)
+
+-   Medidas de associação:[@Sullivan2012; @Kim2015]
+
+    -   Coeficiente de correlação de Pearson ($r$)
+
+    -   Coeficiente de determinação ($R^2$)
+
+<br>
+
+### Como converter um tamanho de efeito em outro?
+
+-   .[@Kim2015]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *effectsize*[@effectsize] fornece diversas funções para conversão de diferentes estimativas de tamanhos de efeito.
+:::
+
+<br>
+
+### Como interpretar um tamanho do efeito?
+
+-   Tamanhos de efeito podem ser comparadores entre diferentes estudos.[@Sullivan2012]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *effectsize*[@effectsize] fornece a função [*rules*](https://www.rdocumentation.org/packages/effectsize/versions/0.8.3/topics/rules) para criar regras de interpretação de tamanhos de efeito.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *effectsize*[@effectsize] fornece a função [*interpret*](https://www.rdocumentation.org/packages/effectsize/versions/0.8.3/topics/interpret) para interpretar os tamanhos de efeito com base em uma lista de regras pré-definidas.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*cohen.ES*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/cohen.ES) para obter os tamanhos de efeito "pequeno", "médio" e "grande" para diversos testes de hipóteses.
+:::
+
+<br>
+
+## P-valor {#p-valor}
+
+<br>
+
+### O que é o P-valor?
+
+-   P-valor é a probabilidade, assumindo-se um dado modelo estatístico, de que um efeito calculado a partir dos dados seria igual ou mais extremo do que o seu valor observado.[@wasserstein2016]
+
+-   P-valor é uma variável aleatória que possui distribuição uniforme quando a hipótese nula $H_{0}$ é verdadeira.[@altman2017]
+
+<br>
+
+### Como interpretar o P-valor?
+
+-   P-valores podem indicar quantitativamente a incompatibilidade entre os dados obtidos e o modelo estatístico especificado a priori (geralmente constituído pela hipótese nula $H_{0}$).[@wasserstein2016]
+
+-   P-valores menores/maiores do que o nível de significância estatístico pré-estabelecido não devem ser utilizados como única fonte de informação para tomada de decisão em ciência.[@wasserstein2016]
+
+-   P-valor resulta da coleta e análise de dados, e assim quantifica a plausibilidade dos dados observados sob a hipótese nula $H_{0}$.[@heinze2016]
+
+-   P-valores abaixo de um nível de significância estatística pré-especificado representam que um experimento merece ser repetido, com a rejeição da hipótese nula $H_{0}$) justificada apenas quando experimentos adicionais frequentemente reportem igualmente resultados positivos (rejeição da hipótese nula $H_{0}$).[@goodman2016]
+
+<br>
+
+### O que o P-valor não é?
+
+-   P-valor não representa a probabilidade de que a hipótese nula $H_{0}$) seja verdadeira, nem a probabilidade de que os dados tenham sido produzidos pelo acaso.[@wasserstein2016]
+
+-   P-valor não mede o tamanho do efeito ou a relevância da sua observação.[@wasserstein2016]
+
+-   P-valor sozinho não provê informação suficiente sobre a evidência sobre um modelo teórico. A sua interpretação correta requer uma descrição ampla sobre o delineamento, métodos e análises estatísticas aplicados no estudo.[@wasserstein2016]
+
+-   Evidência estatística de significância não provê informação sobre a magnitude do efeito observado e não necessariamente implica que o efeito é robusto.[@Landis2012; @altman2017]
+
+<br>
+
+### Qual a origem do 'P<0,05'?
+
+-   .[REF]
+
+### Quais são os complementos ou alternativas ao P-valor?
+
+-   Intervalos de confiança, credibilidade ou predição.[@wasserstein2016]
+
+-   Razão de verossimilhança.[@wasserstein2016]
+
+-   Métodos Bayesianos, fator Bayes.[@wasserstein2016]
+
+<br>
