@@ -8,7 +8,7 @@
 
 ### O que é R?
 
--   R é um programa de computador com linguagem computacional direcionada para análise estatística.[@ihaka1996]
+-   R é um programa de computador de código aberto com linguagem computacional direcionada para análise estatística.[@ihaka1996; @introduc2020]
 
 -   `r R.version$version.string` está disponível gratuitamente em [Comprehensive R Archive Network (CRAN)]((https://cran.r-project.org)).
 
@@ -16,9 +16,19 @@
 
 ### O que é RStudio?
 
--   RStudio é um ambiente de desenvolvimento integrado (*integrated development environment*, IDE) desenvolvido visando a reprodutibilidade e a simplicidade para a criação e disseminação de conhecimento.[@racine2011]
+-   RStudio é um ambiente de desenvolvimento integrado (*integrated development environment*, IDE) desenvolvido visando a reprodutibilidade e a simplicidade para a criação e disseminação de conhecimento.[@racine2011; @introduc2020]
 
--   As principais características do RStudio incluem um ambiente de edição com abas para acesso rápido a arquivos, comandos e resultados; histórico de comandos previamente utilizados; ferramentas para visualização de bancos de dados e elaboração de scripts e gráficos e tabelas.[@racine2011]
+-   As principais características do RStudio incluem um ambiente de edição com abas para acesso rápido a arquivos, comandos e resultados; histórico de comandos previamente utilizados; ferramentas para visualização de bancos de dados e elaboração de scripts e gráficos e tabelas.[@racine2011; @introduc2020]
+
+-   O ambiente do RStudio é dividido em paineis:
+
+    -   *Console*: para execução de códigos simples, .[@introduc2020]
+
+    -   *Editor*: para edição de R scripts.[@introduc2020]
+
+    -   *Environment*: para visualização de objetos criados durante a sessão de trabalho.[@introduc2020]
+
+    -   *Plots*: para visualização de gráficos criados durante a sessão de trabalho.[@introduc2020]
 
 -   RStudio está disponível gratuitamente em [Posit](https://posit.co/download/rstudio-desktop/).
 
@@ -26,7 +36,7 @@
 
 ### Por que usar R?
 
--   R é o software de maior abrangência de métodos estatísticos, possui sintaxe que permite análises estatísticas reproduzíveis e está disponível gratuitamente no website CRAN (<http://cran.r-project.org/>).[@mair2016]
+-   R é o software de maior abrangência de métodos estatísticos, possui sintaxe que permite análises estatísticas reproduzíveis e está disponível gratuitamente no [Comprehensive R Archive Network (CRAN)]((https://cran.r-project.org)).[@mair2016]
 
 <br>
 
@@ -57,6 +67,46 @@ Os pacotes *jmv*[@jmv] e *jmvconnect*[@jmvconnect] fornecem funções para anál
 -   Scripts permitem ao usuário se concentrar nas tarefas mais importantes da computação e utilizar pacotes ou bibliotecas para executar as funções mais básicas com maior eficiência.[@hinsen2011]
 
 -   Um script é um arquivo de texto contendo (quase) os mesmos comandos que você digitaria na linha de comando do R. (Quase) refere-se ao fato de que se você estiver usando *sink()* para enviar a saída para um arquivo, você terá que incluir alguns comandos em *print()* para obter a mesma saída da linha de comando ([CRAN](https://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_scrpt.html)).
+
+<br>
+
+### O que são pacotes?
+
+-   Pacotes são conjuntos de scripts programados pela comunidade e compartilhados para uso público.[@introduc2020]
+
+-   Os pacotes ficam armazenados no [Comprehensive R Archive Network (CRAN)]((https://cran.r-project.org)) e podem ser instalados diretamente no RStudio.[@introduc2020]
+
+-   Na mais recente atualização deste livro, o [Comprehensive R Archive Network (CRAN)]((https://cran.r-project.org)) possui `r length(utils::available.packages(repos = "http://cran.us.r-project.org"))` pacotes disponíveis.[@introduc2020]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *utils*[@utils] fornece a função [*install.packages*](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/install.packages) para instalar os pacotes no computador.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *utils*[@utils] fornece a função [*library*](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/library) para carregar os pacotes instalados no computador.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *utils*[@utils] fornece a função [*require*](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/require) para indicar se o pacote requisitado está disponível.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *utils*[@utils] fornece a função [*installed.packages*](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/installed.packages) para listar os pacotes instalados no computador.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *utils*[@utils] fornece a função [*update.packages*](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/update.packages) para atualizar os pacotes instalados no computador.
+:::
 
 <br>
 
@@ -110,10 +160,12 @@ O pacote *styler*[@styler] fornece a função [*style_file*](https://www.rdocume
 
 -   Ao trabalhar com relatórios dinâmicos, é possível extrair o mesmo script usado para análise estatística. Os documentos podem ser compilados em vários formatos de saída e salvos como DOCX, PPTX e PDF.[@mair2016]
 
+-   Muitos erros de análise poderiam ser evitados com a adoção de boas práticas de programação em manuscritos reproduzíveis.[@trisovic2022]
+
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *rmarkdown*[@rmarkdown] fornece as funções [*render*](<https://www.rdocumentation.org/packages/rmarkdown/versions/2.24/topics/render>) para criar manuscritos reprodutíveis a partir de arquivos .Rmd.
+O pacote *rmarkdown*[@rmarkdown] fornece as funções [*render*](https://www.rdocumentation.org/packages/rmarkdown/versions/2.24/topics/render) para criar manuscritos reprodutíveis a partir de arquivos .Rmd.
 :::
 
 <br>
@@ -146,6 +198,12 @@ O pacote *projects*[@projects] fornece a função [*setup_projects*](https://www
 
 <br>
 
+### Por que compartilhar scripts?
+
+-   Compartilhar o script --- principalmente junto aos dados --- pode facilitar a replicação direta do estudo, a detecção de eventuais erros de análise, a detecção de pesquisas fraudulentas.[@schultze2023]
+
+<br>
+
 ### O que pode ser compartilhado?
 
 -   Idealmente, todos os scripts, pacotes/bibliotecas e dados necessários para outros reproduzirem seus dados.[@Eglen2017]
@@ -162,7 +220,15 @@ O pacote *projects*[@projects] fornece a função [*setup_projects*](https://www
 
 ### Como preparar scripts para compartilhamento?
 
+-   Providencie a documentação sobre seu script (ex.: arquivo README).[@Eglen2017]
+
+- Inclua a versão dos pacotes usados no seu script por meio de um script inicial para instalação de pacotes (ex.: 'instalar.R').[@trisovic2022]
+
 -   Documente em um arquivo README os arquivos disponíveis e os pré-requisitos necessários para executar o código (ex.: pacotes e respectivas versões). Uma lista de configurações (hardware e software) que foram usadas para rodar o código pode ajudar na reprodução dos resultados.[@hofner2015]
+
+- Inclua a informação da sessão em que os scripts foram rodados.[@trisovic2022]
+
+- Use endereços de arquivos relativos.[@trisovic2022]
 
 -   Crie links persistentes para versões do seu script.[@Eglen2017]
 
@@ -172,7 +238,13 @@ O pacote *projects*[@projects] fornece a função [*setup_projects*](https://www
 
 -   Compartilhe todos os pacotes relacionados à sua análise.[@Zhao2023]
 
--   Providencie a documentação sobre seu script (ex.: arquivo README).[@Eglen2017]
+- Teste o script em uma nova sessão antes de compartilhar.[@trisovic2022]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *utils*[@utils] fornece a função [*sessionInfo*](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/sessionInfo) para obter informações sobre a sessão atual incluindo a versão do R, o sistmea operacional e os pacotes carregados.
+:::
 
 <br>
 
