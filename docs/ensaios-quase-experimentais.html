@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 30 Simulação computacional | Ciência com R</title>
+  <title>Capítulo 34 Ensaios quase-experimentais | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 30 Simulação computacional | Ciência com R" />
+  <meta property="og:title" content="Capítulo 34 Ensaios quase-experimentais | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 30 Simulação computacional | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 34 Ensaios quase-experimentais | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tamanho-amostral.html"/>
-<link rel="next" href="propriedades-psicometricas.html"/>
+<link rel="prev" href="estudos-observacionais.html"/>
+<link rel="next" href="ensaios-experimentais.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -1059,55 +1059,20 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="simulacao-computacional" class="section level1 hasAnchor" number="30">
-<h1><span class="header-section-number">Capítulo 30</span> <strong>Simulação computacional</strong><a href="simulacao-computacional.html#simulacao-computacional" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="ensaios-quase-experimentais" class="section level1 hasAnchor" number="34">
+<h1><span class="header-section-number">Capítulo 34</span> <strong>Ensaios quase-experimentais</strong><a href="ensaios-quase-experimentais.html#ensaios-quase-experimentais" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="simulacao-computacional-dados" class="section level2 hasAnchor" number="30.1">
-<h2><span class="header-section-number">30.1</span> Simulação computacional de dados<a href="simulacao-computacional.html#simulacao-computacional-dados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="caracteristicas" class="section level2 hasAnchor" number="34.1">
+<h2><span class="header-section-number">34.1</span> Características<a href="ensaios-quase-experimentais.html#caracteristicas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-simulação-computacional-de-dados" class="section level3 hasAnchor" number="30.1.1">
-<h3><span class="header-section-number">30.1.1</span> O que é simulação computacional de dados?<a href="simulacao-computacional.html#o-que-é-simulação-computacional-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-as-características-dos-ensaios-quase-experimentais" class="section level3 hasAnchor" number="34.1.1">
+<h3><span class="header-section-number">34.1.1</span> Quais são as características dos ensaios quase-experimentais?<a href="ensaios-quase-experimentais.html#quais-são-as-características-dos-ensaios-quase-experimentais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>.[REF]</li>
 </ul>
-<p><br></p>
-</div>
-</div>
-<div id="monte-carlo" class="section level2 hasAnchor" number="30.2">
-<h2><span class="header-section-number">30.2</span> Método de Monte Carlo<a href="simulacao-computacional.html#monte-carlo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-é-o-método-de-monte-carlo" class="section level3 hasAnchor" number="30.2.1">
-<h3><span class="header-section-number">30.2.1</span> O que é o método de Monte Carlo?<a href="simulacao-computacional.html#o-que-é-o-método-de-monte-carlo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>.[REF]</li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base-5">44</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Random"><em>set.seed</em></a> para especificar uma semente para reprodutibilidade de computações que envolvem números aleatórios.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>simstudy</em><span class="citation"><sup><a href="#ref-simstudy">229</a></sup></span> fornece as funções <a href="https://www.rdocumentation.org/packages/simstudy/versions/0.7.0/topics/defData"><em>defData</em></a> e <a href="https://www.rdocumentation.org/packages/simstudy/versions/0.7.0/topics/genData"><em>genData</em></a> para criar variáveis e simular um banco de dados de acordo com o delineamento pré-especificado, respectivamente.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>InteractionPoweR</em><span class="citation"><sup><a href="#ref-InteractionPoweR">166</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/InteractionPoweR/versions/0.2.1/topics/generate_interaction"><em>generate_interaction</em></a> para simular bancos de dads com efeitos de interação.</p>
-</div>
 <p><br></p>
 
 </div>
-</div>
-</div>
-<h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-base-5" class="csl-entry">
-<div class="csl-left-margin">44. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
-</div>
-<div id="ref-InteractionPoweR" class="csl-entry">
-<div class="csl-left-margin">166. </div><div class="csl-right-inline">Baranger DAA, Finsaas MC, Goldstein BL, Vize CE, Lynam DR, Olino TM. Tutorial: Power analyses for interaction effects in cross-sectional regressions. 2022. doi:<a href="https://doi.org/10.31234/osf.io/5ptd7">10.31234/osf.io/5ptd7</a></div>
-</div>
-<div id="ref-simstudy" class="csl-entry">
-<div class="csl-left-margin">229. </div><div class="csl-right-inline">Goldfeld K, Wujciak-Jens J. Simstudy: Illuminating research methods through data generation. 2020;5:2763. doi:<a href="https://doi.org/10.21105/joss.02763">10.21105/joss.02763</a></div>
 </div>
 </div>
             </section>
@@ -1115,8 +1080,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="tamanho-amostral.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="propriedades-psicometricas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estudos-observacionais.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ensaios-experimentais.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
