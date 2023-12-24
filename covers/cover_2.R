@@ -28,7 +28,7 @@ plot(
 text(
   x = W,
   y = H - 0.5,
-  labels = substitute(paste(grDevices::bold(
+  labels = substitute(paste(bold(
     "Arthur de Sá Ferreira"
   ))),
   pos = 2,
@@ -40,7 +40,7 @@ text(
 text(
   x = W,
   y = H / 2 + 2 - 1,
-  labels = substitute(paste(grDevices::bold("Ciência com   "))),
+  labels = substitute(paste(bold("Ciência com   "))),
   pos = 2,
   cex = 6.5,
   col = "black"
@@ -48,7 +48,7 @@ text(
 text(
   x = W,
   y = H / 2 + 2 - 1,
-  labels = substitute(paste(grDevices::bold("R"))),
+  labels = substitute(paste(bold("R"))),
   pos = 2,
   cex = 6.5,
   col = "black"
@@ -59,7 +59,7 @@ text(
   x = W,
   y = H / 2 + 3 - 2.75,
   labels = substitute(paste(
-    grDevices::italic("Perguntas e respostas para pesquisadores e analistas de dados")
+    italic("Perguntas e respostas para pesquisadores e analistas de dados")
   )),
   pos = 2,
   cex = 1.5,
