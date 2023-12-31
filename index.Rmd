@@ -79,9 +79,21 @@ cat('</center>')
 \markboth{}{}
 ```
 
+```{=html}
+<head>
+<meta name="citation_doi" content="doi:10.5281/zenodo.8320232"/><meta name="Doi" content="doi:10.5281/zenodo.8320232"/>
+<meta name="DC.Identifier" content="doi:10.5281/zenodo.8320232"/>
+<meta name="DC.DOI" content="doi:10.5281/zenodo.8320232"/>
+<meta name="DC.Identifier.DOI" content="doi:10.5281/zenodo.8320232"/>
+<meta name="DOIs" content="doi:10.5281/zenodo.8320232"/>
+<meta name="bepress_citation_doi" content="doi:10.5281/zenodo.8320232"/>
+<meta name="rft_id" content="doi:10.5281/zenodo.8320232"/>
+</head>
+```
+
 <div class="boxBorder">
 
-Ferreira, Arthur de Sá. **Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados**. Rio de Janeiro: 1a edição, 2023. `r try(paste0(pdftools::pdf_info("docs/Ciencia-com-R.pdf")$pages, "p."), silent = TRUE)` `r if(knitr::is_html_output()){'<a href="https://doi.org/10.5281/zenodo.8320233" style="vertical-align:middle;"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8320233.svg" alt="DOI"  style="vertical-align:top;"></a>'} else {'[doi: 10.5281/zenodo.8320233](https://doi.org/10.5281/zenodo.8320233).'}`
+Ferreira, Arthur de Sá. **Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados**. Rio de Janeiro: 1a edição, 2023. `r try(paste0(pdftools::pdf_info("docs/Ciencia-com-R.pdf")$pages, "p."), silent = TRUE)` `r if(knitr::is_html_output()){'<a href="https://doi.org/10.5281/zenodo.8320232" style="vertical-align:middle;"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8320232.svg" alt="DOI"  style="vertical-align:top;"></a>'} else {'[doi: 10.5281/zenodo.8320232](https://doi.org/10.5281/zenodo.8320232).'}`
 
 </div>
 
@@ -108,9 +120,11 @@ cat('E-book: ISBN')
 
 ```{r visit-counter, echo = FALSE, results = "asis"}
 if(knitr::is_html_output()){
-  cat('<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a>
-<br>')
+  cat('<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a>')
+  cat('<br>')
   cat('A versão online desta obra está licenciada com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Atribuição-NãoComercial 4.0 Internacional.</a>')
+  cat('<br>')
+  cat('<b>Ciência com R</b> por <b>Arthur de Sa Ferreira</b> está licenciada sob a <a rel="license" data-spdx="Apache-2.0></a>" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.<br>')
   cat(paste0(' Atualizado em ', format(Sys.Date(), "%d/%m/%Y")))
   cat('<br>')
   cat('<center>[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fferreiraas.github.io%2FCiencia-com-R%2F&count_bg=%232C3E50&title_bg=%2375A5D5&icon=&icon_color=%23000000&title=Visitas&edge_flat=false)](https://hits.seeyoufarm.com)</center>')
