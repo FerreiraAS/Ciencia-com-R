@@ -3,7 +3,7 @@ title: '**Ciência com R**'
 
 subtitle: 'Perguntas e respostas para pesquisadores e analistas de dados'
 
-author: '&copy; `r format(Sys.Date(), "%Y")` by Arthur de Sá Ferreira <a id="cy-effective-orcid-url" class="underline"s href="https://orcid.org/0000-0001-7014-2002" target="orcid.widget" rel="me noopener noreferrer" style="vertical-align: top"><br><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width: 1em; margin-inline-start: 0.0em" alt="ORCID iD icon"/> https://orcid.org/0000-0001-7014-2002 </a>'
+author: '&copy; 2023-`r format(Sys.Date(), "%Y")` by Arthur de Sá Ferreira <a id="cy-effective-orcid-url" class="underline"s href="https://orcid.org/0000-0001-7014-2002" target="orcid.widget" rel="me noopener noreferrer" style="vertical-align: top"><br><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width: 1em; margin-inline-start: 0.0em" alt="ORCID iD icon"/> https://orcid.org/0000-0001-7014-2002 </a>'
 
 url: 'https://ferreiraas.github.io/Ciencia-com-R/'
 cover-image: "images/Cover_1.png"
@@ -104,7 +104,7 @@ Ferreira, Arthur de Sá. **Ciência com R: Perguntas e respostas para pesquisado
 <br>
 
 ```{r ficha, echo = FALSE, results = "asis", eval = !knitr::is_html_output()}
-cat('Copyright © 2023 Arthur de Sá Ferreira')
+cat(paste0('Copyright © 2023-', format(Sys.Date(), "%Y")), 'Arthur de Sá Ferreira')
 cat('\n\n')
 cat('\n\n')
 cat('Todos os direitos reservados. Nenhuma parte deste livro pode ser reproduzida ou usada de qualquer maneira sem a permissão prévia por escrito do proprietário dos direitos autorais, exceto para o uso de breves citações em uma resenha do livro.')
@@ -122,10 +122,13 @@ cat('E-book: ISBN')
 if(knitr::is_html_output()){
   cat('<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/></a>')
   cat('<br>')
+  cat('<br>')
   cat('A versão online desta obra está licenciada com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Atribuição-NãoComercial 4.0 Internacional.</a>')
+  cat('<br>')
   cat('<br>')
   cat('<b>Ciência com R</b> por <b>Arthur de Sa Ferreira</b> está licenciada sob a <a rel="license" data-spdx="Apache-2.0></a>" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.<br>')
   cat(paste0(' Atualizado em ', format(Sys.Date(), "%d/%m/%Y")))
+  cat('<br>')
   cat('<br>')
   cat('<center>[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fferreiraas.github.io%2FCiencia-com-R%2F&count_bg=%232C3E50&title_bg=%2375A5D5&icon=&icon_color=%23000000&title=Visitas&edge_flat=false)](https://hits.seeyoufarm.com)</center>')
 }

@@ -6,7 +6,13 @@
 
 <br>
 
-### O que é análise de correlação?
+### O que é covariância?
+
+-   .[REF]
+
+<br>
+
+### O que é correlação?
 
 -   .[REF]
 
@@ -32,10 +38,12 @@
 
 -   Uma escala de medição grosseira (isto é, com representação agregada do constructo na coleta de dados) pode subestimar o tamanho do efeito da correlação $r$ em de cerca de 13% e do coeficiente de determinação $R^2$ de cerca de 30%.[@aguinis2008] Neste caso, a correlação desatenuada $r_{x'y'}$ pode ser calculada pela equação \@ref(eq:r-corrected), utilizando a correlação observada $r_{xy}$ e os fatores de correção $r_{xx'}$ e $r_{yy'}$ para o número de intervalos nas variáveis X e Y, respectivamennte:[@aguinis2008]
 
+```{=tex}
 \begin{equation}
 (\#eq:r-corrected)
 r_{x'y'} = \dfrac{r_{xy}}{r_{xx'}r_{yy'}}
 \end{equation}
+```
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
@@ -44,7 +52,161 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*correct_r_coarseness*](htt
 
 <br>
 
-### Quais testes podem ser usados para análises de correlação?
+- Os coeficientes de correlação possuem suposições que, se violadas, podem levar a interpretações equivocadas. Nestes cenários, visualizar os dados e as relações entre as variáveis pode contribuir com a interpretação e utilidade dos coeficientes de correlação.[@anscombe1973]
+
+-   O *quarteto de Anscombe* é um conjunto de quatro bancos de dados bivariados que possuem a mesma média, variância, correlação e regressão linear (até a 2a casa decimal), mas que são visualmente diferentes e, assim, demonstram a importância da análise gráfica da correlação.[@anscombe1973]
+
+<br>
+
+```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+anscombe.dt <- datasets::anscombe
+anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
+anscombe.dt <- anscombe.dt[c(9, 1:8)]
+
+# exibe a tabela de dados
+kableExtra::kable(
+    anscombe.dt,
+    align = "c",
+    format = ifelse(knitr::is_html_output(), "html", "latex"),
+    booktabs = TRUE,
+    linesep = "",
+    escape = FALSE,
+    caption = "Quarteto de Anscombe."
+) %>%
+    kableExtra::kable_styling(
+        latex_options = c("basic"),
+        bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+        full_width = ifelse(knitr::is_html_output(), T, T),
+        position = "center"
+    ) %>%
+    kableExtra::row_spec(0,
+                         bold = TRUE,
+                         extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+    kableExtra::column_spec(1, bold = TRUE) %>%
+    kableExtra::row_spec(dim(anscombe.dt)[1],
+                         extra_css = "border-bottom: 1px solid")
+
+anscombe.dt <- anscombe.dt %>% dplyr::select(-ID)
+
+cat('<br>')
+cat('<br>')
+
+# exibe a tabela descritiva
+anscombe.summ <- data.frame(
+    "Quarteto 1" = c(NA, NA, NA, NA, NA, NA, NA, NA),
+    "Quarteto 2" = c(NA, NA, NA, NA, NA, NA, NA, NA),
+    "Quarteto 3" = c(NA, NA, NA, NA, NA, NA, NA, NA),
+    "Quarteto 4" = c(NA, NA, NA, NA, NA, NA, NA, NA)
+)
+ff <- y ~ x
+mods <- setNames(as.list(1:4), paste0("lm", 1:4))
+for (i in 1:4) {
+    ff[2:3] <- lapply(paste0(c("y", "x"), i), as.name)
+    mods[[i]] <- lmi <- lm(ff, data = anscombe.dt)
+    # observacoes
+    anscombe.summ[1, i] <- dim(anscombe.dt)[1]
+    # media x,y
+    anscombe.summ[2, i] <- mean(anscombe.dt[, paste0("x", i)])
+    anscombe.summ[3, i] <- mean(anscombe.dt[, paste0("y", i)])
+    # variancia x,y
+    anscombe.summ[4, i] <- var(anscombe.dt[, paste0("x", i)])
+    anscombe.summ[5, i] <- var(anscombe.dt[, paste0("y", i)])
+    # correlacao
+    anscombe.summ[6, i] <-
+        cor(anscombe.dt[, paste0("x", i)], anscombe.dt[, paste0("y", i)])
+    # coeficiente angular
+    anscombe.summ[7, i] <- coef(lmi)[2]
+    # coeficiente linear
+    anscombe.summ[8, i] <- coef(lmi)[1]
+    # coeficiente de determinacao
+    anscombe.summ[9, i] <- summary(lmi)$r.squared
+}
+rownames(anscombe.summ) <-
+    c(
+        "Observações",
+        "Média x",
+        "Média y",
+        "Variância x",
+        "Variância y",
+        "Correlação",
+        "Coeficiente angular",
+        "Coeficiente linear",
+        "Coeficiente de determinação"
+    )
+anscombe.summ <- round(anscombe.summ, 2)
+
+# exibe a tabela de dados
+kableExtra::kable(
+    anscombe.summ,
+    align = "c",
+    format = ifelse(knitr::is_html_output(), "html", "latex"),
+    booktabs = TRUE,
+    linesep = "",
+    escape = FALSE,
+    caption = "Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos."
+) %>%
+    kableExtra::kable_styling(
+        latex_options = c("basic"),
+        bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+        full_width = ifelse(knitr::is_html_output(), T, T),
+        position = "center"
+    ) %>%
+    kableExtra::row_spec(0,
+                         bold = TRUE,
+                         extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+    kableExtra::column_spec(1, bold = TRUE) %>%
+    kableExtra::row_spec(dim(anscombe.summ)[1],
+                         extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+```{r anscombe-plot, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de dispersão do Quarteto de Anscombe para representação gráfica de conjuntos de dados bivariados com parâmetros quase idênticos e relações muito distintas."}
+library(dplyr)
+anscombe.dt <- datasets::anscombe
+anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
+
+# exibe o gráfico
+datLong <- data.frame(
+    group  = paste0("Quarteto ",  rep(1:4, each = 11)),
+    x = unlist(anscombe.dt[, c(1:4)]),
+    y = unlist(anscombe.dt[, c(5:8)])
+)
+rownames(datLong) <- NULL
+ggplot2::ggplot(data = datLong,
+                mapping = ggplot2::aes(x = x, y = y, group = group)) +
+    ggplot2::geom_point(fill = "black") +
+    ggplot2::geom_smooth(
+        method = "lm",
+        se = FALSE,
+        fullrange = TRUE,
+        colour = "grey"
+    ) +
+    ggplot2::facet_wrap( ~ group) +
+    ggplot2::theme(
+        panel.background = ggplot2::element_blank(),
+        panel.grid.major = ggplot2::element_blank(),
+        panel.grid.minor = ggplot2::element_blank(),
+        axis.line = ggplot2::element_line(colour = "black")
+    ) +
+    ggplot2::theme(legend.key = ggplot2::element_blank()) +
+    ggplot2::coord_fixed()
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *anscombiser*[@anscombiser] fornece a função [*anscombise*](https://www.rdocumentation.org/packages/anscombiser/versions/1.1.0/topics/anscombise) para gerar bancos de dados que compartilham os mesmos valores de parâmetros do Quarteto de Anscombe.
+:::
+
+<br>
+
+## Coeficientes de correlação {#coeficientes-correlacao}
+
+<br>
+
+### Quais coeficientes podem ser usados em análises de correlação?
 
 -   Coeficiente de correlação de Pearson ($r$).[@khamis2008; @allison2022]
 
@@ -117,6 +279,68 @@ O pacote *stats*[@stats-2] fornece a função [*cor.test*](https://www.rdocument
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *stats*[@stats-2] fornece a função [*cor.test*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test) para calcular o coeficiente de correlação de Spearman ($\rho$).
 :::
+
+<br>
+
+-   Coeficiente de Kendall ($\tau$).[@khamis2008; @allison2022]
+
+    -   O coeficiente Kendall $\tau$ avalia a força e direção da relação monotônica entre duas variáveis quantitativas ou qualitativas.[@khamis2008; @allison2022]
+
+    -   O coeficiente Kendall $\tau$ é definido como a proporção de todos os pares concordantes menos a proporção de todos os pares discordantes.[@khamis2008; @allison2022]
+
+    -   Tipo: não-paramétrico.[@khamis2008; @allison2022]
+
+    -   Hipóteses:[@khamis2008; @allison2022]
+
+        -   Nula ($H_{0}$): $\tau=0$
+
+        -   Alternativa ($H_{1}$): $\tau≠0$
+
+    -   Tamanho do efeito:[@khamis2008; @allison2022]
+
+        -   Kendall $\tau$
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats-2] fornece a função [*cor.test*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test) para calcular o coeficiente Kendall $\tau$.
+:::
+
+<br>
+
+-   Coeficiente Cramér ($V$).[REF]
+
+    -   O coeficiente Cramér ($V$) avalia a força e direção da relação entre duas variáveis qualitativas.[REF]
+
+    -   Tipo: não-paramétrico.[REF]
+
+    -   Hipóteses:[REF]
+
+        -   Nula ($H_{0}$): $V=0$
+
+        -   Alternativa ($H_{1}$): $V≠0$
+
+    -   Tamanho do efeito:[REF]
+
+        -   Coeficiente Cramer ($V$)
+
+<br>
+
+-   Coeficiente $\phi$.[REF]
+
+    -   O coeficiente Phi ($\phi$) avalia a força e direção da relação entre duas variáveis dicotômicas.[REF]
+
+    -   Tipo: não-paramétrico.[REF]
+
+    -   Hipóteses:[REF]
+
+        -   Nula ($H_{0}$): $\phi=0$
+
+        -   Alternativa ($H_{1}$): $\phi≠0$
+
+    -   Tamanho do efeito:[REF]
+
+        -   Coeficiente Phi ($\phi$)
 
 <br>
 
