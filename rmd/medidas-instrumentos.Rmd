@@ -212,7 +212,7 @@ VAR <- data.frame(VAR.1, VAR.2, VAR.3)
 VAR <- sapply(VAR, as.numeric)
 
 # agrega os valores repetidos em linhas com a média
-VAR.aggr <- apply(VAR, 1, FUN = mean)
+VAR.aggr <- round(apply(VAR, 1, FUN = mean), 0)
 
 # organiza as informações de unidade de análise e dados
 table.3 <- data.frame(ID, VAR.aggr)
