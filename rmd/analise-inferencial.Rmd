@@ -132,34 +132,6 @@ O pacote *stats*[@stats-2] fornece a função [*p.adjust*](https://www.rdocument
 
 <br>
 
-## Significância estatística {#significancia-estatistica}
-
-<br>
-
-### O que é significância estatística?
-
--   A expressão "significância estatística"[@latter1902] ou "evidência estatística de significância" sugere apenas que um experimento merece ser repetido, uma vez que um baixo P-valor (calculado a partir dos dados, modelos e demais suposições do estudo) sugere ser improvável que os dados coletados sejam coletados no contexto de que a hipótese nula $H_{0}$ assumida é verdadeira.[@aylmerfisher1926]
-
-<br>
-
-### Como justificar o nível de significância estatística de um teste?
-
--   .[REF]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *Superpower*[@Superpower] fornece a função [*optimal_alpha*](https://www.rdocumentation.org/packages/Superpower/versions/0.2.0/topics/optimal_alpha) para calcular e justificar o nível de significância $\alpha$ por balanço dos erros tipo I e II.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *Superpower*[@Superpower] fornece a função [*ANOVA_compromise*](https://www.rdocumentation.org/packages/Superpower/versions/0.2.0/topics/ANOVA_compromise) para calcular e justificar o nível de significância $\alpha$ por balanço dos erros tipo I e II em análise de variância (ANOVA).
-:::
-
-<br>
-
 ## Poder do teste {#poder-teste}
 
 <br>
@@ -307,6 +279,48 @@ O pacote *InteractionPoweR*[@InteractionPoweR] fornece a função [*power_intera
 ### O que pode ser realizado ao invés da análise de poder?
 
 -   Após a coleta e análise de dados, recomenda-se realizar a análise e interpretação dos resultados a partir do tamanho do efeito e do seu intervalo de confiança no nível de significância $\alpha$ pré-estabelecido.[@heckman2022]
+
+<br>
+
+## Interpretação de análise inferencial
+
+<br>
+
+  ### Como interpretar uma análise inferencial?
+
+-   Testes de hipótese nula ($H_{0}$) vs. alternativa ($H_{1}$) a partir de um nível de significância ($\alpha$) pré-especificado.[@goodman2016]
+
+-   P-valor como evidência estatística sobre ($H_{0}$).[@goodman2016]
+
+-   Estimação de intervalos de confiança de um nível de significância ($\alpha$) pré-especificado bicaudal ($IC_{1-\alpha/2}$) ou unicaudal ($IC_{1-\alpha}$).[@goodman2016]
+
+-   Análise Bayesiana.[@goodman2016]
+
+<br>
+
+### O que são resultados 'positivos' e 'negativos' ou inconclusivos em teste de hipótese?
+
+-   Resultados 'positivos' compreendem um P-valor dentro da zona crítica estatisticamente significativa (ex.: P \< 0,05 ou outro ponto de corte) e sugerem que os autores rejeitem a hipótese nula $H_{0}$, confirmando assim sua hipótese científica.[@greenhalgh1997a]
+
+-   Resultados 'negativos' ou inconclusivos compreendem um P-valor fora da zona crítica estatisticamente significativa (ex.: P ≥ 0,05 ou outro ponto de corte) e sugerem que os autores não rejeitem a hipótese nula $H_{0}$ porque o efeito observado é nulo, ou porque o estudo não possui poder suficiente para detectá-lo, não permitindo portanto afirmar a hipótese científica.[@greenhalgh1997a]
+
+<br>
+
+### Qual a importância de resultados 'negativos'?
+
+-   Conhecer resultados negativos contribui com uma visão mais ampla do campo de estudo junto aos resultados positivos.[@weintraub2016]
+
+-   Resultados negativos permitem um melhor planejamento das pesquisas futuras e pode aumentar suas chances de sucesso.[@weintraub2016]
+
+<br>
+
+### Resultados inconclusivos: Ausência de evidência ou evidência de ausência?
+
+-   Em estudos (geralmente com amostras grandes), resultados estatisticamente significativos (com P-valores menores do limiar pré-estabelecido, $P<\alpha$) podem não ser clinicamente relevantes.[@altman1995]
+
+-   Em estudos (geralmente com amostras pequenas), resultados estatisticamente não significativos (com P-valores iguais ou maiores do limiar pré-estabelecido, $P≥\alpha$) não devem ser interpretados como evidência de inexistência do efeito.[@altman1995]
+
+-   Geralmente é razoável aceitar uma nova conclusão apenas quando há dados a seu favor ('resultados positivos'). Também é razoável questionar se apenas a ausência de dados a seu favor ('resultados negativos') justifica suficientemente a rejeição de tal conclusão.[@altman1995]
 
 <br>
 
@@ -464,47 +478,5 @@ kableExtra::kable(
   kableExtra::row_spec(dim(cross.table.erros)[1],
                        extra_css = "border-bottom: 1px solid")
 ```
-
-<br>
-
-## Interpretação de análise inferencial
-
-<br>
-
-  ### Como interpretar uma análise inferencial?
-
--   Testes de hipótese nula ($H_{0}$) vs. alternativa ($H_{1}$) a partir de um nível de significância ($\alpha$) pré-especificado.[@goodman2016]
-
--   P-valor como evidência estatística sobre ($H_{0}$).[@goodman2016]
-
--   Estimação de intervalos de confiança de um nível de significância ($\alpha$) pré-especificado bicaudal ($IC_{1-\alpha/2}$) ou unicaudal ($IC_{1-\alpha}$).[@goodman2016]
-
--   Análise Bayesiana.[@goodman2016]
-
-<br>
-
-### O que são resultados 'positivos' e 'negativos' ou inconclusivos em teste de hipótese?
-
--   Resultados 'positivos' compreendem um P-valor dentro da zona crítica estatisticamente significativa (ex.: P \< 0,05 ou outro ponto de corte) e sugerem que os autores rejeitem a hipótese nula $H_{0}$, confirmando assim sua hipótese científica.[@greenhalgh1997a]
-
--   Resultados 'negativos' ou inconclusivos compreendem um P-valor fora da zona crítica estatisticamente significativa (ex.: P ≥ 0,05 ou outro ponto de corte) e sugerem que os autores não rejeitem a hipótese nula $H_{0}$ porque o efeito observado é nulo, ou porque o estudo não possui poder suficiente para detectá-lo, não permitindo portanto afirmar a hipótese científica.[@greenhalgh1997a]
-
-<br>
-
-### Qual a importância de resultados 'negativos'?
-
--   Conhecer resultados negativos contribui com uma visão mais ampla do campo de estudo junto aos resultados positivos.[@weintraub2016]
-
--   Resultados negativos permitem um melhor planejamento das pesquisas futuras e pode aumentar suas chances de sucesso.[@weintraub2016]
-
-<br>
-
-### Resultados inconclusivos: Ausência de evidência ou evidência de ausência?
-
--   Em estudos (geralmente com amostras grandes), resultados estatisticamente significativos (com P-valores menores do limiar pré-estabelecido, $P<\alpha$) podem não ser clinicamente relevantes.[@altman1995]
-
--   Em estudos (geralmente com amostras pequenas), resultados estatisticamente não significativos (com P-valores iguais ou maiores do limiar pré-estabelecido, $P≥\alpha$) não devem ser interpretados como evidência de inexistência do efeito.[@altman1995]
-
--   Geralmente é razoável aceitar uma nova conclusão apenas quando há dados a seu favor ('resultados positivos'). Também é razoável questionar se apenas a ausência de dados a seu favor ('resultados negativos') justifica suficientemente a rejeição de tal conclusão.[@altman1995]
 
 <br>
