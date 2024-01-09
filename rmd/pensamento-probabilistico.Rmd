@@ -283,11 +283,11 @@ gridExtra::grid.arrange(evento, p1, evento, p3, evento, p10, nrow = 3)
 
 <br>
 
-## Leis dos grandes números {#lei-grandes-numeros}
+## Leis dos números anômalos {#lei-numeros-anomals}
 
 <br>
 
-### O que é a lei dos grandes números?
+### O que é a lei dos números anômalos?
 
 -   .[REF]
 
@@ -311,13 +311,15 @@ gridExtra::grid.arrange(evento, p1, evento, p3, evento, p10, nrow = 3)
 
 <br>
 
-## Leis dos números anômalos {#lei-numeros-anomals}
+## Leis dos grandes números {#lei-grandes-numeros}
 
 <br>
 
-### O que é a lei dos números anômalos?
+### O que é a lei dos grandes números?
 
--   .[REF]
+-  A lei dos grandes números descreve que, ao realizar o mesmo experimento $E$ um grande número de vezes ($n$), a média $\mu$ dos resultados obtidos tende a se aproximar do valor esperado $E[\bar{X}]$ à medida que mais experimentos forem realizados ($n \to \infty$).[REF]
+
+- De acordo com a lei dos grandes números, a média amostral converge para a média populacional à medida que o tamanho da amostra aumenta.[REF]
 
 <br>
 
@@ -327,26 +329,36 @@ gridExtra::grid.arrange(evento, p1, evento, p3, evento, p10, nrow = 3)
 
 ### O que é teorema central do limite?
 
--   O teorema central do limite é um teorema que afirma que, para uma amostra aleatória de tamanho $n$ de uma população com média $\mu$ e variância $\sigma^{2}$, a distribuição amostral da média $\bar{X}$ se aproxima de uma distribuição normal com média $\mu$ e variância $\sigma^{2}/n$ à medida que $n$ aumenta.[@kwak2017]
-
-- O teorema central do limite sugere que se o tamanho da amostra $n$ for suficientemente grande, a distribuição amostral das médias obtidas utilizando reamostragem com substituição será aproximadamente normal, com média $\mu$ e variância $\sigma^{2}/n$, independentemente da distribuição da população.[@kwak2017]
+-   O teorema central do limite - equação \@ref(eq:central-limit-theorem) - afirma que, para uma amostra aleatória de tamanho $n$ de uma população com valor esperado igual à média $E[\bar{X_{i}}] = \mu$ e variância $Var[\bar{X_{i}}]$ igual a $\sigma^{2}$, a distribuição amostral da média de uma variável $\bar{X}$ se aproxima de uma distribuição normal $N$ com média $\mu$ e variância $\sigma^{2}/n$ à medida que $n$ aumenta ($n \to \infty$):[@kwak2017]
 
 <br>
 
-```{r teoroma-central-limite, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Histogramas de uma variável aleatória com distribuição uniforme.", eval = FALSE}
+```{=tex}
+\begin{equation}
+(\#eq:central-limit-theorem)
+\sqrt{n}(\bar{X} - \mu) \xrightarrow{n \to \infty} N(0, \sigma^2)
+\end{equation}
+```
+
+<br>
+
+- O teorema central do limite demonstra que se o tamanho da amostra $n$ for suficientemente grande, a distribuição amostral das médias obtidas utilizando reamostragem com substituição será aproximadamente normal, com média $\mu$ e variância $\sigma^{2}/n$, independentemente da distribuição da população.[@kwak2017]
+
+<br>
+
+```{r teoroma-central-limite, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Histogramas de uma variável aleatória com distribuição uniforme (N = 100). Direita: Histogramas da média de 1000 amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade."}
 library(dplyr)
-options(scipen=999)
+options(scipen = 999)
 set.seed(2024)
 
 # simula uma variável aleatória de uma populacao
-N <- 100000
-populacao <- data.frame(
-  ID = seq(start = 1, end = N, by = 1),
-  Variável = round(runif(N, min = 0, max = 50), digits = 0)
-)
+N <- 100
+populacao <- data.frame(ID = seq(start = 1, end = N, by = 1),
+                        Variável = round(runif(N, min = 18, max = 65), digits = 0))
 
 # histograma de densidade da populacao
-histograma_pop <- ggplot2::ggplot(populacao, ggplot2::aes(x = Variável)) +
+histograma_pop <-
+  ggplot2::ggplot(populacao, ggplot2::aes(x = Variável)) +
   ggplot2::geom_histogram(
     ggplot2::aes(y = ggplot2::after_stat(density)),
     binwidth = 1,
@@ -357,7 +369,15 @@ histograma_pop <- ggplot2::ggplot(populacao, ggplot2::aes(x = Variável)) +
   ) +
   ggplot2::geom_density() +
   ggplot2::labs(
-    title = paste0("População (n = ", format(N, big.mark = "."), "), média = ", round(mean(populacao$Variável), digits = 1), ", desvio padrão = ", round(sd(populacao$Variável), digits = 1)),
+    title = paste0(
+      "População (N = ", format(N, big.mark = "."), ")",
+      "\n",
+      "média = ",
+      round(mean(populacao$Variável), digits = 2),
+      "\n",
+      "desvio-padrão = ",
+      round(sd(populacao$Variável), digits = 2)
+    ),
     x = "Variável",
     y = "Densidade"
   ) +
@@ -369,60 +389,139 @@ histograma_pop <- ggplot2::ggplot(populacao, ggplot2::aes(x = Variável)) +
     axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)
   )
 
+B <- 100
 # sorteia m participantes com reposição B vezes
 reamostra <- data.frame(
-  res.5 = numeric(),
-  res.50 = numeric(),
-  res.500 = numeric(),
-  res.5000 = numeric()
+  res.5 = rep(NA, B),
+  res.50 = rep(NA, B),
+  res.500 = rep(NA, B),
+  res.5000 = rep(NA, B)
 )
-for(i in 1:1000){
-  sub <- amostra[sample(x = nrow(amostra), size = 5, replace = TRUE), ]
+for (i in 1:B) {
+  sub <- sample(x = populacao$Variável,
+                size = 5,
+                replace = TRUE)
   reamostra$res.5[i] <- mean(sub)
-  sub <- amostra[sample(x = nrow(amostra), size = 50, replace = TRUE), ]
+  sub <- sample(x = populacao$Variável,
+                size = 50,
+                replace = TRUE)
   reamostra$res.50[i] <- mean(sub)
-  sub <- amostra[sample(x = nrow(amostra), size = 500, replace = TRUE), ]
+  sub <- sample(x = populacao$Variável,
+                size = 500,
+                replace = TRUE)
   reamostra$res.500[i] <- mean(sub)
-  sub <- amostra[sample(x = nrow(amostra), size = 5000, replace = TRUE), ]
+  sub <- sample(x = populacao$Variável,
+                size = 5000,
+                replace = TRUE)
   reamostra$res.5000[i] <- mean(sub)
 }
+names(reamostra) <- c(
+  paste0(
+    "Amostra (n = 5)",
+    "\n",
+    "média = ",
+    round(mean(reamostra$res.5), digits = 2),
+    "\n",
+    "desvio-padrão = ",
+    round(sd(reamostra$res.5), digits = 2)
+  ),
+  paste0(
+    "Amostra (n = 50)",
+    "\n",
+    "média = ",
+    round(mean(reamostra$res.50), digits = 2),
+    "\n",
+    "desvio-padrão = ",
+    round(sd(reamostra$res.50), digits = 2)
+  ),
+  paste0(
+    "Amostra (n = 500)",
+    "\n",
+    "média = ",
+    round(mean(reamostra$res.500), digits = 2),
+    "\n",
+    "desvio-padrão = ",
+    round(sd(reamostra$res.500), digits = 2)
+  ),
+  paste0(
+    "Amostra: (n = 5000)",
+    "\n",
+    "média = ",
+    round(mean(reamostra$res.5000), digits = 2),
+    "\n",
+    "desvio-padrão = ",
+    round(sd(reamostra$res.5000), digits = 2)
+  )
+)
 
-# histograma da média das reamostras
+# histograma de densidade da reamostra utilizando grid por reamostra
+histograma_reamostra <- reamostra %>%
+  tidyr::pivot_longer(cols = 1:4,
+                      names_to = "reamostra",
+                      values_to = "valor") %>%
+  ggplot2::ggplot(ggplot2::aes(x = valor)) +
+  ggplot2::geom_histogram(
+    ggplot2::aes(y = ggplot2::after_stat(density)),
+    binwidth = 1,
+    boundary = 0,
+    fill = "grey",
+    color = "black",
+    alpha = 0.5
+  ) +
+  ggplot2::geom_density() +
+  ggplot2::facet_wrap( ~ reamostra, ncol = 2) +
+  ggplot2::labs(title = "Histogramas representando as médias \n de 100 amostras de tamanhos diferentes \n tomadas da população \n com reposição e igual probabilidade",
+                x = "Variável",
+                y = "Densidade") +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(hjust = 0.5),
+    axis.title = ggplot2::element_text(size = 9),
+    axis.text = ggplot2::element_text(size = 9),
+    axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)
+  )
 
-
-
-# # exibe a tabela
-# kableExtra::kable(
-#   amostra,
-#   align = "c",
-#   format = ifelse(knitr::is_html_output(), "html", "latex"),
-#   booktabs = TRUE,
-#   linesep = "",
-#   caption = paste0("Ppopulação simulada com distribuição uniforme (n = ", n, ").")
-# ) %>%
-#   kableExtra::kable_styling(
-#     latex_options = c("striped"),
-#     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-#     full_width = ifelse(knitr::is_html_output(), T, T),
-#     position = "center"
-# ) %>%
-#   kableExtra::row_spec(
-#     0,
-#     bold = TRUE,
-#     extra_css = "border-top: 1px solid; border-bottom: 1px solid"
-#   ) %>%
-#   kableExtra::row_spec(
-#     dim(amostra)[1],
-#     extra_css = "border-bottom: 1px solid"
-#   )
-
+# exibe os histogramas
+gridExtra::grid.arrange(histograma_pop,
+                        histograma_reamostra,
+                        ncol = 2)
 ```
+
+```{r, eval = FALSE}
+# simula o lançamento de 1 dado k vezes
+lançamentos <- tidydice::roll_dice(
+        times = 1000,
+        rounds = 1,
+        success = 4)
+```
+
+<br>
+
+- Como o teorema central do limite determina a distribuição amostral $Z$ das médias com tamanho amostral suficientemente grande, a média pode ser padronizada para uma distribuição normal com média 0 e variância 1, $N(0,1)$:[@kwak2017]
+
+<br>
+
+```{=tex}
+\begin{equation}
+Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}
+\end{equation}
+```
+
+<br>
+
+### Qual a relação entre a lei dos grandes números e o teorema central do limite?
+
+- A lei dos grandes números é um precursor do teorema central do limite, pois estabelece que a média da amostra se torna cada vez mais próxima da média populacional (isto é, mais representativa) à medida que o tamanho da amostra aumenta, e o teorema central do limite demonstra que o a distribuição da soma das variáveis aleatórias se aproxima de uma distribuição normal também à medida que o tamanho da amostra aumenta.[REF]
 
 <br>
 
 ### Qual a relevância do teorema central do limite para a análise eatatística?
 
-- Baseados no teorema do limite central, os testes paramétricos têm maior poder estatístico do que os testes não paramétricos, os quais não requerem suposições de distribuição de probabilidade.[@kwak2017]
+- O teorema central do limite explica porque os testes paramétricos têm maior poder estatístico do que os testes não paramétricos, os quais não requerem suposições de distribuição de probabilidade.[@kwak2017]
+
+- O teorema central do limite implica que os métodos estatísticos que se aplicam a distibuições normais podem ser aplicados a outras distribuições quando suas suposições são satisfeitas.[@kwak2017]
+
+- Para amostras com $n \geq 30$, a distribuição amostral Student-*t* se aproxima da distribuição normal padrão $Z$ e, portanto, as suposições sobre a distribuição populacional não são mais necessárias de acordo com o teorema central do limite. Neste cenário, a suposição de distribuição normal pode ser usada para a distribuição de probabilidade.[@kwak2017]
 
 <br>
 
