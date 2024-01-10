@@ -28,10 +28,36 @@
 
 <br>
 
-```{r espaco-amostral-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Espaço amostral: Todas as faces de um dado."}
-
+```{r espaco-amostral-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemploes de espaço amostral discreto. Superiro: Todas as faces de uma moeda. Inferior: Todas as faces de um dado. "}
 # para reprodutibilidade
 set.seed(1234)
+
+# simula o lançamento de moeda
+população <- tidydice::flip_coin(
+        times = 1000,
+        rounds = 1,
+        success = 4)
+# remove lances duplicados
+população <- população[!duplicated(população$result), ]
+# coloca em ordem
+população <- população[order(população$result), ]
+
+espaço.amostral.coin <- tidydice::plot_coin(
+    população,
+    fill_success = NA,
+    ) + ggplot2::ggtitle("") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
+  ggplot2::annotate(
+    "text",
+    x = c(1.45, 2.45),
+    y = c(1.45, 1.45),
+    label = c("cara", "coroa"),
+    color = "black",
+    size = 6,
+    fontface = "bold",
+    hjust = 0.5,
+    vjust = 0.5
+  )
 
 # simula o lançamento de dado
 população <- tidydice::roll_dice(
@@ -43,13 +69,16 @@ população <- população[!duplicated(população$result), ]
 # coloca em ordem
 população <- população[order(população$result), ]
 
-espaço.amostral <- tidydice::plot_dice(
+espaço.amostral.dice <- tidydice::plot_dice(
     população,
     fill_success = NA
     ) + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-gridExtra::grid.arrange(espaço.amostral, nrow = 1)
+gridExtra::grid.arrange(
+  espaço.amostral.coin,
+  espaço.amostral.dice,
+  nrow = 2)
 ```
 
 <br>
@@ -63,12 +92,27 @@ gridExtra::grid.arrange(espaço.amostral, nrow = 1)
 <br>
 
 ```{r evento-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de evento do experimento de 1 lançamento de 1 dado."}
-
 # para reprodutibilidade
 set.seed(1234)
 
+# simula 1 lançamento de 1 moeda
+evento.coin <- tidydice::plot_coin(
+    tidydice::flip_coin(
+        times = 1,
+        rounds = 1,
+        success = c(2)),
+    fill_success = "grey"
+    ) + ggplot2::ggtitle("") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+espaço.amostral.coin <- tidydice::plot_coin(
+    população,
+    fill_success = "grey"
+    ) + ggplot2::ggtitle("") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
 # simula 1 lançamento de 1 dado
-evento <- tidydice::plot_dice(
+evento.dice <- tidydice::plot_dice(
     tidydice::roll_dice(
         times = 1,
         rounds = 1,
@@ -77,13 +121,20 @@ evento <- tidydice::plot_dice(
     ) + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-espaço.amostral <- tidydice::plot_dice(
+espaço.amostral.dice <- tidydice::plot_dice(
     população,
     fill_success = "grey"
     ) + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-gridExtra::grid.arrange(evento, espaço.amostral, nrow = 2)
+gridExtra::grid.arrange(
+  evento.coin,
+  espaço.amostral.coin,
+  evento.dice,
+  espaço.amostral.dice,
+  nrow = 2,
+  ncol = 2
+)
 ```
 
 <br>
