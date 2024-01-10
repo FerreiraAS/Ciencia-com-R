@@ -64,9 +64,33 @@
 
 -   Se a média da variável é igual entre grupos no início do acompanhamento, ambas abordagens estimam o mesmo efeito. Caso contrário, o efeito será influenciado pela correlação entre as medidas antes e depois. A análise da mudança não controla para desbalanços no início do estudo. [@Vickers2001]
 
--   Uma abordagem recomendada é a análise de covariância (ANCOVA), pois ajusta os valores pós-intervenção aos valores pré-intervenção para cada participante, e não é afetada pelas diferenças entre grupos no início do estudo.[@Vickers2001]
+-   A abordagem mais recomendada é a análise de covariância (ANCOVA) - equação \@ref(eq:ancova1) - pois ajusta os valores pós-intervenção ($Y_{ij}$) aos valores pré-intervenção ($X_{ij}$) para cada participante ($i$) de cada grupo {$Z_{ij}$}, e portanto não é afetada pelas diferenças entre grupos no início do estudo.[@Vickers2001; @barnett2004]
 
--   A análise de covariância (ANCOVA) modelando seja a mudança (pré - pós) quando o desfecho no pós-tratamento parece ser o método mais efetivo considerando-se o viés de estimação dos parâmetros, a precisão das estimativas, a cobertura nominal (isto é, intervalo de confiança) e o poder do teste.[@OConnell2017]
+<br>
+
+```{=tex}
+\begin{equation}
+(\#eq:ancova1)
+Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
+\end{equation}
+```
+
+<br>
+
+-   A ANCOVA modelando seja a mudança (pré - pós: $\Delta = X_{ij} - Y_{ij}$) quando o desfecho no pós-tratamento parece ser o método mais efetivo considerando-se o viés de estimação dos parâmetros, a precisão das estimativas, a cobertura nominal (isto é, intervalo de confiança) e o poder do teste.[@OConnell2017]
+
+-   Quando a ANCOVA - equação \@ref(eq:ancova2) - é utilizada com a mudança (pré - pós) com variável de desfecho ($Y_{ij}$), o coeficiente de regressão $\beta_1$ é diminuído em 1 unidade.[@laird1983; @barnett2004]
+
+<br>
+
+```{=tex}
+\begin{equation}
+(\#eq:ancova2)
+(X_{ij} - Y_{ij}) = \beta_0 + \beta_1 Z_j + \epsilon_{ij}
+\end{equation}
+```
+
+<br>
 
 -   Análise de variância (ANOVA) e modelos lineares mistos (MLM) são outras opções de métodos, embora apresentem maior variância, menor poder, e cobertura nominal comparados à ANCOVA.[@OConnell2017]
 
@@ -278,6 +302,6 @@ Os pacotes *mice*[@mice] e *miceadds*[@miceadds] fornecem funções [*mice*](htt
 
 -   Visite a rede *Enhancing the QUAlity and Transparency Of health Research* [EQUATOR Network](https://www.equator-network.org/) para encontrar diretrizes específicas para cada tipo de ensaio experimental.
 
-    -   *CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials*:[@schulz2010] https://www.equator-network.org/reporting-guidelines/consort/
+    -   *CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials*:[@schulz2010] <https://www.equator-network.org/reporting-guidelines/consort/>
 
 <br>
