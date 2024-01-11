@@ -28,22 +28,22 @@
 
 <br>
 
-```{r espaco-amostral-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemploes de espaço amostral discreto. Superiro: Todas as faces de uma moeda. Inferior: Todas as faces de um dado. "}
+```{r espaco-amostral-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplos de espaço amostral discreto. Superior: Todas as faces de uma moeda. Inferior: Todas as faces de um dado."}
 # para reprodutibilidade
 set.seed(1234)
 
 # simula o lançamento de moeda
-população <- tidydice::flip_coin(
+população.coin <- tidydice::flip_coin(
         times = 1000,
         rounds = 1,
-        success = 4)
+        success = c(1))
 # remove lances duplicados
-população <- população[!duplicated(população$result), ]
+população.coin <- população.coin[!duplicated(população.coin$result), ]
 # coloca em ordem
-população <- população[order(população$result), ]
+população.coin <- população.coin[order(população.coin$result), ]
 
 espaço.amostral.coin <- tidydice::plot_coin(
-    população,
+    população.coin,
     fill_success = NA,
     ) + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
@@ -60,17 +60,17 @@ espaço.amostral.coin <- tidydice::plot_coin(
   )
 
 # simula o lançamento de dado
-população <- tidydice::roll_dice(
+população.dice <- tidydice::roll_dice(
         times = 1000,
         rounds = 1,
         success = 4)
 # remove lances duplicados
-população <- população[!duplicated(população$result), ]
+população.dice <- população.dice[!duplicated(população.dice$result), ]
 # coloca em ordem
-população <- população[order(população$result), ]
+população.dice <- população.dice[order(população.dice$result), ]
 
 espaço.amostral.dice <- tidydice::plot_dice(
-    população,
+    população.dice,
     fill_success = NA
     ) + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
@@ -91,7 +91,7 @@ gridExtra::grid.arrange(
 
 <br>
 
-```{r evento-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de evento do experimento de 1 lançamento de 1 dado."}
+```{r evento-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplos de evento de experimento. Superior: 1 lançamento de 1 moeda. Inferior: 1 lançamento de 1 dado."}
 # para reprodutibilidade
 set.seed(1234)
 
@@ -100,16 +100,38 @@ evento.coin <- tidydice::plot_coin(
     tidydice::flip_coin(
         times = 1,
         rounds = 1,
-        success = c(2)),
+        success = c(1)),
     fill_success = "grey"
     ) + ggplot2::ggtitle("") +
-  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) + 
+  ggplot2::annotate(
+    "text",
+    x = c(1.45),
+    y = c(1.45),
+    label = c("cara"),
+    color = "black",
+    size = 6,
+    fontface = "bold",
+    hjust = 0.5,
+    vjust = 0.5
+  )
 
 espaço.amostral.coin <- tidydice::plot_coin(
-    população,
+    população.coin,
     fill_success = "grey"
     ) + ggplot2::ggtitle("") +
-  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
+  ggplot2::annotate(
+    "text",
+    x = c(1.45, 2.45),
+    y = c(1.45, 1.45),
+    label = factor(população.coin$result, levels = c(1, 2), labels = c("cara", "coroa")),
+    color = "black",
+    size = 6,
+    fontface = "bold",
+    hjust = 0.5,
+    vjust = 0.5
+  )
 
 # simula 1 lançamento de 1 dado
 evento.dice <- tidydice::plot_dice(
@@ -122,7 +144,7 @@ evento.dice <- tidydice::plot_dice(
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 espaço.amostral.dice <- tidydice::plot_dice(
-    população,
+    população.dice,
     fill_success = "grey"
     ) + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
@@ -414,9 +436,6 @@ set.seed(1234)
 
 # carrega os pacotes
 library(dplyr)
-
-# ajusta a notação científica
-options(scipen = 999)
 
 # simula uma variável aleatória de uma população
 N <- 100
@@ -911,9 +930,9 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}
 
 ### O que é regressão para a média?
 
--   Regressão para a média[@galton1886] é um fenômeno estatístico que ocorre quando uma variável aleatória $Y$ é medida da mesma unidade de análise em dois ou mais momentos diferentes, $Y_{1}$, $Y_{2}$, ..., $Y_{t}$, e a média de $Y_{t}$ é mais próxima da média populacional do que $Y_{1}$, ou seja, $E(Y_{t})$ é mais próxima de $E(Y)$ do que $E(Y_{1})$ é de $E(Y)$.[@barnett2004]
+-   Regressão para a média[@galton1886] é um fenômeno estatístico que ocorre quando uma variável aleatória $X$ é medida na mesma unidade de análise em dois ou mais momentos diferentes, $X_{1}$, $X_{2}$, ..., $X_{t}$ e $X_{t}$ é mais próximo da média populacional do que $X_{1}$, ou seja, $E(X_{t})$ é mais próxima de $E(X)$ do que $E(X_{1})$ é de $E(X)$.[@barnett2004]
 
-- Regressão para a média pode ocorem em qualquer pesquisa cujo delineamento envolva medidas repetidas.[@senn2011]
+-   Regressão para a média pode ocorem em qualquer pesquisa cujo delineamento envolva medidas repetidas.[@senn2011]
 
 -   Em medidas repetidas, a média de várias observações é mais próxima da média verdadeira do que qualquer observação individual, pois o erro aleatório é reduzido pela média.[@barnett2004]
 
@@ -958,7 +977,7 @@ ggplot2::ggplot(amostra, ggplot2::aes(x = Variável)) +
 
 -   A regressão para a média pode ser atribuída ao erro aleatório, que é a variação não sistemática nos valores observados em torno de uma média verdadeira (por exemplo, erro de medição aleatório ou variações aleatórias em um participante).[@barnett2004]
 
-- Regrssão para a média é uma consequência da observação de que dados extremos não se repetem com frequência (isto é, em média).[@senn2011]
+-   Regrssão para a média é uma consequência da observação de que dados extremos não se repetem com frequência (isto é, em média).[@senn2011]
 
 -   Deve-se assumir que a regressão para a média ocorreu até que os dados mostrem o contrário.[@barnett2004]
 
