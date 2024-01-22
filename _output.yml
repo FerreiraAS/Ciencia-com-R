@@ -31,13 +31,15 @@ bookdown::gitbook:
     toolbar:
       position: fixed
       search: yes
+  includes:
+    in_header: [favicon.html, header.html]
 
 bookdown::pdf_book:
   toc: true
   number_sections: true
   papersize: a4
   includes:
-    in_header: tex/preamble.tex
+    in_header: [tex/preamble.tex]
     before_body: [tex/cover_1.tex, tex/cover_2.tex]
     after_body: [tex/cover_4.tex]
   latex_engine: xelatex
