@@ -37,15 +37,18 @@ bookdown::gitbook:
 bookdown::pdf_book:
   toc: true
   number_sections: true
+  documentclass: book
   papersize: a4
   includes:
     in_header: [tex/preamble.tex]
     before_body: [tex/cover_1.tex, tex/cover_2.tex]
     after_body: [tex/cover_4.tex]
   latex_engine: xelatex
-  keep_tex: no
+  keep_tex: false
+  delete_merged_file: true
   dev: "cairo_pdf"
   fig_caption: true
+  split_by: "chapter"
 
 bookdown::epub_book: default
 
