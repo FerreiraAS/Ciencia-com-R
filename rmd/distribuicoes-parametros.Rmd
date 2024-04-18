@@ -20,52 +20,52 @@
 
 ### Quais são as distribuições mais comuns?
 
-- Distribuções discretas:
+-   Distribuções discretas:
 
-    - Uniforme: resultados (finitos) que são igualmente prováveis. [REF]
-    
-    - Binomial: número de sucessos em *k* tentativas. [REF]
-    
-    - Poisson: número de eventos em um intervalo de tempo fixo.[REF]
-    
-    - Bernoulli: .[REF]
-    
-    - Geométrica: número de testes até o 1o sucesso.[REF]
-    
-    - Binomial negativa: número de testes até o *k*-ésimo sucesso.[REF]
-    
-    - Hipergeométrica: número de indivíduos na amostra tomados sem reposição. [REF]
+    -   Uniforme: resultados (finitos) que são igualmente prováveis. [REF]
 
-- Distribuições contínuas:
+    -   Binomial: número de sucessos em *k* tentativas. [REF]
 
-    - Uniforme: resultados que possuem a mesma densidade.[REF]
-    
-    - Exponencial: tempo entre eventos.[REF]
-    
-    - Normal: .[REF]
-    
-    - Normal padrão: .[REF]
-    
-    - Aproximação binomial: número de sucessos em uma grande quantidade de tentativas.[REF]
-    
-    - Aproximação Poisson: número de ocorrências em um intervalo de tempo fixo.[REF]
-    
-    - Qui-quadrado: .[REF]
-    
-    - t-Student: .[REF]
-    
-    - Weibull: .[REF]
-    
-    - Log-normal: .[REF]
-    
-    - Beta: .[REF]
-    
-    - Gama: .[REF]
-    
-    - Logística: .[REF]
-    
-    - Pareto. [REF]
-    
+    -   Poisson: número de eventos em um intervalo de tempo fixo.[REF]
+
+    -   Bernoulli: .[REF]
+
+    -   Geométrica: número de testes até o 1o sucesso.[REF]
+
+    -   Binomial negativa: número de testes até o *k*-ésimo sucesso.[REF]
+
+    -   Hipergeométrica: número de indivíduos na amostra tomados sem reposição. [REF]
+
+-   Distribuições contínuas:
+
+    -   Uniforme: resultados que possuem a mesma densidade.[REF]
+
+    -   Exponencial: tempo entre eventos.[REF]
+
+    -   Normal: .[REF]
+
+    -   Normal padrão: .[REF]
+
+    -   Aproximação binomial: número de sucessos em uma grande quantidade de tentativas.[REF]
+
+    -   Aproximação Poisson: número de ocorrências em um intervalo de tempo fixo.[REF]
+
+    -   Qui-quadrado: .[REF]
+
+    -   t-Student: .[REF]
+
+    -   Weibull: .[REF]
+
+    -   Log-normal: .[REF]
+
+    -   Beta: .[REF]
+
+    -   Gama: .[REF]
+
+    -   Logística: .[REF]
+
+    -   Pareto. [REF]
+
 <br>
 
 ### Quais são as funções de uma distribuição?
@@ -82,6 +82,12 @@
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *stats*[@stats-3] fornece funções de distribuição de probabilidade (p), funções de densidade (d), funções quantílicas (q) e funções geradores de números aleatórios (r) para as distribuições [normal](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal), [Student t](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/TDist), [binomial](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial), [qui-quadrado](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Chisquare), [uniforme](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Uniform), dentre outras.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *ggdist*[@ggdist] fornece a função [geom_slabinterval](https://www.rdocumentation.org/packages/ggdist/versions/3.3.0/topics/geom_slabinterval) para criar gráficos de distribuição de probabilidade (p) e funções de densidade (d) as distribuições.
 :::
 
 <br>
@@ -189,7 +195,7 @@ O pacote *base*[@base-6] fornece a função [*summary*](https://www.rdocumentati
 
 -   Testes paramétricos assumem que: a variável é quantitativa numérica (contínua); os dados foram amostrados de uma população com distribuição normal; a variância da(S) amostra(s) é igual à da população; as amostras foram selecionadas de modo aleatório na população; os valores de cada amostra são independentes entre si.[@Ali2016; @vetter2017]
 
-- Testes paramétricos são baseados na suposição de que os dados amostrais provêm de uma população com parâmetros fixos determinando sua distribuição de probabilidade.[@kwak2017]
+-   Testes paramétricos são baseados na suposição de que os dados amostrais provêm de uma população com parâmetros fixos determinando sua distribuição de probabilidade.[@kwak2017]
 
 <br>
 
@@ -267,14 +273,13 @@ O pacote *stats*[@stats-4] fornece a função [*confint*](https://www.rdocumenta
 
 -   *Quantil*: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem:[@Altman1994]
 
-    - Tercil: 2 valores que dividem a amostra em 3 grupos de tamanhos iguais.[@Altman1994]
-    
-    - Quartil: 3 valores que dividem a amostra em 4 grupos de tamanhos iguais.[@Altman1994]
-    
-    - Quintil: 4 valores que dividem a amostra em 5 grupos de tamanhos iguais.[@Altman1994]
-    
-    - Decil: 9 valores que dividem a amostra em 10 grupos de tamanhos iguais.[@Altman1994]
-    
+    -   Tercil: 2 valores que dividem a amostra em 3 grupos de tamanhos iguais.[@Altman1994]
+
+    -   Quartil: 3 valores que dividem a amostra em 4 grupos de tamanhos iguais.[@Altman1994]
+
+    -   Quintil: 4 valores que dividem a amostra em 5 grupos de tamanhos iguais.[@Altman1994]
+
+    -   Decil: 9 valores que dividem a amostra em 10 grupos de tamanhos iguais.[@Altman1994]
 
 <br>
 
