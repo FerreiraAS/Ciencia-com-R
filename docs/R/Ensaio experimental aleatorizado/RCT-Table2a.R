@@ -124,27 +124,27 @@ TABLE.2a <- function(dataset, variables, covariate, bw.factor, control.g, wt.lab
     # fit linear mixed model
     if (missing != "multiple.imputation") {
         if (!is.null(covariate)) {
-            mod1 <- lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M, random = ~1 |
-                ID_M/TIME_M, data = data_M)
+            mod1 <- lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M,
+                random = ~1 | ID_M/TIME_M, data = data_M)
         } else {
-            mod1 <- lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M, random = ~1 | ID_M/TIME_M,
-                data = data_M)
+            mod1 <- lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M, random = ~1 |
+                ID_M/TIME_M, data = data_M)
         }
         mod1.aov <- anova(mod1)
     } else {
-        ini <- mice(data = data_M, maxit = 0)
+        ini <- mice::mice(data = data_M, maxit = 0)
         pred <- ini$pred
         pred["OUTCOME_M", "ID_M"] <- -2
-        imp <- mice(data_M, pred = pred, method = "2l.pan", m = m.imputations, seed = 0,
-            print = FALSE)
+        imp <- mice::mice(data_M, pred = pred, method = "2l.pan", m = m.imputations,
+            seed = 0, print = FALSE)
         if (!is.null(covariate)) {
-            mod1 <- with(data = imp, lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M,
-                random = ~1 | ID_M/TIME_M))
-            mod1.aov <- quiet(mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M"))
+            mod1 <- with(data = imp, lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M +
+                COVARIATE_M, random = ~1 | ID_M/TIME_M))
+            mod1.aov <- quiet(miceadds::mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M"))
         } else {
-            mod1 <- with(data = imp, lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M, random = ~1 |
-                ID_M/TIME_M))
-            mod1.aov <- quiet(mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M"))
+            mod1 <- with(data = imp, lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M,
+                random = ~1 | ID_M/TIME_M))
+            mod1.aov <- quiet(miceadds::mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M"))
         }
         mod1.aov <- mod1.aov$anova.table[1:3, 2:5]
         mod1.aov <- rbind(rep(NA, 4), mod1.aov)
@@ -212,8 +212,8 @@ TABLE.2a <- function(dataset, variables, covariate, bw.factor, control.g, wt.lab
     model.res[3, 1] <- interaction
 
     # calcula e preenche a subtabela WITHIN-GROUP (SAME LINEAR MIXED MODEL)
-    mult.within <- summary(pairs(emmeans(mod1, ~TIME_M | GROUP_M), reverse = FALSE),
-        infer = c(TRUE, TRUE))
+    mult.within <- multcomp::summary(emmGrid::pairs(emmeans::emmeans(mod1, ~TIME_M |
+        GROUP_M), reverse = FALSE), infer = c(TRUE, TRUE))
     wt <- c()
     wt.pvalues <- c()
     for (i in 1:nlevels(bw.factor)) {
@@ -255,14 +255,15 @@ TABLE.2a <- function(dataset, variables, covariate, bw.factor, control.g, wt.lab
             if (!is.null(covariate)) {
                 df <- data.frame(ID, bw.factor, BASELINE_M, FOLLOWUP_M, CHANGE_M,
                   COVARIATE_M)
-                mod2 <- lme(CHANGE_M ~ bw.factor + BASELINE_M + COVARIATE_M, random = ~1 |
-                  ID, data = df)
+                mod2 <- lme4::lme(CHANGE_M ~ bw.factor + BASELINE_M + COVARIATE_M,
+                  random = ~1 | ID, data = df)
             } else {
                 df <- data.frame(ID, bw.factor, BASELINE_M, FOLLOWUP_M, CHANGE_M)
-                mod2 <- lme(CHANGE_M ~ bw.factor + BASELINE_M, random = ~1 | ID,
-                  data = df)
+                mod2 <- lme4::lme(CHANGE_M ~ bw.factor + BASELINE_M, random = ~1 |
+                  ID, data = df)
             }
-            mod2.sum <- summary(glht(mod2, linfct = mcp(bw.factor = "Tukey")), test = adjusted("holm"))
+            mod2.sum <- multcomp::summary(multcomp::glht(mod2, linfct = mcp::mcp(bw.factor = "Tukey")),
+                test = adjusted("holm"))
             names <- names(coef(mod2.sum))
             estimate <- round(confint(mod2.sum, level = 1 - alpha)$confint[, "Estimate"],
                 digits = n.digits)
@@ -270,7 +271,7 @@ TABLE.2a <- function(dataset, variables, covariate, bw.factor, control.g, wt.lab
                 digits = n.digits)
             upp.ci <- round(confint(mod2.sum, level = 1 - alpha)$confint[, "upr"],
                 digits = n.digits)
-            p.value <- summary(mod2)$tTable[, "p-value"][2]
+            p.value <- multcomp::summary(mod2)$tTable[, "p-value"][2]
         } else {
             if (!is.null(covariate)) {
                 df <- data.frame(ID, bw.factor, BASELINE_M, FOLLOWUP_M, CHANGE_M,
@@ -282,7 +283,7 @@ TABLE.2a <- function(dataset, variables, covariate, bw.factor, control.g, wt.lab
             pred <- ini$pred
             pred["FOLLOWUP_M", "ID"] <- -2
             pred["CHANGE_M", "ID"] <- -2
-            imp <- mice(data = df, pred = pred, method = "2l.pan", m = m.imputations,
+            imp <- mice::mice(data = df, pred = pred, method = "2l.pan", m = m.imputations,
                 seed = 0, print = FALSE)
             implist <- mids2mitml.list(imp)
             mod2 <- with(data = implist, lm(CHANGE_M ~ bw.factor + BASELINE_M, random = ~1 |
@@ -315,7 +316,7 @@ TABLE.2a <- function(dataset, variables, covariate, bw.factor, control.g, wt.lab
         group_data[bw.factor == bw.factor] <- 0
         group_data[bw.factor != control.g] <- 1
         data <- data.frame(group_data, CHANGE_M)
-        smd <- stddiff.numeric(data = data, gcol = 1, vcol = 2)
+        smd <- stddiff::stddiff.numeric(data = data, gcol = 1, vcol = 2)
         estimate <- round(smd[7], digits = n.digits)
         lower <- round(smd[8], digits = n.digits)
         upper <- round(smd[9], digits = n.digits)

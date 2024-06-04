@@ -16,7 +16,7 @@
 
 ### Por que determinar o tamanho da amostra é importante?
 
-- É virtualmente impossível, devido a limitações de recursos - tempo, acesso, custo, dentre outros - coletar dados da população completa.[@kwak2017]
+-   É virtualmente impossível, devido a limitações de recursos - tempo, acesso, custo, dentre outros - coletar dados da população completa.[@kwak2017]
 
 -   Uma amostra muito pequena para o estudo pode resultar em ajuste exagerado, imprecisão e baixo poder do teste.[@van2022a]
 
@@ -78,7 +78,9 @@ O pacote *pwr*[@pwr] fornece a função [*plot.power.htest*](https://www.rdocume
 
 -   Estudo-piloto --- realizados nas mesmas condições do estudo, mas envolvendo um tamanho de amostra limitado --- pode ser útil na estimativa do tamanho da amostra a partir do tamanho do efeito estimado.[@rodríguezdeláguila2014]
 
-- Embora os testes de hipótese considerem efeito nulo para a hipótese nula --- ex.: dferença de média ($H_{0}: \mu_{1} - \mu_{2}=0$), correlação ($H_{0}: r=0$), associação ($H_{0}: \beta=0$ ou $H_{0}: OR=1$) ---, em geral é improvável que os efeitos populacionais sejam de fato nulos (isto é, exatamente 0).[@Andrade2020]
+-   Utilizar os limites dos intervalos de confiança de estudos-piloto de ensaios clínicos como estimativa do tamanho do efeito pode aumentar o poder estatístico da análise se comparado ao uso das estimativas pontuais obtidas no mesmo piloto.[@ying2023]
+
+-   Embora os testes de hipótese considerem efeito nulo para a hipótese nula --- ex.: dferença de média ($H_{0}: \mu_{1} - \mu_{2}=0$), correlação ($H_{0}: r=0$), associação ($H_{0}: \beta=0$ ou $H_{0}: OR=1$) ---, em geral é improvável que os efeitos populacionais sejam de fato nulos (isto é, exatamente 0).[@Andrade2020]
 
 <br>
 
@@ -196,7 +198,6 @@ O pacote *longpower*[@longpower] fornece a função [*power.mmrm*](https://www.r
 n' = \dfrac{n}{1-d}
 \end{equation}
 ```
-
 <br>
 
 ### Como ajustar para confiabilidade?

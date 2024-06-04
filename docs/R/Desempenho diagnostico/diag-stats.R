@@ -67,16 +67,16 @@ diag.stats <- function(new.test, reference.test, new.lab, ref.lab, adjustment, c
     youden <- sen + spe - 1
 
     # Clopper-Pearson exact confidence intervals
-    sen.ci <- exactci(TP, (TP + FN), conf.level)
-    spe.ci <- exactci(TN, (FP + TN), conf.level)
-    ppv.ci <- exactci(TP, (TP + FP), conf.level)
-    npv.ci <- exactci(TN, (FN + TN), conf.level)
-    acc.ci <- exactci((TP + TN), (TP + FN + FP + TN), conf.level)
-    plr.ci <- riskscoreci(TP, (TP + FN), FP, (FP + TN), conf.level)
-    nlr.ci <- riskscoreci(FN, (TP + FN), TN, (FP + TN), conf.level)
-    dor.ci <- oddsratioci.mp((FP * FN), (TP * TN), conf.level)
+    sen.ci <- PropCIs::exactci(TP, (TP + FN), conf.level)
+    spe.ci <- PropCIs::exactci(TN, (FP + TN), conf.level)
+    ppv.ci <- PropCIs::exactci(TP, (TP + FP), conf.level)
+    npv.ci <- PropCIs::exactci(TN, (FN + TN), conf.level)
+    acc.ci <- PropCIs::exactci((TP + TN), (TP + FN + FP + TN), conf.level)
+    plr.ci <- PropCIs::riskscoreci(TP, (TP + FN), FP, (FP + TN), conf.level)
+    nlr.ci <- PropCIs::riskscoreci(FN, (TP + FN), TN, (FP + TN), conf.level)
+    dor.ci <- PropCIs::oddsratioci.mp((FP * FN), (TP * TN), conf.level)
     # DeLong confidence interval
-    auc.ci <- ci.auc(new.test, reference.test, conf.level = conf.level)
+    auc.ci <- pROC::ci.auc(new.test, reference.test, conf.level = conf.level)
     # Wallis confidence interval
     p1 <- sen
     p2 <- spe

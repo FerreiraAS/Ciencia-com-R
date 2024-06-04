@@ -14,7 +14,7 @@ missing.data <- function(dataset, variables, covariate, digits = 3, p.digits = 3
         dataset <- cbind(dataset, covariate)
     }
 
-    test.res <- na.test(dataset, digits = digits, p.digits = p.digits, as.na = as.na,
+    test.res <- misty::na.test(dataset, digits = digits, p.digits = p.digits, as.na = as.na,
         check = check, output = output)
 
     # output results

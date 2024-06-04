@@ -122,27 +122,27 @@ TABLE.2b <- function(dataset, variables, covariate, bw.factor, control.g, wt.lab
     # fit linear mixed model
     if (missing != "multiple.imputation") {
         if (!is.null(covariate)) {
-            mod1 <- lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M, random = ~1 |
-                ID_M/TIME_M, data = data_M)
+            mod1 <- lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M,
+                random = ~1 | ID_M/TIME_M, data = data_M)
         } else {
-            mod1 <- lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M, random = ~1 | ID_M/TIME_M,
-                data = data_M)
+            mod1 <- lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M, random = ~1 |
+                ID_M/TIME_M, data = data_M)
         }
         mod1.aov <- anova(mod1)
     } else {
-        ini <- mice(data = data_M, maxit = 0)
+        ini <- mice::mice(data = data_M, maxit = 0)
         pred <- ini$pred
         pred["OUTCOME_M", "ID_M"] <- -2
-        imp <- mice(data_M, pred = pred, method = "2l.pan", m = m.imputations, seed = 0,
-            print = FALSE)
+        imp <- mice::mice(data_M, pred = pred, method = "2l.pan", m = m.imputations,
+            seed = 0, print = FALSE)
         if (!is.null(covariate)) {
             mod1 <- with(data = imp, lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M,
                 random = ~1 | ID_M/TIME_M))
-            mod1.aov <- quiet(mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M"))
+            mod1.aov <- quiet(miceadds::mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M"))
         } else {
-            mod1 <- with(data = imp, lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M, random = ~1 |
-                ID_M/TIME_M))
-            mod1.aov <- quiet(mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M"))
+            mod1 <- with(data = imp, lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M,
+                random = ~1 | ID_M/TIME_M))
+            mod1.aov <- quiet(miceadds::mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M"))
         }
         mod1.aov <- mod1.aov$anova.table[1:3, 2:5]
         mod1.aov <- rbind(rep(NA, 4), mod1.aov)
@@ -208,8 +208,8 @@ TABLE.2b <- function(dataset, variables, covariate, bw.factor, control.g, wt.lab
     }
 
     # calcula e preenche a subtabela WITHIN-GROUP (SAME LINEAR MIXED MODEL)
-    mult.within <- summary(pairs(emmeans(mod1, ~TIME_M | GROUP_M), reverse = FALSE),
-        infer = c(TRUE, TRUE))
+    mult.within <- multcomp::summary(emmGrid::pairs(emmeans::emmeans(mod1, ~TIME_M |
+        GROUP_M), reverse = FALSE), infer = c(TRUE, TRUE))
     wt <- c()
     wt.pvalues <- c()
     for (i in 1:nlevels(bw.factor)) {
@@ -239,8 +239,8 @@ TABLE.2b <- function(dataset, variables, covariate, bw.factor, control.g, wt.lab
     bw <- c()
     bw.pvalues <- c()
     smd.values <- c()
-    mult.between <- summary(pairs(emmeans(mod1, ~GROUP_M | TIME_M), reverse = FALSE),
-        infer = c(TRUE, TRUE))
+    mult.between <- multcomp::summary(emmGrid::pairs(emmeans::emmeans(mod1, ~GROUP_M |
+        TIME_M), reverse = FALSE), infer = c(TRUE, TRUE))
     for (i in 1:(length(wt.labels))) {
         group.data <- mult.between[i, ]
         # reverse signs due to mult.within order
@@ -259,7 +259,7 @@ TABLE.2b <- function(dataset, variables, covariate, bw.factor, control.g, wt.lab
         group_data[bw.factor == bw.factor] <- 0
         group_data[bw.factor != control.g] <- 1
         data <- data.frame(group_data, OUTCOME_M[TIME_M == i])
-        smd <- stddiff.numeric(data = data, gcol = 1, vcol = 2)
+        smd <- stddiff::stddiff.numeric(data = data, gcol = 1, vcol = 2)
         estimate <- round(smd[7], digits = n.digits)
         lower <- round(smd[8], digits = n.digits)
         upper <- round(smd[9], digits = n.digits)

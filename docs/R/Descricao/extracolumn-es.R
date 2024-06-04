@@ -11,11 +11,11 @@ es <- function(x, ...) {
         if (nlevels(g) > 2) {
             # For numeric variables with 3 or more groups
             model <- aov(as.character(g) ~ y)
-            eta2 <- eta_squared(model, partial = TRUE)$Eta2
+            eta2 <- effectsize::eta_squared(model, partial = TRUE)$Eta2
             if (!is.na(eta2)) {
-                es <- eta2_to_f(eta2)
-                N <- ceiling(pwr.anova.test(k = nlevels(g), f = eta2_to_f(es), sig.level = 0.05,
-                  power = 0.8)$n)
+                es <- effectsize::eta2_to_f(eta2)
+                N <- ceiling(pwr::pwr.anova.test(k = nlevels(g), f = effectsize::eta2_to_f(es),
+                  sig.level = 0.05, power = 0.8)$n)
             }
         } else {
             # For numeric variables with 2 groups
@@ -27,15 +27,15 @@ es <- function(x, ...) {
             d <- (mu.1 - mu.2)/pool.sd
             if (!is.na(d)) {
                 es <- d
-                N <- ceiling(pwr.t.test(d = es, sig.level = 0.05, power = 1 - 0.2,
-                  type = "two.sample")$n)
+                N <- ceiling(pwr::pwr.t.test(d = es, sig.level = 0.05, power = 1 -
+                  0.2, type = "two.sample")$n)
             }
         }
     } else {
         # For categorical variables
         w <- chisq.test(table(y, g), correct = TRUE)
         es <- sqrt(as.numeric(w$statistic)/as.numeric(sum(w$observed)) * as.numeric(w$parameter))
-        N <- ceiling(pwr.chisq.test(w = es, N = NULL, df = w$parameter, sig.level = 0.05,
+        N <- ceiling(pwr::pwr.chisq.test(w = es, N = NULL, df = w$parameter, sig.level = 0.05,
             power = 0.8)$N)
     }
     # Format the ES value, using an HTML entity.  The initial empty string

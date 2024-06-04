@@ -47,11 +47,11 @@ TABLE.3 <- function(dataset, variables, bw.factor, control.g, wt.labels, alpha, 
             desfecho <- cbind(desfecho, t(paste(N, " (", N.perc, "%)", sep = "")))
         }
         # ridit analysis
-        r1 <- meanridits(table(dataset[, i], bw.factor), margin = 2, ref = control.g)[levels(bw.factor) ==
-            control.g]
-        r2 <- meanridits(table(dataset[, i], bw.factor), margin = 2, ref = control.g)[levels(bw.factor) !=
-            control.g]
-        se.diff <- seriditdiff(table(dataset[, i], bw.factor)[levels(bw.factor) ==
+        r1 <- ridittools::meanridits(table(dataset[, i], bw.factor), margin = 2,
+            ref = control.g)[levels(bw.factor) == control.g]
+        r2 <- ridittools::meanridits(table(dataset[, i], bw.factor), margin = 2,
+            ref = control.g)[levels(bw.factor) != control.g]
+        se.diff <- ridittools::seriditdiff(table(dataset[, i], bw.factor)[levels(bw.factor) ==
             control.g], table(dataset[, i], bw.factor)[levels(bw.factor) != control.g])
         z.score <- abs((r2 - r1)/se.diff)
         p.value <- 2 * pnorm(abs(z.score), lower.tail = F)
