@@ -137,7 +137,7 @@ disaggregated_plots <- lapply(unique(data$z), function(z_value) {
 
 # Arrange plots
 cowplot::plot_grid(
-  cowplot::plot_grid(aggregated_plot, labels = "AUTO"), 
+  cowplot::plot_grid(aggregated_plot), 
   cowplot::plot_grid(plotlist = disaggregated_plots, align = "hv"), 
   nrow = 2
 )
