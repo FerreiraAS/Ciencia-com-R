@@ -30,6 +30,58 @@
 
 <br>
 
+```{r correlacao, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Exemplo de diferentes forças e direção de correlação entre duas variáveis X e Y."}
+# Function to generate data with a given correlation
+generate_data <- function(n, rho) {
+  Sigma <- matrix(c(1, rho, rho, 1), ncol = 2)
+  MASS::mvrnorm(n = n, mu = c(0, 0), Sigma = Sigma)
+}
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Number of points
+n <- 100
+
+# Different levels of correlation including zero correlation
+correlations <- c(-0.9, -0.7, -0.4, -0.2, 0, 0.2, 0.4, 0.7, 0.9)
+
+# Generate data for each correlation
+data_list <- lapply(correlations, function(rho) {
+  data <- generate_data(n, rho)
+  data.frame(x = data[, 1], y = data[, 2], correlation = rho)
+})
+
+# Combine data into a single data frame
+data_all <- do.call(rbind, data_list)
+
+# Define the order of the plots to place zero correlation in the center
+plot_order <- c(-0.9, -0.7, -0.4, -0.2, 0, 0.2, 0.4, 0.7, 0.9)
+data_all$correlation <- factor(data_all$correlation, levels = plot_order)
+
+# Custom labels for correlation
+data_all$label <- factor(data_all$correlation, levels = plot_order, labels = paste("r =", format(plot_order, nsmall = 3)))
+
+# Plot using ggplot2
+ggplot2::ggplot(data_all, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(alpha = 0.7, color = "black") +
+  ggplot2::geom_smooth(method = "lm", color = "gray", se = FALSE) +
+  ggplot2::facet_wrap(~ label, nrow = 3, ncol = 3, scales = "free_x") +
+  ggplot2::labs(
+       x = "X",
+       y = "Y") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.border = ggplot2::element_blank(),
+    axis.line = ggplot2::element_line(color = "black"),
+    aspect.ratio = 1
+  )
+```
+
+<br>
+
 ### Quais precauções devem ser tomadas na interpretação de medidas de correlação?
 
 -   Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação causa-efeito entre as variáveis.[@khamis2008]
@@ -60,7 +112,7 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*correct_r_coarseness*](htt
 
 <br>
 
-```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", out.width = "100%"}
 library(dplyr)
 anscombe.dt <- datasets::anscombe
 anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
@@ -164,7 +216,7 @@ kableExtra::kable(
 
 <br>
 
-```{r anscombe-plot, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de dispersão do Quarteto de Anscombe para representação gráfica de conjuntos de dados bivariados com parâmetros quase idênticos e relações muito distintas."}
+```{r anscombe-plot, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Gráfico de dispersão do Quarteto de Anscombe para representação gráfica de conjuntos de dados bivariados com parâmetros quase idênticos e relações muito distintas."}
 library(dplyr)
 anscombe.dt <- datasets::anscombe
 anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
