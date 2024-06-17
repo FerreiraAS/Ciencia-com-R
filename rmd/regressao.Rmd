@@ -128,6 +128,41 @@ O pacote *fastDummies*[@fastDummies] fornece a função [*dummy_cols*](https://w
 
 -   Verifique a existência de multicolinearidade entre as variáveis candidatas.[@Sun1996]
 
+<br>
+
+```{r multicolinearidade, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Multicolinearidade entre variáveis candidatas em modelos de regressão multivariável."}
+# Set the seed for reproducibility
+set.seed(123)
+
+# Generate an independent variable
+X1 <- rnorm(100, mean = 50, sd = 10)
+
+# Generate a second variable that is highly correlated with X1
+X2 <- 0.8 * X1 + rnorm(100, mean = 0, sd = 5)
+
+# Generate a third variable that is not correlated with X1 or X2
+X3 <- rnorm(100, mean = 30, sd = 5)
+
+# Combine the variables into a data frame
+data <- data.frame(X1, X2, X3)
+
+# Create the customized grid plot
+GGally::ggpairs(
+  data, 
+  lower = list(continuous = GGally::wrap("smooth", method = "lm")),
+  diag = list(continuous = "densityDiag"),
+  upper = list(continuous = "cor")
+) +
+  ggplot2::theme(
+    panel.background = ggplot2::element_blank(),
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    axis.line = ggplot2::element_line(color = "black")
+  )
+```
+
+<br>
+
 -   Em caso de uma proporção baixa entre o número de participantes e de variáveis, use o conhecimento prévio da literatura para selecionar um pequeno conjunto de variáveis candidatas.[@Sun1996]
 
 -   Colapse categorias com contagem nula (células com valor igual a 0) de variáveis candidatas.[@Sun1996]
