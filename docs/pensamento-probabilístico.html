@@ -392,7 +392,6 @@ div.csl-indent {
 <li class="chapter" data-level="7.1" data-path="medidas-e-instrumentos.html"><a href="medidas-e-instrumentos.html#escalas"><i class="fa fa-check"></i><b>7.1</b> Escalas</a>
 <ul>
 <li class="chapter" data-level="7.1.1" data-path="medidas-e-instrumentos.html"><a href="medidas-e-instrumentos.html#o-que-são-escalas"><i class="fa fa-check"></i><b>7.1.1</b> O que são escalas?</a></li>
-<li class="chapter" data-level="7.1.2" data-path="medidas-e-instrumentos.html"><a href="medidas-e-instrumentos.html#o-que-são-medidas-grosseiras"><i class="fa fa-check"></i><b>7.1.2</b> O que são medidas grosseiras?</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="medidas-e-instrumentos.html"><a href="medidas-e-instrumentos.html#medidas"><i class="fa fa-check"></i><b>7.2</b> Medidas</a>
 <ul>
@@ -1137,6 +1136,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="fontes-externas.html"><a href="fontes-externas.html#oxford-reference"><i class="fa fa-check"></i>Oxford Reference</a></li>
 <li class="chapter" data-level="" data-path="fontes-externas.html"><a href="fontes-externas.html#royal-statistical-society"><i class="fa fa-check"></i>Royal Statistical Society</a></li>
 <li class="chapter" data-level="" data-path="fontes-externas.html"><a href="fontes-externas.html#statistics-in-medicine"><i class="fa fa-check"></i>Statistics in Medicine</a></li>
+<li class="chapter" data-level="" data-path="fontes-externas.html"><a href="fontes-externas.html#bmc-trials"><i class="fa fa-check"></i>BMC Trials</a></li>
 <li class="chapter" data-level="" data-path="fontes-externas.html"><a href="fontes-externas.html#the-journal-of-applied-statistics-in-the-pharmaceutical-industry"><i class="fa fa-check"></i>The Journal of Applied Statistics in the Pharmaceutical Industry</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><strong>Referências</strong></a></li>
@@ -1420,7 +1420,7 @@ Figura 1.6: Esquerda: Histogramas de lançament de 1 dado com distribuição uni
 </div>
 <p><br></p>
 <ul>
-<li>Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral <span class="math inline">\(S=\{0,1\}\)</span> — codificado para <span class="math inline">\(sucesso = 1\)</span> e <span class="math inline">\(insucesso = 0\)</span> — tem média <span class="math inline">\(\mu\)</span> = 0.46 e variância <span class="math inline">\(\sigma^{2}\)</span> = 0.251. A distribuição amostral da média de 100 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média <span class="math inline">\(\mu\)</span> = 0.46 e variância <span class="math inline">\(\sigma^{2}\)</span> = 0, independentemente da distribuição da população:</li>
+<li>Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral <span class="math inline">\(S=\{0,1\}\)</span> — codificado para <span class="math inline">\(sucesso = 1\)</span> e <span class="math inline">\(insucesso = 0\)</span> — tem média <span class="math inline">\(\mu\)</span> = 0.47 e variância <span class="math inline">\(\sigma^{2}\)</span> = 0.252. A distribuição amostral da média de 100 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média <span class="math inline">\(\mu\)</span> = 0.47 e variância <span class="math inline">\(\sigma^{2}\)</span> = 0, independentemente da distribuição da população:</li>
 </ul>
 <p><br></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:teorema-central-limite-moeda-plot"></span>
@@ -1476,10 +1476,10 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}
 <h3><span class="header-section-number">1.10.1</span> O que é regressão para a média?<a href="pensamento-probabilístico.html#o-que-é-regressão-para-a-média" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Regressão para a média<span class="citation"><sup><a href="#ref-galton1886">8</a></sup></span> é um fenômeno estatístico que ocorre quando uma variável aleatória <span class="math inline">\(X\)</span> é medida na mesma unidade de análise em dois ou mais momentos diferentes, <span class="math inline">\(X_{1}\)</span>, <span class="math inline">\(X_{2}\)</span>, …, <span class="math inline">\(X_{t}\)</span> e <span class="math inline">\(X_{t}\)</span> é mais próximo da média populacional do que <span class="math inline">\(X_{1}\)</span>, ou seja, <span class="math inline">\(E(X_{t})\)</span> é mais próxima de <span class="math inline">\(E(X)\)</span> do que <span class="math inline">\(E(X_{1})\)</span> é de <span class="math inline">\(E(X)\)</span>.<span class="citation"><sup><a href="#ref-barnett2004">9</a></sup></span></p></li>
-<li><p>Regressão para a média pode ocorem em qualquer pesquisa cujo delineamento envolva medidas repetidas.<span class="citation"><sup><a href="#ref-senn2011">10</a></sup></span></p></li>
+<li><p>O valor real - sem erros aleatório ou sistemático - em geral não é conhecido, mas pode ser estimado pela média de várias observações.<span class="citation"><sup><a href="#ref-barnett2004">9</a></sup></span></p></li>
+<li><p>Regressão para a média pode ocorrer em qualquer pesquisa cujo delineamento envolva medidas repetidas.<span class="citation"><sup><a href="#ref-senn2011">10</a></sup></span></p></li>
 <li><p>Em medidas repetidas, a média de várias observações é mais próxima da média verdadeira do que qualquer observação individual, pois o erro aleatório é reduzido pela média.<span class="citation"><sup><a href="#ref-barnett2004">9</a></sup></span></p></li>
 <li><p>Valores extremos - em direção ao mínimo ou máximo - em uma medição inicial tendem a ser seguidos por valores mais próximos da média (valor real) na medição subsequente.<span class="citation"><sup><a href="#ref-barnett2004">9</a></sup></span></p></li>
-<li><p>O valor real - sem erros aleatório ou sistemático - em geral não é conhecido, mas pode ser estimado pela média de várias observações. A média de várias observações é mais próxima da média verdadeira do que qualquer observação individual, pois o erro aleatório é reduzido pela média.<span class="citation"><sup><a href="#ref-barnett2004">9</a></sup></span></p></li>
 <li><p>No exemplo abaixo, a 2a medida (dado 2 = 121) é mais próxima da média (valor real = 120) do que a 1a medida (dado 1 = 118):</p></li>
 </ul>
 <p><br></p>
@@ -1495,7 +1495,7 @@ Figura 1.8: Representação gráfica da regressão para a média em medidas repe
 <h3><span class="header-section-number">1.10.2</span> Qual a causa da regressão para a média?<a href="pensamento-probabilístico.html#qual-a-causa-da-regressão-para-a-média" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>A regressão para a média pode ser atribuída ao erro aleatório, que é a variação não sistemática nos valores observados em torno de uma média verdadeira (por exemplo, erro de medição aleatório ou variações aleatórias em um participante).<span class="citation"><sup><a href="#ref-barnett2004">9</a></sup></span></p></li>
-<li><p>Regrssão para a média é uma consequência da observação de que dados extremos não se repetem com frequência (isto é, em média).<span class="citation"><sup><a href="#ref-senn2011">10</a></sup></span></p></li>
+<li><p>Regrssão para a média é uma consequência da observação de que dados extremos não se repetem com frequência.<span class="citation"><sup><a href="#ref-senn2011">10</a></sup></span></p></li>
 <li><p>Deve-se assumir que a regressão para a média ocorreu até que os dados mostrem o contrário.<span class="citation"><sup><a href="#ref-barnett2004">9</a></sup></span></p></li>
 </ul>
 <p><br></p>
