@@ -260,7 +260,6 @@ means <- aggregate(response ~ group + time, data, mean)
 ggplot2::ggplot(means, ggplot2::aes(x = time, y = response, color = group, group = group)) +
   ggplot2::geom_line(size = 1) +               # Draw lines for means
   ggplot2::geom_point(size = 3) +              # Add points for means
-  ggplot2::scale_x_continuous(breaks = c(1, 2), labels = c("Antes", "Depois")) +
   ggplot2::labs(title = "",
        x = "Tempo",
        y = "Resposta") +
@@ -285,7 +284,7 @@ ggplot2::ggplot(means, ggplot2::aes(x = time, y = response, color = group, group
   # annotate plot with "Efeito de interação"
   ggplot2::annotate("text", x = 2, y = mean(data$response[data$group != "A" & data$time == 2]), label = "Tamanho de efeito \n estimado", size = 3, color = "black", hjust = -0.1, vjust = 0.5) + 
   # augment x axis margins to make room for annotations
-  ggplot2::scale_x_continuous(expand = c(0.3, 0.3))
+  ggplot2::scale_x_continuous(breaks = c(1, 2), labels = c("Antes", "Depois"), expand = c(0.3, 0.3))
 ```
 
 <br>
