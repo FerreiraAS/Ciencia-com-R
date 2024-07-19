@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Parte 3 - Estatística Aplicada | Ciência com R</title>
+  <title>Capítulo 25 Modelos | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Parte 3 - Estatística Aplicada | Ciência com R" />
+  <meta property="og:title" content="Capítulo 25 Modelos | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Parte 3 - Estatística Aplicada | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 25 Modelos | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tamanho-do-efeito-e-p-valor.html"/>
-<link rel="next" href="seleção-de-testes.html"/>
+<link rel="prev" href="associação.html"/>
+<link rel="next" href="regressão.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -1163,19 +1163,72 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="parte-3---estatística-aplicada" class="section level1 unnumbered hasAnchor">
-<h1><em>Parte 3 - Estatística Aplicada</em><a href="parte-3---estatística-aplicada.html#parte-3---estatística-aplicada" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!--script for generating HORIZONTAL LINE-->
-<hr style="height:5px;border-width:0;color:black;background-color:black">
+<div id="modelos" class="section level1 hasAnchor" number="25">
+<h1><span class="header-section-number">Capítulo 25</span> <strong>Modelos</strong><a href="modelos.html#modelos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><br></p>
+<div id="suposições-dos-modelos" class="section level2 hasAnchor" number="25.1">
+<h2><span class="header-section-number">25.1</span> Suposições dos modelos<a href="modelos.html#suposições-dos-modelos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="quais-suposições-são-feitas-para-modelagem-de-regressão" class="section level3 hasAnchor" number="25.1.1">
+<h3><span class="header-section-number">25.1.1</span> Quais suposições são feitas para modelagem de regressão?<a href="modelos.html#quais-suposições-são-feitas-para-modelagem-de-regressão" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+</div>
+<div id="como-avaliar-as-suposições-do-modelo" class="section level3 hasAnchor" number="25.1.2">
+<h3><span class="header-section-number">25.1.2</span> Como avaliar as suposições do modelo?<a href="modelos.html#como-avaliar-as-suposições-do-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>performance</em><span class="citation"><sup><a href="#ref-performance">222</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/check_model"><em>check_model</em></a> para analisar a colinearidade entre variáveis, a normalidade da distribuição das variáveis e a heteroscedasticidade.</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="avaliação-de-modelos" class="section level2 hasAnchor" number="25.2">
+<h2><span class="header-section-number">25.2</span> Avaliação de modelos<a href="modelos.html#avaliação-de-modelos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-qualidade-de-ajuste-de-um-modelo" class="section level3 hasAnchor" number="25.2.1">
+<h3><span class="header-section-number">25.2.1</span> O que é qualidade de ajuste de um modelo?<a href="modelos.html#o-que-é-qualidade-de-ajuste-de-um-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+</div>
+<div id="como-avaliar-a-qualidade-de-ajuste-de-um-modelo" class="section level3 hasAnchor" number="25.2.2">
+<h3><span class="header-section-number">25.2.2</span> Como avaliar a qualidade de ajuste de um modelo?<a href="modelos.html#como-avaliar-a-qualidade-de-ajuste-de-um-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.[REF]</li>
+</ul>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>performance</em><span class="citation"><sup><a href="#ref-performance">222</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/model_performance"><em>model_performance</em></a> para calcular as métricas de ajuste da regressão adequadas ao modelo pré-especificado.</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>performance</em><span class="citation"><sup><a href="#ref-performance">222</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/compare_performance"><em>compare_performance</em></a> para comparar o desempenho e a qualidade do ajuste de diversos modelos de regressão pré-especificados.</p>
+</div>
+<p><br></p>
 
+</div>
+</div>
+</div>
+<h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-performance" class="csl-entry">
+<div class="csl-left-margin">222. </div><div class="csl-right-inline">Lüdecke D, Ben-Shachar MS, Patil I, Waggoner P, Makowski D. <span></span>Performance<span></span>: An <span></span>r<span></span> package for assessment, comparison and testing of statistical models. 2021;6:3139. doi:<a href="https://doi.org/10.21105/joss.03139">10.21105/joss.03139</a></div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tamanho-do-efeito-e-p-valor.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="seleção-de-testes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="associação.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regressão.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
