@@ -47,14 +47,25 @@ library("webshot")
 
 ```{r copy-file, echo = FALSE, results = "hide", include = FALSE}
 # PPTX file
-file.copy(from="Ciencia-com-R.pptx", to="docs/Ciencia-com-R.pptx", 
-          overwrite = TRUE, recursive = FALSE, copy.mode = TRUE)
+file.copy(
+  from = "Ciencia-com-R.pptx",
+  to = "Office/Ciencia-com-R.pptx",
+  overwrite = TRUE,
+  recursive = FALSE,
+  copy.mode = TRUE
+)
 try(unlink("Ciencia-com-R.pptx"), silent = TRUE)
 
 # DOCX file
-file.copy(from="Ciencia-com-R.docx", to="docs/Ciencia-com-R.docx", 
-          overwrite = TRUE, recursive = FALSE, copy.mode = TRUE)
-try(unlink("Ciencia-com-R.docx"), silent = TRUE)
+file.copy(
+  from = "Ciencia-com-R.docx",
+  to = "Office/Ciencia-com-R.docx",
+  overwrite = TRUE,
+  recursive = FALSE,
+  copy.mode = TRUE
+)
+try(unlink("Ciencia-com-R.docx"), silent = TRUE
+)
 ```
 
 ```{r cover-generator, echo = FALSE, include = FALSE, eval = knitr::is_html_output()}
