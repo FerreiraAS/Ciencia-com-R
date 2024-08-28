@@ -87,27 +87,27 @@ FIGURE.1 <- function(dataset, variables, covariate, bw.factor, wt.labels, missin
     # fit linear mixed model
     if (missing != "multiple.imputation") {
         if (!is.null(covariate)) {
-            mod1 <- lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M,
-                random = ~1 | ID_M/TIME_M, data = data_M)
-        } else {
-            mod1 <- lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M, random = ~1 |
+            mod1 <- lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M, random = ~1 |
                 ID_M/TIME_M, data = data_M)
+        } else {
+            mod1 <- lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M, random = ~1 | ID_M/TIME_M,
+                data = data_M)
         }
         mod1.aov <- anova(mod1)
     } else {
-        ini <- mice::mice(data = data_M, maxit = 0)
+        ini <- mice(data = data_M, maxit = 0)
         pred <- ini$pred
         pred["OUTCOME_M", "ID_M"] <- -2
-        imp <- mice::mice(data_M, pred = pred, method = "2l.pan", m = m.imputations,
-            seed = 0, print = FALSE)
+        imp <- mice(data_M, pred = pred, method = "2l.pan", m = m.imputations, seed = 0,
+            print = FALSE)
         if (!is.null(covariate)) {
-            mod1 <- with(data = imp, lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M +
-                COVARIATE_M, random = ~1 | ID_M/TIME_M))
-            mod1.aov <- quiet(miceadds::mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M"))
-        } else {
-            mod1 <- with(data = imp, lme4::lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M,
+            mod1 <- with(data = imp, lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M,
                 random = ~1 | ID_M/TIME_M))
-            mod1.aov <- quiet(miceadds::mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M"))
+            mod1.aov <- quiet(mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M + COVARIATE_M"))
+        } else {
+            mod1 <- with(data = imp, lme(fixed = OUTCOME_M ~ TIME_M * GROUP_M, random = ~1 |
+                ID_M/TIME_M))
+            mod1.aov <- quiet(mi.anova(imp, formula = "OUTCOME_M ~ TIME_M * GROUP_M"))
         }
         mod1.aov <- mod1.aov$anova.table[1:3, 2:5]
         mod1.aov <- rbind(rep(NA, 4), mod1.aov)
@@ -133,7 +133,7 @@ FIGURE.1 <- function(dataset, variables, covariate, bw.factor, wt.labels, missin
         "*\",\"*", " ~ p", p.value))
 
     # calculate CI
-    myCI <- Rmisc::group.CI(OUTCOME_M ~ GROUP_M * as.factor(TIME_M), data = cbind(GROUP_M,
+    myCI <- group.CI(OUTCOME_M ~ GROUP_M * as.factor(TIME_M), data = cbind(GROUP_M,
         as.factor(TIME_M), OUTCOME_M), ci = 1 - alpha)
     myCI[, 2] <- rep(wt.labels, each = nlevels(bw.factor))
 
