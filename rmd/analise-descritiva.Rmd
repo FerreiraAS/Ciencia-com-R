@@ -50,6 +50,180 @@ O pacote *SmartEDA*[@SmartEDA] fornece a função [*ExpReport*](https://www.rdoc
 
 <br>
 
+## Apresentação de resultados numéricos
+
+<br>
+
+### O que são casas decimais?
+
+-   O número de casas decimais refere-se à quantidade de dígitos que aparecem após a vírgula decimal.[@Cole2015;@cole2015]
+
+<br>
+
+### O que são dígitos significativos?
+
+-   O termo "dígitos significativos" é preferido a "algarismos significativos" ou "dígitos efetivos" e não se relaciona com significância estatística.[@Cole2015;@cole2015]
+
+-   O número de dígitos significativos é a soma total de dígitos, desconsiderando a vírgula decimal e os zeros à esquerda; os zeros à direita são considerados informativos, salvo exceções.[@Cole2015;@cole2015]
+
+<br>
+
+### Como arredondar dados numéricos?
+
+-   Apresentar dados com quantidade excessiva de casas decimais pode dificultar a interpretação e induzir erroneamente uma precisão espúria.[@Cole2015;@cole2015]
+
+-   A precisão é determinada pelo grau de arredondamento aplicado, medido em casas decimais ou dígitos significativos.[@Cole2015;@cole2015]
+
+<br>
+
+```{r casas-decimais, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
+# Criar um data frame com exemplos de casas decimais e dígitos significativos
+dados <- data.frame(
+  Valor = c(0.000789, 0.00456, 45.600, 123.456, 78900)
+)
+
+# Calcular casas decimais
+dados$'Casas Decimais' <- sapply(dados$Valor, function(x) {
+  if (x == 0) return(0)
+  else return(nchar(sub(".*\\.", "", as.character(x))))
+})
+
+# Calcular dígitos significativos
+dados$'Dígitos Significativos' <- sapply(dados$Valor, function(x) {
+  gsub("^0+|\\..*", "", as.character(x)) %>%
+  nchar()
+})
+
+# Remover zeros à direita e formatar os valores
+dados$Valor <- sapply(1:nrow(dados), function(i) {
+  format(dados$Valor[i], nsmall = dados$`Casas Decimais`[i], 
+         scientific = FALSE, 
+         trim = TRUE, 
+         decimal.mark = ",")
+})
+
+# exibe a tabela de dados
+kableExtra::kable(
+  dados,
+  align = c("r", "c", "c"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE,
+  caption = "Quantidade de casas decimais e dígitos significativos."
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), T, T),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(dados)[1],
+                       extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+-   O arredondamento também introduz erros, uma vez que aumenta a imprecisão (isto é, incerteza) em torno do valor original.[@Cole2015;@cole2015]
+
+<br>
+
+```{r arredondamento, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
+# Criar um data frame com exemplos de casas decimais e dígitos significativos
+dados <- data.frame(
+  Valor = c(0.000789, 0.00456, 45.600, 123.456, 78900)
+)
+
+# Calcular casas decimais
+dados$'Casas Decimais' <- sapply(dados$Valor, function(x) {
+  if (x == 0) return(0)
+  else return(nchar(sub(".*\\.", "", as.character(x))))
+})
+
+# Calcular dígitos significativos
+dados$'Dígitos Significativos' <- sapply(dados$Valor, function(x) {
+  gsub("^0+|\\..*", "", as.character(x)) %>%
+    nchar()
+})
+
+# Remover zeros à direita e formatar os valores
+dados$Valor <- sapply(1:nrow(dados), function(i) {
+  format(dados$Valor[i], nsmall = dados$`Casas Decimais`[i], 
+         scientific = FALSE, 
+         trim = TRUE, 
+         decimal.mark = ",")
+})
+
+# Função para calcular arredondamento e faixa de erro
+calcular_erro <- function(valor, casas) {
+  original_value <- as.numeric(gsub(",", ".", valor))
+  rounded_value <- round(as.numeric(gsub(",", ".", original_value)), casas)
+
+  # Calcular a faixa de erro
+  if (casas == 2) {
+    lower_bound <- rounded_value - 0.005
+    upper_bound <- rounded_value + 0.005
+  } else if (casas == 1) {
+    lower_bound <- rounded_value - 0.05
+    upper_bound <- rounded_value + 0.05
+  } else {
+    lower_bound <- rounded_value - 0.5
+    upper_bound <- rounded_value + 0.5
+  }
+  
+  return(paste0(format(rounded_value, nsmall = casas, decimal.mark = ","), " <br> [", format(round(lower_bound, casas + 1), nsmall = casas + 1, decimal.mark = ","), ", ", format(round(upper_bound, casas + 1), nsmall = casas + 1, decimal.mark = ","), "]"))
+}
+
+dados$'2 Casas decimais <br> [Margem de erro]' <- sapply(dados$Valor, function(x) {
+  calcular_erro(x, 2)
+})
+
+dados$'1 Casa decimal <br> [Margem de erro]' <- sapply(dados$Valor, function(x) {
+  calcular_erro(x, 1)
+})
+
+dados$'Sem casa decimal <br> [Margem de erro]' <- sapply(dados$Valor, function(x) {
+  calcular_erro(x, 0)
+})
+
+# exibe a tabela de dados
+kableExtra::kable(
+  dados,
+  align = c("r", "c", "c", "r", "r", "r"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE,
+  caption = "Valores originais, arredondamentos e erros de arredondamento por casas decimais."
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), T, T),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(dados)[1],
+                       extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+- A regra geral é utilizar 2 ou 3 dígitos significativos para tamanhos de efeito e 1 ou 2 dígitos significativos para medidas de variabilidade.[@cole2015]
+
+-   Regra dos 3 dígitos significativos para proporção de risco: em média, o erro de arredondamento é menor que os 0,5% exigidos, de modo que três dígitos significativos são mais precisos do que o necessário.[@Cole2015]
+
+-   Regra dos 4 dígitos significativos para proporção de risco: divida a proporção de risco por quatro e arredonde para dois dígitos significativos e, em seguida, relate a proporção para esse número de casas decimais”.[@Cole2015]
+
+<br>
+
 ## Tabelas
 
 <br>
@@ -83,25 +257,25 @@ O pacote *SmartEDA*[@SmartEDA] fornece a função [*ExpReport*](https://www.rdoc
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *flextable*[@flextable-2] fornece as funções [*flextable*](`r paste0("https://search.r-project.org/CRAN/refmans/", "flextable", "/html/", "flextable", ".html")`), [*as_flextable*](`r paste0("https://search.r-project.org/CRAN/refmans/", "flextable", "/html/", "as_flextable", ".html")`) e [*save_as_docx*](`r paste0("https://search.r-project.org/CRAN/refmans/", "flextable", "/html/", "save_as_docx", ".html")`) para criar e salvar tabelas tabelas formatadas em DOCX.
+O pacote *flextable*[@flextable-2] fornece as funções [*flextable*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22flextable%22,%20%22/html/%22,%20%22flextable%22,%20%22.html%22)%60), [*as_flextable*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22flextable%22,%20%22/html/%22,%20%22as_flextable%22,%20%22.html%22)%60) e [*save_as_docx*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22flextable%22,%20%22/html/%22,%20%22save_as_docx%22,%20%22.html%22)%60) para criar e salvar tabelas tabelas formatadas em DOCX.
 :::
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *rempsyc*[@rempsyc] fornece a função [*nice_table*](`r paste0("https://search.r-project.org/CRAN/refmans/", "rempsyc", "/html/", "nice_table", ".html")`) para criar tabelas formatadas.
+O pacote *rempsyc*[@rempsyc] fornece a função [*nice_table*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22rempsyc%22,%20%22/html/%22,%20%22nice_table%22,%20%22.html%22)%60) para criar tabelas formatadas.
 :::
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *table1*[@table1] fornece a função [*table1*](`r paste0("https://search.r-project.org/CRAN/refmans/", "table1", "/html/", "table1", ".html")`) para construção de tabelas.
+O pacote *table1*[@table1] fornece a função [*table1*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22table1%22,%20%22/html/%22,%20%22table1%22,%20%22.html%22)%60) para construção de tabelas.
 :::
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *gtsummary*[@gtsummary-2] fornece a função [*tbl_summary*](`r paste0("https://search.r-project.org/CRAN/refmans/", "gtsummary", "/html/", "tbl_summary", ".html")`) para construção da 'Tabela 1' com dados descritivos.
+O pacote *gtsummary*[@gtsummary-2] fornece a função [*tbl_summary*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22gtsummary%22,%20%22/html/%22,%20%22tbl_summary%22,%20%22.html%22)%60) para construção da 'Tabela 1' com dados descritivos.
 :::
 
 <br>
@@ -143,13 +317,13 @@ O pacote *gtsummary*[@gtsummary-2] fornece a função [*tbl_summary*](`r paste0(
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *table1*[@table1] fornece a função [*table1*](`r paste0("https://search.r-project.org/CRAN/refmans/", "table1", "/html/", "table1", ".html")`) para construção de tabelas.
+O pacote *table1*[@table1] fornece a função [*table1*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22table1%22,%20%22/html/%22,%20%22table1%22,%20%22.html%22)%60) para construção de tabelas.
 :::
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *gtsummary*[@gtsummary-2] fornece a função [*tbl_summary*](`r paste0("https://search.r-project.org/CRAN/refmans/", "gtsummary", "/html/", "tbl_summary", ".html")`) para construção da 'Tabela 1' com dados descritivos.
+O pacote *gtsummary*[@gtsummary-2] fornece a função [*tbl_summary*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22gtsummary%22,%20%22/html/%22,%20%22tbl_summary%22,%20%22.html%22)%60) para construção da 'Tabela 1' com dados descritivos.
 :::
 
 <br>
@@ -187,13 +361,13 @@ O pacote *gtsummary*[@gtsummary-2] fornece a função [*tbl_summary*](`r paste0(
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *table1*[@table1] fornece a função [*table1*](`r paste0("https://search.r-project.org/CRAN/refmans/", "table1", "/html/", "table1", ".html")`) para construção de tabelas.
+O pacote *table1*[@table1] fornece a função [*table1*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22table1%22,%20%22/html/%22,%20%22table1%22,%20%22.html%22)%60) para construção de tabelas.
 :::
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *gtsummary*[@gtsummary-2] fornece a função [*tbl_summary*](`r paste0("https://search.r-project.org/CRAN/refmans/", "gtsummary", "/html/", "tbl_summary", ".html")`) para construção da 'Tabela 1' com dados descritivos.
+O pacote *gtsummary*[@gtsummary-2] fornece a função [*tbl_summary*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22gtsummary%22,%20%22/html/%22,%20%22tbl_summary%22,%20%22.html%22)%60) para construção da 'Tabela 1' com dados descritivos.
 :::
 
 <br>
