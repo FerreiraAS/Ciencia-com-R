@@ -79,7 +79,7 @@ O pacote *SmartEDA*[@SmartEDA] fornece a função [*ExpReport*](https://www.rdoc
 ```{r casas-decimais, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 # Criar um data frame com exemplos de casas decimais e dígitos significativos
 dados <- data.frame(
-  Valor = c(0.000789, 0.00456, 45.600, 123.456, 78900)
+  Valor = c(0.00789, 0.0456, 45.600, 123.456, 7890)
 )
 
 # Calcular casas decimais
@@ -135,7 +135,7 @@ kableExtra::kable(
 ```{r arredondamento, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
 # Criar um data frame com exemplos de casas decimais e dígitos significativos
 dados <- data.frame(
-  Valor = c(0.000789, 0.00456, 45.600, 123.456, 78900)
+  Valor = c(0.00789, 0.0456, 45.600, 123.456, 7890)
 )
 
 # Calcular casas decimais
@@ -175,18 +175,18 @@ calcular_erro <- function(valor, casas) {
     upper_bound <- rounded_value + 0.5
   }
   
-  return(paste0(format(rounded_value, nsmall = casas, decimal.mark = ","), " <br> [", format(round(lower_bound, casas + 1), nsmall = casas + 1, decimal.mark = ","), ", ", format(round(upper_bound, casas + 1), nsmall = casas + 1, decimal.mark = ","), "]"))
+  return(paste0(format(rounded_value, nsmall = casas, decimal.mark = ","), " [", format(round(lower_bound, casas + 1), nsmall = casas + 1, decimal.mark = ","), ", ", format(round(upper_bound, casas + 1), nsmall = casas + 1, decimal.mark = ","), "]"))
 }
 
-dados$'2 Casas decimais <br> [Margem de erro]' <- sapply(dados$Valor, function(x) {
+dados$'2 Casas decimais [Margem de erro]' <- sapply(dados$Valor, function(x) {
   calcular_erro(x, 2)
 })
 
-dados$'1 Casa decimal <br> [Margem de erro]' <- sapply(dados$Valor, function(x) {
+dados$'1 Casa decimal [Margem de erro]' <- sapply(dados$Valor, function(x) {
   calcular_erro(x, 1)
 })
 
-dados$'Sem casa decimal <br> [Margem de erro]' <- sapply(dados$Valor, function(x) {
+dados$'Sem casa decimal [Margem de erro]' <- sapply(dados$Valor, function(x) {
   calcular_erro(x, 0)
 })
 
