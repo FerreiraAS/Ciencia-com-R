@@ -1,0 +1,119 @@
+# **Dados perdidos e imputados **
+
+<br>
+
+## Dados perdidos
+
+<br>
+
+### O que são dados perdidos?
+
+-   Dados perdidos são dados não coletados de um ou mais participantes, para uma ou mais variáveis.[@Altman2007]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base-6] fornece a função [*is.na*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/na) para identificar que elementos de um objeto são dados perdidos.
+:::
+
+<br>
+
+### Qual o problema de um estudo ter dados perdidos?
+
+-   Uma grande quantidade de dados perdidos pode comprometer a integridade científica do estudo, considerando-se que o tamanho da amostra foi estimado para observar um determinado tamanho de efeito mínimo.[@Altman2007]
+
+-   Perda de participantes no estudo por dados perdidos pode reduzir o poder estatístico (erro tipo II).[@Altman2007]
+
+-   Não existe solução globalmente satisfatória para o problema de dados perdidos.[@Altman2007]
+
+<br>
+
+### Quais os mecanismos geradores de dados perdidos?
+
+-   Dados perdidos completamente ao acaso (*missing completely at random*, MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.[@Heymans2022; @carpenter2021]
+
+-   Dados perdidos ao acaso (*missing at random*, MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.[@Heymans2022; @carpenter2021]
+
+-   Dados perdidos não ao acaso (*missing not at random*, MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.[@Heymans2022; @carpenter2021]
+
+<br>
+
+### Como identificar o mecanismo gerador de dados perdidos em um banco de dados?
+
+-   Por definição, não é possível avaliar se os dados foram perdidos ao acaso (MAR) ou não (MNAR).[@Heymans2022]
+
+-   Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise ('dado perdido' = 1, 'dado observado' = 0).[@Heymans2022]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *misty*[@misty] fornece a função [*na.test*](https://www.rdocumentation.org/packages/misty/versions/0.5.0/topics/na.test) para executar o Little's Missing Completely at Random (MCAR) test[@little1988].
+:::
+
+<br>
+
+### Que estratégias podem ser utilizadas na coleta de dados quando há expectativa de perda amostral?
+
+-   Na expectativa de ocorrência de perda amostral, com consequente ocorrência de dados perdidos, recomenda-se ampliar o tamanho da amostra com um percentual correspondente a tal estimativa (ex.: 10%), embora ainda não corrija potenciais vieses pela perda.[@Altman2007]
+
+<br>
+
+### Que estratégias podem ser utilizadas na análise quando há dados perdidos?
+
+-   Na ocorrência de dados perdidos, a análise mais comum compreende apenas os 'casos completos', com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).[@Altman2007]
+
+-   A análise de dados completos é válida quando pode-se argumentar que que a probabilidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.[@carpenter2021]
+
+-   A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.[@carpenter2021]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base-6] fornece a função [*na.omit*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/na.fail) para remover dados perdidos de um objeto em um banco de dados.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função [*complete.cases*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/complete.cases) para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados.
+:::
+
+<br>
+
+### Que estratégias podem ser utilizadas na redação de estudos em que há dados perdidos?
+
+-   Informar: o número de participantes com dados perdidos; diferenças nas taxas de dados perdidos entre os braços do estudo; os motivos dos dados perdidos; o fluxo de participantes; quaisquer diferenças entre os participantes com e sem dados perdidos; o padrão de ausência (por exemplo, se é aleatória); os métodos para tratamento de dados perdidos das variáveis em análise; os resultados de quaisquer análises de sensibilidade; as implicações dos dados perdidos na interpretação do resultados.[@Akl2015]
+
+<br>
+
+## Dados imputados
+
+<br>
+
+### O que são dados imputados?
+
+- .[REF]
+
+<br>
+
+### Quando a imputação de dados é indicada?
+
+-   A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares --- preditoras do desfecho e não dos dados perdidos --- estão disponíveis.[@carpenter2021]
+
+-   Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.[@Altman2007]
+
+<br>
+
+### Quais os métodos de imputação de dados?
+
+-   Modelos lineares e logísticos podem ser utilizados para imputar dados perdidos em variáveis contínuas e dicotômicas, respectivamente.[@austin2023]
+
+-   Os métodos de imputação de dados mais robustos incluem a imputação multivariada por equações encadeadas (*multivariate imputation by chained equations*, MICE)[@mice] e a correspondência média preditiva (*predictive mean matching*, PMM)[@rubin1986; @little1988a].
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+Os pacotes *mice*[@mice] e *miceadds*[@miceadds] fornecem funções [*mice*](https://www.rdocumentation.org/packages/mice/versions/3.16.0/topics/mice) e [*mi.anova*](https://www.rdocumentation.org/packages/miceadds/versions/3.16-18/topics/mi.anova) para imputação multivariada por equações encadeadas, respectivamente, para imputação de dados.
+:::
+
+<br>
