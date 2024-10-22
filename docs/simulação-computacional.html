@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 34 Simulação computacional | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 34 Simulação computacional | Ciência com R" />
   <meta property="og:type" content="book" />
@@ -720,6 +720,10 @@ div.csl-indent {
 <li class="chapter" data-level="19.9.6" data-path="tamanho-do-efeito-e-p-valor.html"><a href="tamanho-do-efeito-e-p-valor.html#qual-a-origem-do-p005"><i class="fa fa-check"></i><b>19.9.6</b> Qual a origem do ‘P&lt;0,05’?</a></li>
 <li class="chapter" data-level="19.9.7" data-path="tamanho-do-efeito-e-p-valor.html"><a href="tamanho-do-efeito-e-p-valor.html#quais-são-os-complementos-ou-alternativas-ao-p-valor"><i class="fa fa-check"></i><b>19.9.7</b> Quais são os complementos ou alternativas ao P-valor?</a></li>
 </ul></li>
+<li class="chapter" data-level="19.10" data-path="tamanho-do-efeito-e-p-valor.html"><a href="tamanho-do-efeito-e-p-valor.html#p-haking"><i class="fa fa-check"></i><b>19.10</b> P-haking</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="tamanho-do-efeito-e-p-valor.html"><a href="tamanho-do-efeito-e-p-valor.html#o-que-é-p-haking"><i class="fa fa-check"></i><b>19.10.1</b> O que é P-haking?</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-3---estatística-aplicada.html"><a href="parte-3---estatística-aplicada.html"><i class="fa fa-check"></i><em>Parte 3 - Estatística Aplicada</em></a></li>
 <li class="chapter" data-level="20" data-path="seleção-de-testes.html"><a href="seleção-de-testes.html"><i class="fa fa-check"></i><b>20</b> <strong>Seleção de testes</strong></a>
@@ -935,6 +939,10 @@ div.csl-indent {
 <li class="chapter" data-level="33.5" data-path="tamanho-da-amostra.html"><a href="tamanho-da-amostra.html#justificativa-do-tamanho-da-amostra"><i class="fa fa-check"></i><b>33.5</b> Justificativa do tamanho da amostra</a>
 <ul>
 <li class="chapter" data-level="33.5.1" data-path="tamanho-da-amostra.html"><a href="tamanho-da-amostra.html#como-justificar-o-tamanho-da-amostra-de-um-estudo"><i class="fa fa-check"></i><b>33.5.1</b> Como justificar o tamanho da amostra de um estudo?</a></li>
+</ul></li>
+<li class="chapter" data-level="33.6" data-path="tamanho-da-amostra.html"><a href="tamanho-da-amostra.html#sparking"><i class="fa fa-check"></i><b>33.6</b> SPARKing</a>
+<ul>
+<li class="chapter" data-level="33.6.1" data-path="tamanho-da-amostra.html"><a href="tamanho-da-amostra.html#o-que-é-sparking"><i class="fa fa-check"></i><b>33.6.1</b> O que é SPARKing?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="34" data-path="simulação-computacional.html"><a href="simulação-computacional.html"><i class="fa fa-check"></i><b>34</b> <strong>Simulação computacional</strong></a>
@@ -1230,11 +1238,11 @@ div.csl-indent {
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>simstudy</em><span class="citation"><sup><a href="#ref-simstudy">254</a></sup></span> fornece as funções <a href="https://www.rdocumentation.org/packages/simstudy/versions/0.7.0/topics/defData"><em>defData</em></a> e <a href="https://www.rdocumentation.org/packages/simstudy/versions/0.7.0/topics/genData"><em>genData</em></a> para criar variáveis e simular um banco de dados de acordo com o delineamento pré-especificado, respectivamente.</p>
+<p>O pacote <em>simstudy</em><span class="citation"><sup><a href="#ref-simstudy">255</a></sup></span> fornece as funções <a href="https://www.rdocumentation.org/packages/simstudy/versions/0.7.0/topics/defData"><em>defData</em></a> e <a href="https://www.rdocumentation.org/packages/simstudy/versions/0.7.0/topics/genData"><em>genData</em></a> para criar variáveis e simular um banco de dados de acordo com o delineamento pré-especificado, respectivamente.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>faux</em><span class="citation"><sup><a href="#ref-faux">255</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/faux/versions/1.2.1/topics/sim_design"><em>sim_design</em></a> para simular um banco de dados de acordo com o delineamento pré-especificado.</p>
+<p>O pacote <em>faux</em><span class="citation"><sup><a href="#ref-faux">256</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/faux/versions/1.2.1/topics/sim_design"><em>sim_design</em></a> para simular um banco de dados de acordo com o delineamento pré-especificado.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
@@ -1251,7 +1259,7 @@ div.csl-indent {
 <ul>
 <li><p>Visite a rede <em>Enhancing the QUAlity and Transparency Of health Research</em> <a href="https://www.equator-network.org/">EQUATOR Network</a> para encontrar diretrizes específicas para cada tipo de estudo de simulação computacional.</p>
 <ul>
-<li><em>Reporting Guidelines for Health Care Simulation Research: Extensions to the CONSORT and STROBE Statements</em>:<span class="citation"><sup><a href="#ref-cheng2016">256</a></sup></span> <a href="https://www.equator-network.org/reporting-guidelines/reporting-guidelines-for-health-care-simulation-research-extensions-to-the-consort-and-strobe-statements/" class="uri">https://www.equator-network.org/reporting-guidelines/reporting-guidelines-for-health-care-simulation-research-extensions-to-the-consort-and-strobe-statements/</a></li>
+<li><em>Reporting Guidelines for Health Care Simulation Research: Extensions to the CONSORT and STROBE Statements</em>:<span class="citation"><sup><a href="#ref-cheng2016">257</a></sup></span> <a href="https://www.equator-network.org/reporting-guidelines/reporting-guidelines-for-health-care-simulation-research-extensions-to-the-consort-and-strobe-statements/" class="uri">https://www.equator-network.org/reporting-guidelines/reporting-guidelines-for-health-care-simulation-research-extensions-to-the-consort-and-strobe-statements/</a></li>
 </ul></li>
 </ul>
 <p><br></p>
@@ -1268,13 +1276,13 @@ div.csl-indent {
 <div class="csl-left-margin">183. </div><div class="csl-right-inline">Baranger DAA, Finsaas MC, Goldstein BL, Vize CE, Lynam DR, Olino TM. Tutorial: Power analyses for interaction effects in cross-sectional regressions. 2022. doi:<a href="https://doi.org/10.31234/osf.io/5ptd7">10.31234/osf.io/5ptd7</a></div>
 </div>
 <div id="ref-simstudy" class="csl-entry">
-<div class="csl-left-margin">254. </div><div class="csl-right-inline">Goldfeld K, Wujciak-Jens J. Simstudy: Illuminating research methods through data generation. 2020;5:2763. doi:<a href="https://doi.org/10.21105/joss.02763">10.21105/joss.02763</a></div>
+<div class="csl-left-margin">255. </div><div class="csl-right-inline">Goldfeld K, Wujciak-Jens J. Simstudy: Illuminating research methods through data generation. 2020;5:2763. doi:<a href="https://doi.org/10.21105/joss.02763">10.21105/joss.02763</a></div>
 </div>
 <div id="ref-faux" class="csl-entry">
-<div class="csl-left-margin">255. </div><div class="csl-right-inline">DeBruine L. Faux: Simulation for factorial designs. 2023. doi:<a href="https://doi.org/10.5281/zenodo.2669586">10.5281/zenodo.2669586</a></div>
+<div class="csl-left-margin">256. </div><div class="csl-right-inline">DeBruine L. Faux: Simulation for factorial designs. 2023. doi:<a href="https://doi.org/10.5281/zenodo.2669586">10.5281/zenodo.2669586</a></div>
 </div>
 <div id="ref-cheng2016" class="csl-entry">
-<div class="csl-left-margin">256. </div><div class="csl-right-inline">Cheng A, Kessler D, Mackinnon R, et al. Reporting Guidelines for Health Care Simulation Research. <em>Simulation in Healthcare: The Journal of the Society for Simulation in Healthcare</em>. 2016;11(4):238-248. doi:<a href="https://doi.org/10.1097/sih.0000000000000150">10.1097/sih.0000000000000150</a></div>
+<div class="csl-left-margin">257. </div><div class="csl-right-inline">Cheng A, Kessler D, Mackinnon R, et al. Reporting Guidelines for Health Care Simulation Research. <em>Simulation in Healthcare: The Journal of the Society for Simulation in Healthcare</em>. 2016;11(4):238-248. doi:<a href="https://doi.org/10.1097/sih.0000000000000150">10.1097/sih.0000000000000150</a></div>
 </div>
 </div>
             </section>

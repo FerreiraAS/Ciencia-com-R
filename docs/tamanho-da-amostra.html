@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 33 Tamanho da amostra | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 33 Tamanho da amostra | Ciência com R" />
   <meta property="og:type" content="book" />
@@ -720,6 +720,10 @@ div.csl-indent {
 <li class="chapter" data-level="19.9.6" data-path="tamanho-do-efeito-e-p-valor.html"><a href="tamanho-do-efeito-e-p-valor.html#qual-a-origem-do-p005"><i class="fa fa-check"></i><b>19.9.6</b> Qual a origem do ‘P&lt;0,05’?</a></li>
 <li class="chapter" data-level="19.9.7" data-path="tamanho-do-efeito-e-p-valor.html"><a href="tamanho-do-efeito-e-p-valor.html#quais-são-os-complementos-ou-alternativas-ao-p-valor"><i class="fa fa-check"></i><b>19.9.7</b> Quais são os complementos ou alternativas ao P-valor?</a></li>
 </ul></li>
+<li class="chapter" data-level="19.10" data-path="tamanho-do-efeito-e-p-valor.html"><a href="tamanho-do-efeito-e-p-valor.html#p-haking"><i class="fa fa-check"></i><b>19.10</b> P-haking</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="tamanho-do-efeito-e-p-valor.html"><a href="tamanho-do-efeito-e-p-valor.html#o-que-é-p-haking"><i class="fa fa-check"></i><b>19.10.1</b> O que é P-haking?</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-3---estatística-aplicada.html"><a href="parte-3---estatística-aplicada.html"><i class="fa fa-check"></i><em>Parte 3 - Estatística Aplicada</em></a></li>
 <li class="chapter" data-level="20" data-path="seleção-de-testes.html"><a href="seleção-de-testes.html"><i class="fa fa-check"></i><b>20</b> <strong>Seleção de testes</strong></a>
@@ -935,6 +939,10 @@ div.csl-indent {
 <li class="chapter" data-level="33.5" data-path="tamanho-da-amostra.html"><a href="tamanho-da-amostra.html#justificativa-do-tamanho-da-amostra"><i class="fa fa-check"></i><b>33.5</b> Justificativa do tamanho da amostra</a>
 <ul>
 <li class="chapter" data-level="33.5.1" data-path="tamanho-da-amostra.html"><a href="tamanho-da-amostra.html#como-justificar-o-tamanho-da-amostra-de-um-estudo"><i class="fa fa-check"></i><b>33.5.1</b> Como justificar o tamanho da amostra de um estudo?</a></li>
+</ul></li>
+<li class="chapter" data-level="33.6" data-path="tamanho-da-amostra.html"><a href="tamanho-da-amostra.html#sparking"><i class="fa fa-check"></i><b>33.6</b> SPARKing</a>
+<ul>
+<li class="chapter" data-level="33.6.1" data-path="tamanho-da-amostra.html"><a href="tamanho-da-amostra.html#o-que-é-sparking"><i class="fa fa-check"></i><b>33.6.1</b> O que é SPARKing?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="34" data-path="simulação-computacional.html"><a href="simulação-computacional.html"><i class="fa fa-check"></i><b>34</b> <strong>Simulação computacional</strong></a>
@@ -1362,10 +1370,10 @@ div.csl-indent {
 <li>Aumentar o tamanho da amostra estimada <span class="math inline">\(n\)</span> pela porcentagem <span class="math inline">\(d\)</span> de perdas esperada ou prevista, para obter o tamanho da amostra efetiva <span class="math inline">\(n&#39;\)</span> com base na equação <a href="tamanho-da-amostra.html#eq:samplesizeadj1">(33.1)</a>:<span class="citation"><sup><a href="#ref-rodríguezdeláguila2014">250</a></sup></span></li>
 </ul>
 <p><br></p>
-<span class="math display" id="eq:samplesizeadj1">\[\begin{equation}
+<p><span class="math display" id="eq:samplesizeadj1">\[\begin{equation}
 \tag{33.1}
 n&#39; = \dfrac{n}{1-d}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p><br></p>
 </div>
 <div id="como-ajustar-para-confiabilidade" class="section level3 hasAnchor" number="33.4.3">
@@ -1384,6 +1392,17 @@ n&#39; = \dfrac{n}{1-d}
 <ul>
 <li><p>Em estudos que envolvem condições raras, pode ser difícil recrutar o número necessário de participantes devido à limitada disponibilidade de casos da população. Mesmo assim, é aconselhável determinar o tamanho da amostra.<span class="citation"><sup><a href="#ref-rodríguezdeláguila2014">250</a></sup></span></p></li>
 <li><p>Quando um estudo deste tipo não é possível, as considerações referentes ao tamanho da amostra são justificadas de acordo com o número máximo de pacientes que podem ser recrutados no decorrer do estudo.<span class="citation"><sup><a href="#ref-rodríguezdeláguila2014">250</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="sparking" class="section level2 hasAnchor" number="33.6">
+<h2><span class="header-section-number">33.6</span> SPARKing<a href="tamanho-da-amostra.html#sparking" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-sparking" class="section level3 hasAnchor" number="33.6.1">
+<h3><span class="header-section-number">33.6.1</span> O que é SPARKing?<a href="tamanho-da-amostra.html#o-que-é-sparking" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>SPARKing é um acrônimo para <em>Sample size Planning After the Results are Known</em>.<span class="citation"><sup><a href="#ref-Sasaki2023">254</a></sup></span></li>
 </ul>
 <p><br></p>
 
@@ -1418,6 +1437,9 @@ n&#39; = \dfrac{n}{1-d}
 </div>
 <div id="ref-Andrade2020" class="csl-entry">
 <div class="csl-left-margin">253. </div><div class="csl-right-inline">Andrade C. Sample Size and its Importance in Research. <em>Indian Journal of Psychological Medicine</em>. 2020;42(1):102-103. doi:<a href="https://doi.org/10.4103/ijpsym.ijpsym_504_19">10.4103/ijpsym.ijpsym_504_19</a></div>
+</div>
+<div id="ref-Sasaki2023" class="csl-entry">
+<div class="csl-left-margin">254. </div><div class="csl-right-inline">Sasaki K, Yamada Y. SPARKing: Sample-size planning after the results are known. <em>Frontiers in Human Neuroscience</em>. 2023;17. doi:<a href="https://doi.org/10.3389/fnhum.2023.912338">10.3389/fnhum.2023.912338</a></div>
 </div>
 </div>
             </section>
