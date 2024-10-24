@@ -68,12 +68,11 @@
 
 <br>
 
-```{=tex}
 \begin{equation}
 (\#eq:ancova1)
 Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 \end{equation}
-```
+
 <br>
 
 -   A ANCOVA modelando seja a mudança (pré - pós: $\Delta = X_{ij} - Y_{ij}$) quando o desfecho no pós-tratamento parece ser o método mais efetivo considerando-se o viés de estimação dos parâmetros, a precisão das estimativas, a cobertura nominal (isto é, intervalo de confiança) e o poder do teste.[@OConnell2017]
@@ -82,12 +81,11 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 <br>
 
-```{=tex}
 \begin{equation}
 (\#eq:ancova2)
 (X_{ij} - Y_{ij}) = \beta_0 + \beta_1 Z_j + \epsilon_{ij}
 \end{equation}
-```
+
 <br>
 
 -   Análise de variância (ANOVA) e modelos lineares mistos (MLM) são outras opções de métodos, embora apresentem maior variância, menor poder, e cobertura nominal comparados à ANCOVA.[@OConnell2017]
@@ -185,6 +183,22 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 ### O que é comparação entre grupos em ensaios clínicos aleatorizados?
 
 -   A comparação se refere ao teste de hipótese nula de não haver diferença ('alteração' ou 'mudança') pós-tratamento entre grupos de tratamento.[@bland2011]
+
+<br>
+
+### O que pode ser comparado entre grupos?
+
+-   Valores pós-tratamento; mudança entre linha de base e pós-tratamento; mudança percentual da linha de base.[@vickers2001]
+
+<br>
+
+### Qual é a comparação entre grupos mais adequada em ensaios clínicos aleatorizados?
+
+- Análise de covariância (ANCOVA) que analisa o pós-tratamento com a linha de base como covariável é a opção que possui maior poder estatístico.[@vickers2001]
+
+- Mudança entre linha de base e pós-tratamento tem poder adequado apenas quando a correlação entre linha de base e pós-tratamento é alta.[@vickers2001]
+
+- Mudança percentual da linha de base é a opção menos eficiente em termos de poder estatístico.[@vickers2001]
 
 <br>
 
@@ -303,7 +317,7 @@ Os pacotes *mice*[@mice] e *miceadds*[@miceadds] fornecem funções [*mice*](htt
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *consort*[@consort] fornece a função [*consort_plot*](`r paste0("https://search.r-project.org/CRAN/refmans/", "consort", "/html/", "consort_plot", ".html")`) para elaboração do fluxograma de ensaios experimentais no formato padrão.
+O pacote *consort*[@consort] fornece a função [*consort_plot*](%60r%20paste0(%22https://search.r-project.org/CRAN/refmans/%22,%20%22consort%22,%20%22/html/%22,%20%22consort_plot%22,%20%22.html%22)%60) para elaboração do fluxograma de ensaios experimentais no formato padrão.
 :::
 
 <br>
