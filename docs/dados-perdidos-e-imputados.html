@@ -1231,72 +1231,72 @@ div.csl-indent {
 <div id="o-que-são-dados-perdidos" class="section level3 hasAnchor" number="10.1.1">
 <h3><span class="header-section-number">10.1.1</span> O que são dados perdidos?<a href="dados-perdidos-e-imputados.html#o-que-são-dados-perdidos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Dados perdidos são dados não coletados de um ou mais participantes, para uma ou mais variáveis.<span class="citation"><sup><a href="#ref-Altman2007">82</a></sup></span></li>
+<li>Dados perdidos são dados não coletados de um ou mais participantes, para uma ou mais variáveis.<span class="citation"><sup><a href="#ref-Altman2007">83</a></sup></span></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base-6">66</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/na"><em>is.na</em></a> para identificar que elementos de um objeto são dados perdidos.</p>
+<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base-6">67</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/na"><em>is.na</em></a> para identificar que elementos de um objeto são dados perdidos.</p>
 </div>
 <p><br></p>
 </div>
 <div id="qual-o-problema-de-um-estudo-ter-dados-perdidos" class="section level3 hasAnchor" number="10.1.2">
 <h3><span class="header-section-number">10.1.2</span> Qual o problema de um estudo ter dados perdidos?<a href="dados-perdidos-e-imputados.html#qual-o-problema-de-um-estudo-ter-dados-perdidos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Uma grande quantidade de dados perdidos pode comprometer a integridade científica do estudo, considerando-se que o tamanho da amostra foi estimado para observar um determinado tamanho de efeito mínimo.<span class="citation"><sup><a href="#ref-Altman2007">82</a></sup></span></p></li>
-<li><p>Perda de participantes no estudo por dados perdidos pode reduzir o poder estatístico (erro tipo II).<span class="citation"><sup><a href="#ref-Altman2007">82</a></sup></span></p></li>
-<li><p>Não existe solução globalmente satisfatória para o problema de dados perdidos.<span class="citation"><sup><a href="#ref-Altman2007">82</a></sup></span></p></li>
+<li><p>Uma grande quantidade de dados perdidos pode comprometer a integridade científica do estudo, considerando-se que o tamanho da amostra foi estimado para observar um determinado tamanho de efeito mínimo.<span class="citation"><sup><a href="#ref-Altman2007">83</a></sup></span></p></li>
+<li><p>Perda de participantes no estudo por dados perdidos pode reduzir o poder estatístico (erro tipo II).<span class="citation"><sup><a href="#ref-Altman2007">83</a></sup></span></p></li>
+<li><p>Não existe solução globalmente satisfatória para o problema de dados perdidos.<span class="citation"><sup><a href="#ref-Altman2007">83</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quais-os-mecanismos-geradores-de-dados-perdidos" class="section level3 hasAnchor" number="10.1.3">
 <h3><span class="header-section-number">10.1.3</span> Quais os mecanismos geradores de dados perdidos?<a href="dados-perdidos-e-imputados.html#quais-os-mecanismos-geradores-de-dados-perdidos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Dados perdidos completamente ao acaso (<em>missing completely at random</em>, MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.<span class="citation"><sup><a href="#ref-Heymans2022">83</a>,<a href="#ref-carpenter2021">84</a></sup></span></p></li>
-<li><p>Dados perdidos ao acaso (<em>missing at random</em>, MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.<span class="citation"><sup><a href="#ref-Heymans2022">83</a>,<a href="#ref-carpenter2021">84</a></sup></span></p></li>
-<li><p>Dados perdidos não ao acaso (<em>missing not at random</em>, MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.<span class="citation"><sup><a href="#ref-Heymans2022">83</a>,<a href="#ref-carpenter2021">84</a></sup></span></p></li>
+<li><p>Dados perdidos completamente ao acaso (<em>missing completely at random</em>, MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.<span class="citation"><sup><a href="#ref-Heymans2022">84</a>,<a href="#ref-carpenter2021">85</a></sup></span></p></li>
+<li><p>Dados perdidos ao acaso (<em>missing at random</em>, MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.<span class="citation"><sup><a href="#ref-Heymans2022">84</a>,<a href="#ref-carpenter2021">85</a></sup></span></p></li>
+<li><p>Dados perdidos não ao acaso (<em>missing not at random</em>, MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.<span class="citation"><sup><a href="#ref-Heymans2022">84</a>,<a href="#ref-carpenter2021">85</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-identificar-o-mecanismo-gerador-de-dados-perdidos-em-um-banco-de-dados" class="section level3 hasAnchor" number="10.1.4">
 <h3><span class="header-section-number">10.1.4</span> Como identificar o mecanismo gerador de dados perdidos em um banco de dados?<a href="dados-perdidos-e-imputados.html#como-identificar-o-mecanismo-gerador-de-dados-perdidos-em-um-banco-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Por definição, não é possível avaliar se os dados foram perdidos ao acaso (MAR) ou não (MNAR).<span class="citation"><sup><a href="#ref-Heymans2022">83</a></sup></span></p></li>
-<li><p>Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise (‘dado perdido’ = 1, ‘dado observado’ = 0).<span class="citation"><sup><a href="#ref-Heymans2022">83</a></sup></span></p></li>
+<li><p>Por definição, não é possível avaliar se os dados foram perdidos ao acaso (MAR) ou não (MNAR).<span class="citation"><sup><a href="#ref-Heymans2022">84</a></sup></span></p></li>
+<li><p>Testes t e regressões logísticas podem ser aplicados para identificar relações entre variáveis com e sem dados perdidos, criando um fator de análise (‘dado perdido’ = 1, ‘dado observado’ = 0).<span class="citation"><sup><a href="#ref-Heymans2022">84</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>misty</em><span class="citation"><sup><a href="#ref-misty">85</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/misty/versions/0.5.0/topics/na.test"><em>na.test</em></a> para executar o Little’s Missing Completely at Random (MCAR) test<span class="citation"><sup><a href="#ref-little1988">86</a></sup></span>.</p>
+<p>O pacote <em>misty</em><span class="citation"><sup><a href="#ref-misty">86</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/misty/versions/0.5.0/topics/na.test"><em>na.test</em></a> para executar o Little’s Missing Completely at Random (MCAR) test<span class="citation"><sup><a href="#ref-little1988">87</a></sup></span>.</p>
 </div>
 <p><br></p>
 </div>
 <div id="que-estratégias-podem-ser-utilizadas-na-coleta-de-dados-quando-há-expectativa-de-perda-amostral" class="section level3 hasAnchor" number="10.1.5">
 <h3><span class="header-section-number">10.1.5</span> Que estratégias podem ser utilizadas na coleta de dados quando há expectativa de perda amostral?<a href="dados-perdidos-e-imputados.html#que-estratégias-podem-ser-utilizadas-na-coleta-de-dados-quando-há-expectativa-de-perda-amostral" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Na expectativa de ocorrência de perda amostral, com consequente ocorrência de dados perdidos, recomenda-se ampliar o tamanho da amostra com um percentual correspondente a tal estimativa (ex.: 10%), embora ainda não corrija potenciais vieses pela perda.<span class="citation"><sup><a href="#ref-Altman2007">82</a></sup></span></li>
+<li>Na expectativa de ocorrência de perda amostral, com consequente ocorrência de dados perdidos, recomenda-se ampliar o tamanho da amostra com um percentual correspondente a tal estimativa (ex.: 10%), embora ainda não corrija potenciais vieses pela perda.<span class="citation"><sup><a href="#ref-Altman2007">83</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="que-estratégias-podem-ser-utilizadas-na-análise-quando-há-dados-perdidos" class="section level3 hasAnchor" number="10.1.6">
 <h3><span class="header-section-number">10.1.6</span> Que estratégias podem ser utilizadas na análise quando há dados perdidos?<a href="dados-perdidos-e-imputados.html#que-estratégias-podem-ser-utilizadas-na-análise-quando-há-dados-perdidos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Na ocorrência de dados perdidos, a análise mais comum compreende apenas os ‘casos completos’, com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).<span class="citation"><sup><a href="#ref-Altman2007">82</a></sup></span></p></li>
-<li><p>A análise de dados completos é válida quando pode-se argumentar que que a probabilidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.<span class="citation"><sup><a href="#ref-carpenter2021">84</a></sup></span></p></li>
-<li><p>A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.<span class="citation"><sup><a href="#ref-carpenter2021">84</a></sup></span></p></li>
+<li><p>Na ocorrência de dados perdidos, a análise mais comum compreende apenas os ‘casos completos’, com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).<span class="citation"><sup><a href="#ref-Altman2007">83</a></sup></span></p></li>
+<li><p>A análise de dados completos é válida quando pode-se argumentar que que a probabilidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.<span class="citation"><sup><a href="#ref-carpenter2021">85</a></sup></span></p></li>
+<li><p>A análise de dados completos é eficiente quando todos os dados perdidos estão no desfecho, ou quando cada participante com dados perdidos nas covariáveis também possui dados perdidos nos desfechos.<span class="citation"><sup><a href="#ref-carpenter2021">85</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base-6">66</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/na.fail"><em>na.omit</em></a> para remover dados perdidos de um objeto em um banco de dados.</p>
+<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base-6">67</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/na.fail"><em>na.omit</em></a> para remover dados perdidos de um objeto em um banco de dados.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats">87</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/complete.cases"><em>complete.cases</em></a> para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados.</p>
+<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats">88</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/complete.cases"><em>complete.cases</em></a> para identificar os casos completos - isto é, sem dados perdidos - em um banco de dados.</p>
 </div>
 <p><br></p>
 </div>
 <div id="que-estratégias-podem-ser-utilizadas-na-redação-de-estudos-em-que-há-dados-perdidos" class="section level3 hasAnchor" number="10.1.7">
 <h3><span class="header-section-number">10.1.7</span> Que estratégias podem ser utilizadas na redação de estudos em que há dados perdidos?<a href="dados-perdidos-e-imputados.html#que-estratégias-podem-ser-utilizadas-na-redação-de-estudos-em-que-há-dados-perdidos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Informar: o número de participantes com dados perdidos; diferenças nas taxas de dados perdidos entre os braços do estudo; os motivos dos dados perdidos; o fluxo de participantes; quaisquer diferenças entre os participantes com e sem dados perdidos; o padrão de ausência (por exemplo, se é aleatória); os métodos para tratamento de dados perdidos das variáveis em análise; os resultados de quaisquer análises de sensibilidade; as implicações dos dados perdidos na interpretação do resultados.<span class="citation"><sup><a href="#ref-Akl2015">88</a></sup></span></li>
+<li>Informar: o número de participantes com dados perdidos; diferenças nas taxas de dados perdidos entre os braços do estudo; os motivos dos dados perdidos; o fluxo de participantes; quaisquer diferenças entre os participantes com e sem dados perdidos; o padrão de ausência (por exemplo, se é aleatória); os métodos para tratamento de dados perdidos das variáveis em análise; os resultados de quaisquer análises de sensibilidade; as implicações dos dados perdidos na interpretação do resultados.<span class="citation"><sup><a href="#ref-Akl2015">89</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
@@ -1314,20 +1314,20 @@ div.csl-indent {
 <div id="quando-a-imputação-de-dados-é-indicada" class="section level3 hasAnchor" number="10.2.2">
 <h3><span class="header-section-number">10.2.2</span> Quando a imputação de dados é indicada?<a href="dados-perdidos-e-imputados.html#quando-a-imputação-de-dados-é-indicada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares — preditoras do desfecho e não dos dados perdidos — estão disponíveis.<span class="citation"><sup><a href="#ref-carpenter2021">84</a></sup></span></p></li>
-<li><p>Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.<span class="citation"><sup><a href="#ref-Altman2007">82</a></sup></span></p></li>
+<li><p>A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares — preditoras do desfecho e não dos dados perdidos — estão disponíveis.<span class="citation"><sup><a href="#ref-carpenter2021">85</a></sup></span></p></li>
+<li><p>Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.<span class="citation"><sup><a href="#ref-Altman2007">83</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quais-os-métodos-de-imputação-de-dados" class="section level3 hasAnchor" number="10.2.3">
 <h3><span class="header-section-number">10.2.3</span> Quais os métodos de imputação de dados?<a href="dados-perdidos-e-imputados.html#quais-os-métodos-de-imputação-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Modelos lineares e logísticos podem ser utilizados para imputar dados perdidos em variáveis contínuas e dicotômicas, respectivamente.<span class="citation"><sup><a href="#ref-austin2023">89</a></sup></span></p></li>
-<li><p>Os métodos de imputação de dados mais robustos incluem a imputação multivariada por equações encadeadas (<em>multivariate imputation by chained equations</em>, MICE)<span class="citation"><sup><a href="#ref-mice">90</a></sup></span> e a correspondência média preditiva (<em>predictive mean matching</em>, PMM)<span class="citation"><sup><a href="#ref-rubin1986">91</a>,<a href="#ref-little1988a">92</a></sup></span>.</p></li>
+<li><p>Modelos lineares e logísticos podem ser utilizados para imputar dados perdidos em variáveis contínuas e dicotômicas, respectivamente.<span class="citation"><sup><a href="#ref-austin2023">90</a></sup></span></p></li>
+<li><p>Os métodos de imputação de dados mais robustos incluem a imputação multivariada por equações encadeadas (<em>multivariate imputation by chained equations</em>, MICE)<span class="citation"><sup><a href="#ref-mice">91</a></sup></span> e a correspondência média preditiva (<em>predictive mean matching</em>, PMM)<span class="citation"><sup><a href="#ref-rubin1986">92</a>,<a href="#ref-little1988a">93</a></sup></span>.</p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>Os pacotes <em>mice</em><span class="citation"><sup><a href="#ref-mice">90</a></sup></span> e <em>miceadds</em><span class="citation"><sup><a href="#ref-miceadds">93</a></sup></span> fornecem funções <a href="https://www.rdocumentation.org/packages/mice/versions/3.16.0/topics/mice"><em>mice</em></a> e <a href="https://www.rdocumentation.org/packages/miceadds/versions/3.16-18/topics/mi.anova"><em>mi.anova</em></a> para imputação multivariada por equações encadeadas, respectivamente, para imputação de dados.</p>
+<p>Os pacotes <em>mice</em><span class="citation"><sup><a href="#ref-mice">91</a></sup></span> e <em>miceadds</em><span class="citation"><sup><a href="#ref-miceadds">94</a></sup></span> fornecem funções <a href="https://www.rdocumentation.org/packages/mice/versions/3.16.0/topics/mice"><em>mice</em></a> e <a href="https://www.rdocumentation.org/packages/miceadds/versions/3.16-18/topics/mi.anova"><em>mi.anova</em></a> para imputação multivariada por equações encadeadas, respectivamente, para imputação de dados.</p>
 </div>
 <p><br></p>
 
@@ -1337,43 +1337,43 @@ div.csl-indent {
 <h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-base-6" class="csl-entry">
-<div class="csl-left-margin">66. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
+<div class="csl-left-margin">67. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
 </div>
 <div id="ref-Altman2007" class="csl-entry">
-<div class="csl-left-margin">82. </div><div class="csl-right-inline">Altman DG, Bland JM. Missing data. <em>BMJ</em>. 2007;334(7590):424-424. doi:<a href="https://doi.org/10.1136/bmj.38977.682025.2c">10.1136/bmj.38977.682025.2c</a></div>
+<div class="csl-left-margin">83. </div><div class="csl-right-inline">Altman DG, Bland JM. Missing data. <em>BMJ</em>. 2007;334(7590):424-424. doi:<a href="https://doi.org/10.1136/bmj.38977.682025.2c">10.1136/bmj.38977.682025.2c</a></div>
 </div>
 <div id="ref-Heymans2022" class="csl-entry">
-<div class="csl-left-margin">83. </div><div class="csl-right-inline">Heymans MW, Twisk JWR. Handling missing data in clinical research. <em>Journal of Clinical Epidemiology</em>. September 2022. doi:<a href="https://doi.org/10.1016/j.jclinepi.2022.08.016">10.1016/j.jclinepi.2022.08.016</a></div>
+<div class="csl-left-margin">84. </div><div class="csl-right-inline">Heymans MW, Twisk JWR. Handling missing data in clinical research. <em>Journal of Clinical Epidemiology</em>. September 2022. doi:<a href="https://doi.org/10.1016/j.jclinepi.2022.08.016">10.1016/j.jclinepi.2022.08.016</a></div>
 </div>
 <div id="ref-carpenter2021" class="csl-entry">
-<div class="csl-left-margin">84. </div><div class="csl-right-inline">Carpenter JR, Smuk M. Missing data: A statistical framework for practice. <em>Biometrical Journal</em>. 2021;63(5):915-947. doi:<a href="https://doi.org/10.1002/bimj.202000196">10.1002/bimj.202000196</a></div>
+<div class="csl-left-margin">85. </div><div class="csl-right-inline">Carpenter JR, Smuk M. Missing data: A statistical framework for practice. <em>Biometrical Journal</em>. 2021;63(5):915-947. doi:<a href="https://doi.org/10.1002/bimj.202000196">10.1002/bimj.202000196</a></div>
 </div>
 <div id="ref-misty" class="csl-entry">
-<div class="csl-left-margin">85. </div><div class="csl-right-inline">Yanagida T. Misty: Miscellaneous functions ’t. yanagida’. 2023. <a href="https://CRAN.R-project.org/package=misty">https://CRAN.R-project.org/package=misty.</a></div>
+<div class="csl-left-margin">86. </div><div class="csl-right-inline">Yanagida T. Misty: Miscellaneous functions ’t. yanagida’. 2023. <a href="https://CRAN.R-project.org/package=misty">https://CRAN.R-project.org/package=misty.</a></div>
 </div>
 <div id="ref-little1988" class="csl-entry">
-<div class="csl-left-margin">86. </div><div class="csl-right-inline">Little RJA. A Test of Missing Completely at Random for Multivariate Data with Missing Values. <em>Journal of the American Statistical Association</em>. 1988;83(404):1198-1202. doi:<a href="https://doi.org/10.1080/01621459.1988.10478722">10.1080/01621459.1988.10478722</a></div>
+<div class="csl-left-margin">87. </div><div class="csl-right-inline">Little RJA. A Test of Missing Completely at Random for Multivariate Data with Missing Values. <em>Journal of the American Statistical Association</em>. 1988;83(404):1198-1202. doi:<a href="https://doi.org/10.1080/01621459.1988.10478722">10.1080/01621459.1988.10478722</a></div>
 </div>
 <div id="ref-stats" class="csl-entry">
-<div class="csl-left-margin">87. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2022. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
+<div class="csl-left-margin">88. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2022. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
 </div>
 <div id="ref-Akl2015" class="csl-entry">
-<div class="csl-left-margin">88. </div><div class="csl-right-inline">Akl EA, Shawwa K, Kahale LA, et al. Reporting missing participant data in randomised trials: systematic survey of the methodological literature and a proposed guide. <em>BMJ Open</em>. 2015;5(12):e008431. doi:<a href="https://doi.org/10.1136/bmjopen-2015-008431">10.1136/bmjopen-2015-008431</a></div>
+<div class="csl-left-margin">89. </div><div class="csl-right-inline">Akl EA, Shawwa K, Kahale LA, et al. Reporting missing participant data in randomised trials: systematic survey of the methodological literature and a proposed guide. <em>BMJ Open</em>. 2015;5(12):e008431. doi:<a href="https://doi.org/10.1136/bmjopen-2015-008431">10.1136/bmjopen-2015-008431</a></div>
 </div>
 <div id="ref-austin2023" class="csl-entry">
-<div class="csl-left-margin">89. </div><div class="csl-right-inline">Austin PC, Buuren S van. Logistic regression vs. predictive mean matching for imputing binary covariates. <em>Statistical Methods in Medical Research</em>. September 2023. doi:<a href="https://doi.org/10.1177/09622802231198795">10.1177/09622802231198795</a></div>
+<div class="csl-left-margin">90. </div><div class="csl-right-inline">Austin PC, Buuren S van. Logistic regression vs. predictive mean matching for imputing binary covariates. <em>Statistical Methods in Medical Research</em>. September 2023. doi:<a href="https://doi.org/10.1177/09622802231198795">10.1177/09622802231198795</a></div>
 </div>
 <div id="ref-mice" class="csl-entry">
-<div class="csl-left-margin">90. </div><div class="csl-right-inline">Buuren S van, Groothuis-Oudshoorn K. <span></span>Mice<span></span>: Multivariate imputation by chained equations in r. 2011;45:1-67. doi:<a href="https://doi.org/10.18637/jss.v045.i03">10.18637/jss.v045.i03</a></div>
+<div class="csl-left-margin">91. </div><div class="csl-right-inline">Buuren S van, Groothuis-Oudshoorn K. <span></span>Mice<span></span>: Multivariate imputation by chained equations in r. 2011;45:1-67. doi:<a href="https://doi.org/10.18637/jss.v045.i03">10.18637/jss.v045.i03</a></div>
 </div>
 <div id="ref-rubin1986" class="csl-entry">
-<div class="csl-left-margin">91. </div><div class="csl-right-inline">Rubin DB. Statistical matching using file concatenation with adjusted weights and multiple imputations. <em>Journal of Business &amp; Economic Statistics</em>. 1986;4(1):87. doi:<a href="https://doi.org/10.2307/1391390">10.2307/1391390</a></div>
+<div class="csl-left-margin">92. </div><div class="csl-right-inline">Rubin DB. Statistical matching using file concatenation with adjusted weights and multiple imputations. <em>Journal of Business &amp; Economic Statistics</em>. 1986;4(1):87. doi:<a href="https://doi.org/10.2307/1391390">10.2307/1391390</a></div>
 </div>
 <div id="ref-little1988a" class="csl-entry">
-<div class="csl-left-margin">92. </div><div class="csl-right-inline">Little RJA. Missing-Data Adjustments in Large Surveys. <em>Journal of Business &amp; Economic Statistics</em>. 1988;6(3):287-296. doi:<a href="https://doi.org/10.1080/07350015.1988.10509663">10.1080/07350015.1988.10509663</a></div>
+<div class="csl-left-margin">93. </div><div class="csl-right-inline">Little RJA. Missing-Data Adjustments in Large Surveys. <em>Journal of Business &amp; Economic Statistics</em>. 1988;6(3):287-296. doi:<a href="https://doi.org/10.1080/07350015.1988.10509663">10.1080/07350015.1988.10509663</a></div>
 </div>
 <div id="ref-miceadds" class="csl-entry">
-<div class="csl-left-margin">93. </div><div class="csl-right-inline">Robitzsch A, Grund S. Miceadds: Some additional multiple imputation functions, especially for ’mice’. 2023. <a href="https://CRAN.R-project.org/package=miceadds">https://CRAN.R-project.org/package=miceadds.</a></div>
+<div class="csl-left-margin">94. </div><div class="csl-right-inline">Robitzsch A, Grund S. Miceadds: Some additional multiple imputation functions, especially for ’mice’. 2023. <a href="https://CRAN.R-project.org/package=miceadds">https://CRAN.R-project.org/package=miceadds.</a></div>
 </div>
 </div>
             </section>
