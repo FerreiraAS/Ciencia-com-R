@@ -132,3 +132,33 @@ if(knitr::is_html_output()){
   cat('<center>[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fferreiraas.github.io%2FCiencia-com-R%2F&count_bg=%232C3E50&title_bg=%2375A5D5&icon=&icon_color=%23000000&title=Visitas&edge_flat=false)](https://hits.seeyoufarm.com)</center>')
 }
 ```
+
+```{r post, echo = FALSE, include = FALSE}
+# source scripts
+source(file.path("posts", "parseRmd.R"), local = knitr::knit_global())
+source(file.path("posts", "savePost.R"), local = knitr::knit_global())
+
+# read all file chapters
+rmd_files <- list.files("rmd", pattern = "\\.Rmd$", full.names = TRUE)
+
+# remove specific chapters
+rmd_files <- rmd_files[!grepl("agradecimentos.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("autor.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("dedicatoria.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-1.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-2.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-3.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-4.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-5.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("prefacio.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("referencias.Rmd", rmd_files)]
+
+# read bib file
+bib <- RefManageR::ReadBib(file.path("bib", "references.bib"))
+
+# loop over all chapters
+# for (k in seq_along(rmd_files)) {
+#   entries <- ParseRmdContent(rmd_files, bib, k)
+# }
+```
+

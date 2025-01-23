@@ -1,5 +1,19 @@
 # **Referências** {-}
 
+```{r check-references, echo = FALSE, include = FALSE, eval = FALSE}
+# check bib entries
+try(TeXCheckR::any_bib_duplicates(file.path(dirname(getwd()), "bib", "references.bib")), silent = TRUE)
+TeXCheckR::check_dashes(file.path(dirname(getwd()), "bib", "references.bib"))
+TeXCheckR::check_escapes(file.path(dirname(getwd()), "bib", "references.bib"))
+TeXCheckR::check_footnote_typography(file.path(dirname(getwd()), "bib", "references.bib"))
+TeXCheckR::check_labels(file.path(dirname(getwd()), "bib", "references.bib"))
+TeXCheckR::check_literal_citations(file.path(dirname(getwd()), "bib", "references.bib"))
+TeXCheckR::check_literal_xrefs(file.path(dirname(getwd()), "bib", "references.bib"))
+TeXCheckR::check_quote_marks(file.path(dirname(getwd()), "bib", "references.bib"))
+TeXCheckR::lint_bib(file.path(dirname(getwd()), "bib", "references.bib"))
+```
+
+
 ```{=latex}
 \DisableFootNotes
 ```
