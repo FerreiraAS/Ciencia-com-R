@@ -12,6 +12,26 @@
 
 <br>
 
+### Como representar distribuições de probabilidade?
+
+-   Tabelas de frequência, polígonos de frequência, gráficos de barras, histogramas e *boxplots* são formas de representar distribuições de probabilidade.[@s2011]
+
+-   Tabelas de frequência mostram as categorias de medição e o número de observações em cada uma. É necessário conhecer o intervalo de valores (mínimo e máximo), que é dividido em intervalos arbitrários chamados "intervalos de classe".[@s2011]
+
+-   Se houver muitos intervalos, não haverá redução significativa na quantidade de dados, e pequenas variações serão perceptíveis. Se houver poucos intervalos, a forma da distribuição não poderá ser adequadamente determinada.[@s2011]
+
+-   A largura das classes pode ser determinada dividindo o intervalo total de observações pelo número de classes. Recomenda-se que as larguras sejam iguais, e larguras desiguais devem ser usadas apenas quando existirem grandes lacunas nos dados. Os intervalos devem ser mutuamente exclusivos e não sobrepostos, evitando intervalos abertos (ex.: \<5, \>10).[@s2011]
+
+-   Polígonos de frequência são gráficos de linhas que conectam os pontos médios de cada barra do histograma. Eles são úteis para comparar duas ou mais distribuições de frequência.[@s2011]
+
+-   Gráficos de barra verticais ou horizontais representam a distribuição de frequências de uma variável categórica. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do gráfico de barras é igual ao número total de observações.[@s2011]
+
+-   Histogramas representam a distribuição de frequências de uma variável contínua. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do histograma é igual ao número total de observações.[@s2011]
+
+-   *Boxplots* representam a distribuição de frequências de uma variável contínua. A linha central divide os dados em duas partes iguais (mediana ou Q2). A caixa inferior representa o primeiro quartil (Q1) e a caixa superior representa o terceiro quartil (Q3). A linha inferior é o mínimo e a linha superior é o máximo. Os valores atípicos são representados por pontos individuais.[@s2011]
+
+<br>
+
 ### Quais características definem uma distribuição?
 
 -   Uma distribuição pode ser definida por modelos matemáticos e caracterizada por parâmetros de tendência central, dispersão, simetria e curtose.
@@ -169,26 +189,6 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 <br>
 
-### Que parâmetros podem ser estimados?
-
--   Parâmetros de tendência central.[@kanji2006; @Ali2016]
-
--   Parâmetros de dispersão.[@kanji2006; @Ali2016; @Curran-Everett2008]
-
--   Parâmetros de proporção.[@Altman1994; @kanji2006; @Ali2016; @Altman1994]
-
--   Parâmetros de distribuição.[@kanji2006]
-
--   Parâmetros de extremos.[@Ali2016]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
-:::
-
-<br>
-
 ### O que é uma análise paramétrica?
 
 -   Testes paramétricos possuem suposições sobre as características e/ou parâmetros da distribuição dos dados na população.[@vetter2017]
@@ -215,17 +215,17 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 <br>
 
-## Valores esperados
+### Que parâmetros podem ser estimados?
 
-<br>
+-   Parâmetros de tendência central.[@kanji2006; @Ali2016]
 
-### Que parâmetros de tendência central podem ser estimados?
+-   Parâmetros de dispersão.[@kanji2006; @Ali2016; @Curran-Everett2008]
 
--   *Média*.[@kanji2006; @Ali2016]
+-   Parâmetros de proporção.[@Altman1994; @kanji2006; @Ali2016; @Altman1994]
 
--   *Mediana*.[@kanji2006; @Ali2016]
+-   Parâmetros de distribuição.[@kanji2006]
 
--   *Moda*.[@kanji2006; @Ali2016]
+-   Parâmetros de extremos.[@Ali2016]
 
 <br>
 
@@ -235,17 +235,61 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 <br>
 
+## Tendência central
+
+<br>
+
+### Que parâmetros de tendência central podem ser estimados?
+
+-   *Média*: aritmética, ponderada, geométrica ou harmônica.[@kanji2006; @Ali2016; @s.2011a]
+
+-   *Mediana*.[@kanji2006; @Ali2016; @s.2011]
+
+-   *Moda*.[@kanji2006; @Ali2016; @s.2011]
+
+-   A posição relativa das medidas de tendência central (média, mediana e moda) depende da forma da distribuição.[@s.2011]
+
+-   Em uma distribuição normal, as três medidas são idênticas.[@s.2011]
+
+-   A média é sempre puxada para os valores extremos, por isso é deslocada para a cauda em distribuições assimétricas.[@s.2011]
+
+-   A mediana fica entre a média e a moda em distribuições assimétricas.[@s.2011]
+
+-   A moda é o valor mais frequente e, portanto, se localiza no pico da distribuição assimétrica.[@s.2011]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
+:::
+
+<br>
+
+### Como escolher o parâmetro de tendência central?
+
+-   A mediana é preferida à média quando existem poucos valores extremos na distribuição, alguns valores são indeterminados, ou há uma distribuição aberta, ou os dados são medidos em uma escala ordinal.[@s.2011]
+
+-   A moda é preferida quando os dados são medidos em uma escala nominal.[@s.2011]
+
+-   A média geométrica é preferida quando os dados são medidos em uma escala logarítmica.[@s.2011]
+
+<br>
+
+## Dispersão
+
+<br>
+
 ### Que parâmetros de dispersão podem ser estimados?
 
 -   *Variância*.[@kanji2006; @Ali2016]
 
--   *Desvio-padrão*: Informam sobre a dispersão da população e são, portanto, úteis como preditores da variação em novas amostras.[@Curran-Everett2008; @krzywinski2013]
+-   *Desvio-padrão*: Informam sobre a dispersão da população e são, portanto, úteis como preditores da variação em novas amostras.[@Curran-Everett2008; @krzywinski2013; @manikandan2011]
 
 -   *Erro-padrão*: Refletem a incerteza na média e sua dependência do tamanho da amostra.[@Curran-Everett2008; @krzywinski2013]
 
--   *Amplitude*.[@kanji2006; @Ali2016]
+-   *Amplitude*.[@kanji2006; @Ali2016; @manikandan2011]
 
--   *Intervalo interquartil*.[@kanji2006; @Ali2016]
+-   *Intervalo interquartil*.[@kanji2006; @Ali2016; @manikandan2011]
 
 -   *Intervalo de confiança*: Captura a média populacional % do tempo correspondente ao nível de significância $\alpha$ pré-estabelecido .[@kanji2006; @Cumming2007; @krzywinski2013; @Ali2016]
 
@@ -260,6 +304,20 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *stats*[@stats-4] fornece a função [*confint*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/confint) para calcular o intervalo de confiança em um nível de significância $\alpha$.
 :::
+
+<br>
+
+### Como escolher o parâmetro de dispersão?
+
+<br>
+
+- Desvio-padrão é apropriado quando a média é utilizada como parâmetro de tendência central em distribuições simétricas.[@manikandan2011]
+
+- Amplitue ou intervalo interquartil são apropriadas para variáveis ordinais ou distribuições assimétricas.[@manikandan2011]
+
+<br>
+
+## Proporção
 
 <br>
 
@@ -301,11 +359,19 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 <br>
 
+## Distribuição
+
+<br>
+
 ### Que parâmetros de distribuição podem ser estimados?
 
 -   *Assimetria*.[@kanji2006]
 
 -   *Curtose*.[@kanji2006]
+
+<br>
+
+## Extremos
 
 <br>
 

@@ -8,33 +8,7 @@
 
 ### O que é análise descritiva?
 
--   A análise descritiva utiliza métodos para calcular, descrever e resumir os dados coletados da(s) amostra(s) de modo que sejam interpretadas adequadamente.[@vetter2017]
-
--   As análises descritivas geralmente compreendem a apresentação quantitativa (numérica) em tabelas e/ou gráficos.[@vetter2017]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *explore*[@explore] fornece a função [*explore*](https://www.rdocumentation.org/packages/explore/versions/1.0.2/topics/explore) para análise exploratória de um banco de dados.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *dataMaid*[@dataMaid] fornece a função [*makeDataReport*](https://www.rdocumentation.org/packages/dataMaid/versions/1.4.1/topics/makeDataReport) para criar um relatório de análise exploratória de um banco de dados.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *DataExplorer*[@DataExplorer] fornece a função [*create_report*](https://www.rdocumentation.org/packages/DataExplorer/versions/0.8.2/topics/create_report) para criar um relatório de análise exploratória de um banco de dados.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *SmartEDA*[@SmartEDA] fornece a função [*ExpReport*](https://www.rdocumentation.org/packages/SmartEDA/versions/0.3.9/topics/ExpReport) para criar um relatório de análise exploratória de um banco de dados.
-:::
+-   Análise descritiva é usada para compreendermos algum aspecto de um conjunto de dados, respondendo a perguntas do tipo "quando?", "onde?", "quem?", "o quê?", "como?".[@gerring2012]
 
 <br>
 
@@ -56,23 +30,23 @@ O pacote *SmartEDA*[@SmartEDA] fornece a função [*ExpReport*](https://www.rdoc
 
 ### O que são casas decimais?
 
--   O número de casas decimais refere-se à quantidade de dígitos que aparecem após a vírgula decimal.[@Cole2015;@cole2015]
+-   O número de casas decimais refere-se à quantidade de dígitos que aparecem após a vírgula decimal.[@Cole2015; @cole2015]
 
 <br>
 
 ### O que são dígitos significativos?
 
--   O termo "dígitos significativos" é preferido a "algarismos significativos" ou "dígitos efetivos" e não se relaciona com significância estatística.[@Cole2015a;@cole2015b]
+-   O termo "dígitos significativos" é preferido a "algarismos significativos" ou "dígitos efetivos" e não se relaciona com significância estatística.[@Cole2015a; @cole2015b]
 
--   O número de dígitos significativos é a soma total de dígitos, desconsiderando a vírgula decimal e os zeros à esquerda; os zeros à direita são considerados informativos, salvo exceções.[@Cole2015a;@cole2015b]
+-   O número de dígitos significativos é a soma total de dígitos, desconsiderando a vírgula decimal e os zeros à esquerda; os zeros à direita são considerados informativos, salvo exceções.[@Cole2015a; @cole2015b]
 
 <br>
 
 ### Como arredondar dados numéricos?
 
--   Apresentar dados com quantidade excessiva de casas decimais pode dificultar a interpretação e induzir erroneamente uma precisão espúria.[@Cole2015a;@cole2015b]
+-   Apresentar dados com quantidade excessiva de casas decimais pode dificultar a interpretação e induzir erroneamente uma precisão espúria.[@Cole2015a; @cole2015b]
 
--   A precisão é determinada pelo grau de arredondamento aplicado, medido em casas decimais ou dígitos significativos.[@Cole2015a;@cole2015b]
+-   A precisão é determinada pelo grau de arredondamento aplicado, medido em casas decimais ou dígitos significativos.[@Cole2015a; @cole2015b]
 
 <br>
 
@@ -128,7 +102,7 @@ kableExtra::kable(
 
 <br>
 
--   O arredondamento também introduz erros, uma vez que aumenta a imprecisão (isto é, incerteza) em torno do valor original.[@Cole2015a;@cole2015b]
+-   O arredondamento também introduz erros, uma vez que aumenta a imprecisão (isto é, incerteza) em torno do valor original.[@Cole2015a; @cole2015b]
 
 <br>
 
@@ -216,7 +190,7 @@ kableExtra::kable(
 
 <br>
 
-- A regra geral é utilizar 2 ou 3 dígitos significativos para tamanhos de efeito e 1 ou 2 dígitos significativos para medidas de variabilidade.[@cole2015b]
+-   A regra geral é utilizar 2 ou 3 dígitos significativos para tamanhos de efeito e 1 ou 2 dígitos significativos para medidas de variabilidade.[@cole2015b]
 
 -   Regra dos 3 dígitos significativos para proporção de risco: em média, o erro de arredondamento é menor que os 0,5% exigidos, de modo que três dígitos significativos são mais precisos do que o necessário.[@Cole2015a]
 
@@ -390,7 +364,7 @@ Os pacotes *ggplot2*[@ggplot2], *plotly*[@plotly] e *corrplot*[@corrplot] fornec
 
 ### Para que servem as barras de erro em gráficos?
 
--   Barras de erro ajudam ao autor a apresentar as informações que descrevem os dados (por exemplo, em uma análise descritiva) ou sobre as inferências ou conclusões tomadas a partir de dados.[@Cumming2007]
+-   Barras de erro ajudam ao autor a apresentar as informações que descrevem os dados (por exemplo, em uma análise descritiva) ou sobre as inferências ou conclusões tomadas a partir de dados.[@Cumming2007;@krzywinski2013]
 
 -   Barras de erro mais longas representam mais imprecisão (maiores erros), enquanto barras mais curtas representam mais precisão na estimativa.[@Cumming2007]
 
@@ -398,7 +372,15 @@ Os pacotes *ggplot2*[@ggplot2], *plotly*[@plotly] e *corrplot*[@corrplot] fornec
 
 -   Barras de erro inferenciais geralmente apresentam o erro-padrão ou intervalo de confiança no nível de significância $\alpha$ pré-estabelecido.[@Cumming2007; @krzywinski2013]
 
+- Barras de erro com desvio-padrão são úteis para descrever a variabilidade dos dados, enquanto as barras de erro com erro padrão da média são úteis para descrever a precisão do parâmetro estimado (média) e sua relação com o tamanho da amostra.[@krzywinski2013]
+
+- Barras de erro com intervalo de confiança são úteis para fornecer uma estimativa da incerteza da estimativa do parâmetro populacional.[@krzywinski2013]
+
 -   O comprimento das barras de erro sugere graficamente a imprecisão dos dados do estudo, uma vez que o valor verdadeiro da população pode estar em qualquer nível do intervalo da barra.[@Cumming2007]
+
+- De modo contraintuitivo, um espaço entre as barras não garante significância, nem a sobreposição a descarta—depende do tipo de barra.[@krzywinski2013]
+
+- Para amostras pequenas é preferível apresentar os dados brutos, uma vez que as barras de erro não serão muito informativas.[@krzywinski2013]
 
 <br>
 
