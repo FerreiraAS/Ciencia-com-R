@@ -20,7 +20,13 @@
 
 -   Se houver muitos intervalos, não haverá redução significativa na quantidade de dados, e pequenas variações serão perceptíveis. Se houver poucos intervalos, a forma da distribuição não poderá ser adequadamente determinada.[@s2011]
 
--   A largura das classes pode ser determinada dividindo o intervalo total de observações pelo número de classes. Recomenda-se que as larguras sejam iguais, e larguras desiguais devem ser usadas apenas quando existirem grandes lacunas nos dados. Os intervalos devem ser mutuamente exclusivos e não sobrepostos, evitando intervalos abertos (ex.: \<5, \>10).[@s2011]
+-   A quantidade de intervalos pode ser determinada pelo método de Sturges, que é dado pela fórmula $k = 1 + 3.322 \times \log_{10}(n)$, onde $k$ é o número de intervalos e $n$ é o número de observações.[@sturges1926]
+
+-   A quantidade de intervalos pode ser determinada pelo método de Scott, que é dado pela fórmula $h = 3.5 \times \text{sd}(x) \times n^{-1/3}$, onde $h$ é a largura do intervalo, $\text{sd}(x)$ é o desvio padrão e $n$ é o número de observações.[@scott1979]
+
+-   A quantidade de intervalos pode ser determinada pelo método de Freedman-Diaconis, que é dado pela fórmula $h = 2 \times \text{IQR}(x) \times n^{-1/3}$, onde $h$ é a largura do intervalo, $\text{IQR}(x)$ é o intervalo interquartil e $n$ é o número de observações.[@freedman1981]
+
+-   A largura das classes pode ser determinada dividindo o intervalo total de observações pelo número de classes. Recomenda-se larguras iguais, mas larguras desiguais podem ser usadas quando existirem grandes lacunas nos dados ou em contextos específicos. Os intervalos devem ser mutuamente exclusivos e não sobrepostos, evitando intervalos abertos (ex.: \<5, \>10).[@s2011]
 
 -   Polígonos de frequência são gráficos de linhas que conectam os pontos médios de cada barra do histograma. Eles são úteis para comparar duas ou mais distribuições de frequência.[@s2011]
 
@@ -29,6 +35,18 @@
 -   Histogramas representam a distribuição de frequências de uma variável contínua. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do histograma é igual ao número total de observações.[@s2011]
 
 -   *Boxplots* representam a distribuição de frequências de uma variável contínua. A linha central divide os dados em duas partes iguais (mediana ou Q2). A caixa inferior representa o primeiro quartil (Q1) e a caixa superior representa o terceiro quartil (Q3). A linha inferior é o mínimo e a linha superior é o máximo. Os valores atípicos são representados por pontos individuais.[@s2011]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *grDevices*[@grDevices] fornece a função [nclass](https://www.rdocumentation.org/packages/grDevices/versions/3.6.2/topics/nclass) para determinar a quantidade de classes de um histograma com os métodos de Sturge[@sturges1926], Scott[@scott1979] ou Freedman-Diaconis[@freedman1981].
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *graphics*[@graphics] fornece a função [hist](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/hist) para criar histogramas.
+:::
 
 <br>
 
@@ -101,7 +119,7 @@
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats-3] fornece funções de distribuição de probabilidade (p), funções de densidade (d), funções quantílicas (q) e funções geradores de números aleatórios (r) para as distribuições [normal](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal), [Student t](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/TDist), [binomial](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial), [qui-quadrado](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Chisquare), [uniforme](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Uniform), dentre outras.
+O pacote *stats*[@stats] fornece funções de distribuição de probabilidade (p), funções de densidade (d), funções quantílicas (q) e funções geradores de números aleatórios (r) para as distribuições [normal](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal), [Student t](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/TDist), [binomial](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial), [qui-quadrado](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Chisquare), [uniforme](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Uniform), dentre outras.
 :::
 
 <br>
@@ -302,7 +320,7 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats-4] fornece a função [*confint*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/confint) para calcular o intervalo de confiança em um nível de significância $\alpha$.
+O pacote *stats*[@stats] fornece a função [*confint*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/confint) para calcular o intervalo de confiança em um nível de significância $\alpha$.
 :::
 
 <br>
@@ -311,9 +329,9 @@ O pacote *stats*[@stats-4] fornece a função [*confint*](https://www.rdocumenta
 
 <br>
 
-- Desvio-padrão é apropriado quando a média é utilizada como parâmetro de tendência central em distribuições simétricas.[@manikandan2011]
+-   Desvio-padrão é apropriado quando a média é utilizada como parâmetro de tendência central em distribuições simétricas.[@manikandan2011]
 
-- Amplitue ou intervalo interquartil são apropriadas para variáveis ordinais ou distribuições assimétricas.[@manikandan2011]
+-   Amplitue ou intervalo interquartil são apropriadas para variáveis ordinais ou distribuições assimétricas.[@manikandan2011]
 
 <br>
 

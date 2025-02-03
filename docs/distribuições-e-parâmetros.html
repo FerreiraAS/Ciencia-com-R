@@ -1255,12 +1255,23 @@ div.csl-indent {
 <li><p>Tabelas de frequência, polígonos de frequência, gráficos de barras, histogramas e <em>boxplots</em> são formas de representar distribuições de probabilidade.<span class="citation"><sup><a href="#ref-s2011">124</a></sup></span></p></li>
 <li><p>Tabelas de frequência mostram as categorias de medição e o número de observações em cada uma. É necessário conhecer o intervalo de valores (mínimo e máximo), que é dividido em intervalos arbitrários chamados “intervalos de classe”.<span class="citation"><sup><a href="#ref-s2011">124</a></sup></span></p></li>
 <li><p>Se houver muitos intervalos, não haverá redução significativa na quantidade de dados, e pequenas variações serão perceptíveis. Se houver poucos intervalos, a forma da distribuição não poderá ser adequadamente determinada.<span class="citation"><sup><a href="#ref-s2011">124</a></sup></span></p></li>
-<li><p>A largura das classes pode ser determinada dividindo o intervalo total de observações pelo número de classes. Recomenda-se que as larguras sejam iguais, e larguras desiguais devem ser usadas apenas quando existirem grandes lacunas nos dados. Os intervalos devem ser mutuamente exclusivos e não sobrepostos, evitando intervalos abertos (ex.: &lt;5, &gt;10).<span class="citation"><sup><a href="#ref-s2011">124</a></sup></span></p></li>
+<li><p>A quantidade de intervalos pode ser determinada pelo método de Sturges, que é dado pela fórmula <span class="math inline">\(k = 1 + 3.322 \times \log_{10}(n)\)</span>, onde <span class="math inline">\(k\)</span> é o número de intervalos e <span class="math inline">\(n\)</span> é o número de observações.<span class="citation"><sup><a href="#ref-sturges1926">125</a></sup></span></p></li>
+<li><p>A quantidade de intervalos pode ser determinada pelo método de Scott, que é dado pela fórmula <span class="math inline">\(h = 3.5 \times \text{sd}(x) \times n^{-1/3}\)</span>, onde <span class="math inline">\(h\)</span> é a largura do intervalo, <span class="math inline">\(\text{sd}(x)\)</span> é o desvio padrão e <span class="math inline">\(n\)</span> é o número de observações.<span class="citation"><sup><a href="#ref-scott1979">126</a></sup></span></p></li>
+<li><p>A quantidade de intervalos pode ser determinada pelo método de Freedman-Diaconis, que é dado pela fórmula <span class="math inline">\(h = 2 \times \text{IQR}(x) \times n^{-1/3}\)</span>, onde <span class="math inline">\(h\)</span> é a largura do intervalo, <span class="math inline">\(\text{IQR}(x)\)</span> é o intervalo interquartil e <span class="math inline">\(n\)</span> é o número de observações.<span class="citation"><sup><a href="#ref-freedman1981">127</a></sup></span></p></li>
+<li><p>A largura das classes pode ser determinada dividindo o intervalo total de observações pelo número de classes. Recomenda-se larguras iguais, mas larguras desiguais podem ser usadas quando existirem grandes lacunas nos dados ou em contextos específicos. Os intervalos devem ser mutuamente exclusivos e não sobrepostos, evitando intervalos abertos (ex.: &lt;5, &gt;10).<span class="citation"><sup><a href="#ref-s2011">124</a></sup></span></p></li>
 <li><p>Polígonos de frequência são gráficos de linhas que conectam os pontos médios de cada barra do histograma. Eles são úteis para comparar duas ou mais distribuições de frequência.<span class="citation"><sup><a href="#ref-s2011">124</a></sup></span></p></li>
 <li><p>Gráficos de barra verticais ou horizontais representam a distribuição de frequências de uma variável categórica. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do gráfico de barras é igual ao número total de observações.<span class="citation"><sup><a href="#ref-s2011">124</a></sup></span></p></li>
 <li><p>Histogramas representam a distribuição de frequências de uma variável contínua. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do histograma é igual ao número total de observações.<span class="citation"><sup><a href="#ref-s2011">124</a></sup></span></p></li>
 <li><p><em>Boxplots</em> representam a distribuição de frequências de uma variável contínua. A linha central divide os dados em duas partes iguais (mediana ou Q2). A caixa inferior representa o primeiro quartil (Q1) e a caixa superior representa o terceiro quartil (Q3). A linha inferior é o mínimo e a linha superior é o máximo. Os valores atípicos são representados por pontos individuais.<span class="citation"><sup><a href="#ref-s2011">124</a></sup></span></p></li>
 </ul>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>grDevices</em><span class="citation"><sup><a href="#ref-grDevices">128</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/grDevices/versions/3.6.2/topics/nclass">nclass</a> para determinar a quantidade de classes de um histograma com os métodos de Sturge<span class="citation"><sup><a href="#ref-sturges1926">125</a></sup></span>, Scott<span class="citation"><sup><a href="#ref-scott1979">126</a></sup></span> ou Freedman-Diaconis<span class="citation"><sup><a href="#ref-freedman1981">127</a></sup></span>.</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>graphics</em><span class="citation"><sup><a href="#ref-graphics">129</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/hist">hist</a> para criar histogramas.</p>
+</div>
 <p><br></p>
 </div>
 <div id="quais-características-definem-uma-distribuição" class="section level3 hasAnchor" number="13.1.3">
@@ -1313,15 +1324,15 @@ div.csl-indent {
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats-3"><strong>stats-3?</strong></a></sup></span> fornece funções de distribuição de probabilidade (p), funções de densidade (d), funções quantílicas (q) e funções geradores de números aleatórios (r) para as distribuições <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal">normal</a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/TDist">Student t</a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial">binomial</a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Chisquare">qui-quadrado</a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Uniform">uniforme</a>, dentre outras.</p>
+<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats">69</a></sup></span> fornece funções de distribuição de probabilidade (p), funções de densidade (d), funções quantílicas (q) e funções geradores de números aleatórios (r) para as distribuições <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal">normal</a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/TDist">Student t</a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial">binomial</a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Chisquare">qui-quadrado</a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Uniform">uniforme</a>, dentre outras.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>ggdist</em><span class="citation"><sup><a href="#ref-ggdist">125</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/ggdist/versions/3.3.0/topics/geom_slabinterval">geom_slabinterval</a> para criar gráficos de distribuição de probabilidade (p) e funções de densidade (d) as distribuições.</p>
+<p>O pacote <em>ggdist</em><span class="citation"><sup><a href="#ref-ggdist">130</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/ggdist/versions/3.3.0/topics/geom_slabinterval">geom_slabinterval</a> para criar gráficos de distribuição de probabilidade (p) e funções de densidade (d) as distribuições.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>ggfortify</em><span class="citation"><sup><a href="#ref-ggfortify">126</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/ggfortify/versions/0.4.16/topics/ggdistribution">ggdistribution</a> para criar gráficos de distribuição de probabilidade (p), funções de densidade (d), funções quantílicas (q) e funções geradores de números aleatórios (r) para as distribuições.</p>
+<p>O pacote <em>ggfortify</em><span class="citation"><sup><a href="#ref-ggfortify">131</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/ggfortify/versions/0.4.16/topics/ggdistribution">ggdistribution</a> para criar gráficos de distribuição de probabilidade (p), funções de densidade (d), funções quantílicas (q) e funções geradores de números aleatórios (r) para as distribuições.</p>
 </div>
 <p><br></p>
 </div>
@@ -1397,7 +1408,7 @@ Figura 13.1: Distribuições e funções de probabilidade
 <div id="por-que-as-análises-paramétricas-são-preferidas" class="section level3 hasAnchor" number="13.2.4">
 <h3><span class="header-section-number">13.2.4</span> Por que as análises paramétricas são preferidas?<a href="distribuições-e-parâmetros.html#por-que-as-análises-paramétricas-são-preferidas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Em geral, testes paramétricos são mais robustos (isto é, possuem menores erros tipo I e II) que seus testes não-paramétricos correspondentes.<span class="citation"><sup><a href="#ref-vetter2017">74</a>,<a href="#ref-greenhalgh1997">127</a></sup></span></p></li>
+<li><p>Em geral, testes paramétricos são mais robustos (isto é, possuem menores erros tipo I e II) que seus testes não-paramétricos correspondentes.<span class="citation"><sup><a href="#ref-vetter2017">74</a>,<a href="#ref-greenhalgh1997">132</a></sup></span></p></li>
 <li><p>Testes não-paramétricos apresentam menor poder estatístico (maior erro tipo II) comparados aos testes paramétricos correspondentes.<span class="citation"><sup><a href="#ref-Ali2016">103</a></sup></span></p></li>
 </ul>
 <p><br></p>
@@ -1405,10 +1416,10 @@ Figura 13.1: Distribuições e funções de probabilidade
 <div id="que-parâmetros-podem-ser-estimados" class="section level3 hasAnchor" number="13.2.5">
 <h3><span class="header-section-number">13.2.5</span> Que parâmetros podem ser estimados?<a href="distribuições-e-parâmetros.html#que-parâmetros-podem-ser-estimados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Parâmetros de tendência central.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a></sup></span></p></li>
-<li><p>Parâmetros de dispersão.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-Curran-Everett2008">129</a></sup></span></p></li>
-<li><p>Parâmetros de proporção.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-Altman1994">130</a>,<a href="#ref-Altman1994">130</a></sup></span></p></li>
-<li><p>Parâmetros de distribuição.<span class="citation"><sup><a href="#ref-kanji2006">128</a></sup></span></p></li>
+<li><p>Parâmetros de tendência central.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a></sup></span></p></li>
+<li><p>Parâmetros de dispersão.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-Curran-Everett2008">134</a></sup></span></p></li>
+<li><p>Parâmetros de proporção.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-Altman1994">135</a>,<a href="#ref-Altman1994">135</a></sup></span></p></li>
+<li><p>Parâmetros de distribuição.<span class="citation"><sup><a href="#ref-kanji2006">133</a></sup></span></p></li>
 <li><p>Parâmetros de extremos.<span class="citation"><sup><a href="#ref-Ali2016">103</a></sup></span></p></li>
 </ul>
 <p><br></p>
@@ -1424,14 +1435,14 @@ Figura 13.1: Distribuições e funções de probabilidade
 <div id="que-parâmetros-de-tendência-central-podem-ser-estimados" class="section level3 hasAnchor" number="13.3.1">
 <h3><span class="header-section-number">13.3.1</span> Que parâmetros de tendência central podem ser estimados?<a href="distribuições-e-parâmetros.html#que-parâmetros-de-tendência-central-podem-ser-estimados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p><em>Média</em>: aritmética, ponderada, geométrica ou harmônica.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-s.2011a">131</a></sup></span></p></li>
-<li><p><em>Mediana</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-s.2011">132</a></sup></span></p></li>
-<li><p><em>Moda</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-s.2011">132</a></sup></span></p></li>
-<li><p>A posição relativa das medidas de tendência central (média, mediana e moda) depende da forma da distribuição.<span class="citation"><sup><a href="#ref-s.2011">132</a></sup></span></p></li>
-<li><p>Em uma distribuição normal, as três medidas são idênticas.<span class="citation"><sup><a href="#ref-s.2011">132</a></sup></span></p></li>
-<li><p>A média é sempre puxada para os valores extremos, por isso é deslocada para a cauda em distribuições assimétricas.<span class="citation"><sup><a href="#ref-s.2011">132</a></sup></span></p></li>
-<li><p>A mediana fica entre a média e a moda em distribuições assimétricas.<span class="citation"><sup><a href="#ref-s.2011">132</a></sup></span></p></li>
-<li><p>A moda é o valor mais frequente e, portanto, se localiza no pico da distribuição assimétrica.<span class="citation"><sup><a href="#ref-s.2011">132</a></sup></span></p></li>
+<li><p><em>Média</em>: aritmética, ponderada, geométrica ou harmônica.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-s.2011a">136</a></sup></span></p></li>
+<li><p><em>Mediana</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-s.2011">137</a></sup></span></p></li>
+<li><p><em>Moda</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-s.2011">137</a></sup></span></p></li>
+<li><p>A posição relativa das medidas de tendência central (média, mediana e moda) depende da forma da distribuição.<span class="citation"><sup><a href="#ref-s.2011">137</a></sup></span></p></li>
+<li><p>Em uma distribuição normal, as três medidas são idênticas.<span class="citation"><sup><a href="#ref-s.2011">137</a></sup></span></p></li>
+<li><p>A média é sempre puxada para os valores extremos, por isso é deslocada para a cauda em distribuições assimétricas.<span class="citation"><sup><a href="#ref-s.2011">137</a></sup></span></p></li>
+<li><p>A mediana fica entre a média e a moda em distribuições assimétricas.<span class="citation"><sup><a href="#ref-s.2011">137</a></sup></span></p></li>
+<li><p>A moda é o valor mais frequente e, portanto, se localiza no pico da distribuição assimétrica.<span class="citation"><sup><a href="#ref-s.2011">137</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
@@ -1442,9 +1453,9 @@ Figura 13.1: Distribuições e funções de probabilidade
 <div id="como-escolher-o-parâmetro-de-tendência-central" class="section level3 hasAnchor" number="13.3.2">
 <h3><span class="header-section-number">13.3.2</span> Como escolher o parâmetro de tendência central?<a href="distribuições-e-parâmetros.html#como-escolher-o-parâmetro-de-tendência-central" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>A mediana é preferida à média quando existem poucos valores extremos na distribuição, alguns valores são indeterminados, ou há uma distribuição aberta, ou os dados são medidos em uma escala ordinal.<span class="citation"><sup><a href="#ref-s.2011">132</a></sup></span></p></li>
-<li><p>A moda é preferida quando os dados são medidos em uma escala nominal.<span class="citation"><sup><a href="#ref-s.2011">132</a></sup></span></p></li>
-<li><p>A média geométrica é preferida quando os dados são medidos em uma escala logarítmica.<span class="citation"><sup><a href="#ref-s.2011">132</a></sup></span></p></li>
+<li><p>A mediana é preferida à média quando existem poucos valores extremos na distribuição, alguns valores são indeterminados, ou há uma distribuição aberta, ou os dados são medidos em uma escala ordinal.<span class="citation"><sup><a href="#ref-s.2011">137</a></sup></span></p></li>
+<li><p>A moda é preferida quando os dados são medidos em uma escala nominal.<span class="citation"><sup><a href="#ref-s.2011">137</a></sup></span></p></li>
+<li><p>A média geométrica é preferida quando os dados são medidos em uma escala logarítmica.<span class="citation"><sup><a href="#ref-s.2011">137</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -1455,12 +1466,12 @@ Figura 13.1: Distribuições e funções de probabilidade
 <div id="que-parâmetros-de-dispersão-podem-ser-estimados" class="section level3 hasAnchor" number="13.4.1">
 <h3><span class="header-section-number">13.4.1</span> Que parâmetros de dispersão podem ser estimados?<a href="distribuições-e-parâmetros.html#que-parâmetros-de-dispersão-podem-ser-estimados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p><em>Variância</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a></sup></span></p></li>
-<li><p><em>Desvio-padrão</em>: Informam sobre a dispersão da população e são, portanto, úteis como preditores da variação em novas amostras.<span class="citation"><sup><a href="#ref-Curran-Everett2008">129</a>,<a href="#ref-krzywinski2013">133</a>,<a href="#ref-manikandan2011">134</a></sup></span></p></li>
-<li><p><em>Erro-padrão</em>: Refletem a incerteza na média e sua dependência do tamanho da amostra.<span class="citation"><sup><a href="#ref-Curran-Everett2008">129</a>,<a href="#ref-krzywinski2013">133</a></sup></span></p></li>
-<li><p><em>Amplitude</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-manikandan2011">134</a></sup></span></p></li>
-<li><p><em>Intervalo interquartil</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-manikandan2011">134</a></sup></span></p></li>
-<li><p><em>Intervalo de confiança</em>: Captura a média populacional % do tempo correspondente ao nível de significância <span class="math inline">\(\alpha\)</span> pré-estabelecido .<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-krzywinski2013">133</a>,<a href="#ref-Cumming2007">135</a></sup></span></p></li>
+<li><p><em>Variância</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a></sup></span></p></li>
+<li><p><em>Desvio-padrão</em>: Informam sobre a dispersão da população e são, portanto, úteis como preditores da variação em novas amostras.<span class="citation"><sup><a href="#ref-Curran-Everett2008">134</a>,<a href="#ref-krzywinski2013">138</a>,<a href="#ref-manikandan2011">139</a></sup></span></p></li>
+<li><p><em>Erro-padrão</em>: Refletem a incerteza na média e sua dependência do tamanho da amostra.<span class="citation"><sup><a href="#ref-Curran-Everett2008">134</a>,<a href="#ref-krzywinski2013">138</a></sup></span></p></li>
+<li><p><em>Amplitude</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-manikandan2011">139</a></sup></span></p></li>
+<li><p><em>Intervalo interquartil</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-manikandan2011">139</a></sup></span></p></li>
+<li><p><em>Intervalo de confiança</em>: Captura a média populacional % do tempo correspondente ao nível de significância <span class="math inline">\(\alpha\)</span> pré-estabelecido .<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-krzywinski2013">138</a>,<a href="#ref-Cumming2007">140</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
@@ -1468,7 +1479,7 @@ Figura 13.1: Distribuições e funções de probabilidade
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats-4"><strong>stats-4?</strong></a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/confint"><em>confint</em></a> para calcular o intervalo de confiança em um nível de significância <span class="math inline">\(\alpha\)</span>.</p>
+<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats">69</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/confint"><em>confint</em></a> para calcular o intervalo de confiança em um nível de significância <span class="math inline">\(\alpha\)</span>.</p>
 </div>
 <p><br></p>
 </div>
@@ -1476,8 +1487,8 @@ Figura 13.1: Distribuições e funções de probabilidade
 <h3><span class="header-section-number">13.4.2</span> Como escolher o parâmetro de dispersão?<a href="distribuições-e-parâmetros.html#como-escolher-o-parâmetro-de-dispersão" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><br></p>
 <ul>
-<li><p>Desvio-padrão é apropriado quando a média é utilizada como parâmetro de tendência central em distribuições simétricas.<span class="citation"><sup><a href="#ref-manikandan2011">134</a></sup></span></p></li>
-<li><p>Amplitue ou intervalo interquartil são apropriadas para variáveis ordinais ou distribuições assimétricas.<span class="citation"><sup><a href="#ref-manikandan2011">134</a></sup></span></p></li>
+<li><p>Desvio-padrão é apropriado quando a média é utilizada como parâmetro de tendência central em distribuições simétricas.<span class="citation"><sup><a href="#ref-manikandan2011">139</a></sup></span></p></li>
+<li><p>Amplitue ou intervalo interquartil são apropriadas para variáveis ordinais ou distribuições assimétricas.<span class="citation"><sup><a href="#ref-manikandan2011">139</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -1488,15 +1499,15 @@ Figura 13.1: Distribuições e funções de probabilidade
 <div id="que-parâmetros-de-proporção-podem-ser-estimados" class="section level3 hasAnchor" number="13.5.1">
 <h3><span class="header-section-number">13.5.1</span> Que parâmetros de proporção podem ser estimados?<a href="distribuições-e-parâmetros.html#que-parâmetros-de-proporção-podem-ser-estimados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p><em>Frequência absoluta</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-Altman1994">130</a></sup></span></p></li>
-<li><p><em>Frequência relativa</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-Altman1994">130</a></sup></span></p></li>
-<li><p><em>Percentil</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">128</a>,<a href="#ref-Altman1994">130</a></sup></span></p></li>
-<li><p><em>Quantil</em>: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem:<span class="citation"><sup><a href="#ref-Altman1994">130</a></sup></span></p>
+<li><p><em>Frequência absoluta</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-Altman1994">135</a></sup></span></p></li>
+<li><p><em>Frequência relativa</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-Altman1994">135</a></sup></span></p></li>
+<li><p><em>Percentil</em>.<span class="citation"><sup><a href="#ref-Ali2016">103</a>,<a href="#ref-kanji2006">133</a>,<a href="#ref-Altman1994">135</a></sup></span></p></li>
+<li><p><em>Quantil</em>: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem:<span class="citation"><sup><a href="#ref-Altman1994">135</a></sup></span></p>
 <ul>
-<li><p>Tercil: 2 valores que dividem a amostra em 3 grupos de tamanhos iguais.<span class="citation"><sup><a href="#ref-Altman1994">130</a></sup></span></p></li>
-<li><p>Quartil: 3 valores que dividem a amostra em 4 grupos de tamanhos iguais.<span class="citation"><sup><a href="#ref-Altman1994">130</a></sup></span></p></li>
-<li><p>Quintil: 4 valores que dividem a amostra em 5 grupos de tamanhos iguais.<span class="citation"><sup><a href="#ref-Altman1994">130</a></sup></span></p></li>
-<li><p>Decil: 9 valores que dividem a amostra em 10 grupos de tamanhos iguais.<span class="citation"><sup><a href="#ref-Altman1994">130</a></sup></span></p></li>
+<li><p>Tercil: 2 valores que dividem a amostra em 3 grupos de tamanhos iguais.<span class="citation"><sup><a href="#ref-Altman1994">135</a></sup></span></p></li>
+<li><p>Quartil: 3 valores que dividem a amostra em 4 grupos de tamanhos iguais.<span class="citation"><sup><a href="#ref-Altman1994">135</a></sup></span></p></li>
+<li><p>Quintil: 4 valores que dividem a amostra em 5 grupos de tamanhos iguais.<span class="citation"><sup><a href="#ref-Altman1994">135</a></sup></span></p></li>
+<li><p>Decil: 9 valores que dividem a amostra em 10 grupos de tamanhos iguais.<span class="citation"><sup><a href="#ref-Altman1994">135</a></sup></span></p></li>
 </ul></li>
 </ul>
 <p><br></p>
@@ -1520,8 +1531,8 @@ Figura 13.1: Distribuições e funções de probabilidade
 <div id="que-parâmetros-de-distribuição-podem-ser-estimados" class="section level3 hasAnchor" number="13.6.1">
 <h3><span class="header-section-number">13.6.1</span> Que parâmetros de distribuição podem ser estimados?<a href="distribuições-e-parâmetros.html#que-parâmetros-de-distribuição-podem-ser-estimados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p><em>Assimetria</em>.<span class="citation"><sup><a href="#ref-kanji2006">128</a></sup></span></p></li>
-<li><p><em>Curtose</em>.<span class="citation"><sup><a href="#ref-kanji2006">128</a></sup></span></p></li>
+<li><p><em>Assimetria</em>.<span class="citation"><sup><a href="#ref-kanji2006">133</a></sup></span></p></li>
+<li><p><em>Curtose</em>.<span class="citation"><sup><a href="#ref-kanji2006">133</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -1548,26 +1559,26 @@ Figura 13.1: Distribuições e funções de probabilidade
 <div id="o-que-são-valores-discrepantes-outliers" class="section level3 hasAnchor" number="13.8.1">
 <h3><span class="header-section-number">13.8.1</span> O que são valores discrepantes (<em>outliers</em>)?<a href="distribuições-e-parâmetros.html#o-que-são-valores-discrepantes-outliers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Em termos gerais, um valor discrepante - “fora da curva” ou <em>outlier</em> - é uma observação que possui um valor relativamente grande ou pequeno em comparação com a maioria das observações.<span class="citation"><sup><a href="#ref-zuur2009">136</a></sup></span></p></li>
-<li><p>Mais especificamente, um valor discrepante é uma observação incomum que exerce influência indevida em uma análise.<span class="citation"><sup><a href="#ref-zuur2009">136</a></sup></span></p></li>
+<li><p>Em termos gerais, um valor discrepante - “fora da curva” ou <em>outlier</em> - é uma observação que possui um valor relativamente grande ou pequeno em comparação com a maioria das observações.<span class="citation"><sup><a href="#ref-zuur2009">141</a></sup></span></p></li>
+<li><p>Mais especificamente, um valor discrepante é uma observação incomum que exerce influência indevida em uma análise.<span class="citation"><sup><a href="#ref-zuur2009">141</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-conduzir-análises-com-valores-discrepantes" class="section level3 hasAnchor" number="13.8.2">
 <h3><span class="header-section-number">13.8.2</span> Como conduzir análises com valores discrepantes?<a href="distribuições-e-parâmetros.html#como-conduzir-análises-com-valores-discrepantes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Erros de observação e de medição são uma justificativa válida para descartar observações discrepantes.<span class="citation"><sup><a href="#ref-zuur2009">136</a></sup></span></p></li>
-<li><p>Valores discrepantes na variável de desfecho podem exigir uma abordagem mais refinada, especialmente quando representam uma variação real na variável que está sendo medida.<span class="citation"><sup><a href="#ref-zuur2009">136</a></sup></span></p></li>
-<li><p>Valores discrepantes em uma (co)variável podem surgir devido a um projeto experimental inadequado; nesse caso, abandonar a observação ou transformar a covariável são opções adequadas.<span class="citation"><sup><a href="#ref-zuur2009">136</a></sup></span></p></li>
-<li><p>É importante reportar se existem valores discrepantes e como foram tratados.<span class="citation"><sup><a href="#ref-zuur2009">136</a></sup></span></p></li>
+<li><p>Erros de observação e de medição são uma justificativa válida para descartar observações discrepantes.<span class="citation"><sup><a href="#ref-zuur2009">141</a></sup></span></p></li>
+<li><p>Valores discrepantes na variável de desfecho podem exigir uma abordagem mais refinada, especialmente quando representam uma variação real na variável que está sendo medida.<span class="citation"><sup><a href="#ref-zuur2009">141</a></sup></span></p></li>
+<li><p>Valores discrepantes em uma (co)variável podem surgir devido a um projeto experimental inadequado; nesse caso, abandonar a observação ou transformar a covariável são opções adequadas.<span class="citation"><sup><a href="#ref-zuur2009">141</a></sup></span></p></li>
+<li><p>É importante reportar se existem valores discrepantes e como foram tratados.<span class="citation"><sup><a href="#ref-zuur2009">141</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>outliers</em><span class="citation"><sup><a href="#ref-outliers">137</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/outliers/versions/0.15/topics/outlier"><em>outlier</em></a> para identificar os valores mais distantes da média.</p>
+<p>O pacote <em>outliers</em><span class="citation"><sup><a href="#ref-outliers">142</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/outliers/versions/0.15/topics/outlier"><em>outlier</em></a> para identificar os valores mais distantes da média.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>outliers</em><span class="citation"><sup><a href="#ref-outliers">137</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/outliers/versions/0.15/topics/rm.outlier"><em>rm.outlier</em></a> para remover os valores mais distantes da média detectados por testes de hipótese e/ou substitui-los pela média ou mediana.</p>
+<p>O pacote <em>outliers</em><span class="citation"><sup><a href="#ref-outliers">142</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/outliers/versions/0.15/topics/rm.outlier"><em>rm.outlier</em></a> para remover os valores mais distantes da média detectados por testes de hipótese e/ou substitui-los pela média ou mediana.</p>
 </div>
 <p><br></p>
 
@@ -1582,6 +1593,9 @@ Figura 13.1: Distribuições e funções de probabilidade
 <div id="ref-base" class="csl-entry">
 <div class="csl-left-margin">63. </div><div class="csl-right-inline">R Core Team. <em><span>R</span>: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing; 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
 </div>
+<div id="ref-stats" class="csl-entry">
+<div class="csl-left-margin">69. </div><div class="csl-right-inline">R Core Team. <em>R: A Language and Environment for Statistical Computing</em>.; 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
+</div>
 <div id="ref-vetter2017" class="csl-entry">
 <div class="csl-left-margin">74. </div><div class="csl-right-inline">Vetter TR. Fundamentals of Research Data and Variables. <em>Anesthesia &amp; Analgesia</em>. 2017;125(4):1375-1380. doi:<a href="https://doi.org/10.1213/ane.0000000000002370">10.1213/ane.0000000000002370</a></div>
 </div>
@@ -1594,44 +1608,59 @@ Figura 13.1: Distribuições e funções de probabilidade
 <div id="ref-s2011" class="csl-entry">
 <div class="csl-left-margin">124. </div><div class="csl-right-inline">S M. Frequency distribution. <em>Journal of Pharmacology and Pharmacotherapeutics</em>. 2011;2(1):54-56. doi:<a href="https://doi.org/10.4103/0976-500x.77120">10.4103/0976-500x.77120</a></div>
 </div>
+<div id="ref-sturges1926" class="csl-entry">
+<div class="csl-left-margin">125. </div><div class="csl-right-inline">Sturges HA. The Choice of a Class Interval. <em>Journal of the American Statistical Association</em>. 1926;21(153):65-66. doi:<a href="https://doi.org/10.1080/01621459.1926.10502161">10.1080/01621459.1926.10502161</a></div>
+</div>
+<div id="ref-scott1979" class="csl-entry">
+<div class="csl-left-margin">126. </div><div class="csl-right-inline">SCOTT DW. On optimal and data-based histograms. <em>Biometrika</em>. 1979;66(3):605-610. doi:<a href="https://doi.org/10.1093/biomet/66.3.605">10.1093/biomet/66.3.605</a></div>
+</div>
+<div id="ref-freedman1981" class="csl-entry">
+<div class="csl-left-margin">127. </div><div class="csl-right-inline">Freedman D, Diaconis P. On the histogram as a density estimator:L 2 theory. <em>Zeitschrift für Wahrscheinlichkeitstheorie und Verwandte Gebiete</em>. 1981;57(4):453-476. doi:<a href="https://doi.org/10.1007/bf01025868">10.1007/bf01025868</a></div>
+</div>
+<div id="ref-grDevices" class="csl-entry">
+<div class="csl-left-margin">128. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2024. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
+</div>
+<div id="ref-graphics" class="csl-entry">
+<div class="csl-left-margin">129. </div><div class="csl-right-inline">R Core Team. R: A language and environment for statistical computing. 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
+</div>
 <div id="ref-ggdist" class="csl-entry">
-<div class="csl-left-margin">125. </div><div class="csl-right-inline">Kay M. <span></span>Ggdist<span></span>: Visualizations of distributions and uncertainty in the grammar of graphics. 2024;30. doi:<a href="https://doi.org/10.1109/TVCG.2023.3327195">10.1109/TVCG.2023.3327195</a></div>
+<div class="csl-left-margin">130. </div><div class="csl-right-inline">Kay M. <span></span>Ggdist<span></span>: Visualizations of distributions and uncertainty in the grammar of graphics. 2024;30. doi:<a href="https://doi.org/10.1109/TVCG.2023.3327195">10.1109/TVCG.2023.3327195</a></div>
 </div>
 <div id="ref-ggfortify" class="csl-entry">
-<div class="csl-left-margin">126. </div><div class="csl-right-inline">Tang Y, Horikoshi M, Li W. <em>Ggfortify: Unified Interface to Visualize Statistical Result of Popular r Packages</em>. Vol 8.; 2016. doi:<a href="https://doi.org/10.32614/RJ-2016-060">10.32614/RJ-2016-060</a></div>
+<div class="csl-left-margin">131. </div><div class="csl-right-inline">Tang Y, Horikoshi M, Li W. <em>Ggfortify: Unified Interface to Visualize Statistical Result of Popular r Packages</em>. Vol 8.; 2016. doi:<a href="https://doi.org/10.32614/RJ-2016-060">10.32614/RJ-2016-060</a></div>
 </div>
 <div id="ref-greenhalgh1997" class="csl-entry">
-<div class="csl-left-margin">127. </div><div class="csl-right-inline">Greenhalgh T. How to read a paper: Statistics for the non-statistician. I: Different types of data need different statistical tests. <em>BMJ</em>. 1997;315(7104):364-366. doi:<a href="https://doi.org/10.1136/bmj.315.7104.364">10.1136/bmj.315.7104.364</a></div>
+<div class="csl-left-margin">132. </div><div class="csl-right-inline">Greenhalgh T. How to read a paper: Statistics for the non-statistician. I: Different types of data need different statistical tests. <em>BMJ</em>. 1997;315(7104):364-366. doi:<a href="https://doi.org/10.1136/bmj.315.7104.364">10.1136/bmj.315.7104.364</a></div>
 </div>
 <div id="ref-kanji2006" class="csl-entry">
-<div class="csl-left-margin">128. </div><div class="csl-right-inline">Kanji G. <em>100 Statistical Tests</em>.; 2006. doi:<a href="https://doi.org/10.4135/9781849208499">10.4135/9781849208499</a></div>
+<div class="csl-left-margin">133. </div><div class="csl-right-inline">Kanji G. <em>100 Statistical Tests</em>.; 2006. doi:<a href="https://doi.org/10.4135/9781849208499">10.4135/9781849208499</a></div>
 </div>
 <div id="ref-Curran-Everett2008" class="csl-entry">
-<div class="csl-left-margin">129. </div><div class="csl-right-inline">Curran-Everett D. Explorations in statistics: standard deviations and standard errors. <em>Advances in Physiology Education</em>. 2008;32(3):203-208. doi:<a href="https://doi.org/10.1152/advan.90123.2008">10.1152/advan.90123.2008</a></div>
+<div class="csl-left-margin">134. </div><div class="csl-right-inline">Curran-Everett D. Explorations in statistics: standard deviations and standard errors. <em>Advances in Physiology Education</em>. 2008;32(3):203-208. doi:<a href="https://doi.org/10.1152/advan.90123.2008">10.1152/advan.90123.2008</a></div>
 </div>
 <div id="ref-Altman1994" class="csl-entry">
-<div class="csl-left-margin">130. </div><div class="csl-right-inline">Altman DG, Bland JM. Statistics Notes: Quartiles, quintiles, centiles, and other quantiles. <em>BMJ</em>. 1994;309(6960):996-996. doi:<a href="https://doi.org/10.1136/bmj.309.6960.996">10.1136/bmj.309.6960.996</a></div>
+<div class="csl-left-margin">135. </div><div class="csl-right-inline">Altman DG, Bland JM. Statistics Notes: Quartiles, quintiles, centiles, and other quantiles. <em>BMJ</em>. 1994;309(6960):996-996. doi:<a href="https://doi.org/10.1136/bmj.309.6960.996">10.1136/bmj.309.6960.996</a></div>
 </div>
 <div id="ref-s.2011a" class="csl-entry">
-<div class="csl-left-margin">131. </div><div class="csl-right-inline">S. M. Measures of central tendency: The mean. <em>Journal of Pharmacology and Pharmacotherapeutics</em>. 2011;2(2):140-142. doi:<a href="https://doi.org/10.4103/0976-500x.81920">10.4103/0976-500x.81920</a></div>
+<div class="csl-left-margin">136. </div><div class="csl-right-inline">S. M. Measures of central tendency: The mean. <em>Journal of Pharmacology and Pharmacotherapeutics</em>. 2011;2(2):140-142. doi:<a href="https://doi.org/10.4103/0976-500x.81920">10.4103/0976-500x.81920</a></div>
 </div>
 <div id="ref-s.2011" class="csl-entry">
-<div class="csl-left-margin">132. </div><div class="csl-right-inline">S. M. Measures of central tendency: Median and mode. <em>Journal of Pharmacology and Pharmacotherapeutics</em>. 2011;2(3):214-215. doi:<a href="https://doi.org/10.4103/0976-500x.83300">10.4103/0976-500x.83300</a></div>
+<div class="csl-left-margin">137. </div><div class="csl-right-inline">S. M. Measures of central tendency: Median and mode. <em>Journal of Pharmacology and Pharmacotherapeutics</em>. 2011;2(3):214-215. doi:<a href="https://doi.org/10.4103/0976-500x.83300">10.4103/0976-500x.83300</a></div>
 </div>
 <div id="ref-krzywinski2013" class="csl-entry">
-<div class="csl-left-margin">133. </div><div class="csl-right-inline">Krzywinski M, Altman N. Error bars. <em>Nature Methods</em>. 2013;10(10):921-922. doi:<a href="https://doi.org/10.1038/nmeth.2659">10.1038/nmeth.2659</a></div>
+<div class="csl-left-margin">138. </div><div class="csl-right-inline">Krzywinski M, Altman N. Error bars. <em>Nature Methods</em>. 2013;10(10):921-922. doi:<a href="https://doi.org/10.1038/nmeth.2659">10.1038/nmeth.2659</a></div>
 </div>
 <div id="ref-manikandan2011" class="csl-entry">
-<div class="csl-left-margin">134. </div><div class="csl-right-inline">Manikandan S. Measures of dispersion. <em>Journal of Pharmacology and Pharmacotherapeutics</em>. 2011;2(4):315-316. doi:<a href="https://doi.org/10.4103/0976-500x.85931">10.4103/0976-500x.85931</a></div>
+<div class="csl-left-margin">139. </div><div class="csl-right-inline">Manikandan S. Measures of dispersion. <em>Journal of Pharmacology and Pharmacotherapeutics</em>. 2011;2(4):315-316. doi:<a href="https://doi.org/10.4103/0976-500x.85931">10.4103/0976-500x.85931</a></div>
 </div>
 <div id="ref-Cumming2007" class="csl-entry">
-<div class="csl-left-margin">135. </div><div class="csl-right-inline">Cumming G, Fidler F, Vaux DL. Error bars in experimental biology. <em>The Journal of Cell Biology</em>. 2007;177(1):7-11. doi:<a href="https://doi.org/10.1083/jcb.200611141">10.1083/jcb.200611141</a></div>
+<div class="csl-left-margin">140. </div><div class="csl-right-inline">Cumming G, Fidler F, Vaux DL. Error bars in experimental biology. <em>The Journal of Cell Biology</em>. 2007;177(1):7-11. doi:<a href="https://doi.org/10.1083/jcb.200611141">10.1083/jcb.200611141</a></div>
 </div>
 <div id="ref-zuur2009" class="csl-entry">
-<div class="csl-left-margin">136. </div><div class="csl-right-inline">Zuur AF, Ieno EN, Elphick CS. A protocol for data exploration to avoid common statistical problems. <em>Methods in Ecology and Evolution</em>. 2009;1(1):3-14. doi:<a href="https://doi.org/10.1111/j.2041-210x.2009.00001.x">10.1111/j.2041-210x.2009.00001.x</a></div>
+<div class="csl-left-margin">141. </div><div class="csl-right-inline">Zuur AF, Ieno EN, Elphick CS. A protocol for data exploration to avoid common statistical problems. <em>Methods in Ecology and Evolution</em>. 2009;1(1):3-14. doi:<a href="https://doi.org/10.1111/j.2041-210x.2009.00001.x">10.1111/j.2041-210x.2009.00001.x</a></div>
 </div>
 <div id="ref-outliers" class="csl-entry">
-<div class="csl-left-margin">137. </div><div class="csl-right-inline">Komsta L. <em>Outliers: Tests for Outliers</em>.; 2022. <a href="https://CRAN.R-project.org/package=outliers">https://CRAN.R-project.org/package=outliers.</a></div>
+<div class="csl-left-margin">142. </div><div class="csl-right-inline">Komsta L. <em>Outliers: Tests for Outliers</em>.; 2022. <a href="https://CRAN.R-project.org/package=outliers">https://CRAN.R-project.org/package=outliers.</a></div>
 </div>
 </div>
             </section>
