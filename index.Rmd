@@ -133,10 +133,16 @@ if(knitr::is_html_output()){
 }
 ```
 
-```{r post, echo = FALSE, include = FALSE}
+```{r post, echo = FALSE, include = FALSE, eval = FALSE}
+# delete .PNG files from posts folder
+delete_files <- list.dirs("posts", full.names = TRUE)
+unlink(delete_files, recursive = TRUE)
+# create folder "posts"
+dir.create("posts", showWarnings = FALSE)
+
 # source scripts
-source(file.path("posts", "parseRmd.R"), local = knitr::knit_global())
-source(file.path("posts", "savePost.R"), local = knitr::knit_global())
+source(file.path("R", "parseRmd.R"), local = knitr::knit_global())
+source(file.path("R", "savePost.R"), local = knitr::knit_global())
 
 # read all file chapters
 rmd_files <- list.files("rmd", pattern = "\\.Rmd$", full.names = TRUE)
@@ -150,6 +156,7 @@ rmd_files <- rmd_files[!grepl("parte-2.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-3.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-4.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-5.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("testes-estatisticos.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("prefacio.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("referencias.Rmd", rmd_files)]
 
@@ -157,8 +164,7 @@ rmd_files <- rmd_files[!grepl("referencias.Rmd", rmd_files)]
 bib <- RefManageR::ReadBib(file.path("bib", "references.bib"))
 
 # loop over all chapters
-# for (k in seq_along(rmd_files)) {
-#   entries <- ParseRmdContent(rmd_files, bib, k)
-# }
+for (k in seq_along(rmd_files)) {
+  ParseRmdContent(rmd_files, bib, k)
+}
 ```
-
