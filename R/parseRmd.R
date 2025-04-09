@@ -8,8 +8,7 @@ ParseRmdContent <- function(rmd_files, bib, k) {
     rmd_data <- rmd_data[rmd_data$type != "rmd_heading", ]
 
     # keep rows with complete headers 1 to 3
-    rmd_data <- rmd_data[complete.cases(dplyr::select(rmd_data, c("sec_h1", "sec_h2",
-        "sec_h3"))), ]
+    rmd_data <- rmd_data[complete.cases(dplyr::select(rmd_data, c("sec_h1", "sec_h2", "sec_h3"))), ]
 
     # loop over all answers
     for (i in 1:nrow(rmd_data)) {
@@ -25,8 +24,7 @@ ParseRmdContent <- function(rmd_files, bib, k) {
 
         question <- rmd_data[i, ]$sec_h3
 
-        answers <- rmd_data[i, ] |>
-            parsermd::as_document()
+        answers <- rmd_data[i, ] |> parsermd::as_document()
         # keep only rows starting with '- '
         answers <- answers[grep("^- ", answers)]
         # remove - from answers
@@ -38,15 +36,19 @@ ParseRmdContent <- function(rmd_files, bib, k) {
         # replace $\\ by $ from answers
         answers <- gsub("\\$\\\\", "$", answers)
 
-        # get content within brackets starting with @ [@]
-        key <- gsub(".*\\[@(.*?)\\].*", "\\1", answers)
-
-        # get source from answers [@key]
-        answers <- trimws(gsub("\\[@(.*?)\\]", "", answers), which = "left")
-
+        # Extrair todas as chaves citadas (removendo o '@' e separando por ponto e vírgula)
+        key <- unlist(regmatches(answers, gregexpr("@[[:alnum:]]+", answers)))
+        key <- gsub("@", "", key)
+        
+        # Remover a parte da citação do texto
+        answers <- trimws(gsub("\\s*\\[@.*?\\]", "", answers), which = "left")
+        
+        # Chave string separada por ponto e vírgula
+        key_string <- paste(key, collapse = "; ")
+        
         entry <- data.frame(chapter = rep(chapter, length(answers)), section = rep(section,
             length(answers)), question = rep(question, length(answers)), answer = answers,
-            key = key)
+            key = key_string)
 
         if (nrow(entry) != 0) {
             for (j in 1:nrow(entry)) {

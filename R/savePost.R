@@ -39,16 +39,30 @@ SavePost <- function(entry, bib) {
 
     question <- emphasis(question)
     answer <- emphasis(answer)
-
-    source <- bib[key]
-    citation <- format(source, style = "text")
-    citation <- gsub("\\[1\\]", "", citation)
-    # remove underline character
-    citation <- gsub("_", "", citation)
-    # remove content within < >.
-    citation <- gsub("<.*?>.", "", citation)
-    # merge citations
-    citation <- paste0(citation, collapse = "\\")
+    
+    # convert keys string to vector
+    key <- unlist(strsplit(key, "; "))
+    # remove repeated keys
+    key <- unique(key)
+    # remove empty keys
+    key <- key[key != ""]
+    
+    citations <- c()
+    # get citation for each key
+    for (j in 1:length(key)) {
+        source <- bib[key[j]]
+        citation <- format(source, style = "text")
+        
+        citation <- gsub("\\[1\\]", "", citation)  # Remove reference number [1]
+        citation <- gsub("_", "", citation)  # Remove underline characters
+        citation <- gsub(".\n<.*?>.", "", citation)  # Remove content within .\n< >. 
+        citation <- gsub("<.*?>.", "", citation)  # Remove content within < >.
+        
+        citations <- c(citations, citation)
+    }
+    
+    # Merge all citations
+    citations <- paste0("[", seq(1,length(citations)), "]", citations, collapse = "\\\\newline")
 
     # Ensure chapter folder exists
     chapter_folder <- file.path(getwd(), "posts", chapter)
@@ -77,7 +91,7 @@ SavePost <- function(entry, bib) {
     # replace RESPOSTA with answer
     tex <- gsub("RESPOSTA", answer, tex)
     # replace CITACAO with citation
-    tex <- gsub("CITACAO", citation, tex)
+    tex <- gsub("CITACAO", citations, tex)
     # escape & character
     tex <- gsub("\\&", "\\\\&", tex)
     # escape % character
