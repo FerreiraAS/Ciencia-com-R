@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 3 Pensamento metodológico | Ciência com R</title>
+  <title>Capítulo 18 Análise preditiva | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 3 Pensamento metodológico | Ciência com R" />
+  <meta property="og:title" content="Capítulo 18 Análise preditiva | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 3 Pensamento metodológico | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 18 Análise preditiva | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="pensamento-estatístico.html"/>
-<link rel="next" href="paradoxos-e-falácias.html"/>
+<link rel="prev" href="análise-inferencial.html"/>
+<link rel="next" href="análise-causal.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -1251,89 +1251,25 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pensamento-metodológico" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Capítulo 3</span> <strong>Pensamento metodológico</strong><a href="pensamento-metodológico.html#pensamento-metodológico" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="análise-preditiva" class="section level1 hasAnchor" number="18">
+<h1><span class="header-section-number">Capítulo 18</span> <strong>Análise preditiva</strong><a href="análise-preditiva.html#análise-preditiva" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="metodologia-da-pesquisa" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Metodologia da pesquisa<a href="pensamento-metodológico.html#metodologia-da-pesquisa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="predição-via-modelagem" class="section level2 hasAnchor" number="18.1">
+<h2><span class="header-section-number">18.1</span> Predição via modelagem<a href="análise-preditiva.html#predição-via-modelagem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-metodologia-da-pesquisa" class="section level3 hasAnchor" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> O que é metodologia da pesquisa?<a href="pensamento-metodológico.html#o-que-é-metodologia-da-pesquisa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>A utilização de um vocabulário próprio — incluindo termos frequentemente usados em metodologia, epidemiologia e estatística — facilita a discussão na comunidade científica e melhora a compreensão das publicações.<span class="citation"><sup><a href="#ref-amatuzzi2006">17</a>,<a href="#ref-amatuzzi2006a">18</a></sup></span></li>
-</ul>
-<p><br></p>
-</div>
-</div>
-<div id="relação-estatística-metodologia" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Relação Estatística-Metodologia<a href="pensamento-metodológico.html#relação-estatística-metodologia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="qual-a-relação-entre-estatística-e-metodologia-da-pesquisa" class="section level3 hasAnchor" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Qual a relação entre estatística e metodologia da pesquisa?<a href="pensamento-metodológico.html#qual-a-relação-entre-estatística-e-metodologia-da-pesquisa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>.<span class="citation"><sup><a href="#ref-munafò2017">19</a></sup></span></li>
-</ul>
-<p><br></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
-<div class="DiagrammeR html-widget html-fill-item" id="htmlwidget-5b104f00cfea1fc9d494" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-5b104f00cfea1fc9d494">{"x":{"diagram":"\n\ngraph TB\n\nA(Projeto <br/>de pesquisa) --- B(Geração e especificação <br/> de hipóteses)\nB(Geração e especificação <br/> de hipóteses)-->C(Delineamento <br/> do estudo)\nC(Delineamento do estudo)-->D(Realização do estudo <br/> e coleta de dados)\nD(Realização do estudo e coleta de dados)-->E(Análise de dados e teste de hipóteses)\nE(Análise de dados <br/> e teste de hipóteses)-->F(Interpretação de resultados)\nF(Interpretação <br/> de resultados)-->G(Publicação e/ou realização <br/> do próximo experimento)\n\nH(Elaboração das hipóteses <br/> nula e alternativa)-.->B(Geração e especificação <br/> de hipóteses)\nI(Seleção das análises <br/> descritiva/inferencial e testes)-.->C(Delineamento <br/> do estudo)\nJ(Análise inicial <br/> de dados)-.->D(Realização do estudo <br/> e coleta de dados)\nK(Análise <br/> inferencial)-.->E(Análise de dados <br/> e teste de hipóteses)\nL(Tamanho do efeito <br/> e P-valor)-.->F(Interpretação <br/> de resultados)\nM(Redação <br/> dos resultados)-.->G(Publicação e/ou realização <br/> do próximo experimento)\n\nH-->I\nI-->J\nJ-->K\nK-->L\nL-->M\n\nstyle H fill:#FFFFFF00;\nstyle I fill:#FFFFFF00;\nstyle J fill:#FFFFFF00;\nstyle K fill:#FFFFFF00;\nstyle L fill:#FFFFFF00;\nstyle M fill:#FFFFFF00;\n\n"},"evals":[],"jsHooks":[]}</script>
-<p class="caption">
-Figura 3.1: Mapa mental da relação entre o pensamento estatístico e o pensamento metodológico.
-</p>
-</div>
-<p><br></p>
-</div>
-</div>
-<div id="reprodutibilidade" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Reprodutibilidade<a href="pensamento-metodológico.html#reprodutibilidade" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-é-reprodutibilidade" class="section level3 hasAnchor" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> O que é reprodutibilidade?<a href="pensamento-metodológico.html#o-que-é-reprodutibilidade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Reprodutibilidade é a habilidade de se obter resultados iguais ou similares quando uma análise ou teste estatístico é repetido.<span class="citation"><sup><a href="#ref-resnik2016">20</a>–<a href="#ref-mair2016">22</a></sup></span></li>
-</ul>
-<p><br></p>
-</div>
-<div id="por-que-reprodutibilidade-é-importante" class="section level3 hasAnchor" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Por que reprodutibilidade é importante?<a href="pensamento-metodológico.html#por-que-reprodutibilidade-é-importante" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Analisar a reprodutibilidade pode fornecer evidências a respeito da objetividade e confiabilidade dos achados, em detrimento de terem sido obtidos devido a vieses ou ao acaso.<span class="citation"><sup><a href="#ref-resnik2016">20</a></sup></span></p></li>
-<li><p>A reprodutibilidade não é apenas uma questão metodológica, mas também ética, uma vez que pode envolver mal práticas científicas como fabricação e/ou falsificação de dados.<span class="citation"><sup><a href="#ref-resnik2016">20</a></sup></span></p></li>
-<li><p>Reprodutibilidade pode ser considerada um padrão mínimo em pesquisa científica.<span class="citation"><sup><a href="#ref-hofner2015">21</a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-</div>
-<div id="robustez" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Robustez<a href="pensamento-metodológico.html#robustez" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-é-robustez" class="section level3 hasAnchor" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> O que é robustez?<a href="pensamento-metodológico.html#o-que-é-robustez" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-são-predições" class="section level3 hasAnchor" number="18.1.1">
+<h3><span class="header-section-number">18.1.1</span> O que são predições?<a href="análise-preditiva.html#o-que-são-predições" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
 <p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>ggeffects</em><span class="citation"><sup><a href="#ref-ggeffects">201</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/ggeffects/versions/1.6.0/topics/predict_response"><em>predict_response</em></a> para calcular valores preditos marginais ou ajustados das variáveis de desfecho.</p>
 </div>
-</div>
-<div id="replicabilidade" class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> Replicabilidade<a href="pensamento-metodológico.html#replicabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-replicabilidade" class="section level3 hasAnchor" number="3.5.1">
-<h3><span class="header-section-number">3.5.1</span> O que é replicabilidade?<a href="pensamento-metodológico.html#o-que-é-replicabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Replicabilidade é a habilidade de se obter conclusões iguais ou similares quando um experimento é repetido.<span class="citation"><sup><a href="#ref-hofner2015">21</a>,<a href="#ref-mair2016">22</a></sup></span></li>
-</ul>
-<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>ggeffects</em><span class="citation"><sup><a href="#ref-ggeffects">201</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/ggeffects/versions/1.6.0/topics/test_response"><em>test_response</em></a> para testar valores preditos marginais ou ajustados das variáveis de desfecho.</p>
 </div>
-</div>
-<div id="generalização" class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> Generalização<a href="pensamento-metodológico.html#generalização" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-é-generalização" class="section level3 hasAnchor" number="3.6.1">
-<h3><span class="header-section-number">3.6.1</span> O que é generalização?<a href="pensamento-metodológico.html#o-que-é-generalização" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Generalização refere-se à extrapolação das conclusões do estudo, observados na amostra, para a população.<span class="citation"><sup><a href="#ref-Banerjee2010">13</a></sup></span></li>
-</ul>
 <p><br></p>
 
 </div>
@@ -1341,26 +1277,8 @@ Figura 3.1: Mapa mental da relação entre o pensamento estatístico e o pensame
 </div>
 <h3><strong>Referências</strong><a href="referências.html#referências" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-Banerjee2010" class="csl-entry">
-<div class="csl-left-margin">13. </div><div class="csl-right-inline">Banerjee A, Chaudhury S. Statistics without tears: Populations and samples. <em>Industrial Psychiatry Journal</em>. 2010;19(1):60. doi:<a href="https://doi.org/10.4103/0972-6748.77642">10.4103/0972-6748.77642</a></div>
-</div>
-<div id="ref-amatuzzi2006" class="csl-entry">
-<div class="csl-left-margin">17. </div><div class="csl-right-inline">Amatuzzi MLL, Barreto M do CC, Litvoc J, Leme LEG. Linguagem metodológica: Parte 1. <em>Acta Ortopédica Brasileira</em>. 2006;14(1):53-56. doi:<a href="https://doi.org/10.1590/s1413-78522006000100012">10.1590/s1413-78522006000100012</a></div>
-</div>
-<div id="ref-amatuzzi2006a" class="csl-entry">
-<div class="csl-left-margin">18. </div><div class="csl-right-inline">Amatuzzi MLL, Barreto M do CC, Litvoc J, Leme LEG. Linguagem metodológica: Parte 2. <em>Acta Ortopédica Brasileira</em>. 2006;14(2):108-112. doi:<a href="https://doi.org/10.1590/s1413-78522006000200012">10.1590/s1413-78522006000200012</a></div>
-</div>
-<div id="ref-munafò2017" class="csl-entry">
-<div class="csl-left-margin">19. </div><div class="csl-right-inline">Munafò MR, Nosek BA, Bishop DVM, et al. A manifesto for reproducible science. <em>Nature Human Behaviour</em>. 2017;1(1). doi:<a href="https://doi.org/10.1038/s41562-016-0021">10.1038/s41562-016-0021</a></div>
-</div>
-<div id="ref-resnik2016" class="csl-entry">
-<div class="csl-left-margin">20. </div><div class="csl-right-inline">Resnik DB, Shamoo AE. Reproducibility and Research Integrity. <em>Accountability in Research</em>. 2016;24(2):116-123. doi:<a href="https://doi.org/10.1080/08989621.2016.1257387">10.1080/08989621.2016.1257387</a></div>
-</div>
-<div id="ref-hofner2015" class="csl-entry">
-<div class="csl-left-margin">21. </div><div class="csl-right-inline">Hofner B, Schmid M, Edler L. Reproducible research in statistics: A review and guidelines for the <span><em>Biometrical Journal</em></span>. <em>Biometrical Journal</em>. 2015;58(2):416-427. doi:<a href="https://doi.org/10.1002/bimj.201500156">10.1002/bimj.201500156</a></div>
-</div>
-<div id="ref-mair2016" class="csl-entry">
-<div class="csl-left-margin">22. </div><div class="csl-right-inline">Mair P. Thou shalt be reproducible! A technology perspective. <em>Frontiers in Psychology</em>. 2016;7. doi:<a href="https://doi.org/10.3389/fpsyg.2016.01079">10.3389/fpsyg.2016.01079</a></div>
+<div id="ref-ggeffects" class="csl-entry">
+<div class="csl-left-margin">201. </div><div class="csl-right-inline">Lüdecke D. Ggeffects: Tidy data frames of marginal effects from regression models. 2018;3:772. doi:<a href="https://doi.org/10.21105/joss.00772">10.21105/joss.00772</a></div>
 </div>
 </div>
             </section>
@@ -1368,8 +1286,8 @@ Figura 3.1: Mapa mental da relação entre o pensamento estatístico e o pensame
           </div>
         </div>
       </div>
-<a href="pensamento-estatístico.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="paradoxos-e-falácias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="análise-inferencial.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análise-causal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

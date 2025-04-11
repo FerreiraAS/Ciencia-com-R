@@ -393,6 +393,12 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 <br>
 
+### O que são extremos?
+
+-   Valores extremos podem constituir valores legítimos ou ilegítimos de uma distribuição.[@leys2019]
+
+<br>
+
 ### Que parâmetros extremos podem ser estimados?
 
 -   *Mínimo*.[@Ali2016]
@@ -415,19 +421,83 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 -   Em termos gerais, um valor discrepante - "fora da curva" ou *outlier* - é uma observação que possui um valor relativamente grande ou pequeno em comparação com a maioria das observações.[@zuur2009]
 
--   Mais especificamente, um valor discrepante é uma observação incomum que exerce influência indevida em uma análise.[@zuur2009]
+-   Um valor discrepante é uma observação incomum que exerce influência indevida em uma análise.[@zuur2009]
+
+-   Valores discrepantes são dados com valores altos de resíduos.[@leys2019]
+
+<br>
+
+### Quais são os tipos de valores discrepantes?
+
+-   Valores discrepantes podem ser categorizados em três subtipos: *outliers* de erro, *outliers* interessantes e *outliers* aleatórios.[@leys2019]
+
+-   Os valores discrepantes de erro são observações claramente não legítimas, distantes de outros dados devido a imprecisões por erro de mensuração e/ou codificação.[@leys2019]
+
+-   Os valores discrepantes interessantes não são claramente erros, mas podem refletir um processo/mecanismo potencialmente interessante para futuras pesquisas.[@leys2019]
+
+-   Os valores discrepantes aleatórios são observações que resultam por acaso, sem qualquer padrão ou tendência conhecida.[@leys2019]
+
+-   Valores discrepantes podem ser univariados ou multivariados.[@leys2019]
+
+<br>
+
+### Por que é importante avaliar valores discrepantes?
+
+-   Excluir o valor discrepante implica em reduzir inadequadamente a variância, ao remover um valor que de fato pertence à distribuição considerada.[@leys2019]
+
+-   Manter os dados inalterados (mantendo o valor discrepante) implica em aumentar inadequadamente a variância, pois a observação não pertence à distribuição que fundamenta o experimento.[@leys2019]
+
+-   Em ambos os casos, uma decisão errada pode influenciar o erro do tipo I ($\alpha$ — rejeitar uma hipótese verdadeira) ou o erro do tipo II ($\beta$ — não rejeitar uma hipótese falsa).[@leys2019]
+
+<br>
+
+### Como detectar valores discrepantes?
+
+-   Na maioria das vezes, não há como saber de qual distribuição uma observação provém. Por isso, não é possível ter certeza se um valor é legítimo ou não dentro do contexto do experimento.[@leys2019]
+
+-   Recomenda-se seguir um procedimento em duas etapas: detectar possíveis candidatos a *outliers* usando ferramentas quantitativas; e gerenciar os outliers, decidindo manter, remover ou recodificar os valores, com base em informações qualitativas.[@leys2019]
+
+-   A detecção de outliers deve ser aplicada apenas uma vez no conjunto de dados; um erro comum é identificar e tratar os outliers (como remover ou recodificar) e, em seguida, reaplicar o procedimento no conjunto de dados já modificado.[@leys2019]
+
+-   A detecção ou o tratamento dos *outliers* não deve ser realizada após a análise dos resultados, pois isso introduz viés nos resultados.[@leys2019]
+
+<br>
+
+### Quais são os métodos para detectar valores discrepantes?
+
+-   Valores univariados são comumente considerados *outliers* quando são mais extremos do que a média ± (desvio padrão × constante), podenso essa constante ser 3 (99,7% das observações estão dentro de 3 desvios-padrão da média) ou 3,29 (99,9% estão dentro de 3,29 desvios-padrão).[@leys2019]
+
+-   Para detectar *outliers* univariados, recomenda-se o uso da Mediana da Desviação Absoluta (Median Absolute Deviation, MAD), calculado a partir de um intervalo em torno da mediana, multiplicado por uma constante (valor padrão: 1,4826).[@leys2013; @leys2019]
+
+-   Para detectar *outliers* multivariados, comumente utiliza-se a distância de Mahalanobis, que identifica valores muito distantes do centróide formado pela maioria dos dados (por exemplo, 99%).[@leys2019]
+
+-   Para detectar *outliers* multivariados, recomenda-se o Determinante de Mínima Covariância (Minimum Covariance Determinant, MCD), pois possui o maior ponto de quebra possível e utiliza a mediana, que é o indicador mais robusto em presença de outliers.[@leys2018; @leys2019]
+
+<br>
+
+### Como manejar os valores discrepantes?
+
+-   Manter *outliers* pode ser uma boa decisão se a maioria desses valores realmente pertence à distribuição de interesse. Manter *outliers* que pertencem a uma distribuição alternativa pode ser problemático, pois um teste pode se tornar significativo apenas por causa de um ou poucos outliers.[@leys2019]
+
+-   Remover *outliers* pode ser eficaz quando eles distorcem a estimativa dos parâmetros da distribuição. Remover *outliers* que pertencem legitimamente à distribuição pode reduzir artificialmente a estimativa do erro.[@leys2019]
+
+-   Remover *outliers* leva à perda de observações, especialmente em conjuntos de dados com muitas variáveis, quando outliers univariados são excluídos em cada variável.[@leys2019]
+
+-   Recodificar *outliers* evita a perda de uma grande quantidade de dados, mas deve ser baseada em argumentos razoáveis e convincentes.[@leys2019]
+
+-   Erros de observação e de medição são uma justificativa válida para descartar observações discrepantes.[@zuur2009]
 
 <br>
 
 ### Como conduzir análises com valores discrepantes?
 
--   Erros de observação e de medição são uma justificativa válida para descartar observações discrepantes.[@zuur2009]
+-   É importante reportar se existem valores discrepantes e como foram tratados.[@zuur2009]
 
 -   Valores discrepantes na variável de desfecho podem exigir uma abordagem mais refinada, especialmente quando representam uma variação real na variável que está sendo medida.[@zuur2009]
 
 -   Valores discrepantes em uma (co)variável podem surgir devido a um projeto experimental inadequado; nesse caso, abandonar a observação ou transformar a covariável são opções adequadas.[@zuur2009]
 
--   É importante reportar se existem valores discrepantes e como foram tratados.[@zuur2009]
+-   Valores discrepantes podem ser recodificados usando a Winsorização,[@Tukey1963] que transforma os *outliers* em valores de percentis específicos (como o 5º e o 95º).[@leys2019]
 
 <br>
 
