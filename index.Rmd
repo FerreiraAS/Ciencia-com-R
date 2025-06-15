@@ -78,7 +78,7 @@ source("covers/cover_4.R", local = knitr::knit_global())
 ```
 
 ```{r sobre, echo = FALSE, results = "asis", eval = knitr::is_html_output()}
-cat('# Capa {-}')
+cat('# Capa {.unnumbered}')
 ```
 
 ```{r capa, fig.align = 'right', echo = FALSE, results = "asis", include = identical(knitr:::pandoc_to(), 'html'), eval = knitr::is_html_output()}
@@ -164,3 +164,11 @@ for (k in seq_along(rmd_files)) {
   ParseRmdContent(rmd_files, bib, k)
 }
 ```
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis'}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>

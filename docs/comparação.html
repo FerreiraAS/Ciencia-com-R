@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="descrição.html"/>
-<link rel="next" href="correlação.html"/>
+<link rel="next" href="correlacao.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -821,7 +821,7 @@ div.csl-indent {
 <li class="chapter" data-level="26.1.1" data-path="rmd/comparacao.html"><a href="#o-que-%C3%A9-an%C3%A1lise-de-compara%C3%A7%C3%A3o-de-dados"><i class="fa fa-check"></i><b>26.1.1</b> O que é análise de comparação de dados?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="rmd/comparacao.html"><a href="#correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>27</b> <strong>Correlação</strong></a>
+<li class="chapter" data-level="27" data-path="correlacao.html"><a href="correlacao.html"><i class="fa fa-check"></i><b>27</b> <strong>Correlação</strong></a>
 <ul>
 <li class="chapter" data-level="27.1" data-path="rmd/comparacao.html"><a href="#an%C3%A1lise-inferencial-de-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>27.1</b> Análise inferencial de correlação</a>
 <ul>
@@ -1279,6 +1279,32 @@ div.csl-indent {
 <p>O pacote <em>cocor</em><span class="citation"><sup><a href="#ref-cocor">234</a></sup></span> fornece as funções <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test">cocor.indep.groups</a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test">cocor.dep.groups.overlap</a> e <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test">cocor.dep.groups.nonoverlap</a> para comparar 2 coeficientes de correlação entre grupos independentes, grupos sobrepostos ou independentes, respectivamente.<span class="citation"><sup><a href="#ref-cocor">234</a></sup></span></p>
 </div>
 <p><br></p>
+<style>
+  /*____Create and format infobox____*/
+  .infobox {
+    padding: 1em 1em 1em 4em;
+    margin-bottom: 10px;
+    border: 2px solid orange;
+    border-radius: 10px;
+    background: #F2F2F2 5px center/3em no-repeat;
+  }
+  .BookCover {
+  background-image: url("images/Cover_1.png");
+  background-size: 2em;
+  background-position: 1em center;
+}
+</style>
+<p><br></p>
+<div class="infobox BookCover">
+<strong>Citar como:</strong><br>
+Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição,
+<span id="citation"></span>
+<script>
+    const year = new Date().getFullYear();
+    document.getElementById("citation").innerHTML = `${year}. <a href="https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>`;
+  </script>
+</div>
+<p><br></p>
 
 </div>
 </div>
@@ -1289,32 +1315,13 @@ div.csl-indent {
 <div class="csl-left-margin">234. </div><div class="csl-right-inline">Diedenhofen B, Musch J. Cocor: A comprehensive solution for the statistical comparison of correlations. 2015;10:e0121945. doi:<a href="https://doi.org/10.1371/journal.pone.0121945">10.1371/journal.pone.0121945</a></div>
 </div>
 </div>
-<style>
-  /*____Create and format infobox____*/
-  .infobox {
-    padding: 1em 1em 1em 4em;
-    margin-bottom: 10px;
-    border: 2px solid orange;
-    border-radius: 10px;
-    background: #F2F2F2 5px center/3em no-repeat;
-  }
-</style>
-
-<br>
-
-<div class="infobox">
-
-<strong>Citar como:</strong><br>
-Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição, <script>document.write(new Date().getFullYear())</script>. <a href = "https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>
-
-</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="descrição.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="correlação.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="correlacao.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1353,7 +1360,9 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": null,
+  "download": [
+    ["Ciencia-com-R.pdf", "PDF"]
+  ],
   "search": {
     "engine": "fuse",
     "options": null

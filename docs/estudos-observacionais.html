@@ -821,7 +821,7 @@ div.csl-indent {
 <li class="chapter" data-level="26.1.1" data-path="rmd/observacional.html"><a href="#o-que-%C3%A9-an%C3%A1lise-de-compara%C3%A7%C3%A3o-de-dados"><i class="fa fa-check"></i><b>26.1.1</b> O que é análise de comparação de dados?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="rmd/observacional.html"><a href="#correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>27</b> <strong>Correlação</strong></a>
+<li class="chapter" data-level="27" data-path="correlacao.html"><a href="correlacao.html"><i class="fa fa-check"></i><b>27</b> <strong>Correlação</strong></a>
 <ul>
 <li class="chapter" data-level="27.1" data-path="rmd/observacional.html"><a href="#an%C3%A1lise-inferencial-de-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>27.1</b> Análise inferencial de correlação</a>
 <ul>
@@ -1289,16 +1289,6 @@ div.csl-indent {
 </ul></li>
 </ul>
 <p><br></p>
-
-</div>
-</div>
-</div>
-<h3><strong>Referências</strong><a href="#refer%C3%AAncias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-vonelm2007" class="csl-entry">
-<div class="csl-left-margin">297. </div><div class="csl-right-inline">Elm E von, Altman DG, Egger M, Pocock SJ, Gøtzsche PC, Vandenbroucke JP. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) Statement: Guidelines for Reporting Observational Studies. <em>Annals of Internal Medicine</em>. 2007;147(8):573. doi:<a href="https://doi.org/10.7326/0003-4819-147-8-200710160-00010">10.7326/0003-4819-147-8-200710160-00010</a></div>
-</div>
-</div>
 <style>
   /*____Create and format infobox____*/
   .infobox {
@@ -1308,15 +1298,32 @@ div.csl-indent {
     border-radius: 10px;
     background: #F2F2F2 5px center/3em no-repeat;
   }
+  .BookCover {
+  background-image: url("images/Cover_1.png");
+  background-size: 2em;
+  background-position: 1em center;
+}
 </style>
-
-<br>
-
-<div class="infobox">
-
+<p><br></p>
+<div class="infobox BookCover">
 <strong>Citar como:</strong><br>
-Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição, <script>document.write(new Date().getFullYear())</script>. <a href = "https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>
+Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição,
+<span id="citation"></span>
+<script>
+    const year = new Date().getFullYear();
+    document.getElementById("citation").innerHTML = `${year}. <a href="https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>`;
+  </script>
+</div>
+<p><br></p>
 
+</div>
+</div>
+</div>
+<h3><strong>Referências</strong><a href="#refer%C3%AAncias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-vonelm2007" class="csl-entry">
+<div class="csl-left-margin">297. </div><div class="csl-right-inline">Elm E von, Altman DG, Egger M, Pocock SJ, Gøtzsche PC, Vandenbroucke JP. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) Statement: Guidelines for Reporting Observational Studies. <em>Annals of Internal Medicine</em>. 2007;147(8):573. doi:<a href="https://doi.org/10.7326/0003-4819-147-8-200710160-00010">10.7326/0003-4819-147-8-200710160-00010</a></div>
+</div>
 </div>
             </section>
 
@@ -1363,7 +1370,9 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": null,
+  "download": [
+    ["Ciencia-com-R.pdf", "PDF"]
+  ],
   "search": {
     "engine": "fuse",
     "options": null

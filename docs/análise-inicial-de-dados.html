@@ -821,7 +821,7 @@ div.csl-indent {
 <li class="chapter" data-level="26.1.1" data-path="rmd/analise-inicial.html"><a href="#o-que-%C3%A9-an%C3%A1lise-de-compara%C3%A7%C3%A3o-de-dados"><i class="fa fa-check"></i><b>26.1.1</b> O que é análise de comparação de dados?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="rmd/analise-inicial.html"><a href="#correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>27</b> <strong>Correlação</strong></a>
+<li class="chapter" data-level="27" data-path="correlacao.html"><a href="correlacao.html"><i class="fa fa-check"></i><b>27</b> <strong>Correlação</strong></a>
 <ul>
 <li class="chapter" data-level="27.1" data-path="rmd/analise-inicial.html"><a href="#an%C3%A1lise-inferencial-de-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>27.1</b> Análise inferencial de correlação</a>
 <ul>
@@ -1329,6 +1329,32 @@ div.csl-indent {
 <li><p>Ocorrência de efeitos teto e piso nas variáveis.<span class="citation"><sup><a href="#ref-huebner2016">128</a></sup></span></p></li>
 </ul>
 <p><br></p>
+<style>
+  /*____Create and format infobox____*/
+  .infobox {
+    padding: 1em 1em 1em 4em;
+    margin-bottom: 10px;
+    border: 2px solid orange;
+    border-radius: 10px;
+    background: #F2F2F2 5px center/3em no-repeat;
+  }
+  .BookCover {
+  background-image: url("images/Cover_1.png");
+  background-size: 2em;
+  background-position: 1em center;
+}
+</style>
+<p><br></p>
+<div class="infobox BookCover">
+<strong>Citar como:</strong><br>
+Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição,
+<span id="citation"></span>
+<script>
+    const year = new Date().getFullYear();
+    document.getElementById("citation").innerHTML = `${year}. <a href="https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>`;
+  </script>
+</div>
+<p><br></p>
 
 </div>
 </div>
@@ -1359,25 +1385,6 @@ div.csl-indent {
 <div id="ref-huebner2016" class="csl-entry">
 <div class="csl-left-margin">128. </div><div class="csl-right-inline">Huebner M, Vach W, Cessie S le. A systematic approach to initial data analysis is good research practice. <em>The Journal of Thoracic and Cardiovascular Surgery</em>. 2016;151(1):25-27. doi:<a href="https://doi.org/10.1016/j.jtcvs.2015.09.085">10.1016/j.jtcvs.2015.09.085</a></div>
 </div>
-</div>
-<style>
-  /*____Create and format infobox____*/
-  .infobox {
-    padding: 1em 1em 1em 4em;
-    margin-bottom: 10px;
-    border: 2px solid orange;
-    border-radius: 10px;
-    background: #F2F2F2 5px center/3em no-repeat;
-  }
-</style>
-
-<br>
-
-<div class="infobox">
-
-<strong>Citar como:</strong><br>
-Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição, <script>document.write(new Date().getFullYear())</script>. <a href = "https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>
-
 </div>
             </section>
 
@@ -1424,7 +1431,9 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": null,
+  "download": [
+    ["Ciencia-com-R.pdf", "PDF"]
+  ],
   "search": {
     "engine": "fuse",
     "options": null

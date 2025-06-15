@@ -7,13 +7,21 @@
     border-radius: 10px;
     background: #F2F2F2 5px center/3em no-repeat;
   }
+  .BookCover {
+  background-image: url("images/Cover_1.png");
+  background-size: 2em;
+  background-position: 1em center;
+}
 </style>
 
 <br>
 
-<div class="infobox">
-
-<strong>Citar como:</strong><br>
-Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição, <script>document.write(new Date().getFullYear())</script>. <a href = "https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>
-
+<div class="infobox BookCover">
+  <strong>Citar como:</strong><br>
+  Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição, 
+  <span id="citation"></span>
+  <script>
+    const year = new Date().getFullYear();
+    document.getElementById("citation").innerHTML = `${year}. <a href="https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>`;
+  </script>
 </div>

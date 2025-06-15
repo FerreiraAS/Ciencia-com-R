@@ -821,7 +821,7 @@ div.csl-indent {
 <li class="chapter" data-level="26.1.1" data-path="rmd/redacao-resultados.html"><a href="#o-que-%C3%A9-an%C3%A1lise-de-compara%C3%A7%C3%A3o-de-dados"><i class="fa fa-check"></i><b>26.1.1</b> O que é análise de comparação de dados?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="rmd/redacao-resultados.html"><a href="#correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>27</b> <strong>Correlação</strong></a>
+<li class="chapter" data-level="27" data-path="correlacao.html"><a href="correlacao.html"><i class="fa fa-check"></i><b>27</b> <strong>Correlação</strong></a>
 <ul>
 <li class="chapter" data-level="27.1" data-path="rmd/redacao-resultados.html"><a href="#an%C3%A1lise-inferencial-de-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>27.1</b> Análise inferencial de correlação</a>
 <ul>
@@ -1313,6 +1313,32 @@ div.csl-indent {
 <li><p><em>Evidence-based statistical analysis and methods in biomedical research (SAMBR) checklists according to design features</em>.<span class="citation"><sup><a href="#ref-dwivedi2019">225</a></sup></span></p></li>
 </ul>
 <p><br></p>
+<style>
+  /*____Create and format infobox____*/
+  .infobox {
+    padding: 1em 1em 1em 4em;
+    margin-bottom: 10px;
+    border: 2px solid orange;
+    border-radius: 10px;
+    background: #F2F2F2 5px center/3em no-repeat;
+  }
+  .BookCover {
+  background-image: url("images/Cover_1.png");
+  background-size: 2em;
+  background-position: 1em center;
+}
+</style>
+<p><br></p>
+<div class="infobox BookCover">
+<strong>Citar como:</strong><br>
+Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição,
+<span id="citation"></span>
+<script>
+    const year = new Date().getFullYear();
+    document.getElementById("citation").innerHTML = `${year}. <a href="https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>`;
+  </script>
+</div>
+<p><br></p>
 
 </div>
 </div>
@@ -1377,25 +1403,6 @@ div.csl-indent {
 <div class="csl-left-margin">341. </div><div class="csl-right-inline">Gil-Sierra MD, Fénix-Caballero S, Abdel kader-Martin L, et al. Checklist for clinical applicability of subgroup analysis. <em>Journal of Clinical Pharmacy and Therapeutics</em>. 2019;45(3):530-538. doi:<a href="https://doi.org/10.1111/jcpt.13102">10.1111/jcpt.13102</a></div>
 </div>
 </div>
-<style>
-  /*____Create and format infobox____*/
-  .infobox {
-    padding: 1em 1em 1em 4em;
-    margin-bottom: 10px;
-    border: 2px solid orange;
-    border-radius: 10px;
-    background: #F2F2F2 5px center/3em no-repeat;
-  }
-</style>
-
-<br>
-
-<div class="infobox">
-
-<strong>Citar como:</strong><br>
-Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição, <script>document.write(new Date().getFullYear())</script>. <a href = "https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>
-
-</div>
             </section>
 
           </div>
@@ -1441,7 +1448,9 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": null,
+  "download": [
+    ["Ciencia-com-R.pdf", "PDF"]
+  ],
   "search": {
     "engine": "fuse",
     "options": null

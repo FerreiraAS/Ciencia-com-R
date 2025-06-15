@@ -821,7 +821,7 @@ div.csl-indent {
 <li class="chapter" data-level="26.1.1" data-path="rmd/tabulacao-dados.html"><a href="#o-que-%C3%A9-an%C3%A1lise-de-compara%C3%A7%C3%A3o-de-dados"><i class="fa fa-check"></i><b>26.1.1</b> O que é análise de comparação de dados?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="rmd/tabulacao-dados.html"><a href="#correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>27</b> <strong>Correlação</strong></a>
+<li class="chapter" data-level="27" data-path="correlacao.html"><a href="correlacao.html"><i class="fa fa-check"></i><b>27</b> <strong>Correlação</strong></a>
 <ul>
 <li class="chapter" data-level="27.1" data-path="rmd/tabulacao-dados.html"><a href="#an%C3%A1lise-inferencial-de-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>27.1</b> Análise inferencial de correlação</a>
 <ul>
@@ -1439,7 +1439,7 @@ Numero.Filhos
 1
 </td>
 <td style="text-align:left;">
-12-06-2025
+16-06-2025
 </td>
 <td style="text-align:left;">
 casado
@@ -1453,7 +1453,7 @@ NA
 2
 </td>
 <td style="text-align:left;">
-13-06-2025
+17-06-2025
 </td>
 <td style="text-align:left;">
 casado
@@ -1467,7 +1467,7 @@ casado
 3
 </td>
 <td style="text-align:left;">
-14-06-2025
+18-06-2025
 </td>
 <td style="text-align:left;">
 casado
@@ -1481,7 +1481,7 @@ NA
 4
 </td>
 <td style="text-align:left;">
-15-06-2025
+19-06-2025
 </td>
 <td style="text-align:left;">
 solteiro
@@ -1495,7 +1495,7 @@ NA
 5
 </td>
 <td style="text-align:left;">
-16-06-2025
+20-06-2025
 </td>
 <td style="text-align:left;">
 casado
@@ -1509,7 +1509,7 @@ NA
 6
 </td>
 <td style="text-align:left;">
-17-06-2025
+21-06-2025
 </td>
 <td style="text-align:left;">
 solteiro
@@ -1523,7 +1523,7 @@ solteiro
 7
 </td>
 <td style="text-align:left;">
-18-06-2025
+22-06-2025
 </td>
 <td style="text-align:left;">
 solteiro
@@ -1537,7 +1537,7 @@ NA
 8
 </td>
 <td style="text-align:left;">
-19-06-2025
+23-06-2025
 </td>
 <td style="text-align:left;">
 solteiro
@@ -1551,7 +1551,7 @@ NA
 9
 </td>
 <td style="text-align:left;">
-20-06-2025
+24-06-2025
 </td>
 <td style="text-align:left;">
 casado
@@ -1565,7 +1565,7 @@ NA
 10
 </td>
 <td style="text-align:left;border-bottom: 1px solid">
-21-06-2025
+25-06-2025
 </td>
 <td style="text-align:left;border-bottom: 1px solid">
 solteiro
@@ -1603,7 +1603,7 @@ Número de Filhos
 1
 </td>
 <td style="text-align:left;">
-12-06-2025
+16-06-2025
 </td>
 <td style="text-align:left;">
 casado
@@ -1617,7 +1617,7 @@ NA
 2
 </td>
 <td style="text-align:left;">
-13-06-2025
+17-06-2025
 </td>
 <td style="text-align:left;">
 Casado
@@ -1631,7 +1631,7 @@ Casado
 3
 </td>
 <td style="text-align:left;">
-14-06-2025
+18-06-2025
 </td>
 <td style="text-align:left;">
 casado
@@ -1645,7 +1645,7 @@ NaN
 4
 </td>
 <td style="text-align:left;">
-15-06-2025
+19-06-2025
 </td>
 <td style="text-align:left;">
 Solteiro
@@ -1659,7 +1659,7 @@ N/A
 5
 </td>
 <td style="text-align:left;">
-16-06-2025
+20-06-2025
 </td>
 <td style="text-align:left;">
 Casado
@@ -1673,7 +1673,7 @@ N.A.
 6
 </td>
 <td style="text-align:left;">
-17-06-2025
+21-06-2025
 </td>
 <td style="text-align:left;">
 solteiro
@@ -1687,7 +1687,7 @@ solteiro
 7
 </td>
 <td style="text-align:left;">
-18-06-2025
+22-06-2025
 </td>
 <td style="text-align:left;">
 solteiro
@@ -1700,7 +1700,7 @@ solteiro
 8
 </td>
 <td style="text-align:left;">
-19-06-2025
+23-06-2025
 </td>
 <td style="text-align:left;">
 Solteiro
@@ -1714,7 +1714,7 @@ na
 9
 </td>
 <td style="text-align:left;">
-20-06-2025
+24-06-2025
 </td>
 <td style="text-align:left;">
 casado
@@ -1728,7 +1728,7 @@ n.a.
 10
 </td>
 <td style="text-align:left;border-bottom: 1px solid">
-21-06-2025
+25-06-2025
 </td>
 <td style="text-align:left;border-bottom: 1px solid">
 Solteiro
@@ -1739,6 +1739,32 @@ Solteiro
 </tr>
 </tbody>
 </table>
+<p><br></p>
+<style>
+  /*____Create and format infobox____*/
+  .infobox {
+    padding: 1em 1em 1em 4em;
+    margin-bottom: 10px;
+    border: 2px solid orange;
+    border-radius: 10px;
+    background: #F2F2F2 5px center/3em no-repeat;
+  }
+  .BookCover {
+  background-image: url("images/Cover_1.png");
+  background-size: 2em;
+  background-position: 1em center;
+}
+</style>
+<p><br></p>
+<div class="infobox BookCover">
+<strong>Citar como:</strong><br>
+Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição,
+<span id="citation"></span>
+<script>
+    const year = new Date().getFullYear();
+    document.getElementById("citation").innerHTML = `${year}. <a href="https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>`;
+  </script>
+</div>
 <p><br></p>
 
 </div>
@@ -1761,25 +1787,6 @@ Solteiro
 <div id="ref-data.table" class="csl-entry">
 <div class="csl-left-margin">77. </div><div class="csl-right-inline">Dowle M, Srinivasan A. <em>Data.table: Extension of ‘Data.frame‘</em>.; 2023. <a href="https://CRAN.R-project.org/package=data.table">https://CRAN.R-project.org/package=data.table.</a></div>
 </div>
-</div>
-<style>
-  /*____Create and format infobox____*/
-  .infobox {
-    padding: 1em 1em 1em 4em;
-    margin-bottom: 10px;
-    border: 2px solid orange;
-    border-radius: 10px;
-    background: #F2F2F2 5px center/3em no-repeat;
-  }
-</style>
-
-<br>
-
-<div class="infobox">
-
-<strong>Citar como:</strong><br>
-Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição, <script>document.write(new Date().getFullYear())</script>. <a href = "https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>
-
 </div>
             </section>
 
@@ -1826,7 +1833,9 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": null,
+  "download": [
+    ["Ciencia-com-R.pdf", "PDF"]
+  ],
   "search": {
     "engine": "fuse",
     "options": null

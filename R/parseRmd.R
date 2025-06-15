@@ -15,12 +15,12 @@ ParseRmdContent <- function(rmd_files, bib, k) {
         chapter <- rmd_data[i, ]$sec_h1
         # remove ** from chapter
         chapter <- gsub("\\*\\*", "", chapter)
-        # remove {-} from chapter
-        chapter <- gsub("\\{-\\}", "", chapter)
+        # remove {.numbered} from chapter
+        chapter <- gsub("\\{.numbered\\}", "", chapter)
 
         section <- rmd_data[i, ]$sec_h2
-        # remove {-} from section
-        section <- gsub("\\{-\\}", "", section)
+        # remove {.numbered} from section
+        section <- gsub("\\{.numbered\\}", "", section)
 
         question <- rmd_data[i, ]$sec_h3
 

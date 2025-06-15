@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>PARTE 2: DADOS – COLETA E PREPARAÇÃO | Ciência com R</title>
+  <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="PARTE 2: DADOS – COLETA E PREPARAÇÃO | Ciência com R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
+  <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
+  <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="PARTE 2: DADOS – COLETA E PREPARAÇÃO | Ciência com R" />
+  
+  <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
+  <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
+
+<meta name="author" content="© 2023-2025 by Arthur de Sá Ferreira   https://orcid.org/0000-0001-7014-2002 " />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="vieses-metodologicos.html"/>
+<link rel="next" href="medidas-instrumentos.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/d3-3.3.8/d3.min.js"></script>
+<script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+<link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+<script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/chromatography-0.1/chromatography.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.11/DiagrammeR.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link rel="shortcut icon" href="favicon_io/android-chrome-192x192.png" sizes="192x192" type="image/png">
+<link rel="shortcut icon" href="favicon_io/android-chrome-512x512.png" sizes="512x512" type="image/png">
+<link rel="apple-touch-icon" href="favicon_io/apple-touch-icon.png" type="image/png">
+<link rel="icon" href="favicon_io/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="favicon_io/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="shortcut icon" href="favicon_io/favicon.ico" type="image/x-icon">
+<meta name="citation_doi" content="doi:10.5281/zenodo.8320232"/><meta name="Doi" content="doi:10.5281/zenodo.8320232"/>
+<meta name="DC.Identifier" content="doi:10.5281/zenodo.8320232"/>
+<meta name="DC.DOI" content="doi:10.5281/zenodo.8320232"/>
+<meta name="DC.Identifier.DOI" content="doi:10.5281/zenodo.8320232"/>
+<meta name="DOIs" content="doi:10.5281/zenodo.8320232"/>
+<meta name="bepress_citation_doi" content="doi:10.5281/zenodo.8320232"/>
+<meta name="rft_id" content="doi:10.5281/zenodo.8320232"/>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a style="text-align:center; border-width:3px;border-style:solid; border-color:white; border-radius:15px; padding:5px; background-color:#276DC2; text-decoration:none; color:white" href="https://ferreiraas.github.io/Ciencia-com-R-Consultoria/"><b>e-Book | Consultoria</b></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Capa</a></li>
+<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i>Dedicatória</a></li>
+<li class="chapter" data-level="" data-path="agradecimentos.html"><a href="agradecimentos.html"><i class="fa fa-check"></i>Agradecimentos</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>Sobre o autor</a></li>
+<li class="chapter" data-level="" data-path="prefacio.html"><a href="prefacio.html"><i class="fa fa-check"></i>Prefácio</a></li>
+<li class="chapter" data-level="" data-path="parte-1.html"><a href="parte-1.html"><i class="fa fa-check"></i><em>PARTE 1: PENSAMENTO ESTATÍSTICO E METODOLÓGICO</em></a>
+<ul>
+<li class="chapter" data-level="" data-path="parte-1.html"><a href="parte-1.html#pense-como-um-cientista"><i class="fa fa-check"></i>Pense como um cientista</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="pensamento-probabilistico.html"><a href="pensamento-probabilistico.html"><i class="fa fa-check"></i><b>1</b> <strong>Pensamento probabilístico</strong></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="pensamento-probabilistico.html"><a href="pensamento-probabilistico.html#experimento"><i class="fa fa-check"></i><b>1.1</b> Experimento</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-um-experimento"><i class="fa fa-check"></i><b>1.1.1</b> O que é um experimento?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="rmd/parte-2.html"><a href="#espa%C3%A7o-amostral-e-eventos-discretos"><i class="fa fa-check"></i><b>1.2</b> Espaço amostral e eventos discretos</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-espa%C3%A7o-amostral-discreto"><i class="fa fa-check"></i><b>1.2.1</b> O que é espaço amostral discreto?</a></li>
+<li class="chapter" data-level="1.2.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-evento-discreto"><i class="fa fa-check"></i><b>1.2.2</b> O que é evento discreto?</a></li>
+<li class="chapter" data-level="1.2.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-espa%C3%A7o-de-eventos-discretos"><i class="fa fa-check"></i><b>1.2.3</b> O que é espaço de eventos discretos?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="rmd/parte-2.html"><a href="#espa%C3%A7o-amostral-e-eventos-cont%C3%ADnuos"><i class="fa fa-check"></i><b>1.3</b> Espaço amostral e eventos contínuos</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-espa%C3%A7o-amostral-cont%C3%ADnuo"><i class="fa fa-check"></i><b>1.3.1</b> O que é espaço amostral contínuo?</a></li>
+<li class="chapter" data-level="1.3.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-evento-cont%C3%ADnuo"><i class="fa fa-check"></i><b>1.3.2</b> O que é evento contínuo?</a></li>
+<li class="chapter" data-level="1.3.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-espa%C3%A7o-de-eventos-cont%C3%ADnuo"><i class="fa fa-check"></i><b>1.3.3</b> O que é espaço de eventos contínuo?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="pensamento-probabilistico.html"><a href="pensamento-probabilistico.html#probabilidade"><i class="fa fa-check"></i><b>1.4</b> Probabilidade</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-probabilidade"><i class="fa fa-check"></i><b>1.4.1</b> O que é probabilidade?</a></li>
+<li class="chapter" data-level="1.4.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-os-axiomas-da-probabilidade"><i class="fa fa-check"></i><b>1.4.2</b> Quais são os axiomas da probabilidade?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="rmd/parte-2.html"><a href="#independ%C3%AAncia-e-probabilidade"><i class="fa fa-check"></i><b>1.5</b> Independência e probabilidade</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-independ%C3%AAncia-em-estat%C3%ADstica"><i class="fa fa-check"></i><b>1.5.1</b> O que é independência em estatística?</a></li>
+<li class="chapter" data-level="1.5.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-probabilidade-marginal"><i class="fa fa-check"></i><b>1.5.2</b> O que é probabilidade marginal?</a></li>
+<li class="chapter" data-level="1.5.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-probabilidade-conjunta"><i class="fa fa-check"></i><b>1.5.3</b> O que é probabilidade conjunta?</a></li>
+<li class="chapter" data-level="1.5.4" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-probabilidade-condicional"><i class="fa fa-check"></i><b>1.5.4</b> O que é probabilidade condicional?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="rmd/parte-2.html"><a href="#leis-dos-n%C3%BAmeros-an%C3%B4malos"><i class="fa fa-check"></i><b>1.6</b> Leis dos números anômalos</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-lei-dos-n%C3%BAmeros-an%C3%B4malos"><i class="fa fa-check"></i><b>1.6.1</b> O que é a lei dos números anômalos?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="rmd/parte-2.html"><a href="#leis-dos-pequenos-n%C3%BAmeros"><i class="fa fa-check"></i><b>1.7</b> Leis dos pequenos números</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-lei-dos-pequenos-n%C3%BAmeros"><i class="fa fa-check"></i><b>1.7.1</b> O que é a lei dos pequenos números?</a></li>
+<li class="chapter" data-level="1.7.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-vers%C3%B5es-da-lei-dos-pequenos-n%C3%BAmeros"><i class="fa fa-check"></i><b>1.7.2</b> Quais são as versões da lei dos pequenos números?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="rmd/parte-2.html"><a href="#leis-dos-grandes-n%C3%BAmeros"><i class="fa fa-check"></i><b>1.8</b> Leis dos grandes números</a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-lei-dos-grandes-n%C3%BAmeros"><i class="fa fa-check"></i><b>1.8.1</b> O que é a lei dos grandes números?</a></li>
+<li class="chapter" data-level="1.8.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-vers%C3%B5es-da-lei-dos-grandes-n%C3%BAmeros"><i class="fa fa-check"></i><b>1.8.2</b> Quais são as versões da lei dos grandes números?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="pensamento-probabilistico.html"><a href="pensamento-probabilistico.html#teorema-central-do-limite"><i class="fa fa-check"></i><b>1.9</b> Teorema central do limite</a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-teorema-central-do-limite"><i class="fa fa-check"></i><b>1.9.1</b> O que é teorema central do limite?</a></li>
+<li class="chapter" data-level="1.9.2" data-path="rmd/parte-2.html"><a href="#quais-as-condi%C3%A7%C3%B5es-de-validade-do-teorema-central-do-limite"><i class="fa fa-check"></i><b>1.9.2</b> Quais as condições de validade do teorema central do limite?</a></li>
+<li class="chapter" data-level="1.9.3" data-path="rmd/parte-2.html"><a href="#qual-a-rela%C3%A7%C3%A3o-entre-a-lei-dos-grandes-n%C3%BAmeros-e-o-teorema-central-do-limite"><i class="fa fa-check"></i><b>1.9.3</b> Qual a relação entre a lei dos grandes números e o teorema central do limite?</a></li>
+<li class="chapter" data-level="1.9.4" data-path="rmd/parte-2.html"><a href="#qual-a-relev%C3%A2ncia-do-teorema-central-do-limite-para-a-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>1.9.4</b> Qual a relevância do teorema central do limite para a análise estatística?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10" data-path="rmd/parte-2.html"><a href="#regress%C3%A3o-para-a-m%C3%A9dia"><i class="fa fa-check"></i><b>1.10</b> Regressão para a média</a>
+<ul>
+<li class="chapter" data-level="1.10.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-regress%C3%A3o-para-a-m%C3%A9dia"><i class="fa fa-check"></i><b>1.10.1</b> O que é regressão para a média?</a></li>
+<li class="chapter" data-level="1.10.2" data-path="rmd/parte-2.html"><a href="#qual-a-causa-da-regress%C3%A3o-para-a-m%C3%A9dia"><i class="fa fa-check"></i><b>1.10.2</b> Qual a causa da regressão para a média?</a></li>
+<li class="chapter" data-level="1.10.3" data-path="rmd/parte-2.html"><a href="#por-que-detectar-o-fen%C3%B4meno-de-regress%C3%A3o-para-a-m%C3%A9dia"><i class="fa fa-check"></i><b>1.10.3</b> Por que detectar o fenômeno de regressão para a média?</a></li>
+<li class="chapter" data-level="1.10.4" data-path="rmd/parte-2.html"><a href="#com-detectar-o-fen%C3%B4meno-de-regress%C3%A3o-para-a-m%C3%A9dia"><i class="fa fa-check"></i><b>1.10.4</b> Com detectar o fenômeno de regressão para a média?</a></li>
+<li class="chapter" data-level="1.10.5" data-path="rmd/parte-2.html"><a href="#como-o-fen%C3%B4meno-de-regress%C3%A3o-para-a-m%C3%A9dia-pode-ser-evitado"><i class="fa fa-check"></i><b>1.10.5</b> Como o fenômeno de regressão para a média pode ser evitado?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html"><i class="fa fa-check"></i><b>2</b> <strong>Pensamento estatístico</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rmd/parte-2.html"><a href="#popula%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>2.1</b> População</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-popula%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>2.1.1</b> O que é população?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#amostra"><i class="fa fa-check"></i><b>2.2</b> Amostra</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-amostra"><i class="fa fa-check"></i><b>2.2.1</b> O que é amostra?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#por-que-usar-dados-de-amostras"><i class="fa fa-check"></i><b>2.2.2</b> Por que usar dados de amostras?</a></li>
+<li class="chapter" data-level="2.2.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-corre%C3%A7%C3%A3o-de-bessel-para-vari%C3%A2ncia"><i class="fa fa-check"></i><b>2.2.3</b> O que é a correção de Bessel para variância?</a></li>
+<li class="chapter" data-level="2.2.4" data-path="rmd/parte-2.html"><a href="#por-que-a-corre%C3%A7%C3%A3o-de-bessel-para-vari%C3%A2ncia-%C3%A9-importante"><i class="fa fa-check"></i><b>2.2.4</b> Por que a correção de Bessel para variância é importante?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rmd/parte-2.html"><a href="#unidade-de-an%C3%A1lise"><i class="fa fa-check"></i><b>2.3</b> Unidade de análise</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-unidade-de-an%C3%A1lise"><i class="fa fa-check"></i><b>2.3.1</b> O que é unidade de análise?</a></li>
+<li class="chapter" data-level="2.3.2" data-path="rmd/parte-2.html"><a href="#por-que-identificar-a-unidade-de-an%C3%A1lise-de-um-estudo"><i class="fa fa-check"></i><b>2.3.2</b> Por que identificar a unidade de análise de um estudo?</a></li>
+<li class="chapter" data-level="2.3.3" data-path="rmd/parte-2.html"><a href="#que-medidas-podem-ser-obtidas-da-unidade-de-an%C3%A1lise-de-um-estudo"><i class="fa fa-check"></i><b>2.3.3</b> Que medidas podem ser obtidas da unidade de análise de um estudo?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#amostragem"><i class="fa fa-check"></i><b>2.4</b> Amostragem</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-amostragem"><i class="fa fa-check"></i><b>2.4.1</b> O que é amostragem?</a></li>
+<li class="chapter" data-level="2.4.2" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-de-amostragem-s%C3%A3o-usados-para-obter-uma-amostra-da-popula%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>2.4.2</b> Quais métodos de amostragem são usados para obter uma amostra da população?</a></li>
+<li class="chapter" data-level="2.4.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-erro-de-amostragem"><i class="fa fa-check"></i><b>2.4.3</b> O que é erro de amostragem?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#reamostragem"><i class="fa fa-check"></i><b>2.5</b> Reamostragem</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-reamostragem"><i class="fa fa-check"></i><b>2.5.1</b> O que é reamostragem?</a></li>
+<li class="chapter" data-level="2.5.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#por-que-utilizar-reamostragem"><i class="fa fa-check"></i><b>2.5.2</b> Por que utilizar reamostragem?</a></li>
+<li class="chapter" data-level="2.5.3" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#quais-procedimentos-de-reamostragem-podem-ser-realizados"><i class="fa fa-check"></i><b>2.5.3</b> Quais procedimentos de reamostragem podem ser realizados?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#subamostragem-e-superamostragem"><i class="fa fa-check"></i><b>2.6</b> Subamostragem e superamostragem</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-subamostragem"><i class="fa fa-check"></i><b>2.6.1</b> O que é subamostragem?</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-superamostragem"><i class="fa fa-check"></i><b>2.6.2</b> O que é superamostragem?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="pensamento-metodologico.html"><a href="pensamento-metodologico.html"><i class="fa fa-check"></i><b>3</b> <strong>Pensamento metodológico</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="pensamento-metodologico.html"><a href="pensamento-metodologico.html#metodologia-da-pesquisa"><i class="fa fa-check"></i><b>3.1</b> Metodologia da pesquisa</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-metodologia-da-pesquisa"><i class="fa fa-check"></i><b>3.1.1</b> O que é metodologia da pesquisa?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="rmd/parte-2.html"><a href="#rela%C3%A7%C3%A3o-estat%C3%ADstica-metodologia"><i class="fa fa-check"></i><b>3.2</b> Relação Estatística-Metodologia</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="rmd/parte-2.html"><a href="#qual-a-rela%C3%A7%C3%A3o-entre-estat%C3%ADstica-e-metodologia-da-pesquisa"><i class="fa fa-check"></i><b>3.2.1</b> Qual a relação entre estatística e metodologia da pesquisa?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="pensamento-metodologico.html"><a href="pensamento-metodologico.html#reprodutibilidade"><i class="fa fa-check"></i><b>3.3</b> Reprodutibilidade</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-reprodutibilidade"><i class="fa fa-check"></i><b>3.3.1</b> O que é reprodutibilidade?</a></li>
+<li class="chapter" data-level="3.3.2" data-path="rmd/parte-2.html"><a href="#por-que-reprodutibilidade-%C3%A9-importante"><i class="fa fa-check"></i><b>3.3.2</b> Por que reprodutibilidade é importante?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="pensamento-metodologico.html"><a href="pensamento-metodologico.html#robustez"><i class="fa fa-check"></i><b>3.4</b> Robustez</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-robustez"><i class="fa fa-check"></i><b>3.4.1</b> O que é robustez?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="pensamento-metodologico.html"><a href="pensamento-metodologico.html#replicabilidade"><i class="fa fa-check"></i><b>3.5</b> Replicabilidade</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-replicabilidade"><i class="fa fa-check"></i><b>3.5.1</b> O que é replicabilidade?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="rmd/parte-2.html"><a href="#generaliza%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>3.6</b> Generalização</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-generaliza%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>3.6.1</b> O que é generalização?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html"><i class="fa fa-check"></i><b>4</b> <strong>Pensamento computacional</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#programas-de-computador"><i class="fa fa-check"></i><b>4.1</b> Programas de computador</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-r"><i class="fa fa-check"></i><b>4.1.1</b> O que é R?</a></li>
+<li class="chapter" data-level="4.1.2" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#por-que-usar-r"><i class="fa fa-check"></i><b>4.1.2</b> Por que usar R?</a></li>
+<li class="chapter" data-level="4.1.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-rstudio"><i class="fa fa-check"></i><b>4.1.3</b> O que é RStudio?</a></li>
+<li class="chapter" data-level="4.1.4" data-path="rmd/parte-2.html"><a href="#que-programas-de-computador-podem-ser-usados-para-an%C3%A1lise-estat%C3%ADstica-com-r"><i class="fa fa-check"></i><b>4.1.4</b> Que programas de computador podem ser usados para análise estatística com R?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#scripts-computacionais"><i class="fa fa-check"></i><b>4.2</b> Scripts computacionais</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-r-scripts"><i class="fa fa-check"></i><b>4.2.1</b> O que são R scripts?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#pacotes"><i class="fa fa-check"></i><b>4.3</b> Pacotes</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-pacotes"><i class="fa fa-check"></i><b>4.3.1</b> O que são pacotes?</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rmd/parte-2.html"><a href="#quais-pr%C3%A1ticas-s%C3%A3o-recomendadas-na-reda%C3%A7%C3%A3o-de-scripts"><i class="fa fa-check"></i><b>4.3.2</b> Quais práticas são recomendadas na redação de scripts?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rmd/parte-2.html"><a href="#manuscritos-reproduz%C3%ADveis"><i class="fa fa-check"></i><b>4.4</b> Manuscritos reproduzíveis</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-manuscritos-reproduz%C3%ADveis"><i class="fa fa-check"></i><b>4.4.1</b> O que são manuscritos reproduzíveis?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rmd/parte-2.html"><a href="#por-que-usar-manuscritos-reproduz%C3%ADveis"><i class="fa fa-check"></i><b>4.4.2</b> Por que usar manuscritos reproduzíveis?</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-rmarkdown"><i class="fa fa-check"></i><b>4.4.3</b> O que é RMarkdown?</a></li>
+<li class="chapter" data-level="4.4.4" data-path="rmd/parte-2.html"><a href="#como-manuscritos-reprodut%C3%ADveis-contribuem-para-a-ci%C3%AAncia"><i class="fa fa-check"></i><b>4.4.4</b> Como manuscritos reprodutíveis contribuem para a ciência?</a></li>
+<li class="chapter" data-level="4.4.5" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#como-contribuir-para-a-reprodutibilidade"><i class="fa fa-check"></i><b>4.4.5</b> Como contribuir para a reprodutibilidade?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#compartilhamento"><i class="fa fa-check"></i><b>4.5</b> Compartilhamento</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#por-que-compartilhar-scripts"><i class="fa fa-check"></i><b>4.5.1</b> Por que compartilhar scripts?</a></li>
+<li class="chapter" data-level="4.5.2" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#o-que-pode-ser-compartilhado"><i class="fa fa-check"></i><b>4.5.2</b> O que pode ser compartilhado?</a></li>
+<li class="chapter" data-level="4.5.3" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#como-preparar-dados-para-compartilhamento"><i class="fa fa-check"></i><b>4.5.3</b> Como preparar dados para compartilhamento?</a></li>
+<li class="chapter" data-level="4.5.4" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#como-preparar-scripts-para-compartilhamento"><i class="fa fa-check"></i><b>4.5.4</b> Como preparar scripts para compartilhamento?</a></li>
+<li class="chapter" data-level="4.5.5" data-path="pensamento-computacional.html"><a href="pensamento-computacional.html#o-que-incluir-no-arquivo-readme"><i class="fa fa-check"></i><b>4.5.5</b> O que incluir no arquivo README?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="paradoxos-falacias.html"><a href="paradoxos-falacias.html"><i class="fa fa-check"></i><b>5</b> <strong>Paradoxos e falácias</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rmd/parte-2.html"><a href="#paradoxos-estat%C3%ADsticos"><i class="fa fa-check"></i><b>5.1</b> Paradoxos estatísticos</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-paradoxos-estat%C3%ADsticos"><i class="fa fa-check"></i><b>5.1.1</b> O que são paradoxos estatísticos?</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-abelson"><i class="fa fa-check"></i><b>5.1.2</b> O que é o paradoxo de Abelson?</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-berkson"><i class="fa fa-check"></i><b>5.1.3</b> O que é o paradoxo de Berkson?</a></li>
+<li class="chapter" data-level="5.1.4" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-big-data"><i class="fa fa-check"></i><b>5.1.4</b> O que é o paradoxo de <em>Big Data</em>?</a></li>
+<li class="chapter" data-level="5.1.5" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-ellsberg"><i class="fa fa-check"></i><b>5.1.5</b> O que é o paradoxo de Ellsberg?</a></li>
+<li class="chapter" data-level="5.1.6" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-freedman"><i class="fa fa-check"></i><b>5.1.6</b> O que é o paradoxo de Freedman?</a></li>
+<li class="chapter" data-level="5.1.7" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-hand"><i class="fa fa-check"></i><b>5.1.7</b> O que é o paradoxo de Hand?</a></li>
+<li class="chapter" data-level="5.1.8" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-lindley"><i class="fa fa-check"></i><b>5.1.8</b> O que é o paradoxo de Lindley?</a></li>
+<li class="chapter" data-level="5.1.9" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-lord"><i class="fa fa-check"></i><b>5.1.9</b> O que é o paradoxo de Lord?</a></li>
+<li class="chapter" data-level="5.1.10" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-proebsting"><i class="fa fa-check"></i><b>5.1.10</b> O que é o paradoxo de Proebsting?</a></li>
+<li class="chapter" data-level="5.1.11" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-simpson"><i class="fa fa-check"></i><b>5.1.11</b> O que é o paradoxo de Simpson?</a></li>
+<li class="chapter" data-level="5.1.12" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-stein"><i class="fa fa-check"></i><b>5.1.12</b> O que é o paradoxo de Stein?</a></li>
+<li class="chapter" data-level="5.1.13" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-de-okie"><i class="fa fa-check"></i><b>5.1.13</b> O que é o paradoxo de Okie?</a></li>
+<li class="chapter" data-level="5.1.14" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-da-acur%C3%A1cia"><i class="fa fa-check"></i><b>5.1.14</b> O que é o paradoxo da acurácia?</a></li>
+<li class="chapter" data-level="5.1.15" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-do-falso-positivo"><i class="fa fa-check"></i><b>5.1.15</b> O que é o paradoxo do falso positivo?</a></li>
+<li class="chapter" data-level="5.1.16" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-da-caixa-de-bertrand"><i class="fa fa-check"></i><b>5.1.16</b> O que é o paradoxo da caixa de Bertrand?</a></li>
+<li class="chapter" data-level="5.1.17" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-do-elevador"><i class="fa fa-check"></i><b>5.1.17</b> O que é o paradoxo do elevador?</a></li>
+<li class="chapter" data-level="5.1.18" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-da-amizade"><i class="fa fa-check"></i><b>5.1.18</b> O que é o paradoxo da amizade?</a></li>
+<li class="chapter" data-level="5.1.19" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-do-menino-ou-menina"><i class="fa fa-check"></i><b>5.1.19</b> O que é o paradoxo do menino ou menina?</a></li>
+<li class="chapter" data-level="5.1.20" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-do-teste-surpresa"><i class="fa fa-check"></i><b>5.1.20</b> O que é o paradoxo do teste surpresa?</a></li>
+<li class="chapter" data-level="5.1.21" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-do-n%C3%B3-da-gravata"><i class="fa fa-check"></i><b>5.1.21</b> O que é o paradoxo do nó da gravata?</a></li>
+<li class="chapter" data-level="5.1.22" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-paradoxo-da-bela-adormecida"><i class="fa fa-check"></i><b>5.1.22</b> O que é o paradoxo da Bela Adormecida?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="rmd/parte-2.html"><a href="#fal%C3%A1cias-estat%C3%ADsticas"><i class="fa fa-check"></i><b>5.2</b> Falácias estatísticas</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-fal%C3%A1cias-estat%C3%ADsticas"><i class="fa fa-check"></i><b>5.2.1</b> O que são falácias estatísticas?</a></li>
+<li class="chapter" data-level="5.2.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-fal%C3%A1cia-do-jogador"><i class="fa fa-check"></i><b>5.2.2</b> O que é a falácia do jogador?</a></li>
+<li class="chapter" data-level="5.2.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-fal%C3%A1cia-da-m%C3%A3o-quente"><i class="fa fa-check"></i><b>5.2.3</b> O que é a falácia da mão quente?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="vieses-metodologicos.html"><a href="vieses-metodologicos.html"><i class="fa fa-check"></i><b>6</b> <strong>Vieses metodológicos</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="rmd/parte-2.html"><a href="#vieses-metodol%C3%B3gicos"><i class="fa fa-check"></i><b>6.1</b> Vieses metodológicos</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-vieses-metodol%C3%B3gicos"><i class="fa fa-check"></i><b>6.1.1</b> O que são vieses metodológicos?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="parte-2.html"><a href="parte-2.html"><i class="fa fa-check"></i><em>PARTE 2: DADOS – COLETA E PREPARAÇÃO</em></a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#organiza%C3%A7%C3%A3o-e-fundamentos-de-dados"><i class="fa fa-check"></i>Organização e fundamentos de dados</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="medidas-instrumentos.html"><a href="medidas-instrumentos.html"><i class="fa fa-check"></i><b>7</b> <strong>Medidas e instrumentos</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="medidas-instrumentos.html"><a href="medidas-instrumentos.html#escalas"><i class="fa fa-check"></i><b>7.1</b> Escalas</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-escalas"><i class="fa fa-check"></i><b>7.1.1</b> O que são escalas?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="rmd/parte-2.html"><a href="#medi%C3%A7%C3%A3o-e-medidas"><i class="fa fa-check"></i><b>7.2</b> Medição e Medidas</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-medi%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>7.2.1</b> O que é medição?</a></li>
+<li class="chapter" data-level="7.2.2" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-medidas-diretas"><i class="fa fa-check"></i><b>7.2.2</b> O que são medidas diretas?</a></li>
+<li class="chapter" data-level="7.2.3" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-medidas-derivadas"><i class="fa fa-check"></i><b>7.2.3</b> O que são medidas derivadas?</a></li>
+<li class="chapter" data-level="7.2.4" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-medidas-por-teoria"><i class="fa fa-check"></i><b>7.2.4</b> O que são medidas por teoria?</a></li>
+<li class="chapter" data-level="7.2.5" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-medidas-%C3%BAnicas"><i class="fa fa-check"></i><b>7.2.5</b> O que são medidas únicas?</a></li>
+<li class="chapter" data-level="7.2.6" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-medidas-repetidas"><i class="fa fa-check"></i><b>7.2.6</b> O que são medidas repetidas?</a></li>
+<li class="chapter" data-level="7.2.7" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-medidas-seriadas"><i class="fa fa-check"></i><b>7.2.7</b> O que são medidas seriadas?</a></li>
+<li class="chapter" data-level="7.2.8" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-medidas-m%C3%BAltiplas"><i class="fa fa-check"></i><b>7.2.8</b> O que são medidas múltiplas?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="medidas-instrumentos.html"><a href="medidas-instrumentos.html#erros-de-medida"><i class="fa fa-check"></i><b>7.3</b> Erros de medida</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-erros-de-medida"><i class="fa fa-check"></i><b>7.3.1</b> O que são erros de medida?</a></li>
+<li class="chapter" data-level="7.3.2" data-path="rmd/parte-2.html"><a href="#quais-fontes-de-variabilidade-s%C3%A3o-comumente-investigadas"><i class="fa fa-check"></i><b>7.3.2</b> Quais fontes de variabilidade são comumente investigadas?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="medidas-instrumentos.html"><a href="medidas-instrumentos.html#instrumentos"><i class="fa fa-check"></i><b>7.4</b> Instrumentos</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-instrumentos"><i class="fa fa-check"></i><b>7.4.1</b> O que são instrumentos?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="rmd/parte-2.html"><a href="#acur%C3%A1cia-e-precis%C3%A3o"><i class="fa fa-check"></i><b>7.5</b> Acurácia e precisão</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-acur%C3%A1cia"><i class="fa fa-check"></i><b>7.5.1</b> O que é acurácia?</a></li>
+<li class="chapter" data-level="7.5.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-precis%C3%A3o"><i class="fa fa-check"></i><b>7.5.2</b> O que é precisão?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="rmd/parte-2.html"><a href="#vi%C3%A9s-e-variabilidade"><i class="fa fa-check"></i><b>7.6</b> Viés e variabilidade</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="rmd/parte-2.html"><a href="#qual-%C3%A9-a-rela%C3%A7%C3%A3o-entre-vi%C3%A9s-e-variabilidade"><i class="fa fa-check"></i><b>7.6.1</b> Qual é a relação entre viés e variabilidade?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="dados-bigdata-metadados.html"><a href="dados-bigdata-metadados.html"><i class="fa fa-check"></i><b>8</b> <strong>Dados, <em>big data</em> e metadados</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="dados-bigdata-metadados.html"><a href="dados-bigdata-metadados.html#dados"><i class="fa fa-check"></i><b>8.1</b> Dados</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-dados"><i class="fa fa-check"></i><b>8.1.1</b> O que são dados?</a></li>
+<li class="chapter" data-level="8.1.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-fontes-de-dados"><i class="fa fa-check"></i><b>8.1.2</b> Quais são as fontes de dados?</a></li>
+<li class="chapter" data-level="8.1.3" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-dados-prim%C3%A1rios-e-secund%C3%A1rios"><i class="fa fa-check"></i><b>8.1.3</b> O que são dados primários e secundários?</a></li>
+<li class="chapter" data-level="8.1.4" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-dados-quantitativos-e-qualitativos"><i class="fa fa-check"></i><b>8.1.4</b> O que são dados quantitativos e qualitativos?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="dados-bigdata-metadados.html"><a href="dados-bigdata-metadados.html#big-data"><i class="fa fa-check"></i><b>8.2</b> <em>Big data</em></a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-big-data"><i class="fa fa-check"></i><b>8.2.1</b> O que são <em>big data</em>?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="dados-bigdata-metadados.html"><a href="dados-bigdata-metadados.html#metadados"><i class="fa fa-check"></i><b>8.3</b> Metadados</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-metadados"><i class="fa fa-check"></i><b>8.3.1</b> O que são metadados?</a></li>
+<li class="chapter" data-level="8.3.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-recomenda%C3%A7%C3%B5es-para-os-metadados-de-um-banco-de-dados"><i class="fa fa-check"></i><b>8.3.2</b> Quais são as recomendações para os metadados de um banco de dados?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="tabulacao-dados.html"><a href="tabulacao-dados.html"><i class="fa fa-check"></i><b>9</b> <strong>Tabulação de dados</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="rmd/parte-2.html"><a href="#planilhas-eletr%C3%B4nicas"><i class="fa fa-check"></i><b>9.1</b> Planilhas eletrônicas</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="rmd/parte-2.html"><a href="#qual-a-organiza%C3%A7%C3%A3o-de-uma-tabela-de-dados"><i class="fa fa-check"></i><b>9.1.1</b> Qual a organização de uma tabela de dados?</a></li>
+<li class="chapter" data-level="9.1.2" data-path="rmd/parte-2.html"><a href="#qual-a-estrutura-b%C3%A1sica-de-uma-tabela-para-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>9.1.2</b> Qual a estrutura básica de uma tabela para análise estatística?</a></li>
+<li class="chapter" data-level="9.1.3" data-path="rmd/parte-2.html"><a href="#o-que-usar-para-organizar-tabelas-para-an%C3%A1lise-computadorizada"><i class="fa fa-check"></i><b>9.1.3</b> O que usar para organizar tabelas para análise computadorizada?</a></li>
+<li class="chapter" data-level="9.1.4" data-path="rmd/parte-2.html"><a href="#o-que-n%C3%A3o-usar-para-organizar-tabelas-para-an%C3%A1lise-computadorizada"><i class="fa fa-check"></i><b>9.1.4</b> O que não usar para organizar tabelas para análise computadorizada?</a></li>
+<li class="chapter" data-level="9.1.5" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-recomendado-e-o-que-deve-ser-evitado-na-organiza%C3%A7%C3%A3o-das-tabelas-para-an%C3%A1lise"><i class="fa fa-check"></i><b>9.1.5</b> O que é recomendado e o que deve ser evitado na organização das tabelas para análise?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="variaveis-fatores.html"><a href="variaveis-fatores.html"><i class="fa fa-check"></i><b>10</b> <strong>Variáveis e fatores</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="rmd/parte-2.html"><a href="#vari%C3%A1veis"><i class="fa fa-check"></i><b>10.1</b> Variáveis</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-vari%C3%A1veis"><i class="fa fa-check"></i><b>10.1.1</b> O que são variáveis?</a></li>
+<li class="chapter" data-level="10.1.2" data-path="rmd/parte-2.html"><a href="#como-s%C3%A3o-classificadas-as-vari%C3%A1veis"><i class="fa fa-check"></i><b>10.1.2</b> Como são classificadas as variáveis?</a></li>
+<li class="chapter" data-level="10.1.3" data-path="rmd/parte-2.html"><a href="#por-que-%C3%A9-importante-classificar-as-vari%C3%A1veis"><i class="fa fa-check"></i><b>10.1.3</b> Por que é importante classificar as variáveis?</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="rmd/parte-2.html"><a href="#transforma%C3%A7%C3%A3o-de-vari%C3%A1veis"><i class="fa fa-check"></i><b>10.2</b> Transformação de variáveis</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-transforma%C3%A7%C3%A3o-de-vari%C3%A1veis"><i class="fa fa-check"></i><b>10.2.1</b> O que é transformação de variáveis?</a></li>
+<li class="chapter" data-level="10.2.2" data-path="rmd/parte-2.html"><a href="#por-que-transformar-vari%C3%A1veis"><i class="fa fa-check"></i><b>10.2.2</b> Por que transformar variáveis?</a></li>
+<li class="chapter" data-level="10.2.3" data-path="rmd/parte-2.html"><a href="#quais-transforma%C3%A7%C3%B5es-podem-ser-aplicadas"><i class="fa fa-check"></i><b>10.2.3</b> Quais transformações podem ser aplicadas?</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="rmd/parte-2.html"><a href="#categoriza%C3%A7%C3%A3o-de-vari%C3%A1veis-cont%C3%ADnuas"><i class="fa fa-check"></i><b>10.3</b> Categorização de variáveis contínuas</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-categoriza%C3%A7%C3%A3o-de-uma-vari%C3%A1vel"><i class="fa fa-check"></i><b>10.3.1</b> O que é categorização de uma variável?</a></li>
+<li class="chapter" data-level="10.3.2" data-path="rmd/parte-2.html"><a href="#por-que-n%C3%A3o-%C3%A9-recomendado-categorizar-vari%C3%A1veis-cont%C3%ADnuas"><i class="fa fa-check"></i><b>10.3.2</b> Por que não é recomendado categorizar variáveis contínuas?</a></li>
+<li class="chapter" data-level="10.3.3" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-alternativas-%C3%A0-categoriza%C3%A7%C3%A3o-de-vari%C3%A1veis-cont%C3%ADnuas"><i class="fa fa-check"></i><b>10.3.3</b> Quais são as alternativas à categorização de variáveis contínuas?</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="rmd/parte-2.html"><a href="#dicotomiza%C3%A7%C3%A3o-de-vari%C3%A1veis-cont%C3%ADnuas"><i class="fa fa-check"></i><b>10.4</b> Dicotomização de variáveis contínuas</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-vari%C3%A1veis-dicot%C3%B4micas"><i class="fa fa-check"></i><b>10.4.1</b> O que são variáveis dicotômicas?</a></li>
+<li class="chapter" data-level="10.4.2" data-path="rmd/parte-2.html"><a href="#quais-argumentos-s%C3%A3o-usados-para-defender-a-categoriza%C3%A7%C3%A3o-ou-dicotomiza%C3%A7%C3%A3o-de-vari%C3%A1veis-cont%C3%ADnuas"><i class="fa fa-check"></i><b>10.4.2</b> Quais argumentos são usados para defender a categorização ou dicotomização de variáveis contínuas?</a></li>
+<li class="chapter" data-level="10.4.3" data-path="rmd/parte-2.html"><a href="#por-que-n%C3%A3o-%C3%A9-recomendado-dicotomizar-vari%C3%A1veis-cont%C3%ADnuas"><i class="fa fa-check"></i><b>10.4.3</b> Por que não é recomendado dicotomizar variáveis contínuas?</a></li>
+<li class="chapter" data-level="10.4.4" data-path="rmd/parte-2.html"><a href="#quais-cen%C3%A1rios-legitimam-a-dicotomiza%C3%A7%C3%A3o-das-vari%C3%A1veis-cont%C3%ADnuas"><i class="fa fa-check"></i><b>10.4.4</b> Quais cenários legitimam a dicotomização das variáveis contínuas?</a></li>
+<li class="chapter" data-level="10.4.5" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-s%C3%A3o-usados-para-dicotomizar-vari%C3%A1veis-cont%C3%ADnuas"><i class="fa fa-check"></i><b>10.4.5</b> Quais métodos são usados para dicotomizar variáveis contínuas?</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="variaveis-fatores.html"><a href="variaveis-fatores.html#fatores"><i class="fa fa-check"></i><b>10.5</b> Fatores</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-fatores"><i class="fa fa-check"></i><b>10.5.1</b> O que são fatores?</a></li>
+<li class="chapter" data-level="10.5.2" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-n%C3%ADveis-de-um-fator"><i class="fa fa-check"></i><b>10.5.2</b> O que são níveis de um fator?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="dados-perdidos-imputados.html"><a href="dados-perdidos-imputados.html"><i class="fa fa-check"></i><b>11</b> <strong>Dados perdidos e imputados</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="dados-perdidos-imputados.html"><a href="dados-perdidos-imputados.html#dados-perdidos"><i class="fa fa-check"></i><b>11.1</b> Dados perdidos</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-dados-perdidos"><i class="fa fa-check"></i><b>11.1.1</b> O que são dados perdidos?</a></li>
+<li class="chapter" data-level="11.1.2" data-path="dados-perdidos-imputados.html"><a href="dados-perdidos-imputados.html#qual-o-problema-de-um-estudo-ter-dados-perdidos"><i class="fa fa-check"></i><b>11.1.2</b> Qual o problema de um estudo ter dados perdidos?</a></li>
+<li class="chapter" data-level="11.1.3" data-path="dados-perdidos-imputados.html"><a href="dados-perdidos-imputados.html#quais-os-mecanismos-geradores-de-dados-perdidos"><i class="fa fa-check"></i><b>11.1.3</b> Quais os mecanismos geradores de dados perdidos?</a></li>
+<li class="chapter" data-level="11.1.4" data-path="dados-perdidos-imputados.html"><a href="dados-perdidos-imputados.html#como-identificar-o-mecanismo-gerador-de-dados-perdidos-em-um-banco-de-dados"><i class="fa fa-check"></i><b>11.1.4</b> Como identificar o mecanismo gerador de dados perdidos em um banco de dados?</a></li>
+<li class="chapter" data-level="11.1.5" data-path="rmd/parte-2.html"><a href="#que-estrat%C3%A9gias-podem-ser-utilizadas-na-coleta-de-dados-quando-h%C3%A1-expectativa-de-perda-amostral"><i class="fa fa-check"></i><b>11.1.5</b> Que estratégias podem ser utilizadas na coleta de dados quando há expectativa de perda amostral?</a></li>
+<li class="chapter" data-level="11.1.6" data-path="rmd/parte-2.html"><a href="#que-estrat%C3%A9gias-podem-ser-utilizadas-na-an%C3%A1lise-quando-h%C3%A1-dados-perdidos"><i class="fa fa-check"></i><b>11.1.6</b> Que estratégias podem ser utilizadas na análise quando há dados perdidos?</a></li>
+<li class="chapter" data-level="11.1.7" data-path="rmd/parte-2.html"><a href="#que-estrat%C3%A9gias-podem-ser-utilizadas-na-reda%C3%A7%C3%A3o-de-estudos-em-que-h%C3%A1-dados-perdidos"><i class="fa fa-check"></i><b>11.1.7</b> Que estratégias podem ser utilizadas na redação de estudos em que há dados perdidos?</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="dados-perdidos-imputados.html"><a href="dados-perdidos-imputados.html#dados-imputados"><i class="fa fa-check"></i><b>11.2</b> Dados imputados</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-dados-imputados"><i class="fa fa-check"></i><b>11.2.1</b> O que são dados imputados?</a></li>
+<li class="chapter" data-level="11.2.2" data-path="rmd/parte-2.html"><a href="#quando-a-imputa%C3%A7%C3%A3o-de-dados-%C3%A9-indicada"><i class="fa fa-check"></i><b>11.2.2</b> Quando a imputação de dados é indicada?</a></li>
+<li class="chapter" data-level="11.2.3" data-path="rmd/parte-2.html"><a href="#quais-os-m%C3%A9todos-de-imputa%C3%A7%C3%A3o-de-dados"><i class="fa fa-check"></i><b>11.2.3</b> Quais os métodos de imputação de dados?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="dados-anonimizados-sinteticos.html"><a href="dados-anonimizados-sinteticos.html"><i class="fa fa-check"></i><b>12</b> <strong>Dados anonimizados e sintéticos</strong></a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="dados-anonimizados-sinteticos.html"><a href="dados-anonimizados-sinteticos.html#dados-anonimizados"><i class="fa fa-check"></i><b>12.1</b> Dados anonimizados</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-dados-anonimizados"><i class="fa fa-check"></i><b>12.1.1</b> O que são dados anonimizados?</a></li>
+<li class="chapter" data-level="12.1.2" data-path="dados-anonimizados-sinteticos.html"><a href="dados-anonimizados-sinteticos.html#com-anonimizar-os-dados-de-um-banco"><i class="fa fa-check"></i><b>12.1.2</b> Com anonimizar os dados de um banco?</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="rmd/parte-2.html"><a href="#dados-sint%C3%A9ticos"><i class="fa fa-check"></i><b>12.2</b> Dados sintéticos</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-dados-sint%C3%A9ticos"><i class="fa fa-check"></i><b>12.2.1</b> O que são dados sintéticos?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="parte-3.html"><a href="parte-3.html"><i class="fa fa-check"></i><em>PARTE 3: ANÁLISE EXPLORATÓRIA E DESCRITIVA</em></a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#analisando-padr%C3%B5es"><i class="fa fa-check"></i>Analisando padrões</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="descricao.html"><a href="descricao.html"><i class="fa fa-check"></i><b>13</b> <strong>Descrição</strong></a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-de-descri%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>13.1</b> Análise de descrição</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-de-descri%C3%A7%C3%A3o-de-dados"><i class="fa fa-check"></i><b>13.1.1</b> O que é análise de descrição de dados?</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="rmd/parte-2.html"><a href="#estima%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>13.2</b> Estimação</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-estimativa"><i class="fa fa-check"></i><b>13.2.1</b> O que é estimativa?</a></li>
+<li class="chapter" data-level="13.2.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-estimativa-pontual"><i class="fa fa-check"></i><b>13.2.2</b> O que é estimativa pontual?</a></li>
+<li class="chapter" data-level="13.2.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-estimativa-intervalar"><i class="fa fa-check"></i><b>13.2.3</b> O que é estimativa intervalar?</a></li>
+<li class="chapter" data-level="13.2.4" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-estimativa-de-par%C3%A2metro"><i class="fa fa-check"></i><b>13.2.4</b> O que é estimativa de parâmetro?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="analise-inicial.html"><a href="analise-inicial.html"><i class="fa fa-check"></i><b>14</b> <strong>Análise inicial de dados</strong></a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-inicial-de-dados"><i class="fa fa-check"></i><b>14.1</b> Análise inicial de dados</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-inicial-de-dados"><i class="fa fa-check"></i><b>14.1.1</b> O que é análise inicial de dados?</a></li>
+<li class="chapter" data-level="14.1.2" data-path="rmd/parte-2.html"><a href="#como-conduzir-uma-an%C3%A1lise-inicial-de-dados"><i class="fa fa-check"></i><b>14.1.2</b> Como conduzir uma análise inicial de dados?</a></li>
+<li class="chapter" data-level="14.1.3" data-path="rmd/parte-2.html"><a href="#quais-problemas-podem-ser-detectados-na-an%C3%A1lise-inicial-de-dados"><i class="fa fa-check"></i><b>14.1.3</b> Quais problemas podem ser detectados na análise inicial de dados?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="distribuicoes-parametros.html"><a href="distribuicoes-parametros.html"><i class="fa fa-check"></i><b>15</b> <strong>Distribuições e parâmetros</strong></a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="rmd/parte-2.html"><a href="#distribui%C3%A7%C3%B5es-de-probabilidade"><i class="fa fa-check"></i><b>15.1</b> Distribuições de probabilidade</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-distribui%C3%A7%C3%B5es-de-probabilidade"><i class="fa fa-check"></i><b>15.1.1</b> O que são distribuições de probabilidade?</a></li>
+<li class="chapter" data-level="15.1.2" data-path="rmd/parte-2.html"><a href="#como-representar-distribui%C3%A7%C3%B5es-de-probabilidade"><i class="fa fa-check"></i><b>15.1.2</b> Como representar distribuições de probabilidade?</a></li>
+<li class="chapter" data-level="15.1.3" data-path="rmd/parte-2.html"><a href="#quais-caracter%C3%ADsticas-definem-uma-distribui%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>15.1.3</b> Quais características definem uma distribuição?</a></li>
+<li class="chapter" data-level="15.1.4" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-distribui%C3%A7%C3%B5es-mais-comuns"><i class="fa fa-check"></i><b>15.1.4</b> Quais são as distribuições mais comuns?</a></li>
+<li class="chapter" data-level="15.1.5" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-fun%C3%A7%C3%B5es-de-uma-distribui%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>15.1.5</b> Quais são as funções de uma distribuição?</a></li>
+<li class="chapter" data-level="15.1.6" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-distribui%C3%A7%C3%A3o-normal"><i class="fa fa-check"></i><b>15.1.6</b> O que é a distribuição normal?</a></li>
+<li class="chapter" data-level="15.1.7" data-path="rmd/parte-2.html"><a href="#que-m%C3%A9todos-podem-ser-utilizados-para-identificar-a-normalidade-da-distribui%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>15.1.7</b> Que métodos podem ser utilizados para identificar a normalidade da distribuição?</a></li>
+<li class="chapter" data-level="15.1.8" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-distribui%C3%A7%C3%B5es-n%C3%A3o-normais"><i class="fa fa-check"></i><b>15.1.8</b> O que são distribuições não-normais?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="rmd/parte-2.html"><a href="#par%C3%A2metros"><i class="fa fa-check"></i><b>15.2</b> Parâmetros</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-par%C3%A2metros"><i class="fa fa-check"></i><b>15.2.1</b> O que são parâmetros?</a></li>
+<li class="chapter" data-level="15.2.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-uma-an%C3%A1lise-param%C3%A9trica"><i class="fa fa-check"></i><b>15.2.2</b> O que é uma análise paramétrica?</a></li>
+<li class="chapter" data-level="15.2.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-uma-an%C3%A1lise-n%C3%A3o-param%C3%A9trica"><i class="fa fa-check"></i><b>15.2.3</b> O que é uma análise não paramétrica?</a></li>
+<li class="chapter" data-level="15.2.4" data-path="rmd/parte-2.html"><a href="#devemos-testar-as-suposi%C3%A7%C3%B5es-de-normalidade"><i class="fa fa-check"></i><b>15.2.4</b> Devemos testar as suposições de normalidade?</a></li>
+<li class="chapter" data-level="15.2.5" data-path="rmd/parte-2.html"><a href="#por-que-as-an%C3%A1lises-param%C3%A9tricas-s%C3%A3o-preferidas"><i class="fa fa-check"></i><b>15.2.5</b> Por que as análises paramétricas são preferidas?</a></li>
+<li class="chapter" data-level="15.2.6" data-path="rmd/parte-2.html"><a href="#que-par%C3%A2metros-podem-ser-estimados"><i class="fa fa-check"></i><b>15.2.6</b> Que parâmetros podem ser estimados?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="rmd/parte-2.html"><a href="#tend%C3%AAncia-central"><i class="fa fa-check"></i><b>15.3</b> Tendência central</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="rmd/parte-2.html"><a href="#que-par%C3%A2metros-de-tend%C3%AAncia-central-podem-ser-estimados"><i class="fa fa-check"></i><b>15.3.1</b> Que parâmetros de tendência central podem ser estimados?</a></li>
+<li class="chapter" data-level="15.3.2" data-path="rmd/parte-2.html"><a href="#como-escolher-o-par%C3%A2metro-de-tend%C3%AAncia-central"><i class="fa fa-check"></i><b>15.3.2</b> Como escolher o parâmetro de tendência central?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="rmd/parte-2.html"><a href="#dispers%C3%A3o"><i class="fa fa-check"></i><b>15.4</b> Dispersão</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="rmd/parte-2.html"><a href="#que-par%C3%A2metros-de-dispers%C3%A3o-podem-ser-estimados"><i class="fa fa-check"></i><b>15.4.1</b> Que parâmetros de dispersão podem ser estimados?</a></li>
+<li class="chapter" data-level="15.4.2" data-path="rmd/parte-2.html"><a href="#como-escolher-o-par%C3%A2metro-de-dispers%C3%A3o"><i class="fa fa-check"></i><b>15.4.2</b> Como escolher o parâmetro de dispersão?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="rmd/parte-2.html"><a href="#propor%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>15.5</b> Proporção</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="rmd/parte-2.html"><a href="#que-par%C3%A2metros-de-propor%C3%A7%C3%A3o-podem-ser-estimados"><i class="fa fa-check"></i><b>15.5.1</b> Que parâmetros de proporção podem ser estimados?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="rmd/parte-2.html"><a href="#distribui%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>15.6</b> Distribuição</a>
+<ul>
+<li class="chapter" data-level="15.6.1" data-path="rmd/parte-2.html"><a href="#que-par%C3%A2metros-de-distribui%C3%A7%C3%A3o-podem-ser-estimados"><i class="fa fa-check"></i><b>15.6.1</b> Que parâmetros de distribuição podem ser estimados?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.7" data-path="distribuicoes-parametros.html"><a href="distribuicoes-parametros.html#extremos"><i class="fa fa-check"></i><b>15.7</b> Extremos</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-extremos"><i class="fa fa-check"></i><b>15.7.1</b> O que são extremos?</a></li>
+<li class="chapter" data-level="15.7.2" data-path="rmd/parte-2.html"><a href="#que-par%C3%A2metros-extremos-podem-ser-estimados"><i class="fa fa-check"></i><b>15.7.2</b> Que parâmetros extremos podem ser estimados?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.8" data-path="distribuicoes-parametros.html"><a href="distribuicoes-parametros.html#valores-discrepantes"><i class="fa fa-check"></i><b>15.8</b> Valores discrepantes</a>
+<ul>
+<li class="chapter" data-level="15.8.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-valores-discrepantes-outliers"><i class="fa fa-check"></i><b>15.8.1</b> O que são valores discrepantes (<em>outliers</em>)?</a></li>
+<li class="chapter" data-level="15.8.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-os-tipos-de-valores-discrepantes"><i class="fa fa-check"></i><b>15.8.2</b> Quais são os tipos de valores discrepantes?</a></li>
+<li class="chapter" data-level="15.8.3" data-path="rmd/parte-2.html"><a href="#por-que-%C3%A9-importante-avaliar-valores-discrepantes"><i class="fa fa-check"></i><b>15.8.3</b> Por que é importante avaliar valores discrepantes?</a></li>
+<li class="chapter" data-level="15.8.4" data-path="distribuicoes-parametros.html"><a href="distribuicoes-parametros.html#como-detectar-valores-discrepantes"><i class="fa fa-check"></i><b>15.8.4</b> Como detectar valores discrepantes?</a></li>
+<li class="chapter" data-level="15.8.5" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-os-m%C3%A9todos-para-detectar-valores-discrepantes"><i class="fa fa-check"></i><b>15.8.5</b> Quais são os métodos para detectar valores discrepantes?</a></li>
+<li class="chapter" data-level="15.8.6" data-path="distribuicoes-parametros.html"><a href="distribuicoes-parametros.html#como-manejar-os-valores-discrepantes"><i class="fa fa-check"></i><b>15.8.6</b> Como manejar os valores discrepantes?</a></li>
+<li class="chapter" data-level="15.8.7" data-path="rmd/parte-2.html"><a href="#como-conduzir-an%C3%A1lises-com-valores-discrepantes"><i class="fa fa-check"></i><b>15.8.7</b> Como conduzir análises com valores discrepantes?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="analise-exploratoria.html"><a href="analise-exploratoria.html"><i class="fa fa-check"></i><b>16</b> <strong>Análise exploratória de dados</strong></a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-explorat%C3%B3ria-de-dados"><i class="fa fa-check"></i><b>16.1</b> Análise exploratória de dados</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-explorat%C3%B3ria-de-dados"><i class="fa fa-check"></i><b>16.1.1</b> O que é análise exploratória de dados?</a></li>
+<li class="chapter" data-level="16.1.2" data-path="rmd/parte-2.html"><a href="#por-que-conduzir-a-an%C3%A1lise-explorat%C3%B3ria-de-dados"><i class="fa fa-check"></i><b>16.1.2</b> Por que conduzir a análise exploratória de dados?</a></li>
+<li class="chapter" data-level="16.1.3" data-path="rmd/parte-2.html"><a href="#quais-etapas-constituem-a-an%C3%A1lise-explorat%C3%B3ria-de-dados"><i class="fa fa-check"></i><b>16.1.3</b> Quais etapas constituem a análise exploratória de dados?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="analise-descritiva.html"><a href="analise-descritiva.html"><i class="fa fa-check"></i><b>17</b> <strong>Análise descritiva</strong></a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-descritiva"><i class="fa fa-check"></i><b>17.1</b> Análise descritiva</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-descritiva"><i class="fa fa-check"></i><b>17.1.1</b> O que é análise descritiva?</a></li>
+<li class="chapter" data-level="17.1.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-apresentar-os-resultados-descritivos"><i class="fa fa-check"></i><b>17.1.2</b> Como apresentar os resultados descritivos?</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="rmd/parte-2.html"><a href="#apresenta%C3%A7%C3%A3o-de-resultados-num%C3%A9ricos"><i class="fa fa-check"></i><b>17.2</b> Apresentação de resultados numéricos</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-casas-decimais"><i class="fa fa-check"></i><b>17.2.1</b> O que são casas decimais?</a></li>
+<li class="chapter" data-level="17.2.2" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-d%C3%ADgitos-significativos"><i class="fa fa-check"></i><b>17.2.2</b> O que são dígitos significativos?</a></li>
+<li class="chapter" data-level="17.2.3" data-path="rmd/parte-2.html"><a href="#como-arredondar-dados-num%C3%A9ricos"><i class="fa fa-check"></i><b>17.2.3</b> Como arredondar dados numéricos?</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#tabelas"><i class="fa fa-check"></i><b>17.3</b> Tabelas</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#por-que-usar-tabelas"><i class="fa fa-check"></i><b>17.3.1</b> Por que usar tabelas?</a></li>
+<li class="chapter" data-level="17.3.2" data-path="rmd/parte-2.html"><a href="#que-informa%C3%A7%C3%B5es-incluir-nas-tabelas"><i class="fa fa-check"></i><b>17.3.2</b> Que informações incluir nas tabelas?</a></li>
+<li class="chapter" data-level="17.3.3" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-os-erros-mais-comuns-de-preenchimento-de-tabelas"><i class="fa fa-check"></i><b>17.3.3</b> Quais são os erros mais comuns de preenchimento de tabelas?</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="analise-descritiva.html"><a href="analise-descritiva.html#tabela-1"><i class="fa fa-check"></i><b>17.4</b> Tabela 1</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-tabela-1"><i class="fa fa-check"></i><b>17.4.1</b> O que é a ‘Tabela 1’?</a></li>
+<li class="chapter" data-level="17.4.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#qual-a-utilidade-da-tabela-1"><i class="fa fa-check"></i><b>17.4.2</b> Qual a utilidade da ‘Tabela 1’?</a></li>
+<li class="chapter" data-level="17.4.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-fal%C3%A1cia-da-tabela-1"><i class="fa fa-check"></i><b>17.4.3</b> O que é a falácia da ‘Tabela 1’?</a></li>
+<li class="chapter" data-level="17.4.4" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-construir-a-tabela-1"><i class="fa fa-check"></i><b>17.4.4</b> Como construir a ‘Tabela 1’?</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="analise-descritiva.html"><a href="analise-descritiva.html#tabela-2"><i class="fa fa-check"></i><b>17.5</b> Tabela 2</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#qual-a-utilidade-da-tabela-2"><i class="fa fa-check"></i><b>17.5.1</b> Qual a utilidade da ‘Tabela 2’?</a></li>
+<li class="chapter" data-level="17.5.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-fal%C3%A1cia-da-tabela-2"><i class="fa fa-check"></i><b>17.5.2</b> O que é a falácia da ‘Tabela 2’?</a></li>
+<li class="chapter" data-level="17.5.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-construir-a-tabela-2"><i class="fa fa-check"></i><b>17.5.3</b> Como construir a ‘Tabela 2’?</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="rmd/parte-2.html"><a href="#gr%C3%A1ficos"><i class="fa fa-check"></i><b>17.6</b> Gráficos</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-gr%C3%A1ficos"><i class="fa fa-check"></i><b>17.6.1</b> O que são gráficos?</a></li>
+<li class="chapter" data-level="17.6.2" data-path="rmd/parte-2.html"><a href="#que-elementos-incluir-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>17.6.2</b> Que elementos incluir em gráficos?</a></li>
+<li class="chapter" data-level="17.6.3" data-path="rmd/parte-2.html"><a href="#para-que-servem-as-barras-de-erro-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>17.6.3</b> Para que servem as barras de erro em gráficos?</a></li>
+<li class="chapter" data-level="17.6.4" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-boas-pr%C3%A1ticas-na-elabora%C3%A7%C3%A3o-de-gr%C3%A1ficos"><i class="fa fa-check"></i><b>17.6.4</b> Quais são as boas práticas na elaboração de gráficos?</a></li>
+<li class="chapter" data-level="17.6.5" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-exportar-figuras-em-formato-tiff"><i class="fa fa-check"></i><b>17.6.5</b> Como exportar figuras em formato TIFF?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="analise-robusta.html"><a href="analise-robusta.html"><i class="fa fa-check"></i><b>18</b> <strong>Análise robusta</strong></a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="rmd/parte-2.html"><a href="#racioc%C3%ADnio-inferencial-robusto"><i class="fa fa-check"></i><b>18.1</b> Raciocínio inferencial robusto</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-robusta"><i class="fa fa-check"></i><b>18.1.1</b> O que é análise robusta?</a></li>
+<li class="chapter" data-level="18.1.2" data-path="rmd/parte-2.html"><a href="#por-que-usar-an%C3%A1lise-robusta"><i class="fa fa-check"></i><b>18.1.2</b> Por que usar análise robusta?</a></li>
+<li class="chapter" data-level="18.1.3" data-path="rmd/parte-2.html"><a href="#quando-usar-an%C3%A1lise-robusta"><i class="fa fa-check"></i><b>18.1.3</b> Quando usar análise robusta?</a></li>
+<li class="chapter" data-level="18.1.4" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-winsoriza%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>18.1.4</b> O que é Winsorização?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="parte-4.html"><a href="parte-4.html"><i class="fa fa-check"></i><em>PARTE 4: INFERÊNCIA E TESTES ESTATÍSTICOS</em></a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#de-amostras-para-popula%C3%A7%C3%B5es"><i class="fa fa-check"></i>De amostras para populações</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="analise-inferencial.html"><a href="analise-inferencial.html"><i class="fa fa-check"></i><b>19</b> <strong>Análise inferencial</strong></a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="rmd/parte-2.html"><a href="#racioc%C3%ADnio-inferencial"><i class="fa fa-check"></i><b>19.1</b> Raciocínio inferencial</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-inferencial"><i class="fa fa-check"></i><b>19.1.1</b> O que é análise inferencial?</a></li>
+<li class="chapter" data-level="19.1.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-os-tipos-de-racioc%C3%ADnio-inferencial"><i class="fa fa-check"></i><b>19.1.2</b> Quais são os tipos de raciocínio inferencial?</a></li>
+<li class="chapter" data-level="19.1.3" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-quest%C3%B5es-fundamentais-da-an%C3%A1lise-inferencial"><i class="fa fa-check"></i><b>19.1.3</b> Quais são as questões fundamentais da análise inferencial?</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="rmd/parte-2.html"><a href="#hip%C3%B3teses-cient%C3%ADficas"><i class="fa fa-check"></i><b>19.2</b> Hipóteses científicas</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-hip%C3%B3tese-cient%C3%ADfica"><i class="fa fa-check"></i><b>19.2.1</b> O que é hipótese científica?</a></li>
+<li class="chapter" data-level="19.2.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-fontes-de-ideias-para-gerar-hip%C3%B3teses-cient%C3%ADficas"><i class="fa fa-check"></i><b>19.2.2</b> Quais são as fontes de ideias para gerar hipóteses científicas?</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="rmd/parte-2.html"><a href="#hip%C3%B3teses-estat%C3%ADsticas"><i class="fa fa-check"></i><b>19.3</b> Hipóteses estatísticas</a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-hip%C3%B3tese-nula"><i class="fa fa-check"></i><b>19.3.1</b> O que é hipótese nula?</a></li>
+<li class="chapter" data-level="19.3.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-hip%C3%B3tese-alternativa"><i class="fa fa-check"></i><b>19.3.2</b> O que é hipótese alternativa?</a></li>
+<li class="chapter" data-level="19.3.3" data-path="rmd/parte-2.html"><a href="#qual-hip%C3%B3tese-est%C3%A1-sendo-testada"><i class="fa fa-check"></i><b>19.3.3</b> Qual hipótese está sendo testada?</a></li>
+</ul></li>
+<li class="chapter" data-level="19.4" data-path="rmd/parte-2.html"><a href="#testes-de-hip%C3%B3teses"><i class="fa fa-check"></i><b>19.4</b> Testes de hipóteses</a>
+<ul>
+<li class="chapter" data-level="19.4.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-os-tipos-de-teste-de-hip%C3%B3teses"><i class="fa fa-check"></i><b>19.4.1</b> Quais são os tipos de teste de hipóteses?</a></li>
+<li class="chapter" data-level="19.4.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-uma-fam%C3%ADlia-de-hip%C3%B3teses"><i class="fa fa-check"></i><b>19.4.2</b> O que é uma família de hipóteses?</a></li>
+<li class="chapter" data-level="19.4.3" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-testes-ad-hoc-e-post-hoc"><i class="fa fa-check"></i><b>19.4.3</b> O que são testes <em>ad hoc</em> e <em>post hoc</em>?</a></li>
+<li class="chapter" data-level="19.4.4" data-path="rmd/parte-2.html"><a href="#como-ajustar-a-an%C3%A1lise-inferencial-para-hip%C3%B3teses-m%C3%BAltiplas"><i class="fa fa-check"></i><b>19.4.4</b> Como ajustar a análise inferencial para hipóteses múltiplas?</a></li>
+<li class="chapter" data-level="19.4.5" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-testes-unicaudais-e-bicaudais"><i class="fa fa-check"></i><b>19.4.5</b> O que são testes unicaudais e bicaudais?</a></li>
+<li class="chapter" data-level="19.4.6" data-path="rmd/parte-2.html"><a href="#o-que-reportar-ap%C3%B3s-um-teste-de-hip%C3%B3tese"><i class="fa fa-check"></i><b>19.4.6</b> O que reportar após um teste de hipótese?</a></li>
+</ul></li>
+<li class="chapter" data-level="19.5" data-path="analise-inferencial.html"><a href="analise-inferencial.html#poder-do-teste"><i class="fa fa-check"></i><b>19.5</b> Poder do teste</a>
+<ul>
+<li class="chapter" data-level="19.5.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-poder-do-teste"><i class="fa fa-check"></i><b>19.5.1</b> O que é poder do teste?</a></li>
+<li class="chapter" data-level="19.5.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-de-poder-do-teste"><i class="fa fa-check"></i><b>19.5.2</b> O que é análise de poder do teste?</a></li>
+<li class="chapter" data-level="19.5.3" data-path="rmd/parte-2.html"><a href="#quando-realizar-a-an%C3%A1lise-de-poder-do-teste"><i class="fa fa-check"></i><b>19.5.3</b> Quando realizar a análise de poder do teste?</a></li>
+<li class="chapter" data-level="19.5.4" data-path="rmd/parte-2.html"><a href="#por-que-a-an%C3%A1lise-de-poder-do-teste-post-hoc-%C3%A9-inadequada"><i class="fa fa-check"></i><b>19.5.4</b> Por que a análise de poder do teste <em>post hoc</em> é inadequada?</a></li>
+<li class="chapter" data-level="19.5.5" data-path="rmd/parte-2.html"><a href="#o-que-pode-ser-realizado-ao-inv%C3%A9s-da-an%C3%A1lise-de-poder"><i class="fa fa-check"></i><b>19.5.5</b> O que pode ser realizado ao invés da análise de poder?</a></li>
+</ul></li>
+<li class="chapter" data-level="19.6" data-path="rmd/parte-2.html"><a href="#infer%C3%AAncia-visual"><i class="fa fa-check"></i><b>19.6</b> Inferência visual</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-infer%C3%AAncia-visual"><i class="fa fa-check"></i><b>19.6.1</b> O que é inferência visual?</a></li>
+<li class="chapter" data-level="19.6.2" data-path="rmd/parte-2.html"><a href="#por-que-usar-intervalos-de-confian%C3%A7a-para-infer%C3%AAncia-visual"><i class="fa fa-check"></i><b>19.6.2</b> Por que usar intervalos de confiança para inferência visual?</a></li>
+<li class="chapter" data-level="19.6.3" data-path="rmd/parte-2.html"><a href="#como-interpretar-intervalos-de-confian%C3%A7a-em-uma-figura"><i class="fa fa-check"></i><b>19.6.3</b> Como interpretar intervalos de confiança em uma figura?</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="rmd/parte-2.html"><a href="#interpreta%C3%A7%C3%A3o-de-an%C3%A1lise-inferencial"><i class="fa fa-check"></i><b>19.7</b> Interpretação de análise inferencial</a>
+<ul>
+<li class="chapter" data-level="19.7.1" data-path="rmd/parte-2.html"><a href="#como-interpretar-uma-an%C3%A1lise-inferencial"><i class="fa fa-check"></i><b>19.7.1</b> Como interpretar uma análise inferencial?</a></li>
+<li class="chapter" data-level="19.7.2" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-resultados-positivos-e-negativos-ou-inconclusivos-em-teste-de-hip%C3%B3tese"><i class="fa fa-check"></i><b>19.7.2</b> O que são resultados ‘positivos’ e ‘negativos’ ou inconclusivos em teste de hipótese?</a></li>
+<li class="chapter" data-level="19.7.3" data-path="rmd/parte-2.html"><a href="#qual-a-import%C3%A2ncia-de-resultados-negativos"><i class="fa fa-check"></i><b>19.7.3</b> Qual a importância de resultados ‘negativos’?</a></li>
+<li class="chapter" data-level="19.7.4" data-path="rmd/parte-2.html"><a href="#resultados-inconclusivos-aus%C3%AAncia-de-evid%C3%AAncia-ou-evid%C3%AAncia-de-aus%C3%AAncia"><i class="fa fa-check"></i><b>19.7.4</b> Resultados inconclusivos: Ausência de evidência ou evidência de ausência?</a></li>
+</ul></li>
+<li class="chapter" data-level="19.8" data-path="rmd/parte-2.html"><a href="#erros-de-infer%C3%AAncia"><i class="fa fa-check"></i><b>19.8</b> Erros de inferência</a>
+<ul>
+<li class="chapter" data-level="19.8.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-erros-de-infer%C3%AAncia-estat%C3%ADstica"><i class="fa fa-check"></i><b>19.8.1</b> O que são erros de inferência estatística?</a></li>
+<li class="chapter" data-level="19.8.2" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-erros-tipo-i-e-tipo-ii"><i class="fa fa-check"></i><b>19.8.2</b> O que são erros Tipo I e Tipo II?</a></li>
+<li class="chapter" data-level="19.8.3" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-erros-tipo-s-e-tipo-m"><i class="fa fa-check"></i><b>19.8.3</b> O que são erros Tipo S e Tipo M?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html"><i class="fa fa-check"></i><b>20</b> <strong>Tamanho do efeito e P-valor</strong></a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html#tamanho-do-efeito"><i class="fa fa-check"></i><b>20.1</b> Tamanho do efeito</a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-tamanho-do-efeito"><i class="fa fa-check"></i><b>20.1.1</b> O que é o tamanho do efeito?</a></li>
+<li class="chapter" data-level="20.1.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-os-tipos-de-tamanho-do-efeito"><i class="fa fa-check"></i><b>20.1.2</b> Quais são os tipos de tamanho do efeito?</a></li>
+<li class="chapter" data-level="20.1.3" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html#como-converter-um-tamanho-de-efeito-em-outro"><i class="fa fa-check"></i><b>20.1.3</b> Como converter um tamanho de efeito em outro?</a></li>
+<li class="chapter" data-level="20.1.4" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html#como-interpretar-um-tamanho-do-efeito"><i class="fa fa-check"></i><b>20.1.4</b> Como interpretar um tamanho do efeito?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html#efeito-fixo"><i class="fa fa-check"></i><b>20.2</b> Efeito fixo</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-fixo"><i class="fa fa-check"></i><b>20.2.1</b> O que é efeito fixo?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="rmd/parte-2.html"><a href="#efeito-aleat%C3%B3rio"><i class="fa fa-check"></i><b>20.3</b> Efeito aleatório</a>
+<ul>
+<li class="chapter" data-level="20.3.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-aleat%C3%B3rio"><i class="fa fa-check"></i><b>20.3.1</b> O que é efeito aleatório?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.4" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html#efeito-principal"><i class="fa fa-check"></i><b>20.4</b> Efeito principal</a>
+<ul>
+<li class="chapter" data-level="20.4.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-principal"><i class="fa fa-check"></i><b>20.4.1</b> O que é efeito principal?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.5" data-path="rmd/parte-2.html"><a href="#efeito-de-modifica%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>20.5</b> Efeito de modificação</a>
+<ul>
+<li class="chapter" data-level="20.5.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-um-modificador-de-efeito"><i class="fa fa-check"></i><b>20.5.1</b> O que é um modificador de efeito?</a></li>
+<li class="chapter" data-level="20.5.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-de-modifica%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>20.5.2</b> O que é efeito de modificação?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.6" data-path="rmd/parte-2.html"><a href="#efeito-de-intera%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>20.6</b> Efeito de interação</a>
+<ul>
+<li class="chapter" data-level="20.6.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-de-intera%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>20.6.1</b> O que é efeito de interação?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.7" data-path="rmd/parte-2.html"><a href="#efeito-de-media%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>20.7</b> Efeito de mediação</a>
+<ul>
+<li class="chapter" data-level="20.7.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-um-mediador-de-efeito"><i class="fa fa-check"></i><b>20.7.1</b> O que é um mediador de efeito?</a></li>
+<li class="chapter" data-level="20.7.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-de-media%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>20.7.2</b> O que é efeito de mediação?</a></li>
+<li class="chapter" data-level="20.7.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-direto"><i class="fa fa-check"></i><b>20.7.3</b> O que é efeito direto?</a></li>
+<li class="chapter" data-level="20.7.4" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-indireto"><i class="fa fa-check"></i><b>20.7.4</b> O que é efeito indireto?</a></li>
+<li class="chapter" data-level="20.7.5" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-total"><i class="fa fa-check"></i><b>20.7.5</b> O que é efeito total?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.8" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html#efeitos-brutos-e-padronizados"><i class="fa fa-check"></i><b>20.8</b> Efeitos brutos e padronizados</a>
+<ul>
+<li class="chapter" data-level="20.8.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-bruto"><i class="fa fa-check"></i><b>20.8.1</b> O que é efeito bruto?</a></li>
+<li class="chapter" data-level="20.8.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-efeito-padronizado"><i class="fa fa-check"></i><b>20.8.2</b> O que é efeito padronizado?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.9" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html#p-valor"><i class="fa fa-check"></i><b>20.9</b> P-valor</a>
+<ul>
+<li class="chapter" data-level="20.9.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-signific%C3%A2ncia-estat%C3%ADstica"><i class="fa fa-check"></i><b>20.9.1</b> O que é significância estatística?</a></li>
+<li class="chapter" data-level="20.9.2" data-path="rmd/parte-2.html"><a href="#como-justificar-o-n%C3%ADvel-de-signific%C3%A2ncia-estat%C3%ADstica-de-um-teste"><i class="fa fa-check"></i><b>20.9.2</b> Como justificar o nível de significância estatística de um teste?</a></li>
+<li class="chapter" data-level="20.9.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-p-valor"><i class="fa fa-check"></i><b>20.9.3</b> O que é o P-valor?</a></li>
+<li class="chapter" data-level="20.9.4" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html#como-interpretar-o-p-valor"><i class="fa fa-check"></i><b>20.9.4</b> Como interpretar o P-valor?</a></li>
+<li class="chapter" data-level="20.9.5" data-path="rmd/parte-2.html"><a href="#o-que-o-p-valor-n%C3%A3o-%C3%A9"><i class="fa fa-check"></i><b>20.9.5</b> O que o P-valor não é?</a></li>
+<li class="chapter" data-level="20.9.6" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html#qual-a-origem-do-p005"><i class="fa fa-check"></i><b>20.9.6</b> Qual a origem do ‘P&lt;0,05’?</a></li>
+<li class="chapter" data-level="20.9.7" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-os-complementos-ou-alternativas-ao-p-valor"><i class="fa fa-check"></i><b>20.9.7</b> Quais são os complementos ou alternativas ao P-valor?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.10" data-path="tamanhoefeito-pvalor.html"><a href="tamanhoefeito-pvalor.html#p-haking"><i class="fa fa-check"></i><b>20.10</b> P-haking</a>
+<ul>
+<li class="chapter" data-level="20.10.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-p-haking"><i class="fa fa-check"></i><b>20.10.1</b> O que é P-haking?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="selecao-testes.html"><a href="selecao-testes.html"><i class="fa fa-check"></i><b>21</b> <strong>Seleção de testes</strong></a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="rmd/parte-2.html"><a href="#multiverso-de-an%C3%A1lises-estat%C3%ADsticas"><i class="fa fa-check"></i><b>21.1</b> Multiverso de análises estatísticas</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="rmd/parte-2.html"><a href="#por-que-escolher-o-teste-%C3%A9-um-problema"><i class="fa fa-check"></i><b>21.1.1</b> Por que escolher o teste é um problema?</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="rmd/parte-2.html"><a href="#escolha-de-testes-para-an%C3%A1lise-inferencial"><i class="fa fa-check"></i><b>21.2</b> Escolha de testes para análise inferencial</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="rmd/parte-2.html"><a href="#como-selecionar-os-testes-para-a-an%C3%A1lise-estat%C3%ADstica-inferencial"><i class="fa fa-check"></i><b>21.2.1</b> Como selecionar os testes para a análise estatística inferencial?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html"><i class="fa fa-check"></i><b>22</b> <strong>Testes estatísticos</strong></a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html#testes-de-qui-quadrado-chi2"><i class="fa fa-check"></i><b>22.1</b> Testes de Qui-quadrado (<span class="math inline">\(\chi^2\)</span>)</a></li>
+<li class="chapter" data-level="22.2" data-path="testes-estatisticos.html"><a href="testes-estatisticos.html#teste-exato-de-fisher"><i class="fa fa-check"></i><b>22.2</b> Teste exato de Fisher</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="comparacao.html"><a href="comparacao.html"><i class="fa fa-check"></i><b>23</b> <strong>Comparação</strong></a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-inferencial-de-compara%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>23.1</b> Análise inferencial de comparação</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-de-compara%C3%A7%C3%A3o-de-dados"><i class="fa fa-check"></i><b>23.1.1</b> O que é análise de comparação de dados?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="correlacao.html"><a href="correlacao.html"><i class="fa fa-check"></i><b>24</b> <strong>Correlação</strong></a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-inferencial-de-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>24.1</b> Análise inferencial de correlação</a>
+<ul>
+<li class="chapter" data-level="24.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-covari%C3%A2ncia"><i class="fa fa-check"></i><b>24.1.1</b> O que é covariância?</a></li>
+<li class="chapter" data-level="24.1.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>24.1.2</b> O que é correlação?</a></li>
+<li class="chapter" data-level="24.1.3" data-path="rmd/parte-2.html"><a href="#qual-%C3%A9-a-interpreta%C3%A7%C3%A3o-das-medidas-de-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>24.1.3</b> Qual é a interpretação das medidas de correlação?</a></li>
+<li class="chapter" data-level="24.1.4" data-path="rmd/parte-2.html"><a href="#quais-precau%C3%A7%C3%B5es-devem-ser-tomadas-na-interpreta%C3%A7%C3%A3o-de-medidas-de-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>24.1.4</b> Quais precauções devem ser tomadas na interpretação de medidas de correlação?</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="rmd/parte-2.html"><a href="#coeficientes-de-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>24.2</b> Coeficientes de correlação</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="rmd/parte-2.html"><a href="#quais-coeficientes-podem-ser-usados-em-an%C3%A1lises-de-correla%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>24.2.1</b> Quais coeficientes podem ser usados em análises de correlação?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="associacao.html"><a href="associacao.html"><i class="fa fa-check"></i><b>25</b> <strong>Associação</strong></a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-inferencial-de-associa%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>25.1</b> Análise inferencial de associação</a>
+<ul>
+<li class="chapter" data-level="25.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-de-associa%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>25.1.1</b> O que é análise de associação?</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="rmd/parte-2.html"><a href="#associa%C3%A7%C3%A3o-bivariada"><i class="fa fa-check"></i><b>25.2</b> Associação bivariada</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-associa%C3%A7%C3%A3o-bivariada"><i class="fa fa-check"></i><b>25.2.1</b> O que são análises de associação bivariada?</a></li>
+<li class="chapter" data-level="25.2.2" data-path="rmd/parte-2.html"><a href="#quais-testes-podem-ser-usados-para-an%C3%A1lises-de-associa%C3%A7%C3%A3o-bivariada"><i class="fa fa-check"></i><b>25.2.2</b> Quais testes podem ser usados para análises de associação bivariada?</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="rmd/parte-2.html"><a href="#associa%C3%A7%C3%A3o-multivariada"><i class="fa fa-check"></i><b>25.3</b> Associação multivariada</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-associa%C3%A7%C3%A3o-multivariada"><i class="fa fa-check"></i><b>25.3.1</b> O que são análises de associação multivariada?</a></li>
+<li class="chapter" data-level="25.3.2" data-path="rmd/parte-2.html"><a href="#quais-testes-podem-ser-usados-para-an%C3%A1lises-de-associa%C3%A7%C3%A3o-multivariada"><i class="fa fa-check"></i><b>25.3.2</b> Quais testes podem ser usados para análises de associação multivariada?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="parte-5.html"><a href="parte-5.html"><i class="fa fa-check"></i><em>PARTE 5: MODELAGEM ESTATÍSTICA</em></a>
+<ul>
+<li class="chapter" data-level="" data-path="parte-5.html"><a href="parte-5.html#ferramentas-preditivas-e-causais"><i class="fa fa-check"></i>Ferramentas preditivas e causais</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="modelos.html"><a href="modelos.html"><i class="fa fa-check"></i><b>26</b> <strong>Modelos</strong></a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="rmd/parte-2.html"><a href="#modelos-estat%C3%ADsticos"><i class="fa fa-check"></i><b>26.1</b> Modelos estatísticos</a>
+<ul>
+<li class="chapter" data-level="26.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-modelos"><i class="fa fa-check"></i><b>26.1.1</b> O que são modelos?</a></li>
+</ul></li>
+<li class="chapter" data-level="26.2" data-path="rmd/parte-2.html"><a href="#suposi%C3%A7%C3%B5es-dos-modelos"><i class="fa fa-check"></i><b>26.2</b> Suposições dos modelos</a>
+<ul>
+<li class="chapter" data-level="26.2.1" data-path="rmd/parte-2.html"><a href="#quais-suposi%C3%A7%C3%B5es-s%C3%A3o-feitas-para-modelagem"><i class="fa fa-check"></i><b>26.2.1</b> Quais suposições são feitas para modelagem?</a></li>
+<li class="chapter" data-level="26.2.2" data-path="rmd/parte-2.html"><a href="#como-avaliar-as-suposi%C3%A7%C3%B5es-de-um-modelo"><i class="fa fa-check"></i><b>26.2.2</b> Como avaliar as suposições de um modelo?</a></li>
+</ul></li>
+<li class="chapter" data-level="26.3" data-path="rmd/parte-2.html"><a href="#avalia%C3%A7%C3%A3o-de-modelos"><i class="fa fa-check"></i><b>26.3</b> Avaliação de modelos</a>
+<ul>
+<li class="chapter" data-level="26.3.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-qualidade-de-ajuste-de-um-modelo"><i class="fa fa-check"></i><b>26.3.1</b> O que é qualidade de ajuste de um modelo?</a></li>
+<li class="chapter" data-level="26.3.2" data-path="modelos.html"><a href="modelos.html#como-avaliar-a-qualidade-de-ajuste-de-um-modelo"><i class="fa fa-check"></i><b>26.3.2</b> Como avaliar a qualidade de ajuste de um modelo?</a></li>
+</ul></li>
+<li class="chapter" data-level="26.4" data-path="rmd/parte-2.html"><a href="#compara%C3%A7%C3%A3o-de-modelos"><i class="fa fa-check"></i><b>26.4</b> Comparação de modelos</a>
+<ul>
+<li class="chapter" data-level="26.4.1" data-path="rmd/parte-2.html"><a href="#como-comparar-modelos-de-aprendizagem-de-m%C3%A1quina"><i class="fa fa-check"></i><b>26.4.1</b> Como comparar modelos de aprendizagem de máquina?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="regressao.html"><a href="regressao.html"><i class="fa fa-check"></i><b>27</b> <strong>Regressão</strong></a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-de-regress%C3%A3o"><i class="fa fa-check"></i><b>27.1</b> Análise de regressão</a>
+<ul>
+<li class="chapter" data-level="27.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-regress%C3%A3o"><i class="fa fa-check"></i><b>27.1.1</b> O que é regressão?</a></li>
+<li class="chapter" data-level="27.1.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-os-algoritmos-de-regress%C3%A3o"><i class="fa fa-check"></i><b>27.1.2</b> Quais são os algoritmos de regressão?</a></li>
+<li class="chapter" data-level="27.1.3" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-simples"><i class="fa fa-check"></i><b>27.1.3</b> O que são análises de regressão simples?</a></li>
+<li class="chapter" data-level="27.1.4" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-multivari%C3%A1vel"><i class="fa fa-check"></i><b>27.1.4</b> O que são análises de regressão multivariável?</a></li>
+<li class="chapter" data-level="27.1.5" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-multivariada"><i class="fa fa-check"></i><b>27.1.5</b> O que são análises de regressão multivariada?</a></li>
+<li class="chapter" data-level="27.1.6" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-linear"><i class="fa fa-check"></i><b>27.1.6</b> O que são análises de regressão linear?</a></li>
+<li class="chapter" data-level="27.1.7" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-n%C3%A3o-linear"><i class="fa fa-check"></i><b>27.1.7</b> O que são análises de regressão não-linear?</a></li>
+<li class="chapter" data-level="27.1.8" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-log%C3%ADstica"><i class="fa fa-check"></i><b>27.1.8</b> O que são análises de regressão logística?</a></li>
+</ul></li>
+<li class="chapter" data-level="27.2" data-path="rmd/parte-2.html"><a href="#prepara%C3%A7%C3%A3o-de-vari%C3%A1veis-para-regress%C3%A3o"><i class="fa fa-check"></i><b>27.2</b> Preparação de variáveis para regressão</a>
+<ul>
+<li class="chapter" data-level="27.2.1" data-path="rmd/parte-2.html"><a href="#como-preparar-as-vari%C3%A1veis-categ%C3%B3ricas-para-an%C3%A1lise-de-regress%C3%A3o"><i class="fa fa-check"></i><b>27.2.1</b> Como preparar as variáveis categóricas para análise de regressão?</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="rmd/parte-2.html"><a href="#redu%C3%A7%C3%A3o-de-dimensionalidade-para-regress%C3%A3o"><i class="fa fa-check"></i><b>27.3</b> Redução de dimensionalidade para regressão</a>
+<ul>
+<li class="chapter" data-level="27.3.1" data-path="rmd/parte-2.html"><a href="#correla%C3%A7%C3%A3o-bivariada-pode-ser-usada-para-sele%C3%A7%C3%A3o-de-vari%C3%A1veis-em-modelos-de-regress%C3%A3o-multivari%C3%A1vel"><i class="fa fa-check"></i><b>27.3.1</b> Correlação bivariada pode ser usada para seleção de variáveis em modelos de regressão multivariável?</a></li>
+<li class="chapter" data-level="27.3.2" data-path="rmd/parte-2.html"><a href="#vari%C3%A1veis-sem-signific%C3%A2ncia-estat%C3%ADstica-devem-ser-exclu%C3%ADdas-do-modelo-final"><i class="fa fa-check"></i><b>27.3.2</b> Variáveis sem significância estatística devem ser excluídas do modelo final?</a></li>
+<li class="chapter" data-level="27.3.3" data-path="rmd/parte-2.html"><a href="#por-que-m%C3%A9todos-de-regress%C3%A3o-gradual-n%C3%A3o-s%C3%A3o-recomendados-para-sele%C3%A7%C3%A3o-de-vari%C3%A1veis-em-modelos-de-regress%C3%A3o-multivari%C3%A1vel"><i class="fa fa-check"></i><b>27.3.3</b> Por que métodos de regressão gradual não são recomendados para seleção de variáveis em modelos de regressão multivariável?</a></li>
+<li class="chapter" data-level="27.3.4" data-path="rmd/parte-2.html"><a href="#o-que-pode-ser-feito-para-reduzir-o-n%C3%BAmero-de-vari%C3%A1veis-candidatas-em-modelos-de-regress%C3%A3o-multivari%C3%A1vel"><i class="fa fa-check"></i><b>27.3.4</b> O que pode ser feito para reduzir o número de variáveis candidatas em modelos de regressão multivariável?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="redes.html"><a href="redes.html"><i class="fa fa-check"></i><b>28</b> <strong>Redes</strong></a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-de-redes"><i class="fa fa-check"></i><b>28.1</b> Análise de redes</a>
+<ul>
+<li class="chapter" data-level="28.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-de-rede"><i class="fa fa-check"></i><b>28.1.1</b> O que é análise de rede?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="aprendizado-maquina.html"><a href="aprendizado-maquina.html"><i class="fa fa-check"></i><b>29</b> <strong>Aprendizado de máquina</strong></a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="rmd/parte-2.html"><a href="#aprendizado-de-m%C3%A1quina"><i class="fa fa-check"></i><b>29.1</b> Aprendizado de máquina</a>
+<ul>
+<li class="chapter" data-level="29.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-aprendizado-de-m%C3%A1quina"><i class="fa fa-check"></i><b>29.1.1</b> O que é aprendizado de máquina?</a></li>
+<li class="chapter" data-level="29.1.2" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-os-principais-algoritmos-de-aprendizado-de-m%C3%A1quina"><i class="fa fa-check"></i><b>29.1.2</b> Quais são os principais algoritmos de aprendizado de máquina?</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="aprendizado-maquina.html"><a href="aprendizado-maquina.html#aprendizado-supervisionada"><i class="fa fa-check"></i><b>29.2</b> aprendizado supervisionada</a></li>
+<li class="chapter" data-level="29.3" data-path="rmd/parte-2.html"><a href="#aprendizado-n%C3%A3o-supervisionada"><i class="fa fa-check"></i><b>29.3</b> aprendizado não-supervisionada</a></li>
+<li class="chapter" data-level="29.4" data-path="rmd/parte-2.html"><a href="#aprendizado-por-refor%C3%A7o"><i class="fa fa-check"></i><b>29.4</b> aprendizado por reforço</a></li>
+<li class="chapter" data-level="29.5" data-path="aprendizado-maquina.html"><a href="aprendizado-maquina.html#aprendizado-profunda"><i class="fa fa-check"></i><b>29.5</b> aprendizado profunda</a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="arvore-decisao.html"><a href="arvore-decisao.html"><i class="fa fa-check"></i><b>30</b> <strong>Árvore de decisão</strong></a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="rmd/parte-2.html"><a href="#%C3%A1rvore-de-decis%C3%A3o"><i class="fa fa-check"></i><b>30.1</b> Árvore de decisão</a>
+<ul>
+<li class="chapter" data-level="30.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-%C3%A1rvore-de-decis%C3%A3o"><i class="fa fa-check"></i><b>30.1.1</b> O que é árvore de decisão?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="analise-preditiva.html"><a href="analise-preditiva.html"><i class="fa fa-check"></i><b>31</b> <strong>Análise preditiva</strong></a>
+<ul>
+<li class="chapter" data-level="31.1" data-path="rmd/parte-2.html"><a href="#predi%C3%A7%C3%A3o-via-modelagem"><i class="fa fa-check"></i><b>31.1</b> Predição via modelagem</a>
+<ul>
+<li class="chapter" data-level="31.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-predi%C3%A7%C3%B5es"><i class="fa fa-check"></i><b>31.1.1</b> O que são predições?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="analise-causal.html"><a href="analise-causal.html"><i class="fa fa-check"></i><b>32</b> <strong>Análise causal</strong></a>
+<ul>
+<li class="chapter" data-level="32.1" data-path="analise-causal.html"><a href="analise-causal.html#causalidade"><i class="fa fa-check"></i><b>32.1</b> Causalidade</a>
+<ul>
+<li class="chapter" data-level="32.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-causal"><i class="fa fa-check"></i><b>32.1.1</b> O que é análise causal?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="parte-6.html"><a href="parte-6.html"><i class="fa fa-check"></i><em>PARTE 6: DELINEAMENTO DE PESQUISA</em></a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#delineamento-antes-da-an%C3%A1lise"><i class="fa fa-check"></i>Delineamento antes da análise</a></li>
+</ul></li>
+<li class="chapter" data-level="33" data-path="delineamento-estudos.html"><a href="delineamento-estudos.html"><i class="fa fa-check"></i><b>33</b> <strong>Delineamento de estudos</strong></a>
+<ul>
+<li class="chapter" data-level="33.1" data-path="rmd/parte-2.html"><a href="#crit%C3%A9rios-de-delineamento"><i class="fa fa-check"></i><b>33.1</b> Critérios de delineamento</a>
+<ul>
+<li class="chapter" data-level="33.1.1" data-path="rmd/parte-2.html"><a href="#quais-crit%C3%A9rios-s%C3%A3o-utilizados-para-classificar-os-delineamentos-de-estudos"><i class="fa fa-check"></i><b>33.1.1</b> Quais critérios são utilizados para classificar os delineamentos de estudos?</a></li>
+</ul></li>
+<li class="chapter" data-level="33.2" data-path="rmd/parte-2.html"><a href="#aloca%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>33.2</b> Alocação</a>
+<ul>
+<li class="chapter" data-level="33.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-aloca%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>33.2.1</b> O que é alocação?</a></li>
+</ul></li>
+<li class="chapter" data-level="33.3" data-path="delineamento-estudos.html"><a href="delineamento-estudos.html#cegamento"><i class="fa fa-check"></i><b>33.3</b> Cegamento</a>
+<ul>
+<li class="chapter" data-level="33.3.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-cegamento"><i class="fa fa-check"></i><b>33.3.1</b> O que é cegamento?</a></li>
+</ul></li>
+<li class="chapter" data-level="33.4" data-path="delineamento-estudos.html"><a href="delineamento-estudos.html#pareamento"><i class="fa fa-check"></i><b>33.4</b> Pareamento</a>
+<ul>
+<li class="chapter" data-level="33.4.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-pareamento"><i class="fa fa-check"></i><b>33.4.1</b> O que é pareamento?</a></li>
+</ul></li>
+<li class="chapter" data-level="33.5" data-path="rmd/parte-2.html"><a href="#aleatoriza%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>33.5</b> Aleatorização</a>
+<ul>
+<li class="chapter" data-level="33.5.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-aleatoriza%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>33.5.1</b> O que é aleatorização?</a></li>
+</ul></li>
+<li class="chapter" data-level="33.6" data-path="delineamento-estudos.html"><a href="delineamento-estudos.html#taxonomia-de-estudos"><i class="fa fa-check"></i><b>33.6</b> Taxonomia de estudos</a>
+<ul>
+<li class="chapter" data-level="33.6.1" data-path="rmd/parte-2.html"><a href="#como-podem-ser-classificados-os-estudos-cient%C3%ADficos"><i class="fa fa-check"></i><b>33.6.1</b> Como podem ser classificados os estudos científicos?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="34" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html"><i class="fa fa-check"></i><b>34</b> <strong>Tamanho da amostra</strong></a>
+<ul>
+<li class="chapter" data-level="34.1" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#tamanho-da-amostra"><i class="fa fa-check"></i><b>34.1</b> Tamanho da amostra</a>
+<ul>
+<li class="chapter" data-level="34.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-tamanho-da-amostra"><i class="fa fa-check"></i><b>34.1.1</b> O que é tamanho da amostra?</a></li>
+<li class="chapter" data-level="34.1.2" data-path="rmd/parte-2.html"><a href="#por-que-determinar-o-tamanho-da-amostra-%C3%A9-importante"><i class="fa fa-check"></i><b>34.1.2</b> Por que determinar o tamanho da amostra é importante?</a></li>
+<li class="chapter" data-level="34.1.3" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#quais-fatores-devem-ser-considerados-para-determinar-o-tamanho-da-amostra"><i class="fa fa-check"></i><b>34.1.3</b> Quais fatores devem ser considerados para determinar o tamanho da amostra?</a></li>
+<li class="chapter" data-level="34.1.4" data-path="rmd/parte-2.html"><a href="#quais-aspectos-%C3%A9ticos-est%C3%A3o-envolvidos-no-tamanho-da-amostra"><i class="fa fa-check"></i><b>34.1.4</b> Quais aspectos éticos estão envolvidos no tamanho da amostra?</a></li>
+</ul></li>
+<li class="chapter" data-level="34.2" data-path="rmd/parte-2.html"><a href="#c%C3%A1lculo-do-tamanho-da-amostra"><i class="fa fa-check"></i><b>34.2</b> Cálculo do tamanho da amostra</a>
+<ul>
+<li class="chapter" data-level="34.2.1" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#como-calcular-o-tamanho-da-amostra"><i class="fa fa-check"></i><b>34.2.1</b> Como calcular o tamanho da amostra?</a></li>
+<li class="chapter" data-level="34.2.2" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#como-especificar-o-tamanho-do-efeito-esperado"><i class="fa fa-check"></i><b>34.2.2</b> Como especificar o tamanho do efeito esperado?</a></li>
+</ul></li>
+<li class="chapter" data-level="34.3" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#perdas-de-amostra"><i class="fa fa-check"></i><b>34.3</b> Perdas de amostra</a>
+<ul>
+<li class="chapter" data-level="34.3.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-perda-de-amostra"><i class="fa fa-check"></i><b>34.3.1</b> O que é perda de amostra?</a></li>
+<li class="chapter" data-level="34.3.2" data-path="rmd/parte-2.html"><a href="#por-que-a-perda-de-amostra-%C3%A9-um-problema"><i class="fa fa-check"></i><b>34.3.2</b> Por que a perda de amostra é um problema?</a></li>
+<li class="chapter" data-level="34.3.3" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#como-evitar-perda-de-amostra"><i class="fa fa-check"></i><b>34.3.3</b> Como evitar perda de amostra?</a></li>
+</ul></li>
+<li class="chapter" data-level="34.4" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#ajustes-no-tamanho-da-amostra"><i class="fa fa-check"></i><b>34.4</b> Ajustes no tamanho da amostra</a>
+<ul>
+<li class="chapter" data-level="34.4.1" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#por-que-ajustar-o-tamanho-da-amostra"><i class="fa fa-check"></i><b>34.4.1</b> Por que ajustar o tamanho da amostra?</a></li>
+<li class="chapter" data-level="34.4.2" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#como-ajustar-para-perda-amostral"><i class="fa fa-check"></i><b>34.4.2</b> Como ajustar para perda amostral?</a></li>
+</ul></li>
+<li class="chapter" data-level="34.5" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#justificativa-do-tamanho-da-amostra"><i class="fa fa-check"></i><b>34.5</b> Justificativa do tamanho da amostra</a>
+<ul>
+<li class="chapter" data-level="34.5.1" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#como-justificar-o-tamanho-da-amostra-de-um-estudo"><i class="fa fa-check"></i><b>34.5.1</b> Como justificar o tamanho da amostra de um estudo?</a></li>
+</ul></li>
+<li class="chapter" data-level="34.6" data-path="tamanho-amostral.html"><a href="tamanho-amostral.html#sparking"><i class="fa fa-check"></i><b>34.6</b> SPARKing</a>
+<ul>
+<li class="chapter" data-level="34.6.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-sparking"><i class="fa fa-check"></i><b>34.6.1</b> O que é SPARKing?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="observacional.html"><a href="observacional.html"><i class="fa fa-check"></i><b>35</b> <strong>Estudos observacionais</strong></a>
+<ul>
+<li class="chapter" data-level="35.1" data-path="rmd/parte-2.html"><a href="#caracter%C3%ADsticas"><i class="fa fa-check"></i><b>35.1</b> Características</a>
+<ul>
+<li class="chapter" data-level="35.1.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-caracter%C3%ADsticas-de-estudos-observacionais"><i class="fa fa-check"></i><b>35.1.1</b> Quais são as características de estudos observacionais?</a></li>
+</ul></li>
+<li class="chapter" data-level="35.2" data-path="rmd/parte-2.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>35.2</b> Diretrizes para redação</a>
+<ul>
+<li class="chapter" data-level="35.2.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-estudos-observacionais"><i class="fa fa-check"></i><b>35.2.1</b> Quais são as diretrizes para redação de estudos observacionais?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="36" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html"><i class="fa fa-check"></i><b>36</b> <strong>Propriedades psicométricas</strong></a>
+<ul>
+<li class="chapter" data-level="36.1" data-path="rmd/parte-2.html"><a href="#caracter%C3%ADsticas-1"><i class="fa fa-check"></i><b>36.1</b> Características</a>
+<ul>
+<li class="chapter" data-level="36.1.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-propriedades-psicom%C3%A9tricas"><i class="fa fa-check"></i><b>36.1.1</b> O que são propriedades psicométricas?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.2" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-fatorial-explorat%C3%B3ria"><i class="fa fa-check"></i><b>36.2</b> Análise fatorial exploratória</a>
+<ul>
+<li class="chapter" data-level="36.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-fatorial-explorat%C3%B3ria"><i class="fa fa-check"></i><b>36.2.1</b> O que é análise fatorial exploratória?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.3" data-path="rmd/parte-2.html"><a href="#an%C3%A1lise-fatorial-confirmat%C3%B3ria"><i class="fa fa-check"></i><b>36.3</b> Análise fatorial confirmatória</a>
+<ul>
+<li class="chapter" data-level="36.3.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-an%C3%A1lise-fatorial-confirmat%C3%B3ria"><i class="fa fa-check"></i><b>36.3.1</b> O que é análise fatorial confirmatória?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.4" data-path="rmd/parte-2.html"><a href="#validade-de-conte%C3%BAdo"><i class="fa fa-check"></i><b>36.4</b> Validade de conteúdo</a>
+<ul>
+<li class="chapter" data-level="36.4.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-validade-interna"><i class="fa fa-check"></i><b>36.4.1</b> O que é validade interna?</a></li>
+<li class="chapter" data-level="36.4.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-validade-externa"><i class="fa fa-check"></i><b>36.4.2</b> O que é validade externa?</a></li>
+<li class="chapter" data-level="36.4.3" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html#que-fatores-afetam-a-validade"><i class="fa fa-check"></i><b>36.4.3</b> Que fatores afetam a validade?</a></li>
+<li class="chapter" data-level="36.4.4" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html#como-avaliar-a-validade-de-um-estudo"><i class="fa fa-check"></i><b>36.4.4</b> Como avaliar a validade de um estudo?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.5" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html#validade-de-face"><i class="fa fa-check"></i><b>36.5</b> Validade de face</a>
+<ul>
+<li class="chapter" data-level="36.5.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-validade-de-face"><i class="fa fa-check"></i><b>36.5.1</b> O que é validade de face?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.6" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html#validade-do-construto"><i class="fa fa-check"></i><b>36.6</b> Validade do construto</a>
+<ul>
+<li class="chapter" data-level="36.6.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-construto"><i class="fa fa-check"></i><b>36.6.1</b> O que é construto?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.7" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html#validade-fatorial"><i class="fa fa-check"></i><b>36.7</b> Validade fatorial</a>
+<ul>
+<li class="chapter" data-level="36.7.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-validade-fatorial"><i class="fa fa-check"></i><b>36.7.1</b> O que é validade fatorial?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.8" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html#validade-convergente"><i class="fa fa-check"></i><b>36.8</b> Validade convergente</a>
+<ul>
+<li class="chapter" data-level="36.8.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-validade-convergente"><i class="fa fa-check"></i><b>36.8.1</b> O que é validade convergente?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.9" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html#validade-discriminante"><i class="fa fa-check"></i><b>36.9</b> Validade discriminante</a>
+<ul>
+<li class="chapter" data-level="36.9.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-validade-discriminante"><i class="fa fa-check"></i><b>36.9.1</b> O que é validade discriminante?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.10" data-path="rmd/parte-2.html"><a href="#validade-de-crit%C3%A9rio"><i class="fa fa-check"></i><b>36.10</b> Validade de critério</a>
+<ul>
+<li class="chapter" data-level="36.10.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-validade-de-crit%C3%A9rio"><i class="fa fa-check"></i><b>36.10.1</b> O que é validade de critério?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.11" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html#validade-concorrente"><i class="fa fa-check"></i><b>36.11</b> Validade concorrente</a>
+<ul>
+<li class="chapter" data-level="36.11.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-concorrente"><i class="fa fa-check"></i><b>36.11.1</b> O que é concorrente?</a></li>
+<li class="chapter" data-level="36.11.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-validade-concorrente"><i class="fa fa-check"></i><b>36.11.2</b> O que é validade concorrente?</a></li>
+<li class="chapter" data-level="36.11.3" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-validade-preditiva"><i class="fa fa-check"></i><b>36.11.3</b> O que é validade preditiva?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.12" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html#responsividade"><i class="fa fa-check"></i><b>36.12</b> Responsividade</a>
+<ul>
+<li class="chapter" data-level="36.12.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-responsividade"><i class="fa fa-check"></i><b>36.12.1</b> O que é responsividade?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.13" data-path="rmd/parte-2.html"><a href="#concord%C3%A2ncia"><i class="fa fa-check"></i><b>36.13</b> Concordância</a>
+<ul>
+<li class="chapter" data-level="36.13.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-concord%C3%A2ncia"><i class="fa fa-check"></i><b>36.13.1</b> O que é concordância?</a></li>
+<li class="chapter" data-level="36.13.2" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-s%C3%A3o-adequados-para-an%C3%A1lise-de-concord%C3%A2ncia-de-vari%C3%A1veis-dicot%C3%B4micas"><i class="fa fa-check"></i><b>36.13.2</b> Quais métodos são adequados para análise de concordância de variáveis dicotômicas?</a></li>
+<li class="chapter" data-level="36.13.3" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-n%C3%A3o-s%C3%A3o-adequados-para-an%C3%A1lise-de-concord%C3%A2ncia-de-vari%C3%A1veis-dicot%C3%B4micas"><i class="fa fa-check"></i><b>36.13.3</b> Quais métodos não são adequados para análise de concordância de variáveis dicotômicas?</a></li>
+<li class="chapter" data-level="36.13.4" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-s%C3%A3o-adequados-para-an%C3%A1lise-de-concord%C3%A2ncia-de-vari%C3%A1veis-categ%C3%B3ricas"><i class="fa fa-check"></i><b>36.13.4</b> Quais métodos são adequados para análise de concordância de variáveis categóricas?</a></li>
+<li class="chapter" data-level="36.13.5" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-s%C3%A3o-adequados-para-an%C3%A1lise-de-concord%C3%A2ncia-de-vari%C3%A1veis-categ%C3%B3ricas-e-cont%C3%ADnuas"><i class="fa fa-check"></i><b>36.13.5</b> Quais métodos são adequados para análise de concordância de variáveis categóricas e contínuas?</a></li>
+<li class="chapter" data-level="36.13.6" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-s%C3%A3o-adequados-para-an%C3%A1lise-de-concord%C3%A2ncia-de-vari%C3%A1veis-ordinais"><i class="fa fa-check"></i><b>36.13.6</b> Quais métodos são adequados para análise de concordância de variáveis ordinais?</a></li>
+<li class="chapter" data-level="36.13.7" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-s%C3%A3o-adequados-para-an%C3%A1lise-de-concord%C3%A2ncia-de-vari%C3%A1veis-cont%C3%ADnuas"><i class="fa fa-check"></i><b>36.13.7</b> Quais métodos são adequados para análise de concordância de variáveis contínuas?</a></li>
+<li class="chapter" data-level="36.13.8" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-n%C3%A3o-s%C3%A3o-adequados-para-an%C3%A1lise-de-concord%C3%A2ncia-de-vari%C3%A1veis-cont%C3%ADnuas"><i class="fa fa-check"></i><b>36.13.8</b> Quais métodos não são adequados para análise de concordância de variáveis contínuas?</a></li>
+<li class="chapter" data-level="36.13.9" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-s%C3%A3o-adequados-para-modelagem-de-concord%C3%A2ncia"><i class="fa fa-check"></i><b>36.13.9</b> Quais métodos são adequados para modelagem de concordância?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.14" data-path="propriedades-psicometricas.html"><a href="propriedades-psicometricas.html#confiabilidade"><i class="fa fa-check"></i><b>36.14</b> Confiabilidade</a>
+<ul>
+<li class="chapter" data-level="36.14.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-confiabilidade"><i class="fa fa-check"></i><b>36.14.1</b> O que é confiabilidade?</a></li>
+<li class="chapter" data-level="36.14.2" data-path="rmd/parte-2.html"><a href="#quais-m%C3%A9todos-s%C3%A3o-adequados-para-an%C3%A1lise-de-confiabilidade"><i class="fa fa-check"></i><b>36.14.2</b> Quais métodos são adequados para análise de confiabilidade?</a></li>
+</ul></li>
+<li class="chapter" data-level="36.15" data-path="rmd/parte-2.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-1"><i class="fa fa-check"></i><b>36.15</b> Diretrizes para redação</a>
+<ul>
+<li class="chapter" data-level="36.15.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-estudos-de-propriedades-psicom%C3%A9tricas"><i class="fa fa-check"></i><b>36.15.1</b> Quais são as diretrizes para redação de estudos de propriedades psicométricas?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="37" data-path="desempenho-diagnostico.html"><a href="desempenho-diagnostico.html"><i class="fa fa-check"></i><b>37</b> <strong>Desempenho diagnóstico</strong></a>
+<ul>
+<li class="chapter" data-level="37.1" data-path="rmd/parte-2.html"><a href="#caracter%C3%ADsticas-2"><i class="fa fa-check"></i><b>37.1</b> Características</a>
+<ul>
+<li class="chapter" data-level="37.1.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-caracter%C3%ADsticas-de-estudos-de-desempenho-diagn%C3%B3stico"><i class="fa fa-check"></i><b>37.1.1</b> Quais são as características de estudos de desempenho diagnóstico?</a></li>
+</ul></li>
+<li class="chapter" data-level="37.2" data-path="desempenho-diagnostico.html"><a href="desempenho-diagnostico.html#tabelas-2x2"><i class="fa fa-check"></i><b>37.2</b> Tabelas 2x2</a>
+<ul>
+<li class="chapter" data-level="37.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-uma-tabela-de-confus%C3%A3o-2x2"><i class="fa fa-check"></i><b>37.2.1</b> O que é uma tabela de confusão 2x2?</a></li>
+<li class="chapter" data-level="37.2.2" data-path="rmd/parte-2.html"><a href="#como-analisar-o-desempenho-diagn%C3%B3stico-em-tabelas-2x2"><i class="fa fa-check"></i><b>37.2.2</b> Como analisar o desempenho diagnóstico em tabelas 2x2?</a></li>
+<li class="chapter" data-level="37.2.3" data-path="rmd/parte-2.html"><a href="#quais-probabilidades-caracterizam-o-desempenho-diagn%C3%B3stico-de-um-teste-em-tabelas-2x2"><i class="fa fa-check"></i><b>37.2.3</b> Quais probabilidades caracterizam o desempenho diagnóstico de um teste em tabelas 2x2?</a></li>
+</ul></li>
+<li class="chapter" data-level="37.3" data-path="rmd/parte-2.html"><a href="#gr%C3%A1ficos-crosshair"><i class="fa fa-check"></i><b>37.3</b> Gráficos <em>crosshair</em></a>
+<ul>
+<li class="chapter" data-level="37.3.1" data-path="rmd/parte-2.html"><a href="#o-que-um-gr%C3%A1fico-crosshair"><i class="fa fa-check"></i><b>37.3.1</b> O que um gráfico <em>crosshair</em>?</a></li>
+</ul></li>
+<li class="chapter" data-level="37.4" data-path="desempenho-diagnostico.html"><a href="desempenho-diagnostico.html#curvas-roc"><i class="fa fa-check"></i><b>37.4</b> Curvas ROC</a>
+<ul>
+<li class="chapter" data-level="37.4.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-a-%C3%A1rea-sob-a-curva-auroc"><i class="fa fa-check"></i><b>37.4.1</b> O que é a área sob a curva (AUROC)?</a></li>
+<li class="chapter" data-level="37.4.2" data-path="rmd/parte-2.html"><a href="#como-interpretar-a-%C3%A1rea-sob-a-curva-roc"><i class="fa fa-check"></i><b>37.4.2</b> Como interpretar a área sob a curva (ROC)?</a></li>
+<li class="chapter" data-level="37.4.3" data-path="rmd/parte-2.html"><a href="#como-analisar-o-desempenho-diagn%C3%B3stico-em-desfechos-com-distribui%C3%A7%C3%A3o-trimodal-na-popula%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>37.4.3</b> Como analisar o desempenho diagnóstico em desfechos com distribuição trimodal na população?</a></li>
+</ul></li>
+<li class="chapter" data-level="37.5" data-path="rmd/parte-2.html"><a href="#interpreta%C3%A7%C3%A3o-da-validade-de-um-teste"><i class="fa fa-check"></i><b>37.5</b> Interpretação da validade de um teste</a>
+<ul>
+<li class="chapter" data-level="37.5.1" data-path="rmd/parte-2.html"><a href="#que-itens-devem-ser-verificados-na-interpreta%C3%A7%C3%A3o-de-um-estudo-de-validade"><i class="fa fa-check"></i><b>37.5.1</b> Que itens devem ser verificados na interpretação de um estudo de validade?</a></li>
+</ul></li>
+<li class="chapter" data-level="37.6" data-path="rmd/parte-2.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-2"><i class="fa fa-check"></i><b>37.6</b> Diretrizes para redação</a>
+<ul>
+<li class="chapter" data-level="37.6.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-estudos-diagn%C3%B3sticos"><i class="fa fa-check"></i><b>37.6.1</b> Quais são as diretrizes para redação de estudos diagnósticos?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="38" data-path="ensaio-quase-experimental.html"><a href="ensaio-quase-experimental.html"><i class="fa fa-check"></i><b>38</b> <strong>Ensaios quase-experimentais</strong></a>
+<ul>
+<li class="chapter" data-level="38.1" data-path="rmd/parte-2.html"><a href="#caracter%C3%ADsticas-3"><i class="fa fa-check"></i><b>38.1</b> Características</a>
+<ul>
+<li class="chapter" data-level="38.1.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-caracter%C3%ADsticas-de-ensaios-quase-experimentais"><i class="fa fa-check"></i><b>38.1.1</b> Quais são as características de ensaios quase-experimentais?</a></li>
+</ul></li>
+<li class="chapter" data-level="38.2" data-path="rmd/parte-2.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-3"><i class="fa fa-check"></i><b>38.2</b> Diretrizes para redação</a>
+<ul>
+<li class="chapter" data-level="38.2.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-ensaios-quase-experimentais"><i class="fa fa-check"></i><b>38.2.1</b> Quais são as diretrizes para redação de ensaios quase-experimentais?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="39" data-path="ensaio-experimental.html"><a href="ensaio-experimental.html"><i class="fa fa-check"></i><b>39</b> <strong>Ensaios experimentais</strong></a>
+<ul>
+<li class="chapter" data-level="39.1" data-path="rmd/parte-2.html"><a href="#ensaio-cl%C3%ADnico-aleatorizado"><i class="fa fa-check"></i><b>39.1</b> Ensaio clínico aleatorizado</a>
+<ul>
+<li class="chapter" data-level="39.1.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-caracter%C3%ADsticas-de-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.1.1</b> Quais são as características de ensaios clínicos aleatorizados?</a></li>
+</ul></li>
+<li class="chapter" data-level="39.2" data-path="rmd/parte-2.html"><a href="#modelos-de-an%C3%A1lise-de-compara%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>39.2</b> Modelos de análise de comparação</a>
+<ul>
+<li class="chapter" data-level="39.2.1" data-path="rmd/parte-2.html"><a href="#que-modelos-podem-ser-utilizados-para-compara%C3%A7%C3%B5es"><i class="fa fa-check"></i><b>39.2.1</b> Que modelos podem ser utilizados para comparações?</a></li>
+</ul></li>
+<li class="chapter" data-level="39.3" data-path="rmd/parte-2.html"><a href="#compara%C3%A7%C3%A3o-na-linha-de-base"><i class="fa fa-check"></i><b>39.3</b> Comparação na linha de base</a>
+<ul>
+<li class="chapter" data-level="39.3.1" data-path="rmd/parte-2.html"><a href="#o-que-s%C3%A3o-dados-na-linha-de-base"><i class="fa fa-check"></i><b>39.3.1</b> O que são dados na linha de base?</a></li>
+<li class="chapter" data-level="39.3.2" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-compara%C3%A7%C3%A3o-entre-grupos-na-linha-de-base-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.3.2</b> O que é comparação entre grupos na linha de base em ensaios clínicos aleatorizados?</a></li>
+<li class="chapter" data-level="39.3.3" data-path="rmd/parte-2.html"><a href="#para-qu%C3%AA-comparar-grupos-na-linha-de-base-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.3.3</b> Para quê comparar grupos na linha de base em ensaios clínicos aleatorizados?</a></li>
+<li class="chapter" data-level="39.3.4" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-raz%C3%B5es-para-diferen%C3%A7as-entre-grupos-de-tratamento-nas-covari%C3%A1veis-na-linha-de-base"><i class="fa fa-check"></i><b>39.3.4</b> Quais são as razões para diferenças entre grupos de tratamento nas (co)variáveis na linha de base?</a></li>
+<li class="chapter" data-level="39.3.5" data-path="rmd/parte-2.html"><a href="#quais-cen%C3%A1rios-permitem-a-compara%C3%A7%C3%A3o-entre-grupos-na-linha-de-base-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.3.5</b> Quais cenários permitem a comparação entre grupos na linha de base em ensaios clínicos aleatorizados?</a></li>
+<li class="chapter" data-level="39.3.6" data-path="rmd/parte-2.html"><a href="#por-que-n%C3%A3o-se-deve-comparar-grupos-na-linha-de-base-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.3.6</b> Por que não se deve comparar grupos na linha de base em ensaios clínicos aleatorizados?</a></li>
+<li class="chapter" data-level="39.3.7" data-path="rmd/parte-2.html"><a href="#quais-estrat%C3%A9gias-podem-ser-adotadas-para-substituir-a-compara%C3%A7%C3%A3o-entre-grupos-na-linha-de-base-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.3.7</b> Quais estratégias podem ser adotadas para substituir a comparação entre grupos na linha de base em ensaios clínicos aleatorizados?</a></li>
+</ul></li>
+<li class="chapter" data-level="39.4" data-path="rmd/parte-2.html"><a href="#compara%C3%A7%C3%A3o-intragrupos"><i class="fa fa-check"></i><b>39.4</b> Comparação intragrupos</a>
+<ul>
+<li class="chapter" data-level="39.4.1" data-path="rmd/parte-2.html"><a href="#por-que-n%C3%A3o-se-deve-comparar-intragrupos-pr%C3%A9---p%C3%B3s-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.4.1</b> Por que não se deve comparar intragrupos (pré - pós) em ensaios clínicos aleatorizados?</a></li>
+</ul></li>
+<li class="chapter" data-level="39.5" data-path="rmd/parte-2.html"><a href="#compara%C3%A7%C3%A3o-entre-grupos"><i class="fa fa-check"></i><b>39.5</b> Comparação entre grupos</a>
+<ul>
+<li class="chapter" data-level="39.5.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-compara%C3%A7%C3%A3o-entre-grupos-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.5.1</b> O que é comparação entre grupos em ensaios clínicos aleatorizados?</a></li>
+<li class="chapter" data-level="39.5.2" data-path="ensaio-experimental.html"><a href="ensaio-experimental.html#o-que-pode-ser-comparado-entre-grupos"><i class="fa fa-check"></i><b>39.5.2</b> O que pode ser comparado entre grupos?</a></li>
+<li class="chapter" data-level="39.5.3" data-path="rmd/parte-2.html"><a href="#qual-%C3%A9-a-compara%C3%A7%C3%A3o-entre-grupos-mais-adequada-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.5.3</b> Qual é a comparação entre grupos mais adequada em ensaios clínicos aleatorizados?</a></li>
+</ul></li>
+<li class="chapter" data-level="39.6" data-path="rmd/parte-2.html"><a href="#compara%C3%A7%C3%A3o-de-subgrupos"><i class="fa fa-check"></i><b>39.6</b> Comparação de subgrupos</a>
+<ul>
+<li class="chapter" data-level="39.6.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-compara%C3%A7%C3%A3o-de-subgrupos-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.6.1</b> O que é comparação de subgrupos em ensaios clínicos aleatorizados?</a></li>
+<li class="chapter" data-level="39.6.2" data-path="rmd/parte-2.html"><a href="#como-realizar-a-compara%C3%A7%C3%A3o-de-subgrupos-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.6.2</b> Como realizar a comparação de subgrupos em ensaios clínicos aleatorizados?</a></li>
+<li class="chapter" data-level="39.6.3" data-path="rmd/parte-2.html"><a href="#como-interpretar-a-compara%C3%A7%C3%A3o-de-subgrupos-em-ensaios-cl%C3%ADnicos-aleatorizados"><i class="fa fa-check"></i><b>39.6.3</b> Como interpretar a comparação de subgrupos em ensaios clínicos aleatorizados?</a></li>
+</ul></li>
+<li class="chapter" data-level="39.7" data-path="rmd/parte-2.html"><a href="#efeito-de-intera%C3%A7%C3%A3o-1"><i class="fa fa-check"></i><b>39.7</b> Efeito de interação</a>
+<ul>
+<li class="chapter" data-level="39.7.1" data-path="rmd/parte-2.html"><a href="#por-que-analisar-o-efeito-de-intera%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>39.7.1</b> Por que analisar o efeito de interação?</a></li>
+<li class="chapter" data-level="39.7.2" data-path="rmd/parte-2.html"><a href="#quando-usar-o-termo-de-intera%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>39.7.2</b> Quando usar o termo de interação?</a></li>
+</ul></li>
+<li class="chapter" data-level="39.8" data-path="rmd/parte-2.html"><a href="#ajuste-de-covari%C3%A1veis"><i class="fa fa-check"></i><b>39.8</b> Ajuste de covariáveis</a>
+<ul>
+<li class="chapter" data-level="39.8.1" data-path="rmd/parte-2.html"><a href="#quais-vari%C3%A1veis-devem-ser-utilizadas-no-ajuste-de-covari%C3%A1veis"><i class="fa fa-check"></i><b>39.8.1</b> Quais variáveis devem ser utilizadas no ajuste de covariáveis?</a></li>
+<li class="chapter" data-level="39.8.2" data-path="rmd/parte-2.html"><a href="#quais-os-benef%C3%ADcios-do-ajuste-de-covari%C3%A1veis"><i class="fa fa-check"></i><b>39.8.2</b> Quais os benefícios do ajuste de covariáveis?</a></li>
+<li class="chapter" data-level="39.8.3" data-path="rmd/parte-2.html"><a href="#quais-os-riscos-do-ajuste-de-covari%C3%A1veis"><i class="fa fa-check"></i><b>39.8.3</b> Quais os riscos do ajuste de covariáveis?</a></li>
+</ul></li>
+<li class="chapter" data-level="39.9" data-path="rmd/parte-2.html"><a href="#imputa%C3%A7%C3%A3o-de-dados-perdidos"><i class="fa fa-check"></i><b>39.9</b> Imputação de dados perdidos</a>
+<ul>
+<li class="chapter" data-level="39.9.1" data-path="ensaio-experimental.html"><a href="ensaio-experimental.html#como-lidar-com-os-dados-perdidos-em-desfechos"><i class="fa fa-check"></i><b>39.9.1</b> Como lidar com os dados perdidos em desfechos?</a></li>
+<li class="chapter" data-level="39.9.2" data-path="rmd/parte-2.html"><a href="#como-lidar-com-os-dados-perdidos-em-covari%C3%A1veis"><i class="fa fa-check"></i><b>39.9.2</b> Como lidar com os dados perdidos em covariáveis?</a></li>
+</ul></li>
+<li class="chapter" data-level="39.10" data-path="rmd/parte-2.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-4"><i class="fa fa-check"></i><b>39.10</b> Diretrizes para redação</a>
+<ul>
+<li class="chapter" data-level="39.10.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-ensaios-experimentais"><i class="fa fa-check"></i><b>39.10.1</b> Quais são as diretrizes para redação de ensaios experimentais?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="40" data-path="meta-analise.html"><a href="meta-analise.html"><i class="fa fa-check"></i><b>40</b> <strong>Meta-análise</strong></a>
+<ul>
+<li class="chapter" data-level="40.1" data-path="rmd/parte-2.html"><a href="#caracter%C3%ADsticas-4"><i class="fa fa-check"></i><b>40.1</b> Características</a>
+<ul>
+<li class="chapter" data-level="40.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-meta-an%C3%A1lise"><i class="fa fa-check"></i><b>40.1.1</b> O que é meta-análise?</a></li>
+</ul></li>
+<li class="chapter" data-level="40.2" data-path="rmd/parte-2.html"><a href="#interpreta%C3%A7%C3%A3o-de-efeitos-em-meta-an%C3%A1lise"><i class="fa fa-check"></i><b>40.2</b> Interpretação de efeitos em meta-análise</a>
+<ul>
+<li class="chapter" data-level="40.2.1" data-path="rmd/parte-2.html"><a href="#como-avaliar-a-varia%C3%A7%C3%A3o-do-tamanho-do-efeito"><i class="fa fa-check"></i><b>40.2.1</b> Como avaliar a variação do tamanho do efeito?</a></li>
+<li class="chapter" data-level="40.2.2" data-path="meta-analise.html"><a href="meta-analise.html#como-avaliar-a-heterogeneidade-entre-os-estudos"><i class="fa fa-check"></i><b>40.2.2</b> Como avaliar a heterogeneidade entre os estudos?</a></li>
+</ul></li>
+<li class="chapter" data-level="40.3" data-path="rmd/parte-2.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-5"><i class="fa fa-check"></i><b>40.3</b> Diretrizes para redação</a>
+<ul>
+<li class="chapter" data-level="40.3.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-meta-an%C3%A1lises"><i class="fa fa-check"></i><b>40.3.1</b> Quais são as diretrizes para redação de meta-análises?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="41" data-path="simulacao-computacional.html"><a href="simulacao-computacional.html"><i class="fa fa-check"></i><b>41</b> <strong>Simulação computacional</strong></a>
+<ul>
+<li class="chapter" data-level="41.1" data-path="rmd/parte-2.html"><a href="#caracter%C3%ADsticas-5"><i class="fa fa-check"></i><b>41.1</b> Características</a>
+<ul>
+<li class="chapter" data-level="41.1.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-caracter%C3%ADsticas-de-estudos-de-simula%C3%A7%C3%A3o-computacional"><i class="fa fa-check"></i><b>41.1.1</b> Quais são as características de estudos de simulação computacional?</a></li>
+</ul></li>
+<li class="chapter" data-level="41.2" data-path="rmd/parte-2.html"><a href="#m%C3%A9todo-de-monte-carlo"><i class="fa fa-check"></i><b>41.2</b> Método de Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="41.2.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-o-m%C3%A9todo-de-monte-carlo"><i class="fa fa-check"></i><b>41.2.1</b> O que é o método de Monte Carlo?</a></li>
+</ul></li>
+<li class="chapter" data-level="41.3" data-path="rmd/parte-2.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-6"><i class="fa fa-check"></i><b>41.3</b> Diretrizes para redação</a>
+<ul>
+<li class="chapter" data-level="41.3.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-estudos-de-simula%C3%A7%C3%A3o-computacional"><i class="fa fa-check"></i><b>41.3.1</b> Quais são as diretrizes para redação de estudos de simulação computacional?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="parte-7.html"><a href="parte-7.html"><i class="fa fa-check"></i><em>PARTE 7: APLICAÇÕES E COMUNICAÇÃO</em></a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#da-an%C3%A1lise-ao-impacto"><i class="fa fa-check"></i>Da análise ao impacto</a></li>
+</ul></li>
+<li class="chapter" data-level="42" data-path="plano-analise.html"><a href="plano-analise.html"><i class="fa fa-check"></i><b>42</b> <strong>Plano de análise</strong></a>
+<ul>
+<li class="chapter" data-level="42.1" data-path="rmd/parte-2.html"><a href="#plano-de-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>42.1</b> Plano de análise estatística</a>
+<ul>
+<li class="chapter" data-level="42.1.1" data-path="rmd/parte-2.html"><a href="#o-que-%C3%A9-plano-de-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>42.1.1</b> O que é plano de análise estatística?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="43" data-path="redacao-resultados.html"><a href="redacao-resultados.html"><i class="fa fa-check"></i><b>43</b> <strong>Redação de resultados</strong></a>
+<ul>
+<li class="chapter" data-level="43.1" data-path="rmd/parte-2.html"><a href="#resultados-da-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>43.1</b> Resultados da análise estatística</a>
+<ul>
+<li class="chapter" data-level="43.1.1" data-path="rmd/parte-2.html"><a href="#como-redigir-os-resultados-da-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>43.1.1</b> Como redigir os resultados da análise estatística?</a></li>
+</ul></li>
+<li class="chapter" data-level="43.2" data-path="redacao-resultados.html"><a href="redacao-resultados.html#diretrizes-e-listas"><i class="fa fa-check"></i><b>43.2</b> Diretrizes e Listas</a>
+<ul>
+<li class="chapter" data-level="43.2.1" data-path="rmd/parte-2.html"><a href="#quais-diretrizes-est%C3%A3o-dispon%C3%ADveis-para-reda%C3%A7%C3%A3o-estat%C3%ADstica"><i class="fa fa-check"></i><b>43.2.1</b> Quais diretrizes estão disponíveis para redação estatística?</a></li>
+<li class="chapter" data-level="43.2.2" data-path="rmd/parte-2.html"><a href="#quais-listas-de-verifica%C3%A7%C3%A3o-est%C3%A3o-dispon%C3%ADveis-para-reda%C3%A7%C3%A3o-estat%C3%ADstica"><i class="fa fa-check"></i><b>43.2.2</b> Quais listas de verificação estão disponíveis para redação estatística?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="parte-8.html"><a href="parte-8.html"><i class="fa fa-check"></i><em>PARTE 8: RECURSOS</em></a>
+<ul>
+<li class="chapter" data-level="" data-path="parte-8.html"><a href="parte-8.html#material-complementar"><i class="fa fa-check"></i>Material complementar</a></li>
+</ul></li>
+<li class="chapter" data-level="44" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>44</b> <strong>Shiny Apps</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i>Aplicativos por delineamento de estudo</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#ensaios-cl%C3%ADnicos"><i class="fa fa-check"></i>Ensaios clínicos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="45" data-path="fontes-externas.html"><a href="fontes-externas.html"><i class="fa fa-check"></i><b>45</b> <strong>Fontes externas</strong></a>
+<ul>
+<li class="chapter" data-level="45.1" data-path="rmd/parte-2.html"><a href="#fontes-de-informa%C3%A7%C3%A3o-externas"><i class="fa fa-check"></i><b>45.1</b> Fontes de informação externas</a>
+<ul>
+<li class="chapter" data-level="45.1.1" data-path="fontes-externas.html"><a href="fontes-externas.html#american-heart-association"><i class="fa fa-check"></i><b>45.1.1</b> American Heart Association</a></li>
+<li class="chapter" data-level="45.1.2" data-path="fontes-externas.html"><a href="fontes-externas.html#american-physiological-society"><i class="fa fa-check"></i><b>45.1.2</b> American Physiological Society</a></li>
+<li class="chapter" data-level="45.1.3" data-path="fontes-externas.html"><a href="fontes-externas.html#american-statistical-association"><i class="fa fa-check"></i><b>45.1.3</b> American Statistical Association</a></li>
+<li class="chapter" data-level="45.1.4" data-path="fontes-externas.html"><a href="fontes-externas.html#british-medicine-journal"><i class="fa fa-check"></i><b>45.1.4</b> British Medicine Journal</a></li>
+<li class="chapter" data-level="45.1.5" data-path="fontes-externas.html"><a href="fontes-externas.html#enhancing-the-quality-and-transparency-of-health-research-network"><i class="fa fa-check"></i><b>45.1.5</b> Enhancing the QUality And Transparency Of health Research Network</a></li>
+<li class="chapter" data-level="45.1.6" data-path="fontes-externas.html"><a href="fontes-externas.html#journal-of-the-amercan-medical-association"><i class="fa fa-check"></i><b>45.1.6</b> Journal of the Amercan Medical Association</a></li>
+<li class="chapter" data-level="45.1.7" data-path="fontes-externas.html"><a href="fontes-externas.html#nature-publishing-group"><i class="fa fa-check"></i><b>45.1.7</b> Nature Publishing Group</a></li>
+<li class="chapter" data-level="45.1.8" data-path="fontes-externas.html"><a href="fontes-externas.html#oxford-reference"><i class="fa fa-check"></i><b>45.1.8</b> Oxford Reference</a></li>
+<li class="chapter" data-level="45.1.9" data-path="fontes-externas.html"><a href="fontes-externas.html#royal-statistical-society"><i class="fa fa-check"></i><b>45.1.9</b> Royal Statistical Society</a></li>
+<li class="chapter" data-level="45.1.10" data-path="fontes-externas.html"><a href="fontes-externas.html#statistics-in-medicine"><i class="fa fa-check"></i><b>45.1.10</b> Statistics in Medicine</a></li>
+<li class="chapter" data-level="45.1.11" data-path="fontes-externas.html"><a href="fontes-externas.html#bmc-trials"><i class="fa fa-check"></i><b>45.1.11</b> BMC Trials</a></li>
+<li class="chapter" data-level="45.1.12" data-path="fontes-externas.html"><a href="fontes-externas.html#the-journal-of-applied-statistics-in-the-pharmaceutical-industry"><i class="fa fa-check"></i><b>45.1.12</b> The Journal of Applied Statistics in the Pharmaceutical Industry</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="46" data-path="diretrizes-listas.html"><a href="diretrizes-listas.html"><i class="fa fa-check"></i><b>46</b> <strong>Diretrizes e Listas</strong></a>
+<ul>
+<li class="chapter" data-level="46.1" data-path="diretrizes-listas.html"><a href="diretrizes-listas.html#diretrizes"><i class="fa fa-check"></i><b>46.1</b> Diretrizes</a>
+<ul>
+<li class="chapter" data-level="46.1.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-relat%C3%B3rios-estat%C3%ADsticos-em-pesquisas"><i class="fa fa-check"></i><b>46.1.1</b> Quais são as diretrizes para relatórios estatísticos em pesquisas?</a></li>
+</ul></li>
+<li class="chapter" data-level="46.2" data-path="rmd/parte-2.html"><a href="#listas-de-verifica%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>46.2</b> Listas de verificação</a>
+<ul>
+<li class="chapter" data-level="46.2.1" data-path="rmd/parte-2.html"><a href="#quais-s%C3%A3o-as-listas-de-verifica%C3%A7%C3%A3o-para-relat%C3%B3rios-estat%C3%ADsticos-em-pesquisas"><i class="fa fa-check"></i><b>46.2.1</b> Quais são as listas de verificação para relatórios estatísticos em pesquisas?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><strong>Referências</strong></a></li>
+<li class="divider"></li>
+<li><a style="text-align:center; border-width:3px;border-style:solid; border-color:white; border-radius:15px; padding:5px; background-color:#276DC2; text-decoration:none; color:white" href="https://bookdown.org">Publicado com Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>Ciência com R</strong></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="parte-2" class="section level1 unnumbered hasAnchor">
+<h1><em>PARTE 2: DADOS – COLETA E PREPARAÇÃO</em><a href="parte-2.html#parte-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!--script for generating HORIZONTAL LINE-->
+<hr style="height:5px;border-width:0;color:black;background-color:black">
+<div id="organização-e-fundamentos-de-dados" class="section level2 unnumbered hasAnchor">
+<h2>Organização e fundamentos de dados<a href="#organiza%C3%A7%C3%A3o-e-fundamentos-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="vieses-metodologicos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="medidas-instrumentos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": true,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": true,
+    "all": null
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": [
+    ["Ciencia-com-R.pdf", "PDF"]
+  ],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "scroll_highlight": true,
+    "number_sections": true
+  },
+  "info": false,
+  "toolbar": {
+    "position": "fixed",
+    "search": true
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
