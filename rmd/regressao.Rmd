@@ -28,13 +28,13 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 ### Quais são os algoritmos de regressão?
 
-- Linear.[@REF]
+-   Linear.[@REF]
 
-- Polinomial.[@REF]
+-   Polinomial.[@REF]
 
-- Ridge.[@REF]
+-   Ridge.[@REF]
 
-- Lasso.[@REF]
+-   Lasso.[@REF]
 
 <br>
 
@@ -58,19 +58,19 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 ### O que são análises de regressão linear?
 
-- .[@REF]
+-   .[@REF]
 
 <br>
 
 ### O que são análises de regressão não-linear?
 
-- .[@REF]
+-   .[@REF]
 
 <br>
 
 ### O que são análises de regressão logística?
 
-- .[@REF]
+-   .[@REF]
 
 <br>
 
@@ -94,37 +94,17 @@ O pacote *fastDummies*[@fastDummies] fornece a função [*dummy_cols*](https://w
 
 <br>
 
-## Redução de dimensionalidade para regressão
+## Multicolinearidade
 
 <br>
 
-### Correlação bivariada pode ser usada para seleção de variáveis em modelos de regressão multivariável?
+### O que é multicolinearidade?
 
--   Seleção bivariada de variáveis - isto é, aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável - é um dos erros mais comuns na literatura.[@Dales1978; @Sun1996; @heinze2016]
-
--   A seleção bivariada de variáveis torna o modelo mais suscetível a otimismo no ajuste se as variáveis de confundimento não são adequadamente controladas.[@Dales1978; @Sun1996]
+-   [@REF]
 
 <br>
 
-### Variáveis sem significância estatística devem ser excluídas do modelo final?
-
--   Eliminar uma variável de um modelo significa anular o seu coeficiente de regressão ($\beta = 0$), mesmo que o valor estimado pelos dados seja outro. Desta forma, os resultados se afasTAM de uma solução de máxima verossimilhança (que tem fundamento teórico) e o modelo resultante é intencionalmente subótimo.[@heinze2016]
-
--   Os coeficientes de regressão geralmente dependem do conjunto de variáveis do modelo e, portanto, podem mudam de valor ("mudança na estimativa" positiva ou negativa) se uma (ou mais) variável(is) for(em) eliminada(s) do modelo.[@heinze2016]
-
-<br>
-
-### Por que métodos de regressão gradual não são recomendados para seleção de variáveis em modelos de regressão multivariável?
-
--   Métodos diferentes de regressão gradual podem produzir diferentes seleções de variáveis de um mesmo banco de dados.[@Healy1995]
-
--   Nenhum método de regressão gradual garante a seleção ótima de variáveis de um banco de dados.[@Healy1995]
-
--   As regras de término da regressão baseadas em P-valor tendem a ser arbitrárias.[@Healy1995]
-
-<br>
-
-### O que pode ser feito para reduzir o número de variáveis candidatas em modelos de regressão multivariável?
+### Como diagnosticar multicolinearidade de forma quantitativa?
 
 -   Verifique a existência de multicolinearidade entre as variáveis candidatas.[@Sun1996]
 
@@ -162,6 +142,56 @@ GGally::ggpairs(
 ```
 
 <br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *GGally*[@GGally] fornece a função [*ggpairs*](https://www.rdocumentation.org/packages/GGally/versions/2.2.1/topics/ggpairs) para criar uma matriz gráfica de correlações bivariadas.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/packages/car/versions/3.1-3/topics/vif) para calcular o fator de inflação da variância (VIF).
+:::
+
+<br>
+
+### O que fazer em caso de multicolinearidade elevada?
+
+-   [@REF]
+
+<br>
+
+## Redução de dimensionalidade para regressão
+
+<br>
+
+### Correlação bivariada pode ser usada para seleção de variáveis em modelos de regressão multivariável?
+
+-   Seleção bivariada de variáveis - isto é, aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável - é um dos erros mais comuns na literatura.[@Dales1978; @Sun1996; @heinze2016]
+
+-   A seleção bivariada de variáveis torna o modelo mais suscetível a otimismo no ajuste se as variáveis de confundimento não são adequadamente controladas.[@Dales1978; @Sun1996]
+
+<br>
+
+### Variáveis sem significância estatística devem ser excluídas do modelo final?
+
+-   Eliminar uma variável de um modelo significa anular o seu coeficiente de regressão ($\beta = 0$), mesmo que o valor estimado pelos dados seja outro. Desta forma, os resultados se afasTAM de uma solução de máxima verossimilhança (que tem fundamento teórico) e o modelo resultante é intencionalmente subótimo.[@heinze2016]
+
+-   Os coeficientes de regressão geralmente dependem do conjunto de variáveis do modelo e, portanto, podem mudam de valor ("mudança na estimativa" positiva ou negativa) se uma (ou mais) variável(is) for(em) eliminada(s) do modelo.[@heinze2016]
+
+<br>
+
+### Por que métodos de regressão gradual não são recomendados para seleção de variáveis em modelos de regressão multivariável?
+
+-   Métodos diferentes de regressão gradual podem produzir diferentes seleções de variáveis de um mesmo banco de dados.[@Healy1995]
+
+-   Nenhum método de regressão gradual garante a seleção ótima de variáveis de um banco de dados.[@Healy1995]
+
+-   As regras de término da regressão baseadas em P-valor tendem a ser arbitrárias.[@Healy1995]
+
+<br>
+
+### O que pode ser feito para reduzir o número de variáveis candidatas em modelos de regressão multivariável?
 
 -   Em caso de uma proporção baixa entre o número de participantes e de variáveis, use o conhecimento prévio da literatura para selecionar um pequeno conjunto de variáveis candidatas.[@Sun1996]
 

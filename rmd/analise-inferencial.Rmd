@@ -433,6 +433,77 @@ kableExtra::kable(
 
 <br>
 
+```{r erros-tipo-I-II-plot, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica dos erros tipo I e tipo II em um teste de hipótese (bicaudal)."}
+# Define parameters
+mu0 <- 0      # Mean under H0
+mu1 <- 1      # Mean under H1
+sigma <- 1    # Standard deviation
+alpha <- 0.05 # Significance level
+
+# Critical value for one-tailed test (upper tail)
+z_crit <- qnorm(1 - alpha, mean = mu0, sd = sigma)
+
+# Sequence of x values
+x <- seq(mu0 - 4*sigma, mu1 + 4*sigma, length.out = 1000)
+
+# Densities
+dens_H0 <- dnorm(x, mean = mu0, sd = sigma)
+dens_H1 <- dnorm(x, mean = mu1, sd = sigma)
+
+# Expand right margin for legend
+par(mar = c(5, 4, 4, 4))  # bottom, left, top, right
+
+# Plot
+plot(x, dens_H0, type = "l", lwd = 2, col = "blue", ylim = c(0, max(dens_H0, dens_H1)),
+     ylab = "Densidade", xlab = "Efeito", main = "Erros tipo I e II")
+lines(x, dens_H1, lwd = 2, col = "red")
+
+# Shade Type I Error (Alpha)
+polygon(c(z_crit, x[x >= z_crit], max(x)),
+        c(0, dens_H0[x >= z_crit], 0),
+        col = rgb(0, 0, 1, 0.3), border = NA)
+
+# Shade Type II Error (Beta)
+polygon(c(min(x), x[x <= z_crit], z_crit),
+        c(0, dens_H1[x <= z_crit], 0),
+        col = rgb(1, 0, 0, 0.3), border = NA)
+
+# Vertical line at critical value
+abline(v = z_crit, col = "black", lty = 2, lwd = 1.5)
+# Add text annotations
+text(z_crit + 0.1, max(dens_H0) * 0.8, expression(z[alpha]), col = "black", pos = 4)
+
+# vertical line for mu0 and mu1
+abline(v = mu0, col = "blue", lty = 3, lwd = 1.5)
+abline(v = mu1, col = "red", lty = 3, lwd = 1.5)
+
+# Add text annotations
+text(mu0, max(dens_H0) * 0.8, expression(mu[0]), col = "blue", pos = 4)
+text(mu1, max(dens_H1) * 0.8, expression(mu[1]), col = "red", pos = 4)
+
+# horizontal line for effect size (mu1 - mu0)
+
+
+# Add text for alpha and beta
+text(z_crit + 0.1, max(dens_H0) * 0.5, expression(alpha), col = "blue", pos = 4)
+
+legend("topleft", 
+       legend = c(expression("Distribuição H"[0]), 
+                  expression("Distribuição H"[1]), 
+                  "Erro tipo I (α)", 
+                  "Erro tipo II (β)",
+                  expression("Valor crítico (" * z[alpha] * ")")),
+       col = c("blue", "red", rgb(0, 0, 1, 0.3), rgb(1, 0, 0, 0.3), "black"),
+       lwd = c(2, 2, NA, NA, 1.5), 
+       lty = c(1, 1, NA, NA, 2), 
+       pch = c(NA, NA, 15, 15, NA), 
+       pt.cex = c(NA, NA, 2, 2, NA),
+       bg = "transparent", 
+       box.col = "transparent")
+```
+
+<br>
+
 ### O que são erros Tipo S e Tipo M?
 
 - Erro Tipo S (do inglês *sign*) significa a identificação errônea da direção - positiva ou negativa - do efeito observado.[@gelman2014; @lu2018]
