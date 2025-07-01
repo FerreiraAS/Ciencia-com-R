@@ -151,10 +151,11 @@ z_crit <- qnorm(1 - alpha, mean = mu0, sd = sigma)
 x <- seq(mu0 - 4*sigma, mu0 + 4*sigma, length.out = 1000)
 dens_H0 <- dnorm(x, mean = mu0, sd = sigma)
 
-# Expand right margin for legend
-par(mar = c(5, 4, 4, 4))
+# Set layout: 2 rows, 1 column (plot on top, legend on bottom)
+layout(matrix(1:2, ncol = 1), heights = c(4, 1))  # 4:1 ratio
 
-# Plot H0 distribution
+# Plot H0 distribution (top panel)
+par(mar = c(5, 4, 2, 2))  # Margins: bottom, left, top, right
 plot(x, dens_H0, type = "l", lwd = 2, col = "blue",
      ylim = c(0, max(dens_H0)),
      ylab = "Densidade", xlab = "Efeito",
@@ -173,8 +174,10 @@ abline(v = z_crit, col = "black", lty = 2, lwd = 1.5)
 text(mu0, max(dens_H0) * 0.85, expression(mu[0]), col = "blue", pos = 4)
 text(z_crit + 0.1, max(dens_H0) * 0.95, expression(z[1 - alpha]), col = "black", pos = 4)
 
-# Legend
-legend("topleft",
+# Legend (bottom panel)
+par(mar = c(0, 0, 0, 0))  # No margins
+plot.new()
+legend("center",
        legend = c(expression("Distribuição H"[0]),
                   "Região crítica (α)",
                   expression("Valor crítico (" * z[1 - alpha] * ")")),
@@ -183,8 +186,8 @@ legend("topleft",
        lty = c(1, NA, 2),
        pch = c(NA, 15, NA),
        pt.cex = c(NA, 2, NA),
-       bg = "transparent",
-       box.col = "transparent")
+       bty = "n",
+       ncol = 1)
 ```
 
 <br>
@@ -203,10 +206,11 @@ z_crit_high <- qnorm(1 - alpha / 2, mean = mu0, sd = sigma)
 x <- seq(mu0 - 4*sigma, mu0 + 4*sigma, length.out = 1000)
 dens_H0 <- dnorm(x, mean = mu0, sd = sigma)
 
-# Expand right margin for legend
-par(mar = c(5, 4, 4, 4))
+# Set layout: 2 rows, 1 column (plot on top, legend on bottom)
+layout(matrix(1:2, ncol = 1), heights = c(4, 1))  # 4:1 ratio
 
-# Plot H0 distribution
+# Plot H0 distribution (top panel)
+par(mar = c(5, 4, 2, 2))  # Margins: bottom, left, top, right
 plot(x, dens_H0, type = "l", lwd = 2, col = "blue",
      ylim = c(0, max(dens_H0)),
      ylab = "Densidade", xlab = "Efeito",
@@ -232,8 +236,10 @@ text(mu0, max(dens_H0) * 0.85, expression(mu[0]), col = "blue", pos = 4)
 text(z_crit_low - 0.1, max(dens_H0) * 0.95, expression(z[alpha/2]), col = "black", pos = 2)
 text(z_crit_high + 0.1, max(dens_H0) * 0.95, expression(z[1 - alpha/2]), col = "black", pos = 4)
 
-# Legend
-legend("topleft",
+# Legend (bottom panel)
+par(mar = c(0, 0, 0, 0))  # No margins
+plot.new()
+legend("center",
        legend = c(expression("Distribuição H"[0]),
                   "Região crítica (α/2)",
                   expression("Valores críticos (" * z[alpha/2] * ", " * z[1 - alpha/2] * ")")),
@@ -559,10 +565,11 @@ x <- seq(mu0 - 4*sigma, mu1 + 4*sigma, length.out = 1000)
 dens_H0 <- dnorm(x, mean = mu0, sd = sigma)
 dens_H1 <- dnorm(x, mean = mu1, sd = sigma)
 
-# Expand right margin for legend
-par(mar = c(5, 4, 4, 4))  # bottom, left, top, right
+# Set layout: 2 rows, 1 column (plot on top, legend on bottom)
+layout(matrix(1:2, ncol = 1), heights = c(4, 1))  # 4:1 ratio
 
 # Plot
+par(mar = c(5, 4, 2, 2))  # Margins: bottom, left, top, right
 plot(x, dens_H0, type = "l", lwd = 2, col = "blue", ylim = c(0, max(dens_H0, dens_H1)),
      ylab = "Densidade", xlab = "Efeito", main = "Erros tipo I e II")
 lines(x, dens_H1, lwd = 2, col = "red")
@@ -590,13 +597,13 @@ abline(v = mu1, col = "red", lty = 3, lwd = 1.5)
 text(mu0, max(dens_H0) * 0.8, expression(mu[0]), col = "blue", pos = 4)
 text(mu1, max(dens_H1) * 0.8, expression(mu[1]), col = "red", pos = 4)
 
-# horizontal line for effect size (mu1 - mu0)
-
-
 # Add text for alpha and beta
 text(z_crit + 0.1, max(dens_H0) * 0.5, expression(alpha), col = "blue", pos = 4)
 
-legend("topleft", 
+# Legend (bottom panel)
+par(mar = c(0, 0, 0, 0))  # No margins
+plot.new()
+legend("center",
        legend = c(expression("Distribuição H"[0]), 
                   expression("Distribuição H"[1]), 
                   "Erro tipo I (α)", 
@@ -607,8 +614,8 @@ legend("topleft",
        lty = c(1, 1, NA, NA, 2), 
        pch = c(NA, NA, 15, 15, NA), 
        pt.cex = c(NA, NA, 2, 2, NA),
-       bg = "transparent", 
-       box.col = "transparent")
+       bty = "n",
+       ncol = 3)
 ```
 
 <br>
@@ -663,28 +670,34 @@ kableExtra::kable(
 <br>
 
 ```{r erros-tipo-S-plot, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica do erro tipo S (sinal) em um teste de hipótese (bicaudal)."}
-
 mu1 <- 0.2     # True effect (small positive)
 sigma <- 1
 alpha <- 0.05
 n <- 30
 se <- sigma / sqrt(n)
+
 # Two-tailed critical values
 z_crit <- qnorm(1 - alpha / 2)
 x_lower <- mu0 - z_crit * se
 x_upper <- mu0 + z_crit * se
+
 # Simulate until we get a significant estimate in the WRONG direction (Type-S error)
 repeat {
   obs_mean <- rnorm(1, mean = mu1, sd = se)
   z <- (obs_mean - mu0) / se
   if (abs(z) > z_crit && obs_mean < 0) break  # Sign error: significant but negative
 }
+
 # x values
 x <- seq(mu0 - 4 * se, mu1 + 4 * se + 0.5, length.out = 1000)
 dens_H0 <- dnorm(x, mean = mu0, sd = se)
 dens_H1 <- dnorm(x, mean = mu1, sd = se)
+
+# Set layout: 2 rows, 1 column (plot on top, legend on bottom)
+layout(matrix(1:2, ncol = 1), heights = c(4, 1))  # 4:1 ratio
+
 # Plot
-par(mar = c(5, 4, 4, 4))
+par(mar = c(5, 4, 2, 2))  # Margins: bottom, left, top, right
 plot(x, dens_H0, type = "l", lwd = 2, col = "blue", ylim = c(0, max(dens_H0, dens_H1)),
      ylab = "Densidade", xlab = "Efeito estimado", main = "Erro Tipo-S: Sinal Incorreto")
 lines(x, dens_H1, lwd = 2, col = "red")
@@ -695,34 +708,40 @@ polygon(c(min(x), x[x <= x_lower], x_lower),
 polygon(c(x_upper, x[x >= x_upper], max(x)),
         c(0, dens_H0[x >= x_upper], 0),
         col = rgb(0, 0, 1, 0.3), border = NA)
+
 # Type-S region shading (significant but wrong direction)
 polygon(c(min(x), x[x <= x_lower], x_lower),
         c(0, dens_H1[x <= x_lower], 0),
         col = rgb(1, 0, 0, 0.3), border = NA)
+
 # Vertical lines
 abline(v = x_lower, col = "black", lty = 2, lwd = 1.5)
 abline(v = x_upper, col = "black", lty = 2, lwd = 1.5)
 abline(v = mu0, col = "blue", lty = 3, lwd = 1.5)
 abline(v = mu1, col = "red", lty = 3, lwd = 1.5)
 abline(v = obs_mean, col = "darkgreen", lwd = 2)
+
 # Labels
 text(x_lower - 0.02, max(dens_H0) * 0.5, expression(alpha/2), col = "blue", pos = 2)
 text(x_upper + 0.02, max(dens_H0) * 0.5, expression(alpha/2), col = "blue", pos = 4)
 text(mu0, max(dens_H0) * 0.8, expression(mu[0]), col = "blue", pos = 4)
 text(mu1, max(dens_H1) * 0.8, expression(mu[1]), col = "red", pos = 4)
 text(obs_mean, max(dens_H1) * 0.9, "Estimado", col = "darkgreen", pos = 4)
-# Legend
-legend("topleft",
-       legend = c(expression("H"[0]), expression("H"[1]),
-                  "Erro tipo I (α)", "Erro tipo-S (sinal errado)",
-                  "Estimativa significativa"),
-       col = c("blue", "red", rgb(0, 0, 1, 0.3), rgb(1, 0, 0, 0.3), "darkgreen"),
-       lwd = c(2, 2, NA, NA, 2),
-       lty = c(1, 1, NA, NA, 1),
-       pch = c(NA, NA, 15, 15, NA),
-       pt.cex = c(NA, NA, 2, 2, NA),
-       bg = "transparent",
-       box.col = "transparent")
+
+# Legend (bottom panel)
+par(mar = c(0, 0, 0, 0))  # No margins
+plot.new()
+legend("center",
+       legend = c(expression("H"[0]), expression("H"[1]), "Estimativa significativa",
+                  "Erro tipo I (α)", "Erro tipo-S (sinal errado)"
+                  ),
+       col = c("blue", "red", "darkgreen", rgb(0, 0, 1, 0.3), rgb(1, 0, 0, 0.3)),
+       lwd = c(2, 2, 2, NA, NA),
+       lty = c(1, 1, 1, NA, NA),
+       pch = c(NA, NA, NA, 15, 15),
+       pt.cex = c(NA, NA, NA, 2, 2),
+       bty = "n",
+       ncol = 2)
 ```
 
 <br>
@@ -802,8 +821,11 @@ x <- seq(mu0 - 4 * se, mu1 + 4 * se + 0.5, length.out = 1000)
 dens_H0 <- dnorm(x, mean = mu0, sd = se)
 dens_H1 <- dnorm(x, mean = mu1, sd = se)
 
+# Set layout: 2 rows, 1 column (plot on top, legend on bottom)
+layout(matrix(1:2, ncol = 1), heights = c(4, 1))  # 4:1 ratio
+
 # Plot
-par(mar = c(5, 4, 4, 4))
+par(mar = c(5, 4, 2, 2))  # Margins: bottom, left, top, right
 plot(x, dens_H0, type = "l", lwd = 2, col = "blue", ylim = c(0, max(dens_H0, dens_H1)),
      ylab = "Densidade", xlab = "Efeito estimado", main = "Erro Tipo-M: Superestimação do Efeito")
 lines(x, dens_H1, lwd = 2, col = "red")
@@ -828,18 +850,20 @@ text(mu0, max(dens_H0) * 0.8, expression(mu[0]), col = "blue", pos = 4)
 text(mu1, max(dens_H1) * 0.8, expression(mu[1]), col = "red", pos = 4)
 text(obs_mean, max(dens_H1) * 0.9, "Estimado", col = "darkgreen", pos = 4)
 
-# Legend
-legend("topleft", 
-       legend = c(expression("H"[0]), expression("H"[1]), 
-                  "Erro tipo I (α)", "Erro tipo II (β)",
-                  "Estimativa significativa"),
-       col = c("blue", "red", rgb(0, 0, 1, 0.3), rgb(1, 0, 0, 0.3), "darkgreen"),
-       lwd = c(2, 2, NA, NA, 2),
-       lty = c(1, 1, NA, NA, 1),
-       pch = c(NA, NA, 15, 15, NA),
-       pt.cex = c(NA, NA, 2, 2, NA),
-       bg = "transparent", 
-       box.col = "transparent")
+# Legend (bottom panel)
+par(mar = c(0, 0, 0, 0))  # No margins
+plot.new()
+legend("center",
+       legend = c(expression("H"[0]), expression("H"[1]), "Estimativa significativa",
+                  "Erro tipo I (α)", "Erro tipo-M (magnitude exagerada)"
+                  ),
+       col = c("blue", "red", "darkgreen", rgb(0, 0, 1, 0.3), rgb(1, 0, 0, 0.3)),
+       lwd = c(2, 2, 2, NA, NA),
+       lty = c(1, 1, 1, NA, NA),
+       pch = c(NA, NA, NA, 15, 15),
+       pt.cex = c(NA, NA, NA, 2, 2),
+       bty = "n",
+       ncol = 2)
 ```
 
 <br>
