@@ -283,6 +283,66 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 <br>
 
+```{r tendencia-central, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Parâmetros de tendência central em distribuições assimétricas e normais."}
+# Função para gerar um data frame com a densidade e os valores de média, mediana e moda
+gerar_dados <- function(tipo_dist) {
+  set.seed(123)  # Para reprodutibilidade
+  n <- 10000
+  
+  if (tipo_dist == "assimetria_positiva") {
+    x <- rlnorm(n, meanlog = 0, sdlog = 0.5)
+    titulo <- "Assimetria Positiva"
+  } else if (tipo_dist == "normal") {
+    x <- rnorm(n, mean = 0, sd = 1)
+    titulo <- "Distribuição Normal (Gaussiana)"
+  } else if (tipo_dist == "assimetria_negativa") {
+    x <- -rlnorm(n, meanlog = 0, sdlog = 0.5)
+    titulo <- "Assimetria Negativa"
+  }
+  
+  # Estimar a moda com base no pico da densidade
+  d <- density(x)
+  moda <- d$x[which.max(d$y)]
+  
+  data.frame(
+    x = x,
+    media = mean(x),
+    mediana = median(x),
+    moda = moda,
+    titulo = titulo
+  )
+}
+
+# Gerar os conjuntos de dados
+dados_pos <- gerar_dados("assimetria_positiva")
+dados_norm <- gerar_dados("normal")
+dados_neg <- gerar_dados("assimetria_negativa")
+
+# Função para plotar cada distribuição
+plotar_distribuicao <- function(dados) {
+  ggplot2::ggplot(dados, ggplot2::aes(x = x)) +
+    ggplot2::geom_density(fill = "lightblue", alpha = 0.6) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = media), color = "red", linetype = "dashed", size = 1) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = mediana), color = "blue", linetype = "dotted", size = 1) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = moda), color = "darkgreen", linetype = "solid", size = 1) +
+    ggplot2::labs(title = unique(dados$titulo),
+         x = "Valor",
+         y = "Densidade",
+         subtitle = "Vermelho: Média | Azul: Mediana | Verde: Moda") +
+    ggplot2::theme_minimal()
+}
+
+# Criar os gráficos individuais
+g1 <- plotar_distribuicao(dados_pos)
+g2 <- plotar_distribuicao(dados_norm)
+g3 <- plotar_distribuicao(dados_neg)
+
+# Combinar os gráficos em um painel
+gridExtra::grid.arrange(g1, g2, g3, nrow = 3)
+```
+
+<br>
+
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
 :::
@@ -316,6 +376,91 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 -   *Intervalo interquartil*.[@kanji2006; @Ali2016; @manikandan2011]
 
 -   *Intervalo de confiança*: Captura a média populacional correspondente ao nível de significância $\alpha$ pré-estabelecido.[@kanji2006; @Cumming2007; @krzywinski2013; @Ali2016]
+
+<br>
+
+```{r dispersao, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Parâmetros de dispersão em distribuições normais."}
+# Geração de dados: distribuição normal
+set.seed(123)
+n <- 200
+dados <- rnorm(n, mean = 50, sd = 10)
+
+# Cálculo das medidas
+media <- mean(dados)
+variancia <- var(dados)
+desvio_padrao <- sd(dados)
+erro_padrao <- desvio_padrao / sqrt(n)
+amplitude <- max(dados) - min(dados)
+iqr <- IQR(dados)
+
+# Criar data frame com os dados
+df <- data.frame(valor = dados)
+
+# Plotar histograma com densidade
+ggplot2::ggplot(df, ggplot2::aes(x = valor)) +
+  ggplot2::geom_histogram(ggplot2::aes(y = ..density..), bins = 30, fill = "lightblue", color = "black", alpha = 0.6) +
+  ggplot2::geom_density(color = "darkblue", size = 1) +
+  
+  # Média
+  ggplot2::geom_vline(ggplot2::aes(xintercept = media, color = "Média"), size = 1.2) +
+  
+  # Desvio padrão
+  ggplot2::geom_vline(ggplot2::aes(xintercept = media + desvio_padrao, color = "Desvio Padrão +1σ"), size = 1, linetype = "dashed") +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = media - desvio_padrao, color = "Desvio Padrão -1σ"), size = 1, linetype = "dashed") +
+  
+  # Erro padrão
+  ggplot2::geom_vline(ggplot2::aes(xintercept = media + erro_padrao, color = "Erro Padrão +SE"), size = 1, linetype = "dotted") +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = media - erro_padrao, color = "Erro Padrão -SE"), size = 1, linetype = "dotted") +
+  
+  # Intervalo interquartil (IQR)
+  ggplot2::geom_vline(ggplot2::aes(xintercept = quantile(dados, 0.25), color = "Q1 (25%)"), size = 1, linetype = "dotdash") +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = quantile(dados, 0.75), color = "Q3 (75%)"), size = 1, linetype = "dotdash") +
+  
+  # Limites mínimo e máximo (Amplitude)
+  ggplot2::geom_vline(ggplot2::aes(xintercept = min(dados), color = "Mínimo"), size = 0.8, linetype = "longdash") +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = max(dados), color = "Máximo"), size = 0.8, linetype = "longdash") +
+  
+  # Legenda
+  ggplot2::scale_color_manual(values = c(
+    "Desvio Padrão -1σ" = "orange",
+    "Desvio Padrão +1σ" = "orange",
+    "Erro Padrão -SE" = "purple",
+    "Erro Padrão +SE" = "purple",
+    "Q1 (25%)" = "green",
+    "Q3 (75%)" = "green",
+    "Mínimo" = "black",
+    "Máximo" = "black",
+    "Média" = "red"
+  ),
+  breaks = c(
+    "Erro Padrão -SE", 
+    "Erro Padrão +SE", 
+    "Q1 (25%)", 
+    "Q3 (75%)", 
+    "Desvio Padrão -1σ", 
+    "Desvio Padrão +1σ", 
+    "Mínimo", 
+    "Máximo", 
+    "Média")
+  ) +
+  
+  ggplot2::labs(
+    title = "Visualização de Medidas de Dispersão",
+    subtitle = paste0(
+      "Média = ", round(media, 2),
+      " | SD = ", round(desvio_padrao, 2),
+      " | SE = ", round(erro_padrao, 2),
+      " | Var = ", round(variancia, 2),
+      " | IQR = ", round(iqr, 2),
+      " | Amplitude = ", round(amplitude, 2)
+    ),
+    x = "Valor",
+    y = "Densidade",
+    color = "Medidas de Dispersão"
+  ) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "bottom")
+```
 
 <br>
 
