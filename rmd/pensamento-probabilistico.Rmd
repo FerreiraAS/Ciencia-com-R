@@ -10,7 +10,11 @@
 
 -   Um experimento é um processo de simulação ou medição cujo resultado é chamado de desfecho.[@grami2023]
 
--   Tentativa se refere a uma repetição de um experimento aleatório.[@grami2023]
+-   Tentativa se refere a uma repetição de um experimento.[@grami2023]
+
+<br>
+
+### O que é um experimento aleatório?
 
 -   Em um experimento aleatório, o desfecho de cada tentativa é imprevisível.[@grami2023]
 
@@ -272,11 +276,59 @@ gridExtra::grid.arrange(espaço.eventos, espaço.amostral, nrow = 2)
 
 -   Em experimentos aleatórios, é comum assumir que os eventos de tentativas separadas são independentes devido a independência física de eventos e experimentos.[@grami2023]
 
--   Se a ocorrência do evento $E_{1}$ não tiver efeito na ocorrência do evento $E_{2}$, os eventos $E_{1}$ e $E_{2}$ são considerados estatisticamente independentes.
+-   Se a ocorrência do evento $E_{1}$ não tiver efeito na ocorrência do evento $E_{2}$, os eventos $E_{1}$ e $E_{2}$ são considerados estatisticamente independentes.[@grami2023]
 
 -   Eventos são mutuamente exclusivos, ou disjuntos, se a ocorrência de um exclui a ocorrência dos outros.[@grami2023]
 
--   Se dois eventos $E_{1}$ e $E_{2}$ são mutuamente exclusivos, então os eventos $E_{1}$ e $E_{2}$ não podem ocorrer ao mesmo tempo e, portanto, são eventos dependentes.
+-   Se dois eventos $E_{1}$ e $E_{2}$ são mutuamente exclusivos, então os eventos $E_{1}$ e $E_{2}$ não podem ocorrer ao mesmo tempo e, portanto, são eventos independentes.[@grami2023]
+
+<br>
+
+```{r independencia-venn, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Superior: Eventos independentes. Inferior: Eventos dependentes.", results = FALSE}
+# Criar o layout dos dois painéis
+grid::grid.newpage()
+grid::pushViewport(grid::viewport(layout = grid::grid.layout(2, 1)))
+
+# Função para posicionar gráficos
+vplayout <- function(x, y) grid::viewport(layout.pos.row = x, layout.pos.col = y)
+
+# Painel 1 - Eventos Independentes
+grid::pushViewport(vplayout(1, 1))
+VennDiagram::draw.pairwise.venn(
+  area1 = 50,
+  area2 = 50,
+  cross.area = 0,
+  category = c("Evento A", "Evento B"),
+  fill = c("lightcoral", "lightgreen"),
+  alpha = 0.5,
+  cat.cex = 1,
+  cex = 1.5,
+  main = "Eventos Independentes",
+  print.mode = "percent"
+)
+grid::popViewport()
+
+# Painel 2 - Eventos Dependentes
+grid::pushViewport(vplayout(2, 1))
+VennDiagram::draw.pairwise.venn(
+  area1 = 50,
+  area2 = 50,
+  cross.area = 20,
+  category = c("Evento A", "Evento B"),
+  fill = c("lightcoral", "lightgreen"),
+  alpha = 0.5,
+  cat.cex = 1,
+  cex = 1.5,
+  main = "Eventos Dependentes",
+  print.mode = "percent"
+)
+grid::popViewport()
+
+# sair do viewport principal
+grid::popViewport()
+```
+
+<br>
 
 -   Em experimentos independentes, o desfecho de uma tentativa é independente dos desfechos de outras tentativas, passadas e/ou futuras. Uma tentativa em um experimento aleatório é independente se a probabilidade de cada desfecho possível não mudar de tentativa para tentativa.[@grami2023]
 
