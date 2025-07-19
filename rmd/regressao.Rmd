@@ -30,6 +30,8 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 -   Linear.[@REF]
 
+-   Nào-linear.[@REF]
+
 -   Polinomial.[@REF]
 
 -   Ridge.[@REF]
@@ -42,17 +44,56 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 -   A análise de regressão simples consiste em modelos estatísticos com 1 variável dependente (desfecho) e 1 variável independente (preditor).[@Hidalgo2013]
 
+- A equação de regressão simples é expressa como \@ref(eq:regressao-simples), onde $Y$ é a variável dependente, $X$ é a variável independente, $\beta_0$ é o intercepto (constante), $\beta_1$ é o coeficiente de regressão da variável independente e $\epsilon$ representa o erro aleatório do modelo.[@Hidalgo2013]
+
+<br>
+
+```{=tex}
+\begin{equation}
+(\#eq:regressao-simples)
+Y = \beta_0 + \beta_1 X + \epsilon
+\end{equation}
+```
+
 <br>
 
 ### O que são análises de regressão multivariável?
 
 -   A análise multivariável (ou múltiplo) consiste em modelos estatísticos com 1 variável dependente (desfecho) e duas ou mais variáveis independentes.[@Hidalgo2013]
 
+-   A equação de regressão multivariável é expressa como \@ref(eq:regressao-multivariavel), onde $Y$ é a variável dependente, $X_1, X_2, ..., X_n$ são as variáveis independentes, $\beta_0$ é o intercepto (constante), $\beta_1, \beta_2, ..., \beta_n$ são os coeficientes de regressão das variáveis independentes e $\epsilon$ representa o erro aleatório do modelo.[@Hidalgo2013]
+
+<br>
+
+```{=tex}
+\begin{equation}
+(\#eq:regressao-multivariavel)
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n + \epsilon
+\end{equation}
+```
+
 <br>
 
 ### O que são análises de regressão multivariada?
 
 -   A análise multivariada consiste em modelos estatísticos com 2 ou mais variáveis dependente (desfechos) e duas ou mais variáveis independentes.[@Hidalgo2013]
+
+-   A equação de regressão multivariada é expressa como \@ref(eq:regressao-multivariada), onde $Y_1, Y_2, ..., Y_m$ são as variáveis dependentes, $X_1, X_2, ..., X_n$ são as variáveis independentes, $\beta_{0j}$ é o intercepto (constante) da variável dependente $Y_j$, $\beta_{ij}$ são os coeficientes de regressão das variáveis independentes para a variável dependente $Y_j$ e $\epsilon_j$ representa o erro aleatório do modelo para a variável dependente $Y_j$.[@Hidalgo2013]
+
+<br>
+
+```{=tex}
+\begin{equation}
+(\#eq:regressao-multivariada)
+Y_1 = \beta_{01} + \beta_{11} X_1 + \beta_{12} X_2 + ... + \beta_{1n} X_n + \epsilon_1
+\\
+Y_2 = \beta_{02} + \beta_{21} X_1 + \beta_{22} X_2 + ... + \beta_{2n} X_n + \epsilon_2
+\\
+...
+\\
+Y_m = \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + ... + \beta_{mn} X_n + \epsilon_m
+\end{equation}
+```
 
 <br>
 
@@ -62,15 +103,168 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 <br>
 
+```{r regressao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão linear."}
+# regression plot for a simple regression univariate model
+# simulate X
+set.seed(123)
+X <- rnorm(100, mean = 50, sd = 10)
+
+# simulate Y based on X
+Y <- 5 + 2 * X + rnorm(100, mean = 0, sd = 5)
+
+# create a data frame
+data <- data.frame(X, Y)
+
+# create the regression model
+model <- lm(Y ~ X, data = data)
+
+# plot the regression line
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(method = "lm", color = "blue") +
+  ggplot2::labs(title = "Regressão linear",
+       x = "Variável Independente (X)",
+       y = "Variável Dependente (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
 ### O que são análises de regressão não-linear?
 
 -   .[@REF]
 
 <br>
 
+```{r regressao-nao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão não-linear."}
+# regression plot for a non-linear regression model
+# simulate X
+set.seed(123)
+X <- seq(-10, 10, length.out = 100)
+
+# simulate Y based on a non-linear function of X
+Y <- 5 + 2 * X^2 + rnorm(100, mean = 0, sd = 5)
+
+# create a data frame
+data <- data.frame(X, Y)
+
+# create the regression model
+model <- lm(Y ~ poly(X, 2), data = data)
+
+# plot the regression line
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(method = "lm", formula = y ~ poly(x, 2), color = "blue") +
+  ggplot2::labs(title = "Regressão não-linear",
+       x = "Variável Independente (X)",
+       y = "Variável Dependente (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### O que são análises de regressão polinomial?
+
+-   .[@REF]
+
+<br>
+
+```{r regressao-polinomial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão polinomial."}
+# regression plot for a polynomial regression model
+# simulate X
+set.seed(123)
+X <- seq(-10, 10, length.out = 100)
+
+# simulate Y based on a polynomial function of X
+Y <- 5 + 2 * X^3 - 0.1 * X^2 + rnorm(100, mean = 0, sd = 5)
+
+# create a data frame
+data <- data.frame(X, Y)
+
+# create the regression model
+model <- lm(Y ~ poly(X, 3), data = data)
+
+# plot the regression line
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(method = "lm", formula = y ~ poly(x, 3), color = "blue") +
+  ggplot2::labs(title = "Regressão polinomial",
+       x = "Variável Independente (X)",
+       y = "Variável Dependente (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### O que são análises de regressão ridge?
+
+-   .[@REF]
+
+<br>
+
+```{r regressao-ridge, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão ridge."}
+# regression plot for a ridge regression model
+# simulate X
+set.seed(123)
+X <- seq(-10, 10, length.out = 100)
+Y <- 5 + 2 * X + rnorm(100, mean = 0, sd = 5)
+data <- data.frame(X, Y)
+
+# criar matriz de preditores com intercepto
+X_matrix <- model.matrix(~ X, data = data)
+
+# ajustar modelo de regressão ridge
+model <- glmnet::glmnet(X_matrix, data$Y, alpha = 0)
+
+# predições (usando lambda padrão)
+predicted_Y <- predict(model, newx = X_matrix, s = 0.01)
+
+# adicionar ao data frame
+data$Y_pred <- as.numeric(predicted_Y)
+
+# plotar com ggplot
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point(color = "gray40") +
+  ggplot2::geom_line(ggplot2::aes(y = Y_pred), color = "blue", size = 1) +
+  ggplot2::labs(title = "Regressão Ridge",
+       x = "Variável Independente (X)",
+       y = "Variável Dependente (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
 ### O que são análises de regressão logística?
 
 -   .[@REF]
+
+<br>
+
+```{r regressao-logistica, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão logística."}
+# regression plot for a logistic regression model
+# simulate X
+set.seed(123)
+X <- rnorm(100, mean = 50, sd = 10)
+
+# simulate a binary outcome Y based on X
+prob <- 1 / (1 + exp(-( -5 + 0.1 * X)))  # logistic function
+Y <- rbinom(100, size = 1, prob = prob) # sample Y ~ Bernoulli(prob)
+
+# create a data frame
+data <- data.frame(X, Y)
+
+# create the logistic regression model
+model <- glm(Y ~ X, data = data, family = binomial)
+
+# plot the regression line
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(method = "glm", method.args = list(family = "binomial"), color = "blue") +
+  ggplot2::labs(title = "Regressão logística",
+       x = "Variável Independente (X)",
+       y = "Probabilidade de Sucesso (Y)") +
+  ggplot2::theme_minimal()
+```
 
 <br>
 

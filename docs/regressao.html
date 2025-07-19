@@ -915,7 +915,9 @@ div.csl-indent {
 <li class="chapter" data-level="27.1.5" data-path="rmd/regressao.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-multivariada"><i class="fa fa-check"></i><b>27.1.5</b> O que são análises de regressão multivariada?</a></li>
 <li class="chapter" data-level="27.1.6" data-path="rmd/regressao.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-linear"><i class="fa fa-check"></i><b>27.1.6</b> O que são análises de regressão linear?</a></li>
 <li class="chapter" data-level="27.1.7" data-path="rmd/regressao.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-n%C3%A3o-linear"><i class="fa fa-check"></i><b>27.1.7</b> O que são análises de regressão não-linear?</a></li>
-<li class="chapter" data-level="27.1.8" data-path="rmd/regressao.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-log%C3%ADstica"><i class="fa fa-check"></i><b>27.1.8</b> O que são análises de regressão logística?</a></li>
+<li class="chapter" data-level="27.1.8" data-path="rmd/regressao.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-polinomial"><i class="fa fa-check"></i><b>27.1.8</b> O que são análises de regressão polinomial?</a></li>
+<li class="chapter" data-level="27.1.9" data-path="rmd/regressao.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-ridge"><i class="fa fa-check"></i><b>27.1.9</b> O que são análises de regressão ridge?</a></li>
+<li class="chapter" data-level="27.1.10" data-path="rmd/regressao.html"><a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-log%C3%ADstica"><i class="fa fa-check"></i><b>27.1.10</b> O que são análises de regressão logística?</a></li>
 </ul></li>
 <li class="chapter" data-level="27.2" data-path="rmd/regressao.html"><a href="#prepara%C3%A7%C3%A3o-de-vari%C3%A1veis-para-regress%C3%A3o"><i class="fa fa-check"></i><b>27.2</b> Preparação de variáveis para regressão</a>
 <ul>
@@ -1369,6 +1371,7 @@ div.csl-indent {
 <h3><span class="header-section-number">27.1.2</span> Quais são os algoritmos de regressão?<a href="#quais-s%C3%A3o-os-algoritmos-de-regress%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Linear.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
+<li><p>Nào-linear.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
 <li><p>Polinomial.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
 <li><p>Ridge.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
 <li><p>Lasso.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
@@ -1378,22 +1381,46 @@ div.csl-indent {
 <div id="o-que-são-análises-de-regressão-simples" class="section level3 hasAnchor" number="27.1.3">
 <h3><span class="header-section-number">27.1.3</span> O que são análises de regressão simples?<a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-simples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>A análise de regressão simples consiste em modelos estatísticos com 1 variável dependente (desfecho) e 1 variável independente (preditor).<span class="citation"><sup><a href="#ref-Hidalgo2013">246</a></sup></span></li>
+<li><p>A análise de regressão simples consiste em modelos estatísticos com 1 variável dependente (desfecho) e 1 variável independente (preditor).<span class="citation"><sup><a href="#ref-Hidalgo2013">246</a></sup></span></p></li>
+<li><p>A equação de regressão simples é expressa como <a href="regressao.html#eq:regressao-simples">(27.1)</a>, onde <span class="math inline">\(Y\)</span> é a variável dependente, <span class="math inline">\(X\)</span> é a variável independente, <span class="math inline">\(\beta_0\)</span> é o intercepto (constante), <span class="math inline">\(\beta_1\)</span> é o coeficiente de regressão da variável independente e <span class="math inline">\(\epsilon\)</span> representa o erro aleatório do modelo.<span class="citation"><sup><a href="#ref-Hidalgo2013">246</a></sup></span></p></li>
 </ul>
+<p><br></p>
+<span class="math display" id="eq:regressao-simples">\[\begin{equation}
+\tag{27.1}
+Y = \beta_0 + \beta_1 X + \epsilon
+\end{equation}\]</span>
 <p><br></p>
 </div>
 <div id="o-que-são-análises-de-regressão-multivariável" class="section level3 hasAnchor" number="27.1.4">
 <h3><span class="header-section-number">27.1.4</span> O que são análises de regressão multivariável?<a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-multivari%C3%A1vel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>A análise multivariável (ou múltiplo) consiste em modelos estatísticos com 1 variável dependente (desfecho) e duas ou mais variáveis independentes.<span class="citation"><sup><a href="#ref-Hidalgo2013">246</a></sup></span></li>
+<li><p>A análise multivariável (ou múltiplo) consiste em modelos estatísticos com 1 variável dependente (desfecho) e duas ou mais variáveis independentes.<span class="citation"><sup><a href="#ref-Hidalgo2013">246</a></sup></span></p></li>
+<li><p>A equação de regressão multivariável é expressa como <a href="regressao.html#eq:regressao-multivariavel">(27.2)</a>, onde <span class="math inline">\(Y\)</span> é a variável dependente, <span class="math inline">\(X_1, X_2, ..., X_n\)</span> são as variáveis independentes, <span class="math inline">\(\beta_0\)</span> é o intercepto (constante), <span class="math inline">\(\beta_1, \beta_2, ..., \beta_n\)</span> são os coeficientes de regressão das variáveis independentes e <span class="math inline">\(\epsilon\)</span> representa o erro aleatório do modelo.<span class="citation"><sup><a href="#ref-Hidalgo2013">246</a></sup></span></p></li>
 </ul>
+<p><br></p>
+<span class="math display" id="eq:regressao-multivariavel">\[\begin{equation}
+\tag{27.2}
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n + \epsilon
+\end{equation}\]</span>
 <p><br></p>
 </div>
 <div id="o-que-são-análises-de-regressão-multivariada" class="section level3 hasAnchor" number="27.1.5">
 <h3><span class="header-section-number">27.1.5</span> O que são análises de regressão multivariada?<a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-multivariada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>A análise multivariada consiste em modelos estatísticos com 2 ou mais variáveis dependente (desfechos) e duas ou mais variáveis independentes.<span class="citation"><sup><a href="#ref-Hidalgo2013">246</a></sup></span></li>
+<li><p>A análise multivariada consiste em modelos estatísticos com 2 ou mais variáveis dependente (desfechos) e duas ou mais variáveis independentes.<span class="citation"><sup><a href="#ref-Hidalgo2013">246</a></sup></span></p></li>
+<li><p>A equação de regressão multivariada é expressa como <a href="regressao.html#eq:regressao-multivariada">(27.3)</a>, onde <span class="math inline">\(Y_1, Y_2, ..., Y_m\)</span> são as variáveis dependentes, <span class="math inline">\(X_1, X_2, ..., X_n\)</span> são as variáveis independentes, <span class="math inline">\(\beta_{0j}\)</span> é o intercepto (constante) da variável dependente <span class="math inline">\(Y_j\)</span>, <span class="math inline">\(\beta_{ij}\)</span> são os coeficientes de regressão das variáveis independentes para a variável dependente <span class="math inline">\(Y_j\)</span> e <span class="math inline">\(\epsilon_j\)</span> representa o erro aleatório do modelo para a variável dependente <span class="math inline">\(Y_j\)</span>.<span class="citation"><sup><a href="#ref-Hidalgo2013">246</a></sup></span></p></li>
 </ul>
+<p><br></p>
+<span class="math display" id="eq:regressao-multivariada">\[\begin{equation}
+\tag{27.3}
+Y_1 = \beta_{01} + \beta_{11} X_1 + \beta_{12} X_2 + ... + \beta_{1n} X_n + \epsilon_1
+\\
+Y_2 = \beta_{02} + \beta_{21} X_1 + \beta_{22} X_2 + ... + \beta_{2n} X_n + \epsilon_2
+\\
+...
+\\
+Y_m = \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + ... + \beta_{mn} X_n + \epsilon_m
+\end{equation}\]</span>
 <p><br></p>
 </div>
 <div id="o-que-são-análises-de-regressão-linear" class="section level3 hasAnchor" number="27.1.6">
@@ -1402,6 +1429,13 @@ div.csl-indent {
 <li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
 <p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:regressao-linear"></span>
+<img src="Ciencia-com-R_files/figure-html/regressao-linear-1.png" alt="Regressão linear." width="672" />
+<p class="caption">
+Figura 27.1: Regressão linear.
+</p>
+</div>
+<p><br></p>
 </div>
 <div id="o-que-são-análises-de-regressão-não-linear" class="section level3 hasAnchor" number="27.1.7">
 <h3><span class="header-section-number">27.1.7</span> O que são análises de regressão não-linear?<a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-n%C3%A3o-linear" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1409,12 +1443,54 @@ div.csl-indent {
 <li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
 <p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:regressao-nao-linear"></span>
+<img src="Ciencia-com-R_files/figure-html/regressao-nao-linear-1.png" alt="Regressão não-linear." width="672" />
+<p class="caption">
+Figura 27.2: Regressão não-linear.
+</p>
 </div>
-<div id="o-que-são-análises-de-regressão-logística" class="section level3 hasAnchor" number="27.1.8">
-<h3><span class="header-section-number">27.1.8</span> O que são análises de regressão logística?<a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-log%C3%ADstica" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><br></p>
+</div>
+<div id="o-que-são-análises-de-regressão-polinomial" class="section level3 hasAnchor" number="27.1.8">
+<h3><span class="header-section-number">27.1.8</span> O que são análises de regressão polinomial?<a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-polinomial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:regressao-polinomial"></span>
+<img src="Ciencia-com-R_files/figure-html/regressao-polinomial-1.png" alt="Regressão polinomial." width="672" />
+<p class="caption">
+Figura 27.3: Regressão polinomial.
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="o-que-são-análises-de-regressão-ridge" class="section level3 hasAnchor" number="27.1.9">
+<h3><span class="header-section-number">27.1.9</span> O que são análises de regressão ridge?<a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-ridge" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+</ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:regressao-ridge"></span>
+<img src="Ciencia-com-R_files/figure-html/regressao-ridge-1.png" alt="Regressão ridge." width="672" />
+<p class="caption">
+Figura 27.4: Regressão ridge.
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="o-que-são-análises-de-regressão-logística" class="section level3 hasAnchor" number="27.1.10">
+<h3><span class="header-section-number">27.1.10</span> O que são análises de regressão logística?<a href="#o-que-s%C3%A3o-an%C3%A1lises-de-regress%C3%A3o-log%C3%ADstica" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+</ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:regressao-logistica"></span>
+<img src="Ciencia-com-R_files/figure-html/regressao-logistica-1.png" alt="Regressão logística." width="672" />
+<p class="caption">
+Figura 27.5: Regressão logística.
+</p>
+</div>
 <p><br></p>
 </div>
 </div>
@@ -1454,7 +1530,7 @@ div.csl-indent {
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:multicolinearidade"></span>
 <img src="Ciencia-com-R_files/figure-html/multicolinearidade-1.png" alt="Multicolinearidade entre variáveis candidatas em modelos de regressão multivariável." width="100%" />
 <p class="caption">
-Figura 27.1: Multicolinearidade entre variáveis candidatas em modelos de regressão multivariável.
+Figura 27.6: Multicolinearidade entre variáveis candidatas em modelos de regressão multivariável.
 </p>
 </div>
 <p><br></p>
