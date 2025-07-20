@@ -44,16 +44,14 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 -   A análise de regressão simples consiste em modelos estatísticos com 1 variável dependente (desfecho) e 1 variável independente (preditor).[@Hidalgo2013]
 
-- A equação de regressão simples é expressa como \@ref(eq:regressao-simples), onde $Y$ é a variável dependente, $X$ é a variável independente, $\beta_0$ é o intercepto (constante), $\beta_1$ é o coeficiente de regressão da variável independente e $\epsilon$ representa o erro aleatório do modelo.[@Hidalgo2013]
+-   A equação de regressão simples é expressa como \@ref(eq:regressao-simples), onde $Y$ é a variável dependente, $X$ é a variável independente, $\beta_0$ é o intercepto (constante), $\beta_1$ é o coeficiente de regressão da variável independente e $\epsilon$ representa o erro aleatório do modelo.[@Hidalgo2013]
 
 <br>
 
-```{=tex}
 \begin{equation}
 (\#eq:regressao-simples)
 Y = \beta_0 + \beta_1 X + \epsilon
 \end{equation}
-```
 
 <br>
 
@@ -65,12 +63,10 @@ Y = \beta_0 + \beta_1 X + \epsilon
 
 <br>
 
-```{=tex}
 \begin{equation}
 (\#eq:regressao-multivariavel)
 Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n + \epsilon
 \end{equation}
-```
 
 <br>
 
@@ -82,7 +78,6 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n + \epsilon
 
 <br>
 
-```{=tex}
 \begin{align}
 (\#eq:regressao-multivariada)
 Y_1 &= \beta_{01} + \beta_{11} X_1 + \beta_{12} X_2 + \dots + \beta_{1n} X_n + \epsilon_1 \\
@@ -90,7 +85,6 @@ Y_2 &= \beta_{02} + \beta_{21} X_1 + \beta_{22} X_2 + \dots + \beta_{2n} X_n + \
 &\vdots \\
 Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \epsilon_m
 \end{align}
-```
 
 <br>
 
@@ -285,19 +279,35 @@ O pacote *fastDummies*[@fastDummies] fornece a função [*dummy_cols*](https://w
 
 <br>
 
+### Por que é comum escolher a categoria mais frequente como referência em modelos epidemiológicos?
+
+- Maior estabilidade estatística: a categoria mais frequente costuma gerar estimativas mais estáveis, com menor erro padrão nos coeficientes das demais categorias.[@REF]
+
+- A escolha da referência não altera o ajuste nem o valor predito pelo modelo — apenas muda o ponto de comparação.[@REF]
+
+<br>
+
 ## Multicolinearidade
 
 <br>
 
 ### O que é multicolinearidade?
 
--   [@REF]
+-   Multicolinearidade representa a intercorrelação entre as variáveis independentes (explanatórias) de um modelo.[@Kim2019]
 
 <br>
 
 ### Como diagnosticar multicolinearidade de forma quantitativa?
 
--   Verifique a existência de multicolinearidade entre as variáveis candidatas.[@Sun1996]
+- Verifique a existência de multicolinearidade entre as variáveis candidatas.[@Sun1996]
+
+- O Coeficiente de determinação ($R^2$) é uma medida de quão bem as variáveis independentes explicam a variabilidade da variável dependente. Valores próximos a 1 indicam que as variáveis independentes estão fortemente correlacionadas entre si, o que pode indicar multicolinearidade.[@Kim2019]
+
+-  O Fator de Inflação da Variância (*variance inflation factor*, VIF) é uma medida que quantifica o quanto a variância de um coeficiente de regressão é inflacionada devido à multicolinearidade. Valores de VIF maiores que 10 são frequentemente considerados indicativos de multicolinearidade significativa.[@Kim2019]
+
+- O recíproco da VIF é chamado de Tolerância, que mede a proporção da variância de uma variável independente que não é explicada pelas outras variáveis independentes. Valores baixos de Tolerância (geralmente abaixo de 0.1) indicam multicolinearidade.[@Kim2019]
+
+- O número de condições (*Condition Number*) é uma medida que avalia a estabilidade numérica de um modelo de regressão. Valores altos (entre 10 de 30) indicam multicolinearidade, e valores maiores que 30 indicam forte multicolinearidade.[@Kim2019]
 
 <br>
 
@@ -348,11 +358,23 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 ### O que fazer em caso de multicolinearidade elevada?
 
--   [@REF]
+- Verifique a transformação (codificação) de variáveis numéricas em categóricas.[@Kim2019]
+
+- Aumente o tamanho da amostra, se possível, para reduzir a multicolinearidade.[@Kim2019]
+
+- Combine níveis de variáveis categóricas com baixa frequência de ocorrência.[@Kim2019]
+
+- Combine variáveis numéricas altamente correlacionadas em uma única variável composta, como a média ou soma das variáveis.[@Kim2019] 
+
+- Considere a exclusão de variáveis altamente correlacionadas do modelo, especialmente se elas não forem essenciais para a análise.[@Kim2019]
+
+- Use técnicas de seleção de variáveis, como seleção passo a passo, para identificar e remover variáveis redundantes.[@Kim2019]
+
+- Use técnicas de regularização, como regressão ridge ou lasso, que podem lidar com multicolinearidade ao penalizar coeficientes de regressão.[@Kim2019]
 
 <br>
 
-## Redução de dimensionalidade para regressão
+## Redução de dimensionalidade
 
 <br>
 
@@ -391,6 +413,12 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 -   Use simulações de dados para identificar qual(is) variável(is) está(ão) causando problemas de convergência do ajuste do modelo.[@Sun1996]
 
 -   A eliminação retroativa tem sido recomendada como a abordagem de regressão gradual mais confiável entre aquelas que podem ser facilmente alcançadas com programas de computador.[@heinze2016]
+
+<br>
+
+### Quando devemos forçar uma variável no modelo?
+
+- Sempre que houver base teórica ou evidência prévia forte (por exemplo, idade em estudos de câncer), ou se for a variável de exposição principal.[@Greenland1989]
 
 <br>
 
