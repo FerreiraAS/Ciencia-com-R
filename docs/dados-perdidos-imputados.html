@@ -1373,10 +1373,37 @@ div.csl-indent {
 <div id="quais-os-mecanismos-geradores-de-dados-perdidos" class="section level3 hasAnchor" number="11.1.3">
 <h3><span class="header-section-number">11.1.3</span> Quais os mecanismos geradores de dados perdidos?<a href="dados-perdidos-imputados.html#quais-os-mecanismos-geradores-de-dados-perdidos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Dados perdidos completamente ao acaso (<em>missing completely at random</em>, MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.<span class="citation"><sup><a href="#ref-Heymans2022">110</a>,<a href="#ref-carpenter2021">111</a></sup></span></p></li>
-<li><p>Dados perdidos ao acaso (<em>missing at random</em>, MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.<span class="citation"><sup><a href="#ref-Heymans2022">110</a>,<a href="#ref-carpenter2021">111</a></sup></span></p></li>
-<li><p>Dados perdidos não ao acaso (<em>missing not at random</em>, MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.<span class="citation"><sup><a href="#ref-Heymans2022">110</a>,<a href="#ref-carpenter2021">111</a></sup></span></p></li>
+<li>Dados perdidos completamente ao acaso (<em>missing completely at random</em>, MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.<span class="citation"><sup><a href="#ref-Heymans2022">110</a>,<a href="#ref-carpenter2021">111</a></sup></span></li>
 </ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mcar"></span>
+<img src="Ciencia-com-R_files/figure-html/mcar-1.png" alt="Representação gráfica de dados perdidos completamente ao acaso (MCAR) em um estudo randomizado controlado (RCT)." width="672" />
+<p class="caption">
+Figura 11.1: Representação gráfica de dados perdidos completamente ao acaso (MCAR) em um estudo randomizado controlado (RCT).
+</p>
+</div>
+<p><br></p>
+<ul>
+<li>Dados perdidos ao acaso (<em>missing at random</em>, MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.<span class="citation"><sup><a href="#ref-Heymans2022">110</a>,<a href="#ref-carpenter2021">111</a></sup></span>
+<br></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mar"></span>
+<img src="Ciencia-com-R_files/figure-html/mar-1.png" alt="Representação gráfica de dados perdidos ao acaso (MAR) em um estudo randomizado controlado (RCT)." width="672" />
+<p class="caption">
+Figura 11.2: Representação gráfica de dados perdidos ao acaso (MAR) em um estudo randomizado controlado (RCT).
+</p>
+</div>
+<p><br></p>
+<ul>
+<li>Dados perdidos não ao acaso (<em>missing not at random</em>, MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.<span class="citation"><sup><a href="#ref-Heymans2022">110</a>,<a href="#ref-carpenter2021">111</a></sup></span></li>
+</ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mnar"></span>
+<img src="Ciencia-com-R_files/figure-html/mnar-1.png" alt="Representação gráfica de dados perdidos não ao acaso (MNAR) em um estudo randomizado controlado (RCT)." width="672" />
+<p class="caption">
+Figura 11.3: Representação gráfica de dados perdidos não ao acaso (MNAR) em um estudo randomizado controlado (RCT).
+</p>
+</div>
 <p><br></p>
 </div>
 <div id="como-identificar-o-mecanismo-gerador-de-dados-perdidos-em-um-banco-de-dados" class="section level3 hasAnchor" number="11.1.4">
@@ -1392,6 +1419,10 @@ div.csl-indent {
 <p><br></p>
 <div class="infobox Rlogo">
 <p>O pacote <em>naniar</em><span class="citation"><sup><a href="#ref-naniar">114</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/naniar/versions/1.0.0/topics/mcar_test"><em>mcar_test</em></a> para executar o Little’s Missing Completely at Random (MCAR) test<span class="citation"><sup><a href="#ref-little1988">113</a></sup></span>.</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>naniar</em><span class="citation"><sup><a href="#ref-naniar">114</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/naniar/versions/1.0.0/topics/gg_miss_upset"><em>gg_miss_upset</em></a> para gerar o gráfico Upset para visualizar padrões de dados perdidos.</p>
 </div>
 <p><br></p>
 </div>

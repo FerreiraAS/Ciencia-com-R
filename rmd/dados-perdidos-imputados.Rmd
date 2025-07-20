@@ -32,9 +32,99 @@ O pacote *base*[@base] fornece a função [*is.na*](https://www.rdocumentation.o
 
 -   Dados perdidos completamente ao acaso (*missing completely at random*, MCAR), em que os dados perdidos estão distribuídos aleatoriamente nos dados da amostra.[@Heymans2022; @carpenter2021]
 
+<br>
+
+```{r mcar, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de dados perdidos completamente ao acaso (MCAR) em um estudo randomizado controlado (RCT)."}
+# para reproduzir o exemplo
+set.seed(123)
+
+# Simulação de dados de um RCT
+n <- 200
+rct_data <- data.frame(
+  id = 1:n,
+  Grupo = sample(c("Controle", "Intervenção"), n, replace = TRUE),
+  Idade = sample(40:75, n, replace = TRUE),
+  Sexo = sample(c("M", "F"), n, replace = TRUE),
+  "Desfecho (pré)" = rnorm(n, mean = 50, sd = 10),
+  "Desfecho (pós)" = rnorm(n, mean = 55, sd = 12),
+  check.names = FALSE
+)
+
+# Simular dados perdidos - MCAR
+rct_mcar <- rct_data
+rct_mcar[["Desfecho (pós)"]][sample(1:n, 30)] <- NA
+rct_mcar$Idade[sample(1:n, 20)] <- NA
+
+p1 <- naniar::gg_miss_upset(rct_mcar, nsets = 5)
+p1
+```
+
+<br>
+
 -   Dados perdidos ao acaso (*missing at random*, MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.[@Heymans2022; @carpenter2021]
+<br>
+
+```{r mar, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de dados perdidos ao acaso (MAR) em um estudo randomizado controlado (RCT)."}
+# para reproduzir o exemplo
+set.seed(123)
+
+# Simulação de dados de um RCT
+n <- 200
+rct_data <- data.frame(
+  id = 1:n,
+  Grupo = sample(c("Controle", "Intervenção"), n, replace = TRUE),
+  Idade = sample(40:75, n, replace = TRUE),
+  Sexo = sample(c("M", "F"), n, replace = TRUE),
+  "Desfecho (pré)" = rnorm(n, mean = 50, sd = 10),
+  "Desfecho (pós)" = rnorm(n, mean = 55, sd = 12),
+  check.names = FALSE
+)
+
+# Simular dados perdidos - MAR
+rct_mar <- rct_data
+rct_mar[["Desfecho (pós)"]][rct_mar$Grupo == "Intervenção" & runif(n) < 0.3] <- NA
+rct_mar$Idade[rct_mar$Sexo == "F" & runif(n) < 0.2] <- NA
+
+# Visualização dos padrões de dados ausentes
+graphics::par(mar = c(5, 4, 4, 2) + 0.1)
+
+p2 <- naniar::gg_miss_upset(rct_mar, nsets = 5)
+p2
+```
+
+<br>
 
 -   Dados perdidos não ao acaso (*missing not at random*, MNAR), em que a probabilidade da ocorrência de dados perdidos é relacionada com a própria variável.[@Heymans2022; @carpenter2021]
+
+<br>
+
+```{r mnar, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de dados perdidos não ao acaso (MNAR) em um estudo randomizado controlado (RCT)."}
+# para reproduzir o exemplo
+set.seed(123)
+
+# Simulação de dados de um RCT
+n <- 200
+rct_data <- data.frame(
+  id = 1:n,
+  Grupo = sample(c("Controle", "Intervenção"), n, replace = TRUE),
+  Idade = sample(40:75, n, replace = TRUE),
+  Sexo = sample(c("M", "F"), n, replace = TRUE),
+  "Desfecho (pré)" = rnorm(n, mean = 50, sd = 10),
+  "Desfecho (pós)" = rnorm(n, mean = 55, sd = 12),
+  check.names = FALSE
+)
+
+# Simular dados perdidos - MNAR
+rct_mnar <- rct_data
+rct_mnar[["Desfecho (pós)"]][rct_mnar[["Desfecho (pós)"]] > 60 & runif(n) < 0.5] <- NA
+rct_mnar[["Desfecho (pré)"]][rct_mnar[["Desfecho (pré)"]] < 45 & runif(n) < 0.4] <- NA
+
+# Visualização dos padrões de dados ausentes
+graphics::par(mar = c(5, 4, 4, 2) + 0.1)
+
+p3 <- naniar::gg_miss_upset(rct_mnar, nsets = 5)
+p3
+```
 
 <br>
 
@@ -54,6 +144,12 @@ O pacote *misty*[@misty] fornece a função [*na.test*](https://www.rdocumentati
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *naniar*[@naniar] fornece a função [*mcar_test*](https://www.rdocumentation.org/packages/naniar/versions/1.0.0/topics/mcar_test) para executar o Little's Missing Completely at Random (MCAR) test[@little1988].
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *naniar*[@naniar] fornece a função [*gg_miss_upset*](https://www.rdocumentation.org/packages/naniar/versions/1.0.0/topics/gg_miss_upset) para gerar o gráfico Upset para visualizar padrões de dados perdidos.
 :::
 
 <br>
