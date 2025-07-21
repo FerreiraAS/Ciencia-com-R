@@ -89,7 +89,7 @@ cor_padrao <- "lightblue"
 bernoulli_data <- rbinom(1000, 1, 0.5) # 1000 testes com probabilidade de sucesso 0.5
 p1 <- ggplot2::ggplot(data.frame(bernoulli_data), ggplot2::aes(x = bernoulli_data)) +
   ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
-  ggplot2::labs(title = "Distribuição Bernoulli (p = 0.5)", x = "Resultado", y = "Frequência") +
+  ggplot2::labs(title = "Distribuição Bernoulli", x = "Resultado", y = "Frequência") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -99,7 +99,7 @@ p1 <- ggplot2::ggplot(data.frame(bernoulli_data), ggplot2::aes(x = bernoulli_dat
 binomial_data <- rbinom(1000, 10, 0.5) # 1000 experimentos com 10 tentativas e p = 0.5
 p2 <- ggplot2::ggplot(data.frame(binomial_data), ggplot2::aes(x = binomial_data)) +
   ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
-  ggplot2::labs(title = "Distribuição Binomial (n = 10, p = 0.5)", x = "Número de Sucessos", y = "Frequência") +
+  ggplot2::labs(title = "Distribuição Binomial", x = "Número de Sucessos", y = "Frequência") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -109,7 +109,7 @@ p2 <- ggplot2::ggplot(data.frame(binomial_data), ggplot2::aes(x = binomial_data)
 geom_data <- rgeom(1000, 0.5) # número de tentativas até o 1º sucesso com p = 0.5
 p3 <- ggplot2::ggplot(data.frame(geom_data), ggplot2::aes(x = geom_data)) +
   ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
-  ggplot2::labs(title = "Distribuição Geométrica (p = 0.5)", x = "Número de Tentativas até o Sucesso", y = "Frequência") +
+  ggplot2::labs(title = "Distribuição Geométrica", x = "Número de Tentativas até o Sucesso", y = "Frequência") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -119,7 +119,7 @@ p3 <- ggplot2::ggplot(data.frame(geom_data), ggplot2::aes(x = geom_data)) +
 neg_binomial_data <- rnbinom(1000, 3, 0.5) # número de tentativas até o 3º sucesso
 p4 <- ggplot2::ggplot(data.frame(neg_binomial_data), ggplot2::aes(x = neg_binomial_data)) +
   ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
-  ggplot2::labs(title = "Distribuição Binomial Negativa (r = 3, p = 0.5)", x = "Número de Tentativas até o 3º Sucesso", y = "Frequência") +
+  ggplot2::labs(title = "Distribuição Binomial Negativa", x = "Número de Tentativas até o 3º Sucesso", y = "Frequência") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -129,7 +129,7 @@ p4 <- ggplot2::ggplot(data.frame(neg_binomial_data), ggplot2::aes(x = neg_binomi
 hypergeom_data <- rhyper(1000, 10, 30, 5) # 1000 amostras de tamanho 5 sem reposição
 p5 <- ggplot2::ggplot(data.frame(hypergeom_data), ggplot2::aes(x = hypergeom_data)) +
   ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
-  ggplot2::labs(title = "Distribuição Hipergeométrica (m = 10, n = 30, k = 5)", x = "Número de Sucessos", y = "Frequência") +
+  ggplot2::labs(title = "Distribuição Hipergeométrica", x = "Número de Sucessos", y = "Frequência") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -139,7 +139,7 @@ p5 <- ggplot2::ggplot(data.frame(hypergeom_data), ggplot2::aes(x = hypergeom_dat
 poisson_data <- rpois(1000, 3) # 1000 eventos com taxa lambda = 3
 p6 <- ggplot2::ggplot(data.frame(poisson_data), ggplot2::aes(x = poisson_data)) +
   ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
-  ggplot2::labs(title = "Distribuição Poisson (λ = 3)", x = "Número de Eventos", y = "Frequência") +
+  ggplot2::labs(title = "Distribuição Poisson", x = "Número de Eventos", y = "Frequência") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -220,7 +220,7 @@ cor_padrao <- "lightblue"
 uniforme_data <- runif(1000000, min = 0, max = 1) # 1000000 valores amostrados entre 0 e 1
 p1 <- ggplot2::ggplot(data.frame(uniforme_data), ggplot2::aes(x = uniforme_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Uniforme (a = 0, b = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Uniforme", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -230,7 +230,7 @@ p1 <- ggplot2::ggplot(data.frame(uniforme_data), ggplot2::aes(x = uniforme_data)
 exponencial_data <- rexp(1000000, rate = 1) # 1000000 valores amostrados com lambda = 1
 p2 <- ggplot2::ggplot(data.frame(exponencial_data), ggplot2::aes(x = exponencial_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Exponencial (lambda = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Exponencial", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -252,7 +252,7 @@ cor_padrao <- "lightblue"
 normal_data <- rnorm(100000, mean = 0, sd = 1) # 100000 valores amostrados de uma normal
 p3 <- ggplot2::ggplot(data.frame(normal_data), ggplot2::aes(x = normal_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Normal (mu = 0, sigma = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Normal", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -275,7 +275,7 @@ cor_padrao <- "lightblue"
 binomial_data <- rbinom(100000, size = 100, prob = 0.5) # 100000 amostras com n = 100 e p = 0.5
 p4 <- ggplot2::ggplot(data.frame(binomial_data), ggplot2::aes(x = binomial_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Aproximação Binomial (n = 100000, p = 0.5)", x = "Número de Sucessos", y = "Densidade") +
+  ggplot2::labs(title = "Aproximação Binomial", x = "Número de Sucessos", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -285,7 +285,7 @@ p4 <- ggplot2::ggplot(data.frame(binomial_data), ggplot2::aes(x = binomial_data)
 poisson_data <- rpois(100000, lambda = 5) # 100000 amostras com lambda = 5
 p5 <- ggplot2::ggplot(data.frame(poisson_data), ggplot2::aes(x = poisson_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Poisson (lambda = 5)", x = "Número de Ocorrências", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Poisson", x = "Número de Ocorrências", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -308,7 +308,7 @@ cor_padrao <- "lightblue"
 tstudent_data <- rt(100000, df = 10) # 100000 amostras com df = 10
 p6 <- ggplot2::ggplot(data.frame(tstudent_data), ggplot2::aes(x = tstudent_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição t-Student (df = 10)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição t-Student", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -318,7 +318,7 @@ p6 <- ggplot2::ggplot(data.frame(tstudent_data), ggplot2::aes(x = tstudent_data)
 chi_squared_data <- rchisq(100000, df = 10) # 100000 amostras com df = 10
 p7 <- ggplot2::ggplot(data.frame(chi_squared_data), ggplot2::aes(x = chi_squared_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Qui-Quadrado (df = 10)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Qui-Quadrado", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -341,7 +341,7 @@ cor_padrao <- "lightblue"
 weibull_data <- rweibull(100000, shape = 1.5, scale = 1) # 100000 amostras com shape = 1.5, scale = 1
 p8 <- ggplot2::ggplot(data.frame(weibull_data), ggplot2::aes(x = weibull_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Weibull (shape = 1.5, scale = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Weibull", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -351,7 +351,7 @@ p8 <- ggplot2::ggplot(data.frame(weibull_data), ggplot2::aes(x = weibull_data)) 
 gama_data <- rgamma(100000, shape = 5, scale = 1) # 100000 amostras com shape = 5, scale = 1
 p9 <- ggplot2::ggplot(data.frame(gama_data), ggplot2::aes(x = gama_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Gama (shape = 5, scale = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Gama", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -361,7 +361,7 @@ p9 <- ggplot2::ggplot(data.frame(gama_data), ggplot2::aes(x = gama_data)) +
 log_normal_data <- rlnorm(100000, meanlog = 0, sdlog = 1) # 100000 amostras com meanlog = 0, sdlog = 1
 p10 <- ggplot2::ggplot(data.frame(log_normal_data), ggplot2::aes(x = log_normal_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Log-Normal (meanlog = 0, sdlog = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Log-Normal", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -384,7 +384,7 @@ cor_padrao <- "lightblue"
 beta_data <- rbeta(100000, shape1 = 2, shape2 = 5) # 100000 amostras com alpha = 2 e beta = 5
 p11 <- ggplot2::ggplot(data.frame(beta_data), ggplot2::aes(x = beta_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Beta (alpha = 2, beta = 5)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Beta", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -394,7 +394,7 @@ p11 <- ggplot2::ggplot(data.frame(beta_data), ggplot2::aes(x = beta_data)) +
 logistica_data <- rlogis(100000, location = 0, scale = 1) # 100000 amostras com mu = 0, s = 1
 p12 <- ggplot2::ggplot(data.frame(logistica_data), ggplot2::aes(x = logistica_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Logística (mu = 0, s = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Logística", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -418,7 +418,7 @@ cor_padrao <- "lightblue"
 pareto_data <- actuar::rpareto(100, shape = 2, scale = 1) # 100 amostras com shape = 2 e scale = 1
 p13 <- ggplot2::ggplot(data.frame(pareto_data), ggplot2::aes(x = pareto_data)) +
   ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
-  ggplot2::labs(title = "Distribuição Pareto (shape = 2, scale = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::labs(title = "Distribuição Pareto", x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
@@ -477,13 +477,17 @@ d1 <- ggfortify::ggdistribution(dnorm,
                                 seq(-3, 3, 0.1),
                                 mean = 0,
                                 sd = 1,
-                                main = "Distribuição de probabilidade") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() + ggplot2::theme(aspect.ratio = 1)
+                                main = "Distribuição de probabilidade") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() +     ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
 
 p1 <- ggfortify::ggdistribution(pnorm,
                                 seq(-3, 3, 0.1),
                                 mean = 0,
                                 sd = 1,
-                                main = "Função de distribuição cumulativa") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() + ggplot2::theme(aspect.ratio = 1)
+                                main = "Função de distribuição cumulativa") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() +     ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
 
 ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 2, align = "h")
 ```
@@ -598,11 +602,6 @@ anderson <- ggplot2::ggplot(data.frame(x = sort(data)), ggplot2::aes(x)) +
   ggplot2::theme(aspect.ratio = 1,
                  text = ggplot2::element_text(size = 8)
   )
-
-# Combine all plots into one grid
-ggpubr::ggarrange(d1, p1, qqplot, kolmogorov, shapiro, anderson, 
-                  heights = c(1, 1), widths = c(1, 1, 1), 
-                  nrow = 2, ncol = 3, align = "h")
 
 # Combine all plots into one grid
 ggpubr::ggarrange(d1, p1, qqplot, kolmogorov, shapiro, anderson, 
