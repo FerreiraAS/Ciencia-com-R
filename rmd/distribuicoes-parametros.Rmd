@@ -60,19 +60,125 @@ O pacote *graphics*[@graphics] fornece a função [hist](https://www.rdocumentat
 
 -   Distribuções discretas:
 
-    -   Uniforme: resultados (finitos) que são igualmente prováveis. [@REF]
+    -   Bernoulli: resultado de um único teste com dois possíveis desfechos (sucesso ou fracasso).[@REF]
 
     -   Binomial: número de sucessos em *k* tentativas. [@REF]
-
-    -   Poisson: número de eventos em um intervalo de tempo fixo.[@REF]
-
-    -   Bernoulli: .[@REF]
 
     -   Geométrica: número de testes até o 1o sucesso.[@REF]
 
     -   Binomial negativa: número de testes até o *k*-ésimo sucesso.[@REF]
 
     -   Hipergeométrica: número de indivíduos na amostra tomados sem reposição. [@REF]
+
+    -   Poisson: número de eventos em um intervalo de tempo fixo.[@REF]
+
+    -   Uniforme: resultados (finitos) que são igualmente prováveis. [@REF]
+    
+    - Multinomial: resultados de múltiplos testes com mais de dois possíveis desfechos. [@REF]
+
+<br>
+
+```{r distribuicao-discreta, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições discretas e suas funções de probabilidade."}
+
+set.seed(42)
+
+# Definir cor padrão para os gráficos
+cor_padrao <- "lightblue"
+
+# 1. Distribuição Bernoulli (p = 0.5)
+bernoulli_data <- rbinom(1000, 1, 0.5) # 1000 testes com probabilidade de sucesso 0.5
+p1 <- ggplot2::ggplot(data.frame(bernoulli_data), ggplot2::aes(x = bernoulli_data)) +
+  ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
+  ggplot2::labs(title = "Distribuição Bernoulli (p = 0.5)", x = "Resultado", y = "Frequência") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 2. Distribuição Binomial (n = 10, p = 0.5)
+binomial_data <- rbinom(1000, 10, 0.5) # 1000 experimentos com 10 tentativas e p = 0.5
+p2 <- ggplot2::ggplot(data.frame(binomial_data), ggplot2::aes(x = binomial_data)) +
+  ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
+  ggplot2::labs(title = "Distribuição Binomial (n = 10, p = 0.5)", x = "Número de Sucessos", y = "Frequência") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 3. Distribuição Geométrica (p = 0.5)
+geom_data <- rgeom(1000, 0.5) # número de tentativas até o 1º sucesso com p = 0.5
+p3 <- ggplot2::ggplot(data.frame(geom_data), ggplot2::aes(x = geom_data)) +
+  ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
+  ggplot2::labs(title = "Distribuição Geométrica (p = 0.5)", x = "Número de Tentativas até o Sucesso", y = "Frequência") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 4. Distribuição Binomial Negativa (r = 3, p = 0.5)
+neg_binomial_data <- rnbinom(1000, 3, 0.5) # número de tentativas até o 3º sucesso
+p4 <- ggplot2::ggplot(data.frame(neg_binomial_data), ggplot2::aes(x = neg_binomial_data)) +
+  ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
+  ggplot2::labs(title = "Distribuição Binomial Negativa (r = 3, p = 0.5)", x = "Número de Tentativas até o 3º Sucesso", y = "Frequência") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 5. Distribuição Hipergeométrica (m = 10, n = 30, k = 5)
+hypergeom_data <- rhyper(1000, 10, 30, 5) # 1000 amostras de tamanho 5 sem reposição
+p5 <- ggplot2::ggplot(data.frame(hypergeom_data), ggplot2::aes(x = hypergeom_data)) +
+  ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
+  ggplot2::labs(title = "Distribuição Hipergeométrica (m = 10, n = 30, k = 5)", x = "Número de Sucessos", y = "Frequência") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 6. Distribuição Poisson (lambda = 3)
+poisson_data <- rpois(1000, 3) # 1000 eventos com taxa lambda = 3
+p6 <- ggplot2::ggplot(data.frame(poisson_data), ggplot2::aes(x = poisson_data)) +
+  ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
+  ggplot2::labs(title = "Distribuição Poisson (λ = 3)", x = "Número de Eventos", y = "Frequência") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 7. Distribuição Uniforme Discreta (min = 1, max = 6)
+uniform_data <- sample(1:6, 1000, replace = TRUE) # 1000 resultados de uma distribuição uniforme discreta (dados de 1 a 6)
+p7 <- ggplot2::ggplot(data.frame(uniform_data), ggplot2::aes(x = uniform_data)) +
+  ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
+  ggplot2::labs(title = "Distribuição Uniforme Discreta", x = "Resultado", y = "Frequência") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 8. Distribuição Multinomial (probabilidades: 1/3, 1/3, 1/3)
+# Gerar 1000 experimentos com 3 resultados possíveis e 10 tentativas em cada experimento
+multinomial_data <- rmultinom(1000, 10, prob = c(1/3, 1/3, 1/3))
+
+# Convertendo os dados para um formato adequado para ggplot
+multinomial_df <- data.frame(
+  Result = rep(1:3, times = 1000),
+  Freq = as.vector(multinomial_data)
+)
+
+# Criando o gráfico
+p8 <- ggplot2::ggplot(multinomial_df, ggplot2::aes(x = factor(Result), y = Freq)) +
+  ggplot2::geom_bar(stat = "identity", fill = cor_padrao) +
+  ggplot2::labs(title = "Distribuição Multinomial", x = "Resultado", y = "Frequência") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# Criar painel 2x4 com todos os gráficos, incluindo o p8
+gridExtra::grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, ncol = 4, nrow = 2)
+```
+
+<br>
 
 -   Distribuições contínuas:
 
@@ -82,27 +188,245 @@ O pacote *graphics*[@graphics] fornece a função [hist](https://www.rdocumentat
 
     -   Normal: .[@REF]
 
-    -   Normal padrão: .[@REF]
-
     -   Aproximação binomial: número de sucessos em uma grande quantidade de tentativas.[@REF]
 
     -   Aproximação Poisson: número de ocorrências em um intervalo de tempo fixo.[@REF]
 
-    -   Qui-quadrado: .[@REF]
-
     -   t-Student: .[@REF]
 
+    -   Qui-quadrado: .[@REF]
+
     -   Weibull: .[@REF]
+
+    -   Gama: .[@REF]
 
     -   Log-normal: .[@REF]
 
     -   Beta: .[@REF]
 
-    -   Gama: .[@REF]
-
     -   Logística: .[@REF]
 
     -   Pareto. [@REF]
+
+<br>
+
+```{r distribuicao-basica, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas básicas e suas funções de densidade."}
+set.seed(42)
+
+# Definir cor padrão para os gráficos
+cor_padrao <- "lightblue"
+
+# 1. Distribuição Uniforme (a = 0, b = 1)
+uniforme_data <- runif(1000000, min = 0, max = 1) # 1000000 valores amostrados entre 0 e 1
+p1 <- ggplot2::ggplot(data.frame(uniforme_data), ggplot2::aes(x = uniforme_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Uniforme (a = 0, b = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 2. Distribuição Exponencial (lambda = 1)
+exponencial_data <- rexp(1000000, rate = 1) # 1000000 valores amostrados com lambda = 1
+p2 <- ggplot2::ggplot(data.frame(exponencial_data), ggplot2::aes(x = exponencial_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Exponencial (lambda = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# Criar painel 1x2 com os gráficos p1 e p2
+gridExtra::grid.arrange(p1, p2, ncol = 2, nrow = 1) # Arranjo 1 linha e 2 colunas
+```
+
+<br>
+
+```{r distribuicao-simetricas, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas aproximadas e suas funções de densidade."}
+set.seed(42)
+
+# Definir cor padrão para os gráficos
+cor_padrao <- "lightblue"
+
+# 3. Distribuição Normal (mu = 0, sigma = 1)
+normal_data <- rnorm(100000, mean = 0, sd = 1) # 100000 valores amostrados de uma normal
+p3 <- ggplot2::ggplot(data.frame(normal_data), ggplot2::aes(x = normal_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Normal (mu = 0, sigma = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# Criar painel 1x1 com os gráficos p1
+gridExtra::grid.arrange(p3, ncol = 1, nrow = 1) # Arranjo 1 linha e 1 coluna
+```
+
+<br>
+
+```{r distribuicao-aproximada, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas aproximadas e suas funções de densidade."}
+
+set.seed(42)
+
+# Definir cor padrão para os gráficos
+cor_padrao <- "lightblue"
+
+# 4. Aproximação Binomial (n = 100, p = 0.5)
+binomial_data <- rbinom(100000, size = 100, prob = 0.5) # 100000 amostras com n = 100 e p = 0.5
+p4 <- ggplot2::ggplot(data.frame(binomial_data), ggplot2::aes(x = binomial_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Aproximação Binomial (n = 100000, p = 0.5)", x = "Número de Sucessos", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 5. Aproximação Poisson (lambda = 5)
+poisson_data <- rpois(100000, lambda = 5) # 100000 amostras com lambda = 5
+p5 <- ggplot2::ggplot(data.frame(poisson_data), ggplot2::aes(x = poisson_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Poisson (lambda = 5)", x = "Número de Ocorrências", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# Criar painel 1x2 com os gráficos p4 e p5
+gridExtra::grid.arrange(p4, p5, ncol = 2, nrow = 1) # Arranjo 1 linha e 2 colunas
+```
+
+<br>
+
+```{r distribuicao-inferencia, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas para inferência e suas funções de densidade."}
+
+set.seed(42)
+
+# Definir cor padrão para os gráficos
+cor_padrao <- "lightblue"
+
+# 6. Distribuição t-Student (df = 10)
+tstudent_data <- rt(100000, df = 10) # 100000 amostras com df = 10
+p6 <- ggplot2::ggplot(data.frame(tstudent_data), ggplot2::aes(x = tstudent_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição t-Student (df = 10)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 7. Distribuição Qui-Quadrado (df = 10)
+chi_squared_data <- rchisq(100000, df = 10) # 100000 amostras com df = 10
+p7 <- ggplot2::ggplot(data.frame(chi_squared_data), ggplot2::aes(x = chi_squared_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Qui-Quadrado (df = 10)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# Criar painel 1x2 com os gráficos p6 e p7
+gridExtra::grid.arrange(p6, p7, ncol = 2, nrow = 1) # Arranjo 1 linhas e 2 colunas
+```
+
+<br>
+
+```{r distribuicao-específicos, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas para dados específicos e suas funções de densidade."}
+
+set.seed(42)
+
+# Definir cor padrão para os gráficos
+cor_padrao <- "lightblue"
+
+# 8. Distribuição Weibull (shape = 1.5, scale = 1)
+weibull_data <- rweibull(100000, shape = 1.5, scale = 1) # 100000 amostras com shape = 1.5, scale = 1
+p8 <- ggplot2::ggplot(data.frame(weibull_data), ggplot2::aes(x = weibull_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Weibull (shape = 1.5, scale = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 9. Distribuição Gama (shape = 5, scale = 1)
+gama_data <- rgamma(100000, shape = 5, scale = 1) # 100000 amostras com shape = 5, scale = 1
+p9 <- ggplot2::ggplot(data.frame(gama_data), ggplot2::aes(x = gama_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Gama (shape = 5, scale = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 10. Distribuição Log-Normal (meanlog = 0, sdlog = 1)
+log_normal_data <- rlnorm(100000, meanlog = 0, sdlog = 1) # 100000 amostras com meanlog = 0, sdlog = 1
+p10 <- ggplot2::ggplot(data.frame(log_normal_data), ggplot2::aes(x = log_normal_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Log-Normal (meanlog = 0, sdlog = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# Criar painel 2x2 com os gráficos p8, p9 e p10
+gridExtra::grid.arrange(p8, p9, p10, ncol = 3, nrow = 1) # Arranjo 1 linhas e 3 colunas
+```
+
+<br>
+
+```{r distribuicao-proporcoes, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas para probabilidades e proporções e suas funções de densidade."}
+
+set.seed(42)
+
+# Definir cor padrão para os gráficos
+cor_padrao <- "lightblue"
+
+# 11. Distribuição Beta (alpha = 2, beta = 5)
+beta_data <- rbeta(100000, shape1 = 2, shape2 = 5) # 100000 amostras com alpha = 2 e beta = 5
+p11 <- ggplot2::ggplot(data.frame(beta_data), ggplot2::aes(x = beta_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Beta (alpha = 2, beta = 5)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# 12. Distribuição Logística (mu = 0, s = 1)
+logistica_data <- rlogis(100000, location = 0, scale = 1) # 100000 amostras com mu = 0, s = 1
+p12 <- ggplot2::ggplot(data.frame(logistica_data), ggplot2::aes(x = logistica_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Logística (mu = 0, s = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# Criar painel 2x2 com os gráficos p11 e p12
+gridExtra::grid.arrange(p11, p12, ncol = 2, nrow = 1) # Arranjo 1 linhas e 2 colunas
+```
+
+<br>
+
+```{r distribuicao-pareto, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas com caudas pesadas e suas funções de densidade."}
+
+set.seed(42)
+
+# Definir cor padrão para os gráficos
+cor_padrao <- "lightblue"
+
+# 13. Distribuição Pareto (shape = 2, scale = 1)
+# Gerar a distribuição Pareto usando a função rpareto
+pareto_data <- actuar::rpareto(100, shape = 2, scale = 1) # 100 amostras com shape = 2 e scale = 1
+p13 <- ggplot2::ggplot(data.frame(pareto_data), ggplot2::aes(x = pareto_data)) +
+  ggdist::stat_halfeye(fill = cor_padrao, color = "black", alpha = 0.7) + 
+  ggplot2::labs(title = "Distribuição Pareto (shape = 2, scale = 1)", x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    text = ggplot2::element_text(size = 8)  # Ajuste o tamanho da fonte de todos os elementos
+  )
+
+# Criar painel 1x1 com os gráficos p13
+gridExtra::grid.arrange(p13, ncol = 1, nrow = 1) # Arranjo 1 linhas e 3 colunas
+```
 
 <br>
 
@@ -144,7 +468,7 @@ O pacote *ggfortify*[@ggfortify] fornece a função [ggdistribution](https://www
 
 <br>
 
-```{r distribuicao-normal, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições e funções de probabilidade"}
+```{r distribuicao-normal, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições e funções de probabilidade."}
 
 scaleFUN <- function(x) sprintf("%.2f", x)
 
@@ -162,7 +486,6 @@ p1 <- ggfortify::ggdistribution(pnorm,
                                 main = "Função de distribuição cumulativa") + ggplot2::scale_y_continuous(labels = scaleFUN) + ggplot2::theme_minimal() + ggplot2::theme(aspect.ratio = 1)
 
 ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 2, align = "h")
-
 ```
 
 <br>
@@ -183,9 +506,214 @@ ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 
 
 <br>
 
+```{r normalidade-distribuicao, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuição normal e métodos de visualização e testes de normalidade."}
+
+scaleFUN <- function(x) sprintf("%.2f", x)
+
+# Simulate random sample from normal distribution
+set.seed(123)
+n <- 50
+data <- rnorm(n, mean = 0, sd = 1)
+
+# Calcular a média e o desvio padrão
+mean_data <- mean(data)
+sd_data <- sd(data)
+
+# Realizar os testes
+ks_test <- ks.test(data, "pnorm", mean = 0, sd = 1)
+shapiro_test <- shapiro.test(data)
+ad_test <- nortest::ad.test(data)
+
+# Função para formatar p-values
+format_p_value <- function(p_value) {
+  if (p_value < 0.001) {
+    return("p < 0.001")
+  } else {
+    return(paste("p-value:", format(p_value, digits = 4)))
+  }
+}
+
+# Normal Distribution plot (d1) com média e desvio padrão no título
+d1 <- ggfortify::ggdistribution(dnorm,
+                                seq(-3, 3, 0.1),
+                                mean = 0,
+                                sd = 1,
+                                main = paste("Distribuição de probabilidade\nMédia:", 
+                                             sprintf("%.2f", mean_data), 
+                                             "Desvio Padrão:", sprintf("%.2f", sd_data))) + 
+  ggplot2::scale_y_continuous(labels = scaleFUN) + 
+  ggplot2::theme_minimal() + 
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# CDF plot (p1)
+p1 <- ggfortify::ggdistribution(pnorm,
+                                seq(-3, 3, 0.1),
+                                mean = 0,
+                                sd = 1,
+                                main = "Função de distribuição cumulativa") + 
+  ggplot2::scale_y_continuous(labels = scaleFUN) + 
+  ggplot2::theme_minimal() + 
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# QQ-plot for Normal distribution
+qqplot <- ggplot2::ggplot(data.frame(x = data), ggplot2::aes(sample = x)) + 
+  ggplot2::stat_qq() +
+  ggplot2::stat_qq_line(color = "red") +
+  ggplot2::ggtitle("QQ-Plot") + 
+  ggplot2::theme_minimal() +
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# Kolmogorov-Smirnov Test plot (kolmogorov)
+kolmogorov <- ggplot2::ggplot(data.frame(x = sort(data)), ggplot2::aes(x)) +
+  ggplot2::stat_ecdf(geom = "step", color = "blue") +  # ECDF of data
+  ggplot2::stat_function(fun = stats::pnorm, args = list(mean = 0, sd = 1), color = "red", size = 1) +  # Normal CDF
+  ggplot2::ggtitle(paste("Kolmogorov-Smirnov Test\n", format_p_value(ks_test$p.value))) + 
+  ggplot2::theme_minimal() + 
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# Shapiro-Wilk Test plot (shapiro)
+shapiro <- ggplot2::ggplot(data.frame(x = sort(data)), ggplot2::aes(x)) +
+  ggplot2::stat_ecdf(geom = "step", color = "green") +  # ECDF of data
+  ggplot2::stat_function(fun = stats::pnorm, args = list(mean = 0, sd = 1), color = "red", size = 1) +  # Normal CDF
+  ggplot2::ggtitle(paste("Shapiro-Wilk Test\n", format_p_value(shapiro_test$p.value))) + 
+  ggplot2::theme_minimal() + 
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# Anderson-Darling Test plot (anderson)
+anderson <- ggplot2::ggplot(data.frame(x = sort(data)), ggplot2::aes(x)) +
+  ggplot2::stat_ecdf(geom = "step", color = "purple") +  # ECDF of data
+  ggplot2::stat_function(fun = stats::pnorm, args = list(mean = 0, sd = 1), color = "red", size = 1) +  # Normal CDF
+  ggplot2::ggtitle(paste("Anderson-Darling Test\n", format_p_value(ad_test$p.value))) + 
+  ggplot2::theme_minimal() + 
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# Combine all plots into one grid
+ggpubr::ggarrange(d1, p1, qqplot, kolmogorov, shapiro, anderson, 
+                  heights = c(1, 1), widths = c(1, 1, 1), 
+                  nrow = 2, ncol = 3, align = "h")
+
+# Combine all plots into one grid
+ggpubr::ggarrange(d1, p1, qqplot, kolmogorov, shapiro, anderson, 
+                  heights = c(1, 1), widths = c(1, 1, 1), 
+                  nrow = 2, ncol = 3, align = "h")
+```
+
+<br>
+
 ### O que são distribuições não-normais?
 
 -   .[@REF]
+
+<br>
+
+```{r nao-normalidade-distribuicao, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuição não-normal (exponencial) e métodos de visualização e testes de normalidade."}
+
+scaleFUN <- function(x) sprintf("%.2f", x)
+
+# Simular uma amostra aleatória de uma distribuição Exponencial
+set.seed(123)
+n <- 50
+data_exp <- rexp(n, rate = 1)  # Taxa de 1 para a distribuição exponencial
+
+# Calcular a média e o desvio padrão
+mean_data_exp <- mean(data_exp)
+sd_data_exp <- sd(data_exp)
+
+# Realizar os testes
+ks_test_exp <- ks.test(data_exp, "pexp", rate = 1)
+shapiro_test_exp <- shapiro.test(data_exp)
+ad_test_exp <- nortest::ad.test(data_exp)
+
+# Função para formatar p-values
+format_p_value <- function(p_value) {
+  if (p_value < 0.001) {
+    return("p < 0.001")
+  } else {
+    return(paste("p-value:", format(p_value, digits = 4)))
+  }
+}
+
+# Distribuição Exponencial (d1)
+d1_exp <- ggfortify::ggdistribution(dexp,
+                                    seq(0, 5, 0.1),
+                                    rate = 1,
+                                    main = paste("Distribuição Exponencial\nMédia:", 
+                                                 sprintf("%.2f", mean_data_exp), 
+                                                 "Desvio Padrão:", sprintf("%.2f", sd_data_exp))) + 
+  ggplot2::scale_y_continuous(labels = scaleFUN) + 
+  ggplot2::theme_minimal() + 
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# Função de distribuição cumulativa (CDF) (p1)
+p1_exp <- ggfortify::ggdistribution(pexp,
+                                    seq(0, 5, 0.1),
+                                    rate = 1,
+                                    main = "Função de distribuição cumulativa") + 
+  ggplot2::scale_y_continuous(labels = scaleFUN) + 
+  ggplot2::theme_minimal() + 
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# QQ-plot para distribuição Exponencial
+qqplot_exp <- ggplot2::ggplot(data.frame(x = data_exp), ggplot2::aes(sample = x)) + 
+  ggplot2::stat_qq(distribution = "exp", dparams = list(rate = 1)) +
+  ggplot2::stat_qq_line(color = "red") +
+  ggplot2::ggtitle("QQ-Plot Exponencial") + 
+  ggplot2::theme_minimal() +
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# Kolmogorov-Smirnov Test plot (kolmogorov)
+kolmogorov_exp <- ggplot2::ggplot(data.frame(x = sort(data_exp)), ggplot2::aes(x)) +
+  ggplot2::stat_ecdf(geom = "step", color = "blue") +
+  ggplot2::stat_function(fun = stats::pexp, args = list(rate = 1), color = "red", size = 1) +
+  ggplot2::ggtitle(paste("Kolmogorov-Smirnov Test\n", format_p_value(ks_test_exp$p.value))) + 
+  ggplot2::theme_minimal() + 
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# Shapiro-Wilk Test plot (shapiro)
+shapiro_exp <- ggplot2::ggplot(data.frame(x = sort(data_exp)), ggplot2::aes(x)) +
+  ggplot2::stat_ecdf(geom = "step", color = "green") +
+  ggplot2::stat_function(fun = stats::pexp, args = list(rate = 1), color = "red", size = 1) +
+  ggplot2::ggtitle(paste("Shapiro-Wilk Test\n", format_p_value(shapiro_test_exp$p.value))) + 
+  ggplot2::theme_minimal() + 
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# Anderson-Darling Test plot (anderson)
+anderson_exp <- ggplot2::ggplot(data.frame(x = sort(data_exp)), ggplot2::aes(x)) +
+  ggplot2::stat_ecdf(geom = "step", color = "purple") +
+  ggplot2::stat_function(fun = stats::pexp, args = list(rate = 1), color = "red", size = 1) +
+  ggplot2::ggtitle(paste("Anderson-Darling Test\n", format_p_value(ad_test_exp$p.value))) + 
+  ggplot2::theme_minimal() + 
+  ggplot2::theme(aspect.ratio = 1,
+                 text = ggplot2::element_text(size = 8)
+  )
+
+# Combinar todos os gráficos em uma grade
+ggpubr::ggarrange(d1_exp, p1_exp, qqplot_exp, kolmogorov_exp, shapiro_exp, anderson_exp, 
+                  heights = c(1, 1), widths = c(1, 1, 1), 
+                  nrow = 2, ncol = 3, align = "h")
+```
 
 <br>
 
