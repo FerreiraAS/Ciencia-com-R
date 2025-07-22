@@ -1,0 +1,218 @@
+# **Paradoxos estatísticos** {#paradoxos-estatisticos}
+
+<br>
+
+## Paradoxos
+
+<br>
+
+### O que são paradoxos estatísticos?
+
+-   Paradoxos podem originar da incompreensão ou mal informação da nossa intuição a respeito do fenômeno.[@meng2018]
+
+<br>
+
+### O que é o paradoxo de Abelson?
+
+-   .[@abelson1985]
+
+<br>
+
+### O que é o paradoxo de Berkson?
+
+-   .[@berkson1946]
+
+<br>
+
+### O que é o paradoxo de *Big Data*?
+
+-   "Quanto maior a quantidade de dados, maior a certeza de que vamos nos enganar".[@meng2018]
+
+<br>
+
+### O que é o paradoxo de Ellsberg?
+
+-   .[@ellsberg1961]
+
+<br>
+
+### O que é o paradoxo de Freedman?
+
+-   .[@freedman1983; @freedman1989]
+
+<br>
+
+### O que é o paradoxo de Hand?
+
+-   .[@hand1992]
+
+<br>
+
+### O que é o paradoxo de Lindley?
+
+-   .[@lindley1957]
+
+<br>
+
+### O que é o paradoxo de Lord?
+
+-   .[@lord1967; @lord1969]
+
+<br>
+
+### O que é o paradoxo de Proebsting?
+
+-   .[@REF]
+
+<br>
+
+### O que é o paradoxo de Simpson?
+
+-   O paradoxo de Simpson ocorre quando a associação entre duas variáveis $X$ e $Y$ desaparece ou mesmo reverte sua direção quando condicionadas em uma terceira variável $Z$.[@simpson1951; @blyth1972]
+
+-   Para decisão do paradoxo de Simpson pode-se utilizar o conceito de 'back-door', o qual considera os 'caminhos' (isto é, associações) no gráfico acíclio direcionado e assegura que todos as associações espúrias do tratamento $X$ para o desfecho $Y$ nesse diagrama causal sejam interceptados pela variável $Z$.[@pearl2014]
+
+-   Dependendo do contexto em que os dados foram obtidos --- delineamento do estudo, escolha dos instrumentos e dos tipos de variáveis --- a melhor escolha para a análise pode variar entre a análise da população agregada ou da subpopulação desagregada.[@pearl2014]
+
+-   É possivel que em alguns contextos nem a análise agregada ou a desagregada podem oferecer a resposta correta, sendo necessário o uso de outras (mais) covariáveis.[@pearl2014]
+
+<br>
+
+```{r simpson, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.cap = "Paradoxo de Simpson representado com dados simulados. Os pontos no gráfico representam observações individuais e as linhas de tendência representam as regressões lineares ajustadas para os dados desagregados da população e agregados por subpopulação."}
+# Define global shapes and colors
+global_shapes <- c(16, 16)  # Circle and triangle
+global_colors <- c("black", "gray50")  # Black and gray
+
+# Function to generate data
+generate_data <- function(n, r1, r2) {
+  x <- c(rnorm(n / 2, mean = -1), rnorm(n / 2, mean = 1))
+  y <- r1 * x + rnorm(n)
+  
+  # Introduce a third variable z that acts as a confounding variable
+  z <- rep(c(0, 1), each = n / 2)
+  y[z == 1] <- r2 * x[z == 1] + rnorm(sum(z))
+  
+  data.frame(x = x, y = y, z = z)
+}
+
+# Generate data
+set.seed(123)
+n <- 100
+r1 <- 0.8
+r2 <- -0.6
+data <- generate_data(n, r1, r2)
+
+# Calculate correlation coefficients
+cor_aggregated <- cor(data$x, data$y)
+cor_disaggregated <- by(data, data$z, function(df) cor(df$x, df$y))
+
+# Define the limits for x and y axes
+x_limits <- range(data$x)
+y_limits <- range(data$y)
+
+# Plot for aggregated trend
+aggregated_plot <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y, color = factor(z)), shape = global_shapes) +
+  ggplot2::geom_point(size = 3, shape = ifelse(data$z == 0, 16, 16), ) +
+  ggplot2::geom_smooth(method = "lm", se = FALSE, ggplot2::aes(group = 1), color = "blue") +
+  ggplot2::labs(title = "População desagregada", x = "X", y = "Y", color = "Subpopulação (Z)") +
+  ggplot2::scale_color_manual(values = global_colors) +
+  ggplot2::theme_minimal() +
+  ggplot2::xlim(x_limits) +
+  ggplot2::ylim(y_limits) +
+  ggplot2::theme(aspect.ratio = 1) +
+  ggplot2::theme(legend.position = "top")
+
+# Plot for disaggregated trends
+disaggregated_plots <- lapply(unique(data$z), function(z_value) {
+  ggplot2::ggplot(data[data$z == z_value,], ggplot2::aes(x = x, y = y, color = factor(z))) +
+    ggplot2::geom_point(size = 3, shape = ifelse(z_value == 0, 16, 16), color = ifelse(z_value == 0, "black", "gray50")) +
+    ggplot2::geom_smooth(method = "lm", se = FALSE, ggplot2::aes(group = 1), color = "blue") +
+    ggplot2::labs(title = paste("Subpopulação agregada Z=", z_value, sep = ""), x = "X", y = "Y") +
+    ggplot2::scale_color_manual(values = global_colors) +
+    ggplot2::theme_minimal() +
+    ggplot2::xlim(x_limits) +
+    ggplot2::ylim(y_limits) +
+    ggplot2::theme(aspect.ratio = 1)
+})
+
+# Arrange plots
+cowplot::plot_grid(
+  cowplot::plot_grid(aggregated_plot), 
+  cowplot::plot_grid(plotlist = disaggregated_plots, align = "hv"), 
+  nrow = 2
+)
+```
+
+<br>
+
+### O que é o paradoxo de Stein?
+
+-   .[@stein1956]
+
+<br>
+
+### O que é o paradoxo de Okie?
+
+-   .[@REF]
+
+<br>
+
+### O que é o paradoxo da acurácia?
+
+-   .[@REF]
+
+<br>
+
+### O que é o paradoxo do falso positivo?
+
+-   .[@REF]
+
+<br>
+
+### O que é o paradoxo da caixa de Bertrand?
+
+-   .[@REF]
+
+<br>
+
+### O que é o paradoxo do elevador?
+
+-   .[@de1996]
+
+<br>
+
+### O que é o paradoxo da amizade?
+
+-   .[@feld1991]
+
+<br>
+
+### O que é o paradoxo do menino ou menina?
+
+-   .[@de1996]
+
+<br>
+
+### O que é o paradoxo do teste surpresa?
+
+-   .[@REF]
+
+<br>
+
+### O que é o paradoxo do nó da gravata?
+
+-   .[@REF]
+
+<br>
+
+### O que é o paradoxo da Bela Adormecida?
+
+-   .[@REF]
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis'}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>
