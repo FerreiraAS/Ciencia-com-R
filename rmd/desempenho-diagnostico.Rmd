@@ -34,7 +34,7 @@
 
 <br>
 
-```{r crosstable, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
+```{r crosstable, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis"}
 
 cross.table <-
   matrix(
@@ -83,7 +83,7 @@ kableExtra::kable(
 
 -   Tabelas de confusão também podem ser visualizadas em formato de árvores de frequência.[@steckelberg2004]
 
-```{r frequency-tree, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Árvore de frequência do desempenho diagnóstico de uma tabela de confusão 2x2 representando um método novo (dicotômico) comparado ao método padrão-ouro ou referência (dicotômico)."}
+```{r frequency-tree, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Árvore de frequência do desempenho diagnóstico de uma tabela de confusão 2x2 representando um método novo (dicotômico) comparado ao método padrão-ouro ou referência (dicotômico)."}
 # generate data
 gold.std <- rbinom(n = 100, size = 1, prob = 0.5)
 new.test <- rbinom(n = 100, size = 1, prob = 0.5)
@@ -188,7 +188,7 @@ VPN = \dfrac{VN}{VN+FN}
 
 <br>
 
-```{r crosstable-prob, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis"}
+```{r crosstable-prob, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis"}
 
 cross.table <-
   matrix(

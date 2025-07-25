@@ -1,0 +1,107 @@
+# **Apêndice - R scripts** {#apendice .unnumbered}
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, results = 'asis'}
+parse_rmd_to_rmd <- function(file_path, output_path) {
+  # Parse the Rmd file
+  rmd_content <- parsermd::parse_rmd(file_path)
+  
+  # Remove empty elements
+  rmd_content <- rmd_content[!sapply(rmd_content, function(x) length(x) == 0)]
+  
+  # Filter only headings and code chunks
+  rmd_content <- rmd_content[sapply(rmd_content, function(x)
+    inherits(x, "rmd_heading") || inherits(x, "rmd_chunk"))]
+  
+  # Extract chapter name
+  chapter <- rmd_content[[1]]$name
+  chapter <- sub(".*\\*\\*(.*?)\\*\\*.*", "\\1", chapter)
+  
+  # Open connection to write
+  con <- file(output_path, open = "wt")
+  on.exit(close(con))
+  
+  # Write the top-level heading
+  writeLines(paste0("# ", chapter, " {.unnumbered .unlisted}\n"), con)
+  
+  # Initialize
+  section_header <- NULL
+  section_chunks <- list()
+  has_code <- FALSE
+  
+  for (item in rmd_content) {
+    if (inherits(item, "rmd_heading")) {
+      if (has_code && length(section_chunks) > 1) {
+        # Write section header and chunks (excluding last)
+        writeLines(paste0("\n## ", section_header, " {.unnumbered .unlisted}\n"), con)
+        for (chunk in head(section_chunks, -1)) {  # <- Skip last chunk
+          writeLines("```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE}", con)
+          writeLines(chunk$code, con)
+          writeLines("```\n", con)
+        }
+      }
+      # Reset for new section
+      section_header <- item$name
+      section_chunks <- list()
+      has_code <- FALSE
+    } else if (inherits(item, "rmd_chunk")) {
+      section_chunks <- c(section_chunks, list(item))
+      has_code <- TRUE
+    }
+  }
+  
+  # Handle the final section
+  if (has_code && length(section_chunks) > 1) {
+    writeLines(paste0("\n## ", section_header, " {.unnumbered .unlisted}\n"), con)
+    for (chunk in head(section_chunks, -1)) {  # <- Skip last chunk
+      writeLines("```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE}", con)
+      writeLines(chunk$code, con)
+      writeLines("```\n", con)
+    }
+  }
+}
+
+# list files
+files <- yaml::read_yaml("_bookdown.yml")$rmd_files
+
+# filter out pre and post files
+remove <- c(
+  "index.Rmd",
+  "rmd/dedicatoria.Rmd",
+  "rmd/agradecimentos.Rmd",
+  "rmd/autor.Rmd",
+  "rmd/prefacio.Rmd",
+  "rmd/parte-1.Rmd",
+  "rmd/parte-2.Rmd",
+  "rmd/parte-3.Rmd",
+  "rmd/parte-4.Rmd",
+  "rmd/parte-5.Rmd",
+  "rmd/parte-6.Rmd",
+  "rmd/parte-7.Rmd",
+  "rmd/parte-8.Rmd",
+  "rmd/apendice.Rmd",
+  "rmd/referencias.Rmd"
+)
+files <- setdiff(files, remove)
+
+# Iterate through each file, extract content, and include it in the document
+for (f in files) {
+  # Generate filtered Rmd content
+  parse_rmd_to_rmd(f, "rmd/apendice_temp.Rmd")
+  
+  # Include it in the output
+  cat(knitr::knit_child("rmd/apendice_temp.Rmd", quiet = TRUE))
+}
+
+# Delete the temp Rmd (after render is complete)
+unlink("rmd/apendice_temp.Rmd")
+```
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis'}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>

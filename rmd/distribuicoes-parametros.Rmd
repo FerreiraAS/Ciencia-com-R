@@ -78,7 +78,7 @@ O pacote *graphics*[@graphics] fornece a função [hist](https://www.rdocumentat
 
 <br>
 
-```{r distribuicao-discreta, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições discretas e suas funções de probabilidade."}
+```{r distribuicao-discreta, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições discretas e suas funções de probabilidade."}
 
 # Definir semente para reprodutibilidade
 set.seed(42)
@@ -211,7 +211,7 @@ gridExtra::grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, ncol = 4, nrow = 2)
 
 <br>
 
-```{r distribuicao-basica, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas básicas e suas funções de densidade."}
+```{r distribuicao-basica, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas básicas e suas funções de densidade."}
 
 # Definir semente para reprodutibilidade
 set.seed(42)
@@ -245,7 +245,7 @@ gridExtra::grid.arrange(p1, p2, ncol = 2, nrow = 1)
 
 <br>
 
-```{r distribuicao-simetricas, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas aproximadas e suas funções de densidade."}
+```{r distribuicao-simetricas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas aproximadas e suas funções de densidade."}
 
 # Definir semente para reprodutibilidade
 set.seed(42)
@@ -269,7 +269,7 @@ gridExtra::grid.arrange(p3, ncol = 1, nrow = 1)
 
 <br>
 
-```{r distribuicao-aproximada, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas aproximadas e suas funções de densidade."}
+```{r distribuicao-aproximada, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas aproximadas e suas funções de densidade."}
 
 # Definir semente para reprodutibilidade
 set.seed(42)
@@ -303,7 +303,7 @@ gridExtra::grid.arrange(p4, p5, ncol = 2, nrow = 1)
 
 <br>
 
-```{r distribuicao-inferencia, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas para inferência e suas funções de densidade."}
+```{r distribuicao-inferencia, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas para inferência e suas funções de densidade."}
 
 set.seed(42)
 
@@ -336,8 +336,9 @@ gridExtra::grid.arrange(p6, p7, ncol = 2, nrow = 1)
 
 <br>
 
-```{r distribuicao-específicos, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas para dados específicos e suas funções de densidade."}
+```{r distribuicao-especificos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas para dados específicos e suas funções de densidade."}
 
+# Definir semente para reprodutibilidade
 set.seed(42)
 
 # Definir cor padrão para os gráficos
@@ -379,7 +380,7 @@ gridExtra::grid.arrange(p8, p9, p10, ncol = 3, nrow = 1)
 
 <br>
 
-```{r distribuicao-proporcoes, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas para probabilidades e proporções e suas funções de densidade."}
+```{r distribuicao-proporcoes, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas para probabilidades e proporções e suas funções de densidade."}
 
 # Definir semente para reprodutibilidade
 set.seed(42)
@@ -413,7 +414,7 @@ gridExtra::grid.arrange(p11, p12, ncol = 2, nrow = 1)
 
 <br>
 
-```{r distribuicao-pareto, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas com caudas pesadas e suas funções de densidade."}
+```{r distribuicao-pareto, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas com caudas pesadas e suas funções de densidade."}
 
 # Definir semente para reprodutibilidade
 set.seed(42)
@@ -476,7 +477,7 @@ O pacote *ggfortify*[@ggfortify] fornece a função [ggdistribution](https://www
 
 <br>
 
-```{r distribuicao-normal, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições e funções de probabilidade."}
+```{r distribuicao-normal, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições e funções de probabilidade."}
 
 scaleFUN <- function(x) sprintf("%.2f", x)
 
@@ -518,7 +519,7 @@ ggpubr::ggarrange(d1, p1, heights = c(1, 1), widths = c(1, 1), nrow = 1, ncol = 
 
 <br>
 
-```{r normalidade-distribuicao, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuição normal e métodos de visualização e testes de normalidade."}
+```{r normalidade-distribuicao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuição normal e métodos de visualização e testes de normalidade."}
 
 scaleFUN <- function(x) sprintf("%.2f", x)
 
@@ -625,7 +626,7 @@ ggpubr::ggarrange(d1, p1, qqplot, kolmogorov, shapiro, anderson,
 
 <br>
 
-```{r nao-normalidade-distribuicao, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuição não-normal (exponencial) e métodos de visualização e testes de normalidade."}
+```{r nao-normalidade-distribuicao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuição não-normal (exponencial) e métodos de visualização e testes de normalidade."}
 
 scaleFUN <- function(x) sprintf("%.2f", x)
 
@@ -818,7 +819,7 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 <br>
 
-```{r tendencia-central, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Parâmetros de tendência central em distribuições assimétricas e normais."}
+```{r tendencia-central, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Parâmetros de tendência central em distribuições assimétricas e normais."}
 # Função para gerar um data frame com a densidade e os valores de média, mediana e moda
 gerar_dados <- function(tipo_dist) {
   set.seed(123)  # Para reprodutibilidade
@@ -914,7 +915,7 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 <br>
 
-```{r dispersao, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Parâmetros de dispersão em distribuições normais."}
+```{r dispersao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Parâmetros de dispersão em distribuições normais."}
 # Geração de dados: distribuição normal
 set.seed(123)
 n <- 200

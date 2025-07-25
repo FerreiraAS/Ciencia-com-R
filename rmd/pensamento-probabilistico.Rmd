@@ -32,7 +32,7 @@
 
 <br>
 
-```{r espaco-amostral-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplos de espaço amostral discreto. Superior: Todas as faces de uma moeda. Inferior: Todas as faces de um dado."}
+```{r espaco-amostral-dado, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplos de espaço amostral discreto. Superior: Todas as faces de uma moeda. Inferior: Todas as faces de um dado."}
 # para reprodutibilidade
 set.seed(1234)
 
@@ -95,7 +95,7 @@ gridExtra::grid.arrange(
 
 <br>
 
-```{r evento-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplos de evento de experimento. Superior: 1 lançamento de 1 moeda. Inferior: 1 lançamento de 1 dado."}
+```{r evento-dado, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplos de evento de experimento. Superior: 1 lançamento de 1 moeda. Inferior: 1 lançamento de 1 dado."}
 # para reprodutibilidade
 set.seed(1234)
 
@@ -177,7 +177,7 @@ gridExtra::grid.arrange(
 
 <br>
 
-```{r espaco-eventos-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Espaço de eventos: União dos eventos face = 3 e face = 4 de um dado."}
+```{r espaco-eventos-dado, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Espaço de eventos: União dos eventos face = 3 e face = 4 de um dado."}
 
 # para reprodutibilidade
 set.seed(1234)
@@ -284,7 +284,7 @@ gridExtra::grid.arrange(espaço.eventos, espaço.amostral, nrow = 2)
 
 <br>
 
-```{r independencia-venn, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Superior: Eventos independentes. Inferior: Eventos dependentes.", results = FALSE}
+```{r independencia-venn, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Superior: Eventos independentes. Inferior: Eventos dependentes.", results = FALSE}
 # Criar o layout dos dois painéis
 grid::grid.newpage()
 grid::pushViewport(grid::viewport(layout = grid::grid.layout(2, 1)))
@@ -334,7 +334,7 @@ grid::popViewport()
 
 <br>
 
-```{r independencia-dado, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Evento (face = 4). Direita: Experimentos de 1 lançamento de 1 dado (superior), 3 lançamentos de 1 dado (central), 10 lançamentos de 1 dado (inferior)."}
+```{r independencia-dado, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Evento (face = 4). Direita: Experimentos de 1 lançamento de 1 dado (superior), 3 lançamentos de 1 dado (central), 10 lançamentos de 1 dado (inferior)."}
 
 # para reprodutibilidade
 set.seed(1234)
@@ -623,7 +623,7 @@ histograma_reamostra <- reamostra %>%
 
 <br>
 
-```{r teorema-central-limite-continua-plot, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Histogramas de uma variável aleatória com distribuição uniforme (N = 100). Direita: Histogramas da média de 100 amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade."}
+```{r teorema-central-limite-continua-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Histogramas de uma variável aleatória com distribuição uniforme (N = 100). Direita: Histogramas da média de 100 amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade."}
 # exibe os histogramas
 gridExtra::grid.arrange(histograma_pop,
                         histograma_reamostra,
@@ -773,7 +773,7 @@ histograma_reamostra <- reamostra %>%
 
 <br>
 
-```{r teorema-central-limite-dado-plot, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Histogramas de lançament de 1 dado com distribuição uniforme (N = 100). Direita: Histogramas da média de 100 amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade."}
+```{r teorema-central-limite-dado-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Histogramas de lançament de 1 dado com distribuição uniforme (N = 100). Direita: Histogramas da média de 100 amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade."}
 # exibe os histogramas
 gridExtra::grid.arrange(histograma_pop,
                         histograma_reamostra,
@@ -926,7 +926,7 @@ histograma_reamostra <- reamostra %>%
 
 <br>
 
-```{r teorema-central-limite-moeda-plot, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Histogramas de lançament de 1 moeda com distribuição uniforme (N = 100). Direita: Histogramas da média de 100 amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade."}
+```{r teorema-central-limite-moeda-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Histogramas de lançament de 1 moeda com distribuição uniforme (N = 100). Direita: Histogramas da média de 100 amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade."}
 # exibe os histogramas
 gridExtra::grid.arrange(histograma_pop,
                         histograma_reamostra,
@@ -1006,7 +1006,7 @@ dado2 <- round(sample(amostra$Variável, 1), digits = 0)
 
 <br>
 
-```{r regressao-media-plot, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica da regressão para a média em medidas repetidas. A segunda medida (dado 2) é mais próxima da média (valor real) do que a primeira medida (dado 1)."}
+```{r regressao-media-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica da regressão para a média em medidas repetidas. A segunda medida (dado 2) é mais próxima da média (valor real) do que a primeira medida (dado 1)."}
 # gráfico de distribuição da amostra com os dois dados aleatórios
 ggplot2::ggplot(amostra, ggplot2::aes(x = Variável)) +
   ggplot2::geom_density(alpha = 0.2, fill = "grey") +
