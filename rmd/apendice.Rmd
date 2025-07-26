@@ -36,7 +36,7 @@ parse_rmd_to_rmd <- function(file_path, output_path) {
         # Write section header and chunks (excluding last)
         writeLines(paste0("\n## ", section_header, " {.unnumbered .unlisted}\n"), con)
         for (chunk in head(section_chunks, -1)) {  # <- Skip last chunk
-          writeLines("```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE}", con)
+          writeLines("```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE, tidy = 'styler', tidy.opts = list(strict=FALSE)}", con)
           writeLines(chunk$code, con)
           writeLines("```\n", con)
         }
@@ -55,7 +55,7 @@ parse_rmd_to_rmd <- function(file_path, output_path) {
   if (has_code && length(section_chunks) > 1) {
     writeLines(paste0("\n## ", section_header, " {.unnumbered .unlisted}\n"), con)
     for (chunk in head(section_chunks, -1)) {  # <- Skip last chunk
-      writeLines("```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE}", con)
+      writeLines("```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE, tidy = 'styler', tidy.opts = list(strict=FALSE)}", con)
       writeLines(chunk$code, con)
       writeLines("```\n", con)
     }
@@ -100,7 +100,7 @@ unlink("rmd/apendice_temp.Rmd")
 
 <br>
 
-```{r, echo=FALSE, warning=FALSE, results='asis'}
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
 cat(readLines("citation.html"), sep = "\n")
 ```
 
