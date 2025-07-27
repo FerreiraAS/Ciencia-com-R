@@ -1,7 +1,9 @@
 W <- 8.27
 H <- 11.69
 
-texto <-
+refs <- as.character(length(bibtex::read.bib("./bib/references.bib")))
+
+texto <- paste0('
   "<p style=\"font-size: 60px;\"><b>Ciência com R</b></p>
   \n
   <br>
@@ -13,12 +15,14 @@ texto <-
   \n *FORMATO DE PERGUNTAS E RESPOSTAS*: Mantenha uma conversa direta e objetiva com o autor. Descubra respostas para as perguntas comumente feitas por estudantes, pesquisadores e profissionais em todas as fases de sua jornada acadêmica e científica.
   \n *APRENDIZADO PROGRESSIVO*: Navegue por uma progressão de conceitos e aplicações. Capítulos são estruturados didaticamente para maior clareza educacional, com referências cruzadas para garantir uma compreensão coesa dos tópicos inter-relacionados, reduzindo a fragmentação do conteúdo.
   \n *INSIGHTS ATUALIZADOS*: Fique à frente da curva com as referências e insights mais recentes. Dr. [Seu nome] lança luz sobre preconceitos, paradoxos, mitos e práticas ilícitas na área, oferecendo uma clareza inestimável até mesmo para os pesquisadores mais experientes.
+  \n *SUPORTE DA LITERATURA*: Com um total de ', refs, ' referências, cada capítulo é apoiado por uma extensa bibliografia, permitindo que você aprofunde seu conhecimento e explore tópicos adicionais.
   \n
   <br>
   \n
   Quer você seja um estudante de pós-graduação em busca de métodos para analisar seus projetos de pesquisa, um pesquisador que precisa de informações e referências para o desenvolvimento de projetos ou um analista de dados experiente que deseja se manter atualizado, este livro é seu melhor companheiro. Além disso, pessoas de diversas áreas encontrarão neste livro uma porta de entrada para compreender a importância de fazer e responder perguntas no mundo da ciência.
   \n
   Tome decisões informadas, evite armadilhas e destaque-se em sua pesquisa científica com \"Ciência com R\". Os insights profundos do Dr. Arthur de Sá Ferreira permitirão que você transforme seus dados em descobertas significativas, colocando você no caminho da excelência em pesquisa."
+')
 
 grDevices::png(
   file = "images/Cover_4.png",

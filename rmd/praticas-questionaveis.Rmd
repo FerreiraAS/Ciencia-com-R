@@ -1,0 +1,240 @@
+# **Práticas questionáveis em pesquisa** {#praticas-questionaveis}
+
+<br>
+
+## Práticas Questionáveis em Pesquisa
+
+<br>
+
+### O que são práticas questionáveis em pesquisa?
+
+-   Práticas questionáveis em pesquisa são más condutas ou comportamentos impróprios, realizados desde o planejamento até a publicação dos resultados.[@john2012; @bausell2021]
+
+<br>
+
+### Por que práticas questionáveis em pesquisa devem ser combatidas?
+
+-   Práticas questionáveis em pesquisa são prevalentes.[@neoh2023]
+
+-  Práticas questionáveis em pesquisa comprometem a integridade científica, a confiabilidade dos resultados e a confiança do público na ciência.[@john2012; @bausell2021]
+
+-  Práticas questionáveis em pesquisa inflam articialmente o tamanho do efeito e poder estatístico.[@bausell2021]
+
+-  Práticas questionáveis em pesquisa parecem contribuir para a crise da replicação na ciência, onde muitos estudos não conseguem ser replicados ou reproduzidos.[@bausell2021]
+
+<br>
+
+## Práticas intencionais e não intencionais
+
+-  Práticas questionáveis podem ser classificadas em três categorias: intencionais, zona cinzenta e não intencionais.[@REF]
+
+-   Práticas intencionais são aquelas que são deliberadamente realizadas com o objetivo de enganar ou manipular os resultados, enquanto práticas não intencionais são aquelas que ocorrem devido a falta de conhecimento, treinamento inadequado ou outras razões.[@REF]
+
+-   Práticas na zona cinzenta são aquelas que podem ser interpretadas de diferentes maneiras, dependendo do contexto e da intenção do pesquisador.[@REF]
+
+<br>
+
+```{r praticas-questionaveis, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis"}
+# Carregar pacotes
+library(dplyr)
+
+# Criar a tibble com 3 categorias equilibradas
+praticas_questionaveis <- tibble::tibble(
+  Prática = c(
+    "*Data fabrication*", "*Data falsification*", "*Fake authorship*", "*Fake peer review*",
+    "*Honorary authorship*", "*Gold authorship*", "*Ghost authorship*", "*Duplicate publication*",
+    "*Spin* (doloso)", "*Data distortion*",
+    
+    "*HARKing*", "*Storytelling*", "*Selective reporting*", "*P-hacking*", "*Data peeking*",
+    "*Cherry picking*", "*Salami slicing*", "*Beautification*",
+    
+    "*P-hacking reverso*", "*Fishing expedition*", "*Data dredging*", "*File drawer problem*",
+    "*Publication bias*"
+  ),
+  Intencionalidade = c(
+    # 10 intencionais
+    "Intencional", "Intencional", "Intencional", "Intencional",
+    "Intencional", "Intencional", "Intencional", "Intencional",
+    "Intencional", "Intencional",
+    
+    # 8 zona cinzenta
+    "Zona cinzenta", "Zona cinzenta", "Zona cinzenta", "Zona cinzenta",
+    "Zona cinzenta", "Zona cinzenta", "Zona cinzenta", "Zona cinzenta",
+    
+    # 5 não intencionais
+    "Não intencional", "Não intencional", "Não intencional", "Não intencional",
+    "Não intencional"
+  ),
+  Definição = c(
+    "Inventar dados inexistentes",
+    "Alterar ou manipular dados reais",
+    "Inserir autores fictícios ou inexistentes",
+    "Criar revisões falsas para facilitar publicação",
+    "Incluir autores sem contribuição real",
+    "Atribuir autoria como forma de prestígio ou recompensa",
+    "Omitir autores que participaram do estudo",
+    "Publicar o mesmo estudo em mais de uma revista",
+    "Apresentar os resultados de forma a exagerar efeitos positivos",
+    "Modificar dados ou gráficos para torná-los mais convincentes",
+    
+    "Criar hipóteses após ver os dados (sem pré-registro)",
+    "Construir uma narrativa forçada para justificar os achados",
+    "Relatar apenas os resultados favoráveis ou positivos",
+    "Testar múltiplas análises até encontrar p<0.05",
+    "Analisar dados antes do término da coleta, parando quando um efeito aparece",
+    "Selecionar apenas os resultados que apoiam a hipótese",
+    "Dividir artificialmente um estudo em vários artigos para inflar publicações",
+    "Embelezar tabelas, gráficos ou resultados para torná-los mais atraentes",
+    
+    "Forçar análises para que não haja significância estatística",
+    "Procurar achados sem plano prévio",
+    "Explorar excessivamente os dados para encontrar associações irrelevantes",
+    "Não publicar estudos com resultados negativos ou nulos",
+    "Tendência geral das revistas em favorecer publicações com resultados positivos"
+  )
+)
+
+# Ordenar por categoria
+praticas_questionaveis <- praticas_questionaveis %>%
+  arrange(factor(Intencionalidade, levels = c("Intencional", "Zona cinzenta", "Não intencional")))
+
+# Exibir com cores
+kableExtra::kable(
+  praticas_questionaveis,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE,
+  caption = "Classificação das práticas questionáveis em pesquisa segundo sua intencionalidade."
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("striped"),
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::row_spec(
+    which(praticas_questionaveis$Intencionalidade == "Intencional"),
+    background = "#ffcdd2"
+  ) %>%
+  kableExtra::row_spec(
+    which(praticas_questionaveis$Intencionalidade == "Zona cinzenta"),
+    background = "#fff9c4"
+  ) %>%
+  kableExtra::row_spec(
+    which(praticas_questionaveis$Intencionalidade == "Não intencional"),
+    background = "#e8f5e9"
+  ) %>%
+  kableExtra::row_spec(
+    nrow(praticas_questionaveis),
+    extra_css = "border-bottom: 1px solid"
+  )
+```
+
+<br>
+
+### Quais práticas questionáveis podem ocorrer durante o planejamento do estudo?
+
+-   *Hypothesizing After Results are Known* (HARKing) consiste em formular hipóteses após a análise dos dados, o que pode levar a resultados enviesados e não replicáveis.[@Kerr1998]
+
+-   *Storytelling* é a prática de criar narrativas convincentes para justificar os resultados, mesmo que não sejam suportados pelos dados.[@REF]
+
+<br>
+
+### Quais práticas questionáveis podem ocorrer durante a coleta de dados?
+
+-   *Data falsification* é a prática de manipular ou inventar dados para obter resultados desejados.[@REF]
+
+-   *Data fabrication* é a prática de inventar dados ou resultados que nunca foram coletados.[@REF]
+
+<br>
+
+### Quais práticas questionáveis podem ocorrer durante a análise dos dados?
+
+-   *P-hacking* é a prática de manipular os dados ou análises para obter resultados estatisticamente significativos, como realizar múltiplos testes sem correção adequada.[@degroot2014; @andrade2021; @stefan2023]
+
+-   *P-hacking* reverso é a prática de manipular os dados ou análises para obter resultados não estatisticamente significativos, como realizar múltiplos testes sem correção adequada, o que pode levar a conclusões enviesadas e enganosas.[@chuard2019]
+
+-   *Data peeking* é a prática de analisar os dados repetidamente antes de completar a coleta, visando interromper a coleta quando um resultado desejado é alcançado.[@armitage1969]
+
+-   *Fishing expedition* refere-se à exploração dos dados sem uma hipótese pré-definida, o que pode levar a conclusões enganosas e enviesadas, uma vez que os resultados podem ser meramente acidentais.[\@ @andrade2021]
+
+-   *Data dredging* refere-se à exploração excessiva dos dados para encontrar padrões ou relações que não são teoricamente fundamentados, o que pode resultar em conclusões enganosas e enviesadas.[@andrade2021]
+
+-   *Selective reporting* é a prática de relatar apenas os resultados que suportam uma hipótese específica, ignorando aqueles que não a apoiam, o que pode levar a conclusões enganosas e enviesadas.[@REF]
+
+<br>
+
+### Quais práticas questionáveis podem ocorrer durante a apresentação dos resultados?
+
+-   *Cherry picking* consiste em selecionar apenas os resultados que suportam uma hipótese específica, ignorando aqueles que não a apoiam, o que pode levar a conclusões enganosas e enviesadas.[@andrade2021]
+
+-   *Spin* é a prática de apresentar os resultados de forma a enfatizar aspectos positivos ou minimizar aspectos negativos, o que pode levar a interpretações enganosas e enviesadas dos dados.[@horton1995; @chiu2017]
+
+-   *Beautification* é a prática de embelezar visualmente gráficos ou tabelas para aumentar impacto visual.[@REF]
+
+-   *Data distortion* é a prática de modificar ou omitir informações nos dados para induzir interpretações específicas.[@REF]
+
+<br>
+
+### Quais práticas questionáveis podem ocorrer durante a publicação e revisão por pares?
+
+-   *Honorary authorship* refere-se à inclusão de autores que não contribuíram significativamente para o estudo, o que pode distorcer a atribuição de crédito e responsabilidade.[@picano2024]
+
+-   *Ghost authorship* é a prática de não reconhecer autores que contribuíram significativamente para o estudo, o que pode distorcer a atribuição de crédito e responsabilidade.[@picano2024]
+
+-   *Gold authorship* é a prática de atribuir autoria em troca de prestígio, recursos ou favorecimento político, independentemente da contribuição acadêmica.[@picano2024]
+
+-   *Fake authorship* refere-se à inclusão de autores fictícios ou inexistentes em uma publicação.[@picano2024]
+
+-   *Fake peer review* refere-se à prática de criar revisões por pares falsas ou fraudulentas para apoiar a publicação de um estudo, o que compromete a integridade do processo de revisão por pares e pode levar a conclusões enganosas.[@REF]
+
+-   *File drawer problem* refere-se à tendência de não publicar estudos com resultados negativos ou não significativos, o que pode levar a uma visão distorcida da literatura científica e dificultar a replicação de estudos.[@REF]
+
+-   *Salami slicing* é a prática de dividir os resultados em múltiplas publicações para aumentar o número de publicações, o que pode levar a uma má interpretação dos dados e à fragmentação do conhecimento.[@REF]
+
+-   *Publication bias* é a tendência de publicar apenas resultados positivos ou significativos, o que pode levar a uma visão distorcida da literatura científica e dificultar a replicação de estudos.
+
+-   *Duplicate publication* é a prática de publicar o mesmo estudo ou resultados em mais de uma revista, o que pode levar a uma superestimação da importância dos resultados e à confusão na literatura científica.[@REF]
+
+<br>
+
+## Prevenindo práticas questionáveis
+
+<br>
+
+### Como prevenir práticas questionáveis?
+
+-   Educação formal em integridade científica e estatística.[@REF]
+
+-   Pré-registro do protocolo do estudo de ensaios clínicos (ex.: [ReBEC](https://ensaiosclinicos.gov.br), [ClinicalTrials.gov](https://clinicaltrials.gov), revisões sistemáticas (ex.: [PROSPERO](https://www.crd.york.ac.uk/prospero/)), ou outras plataformas (ex.: [OSF](https://osf.io)).[@nosek2018]
+
+-   Planos de análise detalhados.[@REF]
+
+-   Compartilhamento de dados/scripts (reprodutibilidade).[@REF]
+
+-   Manuscritos reprodutíveis (RMarkdown, bookdown, etc.).[@REF]
+
+-   Adoção de diretrizes (CONSORT, STROBE, PRISMA).[@REF]
+
+<br>
+
+## Reações éticas e institucionais práticas questionáveis em pesquisa
+
+-   *Post-publication peer review* é a prática de revisar e criticar publicações após sua publicação, o que pode levar a uma melhor compreensão dos resultados e à correção de erros, mas também pode ser usada para desacreditar estudos sem justificativa adequada.[@REF]
+
+-   *Retraction* é a prática de retirar uma publicação devido a erros, fraudes ou práticas questionáveis, o que pode levar a uma melhor compreensão dos resultados e à correção de erros, mas também pode ser usada para desacreditar estudos sem justificativa adequada.[@REF]
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>
