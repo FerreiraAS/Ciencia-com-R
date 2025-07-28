@@ -65,6 +65,29 @@ parse_rmd_to_rmd <- function(file_path, output_path) {
 # list files
 files <- yaml::read_yaml("_bookdown.yml")$rmd_files
 
+# filter pre and post textual files
+remove <- c(
+  "index.Rmd",
+  "rmd/dedicatoria.Rmd",
+  "rmd/agradecimentos.Rmd",
+  "rmd/autor.Rmd",
+  "rmd/prefacio.Rmd",
+  "rmd/parte-1.Rmd",
+  "rmd/parte-2.Rmd",
+  "rmd/parte-3.Rmd",
+  "rmd/parte-4.Rmd",
+  "rmd/parte-5.Rmd",
+  "rmd/parte-6.Rmd",
+  "rmd/parte-7.Rmd",
+  "rmd/parte-8.Rmd",
+  "rmd/shiny-apps.Rmd",
+  "rmd/fontes-externas.Rmd",
+  "rmd/diretrizes-listas.Rmd",
+  "rmd/apendice.Rmd",
+  "rmd/referencias.Rmd"
+  )
+files <- files[!files %in% remove]
+
 # keep files that do have chunks
 files <- files[file.exists(files) & sapply(files, function(f) {
   rmd_content <- parsermd::parse_rmd(f)

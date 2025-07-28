@@ -14,13 +14,25 @@
 
 <br>
 
+### Por que identificar a unidade de análise de um estudo?
+
+-   É fundamental identificar corretamente a unidade de análise para evitar inflação do tamanho da amostra (ex.: medidas bilaterais resultando em o dobro de participantes), violações de suposições dos testes de hipótese (ex.: independência entre medidas e/ou unidade de análise) e resultados espúrios em testes de hipótese (ex.: P-valores menores que aqueles observados se a amostra não estivesse inflada).[@Altman1997; @Matthews1990]
+
+<br>
+
+### Que medidas podem ser obtidas da unidade de análise de um estudo?
+
+-   Da unidade de análise podem ser coletadas informações em medidas únicas, repetidas, seriadas ou múltiplas.
+
+<br>
+
 ## População
 
 <br>
 
 ### O que é população?
 
--   População --- ou população-alvo --- refere-se ao conjunto completo sobre o qual se pretende obter informações.[@Banerjee2010]
+-   População --- ou população-alvo --- refere-se ao conjunto completo sobre o qual se pretende obter informações.[@Banerjee2010; @martínez-mesa2016]
 
 -   População é metodologicamente delimitada pelos critérios de inclusão e exclusão do estudo.[@Banerjee2010]
 
@@ -36,7 +48,7 @@
 
 ### O que é amostra?
 
--   Amostra é uma parte finita da população do estudo.[@Banerjee2010]
+-   Amostra é uma parte finita da população do estudo.[@Banerjee2010; @martínez-mesa2016]
 
 -   Em pesquisa científica, utilizam-se dados de uma amostra de participantes (ou outras unidades de análise) para realizar inferências sobre a população.[@Bland2015]
 
@@ -44,21 +56,22 @@
 
 ### Por que usar dados de amostras?
 
+- Estudos com amostras, em vez de censos, são preferíveis por diversas razões, dentre elas: questões éticas; limitações orçamentárias; desafios logísticos; restrição de tempo; e 
+tamanho populacional desconhecido.[@martínez-mesa2016]
+
 -   Dados de uma amostra de tamanho suficiente e características representativas podem ser utilizados para inferência sobre uma população.[@kwak2017]
 
 -   Em geral, amostras de tamanhos maiores possuem médias mais próximas da média populacional e menores variâncias.[@kwak2017]
 
 <br>
 
-### Por que identificar a unidade de análise de um estudo?
+### O que é representatividade amostral e por que ela importa?
 
--   É fundamental identificar corretamente a unidade de análise para evitar inflação do tamanho da amostra (ex.: medidas bilaterais resultando em o dobro de participantes), violações de suposições dos testes de hipótese (ex.: independência entre medidas e/ou unidade de análise) e resultados espúrios em testes de hipótese (ex.: P-valores menores que aqueles observados se a amostra não estivesse inflada).[@Altman1997; @Matthews1990]
+- Representatividade amostral refere-se ao grau em que uma amostra reflete com fidelidade as características da população de referência.[@martínez-mesa2016]
 
-<br>
+- Quando a amostra contém menos indivíduos do que o número mínimo necessário, mas mantém a representatividade, a inferência estatística ainda é possível, embora possa haver redução da precisão e/ou do poder estatístico para detectar os efeitos.[@martínez-mesa2016]
 
-### Que medidas podem ser obtidas da unidade de análise de um estudo?
-
--   Da unidade de análise podem ser coletadas informações em medidas únicas, repetidas, seriadas ou múltiplas.
+- Amostras não representativas comprometem a validade da inferência estatística, mesmo quando o tamanho da amostra atende aos requisitos de poder da análise.[@martínez-mesa2016]
 
 <br>
 
@@ -68,7 +81,78 @@
 
 ### O que é amostragem?
 
--   .[@REF]
+- Amostragem é o processo pelo qual se seleciona uma parte de uma população para constituir a amostra que será efetivamente estudada.[@martínez-mesa2016]
+
+<br>
+
+```{r populacao-amostra, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da amostragem de uma população para a amostra."}
+# Dados da população e amostra
+set.seed(123)
+pop_n <- 30
+sample_n <- 10
+
+# Reduzindo os raios internos para posicionar os ícones mais perto do centro
+radius_pop <- runif(pop_n, 0.5, 2.5)
+radius_sample <- runif(sample_n, 0.5, 1.5)
+
+# Geração das posições para a população (círculo à esquerda)
+angle_pop <- seq(0, 2 * pi, length.out = pop_n + 1)[-1]
+pop_df <- data.frame(
+  id = 1:pop_n,
+  x_pop = cos(angle_pop) * radius_pop - 4,
+  y_pop = sin(angle_pop) * radius_pop
+)
+
+# Seleção aleatória da amostra
+sample_ids <- sample(pop_df$id, sample_n)
+sample_df <- pop_df %>%
+  dplyr::filter(id %in% sample_ids) %>%
+  dplyr::mutate(
+    angle = seq(0, 2 * pi, length.out = sample_n + 1)[-1],
+    x_sample = cos(angle) * radius_sample + 4,
+    y_sample = sin(angle) * radius_sample
+  )
+
+# Atribui o ícone após os data.frames estarem prontos
+pop_df$label <- "./images/person.svg"
+sample_df$label <- "./images/person.svg"
+
+# Base de setas
+setas_df <- sample_df %>%
+  dplyr::select(id, x_pop, y_pop, x_sample, y_sample)
+
+# Plot
+ggplot2::ggplot() +
+  # Círculo da população
+  ggforce::geom_circle(ggplot2::aes(x0 = -4, y0 = 0, r = 3),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(data = pop_df,
+                      ggplot2::aes(x = x_pop, y = y_pop, image = label),
+                      size = 0.07) +
+  ggplot2::annotate("text", x = -4, y = 3.5,
+                    label = "População", size = 5, fontface = "bold") +
+  
+  # Círculo da amostra
+  ggforce::geom_circle(ggplot2::aes(x0 = 4, y0 = 0, r = 1.8),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(data = sample_df,
+                      ggplot2::aes(x = x_sample, y = y_sample, image = label),
+                      size = 0.07) +
+  ggplot2::annotate("text", x = 4, y = 2.3,
+                    label = "Amostra", size = 5, fontface = "bold") +
+  
+  # Setas
+  ggplot2::geom_segment(data = setas_df,
+                        ggplot2::aes(x = x_pop, y = y_pop,
+                                     xend = x_sample, yend = y_sample),
+                        arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm")),
+                        color = "darkgray",
+                        linewidth = 0.7) +
+  ggplot2::coord_fixed() +
+  ggplot2::theme_void()
+```
 
 <br>
 
@@ -76,15 +160,17 @@
 
 -   O método de amostragem é geralmente definido pelas condições de viabilidade do estudo, no que diz respeito a acesso aos participantes, ao tempo de execução e aos custos envolvidos, entre outras.[@Banerjee2010]
 
--   Não-probabilísticas ou intencionais:[@Banerjee2010]
+-   Não-probabilísticas ou intencionais:[@Banerjee2010; @martínez-mesa2016]
 
     -   Bola de neve.
 
     -   Conveniência.
 
     -   Participantes encaminhados.
+    
+    - Proposital.
 
--   Probabilísticas:[@Banerjee2010]
+-   Probabilísticas:[@Banerjee2010; @martínez-mesa2016]
 
     -   Simples.
 
@@ -100,7 +186,7 @@
 
 ### O que é erro de amostragem?
 
--   .[@REF]
+- Erro de amostragem é a variação natural entre os resultados obtidos a partir de uma amostra e os resultados que seriam obtidos caso toda a população fosse examinada. Reflete o grau de incerteza inerente à generalização de uma amostra para a população.[@martínez-mesa2016]
 
 <br>
 
