@@ -103,7 +103,7 @@ X <- rnorm(100, mean = 50, sd = 10)
 # simulate Y based on X
 Y <- 5 + 2 * X + rnorm(100, mean = 0, sd = 5)
 
-# create a data frame
+# create a dataframe
 data <- data.frame(X, Y)
 
 # create the regression model
@@ -136,7 +136,7 @@ X <- seq(-10, 10, length.out = 100)
 # simulate Y based on a non-linear function of X
 Y <- 5 + 2 * X^2 + rnorm(100, mean = 0, sd = 5)
 
-# create a data frame
+# create a dataframe
 data <- data.frame(X, Y)
 
 # create the regression model
@@ -169,7 +169,7 @@ X <- seq(-10, 10, length.out = 100)
 # simulate Y based on a polynomial function of X
 Y <- 5 + 2 * X^3 - 0.1 * X^2 + rnorm(100, mean = 0, sd = 5)
 
-# create a data frame
+# create a dataframe
 data <- data.frame(X, Y)
 
 # create the regression model
@@ -210,7 +210,7 @@ model <- glmnet::glmnet(X_matrix, data$Y, alpha = 0)
 # predições (usando lambda padrão)
 predicted_Y <- predict(model, newx = X_matrix, s = 0.01)
 
-# adicionar ao data frame
+# adicionar ao dataframe
 data$Y_pred <- as.numeric(predicted_Y)
 
 # plotar com ggplot
@@ -241,7 +241,7 @@ X <- rnorm(100, mean = 50, sd = 10)
 prob <- 1 / (1 + exp(-( -5 + 0.1 * X)))  # logistic function
 Y <- rbinom(100, size = 1, prob = prob) # sample Y ~ Bernoulli(prob)
 
-# create a data frame
+# create a dataframe
 data <- data.frame(X, Y)
 
 # create the logistic regression model
@@ -324,7 +324,7 @@ X2 <- 0.8 * X1 + rnorm(100, mean = 0, sd = 5)
 # Generate a third variable that is not correlated with X1 or X2
 X3 <- rnorm(100, mean = 30, sd = 5)
 
-# Combine the variables into a data frame
+# Combine the variables into a dataframe
 data <- data.frame(X1, X2, X3)
 
 # Create the customized grid plot

@@ -11,7 +11,7 @@ Interpretar os resultados destas análises não é uma tarefa simples. Confiar a
 
 Este livro emerge do reconhecimento desses desafios.
 
-A proposta gira em torno da organização de um compêndio abrangente de métodos e técnicas de ponta, para análise estatística de dados em pesquisa científica, apresentados em formato de perguntas e respostas. Esse formato promove um diálogo direto e objetivo com o leitor, respondendo a dúvidas comumente colocadas por alunos de graduação, pós-graduação, mestrado e doutorado, bem como por pesquisadores.
+A proposta gira em torno da organização de um compêndio abrangente de métodos e técnicas de ponta, para análise estatística de dados em pesquisa científica, apresentados em formato de perguntas e respostas. Esse formato promove um diálogo direto e objetivo com o leitor, respondendo a dúvidas comumente colocadas por alunos de graduação, pós-graduação lato sensu, pós-graduação stricto sensu (mestrado e doutorado), bem como por pesquisadores.
 
 O objetivo geral de cada capítulo é elucidar as questões metodológicas fundamentais: “O que é?”, “Por que usar?”, “Quando usar?”, “Quando não usar?” e “Como fazer?”. Em cada capítulo, diversas questões específicas são propostas e respondidas sistematicamente, permitindo ao leitor uma melhor elaboração do conteúdo e resultado do seu trabalho.
 
