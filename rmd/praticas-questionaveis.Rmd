@@ -16,19 +16,19 @@
 
 -   Práticas questionáveis em pesquisa são prevalentes.[@neoh2023]
 
--  Práticas questionáveis em pesquisa comprometem a integridade científica, a confiabilidade dos resultados e a confiança do público na ciência.[@john2012; @bausell2021]
+-   Práticas questionáveis em pesquisa comprometem a integridade científica, a confiabilidade dos resultados e a confiança do público na ciência.[@john2012; @bausell2021]
 
--  Práticas questionáveis em pesquisa inflam articialmente o tamanho do efeito e poder estatístico.[@bausell2021]
+-   Práticas questionáveis em pesquisa inflam articialmente o tamanho do efeito e poder estatístico.[@bausell2021]
 
--  Práticas questionáveis em pesquisa parecem contribuir para a crise da replicação na ciência, onde muitos estudos não conseguem ser replicados ou reproduzidos.[@bausell2021]
+-   Práticas questionáveis em pesquisa parecem contribuir para a crise da replicação na ciência, onde muitos estudos não conseguem ser replicados ou reproduzidos.[@bausell2021]
 
 <br>
 
-## Práticas intencionais e não intencionais
+## Prática não intencional e má conduta
 
--  Práticas questionáveis podem ser classificadas em três categorias: intencionais, zona cinzenta e não intencionais.[@REF]
+-   Práticas questionáveis podem ser classificadas em más condutas e não intencionais.[@Kleinert2009]
 
--   Práticas intencionais são aquelas que são deliberadamente realizadas com o objetivo de enganar ou manipular os resultados, enquanto práticas não intencionais são aquelas que ocorrem devido a falta de conhecimento, treinamento inadequado ou outras razões.[@REF]
+-   Más condutas são aquelas que são deliberadamente realizadas com o objetivo de enganar ou manipular os resultados, enquanto práticas não intencionais são aquelas que ocorrem devido a falta de conhecimento, treinamento inadequado ou outras razões.[@REF]
 
 -   Práticas na zona cinzenta são aquelas que podem ser interpretadas de diferentes maneiras, dependendo do contexto e da intenção do pesquisador.[@REF]
 
@@ -53,9 +53,9 @@ praticas_questionaveis <- tibble::tibble(
   ),
   Intencionalidade = c(
     # 10 intencionais
-    "Intencional", "Intencional", "Intencional", "Intencional",
-    "Intencional", "Intencional", "Intencional", "Intencional",
-    "Intencional", "Intencional",
+    "Má conduta", "Má conduta", "Má conduta", "Má conduta",
+    "Má conduta", "Má conduta", "Má conduta", "Má conduta",
+    "Má conduta", "Má conduta",
     
     # 8 zona cinzenta
     "Zona cinzenta", "Zona cinzenta", "Zona cinzenta", "Zona cinzenta",
@@ -96,7 +96,7 @@ praticas_questionaveis <- tibble::tibble(
 
 # Ordenar por categoria
 praticas_questionaveis <- praticas_questionaveis %>%
-  arrange(factor(Intencionalidade, levels = c("Intencional", "Zona cinzenta", "Não intencional")))
+  arrange(factor(Intencionalidade, levels = c("Má conduta", "Zona cinzenta", "Não intencional")))
 
 # Exibir com cores
 kableExtra::kable(
@@ -120,7 +120,7 @@ kableExtra::kable(
     extra_css = "border-top: 1px solid; border-bottom: 1px solid"
   ) %>%
   kableExtra::row_spec(
-    which(praticas_questionaveis$Intencionalidade == "Intencional"),
+    which(praticas_questionaveis$Intencionalidade == "Má conduta"),
     background = "#ffcdd2"
   ) %>%
   kableExtra::row_spec(
@@ -219,6 +219,18 @@ kableExtra::kable(
 
 -   Compartilhamento de dados/scripts (reprodutibilidade).[@REF]
 
+    - [Dryad Digital Repository](http://datadryad.org/)
+    
+    - [figshare](http://figshare.com/)
+    
+    - [Harvard Dataverse](http://dataverse.harvard.edu/)
+
+    - [Mendeley Data](https://data.mendeley.com/)
+    
+    - [Open Science Framework](https://osf.io/)
+    
+    - [Zenodo](http://zenodo.org/)
+    
 -   Manuscritos reprodutíveis (RMarkdown, bookdown, etc.).[@REF]
 
 -   Adoção de diretrizes (CONSORT, STROBE, PRISMA).[@REF]
@@ -229,7 +241,19 @@ kableExtra::kable(
 
 -   *Post-publication peer review* é a prática de revisar e criticar publicações após sua publicação, o que pode levar a uma melhor compreensão dos resultados e à correção de erros, mas também pode ser usada para desacreditar estudos sem justificativa adequada.[@REF]
 
+-   *Corrigendum* é uma correção publicada para corrigir erros ou imprecisões em um artigo já publicado, o que pode levar a uma melhor compreensão dos resultados e à correção de erros, mas também pode ser usada para desacreditar estudos sem justificativa adequada.[@REF]
+
+-   *Expression of concern* é uma declaração emitida por uma revista científica para alertar os leitores sobre preocupações com a integridade de um estudo, sem necessariamente retirar o artigo.[@REF]
+
 -   *Retraction* é a prática de retirar uma publicação devido a erros, fraudes ou práticas questionáveis, o que pode levar a uma melhor compreensão dos resultados e à correção de erros, mas também pode ser usada para desacreditar estudos sem justificativa adequada.[@REF]
+
+-   [Retraction Watch](https://retractionwatch.com) é um blog que monitora e relata casos de retratações e preocupações éticas em publicações científicas, fornecendo informações sobre práticas questionáveis e promovendo a transparência na pesquisa.[@REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *retractcheck*[@retractcheck] fornece a função [*retractcheck*](https://rdrr.io/github/chartgerink/retractcheck/man/retractcheck.html) para verificar se um artigo foi retratado usando a [Open Retractions](http://openretractions.com).
+:::
 
 <br>
 

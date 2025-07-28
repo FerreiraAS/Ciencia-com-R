@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 42 Meta-análise | Ciência com R</title>
+  <title>Capítulo 43 Meta-análise | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 42 Meta-análise | Ciência com R" />
+  <meta property="og:title" content="Capítulo 43 Meta-análise | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="https://github.com/FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 42 Meta-análise | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 43 Meta-análise | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ensaio-experimental.html"/>
+<link rel="prev" href="revisao-sistematica.html"/>
 <link rel="next" href="simulacao-computacional.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -68,12 +68,12 @@
 <link rel="icon" href="favicon_io/favicon-16x16.png" sizes="16x16" type="image/png">
 <link rel="icon" href="favicon_io/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="shortcut icon" href="favicon_io/favicon.ico" type="image/x-icon">
-<meta property="og:title" content="Capítulo 42 Meta-análise | Ciência com R" />
+<meta property="og:title" content="Capítulo 43 Meta-análise | Ciência com R" />
 <meta property="og:description" content="Perguntas e respostas para pesquisadores e analistas de dados" />
 <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/favicon_io/android-chrome-512x512.png" />
 <meta property="og:url" content="https://ferreiraas.github.io/Ciencia-com-R/" />
 <meta property="og:type" content="book" />
-<meta property="og:site_name" content="Capítulo 42 Meta-análise | Ciência com R" />
+<meta property="og:site_name" content="Capítulo 43 Meta-análise | Ciência com R" />
 <meta name="citation_doi" content="doi:10.5281/zenodo.8320232"/><meta name="Doi" content="doi:10.5281/zenodo.8320232"/>
 <meta name="DC.Identifier" content="doi:10.5281/zenodo.8320232"/>
 <meta name="DC.DOI" content="doi:10.5281/zenodo.8320232"/>
@@ -240,37 +240,40 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html"><i class="fa fa-check"></i><b>2</b> <strong>Pensamento estatístico</strong></a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="rmd/meta-analise.html"><a href="#popula%C3%A7%C3%A3o-e-amostra"><i class="fa fa-check"></i><b>2.1</b> População e Amostra</a>
+<li class="chapter" data-level="2.1" data-path="rmd/meta-analise.html"><a href="#unidade-de-an%C3%A1lise"><i class="fa fa-check"></i><b>2.1</b> Unidade de análise</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-popula%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>2.1.1</b> O que é população?</a></li>
-<li class="chapter" data-level="2.1.2" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-amostra"><i class="fa fa-check"></i><b>2.1.2</b> O que é amostra?</a></li>
-<li class="chapter" data-level="2.1.3" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#por-que-usar-dados-de-amostras"><i class="fa fa-check"></i><b>2.1.3</b> Por que usar dados de amostras?</a></li>
+<li class="chapter" data-level="2.1.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-unidade-de-an%C3%A1lise"><i class="fa fa-check"></i><b>2.1.1</b> O que é unidade de análise?</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="rmd/meta-analise.html"><a href="#unidade-de-an%C3%A1lise"><i class="fa fa-check"></i><b>2.2</b> Unidade de análise</a>
+<li class="chapter" data-level="2.2" data-path="rmd/meta-analise.html"><a href="#popula%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>2.2</b> População</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-unidade-de-an%C3%A1lise"><i class="fa fa-check"></i><b>2.2.1</b> O que é unidade de análise?</a></li>
-<li class="chapter" data-level="2.2.2" data-path="rmd/meta-analise.html"><a href="#por-que-identificar-a-unidade-de-an%C3%A1lise-de-um-estudo"><i class="fa fa-check"></i><b>2.2.2</b> Por que identificar a unidade de análise de um estudo?</a></li>
-<li class="chapter" data-level="2.2.3" data-path="rmd/meta-analise.html"><a href="#que-medidas-podem-ser-obtidas-da-unidade-de-an%C3%A1lise-de-um-estudo"><i class="fa fa-check"></i><b>2.2.3</b> Que medidas podem ser obtidas da unidade de análise de um estudo?</a></li>
+<li class="chapter" data-level="2.2.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-popula%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>2.2.1</b> O que é população?</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#amostragem"><i class="fa fa-check"></i><b>2.3</b> Amostragem</a>
+<li class="chapter" data-level="2.3" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#amostra"><i class="fa fa-check"></i><b>2.3</b> Amostra</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-amostragem"><i class="fa fa-check"></i><b>2.3.1</b> O que é amostragem?</a></li>
-<li class="chapter" data-level="2.3.2" data-path="rmd/meta-analise.html"><a href="#quais-m%C3%A9todos-de-amostragem-s%C3%A3o-usados-para-obter-uma-amostra-da-popula%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>2.3.2</b> Quais métodos de amostragem são usados para obter uma amostra da população?</a></li>
-<li class="chapter" data-level="2.3.3" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-erro-de-amostragem"><i class="fa fa-check"></i><b>2.3.3</b> O que é erro de amostragem?</a></li>
+<li class="chapter" data-level="2.3.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-amostra"><i class="fa fa-check"></i><b>2.3.1</b> O que é amostra?</a></li>
+<li class="chapter" data-level="2.3.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#por-que-usar-dados-de-amostras"><i class="fa fa-check"></i><b>2.3.2</b> Por que usar dados de amostras?</a></li>
+<li class="chapter" data-level="2.3.3" data-path="rmd/meta-analise.html"><a href="#por-que-identificar-a-unidade-de-an%C3%A1lise-de-um-estudo"><i class="fa fa-check"></i><b>2.3.3</b> Por que identificar a unidade de análise de um estudo?</a></li>
+<li class="chapter" data-level="2.3.4" data-path="rmd/meta-analise.html"><a href="#que-medidas-podem-ser-obtidas-da-unidade-de-an%C3%A1lise-de-um-estudo"><i class="fa fa-check"></i><b>2.3.4</b> Que medidas podem ser obtidas da unidade de análise de um estudo?</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#reamostragem"><i class="fa fa-check"></i><b>2.4</b> Reamostragem</a>
+<li class="chapter" data-level="2.4" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#amostragem"><i class="fa fa-check"></i><b>2.4</b> Amostragem</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-reamostragem"><i class="fa fa-check"></i><b>2.4.1</b> O que é reamostragem?</a></li>
-<li class="chapter" data-level="2.4.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#por-que-utilizar-reamostragem"><i class="fa fa-check"></i><b>2.4.2</b> Por que utilizar reamostragem?</a></li>
-<li class="chapter" data-level="2.4.3" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#quais-procedimentos-de-reamostragem-podem-ser-realizados"><i class="fa fa-check"></i><b>2.4.3</b> Quais procedimentos de reamostragem podem ser realizados?</a></li>
+<li class="chapter" data-level="2.4.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-amostragem"><i class="fa fa-check"></i><b>2.4.1</b> O que é amostragem?</a></li>
+<li class="chapter" data-level="2.4.2" data-path="rmd/meta-analise.html"><a href="#quais-m%C3%A9todos-de-amostragem-s%C3%A3o-usados-para-obter-uma-amostra-da-popula%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>2.4.2</b> Quais métodos de amostragem são usados para obter uma amostra da população?</a></li>
+<li class="chapter" data-level="2.4.3" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-erro-de-amostragem"><i class="fa fa-check"></i><b>2.4.3</b> O que é erro de amostragem?</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#subamostragem"><i class="fa fa-check"></i><b>2.5</b> Subamostragem</a>
+<li class="chapter" data-level="2.5" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#reamostragem"><i class="fa fa-check"></i><b>2.5</b> Reamostragem</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-subamostragem"><i class="fa fa-check"></i><b>2.5.1</b> O que é subamostragem?</a></li>
+<li class="chapter" data-level="2.5.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-reamostragem"><i class="fa fa-check"></i><b>2.5.1</b> O que é reamostragem?</a></li>
+<li class="chapter" data-level="2.5.2" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#por-que-utilizar-reamostragem"><i class="fa fa-check"></i><b>2.5.2</b> Por que utilizar reamostragem?</a></li>
+<li class="chapter" data-level="2.5.3" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#quais-procedimentos-de-reamostragem-podem-ser-realizados"><i class="fa fa-check"></i><b>2.5.3</b> Quais procedimentos de reamostragem podem ser realizados?</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#superamostragem"><i class="fa fa-check"></i><b>2.6</b> Superamostragem</a>
+<li class="chapter" data-level="2.6" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#subamostragem"><i class="fa fa-check"></i><b>2.6</b> Subamostragem</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-superamostragem"><i class="fa fa-check"></i><b>2.6.1</b> O que é superamostragem?</a></li>
+<li class="chapter" data-level="2.6.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-subamostragem"><i class="fa fa-check"></i><b>2.6.1</b> O que é subamostragem?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html#superamostragem"><i class="fa fa-check"></i><b>2.7</b> Superamostragem</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-superamostragem"><i class="fa fa-check"></i><b>2.7.1</b> O que é superamostragem?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="pensamento-probabilistico.html"><a href="pensamento-probabilistico.html"><i class="fa fa-check"></i><b>3</b> <strong>Pensamento probabilístico</strong></a>
@@ -425,7 +428,7 @@ div.csl-indent {
 <li class="chapter" data-level="8.1.1" data-path="rmd/meta-analise.html"><a href="#o-que-s%C3%A3o-pr%C3%A1ticas-question%C3%A1veis-em-pesquisa"><i class="fa fa-check"></i><b>8.1.1</b> O que são práticas questionáveis em pesquisa?</a></li>
 <li class="chapter" data-level="8.1.2" data-path="rmd/meta-analise.html"><a href="#por-que-pr%C3%A1ticas-question%C3%A1veis-em-pesquisa-devem-ser-combatidas"><i class="fa fa-check"></i><b>8.1.2</b> Por que práticas questionáveis em pesquisa devem ser combatidas?</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="rmd/meta-analise.html"><a href="#pr%C3%A1ticas-intencionais-e-n%C3%A3o-intencionais"><i class="fa fa-check"></i><b>8.2</b> Práticas intencionais e não intencionais</a>
+<li class="chapter" data-level="8.2" data-path="rmd/meta-analise.html"><a href="#pr%C3%A1tica-n%C3%A3o-intencional-e-m%C3%A1-conduta"><i class="fa fa-check"></i><b>8.2</b> Prática não intencional e má conduta</a>
 <ul>
 <li class="chapter" data-level="8.2.1" data-path="rmd/meta-analise.html"><a href="#quais-pr%C3%A1ticas-question%C3%A1veis-podem-ocorrer-durante-o-planejamento-do-estudo"><i class="fa fa-check"></i><b>8.2.1</b> Quais práticas questionáveis podem ocorrer durante o planejamento do estudo?</a></li>
 <li class="chapter" data-level="8.2.2" data-path="rmd/meta-analise.html"><a href="#quais-pr%C3%A1ticas-question%C3%A1veis-podem-ocorrer-durante-a-coleta-de-dados"><i class="fa fa-check"></i><b>8.2.2</b> Quais práticas questionáveis podem ocorrer durante a coleta de dados?</a></li>
@@ -1252,102 +1255,109 @@ div.csl-indent {
 <li class="chapter" data-level="41.10.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-ensaios-experimentais"><i class="fa fa-check"></i><b>41.10.1</b> Quais são as diretrizes para redação de ensaios experimentais?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="42" data-path="meta-analise.html"><a href="meta-analise.html"><i class="fa fa-check"></i><b>42</b> <strong>Meta-análise</strong></a>
+<li class="chapter" data-level="42" data-path="revisao-sistematica.html"><a href="revisao-sistematica.html"><i class="fa fa-check"></i><b>42</b> <strong>Revisão sistemática</strong></a>
 <ul>
-<li class="chapter" data-level="42.1" data-path="rmd/meta-analise.html"><a href="#caracter%C3%ADsticas-4"><i class="fa fa-check"></i><b>42.1</b> Características</a>
+<li class="chapter" data-level="42.1" data-path="rmd/meta-analise.html"><a href="#revis%C3%A3o-sistem%C3%A1tica-de-literatura"><i class="fa fa-check"></i><b>42.1</b> Revisão sistemática de literatura</a>
 <ul>
-<li class="chapter" data-level="42.1.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-meta-an%C3%A1lise"><i class="fa fa-check"></i><b>42.1.1</b> O que é meta-análise?</a></li>
-</ul></li>
-<li class="chapter" data-level="42.2" data-path="rmd/meta-analise.html"><a href="#interpreta%C3%A7%C3%A3o-de-efeitos-em-meta-an%C3%A1lise"><i class="fa fa-check"></i><b>42.2</b> Interpretação de efeitos em meta-análise</a>
-<ul>
-<li class="chapter" data-level="42.2.1" data-path="rmd/meta-analise.html"><a href="#como-avaliar-a-varia%C3%A7%C3%A3o-do-tamanho-do-efeito"><i class="fa fa-check"></i><b>42.2.1</b> Como avaliar a variação do tamanho do efeito?</a></li>
-<li class="chapter" data-level="42.2.2" data-path="meta-analise.html"><a href="meta-analise.html#como-avaliar-a-heterogeneidade-entre-os-estudos"><i class="fa fa-check"></i><b>42.2.2</b> Como avaliar a heterogeneidade entre os estudos?</a></li>
-</ul></li>
-<li class="chapter" data-level="42.3" data-path="rmd/meta-analise.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-5"><i class="fa fa-check"></i><b>42.3</b> Diretrizes para redação</a>
-<ul>
-<li class="chapter" data-level="42.3.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-meta-an%C3%A1lises"><i class="fa fa-check"></i><b>42.3.1</b> Quais são as diretrizes para redação de meta-análises?</a></li>
+<li class="chapter" data-level="42.1.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-revis%C3%A3o-sistem%C3%A1tica"><i class="fa fa-check"></i><b>42.1.1</b> O que é revisão sistemática?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="43" data-path="simulacao-computacional.html"><a href="simulacao-computacional.html"><i class="fa fa-check"></i><b>43</b> <strong>Simulação computacional</strong></a>
+<li class="chapter" data-level="43" data-path="meta-analise.html"><a href="meta-analise.html"><i class="fa fa-check"></i><b>43</b> <strong>Meta-análise</strong></a>
 <ul>
-<li class="chapter" data-level="43.1" data-path="rmd/meta-analise.html"><a href="#caracter%C3%ADsticas-5"><i class="fa fa-check"></i><b>43.1</b> Características</a>
+<li class="chapter" data-level="43.1" data-path="rmd/meta-analise.html"><a href="#caracter%C3%ADsticas-4"><i class="fa fa-check"></i><b>43.1</b> Características</a>
 <ul>
-<li class="chapter" data-level="43.1.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-caracter%C3%ADsticas-de-estudos-de-simula%C3%A7%C3%A3o-computacional"><i class="fa fa-check"></i><b>43.1.1</b> Quais são as características de estudos de simulação computacional?</a></li>
+<li class="chapter" data-level="43.1.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-meta-an%C3%A1lise"><i class="fa fa-check"></i><b>43.1.1</b> O que é meta-análise?</a></li>
 </ul></li>
-<li class="chapter" data-level="43.2" data-path="rmd/meta-analise.html"><a href="#m%C3%A9todo-de-monte-carlo"><i class="fa fa-check"></i><b>43.2</b> Método de Monte Carlo</a>
+<li class="chapter" data-level="43.2" data-path="rmd/meta-analise.html"><a href="#interpreta%C3%A7%C3%A3o-de-efeitos-em-meta-an%C3%A1lise"><i class="fa fa-check"></i><b>43.2</b> Interpretação de efeitos em meta-análise</a>
 <ul>
-<li class="chapter" data-level="43.2.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-o-m%C3%A9todo-de-monte-carlo"><i class="fa fa-check"></i><b>43.2.1</b> O que é o método de Monte Carlo?</a></li>
+<li class="chapter" data-level="43.2.1" data-path="rmd/meta-analise.html"><a href="#como-avaliar-a-varia%C3%A7%C3%A3o-do-tamanho-do-efeito"><i class="fa fa-check"></i><b>43.2.1</b> Como avaliar a variação do tamanho do efeito?</a></li>
+<li class="chapter" data-level="43.2.2" data-path="meta-analise.html"><a href="meta-analise.html#como-avaliar-a-heterogeneidade-entre-os-estudos"><i class="fa fa-check"></i><b>43.2.2</b> Como avaliar a heterogeneidade entre os estudos?</a></li>
 </ul></li>
-<li class="chapter" data-level="43.3" data-path="rmd/meta-analise.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-6"><i class="fa fa-check"></i><b>43.3</b> Diretrizes para redação</a>
+<li class="chapter" data-level="43.3" data-path="rmd/meta-analise.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-5"><i class="fa fa-check"></i><b>43.3</b> Diretrizes para redação</a>
 <ul>
-<li class="chapter" data-level="43.3.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-estudos-de-simula%C3%A7%C3%A3o-computacional"><i class="fa fa-check"></i><b>43.3.1</b> Quais são as diretrizes para redação de estudos de simulação computacional?</a></li>
+<li class="chapter" data-level="43.3.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-meta-an%C3%A1lises"><i class="fa fa-check"></i><b>43.3.1</b> Quais são as diretrizes para redação de meta-análises?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="44" data-path="simulacao-computacional.html"><a href="simulacao-computacional.html"><i class="fa fa-check"></i><b>44</b> <strong>Simulação computacional</strong></a>
+<ul>
+<li class="chapter" data-level="44.1" data-path="rmd/meta-analise.html"><a href="#caracter%C3%ADsticas-5"><i class="fa fa-check"></i><b>44.1</b> Características</a>
+<ul>
+<li class="chapter" data-level="44.1.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-caracter%C3%ADsticas-de-estudos-de-simula%C3%A7%C3%A3o-computacional"><i class="fa fa-check"></i><b>44.1.1</b> Quais são as características de estudos de simulação computacional?</a></li>
+</ul></li>
+<li class="chapter" data-level="44.2" data-path="rmd/meta-analise.html"><a href="#m%C3%A9todo-de-monte-carlo"><i class="fa fa-check"></i><b>44.2</b> Método de Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="44.2.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-o-m%C3%A9todo-de-monte-carlo"><i class="fa fa-check"></i><b>44.2.1</b> O que é o método de Monte Carlo?</a></li>
+</ul></li>
+<li class="chapter" data-level="44.3" data-path="rmd/meta-analise.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-6"><i class="fa fa-check"></i><b>44.3</b> Diretrizes para redação</a>
+<ul>
+<li class="chapter" data-level="44.3.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-estudos-de-simula%C3%A7%C3%A3o-computacional"><i class="fa fa-check"></i><b>44.3.1</b> Quais são as diretrizes para redação de estudos de simulação computacional?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-7.html"><a href="parte-7.html"><i class="fa fa-check"></i><em>PARTE 7: APLICAÇÕES E COMUNICAÇÃO</em></a>
 <ul>
 <li class="chapter" data-level="" data-path=""><a href="#da-an%C3%A1lise-ao-impacto"><i class="fa fa-check"></i>Da análise ao impacto</a></li>
 </ul></li>
-<li class="chapter" data-level="44" data-path="plano-analise.html"><a href="plano-analise.html"><i class="fa fa-check"></i><b>44</b> <strong>Plano de análise</strong></a>
+<li class="chapter" data-level="45" data-path="plano-analise.html"><a href="plano-analise.html"><i class="fa fa-check"></i><b>45</b> <strong>Plano de análise</strong></a>
 <ul>
-<li class="chapter" data-level="44.1" data-path="rmd/meta-analise.html"><a href="#plano-de-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>44.1</b> Plano de análise estatística</a>
+<li class="chapter" data-level="45.1" data-path="rmd/meta-analise.html"><a href="#plano-de-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>45.1</b> Plano de análise estatística</a>
 <ul>
-<li class="chapter" data-level="44.1.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-plano-de-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>44.1.1</b> O que é plano de análise estatística?</a></li>
+<li class="chapter" data-level="45.1.1" data-path="rmd/meta-analise.html"><a href="#o-que-%C3%A9-plano-de-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>45.1.1</b> O que é plano de análise estatística?</a></li>
 </ul></li>
-<li class="chapter" data-level="44.2" data-path="rmd/meta-analise.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-7"><i class="fa fa-check"></i><b>44.2</b> Diretrizes para redação</a>
+<li class="chapter" data-level="45.2" data-path="rmd/meta-analise.html"><a href="#diretrizes-para-reda%C3%A7%C3%A3o-7"><i class="fa fa-check"></i><b>45.2</b> Diretrizes para redação</a>
 <ul>
-<li class="chapter" data-level="44.2.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-planos-de-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>44.2.1</b> Quais são as diretrizes para redação de planos de análise estatística?</a></li>
+<li class="chapter" data-level="45.2.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-planos-de-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>45.2.1</b> Quais são as diretrizes para redação de planos de análise estatística?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="45" data-path="redacao-resultados.html"><a href="redacao-resultados.html"><i class="fa fa-check"></i><b>45</b> <strong>Redação de resultados</strong></a>
+<li class="chapter" data-level="46" data-path="redacao-resultados.html"><a href="redacao-resultados.html"><i class="fa fa-check"></i><b>46</b> <strong>Redação de resultados</strong></a>
 <ul>
-<li class="chapter" data-level="45.1" data-path="rmd/meta-analise.html"><a href="#resultados-da-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>45.1</b> Resultados da análise estatística</a>
+<li class="chapter" data-level="46.1" data-path="rmd/meta-analise.html"><a href="#resultados-da-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>46.1</b> Resultados da análise estatística</a>
 <ul>
-<li class="chapter" data-level="45.1.1" data-path="rmd/meta-analise.html"><a href="#como-redigir-os-resultados-da-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>45.1.1</b> Como redigir os resultados da análise estatística?</a></li>
+<li class="chapter" data-level="46.1.1" data-path="rmd/meta-analise.html"><a href="#como-redigir-os-resultados-da-an%C3%A1lise-estat%C3%ADstica"><i class="fa fa-check"></i><b>46.1.1</b> Como redigir os resultados da análise estatística?</a></li>
 </ul></li>
-<li class="chapter" data-level="45.2" data-path="redacao-resultados.html"><a href="redacao-resultados.html#diretrizes-e-listas"><i class="fa fa-check"></i><b>45.2</b> Diretrizes e Listas</a>
+<li class="chapter" data-level="46.2" data-path="redacao-resultados.html"><a href="redacao-resultados.html#diretrizes-e-listas"><i class="fa fa-check"></i><b>46.2</b> Diretrizes e Listas</a>
 <ul>
-<li class="chapter" data-level="45.2.1" data-path="rmd/meta-analise.html"><a href="#quais-diretrizes-est%C3%A3o-dispon%C3%ADveis-para-reda%C3%A7%C3%A3o-estat%C3%ADstica"><i class="fa fa-check"></i><b>45.2.1</b> Quais diretrizes estão disponíveis para redação estatística?</a></li>
-<li class="chapter" data-level="45.2.2" data-path="rmd/meta-analise.html"><a href="#quais-listas-de-verifica%C3%A7%C3%A3o-est%C3%A3o-dispon%C3%ADveis-para-reda%C3%A7%C3%A3o-estat%C3%ADstica"><i class="fa fa-check"></i><b>45.2.2</b> Quais listas de verificação estão disponíveis para redação estatística?</a></li>
+<li class="chapter" data-level="46.2.1" data-path="rmd/meta-analise.html"><a href="#quais-diretrizes-est%C3%A3o-dispon%C3%ADveis-para-reda%C3%A7%C3%A3o-estat%C3%ADstica"><i class="fa fa-check"></i><b>46.2.1</b> Quais diretrizes estão disponíveis para redação estatística?</a></li>
+<li class="chapter" data-level="46.2.2" data-path="rmd/meta-analise.html"><a href="#quais-listas-de-verifica%C3%A7%C3%A3o-est%C3%A3o-dispon%C3%ADveis-para-reda%C3%A7%C3%A3o-estat%C3%ADstica"><i class="fa fa-check"></i><b>46.2.2</b> Quais listas de verificação estão disponíveis para redação estatística?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-8.html"><a href="parte-8.html"><i class="fa fa-check"></i><em>PARTE 8: RECURSOS</em></a>
 <ul>
 <li class="chapter" data-level="" data-path="parte-8.html"><a href="parte-8.html#material-complementar"><i class="fa fa-check"></i>Material complementar</a></li>
 </ul></li>
-<li class="chapter" data-level="46" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>46</b> <strong>Shiny Apps</strong></a>
+<li class="chapter" data-level="47" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>47</b> <strong>Shiny Apps</strong></a>
 <ul>
 <li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i>Aplicativos por delineamento de estudo</a>
 <ul>
 <li class="chapter" data-level="" data-path=""><a href="#ensaios-cl%C3%ADnicos"><i class="fa fa-check"></i>Ensaios clínicos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="47" data-path="fontes-externas.html"><a href="fontes-externas.html"><i class="fa fa-check"></i><b>47</b> <strong>Fontes externas</strong></a>
+<li class="chapter" data-level="48" data-path="fontes-externas.html"><a href="fontes-externas.html"><i class="fa fa-check"></i><b>48</b> <strong>Fontes externas</strong></a>
 <ul>
-<li class="chapter" data-level="47.1" data-path="rmd/meta-analise.html"><a href="#fontes-de-informa%C3%A7%C3%A3o-externas"><i class="fa fa-check"></i><b>47.1</b> Fontes de informação externas</a>
+<li class="chapter" data-level="48.1" data-path="rmd/meta-analise.html"><a href="#fontes-de-informa%C3%A7%C3%A3o-externas"><i class="fa fa-check"></i><b>48.1</b> Fontes de informação externas</a>
 <ul>
-<li class="chapter" data-level="47.1.1" data-path="fontes-externas.html"><a href="fontes-externas.html#american-heart-association"><i class="fa fa-check"></i><b>47.1.1</b> American Heart Association</a></li>
-<li class="chapter" data-level="47.1.2" data-path="fontes-externas.html"><a href="fontes-externas.html#american-physiological-society"><i class="fa fa-check"></i><b>47.1.2</b> American Physiological Society</a></li>
-<li class="chapter" data-level="47.1.3" data-path="fontes-externas.html"><a href="fontes-externas.html#american-statistical-association"><i class="fa fa-check"></i><b>47.1.3</b> American Statistical Association</a></li>
-<li class="chapter" data-level="47.1.4" data-path="fontes-externas.html"><a href="fontes-externas.html#british-medicine-journal"><i class="fa fa-check"></i><b>47.1.4</b> British Medicine Journal</a></li>
-<li class="chapter" data-level="47.1.5" data-path="fontes-externas.html"><a href="fontes-externas.html#enhancing-the-quality-and-transparency-of-health-research-network"><i class="fa fa-check"></i><b>47.1.5</b> Enhancing the QUality And Transparency Of health Research Network</a></li>
-<li class="chapter" data-level="47.1.6" data-path="fontes-externas.html"><a href="fontes-externas.html#journal-of-the-amercan-medical-association"><i class="fa fa-check"></i><b>47.1.6</b> Journal of the Amercan Medical Association</a></li>
-<li class="chapter" data-level="47.1.7" data-path="fontes-externas.html"><a href="fontes-externas.html#nature-publishing-group"><i class="fa fa-check"></i><b>47.1.7</b> Nature Publishing Group</a></li>
-<li class="chapter" data-level="47.1.8" data-path="fontes-externas.html"><a href="fontes-externas.html#oxford-reference"><i class="fa fa-check"></i><b>47.1.8</b> Oxford Reference</a></li>
-<li class="chapter" data-level="47.1.9" data-path="fontes-externas.html"><a href="fontes-externas.html#royal-statistical-society"><i class="fa fa-check"></i><b>47.1.9</b> Royal Statistical Society</a></li>
-<li class="chapter" data-level="47.1.10" data-path="fontes-externas.html"><a href="fontes-externas.html#statistics-in-medicine"><i class="fa fa-check"></i><b>47.1.10</b> Statistics in Medicine</a></li>
-<li class="chapter" data-level="47.1.11" data-path="fontes-externas.html"><a href="fontes-externas.html#bmc-trials"><i class="fa fa-check"></i><b>47.1.11</b> BMC Trials</a></li>
-<li class="chapter" data-level="47.1.12" data-path="fontes-externas.html"><a href="fontes-externas.html#the-journal-of-applied-statistics-in-the-pharmaceutical-industry"><i class="fa fa-check"></i><b>47.1.12</b> The Journal of Applied Statistics in the Pharmaceutical Industry</a></li>
+<li class="chapter" data-level="48.1.1" data-path="fontes-externas.html"><a href="fontes-externas.html#american-heart-association"><i class="fa fa-check"></i><b>48.1.1</b> American Heart Association</a></li>
+<li class="chapter" data-level="48.1.2" data-path="fontes-externas.html"><a href="fontes-externas.html#american-physiological-society"><i class="fa fa-check"></i><b>48.1.2</b> American Physiological Society</a></li>
+<li class="chapter" data-level="48.1.3" data-path="fontes-externas.html"><a href="fontes-externas.html#american-statistical-association"><i class="fa fa-check"></i><b>48.1.3</b> American Statistical Association</a></li>
+<li class="chapter" data-level="48.1.4" data-path="fontes-externas.html"><a href="fontes-externas.html#british-medicine-journal"><i class="fa fa-check"></i><b>48.1.4</b> British Medicine Journal</a></li>
+<li class="chapter" data-level="48.1.5" data-path="fontes-externas.html"><a href="fontes-externas.html#enhancing-the-quality-and-transparency-of-health-research-network"><i class="fa fa-check"></i><b>48.1.5</b> Enhancing the QUality And Transparency Of health Research Network</a></li>
+<li class="chapter" data-level="48.1.6" data-path="fontes-externas.html"><a href="fontes-externas.html#journal-of-the-amercan-medical-association"><i class="fa fa-check"></i><b>48.1.6</b> Journal of the Amercan Medical Association</a></li>
+<li class="chapter" data-level="48.1.7" data-path="fontes-externas.html"><a href="fontes-externas.html#nature-publishing-group"><i class="fa fa-check"></i><b>48.1.7</b> Nature Publishing Group</a></li>
+<li class="chapter" data-level="48.1.8" data-path="fontes-externas.html"><a href="fontes-externas.html#oxford-reference"><i class="fa fa-check"></i><b>48.1.8</b> Oxford Reference</a></li>
+<li class="chapter" data-level="48.1.9" data-path="fontes-externas.html"><a href="fontes-externas.html#royal-statistical-society"><i class="fa fa-check"></i><b>48.1.9</b> Royal Statistical Society</a></li>
+<li class="chapter" data-level="48.1.10" data-path="fontes-externas.html"><a href="fontes-externas.html#statistics-in-medicine"><i class="fa fa-check"></i><b>48.1.10</b> Statistics in Medicine</a></li>
+<li class="chapter" data-level="48.1.11" data-path="fontes-externas.html"><a href="fontes-externas.html#bmc-trials"><i class="fa fa-check"></i><b>48.1.11</b> BMC Trials</a></li>
+<li class="chapter" data-level="48.1.12" data-path="fontes-externas.html"><a href="fontes-externas.html#the-journal-of-applied-statistics-in-the-pharmaceutical-industry"><i class="fa fa-check"></i><b>48.1.12</b> The Journal of Applied Statistics in the Pharmaceutical Industry</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="48" data-path="diretrizes-listas.html"><a href="diretrizes-listas.html"><i class="fa fa-check"></i><b>48</b> <strong>Diretrizes e Listas</strong></a>
+<li class="chapter" data-level="49" data-path="diretrizes-listas.html"><a href="diretrizes-listas.html"><i class="fa fa-check"></i><b>49</b> <strong>Diretrizes e Listas</strong></a>
 <ul>
-<li class="chapter" data-level="48.1" data-path="diretrizes-listas.html"><a href="diretrizes-listas.html#diretrizes"><i class="fa fa-check"></i><b>48.1</b> Diretrizes</a>
+<li class="chapter" data-level="49.1" data-path="diretrizes-listas.html"><a href="diretrizes-listas.html#diretrizes"><i class="fa fa-check"></i><b>49.1</b> Diretrizes</a>
 <ul>
-<li class="chapter" data-level="48.1.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-relat%C3%B3rios-estat%C3%ADsticos-em-pesquisas"><i class="fa fa-check"></i><b>48.1.1</b> Quais são as diretrizes para relatórios estatísticos em pesquisas?</a></li>
+<li class="chapter" data-level="49.1.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-diretrizes-para-relat%C3%B3rios-estat%C3%ADsticos-em-pesquisas"><i class="fa fa-check"></i><b>49.1.1</b> Quais são as diretrizes para relatórios estatísticos em pesquisas?</a></li>
 </ul></li>
-<li class="chapter" data-level="48.2" data-path="rmd/meta-analise.html"><a href="#listas-de-verifica%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>48.2</b> Listas de verificação</a>
+<li class="chapter" data-level="49.2" data-path="rmd/meta-analise.html"><a href="#listas-de-verifica%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>49.2</b> Listas de verificação</a>
 <ul>
-<li class="chapter" data-level="48.2.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-listas-de-verifica%C3%A7%C3%A3o-para-relat%C3%B3rios-estat%C3%ADsticos-em-pesquisas"><i class="fa fa-check"></i><b>48.2.1</b> Quais são as listas de verificação para relatórios estatísticos em pesquisas?</a></li>
+<li class="chapter" data-level="49.2.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-listas-de-verifica%C3%A7%C3%A3o-para-relat%C3%B3rios-estat%C3%ADsticos-em-pesquisas"><i class="fa fa-check"></i><b>49.2.1</b> Quais são as listas de verificação para relatórios estatísticos em pesquisas?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="apendice.html"><a href="apendice.html"><i class="fa fa-check"></i><strong>Apêndice - R scripts</strong></a></li>
@@ -1372,77 +1382,77 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="meta-analise" class="section level1 hasAnchor" number="42">
-<h1><span class="header-section-number">Capítulo 42</span> <strong>Meta-análise</strong><a href="meta-analise.html#meta-analise" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="meta-analise" class="section level1 hasAnchor" number="43">
+<h1><span class="header-section-number">Capítulo 43</span> <strong>Meta-análise</strong><a href="meta-analise.html#meta-analise" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="características-4" class="section level2 hasAnchor" number="42.1">
-<h2><span class="header-section-number">42.1</span> Características<a href="#caracter%C3%ADsticas-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="características-4" class="section level2 hasAnchor" number="43.1">
+<h2><span class="header-section-number">43.1</span> Características<a href="#caracter%C3%ADsticas-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-meta-análise" class="section level3 hasAnchor" number="42.1.1">
-<h3><span class="header-section-number">42.1.1</span> O que é meta-análise?<a href="#o-que-%C3%A9-meta-an%C3%A1lise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-é-meta-análise" class="section level3 hasAnchor" number="43.1.1">
+<h3><span class="header-section-number">43.1.1</span> O que é meta-análise?<a href="#o-que-%C3%A9-meta-an%C3%A1lise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>metagear</em><span class="citation"><sup><a href="#ref-metagear">335</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA"><em>plot_PRISMA</em></a> para gerar o fluxograma de uma revisão sistemática de acordo com o <em>Preferred Reporting Items for Systematic Reviews and Meta-Analyses</em><span class="citation"><sup><a href="#ref-Moher2015">336</a></sup></span>.</p>
+<p>O pacote <em>metagear</em><span class="citation"><sup><a href="#ref-metagear">342</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA"><em>plot_PRISMA</em></a> para gerar o fluxograma de uma revisão sistemática de acordo com o <em>Preferred Reporting Items for Systematic Reviews and Meta-Analyses</em><span class="citation"><sup><a href="#ref-Moher2015">343</a></sup></span>.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>PRISMA2020</em><span class="citation"><sup><a href="#ref-PRISMA2020">337</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram"><em>PRISMA_flowdiagram</em></a> para elaboração do fluxograma de revisões sistemáticas no formato padrão.</p>
+<p>O pacote <em>PRISMA2020</em><span class="citation"><sup><a href="#ref-PRISMA2020">344</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram"><em>PRISMA_flowdiagram</em></a> para elaboração do fluxograma de revisões sistemáticas no formato padrão.</p>
 </div>
 <p><br></p>
 </div>
 </div>
-<div id="interpretação-de-efeitos-em-meta-análise" class="section level2 hasAnchor" number="42.2">
-<h2><span class="header-section-number">42.2</span> Interpretação de efeitos em meta-análise<a href="#interpreta%C3%A7%C3%A3o-de-efeitos-em-meta-an%C3%A1lise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="interpretação-de-efeitos-em-meta-análise" class="section level2 hasAnchor" number="43.2">
+<h2><span class="header-section-number">43.2</span> Interpretação de efeitos em meta-análise<a href="#interpreta%C3%A7%C3%A3o-de-efeitos-em-meta-an%C3%A1lise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="como-avaliar-a-variação-do-tamanho-do-efeito" class="section level3 hasAnchor" number="42.2.1">
-<h3><span class="header-section-number">42.2.1</span> Como avaliar a variação do tamanho do efeito?<a href="#como-avaliar-a-varia%C3%A7%C3%A3o-do-tamanho-do-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="como-avaliar-a-variação-do-tamanho-do-efeito" class="section level3 hasAnchor" number="43.2.1">
+<h3><span class="header-section-number">43.2.1</span> Como avaliar a variação do tamanho do efeito?<a href="#como-avaliar-a-varia%C3%A7%C3%A3o-do-tamanho-do-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>O intervalo de predição contém informação sobre a variação do tamanho do efeito.<span class="citation"><sup><a href="#ref-Borenstein2022">338</a></sup></span></p></li>
-<li><p>Se o intervalo de predição não contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que (a) o tratamento funciona igualmente bem em todas as populações, ou que ele funciona melhor em algumas populações do que em outras.<span class="citation"><sup><a href="#ref-Borenstein2022">338</a></sup></span></p></li>
-<li><p>Se o intervalo de predição contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que o tratamento pode ser benéfico em algumas populações, mas prejudicial em outras, de modo que a estimativa pontual (geralmente a média) torna-se amplamente irrelevante. Nesse caso, é recomendado investigar em que populações o tratamento seria benéfico e em quais causaria danos.<span class="citation"><sup><a href="#ref-Borenstein2022">338</a></sup></span></p></li>
+<li><p>O intervalo de predição contém informação sobre a variação do tamanho do efeito.<span class="citation"><sup><a href="#ref-Borenstein2022">345</a></sup></span></p></li>
+<li><p>Se o intervalo de predição não contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que (a) o tratamento funciona igualmente bem em todas as populações, ou que ele funciona melhor em algumas populações do que em outras.<span class="citation"><sup><a href="#ref-Borenstein2022">345</a></sup></span></p></li>
+<li><p>Se o intervalo de predição contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que o tratamento pode ser benéfico em algumas populações, mas prejudicial em outras, de modo que a estimativa pontual (geralmente a média) torna-se amplamente irrelevante. Nesse caso, é recomendado investigar em que populações o tratamento seria benéfico e em quais causaria danos.<span class="citation"><sup><a href="#ref-Borenstein2022">345</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
-<div id="como-avaliar-a-heterogeneidade-entre-os-estudos" class="section level3 hasAnchor" number="42.2.2">
-<h3><span class="header-section-number">42.2.2</span> Como avaliar a heterogeneidade entre os estudos?<a href="meta-analise.html#como-avaliar-a-heterogeneidade-entre-os-estudos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="como-avaliar-a-heterogeneidade-entre-os-estudos" class="section level3 hasAnchor" number="43.2.2">
+<h3><span class="header-section-number">43.2.2</span> Como avaliar a heterogeneidade entre os estudos?<a href="meta-analise.html#como-avaliar-a-heterogeneidade-entre-os-estudos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>A heterogeneidade - variação não-aleatória - no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo <span class="math inline">\(I^{2}\)</span>.<span class="citation"><sup><a href="#ref-Borenstein2022">338</a>,<a href="#ref-R%C3%BCcker2008">339</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> representa qual proporção da variância observada reflete a variância nos efeitos verdadeiros em vez do erro de amostragem.<span class="citation"><sup><a href="#ref-Borenstein2022">338</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> mede a proporção da variância total que pode ser atribuída à heterogeneidade entre os estudos incluídos.<span class="citation"><sup><a href="#ref-R%C3%BCcker2008">339</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> não depende da quantidade de estudos incluídos na meta-análise. Entretanto, <span class="math inline">\(I^{2}\)</span> aumenta com a quantidade de participantes incluídos nos estudos meta-analisados.<span class="citation"><sup><a href="#ref-R%C3%BCcker2008">339</a></sup></span></p></li>
-<li><p>A heterogeneidade entre estudos é explicada de modo mais confiável utilizando dados de pacientes individuais, uma vez que a direção verdadeira da modificação de efeito não pode ser observada a partir de dados agregados no estudo.<span class="citation"><sup><a href="#ref-degrooth2023">340</a></sup></span></p></li>
+<li><p>A heterogeneidade - variação não-aleatória - no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo <span class="math inline">\(I^{2}\)</span>.<span class="citation"><sup><a href="#ref-Borenstein2022">345</a>,<a href="#ref-R%C3%BCcker2008">346</a></sup></span></p></li>
+<li><p><span class="math inline">\(I^{2}\)</span> representa qual proporção da variância observada reflete a variância nos efeitos verdadeiros em vez do erro de amostragem.<span class="citation"><sup><a href="#ref-Borenstein2022">345</a></sup></span></p></li>
+<li><p><span class="math inline">\(I^{2}\)</span> mede a proporção da variância total que pode ser atribuída à heterogeneidade entre os estudos incluídos.<span class="citation"><sup><a href="#ref-R%C3%BCcker2008">346</a></sup></span></p></li>
+<li><p><span class="math inline">\(I^{2}\)</span> não depende da quantidade de estudos incluídos na meta-análise. Entretanto, <span class="math inline">\(I^{2}\)</span> aumenta com a quantidade de participantes incluídos nos estudos meta-analisados.<span class="citation"><sup><a href="#ref-R%C3%BCcker2008">346</a></sup></span></p></li>
+<li><p>A heterogeneidade entre estudos é explicada de modo mais confiável utilizando dados de pacientes individuais, uma vez que a direção verdadeira da modificação de efeito não pode ser observada a partir de dados agregados no estudo.<span class="citation"><sup><a href="#ref-degrooth2023">347</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>psychmeta</em><span class="citation"><sup><a href="#ref-psychmeta">247</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/psychmeta/versions/2.7.0/topics/ma_d"><em>ma_d</em></a> para meta-analisar valores <em>d</em>.</p>
+<p>O pacote <em>psychmeta</em><span class="citation"><sup><a href="#ref-psychmeta">251</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/psychmeta/versions/2.7.0/topics/ma_d"><em>ma_d</em></a> para meta-analisar valores <em>d</em>.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>psychmeta</em><span class="citation"><sup><a href="#ref-psychmeta">247</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/psychmeta/versions/2.7.0/topics/ma_r"><em>ma_r</em></a> para meta-analisar correlações.</p>
+<p>O pacote <em>psychmeta</em><span class="citation"><sup><a href="#ref-psychmeta">251</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/psychmeta/versions/2.7.0/topics/ma_r"><em>ma_r</em></a> para meta-analisar correlações.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>psychmeta</em><span class="citation"><sup><a href="#ref-psychmeta">247</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/psychmeta/versions/2.7.0/topics/plot_forest"><em>plot_forest</em></a> para criar figuras tipo <em>forest plot</em>.</p>
+<p>O pacote <em>psychmeta</em><span class="citation"><sup><a href="#ref-psychmeta">251</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/psychmeta/versions/2.7.0/topics/plot_forest"><em>plot_forest</em></a> para criar figuras tipo <em>forest plot</em>.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>psychmeta</em><span class="citation"><sup><a href="#ref-psychmeta">247</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/psychmeta/versions/2.7.0/topics/plot_funnel"><em>plot_funnel</em></a> para criar figuras tipo <em>funnel plot</em>.</p>
+<p>O pacote <em>psychmeta</em><span class="citation"><sup><a href="#ref-psychmeta">251</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/psychmeta/versions/2.7.0/topics/plot_funnel"><em>plot_funnel</em></a> para criar figuras tipo <em>funnel plot</em>.</p>
 </div>
 <p><br></p>
 </div>
 </div>
-<div id="diretrizes-para-redação-5" class="section level2 hasAnchor" number="42.3">
-<h2><span class="header-section-number">42.3</span> Diretrizes para redação<a href="#diretrizes-para-reda%C3%A7%C3%A3o-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="diretrizes-para-redação-5" class="section level2 hasAnchor" number="43.3">
+<h2><span class="header-section-number">43.3</span> Diretrizes para redação<a href="#diretrizes-para-reda%C3%A7%C3%A3o-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="quais-são-as-diretrizes-para-redação-de-meta-análises" class="section level3 hasAnchor" number="42.3.1">
-<h3><span class="header-section-number">42.3.1</span> Quais são as diretrizes para redação de meta-análises?<a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-meta-an%C3%A1lises" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-as-diretrizes-para-redação-de-meta-análises" class="section level3 hasAnchor" number="43.3.1">
+<h3><span class="header-section-number">43.3.1</span> Quais são as diretrizes para redação de meta-análises?<a href="#quais-s%C3%A3o-as-diretrizes-para-reda%C3%A7%C3%A3o-de-meta-an%C3%A1lises" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Visite a rede <em>Enhancing the QUAlity and Transparency Of health Research</em> <a href="https://www.equator-network.org/">EQUATOR Network</a> para encontrar diretrizes específicas para cada tipo de meta-análises.</p>
 <ul>
-<li><em>The PRISMA 2020 statement: An updated guideline for reporting systematic reviews</em>:<span class="citation"><sup><a href="#ref-page2021">341</a></sup></span> <a href="https://www.equator-network.org/reporting-guidelines/prisma/" class="uri">https://www.equator-network.org/reporting-guidelines/prisma/</a></li>
+<li><em>The PRISMA 2020 statement: An updated guideline for reporting systematic reviews</em>:<span class="citation"><sup><a href="#ref-page2021">348</a></sup></span> <a href="https://www.equator-network.org/reporting-guidelines/prisma/" class="uri">https://www.equator-network.org/reporting-guidelines/prisma/</a></li>
 </ul></li>
 </ul>
 <p><br></p>
@@ -1479,25 +1489,25 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
 <h3><strong>Referências</strong><a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-psychmeta" class="csl-entry">
-<div class="csl-left-margin">247. </div><div class="csl-right-inline">Dahlke JA, Wiernik BM. <span></span>Psychmeta<span></span>: An r package for psychometric meta-analysis. 2019;43. doi:<a href="https://doi.org/10.1177/0146621618795933">10.1177/0146621618795933</a></div>
+<div class="csl-left-margin">251. </div><div class="csl-right-inline">Dahlke JA, Wiernik BM. <span></span>Psychmeta<span></span>: An r package for psychometric meta-analysis. 2019;43. doi:<a href="https://doi.org/10.1177/0146621618795933">10.1177/0146621618795933</a></div>
 </div>
 <div id="ref-metagear" class="csl-entry">
-<div class="csl-left-margin">335. </div><div class="csl-right-inline">Lajeunesse MJ. Facilitating systematic reviews, data extraction, and meta-analysis with the metagear package for r. 2016;7:323-330.</div>
+<div class="csl-left-margin">342. </div><div class="csl-right-inline">Lajeunesse MJ. Facilitating systematic reviews, data extraction, and meta-analysis with the metagear package for r. 2016;7:323-330.</div>
 </div>
 <div id="ref-Moher2015" class="csl-entry">
-<div class="csl-left-margin">336. </div><div class="csl-right-inline">Moher D, Shamseer L, Clarke M, et al. Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement. <em>Systematic Reviews</em>. 2015;4(1). doi:<a href="https://doi.org/10.1186/2046-4053-4-1">10.1186/2046-4053-4-1</a></div>
+<div class="csl-left-margin">343. </div><div class="csl-right-inline">Moher D, Shamseer L, Clarke M, et al. Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement. <em>Systematic Reviews</em>. 2015;4(1). doi:<a href="https://doi.org/10.1186/2046-4053-4-1">10.1186/2046-4053-4-1</a></div>
 </div>
 <div id="ref-PRISMA2020" class="csl-entry">
-<div class="csl-left-margin">337. </div><div class="csl-right-inline">Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:<a href="https://doi.org/10.1002/cl2.1230">10.1002/cl2.1230</a></div>
+<div class="csl-left-margin">344. </div><div class="csl-right-inline">Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An r package and shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and open synthesis. 2022;18:e1230. doi:<a href="https://doi.org/10.1002/cl2.1230">10.1002/cl2.1230</a></div>
 </div>
 <div id="ref-Borenstein2022" class="csl-entry">
-<div class="csl-left-margin">338. </div><div class="csl-right-inline">Borenstein M. In a meta-analysis, the I-squared statistic does not tell us how much the effect size varies. <em>Journal of Clinical Epidemiology</em>. October 2022. doi:<a href="https://doi.org/10.1016/j.jclinepi.2022.10.003">10.1016/j.jclinepi.2022.10.003</a></div>
+<div class="csl-left-margin">345. </div><div class="csl-right-inline">Borenstein M. In a meta-analysis, the I-squared statistic does not tell us how much the effect size varies. <em>Journal of Clinical Epidemiology</em>. October 2022. doi:<a href="https://doi.org/10.1016/j.jclinepi.2022.10.003">10.1016/j.jclinepi.2022.10.003</a></div>
 </div>
 <div id="ref-degrooth2023" class="csl-entry">
-<div class="csl-left-margin">340. </div><div class="csl-right-inline">Grooth HJ de, Parienti JJ. Heterogeneity between studies can be explained more reliably with individual patient data. <em>Intensive Care Medicine</em>. July 2023. doi:<a href="https://doi.org/10.1007/s00134-023-07163-z">10.1007/s00134-023-07163-z</a></div>
+<div class="csl-left-margin">347. </div><div class="csl-right-inline">Grooth HJ de, Parienti JJ. Heterogeneity between studies can be explained more reliably with individual patient data. <em>Intensive Care Medicine</em>. July 2023. doi:<a href="https://doi.org/10.1007/s00134-023-07163-z">10.1007/s00134-023-07163-z</a></div>
 </div>
 <div id="ref-page2021" class="csl-entry">
-<div class="csl-left-margin">341. </div><div class="csl-right-inline">Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: An updated guideline for reporting systematic reviews. <em>PLOS Medicine</em>. 2021;18(3):e1003583. doi:<a href="https://doi.org/10.1371/journal.pmed.1003583">10.1371/journal.pmed.1003583</a></div>
+<div class="csl-left-margin">348. </div><div class="csl-right-inline">Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: An updated guideline for reporting systematic reviews. <em>PLOS Medicine</em>. 2021;18(3):e1003583. doi:<a href="https://doi.org/10.1371/journal.pmed.1003583">10.1371/journal.pmed.1003583</a></div>
 </div>
 </div>
             </section>
@@ -1505,7 +1515,7 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
           </div>
         </div>
       </div>
-<a href="ensaio-experimental.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="revisao-sistematica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="simulacao-computacional.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
