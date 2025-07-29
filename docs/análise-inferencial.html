@@ -1514,200 +1514,171 @@ div.csl-indent {
 <span id="cb42-38"><a href="análise-inferencial.html#cb42-38" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb42-39"><a href="análise-inferencial.html#cb42-39" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table.erros)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
 </details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="análise-inferencial.html#cb43-1" tabindex="-1"></a><span class="co"># Define parameters</span></span>
+<span id="cb43-2"><a href="análise-inferencial.html#cb43-2" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">0</span>      <span class="co"># Mean under H0</span></span>
+<span id="cb43-3"><a href="análise-inferencial.html#cb43-3" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="dv">1</span>      <span class="co"># Mean under H1</span></span>
+<span id="cb43-4"><a href="análise-inferencial.html#cb43-4" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span>    <span class="co"># Standard deviation</span></span>
+<span id="cb43-5"><a href="análise-inferencial.html#cb43-5" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># Significance level</span></span>
+<span id="cb43-6"><a href="análise-inferencial.html#cb43-6" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="análise-inferencial.html#cb43-7" tabindex="-1"></a><span class="co"># Critical value for one-tailed test (upper tail)</span></span>
+<span id="cb43-8"><a href="análise-inferencial.html#cb43-8" tabindex="-1"></a>z_crit <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">mean =</span> mu0, <span class="at">sd =</span> sigma)</span>
+<span id="cb43-9"><a href="análise-inferencial.html#cb43-9" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="análise-inferencial.html#cb43-10" tabindex="-1"></a><span class="co"># Sequence of x values</span></span>
+<span id="cb43-11"><a href="análise-inferencial.html#cb43-11" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu0 <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> sigma, mu1 <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> sigma, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
+<span id="cb43-12"><a href="análise-inferencial.html#cb43-12" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="análise-inferencial.html#cb43-13" tabindex="-1"></a><span class="co"># Densities</span></span>
+<span id="cb43-14"><a href="análise-inferencial.html#cb43-14" tabindex="-1"></a>dens_H0 <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu0, <span class="at">sd =</span> sigma)</span>
+<span id="cb43-15"><a href="análise-inferencial.html#cb43-15" tabindex="-1"></a>dens_H1 <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sigma)</span>
+<span id="cb43-16"><a href="análise-inferencial.html#cb43-16" tabindex="-1"></a></span>
+<span id="cb43-17"><a href="análise-inferencial.html#cb43-17" tabindex="-1"></a><span class="co"># Set layout: 2 rows, 1 column (plot on top, legend on bottom)</span></span>
+<span id="cb43-18"><a href="análise-inferencial.html#cb43-18" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">1</span>), <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))  <span class="co"># 4:1 ratio</span></span>
+<span id="cb43-19"><a href="análise-inferencial.html#cb43-19" tabindex="-1"></a></span>
+<span id="cb43-20"><a href="análise-inferencial.html#cb43-20" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb43-21"><a href="análise-inferencial.html#cb43-21" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))  <span class="co"># Margins: bottom, left, top, right</span></span>
+<span id="cb43-22"><a href="análise-inferencial.html#cb43-22" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb43-23"><a href="análise-inferencial.html#cb43-23" tabindex="-1"></a>  x,</span>
+<span id="cb43-24"><a href="análise-inferencial.html#cb43-24" tabindex="-1"></a>  dens_H0,</span>
+<span id="cb43-25"><a href="análise-inferencial.html#cb43-25" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb43-26"><a href="análise-inferencial.html#cb43-26" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb43-27"><a href="análise-inferencial.html#cb43-27" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb43-28"><a href="análise-inferencial.html#cb43-28" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(dens_H0, dens_H1)),</span>
+<span id="cb43-29"><a href="análise-inferencial.html#cb43-29" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Densidade&quot;</span>,</span>
+<span id="cb43-30"><a href="análise-inferencial.html#cb43-30" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Efeito&quot;</span>,</span>
+<span id="cb43-31"><a href="análise-inferencial.html#cb43-31" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Erros tipo I e II&quot;</span></span>
+<span id="cb43-32"><a href="análise-inferencial.html#cb43-32" tabindex="-1"></a>)</span>
+<span id="cb43-33"><a href="análise-inferencial.html#cb43-33" tabindex="-1"></a><span class="fu">lines</span>(x, dens_H1, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb43-34"><a href="análise-inferencial.html#cb43-34" tabindex="-1"></a></span>
+<span id="cb43-35"><a href="análise-inferencial.html#cb43-35" tabindex="-1"></a><span class="co"># Shade Type I Error (Alpha)</span></span>
+<span id="cb43-36"><a href="análise-inferencial.html#cb43-36" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(z_crit, x[x <span class="sc">&gt;=</span> z_crit], <span class="fu">max</span>(x)),</span>
+<span id="cb43-37"><a href="análise-inferencial.html#cb43-37" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H0[x <span class="sc">&gt;=</span> z_crit], <span class="dv">0</span>),</span>
+<span id="cb43-38"><a href="análise-inferencial.html#cb43-38" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>),</span>
+<span id="cb43-39"><a href="análise-inferencial.html#cb43-39" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb43-40"><a href="análise-inferencial.html#cb43-40" tabindex="-1"></a></span>
+<span id="cb43-41"><a href="análise-inferencial.html#cb43-41" tabindex="-1"></a><span class="co"># Shade Type II Error (Beta)</span></span>
+<span id="cb43-42"><a href="análise-inferencial.html#cb43-42" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(<span class="fu">min</span>(x), x[x <span class="sc">&lt;=</span> z_crit], z_crit),</span>
+<span id="cb43-43"><a href="análise-inferencial.html#cb43-43" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H1[x <span class="sc">&lt;=</span> z_crit], <span class="dv">0</span>),</span>
+<span id="cb43-44"><a href="análise-inferencial.html#cb43-44" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.3</span>),</span>
+<span id="cb43-45"><a href="análise-inferencial.html#cb43-45" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb43-46"><a href="análise-inferencial.html#cb43-46" tabindex="-1"></a></span>
+<span id="cb43-47"><a href="análise-inferencial.html#cb43-47" tabindex="-1"></a><span class="co"># Vertical line at critical value</span></span>
+<span id="cb43-48"><a href="análise-inferencial.html#cb43-48" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb43-49"><a href="análise-inferencial.html#cb43-49" tabindex="-1"></a>  <span class="at">v =</span> z_crit,</span>
+<span id="cb43-50"><a href="análise-inferencial.html#cb43-50" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb43-51"><a href="análise-inferencial.html#cb43-51" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span>,</span>
+<span id="cb43-52"><a href="análise-inferencial.html#cb43-52" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
+<span id="cb43-53"><a href="análise-inferencial.html#cb43-53" tabindex="-1"></a>)</span>
+<span id="cb43-54"><a href="análise-inferencial.html#cb43-54" tabindex="-1"></a><span class="co"># Add text annotations</span></span>
+<span id="cb43-55"><a href="análise-inferencial.html#cb43-55" tabindex="-1"></a><span class="fu">text</span>(z_crit <span class="sc">+</span> <span class="fl">0.1</span>,</span>
+<span id="cb43-56"><a href="análise-inferencial.html#cb43-56" tabindex="-1"></a>     <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
+<span id="cb43-57"><a href="análise-inferencial.html#cb43-57" tabindex="-1"></a>     <span class="fu">expression</span>(z[alpha]),</span>
+<span id="cb43-58"><a href="análise-inferencial.html#cb43-58" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb43-59"><a href="análise-inferencial.html#cb43-59" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
+<span id="cb43-60"><a href="análise-inferencial.html#cb43-60" tabindex="-1"></a></span>
+<span id="cb43-61"><a href="análise-inferencial.html#cb43-61" tabindex="-1"></a><span class="co"># vertical line for mu0 and mu1</span></span>
+<span id="cb43-62"><a href="análise-inferencial.html#cb43-62" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb43-63"><a href="análise-inferencial.html#cb43-63" tabindex="-1"></a>  <span class="at">v =</span> mu0,</span>
+<span id="cb43-64"><a href="análise-inferencial.html#cb43-64" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb43-65"><a href="análise-inferencial.html#cb43-65" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span>,</span>
+<span id="cb43-66"><a href="análise-inferencial.html#cb43-66" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
+<span id="cb43-67"><a href="análise-inferencial.html#cb43-67" tabindex="-1"></a>)</span>
+<span id="cb43-68"><a href="análise-inferencial.html#cb43-68" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb43-69"><a href="análise-inferencial.html#cb43-69" tabindex="-1"></a>  <span class="at">v =</span> mu1,</span>
+<span id="cb43-70"><a href="análise-inferencial.html#cb43-70" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb43-71"><a href="análise-inferencial.html#cb43-71" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span>,</span>
+<span id="cb43-72"><a href="análise-inferencial.html#cb43-72" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
+<span id="cb43-73"><a href="análise-inferencial.html#cb43-73" tabindex="-1"></a>)</span>
+<span id="cb43-74"><a href="análise-inferencial.html#cb43-74" tabindex="-1"></a></span>
+<span id="cb43-75"><a href="análise-inferencial.html#cb43-75" tabindex="-1"></a><span class="co"># Add text annotations</span></span>
+<span id="cb43-76"><a href="análise-inferencial.html#cb43-76" tabindex="-1"></a><span class="fu">text</span>(mu0,</span>
+<span id="cb43-77"><a href="análise-inferencial.html#cb43-77" tabindex="-1"></a>     <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
+<span id="cb43-78"><a href="análise-inferencial.html#cb43-78" tabindex="-1"></a>     <span class="fu">expression</span>(mu[<span class="dv">0</span>]),</span>
+<span id="cb43-79"><a href="análise-inferencial.html#cb43-79" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb43-80"><a href="análise-inferencial.html#cb43-80" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
+<span id="cb43-81"><a href="análise-inferencial.html#cb43-81" tabindex="-1"></a><span class="fu">text</span>(mu1,</span>
+<span id="cb43-82"><a href="análise-inferencial.html#cb43-82" tabindex="-1"></a>     <span class="fu">max</span>(dens_H1) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
+<span id="cb43-83"><a href="análise-inferencial.html#cb43-83" tabindex="-1"></a>     <span class="fu">expression</span>(mu[<span class="dv">1</span>]),</span>
+<span id="cb43-84"><a href="análise-inferencial.html#cb43-84" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb43-85"><a href="análise-inferencial.html#cb43-85" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
+<span id="cb43-86"><a href="análise-inferencial.html#cb43-86" tabindex="-1"></a></span>
+<span id="cb43-87"><a href="análise-inferencial.html#cb43-87" tabindex="-1"></a><span class="co"># Add text for alpha and beta</span></span>
+<span id="cb43-88"><a href="análise-inferencial.html#cb43-88" tabindex="-1"></a><span class="fu">text</span>(</span>
+<span id="cb43-89"><a href="análise-inferencial.html#cb43-89" tabindex="-1"></a>  z_crit <span class="sc">+</span> <span class="fl">0.1</span>,</span>
+<span id="cb43-90"><a href="análise-inferencial.html#cb43-90" tabindex="-1"></a>  <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.5</span>,</span>
+<span id="cb43-91"><a href="análise-inferencial.html#cb43-91" tabindex="-1"></a>  <span class="fu">expression</span>(alpha),</span>
+<span id="cb43-92"><a href="análise-inferencial.html#cb43-92" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb43-93"><a href="análise-inferencial.html#cb43-93" tabindex="-1"></a>  <span class="at">pos =</span> <span class="dv">4</span></span>
+<span id="cb43-94"><a href="análise-inferencial.html#cb43-94" tabindex="-1"></a>)</span>
+<span id="cb43-95"><a href="análise-inferencial.html#cb43-95" tabindex="-1"></a></span>
+<span id="cb43-96"><a href="análise-inferencial.html#cb43-96" tabindex="-1"></a><span class="co"># Legend (bottom panel)</span></span>
+<span id="cb43-97"><a href="análise-inferencial.html#cb43-97" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))  <span class="co"># No margins</span></span>
+<span id="cb43-98"><a href="análise-inferencial.html#cb43-98" tabindex="-1"></a><span class="fu">plot.new</span>()</span>
+<span id="cb43-99"><a href="análise-inferencial.html#cb43-99" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb43-100"><a href="análise-inferencial.html#cb43-100" tabindex="-1"></a>  <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb43-101"><a href="análise-inferencial.html#cb43-101" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(</span>
+<span id="cb43-102"><a href="análise-inferencial.html#cb43-102" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;Distribuição H&quot;</span>[<span class="dv">0</span>]),</span>
+<span id="cb43-103"><a href="análise-inferencial.html#cb43-103" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;Distribuição H&quot;</span>[<span class="dv">1</span>]),</span>
+<span id="cb43-104"><a href="análise-inferencial.html#cb43-104" tabindex="-1"></a>    <span class="st">&quot;Erro tipo I (α)&quot;</span>,</span>
+<span id="cb43-105"><a href="análise-inferencial.html#cb43-105" tabindex="-1"></a>    <span class="st">&quot;Erro tipo II (β)&quot;</span>,</span>
+<span id="cb43-106"><a href="análise-inferencial.html#cb43-106" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;Valor crítico (&quot;</span> <span class="sc">*</span> z[alpha] <span class="sc">*</span> <span class="st">&quot;)&quot;</span>)</span>
+<span id="cb43-107"><a href="análise-inferencial.html#cb43-107" tabindex="-1"></a>  ),</span>
+<span id="cb43-108"><a href="análise-inferencial.html#cb43-108" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>), <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.3</span>), <span class="st">&quot;black&quot;</span>),</span>
+<span id="cb43-109"><a href="análise-inferencial.html#cb43-109" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="fl">1.5</span>),</span>
+<span id="cb43-110"><a href="análise-inferencial.html#cb43-110" tabindex="-1"></a>  <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">2</span>),</span>
+<span id="cb43-111"><a href="análise-inferencial.html#cb43-111" tabindex="-1"></a>  <span class="at">pch =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">15</span>, <span class="cn">NA</span>),</span>
+<span id="cb43-112"><a href="análise-inferencial.html#cb43-112" tabindex="-1"></a>  <span class="at">pt.cex =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="cn">NA</span>),</span>
+<span id="cb43-113"><a href="análise-inferencial.html#cb43-113" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb43-114"><a href="análise-inferencial.html#cb43-114" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">3</span></span>
+<span id="cb43-115"><a href="análise-inferencial.html#cb43-115" tabindex="-1"></a>)</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="análise-inferencial.html#cb44-1" tabindex="-1"></a><span class="co"># Parâmetros da simulação</span></span>
+<span id="cb44-2"><a href="análise-inferencial.html#cb44-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)  <span class="co"># Para reprodutibilidade</span></span>
+<span id="cb44-3"><a href="análise-inferencial.html#cb44-3" tabindex="-1"></a>n_tests <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># Número de testes</span></span>
+<span id="cb44-4"><a href="análise-inferencial.html#cb44-4" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="dv">30</span>  <span class="co"># Tamanho da amostra em cada teste</span></span>
+<span id="cb44-5"><a href="análise-inferencial.html#cb44-5" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="análise-inferencial.html#cb44-6" tabindex="-1"></a><span class="co"># Simular 100 testes com amostras de 30 elementos</span></span>
+<span id="cb44-7"><a href="análise-inferencial.html#cb44-7" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n_tests)  <span class="co"># Vetor para armazenar os p-valores</span></span>
+<span id="cb44-8"><a href="análise-inferencial.html#cb44-8" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="análise-inferencial.html#cb44-9" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_tests) {</span>
+<span id="cb44-10"><a href="análise-inferencial.html#cb44-10" tabindex="-1"></a>  <span class="co"># Gerar uma amostra aleatória de uma distribuição normal</span></span>
+<span id="cb44-11"><a href="análise-inferencial.html#cb44-11" tabindex="-1"></a>  sample_data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_samples)</span>
+<span id="cb44-12"><a href="análise-inferencial.html#cb44-12" tabindex="-1"></a>  </span>
+<span id="cb44-13"><a href="análise-inferencial.html#cb44-13" tabindex="-1"></a>  <span class="co"># Realizar um teste t para a média da amostra (teste bilateral)</span></span>
+<span id="cb44-14"><a href="análise-inferencial.html#cb44-14" tabindex="-1"></a>  test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(sample_data)</span>
+<span id="cb44-15"><a href="análise-inferencial.html#cb44-15" tabindex="-1"></a>  </span>
+<span id="cb44-16"><a href="análise-inferencial.html#cb44-16" tabindex="-1"></a>  <span class="co"># Armazenar o p-valor</span></span>
+<span id="cb44-17"><a href="análise-inferencial.html#cb44-17" tabindex="-1"></a>  p_values[i] <span class="ot">&lt;-</span> test_result<span class="sc">$</span>p.value</span>
+<span id="cb44-18"><a href="análise-inferencial.html#cb44-18" tabindex="-1"></a>}</span>
+<span id="cb44-19"><a href="análise-inferencial.html#cb44-19" tabindex="-1"></a></span>
+<span id="cb44-20"><a href="análise-inferencial.html#cb44-20" tabindex="-1"></a><span class="co"># Contar quantos p-valores são menores que 0,05</span></span>
+<span id="cb44-21"><a href="análise-inferencial.html#cb44-21" tabindex="-1"></a>p_less_than_0_05 <span class="ot">&lt;-</span> <span class="fu">sum</span>(p_values <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb44-22"><a href="análise-inferencial.html#cb44-22" tabindex="-1"></a></span>
+<span id="cb44-23"><a href="análise-inferencial.html#cb44-23" tabindex="-1"></a><span class="co"># Criar gráfico de distribuição dos p-valores</span></span>
+<span id="cb44-24"><a href="análise-inferencial.html#cb44-24" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(p_values), ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> p_values)) <span class="sc">+</span></span>
+<span id="cb44-25"><a href="análise-inferencial.html#cb44-25" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.01</span>, <span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb44-26"><a href="análise-inferencial.html#cb44-26" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb44-27"><a href="análise-inferencial.html#cb44-27" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="fl">0.06</span>, <span class="at">y =</span> <span class="dv">15</span>, <span class="at">label =</span> <span class="st">&quot;p &lt; 0,05&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb44-28"><a href="análise-inferencial.html#cb44-28" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb44-29"><a href="análise-inferencial.html#cb44-29" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
+<span id="cb44-30"><a href="análise-inferencial.html#cb44-30" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribuição dos p-valores em 100 testes de hipótese&quot;</span>,</span>
+<span id="cb44-31"><a href="análise-inferencial.html#cb44-31" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">&quot;Número de p-valores menores que 0,05: &quot;</span>, p_less_than_0_05, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>),</span>
+<span id="cb44-32"><a href="análise-inferencial.html#cb44-32" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;P-valor&quot;</span>,</span>
+<span id="cb44-33"><a href="análise-inferencial.html#cb44-33" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Frequência&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-34"><a href="análise-inferencial.html#cb44-34" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb44-35"><a href="análise-inferencial.html#cb44-35" tabindex="-1"></a>        <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>))</span></code></pre></div>
+</details>
 </div>
 <div id="o-que-são-erros-tipo-s-e-tipo-m-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>O que são erros Tipo S e Tipo M?<a href="#o-que-s%C3%A3o-erros-tipo-s-e-tipo-m-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="análise-inferencial.html#cb43-1" tabindex="-1"></a><span class="co"># Cria uma tabela de erros tipo S</span></span>
-<span id="cb43-2"><a href="análise-inferencial.html#cb43-2" tabindex="-1"></a>cross.table.erros <span class="ot">&lt;-</span></span>
-<span id="cb43-3"><a href="análise-inferencial.html#cb43-3" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
-<span id="cb43-4"><a href="análise-inferencial.html#cb43-4" tabindex="-1"></a>    <span class="fu">c</span>(</span>
-<span id="cb43-5"><a href="análise-inferencial.html#cb43-5" tabindex="-1"></a>      <span class="st">&#39;Decisão correta&#39;</span>,</span>
-<span id="cb43-6"><a href="análise-inferencial.html#cb43-6" tabindex="-1"></a>      <span class="st">&#39;Decisão incorreta (erro tipo S)&#39;</span>,</span>
-<span id="cb43-7"><a href="análise-inferencial.html#cb43-7" tabindex="-1"></a>      <span class="st">&#39;Decisão incorreta (erro tipo S)&#39;</span>,</span>
-<span id="cb43-8"><a href="análise-inferencial.html#cb43-8" tabindex="-1"></a>      <span class="st">&#39;Decisão correta&#39;</span></span>
-<span id="cb43-9"><a href="análise-inferencial.html#cb43-9" tabindex="-1"></a>    ),</span>
-<span id="cb43-10"><a href="análise-inferencial.html#cb43-10" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">2</span>,</span>
-<span id="cb43-11"><a href="análise-inferencial.html#cb43-11" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">2</span>,</span>
-<span id="cb43-12"><a href="análise-inferencial.html#cb43-12" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
-<span id="cb43-13"><a href="análise-inferencial.html#cb43-13" tabindex="-1"></a>  )</span>
-<span id="cb43-14"><a href="análise-inferencial.html#cb43-14" tabindex="-1"></a><span class="fu">rownames</span>(cross.table.erros) <span class="ot">&lt;-</span></span>
-<span id="cb43-15"><a href="análise-inferencial.html#cb43-15" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Sinal positivo&quot;</span>, <span class="st">&quot;Sinal negativo&quot;</span>)</span>
-<span id="cb43-16"><a href="análise-inferencial.html#cb43-16" tabindex="-1"></a><span class="fu">colnames</span>(cross.table.erros) <span class="ot">&lt;-</span></span>
-<span id="cb43-17"><a href="análise-inferencial.html#cb43-17" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Sinal positivo&quot;</span>, <span class="st">&quot;Sinal negativo&quot;</span>)</span>
-<span id="cb43-18"><a href="análise-inferencial.html#cb43-18" tabindex="-1"></a></span>
-<span id="cb43-19"><a href="análise-inferencial.html#cb43-19" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb43-20"><a href="análise-inferencial.html#cb43-20" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb43-21"><a href="análise-inferencial.html#cb43-21" tabindex="-1"></a>  cross.table.erros,</span>
-<span id="cb43-22"><a href="análise-inferencial.html#cb43-22" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb43-23"><a href="análise-inferencial.html#cb43-23" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb43-24"><a href="análise-inferencial.html#cb43-24" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb43-25"><a href="análise-inferencial.html#cb43-25" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb43-26"><a href="análise-inferencial.html#cb43-26" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb43-27"><a href="análise-inferencial.html#cb43-27" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de erro tipo S de inferência estatística.&quot;</span></span>
-<span id="cb43-28"><a href="análise-inferencial.html#cb43-28" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb43-29"><a href="análise-inferencial.html#cb43-29" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb43-30"><a href="análise-inferencial.html#cb43-30" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb43-31"><a href="análise-inferencial.html#cb43-31" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb43-32"><a href="análise-inferencial.html#cb43-32" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb43-33"><a href="análise-inferencial.html#cb43-33" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb43-34"><a href="análise-inferencial.html#cb43-34" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb43-35"><a href="análise-inferencial.html#cb43-35" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb43-36"><a href="análise-inferencial.html#cb43-36" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb43-37"><a href="análise-inferencial.html#cb43-37" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table.erros)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
-</details>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="análise-inferencial.html#cb44-1" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
-<span id="cb44-2"><a href="análise-inferencial.html#cb44-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb44-3"><a href="análise-inferencial.html#cb44-3" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="análise-inferencial.html#cb44-4" tabindex="-1"></a><span class="co"># Define parameters</span></span>
-<span id="cb44-5"><a href="análise-inferencial.html#cb44-5" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb44-6"><a href="análise-inferencial.html#cb44-6" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb44-7"><a href="análise-inferencial.html#cb44-7" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb44-8"><a href="análise-inferencial.html#cb44-8" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb44-9"><a href="análise-inferencial.html#cb44-9" tabindex="-1"></a>se <span class="ot">&lt;-</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb44-10"><a href="análise-inferencial.html#cb44-10" tabindex="-1"></a></span>
-<span id="cb44-11"><a href="análise-inferencial.html#cb44-11" tabindex="-1"></a><span class="co"># Two-tailed critical values</span></span>
-<span id="cb44-12"><a href="análise-inferencial.html#cb44-12" tabindex="-1"></a>z_crit <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb44-13"><a href="análise-inferencial.html#cb44-13" tabindex="-1"></a>x_lower <span class="ot">&lt;-</span> mu0 <span class="sc">-</span> z_crit <span class="sc">*</span> se</span>
-<span id="cb44-14"><a href="análise-inferencial.html#cb44-14" tabindex="-1"></a>x_upper <span class="ot">&lt;-</span> mu0 <span class="sc">+</span> z_crit <span class="sc">*</span> se</span>
-<span id="cb44-15"><a href="análise-inferencial.html#cb44-15" tabindex="-1"></a></span>
-<span id="cb44-16"><a href="análise-inferencial.html#cb44-16" tabindex="-1"></a><span class="co"># Simulate until we get a significant estimate in the WRONG direction (Type-S error)</span></span>
-<span id="cb44-17"><a href="análise-inferencial.html#cb44-17" tabindex="-1"></a><span class="cf">repeat</span> {</span>
-<span id="cb44-18"><a href="análise-inferencial.html#cb44-18" tabindex="-1"></a>  obs_mean <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> mu1, <span class="at">sd =</span> se)</span>
-<span id="cb44-19"><a href="análise-inferencial.html#cb44-19" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (obs_mean <span class="sc">-</span> mu0) <span class="sc">/</span> se</span>
-<span id="cb44-20"><a href="análise-inferencial.html#cb44-20" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">abs</span>(z) <span class="sc">&gt;</span> z_crit <span class="sc">&amp;&amp;</span></span>
-<span id="cb44-21"><a href="análise-inferencial.html#cb44-21" tabindex="-1"></a>      obs_mean <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
-<span id="cb44-22"><a href="análise-inferencial.html#cb44-22" tabindex="-1"></a>    <span class="cf">break</span>  <span class="co"># Sign error: significant but negative</span></span>
-<span id="cb44-23"><a href="análise-inferencial.html#cb44-23" tabindex="-1"></a>}</span>
-<span id="cb44-24"><a href="análise-inferencial.html#cb44-24" tabindex="-1"></a></span>
-<span id="cb44-25"><a href="análise-inferencial.html#cb44-25" tabindex="-1"></a><span class="co"># x values</span></span>
-<span id="cb44-26"><a href="análise-inferencial.html#cb44-26" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu0 <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> se, mu1 <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> se <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
-<span id="cb44-27"><a href="análise-inferencial.html#cb44-27" tabindex="-1"></a>dens_H0 <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu0, <span class="at">sd =</span> se)</span>
-<span id="cb44-28"><a href="análise-inferencial.html#cb44-28" tabindex="-1"></a>dens_H1 <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> se)</span>
-<span id="cb44-29"><a href="análise-inferencial.html#cb44-29" tabindex="-1"></a></span>
-<span id="cb44-30"><a href="análise-inferencial.html#cb44-30" tabindex="-1"></a><span class="co"># Set layout: 2 rows, 1 column (plot on top, legend on bottom)</span></span>
-<span id="cb44-31"><a href="análise-inferencial.html#cb44-31" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">1</span>), <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))  <span class="co"># 4:1 ratio</span></span>
-<span id="cb44-32"><a href="análise-inferencial.html#cb44-32" tabindex="-1"></a></span>
-<span id="cb44-33"><a href="análise-inferencial.html#cb44-33" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb44-34"><a href="análise-inferencial.html#cb44-34" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))  <span class="co"># Margins: bottom, left, top, right</span></span>
-<span id="cb44-35"><a href="análise-inferencial.html#cb44-35" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb44-36"><a href="análise-inferencial.html#cb44-36" tabindex="-1"></a>  x,</span>
-<span id="cb44-37"><a href="análise-inferencial.html#cb44-37" tabindex="-1"></a>  dens_H0,</span>
-<span id="cb44-38"><a href="análise-inferencial.html#cb44-38" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
-<span id="cb44-39"><a href="análise-inferencial.html#cb44-39" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,</span>
-<span id="cb44-40"><a href="análise-inferencial.html#cb44-40" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb44-41"><a href="análise-inferencial.html#cb44-41" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(dens_H0, dens_H1)),</span>
-<span id="cb44-42"><a href="análise-inferencial.html#cb44-42" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Densidade&quot;</span>,</span>
-<span id="cb44-43"><a href="análise-inferencial.html#cb44-43" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Efeito estimado&quot;</span>,</span>
-<span id="cb44-44"><a href="análise-inferencial.html#cb44-44" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Erro Tipo-S: Sinal Incorreto&quot;</span></span>
-<span id="cb44-45"><a href="análise-inferencial.html#cb44-45" tabindex="-1"></a>)</span>
-<span id="cb44-46"><a href="análise-inferencial.html#cb44-46" tabindex="-1"></a><span class="fu">lines</span>(x, dens_H1, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb44-47"><a href="análise-inferencial.html#cb44-47" tabindex="-1"></a><span class="co"># Type I error region shading</span></span>
-<span id="cb44-48"><a href="análise-inferencial.html#cb44-48" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(<span class="fu">min</span>(x), x[x <span class="sc">&lt;=</span> x_lower], x_lower),</span>
-<span id="cb44-49"><a href="análise-inferencial.html#cb44-49" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H0[x <span class="sc">&lt;=</span> x_lower], <span class="dv">0</span>),</span>
-<span id="cb44-50"><a href="análise-inferencial.html#cb44-50" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>),</span>
-<span id="cb44-51"><a href="análise-inferencial.html#cb44-51" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span>
-<span id="cb44-52"><a href="análise-inferencial.html#cb44-52" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(x_upper, x[x <span class="sc">&gt;=</span> x_upper], <span class="fu">max</span>(x)),</span>
-<span id="cb44-53"><a href="análise-inferencial.html#cb44-53" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H0[x <span class="sc">&gt;=</span> x_upper], <span class="dv">0</span>),</span>
-<span id="cb44-54"><a href="análise-inferencial.html#cb44-54" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>),</span>
-<span id="cb44-55"><a href="análise-inferencial.html#cb44-55" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span>
-<span id="cb44-56"><a href="análise-inferencial.html#cb44-56" tabindex="-1"></a></span>
-<span id="cb44-57"><a href="análise-inferencial.html#cb44-57" tabindex="-1"></a><span class="co"># Type-S region shading (significant but wrong direction)</span></span>
-<span id="cb44-58"><a href="análise-inferencial.html#cb44-58" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(<span class="fu">min</span>(x), x[x <span class="sc">&lt;=</span> x_lower], x_lower),</span>
-<span id="cb44-59"><a href="análise-inferencial.html#cb44-59" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H1[x <span class="sc">&lt;=</span> x_lower], <span class="dv">0</span>),</span>
-<span id="cb44-60"><a href="análise-inferencial.html#cb44-60" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.3</span>),</span>
-<span id="cb44-61"><a href="análise-inferencial.html#cb44-61" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span>
-<span id="cb44-62"><a href="análise-inferencial.html#cb44-62" tabindex="-1"></a></span>
-<span id="cb44-63"><a href="análise-inferencial.html#cb44-63" tabindex="-1"></a><span class="co"># Vertical lines</span></span>
-<span id="cb44-64"><a href="análise-inferencial.html#cb44-64" tabindex="-1"></a><span class="fu">abline</span>(</span>
-<span id="cb44-65"><a href="análise-inferencial.html#cb44-65" tabindex="-1"></a>  <span class="at">v =</span> x_lower,</span>
-<span id="cb44-66"><a href="análise-inferencial.html#cb44-66" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb44-67"><a href="análise-inferencial.html#cb44-67" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span>,</span>
-<span id="cb44-68"><a href="análise-inferencial.html#cb44-68" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
-<span id="cb44-69"><a href="análise-inferencial.html#cb44-69" tabindex="-1"></a>)</span>
-<span id="cb44-70"><a href="análise-inferencial.html#cb44-70" tabindex="-1"></a><span class="fu">abline</span>(</span>
-<span id="cb44-71"><a href="análise-inferencial.html#cb44-71" tabindex="-1"></a>  <span class="at">v =</span> x_upper,</span>
-<span id="cb44-72"><a href="análise-inferencial.html#cb44-72" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb44-73"><a href="análise-inferencial.html#cb44-73" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span>,</span>
-<span id="cb44-74"><a href="análise-inferencial.html#cb44-74" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
-<span id="cb44-75"><a href="análise-inferencial.html#cb44-75" tabindex="-1"></a>)</span>
-<span id="cb44-76"><a href="análise-inferencial.html#cb44-76" tabindex="-1"></a><span class="fu">abline</span>(</span>
-<span id="cb44-77"><a href="análise-inferencial.html#cb44-77" tabindex="-1"></a>  <span class="at">v =</span> mu0,</span>
-<span id="cb44-78"><a href="análise-inferencial.html#cb44-78" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb44-79"><a href="análise-inferencial.html#cb44-79" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span>,</span>
-<span id="cb44-80"><a href="análise-inferencial.html#cb44-80" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
-<span id="cb44-81"><a href="análise-inferencial.html#cb44-81" tabindex="-1"></a>)</span>
-<span id="cb44-82"><a href="análise-inferencial.html#cb44-82" tabindex="-1"></a><span class="fu">abline</span>(</span>
-<span id="cb44-83"><a href="análise-inferencial.html#cb44-83" tabindex="-1"></a>  <span class="at">v =</span> mu1,</span>
-<span id="cb44-84"><a href="análise-inferencial.html#cb44-84" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb44-85"><a href="análise-inferencial.html#cb44-85" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span>,</span>
-<span id="cb44-86"><a href="análise-inferencial.html#cb44-86" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
-<span id="cb44-87"><a href="análise-inferencial.html#cb44-87" tabindex="-1"></a>)</span>
-<span id="cb44-88"><a href="análise-inferencial.html#cb44-88" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> obs_mean,</span>
-<span id="cb44-89"><a href="análise-inferencial.html#cb44-89" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>,</span>
-<span id="cb44-90"><a href="análise-inferencial.html#cb44-90" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb44-91"><a href="análise-inferencial.html#cb44-91" tabindex="-1"></a></span>
-<span id="cb44-92"><a href="análise-inferencial.html#cb44-92" tabindex="-1"></a><span class="co"># Labels</span></span>
-<span id="cb44-93"><a href="análise-inferencial.html#cb44-93" tabindex="-1"></a><span class="fu">text</span>(</span>
-<span id="cb44-94"><a href="análise-inferencial.html#cb44-94" tabindex="-1"></a>  x_lower <span class="sc">-</span> <span class="fl">0.02</span>,</span>
-<span id="cb44-95"><a href="análise-inferencial.html#cb44-95" tabindex="-1"></a>  <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.5</span>,</span>
-<span id="cb44-96"><a href="análise-inferencial.html#cb44-96" tabindex="-1"></a>  <span class="fu">expression</span>(alpha <span class="sc">/</span> <span class="dv">2</span>),</span>
-<span id="cb44-97"><a href="análise-inferencial.html#cb44-97" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb44-98"><a href="análise-inferencial.html#cb44-98" tabindex="-1"></a>  <span class="at">pos =</span> <span class="dv">2</span></span>
-<span id="cb44-99"><a href="análise-inferencial.html#cb44-99" tabindex="-1"></a>)</span>
-<span id="cb44-100"><a href="análise-inferencial.html#cb44-100" tabindex="-1"></a><span class="fu">text</span>(</span>
-<span id="cb44-101"><a href="análise-inferencial.html#cb44-101" tabindex="-1"></a>  x_upper <span class="sc">+</span> <span class="fl">0.02</span>,</span>
-<span id="cb44-102"><a href="análise-inferencial.html#cb44-102" tabindex="-1"></a>  <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.5</span>,</span>
-<span id="cb44-103"><a href="análise-inferencial.html#cb44-103" tabindex="-1"></a>  <span class="fu">expression</span>(alpha <span class="sc">/</span> <span class="dv">2</span>),</span>
-<span id="cb44-104"><a href="análise-inferencial.html#cb44-104" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb44-105"><a href="análise-inferencial.html#cb44-105" tabindex="-1"></a>  <span class="at">pos =</span> <span class="dv">4</span></span>
-<span id="cb44-106"><a href="análise-inferencial.html#cb44-106" tabindex="-1"></a>)</span>
-<span id="cb44-107"><a href="análise-inferencial.html#cb44-107" tabindex="-1"></a><span class="fu">text</span>(mu0,</span>
-<span id="cb44-108"><a href="análise-inferencial.html#cb44-108" tabindex="-1"></a>     <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
-<span id="cb44-109"><a href="análise-inferencial.html#cb44-109" tabindex="-1"></a>     <span class="fu">expression</span>(mu[<span class="dv">0</span>]),</span>
-<span id="cb44-110"><a href="análise-inferencial.html#cb44-110" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb44-111"><a href="análise-inferencial.html#cb44-111" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
-<span id="cb44-112"><a href="análise-inferencial.html#cb44-112" tabindex="-1"></a><span class="fu">text</span>(mu1,</span>
-<span id="cb44-113"><a href="análise-inferencial.html#cb44-113" tabindex="-1"></a>     <span class="fu">max</span>(dens_H1) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
-<span id="cb44-114"><a href="análise-inferencial.html#cb44-114" tabindex="-1"></a>     <span class="fu">expression</span>(mu[<span class="dv">1</span>]),</span>
-<span id="cb44-115"><a href="análise-inferencial.html#cb44-115" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb44-116"><a href="análise-inferencial.html#cb44-116" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
-<span id="cb44-117"><a href="análise-inferencial.html#cb44-117" tabindex="-1"></a><span class="fu">text</span>(obs_mean,</span>
-<span id="cb44-118"><a href="análise-inferencial.html#cb44-118" tabindex="-1"></a>     <span class="fu">max</span>(dens_H1) <span class="sc">*</span> <span class="fl">0.9</span>,</span>
-<span id="cb44-119"><a href="análise-inferencial.html#cb44-119" tabindex="-1"></a>     <span class="st">&quot;Estimado&quot;</span>,</span>
-<span id="cb44-120"><a href="análise-inferencial.html#cb44-120" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>,</span>
-<span id="cb44-121"><a href="análise-inferencial.html#cb44-121" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
-<span id="cb44-122"><a href="análise-inferencial.html#cb44-122" tabindex="-1"></a></span>
-<span id="cb44-123"><a href="análise-inferencial.html#cb44-123" tabindex="-1"></a><span class="co"># Legend (bottom panel)</span></span>
-<span id="cb44-124"><a href="análise-inferencial.html#cb44-124" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))  <span class="co"># No margins</span></span>
-<span id="cb44-125"><a href="análise-inferencial.html#cb44-125" tabindex="-1"></a><span class="fu">plot.new</span>()</span>
-<span id="cb44-126"><a href="análise-inferencial.html#cb44-126" tabindex="-1"></a><span class="fu">legend</span>(</span>
-<span id="cb44-127"><a href="análise-inferencial.html#cb44-127" tabindex="-1"></a>  <span class="st">&quot;center&quot;</span>,</span>
-<span id="cb44-128"><a href="análise-inferencial.html#cb44-128" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(</span>
-<span id="cb44-129"><a href="análise-inferencial.html#cb44-129" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;H&quot;</span>[<span class="dv">0</span>]),</span>
-<span id="cb44-130"><a href="análise-inferencial.html#cb44-130" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;H&quot;</span>[<span class="dv">1</span>]),</span>
-<span id="cb44-131"><a href="análise-inferencial.html#cb44-131" tabindex="-1"></a>    <span class="st">&quot;Estimativa significativa&quot;</span>,</span>
-<span id="cb44-132"><a href="análise-inferencial.html#cb44-132" tabindex="-1"></a>    <span class="st">&quot;Erro tipo I (α)&quot;</span>,</span>
-<span id="cb44-133"><a href="análise-inferencial.html#cb44-133" tabindex="-1"></a>    <span class="st">&quot;Erro tipo-S (sinal errado)&quot;</span></span>
-<span id="cb44-134"><a href="análise-inferencial.html#cb44-134" tabindex="-1"></a>  ),</span>
-<span id="cb44-135"><a href="análise-inferencial.html#cb44-135" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>, <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>), <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.3</span>)),</span>
-<span id="cb44-136"><a href="análise-inferencial.html#cb44-136" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb44-137"><a href="análise-inferencial.html#cb44-137" tabindex="-1"></a>  <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb44-138"><a href="análise-inferencial.html#cb44-138" tabindex="-1"></a>  <span class="at">pch =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">15</span>),</span>
-<span id="cb44-139"><a href="análise-inferencial.html#cb44-139" tabindex="-1"></a>  <span class="at">pt.cex =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
-<span id="cb44-140"><a href="análise-inferencial.html#cb44-140" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb44-141"><a href="análise-inferencial.html#cb44-141" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
-<span id="cb44-142"><a href="análise-inferencial.html#cb44-142" tabindex="-1"></a>)</span></code></pre></div>
-</details>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="análise-inferencial.html#cb45-1" tabindex="-1"></a><span class="co"># Cria uma tabela de erros tipo M</span></span>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="análise-inferencial.html#cb45-1" tabindex="-1"></a><span class="co"># Cria uma tabela de erros tipo S</span></span>
 <span id="cb45-2"><a href="análise-inferencial.html#cb45-2" tabindex="-1"></a>cross.table.erros <span class="ot">&lt;-</span></span>
 <span id="cb45-3"><a href="análise-inferencial.html#cb45-3" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
 <span id="cb45-4"><a href="análise-inferencial.html#cb45-4" tabindex="-1"></a>    <span class="fu">c</span>(</span>
 <span id="cb45-5"><a href="análise-inferencial.html#cb45-5" tabindex="-1"></a>      <span class="st">&#39;Decisão correta&#39;</span>,</span>
-<span id="cb45-6"><a href="análise-inferencial.html#cb45-6" tabindex="-1"></a>      <span class="st">&#39;Decisão incorreta (erro tipo M)&#39;</span>,</span>
-<span id="cb45-7"><a href="análise-inferencial.html#cb45-7" tabindex="-1"></a>      <span class="st">&#39;Decisão incorreta (erro tipo M)&#39;</span>,</span>
+<span id="cb45-6"><a href="análise-inferencial.html#cb45-6" tabindex="-1"></a>      <span class="st">&#39;Decisão incorreta (erro tipo S)&#39;</span>,</span>
+<span id="cb45-7"><a href="análise-inferencial.html#cb45-7" tabindex="-1"></a>      <span class="st">&#39;Decisão incorreta (erro tipo S)&#39;</span>,</span>
 <span id="cb45-8"><a href="análise-inferencial.html#cb45-8" tabindex="-1"></a>      <span class="st">&#39;Decisão correta&#39;</span></span>
 <span id="cb45-9"><a href="análise-inferencial.html#cb45-9" tabindex="-1"></a>    ),</span>
 <span id="cb45-10"><a href="análise-inferencial.html#cb45-10" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">2</span>,</span>
@@ -1715,9 +1686,9 @@ div.csl-indent {
 <span id="cb45-12"><a href="análise-inferencial.html#cb45-12" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
 <span id="cb45-13"><a href="análise-inferencial.html#cb45-13" tabindex="-1"></a>  )</span>
 <span id="cb45-14"><a href="análise-inferencial.html#cb45-14" tabindex="-1"></a><span class="fu">rownames</span>(cross.table.erros) <span class="ot">&lt;-</span></span>
-<span id="cb45-15"><a href="análise-inferencial.html#cb45-15" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Magnitude alta&quot;</span>, <span class="st">&quot;Magnitude baixa&quot;</span>)</span>
+<span id="cb45-15"><a href="análise-inferencial.html#cb45-15" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Sinal positivo&quot;</span>, <span class="st">&quot;Sinal negativo&quot;</span>)</span>
 <span id="cb45-16"><a href="análise-inferencial.html#cb45-16" tabindex="-1"></a><span class="fu">colnames</span>(cross.table.erros) <span class="ot">&lt;-</span></span>
-<span id="cb45-17"><a href="análise-inferencial.html#cb45-17" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Magnitude alta&quot;</span>, <span class="st">&quot;Magnitude baixa&quot;</span>)</span>
+<span id="cb45-17"><a href="análise-inferencial.html#cb45-17" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Sinal positivo&quot;</span>, <span class="st">&quot;Sinal negativo&quot;</span>)</span>
 <span id="cb45-18"><a href="análise-inferencial.html#cb45-18" tabindex="-1"></a></span>
 <span id="cb45-19"><a href="análise-inferencial.html#cb45-19" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
 <span id="cb45-20"><a href="análise-inferencial.html#cb45-20" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
@@ -1727,7 +1698,7 @@ div.csl-indent {
 <span id="cb45-24"><a href="análise-inferencial.html#cb45-24" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb45-25"><a href="análise-inferencial.html#cb45-25" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
 <span id="cb45-26"><a href="análise-inferencial.html#cb45-26" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb45-27"><a href="análise-inferencial.html#cb45-27" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de erro tipo M de inferência estatística.&quot;</span></span>
+<span id="cb45-27"><a href="análise-inferencial.html#cb45-27" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de erro tipo S de inferência estatística.&quot;</span></span>
 <span id="cb45-28"><a href="análise-inferencial.html#cb45-28" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
 <span id="cb45-29"><a href="análise-inferencial.html#cb45-29" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
 <span id="cb45-30"><a href="análise-inferencial.html#cb45-30" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
@@ -1743,126 +1714,309 @@ div.csl-indent {
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="análise-inferencial.html#cb46-1" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
 <span id="cb46-2"><a href="análise-inferencial.html#cb46-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb46-3"><a href="análise-inferencial.html#cb46-3" tabindex="-1"></a></span>
-<span id="cb46-4"><a href="análise-inferencial.html#cb46-4" tabindex="-1"></a><span class="co"># Parameters</span></span>
-<span id="cb46-5"><a href="análise-inferencial.html#cb46-5" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb46-6"><a href="análise-inferencial.html#cb46-6" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb46-7"><a href="análise-inferencial.html#cb46-7" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb46-8"><a href="análise-inferencial.html#cb46-8" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb46-9"><a href="análise-inferencial.html#cb46-9" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb46-10"><a href="análise-inferencial.html#cb46-10" tabindex="-1"></a>se <span class="ot">&lt;-</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb46-11"><a href="análise-inferencial.html#cb46-11" tabindex="-1"></a></span>
-<span id="cb46-12"><a href="análise-inferencial.html#cb46-12" tabindex="-1"></a><span class="co"># Critical value for one-tailed test</span></span>
-<span id="cb46-13"><a href="análise-inferencial.html#cb46-13" tabindex="-1"></a>z_crit <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha)</span>
-<span id="cb46-14"><a href="análise-inferencial.html#cb46-14" tabindex="-1"></a>x_crit <span class="ot">&lt;-</span> mu0 <span class="sc">+</span> z_crit <span class="sc">*</span> se</span>
+<span id="cb46-4"><a href="análise-inferencial.html#cb46-4" tabindex="-1"></a><span class="co"># Define parameters</span></span>
+<span id="cb46-5"><a href="análise-inferencial.html#cb46-5" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb46-6"><a href="análise-inferencial.html#cb46-6" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb46-7"><a href="análise-inferencial.html#cb46-7" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb46-8"><a href="análise-inferencial.html#cb46-8" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb46-9"><a href="análise-inferencial.html#cb46-9" tabindex="-1"></a>se <span class="ot">&lt;-</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb46-10"><a href="análise-inferencial.html#cb46-10" tabindex="-1"></a></span>
+<span id="cb46-11"><a href="análise-inferencial.html#cb46-11" tabindex="-1"></a><span class="co"># Two-tailed critical values</span></span>
+<span id="cb46-12"><a href="análise-inferencial.html#cb46-12" tabindex="-1"></a>z_crit <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb46-13"><a href="análise-inferencial.html#cb46-13" tabindex="-1"></a>x_lower <span class="ot">&lt;-</span> mu0 <span class="sc">-</span> z_crit <span class="sc">*</span> se</span>
+<span id="cb46-14"><a href="análise-inferencial.html#cb46-14" tabindex="-1"></a>x_upper <span class="ot">&lt;-</span> mu0 <span class="sc">+</span> z_crit <span class="sc">*</span> se</span>
 <span id="cb46-15"><a href="análise-inferencial.html#cb46-15" tabindex="-1"></a></span>
-<span id="cb46-16"><a href="análise-inferencial.html#cb46-16" tabindex="-1"></a><span class="co"># Simulate until we get a significant estimate</span></span>
+<span id="cb46-16"><a href="análise-inferencial.html#cb46-16" tabindex="-1"></a><span class="co"># Simulate until we get a significant estimate in the WRONG direction (Type-S error)</span></span>
 <span id="cb46-17"><a href="análise-inferencial.html#cb46-17" tabindex="-1"></a><span class="cf">repeat</span> {</span>
 <span id="cb46-18"><a href="análise-inferencial.html#cb46-18" tabindex="-1"></a>  obs_mean <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> mu1, <span class="at">sd =</span> se)</span>
 <span id="cb46-19"><a href="análise-inferencial.html#cb46-19" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (obs_mean <span class="sc">-</span> mu0) <span class="sc">/</span> se</span>
-<span id="cb46-20"><a href="análise-inferencial.html#cb46-20" tabindex="-1"></a>  <span class="cf">if</span> (z <span class="sc">&gt;</span> z_crit)</span>
-<span id="cb46-21"><a href="análise-inferencial.html#cb46-21" tabindex="-1"></a>    <span class="cf">break</span></span>
-<span id="cb46-22"><a href="análise-inferencial.html#cb46-22" tabindex="-1"></a>}</span>
-<span id="cb46-23"><a href="análise-inferencial.html#cb46-23" tabindex="-1"></a></span>
-<span id="cb46-24"><a href="análise-inferencial.html#cb46-24" tabindex="-1"></a><span class="co"># x values</span></span>
-<span id="cb46-25"><a href="análise-inferencial.html#cb46-25" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu0 <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> se, mu1 <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> se <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
-<span id="cb46-26"><a href="análise-inferencial.html#cb46-26" tabindex="-1"></a>dens_H0 <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu0, <span class="at">sd =</span> se)</span>
-<span id="cb46-27"><a href="análise-inferencial.html#cb46-27" tabindex="-1"></a>dens_H1 <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> se)</span>
-<span id="cb46-28"><a href="análise-inferencial.html#cb46-28" tabindex="-1"></a></span>
-<span id="cb46-29"><a href="análise-inferencial.html#cb46-29" tabindex="-1"></a><span class="co"># Set layout: 2 rows, 1 column (plot on top, legend on bottom)</span></span>
-<span id="cb46-30"><a href="análise-inferencial.html#cb46-30" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">1</span>), <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))  <span class="co"># 4:1 ratio</span></span>
-<span id="cb46-31"><a href="análise-inferencial.html#cb46-31" tabindex="-1"></a></span>
-<span id="cb46-32"><a href="análise-inferencial.html#cb46-32" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb46-33"><a href="análise-inferencial.html#cb46-33" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))  <span class="co"># Margins: bottom, left, top, right</span></span>
-<span id="cb46-34"><a href="análise-inferencial.html#cb46-34" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb46-35"><a href="análise-inferencial.html#cb46-35" tabindex="-1"></a>  x,</span>
-<span id="cb46-36"><a href="análise-inferencial.html#cb46-36" tabindex="-1"></a>  dens_H0,</span>
-<span id="cb46-37"><a href="análise-inferencial.html#cb46-37" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
-<span id="cb46-38"><a href="análise-inferencial.html#cb46-38" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,</span>
-<span id="cb46-39"><a href="análise-inferencial.html#cb46-39" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb46-40"><a href="análise-inferencial.html#cb46-40" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(dens_H0, dens_H1)),</span>
-<span id="cb46-41"><a href="análise-inferencial.html#cb46-41" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Densidade&quot;</span>,</span>
-<span id="cb46-42"><a href="análise-inferencial.html#cb46-42" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Efeito estimado&quot;</span>,</span>
-<span id="cb46-43"><a href="análise-inferencial.html#cb46-43" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Erro Tipo-M: Superestimação do Efeito&quot;</span></span>
-<span id="cb46-44"><a href="análise-inferencial.html#cb46-44" tabindex="-1"></a>)</span>
-<span id="cb46-45"><a href="análise-inferencial.html#cb46-45" tabindex="-1"></a><span class="fu">lines</span>(x, dens_H1, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb46-46"><a href="análise-inferencial.html#cb46-46" tabindex="-1"></a></span>
-<span id="cb46-47"><a href="análise-inferencial.html#cb46-47" tabindex="-1"></a><span class="co"># Type I &amp; II error shading</span></span>
-<span id="cb46-48"><a href="análise-inferencial.html#cb46-48" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(x_crit, x[x <span class="sc">&gt;=</span> x_crit], <span class="fu">max</span>(x)),</span>
-<span id="cb46-49"><a href="análise-inferencial.html#cb46-49" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H0[x <span class="sc">&gt;=</span> x_crit], <span class="dv">0</span>),</span>
+<span id="cb46-20"><a href="análise-inferencial.html#cb46-20" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">abs</span>(z) <span class="sc">&gt;</span> z_crit <span class="sc">&amp;&amp;</span></span>
+<span id="cb46-21"><a href="análise-inferencial.html#cb46-21" tabindex="-1"></a>      obs_mean <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb46-22"><a href="análise-inferencial.html#cb46-22" tabindex="-1"></a>    <span class="cf">break</span>  <span class="co"># Sign error: significant but negative</span></span>
+<span id="cb46-23"><a href="análise-inferencial.html#cb46-23" tabindex="-1"></a>}</span>
+<span id="cb46-24"><a href="análise-inferencial.html#cb46-24" tabindex="-1"></a></span>
+<span id="cb46-25"><a href="análise-inferencial.html#cb46-25" tabindex="-1"></a><span class="co"># x values</span></span>
+<span id="cb46-26"><a href="análise-inferencial.html#cb46-26" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu0 <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> se, mu1 <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> se <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
+<span id="cb46-27"><a href="análise-inferencial.html#cb46-27" tabindex="-1"></a>dens_H0 <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu0, <span class="at">sd =</span> se)</span>
+<span id="cb46-28"><a href="análise-inferencial.html#cb46-28" tabindex="-1"></a>dens_H1 <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> se)</span>
+<span id="cb46-29"><a href="análise-inferencial.html#cb46-29" tabindex="-1"></a></span>
+<span id="cb46-30"><a href="análise-inferencial.html#cb46-30" tabindex="-1"></a><span class="co"># Set layout: 2 rows, 1 column (plot on top, legend on bottom)</span></span>
+<span id="cb46-31"><a href="análise-inferencial.html#cb46-31" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">1</span>), <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))  <span class="co"># 4:1 ratio</span></span>
+<span id="cb46-32"><a href="análise-inferencial.html#cb46-32" tabindex="-1"></a></span>
+<span id="cb46-33"><a href="análise-inferencial.html#cb46-33" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb46-34"><a href="análise-inferencial.html#cb46-34" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))  <span class="co"># Margins: bottom, left, top, right</span></span>
+<span id="cb46-35"><a href="análise-inferencial.html#cb46-35" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb46-36"><a href="análise-inferencial.html#cb46-36" tabindex="-1"></a>  x,</span>
+<span id="cb46-37"><a href="análise-inferencial.html#cb46-37" tabindex="-1"></a>  dens_H0,</span>
+<span id="cb46-38"><a href="análise-inferencial.html#cb46-38" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb46-39"><a href="análise-inferencial.html#cb46-39" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb46-40"><a href="análise-inferencial.html#cb46-40" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb46-41"><a href="análise-inferencial.html#cb46-41" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(dens_H0, dens_H1)),</span>
+<span id="cb46-42"><a href="análise-inferencial.html#cb46-42" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Densidade&quot;</span>,</span>
+<span id="cb46-43"><a href="análise-inferencial.html#cb46-43" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Efeito estimado&quot;</span>,</span>
+<span id="cb46-44"><a href="análise-inferencial.html#cb46-44" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Erro Tipo-S: Sinal Incorreto&quot;</span></span>
+<span id="cb46-45"><a href="análise-inferencial.html#cb46-45" tabindex="-1"></a>)</span>
+<span id="cb46-46"><a href="análise-inferencial.html#cb46-46" tabindex="-1"></a><span class="fu">lines</span>(x, dens_H1, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb46-47"><a href="análise-inferencial.html#cb46-47" tabindex="-1"></a><span class="co"># Type I error region shading</span></span>
+<span id="cb46-48"><a href="análise-inferencial.html#cb46-48" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(<span class="fu">min</span>(x), x[x <span class="sc">&lt;=</span> x_lower], x_lower),</span>
+<span id="cb46-49"><a href="análise-inferencial.html#cb46-49" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H0[x <span class="sc">&lt;=</span> x_lower], <span class="dv">0</span>),</span>
 <span id="cb46-50"><a href="análise-inferencial.html#cb46-50" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>),</span>
 <span id="cb46-51"><a href="análise-inferencial.html#cb46-51" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span>
-<span id="cb46-52"><a href="análise-inferencial.html#cb46-52" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(<span class="fu">min</span>(x), x[x <span class="sc">&lt;=</span> x_crit], x_crit),</span>
-<span id="cb46-53"><a href="análise-inferencial.html#cb46-53" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H1[x <span class="sc">&lt;=</span> x_crit], <span class="dv">0</span>),</span>
-<span id="cb46-54"><a href="análise-inferencial.html#cb46-54" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.3</span>),</span>
+<span id="cb46-52"><a href="análise-inferencial.html#cb46-52" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(x_upper, x[x <span class="sc">&gt;=</span> x_upper], <span class="fu">max</span>(x)),</span>
+<span id="cb46-53"><a href="análise-inferencial.html#cb46-53" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H0[x <span class="sc">&gt;=</span> x_upper], <span class="dv">0</span>),</span>
+<span id="cb46-54"><a href="análise-inferencial.html#cb46-54" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>),</span>
 <span id="cb46-55"><a href="análise-inferencial.html#cb46-55" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span>
 <span id="cb46-56"><a href="análise-inferencial.html#cb46-56" tabindex="-1"></a></span>
-<span id="cb46-57"><a href="análise-inferencial.html#cb46-57" tabindex="-1"></a><span class="co"># Vertical lines</span></span>
-<span id="cb46-58"><a href="análise-inferencial.html#cb46-58" tabindex="-1"></a><span class="fu">abline</span>(</span>
-<span id="cb46-59"><a href="análise-inferencial.html#cb46-59" tabindex="-1"></a>  <span class="at">v =</span> x_crit,</span>
-<span id="cb46-60"><a href="análise-inferencial.html#cb46-60" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb46-61"><a href="análise-inferencial.html#cb46-61" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span>,</span>
-<span id="cb46-62"><a href="análise-inferencial.html#cb46-62" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
-<span id="cb46-63"><a href="análise-inferencial.html#cb46-63" tabindex="-1"></a>)</span>
+<span id="cb46-57"><a href="análise-inferencial.html#cb46-57" tabindex="-1"></a><span class="co"># Type-S region shading (significant but wrong direction)</span></span>
+<span id="cb46-58"><a href="análise-inferencial.html#cb46-58" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(<span class="fu">min</span>(x), x[x <span class="sc">&lt;=</span> x_lower], x_lower),</span>
+<span id="cb46-59"><a href="análise-inferencial.html#cb46-59" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H1[x <span class="sc">&lt;=</span> x_lower], <span class="dv">0</span>),</span>
+<span id="cb46-60"><a href="análise-inferencial.html#cb46-60" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.3</span>),</span>
+<span id="cb46-61"><a href="análise-inferencial.html#cb46-61" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb46-62"><a href="análise-inferencial.html#cb46-62" tabindex="-1"></a></span>
+<span id="cb46-63"><a href="análise-inferencial.html#cb46-63" tabindex="-1"></a><span class="co"># Vertical lines</span></span>
 <span id="cb46-64"><a href="análise-inferencial.html#cb46-64" tabindex="-1"></a><span class="fu">abline</span>(</span>
-<span id="cb46-65"><a href="análise-inferencial.html#cb46-65" tabindex="-1"></a>  <span class="at">v =</span> mu0,</span>
-<span id="cb46-66"><a href="análise-inferencial.html#cb46-66" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb46-67"><a href="análise-inferencial.html#cb46-67" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span>,</span>
+<span id="cb46-65"><a href="análise-inferencial.html#cb46-65" tabindex="-1"></a>  <span class="at">v =</span> x_lower,</span>
+<span id="cb46-66"><a href="análise-inferencial.html#cb46-66" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb46-67"><a href="análise-inferencial.html#cb46-67" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span>,</span>
 <span id="cb46-68"><a href="análise-inferencial.html#cb46-68" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
 <span id="cb46-69"><a href="análise-inferencial.html#cb46-69" tabindex="-1"></a>)</span>
 <span id="cb46-70"><a href="análise-inferencial.html#cb46-70" tabindex="-1"></a><span class="fu">abline</span>(</span>
-<span id="cb46-71"><a href="análise-inferencial.html#cb46-71" tabindex="-1"></a>  <span class="at">v =</span> mu1,</span>
-<span id="cb46-72"><a href="análise-inferencial.html#cb46-72" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb46-73"><a href="análise-inferencial.html#cb46-73" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span>,</span>
+<span id="cb46-71"><a href="análise-inferencial.html#cb46-71" tabindex="-1"></a>  <span class="at">v =</span> x_upper,</span>
+<span id="cb46-72"><a href="análise-inferencial.html#cb46-72" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb46-73"><a href="análise-inferencial.html#cb46-73" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span>,</span>
 <span id="cb46-74"><a href="análise-inferencial.html#cb46-74" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
 <span id="cb46-75"><a href="análise-inferencial.html#cb46-75" tabindex="-1"></a>)</span>
-<span id="cb46-76"><a href="análise-inferencial.html#cb46-76" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> obs_mean,</span>
-<span id="cb46-77"><a href="análise-inferencial.html#cb46-77" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>,</span>
-<span id="cb46-78"><a href="análise-inferencial.html#cb46-78" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb46-79"><a href="análise-inferencial.html#cb46-79" tabindex="-1"></a></span>
-<span id="cb46-80"><a href="análise-inferencial.html#cb46-80" tabindex="-1"></a><span class="co"># Labels</span></span>
-<span id="cb46-81"><a href="análise-inferencial.html#cb46-81" tabindex="-1"></a><span class="fu">text</span>(</span>
-<span id="cb46-82"><a href="análise-inferencial.html#cb46-82" tabindex="-1"></a>  x_crit <span class="sc">+</span> <span class="fl">0.02</span>,</span>
-<span id="cb46-83"><a href="análise-inferencial.html#cb46-83" tabindex="-1"></a>  <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.5</span>,</span>
-<span id="cb46-84"><a href="análise-inferencial.html#cb46-84" tabindex="-1"></a>  <span class="fu">expression</span>(alpha),</span>
-<span id="cb46-85"><a href="análise-inferencial.html#cb46-85" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb46-86"><a href="análise-inferencial.html#cb46-86" tabindex="-1"></a>  <span class="at">pos =</span> <span class="dv">4</span></span>
+<span id="cb46-76"><a href="análise-inferencial.html#cb46-76" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb46-77"><a href="análise-inferencial.html#cb46-77" tabindex="-1"></a>  <span class="at">v =</span> mu0,</span>
+<span id="cb46-78"><a href="análise-inferencial.html#cb46-78" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb46-79"><a href="análise-inferencial.html#cb46-79" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span>,</span>
+<span id="cb46-80"><a href="análise-inferencial.html#cb46-80" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
+<span id="cb46-81"><a href="análise-inferencial.html#cb46-81" tabindex="-1"></a>)</span>
+<span id="cb46-82"><a href="análise-inferencial.html#cb46-82" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb46-83"><a href="análise-inferencial.html#cb46-83" tabindex="-1"></a>  <span class="at">v =</span> mu1,</span>
+<span id="cb46-84"><a href="análise-inferencial.html#cb46-84" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb46-85"><a href="análise-inferencial.html#cb46-85" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span>,</span>
+<span id="cb46-86"><a href="análise-inferencial.html#cb46-86" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
 <span id="cb46-87"><a href="análise-inferencial.html#cb46-87" tabindex="-1"></a>)</span>
-<span id="cb46-88"><a href="análise-inferencial.html#cb46-88" tabindex="-1"></a><span class="fu">text</span>(mu0,</span>
-<span id="cb46-89"><a href="análise-inferencial.html#cb46-89" tabindex="-1"></a>     <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
-<span id="cb46-90"><a href="análise-inferencial.html#cb46-90" tabindex="-1"></a>     <span class="fu">expression</span>(mu[<span class="dv">0</span>]),</span>
-<span id="cb46-91"><a href="análise-inferencial.html#cb46-91" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb46-92"><a href="análise-inferencial.html#cb46-92" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
-<span id="cb46-93"><a href="análise-inferencial.html#cb46-93" tabindex="-1"></a><span class="fu">text</span>(mu1,</span>
-<span id="cb46-94"><a href="análise-inferencial.html#cb46-94" tabindex="-1"></a>     <span class="fu">max</span>(dens_H1) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
-<span id="cb46-95"><a href="análise-inferencial.html#cb46-95" tabindex="-1"></a>     <span class="fu">expression</span>(mu[<span class="dv">1</span>]),</span>
-<span id="cb46-96"><a href="análise-inferencial.html#cb46-96" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb46-97"><a href="análise-inferencial.html#cb46-97" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
-<span id="cb46-98"><a href="análise-inferencial.html#cb46-98" tabindex="-1"></a><span class="fu">text</span>(obs_mean,</span>
-<span id="cb46-99"><a href="análise-inferencial.html#cb46-99" tabindex="-1"></a>     <span class="fu">max</span>(dens_H1) <span class="sc">*</span> <span class="fl">0.9</span>,</span>
-<span id="cb46-100"><a href="análise-inferencial.html#cb46-100" tabindex="-1"></a>     <span class="st">&quot;Estimado&quot;</span>,</span>
-<span id="cb46-101"><a href="análise-inferencial.html#cb46-101" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>,</span>
-<span id="cb46-102"><a href="análise-inferencial.html#cb46-102" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
-<span id="cb46-103"><a href="análise-inferencial.html#cb46-103" tabindex="-1"></a></span>
-<span id="cb46-104"><a href="análise-inferencial.html#cb46-104" tabindex="-1"></a><span class="co"># Legend (bottom panel)</span></span>
-<span id="cb46-105"><a href="análise-inferencial.html#cb46-105" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))  <span class="co"># No margins</span></span>
-<span id="cb46-106"><a href="análise-inferencial.html#cb46-106" tabindex="-1"></a><span class="fu">plot.new</span>()</span>
-<span id="cb46-107"><a href="análise-inferencial.html#cb46-107" tabindex="-1"></a><span class="fu">legend</span>(</span>
-<span id="cb46-108"><a href="análise-inferencial.html#cb46-108" tabindex="-1"></a>  <span class="st">&quot;center&quot;</span>,</span>
-<span id="cb46-109"><a href="análise-inferencial.html#cb46-109" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(</span>
-<span id="cb46-110"><a href="análise-inferencial.html#cb46-110" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;H&quot;</span>[<span class="dv">0</span>]),</span>
-<span id="cb46-111"><a href="análise-inferencial.html#cb46-111" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;H&quot;</span>[<span class="dv">1</span>]),</span>
-<span id="cb46-112"><a href="análise-inferencial.html#cb46-112" tabindex="-1"></a>    <span class="st">&quot;Estimativa significativa&quot;</span>,</span>
-<span id="cb46-113"><a href="análise-inferencial.html#cb46-113" tabindex="-1"></a>    <span class="st">&quot;Erro tipo I (α)&quot;</span>,</span>
-<span id="cb46-114"><a href="análise-inferencial.html#cb46-114" tabindex="-1"></a>    <span class="st">&quot;Erro tipo-M (magnitude exagerada)&quot;</span></span>
-<span id="cb46-115"><a href="análise-inferencial.html#cb46-115" tabindex="-1"></a>  ),</span>
-<span id="cb46-116"><a href="análise-inferencial.html#cb46-116" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>, <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>), <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.3</span>)),</span>
-<span id="cb46-117"><a href="análise-inferencial.html#cb46-117" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb46-118"><a href="análise-inferencial.html#cb46-118" tabindex="-1"></a>  <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb46-119"><a href="análise-inferencial.html#cb46-119" tabindex="-1"></a>  <span class="at">pch =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">15</span>),</span>
-<span id="cb46-120"><a href="análise-inferencial.html#cb46-120" tabindex="-1"></a>  <span class="at">pt.cex =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
-<span id="cb46-121"><a href="análise-inferencial.html#cb46-121" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb46-122"><a href="análise-inferencial.html#cb46-122" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
-<span id="cb46-123"><a href="análise-inferencial.html#cb46-123" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb46-88"><a href="análise-inferencial.html#cb46-88" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> obs_mean,</span>
+<span id="cb46-89"><a href="análise-inferencial.html#cb46-89" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>,</span>
+<span id="cb46-90"><a href="análise-inferencial.html#cb46-90" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb46-91"><a href="análise-inferencial.html#cb46-91" tabindex="-1"></a></span>
+<span id="cb46-92"><a href="análise-inferencial.html#cb46-92" tabindex="-1"></a><span class="co"># Labels</span></span>
+<span id="cb46-93"><a href="análise-inferencial.html#cb46-93" tabindex="-1"></a><span class="fu">text</span>(</span>
+<span id="cb46-94"><a href="análise-inferencial.html#cb46-94" tabindex="-1"></a>  x_lower <span class="sc">-</span> <span class="fl">0.02</span>,</span>
+<span id="cb46-95"><a href="análise-inferencial.html#cb46-95" tabindex="-1"></a>  <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.5</span>,</span>
+<span id="cb46-96"><a href="análise-inferencial.html#cb46-96" tabindex="-1"></a>  <span class="fu">expression</span>(alpha <span class="sc">/</span> <span class="dv">2</span>),</span>
+<span id="cb46-97"><a href="análise-inferencial.html#cb46-97" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb46-98"><a href="análise-inferencial.html#cb46-98" tabindex="-1"></a>  <span class="at">pos =</span> <span class="dv">2</span></span>
+<span id="cb46-99"><a href="análise-inferencial.html#cb46-99" tabindex="-1"></a>)</span>
+<span id="cb46-100"><a href="análise-inferencial.html#cb46-100" tabindex="-1"></a><span class="fu">text</span>(</span>
+<span id="cb46-101"><a href="análise-inferencial.html#cb46-101" tabindex="-1"></a>  x_upper <span class="sc">+</span> <span class="fl">0.02</span>,</span>
+<span id="cb46-102"><a href="análise-inferencial.html#cb46-102" tabindex="-1"></a>  <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.5</span>,</span>
+<span id="cb46-103"><a href="análise-inferencial.html#cb46-103" tabindex="-1"></a>  <span class="fu">expression</span>(alpha <span class="sc">/</span> <span class="dv">2</span>),</span>
+<span id="cb46-104"><a href="análise-inferencial.html#cb46-104" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb46-105"><a href="análise-inferencial.html#cb46-105" tabindex="-1"></a>  <span class="at">pos =</span> <span class="dv">4</span></span>
+<span id="cb46-106"><a href="análise-inferencial.html#cb46-106" tabindex="-1"></a>)</span>
+<span id="cb46-107"><a href="análise-inferencial.html#cb46-107" tabindex="-1"></a><span class="fu">text</span>(mu0,</span>
+<span id="cb46-108"><a href="análise-inferencial.html#cb46-108" tabindex="-1"></a>     <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
+<span id="cb46-109"><a href="análise-inferencial.html#cb46-109" tabindex="-1"></a>     <span class="fu">expression</span>(mu[<span class="dv">0</span>]),</span>
+<span id="cb46-110"><a href="análise-inferencial.html#cb46-110" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb46-111"><a href="análise-inferencial.html#cb46-111" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
+<span id="cb46-112"><a href="análise-inferencial.html#cb46-112" tabindex="-1"></a><span class="fu">text</span>(mu1,</span>
+<span id="cb46-113"><a href="análise-inferencial.html#cb46-113" tabindex="-1"></a>     <span class="fu">max</span>(dens_H1) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
+<span id="cb46-114"><a href="análise-inferencial.html#cb46-114" tabindex="-1"></a>     <span class="fu">expression</span>(mu[<span class="dv">1</span>]),</span>
+<span id="cb46-115"><a href="análise-inferencial.html#cb46-115" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb46-116"><a href="análise-inferencial.html#cb46-116" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
+<span id="cb46-117"><a href="análise-inferencial.html#cb46-117" tabindex="-1"></a><span class="fu">text</span>(obs_mean,</span>
+<span id="cb46-118"><a href="análise-inferencial.html#cb46-118" tabindex="-1"></a>     <span class="fu">max</span>(dens_H1) <span class="sc">*</span> <span class="fl">0.9</span>,</span>
+<span id="cb46-119"><a href="análise-inferencial.html#cb46-119" tabindex="-1"></a>     <span class="st">&quot;Estimado&quot;</span>,</span>
+<span id="cb46-120"><a href="análise-inferencial.html#cb46-120" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>,</span>
+<span id="cb46-121"><a href="análise-inferencial.html#cb46-121" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
+<span id="cb46-122"><a href="análise-inferencial.html#cb46-122" tabindex="-1"></a></span>
+<span id="cb46-123"><a href="análise-inferencial.html#cb46-123" tabindex="-1"></a><span class="co"># Legend (bottom panel)</span></span>
+<span id="cb46-124"><a href="análise-inferencial.html#cb46-124" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))  <span class="co"># No margins</span></span>
+<span id="cb46-125"><a href="análise-inferencial.html#cb46-125" tabindex="-1"></a><span class="fu">plot.new</span>()</span>
+<span id="cb46-126"><a href="análise-inferencial.html#cb46-126" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb46-127"><a href="análise-inferencial.html#cb46-127" tabindex="-1"></a>  <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb46-128"><a href="análise-inferencial.html#cb46-128" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(</span>
+<span id="cb46-129"><a href="análise-inferencial.html#cb46-129" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;H&quot;</span>[<span class="dv">0</span>]),</span>
+<span id="cb46-130"><a href="análise-inferencial.html#cb46-130" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;H&quot;</span>[<span class="dv">1</span>]),</span>
+<span id="cb46-131"><a href="análise-inferencial.html#cb46-131" tabindex="-1"></a>    <span class="st">&quot;Estimativa significativa&quot;</span>,</span>
+<span id="cb46-132"><a href="análise-inferencial.html#cb46-132" tabindex="-1"></a>    <span class="st">&quot;Erro tipo I (α)&quot;</span>,</span>
+<span id="cb46-133"><a href="análise-inferencial.html#cb46-133" tabindex="-1"></a>    <span class="st">&quot;Erro tipo-S (sinal errado)&quot;</span></span>
+<span id="cb46-134"><a href="análise-inferencial.html#cb46-134" tabindex="-1"></a>  ),</span>
+<span id="cb46-135"><a href="análise-inferencial.html#cb46-135" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>, <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>), <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.3</span>)),</span>
+<span id="cb46-136"><a href="análise-inferencial.html#cb46-136" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb46-137"><a href="análise-inferencial.html#cb46-137" tabindex="-1"></a>  <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb46-138"><a href="análise-inferencial.html#cb46-138" tabindex="-1"></a>  <span class="at">pch =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">15</span>),</span>
+<span id="cb46-139"><a href="análise-inferencial.html#cb46-139" tabindex="-1"></a>  <span class="at">pt.cex =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb46-140"><a href="análise-inferencial.html#cb46-140" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb46-141"><a href="análise-inferencial.html#cb46-141" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb46-142"><a href="análise-inferencial.html#cb46-142" tabindex="-1"></a>)</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="análise-inferencial.html#cb47-1" tabindex="-1"></a><span class="co"># Cria uma tabela de erros tipo M</span></span>
+<span id="cb47-2"><a href="análise-inferencial.html#cb47-2" tabindex="-1"></a>cross.table.erros <span class="ot">&lt;-</span></span>
+<span id="cb47-3"><a href="análise-inferencial.html#cb47-3" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
+<span id="cb47-4"><a href="análise-inferencial.html#cb47-4" tabindex="-1"></a>    <span class="fu">c</span>(</span>
+<span id="cb47-5"><a href="análise-inferencial.html#cb47-5" tabindex="-1"></a>      <span class="st">&#39;Decisão correta&#39;</span>,</span>
+<span id="cb47-6"><a href="análise-inferencial.html#cb47-6" tabindex="-1"></a>      <span class="st">&#39;Decisão incorreta (erro tipo M)&#39;</span>,</span>
+<span id="cb47-7"><a href="análise-inferencial.html#cb47-7" tabindex="-1"></a>      <span class="st">&#39;Decisão incorreta (erro tipo M)&#39;</span>,</span>
+<span id="cb47-8"><a href="análise-inferencial.html#cb47-8" tabindex="-1"></a>      <span class="st">&#39;Decisão correta&#39;</span></span>
+<span id="cb47-9"><a href="análise-inferencial.html#cb47-9" tabindex="-1"></a>    ),</span>
+<span id="cb47-10"><a href="análise-inferencial.html#cb47-10" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb47-11"><a href="análise-inferencial.html#cb47-11" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb47-12"><a href="análise-inferencial.html#cb47-12" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
+<span id="cb47-13"><a href="análise-inferencial.html#cb47-13" tabindex="-1"></a>  )</span>
+<span id="cb47-14"><a href="análise-inferencial.html#cb47-14" tabindex="-1"></a><span class="fu">rownames</span>(cross.table.erros) <span class="ot">&lt;-</span></span>
+<span id="cb47-15"><a href="análise-inferencial.html#cb47-15" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Magnitude alta&quot;</span>, <span class="st">&quot;Magnitude baixa&quot;</span>)</span>
+<span id="cb47-16"><a href="análise-inferencial.html#cb47-16" tabindex="-1"></a><span class="fu">colnames</span>(cross.table.erros) <span class="ot">&lt;-</span></span>
+<span id="cb47-17"><a href="análise-inferencial.html#cb47-17" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Magnitude alta&quot;</span>, <span class="st">&quot;Magnitude baixa&quot;</span>)</span>
+<span id="cb47-18"><a href="análise-inferencial.html#cb47-18" tabindex="-1"></a></span>
+<span id="cb47-19"><a href="análise-inferencial.html#cb47-19" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb47-20"><a href="análise-inferencial.html#cb47-20" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb47-21"><a href="análise-inferencial.html#cb47-21" tabindex="-1"></a>  cross.table.erros,</span>
+<span id="cb47-22"><a href="análise-inferencial.html#cb47-22" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb47-23"><a href="análise-inferencial.html#cb47-23" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb47-24"><a href="análise-inferencial.html#cb47-24" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb47-25"><a href="análise-inferencial.html#cb47-25" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb47-26"><a href="análise-inferencial.html#cb47-26" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb47-27"><a href="análise-inferencial.html#cb47-27" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de erro tipo M de inferência estatística.&quot;</span></span>
+<span id="cb47-28"><a href="análise-inferencial.html#cb47-28" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb47-29"><a href="análise-inferencial.html#cb47-29" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb47-30"><a href="análise-inferencial.html#cb47-30" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb47-31"><a href="análise-inferencial.html#cb47-31" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb47-32"><a href="análise-inferencial.html#cb47-32" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb47-33"><a href="análise-inferencial.html#cb47-33" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb47-34"><a href="análise-inferencial.html#cb47-34" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb47-35"><a href="análise-inferencial.html#cb47-35" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb47-36"><a href="análise-inferencial.html#cb47-36" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb47-37"><a href="análise-inferencial.html#cb47-37" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table.erros)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="análise-inferencial.html#cb48-1" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb48-2"><a href="análise-inferencial.html#cb48-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb48-3"><a href="análise-inferencial.html#cb48-3" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="análise-inferencial.html#cb48-4" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb48-5"><a href="análise-inferencial.html#cb48-5" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb48-6"><a href="análise-inferencial.html#cb48-6" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb48-7"><a href="análise-inferencial.html#cb48-7" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb48-8"><a href="análise-inferencial.html#cb48-8" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb48-9"><a href="análise-inferencial.html#cb48-9" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb48-10"><a href="análise-inferencial.html#cb48-10" tabindex="-1"></a>se <span class="ot">&lt;-</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb48-11"><a href="análise-inferencial.html#cb48-11" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="análise-inferencial.html#cb48-12" tabindex="-1"></a><span class="co"># Critical value for one-tailed test</span></span>
+<span id="cb48-13"><a href="análise-inferencial.html#cb48-13" tabindex="-1"></a>z_crit <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha)</span>
+<span id="cb48-14"><a href="análise-inferencial.html#cb48-14" tabindex="-1"></a>x_crit <span class="ot">&lt;-</span> mu0 <span class="sc">+</span> z_crit <span class="sc">*</span> se</span>
+<span id="cb48-15"><a href="análise-inferencial.html#cb48-15" tabindex="-1"></a></span>
+<span id="cb48-16"><a href="análise-inferencial.html#cb48-16" tabindex="-1"></a><span class="co"># Simulate until we get a significant estimate</span></span>
+<span id="cb48-17"><a href="análise-inferencial.html#cb48-17" tabindex="-1"></a><span class="cf">repeat</span> {</span>
+<span id="cb48-18"><a href="análise-inferencial.html#cb48-18" tabindex="-1"></a>  obs_mean <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> mu1, <span class="at">sd =</span> se)</span>
+<span id="cb48-19"><a href="análise-inferencial.html#cb48-19" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (obs_mean <span class="sc">-</span> mu0) <span class="sc">/</span> se</span>
+<span id="cb48-20"><a href="análise-inferencial.html#cb48-20" tabindex="-1"></a>  <span class="cf">if</span> (z <span class="sc">&gt;</span> z_crit)</span>
+<span id="cb48-21"><a href="análise-inferencial.html#cb48-21" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb48-22"><a href="análise-inferencial.html#cb48-22" tabindex="-1"></a>}</span>
+<span id="cb48-23"><a href="análise-inferencial.html#cb48-23" tabindex="-1"></a></span>
+<span id="cb48-24"><a href="análise-inferencial.html#cb48-24" tabindex="-1"></a><span class="co"># x values</span></span>
+<span id="cb48-25"><a href="análise-inferencial.html#cb48-25" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu0 <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> se, mu1 <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> se <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
+<span id="cb48-26"><a href="análise-inferencial.html#cb48-26" tabindex="-1"></a>dens_H0 <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu0, <span class="at">sd =</span> se)</span>
+<span id="cb48-27"><a href="análise-inferencial.html#cb48-27" tabindex="-1"></a>dens_H1 <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> se)</span>
+<span id="cb48-28"><a href="análise-inferencial.html#cb48-28" tabindex="-1"></a></span>
+<span id="cb48-29"><a href="análise-inferencial.html#cb48-29" tabindex="-1"></a><span class="co"># Set layout: 2 rows, 1 column (plot on top, legend on bottom)</span></span>
+<span id="cb48-30"><a href="análise-inferencial.html#cb48-30" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">1</span>), <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))  <span class="co"># 4:1 ratio</span></span>
+<span id="cb48-31"><a href="análise-inferencial.html#cb48-31" tabindex="-1"></a></span>
+<span id="cb48-32"><a href="análise-inferencial.html#cb48-32" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb48-33"><a href="análise-inferencial.html#cb48-33" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))  <span class="co"># Margins: bottom, left, top, right</span></span>
+<span id="cb48-34"><a href="análise-inferencial.html#cb48-34" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb48-35"><a href="análise-inferencial.html#cb48-35" tabindex="-1"></a>  x,</span>
+<span id="cb48-36"><a href="análise-inferencial.html#cb48-36" tabindex="-1"></a>  dens_H0,</span>
+<span id="cb48-37"><a href="análise-inferencial.html#cb48-37" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb48-38"><a href="análise-inferencial.html#cb48-38" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb48-39"><a href="análise-inferencial.html#cb48-39" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb48-40"><a href="análise-inferencial.html#cb48-40" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(dens_H0, dens_H1)),</span>
+<span id="cb48-41"><a href="análise-inferencial.html#cb48-41" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Densidade&quot;</span>,</span>
+<span id="cb48-42"><a href="análise-inferencial.html#cb48-42" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Efeito estimado&quot;</span>,</span>
+<span id="cb48-43"><a href="análise-inferencial.html#cb48-43" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Erro Tipo-M: Superestimação do Efeito&quot;</span></span>
+<span id="cb48-44"><a href="análise-inferencial.html#cb48-44" tabindex="-1"></a>)</span>
+<span id="cb48-45"><a href="análise-inferencial.html#cb48-45" tabindex="-1"></a><span class="fu">lines</span>(x, dens_H1, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb48-46"><a href="análise-inferencial.html#cb48-46" tabindex="-1"></a></span>
+<span id="cb48-47"><a href="análise-inferencial.html#cb48-47" tabindex="-1"></a><span class="co"># Type I &amp; II error shading</span></span>
+<span id="cb48-48"><a href="análise-inferencial.html#cb48-48" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(x_crit, x[x <span class="sc">&gt;=</span> x_crit], <span class="fu">max</span>(x)),</span>
+<span id="cb48-49"><a href="análise-inferencial.html#cb48-49" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H0[x <span class="sc">&gt;=</span> x_crit], <span class="dv">0</span>),</span>
+<span id="cb48-50"><a href="análise-inferencial.html#cb48-50" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>),</span>
+<span id="cb48-51"><a href="análise-inferencial.html#cb48-51" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb48-52"><a href="análise-inferencial.html#cb48-52" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(<span class="fu">min</span>(x), x[x <span class="sc">&lt;=</span> x_crit], x_crit),</span>
+<span id="cb48-53"><a href="análise-inferencial.html#cb48-53" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, dens_H1[x <span class="sc">&lt;=</span> x_crit], <span class="dv">0</span>),</span>
+<span id="cb48-54"><a href="análise-inferencial.html#cb48-54" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.3</span>),</span>
+<span id="cb48-55"><a href="análise-inferencial.html#cb48-55" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb48-56"><a href="análise-inferencial.html#cb48-56" tabindex="-1"></a></span>
+<span id="cb48-57"><a href="análise-inferencial.html#cb48-57" tabindex="-1"></a><span class="co"># Vertical lines</span></span>
+<span id="cb48-58"><a href="análise-inferencial.html#cb48-58" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb48-59"><a href="análise-inferencial.html#cb48-59" tabindex="-1"></a>  <span class="at">v =</span> x_crit,</span>
+<span id="cb48-60"><a href="análise-inferencial.html#cb48-60" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb48-61"><a href="análise-inferencial.html#cb48-61" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span>,</span>
+<span id="cb48-62"><a href="análise-inferencial.html#cb48-62" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
+<span id="cb48-63"><a href="análise-inferencial.html#cb48-63" tabindex="-1"></a>)</span>
+<span id="cb48-64"><a href="análise-inferencial.html#cb48-64" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb48-65"><a href="análise-inferencial.html#cb48-65" tabindex="-1"></a>  <span class="at">v =</span> mu0,</span>
+<span id="cb48-66"><a href="análise-inferencial.html#cb48-66" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb48-67"><a href="análise-inferencial.html#cb48-67" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span>,</span>
+<span id="cb48-68"><a href="análise-inferencial.html#cb48-68" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
+<span id="cb48-69"><a href="análise-inferencial.html#cb48-69" tabindex="-1"></a>)</span>
+<span id="cb48-70"><a href="análise-inferencial.html#cb48-70" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb48-71"><a href="análise-inferencial.html#cb48-71" tabindex="-1"></a>  <span class="at">v =</span> mu1,</span>
+<span id="cb48-72"><a href="análise-inferencial.html#cb48-72" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb48-73"><a href="análise-inferencial.html#cb48-73" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">3</span>,</span>
+<span id="cb48-74"><a href="análise-inferencial.html#cb48-74" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">1.5</span></span>
+<span id="cb48-75"><a href="análise-inferencial.html#cb48-75" tabindex="-1"></a>)</span>
+<span id="cb48-76"><a href="análise-inferencial.html#cb48-76" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> obs_mean,</span>
+<span id="cb48-77"><a href="análise-inferencial.html#cb48-77" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>,</span>
+<span id="cb48-78"><a href="análise-inferencial.html#cb48-78" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb48-79"><a href="análise-inferencial.html#cb48-79" tabindex="-1"></a></span>
+<span id="cb48-80"><a href="análise-inferencial.html#cb48-80" tabindex="-1"></a><span class="co"># Labels</span></span>
+<span id="cb48-81"><a href="análise-inferencial.html#cb48-81" tabindex="-1"></a><span class="fu">text</span>(</span>
+<span id="cb48-82"><a href="análise-inferencial.html#cb48-82" tabindex="-1"></a>  x_crit <span class="sc">+</span> <span class="fl">0.02</span>,</span>
+<span id="cb48-83"><a href="análise-inferencial.html#cb48-83" tabindex="-1"></a>  <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.5</span>,</span>
+<span id="cb48-84"><a href="análise-inferencial.html#cb48-84" tabindex="-1"></a>  <span class="fu">expression</span>(alpha),</span>
+<span id="cb48-85"><a href="análise-inferencial.html#cb48-85" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb48-86"><a href="análise-inferencial.html#cb48-86" tabindex="-1"></a>  <span class="at">pos =</span> <span class="dv">4</span></span>
+<span id="cb48-87"><a href="análise-inferencial.html#cb48-87" tabindex="-1"></a>)</span>
+<span id="cb48-88"><a href="análise-inferencial.html#cb48-88" tabindex="-1"></a><span class="fu">text</span>(mu0,</span>
+<span id="cb48-89"><a href="análise-inferencial.html#cb48-89" tabindex="-1"></a>     <span class="fu">max</span>(dens_H0) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
+<span id="cb48-90"><a href="análise-inferencial.html#cb48-90" tabindex="-1"></a>     <span class="fu">expression</span>(mu[<span class="dv">0</span>]),</span>
+<span id="cb48-91"><a href="análise-inferencial.html#cb48-91" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb48-92"><a href="análise-inferencial.html#cb48-92" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
+<span id="cb48-93"><a href="análise-inferencial.html#cb48-93" tabindex="-1"></a><span class="fu">text</span>(mu1,</span>
+<span id="cb48-94"><a href="análise-inferencial.html#cb48-94" tabindex="-1"></a>     <span class="fu">max</span>(dens_H1) <span class="sc">*</span> <span class="fl">0.8</span>,</span>
+<span id="cb48-95"><a href="análise-inferencial.html#cb48-95" tabindex="-1"></a>     <span class="fu">expression</span>(mu[<span class="dv">1</span>]),</span>
+<span id="cb48-96"><a href="análise-inferencial.html#cb48-96" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb48-97"><a href="análise-inferencial.html#cb48-97" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
+<span id="cb48-98"><a href="análise-inferencial.html#cb48-98" tabindex="-1"></a><span class="fu">text</span>(obs_mean,</span>
+<span id="cb48-99"><a href="análise-inferencial.html#cb48-99" tabindex="-1"></a>     <span class="fu">max</span>(dens_H1) <span class="sc">*</span> <span class="fl">0.9</span>,</span>
+<span id="cb48-100"><a href="análise-inferencial.html#cb48-100" tabindex="-1"></a>     <span class="st">&quot;Estimado&quot;</span>,</span>
+<span id="cb48-101"><a href="análise-inferencial.html#cb48-101" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>,</span>
+<span id="cb48-102"><a href="análise-inferencial.html#cb48-102" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>)</span>
+<span id="cb48-103"><a href="análise-inferencial.html#cb48-103" tabindex="-1"></a></span>
+<span id="cb48-104"><a href="análise-inferencial.html#cb48-104" tabindex="-1"></a><span class="co"># Legend (bottom panel)</span></span>
+<span id="cb48-105"><a href="análise-inferencial.html#cb48-105" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))  <span class="co"># No margins</span></span>
+<span id="cb48-106"><a href="análise-inferencial.html#cb48-106" tabindex="-1"></a><span class="fu">plot.new</span>()</span>
+<span id="cb48-107"><a href="análise-inferencial.html#cb48-107" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb48-108"><a href="análise-inferencial.html#cb48-108" tabindex="-1"></a>  <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb48-109"><a href="análise-inferencial.html#cb48-109" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(</span>
+<span id="cb48-110"><a href="análise-inferencial.html#cb48-110" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;H&quot;</span>[<span class="dv">0</span>]),</span>
+<span id="cb48-111"><a href="análise-inferencial.html#cb48-111" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;H&quot;</span>[<span class="dv">1</span>]),</span>
+<span id="cb48-112"><a href="análise-inferencial.html#cb48-112" tabindex="-1"></a>    <span class="st">&quot;Estimativa significativa&quot;</span>,</span>
+<span id="cb48-113"><a href="análise-inferencial.html#cb48-113" tabindex="-1"></a>    <span class="st">&quot;Erro tipo I (α)&quot;</span>,</span>
+<span id="cb48-114"><a href="análise-inferencial.html#cb48-114" tabindex="-1"></a>    <span class="st">&quot;Erro tipo-M (magnitude exagerada)&quot;</span></span>
+<span id="cb48-115"><a href="análise-inferencial.html#cb48-115" tabindex="-1"></a>  ),</span>
+<span id="cb48-116"><a href="análise-inferencial.html#cb48-116" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>, <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>), <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.3</span>)),</span>
+<span id="cb48-117"><a href="análise-inferencial.html#cb48-117" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb48-118"><a href="análise-inferencial.html#cb48-118" tabindex="-1"></a>  <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb48-119"><a href="análise-inferencial.html#cb48-119" tabindex="-1"></a>  <span class="at">pch =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="dv">15</span>),</span>
+<span id="cb48-120"><a href="análise-inferencial.html#cb48-120" tabindex="-1"></a>  <span class="at">pt.cex =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb48-121"><a href="análise-inferencial.html#cb48-121" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb48-122"><a href="análise-inferencial.html#cb48-122" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb48-123"><a href="análise-inferencial.html#cb48-123" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 </div>
 </div>

@@ -1388,47 +1388,47 @@ div.csl-indent {
 <div id="como-analisar-o-desempenho-diagnóstico-em-tabelas-2x2-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Como analisar o desempenho diagnóstico em tabelas 2x2?<a href="#como-analisar-o-desempenho-diagn%C3%B3stico-em-tabelas-2x2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="desempenho-diagnóstico.html#cb51-1" tabindex="-1"></a>cross.table <span class="ot">&lt;-</span></span>
-<span id="cb51-2"><a href="desempenho-diagnóstico.html#cb51-2" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
-<span id="cb51-3"><a href="desempenho-diagnóstico.html#cb51-3" tabindex="-1"></a>    <span class="fu">c</span>(</span>
-<span id="cb51-4"><a href="desempenho-diagnóstico.html#cb51-4" tabindex="-1"></a>      <span class="st">&#39;$VP$&#39;</span>, <span class="st">&#39;$FN$&#39;</span>, <span class="st">&#39;$VP+FN$&#39;</span>,</span>
-<span id="cb51-5"><a href="desempenho-diagnóstico.html#cb51-5" tabindex="-1"></a>      <span class="st">&#39;$FP$&#39;</span>, <span class="st">&#39;$VN$&#39;</span>, <span class="st">&#39;$FP+VN$&#39;</span>,</span>
-<span id="cb51-6"><a href="desempenho-diagnóstico.html#cb51-6" tabindex="-1"></a>      <span class="st">&#39;$VP+FP$&#39;</span>, <span class="st">&#39;$FN+VN$&#39;</span>, <span class="st">&#39;$N=VP+VN+FP+FN$&#39;</span></span>
-<span id="cb51-7"><a href="desempenho-diagnóstico.html#cb51-7" tabindex="-1"></a>    ),</span>
-<span id="cb51-8"><a href="desempenho-diagnóstico.html#cb51-8" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">3</span>,</span>
-<span id="cb51-9"><a href="desempenho-diagnóstico.html#cb51-9" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">3</span>,</span>
-<span id="cb51-10"><a href="desempenho-diagnóstico.html#cb51-10" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
-<span id="cb51-11"><a href="desempenho-diagnóstico.html#cb51-11" tabindex="-1"></a>  )</span>
-<span id="cb51-12"><a href="desempenho-diagnóstico.html#cb51-12" tabindex="-1"></a><span class="fu">rownames</span>(cross.table) <span class="ot">&lt;-</span></span>
-<span id="cb51-13"><a href="desempenho-diagnóstico.html#cb51-13" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Teste positivo&quot;</span>, <span class="st">&quot;Teste negativo&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
-<span id="cb51-14"><a href="desempenho-diagnóstico.html#cb51-14" tabindex="-1"></a><span class="fu">colnames</span>(cross.table) <span class="ot">&lt;-</span></span>
-<span id="cb51-15"><a href="desempenho-diagnóstico.html#cb51-15" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Condição presente&quot;</span>, <span class="st">&quot;Condição ausente&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
-<span id="cb51-16"><a href="desempenho-diagnóstico.html#cb51-16" tabindex="-1"></a></span>
-<span id="cb51-17"><a href="desempenho-diagnóstico.html#cb51-17" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb51-18"><a href="desempenho-diagnóstico.html#cb51-18" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb51-19"><a href="desempenho-diagnóstico.html#cb51-19" tabindex="-1"></a>  cross.table,</span>
-<span id="cb51-20"><a href="desempenho-diagnóstico.html#cb51-20" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb51-21"><a href="desempenho-diagnóstico.html#cb51-21" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb51-22"><a href="desempenho-diagnóstico.html#cb51-22" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb51-23"><a href="desempenho-diagnóstico.html#cb51-23" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb51-24"><a href="desempenho-diagnóstico.html#cb51-24" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb51-25"><a href="desempenho-diagnóstico.html#cb51-25" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas.&quot;</span></span>
-<span id="cb51-26"><a href="desempenho-diagnóstico.html#cb51-26" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb51-27"><a href="desempenho-diagnóstico.html#cb51-27" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb51-28"><a href="desempenho-diagnóstico.html#cb51-28" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb51-29"><a href="desempenho-diagnóstico.html#cb51-29" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb51-30"><a href="desempenho-diagnóstico.html#cb51-30" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb51-31"><a href="desempenho-diagnóstico.html#cb51-31" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb51-32"><a href="desempenho-diagnóstico.html#cb51-32" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb51-33"><a href="desempenho-diagnóstico.html#cb51-33" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>,</span>
-<span id="cb51-34"><a href="desempenho-diagnóstico.html#cb51-34" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb51-35"><a href="desempenho-diagnóstico.html#cb51-35" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb51-36"><a href="desempenho-diagnóstico.html#cb51-36" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>((<span class="fu">dim</span>(cross.table)[<span class="dv">1</span>] <span class="sc">-</span> <span class="dv">1</span>),</span>
-<span id="cb51-37"><a href="desempenho-diagnóstico.html#cb51-37" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb51-38"><a href="desempenho-diagnóstico.html#cb51-38" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb51-39"><a href="desempenho-diagnóstico.html#cb51-39" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb51-40"><a href="desempenho-diagnóstico.html#cb51-40" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table)[<span class="dv">1</span>],</span>
-<span id="cb51-41"><a href="desempenho-diagnóstico.html#cb51-41" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="desempenho-diagnóstico.html#cb53-1" tabindex="-1"></a>cross.table <span class="ot">&lt;-</span></span>
+<span id="cb53-2"><a href="desempenho-diagnóstico.html#cb53-2" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
+<span id="cb53-3"><a href="desempenho-diagnóstico.html#cb53-3" tabindex="-1"></a>    <span class="fu">c</span>(</span>
+<span id="cb53-4"><a href="desempenho-diagnóstico.html#cb53-4" tabindex="-1"></a>      <span class="st">&#39;$VP$&#39;</span>, <span class="st">&#39;$FN$&#39;</span>, <span class="st">&#39;$VP+FN$&#39;</span>,</span>
+<span id="cb53-5"><a href="desempenho-diagnóstico.html#cb53-5" tabindex="-1"></a>      <span class="st">&#39;$FP$&#39;</span>, <span class="st">&#39;$VN$&#39;</span>, <span class="st">&#39;$FP+VN$&#39;</span>,</span>
+<span id="cb53-6"><a href="desempenho-diagnóstico.html#cb53-6" tabindex="-1"></a>      <span class="st">&#39;$VP+FP$&#39;</span>, <span class="st">&#39;$FN+VN$&#39;</span>, <span class="st">&#39;$N=VP+VN+FP+FN$&#39;</span></span>
+<span id="cb53-7"><a href="desempenho-diagnóstico.html#cb53-7" tabindex="-1"></a>    ),</span>
+<span id="cb53-8"><a href="desempenho-diagnóstico.html#cb53-8" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb53-9"><a href="desempenho-diagnóstico.html#cb53-9" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">3</span>,</span>
+<span id="cb53-10"><a href="desempenho-diagnóstico.html#cb53-10" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
+<span id="cb53-11"><a href="desempenho-diagnóstico.html#cb53-11" tabindex="-1"></a>  )</span>
+<span id="cb53-12"><a href="desempenho-diagnóstico.html#cb53-12" tabindex="-1"></a><span class="fu">rownames</span>(cross.table) <span class="ot">&lt;-</span></span>
+<span id="cb53-13"><a href="desempenho-diagnóstico.html#cb53-13" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Teste positivo&quot;</span>, <span class="st">&quot;Teste negativo&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb53-14"><a href="desempenho-diagnóstico.html#cb53-14" tabindex="-1"></a><span class="fu">colnames</span>(cross.table) <span class="ot">&lt;-</span></span>
+<span id="cb53-15"><a href="desempenho-diagnóstico.html#cb53-15" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Condição presente&quot;</span>, <span class="st">&quot;Condição ausente&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb53-16"><a href="desempenho-diagnóstico.html#cb53-16" tabindex="-1"></a></span>
+<span id="cb53-17"><a href="desempenho-diagnóstico.html#cb53-17" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb53-18"><a href="desempenho-diagnóstico.html#cb53-18" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb53-19"><a href="desempenho-diagnóstico.html#cb53-19" tabindex="-1"></a>  cross.table,</span>
+<span id="cb53-20"><a href="desempenho-diagnóstico.html#cb53-20" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb53-21"><a href="desempenho-diagnóstico.html#cb53-21" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb53-22"><a href="desempenho-diagnóstico.html#cb53-22" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb53-23"><a href="desempenho-diagnóstico.html#cb53-23" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb53-24"><a href="desempenho-diagnóstico.html#cb53-24" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb53-25"><a href="desempenho-diagnóstico.html#cb53-25" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas.&quot;</span></span>
+<span id="cb53-26"><a href="desempenho-diagnóstico.html#cb53-26" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb53-27"><a href="desempenho-diagnóstico.html#cb53-27" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb53-28"><a href="desempenho-diagnóstico.html#cb53-28" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb53-29"><a href="desempenho-diagnóstico.html#cb53-29" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb53-30"><a href="desempenho-diagnóstico.html#cb53-30" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb53-31"><a href="desempenho-diagnóstico.html#cb53-31" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb53-32"><a href="desempenho-diagnóstico.html#cb53-32" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb53-33"><a href="desempenho-diagnóstico.html#cb53-33" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>,</span>
+<span id="cb53-34"><a href="desempenho-diagnóstico.html#cb53-34" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb53-35"><a href="desempenho-diagnóstico.html#cb53-35" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb53-36"><a href="desempenho-diagnóstico.html#cb53-36" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>((<span class="fu">dim</span>(cross.table)[<span class="dv">1</span>] <span class="sc">-</span> <span class="dv">1</span>),</span>
+<span id="cb53-37"><a href="desempenho-diagnóstico.html#cb53-37" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb53-38"><a href="desempenho-diagnóstico.html#cb53-38" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb53-39"><a href="desempenho-diagnóstico.html#cb53-39" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb53-40"><a href="desempenho-diagnóstico.html#cb53-40" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table)[<span class="dv">1</span>],</span>
+<span id="cb53-41"><a href="desempenho-diagnóstico.html#cb53-41" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
 </details>
 </div>
 </div>
