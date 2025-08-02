@@ -422,6 +422,114 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 <br>
 
+## Suposições dos modelos
+
+<br>
+
+### Quais suposições são feitas para regressão?
+
+-   As suposições dos modelos de regressão incluem linearidade, independência, homocedasticidade, normalidade dos resíduos e ausência de multicolinearidade.[@REF]
+
+<br>
+
+### Como avaliar as suposições de uma regressão?
+
+- Usando diagnóstico de regressão (ex.: análise de resíduos, gráficos de valores observados vs. preditos) e comparação com análises estratificadas.[@Greenland1989]
+
+<br>
+
+```{r suposicoes, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Diagnóstico de regressão para avaliar suposições do modelo: linearidade, normalidade dos resíduos, homocedasticidade e alavancagem."}
+# Definir semente para reprodutibilidade
+set.seed(123)
+
+# Simular dados
+n <- 100
+x1 <- rnorm(n, mean = 50, sd = 10)
+x2 <- rnorm(n, mean = 30, sd = 5)
+erro <- rnorm(n, mean = 0, sd = 5)
+y <- 10 + 0.5 * x1 - 0.3 * x2 + erro
+
+# Criar data frame
+dados <- data.frame(y = y, x1 = x1, x2 = x2)
+
+# Ajustar modelo de regressão linear
+modelo <- lm(y ~ x1 + x2, data = dados)
+
+# Função para título e subtítulo logo abaixo do título
+add_title_with_sub <- function(main_title, subtitle, col_main = "black", col_sub = "red") {
+  title(main = main_title, col.main = col_main)
+  mtext(text = subtitle, side = 3, line = 0.5, col = col_sub, cex = 0.8)
+}
+
+# Layout 2x3 para os gráficos
+par(mfrow = c(2, 3), mar = c(5, 4, 5, 2))  # margem superior maior para caber as 2 linhas
+
+# Gráfico 1: Resíduos vs Ajustados
+plot(modelo$fitted.values,
+     resid(modelo),
+     xlab = "Valores Ajustados",
+     ylab = "Resíduos",
+     pch = 20,
+     col = "blue")
+abline(h = 0, col = "red", lty = 2)
+add_title_with_sub("Resíduos vs Ajustados", "--- Resíduo = 0")
+
+# Gráfico 2: Normal Q-Q
+qqnorm(resid(modelo),
+       main = "",
+       xlab = "Quantis Teóricos",
+       ylab = "Resíduos",
+       pch = 20,
+       col = "darkgreen")
+qqline(resid(modelo), col = "red", lty = 2)
+add_title_with_sub("Normal Q-Q", "--- Distribuição Normal Teórica")
+
+# Gráfico 3: Scale-Location
+sqrt_resid <- sqrt(abs(scale(resid(modelo))))
+plot(modelo$fitted.values,
+     sqrt_resid,
+     xlab = "Valores Ajustados",
+     ylab = "√|Resíduos Padronizados|",
+     pch = 20,
+     col = "orange")
+abline(h = 0, col = "red", lty = 2)
+add_title_with_sub("Scale-Location", "--- Referência visual")
+
+# Gráfico 4: Distância de Cook
+cook <- cooks.distance(modelo)
+plot(cook,
+     type = "h",
+     ylab = "Distância",
+     xlab = "Observação",
+     col = "purple")
+abline(h = 4/length(cook), col = "red", lty = 2)
+add_title_with_sub("Distância de Cook", "--- Limite sugerido (4/n)")
+
+# Gráfico 5: Observado vs Ajustado
+limites <- range(c(dados$y, modelo$fitted.values))
+plot(dados$y, modelo$fitted.values,
+     xlab = "Valores Observados",
+     ylab = "Valores Ajustados",
+     pch = 20,
+     col = "darkblue",
+     xlim = limites,
+     ylim = limites)
+abline(a = 0, b = 1, col = "red", lty = 2)
+add_title_with_sub("Observado vs Ajustado", "--- y = x")
+
+# Gráfico 6: Alavancagem
+hat <- hatvalues(modelo)
+plot(hat,
+     ylab = "Valores de Alavancagem",
+     xlab = "Observação",
+     pch = 20,
+     col = "darkred")
+abline(h = 2 * mean(hat), col = "red", lty = 2)
+add_title_with_sub("Alavancagem", "--- 2 × média")
+```
+
+<br>
+
 ```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
 cat(readLines("citation.html"), sep = "\n")
 ```
