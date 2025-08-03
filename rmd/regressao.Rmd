@@ -95,7 +95,6 @@ Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \
 <br>
 
 ```{r regressao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão linear."}
-# regression plot for a simple regression univariate model
 # simulate X
 set.seed(123)
 X <- rnorm(100, mean = 50, sd = 10)
@@ -113,9 +112,7 @@ model <- lm(Y ~ X, data = data)
 ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_point() +
   ggplot2::geom_smooth(method = "lm", color = "blue") +
-  ggplot2::labs(title = "Regressão linear",
-       x = "Variável Independente (X)",
-       y = "Variável Dependente (Y)") +
+  ggplot2::labs(title = "Regressão linear", x = "Variável Independente (X)", y = "Variável Dependente (Y)") +
   ggplot2::theme_minimal()
 ```
 
@@ -128,7 +125,6 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 <br>
 
 ```{r regressao-nao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão não-linear."}
-# regression plot for a non-linear regression model
 # simulate X
 set.seed(123)
 X <- seq(-10, 10, length.out = 100)
@@ -145,10 +141,10 @@ model <- lm(Y ~ poly(X, 2), data = data)
 # plot the regression line
 ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_point() +
-  ggplot2::geom_smooth(method = "lm", formula = y ~ poly(x, 2), color = "blue") +
-  ggplot2::labs(title = "Regressão não-linear",
-       x = "Variável Independente (X)",
-       y = "Variável Dependente (Y)") +
+  ggplot2::geom_smooth(method = "lm",
+                       formula = y ~ poly(x, 2),
+                       color = "blue") +
+  ggplot2::labs(title = "Regressão não-linear", x = "Variável Independente (X)", y = "Variável Dependente (Y)") +
   ggplot2::theme_minimal()
 ```
 
@@ -161,7 +157,6 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 <br>
 
 ```{r regressao-polinomial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão polinomial."}
-# regression plot for a polynomial regression model
 # simulate X
 set.seed(123)
 X <- seq(-10, 10, length.out = 100)
@@ -194,7 +189,6 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 <br>
 
 ```{r regressao-ridge, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão ridge."}
-# regression plot for a ridge regression model
 # simulate X
 set.seed(123)
 X <- seq(-10, 10, length.out = 100)
@@ -232,7 +226,6 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 <br>
 
 ```{r regressao-logistica, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão logística."}
-# regression plot for a logistic regression model
 # simulate X
 set.seed(123)
 X <- rnorm(100, mean = 50, sd = 10)
@@ -439,93 +432,85 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 <br>
 
 ```{r suposicoes, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Diagnóstico de regressão para avaliar suposições do modelo: linearidade, normalidade dos resíduos, homocedasticidade e alavancagem."}
-# Definir semente para reprodutibilidade
+# Definir semente
 set.seed(123)
 
 # Simular dados
 n <- 100
-x1 <- rnorm(n, mean = 50, sd = 10)
-x2 <- rnorm(n, mean = 30, sd = 5)
-erro <- rnorm(n, mean = 0, sd = 5)
+x1 <- stats::rnorm(n, mean = 50, sd = 10)
+x2 <- stats::rnorm(n, mean = 30, sd = 5)
+erro <- stats::rnorm(n, mean = 0, sd = 5)
 y <- 10 + 0.5 * x1 - 0.3 * x2 + erro
 
-# Criar data frame
+# Data frame
 dados <- data.frame(y = y, x1 = x1, x2 = x2)
 
-# Ajustar modelo de regressão linear
-modelo <- lm(y ~ x1 + x2, data = dados)
+# Modelo
+modelo <- stats::lm(y ~ x1 + x2, data = dados)
 
-# Função para título e subtítulo logo abaixo do título
-add_title_with_sub <- function(main_title, subtitle, col_main = "black", col_sub = "red") {
-  title(main = main_title, col.main = col_main)
-  mtext(text = subtitle, side = 3, line = 0.5, col = col_sub, cex = 0.8)
-}
-
-# Layout 2x3 para os gráficos
-par(mfrow = c(2, 3), mar = c(5, 4, 5, 2))  # margem superior maior para caber as 2 linhas
+# Dados auxiliares para gráficos
+dados_diag <- dados %>%
+  dplyr::mutate(
+    Ajustado = stats::fitted(modelo),
+    Resíduo = stats::resid(modelo),
+    Resíduo_pad = stats::rstandard(modelo),
+    Raiz_Resíduo_pad = sqrt(abs(Resíduo_pad)),
+    Cook = stats::cooks.distance(modelo),
+    Alavancagem = stats::hatvalues(modelo)
+  )
 
 # Gráfico 1: Resíduos vs Ajustados
-plot(modelo$fitted.values,
-     resid(modelo),
-     xlab = "Valores Ajustados",
-     ylab = "Resíduos",
-     pch = 20,
-     col = "blue")
-abline(h = 0, col = "red", lty = 2)
-add_title_with_sub("Resíduos vs Ajustados", "--- Resíduo = 0")
+g1 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = Ajustado, y = Resíduo)) +
+  ggplot2::geom_point(color = "blue") +
+  ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+  ggplot2::labs(title = "Resíduos vs Ajustados", subtitle = "--- Resíduo = 0",
+                x = "Valores Ajustados", y = "Resíduos") +
+  ggplot2::theme_minimal()
 
-# Gráfico 2: Normal Q-Q
-qqnorm(resid(modelo),
-       main = "",
-       xlab = "Quantis Teóricos",
-       ylab = "Resíduos",
-       pch = 20,
-       col = "darkgreen")
-qqline(resid(modelo), col = "red", lty = 2)
-add_title_with_sub("Normal Q-Q", "--- Distribuição Normal Teórica")
+# Gráfico 2: QQ Plot
+g2 <- ggplot2::ggplot(dados_diag, ggplot2::aes(sample = Resíduo)) +
+  ggplot2::stat_qq(color = "darkgreen") +
+  ggplot2::stat_qq_line(color = "black", linetype = "dashed") +
+  ggplot2::labs(title = "Normal Q-Q", subtitle = "--- Distribuição Normal Teórica",
+                x = "Quantis Teóricos", y = "Resíduos") +
+  ggplot2::theme_minimal()
 
 # Gráfico 3: Scale-Location
-sqrt_resid <- sqrt(abs(scale(resid(modelo))))
-plot(modelo$fitted.values,
-     sqrt_resid,
-     xlab = "Valores Ajustados",
-     ylab = "√|Resíduos Padronizados|",
-     pch = 20,
-     col = "orange")
-abline(h = 0, col = "red", lty = 2)
-add_title_with_sub("Scale-Location", "--- Referência visual")
+g3 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = Ajustado, y = Raiz_Resíduo_pad)) +
+  ggplot2::geom_point(color = "orange") +
+  ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+  ggplot2::labs(title = "Scale-Location", subtitle = "--- Referência visual",
+                x = "Valores Ajustados", y = "√|Resíduos Padronizados|") +
+  ggplot2::theme_minimal()
 
 # Gráfico 4: Distância de Cook
-cook <- cooks.distance(modelo)
-plot(cook,
-     type = "h",
-     ylab = "Distância",
-     xlab = "Observação",
-     col = "purple")
-abline(h = 4/length(cook), col = "red", lty = 2)
-add_title_with_sub("Distância de Cook", "--- Limite sugerido (4/n)")
+g4 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = seq_along(Cook), y = Cook)) +
+  ggplot2::geom_segment(ggplot2::aes(xend = seq_along(Cook), yend = 0), color = "purple") +
+  ggplot2::geom_hline(yintercept = 4/n, linetype = "dashed", color = "black") +
+  ggplot2::labs(title = "Distância de Cook", subtitle = "--- Limite sugerido (4/n)",
+                x = "Observação", y = "Distância") +
+  ggplot2::theme_minimal()
 
 # Gráfico 5: Observado vs Ajustado
-limites <- range(c(dados$y, modelo$fitted.values))
-plot(dados$y, modelo$fitted.values,
-     xlab = "Valores Observados",
-     ylab = "Valores Ajustados",
-     pch = 20,
-     col = "darkblue",
-     xlim = limites,
-     ylim = limites)
-abline(a = 0, b = 1, col = "red", lty = 2)
-add_title_with_sub("Observado vs Ajustado", "--- y = x")
+lim <- range(c(dados_diag$y, dados_diag$Ajustado))
+g5 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = y, y = Ajustado)) +
+  ggplot2::geom_point(color = "darkblue") +
+  ggplot2::geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "black") +
+  ggplot2::coord_cartesian(xlim = lim, ylim = lim) +
+  ggplot2::labs(title = "Observado vs Ajustado", subtitle = "--- y = x",
+                x = "Valores Observados", y = "Valores Ajustados") +
+  ggplot2::theme_minimal()
 
 # Gráfico 6: Alavancagem
-hat <- hatvalues(modelo)
-plot(hat,
-     ylab = "Valores de Alavancagem",
-     xlab = "Observação",
-     pch = 20,
-     col = "darkred")
-abline(h = 2 * mean(hat), col = "red", lty = 2)
-add_title_with_sub("Alavancagem", "--- 2 × média")
+g6 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = seq_along(Alavancagem), y = Alavancagem)) +
+  ggplot2::geom_point(color = "darkred") +
+  ggplot2::geom_hline(yintercept = 2 * mean(dados_diag$Alavancagem), linetype = "dashed", color = "black") +
+  ggplot2::labs(title = "Alavancagem", subtitle = "--- 2 × média",
+                x = "Observação", y = "Valores de Alavancagem") +
+  ggplot2::theme_minimal()
+
+# Organizar os 6 gráficos em 2x3
+gridExtra::grid.arrange(g1, g2, g3, g4, g5, g6, nrow = 2)
 ```
 
 <br>

@@ -1398,93 +1398,85 @@ div.csl-indent {
 <div id="como-avaliar-as-suposições-de-uma-regressão-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Como avaliar as suposições de uma regressão?<a href="#como-avaliar-as-suposi%C3%A7%C3%B5es-de-uma-regress%C3%A3o-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="regressão.html#cb55-1" tabindex="-1"></a><span class="co"># Definir semente para reprodutibilidade</span></span>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="regressão.html#cb55-1" tabindex="-1"></a><span class="co"># Definir semente</span></span>
 <span id="cb55-2"><a href="regressão.html#cb55-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb55-3"><a href="regressão.html#cb55-3" tabindex="-1"></a></span>
 <span id="cb55-4"><a href="regressão.html#cb55-4" tabindex="-1"></a><span class="co"># Simular dados</span></span>
 <span id="cb55-5"><a href="regressão.html#cb55-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb55-6"><a href="regressão.html#cb55-6" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
-<span id="cb55-7"><a href="regressão.html#cb55-7" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">30</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb55-8"><a href="regressão.html#cb55-8" tabindex="-1"></a>erro <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb55-6"><a href="regressão.html#cb55-6" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb55-7"><a href="regressão.html#cb55-7" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">30</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb55-8"><a href="regressão.html#cb55-8" tabindex="-1"></a>erro <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
 <span id="cb55-9"><a href="regressão.html#cb55-9" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> x1 <span class="sc">-</span> <span class="fl">0.3</span> <span class="sc">*</span> x2 <span class="sc">+</span> erro</span>
 <span id="cb55-10"><a href="regressão.html#cb55-10" tabindex="-1"></a></span>
-<span id="cb55-11"><a href="regressão.html#cb55-11" tabindex="-1"></a><span class="co"># Criar data frame</span></span>
+<span id="cb55-11"><a href="regressão.html#cb55-11" tabindex="-1"></a><span class="co"># Data frame</span></span>
 <span id="cb55-12"><a href="regressão.html#cb55-12" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> y, <span class="at">x1 =</span> x1, <span class="at">x2 =</span> x2)</span>
 <span id="cb55-13"><a href="regressão.html#cb55-13" tabindex="-1"></a></span>
-<span id="cb55-14"><a href="regressão.html#cb55-14" tabindex="-1"></a><span class="co"># Ajustar modelo de regressão linear</span></span>
-<span id="cb55-15"><a href="regressão.html#cb55-15" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> dados)</span>
+<span id="cb55-14"><a href="regressão.html#cb55-14" tabindex="-1"></a><span class="co"># Modelo</span></span>
+<span id="cb55-15"><a href="regressão.html#cb55-15" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> dados)</span>
 <span id="cb55-16"><a href="regressão.html#cb55-16" tabindex="-1"></a></span>
-<span id="cb55-17"><a href="regressão.html#cb55-17" tabindex="-1"></a><span class="co"># Função para título e subtítulo logo abaixo do título</span></span>
-<span id="cb55-18"><a href="regressão.html#cb55-18" tabindex="-1"></a>add_title_with_sub <span class="ot">&lt;-</span> <span class="cf">function</span>(main_title, subtitle, <span class="at">col_main =</span> <span class="st">&quot;black&quot;</span>, <span class="at">col_sub =</span> <span class="st">&quot;red&quot;</span>) {</span>
-<span id="cb55-19"><a href="regressão.html#cb55-19" tabindex="-1"></a>  <span class="fu">title</span>(<span class="at">main =</span> main_title, <span class="at">col.main =</span> col_main)</span>
-<span id="cb55-20"><a href="regressão.html#cb55-20" tabindex="-1"></a>  <span class="fu">mtext</span>(<span class="at">text =</span> subtitle, <span class="at">side =</span> <span class="dv">3</span>, <span class="at">line =</span> <span class="fl">0.5</span>, <span class="at">col =</span> col_sub, <span class="at">cex =</span> <span class="fl">0.8</span>)</span>
-<span id="cb55-21"><a href="regressão.html#cb55-21" tabindex="-1"></a>}</span>
-<span id="cb55-22"><a href="regressão.html#cb55-22" tabindex="-1"></a></span>
-<span id="cb55-23"><a href="regressão.html#cb55-23" tabindex="-1"></a><span class="co"># Layout 2x3 para os gráficos</span></span>
-<span id="cb55-24"><a href="regressão.html#cb55-24" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>))  <span class="co"># margem superior maior para caber as 2 linhas</span></span>
-<span id="cb55-25"><a href="regressão.html#cb55-25" tabindex="-1"></a></span>
-<span id="cb55-26"><a href="regressão.html#cb55-26" tabindex="-1"></a><span class="co"># Gráfico 1: Resíduos vs Ajustados</span></span>
-<span id="cb55-27"><a href="regressão.html#cb55-27" tabindex="-1"></a><span class="fu">plot</span>(modelo<span class="sc">$</span>fitted.values,</span>
-<span id="cb55-28"><a href="regressão.html#cb55-28" tabindex="-1"></a>     <span class="fu">resid</span>(modelo),</span>
-<span id="cb55-29"><a href="regressão.html#cb55-29" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Valores Ajustados&quot;</span>,</span>
-<span id="cb55-30"><a href="regressão.html#cb55-30" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Resíduos&quot;</span>,</span>
-<span id="cb55-31"><a href="regressão.html#cb55-31" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>,</span>
-<span id="cb55-32"><a href="regressão.html#cb55-32" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb55-33"><a href="regressão.html#cb55-33" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb55-34"><a href="regressão.html#cb55-34" tabindex="-1"></a><span class="fu">add_title_with_sub</span>(<span class="st">&quot;Resíduos vs Ajustados&quot;</span>, <span class="st">&quot;--- Resíduo = 0&quot;</span>)</span>
+<span id="cb55-17"><a href="regressão.html#cb55-17" tabindex="-1"></a><span class="co"># Dados auxiliares para gráficos</span></span>
+<span id="cb55-18"><a href="regressão.html#cb55-18" tabindex="-1"></a>dados_diag <span class="ot">&lt;-</span> dados <span class="sc">%&gt;%</span></span>
+<span id="cb55-19"><a href="regressão.html#cb55-19" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb55-20"><a href="regressão.html#cb55-20" tabindex="-1"></a>    <span class="at">Ajustado =</span> stats<span class="sc">::</span><span class="fu">fitted</span>(modelo),</span>
+<span id="cb55-21"><a href="regressão.html#cb55-21" tabindex="-1"></a>    Resíduo <span class="ot">=</span> stats<span class="sc">::</span><span class="fu">resid</span>(modelo),</span>
+<span id="cb55-22"><a href="regressão.html#cb55-22" tabindex="-1"></a>    Resíduo<span class="at">_pad =</span> stats<span class="sc">::</span><span class="fu">rstandard</span>(modelo),</span>
+<span id="cb55-23"><a href="regressão.html#cb55-23" tabindex="-1"></a>    Raiz_Resíduo<span class="at">_pad =</span> <span class="fu">sqrt</span>(<span class="fu">abs</span>(Resíduo_pad)),</span>
+<span id="cb55-24"><a href="regressão.html#cb55-24" tabindex="-1"></a>    <span class="at">Cook =</span> stats<span class="sc">::</span><span class="fu">cooks.distance</span>(modelo),</span>
+<span id="cb55-25"><a href="regressão.html#cb55-25" tabindex="-1"></a>    <span class="at">Alavancagem =</span> stats<span class="sc">::</span><span class="fu">hatvalues</span>(modelo)</span>
+<span id="cb55-26"><a href="regressão.html#cb55-26" tabindex="-1"></a>  )</span>
+<span id="cb55-27"><a href="regressão.html#cb55-27" tabindex="-1"></a></span>
+<span id="cb55-28"><a href="regressão.html#cb55-28" tabindex="-1"></a><span class="co"># Gráfico 1: Resíduos vs Ajustados</span></span>
+<span id="cb55-29"><a href="regressão.html#cb55-29" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados_diag, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> Ajustado, <span class="at">y =</span> Resíduo)) <span class="sc">+</span></span>
+<span id="cb55-30"><a href="regressão.html#cb55-30" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-31"><a href="regressão.html#cb55-31" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-32"><a href="regressão.html#cb55-32" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Resíduos vs Ajustados&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;--- Resíduo = 0&quot;</span>,</span>
+<span id="cb55-33"><a href="regressão.html#cb55-33" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Valores Ajustados&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Resíduos&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-34"><a href="regressão.html#cb55-34" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span>
 <span id="cb55-35"><a href="regressão.html#cb55-35" tabindex="-1"></a></span>
-<span id="cb55-36"><a href="regressão.html#cb55-36" tabindex="-1"></a><span class="co"># Gráfico 2: Normal Q-Q</span></span>
-<span id="cb55-37"><a href="regressão.html#cb55-37" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(modelo),</span>
-<span id="cb55-38"><a href="regressão.html#cb55-38" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb55-39"><a href="regressão.html#cb55-39" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Quantis Teóricos&quot;</span>,</span>
-<span id="cb55-40"><a href="regressão.html#cb55-40" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Resíduos&quot;</span>,</span>
-<span id="cb55-41"><a href="regressão.html#cb55-41" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">20</span>,</span>
-<span id="cb55-42"><a href="regressão.html#cb55-42" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>)</span>
-<span id="cb55-43"><a href="regressão.html#cb55-43" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(modelo), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb55-44"><a href="regressão.html#cb55-44" tabindex="-1"></a><span class="fu">add_title_with_sub</span>(<span class="st">&quot;Normal Q-Q&quot;</span>, <span class="st">&quot;--- Distribuição Normal Teórica&quot;</span>)</span>
-<span id="cb55-45"><a href="regressão.html#cb55-45" tabindex="-1"></a></span>
-<span id="cb55-46"><a href="regressão.html#cb55-46" tabindex="-1"></a><span class="co"># Gráfico 3: Scale-Location</span></span>
-<span id="cb55-47"><a href="regressão.html#cb55-47" tabindex="-1"></a>sqrt_resid <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">abs</span>(<span class="fu">scale</span>(<span class="fu">resid</span>(modelo))))</span>
-<span id="cb55-48"><a href="regressão.html#cb55-48" tabindex="-1"></a><span class="fu">plot</span>(modelo<span class="sc">$</span>fitted.values,</span>
-<span id="cb55-49"><a href="regressão.html#cb55-49" tabindex="-1"></a>     sqrt_resid,</span>
-<span id="cb55-50"><a href="regressão.html#cb55-50" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Valores Ajustados&quot;</span>,</span>
-<span id="cb55-51"><a href="regressão.html#cb55-51" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;√|Resíduos Padronizados|&quot;</span>,</span>
-<span id="cb55-52"><a href="regressão.html#cb55-52" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>,</span>
-<span id="cb55-53"><a href="regressão.html#cb55-53" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;orange&quot;</span>)</span>
-<span id="cb55-54"><a href="regressão.html#cb55-54" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb55-55"><a href="regressão.html#cb55-55" tabindex="-1"></a><span class="fu">add_title_with_sub</span>(<span class="st">&quot;Scale-Location&quot;</span>, <span class="st">&quot;--- Referência visual&quot;</span>)</span>
-<span id="cb55-56"><a href="regressão.html#cb55-56" tabindex="-1"></a></span>
-<span id="cb55-57"><a href="regressão.html#cb55-57" tabindex="-1"></a><span class="co"># Gráfico 4: Distância de Cook</span></span>
-<span id="cb55-58"><a href="regressão.html#cb55-58" tabindex="-1"></a>cook <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(modelo)</span>
-<span id="cb55-59"><a href="regressão.html#cb55-59" tabindex="-1"></a><span class="fu">plot</span>(cook,</span>
-<span id="cb55-60"><a href="regressão.html#cb55-60" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;h&quot;</span>,</span>
-<span id="cb55-61"><a href="regressão.html#cb55-61" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Distância&quot;</span>,</span>
-<span id="cb55-62"><a href="regressão.html#cb55-62" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Observação&quot;</span>,</span>
-<span id="cb55-63"><a href="regressão.html#cb55-63" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;purple&quot;</span>)</span>
-<span id="cb55-64"><a href="regressão.html#cb55-64" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">4</span><span class="sc">/</span><span class="fu">length</span>(cook), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb55-65"><a href="regressão.html#cb55-65" tabindex="-1"></a><span class="fu">add_title_with_sub</span>(<span class="st">&quot;Distância de Cook&quot;</span>, <span class="st">&quot;--- Limite sugerido (4/n)&quot;</span>)</span>
-<span id="cb55-66"><a href="regressão.html#cb55-66" tabindex="-1"></a></span>
-<span id="cb55-67"><a href="regressão.html#cb55-67" tabindex="-1"></a><span class="co"># Gráfico 5: Observado vs Ajustado</span></span>
-<span id="cb55-68"><a href="regressão.html#cb55-68" tabindex="-1"></a>limites <span class="ot">&lt;-</span> <span class="fu">range</span>(<span class="fu">c</span>(dados<span class="sc">$</span>y, modelo<span class="sc">$</span>fitted.values))</span>
-<span id="cb55-69"><a href="regressão.html#cb55-69" tabindex="-1"></a><span class="fu">plot</span>(dados<span class="sc">$</span>y, modelo<span class="sc">$</span>fitted.values,</span>
-<span id="cb55-70"><a href="regressão.html#cb55-70" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Valores Observados&quot;</span>,</span>
-<span id="cb55-71"><a href="regressão.html#cb55-71" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Valores Ajustados&quot;</span>,</span>
-<span id="cb55-72"><a href="regressão.html#cb55-72" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>,</span>
-<span id="cb55-73"><a href="regressão.html#cb55-73" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>,</span>
-<span id="cb55-74"><a href="regressão.html#cb55-74" tabindex="-1"></a>     <span class="at">xlim =</span> limites,</span>
-<span id="cb55-75"><a href="regressão.html#cb55-75" tabindex="-1"></a>     <span class="at">ylim =</span> limites)</span>
-<span id="cb55-76"><a href="regressão.html#cb55-76" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb55-77"><a href="regressão.html#cb55-77" tabindex="-1"></a><span class="fu">add_title_with_sub</span>(<span class="st">&quot;Observado vs Ajustado&quot;</span>, <span class="st">&quot;--- y = x&quot;</span>)</span>
-<span id="cb55-78"><a href="regressão.html#cb55-78" tabindex="-1"></a></span>
-<span id="cb55-79"><a href="regressão.html#cb55-79" tabindex="-1"></a><span class="co"># Gráfico 6: Alavancagem</span></span>
-<span id="cb55-80"><a href="regressão.html#cb55-80" tabindex="-1"></a>hat <span class="ot">&lt;-</span> <span class="fu">hatvalues</span>(modelo)</span>
-<span id="cb55-81"><a href="regressão.html#cb55-81" tabindex="-1"></a><span class="fu">plot</span>(hat,</span>
-<span id="cb55-82"><a href="regressão.html#cb55-82" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Valores de Alavancagem&quot;</span>,</span>
-<span id="cb55-83"><a href="regressão.html#cb55-83" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Observação&quot;</span>,</span>
-<span id="cb55-84"><a href="regressão.html#cb55-84" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>,</span>
-<span id="cb55-85"><a href="regressão.html#cb55-85" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;darkred&quot;</span>)</span>
-<span id="cb55-86"><a href="regressão.html#cb55-86" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(hat), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb55-87"><a href="regressão.html#cb55-87" tabindex="-1"></a><span class="fu">add_title_with_sub</span>(<span class="st">&quot;Alavancagem&quot;</span>, <span class="st">&quot;--- 2 × média&quot;</span>)</span></code></pre></div>
+<span id="cb55-36"><a href="regressão.html#cb55-36" tabindex="-1"></a><span class="co"># Gráfico 2: QQ Plot</span></span>
+<span id="cb55-37"><a href="regressão.html#cb55-37" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados_diag, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">sample =</span> Resíduo)) <span class="sc">+</span></span>
+<span id="cb55-38"><a href="regressão.html#cb55-38" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">stat_qq</span>(<span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-39"><a href="regressão.html#cb55-39" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">stat_qq_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-40"><a href="regressão.html#cb55-40" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Normal Q-Q&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;--- Distribuição Normal Teórica&quot;</span>,</span>
+<span id="cb55-41"><a href="regressão.html#cb55-41" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Quantis Teóricos&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Resíduos&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-42"><a href="regressão.html#cb55-42" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span>
+<span id="cb55-43"><a href="regressão.html#cb55-43" tabindex="-1"></a></span>
+<span id="cb55-44"><a href="regressão.html#cb55-44" tabindex="-1"></a><span class="co"># Gráfico 3: Scale-Location</span></span>
+<span id="cb55-45"><a href="regressão.html#cb55-45" tabindex="-1"></a>g3 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados_diag, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> Ajustado, <span class="at">y =</span> Raiz_Resíduo_pad)) <span class="sc">+</span></span>
+<span id="cb55-46"><a href="regressão.html#cb55-46" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;orange&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-47"><a href="regressão.html#cb55-47" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-48"><a href="regressão.html#cb55-48" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Scale-Location&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;--- Referência visual&quot;</span>,</span>
+<span id="cb55-49"><a href="regressão.html#cb55-49" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Valores Ajustados&quot;</span>, <span class="at">y =</span> <span class="st">&quot;√|Resíduos Padronizados|&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-50"><a href="regressão.html#cb55-50" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span>
+<span id="cb55-51"><a href="regressão.html#cb55-51" tabindex="-1"></a></span>
+<span id="cb55-52"><a href="regressão.html#cb55-52" tabindex="-1"></a><span class="co"># Gráfico 4: Distância de Cook</span></span>
+<span id="cb55-53"><a href="regressão.html#cb55-53" tabindex="-1"></a>g4 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados_diag, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">seq_along</span>(Cook), <span class="at">y =</span> Cook)) <span class="sc">+</span></span>
+<span id="cb55-54"><a href="regressão.html#cb55-54" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_segment</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">xend =</span> <span class="fu">seq_along</span>(Cook), <span class="at">yend =</span> <span class="dv">0</span>), <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-55"><a href="regressão.html#cb55-55" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">4</span><span class="sc">/</span>n, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-56"><a href="regressão.html#cb55-56" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distância de Cook&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;--- Limite sugerido (4/n)&quot;</span>,</span>
+<span id="cb55-57"><a href="regressão.html#cb55-57" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Observação&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Distância&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-58"><a href="regressão.html#cb55-58" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span>
+<span id="cb55-59"><a href="regressão.html#cb55-59" tabindex="-1"></a></span>
+<span id="cb55-60"><a href="regressão.html#cb55-60" tabindex="-1"></a><span class="co"># Gráfico 5: Observado vs Ajustado</span></span>
+<span id="cb55-61"><a href="regressão.html#cb55-61" tabindex="-1"></a>lim <span class="ot">&lt;-</span> <span class="fu">range</span>(<span class="fu">c</span>(dados_diag<span class="sc">$</span>y, dados_diag<span class="sc">$</span>Ajustado))</span>
+<span id="cb55-62"><a href="regressão.html#cb55-62" tabindex="-1"></a>g5 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados_diag, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> Ajustado)) <span class="sc">+</span></span>
+<span id="cb55-63"><a href="regressão.html#cb55-63" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-64"><a href="regressão.html#cb55-64" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-65"><a href="regressão.html#cb55-65" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> lim, <span class="at">ylim =</span> lim) <span class="sc">+</span></span>
+<span id="cb55-66"><a href="regressão.html#cb55-66" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Observado vs Ajustado&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;--- y = x&quot;</span>,</span>
+<span id="cb55-67"><a href="regressão.html#cb55-67" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Valores Observados&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Valores Ajustados&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-68"><a href="regressão.html#cb55-68" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span>
+<span id="cb55-69"><a href="regressão.html#cb55-69" tabindex="-1"></a></span>
+<span id="cb55-70"><a href="regressão.html#cb55-70" tabindex="-1"></a><span class="co"># Gráfico 6: Alavancagem</span></span>
+<span id="cb55-71"><a href="regressão.html#cb55-71" tabindex="-1"></a>g6 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados_diag, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">seq_along</span>(Alavancagem), <span class="at">y =</span> Alavancagem)) <span class="sc">+</span></span>
+<span id="cb55-72"><a href="regressão.html#cb55-72" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-73"><a href="regressão.html#cb55-73" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(dados_diag<span class="sc">$</span>Alavancagem), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-74"><a href="regressão.html#cb55-74" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Alavancagem&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;--- 2 × média&quot;</span>,</span>
+<span id="cb55-75"><a href="regressão.html#cb55-75" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Observação&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Valores de Alavancagem&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-76"><a href="regressão.html#cb55-76" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span>
+<span id="cb55-77"><a href="regressão.html#cb55-77" tabindex="-1"></a></span>
+<span id="cb55-78"><a href="regressão.html#cb55-78" tabindex="-1"></a><span class="co"># Organizar os 6 gráficos em 2x3</span></span>
+<span id="cb55-79"><a href="regressão.html#cb55-79" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(g1, g2, g3, g4, g5, g6, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
 </details>
 </div>
 </div>

@@ -1403,42 +1403,43 @@ div.csl-indent {
 <span id="cb9-3"><a href="pensamento-probabilístico.html#cb9-3" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">pushViewport</span>(grid<span class="sc">::</span><span class="fu">viewport</span>(<span class="at">layout =</span> grid<span class="sc">::</span><span class="fu">grid.layout</span>(<span class="dv">2</span>, <span class="dv">1</span>)))</span>
 <span id="cb9-4"><a href="pensamento-probabilístico.html#cb9-4" tabindex="-1"></a></span>
 <span id="cb9-5"><a href="pensamento-probabilístico.html#cb9-5" tabindex="-1"></a><span class="co"># Função para posicionar gráficos</span></span>
-<span id="cb9-6"><a href="pensamento-probabilístico.html#cb9-6" tabindex="-1"></a>vplayout <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) grid<span class="sc">::</span><span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> x, <span class="at">layout.pos.col =</span> y)</span>
-<span id="cb9-7"><a href="pensamento-probabilístico.html#cb9-7" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="pensamento-probabilístico.html#cb9-8" tabindex="-1"></a><span class="co"># Painel 1 - Eventos Independentes</span></span>
-<span id="cb9-9"><a href="pensamento-probabilístico.html#cb9-9" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">pushViewport</span>(<span class="fu">vplayout</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb9-10"><a href="pensamento-probabilístico.html#cb9-10" tabindex="-1"></a>VennDiagram<span class="sc">::</span><span class="fu">draw.pairwise.venn</span>(</span>
-<span id="cb9-11"><a href="pensamento-probabilístico.html#cb9-11" tabindex="-1"></a>  <span class="at">area1 =</span> <span class="dv">50</span>,</span>
-<span id="cb9-12"><a href="pensamento-probabilístico.html#cb9-12" tabindex="-1"></a>  <span class="at">area2 =</span> <span class="dv">50</span>,</span>
-<span id="cb9-13"><a href="pensamento-probabilístico.html#cb9-13" tabindex="-1"></a>  <span class="at">cross.area =</span> <span class="dv">0</span>,</span>
-<span id="cb9-14"><a href="pensamento-probabilístico.html#cb9-14" tabindex="-1"></a>  <span class="at">category =</span> <span class="fu">c</span>(<span class="st">&quot;Evento A&quot;</span>, <span class="st">&quot;Evento B&quot;</span>),</span>
-<span id="cb9-15"><a href="pensamento-probabilístico.html#cb9-15" tabindex="-1"></a>  <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">&quot;lightcoral&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>),</span>
-<span id="cb9-16"><a href="pensamento-probabilístico.html#cb9-16" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
-<span id="cb9-17"><a href="pensamento-probabilístico.html#cb9-17" tabindex="-1"></a>  <span class="at">cat.cex =</span> <span class="dv">1</span>,</span>
-<span id="cb9-18"><a href="pensamento-probabilístico.html#cb9-18" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">1.5</span>,</span>
-<span id="cb9-19"><a href="pensamento-probabilístico.html#cb9-19" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Eventos Independentes&quot;</span>,</span>
-<span id="cb9-20"><a href="pensamento-probabilístico.html#cb9-20" tabindex="-1"></a>  <span class="at">print.mode =</span> <span class="st">&quot;percent&quot;</span></span>
-<span id="cb9-21"><a href="pensamento-probabilístico.html#cb9-21" tabindex="-1"></a>)</span>
-<span id="cb9-22"><a href="pensamento-probabilístico.html#cb9-22" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">popViewport</span>()</span>
-<span id="cb9-23"><a href="pensamento-probabilístico.html#cb9-23" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="pensamento-probabilístico.html#cb9-24" tabindex="-1"></a><span class="co"># Painel 2 - Eventos Dependentes</span></span>
-<span id="cb9-25"><a href="pensamento-probabilístico.html#cb9-25" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">pushViewport</span>(<span class="fu">vplayout</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb9-26"><a href="pensamento-probabilístico.html#cb9-26" tabindex="-1"></a>VennDiagram<span class="sc">::</span><span class="fu">draw.pairwise.venn</span>(</span>
-<span id="cb9-27"><a href="pensamento-probabilístico.html#cb9-27" tabindex="-1"></a>  <span class="at">area1 =</span> <span class="dv">50</span>,</span>
-<span id="cb9-28"><a href="pensamento-probabilístico.html#cb9-28" tabindex="-1"></a>  <span class="at">area2 =</span> <span class="dv">50</span>,</span>
-<span id="cb9-29"><a href="pensamento-probabilístico.html#cb9-29" tabindex="-1"></a>  <span class="at">cross.area =</span> <span class="dv">20</span>,</span>
-<span id="cb9-30"><a href="pensamento-probabilístico.html#cb9-30" tabindex="-1"></a>  <span class="at">category =</span> <span class="fu">c</span>(<span class="st">&quot;Evento A&quot;</span>, <span class="st">&quot;Evento B&quot;</span>),</span>
-<span id="cb9-31"><a href="pensamento-probabilístico.html#cb9-31" tabindex="-1"></a>  <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">&quot;lightcoral&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>),</span>
-<span id="cb9-32"><a href="pensamento-probabilístico.html#cb9-32" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
-<span id="cb9-33"><a href="pensamento-probabilístico.html#cb9-33" tabindex="-1"></a>  <span class="at">cat.cex =</span> <span class="dv">1</span>,</span>
-<span id="cb9-34"><a href="pensamento-probabilístico.html#cb9-34" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">1.5</span>,</span>
-<span id="cb9-35"><a href="pensamento-probabilístico.html#cb9-35" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Eventos Dependentes&quot;</span>,</span>
-<span id="cb9-36"><a href="pensamento-probabilístico.html#cb9-36" tabindex="-1"></a>  <span class="at">print.mode =</span> <span class="st">&quot;percent&quot;</span></span>
-<span id="cb9-37"><a href="pensamento-probabilístico.html#cb9-37" tabindex="-1"></a>)</span>
-<span id="cb9-38"><a href="pensamento-probabilístico.html#cb9-38" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">popViewport</span>()</span>
-<span id="cb9-39"><a href="pensamento-probabilístico.html#cb9-39" tabindex="-1"></a></span>
-<span id="cb9-40"><a href="pensamento-probabilístico.html#cb9-40" tabindex="-1"></a><span class="co"># sair do viewport principal</span></span>
-<span id="cb9-41"><a href="pensamento-probabilístico.html#cb9-41" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">popViewport</span>()</span></code></pre></div>
+<span id="cb9-6"><a href="pensamento-probabilístico.html#cb9-6" tabindex="-1"></a>vplayout <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y)</span>
+<span id="cb9-7"><a href="pensamento-probabilístico.html#cb9-7" tabindex="-1"></a>  grid<span class="sc">::</span><span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> x, <span class="at">layout.pos.col =</span> y)</span>
+<span id="cb9-8"><a href="pensamento-probabilístico.html#cb9-8" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="pensamento-probabilístico.html#cb9-9" tabindex="-1"></a><span class="co"># Painel 1 - Eventos Independentes</span></span>
+<span id="cb9-10"><a href="pensamento-probabilístico.html#cb9-10" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">pushViewport</span>(<span class="fu">vplayout</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb9-11"><a href="pensamento-probabilístico.html#cb9-11" tabindex="-1"></a>VennDiagram<span class="sc">::</span><span class="fu">draw.pairwise.venn</span>(</span>
+<span id="cb9-12"><a href="pensamento-probabilístico.html#cb9-12" tabindex="-1"></a>  <span class="at">area1 =</span> <span class="dv">50</span>,</span>
+<span id="cb9-13"><a href="pensamento-probabilístico.html#cb9-13" tabindex="-1"></a>  <span class="at">area2 =</span> <span class="dv">50</span>,</span>
+<span id="cb9-14"><a href="pensamento-probabilístico.html#cb9-14" tabindex="-1"></a>  <span class="at">cross.area =</span> <span class="dv">0</span>,</span>
+<span id="cb9-15"><a href="pensamento-probabilístico.html#cb9-15" tabindex="-1"></a>  <span class="at">category =</span> <span class="fu">c</span>(<span class="st">&quot;Evento A&quot;</span>, <span class="st">&quot;Evento B&quot;</span>),</span>
+<span id="cb9-16"><a href="pensamento-probabilístico.html#cb9-16" tabindex="-1"></a>  <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">&quot;lightcoral&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>),</span>
+<span id="cb9-17"><a href="pensamento-probabilístico.html#cb9-17" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb9-18"><a href="pensamento-probabilístico.html#cb9-18" tabindex="-1"></a>  <span class="at">cat.cex =</span> <span class="dv">1</span>,</span>
+<span id="cb9-19"><a href="pensamento-probabilístico.html#cb9-19" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">1.5</span>,</span>
+<span id="cb9-20"><a href="pensamento-probabilístico.html#cb9-20" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Eventos Independentes&quot;</span>,</span>
+<span id="cb9-21"><a href="pensamento-probabilístico.html#cb9-21" tabindex="-1"></a>  <span class="at">print.mode =</span> <span class="st">&quot;percent&quot;</span></span>
+<span id="cb9-22"><a href="pensamento-probabilístico.html#cb9-22" tabindex="-1"></a>)</span>
+<span id="cb9-23"><a href="pensamento-probabilístico.html#cb9-23" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">popViewport</span>()</span>
+<span id="cb9-24"><a href="pensamento-probabilístico.html#cb9-24" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="pensamento-probabilístico.html#cb9-25" tabindex="-1"></a><span class="co"># Painel 2 - Eventos Dependentes</span></span>
+<span id="cb9-26"><a href="pensamento-probabilístico.html#cb9-26" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">pushViewport</span>(<span class="fu">vplayout</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb9-27"><a href="pensamento-probabilístico.html#cb9-27" tabindex="-1"></a>VennDiagram<span class="sc">::</span><span class="fu">draw.pairwise.venn</span>(</span>
+<span id="cb9-28"><a href="pensamento-probabilístico.html#cb9-28" tabindex="-1"></a>  <span class="at">area1 =</span> <span class="dv">50</span>,</span>
+<span id="cb9-29"><a href="pensamento-probabilístico.html#cb9-29" tabindex="-1"></a>  <span class="at">area2 =</span> <span class="dv">50</span>,</span>
+<span id="cb9-30"><a href="pensamento-probabilístico.html#cb9-30" tabindex="-1"></a>  <span class="at">cross.area =</span> <span class="dv">20</span>,</span>
+<span id="cb9-31"><a href="pensamento-probabilístico.html#cb9-31" tabindex="-1"></a>  <span class="at">category =</span> <span class="fu">c</span>(<span class="st">&quot;Evento A&quot;</span>, <span class="st">&quot;Evento B&quot;</span>),</span>
+<span id="cb9-32"><a href="pensamento-probabilístico.html#cb9-32" tabindex="-1"></a>  <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">&quot;lightcoral&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>),</span>
+<span id="cb9-33"><a href="pensamento-probabilístico.html#cb9-33" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb9-34"><a href="pensamento-probabilístico.html#cb9-34" tabindex="-1"></a>  <span class="at">cat.cex =</span> <span class="dv">1</span>,</span>
+<span id="cb9-35"><a href="pensamento-probabilístico.html#cb9-35" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">1.5</span>,</span>
+<span id="cb9-36"><a href="pensamento-probabilístico.html#cb9-36" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Eventos Dependentes&quot;</span>,</span>
+<span id="cb9-37"><a href="pensamento-probabilístico.html#cb9-37" tabindex="-1"></a>  <span class="at">print.mode =</span> <span class="st">&quot;percent&quot;</span></span>
+<span id="cb9-38"><a href="pensamento-probabilístico.html#cb9-38" tabindex="-1"></a>)</span>
+<span id="cb9-39"><a href="pensamento-probabilístico.html#cb9-39" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">popViewport</span>()</span>
+<span id="cb9-40"><a href="pensamento-probabilístico.html#cb9-40" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="pensamento-probabilístico.html#cb9-41" tabindex="-1"></a><span class="co"># sair do viewport principal</span></span>
+<span id="cb9-42"><a href="pensamento-probabilístico.html#cb9-42" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">popViewport</span>()</span></code></pre></div>
 </details>
 </div>
 <div id="o-que-é-teorema-central-do-limite-1" class="section level2 unnumbered unlisted hasAnchor">
@@ -1469,109 +1470,109 @@ div.csl-indent {
 <span id="cb10-23"><a href="pensamento-probabilístico.html#cb10-23" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_density</span>() <span class="sc">+</span></span>
 <span id="cb10-24"><a href="pensamento-probabilístico.html#cb10-24" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
 <span id="cb10-25"><a href="pensamento-probabilístico.html#cb10-25" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste0</span>(</span>
-<span id="cb10-26"><a href="pensamento-probabilístico.html#cb10-26" tabindex="-1"></a>      <span class="st">&quot;População (N = &quot;</span>, N, <span class="st">&quot;)&quot;</span>,</span>
-<span id="cb10-27"><a href="pensamento-probabilístico.html#cb10-27" tabindex="-1"></a>      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-28"><a href="pensamento-probabilístico.html#cb10-28" tabindex="-1"></a>      <span class="st">&quot;média = &quot;</span>,</span>
-<span id="cb10-29"><a href="pensamento-probabilístico.html#cb10-29" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">mean</span>(população<span class="sc">$</span>Variável), <span class="at">digits =</span> <span class="dv">3</span>),</span>
-<span id="cb10-30"><a href="pensamento-probabilístico.html#cb10-30" tabindex="-1"></a>      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-31"><a href="pensamento-probabilístico.html#cb10-31" tabindex="-1"></a>      <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
-<span id="cb10-32"><a href="pensamento-probabilístico.html#cb10-32" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">sd</span>(população<span class="sc">$</span>Variável), <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb10-33"><a href="pensamento-probabilístico.html#cb10-33" tabindex="-1"></a>    ),</span>
-<span id="cb10-34"><a href="pensamento-probabilístico.html#cb10-34" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Variável&quot;</span>,</span>
-<span id="cb10-35"><a href="pensamento-probabilístico.html#cb10-35" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Densidade&quot;</span></span>
-<span id="cb10-36"><a href="pensamento-probabilístico.html#cb10-36" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-37"><a href="pensamento-probabilístico.html#cb10-37" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb10-38"><a href="pensamento-probabilístico.html#cb10-38" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb10-39"><a href="pensamento-probabilístico.html#cb10-39" tabindex="-1"></a>    <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb10-40"><a href="pensamento-probabilístico.html#cb10-40" tabindex="-1"></a>    <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb10-41"><a href="pensamento-probabilístico.html#cb10-41" tabindex="-1"></a>    <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb10-42"><a href="pensamento-probabilístico.html#cb10-42" tabindex="-1"></a>    <span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
-<span id="cb10-43"><a href="pensamento-probabilístico.html#cb10-43" tabindex="-1"></a>  )</span>
-<span id="cb10-44"><a href="pensamento-probabilístico.html#cb10-44" tabindex="-1"></a></span>
-<span id="cb10-45"><a href="pensamento-probabilístico.html#cb10-45" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb10-46"><a href="pensamento-probabilístico.html#cb10-46" tabindex="-1"></a><span class="co"># armazena as médias das amostras de tamanho B</span></span>
-<span id="cb10-47"><a href="pensamento-probabilístico.html#cb10-47" tabindex="-1"></a>reamostra <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb10-48"><a href="pensamento-probabilístico.html#cb10-48" tabindex="-1"></a>  <span class="at">res.5 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
-<span id="cb10-49"><a href="pensamento-probabilístico.html#cb10-49" tabindex="-1"></a>  <span class="at">res.50 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
-<span id="cb10-50"><a href="pensamento-probabilístico.html#cb10-50" tabindex="-1"></a>  <span class="at">res.500 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
-<span id="cb10-51"><a href="pensamento-probabilístico.html#cb10-51" tabindex="-1"></a>  <span class="at">res.5000 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B)</span>
-<span id="cb10-52"><a href="pensamento-probabilístico.html#cb10-52" tabindex="-1"></a>)</span>
-<span id="cb10-53"><a href="pensamento-probabilístico.html#cb10-53" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb10-54"><a href="pensamento-probabilístico.html#cb10-54" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
-<span id="cb10-55"><a href="pensamento-probabilístico.html#cb10-55" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">5</span>,</span>
-<span id="cb10-56"><a href="pensamento-probabilístico.html#cb10-56" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-57"><a href="pensamento-probabilístico.html#cb10-57" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.5</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
-<span id="cb10-58"><a href="pensamento-probabilístico.html#cb10-58" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
-<span id="cb10-59"><a href="pensamento-probabilístico.html#cb10-59" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">50</span>,</span>
-<span id="cb10-60"><a href="pensamento-probabilístico.html#cb10-60" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-61"><a href="pensamento-probabilístico.html#cb10-61" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.50</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
-<span id="cb10-62"><a href="pensamento-probabilístico.html#cb10-62" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
-<span id="cb10-63"><a href="pensamento-probabilístico.html#cb10-63" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">500</span>,</span>
-<span id="cb10-64"><a href="pensamento-probabilístico.html#cb10-64" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-65"><a href="pensamento-probabilístico.html#cb10-65" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.500</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
-<span id="cb10-66"><a href="pensamento-probabilístico.html#cb10-66" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
-<span id="cb10-67"><a href="pensamento-probabilístico.html#cb10-67" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">5000</span>,</span>
-<span id="cb10-68"><a href="pensamento-probabilístico.html#cb10-68" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-69"><a href="pensamento-probabilístico.html#cb10-69" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.5000</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
-<span id="cb10-70"><a href="pensamento-probabilístico.html#cb10-70" tabindex="-1"></a>}</span>
-<span id="cb10-71"><a href="pensamento-probabilístico.html#cb10-71" tabindex="-1"></a><span class="fu">names</span>(reamostra) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb10-72"><a href="pensamento-probabilístico.html#cb10-72" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb10-73"><a href="pensamento-probabilístico.html#cb10-73" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 5)&quot;</span>,</span>
-<span id="cb10-74"><a href="pensamento-probabilístico.html#cb10-74" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-75"><a href="pensamento-probabilístico.html#cb10-75" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
-<span id="cb10-76"><a href="pensamento-probabilístico.html#cb10-76" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.5</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
-<span id="cb10-77"><a href="pensamento-probabilístico.html#cb10-77" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-78"><a href="pensamento-probabilístico.html#cb10-78" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
-<span id="cb10-79"><a href="pensamento-probabilístico.html#cb10-79" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.5</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb10-80"><a href="pensamento-probabilístico.html#cb10-80" tabindex="-1"></a>  ),</span>
-<span id="cb10-81"><a href="pensamento-probabilístico.html#cb10-81" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb10-82"><a href="pensamento-probabilístico.html#cb10-82" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 50)&quot;</span>,</span>
-<span id="cb10-83"><a href="pensamento-probabilístico.html#cb10-83" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-84"><a href="pensamento-probabilístico.html#cb10-84" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
-<span id="cb10-85"><a href="pensamento-probabilístico.html#cb10-85" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.50</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
-<span id="cb10-86"><a href="pensamento-probabilístico.html#cb10-86" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-87"><a href="pensamento-probabilístico.html#cb10-87" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
-<span id="cb10-88"><a href="pensamento-probabilístico.html#cb10-88" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.50</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb10-89"><a href="pensamento-probabilístico.html#cb10-89" tabindex="-1"></a>  ),</span>
-<span id="cb10-90"><a href="pensamento-probabilístico.html#cb10-90" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb10-91"><a href="pensamento-probabilístico.html#cb10-91" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 500)&quot;</span>,</span>
-<span id="cb10-92"><a href="pensamento-probabilístico.html#cb10-92" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-93"><a href="pensamento-probabilístico.html#cb10-93" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
-<span id="cb10-94"><a href="pensamento-probabilístico.html#cb10-94" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.500</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
-<span id="cb10-95"><a href="pensamento-probabilístico.html#cb10-95" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-96"><a href="pensamento-probabilístico.html#cb10-96" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
-<span id="cb10-97"><a href="pensamento-probabilístico.html#cb10-97" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.500</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb10-98"><a href="pensamento-probabilístico.html#cb10-98" tabindex="-1"></a>  ),</span>
-<span id="cb10-99"><a href="pensamento-probabilístico.html#cb10-99" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb10-100"><a href="pensamento-probabilístico.html#cb10-100" tabindex="-1"></a>    <span class="st">&quot;Amostra: (n = 5000)&quot;</span>,</span>
-<span id="cb10-101"><a href="pensamento-probabilístico.html#cb10-101" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-102"><a href="pensamento-probabilístico.html#cb10-102" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
-<span id="cb10-103"><a href="pensamento-probabilístico.html#cb10-103" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.5000</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
-<span id="cb10-104"><a href="pensamento-probabilístico.html#cb10-104" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb10-105"><a href="pensamento-probabilístico.html#cb10-105" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
-<span id="cb10-106"><a href="pensamento-probabilístico.html#cb10-106" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.5000</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb10-107"><a href="pensamento-probabilístico.html#cb10-107" tabindex="-1"></a>  )</span>
-<span id="cb10-108"><a href="pensamento-probabilístico.html#cb10-108" tabindex="-1"></a>)</span>
-<span id="cb10-109"><a href="pensamento-probabilístico.html#cb10-109" tabindex="-1"></a></span>
-<span id="cb10-110"><a href="pensamento-probabilístico.html#cb10-110" tabindex="-1"></a><span class="co"># histograma de densidade da reamostra utilizando grid por reamostra</span></span>
-<span id="cb10-111"><a href="pensamento-probabilístico.html#cb10-111" tabindex="-1"></a>histograma_reamostra <span class="ot">&lt;-</span> reamostra <span class="sc">%&gt;%</span></span>
-<span id="cb10-112"><a href="pensamento-probabilístico.html#cb10-112" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
-<span id="cb10-113"><a href="pensamento-probabilístico.html#cb10-113" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">&quot;reamostra&quot;</span>,</span>
-<span id="cb10-114"><a href="pensamento-probabilístico.html#cb10-114" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-115"><a href="pensamento-probabilístico.html#cb10-115" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> valor)) <span class="sc">+</span></span>
-<span id="cb10-116"><a href="pensamento-probabilístico.html#cb10-116" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(</span>
-<span id="cb10-117"><a href="pensamento-probabilístico.html#cb10-117" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">y =</span> ggplot2<span class="sc">::</span><span class="fu">after_stat</span>(density)),</span>
-<span id="cb10-118"><a href="pensamento-probabilístico.html#cb10-118" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">1</span>,</span>
-<span id="cb10-119"><a href="pensamento-probabilístico.html#cb10-119" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
-<span id="cb10-120"><a href="pensamento-probabilístico.html#cb10-120" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;grey&quot;</span>,</span>
-<span id="cb10-121"><a href="pensamento-probabilístico.html#cb10-121" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb10-122"><a href="pensamento-probabilístico.html#cb10-122" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
-<span id="cb10-123"><a href="pensamento-probabilístico.html#cb10-123" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-124"><a href="pensamento-probabilístico.html#cb10-124" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb10-125"><a href="pensamento-probabilístico.html#cb10-125" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>( <span class="sc">~</span> reamostra, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb10-126"><a href="pensamento-probabilístico.html#cb10-126" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histogramas representando as médias </span><span class="sc">\n</span><span class="st"> de 100 amostras de tamanhos diferentes </span><span class="sc">\n</span><span class="st"> tomadas da população </span><span class="sc">\n</span><span class="st"> com reposição e igual probabilidade&quot;</span>,</span>
-<span id="cb10-127"><a href="pensamento-probabilístico.html#cb10-127" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Variável&quot;</span>,</span>
-<span id="cb10-128"><a href="pensamento-probabilístico.html#cb10-128" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">&quot;Densidade&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-26"><a href="pensamento-probabilístico.html#cb10-26" tabindex="-1"></a>      <span class="st">&quot;População (N = &quot;</span>,</span>
+<span id="cb10-27"><a href="pensamento-probabilístico.html#cb10-27" tabindex="-1"></a>      N,</span>
+<span id="cb10-28"><a href="pensamento-probabilístico.html#cb10-28" tabindex="-1"></a>      <span class="st">&quot;)&quot;</span>,</span>
+<span id="cb10-29"><a href="pensamento-probabilístico.html#cb10-29" tabindex="-1"></a>      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-30"><a href="pensamento-probabilístico.html#cb10-30" tabindex="-1"></a>      <span class="st">&quot;média = &quot;</span>,</span>
+<span id="cb10-31"><a href="pensamento-probabilístico.html#cb10-31" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">mean</span>(população<span class="sc">$</span>Variável), <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb10-32"><a href="pensamento-probabilístico.html#cb10-32" tabindex="-1"></a>      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-33"><a href="pensamento-probabilístico.html#cb10-33" tabindex="-1"></a>      <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
+<span id="cb10-34"><a href="pensamento-probabilístico.html#cb10-34" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">sd</span>(população<span class="sc">$</span>Variável), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb10-35"><a href="pensamento-probabilístico.html#cb10-35" tabindex="-1"></a>    ),</span>
+<span id="cb10-36"><a href="pensamento-probabilístico.html#cb10-36" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Variável&quot;</span>,</span>
+<span id="cb10-37"><a href="pensamento-probabilístico.html#cb10-37" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Densidade&quot;</span></span>
+<span id="cb10-38"><a href="pensamento-probabilístico.html#cb10-38" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-39"><a href="pensamento-probabilístico.html#cb10-39" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb10-40"><a href="pensamento-probabilístico.html#cb10-40" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb10-41"><a href="pensamento-probabilístico.html#cb10-41" tabindex="-1"></a>    <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb10-42"><a href="pensamento-probabilístico.html#cb10-42" tabindex="-1"></a>    <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb10-43"><a href="pensamento-probabilístico.html#cb10-43" tabindex="-1"></a>    <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb10-44"><a href="pensamento-probabilístico.html#cb10-44" tabindex="-1"></a>    <span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb10-45"><a href="pensamento-probabilístico.html#cb10-45" tabindex="-1"></a>  )</span>
+<span id="cb10-46"><a href="pensamento-probabilístico.html#cb10-46" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="pensamento-probabilístico.html#cb10-47" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb10-48"><a href="pensamento-probabilístico.html#cb10-48" tabindex="-1"></a><span class="co"># armazena as médias das amostras de tamanho B</span></span>
+<span id="cb10-49"><a href="pensamento-probabilístico.html#cb10-49" tabindex="-1"></a>reamostra <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-50"><a href="pensamento-probabilístico.html#cb10-50" tabindex="-1"></a>  <span class="at">res.5 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
+<span id="cb10-51"><a href="pensamento-probabilístico.html#cb10-51" tabindex="-1"></a>  <span class="at">res.50 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
+<span id="cb10-52"><a href="pensamento-probabilístico.html#cb10-52" tabindex="-1"></a>  <span class="at">res.500 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
+<span id="cb10-53"><a href="pensamento-probabilístico.html#cb10-53" tabindex="-1"></a>  <span class="at">res.5000 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B)</span>
+<span id="cb10-54"><a href="pensamento-probabilístico.html#cb10-54" tabindex="-1"></a>)</span>
+<span id="cb10-55"><a href="pensamento-probabilístico.html#cb10-55" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb10-56"><a href="pensamento-probabilístico.html#cb10-56" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
+<span id="cb10-57"><a href="pensamento-probabilístico.html#cb10-57" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb10-58"><a href="pensamento-probabilístico.html#cb10-58" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-59"><a href="pensamento-probabilístico.html#cb10-59" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.5</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
+<span id="cb10-60"><a href="pensamento-probabilístico.html#cb10-60" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
+<span id="cb10-61"><a href="pensamento-probabilístico.html#cb10-61" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">50</span>,</span>
+<span id="cb10-62"><a href="pensamento-probabilístico.html#cb10-62" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-63"><a href="pensamento-probabilístico.html#cb10-63" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.50</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
+<span id="cb10-64"><a href="pensamento-probabilístico.html#cb10-64" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
+<span id="cb10-65"><a href="pensamento-probabilístico.html#cb10-65" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">500</span>,</span>
+<span id="cb10-66"><a href="pensamento-probabilístico.html#cb10-66" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-67"><a href="pensamento-probabilístico.html#cb10-67" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.500</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
+<span id="cb10-68"><a href="pensamento-probabilístico.html#cb10-68" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
+<span id="cb10-69"><a href="pensamento-probabilístico.html#cb10-69" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">5000</span>,</span>
+<span id="cb10-70"><a href="pensamento-probabilístico.html#cb10-70" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-71"><a href="pensamento-probabilístico.html#cb10-71" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.5000</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
+<span id="cb10-72"><a href="pensamento-probabilístico.html#cb10-72" tabindex="-1"></a>}</span>
+<span id="cb10-73"><a href="pensamento-probabilístico.html#cb10-73" tabindex="-1"></a><span class="fu">names</span>(reamostra) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb10-74"><a href="pensamento-probabilístico.html#cb10-74" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb10-75"><a href="pensamento-probabilístico.html#cb10-75" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 5)&quot;</span>,</span>
+<span id="cb10-76"><a href="pensamento-probabilístico.html#cb10-76" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-77"><a href="pensamento-probabilístico.html#cb10-77" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
+<span id="cb10-78"><a href="pensamento-probabilístico.html#cb10-78" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.5</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb10-79"><a href="pensamento-probabilístico.html#cb10-79" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-80"><a href="pensamento-probabilístico.html#cb10-80" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
+<span id="cb10-81"><a href="pensamento-probabilístico.html#cb10-81" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.5</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb10-82"><a href="pensamento-probabilístico.html#cb10-82" tabindex="-1"></a>  ),</span>
+<span id="cb10-83"><a href="pensamento-probabilístico.html#cb10-83" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb10-84"><a href="pensamento-probabilístico.html#cb10-84" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 50)&quot;</span>,</span>
+<span id="cb10-85"><a href="pensamento-probabilístico.html#cb10-85" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-86"><a href="pensamento-probabilístico.html#cb10-86" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
+<span id="cb10-87"><a href="pensamento-probabilístico.html#cb10-87" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.50</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb10-88"><a href="pensamento-probabilístico.html#cb10-88" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-89"><a href="pensamento-probabilístico.html#cb10-89" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
+<span id="cb10-90"><a href="pensamento-probabilístico.html#cb10-90" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.50</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb10-91"><a href="pensamento-probabilístico.html#cb10-91" tabindex="-1"></a>  ),</span>
+<span id="cb10-92"><a href="pensamento-probabilístico.html#cb10-92" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb10-93"><a href="pensamento-probabilístico.html#cb10-93" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 500)&quot;</span>,</span>
+<span id="cb10-94"><a href="pensamento-probabilístico.html#cb10-94" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-95"><a href="pensamento-probabilístico.html#cb10-95" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
+<span id="cb10-96"><a href="pensamento-probabilístico.html#cb10-96" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.500</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb10-97"><a href="pensamento-probabilístico.html#cb10-97" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-98"><a href="pensamento-probabilístico.html#cb10-98" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
+<span id="cb10-99"><a href="pensamento-probabilístico.html#cb10-99" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.500</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb10-100"><a href="pensamento-probabilístico.html#cb10-100" tabindex="-1"></a>  ),</span>
+<span id="cb10-101"><a href="pensamento-probabilístico.html#cb10-101" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb10-102"><a href="pensamento-probabilístico.html#cb10-102" tabindex="-1"></a>    <span class="st">&quot;Amostra: (n = 5000)&quot;</span>,</span>
+<span id="cb10-103"><a href="pensamento-probabilístico.html#cb10-103" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-104"><a href="pensamento-probabilístico.html#cb10-104" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
+<span id="cb10-105"><a href="pensamento-probabilístico.html#cb10-105" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.5000</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb10-106"><a href="pensamento-probabilístico.html#cb10-106" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb10-107"><a href="pensamento-probabilístico.html#cb10-107" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
+<span id="cb10-108"><a href="pensamento-probabilístico.html#cb10-108" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.5000</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb10-109"><a href="pensamento-probabilístico.html#cb10-109" tabindex="-1"></a>  )</span>
+<span id="cb10-110"><a href="pensamento-probabilístico.html#cb10-110" tabindex="-1"></a>)</span>
+<span id="cb10-111"><a href="pensamento-probabilístico.html#cb10-111" tabindex="-1"></a></span>
+<span id="cb10-112"><a href="pensamento-probabilístico.html#cb10-112" tabindex="-1"></a><span class="co"># histograma de densidade da reamostra utilizando grid por reamostra</span></span>
+<span id="cb10-113"><a href="pensamento-probabilístico.html#cb10-113" tabindex="-1"></a>histograma_reamostra <span class="ot">&lt;-</span> reamostra <span class="sc">%&gt;%</span></span>
+<span id="cb10-114"><a href="pensamento-probabilístico.html#cb10-114" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb10-115"><a href="pensamento-probabilístico.html#cb10-115" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">&quot;reamostra&quot;</span>,</span>
+<span id="cb10-116"><a href="pensamento-probabilístico.html#cb10-116" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-117"><a href="pensamento-probabilístico.html#cb10-117" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> valor)) <span class="sc">+</span></span>
+<span id="cb10-118"><a href="pensamento-probabilístico.html#cb10-118" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(</span>
+<span id="cb10-119"><a href="pensamento-probabilístico.html#cb10-119" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">y =</span> ggplot2<span class="sc">::</span><span class="fu">after_stat</span>(density)),</span>
+<span id="cb10-120"><a href="pensamento-probabilístico.html#cb10-120" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">1</span>,</span>
+<span id="cb10-121"><a href="pensamento-probabilístico.html#cb10-121" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb10-122"><a href="pensamento-probabilístico.html#cb10-122" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;grey&quot;</span>,</span>
+<span id="cb10-123"><a href="pensamento-probabilístico.html#cb10-123" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb10-124"><a href="pensamento-probabilístico.html#cb10-124" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
+<span id="cb10-125"><a href="pensamento-probabilístico.html#cb10-125" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-126"><a href="pensamento-probabilístico.html#cb10-126" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb10-127"><a href="pensamento-probabilístico.html#cb10-127" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(<span class="sc">~</span> reamostra, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb10-128"><a href="pensamento-probabilístico.html#cb10-128" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histogramas representando as médias </span><span class="sc">\n</span><span class="st"> de 100 amostras de tamanhos diferentes </span><span class="sc">\n</span><span class="st"> tomadas da população </span><span class="sc">\n</span><span class="st"> com reposição e igual probabilidade&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Variável&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidade&quot;</span>) <span class="sc">+</span></span>
 <span id="cb10-129"><a href="pensamento-probabilístico.html#cb10-129" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb10-130"><a href="pensamento-probabilístico.html#cb10-130" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
 <span id="cb10-131"><a href="pensamento-probabilístico.html#cb10-131" tabindex="-1"></a>    <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
@@ -1582,9 +1583,9 @@ div.csl-indent {
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="pensamento-probabilístico.html#cb11-1" tabindex="-1"></a><span class="co"># exibe os histogramas</span></span>
-<span id="cb11-2"><a href="pensamento-probabilístico.html#cb11-2" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(histograma_pop,</span>
-<span id="cb11-3"><a href="pensamento-probabilístico.html#cb11-3" tabindex="-1"></a>                        histograma_reamostra,</span>
-<span id="cb11-4"><a href="pensamento-probabilístico.html#cb11-4" tabindex="-1"></a>                        <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb11-2"><a href="pensamento-probabilístico.html#cb11-2" tabindex="-1"></a><span class="co"># gridExtra::grid.arrange(histograma_pop,</span></span>
+<span id="cb11-3"><a href="pensamento-probabilístico.html#cb11-3" tabindex="-1"></a><span class="co">#                         histograma_reamostra,</span></span>
+<span id="cb11-4"><a href="pensamento-probabilístico.html#cb11-4" tabindex="-1"></a><span class="co">#                         ncol = 2)</span></span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="pensamento-probabilístico.html#cb12-1" tabindex="-1"></a><span class="co"># para garantir a reprodutibilidade</span></span>
@@ -1611,109 +1612,109 @@ div.csl-indent {
 <span id="cb12-22"><a href="pensamento-probabilístico.html#cb12-22" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_density</span>() <span class="sc">+</span></span>
 <span id="cb12-23"><a href="pensamento-probabilístico.html#cb12-23" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
 <span id="cb12-24"><a href="pensamento-probabilístico.html#cb12-24" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste0</span>(</span>
-<span id="cb12-25"><a href="pensamento-probabilístico.html#cb12-25" tabindex="-1"></a>      <span class="st">&quot;População (N = &quot;</span>, N, <span class="st">&quot;)&quot;</span>,</span>
-<span id="cb12-26"><a href="pensamento-probabilístico.html#cb12-26" tabindex="-1"></a>      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb12-27"><a href="pensamento-probabilístico.html#cb12-27" tabindex="-1"></a>      <span class="st">&quot;média = &quot;</span>,</span>
-<span id="cb12-28"><a href="pensamento-probabilístico.html#cb12-28" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">mean</span>(população<span class="sc">$</span>Variável), <span class="at">digits =</span> <span class="dv">3</span>),</span>
-<span id="cb12-29"><a href="pensamento-probabilístico.html#cb12-29" tabindex="-1"></a>      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb12-30"><a href="pensamento-probabilístico.html#cb12-30" tabindex="-1"></a>      <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
-<span id="cb12-31"><a href="pensamento-probabilístico.html#cb12-31" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">sd</span>(população<span class="sc">$</span>Variável), <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb12-32"><a href="pensamento-probabilístico.html#cb12-32" tabindex="-1"></a>    ),</span>
-<span id="cb12-33"><a href="pensamento-probabilístico.html#cb12-33" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Variável&quot;</span>,</span>
-<span id="cb12-34"><a href="pensamento-probabilístico.html#cb12-34" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Densidade&quot;</span></span>
-<span id="cb12-35"><a href="pensamento-probabilístico.html#cb12-35" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-36"><a href="pensamento-probabilístico.html#cb12-36" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb12-37"><a href="pensamento-probabilístico.html#cb12-37" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb12-38"><a href="pensamento-probabilístico.html#cb12-38" tabindex="-1"></a>    <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb12-39"><a href="pensamento-probabilístico.html#cb12-39" tabindex="-1"></a>    <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb12-40"><a href="pensamento-probabilístico.html#cb12-40" tabindex="-1"></a>    <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb12-41"><a href="pensamento-probabilístico.html#cb12-41" tabindex="-1"></a>    <span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
-<span id="cb12-42"><a href="pensamento-probabilístico.html#cb12-42" tabindex="-1"></a>  )</span>
-<span id="cb12-43"><a href="pensamento-probabilístico.html#cb12-43" tabindex="-1"></a></span>
-<span id="cb12-44"><a href="pensamento-probabilístico.html#cb12-44" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb12-45"><a href="pensamento-probabilístico.html#cb12-45" tabindex="-1"></a><span class="co"># armazena as médias das amostras de tamanho B</span></span>
-<span id="cb12-46"><a href="pensamento-probabilístico.html#cb12-46" tabindex="-1"></a>reamostra <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb12-47"><a href="pensamento-probabilístico.html#cb12-47" tabindex="-1"></a>  <span class="at">res.5 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
-<span id="cb12-48"><a href="pensamento-probabilístico.html#cb12-48" tabindex="-1"></a>  <span class="at">res.50 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
-<span id="cb12-49"><a href="pensamento-probabilístico.html#cb12-49" tabindex="-1"></a>  <span class="at">res.500 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
-<span id="cb12-50"><a href="pensamento-probabilístico.html#cb12-50" tabindex="-1"></a>  <span class="at">res.5000 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B)</span>
-<span id="cb12-51"><a href="pensamento-probabilístico.html#cb12-51" tabindex="-1"></a>)</span>
-<span id="cb12-52"><a href="pensamento-probabilístico.html#cb12-52" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb12-53"><a href="pensamento-probabilístico.html#cb12-53" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
-<span id="cb12-54"><a href="pensamento-probabilístico.html#cb12-54" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">5</span>,</span>
-<span id="cb12-55"><a href="pensamento-probabilístico.html#cb12-55" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-56"><a href="pensamento-probabilístico.html#cb12-56" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.5</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
-<span id="cb12-57"><a href="pensamento-probabilístico.html#cb12-57" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
-<span id="cb12-58"><a href="pensamento-probabilístico.html#cb12-58" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">50</span>,</span>
-<span id="cb12-59"><a href="pensamento-probabilístico.html#cb12-59" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-60"><a href="pensamento-probabilístico.html#cb12-60" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.50</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
-<span id="cb12-61"><a href="pensamento-probabilístico.html#cb12-61" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
-<span id="cb12-62"><a href="pensamento-probabilístico.html#cb12-62" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">500</span>,</span>
-<span id="cb12-63"><a href="pensamento-probabilístico.html#cb12-63" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-64"><a href="pensamento-probabilístico.html#cb12-64" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.500</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
-<span id="cb12-65"><a href="pensamento-probabilístico.html#cb12-65" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
-<span id="cb12-66"><a href="pensamento-probabilístico.html#cb12-66" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">5000</span>,</span>
-<span id="cb12-67"><a href="pensamento-probabilístico.html#cb12-67" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-68"><a href="pensamento-probabilístico.html#cb12-68" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.5000</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
-<span id="cb12-69"><a href="pensamento-probabilístico.html#cb12-69" tabindex="-1"></a>}</span>
-<span id="cb12-70"><a href="pensamento-probabilístico.html#cb12-70" tabindex="-1"></a><span class="fu">names</span>(reamostra) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb12-71"><a href="pensamento-probabilístico.html#cb12-71" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb12-72"><a href="pensamento-probabilístico.html#cb12-72" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 5)&quot;</span>,</span>
-<span id="cb12-73"><a href="pensamento-probabilístico.html#cb12-73" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb12-74"><a href="pensamento-probabilístico.html#cb12-74" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
-<span id="cb12-75"><a href="pensamento-probabilístico.html#cb12-75" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.5</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
-<span id="cb12-76"><a href="pensamento-probabilístico.html#cb12-76" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb12-77"><a href="pensamento-probabilístico.html#cb12-77" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
-<span id="cb12-78"><a href="pensamento-probabilístico.html#cb12-78" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.5</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb12-79"><a href="pensamento-probabilístico.html#cb12-79" tabindex="-1"></a>  ),</span>
-<span id="cb12-80"><a href="pensamento-probabilístico.html#cb12-80" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb12-81"><a href="pensamento-probabilístico.html#cb12-81" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 50)&quot;</span>,</span>
-<span id="cb12-82"><a href="pensamento-probabilístico.html#cb12-82" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb12-83"><a href="pensamento-probabilístico.html#cb12-83" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
-<span id="cb12-84"><a href="pensamento-probabilístico.html#cb12-84" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.50</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
-<span id="cb12-85"><a href="pensamento-probabilístico.html#cb12-85" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb12-86"><a href="pensamento-probabilístico.html#cb12-86" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
-<span id="cb12-87"><a href="pensamento-probabilístico.html#cb12-87" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.50</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb12-88"><a href="pensamento-probabilístico.html#cb12-88" tabindex="-1"></a>  ),</span>
-<span id="cb12-89"><a href="pensamento-probabilístico.html#cb12-89" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb12-90"><a href="pensamento-probabilístico.html#cb12-90" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 500)&quot;</span>,</span>
-<span id="cb12-91"><a href="pensamento-probabilístico.html#cb12-91" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb12-92"><a href="pensamento-probabilístico.html#cb12-92" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
-<span id="cb12-93"><a href="pensamento-probabilístico.html#cb12-93" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.500</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
-<span id="cb12-94"><a href="pensamento-probabilístico.html#cb12-94" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb12-95"><a href="pensamento-probabilístico.html#cb12-95" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
-<span id="cb12-96"><a href="pensamento-probabilístico.html#cb12-96" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.500</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb12-97"><a href="pensamento-probabilístico.html#cb12-97" tabindex="-1"></a>  ),</span>
-<span id="cb12-98"><a href="pensamento-probabilístico.html#cb12-98" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb12-99"><a href="pensamento-probabilístico.html#cb12-99" tabindex="-1"></a>    <span class="st">&quot;Amostra: (n = 5000)&quot;</span>,</span>
-<span id="cb12-100"><a href="pensamento-probabilístico.html#cb12-100" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb12-101"><a href="pensamento-probabilístico.html#cb12-101" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
-<span id="cb12-102"><a href="pensamento-probabilístico.html#cb12-102" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.5000</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
-<span id="cb12-103"><a href="pensamento-probabilístico.html#cb12-103" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb12-104"><a href="pensamento-probabilístico.html#cb12-104" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
-<span id="cb12-105"><a href="pensamento-probabilístico.html#cb12-105" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.5000</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb12-106"><a href="pensamento-probabilístico.html#cb12-106" tabindex="-1"></a>  )</span>
-<span id="cb12-107"><a href="pensamento-probabilístico.html#cb12-107" tabindex="-1"></a>)</span>
-<span id="cb12-108"><a href="pensamento-probabilístico.html#cb12-108" tabindex="-1"></a></span>
-<span id="cb12-109"><a href="pensamento-probabilístico.html#cb12-109" tabindex="-1"></a><span class="co"># histograma de densidade da reamostra utilizando grid por reamostra</span></span>
-<span id="cb12-110"><a href="pensamento-probabilístico.html#cb12-110" tabindex="-1"></a>histograma_reamostra <span class="ot">&lt;-</span> reamostra <span class="sc">%&gt;%</span></span>
-<span id="cb12-111"><a href="pensamento-probabilístico.html#cb12-111" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
-<span id="cb12-112"><a href="pensamento-probabilístico.html#cb12-112" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">&quot;reamostra&quot;</span>,</span>
-<span id="cb12-113"><a href="pensamento-probabilístico.html#cb12-113" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-114"><a href="pensamento-probabilístico.html#cb12-114" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> valor)) <span class="sc">+</span></span>
-<span id="cb12-115"><a href="pensamento-probabilístico.html#cb12-115" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(</span>
-<span id="cb12-116"><a href="pensamento-probabilístico.html#cb12-116" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">y =</span> ggplot2<span class="sc">::</span><span class="fu">after_stat</span>(density)),</span>
-<span id="cb12-117"><a href="pensamento-probabilístico.html#cb12-117" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">1</span>,</span>
-<span id="cb12-118"><a href="pensamento-probabilístico.html#cb12-118" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
-<span id="cb12-119"><a href="pensamento-probabilístico.html#cb12-119" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;grey&quot;</span>,</span>
-<span id="cb12-120"><a href="pensamento-probabilístico.html#cb12-120" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb12-121"><a href="pensamento-probabilístico.html#cb12-121" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
-<span id="cb12-122"><a href="pensamento-probabilístico.html#cb12-122" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-123"><a href="pensamento-probabilístico.html#cb12-123" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb12-124"><a href="pensamento-probabilístico.html#cb12-124" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>( <span class="sc">~</span> reamostra, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb12-125"><a href="pensamento-probabilístico.html#cb12-125" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histogramas representando as médias </span><span class="sc">\n</span><span class="st"> de 100 amostras de tamanhos diferentes </span><span class="sc">\n</span><span class="st"> tomadas da população </span><span class="sc">\n</span><span class="st"> com reposição e igual probabilidade&quot;</span>,</span>
-<span id="cb12-126"><a href="pensamento-probabilístico.html#cb12-126" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Variável&quot;</span>,</span>
-<span id="cb12-127"><a href="pensamento-probabilístico.html#cb12-127" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">&quot;Densidade&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-25"><a href="pensamento-probabilístico.html#cb12-25" tabindex="-1"></a>      <span class="st">&quot;População (N = &quot;</span>,</span>
+<span id="cb12-26"><a href="pensamento-probabilístico.html#cb12-26" tabindex="-1"></a>      N,</span>
+<span id="cb12-27"><a href="pensamento-probabilístico.html#cb12-27" tabindex="-1"></a>      <span class="st">&quot;)&quot;</span>,</span>
+<span id="cb12-28"><a href="pensamento-probabilístico.html#cb12-28" tabindex="-1"></a>      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb12-29"><a href="pensamento-probabilístico.html#cb12-29" tabindex="-1"></a>      <span class="st">&quot;média = &quot;</span>,</span>
+<span id="cb12-30"><a href="pensamento-probabilístico.html#cb12-30" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">mean</span>(população<span class="sc">$</span>Variável), <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb12-31"><a href="pensamento-probabilístico.html#cb12-31" tabindex="-1"></a>      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb12-32"><a href="pensamento-probabilístico.html#cb12-32" tabindex="-1"></a>      <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
+<span id="cb12-33"><a href="pensamento-probabilístico.html#cb12-33" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">sd</span>(população<span class="sc">$</span>Variável), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb12-34"><a href="pensamento-probabilístico.html#cb12-34" tabindex="-1"></a>    ),</span>
+<span id="cb12-35"><a href="pensamento-probabilístico.html#cb12-35" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Variável&quot;</span>,</span>
+<span id="cb12-36"><a href="pensamento-probabilístico.html#cb12-36" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Densidade&quot;</span></span>
+<span id="cb12-37"><a href="pensamento-probabilístico.html#cb12-37" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-38"><a href="pensamento-probabilístico.html#cb12-38" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb12-39"><a href="pensamento-probabilístico.html#cb12-39" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb12-40"><a href="pensamento-probabilístico.html#cb12-40" tabindex="-1"></a>    <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb12-41"><a href="pensamento-probabilístico.html#cb12-41" tabindex="-1"></a>    <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb12-42"><a href="pensamento-probabilístico.html#cb12-42" tabindex="-1"></a>    <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb12-43"><a href="pensamento-probabilístico.html#cb12-43" tabindex="-1"></a>    <span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb12-44"><a href="pensamento-probabilístico.html#cb12-44" tabindex="-1"></a>  )</span>
+<span id="cb12-45"><a href="pensamento-probabilístico.html#cb12-45" tabindex="-1"></a></span>
+<span id="cb12-46"><a href="pensamento-probabilístico.html#cb12-46" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb12-47"><a href="pensamento-probabilístico.html#cb12-47" tabindex="-1"></a><span class="co"># armazena as médias das amostras de tamanho B</span></span>
+<span id="cb12-48"><a href="pensamento-probabilístico.html#cb12-48" tabindex="-1"></a>reamostra <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-49"><a href="pensamento-probabilístico.html#cb12-49" tabindex="-1"></a>  <span class="at">res.5 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
+<span id="cb12-50"><a href="pensamento-probabilístico.html#cb12-50" tabindex="-1"></a>  <span class="at">res.50 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
+<span id="cb12-51"><a href="pensamento-probabilístico.html#cb12-51" tabindex="-1"></a>  <span class="at">res.500 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B),</span>
+<span id="cb12-52"><a href="pensamento-probabilístico.html#cb12-52" tabindex="-1"></a>  <span class="at">res.5000 =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B)</span>
+<span id="cb12-53"><a href="pensamento-probabilístico.html#cb12-53" tabindex="-1"></a>)</span>
+<span id="cb12-54"><a href="pensamento-probabilístico.html#cb12-54" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb12-55"><a href="pensamento-probabilístico.html#cb12-55" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
+<span id="cb12-56"><a href="pensamento-probabilístico.html#cb12-56" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb12-57"><a href="pensamento-probabilístico.html#cb12-57" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-58"><a href="pensamento-probabilístico.html#cb12-58" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.5</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
+<span id="cb12-59"><a href="pensamento-probabilístico.html#cb12-59" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
+<span id="cb12-60"><a href="pensamento-probabilístico.html#cb12-60" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">50</span>,</span>
+<span id="cb12-61"><a href="pensamento-probabilístico.html#cb12-61" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-62"><a href="pensamento-probabilístico.html#cb12-62" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.50</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
+<span id="cb12-63"><a href="pensamento-probabilístico.html#cb12-63" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
+<span id="cb12-64"><a href="pensamento-probabilístico.html#cb12-64" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">500</span>,</span>
+<span id="cb12-65"><a href="pensamento-probabilístico.html#cb12-65" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-66"><a href="pensamento-probabilístico.html#cb12-66" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.500</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
+<span id="cb12-67"><a href="pensamento-probabilístico.html#cb12-67" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> população<span class="sc">$</span>Variável,</span>
+<span id="cb12-68"><a href="pensamento-probabilístico.html#cb12-68" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">5000</span>,</span>
+<span id="cb12-69"><a href="pensamento-probabilístico.html#cb12-69" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-70"><a href="pensamento-probabilístico.html#cb12-70" tabindex="-1"></a>  reamostra<span class="sc">$</span>res<span class="fl">.5000</span>[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sub)</span>
+<span id="cb12-71"><a href="pensamento-probabilístico.html#cb12-71" tabindex="-1"></a>}</span>
+<span id="cb12-72"><a href="pensamento-probabilístico.html#cb12-72" tabindex="-1"></a><span class="fu">names</span>(reamostra) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-73"><a href="pensamento-probabilístico.html#cb12-73" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb12-74"><a href="pensamento-probabilístico.html#cb12-74" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 5)&quot;</span>,</span>
+<span id="cb12-75"><a href="pensamento-probabilístico.html#cb12-75" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb12-76"><a href="pensamento-probabilístico.html#cb12-76" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
+<span id="cb12-77"><a href="pensamento-probabilístico.html#cb12-77" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.5</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb12-78"><a href="pensamento-probabilístico.html#cb12-78" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb12-79"><a href="pensamento-probabilístico.html#cb12-79" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
+<span id="cb12-80"><a href="pensamento-probabilístico.html#cb12-80" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.5</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb12-81"><a href="pensamento-probabilístico.html#cb12-81" tabindex="-1"></a>  ),</span>
+<span id="cb12-82"><a href="pensamento-probabilístico.html#cb12-82" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb12-83"><a href="pensamento-probabilístico.html#cb12-83" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 50)&quot;</span>,</span>
+<span id="cb12-84"><a href="pensamento-probabilístico.html#cb12-84" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb12-85"><a href="pensamento-probabilístico.html#cb12-85" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
+<span id="cb12-86"><a href="pensamento-probabilístico.html#cb12-86" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.50</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb12-87"><a href="pensamento-probabilístico.html#cb12-87" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb12-88"><a href="pensamento-probabilístico.html#cb12-88" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
+<span id="cb12-89"><a href="pensamento-probabilístico.html#cb12-89" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.50</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb12-90"><a href="pensamento-probabilístico.html#cb12-90" tabindex="-1"></a>  ),</span>
+<span id="cb12-91"><a href="pensamento-probabilístico.html#cb12-91" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb12-92"><a href="pensamento-probabilístico.html#cb12-92" tabindex="-1"></a>    <span class="st">&quot;Amostra (n = 500)&quot;</span>,</span>
+<span id="cb12-93"><a href="pensamento-probabilístico.html#cb12-93" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb12-94"><a href="pensamento-probabilístico.html#cb12-94" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
+<span id="cb12-95"><a href="pensamento-probabilístico.html#cb12-95" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.500</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb12-96"><a href="pensamento-probabilístico.html#cb12-96" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb12-97"><a href="pensamento-probabilístico.html#cb12-97" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
+<span id="cb12-98"><a href="pensamento-probabilístico.html#cb12-98" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.500</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb12-99"><a href="pensamento-probabilístico.html#cb12-99" tabindex="-1"></a>  ),</span>
+<span id="cb12-100"><a href="pensamento-probabilístico.html#cb12-100" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb12-101"><a href="pensamento-probabilístico.html#cb12-101" tabindex="-1"></a>    <span class="st">&quot;Amostra: (n = 5000)&quot;</span>,</span>
+<span id="cb12-102"><a href="pensamento-probabilístico.html#cb12-102" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb12-103"><a href="pensamento-probabilístico.html#cb12-103" tabindex="-1"></a>    <span class="st">&quot;média = &quot;</span>,</span>
+<span id="cb12-104"><a href="pensamento-probabilístico.html#cb12-104" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">mean</span>(reamostra<span class="sc">$</span>res<span class="fl">.5000</span>), <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb12-105"><a href="pensamento-probabilístico.html#cb12-105" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb12-106"><a href="pensamento-probabilístico.html#cb12-106" tabindex="-1"></a>    <span class="st">&quot;desvio-padrão = &quot;</span>,</span>
+<span id="cb12-107"><a href="pensamento-probabilístico.html#cb12-107" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sd</span>(reamostra<span class="sc">$</span>res<span class="fl">.5000</span>), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb12-108"><a href="pensamento-probabilístico.html#cb12-108" tabindex="-1"></a>  )</span>
+<span id="cb12-109"><a href="pensamento-probabilístico.html#cb12-109" tabindex="-1"></a>)</span>
+<span id="cb12-110"><a href="pensamento-probabilístico.html#cb12-110" tabindex="-1"></a></span>
+<span id="cb12-111"><a href="pensamento-probabilístico.html#cb12-111" tabindex="-1"></a><span class="co"># histograma de densidade da reamostra utilizando grid por reamostra</span></span>
+<span id="cb12-112"><a href="pensamento-probabilístico.html#cb12-112" tabindex="-1"></a>histograma_reamostra <span class="ot">&lt;-</span> reamostra <span class="sc">%&gt;%</span></span>
+<span id="cb12-113"><a href="pensamento-probabilístico.html#cb12-113" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb12-114"><a href="pensamento-probabilístico.html#cb12-114" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">&quot;reamostra&quot;</span>,</span>
+<span id="cb12-115"><a href="pensamento-probabilístico.html#cb12-115" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-116"><a href="pensamento-probabilístico.html#cb12-116" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> valor)) <span class="sc">+</span></span>
+<span id="cb12-117"><a href="pensamento-probabilístico.html#cb12-117" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(</span>
+<span id="cb12-118"><a href="pensamento-probabilístico.html#cb12-118" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">y =</span> ggplot2<span class="sc">::</span><span class="fu">after_stat</span>(density)),</span>
+<span id="cb12-119"><a href="pensamento-probabilístico.html#cb12-119" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">1</span>,</span>
+<span id="cb12-120"><a href="pensamento-probabilístico.html#cb12-120" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb12-121"><a href="pensamento-probabilístico.html#cb12-121" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;grey&quot;</span>,</span>
+<span id="cb12-122"><a href="pensamento-probabilístico.html#cb12-122" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb12-123"><a href="pensamento-probabilístico.html#cb12-123" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
+<span id="cb12-124"><a href="pensamento-probabilístico.html#cb12-124" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-125"><a href="pensamento-probabilístico.html#cb12-125" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb12-126"><a href="pensamento-probabilístico.html#cb12-126" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(<span class="sc">~</span> reamostra, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb12-127"><a href="pensamento-probabilístico.html#cb12-127" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histogramas representando as médias </span><span class="sc">\n</span><span class="st"> de 100 amostras de tamanhos diferentes </span><span class="sc">\n</span><span class="st"> tomadas da população </span><span class="sc">\n</span><span class="st"> com reposição e igual probabilidade&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Variável&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidade&quot;</span>) <span class="sc">+</span></span>
 <span id="cb12-128"><a href="pensamento-probabilístico.html#cb12-128" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb12-129"><a href="pensamento-probabilístico.html#cb12-129" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
 <span id="cb12-130"><a href="pensamento-probabilístico.html#cb12-130" tabindex="-1"></a>    <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>

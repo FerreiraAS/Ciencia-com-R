@@ -37,19 +37,15 @@
 set.seed(1234)
 
 # simula o lançamento de moeda
-população.coin <- tidydice::flip_coin(
-        times = 1000,
-        rounds = 1,
-        success = c(1))
+população.coin <- tidydice::flip_coin(times = 1000,
+                                      rounds = 1,
+                                      success = c(1))
 # remove lances duplicados
 população.coin <- população.coin[!duplicated(população.coin$result), ]
 # coloca em ordem
 população.coin <- população.coin[order(população.coin$result), ]
 
-espaço.amostral.coin <- tidydice::plot_coin(
-    população.coin,
-    fill_success = NA,
-    ) + ggplot2::ggtitle("") +
+espaço.amostral.coin <- tidydice::plot_coin(população.coin, fill_success = NA, ) + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
   ggplot2::annotate(
     "text",
@@ -64,25 +60,18 @@ espaço.amostral.coin <- tidydice::plot_coin(
   )
 
 # simula o lançamento de dado
-população.dice <- tidydice::roll_dice(
-        times = 1000,
-        rounds = 1,
-        success = 4)
+população.dice <- tidydice::roll_dice(times = 1000,
+                                      rounds = 1,
+                                      success = 4)
 # remove lances duplicados
 população.dice <- população.dice[!duplicated(população.dice$result), ]
 # coloca em ordem
 população.dice <- população.dice[order(população.dice$result), ]
 
-espaço.amostral.dice <- tidydice::plot_dice(
-    população.dice,
-    fill_success = NA
-    ) + ggplot2::ggtitle("") +
+espaço.amostral.dice <- tidydice::plot_dice(população.dice, fill_success = NA) + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-gridExtra::grid.arrange(
-  espaço.amostral.coin,
-  espaço.amostral.dice,
-  nrow = 2)
+gridExtra::grid.arrange(espaço.amostral.coin, espaço.amostral.dice, nrow = 2)
 ```
 
 <br>
@@ -100,14 +89,13 @@ gridExtra::grid.arrange(
 set.seed(1234)
 
 # simula 1 lançamento de 1 moeda
-evento.coin <- tidydice::plot_coin(
-    tidydice::flip_coin(
-        times = 1,
-        rounds = 1,
-        success = c(1)),
-    fill_success = "grey"
-    ) + ggplot2::ggtitle("") +
-  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) + 
+evento.coin <- tidydice::plot_coin(tidydice::flip_coin(
+  times = 1,
+  rounds = 1,
+  success = c(1)
+),
+fill_success = "grey") + ggplot2::ggtitle("") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
   ggplot2::annotate(
     "text",
     x = c(1.45),
@@ -120,16 +108,17 @@ evento.coin <- tidydice::plot_coin(
     vjust = 0.5
   )
 
-espaço.amostral.coin <- tidydice::plot_coin(
-    população.coin,
-    fill_success = "grey"
-    ) + ggplot2::ggtitle("") +
+espaço.amostral.coin <- tidydice::plot_coin(população.coin, fill_success = "grey") + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
   ggplot2::annotate(
     "text",
     x = c(1.45, 2.45),
     y = c(1.45, 1.45),
-    label = factor(população.coin$result, levels = c(1, 2), labels = c("cara", "coroa")),
+    label = factor(
+      população.coin$result,
+      levels = c(1, 2),
+      labels = c("cara", "coroa")
+    ),
     color = "black",
     size = 6,
     fontface = "bold",
@@ -138,19 +127,15 @@ espaço.amostral.coin <- tidydice::plot_coin(
   )
 
 # simula 1 lançamento de 1 dado
-evento.dice <- tidydice::plot_dice(
-    tidydice::roll_dice(
-        times = 1,
-        rounds = 1,
-        success = 4),
-    fill_success = "grey"
-    ) + ggplot2::ggtitle("") +
+evento.dice <- tidydice::plot_dice(tidydice::roll_dice(
+  times = 1,
+  rounds = 1,
+  success = 4
+),
+fill_success = "grey") + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-espaço.amostral.dice <- tidydice::plot_dice(
-    população.dice,
-    fill_success = "grey"
-    ) + ggplot2::ggtitle("") +
+espaço.amostral.dice <- tidydice::plot_dice(população.dice, fill_success = "grey") + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 gridExtra::grid.arrange(
@@ -178,33 +163,26 @@ gridExtra::grid.arrange(
 <br>
 
 ```{r espaco-eventos-dado, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Espaço de eventos: União dos eventos face = 3 e face = 4 de um dado."}
-
 # para reprodutibilidade
 set.seed(1234)
 
 # simula o lançamento de dado
-população <- tidydice::roll_dice(
-        times = 1000,
-        rounds = 1,
-        success = c(3,4))
+população <- tidydice::roll_dice(times = 1000,
+                                 rounds = 1,
+                                 success = c(3, 4))
 # remove lances duplicados
 população <- população[!duplicated(população$result), ]
 # coloca em ordem
 população <- população[order(população$result), ]
 
-espaço.amostral <- tidydice::plot_dice(
-    população,
-    fill_success = "grey"
-    ) + ggplot2::ggtitle("") +
+espaço.amostral <- tidydice::plot_dice(população, fill_success = "grey") + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 # seleciona espaço de eventos
-população <- população[população$result == 3 | população$result == 4, ]
+população <- população[população$result == 3 |
+                         população$result == 4, ]
 
-espaço.eventos <- tidydice::plot_dice(
-    população,
-    fill_success = "grey"
-    ) + ggplot2::ggtitle("") +
+espaço.eventos <- tidydice::plot_dice(população, fill_success = "grey") + ggplot2::ggtitle("") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 gridExtra::grid.arrange(espaço.eventos, espaço.amostral, nrow = 2)
@@ -290,7 +268,8 @@ grid::grid.newpage()
 grid::pushViewport(grid::viewport(layout = grid::grid.layout(2, 1)))
 
 # Função para posicionar gráficos
-vplayout <- function(x, y) grid::viewport(layout.pos.row = x, layout.pos.col = y)
+vplayout <- function(x, y)
+  grid::viewport(layout.pos.row = x, layout.pos.col = y)
 
 # Painel 1 - Eventos Independentes
 grid::pushViewport(vplayout(1, 1))
@@ -335,48 +314,43 @@ grid::popViewport()
 <br>
 
 ```{r independencia-dado, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Evento (face = 4). Direita: Experimentos de 1 lançamento de 1 dado (superior), 3 lançamentos de 1 dado (central), 10 lançamentos de 1 dado (inferior)."}
-
 # para reprodutibilidade
 set.seed(1234)
 
 # simula 1 lançamento de 1 dado
-evento <- tidydice::plot_dice(
-    tidydice::roll_dice(
-        times = 1,
-        rounds = 1,
-        success = 4),
-    fill_success = "grey"
-    ) + ggplot2::ggtitle("Evento") +
+evento <- tidydice::plot_dice(tidydice::roll_dice(
+  times = 1,
+  rounds = 1,
+  success = 4
+),
+fill_success = "grey") + ggplot2::ggtitle("Evento") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 # simula 1 lançamento de 1 dado
-p1 <- tidydice::plot_dice(
-    tidydice::roll_dice(
-        times = 1,
-        rounds = 1,
-        success = 4),
-    fill_success = "grey"
-    ) + ggplot2::ggtitle("1 lançamento de 1 dado") +
+p1 <- tidydice::plot_dice(tidydice::roll_dice(
+  times = 1,
+  rounds = 1,
+  success = 4
+),
+fill_success = "grey") + ggplot2::ggtitle("1 lançamento de 1 dado") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 # simula 3 lançamentos de 1 dado
-p3 <-tidydice::plot_dice(
-    tidydice::roll_dice(
-        times = 3,
-        rounds = 1,
-        success = 4),
-    fill_success = "grey"
-    ) + ggplot2::ggtitle("3 lançamentos de 1 dado") +
+p3 <- tidydice::plot_dice(tidydice::roll_dice(
+  times = 3,
+  rounds = 1,
+  success = 4
+),
+fill_success = "grey") + ggplot2::ggtitle("3 lançamentos de 1 dado") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 # simula 10 lançamentos de 1 dado
-p10 <- tidydice::plot_dice(
-    tidydice::roll_dice(
-        times = 10,
-        rounds = 1,
-        success = 4),
-    fill_success = "grey"
-    ) + ggplot2::ggtitle("10 lançamentos de 1 dado") +
+p10 <- tidydice::plot_dice(tidydice::roll_dice(
+  times = 10,
+  rounds = 1,
+  success = 4
+),
+fill_success = "grey") + ggplot2::ggtitle("10 lançamentos de 1 dado") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 gridExtra::grid.arrange(evento, p1, evento, p3, evento, p10, nrow = 3)
@@ -509,7 +483,9 @@ histograma_pop <-
   ggplot2::geom_density() +
   ggplot2::labs(
     title = paste0(
-      "População (N = ", N, ")",
+      "População (N = ",
+      N,
+      ")",
       "\n",
       "média = ",
       round(mean(população$Variável), digits = 3),
@@ -608,10 +584,8 @@ histograma_reamostra <- reamostra %>%
     alpha = 0.5
   ) +
   ggplot2::geom_density() +
-  ggplot2::facet_wrap( ~ reamostra, ncol = 2) +
-  ggplot2::labs(title = "Histogramas representando as médias \n de 100 amostras de tamanhos diferentes \n tomadas da população \n com reposição e igual probabilidade",
-                x = "Variável",
-                y = "Densidade") +
+  ggplot2::facet_wrap(~ reamostra, ncol = 2) +
+  ggplot2::labs(title = "Histogramas representando as médias \n de 100 amostras de tamanhos diferentes \n tomadas da população \n com reposição e igual probabilidade", x = "Variável", y = "Densidade") +
   ggplot2::theme_bw() +
   ggplot2::theme(
     plot.title = ggplot2::element_text(hjust = 0.5),
@@ -627,9 +601,9 @@ histograma_reamostra <- reamostra %>%
 
 ```{r teorema-central-limite-continua-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquerda: Histogramas de uma variável aleatória com distribuição uniforme (N = 100). Direita: Histogramas da média de 100 amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade."}
 # exibe os histogramas
-gridExtra::grid.arrange(histograma_pop,
-                        histograma_reamostra,
-                        ncol = 2)
+# gridExtra::grid.arrange(histograma_pop,
+#                         histograma_reamostra,
+#                         ncol = 2)
 ```
 
 ```{r teorema-central-limite-dado, include = FALSE, echo = FALSE, results = "hide"}
@@ -657,7 +631,9 @@ histograma_pop <-
   ggplot2::geom_density() +
   ggplot2::labs(
     title = paste0(
-      "População (N = ", N, ")",
+      "População (N = ",
+      N,
+      ")",
       "\n",
       "média = ",
       round(mean(população$Variável), digits = 3),
@@ -756,10 +732,8 @@ histograma_reamostra <- reamostra %>%
     alpha = 0.5
   ) +
   ggplot2::geom_density() +
-  ggplot2::facet_wrap( ~ reamostra, ncol = 2) +
-  ggplot2::labs(title = "Histogramas representando as médias \n de 100 amostras de tamanhos diferentes \n tomadas da população \n com reposição e igual probabilidade",
-                x = "Variável",
-                y = "Densidade") +
+  ggplot2::facet_wrap(~ reamostra, ncol = 2) +
+  ggplot2::labs(title = "Histogramas representando as médias \n de 100 amostras de tamanhos diferentes \n tomadas da população \n com reposição e igual probabilidade", x = "Variável", y = "Densidade") +
   ggplot2::theme_bw() +
   ggplot2::theme(
     plot.title = ggplot2::element_text(hjust = 0.5),
@@ -1014,15 +988,59 @@ dado2 <- round(sample(amostra$Variável, 1), digits = 0)
 # gráfico de distribuição da amostra com os dois dados aleatórios
 ggplot2::ggplot(amostra, ggplot2::aes(x = Variável)) +
   ggplot2::geom_density(alpha = 0.2, fill = "grey") +
-  ggplot2::geom_vline(xintercept = dado1, color = "black", linetype = "dashed") +
-  ggplot2::geom_vline(xintercept = dado2, color = "black", linetype = "dashed") +
-  ggplot2::geom_vline(xintercept = mean(amostra$Variável), color = "black", linetype = "dashed") +
-  ggplot2::geom_text(ggplot2::aes(x = dado1, y = 0, label = "Dado 1", hjust = 1.1, vjust = 1.1), color = "black", size = 3) +
-  ggplot2::geom_text(ggplot2::aes(x = dado2, y = 0, label = "Dado 2", hjust = 1.1, vjust = 1.1), color = "black", size = 3) +
-  ggplot2::geom_text(ggplot2::aes(x = mean(amostra$Variável), y = 0, label = "Média (valor real)", hjust = 1.1, vjust = 1.1), color = "black", size = 3) +
+  ggplot2::geom_vline(xintercept = dado1,
+                      color = "black",
+                      linetype = "dashed") +
+  ggplot2::geom_vline(xintercept = dado2,
+                      color = "black",
+                      linetype = "dashed") +
+  ggplot2::geom_vline(
+    xintercept = mean(amostra$Variável),
+    color = "black",
+    linetype = "dashed"
+  ) +
+  ggplot2::geom_text(
+    ggplot2::aes(
+      x = dado1,
+      y = 0,
+      label = "Dado 1",
+      hjust = 1.1,
+      vjust = 1.1
+    ),
+    color = "black",
+    size = 3
+  ) +
+  ggplot2::geom_text(
+    ggplot2::aes(
+      x = dado2,
+      y = 0,
+      label = "Dado 2",
+      hjust = 1.1,
+      vjust = 1.1
+    ),
+    color = "black",
+    size = 3
+  ) +
+  ggplot2::geom_text(
+    ggplot2::aes(
+      x = mean(amostra$Variável),
+      y = 0,
+      label = "Média (valor real)",
+      hjust = 1.1,
+      vjust = 1.1
+    ),
+    color = "black",
+    size = 3
+  ) +
   ggplot2::labs(x = "Variável", y = "Densidade") +
-  ggplot2::theme(ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank(), panel.grid.major = ggplot2::element_blank()) +
-  ggplot2::scale_x_continuous(breaks = round(seq(min(amostra$Variável), max(amostra$Variável), by = 1),0))
+  ggplot2::theme(
+    ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major = ggplot2::element_blank()
+  ) +
+  ggplot2::scale_x_continuous(breaks = round(seq(
+    min(amostra$Variável), max(amostra$Variável), by = 1
+  ), 0))
 ```
 
 <br>

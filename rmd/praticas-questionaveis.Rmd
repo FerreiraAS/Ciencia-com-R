@@ -43,28 +43,60 @@ library(dplyr)
 # Criar a tibble com 3 categorias equilibradas
 praticas_questionaveis <- tibble::tibble(
   Prática = c(
-    "*Data fabrication*", "*Data falsification*", "*Fake authorship*", "*Fake peer review*",
-    "*Honorary authorship*", "*Gold authorship*", "*Ghost authorship*", "*Duplicate publication*",
-    "*Spin* (doloso)", "*Data distortion*",
+    "*Data fabrication*",
+    "*Data falsification*",
+    "*Fake authorship*",
+    "*Fake peer review*",
+    "*Honorary authorship*",
+    "*Gold authorship*",
+    "*Ghost authorship*",
+    "*Duplicate publication*",
+    "*Spin* (doloso)",
+    "*Data distortion*",
     
-    "*HARKing*", "*Storytelling*", "*Selective reporting*", "*P-hacking*", "*Data peeking*",
-    "*Cherry picking*", "*Salami slicing*", "*Beautification*",
+    "*HARKing*",
+    "*Storytelling*",
+    "*Selective reporting*",
+    "*P-hacking*",
+    "*Data peeking*",
+    "*Cherry picking*",
+    "*Salami slicing*",
+    "*Beautification*",
     
-    "*P-hacking reverso*", "*Fishing expedition*", "*Data dredging*", "*File drawer problem*",
+    "*P-hacking reverso*",
+    "*Fishing expedition*",
+    "*Data dredging*",
+    "*File drawer problem*",
     "*Publication bias*"
   ),
   Intencionalidade = c(
     # 10 intencionais
-    "Má conduta", "Má conduta", "Má conduta", "Má conduta",
-    "Má conduta", "Má conduta", "Má conduta", "Má conduta",
-    "Má conduta", "Má conduta",
+    "Má conduta",
+    "Má conduta",
+    "Má conduta",
+    "Má conduta",
+    "Má conduta",
+    "Má conduta",
+    "Má conduta",
+    "Má conduta",
+    "Má conduta",
+    "Má conduta",
     
     # 8 zona cinzenta
-    "Zona cinzenta", "Zona cinzenta", "Zona cinzenta", "Zona cinzenta",
-    "Zona cinzenta", "Zona cinzenta", "Zona cinzenta", "Zona cinzenta",
+    "Zona cinzenta",
+    "Zona cinzenta",
+    "Zona cinzenta",
+    "Zona cinzenta",
+    "Zona cinzenta",
+    "Zona cinzenta",
+    "Zona cinzenta",
+    "Zona cinzenta",
     
     # 5 não intencionais
-    "Não intencional", "Não intencional", "Não intencional", "Não intencional",
+    "Não intencional",
+    "Não intencional",
+    "Não intencional",
+    "Não intencional",
     "Não intencional"
   ),
   Definição = c(
@@ -98,7 +130,10 @@ praticas_questionaveis <- tibble::tibble(
 
 # Ordenar por categoria
 praticas_questionaveis <- praticas_questionaveis %>%
-  arrange(factor(Intencionalidade, levels = c("Má conduta", "Zona cinzenta", "Não intencional")))
+  arrange(factor(
+    Intencionalidade,
+    levels = c("Má conduta", "Zona cinzenta", "Não intencional")
+  ))
 
 # Exibir com cores
 kableExtra::kable(
@@ -116,11 +151,7 @@ kableExtra::kable(
     full_width = TRUE,
     position = "center"
   ) %>%
-  kableExtra::row_spec(
-    0,
-    bold = TRUE,
-    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
-  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
   kableExtra::row_spec(
     which(praticas_questionaveis$Intencionalidade == "Má conduta"),
     background = "#ffcdd2"
@@ -133,10 +164,7 @@ kableExtra::kable(
     which(praticas_questionaveis$Intencionalidade == "Não intencional"),
     background = "#e8f5e9"
   ) %>%
-  kableExtra::row_spec(
-    nrow(praticas_questionaveis),
-    extra_css = "border-bottom: 1px solid"
-  )
+  kableExtra::row_spec(nrow(praticas_questionaveis), extra_css = "border-bottom: 1px solid")
 ```
 
 <br>

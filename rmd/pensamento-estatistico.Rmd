@@ -130,26 +130,46 @@ ggplot2::ggplot() +
   ggimage::geom_image(data = pop_df,
                       ggplot2::aes(x = x_pop, y = y_pop, image = label),
                       size = 0.07) +
-  ggplot2::annotate("text", x = -4, y = 3.5,
-                    label = "População", size = 5, fontface = "bold") +
+  ggplot2::annotate(
+    "text",
+    x = -4,
+    y = 3.5,
+    label = "População",
+    size = 5,
+    fontface = "bold"
+  ) +
   
   # Círculo da amostra
   ggforce::geom_circle(ggplot2::aes(x0 = 4, y0 = 0, r = 1.8),
                        color = "black",
                        linewidth = 1) +
-  ggimage::geom_image(data = sample_df,
-                      ggplot2::aes(x = x_sample, y = y_sample, image = label),
-                      size = 0.07) +
-  ggplot2::annotate("text", x = 4, y = 2.3,
-                    label = "Amostra", size = 5, fontface = "bold") +
+  ggimage::geom_image(
+    data = sample_df,
+    ggplot2::aes(x = x_sample, y = y_sample, image = label),
+    size = 0.07
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = 4,
+    y = 2.3,
+    label = "Amostra",
+    size = 5,
+    fontface = "bold"
+  ) +
   
   # Setas
-  ggplot2::geom_segment(data = setas_df,
-                        ggplot2::aes(x = x_pop, y = y_pop,
-                                     xend = x_sample, yend = y_sample),
-                        arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm")),
-                        color = "darkgray",
-                        linewidth = 0.7) +
+  ggplot2::geom_segment(
+    data = setas_df,
+    ggplot2::aes(
+      x = x_pop,
+      y = y_pop,
+      xend = x_sample,
+      yend = y_sample
+    ),
+    arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm")),
+    color = "darkgray",
+    linewidth = 0.7
+  ) +
   ggplot2::coord_fixed() +
   ggplot2::theme_void()
 ```
