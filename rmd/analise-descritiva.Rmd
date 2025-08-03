@@ -254,6 +254,28 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://sear
 
 <br>
 
+### Quais são os tipos de tabelas?
+
+<br>
+
+- Tabela de frequência: apresenta a quantidade de ocorrências (frequência absoluta e relativa) de cada categoria de uma variável; usada com variáveis qualitativas ou quantitativas discretas.[@REF]
+
+- Tabela de frequência agrupada: organiza dados contínuos em intervalos de classe (ex: faixas etárias) e mostra as frequências correspondentes.[@REF]
+
+- Tabela de contingência (ou tabela cruzada): cruza duas variáveis categóricas, permitindo observar possíveis associações entre elas; base para testes como qui-quadrado.[@REF]
+
+- Tabela de medidas descritivas: resume variáveis quantitativas com estatísticas como média, mediana, desvio padrão, mínimo, máximo e quartis.[@REF]
+
+- Tabela de comparação entre grupos: apresenta médias, desvios padrão e resultados de testes estatísticos (como t de Student, ANOVA, Mann-Whitney) para comparar dois ou mais grupos.[@REF]
+
+- Tabela de resultados de testes estatísticos: exibe valores de estatísticas de teste (como t, F, χ²), valores de p e intervalos de confiança; usada para mostrar inferências.[@REF]
+
+- Tabela de regressão (ou de modelos estatísticos): mostra os coeficientes de regressão, erros padrão, intervalos de confiança e valores de p para cada variável de um modelo (ex: regressão linear, logística, modelos mistos).[@REF]
+
+- Tabela de séries temporais ou longitudinais: organiza dados medidos em diferentes momentos no tempo, permitindo visualizar tendências ou variações longitudinais.[@REF]
+
+<br>
+
 ## Tabela 1
 
 <br>
@@ -350,6 +372,277 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://sear
 
 <br>
 
+### Quais são os tipos de gráficos para variáveis categóricas?
+
+- Gráfico de barras: Mais usado para comparar frequências absolutas ou relativas entre categorias.[@REF]
+
+- Gráfico de barras empilhadas: Útil para comparar proporções entre grupos em mais de uma variável categórica.[@REF]
+
+<br>
+
+```{r graficos-var-categoricas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de barras simples representando frequências por categoria."}
+# Criar um conjunto de dados de exemplo
+dados <- data.frame(
+  Grupo = rep(c("A", "B", "C"), each = 3),
+  Categoria = rep(c("X", "Y", "Z"), times = 3),
+  Contagem = c(30, 20, 10, 25, 15, 5, 20, 10, 10)
+)
+
+# Frequência por Categoria (soma total de contagens)
+dados_barras <- dados %>%
+  dplyr::group_by(Categoria) %>%
+  dplyr::summarise(Total = sum(Contagem))
+
+ggplot2::ggplot(dados_barras, ggplot2::aes(x = Categoria, y = Total, fill = Categoria)) +
+  ggplot2::geom_bar(stat = "identity") +
+  ggplot2::labs(title = "Gráfico de Barras Simples",
+       x = "Categoria", y = "Frequência Total") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+```{r graficos-var-categoricas-empilhados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de barras empilhadas representando frequências por categoria."}
+# Criar um conjunto de dados de exemplo
+dados <- data.frame(
+  Grupo = rep(c("A", "B", "C"), each = 3),
+  Categoria = rep(c("X", "Y", "Z"), times = 3),
+  Contagem = c(30, 20, 10, 25, 15, 5, 20, 10, 10)
+)
+
+# Frequência por Categoria (soma total de contagens)
+dados_barras <- dados %>%
+  dplyr::group_by(Categoria) %>%
+  dplyr::summarise(Total = sum(Contagem))
+
+ggplot2::ggplot(dados, ggplot2::aes(x = Grupo, y = Contagem, fill = Categoria)) +
+  ggplot2::geom_bar(stat = "identity") +
+  ggplot2::labs(title = "Gráfico de Barras Empilhadas",
+       x = "Grupo", y = "Contagem") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### Quais são os tipos de gráficos para variáveis numéricas?
+
+- Histograma: Distribuição de frequência de uma variável contínua. Mostra a forma da distribuição (simétrica, assimétrica, bimodal...).[@REF]
+
+- Diagrama de caixa (*boxplot*): Resume mediana, quartis e valores extremos. Excelente para comparar grupos.[@REF]
+
+- Gráfico de densidade: Similar ao histograma, mas mais suave. Útil para avaliar a distribuição.[@REF]
+
+- Gráfico de linha: Usado para séries temporais (ex: evolução de uma medida ao longo do tempo).[@REF]
+
+<br>
+
+```{r graficos-var-numericas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Histograma da variável 'valor'."}
+# Simular dados
+dados <- data.frame(valor = stats::rnorm(1000, mean = 50, sd = 10))
+
+# Histograma
+ggplot2::ggplot(dados, ggplot2::aes(x = valor)) +
+  ggplot2::geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+  ggplot2::labs(title = "Histograma da variável 'valor'",
+                x = "Valor", y = "Frequência") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+```{r boxplot-grupos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Boxplot por grupo."}
+# Simular dados com dois grupos
+dados <- data.frame(
+  grupo = rep(c("Controle", "Tratamento"), each = 100),
+  medida = c(stats::rnorm(100, mean = 50, sd = 5),
+             stats::rnorm(100, mean = 55, sd = 7))
+)
+
+# Boxplot
+ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, fill = grupo)) +
+  ggplot2::geom_boxplot() +
+  ggplot2::labs(title = "Boxplot por grupo",
+                x = "Grupo", y = "Medida") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+```{r grafico-densidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de densidade da variável 'valor'."}
+# Simular dados
+dados <- data.frame(valor = stats::rnorm(1000, mean = 0, sd = 1))
+
+# Gráfico de densidade
+ggplot2::ggplot(dados, ggplot2::aes(x = valor)) +
+  ggplot2::geom_density(fill = "lightblue", alpha = 0.6) +
+  ggplot2::labs(title = "Gráfico de Densidade da variável 'valor'",
+                x = "Valor", y = "Densidade") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### Quais são os tipos de gráficos para relações entre variáveis?
+
+- Gráfico de dispersão (*scatter plot*): Mostra a relação entre duas variáveis quantitativas. Ideal para investigar correlações.[@REF]
+
+- Gráfico de bolhas (*bubble chart*): Expande o gráfico de dispersão adicionando uma terceira variável (tamanho da bolha).[@REF]
+
+<br>
+
+```{r graficos-relacoes, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de dispersão representando a relação entre duas variáveis."}
+# Simular dados
+dados <- data.frame(
+  x = stats::rnorm(100, mean = 50, sd = 10),
+  y = 2 * stats::rnorm(100, mean = 50, sd = 10) + 10
+)
+
+# Gráfico de dispersão
+ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(color = "darkblue", alpha = 0.7) +
+  ggplot2::labs(title = "Gráfico de Dispersão",
+                x = "Variável X", y = "Variável Y") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+```{r graficos-bolhas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de bolhas representando a relação entre três variáveis."}
+# Simular dados com três variáveis
+dados <- data.frame(
+  x = stats::rnorm(100, 10, 3),
+  y = stats::rnorm(100, 20, 5),
+  z = abs(stats::rnorm(100, 5, 2)) # Tamanho da bolha (positivo)
+)
+
+# Gráfico de bolhas
+ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y, size = z)) +
+  ggplot2::geom_point(alpha = 0.6, color = "purple") +
+  ggplot2::labs(title = "Gráfico de Bolhas",
+                x = "Eixo X", y = "Eixo Y", size = "Variável Z") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### Quais são os tipos de gráficos para séries temporais?
+
+- Gráfico de linhas: Mostra a evolução de uma variável ao longo do tempo, com pontos conectados por linhas.[@REF]
+
+<br>
+
+```{r grafico-linha, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de linha representando uma série temporal."}
+# Simular série temporal
+set.seed(42)
+tempo <- seq.Date(from = as.Date("2025-01-01"), by = "day", length.out = 100)
+medida <- cumsum(stats::rnorm(100, mean = 0.2, sd = 1))
+dados <- data.frame(data = tempo, valor = medida)
+
+# Gráfico de linha com pontos
+ggplot2::ggplot(dados, ggplot2::aes(x = data, y = valor)) +
+  ggplot2::geom_line(color = "darkgreen") +
+  ggplot2::geom_point(color = "black", size = 1.5) +
+  ggplot2::labs(title = "Série Temporal Simulada",
+                x = "Data", y = "Valor") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### Quais são os tipos de gráficos para dados multivariados?
+
+- Gráfico de radar (ou gráfico de aranha): Representa várias variáveis em um único gráfico, útil para comparar perfis.[@REF]
+
+- Gráfico de matriz de dispersão: Mostra relações entre múltiplas variáveis quantitativas, útil para identificar padrões.[@REF]
+
+- Gráfico de correlação: Representa a relação entre duas variáveis, com pontos e uma linha de tendência.[@REF]
+
+- Gráfico de calor (*heatmap*): Representa dados em uma matriz, com cores indicando intensidade ou frequência.[@REF]
+
+<br>
+
+```{r graficos-multivariados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico radar representando múltiplas variáveis."}
+# Simular dados para 3 perfis com 5 variáveis
+dados <- data.frame(
+  Max = c(10, 10, 10, 10, 10),
+  Min = c(0, 0, 0, 0, 0),
+  Perfil_A = c(6, 7, 8, 5, 9),
+  Perfil_B = c(8, 6, 7, 6, 7),
+  Perfil_C = c(5, 9, 6, 8, 6)
+)
+rownames(dados) <- c("Max", "Min", "A", "B", "C")
+
+# Gráfico radar
+fmsb::radarchart(dados,
+                 axistype = 1,
+                 pcol = c("red", "blue", "green"),
+                 plty = 1,
+                 title = "Gráfico de Radar - Perfis Simulados")
+```
+
+<br>
+
+```{r graficos-matriz-dispersao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Matriz de dispersão representando relações entre múltiplas variáveis."}
+# Instalar se necessário: install.packages("GGally")
+library(GGally)
+
+# Simular dados multivariados
+dados <- data.frame(
+  var1 = stats::rnorm(100),
+  var2 = stats::rnorm(100, mean = 50, sd = 10),
+  var3 = stats::rnorm(100, mean = 100, sd = 25)
+)
+
+# Matriz de dispersão
+GGally::ggpairs(dados, title = "Matriz de Dispersão")
+```
+
+<br>
+
+```{r graficos-correlacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de correlação entre duas variáveis com linha de tendência."}
+# Simular dados com correlação
+set.seed(1)
+x <- stats::rnorm(100)
+y <- 2 * x + stats::rnorm(100, sd = 0.5)
+dados <- data.frame(x = x, y = y)
+
+# Gráfico de dispersão com linha de tendência
+ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(color = "darkblue", alpha = 0.6) +
+  ggplot2::geom_smooth(method = "lm", color = "red", se = FALSE) +
+  ggplot2::labs(title = "Correlação entre Variáveis",
+                x = "Variável X", y = "Variável Y") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+```{r graficos-heatmap, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Mapa de calor da correlação entre variáveis."}
+# Simular matriz de correlação
+set.seed(2)
+dados <- data.frame(
+  A = stats::rnorm(50),
+  B = stats::rnorm(50, mean = 5),
+  C = stats::rnorm(50, mean = 10, sd = 3)
+)
+matriz_cor <- stats::cor(dados)
+
+# Converter para formato longo e renomear variáveis
+library(reshape2)
+dados_long <- reshape2::melt(matriz_cor)
+names(dados_long) <- c("Variável 1", "Variável 2", "Correlação")
+
+# Heatmap com nomes atualizados (sem aspas em aes)
+ggplot2::ggplot(dados_long, ggplot2::aes(x = `Variável 1`, y = `Variável 2`, fill = Correlação)) +
+  ggplot2::geom_tile(color = "white") +
+  ggplot2::scale_fill_gradient2(low = "blue", high = "red", mid = "white",
+                                midpoint = 0, limit = c(-1, 1), name = "Correlação") +
+  ggplot2::labs(title = "Mapa de Calor da Correlação entre Variáveis") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
 ### Que elementos incluir em gráficos?
 
 -   Título, eixos horizontal e vertical com respectivas unidades, escalas em intervalos representativos das variáveis, legenda com símbolos, síntese descritiva dos valores e respectiva margem de erro, conforme necessário para adequada interpretação.[@Park2022]
@@ -397,6 +690,8 @@ Os pacotes *ggplot2*[@ggplot2], *plotly*[@plotly] e *corrplot*[@corrplot] fornec
 -   Use *jitter* simétrico em gráficos de pontos para permitir a visualização de todos os dados.[@Weissgerber2019]
 
 -   Prefira palhetas de cor adaptadas para daltônicos.[@Weissgerber2019]
+
+<br>
 
 ```{r bar-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráficos de barras represetando médias, barras de erro e dados individuais."}
 # Gerar dados de exemplo

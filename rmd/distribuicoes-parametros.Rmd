@@ -225,7 +225,7 @@ p2 <- ggplot2::ggplot(data.frame(exponencial_data),
 gridExtra::grid.arrange(p1, p2, ncol = 2, nrow = 1)
 ```
 
-< br >
+<br>
 
 ```{r distribuicao-simetricas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições contínuas aproximadas e suas funções de densidade."}
 # Definir semente para reprodutibilidade
@@ -639,135 +639,6 @@ ggpubr::ggarrange(
 
 <br>
 
-```{r nao-normalidade-distribuicao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuição não-normal (exponencial) e métodos de visualização e testes de normalidade."}
-scaleFUN <- function(x)
-  sprintf("%.2f", x)
-
-# Simular uma amostra aleatória de uma distribuição Exponencial
-set.seed(123)
-n <- 50
-data_exp <- rexp(n, rate = 1)  # Taxa de 1 para a distribuição exponencial
-
-# Calcular a média e o desvio padrão
-mean_data_exp <- mean(data_exp)
-sd_data_exp <- sd(data_exp)
-
-# Realizar os testes
-ks_test_exp <- ks.test(data_exp, "pexp", rate = 1)
-shapiro_test_exp <- shapiro.test(data_exp)
-ad_test_exp <- nortest::ad.test(data_exp)
-
-# Função para formatar p-values
-format_p_value <- function(p_value) {
-  if (p_value < 0.001) {
-    return("p < 0.001")
-  } else {
-    return(paste("p-value:", format(p_value, digits = 4)))
-  }
-}
-
-# Distribuição Exponencial (d1)
-d1_exp <- ggfortify::ggdistribution(
-  dexp,
-  seq(0, 5, 0.1),
-  rate = 1,
-  main = paste(
-    "Distribuição Exponencial\nMédia:",
-    sprintf("%.2f", mean_data_exp),
-    "Desvio Padrão:",
-    sprintf("%.2f", sd_data_exp)
-  )
-) +
-  ggplot2::scale_y_continuous(labels = scaleFUN) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(aspect.ratio = 1,
-                 text = ggplot2::element_text(size = 8))
-
-# Função de distribuição cumulativa (CDF) (p1)
-p1_exp <- ggfortify::ggdistribution(pexp, seq(0, 5, 0.1), rate = 1, main = "Função de distribuição cumulativa") +
-  ggplot2::scale_y_continuous(labels = scaleFUN) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(aspect.ratio = 1,
-                 text = ggplot2::element_text(size = 8))
-
-# QQ-plot para distribuição Exponencial
-qqplot_exp <- ggplot2::ggplot(data.frame(x = data_exp), ggplot2::aes(sample = x)) +
-  ggplot2::stat_qq(distribution = "exp", dparams = list(rate = 1)) +
-  ggplot2::stat_qq_line(color = "red") +
-  ggplot2::ggtitle("QQ-Plot Exponencial") +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(aspect.ratio = 1,
-                 text = ggplot2::element_text(size = 8))
-
-# Kolmogorov-Smirnov Test plot (kolmogorov)
-kolmogorov_exp <- ggplot2::ggplot(data.frame(x = sort(data_exp)), ggplot2::aes(x)) +
-  ggplot2::stat_ecdf(geom = "step", color = "blue") +
-  ggplot2::stat_function(
-    fun = stats::pexp,
-    args = list(rate = 1),
-    color = "red",
-    size = 1
-  ) +
-  ggplot2::ggtitle(paste(
-    "Kolmogorov-Smirnov Test\n",
-    format_p_value(ks_test_exp$p.value)
-  )) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(aspect.ratio = 1,
-                 text = ggplot2::element_text(size = 8))
-
-# Shapiro-Wilk Test plot (shapiro)
-shapiro_exp <- ggplot2::ggplot(data.frame(x = sort(data_exp)), ggplot2::aes(x)) +
-  ggplot2::stat_ecdf(geom = "step", color = "green") +
-  ggplot2::stat_function(
-    fun = stats::pexp,
-    args = list(rate = 1),
-    color = "red",
-    size = 1
-  ) +
-  ggplot2::ggtitle(paste(
-    "Shapiro-Wilk Test\n",
-    format_p_value(shapiro_test_exp$p.value)
-  )) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(aspect.ratio = 1,
-                 text = ggplot2::element_text(size = 8))
-
-# Anderson-Darling Test plot (anderson)
-anderson_exp <- ggplot2::ggplot(data.frame(x = sort(data_exp)), ggplot2::aes(x)) +
-  ggplot2::stat_ecdf(geom = "step", color = "purple") +
-  ggplot2::stat_function(
-    fun = stats::pexp,
-    args = list(rate = 1),
-    color = "red",
-    size = 1
-  ) +
-  ggplot2::ggtitle(paste(
-    "Anderson-Darling Test\n",
-    format_p_value(ad_test_exp$p.value)
-  )) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(aspect.ratio = 1,
-                 text = ggplot2::element_text(size = 8))
-
-# Combinar todos os gráficos em uma grade
-ggpubr::ggarrange(
-  d1_exp,
-  p1_exp,
-  qqplot_exp,
-  kolmogorov_exp,
-  shapiro_exp,
-  anderson_exp,
-  heights = c(1, 1),
-  widths = c(1, 1, 1),
-  nrow = 2,
-  ncol = 3,
-  align = "h"
-)
-```
-
-<br>
-
 ## Parâmetros
 
 <br>
@@ -859,6 +730,57 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 -   A mediana fica entre a média e a moda em distribuições assimétricas.[@s.2011]
 
 -   A moda é o valor mais frequente e, portanto, se localiza no pico da distribuição assimétrica.[@s.2011]
+
+- Uma distribuição pode uma moda (unimodal), duas modas (bimodal) ou três ou mais modas (multimodal), indicando a presença de mais de um valor com alta frequência.[@s.2011]
+
+<br>
+
+```{r distribuicoes-unimodal-bimodal-multimodal, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuições unimodal, bimodal e multimodal."}
+# Reprodutibilidade
+set.seed(42)
+
+# Cor padrão
+cor_padrao <- "lightblue"
+
+# 1. Unimodal
+dados_uni <- rnorm(100000, mean = 0, sd = 1)
+df_uni <- data.frame(valor = dados_uni, grupo = "Unimodal")
+
+# 2. Bimodal
+dados_bi <- c(rnorm(50000, mean = -1, sd = 0.8), rnorm(50000, mean = 1, sd = 0.8))
+df_bi <- data.frame(valor = dados_bi, grupo = "Bimodal")
+
+# 3. Multimodal
+dados_multi <- c(rnorm(33333, mean = -2, sd = 0.5),
+                 rnorm(33334, mean = 0, sd = 0.4),
+                 rnorm(33333, mean = 2, sd = 0.5))
+df_multi <- data.frame(valor = dados_multi, grupo = "Multimodal")
+
+# Juntar os dados
+dados_todos <- rbind(df_uni, df_bi, df_multi)
+
+# Reordenar os níveis do fator explicitamente
+dados_todos$grupo <- factor(dados_todos$grupo,
+                            levels = rev(c("Unimodal", "Bimodal", "Multimodal")))
+
+# Plot com stat_halfeye (sem slab_type)
+p <- ggplot2::ggplot(dados_todos, ggplot2::aes(x = valor, y = grupo)) +
+  ggdist::stat_halfeye(
+    ggplot2::aes(thickness = ggplot2::after_stat(pdf)),
+    fill = cor_padrao,
+    color = "black",
+    alpha = 0.7
+  ) +
+  ggplot2::labs(
+    title = "Distribuições Unimodal, Bimodal e Multimodal",
+    x = "Valor", y = NULL
+  ) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(text = ggplot2::element_text(size = 9))
+
+# Mostrar gráfico
+p
+```
 
 <br>
 
