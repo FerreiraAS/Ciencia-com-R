@@ -104,7 +104,8 @@ data <- generate_data(n, r1, r2)
 
 # Calculate correlation coefficients
 cor_aggregated <- cor(data$x, data$y)
-cor_disaggregated <- by(data, data$z, function(df) cor(df$x, df$y))
+cor_disaggregated <- by(data, data$z, function(df)
+  cor(df$x, df$y))
 
 # Define the limits for x and y axes
 x_limits <- range(data$x)
@@ -113,8 +114,18 @@ y_limits <- range(data$y)
 # Plot for aggregated trend
 aggregated_plot <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y, color = factor(z)), shape = global_shapes) +
   ggplot2::geom_point(size = 3, shape = ifelse(data$z == 0, 16, 16), ) +
-  ggplot2::geom_smooth(method = "lm", se = FALSE, ggplot2::aes(group = 1), color = "blue") +
-  ggplot2::labs(title = "População desagregada", x = "X", y = "Y", color = "Subpopulação (Z)") +
+  ggplot2::geom_smooth(
+    method = "lm",
+    se = FALSE,
+    ggplot2::aes(group = 1),
+    color = "blue"
+  ) +
+  ggplot2::labs(
+    title = "População desagregada",
+    x = "X",
+    y = "Y",
+    color = "Subpopulação (Z)"
+  ) +
   ggplot2::scale_color_manual(values = global_colors) +
   ggplot2::theme_minimal() +
   ggplot2::xlim(x_limits) +
@@ -124,10 +135,23 @@ aggregated_plot <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y, color = fact
 
 # Plot for disaggregated trends
 disaggregated_plots <- lapply(unique(data$z), function(z_value) {
-  ggplot2::ggplot(data[data$z == z_value,], ggplot2::aes(x = x, y = y, color = factor(z))) +
-    ggplot2::geom_point(size = 3, shape = ifelse(z_value == 0, 16, 16), color = ifelse(z_value == 0, "black", "gray50")) +
-    ggplot2::geom_smooth(method = "lm", se = FALSE, ggplot2::aes(group = 1), color = "blue") +
-    ggplot2::labs(title = paste("Subpopulação agregada Z=", z_value, sep = ""), x = "X", y = "Y") +
+  ggplot2::ggplot(data[data$z == z_value, ], ggplot2::aes(x = x, y = y, color = factor(z))) +
+    ggplot2::geom_point(
+      size = 3,
+      shape = ifelse(z_value == 0, 16, 16),
+      color = ifelse(z_value == 0, "black", "gray50")
+    ) +
+    ggplot2::geom_smooth(
+      method = "lm",
+      se = FALSE,
+      ggplot2::aes(group = 1),
+      color = "blue"
+    ) +
+    ggplot2::labs(
+      title = paste("Subpopulação agregada Z=", z_value, sep = ""),
+      x = "X",
+      y = "Y"
+    ) +
     ggplot2::scale_color_manual(values = global_colors) +
     ggplot2::theme_minimal() +
     ggplot2::xlim(x_limits) +
@@ -137,8 +161,8 @@ disaggregated_plots <- lapply(unique(data$z), function(z_value) {
 
 # Arrange plots
 cowplot::plot_grid(
-  cowplot::plot_grid(aggregated_plot), 
-  cowplot::plot_grid(plotlist = disaggregated_plots, align = "hv"), 
+  cowplot::plot_grid(aggregated_plot),
+  cowplot::plot_grid(plotlist = disaggregated_plots, align = "hv"),
   nrow = 2
 )
 ```

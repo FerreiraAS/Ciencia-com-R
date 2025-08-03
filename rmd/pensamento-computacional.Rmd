@@ -73,6 +73,66 @@ Os pacotes *jmv*[@jmv] e *jmvconnect*[@jmvconnect] fornecem funções para anál
 
 <br>
 
+## Simulações computacionais
+
+<br>
+
+### O que são simulações computacionais?
+
+-   Simulações computacionais consistem na geração de dados artificiais baseados em regras matemáticas e estatísticas, permitindo testar hipóteses, validar métodos e explorar cenários complexos sem necessidade de dados reais.[@hinsen2011]
+
+-   A simulação é frequentemente usada em estatística para avaliar o desempenho de testes, estimadores e modelos sob diferentes condições.
+
+<br>
+
+### Por que usar simulações?
+
+-   Testar o comportamento de métodos estatísticos sob diferentes premissas (ex: normalidade, homocedasticidade, tamanho amostral).
+
+-   Avaliar a robustez de algoritmos computacionais.
+
+-   Reproduzir processos naturais ou sociais para compreensão teórica.
+
+<br>
+
+```{r}
+# Simulação de 1000 médias de amostras de tamanho 30 de uma N(0,1)
+set.seed(123)
+n_sim <- 1000
+amostras <- replicate(n_sim, mean(rnorm(30, mean = 0, sd = 1)))
+hist(
+  amostras,
+  main = "Distribuição das médias simuladas",
+  xlab = "Média",
+  col = "lightblue",
+  border = "white"
+)
+```
+
+<br>
+
+### Quais são as boas práticas em simulações computacionais?
+
+-   Defina claramente o objetivo da simulação e as hipóteses a serem testadas, incluindo quais aspectos do fenômeno ou do método você pretende avaliar.[@eglen2017]
+
+-   Use uma semente para o gerador de números aleatórios com set.seed() para garantir a reprodutibilidade dos resultados.[@REF]
+
+-   Documente detalhadamente o processo de simulação, incluindo os parâmetros utilizados, a lógica do algoritmo e as suposições feitas.[@trisovic2022a]
+
+-   Realize múltiplas simulações (ex.: 1000 ou mais) para obter estimativas estáveis e resultados mais robustos e confiáveis.[@REF]
+
+-   Analise os resultados de forma crítica, considerando a variabilidade, as limitações do modelo e possíveis vieses do processo de simulação.[@REF]
+
+-   Use funções vetorizadas para otimizar o desempenho e reduzir o tempo de execução da simulação.[@REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote base[@base] fornece a função [*set.seed*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Random) para especificar uma semente e garantir a reprodutibilidade de computações que envolvem números aleatórios.
+:::
+
+<br>
+
 ## Scripts computacionais
 
 <br>

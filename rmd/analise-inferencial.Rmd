@@ -138,199 +138,282 @@ O pacote *stats*[@stats] fornece a função [*p.adjust*](https://www.rdocumentat
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese (unicaudal)."}
-# Define parameters for H0
-mu0 <- 0       # Mean under H0
-sigma <- 1     # Standard deviation
-alpha <- 0.05  # Significance level (total)
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese unicaudal à direita, aplicado quando se busca evidência de efeitos positivos (valores significativamente maiores que o esperado sob $H_0$)."}
+# Parâmetros
+mu0 <- 0
+sigma <- 1
+alpha <- 0.05
 
-# Critical value for one-tailed test (right tail)
+# Valor crítico (cauda direita)
 z_crit <- qnorm(1 - alpha, mean = mu0, sd = sigma)
 
-# Sequence of x values
+# Dados
 x <- seq(mu0 - 4 * sigma, mu0 + 4 * sigma, length.out = 1000)
 dens_H0 <- dnorm(x, mean = mu0, sd = sigma)
+dados <- data.frame(x = x, densidade = dens_H0)
+dados$regiao_critica <- ifelse(x >= z_crit, "regiao_critica", "h0")
 
-# Set layout: 2 rows, 1 column (plot on top, legend on bottom)
-layout(matrix(1:2, ncol = 1), heights = c(4, 1))  # 4:1 ratio
-
-# Plot H0 distribution (top panel)
-par(mar = c(5, 4, 2, 2))  # Margins: bottom, left, top, right
-plot(
-  x,
-  dens_H0,
-  type = "l",
-  lwd = 2,
-  col = "blue",
-  ylim = c(0, max(dens_H0)),
-  ylab = "Densidade",
-  xlab = "Efeito",
-  main = "Teste Unicaudal (cauda direita) da Hipótese Nula"
-)
-
-# Shade right tail (Type I Error α)
-polygon(c(z_crit, x[x >= z_crit], max(x)),
-        c(0, dens_H0[x >= z_crit], 0),
-        col = rgb(0, 0, 1, 0.3),
-        border = NA)
-
-# Add vertical lines
-abline(
-  v = mu0,
-  col = "blue",
-  lty = 3,
-  lwd = 1.5
-)
-abline(
-  v = z_crit,
-  col = "black",
-  lty = 2,
-  lwd = 1.5
-)
-
-# Annotations
-text(mu0,
-     max(dens_H0) * 0.85,
-     expression(mu[0]),
-     col = "blue",
-     pos = 4)
-text(
-  z_crit + 0.1,
-  max(dens_H0) * 0.95,
-  expression(z[1 - alpha]),
-  col = "black",
-  pos = 4
-)
-
-# Legend (bottom panel)
-par(mar = c(0, 0, 0, 0))  # No margins
-plot.new()
-legend(
-  "center",
-  legend = c(
-    expression("Distribuição H"[0]),
-    "Região crítica (α)",
-    expression("Valor crítico (" * z[1 - alpha] * ")")
-  ),
-  col = c("blue", rgb(0, 0, 1, 0.3), "black"),
-  lwd = c(2, NA, 1.5),
-  lty = c(1, NA, 2),
-  pch = c(NA, 15, NA),
-  pt.cex = c(NA, 2, NA),
-  bty = "n",
-  ncol = 1
-)
+# Gráfico
+ggplot2::ggplot(dados, ggplot2::aes(x = x, y = densidade)) +
+  ggplot2::geom_line(ggplot2::aes(color = "h0"), size = 1.2) +
+  ggplot2::geom_area(
+    data = subset(dados, regiao_critica == "regiao_critica"),
+    ggplot2::aes(fill = "regiao_critica"),
+    alpha = 0.3
+  ) +
+  ggplot2::geom_vline(
+    xintercept = mu0,
+    linetype = "dotted",
+    color = "blue",
+    size = 1
+  ) +
+  ggplot2::geom_vline(
+    ggplot2::aes(xintercept = z_crit, linetype = "zcrit"),
+    color = "black",
+    size = 1
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = mu0 + 0.1,
+    y = max(dens_H0) * 0.85,
+    label = expression(mu[0]),
+    color = "blue",
+    parse = TRUE,
+    hjust = 0
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = z_crit + 0.1,
+    y = max(dens_H0) * 0.95,
+    label = expression(z[1 - alpha]),
+    color = "black",
+    parse = TRUE,
+    hjust = 0
+  ) +
+  ggplot2::scale_color_manual(
+    name = NULL,
+    values = c("h0" = "blue"),
+    labels = c(expression("Distribuição H"[0]))
+  ) +
+  ggplot2::scale_linetype_manual(
+    name = NULL,
+    values = c("zcrit" = "dashed"),
+    labels = c(expression("Valor crítico (z"[1 - alpha] * ")"))
+  ) +
+  ggplot2::scale_fill_manual(
+    name = NULL,
+    values = c("regiao_critica" = "blue"),
+    labels = c("Região crítica (α)")
+  ) +
+  ggplot2::labs(title = "Teste Unicaudal (cauda direita) da Hipótese Nula", x = "Efeito", y = "Densidade") +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::theme(legend.position = "bottom",
+                 legend.text = ggplot2::element_text(size = 12)) +
+  ggplot2::guides(
+    color = ggplot2::guide_legend(order = 1, override.aes = list(linetype = "solid")),
+    linetype = ggplot2::guide_legend(
+      order = 2,
+      override.aes = list(color = "black", size = 1)
+    ),
+    fill = ggplot2::guide_legend(order = 3, override.aes = list(alpha = 0.3))
+  )
 ```
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese (bicaudal)."}
-# Define parameters for H0
-mu0 <- 0       # Mean under H0
-sigma <- 1     # Standard deviation
-alpha <- 0.05  # Significance level (total)
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese unicaudal à esquerda, aplicado quando se busca evidência de efeitos negativos (valores significativamente menores que o esperado sob $H_0$)."}
+# Parâmetros
+mu0 <- 0
+sigma <- 1
+alpha <- 0.05
 
-# Critical values for two-tailed test
-z_crit_low <- qnorm(alpha / 2, mean = mu0, sd = sigma)
-z_crit_high <- qnorm(1 - alpha / 2, mean = mu0, sd = sigma)
+# Valor crítico (cauda esquerda)
+z_crit <- qnorm(alpha, mean = mu0, sd = sigma)
 
-# Sequence of x values
+# Dados
 x <- seq(mu0 - 4 * sigma, mu0 + 4 * sigma, length.out = 1000)
 dens_H0 <- dnorm(x, mean = mu0, sd = sigma)
+dados <- data.frame(x = x, densidade = dens_H0)
+dados$regiao_critica <- ifelse(x <= z_crit, "regiao_critica", "h0")
 
-# Set layout: 2 rows, 1 column (plot on top, legend on bottom)
-layout(matrix(1:2, ncol = 1), heights = c(4, 1))  # 4:1 ratio
+# Gráfico
+ggplot2::ggplot(dados, ggplot2::aes(x = x, y = densidade)) +
+  ggplot2::geom_line(ggplot2::aes(color = "h0"), size = 1.2) +
+  ggplot2::geom_area(
+    data = subset(dados, regiao_critica == "regiao_critica"),
+    ggplot2::aes(fill = "regiao_critica"),
+    alpha = 0.3
+  ) +
+  ggplot2::geom_vline(
+    xintercept = mu0,
+    linetype = "dotted",
+    color = "blue",
+    size = 1
+  ) +
+  ggplot2::geom_vline(
+    ggplot2::aes(xintercept = z_crit, linetype = "zcrit"),
+    color = "black",
+    size = 1
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = mu0 + 0.1,
+    y = max(dens_H0) * 0.85,
+    label = expression(mu[0]),
+    color = "blue",
+    parse = TRUE,
+    hjust = 0
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = z_crit + 0.1,
+    y = max(dens_H0) * 0.95,
+    label = expression(z[alpha]),
+    color = "black",
+    parse = TRUE,
+    hjust = 0
+  ) +
+  ggplot2::scale_color_manual(
+    name = NULL,
+    values = c("h0" = "blue"),
+    labels = c(expression("Distribuição H"[0]))
+  ) +
+  ggplot2::scale_linetype_manual(
+    name = NULL,
+    values = c("zcrit" = "dashed"),
+    labels = c(expression("Valor crítico (z"[alpha] * ")"))
+  ) +
+  ggplot2::scale_fill_manual(
+    name = NULL,
+    values = c("regiao_critica" = "blue"),
+    labels = c("Região crítica (α)")
+  ) +
+  ggplot2::labs(title = "Teste Unicaudal (cauda esquerda) da Hipótese Nula", x = "Efeito", y = "Densidade") +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::theme(legend.position = "bottom",
+                 legend.text = ggplot2::element_text(size = 12)) +
+  ggplot2::guides(
+    color = ggplot2::guide_legend(order = 1, override.aes = list(linetype = "solid")),
+    linetype = ggplot2::guide_legend(
+      order = 2,
+      override.aes = list(color = "black", size = 1)
+    ),
+    fill = ggplot2::guide_legend(order = 3, override.aes = list(alpha = 0.3))
+  )
+```
 
-# Plot H0 distribution (top panel)
-par(mar = c(5, 4, 2, 2))  # Margins: bottom, left, top, right
-plot(
-  x,
-  dens_H0,
-  type = "l",
-  lwd = 2,
-  col = "blue",
-  ylim = c(0, max(dens_H0)),
-  ylab = "Densidade",
-  xlab = "Efeito",
-  main = "Teste Bicaudal da Hipótese Nula"
-)
+<br>
 
-# Shade left tail (Type I Error α/2)
-polygon(
-  c(min(x), x[x <= z_crit_low], z_crit_low),
-  c(0, dens_H0[x <= z_crit_low], 0),
-  col = rgb(0, 0, 1, 0.3),
-  border = NA
-)
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese bicaudal, aplicado quando se busca evidência de efeitos positivos ou negativos (valores significativamente diferentes do esperado sob $H_0$)."}
+# Parâmetros
+mu0 <- 0
+sigma <- 1
+alpha <- 0.05
 
-# Shade right tail (Type I Error α/2)
-polygon(
-  c(z_crit_high, x[x >= z_crit_high], max(x)),
-  c(0, dens_H0[x >= z_crit_high], 0),
-  col = rgb(0, 0, 1, 0.3),
-  border = NA
-)
+# Valores críticos (duas caudas)
+z_lower <- qnorm(alpha / 2, mean = mu0, sd = sigma)
+z_upper <- qnorm(1 - alpha / 2, mean = mu0, sd = sigma)
 
-# Add vertical lines
-abline(
-  v = mu0,
-  col = "blue",
-  lty = 3,
-  lwd = 1.5
-)
-abline(
-  v = z_crit_low,
-  col = "black",
-  lty = 2,
-  lwd = 1.5
-)
-abline(
-  v = z_crit_high,
-  col = "black",
-  lty = 2,
-  lwd = 1.5
-)
+# Dados
+x <- seq(mu0 - 4 * sigma, mu0 + 4 * sigma, length.out = 1000)
+dens_H0 <- dnorm(x, mean = mu0, sd = sigma)
+dados <- data.frame(x = x, densidade = dens_H0)
 
-# Annotations
-text(mu0,
-     max(dens_H0) * 0.85,
-     expression(mu[0]),
-     col = "blue",
-     pos = 4)
-text(
-  z_crit_low - 0.1,
-  max(dens_H0) * 0.95,
-  expression(z[alpha / 2]),
-  col = "black",
-  pos = 2
-)
-text(
-  z_crit_high + 0.1,
-  max(dens_H0) * 0.95,
-  expression(z[1 - alpha / 2]),
-  col = "black",
-  pos = 4
-)
+# Caudas separadas
+dados_cauda_inf <- subset(dados, x <= z_lower)
+dados_cauda_sup <- subset(dados, x >= z_upper)
 
-# Legend (bottom panel)
-par(mar = c(0, 0, 0, 0))  # No margins
-plot.new()
-legend(
-  "center",
-  legend = c(
-    expression("Distribuição H"[0]),
-    "Região crítica (α/2)",
-    expression("Valores críticos (" * z[alpha / 2] * ", " * z[1 - alpha /
-                                                                2] * ")")
-  ),
-  col = c("blue", rgb(0, 0, 1, 0.3), "black"),
-  lwd = c(2, NA, 1.5),
-  lty = c(1, NA, 2),
-  pch = c(NA, 15, NA),
-  pt.cex = c(NA, 2, NA),
-  bg = "transparent",
-  box.col = "transparent"
-)
+# Gráfico
+ggplot2::ggplot(dados, ggplot2::aes(x = x, y = densidade)) +
+  
+  # Linha da distribuição H0 com legenda
+  ggplot2::geom_line(ggplot2::aes(color = "H0"), size = 1.2) +
+  
+  # Área das caudas com legenda
+  ggplot2::geom_area(data = dados_cauda_inf,
+                     ggplot2::aes(x = x, y = densidade, fill = "rc"),
+                     alpha = 0.3) +
+  ggplot2::geom_area(data = dados_cauda_sup,
+                     ggplot2::aes(x = x, y = densidade, fill = "rc"),
+                     alpha = 0.3) +
+  
+  # Linha pontilhada em mu0
+  ggplot2::geom_vline(
+    xintercept = mu0,
+    linetype = "dotted",
+    color = "blue",
+    size = 1
+  ) +
+  
+  # Linhas dos valores críticos com legenda
+  ggplot2::geom_vline(
+    ggplot2::aes(xintercept = z_lower, linetype = "zcrit"),
+    color = "black",
+    size = 1
+  ) +
+  ggplot2::geom_vline(
+    ggplot2::aes(xintercept = z_upper, linetype = "zcrit"),
+    color = "black",
+    size = 1
+  ) +
+  
+  # Anotações
+  ggplot2::annotate(
+    "text",
+    x = mu0 + 0.1,
+    y = max(dens_H0) * 0.85,
+    label = expression(mu[0]),
+    color = "blue",
+    parse = TRUE,
+    hjust = 0
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = z_upper + 0.1,
+    y = max(dens_H0) * 0.95,
+    label = expression(z[1 - alpha / 2]),
+    color = "black",
+    parse = TRUE,
+    hjust = 0
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = z_lower - 0.1,
+    y = max(dens_H0) * 0.95,
+    label = expression(z[alpha / 2]),
+    color = "black",
+    parse = TRUE,
+    hjust = 1
+  ) +
+  # Legendas
+  ggplot2::scale_color_manual(
+    name = NULL,
+    values = c("H0" = "blue"),
+    labels = c(expression("Distribuição H"[0]))
+  ) +
+  ggplot2::scale_fill_manual(
+    name = NULL,
+    values = c("rc" = "blue"),
+    labels = c("Regiões críticas (α)")
+  ) +
+  ggplot2::scale_linetype_manual(
+    name = NULL,
+    values = c("zcrit" = "dashed"),
+    labels = c(expression("Valores críticos (z"[alpha / 2] * ", z"[1 - alpha /
+                                                                     2] * ")"))
+  ) +
+  ggplot2::labs(title = "Teste Bicaudal da Hipótese Nula", x = "Efeito", y = "Densidade") +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::theme(legend.position = "bottom",
+                 legend.text = ggplot2::element_text(size = 12)) +
+  ggplot2::guides(
+    color = ggplot2::guide_legend(order = 1, override.aes = list(linetype = "solid")),
+    linetype = ggplot2::guide_legend(
+      order = 2,
+      override.aes = list(color = "black", size = 1)
+    ),
+    fill = ggplot2::guide_legend(order = 3, override.aes = list(alpha = 0.3))
+  )
 ```
 
 <br>
@@ -632,128 +715,140 @@ kableExtra::kable(
 <br>
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica dos erros tipo I e tipo II em um teste de hipótese (bicaudal)."}
-# Define parameters
-mu0 <- 0      # Mean under H0
-mu1 <- 1      # Mean under H1
-sigma <- 1    # Standard deviation
-alpha <- 0.05 # Significance level
+# Parâmetros
+mu0 <- 0
+mu1 <- 1
+sigma <- 1
+alpha <- 0.05
+z_crit <- stats::qnorm(1 - alpha, mean = mu0, sd = sigma)
 
-# Critical value for one-tailed test (upper tail)
-z_crit <- qnorm(1 - alpha, mean = mu0, sd = sigma)
+# Dados principais
+x <- base::seq(mu0 - 4 * sigma, mu1 + 4 * sigma, length.out = 1000)
 
-# Sequence of x values
-x <- seq(mu0 - 4 * sigma, mu1 + 4 * sigma, length.out = 1000)
-
-# Densities
-dens_H0 <- dnorm(x, mean = mu0, sd = sigma)
-dens_H1 <- dnorm(x, mean = mu1, sd = sigma)
-
-# Set layout: 2 rows, 1 column (plot on top, legend on bottom)
-layout(matrix(1:2, ncol = 1), heights = c(4, 1))  # 4:1 ratio
-
-# Plot
-par(mar = c(5, 4, 2, 2))  # Margins: bottom, left, top, right
-plot(
-  x,
-  dens_H0,
-  type = "l",
-  lwd = 2,
-  col = "blue",
-  ylim = c(0, max(dens_H0, dens_H1)),
-  ylab = "Densidade",
-  xlab = "Efeito",
-  main = "Erros tipo I e II"
-)
-lines(x, dens_H1, lwd = 2, col = "red")
-
-# Shade Type I Error (Alpha)
-polygon(c(z_crit, x[x >= z_crit], max(x)),
-        c(0, dens_H0[x >= z_crit], 0),
-        col = rgb(0, 0, 1, 0.3),
-        border = NA)
-
-# Shade Type II Error (Beta)
-polygon(c(min(x), x[x <= z_crit], z_crit),
-        c(0, dens_H1[x <= z_crit], 0),
-        col = rgb(1, 0, 0, 0.3),
-        border = NA)
-
-# Vertical line at critical value
-abline(
-  v = z_crit,
-  col = "black",
-  lty = 2,
-  lwd = 1.5
-)
-# Add text annotations
-text(z_crit + 0.1,
-     max(dens_H0) * 0.8,
-     expression(z[alpha]),
-     col = "black",
-     pos = 4)
-
-# vertical line for mu0 and mu1
-abline(
-  v = mu0,
-  col = "blue",
-  lty = 3,
-  lwd = 1.5
-)
-abline(
-  v = mu1,
-  col = "red",
-  lty = 3,
-  lwd = 1.5
+dens_df <- dplyr::tibble(
+  x = x,
+  dens_H0 = stats::dnorm(x, mean = mu0, sd = sigma),
+  dens_H1 = stats::dnorm(x, mean = mu1, sd = sigma)
 )
 
-# Add text annotations
-text(mu0,
-     max(dens_H0) * 0.8,
-     expression(mu[0]),
-     col = "blue",
-     pos = 4)
-text(mu1,
-     max(dens_H1) * 0.8,
-     expression(mu[1]),
-     col = "red",
-     pos = 4)
+# Dados das regiões de erro
+area_alpha <- dplyr::filter(dens_df, x >= z_crit) %>%
+  dplyr::mutate(erro = "Erro Tipo I (α)", y = dens_H0)
 
-# Add text for alpha and beta
-text(
-  z_crit + 0.1,
-  max(dens_H0) * 0.5,
-  expression(alpha),
-  col = "blue",
-  pos = 4
-)
+area_beta <- dplyr::filter(dens_df, x <= z_crit) %>%
+  dplyr::mutate(erro = "Erro Tipo II (β)", y = dens_H1)
 
-# Legend (bottom panel)
-par(mar = c(0, 0, 0, 0))  # No margins
-plot.new()
-legend(
-  "center",
-  legend = c(
-    expression("Distribuição H"[0]),
-    expression("Distribuição H"[1]),
-    "Erro tipo I (α)",
-    "Erro tipo II (β)",
-    expression("Valor crítico (" * z[alpha] * ")")
-  ),
-  col = c("blue", "red", rgb(0, 0, 1, 0.3), rgb(1, 0, 0, 0.3), "black"),
-  lwd = c(2, 2, NA, NA, 1.5),
-  lty = c(1, 1, NA, NA, 2),
-  pch = c(NA, NA, 15, 15, NA),
-  pt.cex = c(NA, NA, 2, 2, NA),
-  bty = "n",
-  ncol = 3
-)
+areas_df <- dplyr::bind_rows(area_alpha, area_beta)
+
+# Gráfico
+plot_base <- ggplot2::ggplot() +
+  # Áreas de erro com legenda
+  ggplot2::geom_area(data = areas_df,
+                     ggplot2::aes(x = x, y = y, fill = erro),
+                     alpha = 0.3) +
+  # Curvas H0 e H1
+  ggplot2::geom_line(data = dens_df,
+                     ggplot2::aes(x = x, y = dens_H0, color = "H0"),
+                     linewidth = 1.2) +
+  ggplot2::geom_line(data = dens_df,
+                     ggplot2::aes(x = x, y = dens_H1, color = "H1"),
+                     linewidth = 1.2) +
+  # Linhas verticais
+  ggplot2::geom_vline(
+    xintercept = z_crit,
+    linetype = "dashed",
+    color = "black",
+    linewidth = 1
+  ) +
+  ggplot2::geom_vline(
+    xintercept = mu0,
+    linetype = "dotted",
+    color = "blue",
+    linewidth = 1
+  ) +
+  ggplot2::geom_vline(
+    xintercept = mu1,
+    linetype = "dotted",
+    color = "red",
+    linewidth = 1
+  ) +
+  # Anotações matemáticas
+  ggplot2::annotate(
+    "text",
+    x = z_crit + 0.1,
+    y = 0.2,
+    label = "z[alpha]",
+    parse = TRUE,
+    hjust = 0,
+    color = "black"
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = mu0,
+    y = 0.3,
+    label = "mu[0]",
+    parse = TRUE,
+    hjust = -0.1,
+    color = "blue"
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = mu1,
+    y = 0.3,
+    label = "mu[1]",
+    parse = TRUE,
+    hjust = -0.1,
+    color = "red"
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = z_crit + 0.1,
+    y = 0.1,
+    label = "alpha",
+    parse = TRUE,
+    hjust = 0,
+    color = "blue"
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = z_crit - 0.4,
+    y = 0.05,
+    label = "beta",
+    parse = TRUE,
+    hjust = 0,
+    color = "red"
+  ) +
+  # Títulos e legendas
+  ggplot2::labs(
+    title = "Erros tipo I e II",
+    x = "Efeito",
+    y = "Densidade",
+    color = "Distribuições",
+    fill = NULL  # Remove título da legenda de preenchimento
+  ) +
+  # Escalas de cores
+  ggplot2::scale_color_manual(
+    values = c("H0" = "blue", "H1" = "red"),
+    labels = c(expression(H[0]), expression(H[1]))
+  ) +
+  ggplot2::scale_fill_manual(values = c(
+    "Erro Tipo I (α)" = "blue",
+    "Erro Tipo II (β)" = "red"
+  )) +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::theme(legend.position = "bottom")
+
+# Exibir gráfico
+plot_base
 ```
 
 <br>
 
 ```{r erro-tipo-I, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Erro tipo I: Distribuição dos p-valores em 100 testes de hipótese de amostras aleatórias de tamanho 30. A linha vermelha pontilhada indica o nível de significância estatística de 0,05."}
+# Para reprodutibilidade
+set.seed(42)
+
 # Parâmetros da simulação
-set.seed(42)  # Para reprodutibilidade
 n_tests <- 100  # Número de testes
 n_samples <- 30  # Tamanho da amostra em cada teste
 
@@ -786,14 +881,20 @@ ggplot2::ggplot(data.frame(p_values), ggplot2::aes(x = p_values)) +
     x = "P-valor",
     y = "Frequência") +
   ggplot2::theme(axis.text = ggplot2::element_text(size = 12),
-        axis.title = ggplot2::element_text(size = 14))
+        axis.title = ggplot2::element_text(size = 14)) +
+  ggplot2::scale_x_continuous(
+  limits = c(0, 1),
+  breaks = seq(0, 1, by = 0.25)
+)
 ```
 
 <br>
 
 ```{r erro-tipo-II, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Erro tipo II: Distribuição dos p-valores em 100 testes de hipótese de amostras aleatórias de tamanho 10. A linha vermelha pontilhada indica o nível de significância estatística de 0,05."}
+# Reprodutibilidade
+set.seed(42)
+
 # Parâmetros da simulação
-set.seed(42)  # Reprodutibilidade
 n_tests <- 100
 n_samples <- 34  # Ajustado para obter ~80% de poder (20% de erro tipo II)
 true_mean <- 0.5  # H₀ é falsa: média real ≠ 0
@@ -818,7 +919,7 @@ erro_tipo_II_percentual <- round(p_greater_than_0_05 / n_tests * 100)
 
 # Gráfico
 ggplot2::ggplot(data.frame(p_values), ggplot2::aes(x = p_values)) +
-  ggplot2::geom_histogram(binwidth = 0.05, fill = "lightcoral", color = "black", alpha = 0.7) +
+  ggplot2::geom_histogram(binwidth = 0.01, fill = "lightcoral", color = "black", alpha = 0.7) +
   ggplot2::geom_vline(xintercept = 0.05, color = "red", linetype = "dashed", size = 1) +
   ggplot2::annotate("text", x = 0.25, y = 15,
                     label = paste0("Erro tipo II (p > 0,05): ", erro_tipo_II_percentual, "%"),
@@ -831,7 +932,11 @@ ggplot2::ggplot(data.frame(p_values), ggplot2::aes(x = p_values)) +
     y = "Frequência"
   ) +
   ggplot2::theme(axis.text = ggplot2::element_text(size = 12),
-                 axis.title = ggplot2::element_text(size = 14))
+                 axis.title = ggplot2::element_text(size = 14)) +
+  ggplot2::scale_x_continuous(
+  limits = c(0, 1),
+  breaks = seq(0, 1, by = 0.25)
+)
 ```
 
 <br>
@@ -885,148 +990,129 @@ kableExtra::kable(
 <br>
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica do erro tipo S (sinal) em um teste de hipótese (bicaudal)."}
-# Set seed for reproducibility
+# Reprodutibilidade
 set.seed(123)
 
-# Define parameters
+# Parâmetros
+mu0 <- 0
 mu1 <- 0.2
 sigma <- 1
 alpha <- 0.05
 n <- 30
 se <- sigma / sqrt(n)
 
-# Two-tailed critical values
-z_crit <- qnorm(1 - alpha / 2)
-x_lower <- mu0 - z_crit * se
-x_upper <- mu0 + z_crit * se
-
-# Simulate until we get a significant estimate in the WRONG direction (Type-S error)
+# Simula erro tipo-S
 repeat {
   obs_mean <- rnorm(1, mean = mu1, sd = se)
   z <- (obs_mean - mu0) / se
-  if (abs(z) > z_crit &&
-      obs_mean < 0)
-    break  # Sign error: significant but negative
+  if (abs(z) > qnorm(1 - alpha / 2) && obs_mean < 0)
+    break
 }
 
-# x values
-x <- seq(mu0 - 4 * se, mu1 + 4 * se + 0.5, length.out = 1000)
+# Dados
+x <- seq(-1, 1, length.out = 1000)
 dens_H0 <- dnorm(x, mean = mu0, sd = se)
 dens_H1 <- dnorm(x, mean = mu1, sd = se)
+dens_estimado <- dnorm(x, mean = obs_mean, sd = se)
 
-# Set layout: 2 rows, 1 column (plot on top, legend on bottom)
-layout(matrix(1:2, ncol = 1), heights = c(4, 1))  # 4:1 ratio
+dados <- data.frame(
+  x = x,
+  H0 = dens_H0,
+  H1 = dens_H1,
+  Estimado = dens_estimado
+)
 
-# Plot
-par(mar = c(5, 4, 2, 2))  # Margins: bottom, left, top, right
-plot(
-  x,
-  dens_H0,
-  type = "l",
-  lwd = 2,
-  col = "blue",
-  ylim = c(0, max(dens_H0, dens_H1)),
-  ylab = "Densidade",
-  xlab = "Efeito estimado",
-  main = "Erro Tipo-S: Sinal Incorreto"
-)
-lines(x, dens_H1, lwd = 2, col = "red")
-# Type I error region shading
-polygon(c(min(x), x[x <= x_lower], x_lower),
-        c(0, dens_H0[x <= x_lower], 0),
-        col = rgb(0, 0, 1, 0.3),
-        border = NA)
-polygon(c(x_upper, x[x >= x_upper], max(x)),
-        c(0, dens_H0[x >= x_upper], 0),
-        col = rgb(0, 0, 1, 0.3),
-        border = NA)
+# Pico das distribuições
+pico_H1 <- dnorm(mu1, mean = mu1, sd = se)
+pico_estimado <- dnorm(obs_mean, mean = obs_mean, sd = se)
 
-# Type-S region shading (significant but wrong direction)
-polygon(c(min(x), x[x <= x_lower], x_lower),
-        c(0, dens_H1[x <= x_lower], 0),
-        col = rgb(1, 0, 0, 0.3),
-        border = NA)
+# Definindo novo limite superior do eixo y
+y_lim_sup <- max(pico_H1, pico_estimado) + 0.15
 
-# Vertical lines
-abline(
-  v = x_lower,
-  col = "black",
-  lty = 2,
-  lwd = 1.5
-)
-abline(
-  v = x_upper,
-  col = "black",
-  lty = 2,
-  lwd = 1.5
-)
-abline(
-  v = mu0,
-  col = "blue",
-  lty = 3,
-  lwd = 1.5
-)
-abline(
-  v = mu1,
-  col = "red",
-  lty = 3,
-  lwd = 1.5
-)
-abline(v = obs_mean,
-       col = "darkgreen",
-       lwd = 2)
+plot_base <- ggplot2::ggplot(dados, ggplot2::aes(x = x)) +
+  # Curvas
+  ggplot2::geom_line(ggplot2::aes(y = H0, color = "H0"), size = 1) +
+  ggplot2::geom_line(ggplot2::aes(y = H1, color = "H1"), size = 1) +
+  ggplot2::geom_line(ggplot2::aes(y = Estimado, color = "Estimado"),
+                     size = 1,
+                     linetype = "solid") +
+  # Linhas principais
+  ggplot2::geom_vline(xintercept = mu0,
+                      linetype = "dotted",
+                      color = "blue") +
+  ggplot2::geom_vline(xintercept = mu1,
+                      linetype = "dotted",
+                      color = "red") +
+  # Labels de médias
+  ggplot2::annotate(
+    "text",
+    x = mu0,
+    y = max(dens_H0) * 0.95,
+    label = expression(mu[0]),
+    color = "blue",
+    hjust = -0.1,
+    parse = TRUE
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = mu1,
+    y = max(dens_H1) * 0.95,
+    label = expression(mu[1]),
+    color = "red",
+    hjust = -0.1,
+    parse = TRUE
+  ) +
+  # Seta "efeito real" no pico
+  ggplot2::annotate(
+    "segment",
+    x = mu1,
+    xend = mu1,
+    y = y_lim_sup,
+    yend = pico_H1,
+    arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm")),
+    color = "red"
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = mu1,
+    y = y_lim_sup + 0.05,
+    label = "Real (+)",
+    color = "red",
+    hjust = 0.5
+  ) +
+  # Seta "efeito estimado" no pico
+  ggplot2::annotate(
+    "segment",
+    x = obs_mean,
+    xend = obs_mean,
+    y = y_lim_sup,
+    yend = pico_estimado,
+    arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm")),
+    color = "darkgreen"
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = obs_mean,
+    y = y_lim_sup + 0.05,
+    label = "Estimado (-)",
+    color = "darkgreen",
+    hjust = 0.5
+  ) +
+  ggplot2::scale_color_manual(
+    name = "Densidades",
+    values = c(
+      "H0" = "blue",
+      "H1" = "red",
+      "Estimado" = "darkgreen"
+    )
+  ) +
+  ggplot2::labs(title = "Erro Tipo-S: Sinal Incorreto", x = "Efeito estimado", y = "Densidade") +
+  ggplot2::coord_cartesian(xlim = c(-1, 1), ylim = c(0, y_lim_sup + 0.03)) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "none")
 
-# Labels
-text(
-  x_lower - 0.02,
-  max(dens_H0) * 0.5,
-  expression(alpha / 2),
-  col = "blue",
-  pos = 2
-)
-text(
-  x_upper + 0.02,
-  max(dens_H0) * 0.5,
-  expression(alpha / 2),
-  col = "blue",
-  pos = 4
-)
-text(mu0,
-     max(dens_H0) * 0.8,
-     expression(mu[0]),
-     col = "blue",
-     pos = 4)
-text(mu1,
-     max(dens_H1) * 0.8,
-     expression(mu[1]),
-     col = "red",
-     pos = 4)
-text(obs_mean,
-     max(dens_H1) * 0.9,
-     "Estimado",
-     col = "darkgreen",
-     pos = 4)
-
-# Legend (bottom panel)
-par(mar = c(0, 0, 0, 0))  # No margins
-plot.new()
-legend(
-  "center",
-  legend = c(
-    expression("H"[0]),
-    expression("H"[1]),
-    "Estimativa significativa",
-    "Erro tipo I (α)",
-    "Erro tipo-S (sinal errado)"
-  ),
-  col = c("blue", "red", "darkgreen", rgb(0, 0, 1, 0.3), rgb(1, 0, 0, 0.3)),
-  lwd = c(2, 2, 2, NA, NA),
-  lty = c(1, 1, 1, NA, NA),
-  pch = c(NA, NA, NA, 15, 15),
-  pt.cex = c(NA, NA, NA, 2, 2),
-  bty = "n",
-  ncol = 2
-)
+# Exibir gráfico
+plot_base
 ```
 
 <br>
@@ -1078,10 +1164,10 @@ kableExtra::kable(
 <br>
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica do erro tipo M (magnitude) em um teste de hipótese (bicaudal)."}
-# Set seed for reproducibility
+# Reprodutibilidade
 set.seed(123)
 
-# Parameters
+# Parâmetros
 mu0 <- 0
 mu1 <- 0.2
 sigma <- 1
@@ -1089,118 +1175,123 @@ alpha <- 0.05
 n <- 30
 se <- sigma / sqrt(n)
 
-# Critical value for one-tailed test
-z_crit <- qnorm(1 - alpha)
-x_crit <- mu0 + z_crit * se
-
-# Simulate until we get a significant estimate
+# Simula um efeito superestimado (erro tipo-M)
 repeat {
   obs_mean <- rnorm(1, mean = mu1, sd = se)
   z <- (obs_mean - mu0) / se
-  if (z > z_crit)
+  if (abs(z) > qnorm(1 - alpha / 2) && obs_mean > mu1)
     break
 }
 
-# x values
-x <- seq(mu0 - 4 * se, mu1 + 4 * se + 0.5, length.out = 1000)
+# Densidades para visualização
+x <- seq(-1, 1, length.out = 1000)
 dens_H0 <- dnorm(x, mean = mu0, sd = se)
 dens_H1 <- dnorm(x, mean = mu1, sd = se)
+dens_estimado <- dnorm(x, mean = obs_mean, sd = se)
 
-# Set layout: 2 rows, 1 column (plot on top, legend on bottom)
-layout(matrix(1:2, ncol = 1), heights = c(4, 1))  # 4:1 ratio
+# Picos das curvas
+pico_H1 <- dnorm(mu1, mean = mu1, sd = se)
+pico_estimado <- dnorm(obs_mean, mean = obs_mean, sd = se)
 
-# Plot
-par(mar = c(5, 4, 2, 2))  # Margins: bottom, left, top, right
-plot(
-  x,
-  dens_H0,
-  type = "l",
-  lwd = 2,
-  col = "blue",
-  ylim = c(0, max(dens_H0, dens_H1)),
-  ylab = "Densidade",
-  xlab = "Efeito estimado",
-  main = "Erro Tipo-M: Superestimação do Efeito"
-)
-lines(x, dens_H1, lwd = 2, col = "red")
+# Limite superior do eixo y
+y_lim_sup <- max(pico_H1, pico_estimado) + 0.15
 
-# Type I & II error shading
-polygon(c(x_crit, x[x >= x_crit], max(x)),
-        c(0, dens_H0[x >= x_crit], 0),
-        col = rgb(0, 0, 1, 0.3),
-        border = NA)
-polygon(c(min(x), x[x <= x_crit], x_crit),
-        c(0, dens_H1[x <= x_crit], 0),
-        col = rgb(1, 0, 0, 0.3),
-        border = NA)
+# Dados para o gráfico
+dados <- data.frame(
+  x = x,
+  H0 = dens_H0,
+  H1 = dens_H1,
+  Estimado = dens_estimado
+)
 
-# Vertical lines
-abline(
-  v = x_crit,
-  col = "black",
-  lty = 2,
-  lwd = 1.5
-)
-abline(
-  v = mu0,
-  col = "blue",
-  lty = 3,
-  lwd = 1.5
-)
-abline(
-  v = mu1,
-  col = "red",
-  lty = 3,
-  lwd = 1.5
-)
-abline(v = obs_mean,
-       col = "darkgreen",
-       lwd = 2)
+# Gráfico
+plot_base <- ggplot2::ggplot(dados, ggplot2::aes(x = x)) +
+  ggplot2::geom_line(ggplot2::aes(y = H0, color = "H0"), size = 1) +
+  ggplot2::geom_line(ggplot2::aes(y = H1, color = "H1"), size = 1) +
+  ggplot2::geom_line(ggplot2::aes(y = Estimado, color = "Estimado"), size = 1) +
+  
+  # Linhas verticais para médias
+  ggplot2::geom_vline(xintercept = mu0,
+                      linetype = "dotted",
+                      color = "blue") +
+  ggplot2::geom_vline(xintercept = mu1,
+                      linetype = "dotted",
+                      color = "red") +
+  
+  # Anotações
+  ggplot2::annotate(
+    "text",
+    x = mu0,
+    y = max(dens_H0) * 0.95,
+    label = expression(mu[0]),
+    color = "blue",
+    hjust = -0.1,
+    parse = TRUE
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = mu1,
+    y = max(dens_H1) * 0.95,
+    label = expression(mu[1]),
+    color = "red",
+    hjust = -0.1,
+    parse = TRUE
+  ) +
+  
+  # Setas e texto: efeito real
+  ggplot2::annotate(
+    "segment",
+    x = mu1,
+    xend = mu1,
+    y = y_lim_sup,
+    yend = pico_H1,
+    arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm")),
+    color = "red"
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = mu1,
+    y = y_lim_sup + 0.05,
+    label = "Real (+)",
+    color = "red",
+    hjust = 0.5
+  ) +
+  
+  # Setas e texto: efeito estimado (superestimado)
+  ggplot2::annotate(
+    "segment",
+    x = obs_mean,
+    xend = obs_mean,
+    y = y_lim_sup,
+    yend = pico_estimado,
+    arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm")),
+    color = "darkgreen"
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = obs_mean,
+    y = y_lim_sup + 0.05,
+    label = "Estimado (++)",
+    color = "darkgreen",
+    hjust = 0.5
+  ) +
+  
+  # Estilo
+  ggplot2::scale_color_manual(
+    name = "Densidades",
+    values = c(
+      "H0" = "blue",
+      "H1" = "red",
+      "Estimado" = "darkgreen"
+    )
+  ) +
+  ggplot2::labs(title = "Erro Tipo-M: Superestimação da Magnitude", x = "Efeito estimado", y = "Densidade") +
+  ggplot2::coord_cartesian(xlim = c(-1, 1), ylim = c(0, y_lim_sup + 0.03)) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "none")
 
-# Labels
-text(
-  x_crit + 0.02,
-  max(dens_H0) * 0.5,
-  expression(alpha),
-  col = "blue",
-  pos = 4
-)
-text(mu0,
-     max(dens_H0) * 0.8,
-     expression(mu[0]),
-     col = "blue",
-     pos = 4)
-text(mu1,
-     max(dens_H1) * 0.8,
-     expression(mu[1]),
-     col = "red",
-     pos = 4)
-text(obs_mean,
-     max(dens_H1) * 0.9,
-     "Estimado",
-     col = "darkgreen",
-     pos = 4)
-
-# Legend (bottom panel)
-par(mar = c(0, 0, 0, 0))  # No margins
-plot.new()
-legend(
-  "center",
-  legend = c(
-    expression("H"[0]),
-    expression("H"[1]),
-    "Estimativa significativa",
-    "Erro tipo I (α)",
-    "Erro tipo-M (magnitude exagerada)"
-  ),
-  col = c("blue", "red", "darkgreen", rgb(0, 0, 1, 0.3), rgb(1, 0, 0, 0.3)),
-  lwd = c(2, 2, 2, NA, NA),
-  lty = c(1, 1, 1, NA, NA),
-  pch = c(NA, NA, NA, 15, 15),
-  pt.cex = c(NA, NA, NA, 2, 2),
-  bty = "n",
-  ncol = 2
-)
+# Exibir gráfico
+plot_base
 ```
 
 <br>

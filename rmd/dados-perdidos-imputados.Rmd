@@ -82,7 +82,8 @@ rct_data <- data.frame(
 
 # Simular dados perdidos - MAR
 rct_mar <- rct_data
-rct_mar[["Desfecho (pós)"]][rct_mar$Grupo == "Intervenção" & runif(n) < 0.3] <- NA
+rct_mar[["Desfecho (pós)"]][rct_mar$Grupo == "Intervenção" &
+                              runif(n) < 0.3] <- NA
 rct_mar$Idade[rct_mar$Sexo == "F" & runif(n) < 0.2] <- NA
 
 # Visualização dos padrões de dados ausentes
@@ -116,8 +117,10 @@ rct_data <- data.frame(
 
 # Simular dados perdidos - MNAR
 rct_mnar <- rct_data
-rct_mnar[["Desfecho (pós)"]][rct_mnar[["Desfecho (pós)"]] > 60 & runif(n) < 0.5] <- NA
-rct_mnar[["Desfecho (pré)"]][rct_mnar[["Desfecho (pré)"]] < 45 & runif(n) < 0.4] <- NA
+rct_mnar[["Desfecho (pós)"]][rct_mnar[["Desfecho (pós)"]] > 60 &
+                               runif(n) < 0.5] <- NA
+rct_mnar[["Desfecho (pré)"]][rct_mnar[["Desfecho (pré)"]] < 45 &
+                               runif(n) < 0.4] <- NA
 
 # Visualização dos padrões de dados ausentes
 graphics::par(mar = c(5, 4, 4, 2) + 0.1)

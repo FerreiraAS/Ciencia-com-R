@@ -8,7 +8,8 @@ parse_rmd_to_rmd <- function(file_path, output_path) {
   rmd_content <- parsermd::parse_rmd(file_path)
   
   # Remove empty elements
-  rmd_content <- rmd_content[!sapply(rmd_content, function(x) length(x) == 0)]
+  rmd_content <- rmd_content[!sapply(rmd_content, function(x)
+    length(x) == 0)]
   
   # Filter only headings and code chunks
   rmd_content <- rmd_content[sapply(rmd_content, function(x)
@@ -34,9 +35,14 @@ parse_rmd_to_rmd <- function(file_path, output_path) {
     if (inherits(item, "rmd_heading")) {
       if (has_code && length(section_chunks) > 1) {
         # Write section header and chunks (excluding last)
-        writeLines(paste0("\n## ", section_header, " {.unnumbered .unlisted}\n"), con)
-        for (chunk in head(section_chunks, -1)) {  # <- Skip last chunk
-          writeLines("```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE, tidy = 'styler', tidy.opts = list(strict=FALSE)}", con)
+        writeLines(paste0("\n## ", section_header, " {.unnumbered .unlisted}\n"),
+                   con)
+        for (chunk in head(section_chunks, -1)) {
+          # <- Skip last chunk
+          writeLines(
+            "```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE, tidy = 'styler', tidy.opts = list(strict=FALSE)}",
+            con
+          )
           writeLines(chunk$code, con)
           writeLines("```\n", con)
         }
@@ -53,9 +59,14 @@ parse_rmd_to_rmd <- function(file_path, output_path) {
   
   # Handle the final section
   if (has_code && length(section_chunks) > 1) {
-    writeLines(paste0("\n## ", section_header, " {.unnumbered .unlisted}\n"), con)
-    for (chunk in head(section_chunks, -1)) {  # <- Skip last chunk
-      writeLines("```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE, tidy = 'styler', tidy.opts = list(strict=FALSE)}", con)
+    writeLines(paste0("\n## ", section_header, " {.unnumbered .unlisted}\n"),
+               con)
+    for (chunk in head(section_chunks, -1)) {
+      # <- Skip last chunk
+      writeLines(
+        "```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE, tidy = 'styler', tidy.opts = list(strict=FALSE)}",
+        con
+      )
       writeLines(chunk$code, con)
       writeLines("```\n", con)
     }
@@ -85,13 +96,14 @@ remove <- c(
   "rmd/diretrizes-listas.Rmd",
   "rmd/apendice.Rmd",
   "rmd/referencias.Rmd"
-  )
+)
 files <- files[!files %in% remove]
 
 # keep files that do have chunks
 files <- files[file.exists(files) & sapply(files, function(f) {
   rmd_content <- parsermd::parse_rmd(f)
-  any(sapply(rmd_content, function(x) inherits(x, "rmd_chunk")))
+  any(sapply(rmd_content, function(x)
+    inherits(x, "rmd_chunk")))
 })]
 
 # Iterate through each file, extract content, and include it in the document
