@@ -88,7 +88,7 @@ tamanho populacional desconhecido.[@martínez-mesa2016]
 ```{r populacao-amostra, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da amostragem de uma população para a amostra."}
 # Dados da população e amostra
 set.seed(123)
-pop_n <- 30
+pop_n <- 50
 sample_n <- 10
 
 # Reduzindo os raios internos para posicionar os ícones mais perto do centro
@@ -156,9 +156,8 @@ ggplot2::ggplot() +
     size = 5,
     fontface = "bold"
   ) +
-  
   # Setas
-  ggplot2::geom_segment(
+  ggplot2::geom_curve(
     data = setas_df,
     ggplot2::aes(
       x = x_pop,
@@ -166,12 +165,23 @@ ggplot2::ggplot() +
       xend = x_sample,
       yend = y_sample
     ),
-    arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm")),
+    arrow = ggplot2::arrow(length = grid::unit(0.2, "cm")),
     color = "darkgray",
-    linewidth = 0.7
+    linewidth = 0.7,
+    curvature = -0.2
   ) +
   ggplot2::coord_fixed() +
-  ggplot2::theme_void()
+  ggplot2::theme_void() +
+  # Texto "Amostragem"
+  ggplot2::annotate(
+    "text",
+    x = 0,
+    y = 3,
+    label = "Amostragem",
+    color = "darkgray",
+    size = 5,
+    fontface = "italic"
+  )
 ```
 
 <br>
@@ -182,25 +192,25 @@ ggplot2::ggplot() +
 
 -   Não-probabilísticas ou intencionais:[@Banerjee2010; @martínez-mesa2016]
 
-    -   Bola de neve.
+    - Bola de neve.
 
-    -   Conveniência.
+    - Conveniência.
 
-    -   Participantes encaminhados.
+    - Participantes encaminhados.
     
     - Proposital.
 
 -   Probabilísticas:[@Banerjee2010; @martínez-mesa2016]
 
-    -   Simples.
+    - Simples.
 
-    -   Sistemática.
+    - Sistemática.
 
-    -   Multiestágio.
+    - Multiestágio.
 
-    -   Estratificada.
+    - Estratificada.
 
-    -   Agregada.
+    - Agregada.
 
 <br>
 
@@ -238,6 +248,180 @@ ggplot2::ggplot() +
 
 <br>
 
+```{r reamostragem, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da reamostragem de uma amostra."}
+# reproducibilidade
+set.seed(123)
+
+# parâmetros
+pop_n <- 50
+sample_n <- 10
+svg_size <- 0.045
+y_offsets <- c(6, 3, 0, -3, -6)
+raio_reamostra <- 1.2
+
+# População (coluna 1)
+radius_pop <- runif(pop_n, 0.5, 2.5)
+angle_pop <- seq(0, 2 * pi, length.out = pop_n + 1)[-1]
+pop_df <- data.frame(
+  id = 1:pop_n,
+  x_pop = cos(angle_pop) * radius_pop - 6,
+  y_pop = sin(angle_pop) * radius_pop,
+  label = "./images/person.svg"
+)
+
+# Amostra (coluna 2)
+radius_sample <- runif(sample_n, 0.4, 1.2)
+angle_sample <- seq(0, 2 * pi, length.out = sample_n + 1)[-1]
+sample_ids <- sample(pop_df$id, sample_n)
+sample_df <- dplyr::filter(pop_df, id %in% sample_ids) |>
+  dplyr::mutate(
+    angle = angle_sample,
+    x_sample = cos(angle) * radius_sample,
+    y_sample = sin(angle) * radius_sample,
+    label = "./images/person.svg"
+  )
+
+# Reamostras (coluna 3) — agora bootstrap da amostra
+reamostra_list <- lapply(seq_along(y_offsets), function(i) {
+  offset <- y_offsets[i]
+  radius_sample <- runif(sample_n, 0.3, 1.1)
+  angle_sample <- seq(0, 2 * pi, length.out = sample_n + 1)[-1]
+  
+  # Bootstrap da amostra: sorteia com reposição
+  re_ids <- sample(sample_df$id, sample_n, replace = TRUE)
+  sample_boot <- dplyr::filter(sample_df, id %in% re_ids)
+  
+  # Para manter mesmo número de pontos, atribuímos posições sequenciais
+  sample_boot <- dplyr::arrange(sample_boot, id)[seq_len(sample_n), ] |>
+    dplyr::mutate(
+      angle = angle_sample,
+      x_sample_reamostra = cos(angle) * radius_sample + 6,
+      y_sample_reamostra = sin(angle) * radius_sample + offset,
+      grupo = paste0("Reamostra ", i)
+    )
+})
+reamostras_df <- dplyr::bind_rows(reamostra_list)
+
+# Setas: População → Amostra
+setas_amostra <- dplyr::left_join(
+  dplyr::filter(pop_df, id %in% sample_ids),
+  dplyr::select(sample_df, id, xend = x_sample, yend = y_sample),
+  by = "id"
+) |>
+  dplyr::rename(x = x_pop, y = y_pop)
+
+# Setas: Amostra → Reamostras (AGORA COMPLETO)
+# Faz um join entre a amostra e todas as ocorrências nas reamostras.
+setas_reamostras <- dplyr::inner_join(
+  dplyr::select(sample_df, id, x_amostra = x_sample, y_amostra = y_sample),
+  dplyr::select(
+    reamostras_df,
+    id,
+    x_sample_reamostra,
+    y_sample_reamostra,
+    grupo
+  ),
+  by = "id"
+) |>
+  dplyr::rename(x = x_amostra,
+                y = y_amostra,
+                xend = x_sample_reamostra,
+                yend = y_sample_reamostra)
+
+
+# Gráfico
+ggplot2::ggplot() +
+  # Coluna População
+  ggforce::geom_circle(ggplot2::aes(x0 = -6, y0 = 0, r = 3),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(data = pop_df,
+                      ggplot2::aes(x = x_pop, y = y_pop, image = label),
+                      size = svg_size) +
+  ggplot2::annotate(
+    "text",
+    x = -6,
+    y = 3.5,
+    label = "População",
+    size = 5,
+    fontface = "bold"
+  ) +
+  # Coluna Amostra
+  ggforce::geom_circle(ggplot2::aes(x0 = 0, y0 = 0, r = 1.8),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(
+    data = sample_df,
+    ggplot2::aes(x = x_sample, y = y_sample, image = label),
+    size = svg_size
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = 0,
+    y = 2.3,
+    label = "Amostra",
+    size = 5,
+    fontface = "bold"
+  ) +
+  # Coluna Reamostras
+  ggforce::geom_circle(
+    data = data.frame(x0 = 6, y0 = y_offsets, r = raio_reamostra),
+    ggplot2::aes(x0 = x0, y0 = y0, r = r),
+    color = "black",
+    linewidth = 1
+  ) +
+  ggimage::geom_image(
+    data = reamostras_df,
+    ggplot2::aes(x = x_sample_reamostra, y = y_sample_reamostra, image = label),
+    size = svg_size
+  ) +
+  ggplot2::geom_text(
+    data = data.frame(
+      x = 6,
+      y = y_offsets,
+      label = paste0("Reamostra ", 1:5)
+    ),
+    ggplot2::aes(
+      x = x,
+      y = y + raio_reamostra + 0.4,
+      label = label
+    ),
+    size = 4.2,
+    fontface = "bold"
+  ) +
+  # Setas: População → Amostra
+  ggplot2::geom_curve(
+    data = setas_amostra,
+    ggplot2::aes(
+      x = x,
+      y = y,
+      xend = xend,
+      yend = yend
+    ),
+    arrow = ggplot2::arrow(length = grid::unit(0.2, "cm")),
+    color = "gray50",
+    linewidth = 0.6,
+    curvature = -0.2
+  ) +
+  # Setas: Amostra → Reamostras
+  ggplot2::geom_curve(
+    data = setas_reamostras,
+    ggplot2::aes(
+      x = x,
+      y = y,
+      xend = xend,
+      yend = yend
+    ),
+    arrow = ggplot2::arrow(length = grid::unit(0.2, "cm")),
+    color = "gray60",
+    linewidth = 0.6,
+    curvature = -0.2
+  ) +
+  ggplot2::theme_void()
+```
+
+<br>
+
 ## Subamostragem
 
 <br>
@@ -248,6 +432,144 @@ ggplot2::ggplot() +
 
 <br>
 
+```{r subamostragem, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da subamostragem de uma amostra."}
+# Reprodutibilidade
+set.seed(123)
+
+# Tamanhos
+pop_n <- 50
+sample_n <- 15
+subsample_n <- 5
+
+# Raio dos círculos
+radius_pop <- runif(pop_n, 0.5, 2.5)
+radius_sample <- runif(sample_n, 0.5, 1.5)
+radius_subsample <- runif(subsample_n, 0.5, 1)
+
+# Ângulos para posicionamento circular
+angle_pop <- seq(0, 2 * pi, length.out = pop_n + 1)[-1]
+angle_sample <- seq(0, 2 * pi, length.out = sample_n + 1)[-1]
+angle_subsample <- seq(0, 2 * pi, length.out = subsample_n + 1)[-1]
+
+# População (esquerda)
+pop_df <- data.frame(
+  id = 1:pop_n,
+  x_pop = cos(angle_pop) * radius_pop - 6,
+  y_pop = sin(angle_pop) * radius_pop,
+  label = "./images/person.svg"
+)
+
+# Amostra (centro)
+sample_ids <- sample(pop_df$id, sample_n)
+sample_df <- pop_df %>%
+  dplyr::filter(id %in% sample_ids) %>%
+  dplyr::mutate(
+    angle = angle_sample,
+    x_sample = cos(angle_sample) * radius_sample,
+    y_sample = sin(angle_sample) * radius_sample,
+    label = "./images/person.svg"
+  )
+
+# Subamostra (direita)
+subsample_ids <- sample(sample_df$id, subsample_n)
+subsample_df <- sample_df %>%
+  dplyr::filter(id %in% subsample_ids) %>%
+  dplyr::mutate(
+    angle = angle_subsample,
+    x_sub = cos(angle_subsample) * radius_subsample + 6,
+    y_sub = sin(angle_subsample) * radius_subsample,
+    label = "./images/person.svg"
+  )
+
+# Setas população → amostra
+setas_1 <- sample_df %>%
+  dplyr::select(id, x_pop, y_pop, x_sample, y_sample)
+
+# Setas amostra → subamostra
+setas_2 <- subsample_df %>%
+  dplyr::select(id, x_sample, y_sample, x_sub, y_sub)
+
+# Plot
+ggplot2::ggplot() +
+  # Círculo da população
+  ggforce::geom_circle(ggplot2::aes(x0 = -6, y0 = 0, r = 3),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(data = pop_df,
+                      ggplot2::aes(x = x_pop, y = y_pop, image = label),
+                      size = 0.07) +
+  ggplot2::annotate(
+    "text",
+    x = -6,
+    y = 3.5,
+    label = "População",
+    size = 5,
+    fontface = "bold"
+  ) +
+  # Círculo da amostra
+  ggforce::geom_circle(ggplot2::aes(x0 = 0, y0 = 0, r = 2),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(data = sample_df,
+                      ggplot2::aes(x = x_sample, y = y_sample, image = label),
+                      size = 0.07) +
+  ggplot2::annotate(
+    "text",
+    x = 0,
+    y = 2.5,
+    label = "Amostra",
+    size = 5,
+    fontface = "bold"
+  ) +
+  # Círculo da subamostra
+  ggforce::geom_circle(ggplot2::aes(x0 = 6, y0 = 0, r = 1.2),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(data = subsample_df,
+                      ggplot2::aes(x = x_sub, y = y_sub, image = label),
+                      size = 0.07) +
+  ggplot2::annotate(
+    "text",
+    x = 6,
+    y = 1.7,
+    label = "Subamostra",
+    size = 5,
+    fontface = "bold"
+  ) +
+  # Setas: população → amostra
+  ggplot2::geom_curve(
+    data = setas_1,
+    ggplot2::aes(
+      x = x_pop,
+      y = y_pop,
+      xend = x_sample,
+      yend = y_sample
+    ),
+    arrow = ggplot2::arrow(length = grid::unit(0.2, "cm")),
+    color = "darkgray",
+    linewidth = 0.7,
+    curvature = -0.2
+  ) +
+  # Setas: amostra → subamostra
+  ggplot2::geom_curve(
+    data = setas_2,
+    ggplot2::aes(
+      x = x_sample,
+      y = y_sample,
+      xend = x_sub,
+      yend = y_sub
+    ),
+    arrow = ggplot2::arrow(length = grid::unit(0.2, "cm")),
+    color = "darkgray",
+    linewidth = 0.7,
+    curvature = 0.2
+  ) +
+  ggplot2::coord_fixed() +
+  ggplot2::theme_void()
+```
+
+<br>
+
 ## Superamostragem
 
 <br>
@@ -255,6 +577,145 @@ ggplot2::ggplot() +
 ### O que é superamostragem?
 
 -   .[@REF]
+
+<br>
+
+```{r superamostragem, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da superamostragem de uma população."}
+# Reprodutibilidade
+set.seed(123)
+
+# Tamanhos
+pop_n <- 50
+sample_n <- 15
+supersample_n <- 30  # maior que a amostra
+
+# Raio dos círculos
+radius_pop <- runif(pop_n, 0.5, 2.5)
+radius_sample <- runif(sample_n, 0.5, 1.5)
+
+# Ângulos para população e amostra
+angle_pop <- seq(0, 2 * pi, length.out = pop_n + 1)[-1]
+angle_sample <- seq(0, 2 * pi, length.out = sample_n + 1)[-1]
+
+# População (esquerda)
+pop_df <- data.frame(
+  id = 1:pop_n,
+  x_pop = cos(angle_pop) * radius_pop - 6,
+  y_pop = sin(angle_pop) * radius_pop,
+  label = "./images/person.svg"
+)
+
+# Amostra (centro) – amostragem aleatória da população
+sample_ids <- sample(pop_df$id, sample_n)
+sample_df <- pop_df %>%
+  dplyr::filter(id %in% sample_ids) %>%
+  dplyr::mutate(
+    angle = angle_sample,
+    x_sample = cos(angle_sample) * radius_sample,
+    y_sample = sin(angle_sample) * radius_sample,
+    label = "./images/person.svg"
+  )
+
+# Superamostra (direita) – reamostragem com reposição da amostra
+angle_supersample <- seq(0, 2 * pi, length.out = supersample_n + 1)[-1]
+radius_supersample <- runif(supersample_n, 0.5, 1)
+
+supersample_df <- sample_df %>%
+  dplyr::slice_sample(n = supersample_n, replace = TRUE) %>%
+  dplyr::mutate(
+    angle = angle_supersample,
+    radius = radius_supersample,
+    x_sub = cos(angle) * radius + 6,
+    y_sub = sin(angle) * radius,
+    label = "./images/person.svg"
+  )
+
+# Setas população → amostra
+setas_1 <- sample_df %>%
+  dplyr::select(id, x_pop, y_pop, x_sample, y_sample)
+
+# Setas amostra → superamostra
+setas_2 <- supersample_df %>%
+  dplyr::select(id, x_sample, y_sample, x_sub, y_sub)
+
+# Plot
+ggplot2::ggplot() +
+  # Círculo da população
+  ggforce::geom_circle(ggplot2::aes(x0 = -6, y0 = 0, r = 3),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(data = pop_df,
+                      ggplot2::aes(x = x_pop, y = y_pop, image = label),
+                      size = 0.07) +
+  ggplot2::annotate(
+    "text",
+    x = -6,
+    y = 3.5,
+    label = "População",
+    size = 5,
+    fontface = "bold"
+  ) +
+  # Círculo da amostra
+  ggforce::geom_circle(ggplot2::aes(x0 = 0, y0 = 0, r = 2),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(data = sample_df,
+                      ggplot2::aes(x = x_sample, y = y_sample, image = label),
+                      size = 0.07) +
+  ggplot2::annotate(
+    "text",
+    x = 0,
+    y = 2.5,
+    label = "Amostra",
+    size = 5,
+    fontface = "bold"
+  ) +
+  # Círculo da superamostra
+  ggforce::geom_circle(ggplot2::aes(x0 = 6, y0 = 0, r = 2.3),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(data = supersample_df,
+                      ggplot2::aes(x = x_sub, y = y_sub, image = label),
+                      size = 0.07) +
+  ggplot2::annotate(
+    "text",
+    x = 6,
+    y = 2.8,
+    label = "Superamostra",
+    size = 5,
+    fontface = "bold"
+  ) +
+  # Setas: população → amostra
+  ggplot2::geom_curve(
+    data = setas_1,
+    ggplot2::aes(
+      x = x_pop,
+      y = y_pop,
+      xend = x_sample,
+      yend = y_sample
+    ),
+    arrow = ggplot2::arrow(length = grid::unit(0.2, "cm")),
+    color = "darkgray",
+    linewidth = 0.7,
+    curvature = -0.2
+  ) +
+  # Setas: amostra → superamostra
+  ggplot2::geom_curve(
+    data = setas_2,
+    ggplot2::aes(
+      x = x_sample,
+      y = y_sample,
+      xend = x_sub,
+      yend = y_sub
+    ),
+    arrow = ggplot2::arrow(length = grid::unit(0.2, "cm")),
+    color = "darkgray",
+    linewidth = 0.7,
+    curvature = 0.2
+  ) +
+  ggplot2::coord_fixed() +
+  ggplot2::theme_void()
+```
 
 <br>
 

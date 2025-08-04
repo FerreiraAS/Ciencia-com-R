@@ -129,7 +129,7 @@ if(knitr::is_html_output()){
 }
 ```
 
-```{r post, echo = FALSE, include = FALSE, eval = FALSE}
+```{r post, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE, eval = FALSE}
 # delete .PNG files from posts folder
 delete_files <- list.dirs("posts", full.names = TRUE)
 unlink(delete_files, recursive = TRUE)
@@ -145,15 +145,21 @@ rmd_files <- list.files("rmd", pattern = "\\.Rmd$", full.names = TRUE)
 
 # remove specific chapters
 rmd_files <- rmd_files[!grepl("agradecimentos.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("autor.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("dedicatoria.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("autor.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("prefacio.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-1.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-2.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-3.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-4.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-5.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("testes-estatisticos.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("prefacio.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-6.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-7.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-8.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("shiny-apps.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("fontes-externas.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("diretrizes-listas.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("apendice.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("referencias.Rmd", rmd_files)]
 
 # read bib file

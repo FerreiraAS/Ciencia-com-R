@@ -113,7 +113,7 @@ y_limits <- range(data$y)
 
 # Plot for aggregated trend
 aggregated_plot <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y, color = factor(z)), shape = global_shapes) +
-  ggplot2::geom_point(size = 3, shape = ifelse(data$z == 0, 16, 16), ) +
+  ggplot2::geom_point(size = 2, shape = ifelse(data$z == 0, 16, 16)) +
   ggplot2::geom_smooth(
     method = "lm",
     se = FALSE,
@@ -121,23 +121,26 @@ aggregated_plot <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y, color = fact
     color = "blue"
   ) +
   ggplot2::labs(
-    title = "População desagregada",
+    title = "População agregada",
     x = "X",
     y = "Y",
-    color = "Subpopulação (Z)"
+    color = "Z"
   ) +
   ggplot2::scale_color_manual(values = global_colors) +
   ggplot2::theme_minimal() +
   ggplot2::xlim(x_limits) +
   ggplot2::ylim(y_limits) +
-  ggplot2::theme(aspect.ratio = 1) +
-  ggplot2::theme(legend.position = "top")
+  ggplot2::theme(
+    aspect.ratio = 1,
+    legend.position = "right",
+    plot.title = ggplot2::element_text(hjust = 0.5)
+  )
 
 # Plot for disaggregated trends
 disaggregated_plots <- lapply(unique(data$z), function(z_value) {
   ggplot2::ggplot(data[data$z == z_value, ], ggplot2::aes(x = x, y = y, color = factor(z))) +
     ggplot2::geom_point(
-      size = 3,
+      size = 2,
       shape = ifelse(z_value == 0, 16, 16),
       color = ifelse(z_value == 0, "black", "gray50")
     ) +
@@ -148,7 +151,7 @@ disaggregated_plots <- lapply(unique(data$z), function(z_value) {
       color = "blue"
     ) +
     ggplot2::labs(
-      title = paste("Subpopulação agregada Z=", z_value, sep = ""),
+      title = paste("Subpopulação desagregada (Z=", z_value, ")", sep = ""),
       x = "X",
       y = "Y"
     ) +

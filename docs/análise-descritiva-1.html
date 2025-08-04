@@ -695,8 +695,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="19.3.1" data-path="analise-descritiva.html"><a href="analise-descritiva.html#por-que-usar-tabelas"><i class="fa fa-check"></i><b>19.3.1</b> Por que usar tabelas?</a></li>
 <li class="chapter" data-level="19.3.2" data-path="rmd/apendice.html"><a href="#que-informa%C3%A7%C3%B5es-incluir-nas-tabelas"><i class="fa fa-check"></i><b>19.3.2</b> Que informações incluir nas tabelas?</a></li>
-<li class="chapter" data-level="19.3.3" data-path="rmd/apendice.html"><a href="#quais-s%C3%A3o-os-erros-mais-comuns-de-preenchimento-de-tabelas"><i class="fa fa-check"></i><b>19.3.3</b> Quais são os erros mais comuns de preenchimento de tabelas?</a></li>
-<li class="chapter" data-level="19.3.4" data-path="rmd/apendice.html"><a href="#quais-s%C3%A3o-os-tipos-de-tabelas"><i class="fa fa-check"></i><b>19.3.4</b> Quais são os tipos de tabelas?</a></li>
+<li class="chapter" data-level="19.3.3" data-path="rmd/apendice.html"><a href="#quais-s%C3%A3o-os-tipos-de-tabelas"><i class="fa fa-check"></i><b>19.3.3</b> Quais são os tipos de tabelas?</a></li>
+<li class="chapter" data-level="19.3.4" data-path="rmd/apendice.html"><a href="#quais-s%C3%A3o-os-erros-mais-comuns-de-preenchimento-de-tabelas"><i class="fa fa-check"></i><b>19.3.4</b> Quais são os erros mais comuns de preenchimento de tabelas?</a></li>
 </ul></li>
 <li class="chapter" data-level="19.4" data-path="analise-descritiva.html"><a href="analise-descritiva.html#tabela-1"><i class="fa fa-check"></i><b>19.4</b> Tabela 1</a>
 <ul>
@@ -1425,171 +1425,171 @@ div.csl-indent {
 <div id="como-arredondar-dados-numéricos-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Como arredondar dados numéricos?<a href="#como-arredondar-dados-num%C3%A9ricos-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="análise-descritiva-1.html#cb42-1" tabindex="-1"></a><span class="co"># Criar um dataframe com exemplos de casas decimais e dígitos significativos</span></span>
-<span id="cb42-2"><a href="análise-descritiva-1.html#cb42-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb42-3"><a href="análise-descritiva-1.html#cb42-3" tabindex="-1"></a>  <span class="at">Valor =</span> <span class="fu">c</span>(<span class="fl">0.00789</span>, <span class="fl">0.0456</span>, <span class="fl">45.600</span>, <span class="fl">123.456</span>, <span class="dv">7890</span>)</span>
-<span id="cb42-4"><a href="análise-descritiva-1.html#cb42-4" tabindex="-1"></a>)</span>
-<span id="cb42-5"><a href="análise-descritiva-1.html#cb42-5" tabindex="-1"></a></span>
-<span id="cb42-6"><a href="análise-descritiva-1.html#cb42-6" tabindex="-1"></a><span class="co"># Calcular casas decimais</span></span>
-<span id="cb42-7"><a href="análise-descritiva-1.html#cb42-7" tabindex="-1"></a>dados<span class="sc">$</span><span class="st">&#39;Casas Decimais&#39;</span> <span class="ot">&lt;-</span> <span class="fu">sapply</span>(dados<span class="sc">$</span>Valor, <span class="cf">function</span>(x) {</span>
-<span id="cb42-8"><a href="análise-descritiva-1.html#cb42-8" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="dv">0</span>)</span>
-<span id="cb42-9"><a href="análise-descritiva-1.html#cb42-9" tabindex="-1"></a>  <span class="cf">else</span> <span class="fu">return</span>(<span class="fu">nchar</span>(<span class="fu">sub</span>(<span class="st">&quot;.*</span><span class="sc">\\</span><span class="st">.&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">as.character</span>(x))))</span>
-<span id="cb42-10"><a href="análise-descritiva-1.html#cb42-10" tabindex="-1"></a>})</span>
-<span id="cb42-11"><a href="análise-descritiva-1.html#cb42-11" tabindex="-1"></a></span>
-<span id="cb42-12"><a href="análise-descritiva-1.html#cb42-12" tabindex="-1"></a><span class="co"># Calcular dígitos significativos</span></span>
-<span id="cb42-13"><a href="análise-descritiva-1.html#cb42-13" tabindex="-1"></a>dados<span class="sc">$</span><span class="st">&#39;Dígitos Significativos&#39;</span> <span class="ot">&lt;-</span> <span class="fu">sapply</span>(dados<span class="sc">$</span>Valor, <span class="cf">function</span>(x) {</span>
-<span id="cb42-14"><a href="análise-descritiva-1.html#cb42-14" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;^0+|</span><span class="sc">\\</span><span class="st">..*&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">as.character</span>(x)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-15"><a href="análise-descritiva-1.html#cb42-15" tabindex="-1"></a>  <span class="fu">nchar</span>()</span>
-<span id="cb42-16"><a href="análise-descritiva-1.html#cb42-16" tabindex="-1"></a>})</span>
-<span id="cb42-17"><a href="análise-descritiva-1.html#cb42-17" tabindex="-1"></a></span>
-<span id="cb42-18"><a href="análise-descritiva-1.html#cb42-18" tabindex="-1"></a><span class="co"># Remover zeros à direita e formatar os valores</span></span>
-<span id="cb42-19"><a href="análise-descritiva-1.html#cb42-19" tabindex="-1"></a>dados<span class="sc">$</span>Valor <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dados), <span class="cf">function</span>(i) {</span>
-<span id="cb42-20"><a href="análise-descritiva-1.html#cb42-20" tabindex="-1"></a>  <span class="fu">format</span>(dados<span class="sc">$</span>Valor[i], <span class="at">nsmall =</span> dados<span class="sc">$</span><span class="st">`</span><span class="at">Casas Decimais</span><span class="st">`</span>[i], </span>
-<span id="cb42-21"><a href="análise-descritiva-1.html#cb42-21" tabindex="-1"></a>         <span class="at">scientific =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb42-22"><a href="análise-descritiva-1.html#cb42-22" tabindex="-1"></a>         <span class="at">trim =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb42-23"><a href="análise-descritiva-1.html#cb42-23" tabindex="-1"></a>         <span class="at">decimal.mark =</span> <span class="st">&quot;,&quot;</span>)</span>
-<span id="cb42-24"><a href="análise-descritiva-1.html#cb42-24" tabindex="-1"></a>})</span>
-<span id="cb42-25"><a href="análise-descritiva-1.html#cb42-25" tabindex="-1"></a></span>
-<span id="cb42-26"><a href="análise-descritiva-1.html#cb42-26" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb42-27"><a href="análise-descritiva-1.html#cb42-27" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb42-28"><a href="análise-descritiva-1.html#cb42-28" tabindex="-1"></a>  dados,</span>
-<span id="cb42-29"><a href="análise-descritiva-1.html#cb42-29" tabindex="-1"></a>  <span class="at">align =</span> <span class="fu">c</span>(<span class="st">&quot;r&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;c&quot;</span>),</span>
-<span id="cb42-30"><a href="análise-descritiva-1.html#cb42-30" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb42-31"><a href="análise-descritiva-1.html#cb42-31" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb42-32"><a href="análise-descritiva-1.html#cb42-32" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb42-33"><a href="análise-descritiva-1.html#cb42-33" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb42-34"><a href="análise-descritiva-1.html#cb42-34" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Quantidade de casas decimais e dígitos significativos.&quot;</span></span>
-<span id="cb42-35"><a href="análise-descritiva-1.html#cb42-35" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-36"><a href="análise-descritiva-1.html#cb42-36" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb42-37"><a href="análise-descritiva-1.html#cb42-37" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb42-38"><a href="análise-descritiva-1.html#cb42-38" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb42-39"><a href="análise-descritiva-1.html#cb42-39" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb42-40"><a href="análise-descritiva-1.html#cb42-40" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb42-41"><a href="análise-descritiva-1.html#cb42-41" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb42-42"><a href="análise-descritiva-1.html#cb42-42" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>,</span>
-<span id="cb42-43"><a href="análise-descritiva-1.html#cb42-43" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb42-44"><a href="análise-descritiva-1.html#cb42-44" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-45"><a href="análise-descritiva-1.html#cb42-45" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-46"><a href="análise-descritiva-1.html#cb42-46" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(dados)[<span class="dv">1</span>],</span>
-<span id="cb42-47"><a href="análise-descritiva-1.html#cb42-47" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="análise-descritiva-1.html#cb43-1" tabindex="-1"></a><span class="co"># Criar um dataframe com exemplos de casas decimais e dígitos significativos</span></span>
+<span id="cb43-2"><a href="análise-descritiva-1.html#cb43-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb43-3"><a href="análise-descritiva-1.html#cb43-3" tabindex="-1"></a>  <span class="at">Valor =</span> <span class="fu">c</span>(<span class="fl">0.00789</span>, <span class="fl">0.0456</span>, <span class="fl">45.600</span>, <span class="fl">123.456</span>, <span class="dv">7890</span>)</span>
+<span id="cb43-4"><a href="análise-descritiva-1.html#cb43-4" tabindex="-1"></a>)</span>
+<span id="cb43-5"><a href="análise-descritiva-1.html#cb43-5" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="análise-descritiva-1.html#cb43-6" tabindex="-1"></a><span class="co"># Calcular casas decimais</span></span>
+<span id="cb43-7"><a href="análise-descritiva-1.html#cb43-7" tabindex="-1"></a>dados<span class="sc">$</span><span class="st">&#39;Casas Decimais&#39;</span> <span class="ot">&lt;-</span> <span class="fu">sapply</span>(dados<span class="sc">$</span>Valor, <span class="cf">function</span>(x) {</span>
+<span id="cb43-8"><a href="análise-descritiva-1.html#cb43-8" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="dv">0</span>)</span>
+<span id="cb43-9"><a href="análise-descritiva-1.html#cb43-9" tabindex="-1"></a>  <span class="cf">else</span> <span class="fu">return</span>(<span class="fu">nchar</span>(<span class="fu">sub</span>(<span class="st">&quot;.*</span><span class="sc">\\</span><span class="st">.&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">as.character</span>(x))))</span>
+<span id="cb43-10"><a href="análise-descritiva-1.html#cb43-10" tabindex="-1"></a>})</span>
+<span id="cb43-11"><a href="análise-descritiva-1.html#cb43-11" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="análise-descritiva-1.html#cb43-12" tabindex="-1"></a><span class="co"># Calcular dígitos significativos</span></span>
+<span id="cb43-13"><a href="análise-descritiva-1.html#cb43-13" tabindex="-1"></a>dados<span class="sc">$</span><span class="st">&#39;Dígitos Significativos&#39;</span> <span class="ot">&lt;-</span> <span class="fu">sapply</span>(dados<span class="sc">$</span>Valor, <span class="cf">function</span>(x) {</span>
+<span id="cb43-14"><a href="análise-descritiva-1.html#cb43-14" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;^0+|</span><span class="sc">\\</span><span class="st">..*&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">as.character</span>(x)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-15"><a href="análise-descritiva-1.html#cb43-15" tabindex="-1"></a>  <span class="fu">nchar</span>()</span>
+<span id="cb43-16"><a href="análise-descritiva-1.html#cb43-16" tabindex="-1"></a>})</span>
+<span id="cb43-17"><a href="análise-descritiva-1.html#cb43-17" tabindex="-1"></a></span>
+<span id="cb43-18"><a href="análise-descritiva-1.html#cb43-18" tabindex="-1"></a><span class="co"># Remover zeros à direita e formatar os valores</span></span>
+<span id="cb43-19"><a href="análise-descritiva-1.html#cb43-19" tabindex="-1"></a>dados<span class="sc">$</span>Valor <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dados), <span class="cf">function</span>(i) {</span>
+<span id="cb43-20"><a href="análise-descritiva-1.html#cb43-20" tabindex="-1"></a>  <span class="fu">format</span>(dados<span class="sc">$</span>Valor[i], <span class="at">nsmall =</span> dados<span class="sc">$</span><span class="st">`</span><span class="at">Casas Decimais</span><span class="st">`</span>[i], </span>
+<span id="cb43-21"><a href="análise-descritiva-1.html#cb43-21" tabindex="-1"></a>         <span class="at">scientific =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb43-22"><a href="análise-descritiva-1.html#cb43-22" tabindex="-1"></a>         <span class="at">trim =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb43-23"><a href="análise-descritiva-1.html#cb43-23" tabindex="-1"></a>         <span class="at">decimal.mark =</span> <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb43-24"><a href="análise-descritiva-1.html#cb43-24" tabindex="-1"></a>})</span>
+<span id="cb43-25"><a href="análise-descritiva-1.html#cb43-25" tabindex="-1"></a></span>
+<span id="cb43-26"><a href="análise-descritiva-1.html#cb43-26" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb43-27"><a href="análise-descritiva-1.html#cb43-27" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb43-28"><a href="análise-descritiva-1.html#cb43-28" tabindex="-1"></a>  dados,</span>
+<span id="cb43-29"><a href="análise-descritiva-1.html#cb43-29" tabindex="-1"></a>  <span class="at">align =</span> <span class="fu">c</span>(<span class="st">&quot;r&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;c&quot;</span>),</span>
+<span id="cb43-30"><a href="análise-descritiva-1.html#cb43-30" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb43-31"><a href="análise-descritiva-1.html#cb43-31" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb43-32"><a href="análise-descritiva-1.html#cb43-32" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb43-33"><a href="análise-descritiva-1.html#cb43-33" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb43-34"><a href="análise-descritiva-1.html#cb43-34" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Quantidade de casas decimais e dígitos significativos.&quot;</span></span>
+<span id="cb43-35"><a href="análise-descritiva-1.html#cb43-35" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-36"><a href="análise-descritiva-1.html#cb43-36" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb43-37"><a href="análise-descritiva-1.html#cb43-37" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb43-38"><a href="análise-descritiva-1.html#cb43-38" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb43-39"><a href="análise-descritiva-1.html#cb43-39" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb43-40"><a href="análise-descritiva-1.html#cb43-40" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb43-41"><a href="análise-descritiva-1.html#cb43-41" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb43-42"><a href="análise-descritiva-1.html#cb43-42" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>,</span>
+<span id="cb43-43"><a href="análise-descritiva-1.html#cb43-43" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb43-44"><a href="análise-descritiva-1.html#cb43-44" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-45"><a href="análise-descritiva-1.html#cb43-45" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-46"><a href="análise-descritiva-1.html#cb43-46" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(dados)[<span class="dv">1</span>],</span>
+<span id="cb43-47"><a href="análise-descritiva-1.html#cb43-47" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
 </details>
 </div>
 <div id="quais-são-os-tipos-de-gráficos-para-variáveis-categóricas-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Quais são os tipos de gráficos para variáveis categóricas?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-categ%C3%B3ricas-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="análise-descritiva-1.html#cb43-1" tabindex="-1"></a><span class="co"># Criar um conjunto de dados de exemplo</span></span>
-<span id="cb43-2"><a href="análise-descritiva-1.html#cb43-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb43-3"><a href="análise-descritiva-1.html#cb43-3" tabindex="-1"></a>  <span class="at">Grupo =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="at">each =</span> <span class="dv">3</span>),</span>
-<span id="cb43-4"><a href="análise-descritiva-1.html#cb43-4" tabindex="-1"></a>  <span class="at">Categoria =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;Z&quot;</span>), <span class="at">times =</span> <span class="dv">3</span>),</span>
-<span id="cb43-5"><a href="análise-descritiva-1.html#cb43-5" tabindex="-1"></a>  <span class="at">Contagem =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">10</span>)</span>
-<span id="cb43-6"><a href="análise-descritiva-1.html#cb43-6" tabindex="-1"></a>)</span>
-<span id="cb43-7"><a href="análise-descritiva-1.html#cb43-7" tabindex="-1"></a></span>
-<span id="cb43-8"><a href="análise-descritiva-1.html#cb43-8" tabindex="-1"></a><span class="co"># Frequência por Categoria (soma total de contagens)</span></span>
-<span id="cb43-9"><a href="análise-descritiva-1.html#cb43-9" tabindex="-1"></a>dados_barras <span class="ot">&lt;-</span> dados <span class="sc">%&gt;%</span></span>
-<span id="cb43-10"><a href="análise-descritiva-1.html#cb43-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(Categoria) <span class="sc">%&gt;%</span></span>
-<span id="cb43-11"><a href="análise-descritiva-1.html#cb43-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">Total =</span> <span class="fu">sum</span>(Contagem))</span>
-<span id="cb43-12"><a href="análise-descritiva-1.html#cb43-12" tabindex="-1"></a></span>
-<span id="cb43-13"><a href="análise-descritiva-1.html#cb43-13" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados_barras, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> Categoria, <span class="at">y =</span> Total, <span class="at">fill =</span> Categoria)) <span class="sc">+</span></span>
-<span id="cb43-14"><a href="análise-descritiva-1.html#cb43-14" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb43-15"><a href="análise-descritiva-1.html#cb43-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Gráfico de Barras Simples&quot;</span>,</span>
-<span id="cb43-16"><a href="análise-descritiva-1.html#cb43-16" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Categoria&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frequência Total&quot;</span>) <span class="sc">+</span></span>
-<span id="cb43-17"><a href="análise-descritiva-1.html#cb43-17" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="análise-descritiva-1.html#cb44-1" tabindex="-1"></a><span class="co"># Criar um conjunto de dados de exemplo</span></span>
+<span id="cb44-2"><a href="análise-descritiva-1.html#cb44-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb44-3"><a href="análise-descritiva-1.html#cb44-3" tabindex="-1"></a>  <span class="at">Grupo =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="at">each =</span> <span class="dv">3</span>),</span>
+<span id="cb44-4"><a href="análise-descritiva-1.html#cb44-4" tabindex="-1"></a>  <span class="at">Categoria =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;Z&quot;</span>), <span class="at">times =</span> <span class="dv">3</span>),</span>
+<span id="cb44-5"><a href="análise-descritiva-1.html#cb44-5" tabindex="-1"></a>  <span class="at">Contagem =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb44-6"><a href="análise-descritiva-1.html#cb44-6" tabindex="-1"></a>)</span>
+<span id="cb44-7"><a href="análise-descritiva-1.html#cb44-7" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="análise-descritiva-1.html#cb44-8" tabindex="-1"></a><span class="co"># Frequência por Categoria (soma total de contagens)</span></span>
+<span id="cb44-9"><a href="análise-descritiva-1.html#cb44-9" tabindex="-1"></a>dados_barras <span class="ot">&lt;-</span> dados <span class="sc">%&gt;%</span></span>
+<span id="cb44-10"><a href="análise-descritiva-1.html#cb44-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(Categoria) <span class="sc">%&gt;%</span></span>
+<span id="cb44-11"><a href="análise-descritiva-1.html#cb44-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">Total =</span> <span class="fu">sum</span>(Contagem))</span>
+<span id="cb44-12"><a href="análise-descritiva-1.html#cb44-12" tabindex="-1"></a></span>
+<span id="cb44-13"><a href="análise-descritiva-1.html#cb44-13" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados_barras, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> Categoria, <span class="at">y =</span> Total, <span class="at">fill =</span> Categoria)) <span class="sc">+</span></span>
+<span id="cb44-14"><a href="análise-descritiva-1.html#cb44-14" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-15"><a href="análise-descritiva-1.html#cb44-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Gráfico de Barras Simples&quot;</span>,</span>
+<span id="cb44-16"><a href="análise-descritiva-1.html#cb44-16" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Categoria&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frequência Total&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-17"><a href="análise-descritiva-1.html#cb44-17" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
 </details>
 </div>
 <div id="quais-são-os-tipos-de-gráficos-para-variáveis-numéricas-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Quais são os tipos de gráficos para variáveis numéricas?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-num%C3%A9ricas-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="análise-descritiva-1.html#cb44-1" tabindex="-1"></a><span class="co"># Simular dados</span></span>
-<span id="cb44-2"><a href="análise-descritiva-1.html#cb44-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">valor =</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>))</span>
-<span id="cb44-3"><a href="análise-descritiva-1.html#cb44-3" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="análise-descritiva-1.html#cb44-4" tabindex="-1"></a><span class="co"># Histograma</span></span>
-<span id="cb44-5"><a href="análise-descritiva-1.html#cb44-5" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> valor)) <span class="sc">+</span></span>
-<span id="cb44-6"><a href="análise-descritiva-1.html#cb44-6" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb44-7"><a href="análise-descritiva-1.html#cb44-7" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histograma da variável &#39;valor&#39;&quot;</span>,</span>
-<span id="cb44-8"><a href="análise-descritiva-1.html#cb44-8" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Valor&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frequência&quot;</span>) <span class="sc">+</span></span>
-<span id="cb44-9"><a href="análise-descritiva-1.html#cb44-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="análise-descritiva-1.html#cb45-1" tabindex="-1"></a><span class="co"># Simular dados</span></span>
+<span id="cb45-2"><a href="análise-descritiva-1.html#cb45-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">valor =</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>))</span>
+<span id="cb45-3"><a href="análise-descritiva-1.html#cb45-3" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="análise-descritiva-1.html#cb45-4" tabindex="-1"></a><span class="co"># Histograma</span></span>
+<span id="cb45-5"><a href="análise-descritiva-1.html#cb45-5" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> valor)) <span class="sc">+</span></span>
+<span id="cb45-6"><a href="análise-descritiva-1.html#cb45-6" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb45-7"><a href="análise-descritiva-1.html#cb45-7" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histograma da variável &#39;valor&#39;&quot;</span>,</span>
+<span id="cb45-8"><a href="análise-descritiva-1.html#cb45-8" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Valor&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frequência&quot;</span>) <span class="sc">+</span></span>
+<span id="cb45-9"><a href="análise-descritiva-1.html#cb45-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="análise-descritiva-1.html#cb45-1" tabindex="-1"></a><span class="co"># Simular dados com dois grupos</span></span>
-<span id="cb45-2"><a href="análise-descritiva-1.html#cb45-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb45-3"><a href="análise-descritiva-1.html#cb45-3" tabindex="-1"></a>  <span class="at">grupo =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Controle&quot;</span>, <span class="st">&quot;Tratamento&quot;</span>), <span class="at">each =</span> <span class="dv">100</span>),</span>
-<span id="cb45-4"><a href="análise-descritiva-1.html#cb45-4" tabindex="-1"></a>  <span class="at">medida =</span> <span class="fu">c</span>(stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>),</span>
-<span id="cb45-5"><a href="análise-descritiva-1.html#cb45-5" tabindex="-1"></a>             stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">55</span>, <span class="at">sd =</span> <span class="dv">7</span>))</span>
-<span id="cb45-6"><a href="análise-descritiva-1.html#cb45-6" tabindex="-1"></a>)</span>
-<span id="cb45-7"><a href="análise-descritiva-1.html#cb45-7" tabindex="-1"></a></span>
-<span id="cb45-8"><a href="análise-descritiva-1.html#cb45-8" tabindex="-1"></a><span class="co"># Boxplot</span></span>
-<span id="cb45-9"><a href="análise-descritiva-1.html#cb45-9" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> grupo, <span class="at">y =</span> medida, <span class="at">fill =</span> grupo)) <span class="sc">+</span></span>
-<span id="cb45-10"><a href="análise-descritiva-1.html#cb45-10" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb45-11"><a href="análise-descritiva-1.html#cb45-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Boxplot por grupo&quot;</span>,</span>
-<span id="cb45-12"><a href="análise-descritiva-1.html#cb45-12" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Grupo&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Medida&quot;</span>) <span class="sc">+</span></span>
-<span id="cb45-13"><a href="análise-descritiva-1.html#cb45-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="análise-descritiva-1.html#cb46-1" tabindex="-1"></a><span class="co"># Simular dados com dois grupos</span></span>
+<span id="cb46-2"><a href="análise-descritiva-1.html#cb46-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb46-3"><a href="análise-descritiva-1.html#cb46-3" tabindex="-1"></a>  <span class="at">grupo =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Controle&quot;</span>, <span class="st">&quot;Tratamento&quot;</span>), <span class="at">each =</span> <span class="dv">100</span>),</span>
+<span id="cb46-4"><a href="análise-descritiva-1.html#cb46-4" tabindex="-1"></a>  <span class="at">medida =</span> <span class="fu">c</span>(stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">5</span>),</span>
+<span id="cb46-5"><a href="análise-descritiva-1.html#cb46-5" tabindex="-1"></a>             stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">55</span>, <span class="at">sd =</span> <span class="dv">7</span>))</span>
+<span id="cb46-6"><a href="análise-descritiva-1.html#cb46-6" tabindex="-1"></a>)</span>
+<span id="cb46-7"><a href="análise-descritiva-1.html#cb46-7" tabindex="-1"></a></span>
+<span id="cb46-8"><a href="análise-descritiva-1.html#cb46-8" tabindex="-1"></a><span class="co"># Boxplot</span></span>
+<span id="cb46-9"><a href="análise-descritiva-1.html#cb46-9" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> grupo, <span class="at">y =</span> medida, <span class="at">fill =</span> grupo)) <span class="sc">+</span></span>
+<span id="cb46-10"><a href="análise-descritiva-1.html#cb46-10" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb46-11"><a href="análise-descritiva-1.html#cb46-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Boxplot por grupo&quot;</span>,</span>
+<span id="cb46-12"><a href="análise-descritiva-1.html#cb46-12" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Grupo&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Medida&quot;</span>) <span class="sc">+</span></span>
+<span id="cb46-13"><a href="análise-descritiva-1.html#cb46-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
 </details>
 </div>
 <div id="quais-são-os-tipos-de-gráficos-para-relações-entre-variáveis-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Quais são os tipos de gráficos para relações entre variáveis?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-rela%C3%A7%C3%B5es-entre-vari%C3%A1veis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="análise-descritiva-1.html#cb46-1" tabindex="-1"></a><span class="co"># Simular dados</span></span>
-<span id="cb46-2"><a href="análise-descritiva-1.html#cb46-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb46-3"><a href="análise-descritiva-1.html#cb46-3" tabindex="-1"></a>  <span class="at">x =</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
-<span id="cb46-4"><a href="análise-descritiva-1.html#cb46-4" tabindex="-1"></a>  <span class="at">y =</span> <span class="dv">2</span> <span class="sc">*</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>) <span class="sc">+</span> <span class="dv">10</span></span>
-<span id="cb46-5"><a href="análise-descritiva-1.html#cb46-5" tabindex="-1"></a>)</span>
-<span id="cb46-6"><a href="análise-descritiva-1.html#cb46-6" tabindex="-1"></a></span>
-<span id="cb46-7"><a href="análise-descritiva-1.html#cb46-7" tabindex="-1"></a><span class="co"># Gráfico de dispersão</span></span>
-<span id="cb46-8"><a href="análise-descritiva-1.html#cb46-8" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb46-9"><a href="análise-descritiva-1.html#cb46-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb46-10"><a href="análise-descritiva-1.html#cb46-10" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Gráfico de Dispersão&quot;</span>,</span>
-<span id="cb46-11"><a href="análise-descritiva-1.html#cb46-11" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Variável X&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Variável Y&quot;</span>) <span class="sc">+</span></span>
-<span id="cb46-12"><a href="análise-descritiva-1.html#cb46-12" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="análise-descritiva-1.html#cb47-1" tabindex="-1"></a><span class="co"># Simular dados</span></span>
+<span id="cb47-2"><a href="análise-descritiva-1.html#cb47-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb47-3"><a href="análise-descritiva-1.html#cb47-3" tabindex="-1"></a>  <span class="at">x =</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
+<span id="cb47-4"><a href="análise-descritiva-1.html#cb47-4" tabindex="-1"></a>  <span class="at">y =</span> <span class="dv">2</span> <span class="sc">*</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>) <span class="sc">+</span> <span class="dv">10</span></span>
+<span id="cb47-5"><a href="análise-descritiva-1.html#cb47-5" tabindex="-1"></a>)</span>
+<span id="cb47-6"><a href="análise-descritiva-1.html#cb47-6" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="análise-descritiva-1.html#cb47-7" tabindex="-1"></a><span class="co"># Gráfico de dispersão</span></span>
+<span id="cb47-8"><a href="análise-descritiva-1.html#cb47-8" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb47-9"><a href="análise-descritiva-1.html#cb47-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb47-10"><a href="análise-descritiva-1.html#cb47-10" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Gráfico de Dispersão&quot;</span>,</span>
+<span id="cb47-11"><a href="análise-descritiva-1.html#cb47-11" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Variável X&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Variável Y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb47-12"><a href="análise-descritiva-1.html#cb47-12" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
 </details>
 </div>
 <div id="quais-são-os-tipos-de-gráficos-para-dados-multivariados-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Quais são os tipos de gráficos para dados multivariados?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-multivariados-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="análise-descritiva-1.html#cb47-1" tabindex="-1"></a><span class="co"># Simular dados para 3 perfis com 5 variáveis</span></span>
-<span id="cb47-2"><a href="análise-descritiva-1.html#cb47-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb47-3"><a href="análise-descritiva-1.html#cb47-3" tabindex="-1"></a>  <span class="at">Max =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>),</span>
-<span id="cb47-4"><a href="análise-descritiva-1.html#cb47-4" tabindex="-1"></a>  <span class="at">Min =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb47-5"><a href="análise-descritiva-1.html#cb47-5" tabindex="-1"></a>  <span class="at">Perfil_A =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">9</span>),</span>
-<span id="cb47-6"><a href="análise-descritiva-1.html#cb47-6" tabindex="-1"></a>  <span class="at">Perfil_B =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">7</span>),</span>
-<span id="cb47-7"><a href="análise-descritiva-1.html#cb47-7" tabindex="-1"></a>  <span class="at">Perfil_C =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">6</span>)</span>
-<span id="cb47-8"><a href="análise-descritiva-1.html#cb47-8" tabindex="-1"></a>)</span>
-<span id="cb47-9"><a href="análise-descritiva-1.html#cb47-9" tabindex="-1"></a><span class="fu">rownames</span>(dados) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Max&quot;</span>, <span class="st">&quot;Min&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
-<span id="cb47-10"><a href="análise-descritiva-1.html#cb47-10" tabindex="-1"></a></span>
-<span id="cb47-11"><a href="análise-descritiva-1.html#cb47-11" tabindex="-1"></a><span class="co"># Gráfico radar</span></span>
-<span id="cb47-12"><a href="análise-descritiva-1.html#cb47-12" tabindex="-1"></a>fmsb<span class="sc">::</span><span class="fu">radarchart</span>(dados,</span>
-<span id="cb47-13"><a href="análise-descritiva-1.html#cb47-13" tabindex="-1"></a>                 <span class="at">axistype =</span> <span class="dv">1</span>,</span>
-<span id="cb47-14"><a href="análise-descritiva-1.html#cb47-14" tabindex="-1"></a>                 <span class="at">pcol =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>),</span>
-<span id="cb47-15"><a href="análise-descritiva-1.html#cb47-15" tabindex="-1"></a>                 <span class="at">plty =</span> <span class="dv">1</span>,</span>
-<span id="cb47-16"><a href="análise-descritiva-1.html#cb47-16" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Gráfico de Radar - Perfis Simulados&quot;</span>)</span></code></pre></div>
-</details>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="análise-descritiva-1.html#cb48-1" tabindex="-1"></a><span class="co"># Instalar se necessário: install.packages(&quot;GGally&quot;)</span></span>
-<span id="cb48-2"><a href="análise-descritiva-1.html#cb48-2" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb48-3"><a href="análise-descritiva-1.html#cb48-3" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="análise-descritiva-1.html#cb48-4" tabindex="-1"></a><span class="co"># Simular dados multivariados</span></span>
-<span id="cb48-5"><a href="análise-descritiva-1.html#cb48-5" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb48-6"><a href="análise-descritiva-1.html#cb48-6" tabindex="-1"></a>  <span class="at">var1 =</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>),</span>
-<span id="cb48-7"><a href="análise-descritiva-1.html#cb48-7" tabindex="-1"></a>  <span class="at">var2 =</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
-<span id="cb48-8"><a href="análise-descritiva-1.html#cb48-8" tabindex="-1"></a>  <span class="at">var3 =</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">25</span>)</span>
-<span id="cb48-9"><a href="análise-descritiva-1.html#cb48-9" tabindex="-1"></a>)</span>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="análise-descritiva-1.html#cb48-1" tabindex="-1"></a><span class="co"># Simular dados para 3 perfis com 5 variáveis</span></span>
+<span id="cb48-2"><a href="análise-descritiva-1.html#cb48-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb48-3"><a href="análise-descritiva-1.html#cb48-3" tabindex="-1"></a>  <span class="at">Max =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>),</span>
+<span id="cb48-4"><a href="análise-descritiva-1.html#cb48-4" tabindex="-1"></a>  <span class="at">Min =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb48-5"><a href="análise-descritiva-1.html#cb48-5" tabindex="-1"></a>  <span class="at">Perfil_A =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">9</span>),</span>
+<span id="cb48-6"><a href="análise-descritiva-1.html#cb48-6" tabindex="-1"></a>  <span class="at">Perfil_B =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">7</span>),</span>
+<span id="cb48-7"><a href="análise-descritiva-1.html#cb48-7" tabindex="-1"></a>  <span class="at">Perfil_C =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">6</span>)</span>
+<span id="cb48-8"><a href="análise-descritiva-1.html#cb48-8" tabindex="-1"></a>)</span>
+<span id="cb48-9"><a href="análise-descritiva-1.html#cb48-9" tabindex="-1"></a><span class="fu">rownames</span>(dados) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Max&quot;</span>, <span class="st">&quot;Min&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
 <span id="cb48-10"><a href="análise-descritiva-1.html#cb48-10" tabindex="-1"></a></span>
-<span id="cb48-11"><a href="análise-descritiva-1.html#cb48-11" tabindex="-1"></a><span class="co"># Matriz de dispersão</span></span>
-<span id="cb48-12"><a href="análise-descritiva-1.html#cb48-12" tabindex="-1"></a>GGally<span class="sc">::</span><span class="fu">ggpairs</span>(dados, <span class="at">title =</span> <span class="st">&quot;Matriz de Dispersão&quot;</span>)</span></code></pre></div>
+<span id="cb48-11"><a href="análise-descritiva-1.html#cb48-11" tabindex="-1"></a><span class="co"># Gráfico radar</span></span>
+<span id="cb48-12"><a href="análise-descritiva-1.html#cb48-12" tabindex="-1"></a>fmsb<span class="sc">::</span><span class="fu">radarchart</span>(dados,</span>
+<span id="cb48-13"><a href="análise-descritiva-1.html#cb48-13" tabindex="-1"></a>                 <span class="at">axistype =</span> <span class="dv">1</span>,</span>
+<span id="cb48-14"><a href="análise-descritiva-1.html#cb48-14" tabindex="-1"></a>                 <span class="at">pcol =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>),</span>
+<span id="cb48-15"><a href="análise-descritiva-1.html#cb48-15" tabindex="-1"></a>                 <span class="at">plty =</span> <span class="dv">1</span>,</span>
+<span id="cb48-16"><a href="análise-descritiva-1.html#cb48-16" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Gráfico de Radar - Perfis Simulados&quot;</span>)</span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="análise-descritiva-1.html#cb49-1" tabindex="-1"></a><span class="co"># Simular dados com correlação</span></span>
-<span id="cb49-2"><a href="análise-descritiva-1.html#cb49-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb49-3"><a href="análise-descritiva-1.html#cb49-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb49-4"><a href="análise-descritiva-1.html#cb49-4" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb49-5"><a href="análise-descritiva-1.html#cb49-5" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
-<span id="cb49-6"><a href="análise-descritiva-1.html#cb49-6" tabindex="-1"></a></span>
-<span id="cb49-7"><a href="análise-descritiva-1.html#cb49-7" tabindex="-1"></a><span class="co"># Gráfico de dispersão com linha de tendência</span></span>
-<span id="cb49-8"><a href="análise-descritiva-1.html#cb49-8" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb49-9"><a href="análise-descritiva-1.html#cb49-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb49-10"><a href="análise-descritiva-1.html#cb49-10" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb49-11"><a href="análise-descritiva-1.html#cb49-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Correlação entre Variáveis&quot;</span>,</span>
-<span id="cb49-12"><a href="análise-descritiva-1.html#cb49-12" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Variável X&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Variável Y&quot;</span>) <span class="sc">+</span></span>
-<span id="cb49-13"><a href="análise-descritiva-1.html#cb49-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="análise-descritiva-1.html#cb49-1" tabindex="-1"></a><span class="co"># Instalar se necessário: install.packages(&quot;GGally&quot;)</span></span>
+<span id="cb49-2"><a href="análise-descritiva-1.html#cb49-2" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb49-3"><a href="análise-descritiva-1.html#cb49-3" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="análise-descritiva-1.html#cb49-4" tabindex="-1"></a><span class="co"># Simular dados multivariados</span></span>
+<span id="cb49-5"><a href="análise-descritiva-1.html#cb49-5" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb49-6"><a href="análise-descritiva-1.html#cb49-6" tabindex="-1"></a>  <span class="at">var1 =</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>),</span>
+<span id="cb49-7"><a href="análise-descritiva-1.html#cb49-7" tabindex="-1"></a>  <span class="at">var2 =</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
+<span id="cb49-8"><a href="análise-descritiva-1.html#cb49-8" tabindex="-1"></a>  <span class="at">var3 =</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">25</span>)</span>
+<span id="cb49-9"><a href="análise-descritiva-1.html#cb49-9" tabindex="-1"></a>)</span>
+<span id="cb49-10"><a href="análise-descritiva-1.html#cb49-10" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="análise-descritiva-1.html#cb49-11" tabindex="-1"></a><span class="co"># Matriz de dispersão</span></span>
+<span id="cb49-12"><a href="análise-descritiva-1.html#cb49-12" tabindex="-1"></a>GGally<span class="sc">::</span><span class="fu">ggpairs</span>(dados, <span class="at">title =</span> <span class="st">&quot;Matriz de Dispersão&quot;</span>)</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="análise-descritiva-1.html#cb50-1" tabindex="-1"></a><span class="co"># Simular dados com correlação</span></span>
+<span id="cb50-2"><a href="análise-descritiva-1.html#cb50-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb50-3"><a href="análise-descritiva-1.html#cb50-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb50-4"><a href="análise-descritiva-1.html#cb50-4" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> stats<span class="sc">::</span><span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb50-5"><a href="análise-descritiva-1.html#cb50-5" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb50-6"><a href="análise-descritiva-1.html#cb50-6" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="análise-descritiva-1.html#cb50-7" tabindex="-1"></a><span class="co"># Gráfico de dispersão com linha de tendência</span></span>
+<span id="cb50-8"><a href="análise-descritiva-1.html#cb50-8" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dados, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb50-9"><a href="análise-descritiva-1.html#cb50-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb50-10"><a href="análise-descritiva-1.html#cb50-10" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb50-11"><a href="análise-descritiva-1.html#cb50-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Correlação entre Variáveis&quot;</span>,</span>
+<span id="cb50-12"><a href="análise-descritiva-1.html#cb50-12" tabindex="-1"></a>                <span class="at">x =</span> <span class="st">&quot;Variável X&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Variável Y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-13"><a href="análise-descritiva-1.html#cb50-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
 </details>
 </div>
 </div>

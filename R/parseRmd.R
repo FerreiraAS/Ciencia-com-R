@@ -9,15 +9,20 @@ ParseRmdContent <- function(rmd_files, bib, k) {
 
     # keep rows with complete headers 1 to 3
     rmd_data <- rmd_data[complete.cases(dplyr::select(rmd_data, c("sec_h1", "sec_h2", "sec_h3"))), ]
+    
+    # remove last row
+    rmd_data <- rmd_data[-nrow(rmd_data), ]
 
     # loop over all answers
-    for (i in 1:nrow(rmd_data)) {
+    for (i in 1:(nrow(rmd_data))) {
         chapter <- rmd_data[i, ]$sec_h1
         # remove ** from chapter
         chapter <- gsub("\\*\\*", "", chapter)
-        # remove {.numbered} from chapter
-        chapter <- gsub("\\{.numbered\\}", "", chapter)
-
+        # remove {} content from chapter
+        chapter <- gsub("\\{.*?\\}", "", chapter)
+        # trim ws
+        chapter <- trimws(chapter)
+        
         section <- rmd_data[i, ]$sec_h2
         # remove {.numbered} from section
         section <- gsub("\\{.numbered\\}", "", section)
