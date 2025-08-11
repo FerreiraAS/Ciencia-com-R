@@ -30,7 +30,7 @@
 
 <br>
 
-```{r correlacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Exemplo de diferentes forças e direção de correlação entre duas variáveis X e Y."}
+```{r correlacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de diferentes forças e direção de correlação entre duas variáveis X e Y."}
 # Function to generate data with a given correlation
 generate_data <- function(n, rho) {
   Sigma <- matrix(c(1, rho, rho, 1), ncol = 2)
@@ -128,7 +128,7 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*correct_r*](https://www.rd
 
 <br>
 
-```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", out.width = "100%"}
+```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
 library(dplyr)
 anscombe.dt <- datasets::anscombe
 anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
@@ -226,7 +226,7 @@ kableExtra::kable(
 
 <br>
 
-```{r anscombe-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", out.width = "100%", fig.cap = "Gráfico de dispersão do Quarteto de Anscombe para representação gráfica de conjuntos de dados bivariados com parâmetros quase idênticos e relações muito distintas."}
+```{r anscombe-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de dispersão do Quarteto de Anscombe para representação gráfica de conjuntos de dados bivariados com parâmetros quase idênticos e relações muito distintas."}
 library(dplyr)
 anscombe.dt <- datasets::anscombe
 anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
