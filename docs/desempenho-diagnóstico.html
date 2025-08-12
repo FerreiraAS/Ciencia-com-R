@@ -20,7 +20,6 @@
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
 
-<meta name="author" content="© 2023-2025 by Arthur de Sá Ferreira   https://orcid.org/0000-0001-7014-2002   cienciacomr?" />
 
 
 
@@ -30,7 +29,7 @@
   
   
 <link rel="prev" href="propriedades-psicométricas.html"/>
-<link rel="next" href="ensaios-quase-experimentais.html"/>
+<link rel="next" href="referencias.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -1462,49 +1461,77 @@ div.csl-indent {
 <div id="como-analisar-o-desempenho-diagnóstico-em-tabelas-2x2-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Como analisar o desempenho diagnóstico em tabelas 2x2?<a href="#como-analisar-o-desempenho-diagn%C3%B3stico-em-tabelas-2x2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="desempenho-diagnóstico.html#cb65-1" tabindex="-1"></a>cross.table <span class="ot">&lt;-</span></span>
-<span id="cb65-2"><a href="desempenho-diagnóstico.html#cb65-2" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
-<span id="cb65-3"><a href="desempenho-diagnóstico.html#cb65-3" tabindex="-1"></a>    <span class="fu">c</span>(</span>
-<span id="cb65-4"><a href="desempenho-diagnóstico.html#cb65-4" tabindex="-1"></a>      <span class="st">&#39;$VP$&#39;</span>,</span>
-<span id="cb65-5"><a href="desempenho-diagnóstico.html#cb65-5" tabindex="-1"></a>      <span class="st">&#39;$FN$&#39;</span>,</span>
-<span id="cb65-6"><a href="desempenho-diagnóstico.html#cb65-6" tabindex="-1"></a>      <span class="st">&#39;$VP+FN$&#39;</span>,</span>
-<span id="cb65-7"><a href="desempenho-diagnóstico.html#cb65-7" tabindex="-1"></a>      <span class="st">&#39;$FP$&#39;</span>,</span>
-<span id="cb65-8"><a href="desempenho-diagnóstico.html#cb65-8" tabindex="-1"></a>      <span class="st">&#39;$VN$&#39;</span>,</span>
-<span id="cb65-9"><a href="desempenho-diagnóstico.html#cb65-9" tabindex="-1"></a>      <span class="st">&#39;$FP+VN$&#39;</span>,</span>
-<span id="cb65-10"><a href="desempenho-diagnóstico.html#cb65-10" tabindex="-1"></a>      <span class="st">&#39;$VP+FP$&#39;</span>,</span>
-<span id="cb65-11"><a href="desempenho-diagnóstico.html#cb65-11" tabindex="-1"></a>      <span class="st">&#39;$FN+VN$&#39;</span>,</span>
-<span id="cb65-12"><a href="desempenho-diagnóstico.html#cb65-12" tabindex="-1"></a>      <span class="st">&#39;$N=VP+VN+FP+FN$&#39;</span></span>
-<span id="cb65-13"><a href="desempenho-diagnóstico.html#cb65-13" tabindex="-1"></a>    ),</span>
-<span id="cb65-14"><a href="desempenho-diagnóstico.html#cb65-14" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">3</span>,</span>
-<span id="cb65-15"><a href="desempenho-diagnóstico.html#cb65-15" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">3</span>,</span>
-<span id="cb65-16"><a href="desempenho-diagnóstico.html#cb65-16" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
-<span id="cb65-17"><a href="desempenho-diagnóstico.html#cb65-17" tabindex="-1"></a>  )</span>
-<span id="cb65-18"><a href="desempenho-diagnóstico.html#cb65-18" tabindex="-1"></a><span class="fu">rownames</span>(cross.table) <span class="ot">&lt;-</span></span>
-<span id="cb65-19"><a href="desempenho-diagnóstico.html#cb65-19" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Teste positivo&quot;</span>, <span class="st">&quot;Teste negativo&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
-<span id="cb65-20"><a href="desempenho-diagnóstico.html#cb65-20" tabindex="-1"></a><span class="fu">colnames</span>(cross.table) <span class="ot">&lt;-</span></span>
-<span id="cb65-21"><a href="desempenho-diagnóstico.html#cb65-21" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Condição presente&quot;</span>, <span class="st">&quot;Condição ausente&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
-<span id="cb65-22"><a href="desempenho-diagnóstico.html#cb65-22" tabindex="-1"></a></span>
-<span id="cb65-23"><a href="desempenho-diagnóstico.html#cb65-23" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb65-24"><a href="desempenho-diagnóstico.html#cb65-24" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb65-25"><a href="desempenho-diagnóstico.html#cb65-25" tabindex="-1"></a>  cross.table,</span>
-<span id="cb65-26"><a href="desempenho-diagnóstico.html#cb65-26" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb65-27"><a href="desempenho-diagnóstico.html#cb65-27" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb65-28"><a href="desempenho-diagnóstico.html#cb65-28" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb65-29"><a href="desempenho-diagnóstico.html#cb65-29" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb65-30"><a href="desempenho-diagnóstico.html#cb65-30" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb65-31"><a href="desempenho-diagnóstico.html#cb65-31" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas.&quot;</span></span>
-<span id="cb65-32"><a href="desempenho-diagnóstico.html#cb65-32" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb65-33"><a href="desempenho-diagnóstico.html#cb65-33" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb65-34"><a href="desempenho-diagnóstico.html#cb65-34" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb65-35"><a href="desempenho-diagnóstico.html#cb65-35" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb65-36"><a href="desempenho-diagnóstico.html#cb65-36" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb65-37"><a href="desempenho-diagnóstico.html#cb65-37" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb65-38"><a href="desempenho-diagnóstico.html#cb65-38" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb65-39"><a href="desempenho-diagnóstico.html#cb65-39" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb65-40"><a href="desempenho-diagnóstico.html#cb65-40" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>((<span class="fu">dim</span>(cross.table)[<span class="dv">1</span>] <span class="sc">-</span> <span class="dv">1</span>), <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb65-41"><a href="desempenho-diagnóstico.html#cb65-41" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb65-42"><a href="desempenho-diagnóstico.html#cb65-42" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="desempenho-diagnóstico.html#cb66-1" tabindex="-1"></a>cross.table <span class="ot">&lt;-</span></span>
+<span id="cb66-2"><a href="desempenho-diagnóstico.html#cb66-2" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
+<span id="cb66-3"><a href="desempenho-diagnóstico.html#cb66-3" tabindex="-1"></a>    <span class="fu">c</span>(</span>
+<span id="cb66-4"><a href="desempenho-diagnóstico.html#cb66-4" tabindex="-1"></a>      <span class="st">&#39;$VP$&#39;</span>,</span>
+<span id="cb66-5"><a href="desempenho-diagnóstico.html#cb66-5" tabindex="-1"></a>      <span class="st">&#39;$FN$&#39;</span>,</span>
+<span id="cb66-6"><a href="desempenho-diagnóstico.html#cb66-6" tabindex="-1"></a>      <span class="st">&#39;$VP+FN$&#39;</span>,</span>
+<span id="cb66-7"><a href="desempenho-diagnóstico.html#cb66-7" tabindex="-1"></a>      <span class="st">&#39;$FP$&#39;</span>,</span>
+<span id="cb66-8"><a href="desempenho-diagnóstico.html#cb66-8" tabindex="-1"></a>      <span class="st">&#39;$VN$&#39;</span>,</span>
+<span id="cb66-9"><a href="desempenho-diagnóstico.html#cb66-9" tabindex="-1"></a>      <span class="st">&#39;$FP+VN$&#39;</span>,</span>
+<span id="cb66-10"><a href="desempenho-diagnóstico.html#cb66-10" tabindex="-1"></a>      <span class="st">&#39;$VP+FP$&#39;</span>,</span>
+<span id="cb66-11"><a href="desempenho-diagnóstico.html#cb66-11" tabindex="-1"></a>      <span class="st">&#39;$FN+VN$&#39;</span>,</span>
+<span id="cb66-12"><a href="desempenho-diagnóstico.html#cb66-12" tabindex="-1"></a>      <span class="st">&#39;$N=VP+VN+FP+FN$&#39;</span></span>
+<span id="cb66-13"><a href="desempenho-diagnóstico.html#cb66-13" tabindex="-1"></a>    ),</span>
+<span id="cb66-14"><a href="desempenho-diagnóstico.html#cb66-14" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb66-15"><a href="desempenho-diagnóstico.html#cb66-15" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">3</span>,</span>
+<span id="cb66-16"><a href="desempenho-diagnóstico.html#cb66-16" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
+<span id="cb66-17"><a href="desempenho-diagnóstico.html#cb66-17" tabindex="-1"></a>  )</span>
+<span id="cb66-18"><a href="desempenho-diagnóstico.html#cb66-18" tabindex="-1"></a><span class="fu">rownames</span>(cross.table) <span class="ot">&lt;-</span></span>
+<span id="cb66-19"><a href="desempenho-diagnóstico.html#cb66-19" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Teste positivo&quot;</span>, <span class="st">&quot;Teste negativo&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb66-20"><a href="desempenho-diagnóstico.html#cb66-20" tabindex="-1"></a><span class="fu">colnames</span>(cross.table) <span class="ot">&lt;-</span></span>
+<span id="cb66-21"><a href="desempenho-diagnóstico.html#cb66-21" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Condição presente&quot;</span>, <span class="st">&quot;Condição ausente&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb66-22"><a href="desempenho-diagnóstico.html#cb66-22" tabindex="-1"></a></span>
+<span id="cb66-23"><a href="desempenho-diagnóstico.html#cb66-23" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb66-24"><a href="desempenho-diagnóstico.html#cb66-24" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb66-25"><a href="desempenho-diagnóstico.html#cb66-25" tabindex="-1"></a>  cross.table,</span>
+<span id="cb66-26"><a href="desempenho-diagnóstico.html#cb66-26" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb66-27"><a href="desempenho-diagnóstico.html#cb66-27" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb66-28"><a href="desempenho-diagnóstico.html#cb66-28" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb66-29"><a href="desempenho-diagnóstico.html#cb66-29" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb66-30"><a href="desempenho-diagnóstico.html#cb66-30" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb66-31"><a href="desempenho-diagnóstico.html#cb66-31" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas.&quot;</span></span>
+<span id="cb66-32"><a href="desempenho-diagnóstico.html#cb66-32" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-33"><a href="desempenho-diagnóstico.html#cb66-33" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb66-34"><a href="desempenho-diagnóstico.html#cb66-34" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb66-35"><a href="desempenho-diagnóstico.html#cb66-35" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb66-36"><a href="desempenho-diagnóstico.html#cb66-36" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb66-37"><a href="desempenho-diagnóstico.html#cb66-37" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb66-38"><a href="desempenho-diagnóstico.html#cb66-38" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb66-39"><a href="desempenho-diagnóstico.html#cb66-39" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-40"><a href="desempenho-diagnóstico.html#cb66-40" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>((<span class="fu">dim</span>(cross.table)[<span class="dv">1</span>] <span class="sc">-</span> <span class="dv">1</span>), <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-41"><a href="desempenho-diagnóstico.html#cb66-41" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-42"><a href="desempenho-diagnóstico.html#cb66-42" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
 </details>
+<p><br></p>
+<style>
+  /*____Create and format infobox____*/
+  .infobox {
+    padding: 1em 1em 1em 4em;
+    margin-bottom: 10px;
+    border: 2px solid orange;
+    border-radius: 10px;
+    background: #F2F2F2 5px center/3em no-repeat;
+  }
+  .BookCover {
+  background-image: url("images/Cover_1.png");
+  background-size: 2em;
+  background-position: 1em center;
+}
+</style>
+<p><br></p>
+<div class="infobox BookCover">
+<strong>Citar como:</strong><br>
+Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadores e analistas de dados. Rio de Janeiro: 1a edição,
+<span id="citation"></span>
+<script>
+    const year = new Date().getFullYear();
+    document.getElementById("citation").innerHTML = `${year}. <a href="https://doi.org/10.5281/zenodo.8320232">doi: 10.5281/zenodo.8320232</a>`;
+  </script>
+</div>
+<p><br></p>
+
 </div>
 </div>
             </section>
@@ -1513,7 +1540,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="propriedades-psicométricas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ensaios-quase-experimentais.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

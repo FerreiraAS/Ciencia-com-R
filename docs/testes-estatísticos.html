@@ -20,7 +20,6 @@
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
 
-<meta name="author" content="© 2023-2025 by Arthur de Sá Ferreira   https://orcid.org/0000-0001-7014-2002   cienciacomr?" />
 
 
 
@@ -30,7 +29,7 @@
   
   
 <link rel="prev" href="tamanho-do-efeito-e-p-valor.html"/>
-<link rel="next" href="comparação.html"/>
+<link rel="next" href="correlação.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -1462,55 +1461,6 @@ div.csl-indent {
 <div id="testes-de-qui-quadrado-chi2-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Testes de Qui-quadrado (<span class="math inline">\(\chi^2\)</span>)<a href="testes-estatísticos.html#testes-de-qui-quadrado-chi2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="testes-estatísticos.html#cb61-1" tabindex="-1"></a><span class="co"># carrega os pacotes</span></span>
-<span id="cb61-2"><a href="testes-estatísticos.html#cb61-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
-<span id="cb61-3"><a href="testes-estatísticos.html#cb61-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;gtsummary&quot;</span>)</span>
-<span id="cb61-4"><a href="testes-estatísticos.html#cb61-4" tabindex="-1"></a></span>
-<span id="cb61-5"><a href="testes-estatísticos.html#cb61-5" tabindex="-1"></a><span class="co"># tabela 2x2</span></span>
-<span id="cb61-6"><a href="testes-estatísticos.html#cb61-6" tabindex="-1"></a>tbl_cross <span class="ot">&lt;-</span></span>
-<span id="cb61-7"><a href="testes-estatísticos.html#cb61-7" tabindex="-1"></a>    <span class="co"># banco de dados</span></span>
-<span id="cb61-8"><a href="testes-estatísticos.html#cb61-8" tabindex="-1"></a>    trial <span class="sc">%&gt;%</span></span>
-<span id="cb61-9"><a href="testes-estatísticos.html#cb61-9" tabindex="-1"></a>    <span class="co"># cria a tabela de contingência</span></span>
-<span id="cb61-10"><a href="testes-estatísticos.html#cb61-10" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">tbl_cross</span>(</span>
-<span id="cb61-11"><a href="testes-estatísticos.html#cb61-11" tabindex="-1"></a>        <span class="at">row =</span> trt,</span>
-<span id="cb61-12"><a href="testes-estatísticos.html#cb61-12" tabindex="-1"></a>        <span class="at">col =</span> response,</span>
-<span id="cb61-13"><a href="testes-estatísticos.html#cb61-13" tabindex="-1"></a>        <span class="at">statistic =</span> <span class="st">&quot;{n}&quot;</span>,</span>
-<span id="cb61-14"><a href="testes-estatísticos.html#cb61-14" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">0</span>,</span>
-<span id="cb61-15"><a href="testes-estatísticos.html#cb61-15" tabindex="-1"></a>        <span class="at">percent =</span> <span class="st">&quot;cell&quot;</span>,</span>
-<span id="cb61-16"><a href="testes-estatísticos.html#cb61-16" tabindex="-1"></a>        <span class="at">margin =</span> <span class="fu">c</span>(<span class="st">&quot;row&quot;</span>, <span class="st">&quot;column&quot;</span>),</span>
-<span id="cb61-17"><a href="testes-estatísticos.html#cb61-17" tabindex="-1"></a>        <span class="at">missing =</span> <span class="st">&quot;no&quot;</span>,</span>
-<span id="cb61-18"><a href="testes-estatísticos.html#cb61-18" tabindex="-1"></a>        <span class="at">missing_text =</span> <span class="st">&quot;Dados perdidos&quot;</span>,</span>
-<span id="cb61-19"><a href="testes-estatísticos.html#cb61-19" tabindex="-1"></a>        <span class="at">margin_text =</span> <span class="st">&quot;Total&quot;</span></span>
-<span id="cb61-20"><a href="testes-estatísticos.html#cb61-20" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
-<span id="cb61-21"><a href="testes-estatísticos.html#cb61-21" tabindex="-1"></a>    <span class="co"># calcula o p-valor do teste</span></span>
-<span id="cb61-22"><a href="testes-estatísticos.html#cb61-22" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">add_p</span>(</span>
-<span id="cb61-23"><a href="testes-estatísticos.html#cb61-23" tabindex="-1"></a>        <span class="at">test =</span> <span class="st">&quot;chisq.test&quot;</span>,</span>
-<span id="cb61-24"><a href="testes-estatísticos.html#cb61-24" tabindex="-1"></a>        <span class="at">pvalue_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_pvalue</span>(x, <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb61-25"><a href="testes-estatísticos.html#cb61-25" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
-<span id="cb61-26"><a href="testes-estatísticos.html#cb61-26" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_header</span>(</span>
-<span id="cb61-27"><a href="testes-estatísticos.html#cb61-27" tabindex="-1"></a>        <span class="at">p.value =</span> <span class="st">&quot;**P-valor**&quot;</span></span>
-<span id="cb61-28"><a href="testes-estatísticos.html#cb61-28" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
-<span id="cb61-29"><a href="testes-estatísticos.html#cb61-29" tabindex="-1"></a>    <span class="co"># calcula o tamanho do efeito</span></span>
-<span id="cb61-30"><a href="testes-estatísticos.html#cb61-30" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_table_styling</span>(</span>
-<span id="cb61-31"><a href="testes-estatísticos.html#cb61-31" tabindex="-1"></a>        <span class="at">rows =</span> <span class="cn">NULL</span>,</span>
-<span id="cb61-32"><a href="testes-estatísticos.html#cb61-32" tabindex="-1"></a>        <span class="at">footnote =</span> <span class="fu">as.character</span>(rstatix<span class="sc">::</span><span class="fu">cramer_v</span>(trt, response))</span>
-<span id="cb61-33"><a href="testes-estatísticos.html#cb61-33" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
-<span id="cb61-34"><a href="testes-estatísticos.html#cb61-34" tabindex="-1"></a>    <span class="co"># formata o título em negrito</span></span>
-<span id="cb61-35"><a href="testes-estatísticos.html#cb61-35" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">bold_labels</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb61-36"><a href="testes-estatísticos.html#cb61-36" tabindex="-1"></a>    <span class="co"># cria título da tabela</span></span>
-<span id="cb61-37"><a href="testes-estatísticos.html#cb61-37" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_caption</span>(</span>
-<span id="cb61-38"><a href="testes-estatísticos.html#cb61-38" tabindex="-1"></a>        <span class="st">&quot;Teste Qui-quadrado (com correção de Yates)&quot;</span></span>
-<span id="cb61-39"><a href="testes-estatísticos.html#cb61-39" tabindex="-1"></a>        )</span>
-<span id="cb61-40"><a href="testes-estatísticos.html#cb61-40" tabindex="-1"></a></span>
-<span id="cb61-41"><a href="testes-estatísticos.html#cb61-41" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
-<span id="cb61-42"><a href="testes-estatísticos.html#cb61-42" tabindex="-1"></a><span class="fu">require</span>(huxtable)</span>
-<span id="cb61-43"><a href="testes-estatísticos.html#cb61-43" tabindex="-1"></a>tbl_cross <span class="sc">%&gt;%</span></span>
-<span id="cb61-44"><a href="testes-estatísticos.html#cb61-44" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">as_hux_table</span>()</span></code></pre></div>
-</details>
-</div>
-<div id="teste-exato-de-fisher-1" class="section level2 unnumbered unlisted hasAnchor">
-<h2>Teste exato de Fisher<a href="testes-estatísticos.html#teste-exato-de-fisher-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="testes-estatísticos.html#cb62-1" tabindex="-1"></a><span class="co"># carrega os pacotes</span></span>
 <span id="cb62-2"><a href="testes-estatísticos.html#cb62-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
 <span id="cb62-3"><a href="testes-estatísticos.html#cb62-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;gtsummary&quot;</span>)</span>
@@ -1533,7 +1483,7 @@ div.csl-indent {
 <span id="cb62-20"><a href="testes-estatísticos.html#cb62-20" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
 <span id="cb62-21"><a href="testes-estatísticos.html#cb62-21" tabindex="-1"></a>    <span class="co"># calcula o p-valor do teste</span></span>
 <span id="cb62-22"><a href="testes-estatísticos.html#cb62-22" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">add_p</span>(</span>
-<span id="cb62-23"><a href="testes-estatísticos.html#cb62-23" tabindex="-1"></a>        <span class="at">test =</span> <span class="st">&quot;fisher.test&quot;</span>,</span>
+<span id="cb62-23"><a href="testes-estatísticos.html#cb62-23" tabindex="-1"></a>        <span class="at">test =</span> <span class="st">&quot;chisq.test&quot;</span>,</span>
 <span id="cb62-24"><a href="testes-estatísticos.html#cb62-24" tabindex="-1"></a>        <span class="at">pvalue_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_pvalue</span>(x, <span class="at">digits =</span> <span class="dv">3</span>)</span>
 <span id="cb62-25"><a href="testes-estatísticos.html#cb62-25" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
 <span id="cb62-26"><a href="testes-estatísticos.html#cb62-26" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_header</span>(</span>
@@ -1548,13 +1498,62 @@ div.csl-indent {
 <span id="cb62-35"><a href="testes-estatísticos.html#cb62-35" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">bold_labels</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb62-36"><a href="testes-estatísticos.html#cb62-36" tabindex="-1"></a>    <span class="co"># cria título da tabela</span></span>
 <span id="cb62-37"><a href="testes-estatísticos.html#cb62-37" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_caption</span>(</span>
-<span id="cb62-38"><a href="testes-estatísticos.html#cb62-38" tabindex="-1"></a>        <span class="st">&quot;Teste exato de Fisher&quot;</span></span>
+<span id="cb62-38"><a href="testes-estatísticos.html#cb62-38" tabindex="-1"></a>        <span class="st">&quot;Teste Qui-quadrado (com correção de Yates)&quot;</span></span>
 <span id="cb62-39"><a href="testes-estatísticos.html#cb62-39" tabindex="-1"></a>        )</span>
 <span id="cb62-40"><a href="testes-estatísticos.html#cb62-40" tabindex="-1"></a></span>
 <span id="cb62-41"><a href="testes-estatísticos.html#cb62-41" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
 <span id="cb62-42"><a href="testes-estatísticos.html#cb62-42" tabindex="-1"></a><span class="fu">require</span>(huxtable)</span>
 <span id="cb62-43"><a href="testes-estatísticos.html#cb62-43" tabindex="-1"></a>tbl_cross <span class="sc">%&gt;%</span></span>
 <span id="cb62-44"><a href="testes-estatísticos.html#cb62-44" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">as_hux_table</span>()</span></code></pre></div>
+</details>
+</div>
+<div id="teste-exato-de-fisher-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Teste exato de Fisher<a href="testes-estatísticos.html#teste-exato-de-fisher-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="testes-estatísticos.html#cb63-1" tabindex="-1"></a><span class="co"># carrega os pacotes</span></span>
+<span id="cb63-2"><a href="testes-estatísticos.html#cb63-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb63-3"><a href="testes-estatísticos.html#cb63-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;gtsummary&quot;</span>)</span>
+<span id="cb63-4"><a href="testes-estatísticos.html#cb63-4" tabindex="-1"></a></span>
+<span id="cb63-5"><a href="testes-estatísticos.html#cb63-5" tabindex="-1"></a><span class="co"># tabela 2x2</span></span>
+<span id="cb63-6"><a href="testes-estatísticos.html#cb63-6" tabindex="-1"></a>tbl_cross <span class="ot">&lt;-</span></span>
+<span id="cb63-7"><a href="testes-estatísticos.html#cb63-7" tabindex="-1"></a>    <span class="co"># banco de dados</span></span>
+<span id="cb63-8"><a href="testes-estatísticos.html#cb63-8" tabindex="-1"></a>    trial <span class="sc">%&gt;%</span></span>
+<span id="cb63-9"><a href="testes-estatísticos.html#cb63-9" tabindex="-1"></a>    <span class="co"># cria a tabela de contingência</span></span>
+<span id="cb63-10"><a href="testes-estatísticos.html#cb63-10" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">tbl_cross</span>(</span>
+<span id="cb63-11"><a href="testes-estatísticos.html#cb63-11" tabindex="-1"></a>        <span class="at">row =</span> trt,</span>
+<span id="cb63-12"><a href="testes-estatísticos.html#cb63-12" tabindex="-1"></a>        <span class="at">col =</span> response,</span>
+<span id="cb63-13"><a href="testes-estatísticos.html#cb63-13" tabindex="-1"></a>        <span class="at">statistic =</span> <span class="st">&quot;{n}&quot;</span>,</span>
+<span id="cb63-14"><a href="testes-estatísticos.html#cb63-14" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">0</span>,</span>
+<span id="cb63-15"><a href="testes-estatísticos.html#cb63-15" tabindex="-1"></a>        <span class="at">percent =</span> <span class="st">&quot;cell&quot;</span>,</span>
+<span id="cb63-16"><a href="testes-estatísticos.html#cb63-16" tabindex="-1"></a>        <span class="at">margin =</span> <span class="fu">c</span>(<span class="st">&quot;row&quot;</span>, <span class="st">&quot;column&quot;</span>),</span>
+<span id="cb63-17"><a href="testes-estatísticos.html#cb63-17" tabindex="-1"></a>        <span class="at">missing =</span> <span class="st">&quot;no&quot;</span>,</span>
+<span id="cb63-18"><a href="testes-estatísticos.html#cb63-18" tabindex="-1"></a>        <span class="at">missing_text =</span> <span class="st">&quot;Dados perdidos&quot;</span>,</span>
+<span id="cb63-19"><a href="testes-estatísticos.html#cb63-19" tabindex="-1"></a>        <span class="at">margin_text =</span> <span class="st">&quot;Total&quot;</span></span>
+<span id="cb63-20"><a href="testes-estatísticos.html#cb63-20" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
+<span id="cb63-21"><a href="testes-estatísticos.html#cb63-21" tabindex="-1"></a>    <span class="co"># calcula o p-valor do teste</span></span>
+<span id="cb63-22"><a href="testes-estatísticos.html#cb63-22" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">add_p</span>(</span>
+<span id="cb63-23"><a href="testes-estatísticos.html#cb63-23" tabindex="-1"></a>        <span class="at">test =</span> <span class="st">&quot;fisher.test&quot;</span>,</span>
+<span id="cb63-24"><a href="testes-estatísticos.html#cb63-24" tabindex="-1"></a>        <span class="at">pvalue_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_pvalue</span>(x, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb63-25"><a href="testes-estatísticos.html#cb63-25" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
+<span id="cb63-26"><a href="testes-estatísticos.html#cb63-26" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_header</span>(</span>
+<span id="cb63-27"><a href="testes-estatísticos.html#cb63-27" tabindex="-1"></a>        <span class="at">p.value =</span> <span class="st">&quot;**P-valor**&quot;</span></span>
+<span id="cb63-28"><a href="testes-estatísticos.html#cb63-28" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
+<span id="cb63-29"><a href="testes-estatísticos.html#cb63-29" tabindex="-1"></a>    <span class="co"># calcula o tamanho do efeito</span></span>
+<span id="cb63-30"><a href="testes-estatísticos.html#cb63-30" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_table_styling</span>(</span>
+<span id="cb63-31"><a href="testes-estatísticos.html#cb63-31" tabindex="-1"></a>        <span class="at">rows =</span> <span class="cn">NULL</span>,</span>
+<span id="cb63-32"><a href="testes-estatísticos.html#cb63-32" tabindex="-1"></a>        <span class="at">footnote =</span> <span class="fu">as.character</span>(rstatix<span class="sc">::</span><span class="fu">cramer_v</span>(trt, response))</span>
+<span id="cb63-33"><a href="testes-estatísticos.html#cb63-33" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
+<span id="cb63-34"><a href="testes-estatísticos.html#cb63-34" tabindex="-1"></a>    <span class="co"># formata o título em negrito</span></span>
+<span id="cb63-35"><a href="testes-estatísticos.html#cb63-35" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">bold_labels</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb63-36"><a href="testes-estatísticos.html#cb63-36" tabindex="-1"></a>    <span class="co"># cria título da tabela</span></span>
+<span id="cb63-37"><a href="testes-estatísticos.html#cb63-37" tabindex="-1"></a>    gtsummary<span class="sc">::</span><span class="fu">modify_caption</span>(</span>
+<span id="cb63-38"><a href="testes-estatísticos.html#cb63-38" tabindex="-1"></a>        <span class="st">&quot;Teste exato de Fisher&quot;</span></span>
+<span id="cb63-39"><a href="testes-estatísticos.html#cb63-39" tabindex="-1"></a>        )</span>
+<span id="cb63-40"><a href="testes-estatísticos.html#cb63-40" tabindex="-1"></a></span>
+<span id="cb63-41"><a href="testes-estatísticos.html#cb63-41" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
+<span id="cb63-42"><a href="testes-estatísticos.html#cb63-42" tabindex="-1"></a><span class="fu">require</span>(huxtable)</span>
+<span id="cb63-43"><a href="testes-estatísticos.html#cb63-43" tabindex="-1"></a>tbl_cross <span class="sc">%&gt;%</span></span>
+<span id="cb63-44"><a href="testes-estatísticos.html#cb63-44" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">as_hux_table</span>()</span></code></pre></div>
 </details>
 </div>
 </div>
@@ -1564,7 +1563,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="tamanho-do-efeito-e-p-valor.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="comparação.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="correlação.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

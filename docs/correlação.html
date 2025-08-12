@@ -20,7 +20,6 @@
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas a análise estatística de dados, revisitando o principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
 
-<meta name="author" content="© 2023-2025 by Arthur de Sá Ferreira   https://orcid.org/0000-0001-7014-2002   cienciacomr?" />
 
 
 
@@ -29,7 +28,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="associação.html"/>
+<link rel="prev" href="testes-estatísticos.html"/>
 <link rel="next" href="regressão.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -1462,99 +1461,99 @@ div.csl-indent {
 <div id="quais-precauções-devem-ser-tomadas-na-interpretação-de-medidas-de-correlação-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Quais precauções devem ser tomadas na interpretação de medidas de correlação?<a href="#quais-precau%C3%A7%C3%B5es-devem-ser-tomadas-na-interpreta%C3%A7%C3%A3o-de-medidas-de-correla%C3%A7%C3%A3o-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="correlação.html#cb63-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb63-2"><a href="correlação.html#cb63-2" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> datasets<span class="sc">::</span>anscombe</span>
-<span id="cb63-3"><a href="correlação.html#cb63-3" tabindex="-1"></a>anscombe.dt<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>])</span>
-<span id="cb63-4"><a href="correlação.html#cb63-4" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> anscombe.dt[<span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)]</span>
-<span id="cb63-5"><a href="correlação.html#cb63-5" tabindex="-1"></a></span>
-<span id="cb63-6"><a href="correlação.html#cb63-6" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb63-7"><a href="correlação.html#cb63-7" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb63-8"><a href="correlação.html#cb63-8" tabindex="-1"></a>  anscombe.dt,</span>
-<span id="cb63-9"><a href="correlação.html#cb63-9" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb63-10"><a href="correlação.html#cb63-10" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb63-11"><a href="correlação.html#cb63-11" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb63-12"><a href="correlação.html#cb63-12" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb63-13"><a href="correlação.html#cb63-13" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb63-14"><a href="correlação.html#cb63-14" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Quarteto de Anscombe.&quot;</span></span>
-<span id="cb63-15"><a href="correlação.html#cb63-15" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb63-16"><a href="correlação.html#cb63-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb63-17"><a href="correlação.html#cb63-17" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb63-18"><a href="correlação.html#cb63-18" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb63-19"><a href="correlação.html#cb63-19" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb63-20"><a href="correlação.html#cb63-20" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb63-21"><a href="correlação.html#cb63-21" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb63-22"><a href="correlação.html#cb63-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb63-23"><a href="correlação.html#cb63-23" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb63-24"><a href="correlação.html#cb63-24" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span>
-<span id="cb63-25"><a href="correlação.html#cb63-25" tabindex="-1"></a></span>
-<span id="cb63-26"><a href="correlação.html#cb63-26" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> anscombe.dt <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>ID)</span>
-<span id="cb63-27"><a href="correlação.html#cb63-27" tabindex="-1"></a></span>
-<span id="cb63-28"><a href="correlação.html#cb63-28" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;&lt;br&gt;&#39;</span>)</span>
-<span id="cb63-29"><a href="correlação.html#cb63-29" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;&lt;br&gt;&#39;</span>)</span>
-<span id="cb63-30"><a href="correlação.html#cb63-30" tabindex="-1"></a></span>
-<span id="cb63-31"><a href="correlação.html#cb63-31" tabindex="-1"></a><span class="co"># exibe a tabela descritiva</span></span>
-<span id="cb63-32"><a href="correlação.html#cb63-32" tabindex="-1"></a>anscombe.summ <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb63-33"><a href="correlação.html#cb63-33" tabindex="-1"></a>  <span class="st">&quot;X1Y1&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb63-34"><a href="correlação.html#cb63-34" tabindex="-1"></a>  <span class="st">&quot;X2Y2&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb63-35"><a href="correlação.html#cb63-35" tabindex="-1"></a>  <span class="st">&quot;X3Y3&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb63-36"><a href="correlação.html#cb63-36" tabindex="-1"></a>  <span class="st">&quot;X4Y4&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
-<span id="cb63-37"><a href="correlação.html#cb63-37" tabindex="-1"></a>)</span>
-<span id="cb63-38"><a href="correlação.html#cb63-38" tabindex="-1"></a>ff <span class="ot">&lt;-</span> y <span class="sc">~</span> x</span>
-<span id="cb63-39"><a href="correlação.html#cb63-39" tabindex="-1"></a>mods <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">as.list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">paste0</span>(<span class="st">&quot;lm&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
-<span id="cb63-40"><a href="correlação.html#cb63-40" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
-<span id="cb63-41"><a href="correlação.html#cb63-41" tabindex="-1"></a>  ff[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">paste0</span>(<span class="fu">c</span>(<span class="st">&quot;y&quot;</span>, <span class="st">&quot;x&quot;</span>), i), as.name)</span>
-<span id="cb63-42"><a href="correlação.html#cb63-42" tabindex="-1"></a>  mods[[i]] <span class="ot">&lt;-</span> lmi <span class="ot">&lt;-</span> <span class="fu">lm</span>(ff, <span class="at">data =</span> anscombe.dt)</span>
-<span id="cb63-43"><a href="correlação.html#cb63-43" tabindex="-1"></a>  <span class="co"># observacoes</span></span>
-<span id="cb63-44"><a href="correlação.html#cb63-44" tabindex="-1"></a>  anscombe.summ[<span class="dv">1</span>, i] <span class="ot">&lt;-</span> <span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>]</span>
-<span id="cb63-45"><a href="correlação.html#cb63-45" tabindex="-1"></a>  <span class="co"># media x,y</span></span>
-<span id="cb63-46"><a href="correlação.html#cb63-46" tabindex="-1"></a>  anscombe.summ[<span class="dv">2</span>, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)])</span>
-<span id="cb63-47"><a href="correlação.html#cb63-47" tabindex="-1"></a>  anscombe.summ[<span class="dv">3</span>, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
-<span id="cb63-48"><a href="correlação.html#cb63-48" tabindex="-1"></a>  <span class="co"># variancia x,y</span></span>
-<span id="cb63-49"><a href="correlação.html#cb63-49" tabindex="-1"></a>  anscombe.summ[<span class="dv">4</span>, i] <span class="ot">&lt;-</span> <span class="fu">var</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)])</span>
-<span id="cb63-50"><a href="correlação.html#cb63-50" tabindex="-1"></a>  anscombe.summ[<span class="dv">5</span>, i] <span class="ot">&lt;-</span> <span class="fu">var</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
-<span id="cb63-51"><a href="correlação.html#cb63-51" tabindex="-1"></a>  <span class="co"># correlacao</span></span>
-<span id="cb63-52"><a href="correlação.html#cb63-52" tabindex="-1"></a>  anscombe.summ[<span class="dv">6</span>, i] <span class="ot">&lt;-</span></span>
-<span id="cb63-53"><a href="correlação.html#cb63-53" tabindex="-1"></a>    <span class="fu">cor</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)], anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
-<span id="cb63-54"><a href="correlação.html#cb63-54" tabindex="-1"></a>  <span class="co"># coeficiente angular</span></span>
-<span id="cb63-55"><a href="correlação.html#cb63-55" tabindex="-1"></a>  anscombe.summ[<span class="dv">7</span>, i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmi)[<span class="dv">2</span>]</span>
-<span id="cb63-56"><a href="correlação.html#cb63-56" tabindex="-1"></a>  <span class="co"># coeficiente linear</span></span>
-<span id="cb63-57"><a href="correlação.html#cb63-57" tabindex="-1"></a>  anscombe.summ[<span class="dv">8</span>, i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmi)[<span class="dv">1</span>]</span>
-<span id="cb63-58"><a href="correlação.html#cb63-58" tabindex="-1"></a>  <span class="co"># coeficiente de determinacao</span></span>
-<span id="cb63-59"><a href="correlação.html#cb63-59" tabindex="-1"></a>  anscombe.summ[<span class="dv">9</span>, i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(lmi)<span class="sc">$</span>r.squared</span>
-<span id="cb63-60"><a href="correlação.html#cb63-60" tabindex="-1"></a>}</span>
-<span id="cb63-61"><a href="correlação.html#cb63-61" tabindex="-1"></a><span class="fu">rownames</span>(anscombe.summ) <span class="ot">&lt;-</span></span>
-<span id="cb63-62"><a href="correlação.html#cb63-62" tabindex="-1"></a>  <span class="fu">c</span>(</span>
-<span id="cb63-63"><a href="correlação.html#cb63-63" tabindex="-1"></a>    <span class="st">&quot;Observações&quot;</span>,</span>
-<span id="cb63-64"><a href="correlação.html#cb63-64" tabindex="-1"></a>    <span class="st">&quot;Média x&quot;</span>,</span>
-<span id="cb63-65"><a href="correlação.html#cb63-65" tabindex="-1"></a>    <span class="st">&quot;Média y&quot;</span>,</span>
-<span id="cb63-66"><a href="correlação.html#cb63-66" tabindex="-1"></a>    <span class="st">&quot;Variância x&quot;</span>,</span>
-<span id="cb63-67"><a href="correlação.html#cb63-67" tabindex="-1"></a>    <span class="st">&quot;Variância y&quot;</span>,</span>
-<span id="cb63-68"><a href="correlação.html#cb63-68" tabindex="-1"></a>    <span class="st">&quot;Correlação&quot;</span>,</span>
-<span id="cb63-69"><a href="correlação.html#cb63-69" tabindex="-1"></a>    <span class="st">&quot;Coeficiente angular&quot;</span>,</span>
-<span id="cb63-70"><a href="correlação.html#cb63-70" tabindex="-1"></a>    <span class="st">&quot;Coeficiente linear&quot;</span>,</span>
-<span id="cb63-71"><a href="correlação.html#cb63-71" tabindex="-1"></a>    <span class="st">&quot;Coeficiente de determinação&quot;</span></span>
-<span id="cb63-72"><a href="correlação.html#cb63-72" tabindex="-1"></a>  )</span>
-<span id="cb63-73"><a href="correlação.html#cb63-73" tabindex="-1"></a>anscombe.summ <span class="ot">&lt;-</span> <span class="fu">round</span>(anscombe.summ, <span class="dv">2</span>)</span>
-<span id="cb63-74"><a href="correlação.html#cb63-74" tabindex="-1"></a></span>
-<span id="cb63-75"><a href="correlação.html#cb63-75" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb63-76"><a href="correlação.html#cb63-76" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb63-77"><a href="correlação.html#cb63-77" tabindex="-1"></a>  anscombe.summ,</span>
-<span id="cb63-78"><a href="correlação.html#cb63-78" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb63-79"><a href="correlação.html#cb63-79" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb63-80"><a href="correlação.html#cb63-80" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb63-81"><a href="correlação.html#cb63-81" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb63-82"><a href="correlação.html#cb63-82" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb63-83"><a href="correlação.html#cb63-83" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos.&quot;</span></span>
-<span id="cb63-84"><a href="correlação.html#cb63-84" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb63-85"><a href="correlação.html#cb63-85" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb63-86"><a href="correlação.html#cb63-86" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb63-87"><a href="correlação.html#cb63-87" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb63-88"><a href="correlação.html#cb63-88" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb63-89"><a href="correlação.html#cb63-89" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb63-90"><a href="correlação.html#cb63-90" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb63-91"><a href="correlação.html#cb63-91" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb63-92"><a href="correlação.html#cb63-92" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb63-93"><a href="correlação.html#cb63-93" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(anscombe.summ)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="correlação.html#cb64-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb64-2"><a href="correlação.html#cb64-2" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> datasets<span class="sc">::</span>anscombe</span>
+<span id="cb64-3"><a href="correlação.html#cb64-3" tabindex="-1"></a>anscombe.dt<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>])</span>
+<span id="cb64-4"><a href="correlação.html#cb64-4" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> anscombe.dt[<span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)]</span>
+<span id="cb64-5"><a href="correlação.html#cb64-5" tabindex="-1"></a></span>
+<span id="cb64-6"><a href="correlação.html#cb64-6" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb64-7"><a href="correlação.html#cb64-7" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb64-8"><a href="correlação.html#cb64-8" tabindex="-1"></a>  anscombe.dt,</span>
+<span id="cb64-9"><a href="correlação.html#cb64-9" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb64-10"><a href="correlação.html#cb64-10" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb64-11"><a href="correlação.html#cb64-11" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb64-12"><a href="correlação.html#cb64-12" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb64-13"><a href="correlação.html#cb64-13" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb64-14"><a href="correlação.html#cb64-14" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Quarteto de Anscombe.&quot;</span></span>
+<span id="cb64-15"><a href="correlação.html#cb64-15" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-16"><a href="correlação.html#cb64-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb64-17"><a href="correlação.html#cb64-17" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb64-18"><a href="correlação.html#cb64-18" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb64-19"><a href="correlação.html#cb64-19" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb64-20"><a href="correlação.html#cb64-20" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb64-21"><a href="correlação.html#cb64-21" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb64-22"><a href="correlação.html#cb64-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-23"><a href="correlação.html#cb64-23" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-24"><a href="correlação.html#cb64-24" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span>
+<span id="cb64-25"><a href="correlação.html#cb64-25" tabindex="-1"></a></span>
+<span id="cb64-26"><a href="correlação.html#cb64-26" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> anscombe.dt <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>ID)</span>
+<span id="cb64-27"><a href="correlação.html#cb64-27" tabindex="-1"></a></span>
+<span id="cb64-28"><a href="correlação.html#cb64-28" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;&lt;br&gt;&#39;</span>)</span>
+<span id="cb64-29"><a href="correlação.html#cb64-29" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;&lt;br&gt;&#39;</span>)</span>
+<span id="cb64-30"><a href="correlação.html#cb64-30" tabindex="-1"></a></span>
+<span id="cb64-31"><a href="correlação.html#cb64-31" tabindex="-1"></a><span class="co"># exibe a tabela descritiva</span></span>
+<span id="cb64-32"><a href="correlação.html#cb64-32" tabindex="-1"></a>anscombe.summ <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb64-33"><a href="correlação.html#cb64-33" tabindex="-1"></a>  <span class="st">&quot;X1Y1&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb64-34"><a href="correlação.html#cb64-34" tabindex="-1"></a>  <span class="st">&quot;X2Y2&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb64-35"><a href="correlação.html#cb64-35" tabindex="-1"></a>  <span class="st">&quot;X3Y3&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb64-36"><a href="correlação.html#cb64-36" tabindex="-1"></a>  <span class="st">&quot;X4Y4&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
+<span id="cb64-37"><a href="correlação.html#cb64-37" tabindex="-1"></a>)</span>
+<span id="cb64-38"><a href="correlação.html#cb64-38" tabindex="-1"></a>ff <span class="ot">&lt;-</span> y <span class="sc">~</span> x</span>
+<span id="cb64-39"><a href="correlação.html#cb64-39" tabindex="-1"></a>mods <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">as.list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">paste0</span>(<span class="st">&quot;lm&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb64-40"><a href="correlação.html#cb64-40" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb64-41"><a href="correlação.html#cb64-41" tabindex="-1"></a>  ff[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">paste0</span>(<span class="fu">c</span>(<span class="st">&quot;y&quot;</span>, <span class="st">&quot;x&quot;</span>), i), as.name)</span>
+<span id="cb64-42"><a href="correlação.html#cb64-42" tabindex="-1"></a>  mods[[i]] <span class="ot">&lt;-</span> lmi <span class="ot">&lt;-</span> <span class="fu">lm</span>(ff, <span class="at">data =</span> anscombe.dt)</span>
+<span id="cb64-43"><a href="correlação.html#cb64-43" tabindex="-1"></a>  <span class="co"># observacoes</span></span>
+<span id="cb64-44"><a href="correlação.html#cb64-44" tabindex="-1"></a>  anscombe.summ[<span class="dv">1</span>, i] <span class="ot">&lt;-</span> <span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>]</span>
+<span id="cb64-45"><a href="correlação.html#cb64-45" tabindex="-1"></a>  <span class="co"># media x,y</span></span>
+<span id="cb64-46"><a href="correlação.html#cb64-46" tabindex="-1"></a>  anscombe.summ[<span class="dv">2</span>, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)])</span>
+<span id="cb64-47"><a href="correlação.html#cb64-47" tabindex="-1"></a>  anscombe.summ[<span class="dv">3</span>, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
+<span id="cb64-48"><a href="correlação.html#cb64-48" tabindex="-1"></a>  <span class="co"># variancia x,y</span></span>
+<span id="cb64-49"><a href="correlação.html#cb64-49" tabindex="-1"></a>  anscombe.summ[<span class="dv">4</span>, i] <span class="ot">&lt;-</span> <span class="fu">var</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)])</span>
+<span id="cb64-50"><a href="correlação.html#cb64-50" tabindex="-1"></a>  anscombe.summ[<span class="dv">5</span>, i] <span class="ot">&lt;-</span> <span class="fu">var</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
+<span id="cb64-51"><a href="correlação.html#cb64-51" tabindex="-1"></a>  <span class="co"># correlacao</span></span>
+<span id="cb64-52"><a href="correlação.html#cb64-52" tabindex="-1"></a>  anscombe.summ[<span class="dv">6</span>, i] <span class="ot">&lt;-</span></span>
+<span id="cb64-53"><a href="correlação.html#cb64-53" tabindex="-1"></a>    <span class="fu">cor</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)], anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
+<span id="cb64-54"><a href="correlação.html#cb64-54" tabindex="-1"></a>  <span class="co"># coeficiente angular</span></span>
+<span id="cb64-55"><a href="correlação.html#cb64-55" tabindex="-1"></a>  anscombe.summ[<span class="dv">7</span>, i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmi)[<span class="dv">2</span>]</span>
+<span id="cb64-56"><a href="correlação.html#cb64-56" tabindex="-1"></a>  <span class="co"># coeficiente linear</span></span>
+<span id="cb64-57"><a href="correlação.html#cb64-57" tabindex="-1"></a>  anscombe.summ[<span class="dv">8</span>, i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmi)[<span class="dv">1</span>]</span>
+<span id="cb64-58"><a href="correlação.html#cb64-58" tabindex="-1"></a>  <span class="co"># coeficiente de determinacao</span></span>
+<span id="cb64-59"><a href="correlação.html#cb64-59" tabindex="-1"></a>  anscombe.summ[<span class="dv">9</span>, i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(lmi)<span class="sc">$</span>r.squared</span>
+<span id="cb64-60"><a href="correlação.html#cb64-60" tabindex="-1"></a>}</span>
+<span id="cb64-61"><a href="correlação.html#cb64-61" tabindex="-1"></a><span class="fu">rownames</span>(anscombe.summ) <span class="ot">&lt;-</span></span>
+<span id="cb64-62"><a href="correlação.html#cb64-62" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb64-63"><a href="correlação.html#cb64-63" tabindex="-1"></a>    <span class="st">&quot;Observações&quot;</span>,</span>
+<span id="cb64-64"><a href="correlação.html#cb64-64" tabindex="-1"></a>    <span class="st">&quot;Média x&quot;</span>,</span>
+<span id="cb64-65"><a href="correlação.html#cb64-65" tabindex="-1"></a>    <span class="st">&quot;Média y&quot;</span>,</span>
+<span id="cb64-66"><a href="correlação.html#cb64-66" tabindex="-1"></a>    <span class="st">&quot;Variância x&quot;</span>,</span>
+<span id="cb64-67"><a href="correlação.html#cb64-67" tabindex="-1"></a>    <span class="st">&quot;Variância y&quot;</span>,</span>
+<span id="cb64-68"><a href="correlação.html#cb64-68" tabindex="-1"></a>    <span class="st">&quot;Correlação&quot;</span>,</span>
+<span id="cb64-69"><a href="correlação.html#cb64-69" tabindex="-1"></a>    <span class="st">&quot;Coeficiente angular&quot;</span>,</span>
+<span id="cb64-70"><a href="correlação.html#cb64-70" tabindex="-1"></a>    <span class="st">&quot;Coeficiente linear&quot;</span>,</span>
+<span id="cb64-71"><a href="correlação.html#cb64-71" tabindex="-1"></a>    <span class="st">&quot;Coeficiente de determinação&quot;</span></span>
+<span id="cb64-72"><a href="correlação.html#cb64-72" tabindex="-1"></a>  )</span>
+<span id="cb64-73"><a href="correlação.html#cb64-73" tabindex="-1"></a>anscombe.summ <span class="ot">&lt;-</span> <span class="fu">round</span>(anscombe.summ, <span class="dv">2</span>)</span>
+<span id="cb64-74"><a href="correlação.html#cb64-74" tabindex="-1"></a></span>
+<span id="cb64-75"><a href="correlação.html#cb64-75" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb64-76"><a href="correlação.html#cb64-76" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb64-77"><a href="correlação.html#cb64-77" tabindex="-1"></a>  anscombe.summ,</span>
+<span id="cb64-78"><a href="correlação.html#cb64-78" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb64-79"><a href="correlação.html#cb64-79" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb64-80"><a href="correlação.html#cb64-80" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb64-81"><a href="correlação.html#cb64-81" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb64-82"><a href="correlação.html#cb64-82" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb64-83"><a href="correlação.html#cb64-83" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos.&quot;</span></span>
+<span id="cb64-84"><a href="correlação.html#cb64-84" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-85"><a href="correlação.html#cb64-85" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb64-86"><a href="correlação.html#cb64-86" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb64-87"><a href="correlação.html#cb64-87" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb64-88"><a href="correlação.html#cb64-88" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb64-89"><a href="correlação.html#cb64-89" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb64-90"><a href="correlação.html#cb64-90" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb64-91"><a href="correlação.html#cb64-91" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-92"><a href="correlação.html#cb64-92" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-93"><a href="correlação.html#cb64-93" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(anscombe.summ)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
 </details>
 </div>
 </div>
@@ -1563,7 +1562,7 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="associação.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="testes-estatísticos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="regressão.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

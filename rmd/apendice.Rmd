@@ -91,28 +91,26 @@ remove <- c(
   "rmd/parte-6.Rmd",
   "rmd/parte-7.Rmd",
   "rmd/parte-8.Rmd",
-  "rmd/shiny-apps.Rmd",
-  "rmd/fontes-externas.Rmd",
-  "rmd/diretrizes-listas.Rmd",
+  "rmd/parte-9.Rmd",
   "rmd/apendice.Rmd",
   "rmd/referencias.Rmd"
 )
 files <- files[!files %in% remove]
 
-# keep files that do have chunks
+# Keep files that do have chunks and exist
 files <- files[file.exists(files) & sapply(files, function(f) {
   rmd_content <- parsermd::parse_rmd(f)
-  any(sapply(rmd_content, function(x)
-    inherits(x, "rmd_chunk")))
+  # Count chunks and check if the count is > 1
+  sum(sapply(rmd_content, function(x) inherits(x, "rmd_chunk"))) > 1
 })]
 
-# Iterate through each file, extract content, and include it in the document
+# Iterate through the filtered list of files
 for (f in files) {
-  # Generate filtered Rmd content
-  parse_rmd_to_rmd(f, "rmd/apendice_temp.Rmd")
-  
-  # Include it in the output
-  cat(knitr::knit_child("rmd/apendice_temp.Rmd", quiet = TRUE))
+ # Generate filtered Rmd content
+ parse_rmd_to_rmd(f, "rmd/apendice_temp.Rmd")
+
+ # Include it in the output
+ cat(knitr::knit_child("rmd/apendice_temp.Rmd", quiet = TRUE))
 }
 
 # Delete the temp Rmd (after render is complete)
