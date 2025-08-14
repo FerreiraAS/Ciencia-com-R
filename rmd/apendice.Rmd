@@ -3,72 +3,68 @@
 <br>
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE, results = 'asis'}
-parse_rmd_to_rmd <- function(file_path, output_path) {
-  # Parse the Rmd file
-  rmd_content <- parsermd::parse_rmd(file_path)
-  
-  # Remove empty elements
-  rmd_content <- rmd_content[!sapply(rmd_content, function(x)
-    length(x) == 0)]
-  
-  # Filter only headings and code chunks
-  rmd_content <- rmd_content[sapply(rmd_content, function(x)
-    inherits(x, "rmd_heading") || inherits(x, "rmd_chunk"))]
-  
-  # Extract chapter name
-  chapter <- rmd_content[[1]]$name
-  chapter <- sub(".*\\*\\*(.*?)\\*\\*.*", "\\1", chapter)
-  
-  # Open connection to write
-  con <- file(output_path, open = "wt")
-  on.exit(close(con))
-  
-  # Write the top-level heading
-  writeLines(paste0("# ", chapter, " {.unnumbered .unlisted}\n"), con)
-  
-  # Initialize
-  section_header <- NULL
-  section_chunks <- list()
-  has_code <- FALSE
-  
-  for (item in rmd_content) {
-    if (inherits(item, "rmd_heading")) {
-      if (has_code && length(section_chunks) > 1) {
-        # Write section header and chunks (excluding last)
-        writeLines(paste0("\n## ", section_header, " {.unnumbered .unlisted}\n"),
-                   con)
-        for (chunk in head(section_chunks, -1)) {
-          # <- Skip last chunk
-          writeLines(
-            "```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE, tidy = 'styler', tidy.opts = list(strict=FALSE)}",
-            con
-          )
-          writeLines(chunk$code, con)
-          writeLines("```\n", con)
-        }
-      }
-      # Reset for new section
-      section_header <- item$name
-      section_chunks <- list()
-      has_code <- FALSE
+`%||%` <- function(x, y) if (is.null(x)) y else x
+
+parse_rmd_to_rmd <- function(input_file,
+                             output_file,
+                             skip_last_chunk_in_chapter = TRUE) {
+  rmd <- parsermd::parse_rmd(input_file)
+
+  # --- 1) Captura do título do capítulo
+  heading_idxs <- which(vapply(rmd, inherits, logical(1), "rmd_heading"))
+  if (length(heading_idxs) == 0) stop("Nenhum heading encontrado no arquivo.")
+
+  h1_pos <- which(vapply(rmd[heading_idxs], function(x) x$level == 1, logical(1)))[1]
+  first_heading <- if (!is.na(h1_pos)) rmd[[heading_idxs[h1_pos]]] else rmd[[heading_idxs[1]]]
+
+  heading_text <- first_heading$name %||% first_heading$label %||% ""
+  chapter_title <- sub(".*\\*\\*(.*?)\\*\\*.*", "\\1", heading_text)
+  if (identical(chapter_title, heading_text)) chapter_title <- heading_text
+
+  con <- file(output_file, "w")
+  on.exit(close(con), add = TRUE)
+
+  writeLines(paste0("# ", chapter_title, " {.unnumbered .unlisted}\n"), con)
+
+  # --- 2) Coletar todos os elementos que serão impressos
+  output_items <- list()
+
+  for (item in rmd) {
+    if (inherits(item, "rmd_heading") && item$level == 2) {
+      output_items <- c(output_items, list(list(type = "heading", text = item$name %||% item$label %||% "")))
     } else if (inherits(item, "rmd_chunk")) {
-      section_chunks <- c(section_chunks, list(item))
-      has_code <- TRUE
+      output_items <- c(output_items, list(list(type = "chunk", chunk = item)))
     }
   }
-  
-  # Handle the final section
-  if (has_code && length(section_chunks) > 1) {
-    writeLines(paste0("\n## ", section_header, " {.unnumbered .unlisted}\n"),
-               con)
-    for (chunk in head(section_chunks, -1)) {
-      # <- Skip last chunk
+
+  # --- 3) Se for para pular o último chunk do capítulo
+  if (isTRUE(skip_last_chunk_in_chapter)) {
+    chunk_positions <- which(vapply(output_items, function(x) x$type == "chunk", logical(1)))
+    if (length(chunk_positions) > 0) {
+      last_chunk_pos <- tail(chunk_positions, 1)
+      output_items <- output_items[-last_chunk_pos]
+    }
+  }
+
+  # --- 4) Escrever no arquivo
+  for (el in output_items) {
+    if (el$type == "heading") {
+      writeLines(paste0("## ", el$text, " {.unnumbered .unlisted}\n"), con)
+      writeLines("", con)
+    } else if (el$type == "chunk") {
+      chunk <- el$chunk
+      engine <- chunk$engine %||% "r"
       writeLines(
-        "```{r echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE, tidy = 'styler', tidy.opts = list(strict=FALSE)}",
+        paste0(
+          "```{", engine,
+          " echo=TRUE, error=FALSE, warning=FALSE, message=FALSE, ",
+          "results=FALSE, eval=FALSE, tidy='styler', tidy.opts=list(strict=FALSE)}"
+        ),
         con
       )
       writeLines(chunk$code, con)
-      writeLines("```\n", con)
+      writeLines("```", con)
+      writeLines("", con)
     }
   }
 }

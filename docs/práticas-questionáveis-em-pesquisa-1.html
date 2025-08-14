@@ -1444,6 +1444,148 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="práticas-questionáveis-em-pesquisa-1" class="section level1 unnumbered unlisted hasAnchor">
 <h1>Práticas questionáveis em pesquisa<a href="#pr%C3%A1ticas-question%C3%A1veis-em-pesquisa-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="práticas-questionáveis-em-pesquisa-2" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Práticas Questionáveis em Pesquisa<a href="#pr%C3%A1ticas-question%C3%A1veis-em-pesquisa-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="prática-não-intencional-e-má-conduta-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Prática não intencional e má conduta<a href="#pr%C3%A1tica-n%C3%A3o-intencional-e-m%C3%A1-conduta-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-1" tabindex="-1"></a><span class="co"># Carregar pacotes</span></span>
+<span id="cb15-2"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-3"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-4" tabindex="-1"></a><span class="co"># Criar a tibble com 3 categorias equilibradas</span></span>
+<span id="cb15-5"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-5" tabindex="-1"></a>praticas_questionaveis <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb15-6"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-6" tabindex="-1"></a>  Prática <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb15-7"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-7" tabindex="-1"></a>    <span class="st">&quot;Data fabrication&quot;</span>,</span>
+<span id="cb15-8"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-8" tabindex="-1"></a>    <span class="st">&quot;Data falsification&quot;</span>,</span>
+<span id="cb15-9"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-9" tabindex="-1"></a>    <span class="st">&quot;Fake authorship&quot;</span>,</span>
+<span id="cb15-10"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-10" tabindex="-1"></a>    <span class="st">&quot;Fake peer review&quot;</span>,</span>
+<span id="cb15-11"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-11" tabindex="-1"></a>    <span class="st">&quot;Honorary authorship&quot;</span>,</span>
+<span id="cb15-12"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-12" tabindex="-1"></a>    <span class="st">&quot;Gold authorship&quot;</span>,</span>
+<span id="cb15-13"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-13" tabindex="-1"></a>    <span class="st">&quot;Ghost authorship&quot;</span>,</span>
+<span id="cb15-14"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-14" tabindex="-1"></a>    <span class="st">&quot;Duplicate publication&quot;</span>,</span>
+<span id="cb15-15"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-15" tabindex="-1"></a>    <span class="st">&quot;Spin (doloso)&quot;</span>,</span>
+<span id="cb15-16"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-16" tabindex="-1"></a>    <span class="st">&quot;Data distortion&quot;</span>,</span>
+<span id="cb15-17"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-17" tabindex="-1"></a>    </span>
+<span id="cb15-18"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-18" tabindex="-1"></a>    <span class="st">&quot;HARKing&quot;</span>,</span>
+<span id="cb15-19"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-19" tabindex="-1"></a>    <span class="st">&quot;Storytelling&quot;</span>,</span>
+<span id="cb15-20"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-20" tabindex="-1"></a>    <span class="st">&quot;Selective reporting&quot;</span>,</span>
+<span id="cb15-21"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-21" tabindex="-1"></a>    <span class="st">&quot;P-hacking&quot;</span>,</span>
+<span id="cb15-22"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-22" tabindex="-1"></a>    <span class="st">&quot;Data peeking&quot;</span>,</span>
+<span id="cb15-23"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-23" tabindex="-1"></a>    <span class="st">&quot;Cherry picking&quot;</span>,</span>
+<span id="cb15-24"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-24" tabindex="-1"></a>    <span class="st">&quot;Salami slicing&quot;</span>,</span>
+<span id="cb15-25"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-25" tabindex="-1"></a>    <span class="st">&quot;Beautification&quot;</span>,</span>
+<span id="cb15-26"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-26" tabindex="-1"></a>    </span>
+<span id="cb15-27"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-27" tabindex="-1"></a>    <span class="st">&quot;P-hacking reverso&quot;</span>,</span>
+<span id="cb15-28"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-28" tabindex="-1"></a>    <span class="st">&quot;Fishing expedition&quot;</span>,</span>
+<span id="cb15-29"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-29" tabindex="-1"></a>    <span class="st">&quot;Data dredging&quot;</span>,</span>
+<span id="cb15-30"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-30" tabindex="-1"></a>    <span class="st">&quot;File drawer problem&quot;</span>,</span>
+<span id="cb15-31"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-31" tabindex="-1"></a>    <span class="st">&quot;Publication bias&quot;</span></span>
+<span id="cb15-32"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-32" tabindex="-1"></a>  ),</span>
+<span id="cb15-33"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-33" tabindex="-1"></a>  <span class="at">Intencionalidade =</span> <span class="fu">c</span>(</span>
+<span id="cb15-34"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-34" tabindex="-1"></a>    <span class="co"># 10 intencionais</span></span>
+<span id="cb15-35"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-35" tabindex="-1"></a>    <span class="st">&quot;Má conduta&quot;</span>,</span>
+<span id="cb15-36"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-36" tabindex="-1"></a>    <span class="st">&quot;Má conduta&quot;</span>,</span>
+<span id="cb15-37"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-37" tabindex="-1"></a>    <span class="st">&quot;Má conduta&quot;</span>,</span>
+<span id="cb15-38"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-38" tabindex="-1"></a>    <span class="st">&quot;Má conduta&quot;</span>,</span>
+<span id="cb15-39"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-39" tabindex="-1"></a>    <span class="st">&quot;Má conduta&quot;</span>,</span>
+<span id="cb15-40"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-40" tabindex="-1"></a>    <span class="st">&quot;Má conduta&quot;</span>,</span>
+<span id="cb15-41"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-41" tabindex="-1"></a>    <span class="st">&quot;Má conduta&quot;</span>,</span>
+<span id="cb15-42"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-42" tabindex="-1"></a>    <span class="st">&quot;Má conduta&quot;</span>,</span>
+<span id="cb15-43"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-43" tabindex="-1"></a>    <span class="st">&quot;Má conduta&quot;</span>,</span>
+<span id="cb15-44"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-44" tabindex="-1"></a>    <span class="st">&quot;Má conduta&quot;</span>,</span>
+<span id="cb15-45"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-45" tabindex="-1"></a>    </span>
+<span id="cb15-46"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-46" tabindex="-1"></a>    <span class="co"># 8 zona cinzenta</span></span>
+<span id="cb15-47"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-47" tabindex="-1"></a>    <span class="st">&quot;Zona cinzenta&quot;</span>,</span>
+<span id="cb15-48"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-48" tabindex="-1"></a>    <span class="st">&quot;Zona cinzenta&quot;</span>,</span>
+<span id="cb15-49"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-49" tabindex="-1"></a>    <span class="st">&quot;Zona cinzenta&quot;</span>,</span>
+<span id="cb15-50"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-50" tabindex="-1"></a>    <span class="st">&quot;Zona cinzenta&quot;</span>,</span>
+<span id="cb15-51"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-51" tabindex="-1"></a>    <span class="st">&quot;Zona cinzenta&quot;</span>,</span>
+<span id="cb15-52"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-52" tabindex="-1"></a>    <span class="st">&quot;Zona cinzenta&quot;</span>,</span>
+<span id="cb15-53"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-53" tabindex="-1"></a>    <span class="st">&quot;Zona cinzenta&quot;</span>,</span>
+<span id="cb15-54"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-54" tabindex="-1"></a>    <span class="st">&quot;Zona cinzenta&quot;</span>,</span>
+<span id="cb15-55"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-55" tabindex="-1"></a>    </span>
+<span id="cb15-56"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-56" tabindex="-1"></a>    <span class="co"># 5 não intencionais</span></span>
+<span id="cb15-57"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-57" tabindex="-1"></a>    <span class="st">&quot;Não intencional&quot;</span>,</span>
+<span id="cb15-58"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-58" tabindex="-1"></a>    <span class="st">&quot;Não intencional&quot;</span>,</span>
+<span id="cb15-59"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-59" tabindex="-1"></a>    <span class="st">&quot;Não intencional&quot;</span>,</span>
+<span id="cb15-60"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-60" tabindex="-1"></a>    <span class="st">&quot;Não intencional&quot;</span>,</span>
+<span id="cb15-61"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-61" tabindex="-1"></a>    <span class="st">&quot;Não intencional&quot;</span></span>
+<span id="cb15-62"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-62" tabindex="-1"></a>  ),</span>
+<span id="cb15-63"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-63" tabindex="-1"></a>  Definição <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb15-64"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-64" tabindex="-1"></a>    <span class="st">&quot;Inventar dados inexistentes&quot;</span>,</span>
+<span id="cb15-65"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-65" tabindex="-1"></a>    <span class="st">&quot;Alterar ou manipular dados reais&quot;</span>,</span>
+<span id="cb15-66"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-66" tabindex="-1"></a>    <span class="st">&quot;Inserir autores fictícios ou inexistentes&quot;</span>,</span>
+<span id="cb15-67"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-67" tabindex="-1"></a>    <span class="st">&quot;Criar revisões falsas para facilitar publicação&quot;</span>,</span>
+<span id="cb15-68"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-68" tabindex="-1"></a>    <span class="st">&quot;Incluir autores sem contribuição real&quot;</span>,</span>
+<span id="cb15-69"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-69" tabindex="-1"></a>    <span class="st">&quot;Atribuir autoria como forma de prestígio ou recompensa&quot;</span>,</span>
+<span id="cb15-70"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-70" tabindex="-1"></a>    <span class="st">&quot;Omitir autores que participaram do estudo&quot;</span>,</span>
+<span id="cb15-71"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-71" tabindex="-1"></a>    <span class="st">&quot;Publicar o mesmo estudo em mais de uma revista&quot;</span>,</span>
+<span id="cb15-72"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-72" tabindex="-1"></a>    <span class="st">&quot;Apresentar os resultados de forma a exagerar efeitos positivos&quot;</span>,</span>
+<span id="cb15-73"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-73" tabindex="-1"></a>    <span class="st">&quot;Modificar dados ou gráficos para torná-los mais convincentes&quot;</span>,</span>
+<span id="cb15-74"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-74" tabindex="-1"></a>    </span>
+<span id="cb15-75"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-75" tabindex="-1"></a>    <span class="st">&quot;Criar hipóteses após ver os dados (sem pré-registro)&quot;</span>,</span>
+<span id="cb15-76"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-76" tabindex="-1"></a>    <span class="st">&quot;Construir uma narrativa forçada para justificar os achados&quot;</span>,</span>
+<span id="cb15-77"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-77" tabindex="-1"></a>    <span class="st">&quot;Relatar apenas os resultados favoráveis ou positivos&quot;</span>,</span>
+<span id="cb15-78"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-78" tabindex="-1"></a>    <span class="st">&quot;Testar múltiplas análises até encontrar p&lt;0.05&quot;</span>,</span>
+<span id="cb15-79"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-79" tabindex="-1"></a>    <span class="st">&quot;Analisar dados antes do término da coleta, parando quando um efeito aparece&quot;</span>,</span>
+<span id="cb15-80"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-80" tabindex="-1"></a>    <span class="st">&quot;Selecionar apenas os resultados que apoiam a hipótese&quot;</span>,</span>
+<span id="cb15-81"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-81" tabindex="-1"></a>    <span class="st">&quot;Dividir artificialmente um estudo em vários artigos para inflar publicações&quot;</span>,</span>
+<span id="cb15-82"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-82" tabindex="-1"></a>    <span class="st">&quot;Embelezar tabelas, gráficos ou resultados para torná-los mais atraentes&quot;</span>,</span>
+<span id="cb15-83"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-83" tabindex="-1"></a>    </span>
+<span id="cb15-84"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-84" tabindex="-1"></a>    <span class="st">&quot;Forçar análises para que não haja significância estatística&quot;</span>,</span>
+<span id="cb15-85"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-85" tabindex="-1"></a>    <span class="st">&quot;Procurar achados sem plano prévio&quot;</span>,</span>
+<span id="cb15-86"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-86" tabindex="-1"></a>    <span class="st">&quot;Explorar excessivamente os dados para encontrar associações irrelevantes&quot;</span>,</span>
+<span id="cb15-87"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-87" tabindex="-1"></a>    <span class="st">&quot;Não publicar estudos com resultados negativos ou nulos&quot;</span>,</span>
+<span id="cb15-88"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-88" tabindex="-1"></a>    <span class="st">&quot;Tendência geral das revistas em favorecer publicações com resultados positivos&quot;</span></span>
+<span id="cb15-89"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-89" tabindex="-1"></a>  )</span>
+<span id="cb15-90"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-90" tabindex="-1"></a>)</span>
+<span id="cb15-91"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-91" tabindex="-1"></a></span>
+<span id="cb15-92"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-92" tabindex="-1"></a><span class="co"># Ordenar por categoria</span></span>
+<span id="cb15-93"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-93" tabindex="-1"></a>praticas_questionaveis <span class="ot">&lt;-</span> praticas_questionaveis <span class="sc">%&gt;%</span></span>
+<span id="cb15-94"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-94" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">factor</span>(</span>
+<span id="cb15-95"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-95" tabindex="-1"></a>    Intencionalidade,</span>
+<span id="cb15-96"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-96" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Má conduta&quot;</span>, <span class="st">&quot;Zona cinzenta&quot;</span>, <span class="st">&quot;Não intencional&quot;</span>)</span>
+<span id="cb15-97"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-97" tabindex="-1"></a>  ))</span>
+<span id="cb15-98"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-98" tabindex="-1"></a></span>
+<span id="cb15-99"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-99" tabindex="-1"></a><span class="co"># Exibir com cores</span></span>
+<span id="cb15-100"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-100" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb15-101"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-101" tabindex="-1"></a>  praticas_questionaveis,</span>
+<span id="cb15-102"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-102" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb15-103"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-103" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb15-104"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-104" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb15-105"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-105" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb15-106"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-106" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb15-107"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-107" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Classificação das práticas questionáveis em pesquisa segundo sua intencionalidade.&quot;</span></span>
+<span id="cb15-108"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-108" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-109"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-109" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb15-110"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-110" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>),</span>
+<span id="cb15-111"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-111" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb15-112"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-112" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb15-113"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-113" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb15-114"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-114" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-115"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-115" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-116"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-116" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
+<span id="cb15-117"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-117" tabindex="-1"></a>    <span class="fu">which</span>(praticas_questionaveis<span class="sc">$</span>Intencionalidade <span class="sc">==</span> <span class="st">&quot;Má conduta&quot;</span>),</span>
+<span id="cb15-118"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-118" tabindex="-1"></a>    <span class="at">background =</span> <span class="st">&quot;#ffcdd2&quot;</span></span>
+<span id="cb15-119"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-119" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-120"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-120" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
+<span id="cb15-121"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-121" tabindex="-1"></a>    <span class="fu">which</span>(praticas_questionaveis<span class="sc">$</span>Intencionalidade <span class="sc">==</span> <span class="st">&quot;Zona cinzenta&quot;</span>),</span>
+<span id="cb15-122"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-122" tabindex="-1"></a>    <span class="at">background =</span> <span class="st">&quot;#fff9c4&quot;</span></span>
+<span id="cb15-123"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-123" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-124"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-124" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
+<span id="cb15-125"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-125" tabindex="-1"></a>    <span class="fu">which</span>(praticas_questionaveis<span class="sc">$</span>Intencionalidade <span class="sc">==</span> <span class="st">&quot;Não intencional&quot;</span>),</span>
+<span id="cb15-126"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-126" tabindex="-1"></a>    <span class="at">background =</span> <span class="st">&quot;#e8f5e9&quot;</span></span>
+<span id="cb15-127"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-127" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-128"><a href="práticas-questionáveis-em-pesquisa-1.html#cb15-128" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">nrow</span>(praticas_questionaveis), <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
+</details>
+</div>
+<div id="prevenindo-práticas-questionáveis-em-pesquisa-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Prevenindo práticas questionáveis em pesquisa<a href="#prevenindo-pr%C3%A1ticas-question%C3%A1veis-em-pesquisa-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="reações-éticas-e-institucionais-práticas-questionáveis-em-pesquisa-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Reações éticas e institucionais práticas questionáveis em pesquisa<a href="#rea%C3%A7%C3%B5es-%C3%A9ticas-e-institucionais-pr%C3%A1ticas-question%C3%A1veis-em-pesquisa-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
 </div>
             </section>
 

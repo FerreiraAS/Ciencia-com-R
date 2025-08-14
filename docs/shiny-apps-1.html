@@ -1444,48 +1444,48 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="shiny-apps-1" class="section level1 unnumbered unlisted hasAnchor">
 <h1>Shiny Apps<a href="shiny-apps-1.html#shiny-apps-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="ensaios-clínicos-.unnumbered" class="section level2 unnumbered unlisted hasAnchor">
-<h2>Ensaios clínicos {.unnumbered}<a href="#ensaios-cl%C3%ADnicos-.unnumbered" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="aplicativos-por-delineamento-de-estudo-.unnumbered" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Aplicativos por delineamento de estudo {.unnumbered}<a href="shiny-apps-1.html#aplicativos-por-delineamento-de-estudo-.unnumbered" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="shiny-apps-1.html#cb35-1" tabindex="-1"></a>URL.site <span class="ot">&lt;-</span> <span class="st">&quot;https://sciencer.shinyapps.io/RCTapp/&quot;</span></span>
-<span id="cb35-2"><a href="shiny-apps-1.html#cb35-2" tabindex="-1"></a>file.png <span class="ot">&lt;-</span> <span class="st">&quot;images/RCTapp.png&quot;</span></span>
-<span id="cb35-3"><a href="shiny-apps-1.html#cb35-3" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="shiny-apps-1.html#cb35-4" tabindex="-1"></a>screen_width <span class="ot">&lt;-</span> <span class="dv">1920</span></span>
-<span id="cb35-5"><a href="shiny-apps-1.html#cb35-5" tabindex="-1"></a>screen_height <span class="ot">&lt;-</span> <span class="dv">1080</span></span>
-<span id="cb35-6"><a href="shiny-apps-1.html#cb35-6" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="shiny-apps-1.html#cb35-7" tabindex="-1"></a><span class="co"># function to vget screenshot</span></span>
-<span id="cb35-8"><a href="shiny-apps-1.html#cb35-8" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;chromote&quot;</span>)</span>
-<span id="cb35-9"><a href="shiny-apps-1.html#cb35-9" tabindex="-1"></a>screenshot <span class="ot">&lt;-</span> <span class="cf">function</span>(b, img_path,</span>
-<span id="cb35-10"><a href="shiny-apps-1.html#cb35-10" tabindex="-1"></a>                       <span class="at">selector =</span> <span class="st">&quot;html&quot;</span>,</span>
-<span id="cb35-11"><a href="shiny-apps-1.html#cb35-11" tabindex="-1"></a>                       <span class="at">cliprect =</span> <span class="fu">c</span>(<span class="at">top =</span> <span class="dv">0</span>, <span class="at">left =</span> <span class="dv">0</span>, <span class="at">width =</span> screen_width, <span class="at">height =</span> screen_height),</span>
-<span id="cb35-12"><a href="shiny-apps-1.html#cb35-12" tabindex="-1"></a>                       <span class="at">expand =</span> <span class="cn">NULL</span>) {</span>
-<span id="cb35-13"><a href="shiny-apps-1.html#cb35-13" tabindex="-1"></a>  </span>
-<span id="cb35-14"><a href="shiny-apps-1.html#cb35-14" tabindex="-1"></a>  b<span class="sc">$</span><span class="fu">screenshot</span>(</span>
-<span id="cb35-15"><a href="shiny-apps-1.html#cb35-15" tabindex="-1"></a>    img_path,</span>
-<span id="cb35-16"><a href="shiny-apps-1.html#cb35-16" tabindex="-1"></a>    <span class="at">selector =</span> selector,</span>
-<span id="cb35-17"><a href="shiny-apps-1.html#cb35-17" tabindex="-1"></a>    <span class="at">delay =</span> <span class="dv">15</span>,</span>
-<span id="cb35-18"><a href="shiny-apps-1.html#cb35-18" tabindex="-1"></a>    <span class="at">cliprect =</span> cliprect,</span>
-<span id="cb35-19"><a href="shiny-apps-1.html#cb35-19" tabindex="-1"></a>    <span class="at">expand =</span> expand</span>
-<span id="cb35-20"><a href="shiny-apps-1.html#cb35-20" tabindex="-1"></a>  )</span>
-<span id="cb35-21"><a href="shiny-apps-1.html#cb35-21" tabindex="-1"></a>  </span>
-<span id="cb35-22"><a href="shiny-apps-1.html#cb35-22" tabindex="-1"></a>  magick<span class="sc">::</span><span class="fu">image_read</span>(img_path) <span class="sc">|&gt;</span></span>
-<span id="cb35-23"><a href="shiny-apps-1.html#cb35-23" tabindex="-1"></a>    magick<span class="sc">::</span><span class="fu">image_shadow</span>() <span class="sc">|&gt;</span></span>
-<span id="cb35-24"><a href="shiny-apps-1.html#cb35-24" tabindex="-1"></a>    magick<span class="sc">::</span><span class="fu">image_write</span>(img_path, <span class="at">quality =</span> <span class="dv">100</span>)</span>
-<span id="cb35-25"><a href="shiny-apps-1.html#cb35-25" tabindex="-1"></a>}</span>
-<span id="cb35-26"><a href="shiny-apps-1.html#cb35-26" tabindex="-1"></a></span>
-<span id="cb35-27"><a href="shiny-apps-1.html#cb35-27" tabindex="-1"></a><span class="co"># get URL screenshot</span></span>
-<span id="cb35-28"><a href="shiny-apps-1.html#cb35-28" tabindex="-1"></a>a <span class="ot">&lt;-</span> ChromoteSession<span class="sc">$</span><span class="fu">new</span>(<span class="at">height =</span> screen_height, <span class="at">width =</span> screen_width)</span>
-<span id="cb35-29"><a href="shiny-apps-1.html#cb35-29" tabindex="-1"></a><span class="fu">invisible</span>(a<span class="sc">$</span>Page<span class="sc">$</span><span class="fu">navigate</span>(URL.site))</span>
-<span id="cb35-30"><a href="shiny-apps-1.html#cb35-30" tabindex="-1"></a><span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
-<span id="cb35-31"><a href="shiny-apps-1.html#cb35-31" tabindex="-1"></a><span class="fu">screenshot</span>(a, file.png)</span>
-<span id="cb35-32"><a href="shiny-apps-1.html#cb35-32" tabindex="-1"></a></span>
-<span id="cb35-33"><a href="shiny-apps-1.html#cb35-33" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">exists</span>(file.png)) {</span>
-<span id="cb35-34"><a href="shiny-apps-1.html#cb35-34" tabindex="-1"></a>  <span class="co"># show image</span></span>
-<span id="cb35-35"><a href="shiny-apps-1.html#cb35-35" tabindex="-1"></a>  img <span class="ot">&lt;-</span> magick<span class="sc">::</span><span class="fu">image_read</span>(file.png)</span>
-<span id="cb35-36"><a href="shiny-apps-1.html#cb35-36" tabindex="-1"></a>  <span class="co"># zero margins</span></span>
-<span id="cb35-37"><a href="shiny-apps-1.html#cb35-37" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb35-38"><a href="shiny-apps-1.html#cb35-38" tabindex="-1"></a>  <span class="fu">plot</span>(img)</span>
-<span id="cb35-39"><a href="shiny-apps-1.html#cb35-39" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="shiny-apps-1.html#cb54-1" tabindex="-1"></a>URL.site <span class="ot">&lt;-</span> <span class="st">&quot;https://sciencer.shinyapps.io/RCTapp/&quot;</span></span>
+<span id="cb54-2"><a href="shiny-apps-1.html#cb54-2" tabindex="-1"></a>file.png <span class="ot">&lt;-</span> <span class="st">&quot;images/RCTapp.png&quot;</span></span>
+<span id="cb54-3"><a href="shiny-apps-1.html#cb54-3" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="shiny-apps-1.html#cb54-4" tabindex="-1"></a>screen_width <span class="ot">&lt;-</span> <span class="dv">1920</span></span>
+<span id="cb54-5"><a href="shiny-apps-1.html#cb54-5" tabindex="-1"></a>screen_height <span class="ot">&lt;-</span> <span class="dv">1080</span></span>
+<span id="cb54-6"><a href="shiny-apps-1.html#cb54-6" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="shiny-apps-1.html#cb54-7" tabindex="-1"></a><span class="co"># function to vget screenshot</span></span>
+<span id="cb54-8"><a href="shiny-apps-1.html#cb54-8" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;chromote&quot;</span>)</span>
+<span id="cb54-9"><a href="shiny-apps-1.html#cb54-9" tabindex="-1"></a>screenshot <span class="ot">&lt;-</span> <span class="cf">function</span>(b, img_path,</span>
+<span id="cb54-10"><a href="shiny-apps-1.html#cb54-10" tabindex="-1"></a>                       <span class="at">selector =</span> <span class="st">&quot;html&quot;</span>,</span>
+<span id="cb54-11"><a href="shiny-apps-1.html#cb54-11" tabindex="-1"></a>                       <span class="at">cliprect =</span> <span class="fu">c</span>(<span class="at">top =</span> <span class="dv">0</span>, <span class="at">left =</span> <span class="dv">0</span>, <span class="at">width =</span> screen_width, <span class="at">height =</span> screen_height),</span>
+<span id="cb54-12"><a href="shiny-apps-1.html#cb54-12" tabindex="-1"></a>                       <span class="at">expand =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb54-13"><a href="shiny-apps-1.html#cb54-13" tabindex="-1"></a>  </span>
+<span id="cb54-14"><a href="shiny-apps-1.html#cb54-14" tabindex="-1"></a>  b<span class="sc">$</span><span class="fu">screenshot</span>(</span>
+<span id="cb54-15"><a href="shiny-apps-1.html#cb54-15" tabindex="-1"></a>    img_path,</span>
+<span id="cb54-16"><a href="shiny-apps-1.html#cb54-16" tabindex="-1"></a>    <span class="at">selector =</span> selector,</span>
+<span id="cb54-17"><a href="shiny-apps-1.html#cb54-17" tabindex="-1"></a>    <span class="at">delay =</span> <span class="dv">15</span>,</span>
+<span id="cb54-18"><a href="shiny-apps-1.html#cb54-18" tabindex="-1"></a>    <span class="at">cliprect =</span> cliprect,</span>
+<span id="cb54-19"><a href="shiny-apps-1.html#cb54-19" tabindex="-1"></a>    <span class="at">expand =</span> expand</span>
+<span id="cb54-20"><a href="shiny-apps-1.html#cb54-20" tabindex="-1"></a>  )</span>
+<span id="cb54-21"><a href="shiny-apps-1.html#cb54-21" tabindex="-1"></a>  </span>
+<span id="cb54-22"><a href="shiny-apps-1.html#cb54-22" tabindex="-1"></a>  magick<span class="sc">::</span><span class="fu">image_read</span>(img_path) <span class="sc">|&gt;</span></span>
+<span id="cb54-23"><a href="shiny-apps-1.html#cb54-23" tabindex="-1"></a>    magick<span class="sc">::</span><span class="fu">image_shadow</span>() <span class="sc">|&gt;</span></span>
+<span id="cb54-24"><a href="shiny-apps-1.html#cb54-24" tabindex="-1"></a>    magick<span class="sc">::</span><span class="fu">image_write</span>(img_path, <span class="at">quality =</span> <span class="dv">100</span>)</span>
+<span id="cb54-25"><a href="shiny-apps-1.html#cb54-25" tabindex="-1"></a>}</span>
+<span id="cb54-26"><a href="shiny-apps-1.html#cb54-26" tabindex="-1"></a></span>
+<span id="cb54-27"><a href="shiny-apps-1.html#cb54-27" tabindex="-1"></a><span class="co"># get URL screenshot</span></span>
+<span id="cb54-28"><a href="shiny-apps-1.html#cb54-28" tabindex="-1"></a>a <span class="ot">&lt;-</span> ChromoteSession<span class="sc">$</span><span class="fu">new</span>(<span class="at">height =</span> screen_height, <span class="at">width =</span> screen_width)</span>
+<span id="cb54-29"><a href="shiny-apps-1.html#cb54-29" tabindex="-1"></a><span class="fu">invisible</span>(a<span class="sc">$</span>Page<span class="sc">$</span><span class="fu">navigate</span>(URL.site))</span>
+<span id="cb54-30"><a href="shiny-apps-1.html#cb54-30" tabindex="-1"></a><span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
+<span id="cb54-31"><a href="shiny-apps-1.html#cb54-31" tabindex="-1"></a><span class="fu">screenshot</span>(a, file.png)</span>
+<span id="cb54-32"><a href="shiny-apps-1.html#cb54-32" tabindex="-1"></a></span>
+<span id="cb54-33"><a href="shiny-apps-1.html#cb54-33" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">exists</span>(file.png)) {</span>
+<span id="cb54-34"><a href="shiny-apps-1.html#cb54-34" tabindex="-1"></a>  <span class="co"># show image</span></span>
+<span id="cb54-35"><a href="shiny-apps-1.html#cb54-35" tabindex="-1"></a>  img <span class="ot">&lt;-</span> magick<span class="sc">::</span><span class="fu">image_read</span>(file.png)</span>
+<span id="cb54-36"><a href="shiny-apps-1.html#cb54-36" tabindex="-1"></a>  <span class="co"># zero margins</span></span>
+<span id="cb54-37"><a href="shiny-apps-1.html#cb54-37" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb54-38"><a href="shiny-apps-1.html#cb54-38" tabindex="-1"></a>  <span class="fu">plot</span>(img)</span>
+<span id="cb54-39"><a href="shiny-apps-1.html#cb54-39" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 </div>
 </div>

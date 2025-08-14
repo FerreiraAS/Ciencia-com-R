@@ -1444,6 +1444,87 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="pensamento-computacional-1" class="section level1 unnumbered unlisted hasAnchor">
 <h1>Pensamento computacional<a href="pensamento-computacional-1.html#pensamento-computacional-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="programas-de-computador-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Programas de computador<a href="pensamento-computacional-1.html#programas-de-computador-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="pensamento-computacional-1.html#cb51-1" tabindex="-1"></a><span class="co"># insert image from html page</span></span>
+<span id="cb51-2"><a href="pensamento-computacional-1.html#cb51-2" tabindex="-1"></a>myurl <span class="ot">&lt;-</span> <span class="st">&quot;https://docs.posit.co/ide/user/ide/guide/ui/images/rstudio-panes-labeled.jpeg&quot;</span></span>
+<span id="cb51-3"><a href="pensamento-computacional-1.html#cb51-3" tabindex="-1"></a>utils<span class="sc">::</span><span class="fu">download.file</span>(<span class="at">url =</span> myurl, <span class="at">destfile =</span> <span class="st">&#39;images/RStudioConsole.jpeg&#39;</span>, <span class="at">mode =</span> <span class="st">&#39;wb&#39;</span>)</span>
+<span id="cb51-4"><a href="pensamento-computacional-1.html#cb51-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&#39;images/RStudioConsole.jpeg&#39;</span>)</span></code></pre></div>
+</details>
+</div>
+<div id="simulações-computacionais-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Simulações computacionais<a href="#simula%C3%A7%C3%B5es-computacionais-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="pensamento-computacional-1.html#cb52-1" tabindex="-1"></a><span class="co"># Simulação de 1000 médias de amostras de tamanho 30 de uma N(0,1)</span></span>
+<span id="cb52-2"><a href="pensamento-computacional-1.html#cb52-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb52-3"><a href="pensamento-computacional-1.html#cb52-3" tabindex="-1"></a>n_sim <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb52-4"><a href="pensamento-computacional-1.html#cb52-4" tabindex="-1"></a>amostras <span class="ot">&lt;-</span> <span class="fu">replicate</span>(n_sim, <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)))</span>
+<span id="cb52-5"><a href="pensamento-computacional-1.html#cb52-5" tabindex="-1"></a><span class="fu">hist</span>(</span>
+<span id="cb52-6"><a href="pensamento-computacional-1.html#cb52-6" tabindex="-1"></a>  amostras,</span>
+<span id="cb52-7"><a href="pensamento-computacional-1.html#cb52-7" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Distribuição das médias simuladas&quot;</span>,</span>
+<span id="cb52-8"><a href="pensamento-computacional-1.html#cb52-8" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Média&quot;</span>,</span>
+<span id="cb52-9"><a href="pensamento-computacional-1.html#cb52-9" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb52-10"><a href="pensamento-computacional-1.html#cb52-10" tabindex="-1"></a>  <span class="at">border =</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb52-11"><a href="pensamento-computacional-1.html#cb52-11" tabindex="-1"></a>)</span></code></pre></div>
+</details>
+</div>
+<div id="scripts-computacionais-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Scripts computacionais<a href="pensamento-computacional-1.html#scripts-computacionais-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="pensamento-computacional-1.html#cb53-1" tabindex="-1"></a><span class="co"># Exemplo de R script</span></span>
+<span id="cb53-2"><a href="pensamento-computacional-1.html#cb53-2" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="pensamento-computacional-1.html#cb53-3" tabindex="-1"></a><span class="co"># Este é um comentário</span></span>
+<span id="cb53-4"><a href="pensamento-computacional-1.html#cb53-4" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="pensamento-computacional-1.html#cb53-5" tabindex="-1"></a><span class="co"># Esta é uma variável</span></span>
+<span id="cb53-6"><a href="pensamento-computacional-1.html#cb53-6" tabindex="-1"></a>variavel <span class="ot">&lt;-</span> <span class="fl">3.14</span> <span class="co"># Atribui o valor 3.14 à variável</span></span>
+<span id="cb53-7"><a href="pensamento-computacional-1.html#cb53-7" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="pensamento-computacional-1.html#cb53-8" tabindex="-1"></a><span class="co"># Esta é uma função</span></span>
+<span id="cb53-9"><a href="pensamento-computacional-1.html#cb53-9" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb53-10"><a href="pensamento-computacional-1.html#cb53-10" tabindex="-1"></a>  <span class="fu">return</span>(x<span class="sc">^</span><span class="dv">2</span>) <span class="co"># Retorna o quadrado do valor de x</span></span>
+<span id="cb53-11"><a href="pensamento-computacional-1.html#cb53-11" tabindex="-1"></a>}</span>
+<span id="cb53-12"><a href="pensamento-computacional-1.html#cb53-12" tabindex="-1"></a></span>
+<span id="cb53-13"><a href="pensamento-computacional-1.html#cb53-13" tabindex="-1"></a><span class="co"># Esta é uma chamada de função</span></span>
+<span id="cb53-14"><a href="pensamento-computacional-1.html#cb53-14" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> <span class="fu">f</span>(variavel) <span class="co"># Chama a função f com a variável como argumento</span></span>
+<span id="cb53-15"><a href="pensamento-computacional-1.html#cb53-15" tabindex="-1"></a></span>
+<span id="cb53-16"><a href="pensamento-computacional-1.html#cb53-16" tabindex="-1"></a><span class="co"># Exibe o resultado da função</span></span>
+<span id="cb53-17"><a href="pensamento-computacional-1.html#cb53-17" tabindex="-1"></a><span class="fu">print</span>(resultado) <span class="co"># Exibe o resultado na saída padrão</span></span>
+<span id="cb53-18"><a href="pensamento-computacional-1.html#cb53-18" tabindex="-1"></a></span>
+<span id="cb53-19"><a href="pensamento-computacional-1.html#cb53-19" tabindex="-1"></a><span class="co"># Este é um vetor</span></span>
+<span id="cb53-20"><a href="pensamento-computacional-1.html#cb53-20" tabindex="-1"></a>vetor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="co"># Cria um vetor com os valores de 1 a 5</span></span>
+<span id="cb53-21"><a href="pensamento-computacional-1.html#cb53-21" tabindex="-1"></a><span class="co"># Exibe o vetor</span></span>
+<span id="cb53-22"><a href="pensamento-computacional-1.html#cb53-22" tabindex="-1"></a><span class="fu">print</span>(vetor) <span class="co"># Exibe o vetor na saída padrão</span></span>
+<span id="cb53-23"><a href="pensamento-computacional-1.html#cb53-23" tabindex="-1"></a></span>
+<span id="cb53-24"><a href="pensamento-computacional-1.html#cb53-24" tabindex="-1"></a><span class="co"># Esta é uma matrix</span></span>
+<span id="cb53-25"><a href="pensamento-computacional-1.html#cb53-25" tabindex="-1"></a>matriz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>) <span class="co"># Cria uma matriz 3x3 com os valores de 1 a 9</span></span>
+<span id="cb53-26"><a href="pensamento-computacional-1.html#cb53-26" tabindex="-1"></a><span class="co"># Exibe a matriz</span></span>
+<span id="cb53-27"><a href="pensamento-computacional-1.html#cb53-27" tabindex="-1"></a><span class="fu">print</span>(matriz) <span class="co"># Exibe a matriz na saída padrão</span></span>
+<span id="cb53-28"><a href="pensamento-computacional-1.html#cb53-28" tabindex="-1"></a></span>
+<span id="cb53-29"><a href="pensamento-computacional-1.html#cb53-29" tabindex="-1"></a><span class="co"># Esta é uma lista</span></span>
+<span id="cb53-30"><a href="pensamento-computacional-1.html#cb53-30" tabindex="-1"></a>lista <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">nome=</span><span class="st">&quot;João&quot;</span>, <span class="at">idade=</span><span class="dv">30</span>, <span class="at">altura=</span><span class="fl">1.75</span>) <span class="co"># Cria uma lista com nome, idade e altura</span></span>
+<span id="cb53-31"><a href="pensamento-computacional-1.html#cb53-31" tabindex="-1"></a><span class="co"># Exibe a lista</span></span>
+<span id="cb53-32"><a href="pensamento-computacional-1.html#cb53-32" tabindex="-1"></a><span class="fu">print</span>(lista) <span class="co"># Exibe a lista na saída padrão</span></span>
+<span id="cb53-33"><a href="pensamento-computacional-1.html#cb53-33" tabindex="-1"></a></span>
+<span id="cb53-34"><a href="pensamento-computacional-1.html#cb53-34" tabindex="-1"></a><span class="co"># Este é um dataframe</span></span>
+<span id="cb53-35"><a href="pensamento-computacional-1.html#cb53-35" tabindex="-1"></a>dataframe <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">nome=</span><span class="fu">c</span>(<span class="st">&quot;João&quot;</span>, <span class="st">&quot;Maria&quot;</span>, <span class="st">&quot;José&quot;</span>), <span class="at">idade=</span><span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">25</span>, <span class="dv">40</span>), <span class="at">altura=</span><span class="fu">c</span>(<span class="fl">1.75</span>, <span class="fl">1.60</span>, <span class="fl">1.80</span>)) <span class="co"># Cria um dataframe com nome, idade e altura</span></span>
+<span id="cb53-36"><a href="pensamento-computacional-1.html#cb53-36" tabindex="-1"></a><span class="co"># Exibe o dataframe</span></span>
+<span id="cb53-37"><a href="pensamento-computacional-1.html#cb53-37" tabindex="-1"></a><span class="fu">print</span>(dataframe) <span class="co"># Exibe o dataframe na saída padrão</span></span>
+<span id="cb53-38"><a href="pensamento-computacional-1.html#cb53-38" tabindex="-1"></a></span>
+<span id="cb53-39"><a href="pensamento-computacional-1.html#cb53-39" tabindex="-1"></a><span class="co"># Fim do exemplo de R script</span></span></code></pre></div>
+</details>
+</div>
+<div id="pacotes-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Pacotes<a href="pensamento-computacional-1.html#pacotes-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="aplicativos-shiny-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Aplicativos Shiny<a href="pensamento-computacional-1.html#aplicativos-shiny-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="manuscritos-reproduzíveis-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Manuscritos reproduzíveis<a href="#manuscritos-reproduz%C3%ADveis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="compartilhamento-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Compartilhamento<a href="pensamento-computacional-1.html#compartilhamento-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
 </div>
             </section>
 

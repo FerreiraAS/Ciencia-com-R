@@ -1444,143 +1444,565 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="pensamento-estatístico" class="section level1 unnumbered unlisted hasAnchor">
 <h1>Pensamento estatístico<a href="#pensamento-estat%C3%ADstico" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="o-que-é-superamostragem-1" class="section level2 unnumbered unlisted hasAnchor">
-<h2>O que é superamostragem?<a href="#o-que-%C3%A9-superamostragem-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="unidade-de-análise-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Unidade de análise<a href="#unidade-de-an%C3%A1lise-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="população-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>População<a href="#popula%C3%A7%C3%A3o-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="amostra-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Amostra<a href="pensamento-estatístico.html#amostra-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="amostragem-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Amostragem<a href="pensamento-estatístico.html#amostragem-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="pensamento-estatístico.html#cb9-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="pensamento-estatístico.html#cb9-1" tabindex="-1"></a><span class="co"># Dados da população e amostra</span></span>
 <span id="cb9-2"><a href="pensamento-estatístico.html#cb9-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb9-3"><a href="pensamento-estatístico.html#cb9-3" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="pensamento-estatístico.html#cb9-4" tabindex="-1"></a><span class="co"># Tamanhos</span></span>
-<span id="cb9-5"><a href="pensamento-estatístico.html#cb9-5" tabindex="-1"></a>pop_n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb9-6"><a href="pensamento-estatístico.html#cb9-6" tabindex="-1"></a>sample_n <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb9-7"><a href="pensamento-estatístico.html#cb9-7" tabindex="-1"></a>supersample_n <span class="ot">&lt;-</span> <span class="dv">30</span>  <span class="co"># maior que a amostra</span></span>
-<span id="cb9-8"><a href="pensamento-estatístico.html#cb9-8" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="pensamento-estatístico.html#cb9-9" tabindex="-1"></a><span class="co"># Raio dos círculos</span></span>
-<span id="cb9-10"><a href="pensamento-estatístico.html#cb9-10" tabindex="-1"></a>radius_pop <span class="ot">&lt;-</span> <span class="fu">runif</span>(pop_n, <span class="fl">0.5</span>, <span class="fl">2.5</span>)</span>
-<span id="cb9-11"><a href="pensamento-estatístico.html#cb9-11" tabindex="-1"></a>radius_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(sample_n, <span class="fl">0.5</span>, <span class="fl">1.5</span>)</span>
-<span id="cb9-12"><a href="pensamento-estatístico.html#cb9-12" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="pensamento-estatístico.html#cb9-13" tabindex="-1"></a><span class="co"># Ângulos para população e amostra</span></span>
-<span id="cb9-14"><a href="pensamento-estatístico.html#cb9-14" tabindex="-1"></a>angle_pop <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> pop_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb9-15"><a href="pensamento-estatístico.html#cb9-15" tabindex="-1"></a>angle_sample <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> sample_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb9-16"><a href="pensamento-estatístico.html#cb9-16" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="pensamento-estatístico.html#cb9-17" tabindex="-1"></a><span class="co"># População (esquerda)</span></span>
-<span id="cb9-18"><a href="pensamento-estatístico.html#cb9-18" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb9-19"><a href="pensamento-estatístico.html#cb9-19" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>pop_n,</span>
-<span id="cb9-20"><a href="pensamento-estatístico.html#cb9-20" tabindex="-1"></a>  <span class="at">x_pop =</span> <span class="fu">cos</span>(angle_pop) <span class="sc">*</span> radius_pop <span class="sc">-</span> <span class="dv">6</span>,</span>
-<span id="cb9-21"><a href="pensamento-estatístico.html#cb9-21" tabindex="-1"></a>  <span class="at">y_pop =</span> <span class="fu">sin</span>(angle_pop) <span class="sc">*</span> radius_pop,</span>
-<span id="cb9-22"><a href="pensamento-estatístico.html#cb9-22" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
-<span id="cb9-23"><a href="pensamento-estatístico.html#cb9-23" tabindex="-1"></a>)</span>
-<span id="cb9-24"><a href="pensamento-estatístico.html#cb9-24" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="pensamento-estatístico.html#cb9-25" tabindex="-1"></a><span class="co"># Amostra (centro) – amostragem aleatória da população</span></span>
-<span id="cb9-26"><a href="pensamento-estatístico.html#cb9-26" tabindex="-1"></a>sample_ids <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop_df<span class="sc">$</span>id, sample_n)</span>
-<span id="cb9-27"><a href="pensamento-estatístico.html#cb9-27" tabindex="-1"></a>sample_df <span class="ot">&lt;-</span> pop_df <span class="sc">%&gt;%</span></span>
-<span id="cb9-28"><a href="pensamento-estatístico.html#cb9-28" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(id <span class="sc">%in%</span> sample_ids) <span class="sc">%&gt;%</span></span>
-<span id="cb9-29"><a href="pensamento-estatístico.html#cb9-29" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb9-30"><a href="pensamento-estatístico.html#cb9-30" tabindex="-1"></a>    <span class="at">angle =</span> angle_sample,</span>
-<span id="cb9-31"><a href="pensamento-estatístico.html#cb9-31" tabindex="-1"></a>    <span class="at">x_sample =</span> <span class="fu">cos</span>(angle_sample) <span class="sc">*</span> radius_sample,</span>
-<span id="cb9-32"><a href="pensamento-estatístico.html#cb9-32" tabindex="-1"></a>    <span class="at">y_sample =</span> <span class="fu">sin</span>(angle_sample) <span class="sc">*</span> radius_sample,</span>
-<span id="cb9-33"><a href="pensamento-estatístico.html#cb9-33" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
-<span id="cb9-34"><a href="pensamento-estatístico.html#cb9-34" tabindex="-1"></a>  )</span>
+<span id="cb9-3"><a href="pensamento-estatístico.html#cb9-3" tabindex="-1"></a>pop_n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb9-4"><a href="pensamento-estatístico.html#cb9-4" tabindex="-1"></a>sample_n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb9-5"><a href="pensamento-estatístico.html#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="pensamento-estatístico.html#cb9-6" tabindex="-1"></a><span class="co"># Reduzindo os raios internos para posicionar os ícones mais perto do centro</span></span>
+<span id="cb9-7"><a href="pensamento-estatístico.html#cb9-7" tabindex="-1"></a>radius_pop <span class="ot">&lt;-</span> <span class="fu">runif</span>(pop_n, <span class="fl">0.5</span>, <span class="fl">2.5</span>)</span>
+<span id="cb9-8"><a href="pensamento-estatístico.html#cb9-8" tabindex="-1"></a>radius_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(sample_n, <span class="fl">0.5</span>, <span class="fl">1.5</span>)</span>
+<span id="cb9-9"><a href="pensamento-estatístico.html#cb9-9" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="pensamento-estatístico.html#cb9-10" tabindex="-1"></a><span class="co"># Geração das posições para a população (círculo à esquerda)</span></span>
+<span id="cb9-11"><a href="pensamento-estatístico.html#cb9-11" tabindex="-1"></a>angle_pop <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> pop_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb9-12"><a href="pensamento-estatístico.html#cb9-12" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-13"><a href="pensamento-estatístico.html#cb9-13" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>pop_n,</span>
+<span id="cb9-14"><a href="pensamento-estatístico.html#cb9-14" tabindex="-1"></a>  <span class="at">x_pop =</span> <span class="fu">cos</span>(angle_pop) <span class="sc">*</span> radius_pop <span class="sc">-</span> <span class="dv">4</span>,</span>
+<span id="cb9-15"><a href="pensamento-estatístico.html#cb9-15" tabindex="-1"></a>  <span class="at">y_pop =</span> <span class="fu">sin</span>(angle_pop) <span class="sc">*</span> radius_pop</span>
+<span id="cb9-16"><a href="pensamento-estatístico.html#cb9-16" tabindex="-1"></a>)</span>
+<span id="cb9-17"><a href="pensamento-estatístico.html#cb9-17" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="pensamento-estatístico.html#cb9-18" tabindex="-1"></a><span class="co"># Seleção aleatória da amostra</span></span>
+<span id="cb9-19"><a href="pensamento-estatístico.html#cb9-19" tabindex="-1"></a>sample_ids <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop_df<span class="sc">$</span>id, sample_n)</span>
+<span id="cb9-20"><a href="pensamento-estatístico.html#cb9-20" tabindex="-1"></a>sample_df <span class="ot">&lt;-</span> pop_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-21"><a href="pensamento-estatístico.html#cb9-21" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(id <span class="sc">%in%</span> sample_ids) <span class="sc">%&gt;%</span></span>
+<span id="cb9-22"><a href="pensamento-estatístico.html#cb9-22" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb9-23"><a href="pensamento-estatístico.html#cb9-23" tabindex="-1"></a>    <span class="at">angle =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> sample_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb9-24"><a href="pensamento-estatístico.html#cb9-24" tabindex="-1"></a>    <span class="at">x_sample =</span> <span class="fu">cos</span>(angle) <span class="sc">*</span> radius_sample <span class="sc">+</span> <span class="dv">4</span>,</span>
+<span id="cb9-25"><a href="pensamento-estatístico.html#cb9-25" tabindex="-1"></a>    <span class="at">y_sample =</span> <span class="fu">sin</span>(angle) <span class="sc">*</span> radius_sample</span>
+<span id="cb9-26"><a href="pensamento-estatístico.html#cb9-26" tabindex="-1"></a>  )</span>
+<span id="cb9-27"><a href="pensamento-estatístico.html#cb9-27" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="pensamento-estatístico.html#cb9-28" tabindex="-1"></a><span class="co"># Atribui o ícone após os data.frames estarem prontos</span></span>
+<span id="cb9-29"><a href="pensamento-estatístico.html#cb9-29" tabindex="-1"></a>pop_df<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
+<span id="cb9-30"><a href="pensamento-estatístico.html#cb9-30" tabindex="-1"></a>sample_df<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
+<span id="cb9-31"><a href="pensamento-estatístico.html#cb9-31" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="pensamento-estatístico.html#cb9-32" tabindex="-1"></a><span class="co"># Base de setas</span></span>
+<span id="cb9-33"><a href="pensamento-estatístico.html#cb9-33" tabindex="-1"></a>setas_df <span class="ot">&lt;-</span> sample_df <span class="sc">%&gt;%</span></span>
+<span id="cb9-34"><a href="pensamento-estatístico.html#cb9-34" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, x_pop, y_pop, x_sample, y_sample)</span>
 <span id="cb9-35"><a href="pensamento-estatístico.html#cb9-35" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="pensamento-estatístico.html#cb9-36" tabindex="-1"></a><span class="co"># Superamostra (direita) – reamostragem com reposição da amostra</span></span>
-<span id="cb9-37"><a href="pensamento-estatístico.html#cb9-37" tabindex="-1"></a>angle_supersample <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> supersample_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb9-38"><a href="pensamento-estatístico.html#cb9-38" tabindex="-1"></a>radius_supersample <span class="ot">&lt;-</span> <span class="fu">runif</span>(supersample_n, <span class="fl">0.5</span>, <span class="dv">1</span>)</span>
-<span id="cb9-39"><a href="pensamento-estatístico.html#cb9-39" tabindex="-1"></a></span>
-<span id="cb9-40"><a href="pensamento-estatístico.html#cb9-40" tabindex="-1"></a>supersample_df <span class="ot">&lt;-</span> sample_df <span class="sc">%&gt;%</span></span>
-<span id="cb9-41"><a href="pensamento-estatístico.html#cb9-41" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">slice_sample</span>(<span class="at">n =</span> supersample_n, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-42"><a href="pensamento-estatístico.html#cb9-42" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb9-43"><a href="pensamento-estatístico.html#cb9-43" tabindex="-1"></a>    <span class="at">angle =</span> angle_supersample,</span>
-<span id="cb9-44"><a href="pensamento-estatístico.html#cb9-44" tabindex="-1"></a>    <span class="at">radius =</span> radius_supersample,</span>
-<span id="cb9-45"><a href="pensamento-estatístico.html#cb9-45" tabindex="-1"></a>    <span class="at">x_sub =</span> <span class="fu">cos</span>(angle) <span class="sc">*</span> radius <span class="sc">+</span> <span class="dv">6</span>,</span>
-<span id="cb9-46"><a href="pensamento-estatístico.html#cb9-46" tabindex="-1"></a>    <span class="at">y_sub =</span> <span class="fu">sin</span>(angle) <span class="sc">*</span> radius,</span>
-<span id="cb9-47"><a href="pensamento-estatístico.html#cb9-47" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
-<span id="cb9-48"><a href="pensamento-estatístico.html#cb9-48" tabindex="-1"></a>  )</span>
-<span id="cb9-49"><a href="pensamento-estatístico.html#cb9-49" tabindex="-1"></a></span>
-<span id="cb9-50"><a href="pensamento-estatístico.html#cb9-50" tabindex="-1"></a><span class="co"># Setas população → amostra</span></span>
-<span id="cb9-51"><a href="pensamento-estatístico.html#cb9-51" tabindex="-1"></a>setas_1 <span class="ot">&lt;-</span> sample_df <span class="sc">%&gt;%</span></span>
-<span id="cb9-52"><a href="pensamento-estatístico.html#cb9-52" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, x_pop, y_pop, x_sample, y_sample)</span>
-<span id="cb9-53"><a href="pensamento-estatístico.html#cb9-53" tabindex="-1"></a></span>
-<span id="cb9-54"><a href="pensamento-estatístico.html#cb9-54" tabindex="-1"></a><span class="co"># Setas amostra → superamostra</span></span>
-<span id="cb9-55"><a href="pensamento-estatístico.html#cb9-55" tabindex="-1"></a>setas_2 <span class="ot">&lt;-</span> supersample_df <span class="sc">%&gt;%</span></span>
-<span id="cb9-56"><a href="pensamento-estatístico.html#cb9-56" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, x_sample, y_sample, x_sub, y_sub)</span>
-<span id="cb9-57"><a href="pensamento-estatístico.html#cb9-57" tabindex="-1"></a></span>
-<span id="cb9-58"><a href="pensamento-estatístico.html#cb9-58" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb9-59"><a href="pensamento-estatístico.html#cb9-59" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb9-60"><a href="pensamento-estatístico.html#cb9-60" tabindex="-1"></a>  <span class="co"># Círculo da população</span></span>
-<span id="cb9-61"><a href="pensamento-estatístico.html#cb9-61" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="dv">6</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">3</span>),</span>
-<span id="cb9-62"><a href="pensamento-estatístico.html#cb9-62" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb9-63"><a href="pensamento-estatístico.html#cb9-63" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb9-64"><a href="pensamento-estatístico.html#cb9-64" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> pop_df,</span>
-<span id="cb9-65"><a href="pensamento-estatístico.html#cb9-65" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_pop, <span class="at">y =</span> y_pop, <span class="at">image =</span> label),</span>
-<span id="cb9-66"><a href="pensamento-estatístico.html#cb9-66" tabindex="-1"></a>                      <span class="at">size =</span> <span class="fl">0.07</span>) <span class="sc">+</span></span>
-<span id="cb9-67"><a href="pensamento-estatístico.html#cb9-67" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
-<span id="cb9-68"><a href="pensamento-estatístico.html#cb9-68" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb9-69"><a href="pensamento-estatístico.html#cb9-69" tabindex="-1"></a>    <span class="at">x =</span> <span class="sc">-</span><span class="dv">6</span>,</span>
-<span id="cb9-70"><a href="pensamento-estatístico.html#cb9-70" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">3.5</span>,</span>
-<span id="cb9-71"><a href="pensamento-estatístico.html#cb9-71" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;População&quot;</span>,</span>
-<span id="cb9-72"><a href="pensamento-estatístico.html#cb9-72" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
-<span id="cb9-73"><a href="pensamento-estatístico.html#cb9-73" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
-<span id="cb9-74"><a href="pensamento-estatístico.html#cb9-74" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-75"><a href="pensamento-estatístico.html#cb9-75" tabindex="-1"></a>  <span class="co"># Círculo da amostra</span></span>
-<span id="cb9-76"><a href="pensamento-estatístico.html#cb9-76" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">0</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">2</span>),</span>
-<span id="cb9-77"><a href="pensamento-estatístico.html#cb9-77" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb9-78"><a href="pensamento-estatístico.html#cb9-78" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb9-79"><a href="pensamento-estatístico.html#cb9-79" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> sample_df,</span>
-<span id="cb9-80"><a href="pensamento-estatístico.html#cb9-80" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_sample, <span class="at">y =</span> y_sample, <span class="at">image =</span> label),</span>
-<span id="cb9-81"><a href="pensamento-estatístico.html#cb9-81" tabindex="-1"></a>                      <span class="at">size =</span> <span class="fl">0.07</span>) <span class="sc">+</span></span>
-<span id="cb9-82"><a href="pensamento-estatístico.html#cb9-82" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
-<span id="cb9-83"><a href="pensamento-estatístico.html#cb9-83" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb9-84"><a href="pensamento-estatístico.html#cb9-84" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">0</span>,</span>
-<span id="cb9-85"><a href="pensamento-estatístico.html#cb9-85" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">2.5</span>,</span>
-<span id="cb9-86"><a href="pensamento-estatístico.html#cb9-86" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Amostra&quot;</span>,</span>
-<span id="cb9-87"><a href="pensamento-estatístico.html#cb9-87" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
-<span id="cb9-88"><a href="pensamento-estatístico.html#cb9-88" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
-<span id="cb9-89"><a href="pensamento-estatístico.html#cb9-89" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-90"><a href="pensamento-estatístico.html#cb9-90" tabindex="-1"></a>  <span class="co"># Círculo da superamostra</span></span>
-<span id="cb9-91"><a href="pensamento-estatístico.html#cb9-91" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">6</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="fl">2.3</span>),</span>
-<span id="cb9-92"><a href="pensamento-estatístico.html#cb9-92" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb9-93"><a href="pensamento-estatístico.html#cb9-93" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb9-94"><a href="pensamento-estatístico.html#cb9-94" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> supersample_df,</span>
-<span id="cb9-95"><a href="pensamento-estatístico.html#cb9-95" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_sub, <span class="at">y =</span> y_sub, <span class="at">image =</span> label),</span>
-<span id="cb9-96"><a href="pensamento-estatístico.html#cb9-96" tabindex="-1"></a>                      <span class="at">size =</span> <span class="fl">0.07</span>) <span class="sc">+</span></span>
-<span id="cb9-97"><a href="pensamento-estatístico.html#cb9-97" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
-<span id="cb9-98"><a href="pensamento-estatístico.html#cb9-98" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb9-99"><a href="pensamento-estatístico.html#cb9-99" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">6</span>,</span>
-<span id="cb9-100"><a href="pensamento-estatístico.html#cb9-100" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">2.8</span>,</span>
-<span id="cb9-101"><a href="pensamento-estatístico.html#cb9-101" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Superamostra&quot;</span>,</span>
-<span id="cb9-102"><a href="pensamento-estatístico.html#cb9-102" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
-<span id="cb9-103"><a href="pensamento-estatístico.html#cb9-103" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
-<span id="cb9-104"><a href="pensamento-estatístico.html#cb9-104" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-105"><a href="pensamento-estatístico.html#cb9-105" tabindex="-1"></a>  <span class="co"># Setas: população → amostra</span></span>
-<span id="cb9-106"><a href="pensamento-estatístico.html#cb9-106" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_curve</span>(</span>
-<span id="cb9-107"><a href="pensamento-estatístico.html#cb9-107" tabindex="-1"></a>    <span class="at">data =</span> setas_1,</span>
-<span id="cb9-108"><a href="pensamento-estatístico.html#cb9-108" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
-<span id="cb9-109"><a href="pensamento-estatístico.html#cb9-109" tabindex="-1"></a>      <span class="at">x =</span> x_pop,</span>
-<span id="cb9-110"><a href="pensamento-estatístico.html#cb9-110" tabindex="-1"></a>      <span class="at">y =</span> y_pop,</span>
-<span id="cb9-111"><a href="pensamento-estatístico.html#cb9-111" tabindex="-1"></a>      <span class="at">xend =</span> x_sample,</span>
-<span id="cb9-112"><a href="pensamento-estatístico.html#cb9-112" tabindex="-1"></a>      <span class="at">yend =</span> y_sample</span>
-<span id="cb9-113"><a href="pensamento-estatístico.html#cb9-113" tabindex="-1"></a>    ),</span>
-<span id="cb9-114"><a href="pensamento-estatístico.html#cb9-114" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)),</span>
-<span id="cb9-115"><a href="pensamento-estatístico.html#cb9-115" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkgray&quot;</span>,</span>
-<span id="cb9-116"><a href="pensamento-estatístico.html#cb9-116" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.7</span>,</span>
-<span id="cb9-117"><a href="pensamento-estatístico.html#cb9-117" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="sc">-</span><span class="fl">0.2</span></span>
-<span id="cb9-118"><a href="pensamento-estatístico.html#cb9-118" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-119"><a href="pensamento-estatístico.html#cb9-119" tabindex="-1"></a>  <span class="co"># Setas: amostra → superamostra</span></span>
-<span id="cb9-120"><a href="pensamento-estatístico.html#cb9-120" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_curve</span>(</span>
-<span id="cb9-121"><a href="pensamento-estatístico.html#cb9-121" tabindex="-1"></a>    <span class="at">data =</span> setas_2,</span>
-<span id="cb9-122"><a href="pensamento-estatístico.html#cb9-122" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
-<span id="cb9-123"><a href="pensamento-estatístico.html#cb9-123" tabindex="-1"></a>      <span class="at">x =</span> x_sample,</span>
-<span id="cb9-124"><a href="pensamento-estatístico.html#cb9-124" tabindex="-1"></a>      <span class="at">y =</span> y_sample,</span>
-<span id="cb9-125"><a href="pensamento-estatístico.html#cb9-125" tabindex="-1"></a>      <span class="at">xend =</span> x_sub,</span>
-<span id="cb9-126"><a href="pensamento-estatístico.html#cb9-126" tabindex="-1"></a>      <span class="at">yend =</span> y_sub</span>
-<span id="cb9-127"><a href="pensamento-estatístico.html#cb9-127" tabindex="-1"></a>    ),</span>
-<span id="cb9-128"><a href="pensamento-estatístico.html#cb9-128" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)),</span>
-<span id="cb9-129"><a href="pensamento-estatístico.html#cb9-129" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkgray&quot;</span>,</span>
-<span id="cb9-130"><a href="pensamento-estatístico.html#cb9-130" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.7</span>,</span>
-<span id="cb9-131"><a href="pensamento-estatístico.html#cb9-131" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="fl">0.2</span></span>
-<span id="cb9-132"><a href="pensamento-estatístico.html#cb9-132" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-133"><a href="pensamento-estatístico.html#cb9-133" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
-<span id="cb9-134"><a href="pensamento-estatístico.html#cb9-134" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_void</span>()</span></code></pre></div>
+<span id="cb9-36"><a href="pensamento-estatístico.html#cb9-36" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb9-37"><a href="pensamento-estatístico.html#cb9-37" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-38"><a href="pensamento-estatístico.html#cb9-38" tabindex="-1"></a>  <span class="co"># Círculo da população</span></span>
+<span id="cb9-39"><a href="pensamento-estatístico.html#cb9-39" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">3</span>),</span>
+<span id="cb9-40"><a href="pensamento-estatístico.html#cb9-40" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb9-41"><a href="pensamento-estatístico.html#cb9-41" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-42"><a href="pensamento-estatístico.html#cb9-42" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> pop_df,</span>
+<span id="cb9-43"><a href="pensamento-estatístico.html#cb9-43" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_pop, <span class="at">y =</span> y_pop, <span class="at">image =</span> label),</span>
+<span id="cb9-44"><a href="pensamento-estatístico.html#cb9-44" tabindex="-1"></a>                      <span class="at">size =</span> <span class="fl">0.07</span>) <span class="sc">+</span></span>
+<span id="cb9-45"><a href="pensamento-estatístico.html#cb9-45" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb9-46"><a href="pensamento-estatístico.html#cb9-46" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb9-47"><a href="pensamento-estatístico.html#cb9-47" tabindex="-1"></a>    <span class="at">x =</span> <span class="sc">-</span><span class="dv">4</span>,</span>
+<span id="cb9-48"><a href="pensamento-estatístico.html#cb9-48" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">3.5</span>,</span>
+<span id="cb9-49"><a href="pensamento-estatístico.html#cb9-49" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;População&quot;</span>,</span>
+<span id="cb9-50"><a href="pensamento-estatístico.html#cb9-50" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb9-51"><a href="pensamento-estatístico.html#cb9-51" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb9-52"><a href="pensamento-estatístico.html#cb9-52" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-53"><a href="pensamento-estatístico.html#cb9-53" tabindex="-1"></a>  </span>
+<span id="cb9-54"><a href="pensamento-estatístico.html#cb9-54" tabindex="-1"></a>  <span class="co"># Círculo da amostra</span></span>
+<span id="cb9-55"><a href="pensamento-estatístico.html#cb9-55" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">4</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="fl">1.8</span>),</span>
+<span id="cb9-56"><a href="pensamento-estatístico.html#cb9-56" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb9-57"><a href="pensamento-estatístico.html#cb9-57" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-58"><a href="pensamento-estatístico.html#cb9-58" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(</span>
+<span id="cb9-59"><a href="pensamento-estatístico.html#cb9-59" tabindex="-1"></a>    <span class="at">data =</span> sample_df,</span>
+<span id="cb9-60"><a href="pensamento-estatístico.html#cb9-60" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_sample, <span class="at">y =</span> y_sample, <span class="at">image =</span> label),</span>
+<span id="cb9-61"><a href="pensamento-estatístico.html#cb9-61" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.07</span></span>
+<span id="cb9-62"><a href="pensamento-estatístico.html#cb9-62" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-63"><a href="pensamento-estatístico.html#cb9-63" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb9-64"><a href="pensamento-estatístico.html#cb9-64" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb9-65"><a href="pensamento-estatístico.html#cb9-65" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">4</span>,</span>
+<span id="cb9-66"><a href="pensamento-estatístico.html#cb9-66" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">2.3</span>,</span>
+<span id="cb9-67"><a href="pensamento-estatístico.html#cb9-67" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Amostra&quot;</span>,</span>
+<span id="cb9-68"><a href="pensamento-estatístico.html#cb9-68" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb9-69"><a href="pensamento-estatístico.html#cb9-69" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb9-70"><a href="pensamento-estatístico.html#cb9-70" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-71"><a href="pensamento-estatístico.html#cb9-71" tabindex="-1"></a>  <span class="co"># Setas</span></span>
+<span id="cb9-72"><a href="pensamento-estatístico.html#cb9-72" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_curve</span>(</span>
+<span id="cb9-73"><a href="pensamento-estatístico.html#cb9-73" tabindex="-1"></a>    <span class="at">data =</span> setas_df,</span>
+<span id="cb9-74"><a href="pensamento-estatístico.html#cb9-74" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb9-75"><a href="pensamento-estatístico.html#cb9-75" tabindex="-1"></a>      <span class="at">x =</span> x_pop,</span>
+<span id="cb9-76"><a href="pensamento-estatístico.html#cb9-76" tabindex="-1"></a>      <span class="at">y =</span> y_pop,</span>
+<span id="cb9-77"><a href="pensamento-estatístico.html#cb9-77" tabindex="-1"></a>      <span class="at">xend =</span> x_sample,</span>
+<span id="cb9-78"><a href="pensamento-estatístico.html#cb9-78" tabindex="-1"></a>      <span class="at">yend =</span> y_sample</span>
+<span id="cb9-79"><a href="pensamento-estatístico.html#cb9-79" tabindex="-1"></a>    ),</span>
+<span id="cb9-80"><a href="pensamento-estatístico.html#cb9-80" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)),</span>
+<span id="cb9-81"><a href="pensamento-estatístico.html#cb9-81" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkgray&quot;</span>,</span>
+<span id="cb9-82"><a href="pensamento-estatístico.html#cb9-82" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.7</span>,</span>
+<span id="cb9-83"><a href="pensamento-estatístico.html#cb9-83" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="sc">-</span><span class="fl">0.2</span></span>
+<span id="cb9-84"><a href="pensamento-estatístico.html#cb9-84" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-85"><a href="pensamento-estatístico.html#cb9-85" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb9-86"><a href="pensamento-estatístico.html#cb9-86" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb9-87"><a href="pensamento-estatístico.html#cb9-87" tabindex="-1"></a>  <span class="co"># Texto &quot;Amostragem&quot;</span></span>
+<span id="cb9-88"><a href="pensamento-estatístico.html#cb9-88" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb9-89"><a href="pensamento-estatístico.html#cb9-89" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb9-90"><a href="pensamento-estatístico.html#cb9-90" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">0</span>,</span>
+<span id="cb9-91"><a href="pensamento-estatístico.html#cb9-91" tabindex="-1"></a>    <span class="at">y =</span> <span class="dv">3</span>,</span>
+<span id="cb9-92"><a href="pensamento-estatístico.html#cb9-92" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Amostragem&quot;</span>,</span>
+<span id="cb9-93"><a href="pensamento-estatístico.html#cb9-93" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkgray&quot;</span>,</span>
+<span id="cb9-94"><a href="pensamento-estatístico.html#cb9-94" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb9-95"><a href="pensamento-estatístico.html#cb9-95" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;italic&quot;</span></span>
+<span id="cb9-96"><a href="pensamento-estatístico.html#cb9-96" tabindex="-1"></a>  )</span></code></pre></div>
+</details>
+</div>
+<div id="reamostragem-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Reamostragem<a href="pensamento-estatístico.html#reamostragem-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="pensamento-estatístico.html#cb10-1" tabindex="-1"></a><span class="co"># reproducibilidade</span></span>
+<span id="cb10-2"><a href="pensamento-estatístico.html#cb10-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb10-3"><a href="pensamento-estatístico.html#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="pensamento-estatístico.html#cb10-4" tabindex="-1"></a><span class="co"># parâmetros</span></span>
+<span id="cb10-5"><a href="pensamento-estatístico.html#cb10-5" tabindex="-1"></a>pop_n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb10-6"><a href="pensamento-estatístico.html#cb10-6" tabindex="-1"></a>sample_n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb10-7"><a href="pensamento-estatístico.html#cb10-7" tabindex="-1"></a>svg_size <span class="ot">&lt;-</span> <span class="fl">0.045</span></span>
+<span id="cb10-8"><a href="pensamento-estatístico.html#cb10-8" tabindex="-1"></a>y_offsets <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">6</span>)</span>
+<span id="cb10-9"><a href="pensamento-estatístico.html#cb10-9" tabindex="-1"></a>raio_reamostra <span class="ot">&lt;-</span> <span class="fl">1.2</span></span>
+<span id="cb10-10"><a href="pensamento-estatístico.html#cb10-10" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="pensamento-estatístico.html#cb10-11" tabindex="-1"></a><span class="co"># População (coluna 1)</span></span>
+<span id="cb10-12"><a href="pensamento-estatístico.html#cb10-12" tabindex="-1"></a>radius_pop <span class="ot">&lt;-</span> <span class="fu">runif</span>(pop_n, <span class="fl">0.5</span>, <span class="fl">2.5</span>)</span>
+<span id="cb10-13"><a href="pensamento-estatístico.html#cb10-13" tabindex="-1"></a>angle_pop <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> pop_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb10-14"><a href="pensamento-estatístico.html#cb10-14" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-15"><a href="pensamento-estatístico.html#cb10-15" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>pop_n,</span>
+<span id="cb10-16"><a href="pensamento-estatístico.html#cb10-16" tabindex="-1"></a>  <span class="at">x_pop =</span> <span class="fu">cos</span>(angle_pop) <span class="sc">*</span> radius_pop <span class="sc">-</span> <span class="dv">6</span>,</span>
+<span id="cb10-17"><a href="pensamento-estatístico.html#cb10-17" tabindex="-1"></a>  <span class="at">y_pop =</span> <span class="fu">sin</span>(angle_pop) <span class="sc">*</span> radius_pop,</span>
+<span id="cb10-18"><a href="pensamento-estatístico.html#cb10-18" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
+<span id="cb10-19"><a href="pensamento-estatístico.html#cb10-19" tabindex="-1"></a>)</span>
+<span id="cb10-20"><a href="pensamento-estatístico.html#cb10-20" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="pensamento-estatístico.html#cb10-21" tabindex="-1"></a><span class="co"># Amostra (coluna 2)</span></span>
+<span id="cb10-22"><a href="pensamento-estatístico.html#cb10-22" tabindex="-1"></a>radius_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(sample_n, <span class="fl">0.4</span>, <span class="fl">1.2</span>)</span>
+<span id="cb10-23"><a href="pensamento-estatístico.html#cb10-23" tabindex="-1"></a>angle_sample <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> sample_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb10-24"><a href="pensamento-estatístico.html#cb10-24" tabindex="-1"></a>sample_ids <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop_df<span class="sc">$</span>id, sample_n)</span>
+<span id="cb10-25"><a href="pensamento-estatístico.html#cb10-25" tabindex="-1"></a>sample_df <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(pop_df, id <span class="sc">%in%</span> sample_ids) <span class="sc">|&gt;</span></span>
+<span id="cb10-26"><a href="pensamento-estatístico.html#cb10-26" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb10-27"><a href="pensamento-estatístico.html#cb10-27" tabindex="-1"></a>    <span class="at">angle =</span> angle_sample,</span>
+<span id="cb10-28"><a href="pensamento-estatístico.html#cb10-28" tabindex="-1"></a>    <span class="at">x_sample =</span> <span class="fu">cos</span>(angle) <span class="sc">*</span> radius_sample,</span>
+<span id="cb10-29"><a href="pensamento-estatístico.html#cb10-29" tabindex="-1"></a>    <span class="at">y_sample =</span> <span class="fu">sin</span>(angle) <span class="sc">*</span> radius_sample,</span>
+<span id="cb10-30"><a href="pensamento-estatístico.html#cb10-30" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
+<span id="cb10-31"><a href="pensamento-estatístico.html#cb10-31" tabindex="-1"></a>  )</span>
+<span id="cb10-32"><a href="pensamento-estatístico.html#cb10-32" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="pensamento-estatístico.html#cb10-33" tabindex="-1"></a><span class="co"># Reamostras (coluna 3) — agora bootstrap da amostra</span></span>
+<span id="cb10-34"><a href="pensamento-estatístico.html#cb10-34" tabindex="-1"></a>reamostra_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">seq_along</span>(y_offsets), <span class="cf">function</span>(i) {</span>
+<span id="cb10-35"><a href="pensamento-estatístico.html#cb10-35" tabindex="-1"></a>  offset <span class="ot">&lt;-</span> y_offsets[i]</span>
+<span id="cb10-36"><a href="pensamento-estatístico.html#cb10-36" tabindex="-1"></a>  radius_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(sample_n, <span class="fl">0.3</span>, <span class="fl">1.1</span>)</span>
+<span id="cb10-37"><a href="pensamento-estatístico.html#cb10-37" tabindex="-1"></a>  angle_sample <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> sample_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb10-38"><a href="pensamento-estatístico.html#cb10-38" tabindex="-1"></a>  </span>
+<span id="cb10-39"><a href="pensamento-estatístico.html#cb10-39" tabindex="-1"></a>  <span class="co"># Bootstrap da amostra: sorteia com reposição</span></span>
+<span id="cb10-40"><a href="pensamento-estatístico.html#cb10-40" tabindex="-1"></a>  re_ids <span class="ot">&lt;-</span> <span class="fu">sample</span>(sample_df<span class="sc">$</span>id, sample_n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-41"><a href="pensamento-estatístico.html#cb10-41" tabindex="-1"></a>  sample_boot <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(sample_df, id <span class="sc">%in%</span> re_ids)</span>
+<span id="cb10-42"><a href="pensamento-estatístico.html#cb10-42" tabindex="-1"></a>  </span>
+<span id="cb10-43"><a href="pensamento-estatístico.html#cb10-43" tabindex="-1"></a>  <span class="co"># Para manter mesmo número de pontos, atribuímos posições sequenciais</span></span>
+<span id="cb10-44"><a href="pensamento-estatístico.html#cb10-44" tabindex="-1"></a>  sample_boot <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">arrange</span>(sample_boot, id)[<span class="fu">seq_len</span>(sample_n), ] <span class="sc">|&gt;</span></span>
+<span id="cb10-45"><a href="pensamento-estatístico.html#cb10-45" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb10-46"><a href="pensamento-estatístico.html#cb10-46" tabindex="-1"></a>      <span class="at">angle =</span> angle_sample,</span>
+<span id="cb10-47"><a href="pensamento-estatístico.html#cb10-47" tabindex="-1"></a>      <span class="at">x_sample_reamostra =</span> <span class="fu">cos</span>(angle) <span class="sc">*</span> radius_sample <span class="sc">+</span> <span class="dv">6</span>,</span>
+<span id="cb10-48"><a href="pensamento-estatístico.html#cb10-48" tabindex="-1"></a>      <span class="at">y_sample_reamostra =</span> <span class="fu">sin</span>(angle) <span class="sc">*</span> radius_sample <span class="sc">+</span> offset,</span>
+<span id="cb10-49"><a href="pensamento-estatístico.html#cb10-49" tabindex="-1"></a>      <span class="at">grupo =</span> <span class="fu">paste0</span>(<span class="st">&quot;Reamostra &quot;</span>, i)</span>
+<span id="cb10-50"><a href="pensamento-estatístico.html#cb10-50" tabindex="-1"></a>    )</span>
+<span id="cb10-51"><a href="pensamento-estatístico.html#cb10-51" tabindex="-1"></a>})</span>
+<span id="cb10-52"><a href="pensamento-estatístico.html#cb10-52" tabindex="-1"></a>reamostras_df <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(reamostra_list)</span>
+<span id="cb10-53"><a href="pensamento-estatístico.html#cb10-53" tabindex="-1"></a></span>
+<span id="cb10-54"><a href="pensamento-estatístico.html#cb10-54" tabindex="-1"></a><span class="co"># Setas: População → Amostra</span></span>
+<span id="cb10-55"><a href="pensamento-estatístico.html#cb10-55" tabindex="-1"></a>setas_amostra <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(</span>
+<span id="cb10-56"><a href="pensamento-estatístico.html#cb10-56" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(pop_df, id <span class="sc">%in%</span> sample_ids),</span>
+<span id="cb10-57"><a href="pensamento-estatístico.html#cb10-57" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sample_df, id, <span class="at">xend =</span> x_sample, <span class="at">yend =</span> y_sample),</span>
+<span id="cb10-58"><a href="pensamento-estatístico.html#cb10-58" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;id&quot;</span></span>
+<span id="cb10-59"><a href="pensamento-estatístico.html#cb10-59" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb10-60"><a href="pensamento-estatístico.html#cb10-60" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">x =</span> x_pop, <span class="at">y =</span> y_pop)</span>
+<span id="cb10-61"><a href="pensamento-estatístico.html#cb10-61" tabindex="-1"></a></span>
+<span id="cb10-62"><a href="pensamento-estatístico.html#cb10-62" tabindex="-1"></a><span class="co"># Setas: Amostra → Reamostras (AGORA COMPLETO)</span></span>
+<span id="cb10-63"><a href="pensamento-estatístico.html#cb10-63" tabindex="-1"></a><span class="co"># Faz um join entre a amostra e todas as ocorrências nas reamostras.</span></span>
+<span id="cb10-64"><a href="pensamento-estatístico.html#cb10-64" tabindex="-1"></a>setas_reamostras <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">inner_join</span>(</span>
+<span id="cb10-65"><a href="pensamento-estatístico.html#cb10-65" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sample_df, id, <span class="at">x_amostra =</span> x_sample, <span class="at">y_amostra =</span> y_sample),</span>
+<span id="cb10-66"><a href="pensamento-estatístico.html#cb10-66" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb10-67"><a href="pensamento-estatístico.html#cb10-67" tabindex="-1"></a>    reamostras_df,</span>
+<span id="cb10-68"><a href="pensamento-estatístico.html#cb10-68" tabindex="-1"></a>    id,</span>
+<span id="cb10-69"><a href="pensamento-estatístico.html#cb10-69" tabindex="-1"></a>    x_sample_reamostra,</span>
+<span id="cb10-70"><a href="pensamento-estatístico.html#cb10-70" tabindex="-1"></a>    y_sample_reamostra,</span>
+<span id="cb10-71"><a href="pensamento-estatístico.html#cb10-71" tabindex="-1"></a>    grupo</span>
+<span id="cb10-72"><a href="pensamento-estatístico.html#cb10-72" tabindex="-1"></a>  ),</span>
+<span id="cb10-73"><a href="pensamento-estatístico.html#cb10-73" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;id&quot;</span></span>
+<span id="cb10-74"><a href="pensamento-estatístico.html#cb10-74" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb10-75"><a href="pensamento-estatístico.html#cb10-75" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">x =</span> x_amostra,</span>
+<span id="cb10-76"><a href="pensamento-estatístico.html#cb10-76" tabindex="-1"></a>                <span class="at">y =</span> y_amostra,</span>
+<span id="cb10-77"><a href="pensamento-estatístico.html#cb10-77" tabindex="-1"></a>                <span class="at">xend =</span> x_sample_reamostra,</span>
+<span id="cb10-78"><a href="pensamento-estatístico.html#cb10-78" tabindex="-1"></a>                <span class="at">yend =</span> y_sample_reamostra)</span>
+<span id="cb10-79"><a href="pensamento-estatístico.html#cb10-79" tabindex="-1"></a></span>
+<span id="cb10-80"><a href="pensamento-estatístico.html#cb10-80" tabindex="-1"></a></span>
+<span id="cb10-81"><a href="pensamento-estatístico.html#cb10-81" tabindex="-1"></a><span class="co"># Gráfico</span></span>
+<span id="cb10-82"><a href="pensamento-estatístico.html#cb10-82" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-83"><a href="pensamento-estatístico.html#cb10-83" tabindex="-1"></a>  <span class="co"># Coluna População</span></span>
+<span id="cb10-84"><a href="pensamento-estatístico.html#cb10-84" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="dv">6</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">3</span>),</span>
+<span id="cb10-85"><a href="pensamento-estatístico.html#cb10-85" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb10-86"><a href="pensamento-estatístico.html#cb10-86" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb10-87"><a href="pensamento-estatístico.html#cb10-87" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> pop_df,</span>
+<span id="cb10-88"><a href="pensamento-estatístico.html#cb10-88" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_pop, <span class="at">y =</span> y_pop, <span class="at">image =</span> label),</span>
+<span id="cb10-89"><a href="pensamento-estatístico.html#cb10-89" tabindex="-1"></a>                      <span class="at">size =</span> svg_size) <span class="sc">+</span></span>
+<span id="cb10-90"><a href="pensamento-estatístico.html#cb10-90" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb10-91"><a href="pensamento-estatístico.html#cb10-91" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb10-92"><a href="pensamento-estatístico.html#cb10-92" tabindex="-1"></a>    <span class="at">x =</span> <span class="sc">-</span><span class="dv">6</span>,</span>
+<span id="cb10-93"><a href="pensamento-estatístico.html#cb10-93" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">3.5</span>,</span>
+<span id="cb10-94"><a href="pensamento-estatístico.html#cb10-94" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;População&quot;</span>,</span>
+<span id="cb10-95"><a href="pensamento-estatístico.html#cb10-95" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb10-96"><a href="pensamento-estatístico.html#cb10-96" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb10-97"><a href="pensamento-estatístico.html#cb10-97" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-98"><a href="pensamento-estatístico.html#cb10-98" tabindex="-1"></a>  <span class="co"># Coluna Amostra</span></span>
+<span id="cb10-99"><a href="pensamento-estatístico.html#cb10-99" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">0</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="fl">1.8</span>),</span>
+<span id="cb10-100"><a href="pensamento-estatístico.html#cb10-100" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb10-101"><a href="pensamento-estatístico.html#cb10-101" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb10-102"><a href="pensamento-estatístico.html#cb10-102" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(</span>
+<span id="cb10-103"><a href="pensamento-estatístico.html#cb10-103" tabindex="-1"></a>    <span class="at">data =</span> sample_df,</span>
+<span id="cb10-104"><a href="pensamento-estatístico.html#cb10-104" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_sample, <span class="at">y =</span> y_sample, <span class="at">image =</span> label),</span>
+<span id="cb10-105"><a href="pensamento-estatístico.html#cb10-105" tabindex="-1"></a>    <span class="at">size =</span> svg_size</span>
+<span id="cb10-106"><a href="pensamento-estatístico.html#cb10-106" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-107"><a href="pensamento-estatístico.html#cb10-107" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb10-108"><a href="pensamento-estatístico.html#cb10-108" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb10-109"><a href="pensamento-estatístico.html#cb10-109" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">0</span>,</span>
+<span id="cb10-110"><a href="pensamento-estatístico.html#cb10-110" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">2.3</span>,</span>
+<span id="cb10-111"><a href="pensamento-estatístico.html#cb10-111" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Amostra&quot;</span>,</span>
+<span id="cb10-112"><a href="pensamento-estatístico.html#cb10-112" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb10-113"><a href="pensamento-estatístico.html#cb10-113" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb10-114"><a href="pensamento-estatístico.html#cb10-114" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-115"><a href="pensamento-estatístico.html#cb10-115" tabindex="-1"></a>  <span class="co"># Coluna Reamostras</span></span>
+<span id="cb10-116"><a href="pensamento-estatístico.html#cb10-116" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(</span>
+<span id="cb10-117"><a href="pensamento-estatístico.html#cb10-117" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x0 =</span> <span class="dv">6</span>, <span class="at">y0 =</span> y_offsets, <span class="at">r =</span> raio_reamostra),</span>
+<span id="cb10-118"><a href="pensamento-estatístico.html#cb10-118" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> x0, <span class="at">y0 =</span> y0, <span class="at">r =</span> r),</span>
+<span id="cb10-119"><a href="pensamento-estatístico.html#cb10-119" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb10-120"><a href="pensamento-estatístico.html#cb10-120" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb10-121"><a href="pensamento-estatístico.html#cb10-121" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-122"><a href="pensamento-estatístico.html#cb10-122" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(</span>
+<span id="cb10-123"><a href="pensamento-estatístico.html#cb10-123" tabindex="-1"></a>    <span class="at">data =</span> reamostras_df,</span>
+<span id="cb10-124"><a href="pensamento-estatístico.html#cb10-124" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_sample_reamostra, <span class="at">y =</span> y_sample_reamostra, <span class="at">image =</span> label),</span>
+<span id="cb10-125"><a href="pensamento-estatístico.html#cb10-125" tabindex="-1"></a>    <span class="at">size =</span> svg_size</span>
+<span id="cb10-126"><a href="pensamento-estatístico.html#cb10-126" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-127"><a href="pensamento-estatístico.html#cb10-127" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_text</span>(</span>
+<span id="cb10-128"><a href="pensamento-estatístico.html#cb10-128" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-129"><a href="pensamento-estatístico.html#cb10-129" tabindex="-1"></a>      <span class="at">x =</span> <span class="dv">6</span>,</span>
+<span id="cb10-130"><a href="pensamento-estatístico.html#cb10-130" tabindex="-1"></a>      <span class="at">y =</span> y_offsets,</span>
+<span id="cb10-131"><a href="pensamento-estatístico.html#cb10-131" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">&quot;Reamostra &quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb10-132"><a href="pensamento-estatístico.html#cb10-132" tabindex="-1"></a>    ),</span>
+<span id="cb10-133"><a href="pensamento-estatístico.html#cb10-133" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb10-134"><a href="pensamento-estatístico.html#cb10-134" tabindex="-1"></a>      <span class="at">x =</span> x,</span>
+<span id="cb10-135"><a href="pensamento-estatístico.html#cb10-135" tabindex="-1"></a>      <span class="at">y =</span> y <span class="sc">+</span> raio_reamostra <span class="sc">+</span> <span class="fl">0.4</span>,</span>
+<span id="cb10-136"><a href="pensamento-estatístico.html#cb10-136" tabindex="-1"></a>      <span class="at">label =</span> label</span>
+<span id="cb10-137"><a href="pensamento-estatístico.html#cb10-137" tabindex="-1"></a>    ),</span>
+<span id="cb10-138"><a href="pensamento-estatístico.html#cb10-138" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">4.2</span>,</span>
+<span id="cb10-139"><a href="pensamento-estatístico.html#cb10-139" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb10-140"><a href="pensamento-estatístico.html#cb10-140" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-141"><a href="pensamento-estatístico.html#cb10-141" tabindex="-1"></a>  <span class="co"># Setas: População → Amostra</span></span>
+<span id="cb10-142"><a href="pensamento-estatístico.html#cb10-142" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_curve</span>(</span>
+<span id="cb10-143"><a href="pensamento-estatístico.html#cb10-143" tabindex="-1"></a>    <span class="at">data =</span> setas_amostra,</span>
+<span id="cb10-144"><a href="pensamento-estatístico.html#cb10-144" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb10-145"><a href="pensamento-estatístico.html#cb10-145" tabindex="-1"></a>      <span class="at">x =</span> x,</span>
+<span id="cb10-146"><a href="pensamento-estatístico.html#cb10-146" tabindex="-1"></a>      <span class="at">y =</span> y,</span>
+<span id="cb10-147"><a href="pensamento-estatístico.html#cb10-147" tabindex="-1"></a>      <span class="at">xend =</span> xend,</span>
+<span id="cb10-148"><a href="pensamento-estatístico.html#cb10-148" tabindex="-1"></a>      <span class="at">yend =</span> yend</span>
+<span id="cb10-149"><a href="pensamento-estatístico.html#cb10-149" tabindex="-1"></a>    ),</span>
+<span id="cb10-150"><a href="pensamento-estatístico.html#cb10-150" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)),</span>
+<span id="cb10-151"><a href="pensamento-estatístico.html#cb10-151" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;gray50&quot;</span>,</span>
+<span id="cb10-152"><a href="pensamento-estatístico.html#cb10-152" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.6</span>,</span>
+<span id="cb10-153"><a href="pensamento-estatístico.html#cb10-153" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="sc">-</span><span class="fl">0.2</span></span>
+<span id="cb10-154"><a href="pensamento-estatístico.html#cb10-154" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-155"><a href="pensamento-estatístico.html#cb10-155" tabindex="-1"></a>  <span class="co"># Setas: Amostra → Reamostras</span></span>
+<span id="cb10-156"><a href="pensamento-estatístico.html#cb10-156" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_curve</span>(</span>
+<span id="cb10-157"><a href="pensamento-estatístico.html#cb10-157" tabindex="-1"></a>    <span class="at">data =</span> setas_reamostras,</span>
+<span id="cb10-158"><a href="pensamento-estatístico.html#cb10-158" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb10-159"><a href="pensamento-estatístico.html#cb10-159" tabindex="-1"></a>      <span class="at">x =</span> x,</span>
+<span id="cb10-160"><a href="pensamento-estatístico.html#cb10-160" tabindex="-1"></a>      <span class="at">y =</span> y,</span>
+<span id="cb10-161"><a href="pensamento-estatístico.html#cb10-161" tabindex="-1"></a>      <span class="at">xend =</span> xend,</span>
+<span id="cb10-162"><a href="pensamento-estatístico.html#cb10-162" tabindex="-1"></a>      <span class="at">yend =</span> yend</span>
+<span id="cb10-163"><a href="pensamento-estatístico.html#cb10-163" tabindex="-1"></a>    ),</span>
+<span id="cb10-164"><a href="pensamento-estatístico.html#cb10-164" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)),</span>
+<span id="cb10-165"><a href="pensamento-estatístico.html#cb10-165" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;gray60&quot;</span>,</span>
+<span id="cb10-166"><a href="pensamento-estatístico.html#cb10-166" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.6</span>,</span>
+<span id="cb10-167"><a href="pensamento-estatístico.html#cb10-167" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="sc">-</span><span class="fl">0.2</span></span>
+<span id="cb10-168"><a href="pensamento-estatístico.html#cb10-168" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-169"><a href="pensamento-estatístico.html#cb10-169" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_void</span>()</span></code></pre></div>
+</details>
+</div>
+<div id="subamostragem-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Subamostragem<a href="pensamento-estatístico.html#subamostragem-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="pensamento-estatístico.html#cb11-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
+<span id="cb11-2"><a href="pensamento-estatístico.html#cb11-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb11-3"><a href="pensamento-estatístico.html#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="pensamento-estatístico.html#cb11-4" tabindex="-1"></a><span class="co"># Tamanhos</span></span>
+<span id="cb11-5"><a href="pensamento-estatístico.html#cb11-5" tabindex="-1"></a>pop_n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb11-6"><a href="pensamento-estatístico.html#cb11-6" tabindex="-1"></a>sample_n <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb11-7"><a href="pensamento-estatístico.html#cb11-7" tabindex="-1"></a>subsample_n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb11-8"><a href="pensamento-estatístico.html#cb11-8" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="pensamento-estatístico.html#cb11-9" tabindex="-1"></a><span class="co"># Raio dos círculos</span></span>
+<span id="cb11-10"><a href="pensamento-estatístico.html#cb11-10" tabindex="-1"></a>radius_pop <span class="ot">&lt;-</span> <span class="fu">runif</span>(pop_n, <span class="fl">0.5</span>, <span class="fl">2.5</span>)</span>
+<span id="cb11-11"><a href="pensamento-estatístico.html#cb11-11" tabindex="-1"></a>radius_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(sample_n, <span class="fl">0.5</span>, <span class="fl">1.5</span>)</span>
+<span id="cb11-12"><a href="pensamento-estatístico.html#cb11-12" tabindex="-1"></a>radius_subsample <span class="ot">&lt;-</span> <span class="fu">runif</span>(subsample_n, <span class="fl">0.5</span>, <span class="dv">1</span>)</span>
+<span id="cb11-13"><a href="pensamento-estatístico.html#cb11-13" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="pensamento-estatístico.html#cb11-14" tabindex="-1"></a><span class="co"># Ângulos para posicionamento circular</span></span>
+<span id="cb11-15"><a href="pensamento-estatístico.html#cb11-15" tabindex="-1"></a>angle_pop <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> pop_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb11-16"><a href="pensamento-estatístico.html#cb11-16" tabindex="-1"></a>angle_sample <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> sample_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb11-17"><a href="pensamento-estatístico.html#cb11-17" tabindex="-1"></a>angle_subsample <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> subsample_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb11-18"><a href="pensamento-estatístico.html#cb11-18" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="pensamento-estatístico.html#cb11-19" tabindex="-1"></a><span class="co"># População (esquerda)</span></span>
+<span id="cb11-20"><a href="pensamento-estatístico.html#cb11-20" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-21"><a href="pensamento-estatístico.html#cb11-21" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>pop_n,</span>
+<span id="cb11-22"><a href="pensamento-estatístico.html#cb11-22" tabindex="-1"></a>  <span class="at">x_pop =</span> <span class="fu">cos</span>(angle_pop) <span class="sc">*</span> radius_pop <span class="sc">-</span> <span class="dv">6</span>,</span>
+<span id="cb11-23"><a href="pensamento-estatístico.html#cb11-23" tabindex="-1"></a>  <span class="at">y_pop =</span> <span class="fu">sin</span>(angle_pop) <span class="sc">*</span> radius_pop,</span>
+<span id="cb11-24"><a href="pensamento-estatístico.html#cb11-24" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
+<span id="cb11-25"><a href="pensamento-estatístico.html#cb11-25" tabindex="-1"></a>)</span>
+<span id="cb11-26"><a href="pensamento-estatístico.html#cb11-26" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="pensamento-estatístico.html#cb11-27" tabindex="-1"></a><span class="co"># Amostra (centro)</span></span>
+<span id="cb11-28"><a href="pensamento-estatístico.html#cb11-28" tabindex="-1"></a>sample_ids <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop_df<span class="sc">$</span>id, sample_n)</span>
+<span id="cb11-29"><a href="pensamento-estatístico.html#cb11-29" tabindex="-1"></a>sample_df <span class="ot">&lt;-</span> pop_df <span class="sc">%&gt;%</span></span>
+<span id="cb11-30"><a href="pensamento-estatístico.html#cb11-30" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(id <span class="sc">%in%</span> sample_ids) <span class="sc">%&gt;%</span></span>
+<span id="cb11-31"><a href="pensamento-estatístico.html#cb11-31" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb11-32"><a href="pensamento-estatístico.html#cb11-32" tabindex="-1"></a>    <span class="at">angle =</span> angle_sample,</span>
+<span id="cb11-33"><a href="pensamento-estatístico.html#cb11-33" tabindex="-1"></a>    <span class="at">x_sample =</span> <span class="fu">cos</span>(angle_sample) <span class="sc">*</span> radius_sample,</span>
+<span id="cb11-34"><a href="pensamento-estatístico.html#cb11-34" tabindex="-1"></a>    <span class="at">y_sample =</span> <span class="fu">sin</span>(angle_sample) <span class="sc">*</span> radius_sample,</span>
+<span id="cb11-35"><a href="pensamento-estatístico.html#cb11-35" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
+<span id="cb11-36"><a href="pensamento-estatístico.html#cb11-36" tabindex="-1"></a>  )</span>
+<span id="cb11-37"><a href="pensamento-estatístico.html#cb11-37" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="pensamento-estatístico.html#cb11-38" tabindex="-1"></a><span class="co"># Subamostra (direita)</span></span>
+<span id="cb11-39"><a href="pensamento-estatístico.html#cb11-39" tabindex="-1"></a>subsample_ids <span class="ot">&lt;-</span> <span class="fu">sample</span>(sample_df<span class="sc">$</span>id, subsample_n)</span>
+<span id="cb11-40"><a href="pensamento-estatístico.html#cb11-40" tabindex="-1"></a>subsample_df <span class="ot">&lt;-</span> sample_df <span class="sc">%&gt;%</span></span>
+<span id="cb11-41"><a href="pensamento-estatístico.html#cb11-41" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(id <span class="sc">%in%</span> subsample_ids) <span class="sc">%&gt;%</span></span>
+<span id="cb11-42"><a href="pensamento-estatístico.html#cb11-42" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb11-43"><a href="pensamento-estatístico.html#cb11-43" tabindex="-1"></a>    <span class="at">angle =</span> angle_subsample,</span>
+<span id="cb11-44"><a href="pensamento-estatístico.html#cb11-44" tabindex="-1"></a>    <span class="at">x_sub =</span> <span class="fu">cos</span>(angle_subsample) <span class="sc">*</span> radius_subsample <span class="sc">+</span> <span class="dv">6</span>,</span>
+<span id="cb11-45"><a href="pensamento-estatístico.html#cb11-45" tabindex="-1"></a>    <span class="at">y_sub =</span> <span class="fu">sin</span>(angle_subsample) <span class="sc">*</span> radius_subsample,</span>
+<span id="cb11-46"><a href="pensamento-estatístico.html#cb11-46" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
+<span id="cb11-47"><a href="pensamento-estatístico.html#cb11-47" tabindex="-1"></a>  )</span>
+<span id="cb11-48"><a href="pensamento-estatístico.html#cb11-48" tabindex="-1"></a></span>
+<span id="cb11-49"><a href="pensamento-estatístico.html#cb11-49" tabindex="-1"></a><span class="co"># Setas população → amostra</span></span>
+<span id="cb11-50"><a href="pensamento-estatístico.html#cb11-50" tabindex="-1"></a>setas_1 <span class="ot">&lt;-</span> sample_df <span class="sc">%&gt;%</span></span>
+<span id="cb11-51"><a href="pensamento-estatístico.html#cb11-51" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, x_pop, y_pop, x_sample, y_sample)</span>
+<span id="cb11-52"><a href="pensamento-estatístico.html#cb11-52" tabindex="-1"></a></span>
+<span id="cb11-53"><a href="pensamento-estatístico.html#cb11-53" tabindex="-1"></a><span class="co"># Setas amostra → subamostra</span></span>
+<span id="cb11-54"><a href="pensamento-estatístico.html#cb11-54" tabindex="-1"></a>setas_2 <span class="ot">&lt;-</span> subsample_df <span class="sc">%&gt;%</span></span>
+<span id="cb11-55"><a href="pensamento-estatístico.html#cb11-55" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, x_sample, y_sample, x_sub, y_sub)</span>
+<span id="cb11-56"><a href="pensamento-estatístico.html#cb11-56" tabindex="-1"></a></span>
+<span id="cb11-57"><a href="pensamento-estatístico.html#cb11-57" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb11-58"><a href="pensamento-estatístico.html#cb11-58" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb11-59"><a href="pensamento-estatístico.html#cb11-59" tabindex="-1"></a>  <span class="co"># Círculo da população</span></span>
+<span id="cb11-60"><a href="pensamento-estatístico.html#cb11-60" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="dv">6</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">3</span>),</span>
+<span id="cb11-61"><a href="pensamento-estatístico.html#cb11-61" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb11-62"><a href="pensamento-estatístico.html#cb11-62" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-63"><a href="pensamento-estatístico.html#cb11-63" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> pop_df,</span>
+<span id="cb11-64"><a href="pensamento-estatístico.html#cb11-64" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_pop, <span class="at">y =</span> y_pop, <span class="at">image =</span> label),</span>
+<span id="cb11-65"><a href="pensamento-estatístico.html#cb11-65" tabindex="-1"></a>                      <span class="at">size =</span> <span class="fl">0.07</span>) <span class="sc">+</span></span>
+<span id="cb11-66"><a href="pensamento-estatístico.html#cb11-66" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb11-67"><a href="pensamento-estatístico.html#cb11-67" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb11-68"><a href="pensamento-estatístico.html#cb11-68" tabindex="-1"></a>    <span class="at">x =</span> <span class="sc">-</span><span class="dv">6</span>,</span>
+<span id="cb11-69"><a href="pensamento-estatístico.html#cb11-69" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">3.5</span>,</span>
+<span id="cb11-70"><a href="pensamento-estatístico.html#cb11-70" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;População&quot;</span>,</span>
+<span id="cb11-71"><a href="pensamento-estatístico.html#cb11-71" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb11-72"><a href="pensamento-estatístico.html#cb11-72" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb11-73"><a href="pensamento-estatístico.html#cb11-73" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-74"><a href="pensamento-estatístico.html#cb11-74" tabindex="-1"></a>  <span class="co"># Círculo da amostra</span></span>
+<span id="cb11-75"><a href="pensamento-estatístico.html#cb11-75" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">0</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">2</span>),</span>
+<span id="cb11-76"><a href="pensamento-estatístico.html#cb11-76" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb11-77"><a href="pensamento-estatístico.html#cb11-77" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-78"><a href="pensamento-estatístico.html#cb11-78" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> sample_df,</span>
+<span id="cb11-79"><a href="pensamento-estatístico.html#cb11-79" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_sample, <span class="at">y =</span> y_sample, <span class="at">image =</span> label),</span>
+<span id="cb11-80"><a href="pensamento-estatístico.html#cb11-80" tabindex="-1"></a>                      <span class="at">size =</span> <span class="fl">0.07</span>) <span class="sc">+</span></span>
+<span id="cb11-81"><a href="pensamento-estatístico.html#cb11-81" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb11-82"><a href="pensamento-estatístico.html#cb11-82" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb11-83"><a href="pensamento-estatístico.html#cb11-83" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">0</span>,</span>
+<span id="cb11-84"><a href="pensamento-estatístico.html#cb11-84" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">2.5</span>,</span>
+<span id="cb11-85"><a href="pensamento-estatístico.html#cb11-85" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Amostra&quot;</span>,</span>
+<span id="cb11-86"><a href="pensamento-estatístico.html#cb11-86" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb11-87"><a href="pensamento-estatístico.html#cb11-87" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb11-88"><a href="pensamento-estatístico.html#cb11-88" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-89"><a href="pensamento-estatístico.html#cb11-89" tabindex="-1"></a>  <span class="co"># Círculo da subamostra</span></span>
+<span id="cb11-90"><a href="pensamento-estatístico.html#cb11-90" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">6</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="fl">1.2</span>),</span>
+<span id="cb11-91"><a href="pensamento-estatístico.html#cb11-91" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb11-92"><a href="pensamento-estatístico.html#cb11-92" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-93"><a href="pensamento-estatístico.html#cb11-93" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> subsample_df,</span>
+<span id="cb11-94"><a href="pensamento-estatístico.html#cb11-94" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_sub, <span class="at">y =</span> y_sub, <span class="at">image =</span> label),</span>
+<span id="cb11-95"><a href="pensamento-estatístico.html#cb11-95" tabindex="-1"></a>                      <span class="at">size =</span> <span class="fl">0.07</span>) <span class="sc">+</span></span>
+<span id="cb11-96"><a href="pensamento-estatístico.html#cb11-96" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb11-97"><a href="pensamento-estatístico.html#cb11-97" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb11-98"><a href="pensamento-estatístico.html#cb11-98" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">6</span>,</span>
+<span id="cb11-99"><a href="pensamento-estatístico.html#cb11-99" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">1.7</span>,</span>
+<span id="cb11-100"><a href="pensamento-estatístico.html#cb11-100" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Subamostra&quot;</span>,</span>
+<span id="cb11-101"><a href="pensamento-estatístico.html#cb11-101" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb11-102"><a href="pensamento-estatístico.html#cb11-102" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb11-103"><a href="pensamento-estatístico.html#cb11-103" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-104"><a href="pensamento-estatístico.html#cb11-104" tabindex="-1"></a>  <span class="co"># Setas: população → amostra</span></span>
+<span id="cb11-105"><a href="pensamento-estatístico.html#cb11-105" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_curve</span>(</span>
+<span id="cb11-106"><a href="pensamento-estatístico.html#cb11-106" tabindex="-1"></a>    <span class="at">data =</span> setas_1,</span>
+<span id="cb11-107"><a href="pensamento-estatístico.html#cb11-107" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb11-108"><a href="pensamento-estatístico.html#cb11-108" tabindex="-1"></a>      <span class="at">x =</span> x_pop,</span>
+<span id="cb11-109"><a href="pensamento-estatístico.html#cb11-109" tabindex="-1"></a>      <span class="at">y =</span> y_pop,</span>
+<span id="cb11-110"><a href="pensamento-estatístico.html#cb11-110" tabindex="-1"></a>      <span class="at">xend =</span> x_sample,</span>
+<span id="cb11-111"><a href="pensamento-estatístico.html#cb11-111" tabindex="-1"></a>      <span class="at">yend =</span> y_sample</span>
+<span id="cb11-112"><a href="pensamento-estatístico.html#cb11-112" tabindex="-1"></a>    ),</span>
+<span id="cb11-113"><a href="pensamento-estatístico.html#cb11-113" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)),</span>
+<span id="cb11-114"><a href="pensamento-estatístico.html#cb11-114" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkgray&quot;</span>,</span>
+<span id="cb11-115"><a href="pensamento-estatístico.html#cb11-115" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.7</span>,</span>
+<span id="cb11-116"><a href="pensamento-estatístico.html#cb11-116" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="sc">-</span><span class="fl">0.2</span></span>
+<span id="cb11-117"><a href="pensamento-estatístico.html#cb11-117" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-118"><a href="pensamento-estatístico.html#cb11-118" tabindex="-1"></a>  <span class="co"># Setas: amostra → subamostra</span></span>
+<span id="cb11-119"><a href="pensamento-estatístico.html#cb11-119" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_curve</span>(</span>
+<span id="cb11-120"><a href="pensamento-estatístico.html#cb11-120" tabindex="-1"></a>    <span class="at">data =</span> setas_2,</span>
+<span id="cb11-121"><a href="pensamento-estatístico.html#cb11-121" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb11-122"><a href="pensamento-estatístico.html#cb11-122" tabindex="-1"></a>      <span class="at">x =</span> x_sample,</span>
+<span id="cb11-123"><a href="pensamento-estatístico.html#cb11-123" tabindex="-1"></a>      <span class="at">y =</span> y_sample,</span>
+<span id="cb11-124"><a href="pensamento-estatístico.html#cb11-124" tabindex="-1"></a>      <span class="at">xend =</span> x_sub,</span>
+<span id="cb11-125"><a href="pensamento-estatístico.html#cb11-125" tabindex="-1"></a>      <span class="at">yend =</span> y_sub</span>
+<span id="cb11-126"><a href="pensamento-estatístico.html#cb11-126" tabindex="-1"></a>    ),</span>
+<span id="cb11-127"><a href="pensamento-estatístico.html#cb11-127" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)),</span>
+<span id="cb11-128"><a href="pensamento-estatístico.html#cb11-128" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkgray&quot;</span>,</span>
+<span id="cb11-129"><a href="pensamento-estatístico.html#cb11-129" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.7</span>,</span>
+<span id="cb11-130"><a href="pensamento-estatístico.html#cb11-130" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="fl">0.2</span></span>
+<span id="cb11-131"><a href="pensamento-estatístico.html#cb11-131" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-132"><a href="pensamento-estatístico.html#cb11-132" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb11-133"><a href="pensamento-estatístico.html#cb11-133" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_void</span>()</span></code></pre></div>
+</details>
+</div>
+<div id="superamostragem-1" class="section level2 unnumbered unlisted hasAnchor">
+<h2>Superamostragem<a href="pensamento-estatístico.html#superamostragem-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="pensamento-estatístico.html#cb12-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
+<span id="cb12-2"><a href="pensamento-estatístico.html#cb12-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb12-3"><a href="pensamento-estatístico.html#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="pensamento-estatístico.html#cb12-4" tabindex="-1"></a><span class="co"># Tamanhos</span></span>
+<span id="cb12-5"><a href="pensamento-estatístico.html#cb12-5" tabindex="-1"></a>pop_n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb12-6"><a href="pensamento-estatístico.html#cb12-6" tabindex="-1"></a>sample_n <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb12-7"><a href="pensamento-estatístico.html#cb12-7" tabindex="-1"></a>supersample_n <span class="ot">&lt;-</span> <span class="dv">30</span>  <span class="co"># maior que a amostra</span></span>
+<span id="cb12-8"><a href="pensamento-estatístico.html#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="pensamento-estatístico.html#cb12-9" tabindex="-1"></a><span class="co"># Raio dos círculos</span></span>
+<span id="cb12-10"><a href="pensamento-estatístico.html#cb12-10" tabindex="-1"></a>radius_pop <span class="ot">&lt;-</span> <span class="fu">runif</span>(pop_n, <span class="fl">0.5</span>, <span class="fl">2.5</span>)</span>
+<span id="cb12-11"><a href="pensamento-estatístico.html#cb12-11" tabindex="-1"></a>radius_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(sample_n, <span class="fl">0.5</span>, <span class="fl">1.5</span>)</span>
+<span id="cb12-12"><a href="pensamento-estatístico.html#cb12-12" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="pensamento-estatístico.html#cb12-13" tabindex="-1"></a><span class="co"># Ângulos para população e amostra</span></span>
+<span id="cb12-14"><a href="pensamento-estatístico.html#cb12-14" tabindex="-1"></a>angle_pop <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> pop_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb12-15"><a href="pensamento-estatístico.html#cb12-15" tabindex="-1"></a>angle_sample <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> sample_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb12-16"><a href="pensamento-estatístico.html#cb12-16" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="pensamento-estatístico.html#cb12-17" tabindex="-1"></a><span class="co"># População (esquerda)</span></span>
+<span id="cb12-18"><a href="pensamento-estatístico.html#cb12-18" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-19"><a href="pensamento-estatístico.html#cb12-19" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>pop_n,</span>
+<span id="cb12-20"><a href="pensamento-estatístico.html#cb12-20" tabindex="-1"></a>  <span class="at">x_pop =</span> <span class="fu">cos</span>(angle_pop) <span class="sc">*</span> radius_pop <span class="sc">-</span> <span class="dv">6</span>,</span>
+<span id="cb12-21"><a href="pensamento-estatístico.html#cb12-21" tabindex="-1"></a>  <span class="at">y_pop =</span> <span class="fu">sin</span>(angle_pop) <span class="sc">*</span> radius_pop,</span>
+<span id="cb12-22"><a href="pensamento-estatístico.html#cb12-22" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
+<span id="cb12-23"><a href="pensamento-estatístico.html#cb12-23" tabindex="-1"></a>)</span>
+<span id="cb12-24"><a href="pensamento-estatístico.html#cb12-24" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="pensamento-estatístico.html#cb12-25" tabindex="-1"></a><span class="co"># Amostra (centro) – amostragem aleatória da população</span></span>
+<span id="cb12-26"><a href="pensamento-estatístico.html#cb12-26" tabindex="-1"></a>sample_ids <span class="ot">&lt;-</span> <span class="fu">sample</span>(pop_df<span class="sc">$</span>id, sample_n)</span>
+<span id="cb12-27"><a href="pensamento-estatístico.html#cb12-27" tabindex="-1"></a>sample_df <span class="ot">&lt;-</span> pop_df <span class="sc">%&gt;%</span></span>
+<span id="cb12-28"><a href="pensamento-estatístico.html#cb12-28" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(id <span class="sc">%in%</span> sample_ids) <span class="sc">%&gt;%</span></span>
+<span id="cb12-29"><a href="pensamento-estatístico.html#cb12-29" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb12-30"><a href="pensamento-estatístico.html#cb12-30" tabindex="-1"></a>    <span class="at">angle =</span> angle_sample,</span>
+<span id="cb12-31"><a href="pensamento-estatístico.html#cb12-31" tabindex="-1"></a>    <span class="at">x_sample =</span> <span class="fu">cos</span>(angle_sample) <span class="sc">*</span> radius_sample,</span>
+<span id="cb12-32"><a href="pensamento-estatístico.html#cb12-32" tabindex="-1"></a>    <span class="at">y_sample =</span> <span class="fu">sin</span>(angle_sample) <span class="sc">*</span> radius_sample,</span>
+<span id="cb12-33"><a href="pensamento-estatístico.html#cb12-33" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
+<span id="cb12-34"><a href="pensamento-estatístico.html#cb12-34" tabindex="-1"></a>  )</span>
+<span id="cb12-35"><a href="pensamento-estatístico.html#cb12-35" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="pensamento-estatístico.html#cb12-36" tabindex="-1"></a><span class="co"># Superamostra (direita) – reamostragem com reposição da amostra</span></span>
+<span id="cb12-37"><a href="pensamento-estatístico.html#cb12-37" tabindex="-1"></a>angle_supersample <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> supersample_n <span class="sc">+</span> <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb12-38"><a href="pensamento-estatístico.html#cb12-38" tabindex="-1"></a>radius_supersample <span class="ot">&lt;-</span> <span class="fu">runif</span>(supersample_n, <span class="fl">0.5</span>, <span class="dv">1</span>)</span>
+<span id="cb12-39"><a href="pensamento-estatístico.html#cb12-39" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="pensamento-estatístico.html#cb12-40" tabindex="-1"></a>supersample_df <span class="ot">&lt;-</span> sample_df <span class="sc">%&gt;%</span></span>
+<span id="cb12-41"><a href="pensamento-estatístico.html#cb12-41" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">slice_sample</span>(<span class="at">n =</span> supersample_n, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-42"><a href="pensamento-estatístico.html#cb12-42" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb12-43"><a href="pensamento-estatístico.html#cb12-43" tabindex="-1"></a>    <span class="at">angle =</span> angle_supersample,</span>
+<span id="cb12-44"><a href="pensamento-estatístico.html#cb12-44" tabindex="-1"></a>    <span class="at">radius =</span> radius_supersample,</span>
+<span id="cb12-45"><a href="pensamento-estatístico.html#cb12-45" tabindex="-1"></a>    <span class="at">x_sub =</span> <span class="fu">cos</span>(angle) <span class="sc">*</span> radius <span class="sc">+</span> <span class="dv">6</span>,</span>
+<span id="cb12-46"><a href="pensamento-estatístico.html#cb12-46" tabindex="-1"></a>    <span class="at">y_sub =</span> <span class="fu">sin</span>(angle) <span class="sc">*</span> radius,</span>
+<span id="cb12-47"><a href="pensamento-estatístico.html#cb12-47" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;./images/person.svg&quot;</span></span>
+<span id="cb12-48"><a href="pensamento-estatístico.html#cb12-48" tabindex="-1"></a>  )</span>
+<span id="cb12-49"><a href="pensamento-estatístico.html#cb12-49" tabindex="-1"></a></span>
+<span id="cb12-50"><a href="pensamento-estatístico.html#cb12-50" tabindex="-1"></a><span class="co"># Setas população → amostra</span></span>
+<span id="cb12-51"><a href="pensamento-estatístico.html#cb12-51" tabindex="-1"></a>setas_1 <span class="ot">&lt;-</span> sample_df <span class="sc">%&gt;%</span></span>
+<span id="cb12-52"><a href="pensamento-estatístico.html#cb12-52" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, x_pop, y_pop, x_sample, y_sample)</span>
+<span id="cb12-53"><a href="pensamento-estatístico.html#cb12-53" tabindex="-1"></a></span>
+<span id="cb12-54"><a href="pensamento-estatístico.html#cb12-54" tabindex="-1"></a><span class="co"># Setas amostra → superamostra</span></span>
+<span id="cb12-55"><a href="pensamento-estatístico.html#cb12-55" tabindex="-1"></a>setas_2 <span class="ot">&lt;-</span> supersample_df <span class="sc">%&gt;%</span></span>
+<span id="cb12-56"><a href="pensamento-estatístico.html#cb12-56" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, x_sample, y_sample, x_sub, y_sub)</span>
+<span id="cb12-57"><a href="pensamento-estatístico.html#cb12-57" tabindex="-1"></a></span>
+<span id="cb12-58"><a href="pensamento-estatístico.html#cb12-58" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb12-59"><a href="pensamento-estatístico.html#cb12-59" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb12-60"><a href="pensamento-estatístico.html#cb12-60" tabindex="-1"></a>  <span class="co"># Círculo da população</span></span>
+<span id="cb12-61"><a href="pensamento-estatístico.html#cb12-61" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="dv">6</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">3</span>),</span>
+<span id="cb12-62"><a href="pensamento-estatístico.html#cb12-62" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb12-63"><a href="pensamento-estatístico.html#cb12-63" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-64"><a href="pensamento-estatístico.html#cb12-64" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> pop_df,</span>
+<span id="cb12-65"><a href="pensamento-estatístico.html#cb12-65" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_pop, <span class="at">y =</span> y_pop, <span class="at">image =</span> label),</span>
+<span id="cb12-66"><a href="pensamento-estatístico.html#cb12-66" tabindex="-1"></a>                      <span class="at">size =</span> <span class="fl">0.07</span>) <span class="sc">+</span></span>
+<span id="cb12-67"><a href="pensamento-estatístico.html#cb12-67" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb12-68"><a href="pensamento-estatístico.html#cb12-68" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb12-69"><a href="pensamento-estatístico.html#cb12-69" tabindex="-1"></a>    <span class="at">x =</span> <span class="sc">-</span><span class="dv">6</span>,</span>
+<span id="cb12-70"><a href="pensamento-estatístico.html#cb12-70" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">3.5</span>,</span>
+<span id="cb12-71"><a href="pensamento-estatístico.html#cb12-71" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;População&quot;</span>,</span>
+<span id="cb12-72"><a href="pensamento-estatístico.html#cb12-72" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb12-73"><a href="pensamento-estatístico.html#cb12-73" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb12-74"><a href="pensamento-estatístico.html#cb12-74" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-75"><a href="pensamento-estatístico.html#cb12-75" tabindex="-1"></a>  <span class="co"># Círculo da amostra</span></span>
+<span id="cb12-76"><a href="pensamento-estatístico.html#cb12-76" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">0</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">2</span>),</span>
+<span id="cb12-77"><a href="pensamento-estatístico.html#cb12-77" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb12-78"><a href="pensamento-estatístico.html#cb12-78" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-79"><a href="pensamento-estatístico.html#cb12-79" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> sample_df,</span>
+<span id="cb12-80"><a href="pensamento-estatístico.html#cb12-80" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_sample, <span class="at">y =</span> y_sample, <span class="at">image =</span> label),</span>
+<span id="cb12-81"><a href="pensamento-estatístico.html#cb12-81" tabindex="-1"></a>                      <span class="at">size =</span> <span class="fl">0.07</span>) <span class="sc">+</span></span>
+<span id="cb12-82"><a href="pensamento-estatístico.html#cb12-82" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb12-83"><a href="pensamento-estatístico.html#cb12-83" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb12-84"><a href="pensamento-estatístico.html#cb12-84" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">0</span>,</span>
+<span id="cb12-85"><a href="pensamento-estatístico.html#cb12-85" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">2.5</span>,</span>
+<span id="cb12-86"><a href="pensamento-estatístico.html#cb12-86" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Amostra&quot;</span>,</span>
+<span id="cb12-87"><a href="pensamento-estatístico.html#cb12-87" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb12-88"><a href="pensamento-estatístico.html#cb12-88" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb12-89"><a href="pensamento-estatístico.html#cb12-89" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-90"><a href="pensamento-estatístico.html#cb12-90" tabindex="-1"></a>  <span class="co"># Círculo da superamostra</span></span>
+<span id="cb12-91"><a href="pensamento-estatístico.html#cb12-91" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">6</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="fl">2.3</span>),</span>
+<span id="cb12-92"><a href="pensamento-estatístico.html#cb12-92" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb12-93"><a href="pensamento-estatístico.html#cb12-93" tabindex="-1"></a>                       <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-94"><a href="pensamento-estatístico.html#cb12-94" tabindex="-1"></a>  ggimage<span class="sc">::</span><span class="fu">geom_image</span>(<span class="at">data =</span> supersample_df,</span>
+<span id="cb12-95"><a href="pensamento-estatístico.html#cb12-95" tabindex="-1"></a>                      ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x_sub, <span class="at">y =</span> y_sub, <span class="at">image =</span> label),</span>
+<span id="cb12-96"><a href="pensamento-estatístico.html#cb12-96" tabindex="-1"></a>                      <span class="at">size =</span> <span class="fl">0.07</span>) <span class="sc">+</span></span>
+<span id="cb12-97"><a href="pensamento-estatístico.html#cb12-97" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb12-98"><a href="pensamento-estatístico.html#cb12-98" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb12-99"><a href="pensamento-estatístico.html#cb12-99" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">6</span>,</span>
+<span id="cb12-100"><a href="pensamento-estatístico.html#cb12-100" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">2.8</span>,</span>
+<span id="cb12-101"><a href="pensamento-estatístico.html#cb12-101" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Superamostra&quot;</span>,</span>
+<span id="cb12-102"><a href="pensamento-estatístico.html#cb12-102" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb12-103"><a href="pensamento-estatístico.html#cb12-103" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span></span>
+<span id="cb12-104"><a href="pensamento-estatístico.html#cb12-104" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-105"><a href="pensamento-estatístico.html#cb12-105" tabindex="-1"></a>  <span class="co"># Setas: população → amostra</span></span>
+<span id="cb12-106"><a href="pensamento-estatístico.html#cb12-106" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_curve</span>(</span>
+<span id="cb12-107"><a href="pensamento-estatístico.html#cb12-107" tabindex="-1"></a>    <span class="at">data =</span> setas_1,</span>
+<span id="cb12-108"><a href="pensamento-estatístico.html#cb12-108" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb12-109"><a href="pensamento-estatístico.html#cb12-109" tabindex="-1"></a>      <span class="at">x =</span> x_pop,</span>
+<span id="cb12-110"><a href="pensamento-estatístico.html#cb12-110" tabindex="-1"></a>      <span class="at">y =</span> y_pop,</span>
+<span id="cb12-111"><a href="pensamento-estatístico.html#cb12-111" tabindex="-1"></a>      <span class="at">xend =</span> x_sample,</span>
+<span id="cb12-112"><a href="pensamento-estatístico.html#cb12-112" tabindex="-1"></a>      <span class="at">yend =</span> y_sample</span>
+<span id="cb12-113"><a href="pensamento-estatístico.html#cb12-113" tabindex="-1"></a>    ),</span>
+<span id="cb12-114"><a href="pensamento-estatístico.html#cb12-114" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)),</span>
+<span id="cb12-115"><a href="pensamento-estatístico.html#cb12-115" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkgray&quot;</span>,</span>
+<span id="cb12-116"><a href="pensamento-estatístico.html#cb12-116" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.7</span>,</span>
+<span id="cb12-117"><a href="pensamento-estatístico.html#cb12-117" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="sc">-</span><span class="fl">0.2</span></span>
+<span id="cb12-118"><a href="pensamento-estatístico.html#cb12-118" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-119"><a href="pensamento-estatístico.html#cb12-119" tabindex="-1"></a>  <span class="co"># Setas: amostra → superamostra</span></span>
+<span id="cb12-120"><a href="pensamento-estatístico.html#cb12-120" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_curve</span>(</span>
+<span id="cb12-121"><a href="pensamento-estatístico.html#cb12-121" tabindex="-1"></a>    <span class="at">data =</span> setas_2,</span>
+<span id="cb12-122"><a href="pensamento-estatístico.html#cb12-122" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb12-123"><a href="pensamento-estatístico.html#cb12-123" tabindex="-1"></a>      <span class="at">x =</span> x_sample,</span>
+<span id="cb12-124"><a href="pensamento-estatístico.html#cb12-124" tabindex="-1"></a>      <span class="at">y =</span> y_sample,</span>
+<span id="cb12-125"><a href="pensamento-estatístico.html#cb12-125" tabindex="-1"></a>      <span class="at">xend =</span> x_sub,</span>
+<span id="cb12-126"><a href="pensamento-estatístico.html#cb12-126" tabindex="-1"></a>      <span class="at">yend =</span> y_sub</span>
+<span id="cb12-127"><a href="pensamento-estatístico.html#cb12-127" tabindex="-1"></a>    ),</span>
+<span id="cb12-128"><a href="pensamento-estatístico.html#cb12-128" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;cm&quot;</span>)),</span>
+<span id="cb12-129"><a href="pensamento-estatístico.html#cb12-129" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkgray&quot;</span>,</span>
+<span id="cb12-130"><a href="pensamento-estatístico.html#cb12-130" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.7</span>,</span>
+<span id="cb12-131"><a href="pensamento-estatístico.html#cb12-131" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="fl">0.2</span></span>
+<span id="cb12-132"><a href="pensamento-estatístico.html#cb12-132" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-133"><a href="pensamento-estatístico.html#cb12-133" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb12-134"><a href="pensamento-estatístico.html#cb12-134" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_void</span>()</span></code></pre></div>
 </details>
 </div>
 </div>
