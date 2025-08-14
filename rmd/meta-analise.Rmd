@@ -8,19 +8,169 @@
 
 ### O que é meta-análise?
 
--   .[@REF]
+-   Meta-análise é um método estatístico que combina quantitativamente os resultados de múltiplos estudos independentes sobre uma mesma questão de pesquisa, aumentando o poder estatístico e a precisão das estimativas de efeito.[@borenstein2010]
+
+-   Meta-análise sintetiza evidências considerando o peso de cada estudo (geralmente inversamente proporcional à variância) e permite avaliar a consistência dos resultados, identificar fontes de heterogeneidade e estimar um efeito global.[@borenstein2010]
+
+<br>
+
+## Modelos de meta-análise
+
+-   **Modelo de efeitos fixos**: assume que todos os estudos avaliam o mesmo efeito verdadeiro, e a variação observada é apenas devido ao erro de amostragem. É adequado quando os estudos são homogêneos e as diferenças entre eles são pequenas.[@borenstein2010]
+
+-   **Modelo de efeitos aleatórios**: assume que os estudos avaliam efeitos verdadeiros diferentes, com uma distribuição normal. É mais apropriado quando há heterogeneidade entre os estudos, pois considera a variação entre eles além do erro de amostragem.[@borenstein2010]
+
+-   **Modelo de efeitos de rede**: estende a meta-análise para comparar múltiplas intervenções simultaneamente, mesmo que não tenham sido comparadas diretamente em estudos. É útil para avaliar a eficácia relativa de várias intervenções.[@REF]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *metagear*[@metagear] fornece a função [*plot_PRISMA*](https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA) para gerar o fluxograma de uma revisão sistemática de acordo com o *Preferred Reporting Items for Systematic Reviews and Meta-Analyses*[@Moher2015].
+O pacote *metafor*[@metafor] fornece a função [*forest*](https://cran.r-project.org/web/packages/metafor/index.html) para criar figuras tipo *forest plot*.
 :::
 
 <br>
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *PRISMA2020*[@PRISMA2020] fornece a função [*PRISMA_flowdiagram*](https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram) para elaboração do fluxograma de revisões sistemáticas no formato padrão.
-:::
+```{r ma-comparacao-efeitos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Comparação entre modelos de efeito fixo e aleatório com 10 ensaios clínicos simulados."}
+# Reprodutibilidade
+set.seed(123)
+
+# Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)
+k   <- 10
+n_t <- sample(30:200, k, replace = TRUE)  # tamanho do grupo Tratamento
+n_c <- sample(30:200, k, replace = TRUE)  # tamanho do grupo Controle
+
+# Médias e desvios-padrão simulados
+mu_c <- rnorm(k, mean = 0.00, sd = 0.40)
+mu_t <- mu_c + rnorm(k, mean = 0.30, sd = 0.15)  # efeito médio positivo para Tratamento
+sd_c <- runif(k, min = 0.6, max = 1.4)
+sd_t <- runif(k, min = 0.6, max = 1.4)
+
+dat <- data.frame(
+  study_id = paste0("Trial_", seq_len(k)),
+  n_t      = n_t,
+  n_c      = n_c,
+  mean_t   = mu_t,
+  mean_c   = mu_c,
+  sd_t     = sd_t,
+  sd_c     = sd_c,
+  stringsAsFactors = FALSE
+)
+
+# Calcular SMD (Hedges g) com escalc()
+# measure = "SMD" usa a correção de Hedges por padrão (J)
+es <- metafor::escalc(
+  measure = "SMD",
+  m1i = dat$mean_t,
+  sd1i = dat$sd_t,
+  n1i = dat$n_t,
+  m2i = dat$mean_c,
+  sd2i = dat$sd_c,
+  n2i = dat$n_c,
+  data = dat,
+  vtype = "UB"
+)
+
+# --- modelo de efeito fixo) ---
+res_fe <- metafor::rma.uni(yi = es$yi,
+                           vi = es$vi,
+                           method = "FE")
+
+# --- modelo de efeito aleatório (REML) ---
+res_re <- metafor::rma.uni(
+  yi = es$yi,
+  vi = es$vi,
+  method = "REML"  # método para efeito aleatório
+)
+tau2   <- base::as.numeric(res_re$tau2)
+fe_est <- base::as.numeric(res_fe$b)
+re_est <- base::as.numeric(res_re$b)
+
+# --- preparar dados (Trial_1 no topo) ---
+plotdat <- es %>%
+  dplyr::mutate(se = base::sqrt(vi),
+                study_id = base::factor(study_id, levels = study_id))
+
+# --- curvas para FE (sd = se) ---
+curve_FE <- plotdat %>%
+  dplyr::rowwise() %>%
+  dplyr::do({
+    m <- .$yi
+    s <- .$se
+    xseq <- base::seq(m - 4 * s, m + 4 * s, length.out = 200)
+    tibble::tibble(
+      study_id = .$study_id,
+      model = "FE",
+      x = xseq,
+      density = stats::dnorm(xseq, mean = m, sd = s)
+    )
+  }) %>%
+  dplyr::ungroup()
+
+# --- curvas para RE (sd = sqrt(se^2 + tau2)) ---
+curve_RE <- plotdat %>%
+  dplyr::rowwise() %>%
+  dplyr::do({
+    m <- .$yi
+    s <- base::sqrt(.$se^2 + tau2)
+    xseq <- base::seq(m - 4 * s, m + 4 * s, length.out = 200)
+    tibble::tibble(
+      study_id = .$study_id,
+      model = "RE",
+      x = xseq,
+      density = stats::dnorm(xseq, mean = m, sd = s)
+    )
+  }) %>%
+  dplyr::ungroup()
+
+# --- juntar e normalizar ---
+curve_data <- dplyr::bind_rows(curve_FE, curve_RE) %>%
+  dplyr::group_by(study_id, model) %>%
+  dplyr::mutate(density = density / base::max(density)) %>%
+  dplyr::ungroup()
+
+# --- paleta ---
+cols <- c(FE = "gray20", RE = "steelblue4")
+lts  <- c(FE = "solid", RE = "longdash")
+
+# --- plot ---
+ggplot2::ggplot(curve_data,
+                ggplot2::aes(
+                  x = x,
+                  y = density,
+                  color = model,
+                  linetype = model
+                )) +
+  ggplot2::geom_line(linewidth = 0.8) +
+  ggplot2::facet_wrap(
+    ~ study_id,
+    ncol = 1,
+    strip.position = "left",
+    scales = "free_y"
+  ) +
+  ggplot2::geom_vline(
+    xintercept = fe_est,
+    color = cols["FE"],
+    linetype = lts["FE"],
+    linewidth = 0.8
+  ) +
+  ggplot2::geom_vline(
+    xintercept = re_est,
+    color = cols["RE"],
+    linetype = lts["RE"],
+    linewidth = 0.8
+  ) +
+  ggplot2::scale_color_manual(values = cols, name = "Modelo") +
+  ggplot2::scale_linetype_manual(values = lts, name = "Modelo") +
+  ggplot2::labs(
+    title = "Curvas Normais por Estudo: FE vs RE",
+    subtitle = "Curvas por estudo (FE = σ; RE = √(σ² + τ²)). Linhas verticais: pooled FE (preta) e pooled RE (azul).",
+    x = "Hedges g",
+    y = "Densidade (normalizada)"
+  ) +
+  ggplot2::theme_minimal(base_size = 12) +
+  ggplot2::theme(strip.text.y.left = ggplot2::element_text(angle = 0),
+                 legend.position = "top")
+```
 
 <br>
 
@@ -64,9 +214,358 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*ma_r*](https://www.rdocume
 
 <br>
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psychmeta*[@psychmeta] fornece a função [*plot_forest*](https://www.rdocumentation.org/packages/psychmeta/versions/2.7.0/topics/plot_forest) para criar figuras tipo *forest plot*.
-:::
+## Interpretação do Forest Plot
+
+<br>
+
+### O que é um forest plot?
+
+-   Um forest plot é uma representação gráfica dos achados de uma meta-análise. Ele resume os resultados de estudos individuais e apresenta uma estimativa combinada do efeito, permitindo interpretação visual da magnitude, direção e significância estatística dos resultados.[@dettori2021]
+
+<br>
+
+```{r ma-efeito-fixo, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Forest plot de uma meta-análise de efeito fixo com 10 ensaios clínicos simulados."}
+# Reprodutibilidade
+set.seed(123)
+
+# Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)
+k   <- 10
+n_t <- sample(30:200, k, replace = TRUE)  # tamanho do grupo Tratamento
+n_c <- sample(30:200, k, replace = TRUE)  # tamanho do grupo Controle
+
+# Médias e desvios-padrão simulados
+mu_c <- rnorm(k, mean = 0.00, sd = 0.40)
+mu_t <- mu_c + rnorm(k, mean = 0.30, sd = 0.15)  # efeito médio positivo para Tratamento
+sd_c <- runif(k, min = 0.6, max = 1.4)
+sd_t <- runif(k, min = 0.6, max = 1.4)
+
+dat <- data.frame(
+  study_id = paste0("Trial_", seq_len(k)),
+  n_t      = n_t,
+  n_c      = n_c,
+  mean_t   = mu_t,
+  mean_c   = mu_c,
+  sd_t     = sd_t,
+  sd_c     = sd_c,
+  stringsAsFactors = FALSE
+)
+
+# Calcular SMD (Hedges g) com escalc()
+# measure = "SMD" usa a correção de Hedges por padrão (J)
+es <- metafor::escalc(
+  measure = "SMD",
+  m1i = dat$mean_t,
+  sd1i = dat$sd_t,
+  n1i = dat$n_t,
+  m2i = dat$mean_c,
+  sd2i = dat$sd_c,
+  n2i = dat$n_c,
+  data = dat,
+  vtype = "UB"
+)
+
+# Ajustar meta-análise de efeito fixo (variância inversa, sem tau^2)
+res_fe <- metafor::rma.uni(yi = es$yi,
+                           vi = es$vi,
+                           method = "FE")
+
+# Forest plot
+metafor::forest(
+  res_fe,
+  slab = es$study_id,
+  xlab = "Hedges g",
+  header = "Ensaios Clínicos",
+  cex = 0.9,
+  refline = 0,
+  mlab = "Modelo de Efeito Fixo"
+)
+```
+
+<br>
+
+```{r ma-efeito-aleatorio, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Forest plot de uma meta-análise de efeito aleatório com 10 ensaios clínicos simulados."}
+# Reprodutibilidade
+set.seed(123)
+
+# Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)
+k   <- 10
+n_t <- sample(30:200, k, replace = TRUE)  # tamanho do grupo Tratamento
+n_c <- sample(30:200, k, replace = TRUE)  # tamanho do grupo Controle
+
+# Médias e desvios-padrão simulados
+mu_c <- rnorm(k, mean = 0.00, sd = 0.40)
+mu_t <- mu_c + rnorm(k, mean = 0.30, sd = 0.15)  # efeito médio positivo para Tratamento
+sd_c <- runif(k, min = 0.6, max = 1.4)
+sd_t <- runif(k, min = 0.6, max = 1.4)
+
+dat <- data.frame(
+  study_id = paste0("Trial_", seq_len(k)),
+  n_t      = n_t,
+  n_c      = n_c,
+  mean_t   = mu_t,
+  mean_c   = mu_c,
+  sd_t     = sd_t,
+  sd_c     = sd_c,
+  stringsAsFactors = FALSE
+)
+
+# Calcular SMD (Hedges g) com escalc()
+# measure = "SMD" usa a correção de Hedges por padrão (J)
+es <- metafor::escalc(
+  measure = "SMD",
+  m1i = dat$mean_t,
+  sd1i = dat$sd_t,
+  n1i = dat$n_t,
+  m2i = dat$mean_c,
+  sd2i = dat$sd_c,
+  n2i = dat$n_c,
+  data = dat,
+  vtype = "UB"
+)
+
+# Ajustar meta-análise de efeito aleatório (REML)
+res_re <- metafor::rma.uni(
+  yi = es$yi,
+  vi = es$vi,
+  method = "REML"  # método para efeito aleatório
+)
+
+# Forest plot
+metafor::forest(
+  res_re,
+  slab = es$study_id,
+  xlab = "Hedges g",
+  header = "Ensaios Clínicos",
+  cex = 0.9,
+  refline = 0,
+  mlab = "Modelo de Efeito Aleatório (REML)"
+)
+```
+
+<br>
+
+### 2. Quais são as seis colunas básicas que um forest plot geralmente apresenta?
+
+-   As seis colunas básicas incluem: estudos incluídos (e subgrupos, se analisados); dados do grupo de intervenção, dados do grupo controle; peso de cada estudo; medida numérica do efeito; representação gráfica do efeito.[@dettori2021]
+
+<br>
+
+### Como diferenciar um desfecho binário de um contínuo em um forest plot?
+
+-   Em desfechos binários, são mostrados número de eventos e total da amostra, sendo o efeito medido por *risk ratio* ($RR$) ou *odds ratio* ($OR$).[@dettori2021]
+
+-   Em desfechos contínuos, apresentam-se médias, desvios-padrão e tamanhos amostrais, com o efeito medido pela diferença de médias.[@dettori2021]
+
+<br>
+
+### 4. O que representa o ponto central da caixa e o tamanho desta no gráfico?
+
+-   O ponto central indica a estimativa pontual do efeito (melhor estmativa para o efeito real).[@dettori2021]
+
+-   O tamanho da caixa é proporcional ao peso do estudo na meta-análise, geralmente maior para estudos com amostras maiores.[@dettori2021]
+
+<br>
+
+### 5. Qual é o significado da linha vertical do “nenhum efeito”?
+
+-   É a linha de referência que indica efeito nulo.[@dettori2021]
+
+-   Para desfechos binários, corresponde ao valor 1 ($RR$ ou $OR$ = 1).[@dettori2021]
+
+-   Para desfechos contínuos, corresponde ao valor 0 (diferença de médias = 0).[@dettori2021]
+
+- Se o intervalo de confiança de um estudo ou do resultado combinado cruza essa linha, o resultado não é estatisticamente significativo.[@dettori2021]
+
+<br>
+
+### 6. Como interpretar o diamante na parte inferior do forest plot?
+
+-   O diamante representa o efeito combinado dos estudos incluídos.[@dettori2021]
+
+-   O ponto central do diamante é a estimativa global.[@dettori2021]
+
+-   A largura do diamante representa o intervalo de confiança de 95% para o efeito combinado.[@dettori2021]
+
+<br>
+
+### Como a heterogeneidade pode ser avaliada no forest plot?
+
+-   A variabilidade nos resultados dos estudos incluídos é avaliada pela sobreposição dos intervalos de confiança dos estudos; pelo teste do qui-quadrado ($chi^2$) e pelo valor de $I^{2}$.[@dettori2021]
+
+<br>
+
+### Quais são as interpretações usuais para os valores de $I^{2}$?
+
+-   0% a 40%: pode não ser importante; 30% a 60%: heterogeneidade moderada; 50% a 90%: heterogeneidade substancial; 75% a 100%: heterogeneidade considerável.[@dettori2021]
+
+<br>
+
+## Viés de publicação em meta-análises
+
+<br>
+
+### O que é viés de publicação?
+
+-   O viés de publicação ocorre quando estudos com resultados não significativos ou contrários à hipótese tendem a não ser publicados, afetando a estimativa final da meta-análise e podendo levar a conclusões incorretas.[@song2000]
+
+<br>
+
+### Quais métodos podem ser usados para identificar viés de publicação?
+
+-   O método mais simples é o **funnel plot**, que representa a estimativa de efeito de cada estudo em função de sua precisão ($1/SE$).[@egger1997]
+
+-   Na ausência de viés, espera-se uma distribuição simétrica (“forma de funil”). Assimetria pode indicar viés de publicação, heterogeneidade entre estudos ou efeitos de tamanho de estudo (*small-study effects*).[@egger1997]
+
+-   Para *odds ratios* ($OR$), a correlação entre $ln(OR)$ e seu erro padrão pode gerar assimetria mesmo sem viés, por isso recomenda-se, nesses casos, plotar em função do tamanho amostral.[@peters2006]
+
+<br>
+
+### O que é um gráfico de funil (*funnel plot*)?
+
+-   É um gráfico de dispersão que relaciona a estimativa de efeito de cada estudo com uma medida de seu tamanho ou precisão (por exemplo, erro-padrão no eixo vertical, em escala invertida). Em condições ideais (ausência de viés e heterogeneidade), os estudos se distribuem de forma simétrica, formando um “funil invertido”.[@sterne2011]
+
+<br>
+
+```{r ma-funnel-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de funil de meta-análise com 10 ensaios clínicos simulados."}
+# Reprodutibilidade
+set.seed(123)
+
+# Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)
+k   <- 10
+n_t <- sample(30:200, k, replace = TRUE)  # tamanho do grupo Tratamento
+n_c <- sample(30:200, k, replace = TRUE)  # tamanho do grupo Controle
+
+# Médias e desvios-padrão simulados
+mu_c <- rnorm(k, mean = 0.00, sd = 0.40)
+mu_t <- mu_c + rnorm(k, mean = 0.30, sd = 0.15)  # efeito médio positivo para Tratamento
+sd_c <- runif(k, min = 0.6, max = 1.4)
+sd_t <- runif(k, min = 0.6, max = 1.4)
+
+dat <- data.frame(
+  study_id = paste0("Trial_", seq_len(k)),
+  n_t      = n_t,
+  n_c      = n_c,
+  mean_t   = mu_t,
+  mean_c   = mu_c,
+  sd_t     = sd_t,
+  sd_c     = sd_c,
+  stringsAsFactors = FALSE
+)
+
+# Calcular SMD (Hedges g) com escalc()
+# measure = "SMD" usa a correção de Hedges por padrão (J)
+es <- metafor::escalc(
+  measure = "SMD",
+  m1i = dat$mean_t,
+  sd1i = dat$sd_t,
+  n1i = dat$n_t,
+  m2i = dat$mean_c,
+  sd2i = dat$sd_c,
+  n2i = dat$n_c,
+  data = dat,
+  vtype = "UB"
+)
+
+# --- modelo de efeito fixo) ---
+res_fe <- metafor::rma.uni(yi = es$yi,
+                           vi = es$vi,
+                           method = "FE")
+
+# --- modelo de efeito aleatório (REML) ---
+res_re <- metafor::rma.uni(
+  yi = es$yi,
+  vi = es$vi,
+  method = "REML"  # método para efeito aleatório
+)
+tau2   <- base::as.numeric(res_re$tau2)
+fe_est <- base::as.numeric(res_fe$b)
+re_est <- base::as.numeric(res_re$b)
+
+# Funnel com “contour enhancement” para significância
+#    As áreas sombreadas ajudam a distinguir assimetria por viés vs. heterogeneidade/azar.
+metafor::funnel(
+  res_re,
+  xlab   = "Hedges g (SMD)",
+  ylab   = "Precisão (1/SE)",
+  yaxis  = "seinv",
+  level  = c(90, 95, 99),   # contornos de significância
+  refline = as.numeric(res_re$b),
+  back   = "gray95",        # fundo suave
+  shade  = c("white", "gray90", "gray80")
+)
+
+# Adiciona rótulos dos estudos
+# A função funnel() devolve um gráfico, mas não retorna coordenadas,
+# então usamos os próprios yi e vi para calcular posições
+with(es, {
+  precisao <- 1 / sqrt(vi) # eixo vertical (seinv)
+  text(x = yi, y = precisao, labels = dat$study_id, pos = 4, cex = 0.7)
+})
+```
+
+<br>
+
+### A assimetria do *funnel plot* indica sempre viés de publicação?
+
+-   Viéses de relato (*reporting biases*), como viés de publicação, viés de linguagem ou de citação.[@sterne2011]
+
+-   Diferenças metodológicas entre estudos pequenos e grandes.[@sterne2011]
+
+-   Heterogeneidade verdadeira (diferença real no efeito conforme o tamanho ou o contexto do estudo).[@sterne2011]
+
+-   Artefatos estatísticos ou mero acaso.[@sterne2011]
+
+<br>
+
+### O que é *trim and fill*?
+
+-   O método *trim and fill* “apara” (trim) os estudos que causam assimetria no funnel plot, estima o número de estudos possivelmente ausentes (não publicados) e “preenche” (fill) o gráfico com esses estudos simulados, recalculando o efeito combinado.[@duval2000]
+
+-   O método assume que a assimetria é causada unicamente por viés de publicação, podendo levar a conclusões equivocadas quando há outras causas, como heterogeneidade. [@duval2000]
+
+<br>
+
+### O que é o teste de Egger?
+
+-   É um teste estatístico amplamente utilizado que avalia a relação entre o efeito padronizado ($efeito/SE$) e a precisão ($1/SE$).[@egger1997]
+
+-   No entanto, para meta-análises com $OR$, apresenta taxas de erro tipo I excessivas, especialmente quando o efeito é grande ou há alta heterogeneidade.[@peters2006]
+
+<br>
+
+### O que é o teste de Peters?
+
+-   Uma regressão linear ponderada com $ln(OR)$ como variável dependente e o inverso do tamanho total da amostra como variável independente (modificação do teste de Macaskill).[@peters2006]
+
+-   Essa abordagem reduz a correlação entre $ln(OR)$ e seu $SE$, resultando em taxas de erro tipo I mais adequadas (\~10%) independentemente do tamanho do efeito, número de estudos ou heterogeneidade.[@peters2006]
+
+-   O teste de Peters é preferível ao teste de Egger quando o desfecho é expresso como OR, pois mantém taxas de erro tipo I adequadas e ainda apresenta poder comparável para detectar viés em condições de baixa heterogeneidade.[@peters2006]
+
+-   Em casos de alta heterogeneidade, o teste de Egger pode apresentar maior poder, mas sua alta taxa de falsos positivos compromete a interpretação.[@peters2006]
+
+<br>
+
+### Quais são as recomendações para testar a assimetria?
+
+-   Evitar testes quando há menos de 10 estudos, devido ao baixo poder estatístico.[@sterne2011]
+
+-   Inspecionar visualmente o *funnel plot* junto com os resultados dos testes.[@sterne2011]
+
+-   Para desfechos contínuos (diferença de médias), o teste de Egger pode ser usado.[@sterne2011]
+
+-   Para desfechos dicotômicos expressos como *odds ratio* ($OR$) com baixa heterogeneidade ($\tau^2 < 0,1$), considerar os testes de Harbord, Peters ou Rücker.[@sterne2011]
+
+-   Para desfechos dicotômicos expressos como *odds ratio*($OR$) com alta heterogeneidade ($\tau^2 > 0,1$), o teste de Rücker com transformação $arcsine$ é mais indicado.[@sterne2011]
+
+<br>
+
+### Como interpretar os resultados de testes de viés de publicação?
+
+-   Um resultado não significativo não garante ausência de viés.[@peters2006]
+
+-   Recomenda-se complementar com inspeção visual do *funnel plot* e considerar métodos adicionais como *trim and fill*.[@duval2000; @peters2006]
+
+-   Quando há suspeita de viés, discutir as implicações e interpretar o efeito combinado com cautela.[@peters2006]
 
 <br>
 
@@ -85,6 +584,18 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*plot_funnel*](https://www.
 -   Visite a rede *Enhancing the QUAlity and Transparency Of health Research* [EQUATOR Network](https://www.equator-network.org/) para encontrar diretrizes específicas para cada tipo de meta-análises.
 
     -   *The PRISMA 2020 statement: An updated guideline for reporting systematic reviews*:[@page2021] <https://www.equator-network.org/reporting-guidelines/prisma/>
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *metagear*[@metagear] fornece a função [*plot_PRISMA*](https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA) para gerar o fluxograma de uma revisão sistemática de acordo com o *Preferred Reporting Items for Systematic Reviews and Meta-Analyses*[@Moher2015].
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *PRISMA2020*[@PRISMA2020] fornece a função [*PRISMA_flowdiagram*](https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram) para elaboração do fluxograma de revisões sistemáticas no formato padrão.
+:::
 
 <br>
 

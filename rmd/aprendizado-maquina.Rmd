@@ -12,56 +12,52 @@
 
 <br>
 
+## Tipos de aprendizado
+
+<br>
+
+### O que é aprendizado supervisionado?
+
+-   .[@REF]
+
+<br>
+
+### O que é aprendizado não supervisionado?
+
+-   .[@REF]
+
+<br>
+
+### O que é aprendizado semi-supervisionado?
+
+-   .[@REF]
+
+<br>
+
+### O que é aprendizado por reforço?
+
+-   .[@REF]
+
+<br>
+
+### O que é aprendizado profundo?
+
+-   .[@REF]
+
+<br>
+
+## Principais algoritmos
+
+<br>
+
 ### Quais são os principais algoritmos de aprendizado de máquina?
 
--   Regressão linear: .[@REF]
-
--   Árvores de decisão: .[@REF]
-
--   Máquinas de vetores de suporte: .[@REF]
-
--   Regressão logística: .[@REF]
-
--   K-médias: .[@REF]
-
--   K-vizinhos mais próximos: .[@REF]
-
--   Redes neurais: .[@REF]
-
--   Florestas aleatórias: .[@REF]
-
--   Análise de componentes principais: .[@REF]
-
--   Naive Bayes: .[@REF]
-
-<br>
-
-## Aprendizado supervisionada
-
--   .[@REF]
-
-<br>
-
-## Aprendizado não-supervisionada
-
--   .[@REF]
-
-<br>
-
-## Aprendizado por reforço
-
--   .[@REF]
-
-<br>
-
-## Aprendizado profunda
-
--   .[@REF]
+-   Modelos de regressão não penalizados, modelos de regressão penalizados, modelos baseados em árvores, modelos baseados em vizinhos, redes neurais, máquinas de vetores de suporte, Naive Bayes e ensembles do tipo Superlearner.[@andaurnavarro2023]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *h2o*[@correctR] fornece funções construir modelos de aprendizado de máquina.
+O pacote *h2o*[\@correctR](https://cran.r-project.org/web/packages/h2o/index.html) fornece funções construir modelos de aprendizado de máquina.
 :::
 
 <br>
@@ -69,6 +65,56 @@ O pacote *h2o*[@correctR] fornece funções construir modelos de aprendizado de 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *correctR*[@correctR] fornece as funções [*kfold_ttest*](https://cloud.r-project.org/web/packages/correctR/correctR.pdf), [*repkfold_ttest*](https://cloud.r-project.org/web/packages/correctR/correctR.pdf) e [*resampled_ttest*](https://cloud.r-project.org/web/packages/correctR/correctR.pdf) para calcular estatística para comparação de modelos de aprendizado de máquina em amostras dependentes.
 :::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *caret*[\@caret](https://cran.r-project.org/web/packages/caret/index.html) fornece um conjunto de funções para pré-processamento, ajuste, avaliação e comparação de modelos de aprendizado de máquina.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.
+:::
+
+<br>
+
+## Desbalanceamento de classes
+
+<br>
+
+### O que é desbalanceamento de classes (*class imbalance*)?
+
+-   Ocorre quando as classes do desfecho (por exemplo, presença vs. ausência de um evento) não estão igualmente representadas nos dados de treinamento.[@REF]
+
+<br>
+
+### Por que o desbalanceamento é um problema?
+
+-   Modelos podem aprender a priorizar a classe mais frequente, obtendo alta acurácia global, mas baixo desempenho para a classe minoritária.[@REF]
+
+-   Isso pode comprometer métricas como sensibilidade, especificidade e, em alguns casos, a calibração.[@REF]
+
+<br>
+
+### Quais são as abordagens mais comuns para lidar com desbalanceamento de classes?
+
+-   Reamostragem aleatória: superamostragem da classe minoritária; subamostragem da classe majoritária).[@REF]
+
+-   Ajuste de pesos: penaliza mais os erros na classe menos frequente.[@REF]
+
+-   Alteração do limiar de decisão: muda o ponto de corte de probabilidade para otimizar métricas específicas.[@REF]
+
+<br>
+
+### Qual é o impacto do desbalanceamento de classes na calibração de modelos?
+
+-   Corrigir o desbalanceamento de classes nem sempre melhora a calibração e, em alguns casos, pode piorá-la.[@carriero2025]
+
+-   Em simulações computacionais, modelos sem correção tiveram calibração igual ou superior aos corrigidos.[@carriero2025]
+
+-   A piora observada foi caracterizada por superestimação do risco, nem sempre reversível com re-calibração.[@carriero2025]
 
 <br>
 
