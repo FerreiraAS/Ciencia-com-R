@@ -28,7 +28,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="modelos-1.html"/>
+<link rel="prev" href="análise-causal.html"/>
 <link rel="next" href="desempenho-diagnóstico.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -1114,6 +1114,11 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="39.3.1" data-path="rmd/apendice.html"><a href="#quais-s%C3%A3o-as-principais-recomenda%C3%A7%C3%B5es-para-relatar-causalidade"><i class="fa fa-check"></i><b>39.3.1</b> Quais são as principais recomendações para relatar causalidade?</a></li>
 </ul></li>
+<li class="chapter" data-level="39.4" data-path="rmd/apendice.html"><a href="#diagramas-ac%C3%ADclicos-direcionados-dags"><i class="fa fa-check"></i><b>39.4</b> Diagramas acíclicos direcionados (DAGs)</a>
+<ul>
+<li class="chapter" data-level="39.4.1" data-path="rmd/apendice.html"><a href="#o-que-s%C3%A3o-dags"><i class="fa fa-check"></i><b>39.4.1</b> O que são DAGs?</a></li>
+<li class="chapter" data-level="39.4.2" data-path="rmd/apendice.html"><a href="#quais-s%C3%A3o-os-padr%C3%B5es-causais-b%C3%A1sicos"><i class="fa fa-check"></i><b>39.4.2</b> Quais são os padrões causais básicos?</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="40" data-path="analise-qualitativa.html"><a href="analise-qualitativa.html"><i class="fa fa-check"></i><b>40</b> <strong>Análise qualitativa</strong></a>
 <ul>
@@ -1500,130 +1505,130 @@ div.csl-indent {
 <div id="características-6" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Características<a href="#caracter%C3%ADsticas-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="propriedades-psicométricas.html#cb111-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb111-2"><a href="propriedades-psicométricas.html#cb111-2" tabindex="-1"></a>cross.table.psico <span class="ot">&lt;-</span></span>
-<span id="cb111-3"><a href="propriedades-psicométricas.html#cb111-3" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
-<span id="cb111-4"><a href="propriedades-psicométricas.html#cb111-4" tabindex="-1"></a>    <span class="fu">c</span>(</span>
-<span id="cb111-5"><a href="propriedades-psicométricas.html#cb111-5" tabindex="-1"></a>      <span class="st">&#39;Adequado&#39;</span>, <span class="st">&#39;Inadequado&#39;</span>,</span>
-<span id="cb111-6"><a href="propriedades-psicométricas.html#cb111-6" tabindex="-1"></a>      <span class="st">&#39;Inadequado&#39;</span>, <span class="st">&#39;Inadequado&#39;</span></span>
-<span id="cb111-7"><a href="propriedades-psicométricas.html#cb111-7" tabindex="-1"></a>    ),</span>
-<span id="cb111-8"><a href="propriedades-psicométricas.html#cb111-8" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">2</span>,</span>
-<span id="cb111-9"><a href="propriedades-psicométricas.html#cb111-9" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">2</span>,</span>
-<span id="cb111-10"><a href="propriedades-psicométricas.html#cb111-10" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
-<span id="cb111-11"><a href="propriedades-psicométricas.html#cb111-11" tabindex="-1"></a>  )</span>
-<span id="cb111-12"><a href="propriedades-psicométricas.html#cb111-12" tabindex="-1"></a><span class="fu">rownames</span>(cross.table.psico) <span class="ot">&lt;-</span></span>
-<span id="cb111-13"><a href="propriedades-psicométricas.html#cb111-13" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Validade alta&quot;</span>, <span class="st">&quot;Validade baixa&quot;</span>)</span>
-<span id="cb111-14"><a href="propriedades-psicométricas.html#cb111-14" tabindex="-1"></a><span class="fu">colnames</span>(cross.table.psico) <span class="ot">&lt;-</span></span>
-<span id="cb111-15"><a href="propriedades-psicométricas.html#cb111-15" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Concordância alta&quot;</span>, <span class="st">&quot;Concordância baixa&quot;</span>)</span>
-<span id="cb111-16"><a href="propriedades-psicométricas.html#cb111-16" tabindex="-1"></a></span>
-<span id="cb111-17"><a href="propriedades-psicométricas.html#cb111-17" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb111-18"><a href="propriedades-psicométricas.html#cb111-18" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb111-19"><a href="propriedades-psicométricas.html#cb111-19" tabindex="-1"></a>  cross.table.psico,</span>
-<span id="cb111-20"><a href="propriedades-psicométricas.html#cb111-20" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb111-21"><a href="propriedades-psicométricas.html#cb111-21" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb111-22"><a href="propriedades-psicométricas.html#cb111-22" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb111-23"><a href="propriedades-psicométricas.html#cb111-23" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb111-24"><a href="propriedades-psicométricas.html#cb111-24" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb111-25"><a href="propriedades-psicométricas.html#cb111-25" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de confusão sobre propriedades psicométricas de instrumentos.&quot;</span></span>
-<span id="cb111-26"><a href="propriedades-psicométricas.html#cb111-26" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb111-27"><a href="propriedades-psicométricas.html#cb111-27" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb111-28"><a href="propriedades-psicométricas.html#cb111-28" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb111-29"><a href="propriedades-psicométricas.html#cb111-29" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb111-30"><a href="propriedades-psicométricas.html#cb111-30" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb111-31"><a href="propriedades-psicométricas.html#cb111-31" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb111-32"><a href="propriedades-psicométricas.html#cb111-32" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb111-33"><a href="propriedades-psicométricas.html#cb111-33" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>,</span>
-<span id="cb111-34"><a href="propriedades-psicométricas.html#cb111-34" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb111-35"><a href="propriedades-psicométricas.html#cb111-35" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb111-36"><a href="propriedades-psicométricas.html#cb111-36" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb111-37"><a href="propriedades-psicométricas.html#cb111-37" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table.psico)[<span class="dv">1</span>],</span>
-<span id="cb111-38"><a href="propriedades-psicométricas.html#cb111-38" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="propriedades-psicométricas.html#cb112-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb112-2"><a href="propriedades-psicométricas.html#cb112-2" tabindex="-1"></a>cross.table.psico <span class="ot">&lt;-</span></span>
+<span id="cb112-3"><a href="propriedades-psicométricas.html#cb112-3" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
+<span id="cb112-4"><a href="propriedades-psicométricas.html#cb112-4" tabindex="-1"></a>    <span class="fu">c</span>(</span>
+<span id="cb112-5"><a href="propriedades-psicométricas.html#cb112-5" tabindex="-1"></a>      <span class="st">&#39;Adequado&#39;</span>, <span class="st">&#39;Inadequado&#39;</span>,</span>
+<span id="cb112-6"><a href="propriedades-psicométricas.html#cb112-6" tabindex="-1"></a>      <span class="st">&#39;Inadequado&#39;</span>, <span class="st">&#39;Inadequado&#39;</span></span>
+<span id="cb112-7"><a href="propriedades-psicométricas.html#cb112-7" tabindex="-1"></a>    ),</span>
+<span id="cb112-8"><a href="propriedades-psicométricas.html#cb112-8" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb112-9"><a href="propriedades-psicométricas.html#cb112-9" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb112-10"><a href="propriedades-psicométricas.html#cb112-10" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
+<span id="cb112-11"><a href="propriedades-psicométricas.html#cb112-11" tabindex="-1"></a>  )</span>
+<span id="cb112-12"><a href="propriedades-psicométricas.html#cb112-12" tabindex="-1"></a><span class="fu">rownames</span>(cross.table.psico) <span class="ot">&lt;-</span></span>
+<span id="cb112-13"><a href="propriedades-psicométricas.html#cb112-13" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Validade alta&quot;</span>, <span class="st">&quot;Validade baixa&quot;</span>)</span>
+<span id="cb112-14"><a href="propriedades-psicométricas.html#cb112-14" tabindex="-1"></a><span class="fu">colnames</span>(cross.table.psico) <span class="ot">&lt;-</span></span>
+<span id="cb112-15"><a href="propriedades-psicométricas.html#cb112-15" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Concordância alta&quot;</span>, <span class="st">&quot;Concordância baixa&quot;</span>)</span>
+<span id="cb112-16"><a href="propriedades-psicométricas.html#cb112-16" tabindex="-1"></a></span>
+<span id="cb112-17"><a href="propriedades-psicométricas.html#cb112-17" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb112-18"><a href="propriedades-psicométricas.html#cb112-18" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb112-19"><a href="propriedades-psicométricas.html#cb112-19" tabindex="-1"></a>  cross.table.psico,</span>
+<span id="cb112-20"><a href="propriedades-psicométricas.html#cb112-20" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb112-21"><a href="propriedades-psicométricas.html#cb112-21" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb112-22"><a href="propriedades-psicométricas.html#cb112-22" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb112-23"><a href="propriedades-psicométricas.html#cb112-23" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb112-24"><a href="propriedades-psicométricas.html#cb112-24" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb112-25"><a href="propriedades-psicométricas.html#cb112-25" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de confusão sobre propriedades psicométricas de instrumentos.&quot;</span></span>
+<span id="cb112-26"><a href="propriedades-psicométricas.html#cb112-26" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb112-27"><a href="propriedades-psicométricas.html#cb112-27" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb112-28"><a href="propriedades-psicométricas.html#cb112-28" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb112-29"><a href="propriedades-psicométricas.html#cb112-29" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb112-30"><a href="propriedades-psicométricas.html#cb112-30" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb112-31"><a href="propriedades-psicométricas.html#cb112-31" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb112-32"><a href="propriedades-psicométricas.html#cb112-32" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb112-33"><a href="propriedades-psicométricas.html#cb112-33" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>,</span>
+<span id="cb112-34"><a href="propriedades-psicométricas.html#cb112-34" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb112-35"><a href="propriedades-psicométricas.html#cb112-35" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb112-36"><a href="propriedades-psicométricas.html#cb112-36" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb112-37"><a href="propriedades-psicométricas.html#cb112-37" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table.psico)[<span class="dv">1</span>],</span>
+<span id="cb112-38"><a href="propriedades-psicométricas.html#cb112-38" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
 </details>
 </div>
 <div id="concordância-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Concordância<a href="#concord%C3%A2ncia-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="propriedades-psicométricas.html#cb112-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb112-2"><a href="propriedades-psicométricas.html#cb112-2" tabindex="-1"></a>cross.table.kappa <span class="ot">&lt;-</span></span>
-<span id="cb112-3"><a href="propriedades-psicométricas.html#cb112-3" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
-<span id="cb112-4"><a href="propriedades-psicométricas.html#cb112-4" tabindex="-1"></a>    <span class="fu">c</span>(</span>
-<span id="cb112-5"><a href="propriedades-psicométricas.html#cb112-5" tabindex="-1"></a>      <span class="st">&#39;$a$&#39;</span>, <span class="st">&#39;$c$&#39;</span>, <span class="st">&#39;$e=a+c$&#39;</span>,</span>
-<span id="cb112-6"><a href="propriedades-psicométricas.html#cb112-6" tabindex="-1"></a>      <span class="st">&#39;$b$&#39;</span>, <span class="st">&#39;$d$&#39;</span>, <span class="st">&#39;$f=b+d$&#39;</span>,</span>
-<span id="cb112-7"><a href="propriedades-psicométricas.html#cb112-7" tabindex="-1"></a>      <span class="st">&#39;$g=a+b$&#39;</span>, <span class="st">&#39;$h=c+d$&#39;</span>, <span class="st">&#39;$N=a+b+c+d$&#39;</span></span>
-<span id="cb112-8"><a href="propriedades-psicométricas.html#cb112-8" tabindex="-1"></a>    ),</span>
-<span id="cb112-9"><a href="propriedades-psicométricas.html#cb112-9" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">3</span>,</span>
-<span id="cb112-10"><a href="propriedades-psicométricas.html#cb112-10" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">3</span>,</span>
-<span id="cb112-11"><a href="propriedades-psicométricas.html#cb112-11" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
-<span id="cb112-12"><a href="propriedades-psicométricas.html#cb112-12" tabindex="-1"></a>  )</span>
-<span id="cb112-13"><a href="propriedades-psicométricas.html#cb112-13" tabindex="-1"></a><span class="fu">rownames</span>(cross.table.kappa) <span class="ot">&lt;-</span></span>
-<span id="cb112-14"><a href="propriedades-psicométricas.html#cb112-14" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Teste positivo&quot;</span>, <span class="st">&quot;Teste negativo&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
-<span id="cb112-15"><a href="propriedades-psicométricas.html#cb112-15" tabindex="-1"></a><span class="fu">colnames</span>(cross.table.kappa) <span class="ot">&lt;-</span></span>
-<span id="cb112-16"><a href="propriedades-psicométricas.html#cb112-16" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Teste positivo&quot;</span>, <span class="st">&quot;Teste negativo&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
-<span id="cb112-17"><a href="propriedades-psicométricas.html#cb112-17" tabindex="-1"></a></span>
-<span id="cb112-18"><a href="propriedades-psicométricas.html#cb112-18" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb112-19"><a href="propriedades-psicométricas.html#cb112-19" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb112-20"><a href="propriedades-psicométricas.html#cb112-20" tabindex="-1"></a>  cross.table.kappa,</span>
-<span id="cb112-21"><a href="propriedades-psicométricas.html#cb112-21" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb112-22"><a href="propriedades-psicométricas.html#cb112-22" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb112-23"><a href="propriedades-psicométricas.html#cb112-23" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb112-24"><a href="propriedades-psicométricas.html#cb112-24" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb112-25"><a href="propriedades-psicométricas.html#cb112-25" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb112-26"><a href="propriedades-psicométricas.html#cb112-26" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de confusão 2x2 para análise de concordância de testes e variáveis dicotômicas.&quot;</span></span>
-<span id="cb112-27"><a href="propriedades-psicométricas.html#cb112-27" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb112-28"><a href="propriedades-psicométricas.html#cb112-28" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb112-29"><a href="propriedades-psicométricas.html#cb112-29" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb112-30"><a href="propriedades-psicométricas.html#cb112-30" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb112-31"><a href="propriedades-psicométricas.html#cb112-31" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb112-32"><a href="propriedades-psicométricas.html#cb112-32" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb112-33"><a href="propriedades-psicométricas.html#cb112-33" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb112-34"><a href="propriedades-psicométricas.html#cb112-34" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>,</span>
-<span id="cb112-35"><a href="propriedades-psicométricas.html#cb112-35" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb112-36"><a href="propriedades-psicométricas.html#cb112-36" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb112-37"><a href="propriedades-psicométricas.html#cb112-37" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb112-38"><a href="propriedades-psicométricas.html#cb112-38" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table.kappa)[<span class="dv">1</span>],</span>
-<span id="cb112-39"><a href="propriedades-psicométricas.html#cb112-39" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
-</details>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="propriedades-psicométricas.html#cb113-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb113-2"><a href="propriedades-psicométricas.html#cb113-2" tabindex="-1"></a>cross.table.kappa <span class="ot">&lt;-</span></span>
 <span id="cb113-3"><a href="propriedades-psicométricas.html#cb113-3" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
 <span id="cb113-4"><a href="propriedades-psicométricas.html#cb113-4" tabindex="-1"></a>    <span class="fu">c</span>(</span>
-<span id="cb113-5"><a href="propriedades-psicométricas.html#cb113-5" tabindex="-1"></a>      <span class="st">&#39;$a$&#39;</span>, <span class="st">&#39;$d$&#39;</span>, <span class="st">&#39;$g$&#39;</span>, <span class="st">&#39;$j=a+d+g$&#39;</span>,</span>
-<span id="cb113-6"><a href="propriedades-psicométricas.html#cb113-6" tabindex="-1"></a>      <span class="st">&#39;$b$&#39;</span>, <span class="st">&#39;$e$&#39;</span>, <span class="st">&#39;$h$&#39;</span>, <span class="st">&#39;$k=b+e+h$&#39;</span>,</span>
-<span id="cb113-7"><a href="propriedades-psicométricas.html#cb113-7" tabindex="-1"></a>      <span class="st">&#39;$c$&#39;</span>, <span class="st">&#39;$f$&#39;</span>, <span class="st">&#39;$i$&#39;</span>, <span class="st">&#39;$l=c+f+i$&#39;</span>,</span>
-<span id="cb113-8"><a href="propriedades-psicométricas.html#cb113-8" tabindex="-1"></a>      <span class="st">&#39;$j=a+b+c$&#39;</span>, <span class="st">&#39;$k=d+e+f$&#39;</span>, <span class="st">&#39;$l=g+h+i$&#39;</span>, <span class="st">&#39;$N=a+b+c+d+e+f+g+h+i$&#39;</span></span>
-<span id="cb113-9"><a href="propriedades-psicométricas.html#cb113-9" tabindex="-1"></a>    ),</span>
-<span id="cb113-10"><a href="propriedades-psicométricas.html#cb113-10" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">4</span>,</span>
-<span id="cb113-11"><a href="propriedades-psicométricas.html#cb113-11" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">4</span>,</span>
-<span id="cb113-12"><a href="propriedades-psicométricas.html#cb113-12" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
-<span id="cb113-13"><a href="propriedades-psicométricas.html#cb113-13" tabindex="-1"></a>  )</span>
-<span id="cb113-14"><a href="propriedades-psicométricas.html#cb113-14" tabindex="-1"></a><span class="fu">rownames</span>(cross.table.kappa) <span class="ot">&lt;-</span></span>
-<span id="cb113-15"><a href="propriedades-psicométricas.html#cb113-15" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Grave&quot;</span>, <span class="st">&quot;Moderado&quot;</span>, <span class="st">&quot;Leve&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
-<span id="cb113-16"><a href="propriedades-psicométricas.html#cb113-16" tabindex="-1"></a><span class="fu">colnames</span>(cross.table.kappa) <span class="ot">&lt;-</span></span>
-<span id="cb113-17"><a href="propriedades-psicométricas.html#cb113-17" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Grave&quot;</span>, <span class="st">&quot;Moderado&quot;</span>, <span class="st">&quot;Leve&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
-<span id="cb113-18"><a href="propriedades-psicométricas.html#cb113-18" tabindex="-1"></a></span>
-<span id="cb113-19"><a href="propriedades-psicométricas.html#cb113-19" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb113-20"><a href="propriedades-psicométricas.html#cb113-20" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb113-21"><a href="propriedades-psicométricas.html#cb113-21" tabindex="-1"></a>  cross.table.kappa,</span>
-<span id="cb113-22"><a href="propriedades-psicométricas.html#cb113-22" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb113-23"><a href="propriedades-psicométricas.html#cb113-23" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb113-24"><a href="propriedades-psicométricas.html#cb113-24" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb113-25"><a href="propriedades-psicométricas.html#cb113-25" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb113-26"><a href="propriedades-psicométricas.html#cb113-26" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb113-27"><a href="propriedades-psicométricas.html#cb113-27" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de confusão 3x3 para análise de concordância de testes e variáveis dicotômicas.&quot;</span></span>
-<span id="cb113-28"><a href="propriedades-psicométricas.html#cb113-28" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb113-29"><a href="propriedades-psicométricas.html#cb113-29" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb113-30"><a href="propriedades-psicométricas.html#cb113-30" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb113-31"><a href="propriedades-psicométricas.html#cb113-31" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb113-32"><a href="propriedades-psicométricas.html#cb113-32" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb113-33"><a href="propriedades-psicométricas.html#cb113-33" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb113-34"><a href="propriedades-psicométricas.html#cb113-34" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb113-35"><a href="propriedades-psicométricas.html#cb113-35" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>,</span>
-<span id="cb113-36"><a href="propriedades-psicométricas.html#cb113-36" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb113-37"><a href="propriedades-psicométricas.html#cb113-37" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb113-38"><a href="propriedades-psicométricas.html#cb113-38" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb113-39"><a href="propriedades-psicométricas.html#cb113-39" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table.kappa)[<span class="dv">1</span>],</span>
-<span id="cb113-40"><a href="propriedades-psicométricas.html#cb113-40" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
+<span id="cb113-5"><a href="propriedades-psicométricas.html#cb113-5" tabindex="-1"></a>      <span class="st">&#39;$a$&#39;</span>, <span class="st">&#39;$c$&#39;</span>, <span class="st">&#39;$e=a+c$&#39;</span>,</span>
+<span id="cb113-6"><a href="propriedades-psicométricas.html#cb113-6" tabindex="-1"></a>      <span class="st">&#39;$b$&#39;</span>, <span class="st">&#39;$d$&#39;</span>, <span class="st">&#39;$f=b+d$&#39;</span>,</span>
+<span id="cb113-7"><a href="propriedades-psicométricas.html#cb113-7" tabindex="-1"></a>      <span class="st">&#39;$g=a+b$&#39;</span>, <span class="st">&#39;$h=c+d$&#39;</span>, <span class="st">&#39;$N=a+b+c+d$&#39;</span></span>
+<span id="cb113-8"><a href="propriedades-psicométricas.html#cb113-8" tabindex="-1"></a>    ),</span>
+<span id="cb113-9"><a href="propriedades-psicométricas.html#cb113-9" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb113-10"><a href="propriedades-psicométricas.html#cb113-10" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">3</span>,</span>
+<span id="cb113-11"><a href="propriedades-psicométricas.html#cb113-11" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
+<span id="cb113-12"><a href="propriedades-psicométricas.html#cb113-12" tabindex="-1"></a>  )</span>
+<span id="cb113-13"><a href="propriedades-psicométricas.html#cb113-13" tabindex="-1"></a><span class="fu">rownames</span>(cross.table.kappa) <span class="ot">&lt;-</span></span>
+<span id="cb113-14"><a href="propriedades-psicométricas.html#cb113-14" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Teste positivo&quot;</span>, <span class="st">&quot;Teste negativo&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb113-15"><a href="propriedades-psicométricas.html#cb113-15" tabindex="-1"></a><span class="fu">colnames</span>(cross.table.kappa) <span class="ot">&lt;-</span></span>
+<span id="cb113-16"><a href="propriedades-psicométricas.html#cb113-16" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Teste positivo&quot;</span>, <span class="st">&quot;Teste negativo&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb113-17"><a href="propriedades-psicométricas.html#cb113-17" tabindex="-1"></a></span>
+<span id="cb113-18"><a href="propriedades-psicométricas.html#cb113-18" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb113-19"><a href="propriedades-psicométricas.html#cb113-19" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb113-20"><a href="propriedades-psicométricas.html#cb113-20" tabindex="-1"></a>  cross.table.kappa,</span>
+<span id="cb113-21"><a href="propriedades-psicométricas.html#cb113-21" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb113-22"><a href="propriedades-psicométricas.html#cb113-22" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb113-23"><a href="propriedades-psicométricas.html#cb113-23" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb113-24"><a href="propriedades-psicométricas.html#cb113-24" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb113-25"><a href="propriedades-psicométricas.html#cb113-25" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb113-26"><a href="propriedades-psicométricas.html#cb113-26" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de confusão 2x2 para análise de concordância de testes e variáveis dicotômicas.&quot;</span></span>
+<span id="cb113-27"><a href="propriedades-psicométricas.html#cb113-27" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb113-28"><a href="propriedades-psicométricas.html#cb113-28" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb113-29"><a href="propriedades-psicométricas.html#cb113-29" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb113-30"><a href="propriedades-psicométricas.html#cb113-30" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb113-31"><a href="propriedades-psicométricas.html#cb113-31" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb113-32"><a href="propriedades-psicométricas.html#cb113-32" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb113-33"><a href="propriedades-psicométricas.html#cb113-33" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb113-34"><a href="propriedades-psicométricas.html#cb113-34" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>,</span>
+<span id="cb113-35"><a href="propriedades-psicométricas.html#cb113-35" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb113-36"><a href="propriedades-psicométricas.html#cb113-36" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb113-37"><a href="propriedades-psicométricas.html#cb113-37" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb113-38"><a href="propriedades-psicométricas.html#cb113-38" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table.kappa)[<span class="dv">1</span>],</span>
+<span id="cb113-39"><a href="propriedades-psicométricas.html#cb113-39" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="propriedades-psicométricas.html#cb114-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb114-2"><a href="propriedades-psicométricas.html#cb114-2" tabindex="-1"></a>cross.table.kappa <span class="ot">&lt;-</span></span>
+<span id="cb114-3"><a href="propriedades-psicométricas.html#cb114-3" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
+<span id="cb114-4"><a href="propriedades-psicométricas.html#cb114-4" tabindex="-1"></a>    <span class="fu">c</span>(</span>
+<span id="cb114-5"><a href="propriedades-psicométricas.html#cb114-5" tabindex="-1"></a>      <span class="st">&#39;$a$&#39;</span>, <span class="st">&#39;$d$&#39;</span>, <span class="st">&#39;$g$&#39;</span>, <span class="st">&#39;$j=a+d+g$&#39;</span>,</span>
+<span id="cb114-6"><a href="propriedades-psicométricas.html#cb114-6" tabindex="-1"></a>      <span class="st">&#39;$b$&#39;</span>, <span class="st">&#39;$e$&#39;</span>, <span class="st">&#39;$h$&#39;</span>, <span class="st">&#39;$k=b+e+h$&#39;</span>,</span>
+<span id="cb114-7"><a href="propriedades-psicométricas.html#cb114-7" tabindex="-1"></a>      <span class="st">&#39;$c$&#39;</span>, <span class="st">&#39;$f$&#39;</span>, <span class="st">&#39;$i$&#39;</span>, <span class="st">&#39;$l=c+f+i$&#39;</span>,</span>
+<span id="cb114-8"><a href="propriedades-psicométricas.html#cb114-8" tabindex="-1"></a>      <span class="st">&#39;$j=a+b+c$&#39;</span>, <span class="st">&#39;$k=d+e+f$&#39;</span>, <span class="st">&#39;$l=g+h+i$&#39;</span>, <span class="st">&#39;$N=a+b+c+d+e+f+g+h+i$&#39;</span></span>
+<span id="cb114-9"><a href="propriedades-psicométricas.html#cb114-9" tabindex="-1"></a>    ),</span>
+<span id="cb114-10"><a href="propriedades-psicométricas.html#cb114-10" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">4</span>,</span>
+<span id="cb114-11"><a href="propriedades-psicométricas.html#cb114-11" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">4</span>,</span>
+<span id="cb114-12"><a href="propriedades-psicométricas.html#cb114-12" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
+<span id="cb114-13"><a href="propriedades-psicométricas.html#cb114-13" tabindex="-1"></a>  )</span>
+<span id="cb114-14"><a href="propriedades-psicométricas.html#cb114-14" tabindex="-1"></a><span class="fu">rownames</span>(cross.table.kappa) <span class="ot">&lt;-</span></span>
+<span id="cb114-15"><a href="propriedades-psicométricas.html#cb114-15" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Grave&quot;</span>, <span class="st">&quot;Moderado&quot;</span>, <span class="st">&quot;Leve&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb114-16"><a href="propriedades-psicométricas.html#cb114-16" tabindex="-1"></a><span class="fu">colnames</span>(cross.table.kappa) <span class="ot">&lt;-</span></span>
+<span id="cb114-17"><a href="propriedades-psicométricas.html#cb114-17" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Grave&quot;</span>, <span class="st">&quot;Moderado&quot;</span>, <span class="st">&quot;Leve&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb114-18"><a href="propriedades-psicométricas.html#cb114-18" tabindex="-1"></a></span>
+<span id="cb114-19"><a href="propriedades-psicométricas.html#cb114-19" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb114-20"><a href="propriedades-psicométricas.html#cb114-20" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb114-21"><a href="propriedades-psicométricas.html#cb114-21" tabindex="-1"></a>  cross.table.kappa,</span>
+<span id="cb114-22"><a href="propriedades-psicométricas.html#cb114-22" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb114-23"><a href="propriedades-psicométricas.html#cb114-23" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb114-24"><a href="propriedades-psicométricas.html#cb114-24" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb114-25"><a href="propriedades-psicométricas.html#cb114-25" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb114-26"><a href="propriedades-psicométricas.html#cb114-26" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb114-27"><a href="propriedades-psicométricas.html#cb114-27" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Tabela de confusão 3x3 para análise de concordância de testes e variáveis dicotômicas.&quot;</span></span>
+<span id="cb114-28"><a href="propriedades-psicométricas.html#cb114-28" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb114-29"><a href="propriedades-psicométricas.html#cb114-29" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb114-30"><a href="propriedades-psicométricas.html#cb114-30" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb114-31"><a href="propriedades-psicométricas.html#cb114-31" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb114-32"><a href="propriedades-psicométricas.html#cb114-32" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb114-33"><a href="propriedades-psicométricas.html#cb114-33" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb114-34"><a href="propriedades-psicométricas.html#cb114-34" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb114-35"><a href="propriedades-psicométricas.html#cb114-35" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>,</span>
+<span id="cb114-36"><a href="propriedades-psicométricas.html#cb114-36" tabindex="-1"></a>                       <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb114-37"><a href="propriedades-psicométricas.html#cb114-37" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb114-38"><a href="propriedades-psicométricas.html#cb114-38" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb114-39"><a href="propriedades-psicométricas.html#cb114-39" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(cross.table.kappa)[<span class="dv">1</span>],</span>
+<span id="cb114-40"><a href="propriedades-psicométricas.html#cb114-40" tabindex="-1"></a>                       <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
 </details>
 </div>
 <div id="diretrizes-para-redação-8" class="section level2 unnumbered unlisted hasAnchor">
@@ -1635,7 +1640,7 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="modelos-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análise-causal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="desempenho-diagnóstico.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

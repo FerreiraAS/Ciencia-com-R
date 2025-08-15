@@ -1114,6 +1114,11 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="39.3.1" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-as-principais-recomenda%C3%A7%C3%B5es-para-relatar-causalidade"><i class="fa fa-check"></i><b>39.3.1</b> Quais são as principais recomendações para relatar causalidade?</a></li>
 </ul></li>
+<li class="chapter" data-level="39.4" data-path="rmd/meta-analise.html"><a href="#diagramas-ac%C3%ADclicos-direcionados-dags"><i class="fa fa-check"></i><b>39.4</b> Diagramas acíclicos direcionados (DAGs)</a>
+<ul>
+<li class="chapter" data-level="39.4.1" data-path="rmd/meta-analise.html"><a href="#o-que-s%C3%A3o-dags"><i class="fa fa-check"></i><b>39.4.1</b> O que são DAGs?</a></li>
+<li class="chapter" data-level="39.4.2" data-path="rmd/meta-analise.html"><a href="#quais-s%C3%A3o-os-padr%C3%B5es-causais-b%C3%A1sicos"><i class="fa fa-check"></i><b>39.4.2</b> Quais são os padrões causais básicos?</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="40" data-path="analise-qualitativa.html"><a href="analise-qualitativa.html"><i class="fa fa-check"></i><b>40</b> <strong>Análise qualitativa</strong></a>
 <ul>
@@ -1504,8 +1509,8 @@ div.csl-indent {
 <div id="o-que-é-meta-análise" class="section level3 hasAnchor" number="49.1.1">
 <h3><span class="header-section-number">49.1.1</span> O que é meta-análise?<a href="#o-que-%C3%A9-meta-an%C3%A1lise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Meta-análise é um método estatístico que combina quantitativamente os resultados de múltiplos estudos independentes sobre uma mesma questão de pesquisa, aumentando o poder estatístico e a precisão das estimativas de efeito.<span class="citation"><sup><a href="#ref-borenstein2010">367</a></sup></span></p></li>
-<li><p>Meta-análise sintetiza evidências considerando o peso de cada estudo (geralmente inversamente proporcional à variância) e permite avaliar a consistência dos resultados, identificar fontes de heterogeneidade e estimar um efeito global.<span class="citation"><sup><a href="#ref-borenstein2010">367</a></sup></span></p></li>
+<li><p>Meta-análise é um método estatístico que combina quantitativamente os resultados de múltiplos estudos independentes sobre uma mesma questão de pesquisa, aumentando o poder estatístico e a precisão das estimativas de efeito.<span class="citation"><sup><a href="#ref-borenstein2010">366</a></sup></span></p></li>
+<li><p>Meta-análise sintetiza evidências considerando o peso de cada estudo (geralmente inversamente proporcional à variância) e permite avaliar a consistência dos resultados, identificar fontes de heterogeneidade e estimar um efeito global.<span class="citation"><sup><a href="#ref-borenstein2010">366</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -1513,13 +1518,13 @@ div.csl-indent {
 <div id="modelos-de-meta-análise" class="section level2 hasAnchor" number="49.2">
 <h2><span class="header-section-number">49.2</span> Modelos de meta-análise<a href="#modelos-de-meta-an%C3%A1lise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><p><strong>Modelo de efeitos fixos</strong>: assume que todos os estudos avaliam o mesmo efeito verdadeiro, e a variação observada é apenas devido ao erro de amostragem. É adequado quando os estudos são homogêneos e as diferenças entre eles são pequenas.<span class="citation"><sup><a href="#ref-borenstein2010">367</a></sup></span></p></li>
-<li><p><strong>Modelo de efeitos aleatórios</strong>: assume que os estudos avaliam efeitos verdadeiros diferentes, com uma distribuição normal. É mais apropriado quando há heterogeneidade entre os estudos, pois considera a variação entre eles além do erro de amostragem.<span class="citation"><sup><a href="#ref-borenstein2010">367</a></sup></span></p></li>
+<li><p><strong>Modelo de efeitos fixos</strong>: assume que todos os estudos avaliam o mesmo efeito verdadeiro, e a variação observada é apenas devido ao erro de amostragem. É adequado quando os estudos são homogêneos e as diferenças entre eles são pequenas.<span class="citation"><sup><a href="#ref-borenstein2010">366</a></sup></span></p></li>
+<li><p><strong>Modelo de efeitos aleatórios</strong>: assume que os estudos avaliam efeitos verdadeiros diferentes, com uma distribuição normal. É mais apropriado quando há heterogeneidade entre os estudos, pois considera a variação entre eles além do erro de amostragem.<span class="citation"><sup><a href="#ref-borenstein2010">366</a></sup></span></p></li>
 <li><p><strong>Modelo de efeitos de rede</strong>: estende a meta-análise para comparar múltiplas intervenções simultaneamente, mesmo que não tenham sido comparadas diretamente em estudos. É útil para avaliar a eficácia relativa de várias intervenções.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>metafor</em><span class="citation"><sup><a href="#ref-metafor">368</a></sup></span> fornece a função <a href="https://cran.r-project.org/web/packages/metafor/index.html"><em>forest</em></a> para criar figuras tipo <em>forest plot</em>.</p>
+<p>O pacote <em>metafor</em><span class="citation"><sup><a href="#ref-metafor">367</a></sup></span> fornece a função <a href="https://cran.r-project.org/web/packages/metafor/index.html"><em>forest</em></a> para criar figuras tipo <em>forest plot</em>.</p>
 </div>
 <p><br></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ma-comparacao-efeitos"></span>
@@ -1536,20 +1541,20 @@ Figura 49.1: Comparação entre modelos de efeito fixo e aleatório com 10 ensai
 <div id="como-avaliar-a-variação-do-tamanho-do-efeito" class="section level3 hasAnchor" number="49.3.1">
 <h3><span class="header-section-number">49.3.1</span> Como avaliar a variação do tamanho do efeito?<a href="#como-avaliar-a-varia%C3%A7%C3%A3o-do-tamanho-do-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>O intervalo de predição contém informação sobre a variação do tamanho do efeito.<span class="citation"><sup><a href="#ref-Borenstein2022">369</a></sup></span></p></li>
-<li><p>Se o intervalo de predição não contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que (a) o tratamento funciona igualmente bem em todas as populações, ou que ele funciona melhor em algumas populações do que em outras.<span class="citation"><sup><a href="#ref-Borenstein2022">369</a></sup></span></p></li>
-<li><p>Se o intervalo de predição contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que o tratamento pode ser benéfico em algumas populações, mas prejudicial em outras, de modo que a estimativa pontual (geralmente a média) torna-se amplamente irrelevante. Nesse caso, é recomendado investigar em que populações o tratamento seria benéfico e em quais causaria danos.<span class="citation"><sup><a href="#ref-Borenstein2022">369</a></sup></span></p></li>
+<li><p>O intervalo de predição contém informação sobre a variação do tamanho do efeito.<span class="citation"><sup><a href="#ref-Borenstein2022">368</a></sup></span></p></li>
+<li><p>Se o intervalo de predição não contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que (a) o tratamento funciona igualmente bem em todas as populações, ou que ele funciona melhor em algumas populações do que em outras.<span class="citation"><sup><a href="#ref-Borenstein2022">368</a></sup></span></p></li>
+<li><p>Se o intervalo de predição contém a hipótese nula (<span class="math inline">\(H_{0}\)</span>), podemos concluir que o tratamento pode ser benéfico em algumas populações, mas prejudicial em outras, de modo que a estimativa pontual (geralmente a média) torna-se amplamente irrelevante. Nesse caso, é recomendado investigar em que populações o tratamento seria benéfico e em quais causaria danos.<span class="citation"><sup><a href="#ref-Borenstein2022">368</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-avaliar-a-heterogeneidade-entre-os-estudos" class="section level3 hasAnchor" number="49.3.2">
 <h3><span class="header-section-number">49.3.2</span> Como avaliar a heterogeneidade entre os estudos?<a href="meta-analise.html#como-avaliar-a-heterogeneidade-entre-os-estudos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>A heterogeneidade - variação não-aleatória - no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo <span class="math inline">\(I^{2}\)</span>.<span class="citation"><sup><a href="#ref-Borenstein2022">369</a>,<a href="#ref-R%C3%BCcker2008">370</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> representa qual proporção da variância observada reflete a variância nos efeitos verdadeiros em vez do erro de amostragem.<span class="citation"><sup><a href="#ref-Borenstein2022">369</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> mede a proporção da variância total que pode ser atribuída à heterogeneidade entre os estudos incluídos.<span class="citation"><sup><a href="#ref-R%C3%BCcker2008">370</a></sup></span></p></li>
-<li><p><span class="math inline">\(I^{2}\)</span> não depende da quantidade de estudos incluídos na meta-análise. Entretanto, <span class="math inline">\(I^{2}\)</span> aumenta com a quantidade de participantes incluídos nos estudos meta-analisados.<span class="citation"><sup><a href="#ref-R%C3%BCcker2008">370</a></sup></span></p></li>
-<li><p>A heterogeneidade entre estudos é explicada de modo mais confiável utilizando dados de pacientes individuais, uma vez que a direção verdadeira da modificação de efeito não pode ser observada a partir de dados agregados no estudo.<span class="citation"><sup><a href="#ref-degrooth2023">371</a></sup></span></p></li>
+<li><p>A heterogeneidade - variação não-aleatória - no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo <span class="math inline">\(I^{2}\)</span>.<span class="citation"><sup><a href="#ref-Borenstein2022">368</a>,<a href="#ref-R%C3%BCcker2008">369</a></sup></span></p></li>
+<li><p><span class="math inline">\(I^{2}\)</span> representa qual proporção da variância observada reflete a variância nos efeitos verdadeiros em vez do erro de amostragem.<span class="citation"><sup><a href="#ref-Borenstein2022">368</a></sup></span></p></li>
+<li><p><span class="math inline">\(I^{2}\)</span> mede a proporção da variância total que pode ser atribuída à heterogeneidade entre os estudos incluídos.<span class="citation"><sup><a href="#ref-R%C3%BCcker2008">369</a></sup></span></p></li>
+<li><p><span class="math inline">\(I^{2}\)</span> não depende da quantidade de estudos incluídos na meta-análise. Entretanto, <span class="math inline">\(I^{2}\)</span> aumenta com a quantidade de participantes incluídos nos estudos meta-analisados.<span class="citation"><sup><a href="#ref-R%C3%BCcker2008">369</a></sup></span></p></li>
+<li><p>A heterogeneidade entre estudos é explicada de modo mais confiável utilizando dados de pacientes individuais, uma vez que a direção verdadeira da modificação de efeito não pode ser observada a partir de dados agregados no estudo.<span class="citation"><sup><a href="#ref-degrooth2023">370</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
@@ -1568,7 +1573,7 @@ Figura 49.1: Comparação entre modelos de efeito fixo e aleatório com 10 ensai
 <div id="o-que-é-um-forest-plot" class="section level3 hasAnchor" number="49.4.1">
 <h3><span class="header-section-number">49.4.1</span> O que é um forest plot?<a href="#o-que-%C3%A9-um-forest-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Um forest plot é uma representação gráfica dos achados de uma meta-análise. Ele resume os resultados de estudos individuais e apresenta uma estimativa combinada do efeito, permitindo interpretação visual da magnitude, direção e significância estatística dos resultados.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></li>
+<li>Um forest plot é uma representação gráfica dos achados de uma meta-análise. Ele resume os resultados de estudos individuais e apresenta uma estimativa combinada do efeito, permitindo interpretação visual da magnitude, direção e significância estatística dos resultados.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></li>
 </ul>
 <p><br></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ma-efeito-fixo"></span>
@@ -1589,56 +1594,56 @@ Figura 49.3: Forest plot de uma meta-análise de efeito aleatório com 10 ensaio
 <div id="quais-são-as-seis-colunas-básicas-que-um-forest-plot-geralmente-apresenta" class="section level3 hasAnchor" number="49.4.2">
 <h3><span class="header-section-number">49.4.2</span> 2. Quais são as seis colunas básicas que um forest plot geralmente apresenta?<a href="#quais-s%C3%A3o-as-seis-colunas-b%C3%A1sicas-que-um-forest-plot-geralmente-apresenta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>As seis colunas básicas incluem: estudos incluídos (e subgrupos, se analisados); dados do grupo de intervenção, dados do grupo controle; peso de cada estudo; medida numérica do efeito; representação gráfica do efeito.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></li>
+<li>As seis colunas básicas incluem: estudos incluídos (e subgrupos, se analisados); dados do grupo de intervenção, dados do grupo controle; peso de cada estudo; medida numérica do efeito; representação gráfica do efeito.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-diferenciar-um-desfecho-binário-de-um-contínuo-em-um-forest-plot" class="section level3 hasAnchor" number="49.4.3">
 <h3><span class="header-section-number">49.4.3</span> Como diferenciar um desfecho binário de um contínuo em um forest plot?<a href="#como-diferenciar-um-desfecho-bin%C3%A1rio-de-um-cont%C3%ADnuo-em-um-forest-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Em desfechos binários, são mostrados número de eventos e total da amostra, sendo o efeito medido por <em>risk ratio</em> (<span class="math inline">\(RR\)</span>) ou <em>odds ratio</em> (<span class="math inline">\(OR\)</span>).<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
-<li><p>Em desfechos contínuos, apresentam-se médias, desvios-padrão e tamanhos amostrais, com o efeito medido pela diferença de médias.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
+<li><p>Em desfechos binários, são mostrados número de eventos e total da amostra, sendo o efeito medido por <em>risk ratio</em> (<span class="math inline">\(RR\)</span>) ou <em>odds ratio</em> (<span class="math inline">\(OR\)</span>).<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
+<li><p>Em desfechos contínuos, apresentam-se médias, desvios-padrão e tamanhos amostrais, com o efeito medido pela diferença de médias.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-representa-o-ponto-central-da-caixa-e-o-tamanho-desta-no-gráfico" class="section level3 hasAnchor" number="49.4.4">
 <h3><span class="header-section-number">49.4.4</span> 4. O que representa o ponto central da caixa e o tamanho desta no gráfico?<a href="#o-que-representa-o-ponto-central-da-caixa-e-o-tamanho-desta-no-gr%C3%A1fico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>O ponto central indica a estimativa pontual do efeito (melhor estmativa para o efeito real).<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
-<li><p>O tamanho da caixa é proporcional ao peso do estudo na meta-análise, geralmente maior para estudos com amostras maiores.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
+<li><p>O ponto central indica a estimativa pontual do efeito (melhor estmativa para o efeito real).<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
+<li><p>O tamanho da caixa é proporcional ao peso do estudo na meta-análise, geralmente maior para estudos com amostras maiores.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="qual-é-o-significado-da-linha-vertical-do-nenhum-efeito" class="section level3 hasAnchor" number="49.4.5">
 <h3><span class="header-section-number">49.4.5</span> 5. Qual é o significado da linha vertical do “nenhum efeito”?<a href="#qual-%C3%A9-o-significado-da-linha-vertical-do-nenhum-efeito" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>É a linha de referência que indica efeito nulo.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
-<li><p>Para desfechos binários, corresponde ao valor 1 (<span class="math inline">\(RR\)</span> ou <span class="math inline">\(OR\)</span> = 1).<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
-<li><p>Para desfechos contínuos, corresponde ao valor 0 (diferença de médias = 0).<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
-<li><p>Se o intervalo de confiança de um estudo ou do resultado combinado cruza essa linha, o resultado não é estatisticamente significativo.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
+<li><p>É a linha de referência que indica efeito nulo.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
+<li><p>Para desfechos binários, corresponde ao valor 1 (<span class="math inline">\(RR\)</span> ou <span class="math inline">\(OR\)</span> = 1).<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
+<li><p>Para desfechos contínuos, corresponde ao valor 0 (diferença de médias = 0).<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
+<li><p>Se o intervalo de confiança de um estudo ou do resultado combinado cruza essa linha, o resultado não é estatisticamente significativo.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-interpretar-o-diamante-na-parte-inferior-do-forest-plot" class="section level3 hasAnchor" number="49.4.6">
 <h3><span class="header-section-number">49.4.6</span> 6. Como interpretar o diamante na parte inferior do forest plot?<a href="meta-analise.html#como-interpretar-o-diamante-na-parte-inferior-do-forest-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>O diamante representa o efeito combinado dos estudos incluídos.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
-<li><p>O ponto central do diamante é a estimativa global.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
-<li><p>A largura do diamante representa o intervalo de confiança de 95% para o efeito combinado.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></p></li>
+<li><p>O diamante representa o efeito combinado dos estudos incluídos.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
+<li><p>O ponto central do diamante é a estimativa global.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
+<li><p>A largura do diamante representa o intervalo de confiança de 95% para o efeito combinado.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-a-heterogeneidade-pode-ser-avaliada-no-forest-plot" class="section level3 hasAnchor" number="49.4.7">
 <h3><span class="header-section-number">49.4.7</span> Como a heterogeneidade pode ser avaliada no forest plot?<a href="meta-analise.html#como-a-heterogeneidade-pode-ser-avaliada-no-forest-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>A variabilidade nos resultados dos estudos incluídos é avaliada pela sobreposição dos intervalos de confiança dos estudos; pelo teste do qui-quadrado (<span class="math inline">\(chi^2\)</span>) e pelo valor de <span class="math inline">\(I^{2}\)</span>.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></li>
+<li>A variabilidade nos resultados dos estudos incluídos é avaliada pela sobreposição dos intervalos de confiança dos estudos; pelo teste do qui-quadrado (<span class="math inline">\(chi^2\)</span>) e pelo valor de <span class="math inline">\(I^{2}\)</span>.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quais-são-as-interpretações-usuais-para-os-valores-de-i2" class="section level3 hasAnchor" number="49.4.8">
 <h3><span class="header-section-number">49.4.8</span> Quais são as interpretações usuais para os valores de <span class="math inline">\(I^{2}\)</span>?<a href="#quais-s%C3%A3o-as-interpreta%C3%A7%C3%B5es-usuais-para-os-valores-de-i2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>0% a 40%: pode não ser importante; 30% a 60%: heterogeneidade moderada; 50% a 90%: heterogeneidade substancial; 75% a 100%: heterogeneidade considerável.<span class="citation"><sup><a href="#ref-dettori2021">372</a></sup></span></li>
+<li>0% a 40%: pode não ser importante; 30% a 60%: heterogeneidade moderada; 50% a 90%: heterogeneidade substancial; 75% a 100%: heterogeneidade considerável.<span class="citation"><sup><a href="#ref-dettori2021">371</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
@@ -1649,23 +1654,23 @@ Figura 49.3: Forest plot de uma meta-análise de efeito aleatório com 10 ensaio
 <div id="o-que-é-viés-de-publicação" class="section level3 hasAnchor" number="49.5.1">
 <h3><span class="header-section-number">49.5.1</span> O que é viés de publicação?<a href="#o-que-%C3%A9-vi%C3%A9s-de-publica%C3%A7%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>O viés de publicação ocorre quando estudos com resultados não significativos ou contrários à hipótese tendem a não ser publicados, afetando a estimativa final da meta-análise e podendo levar a conclusões incorretas.<span class="citation"><sup><a href="#ref-song2000">373</a></sup></span></li>
+<li>O viés de publicação ocorre quando estudos com resultados não significativos ou contrários à hipótese tendem a não ser publicados, afetando a estimativa final da meta-análise e podendo levar a conclusões incorretas.<span class="citation"><sup><a href="#ref-song2000">372</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quais-métodos-podem-ser-usados-para-identificar-viés-de-publicação" class="section level3 hasAnchor" number="49.5.2">
 <h3><span class="header-section-number">49.5.2</span> Quais métodos podem ser usados para identificar viés de publicação?<a href="#quais-m%C3%A9todos-podem-ser-usados-para-identificar-vi%C3%A9s-de-publica%C3%A7%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>O método mais simples é o <strong>funnel plot</strong>, que representa a estimativa de efeito de cada estudo em função de sua precisão (<span class="math inline">\(1/SE\)</span>).<span class="citation"><sup><a href="#ref-egger1997">374</a></sup></span></p></li>
-<li><p>Na ausência de viés, espera-se uma distribuição simétrica (“forma de funil”). Assimetria pode indicar viés de publicação, heterogeneidade entre estudos ou efeitos de tamanho de estudo (<em>small-study effects</em>).<span class="citation"><sup><a href="#ref-egger1997">374</a></sup></span></p></li>
-<li><p>Para <em>odds ratios</em> (<span class="math inline">\(OR\)</span>), a correlação entre <span class="math inline">\(ln(OR)\)</span> e seu erro padrão pode gerar assimetria mesmo sem viés, por isso recomenda-se, nesses casos, plotar em função do tamanho amostral.<span class="citation"><sup><a href="#ref-peters2006">375</a></sup></span></p></li>
+<li><p>O método mais simples é o <strong>funnel plot</strong>, que representa a estimativa de efeito de cada estudo em função de sua precisão (<span class="math inline">\(1/SE\)</span>).<span class="citation"><sup><a href="#ref-egger1997">373</a></sup></span></p></li>
+<li><p>Na ausência de viés, espera-se uma distribuição simétrica (“forma de funil”). Assimetria pode indicar viés de publicação, heterogeneidade entre estudos ou efeitos de tamanho de estudo (<em>small-study effects</em>).<span class="citation"><sup><a href="#ref-egger1997">373</a></sup></span></p></li>
+<li><p>Para <em>odds ratios</em> (<span class="math inline">\(OR\)</span>), a correlação entre <span class="math inline">\(ln(OR)\)</span> e seu erro padrão pode gerar assimetria mesmo sem viés, por isso recomenda-se, nesses casos, plotar em função do tamanho amostral.<span class="citation"><sup><a href="#ref-peters2006">374</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-é-um-gráfico-de-funil-funnel-plot" class="section level3 hasAnchor" number="49.5.3">
 <h3><span class="header-section-number">49.5.3</span> O que é um gráfico de funil (<em>funnel plot</em>)?<a href="#o-que-%C3%A9-um-gr%C3%A1fico-de-funil-funnel-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>É um gráfico de dispersão que relaciona a estimativa de efeito de cada estudo com uma medida de seu tamanho ou precisão (por exemplo, erro-padrão no eixo vertical, em escala invertida). Em condições ideais (ausência de viés e heterogeneidade), os estudos se distribuem de forma simétrica, formando um “funil invertido”.<span class="citation"><sup><a href="#ref-sterne2011">376</a></sup></span></li>
+<li>É um gráfico de dispersão que relaciona a estimativa de efeito de cada estudo com uma medida de seu tamanho ou precisão (por exemplo, erro-padrão no eixo vertical, em escala invertida). Em condições ideais (ausência de viés e heterogeneidade), os estudos se distribuem de forma simétrica, formando um “funil invertido”.<span class="citation"><sup><a href="#ref-sterne2011">375</a></sup></span></li>
 </ul>
 <p><br></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ma-funnel-plot"></span>
@@ -1679,56 +1684,56 @@ Figura 49.4: Gráfico de funil de meta-análise com 10 ensaios clínicos simulad
 <div id="a-assimetria-do-funnel-plot-indica-sempre-viés-de-publicação" class="section level3 hasAnchor" number="49.5.4">
 <h3><span class="header-section-number">49.5.4</span> A assimetria do <em>funnel plot</em> indica sempre viés de publicação?<a href="#a-assimetria-do-funnel-plot-indica-sempre-vi%C3%A9s-de-publica%C3%A7%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Viéses de relato (<em>reporting biases</em>), como viés de publicação, viés de linguagem ou de citação.<span class="citation"><sup><a href="#ref-sterne2011">376</a></sup></span></p></li>
-<li><p>Diferenças metodológicas entre estudos pequenos e grandes.<span class="citation"><sup><a href="#ref-sterne2011">376</a></sup></span></p></li>
-<li><p>Heterogeneidade verdadeira (diferença real no efeito conforme o tamanho ou o contexto do estudo).<span class="citation"><sup><a href="#ref-sterne2011">376</a></sup></span></p></li>
-<li><p>Artefatos estatísticos ou mero acaso.<span class="citation"><sup><a href="#ref-sterne2011">376</a></sup></span></p></li>
+<li><p>Viéses de relato (<em>reporting biases</em>), como viés de publicação, viés de linguagem ou de citação.<span class="citation"><sup><a href="#ref-sterne2011">375</a></sup></span></p></li>
+<li><p>Diferenças metodológicas entre estudos pequenos e grandes.<span class="citation"><sup><a href="#ref-sterne2011">375</a></sup></span></p></li>
+<li><p>Heterogeneidade verdadeira (diferença real no efeito conforme o tamanho ou o contexto do estudo).<span class="citation"><sup><a href="#ref-sterne2011">375</a></sup></span></p></li>
+<li><p>Artefatos estatísticos ou mero acaso.<span class="citation"><sup><a href="#ref-sterne2011">375</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-é-trim-and-fill" class="section level3 hasAnchor" number="49.5.5">
 <h3><span class="header-section-number">49.5.5</span> O que é <em>trim and fill</em>?<a href="#o-que-%C3%A9-trim-and-fill" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>O método <em>trim and fill</em> “apara” (trim) os estudos que causam assimetria no funnel plot, estima o número de estudos possivelmente ausentes (não publicados) e “preenche” (fill) o gráfico com esses estudos simulados, recalculando o efeito combinado.<span class="citation"><sup><a href="#ref-duval2000">377</a></sup></span></p></li>
-<li><p>O método assume que a assimetria é causada unicamente por viés de publicação, podendo levar a conclusões equivocadas quando há outras causas, como heterogeneidade.<span class="citation"><sup><a href="#ref-duval2000">377</a></sup></span></p></li>
+<li><p>O método <em>trim and fill</em> “apara” (trim) os estudos que causam assimetria no funnel plot, estima o número de estudos possivelmente ausentes (não publicados) e “preenche” (fill) o gráfico com esses estudos simulados, recalculando o efeito combinado.<span class="citation"><sup><a href="#ref-duval2000">376</a></sup></span></p></li>
+<li><p>O método assume que a assimetria é causada unicamente por viés de publicação, podendo levar a conclusões equivocadas quando há outras causas, como heterogeneidade.<span class="citation"><sup><a href="#ref-duval2000">376</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-é-o-teste-de-egger" class="section level3 hasAnchor" number="49.5.6">
 <h3><span class="header-section-number">49.5.6</span> O que é o teste de Egger?<a href="#o-que-%C3%A9-o-teste-de-egger" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>É um teste estatístico amplamente utilizado que avalia a relação entre o efeito padronizado (<span class="math inline">\(efeito/SE\)</span>) e a precisão (<span class="math inline">\(1/SE\)</span>).<span class="citation"><sup><a href="#ref-egger1997">374</a></sup></span></p></li>
-<li><p>No entanto, para meta-análises com <span class="math inline">\(OR\)</span>, apresenta taxas de erro tipo I excessivas, especialmente quando o efeito é grande ou há alta heterogeneidade.<span class="citation"><sup><a href="#ref-peters2006">375</a></sup></span></p></li>
+<li><p>É um teste estatístico amplamente utilizado que avalia a relação entre o efeito padronizado (<span class="math inline">\(efeito/SE\)</span>) e a precisão (<span class="math inline">\(1/SE\)</span>).<span class="citation"><sup><a href="#ref-egger1997">373</a></sup></span></p></li>
+<li><p>No entanto, para meta-análises com <span class="math inline">\(OR\)</span>, apresenta taxas de erro tipo I excessivas, especialmente quando o efeito é grande ou há alta heterogeneidade.<span class="citation"><sup><a href="#ref-peters2006">374</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-é-o-teste-de-peters" class="section level3 hasAnchor" number="49.5.7">
 <h3><span class="header-section-number">49.5.7</span> O que é o teste de Peters?<a href="#o-que-%C3%A9-o-teste-de-peters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Uma regressão linear ponderada com <span class="math inline">\(ln(OR)\)</span> como variável dependente e o inverso do tamanho total da amostra como variável independente (modificação do teste de Macaskill).<span class="citation"><sup><a href="#ref-peters2006">375</a></sup></span></p></li>
-<li><p>Essa abordagem reduz a correlação entre <span class="math inline">\(ln(OR)\)</span> e seu <span class="math inline">\(SE\)</span>, resultando em taxas de erro tipo I mais adequadas (~10%) independentemente do tamanho do efeito, número de estudos ou heterogeneidade.<span class="citation"><sup><a href="#ref-peters2006">375</a></sup></span></p></li>
-<li><p>O teste de Peters é preferível ao teste de Egger quando o desfecho é expresso como OR, pois mantém taxas de erro tipo I adequadas e ainda apresenta poder comparável para detectar viés em condições de baixa heterogeneidade.<span class="citation"><sup><a href="#ref-peters2006">375</a></sup></span></p></li>
-<li><p>Em casos de alta heterogeneidade, o teste de Egger pode apresentar maior poder, mas sua alta taxa de falsos positivos compromete a interpretação.<span class="citation"><sup><a href="#ref-peters2006">375</a></sup></span></p></li>
+<li><p>Uma regressão linear ponderada com <span class="math inline">\(ln(OR)\)</span> como variável dependente e o inverso do tamanho total da amostra como variável independente (modificação do teste de Macaskill).<span class="citation"><sup><a href="#ref-peters2006">374</a></sup></span></p></li>
+<li><p>Essa abordagem reduz a correlação entre <span class="math inline">\(ln(OR)\)</span> e seu <span class="math inline">\(SE\)</span>, resultando em taxas de erro tipo I mais adequadas (~10%) independentemente do tamanho do efeito, número de estudos ou heterogeneidade.<span class="citation"><sup><a href="#ref-peters2006">374</a></sup></span></p></li>
+<li><p>O teste de Peters é preferível ao teste de Egger quando o desfecho é expresso como OR, pois mantém taxas de erro tipo I adequadas e ainda apresenta poder comparável para detectar viés em condições de baixa heterogeneidade.<span class="citation"><sup><a href="#ref-peters2006">374</a></sup></span></p></li>
+<li><p>Em casos de alta heterogeneidade, o teste de Egger pode apresentar maior poder, mas sua alta taxa de falsos positivos compromete a interpretação.<span class="citation"><sup><a href="#ref-peters2006">374</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quais-são-as-recomendações-para-testar-a-assimetria" class="section level3 hasAnchor" number="49.5.8">
 <h3><span class="header-section-number">49.5.8</span> Quais são as recomendações para testar a assimetria?<a href="#quais-s%C3%A3o-as-recomenda%C3%A7%C3%B5es-para-testar-a-assimetria" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Evitar testes quando há menos de 10 estudos, devido ao baixo poder estatístico.<span class="citation"><sup><a href="#ref-sterne2011">376</a></sup></span></p></li>
-<li><p>Inspecionar visualmente o <em>funnel plot</em> junto com os resultados dos testes.<span class="citation"><sup><a href="#ref-sterne2011">376</a></sup></span></p></li>
-<li><p>Para desfechos contínuos (diferença de médias), o teste de Egger pode ser usado.<span class="citation"><sup><a href="#ref-sterne2011">376</a></sup></span></p></li>
-<li><p>Para desfechos dicotômicos expressos como <em>odds ratio</em> (<span class="math inline">\(OR\)</span>) com baixa heterogeneidade (<span class="math inline">\(\tau^2 &lt; 0,1\)</span>), considerar os testes de Harbord, Peters ou Rücker.<span class="citation"><sup><a href="#ref-sterne2011">376</a></sup></span></p></li>
-<li><p>Para desfechos dicotômicos expressos como <em>odds ratio</em>(<span class="math inline">\(OR\)</span>) com alta heterogeneidade (<span class="math inline">\(\tau^2 &gt; 0,1\)</span>), o teste de Rücker com transformação <span class="math inline">\(arcsine\)</span> é mais indicado.<span class="citation"><sup><a href="#ref-sterne2011">376</a></sup></span></p></li>
+<li><p>Evitar testes quando há menos de 10 estudos, devido ao baixo poder estatístico.<span class="citation"><sup><a href="#ref-sterne2011">375</a></sup></span></p></li>
+<li><p>Inspecionar visualmente o <em>funnel plot</em> junto com os resultados dos testes.<span class="citation"><sup><a href="#ref-sterne2011">375</a></sup></span></p></li>
+<li><p>Para desfechos contínuos (diferença de médias), o teste de Egger pode ser usado.<span class="citation"><sup><a href="#ref-sterne2011">375</a></sup></span></p></li>
+<li><p>Para desfechos dicotômicos expressos como <em>odds ratio</em> (<span class="math inline">\(OR\)</span>) com baixa heterogeneidade (<span class="math inline">\(\tau^2 &lt; 0,1\)</span>), considerar os testes de Harbord, Peters ou Rücker.<span class="citation"><sup><a href="#ref-sterne2011">375</a></sup></span></p></li>
+<li><p>Para desfechos dicotômicos expressos como <em>odds ratio</em>(<span class="math inline">\(OR\)</span>) com alta heterogeneidade (<span class="math inline">\(\tau^2 &gt; 0,1\)</span>), o teste de Rücker com transformação <span class="math inline">\(arcsine\)</span> é mais indicado.<span class="citation"><sup><a href="#ref-sterne2011">375</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-interpretar-os-resultados-de-testes-de-viés-de-publicação" class="section level3 hasAnchor" number="49.5.9">
 <h3><span class="header-section-number">49.5.9</span> Como interpretar os resultados de testes de viés de publicação?<a href="#como-interpretar-os-resultados-de-testes-de-vi%C3%A9s-de-publica%C3%A7%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Um resultado não significativo não garante ausência de viés.<span class="citation"><sup><a href="#ref-peters2006">375</a></sup></span></p></li>
-<li><p>Recomenda-se complementar com inspeção visual do <em>funnel plot</em> e considerar métodos adicionais como <em>trim and fill</em>.<span class="citation"><sup><a href="#ref-peters2006">375</a>,<a href="#ref-duval2000">377</a></sup></span></p></li>
-<li><p>Quando há suspeita de viés, discutir as implicações e interpretar o efeito combinado com cautela.<span class="citation"><sup><a href="#ref-peters2006">375</a></sup></span></p></li>
+<li><p>Um resultado não significativo não garante ausência de viés.<span class="citation"><sup><a href="#ref-peters2006">374</a></sup></span></p></li>
+<li><p>Recomenda-se complementar com inspeção visual do <em>funnel plot</em> e considerar métodos adicionais como <em>trim and fill</em>.<span class="citation"><sup><a href="#ref-peters2006">374</a>,<a href="#ref-duval2000">376</a></sup></span></p></li>
+<li><p>Quando há suspeita de viés, discutir as implicações e interpretar o efeito combinado com cautela.<span class="citation"><sup><a href="#ref-peters2006">374</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
@@ -1745,16 +1750,16 @@ Figura 49.4: Gráfico de funil de meta-análise com 10 ensaios clínicos simulad
 <ul>
 <li><p>Visite a rede <em>Enhancing the QUAlity and Transparency Of health Research</em> <a href="https://www.equator-network.org/">EQUATOR Network</a> para encontrar diretrizes específicas para cada tipo de meta-análises.</p>
 <ul>
-<li><em>The PRISMA 2020 statement: An updated guideline for reporting systematic reviews</em>:<span class="citation"><sup><a href="#ref-page2021">378</a></sup></span> <a href="https://www.equator-network.org/reporting-guidelines/prisma/" class="uri">https://www.equator-network.org/reporting-guidelines/prisma/</a></li>
+<li><em>The PRISMA 2020 statement: An updated guideline for reporting systematic reviews</em>:<span class="citation"><sup><a href="#ref-page2021">377</a></sup></span> <a href="https://www.equator-network.org/reporting-guidelines/prisma/" class="uri">https://www.equator-network.org/reporting-guidelines/prisma/</a></li>
 </ul></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>metagear</em><span class="citation"><sup><a href="#ref-metagear">379</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA"><em>plot_PRISMA</em></a> para gerar o fluxograma de uma revisão sistemática de acordo com o <em>Preferred Reporting Items for Systematic Reviews and Meta-Analyses</em><span class="citation"><sup><a href="#ref-Moher2015">380</a></sup></span>.</p>
+<p>O pacote <em>metagear</em><span class="citation"><sup><a href="#ref-metagear">378</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/metagear/versions/0.7/topics/plot_PRISMA"><em>plot_PRISMA</em></a> para gerar o fluxograma de uma revisão sistemática de acordo com o <em>Preferred Reporting Items for Systematic Reviews and Meta-Analyses</em><span class="citation"><sup><a href="#ref-Moher2015">379</a></sup></span>.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>PRISMA2020</em><span class="citation"><sup><a href="#ref-PRISMA2020">381</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram"><em>PRISMA_flowdiagram</em></a> para elaboração do fluxograma de revisões sistemáticas no formato padrão.</p>
+<p>O pacote <em>PRISMA2020</em><span class="citation"><sup><a href="#ref-PRISMA2020">380</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram"><em>PRISMA_flowdiagram</em></a> para elaboração do fluxograma de revisões sistemáticas no formato padrão.</p>
 </div>
 <p><br></p>
 <style>
@@ -1793,46 +1798,46 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
 <div class="csl-left-margin">269. </div><div class="csl-right-inline">Dahlke JA, Wiernik BM. <span></span>psychmeta<span></span>: An R Package for Psychometric Meta-Analysis. <em>Applied Psychological Measurement</em>. 2018;43(3):415–416. doi:<a href="https://doi.org/10.1177/0146621618795933">10.1177/0146621618795933</a></div>
 </div>
 <div id="ref-borenstein2010" class="csl-entry">
-<div class="csl-left-margin">367. </div><div class="csl-right-inline">Borenstein M, Hedges LV, Higgins JPT, Rothstein HR. A basic introduction to fixed-effect and random-effects models for meta-analysis. <em>Research Synthesis Methods</em>. 2010;1(2):97–111. doi:<a href="https://doi.org/10.1002/jrsm.12">10.1002/jrsm.12</a></div>
+<div class="csl-left-margin">366. </div><div class="csl-right-inline">Borenstein M, Hedges LV, Higgins JPT, Rothstein HR. A basic introduction to fixed-effect and random-effects models for meta-analysis. <em>Research Synthesis Methods</em>. 2010;1(2):97–111. doi:<a href="https://doi.org/10.1002/jrsm.12">10.1002/jrsm.12</a></div>
 </div>
 <div id="ref-metafor" class="csl-entry">
-<div class="csl-left-margin">368. </div><div class="csl-right-inline">Viechtbauer W. Conducting meta-analyses in <span></span>R<span></span> with the <span></span>metafor<span></span> package. 2010;36. doi:<a href="https://doi.org/10.18637/jss.v036.i03">10.18637/jss.v036.i03</a></div>
+<div class="csl-left-margin">367. </div><div class="csl-right-inline">Viechtbauer W. Conducting meta-analyses in <span></span>R<span></span> with the <span></span>metafor<span></span> package. 2010;36. doi:<a href="https://doi.org/10.18637/jss.v036.i03">10.18637/jss.v036.i03</a></div>
 </div>
 <div id="ref-Borenstein2022" class="csl-entry">
-<div class="csl-left-margin">369. </div><div class="csl-right-inline">Borenstein M. In a meta-analysis, the I-squared statistic does not tell us how much the effect size varies. <em>Journal of Clinical Epidemiology</em>. outubro 2022. doi:<a href="https://doi.org/10.1016/j.jclinepi.2022.10.003">10.1016/j.jclinepi.2022.10.003</a></div>
+<div class="csl-left-margin">368. </div><div class="csl-right-inline">Borenstein M. In a meta-analysis, the I-squared statistic does not tell us how much the effect size varies. <em>Journal of Clinical Epidemiology</em>. outubro 2022. doi:<a href="https://doi.org/10.1016/j.jclinepi.2022.10.003">10.1016/j.jclinepi.2022.10.003</a></div>
 </div>
 <div id="ref-degrooth2023" class="csl-entry">
-<div class="csl-left-margin">371. </div><div class="csl-right-inline">Grooth HJ de, Parienti JJ. Heterogeneity between studies can be explained more reliably with individual patient data. <em>Intensive Care Medicine</em>. julho 2023. doi:<a href="https://doi.org/10.1007/s00134-023-07163-z">10.1007/s00134-023-07163-z</a></div>
+<div class="csl-left-margin">370. </div><div class="csl-right-inline">Grooth HJ de, Parienti JJ. Heterogeneity between studies can be explained more reliably with individual patient data. <em>Intensive Care Medicine</em>. julho 2023. doi:<a href="https://doi.org/10.1007/s00134-023-07163-z">10.1007/s00134-023-07163-z</a></div>
 </div>
 <div id="ref-dettori2021" class="csl-entry">
-<div class="csl-left-margin">372. </div><div class="csl-right-inline">Dettori JR, Norvell DC, Chapman JR. Seeing the Forest by Looking at the Trees: How to Interpret a Meta-Analysis Forest Plot. <em>Global Spine Journal</em>. 2021;11(4):614–616. doi:<a href="https://doi.org/10.1177/21925682211003889">10.1177/21925682211003889</a></div>
+<div class="csl-left-margin">371. </div><div class="csl-right-inline">Dettori JR, Norvell DC, Chapman JR. Seeing the Forest by Looking at the Trees: How to Interpret a Meta-Analysis Forest Plot. <em>Global Spine Journal</em>. 2021;11(4):614–616. doi:<a href="https://doi.org/10.1177/21925682211003889">10.1177/21925682211003889</a></div>
 </div>
 <div id="ref-song2000" class="csl-entry">
-<div class="csl-left-margin">373. </div><div class="csl-right-inline">Song, Eastwood, Gilbody, Duley, Sutton. Publication and related biases. <em>Health Technology Assessment</em>. 2000;4(10). doi:<a href="https://doi.org/10.3310/hta4100">10.3310/hta4100</a></div>
+<div class="csl-left-margin">372. </div><div class="csl-right-inline">Song, Eastwood, Gilbody, Duley, Sutton. Publication and related biases. <em>Health Technology Assessment</em>. 2000;4(10). doi:<a href="https://doi.org/10.3310/hta4100">10.3310/hta4100</a></div>
 </div>
 <div id="ref-egger1997" class="csl-entry">
-<div class="csl-left-margin">374. </div><div class="csl-right-inline">Egger M, Smith GD, Schneider M, Minder C. Bias in meta-analysis detected by a simple, graphical test. <em>BMJ</em>. 1997;315(7109):629–634. doi:<a href="https://doi.org/10.1136/bmj.315.7109.629">10.1136/bmj.315.7109.629</a></div>
+<div class="csl-left-margin">373. </div><div class="csl-right-inline">Egger M, Smith GD, Schneider M, Minder C. Bias in meta-analysis detected by a simple, graphical test. <em>BMJ</em>. 1997;315(7109):629–634. doi:<a href="https://doi.org/10.1136/bmj.315.7109.629">10.1136/bmj.315.7109.629</a></div>
 </div>
 <div id="ref-peters2006" class="csl-entry">
-<div class="csl-left-margin">375. </div><div class="csl-right-inline">Peters JL. Comparison of Two Methods to Detect Publication Bias in Meta-analysis. <em>JAMA</em>. 2006;295(6):676. doi:<a href="https://doi.org/10.1001/jama.295.6.676">10.1001/jama.295.6.676</a></div>
+<div class="csl-left-margin">374. </div><div class="csl-right-inline">Peters JL. Comparison of Two Methods to Detect Publication Bias in Meta-analysis. <em>JAMA</em>. 2006;295(6):676. doi:<a href="https://doi.org/10.1001/jama.295.6.676">10.1001/jama.295.6.676</a></div>
 </div>
 <div id="ref-sterne2011" class="csl-entry">
-<div class="csl-left-margin">376. </div><div class="csl-right-inline">Sterne JAC, Sutton AJ, Ioannidis JPA, et al. Recommendations for examining and interpreting funnel plot asymmetry in meta-analyses of randomised controlled trials. <em>BMJ</em>. 2011;343(jul22 1):d4002–d4002. doi:<a href="https://doi.org/10.1136/bmj.d4002">10.1136/bmj.d4002</a></div>
+<div class="csl-left-margin">375. </div><div class="csl-right-inline">Sterne JAC, Sutton AJ, Ioannidis JPA, et al. Recommendations for examining and interpreting funnel plot asymmetry in meta-analyses of randomised controlled trials. <em>BMJ</em>. 2011;343(jul22 1):d4002–d4002. doi:<a href="https://doi.org/10.1136/bmj.d4002">10.1136/bmj.d4002</a></div>
 </div>
 <div id="ref-duval2000" class="csl-entry">
-<div class="csl-left-margin">377. </div><div class="csl-right-inline">Duval S, Tweedie R. Trim and Fill: A Simple Funnel<span>-</span>Plot<span></span>Based Method of Testing and Adjusting for Publication Bias in Meta<span>-</span>Analysis. <em>Biometrics</em>. 2000;56(2):455–463. doi:<a href="https://doi.org/10.1111/j.0006-341x.2000.00455.x">10.1111/j.0006-341x.2000.00455.x</a></div>
+<div class="csl-left-margin">376. </div><div class="csl-right-inline">Duval S, Tweedie R. Trim and Fill: A Simple Funnel<span>-</span>Plot<span></span>Based Method of Testing and Adjusting for Publication Bias in Meta<span>-</span>Analysis. <em>Biometrics</em>. 2000;56(2):455–463. doi:<a href="https://doi.org/10.1111/j.0006-341x.2000.00455.x">10.1111/j.0006-341x.2000.00455.x</a></div>
 </div>
 <div id="ref-page2021" class="csl-entry">
-<div class="csl-left-margin">378. </div><div class="csl-right-inline">Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: An updated guideline for reporting systematic reviews. <em>PLOS Medicine</em>. 2021;18(3):e1003583. doi:<a href="https://doi.org/10.1371/journal.pmed.1003583">10.1371/journal.pmed.1003583</a></div>
+<div class="csl-left-margin">377. </div><div class="csl-right-inline">Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: An updated guideline for reporting systematic reviews. <em>PLOS Medicine</em>. 2021;18(3):e1003583. doi:<a href="https://doi.org/10.1371/journal.pmed.1003583">10.1371/journal.pmed.1003583</a></div>
 </div>
 <div id="ref-metagear" class="csl-entry">
-<div class="csl-left-margin">379. </div><div class="csl-right-inline">Lajeunesse MJ. Facilitating systematic reviews, data extraction, and meta-analysis with the metagear package for R. <em>Methods in Ecology and Evolution</em>. 2016;7(3):323–330. doi:<a href="https://doi.org/10.1111/2041-210X.12472">10.1111/2041-210X.12472</a></div>
+<div class="csl-left-margin">378. </div><div class="csl-right-inline">Lajeunesse MJ. Facilitating systematic reviews, data extraction, and meta-analysis with the metagear package for R. <em>Methods in Ecology and Evolution</em>. 2016;7(3):323–330. doi:<a href="https://doi.org/10.1111/2041-210X.12472">10.1111/2041-210X.12472</a></div>
 </div>
 <div id="ref-Moher2015" class="csl-entry">
-<div class="csl-left-margin">380. </div><div class="csl-right-inline">Moher D, Shamseer L, Clarke M, et al. Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement. <em>Systematic Reviews</em>. 2015;4(1). doi:<a href="https://doi.org/10.1186/2046-4053-4-1">10.1186/2046-4053-4-1</a></div>
+<div class="csl-left-margin">379. </div><div class="csl-right-inline">Moher D, Shamseer L, Clarke M, et al. Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement. <em>Systematic Reviews</em>. 2015;4(1). doi:<a href="https://doi.org/10.1186/2046-4053-4-1">10.1186/2046-4053-4-1</a></div>
 </div>
 <div id="ref-PRISMA2020" class="csl-entry">
-<div class="csl-left-margin">381. </div><div class="csl-right-inline">Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An R package and Shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and Open Synthesis. <em>Campbell Systematic Reviews</em>. 2022;18:e1230. doi:<a href="https://doi.org/10.1002/cl2.1230">10.1002/cl2.1230</a></div>
+<div class="csl-left-margin">380. </div><div class="csl-right-inline">Haddaway NR, Page MJ, Pritchard CC, McGuinness LA. PRISMA2020: An R package and Shiny app for producing PRISMA 2020-compliant flow diagrams, with interactivity for optimised digital transparency and Open Synthesis. <em>Campbell Systematic Reviews</em>. 2022;18:e1230. doi:<a href="https://doi.org/10.1002/cl2.1230">10.1002/cl2.1230</a></div>
 </div>
 </div>
             </section>
