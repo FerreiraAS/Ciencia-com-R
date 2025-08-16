@@ -189,11 +189,11 @@ div.csl-indent {
 <li><a style="text-align:center; border-width:3px;border-style:solid; border-color:white; border-radius:15px; padding:5px; background-color:#276DC2; text-decoration:none; color:white" href="https://ferreiraas.github.io/Ciencia-com-R-Consultoria/"><b>e-Book | Consultoria</b></a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Capa</a></li>
-<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i>Dedicatória</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Capa</strong></a></li>
+<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i><strong>Dedicatória</strong></a></li>
 <li class="chapter" data-level="" data-path="agradecimentos.html"><a href="agradecimentos.html"><i class="fa fa-check"></i><strong>Agradecimentos</strong></a></li>
+<li class="chapter" data-level="" data-path="apresentacao.html"><a href="apresentacao.html"><i class="fa fa-check"></i><strong>Apresentação</strong></a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i><strong>Sobre o autor</strong></a></li>
-<li class="chapter" data-level="" data-path="prefacio.html"><a href="prefacio.html"><i class="fa fa-check"></i><strong>Prefácio</strong></a></li>
 <li class="chapter" data-level="" data-path="parte-1.html"><a href="parte-1.html"><i class="fa fa-check"></i><em>PARTE 1: FUNDAMENTOS ESTATÍSTICOS</em></a></li>
 <li class="chapter" data-level="1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html"><i class="fa fa-check"></i><b>1</b> <strong>Pensamento estatístico</strong></a>
 <ul>
@@ -622,9 +622,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="17" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>17</b> <strong>Shiny Apps</strong></a>
 <ul>
-<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i>Aplicativos por delineamento de estudo</a>
+<li class="chapter" data-level="17.1" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i><b>17.1</b> Aplicativos por delineamento de estudo</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#ensaios-cl%C3%ADnicos"><i class="fa fa-check"></i>Ensaios clínicos</a></li>
+<li class="chapter" data-level="17.1.1" data-path="shiny-apps.html"><a href="shiny-apps.html#qual-shiny-app-usar-para-ensaios-experimentais"><i class="fa fa-check"></i><b>17.1.1</b> Qual Shiny App usar para ensaios experimentais?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-5.html"><a href="parte-5.html"><i class="fa fa-check"></i><em>PARTE 5: ANÁLISES DESCRITIVAS E EXPLORATÓRIAS</em></a></li>
@@ -1651,48 +1651,50 @@ Figura 15.1: Interface do RStudio. Fonte: <a href="https://docs.posit.co/ide/use
 <span id="cb2-16"><a href="pensamento-computacional.html#cb2-16" tabindex="-1"></a><span class="co"># Exibe o resultado da função</span></span>
 <span id="cb2-17"><a href="pensamento-computacional.html#cb2-17" tabindex="-1"></a><span class="fu">print</span>(resultado) <span class="co"># Exibe o resultado na saída padrão</span></span></code></pre></div>
 </details>
-<p>[1] 9.8596</p>
+<pre><code>## [1] 9.8596</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="pensamento-computacional.html#cb3-1" tabindex="-1"></a><span class="co"># Este é um vetor</span></span>
-<span id="cb3-2"><a href="pensamento-computacional.html#cb3-2" tabindex="-1"></a>vetor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="co"># Cria um vetor com os valores de 1 a 5</span></span>
-<span id="cb3-3"><a href="pensamento-computacional.html#cb3-3" tabindex="-1"></a><span class="co"># Exibe o vetor</span></span>
-<span id="cb3-4"><a href="pensamento-computacional.html#cb3-4" tabindex="-1"></a><span class="fu">print</span>(vetor) <span class="co"># Exibe o vetor na saída padrão</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="pensamento-computacional.html#cb4-1" tabindex="-1"></a><span class="co"># Este é um vetor</span></span>
+<span id="cb4-2"><a href="pensamento-computacional.html#cb4-2" tabindex="-1"></a>vetor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="co"># Cria um vetor com os valores de 1 a 5</span></span>
+<span id="cb4-3"><a href="pensamento-computacional.html#cb4-3" tabindex="-1"></a><span class="co"># Exibe o vetor</span></span>
+<span id="cb4-4"><a href="pensamento-computacional.html#cb4-4" tabindex="-1"></a><span class="fu">print</span>(vetor) <span class="co"># Exibe o vetor na saída padrão</span></span></code></pre></div>
 </details>
-<p>[1] 1 2 3 4 5</p>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="pensamento-computacional.html#cb4-1" tabindex="-1"></a><span class="co"># Esta é uma matrix</span></span>
-<span id="cb4-2"><a href="pensamento-computacional.html#cb4-2" tabindex="-1"></a>matriz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>) <span class="co"># Cria uma matriz 3x3 com os valores de 1 a 9</span></span>
-<span id="cb4-3"><a href="pensamento-computacional.html#cb4-3" tabindex="-1"></a><span class="co"># Exibe a matriz</span></span>
-<span id="cb4-4"><a href="pensamento-computacional.html#cb4-4" tabindex="-1"></a><span class="fu">print</span>(matriz) <span class="co"># Exibe a matriz na saída padrão</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="pensamento-computacional.html#cb6-1" tabindex="-1"></a><span class="co"># Esta é uma matrix</span></span>
+<span id="cb6-2"><a href="pensamento-computacional.html#cb6-2" tabindex="-1"></a>matriz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>) <span class="co"># Cria uma matriz 3x3 com os valores de 1 a 9</span></span>
+<span id="cb6-3"><a href="pensamento-computacional.html#cb6-3" tabindex="-1"></a><span class="co"># Exibe a matriz</span></span>
+<span id="cb6-4"><a href="pensamento-computacional.html#cb6-4" tabindex="-1"></a><span class="fu">print</span>(matriz) <span class="co"># Exibe a matriz na saída padrão</span></span></code></pre></div>
 </details>
-<pre><code> [,1] [,2] [,3]</code></pre>
-<p>[1,] 1 4 7
-[2,] 2 5 8
-[3,] 3 6 9</p>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="pensamento-computacional.html#cb6-1" tabindex="-1"></a><span class="co"># Esta é uma lista</span></span>
-<span id="cb6-2"><a href="pensamento-computacional.html#cb6-2" tabindex="-1"></a>lista <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">nome=</span><span class="st">&quot;João&quot;</span>, <span class="at">idade=</span><span class="dv">30</span>, <span class="at">altura=</span><span class="fl">1.75</span>) <span class="co"># Cria uma lista com nome, idade e altura</span></span>
-<span id="cb6-3"><a href="pensamento-computacional.html#cb6-3" tabindex="-1"></a><span class="co"># Exibe a lista</span></span>
-<span id="cb6-4"><a href="pensamento-computacional.html#cb6-4" tabindex="-1"></a><span class="fu">print</span>(lista) <span class="co"># Exibe a lista na saída padrão</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="pensamento-computacional.html#cb8-1" tabindex="-1"></a><span class="co"># Esta é uma lista</span></span>
+<span id="cb8-2"><a href="pensamento-computacional.html#cb8-2" tabindex="-1"></a>lista <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">nome=</span><span class="st">&quot;João&quot;</span>, <span class="at">idade=</span><span class="dv">30</span>, <span class="at">altura=</span><span class="fl">1.75</span>) <span class="co"># Cria uma lista com nome, idade e altura</span></span>
+<span id="cb8-3"><a href="pensamento-computacional.html#cb8-3" tabindex="-1"></a><span class="co"># Exibe a lista</span></span>
+<span id="cb8-4"><a href="pensamento-computacional.html#cb8-4" tabindex="-1"></a><span class="fu">print</span>(lista) <span class="co"># Exibe a lista na saída padrão</span></span></code></pre></div>
 </details>
-<p>$nome
-[1] “João”</p>
-<p>$idade
-[1] 30</p>
-<p>$altura
-[1] 1.75</p>
+<pre><code>## $nome
+## [1] &quot;João&quot;
+## 
+## $idade
+## [1] 30
+## 
+## $altura
+## [1] 1.75</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="pensamento-computacional.html#cb7-1" tabindex="-1"></a><span class="co"># Este é um dataframe</span></span>
-<span id="cb7-2"><a href="pensamento-computacional.html#cb7-2" tabindex="-1"></a>dataframe <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">nome=</span><span class="fu">c</span>(<span class="st">&quot;João&quot;</span>, <span class="st">&quot;Maria&quot;</span>, <span class="st">&quot;José&quot;</span>), <span class="at">idade=</span><span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">25</span>, <span class="dv">40</span>), <span class="at">altura=</span><span class="fu">c</span>(<span class="fl">1.75</span>, <span class="fl">1.60</span>, <span class="fl">1.80</span>)) <span class="co"># Cria um dataframe com nome, idade e altura</span></span>
-<span id="cb7-3"><a href="pensamento-computacional.html#cb7-3" tabindex="-1"></a><span class="co"># Exibe o dataframe</span></span>
-<span id="cb7-4"><a href="pensamento-computacional.html#cb7-4" tabindex="-1"></a><span class="fu">print</span>(dataframe) <span class="co"># Exibe o dataframe na saída padrão</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="pensamento-computacional.html#cb10-1" tabindex="-1"></a><span class="co"># Este é um dataframe</span></span>
+<span id="cb10-2"><a href="pensamento-computacional.html#cb10-2" tabindex="-1"></a>dataframe <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">nome=</span><span class="fu">c</span>(<span class="st">&quot;João&quot;</span>, <span class="st">&quot;Maria&quot;</span>, <span class="st">&quot;José&quot;</span>), <span class="at">idade=</span><span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">25</span>, <span class="dv">40</span>), <span class="at">altura=</span><span class="fu">c</span>(<span class="fl">1.75</span>, <span class="fl">1.60</span>, <span class="fl">1.80</span>)) <span class="co"># Cria um dataframe com nome, idade e altura</span></span>
+<span id="cb10-3"><a href="pensamento-computacional.html#cb10-3" tabindex="-1"></a><span class="co"># Exibe o dataframe</span></span>
+<span id="cb10-4"><a href="pensamento-computacional.html#cb10-4" tabindex="-1"></a><span class="fu">print</span>(dataframe) <span class="co"># Exibe o dataframe na saída padrão</span></span></code></pre></div>
 </details>
-<p>nome idade altura
-1 João 30 1.75
-2 Maria 25 1.60
-3 José 40 1.80</p>
+<pre><code>##    nome idade altura
+## 1  João    30   1.75
+## 2 Maria    25   1.60
+## 3  José    40   1.80</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="pensamento-computacional.html#cb8-1" tabindex="-1"></a><span class="co"># Fim do exemplo de R script</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="pensamento-computacional.html#cb12-1" tabindex="-1"></a><span class="co"># Fim do exemplo de R script</span></span></code></pre></div>
 </details>
 <p><br></p>
 </div>

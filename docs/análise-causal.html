@@ -189,11 +189,11 @@ div.csl-indent {
 <li><a style="text-align:center; border-width:3px;border-style:solid; border-color:white; border-radius:15px; padding:5px; background-color:#276DC2; text-decoration:none; color:white" href="https://ferreiraas.github.io/Ciencia-com-R-Consultoria/"><b>e-Book | Consultoria</b></a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Capa</a></li>
-<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i>Dedicatória</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Capa</strong></a></li>
+<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i><strong>Dedicatória</strong></a></li>
 <li class="chapter" data-level="" data-path="agradecimentos.html"><a href="agradecimentos.html"><i class="fa fa-check"></i><strong>Agradecimentos</strong></a></li>
+<li class="chapter" data-level="" data-path="apresentacao.html"><a href="apresentacao.html"><i class="fa fa-check"></i><strong>Apresentação</strong></a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i><strong>Sobre o autor</strong></a></li>
-<li class="chapter" data-level="" data-path="prefacio.html"><a href="prefacio.html"><i class="fa fa-check"></i><strong>Prefácio</strong></a></li>
 <li class="chapter" data-level="" data-path="parte-1.html"><a href="parte-1.html"><i class="fa fa-check"></i><em>PARTE 1: FUNDAMENTOS ESTATÍSTICOS</em></a></li>
 <li class="chapter" data-level="1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html"><i class="fa fa-check"></i><b>1</b> <strong>Pensamento estatístico</strong></a>
 <ul>
@@ -622,9 +622,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="17" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>17</b> <strong>Shiny Apps</strong></a>
 <ul>
-<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i>Aplicativos por delineamento de estudo</a>
+<li class="chapter" data-level="17.1" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i><b>17.1</b> Aplicativos por delineamento de estudo</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#ensaios-cl%C3%ADnicos"><i class="fa fa-check"></i>Ensaios clínicos</a></li>
+<li class="chapter" data-level="17.1.1" data-path="shiny-apps.html"><a href="shiny-apps.html#qual-shiny-app-usar-para-ensaios-experimentais"><i class="fa fa-check"></i><b>17.1.1</b> Qual Shiny App usar para ensaios experimentais?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-5.html"><a href="parte-5.html"><i class="fa fa-check"></i><em>PARTE 5: ANÁLISES DESCRITIVAS E EXPLORATÓRIAS</em></a></li>
@@ -1509,109 +1509,109 @@ div.csl-indent {
 <div id="diagramas-acíclicos-direcionados-dags-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Diagramas acíclicos direcionados (DAGs)<a href="#diagramas-ac%C3%ADclicos-direcionados-dags-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="análise-causal.html#cb111-1" tabindex="-1"></a><span class="co"># ---------- Funções auxiliares ----------</span></span>
-<span id="cb111-2"><a href="análise-causal.html#cb111-2" tabindex="-1"></a>.build_nodes_df <span class="ot">&lt;-</span> <span class="cf">function</span>(dag, panel_label){</span>
-<span id="cb111-3"><a href="análise-causal.html#cb111-3" tabindex="-1"></a>  coords <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">coordinates</span>(dag)</span>
-<span id="cb111-4"><a href="análise-causal.html#cb111-4" tabindex="-1"></a>  nms <span class="ot">&lt;-</span> <span class="fu">union</span>(<span class="fu">names</span>(coords<span class="sc">$</span>x), <span class="fu">names</span>(coords<span class="sc">$</span>y))</span>
-<span id="cb111-5"><a href="análise-causal.html#cb111-5" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">unname</span>(coords<span class="sc">$</span>x[nms]); <span class="fu">names</span>(x) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb111-6"><a href="análise-causal.html#cb111-6" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">unname</span>(coords<span class="sc">$</span>y[nms]); <span class="fu">names</span>(y) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb111-7"><a href="análise-causal.html#cb111-7" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb111-8"><a href="análise-causal.html#cb111-8" tabindex="-1"></a>    <span class="at">name  =</span> nms, <span class="at">x =</span> <span class="fu">as.numeric</span>(x), <span class="at">y =</span> <span class="fu">as.numeric</span>(y),</span>
-<span id="cb111-9"><a href="análise-causal.html#cb111-9" tabindex="-1"></a>    <span class="at">panel =</span> panel_label, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb111-10"><a href="análise-causal.html#cb111-10" tabindex="-1"></a>  )</span>
-<span id="cb111-11"><a href="análise-causal.html#cb111-11" tabindex="-1"></a>}</span>
-<span id="cb111-12"><a href="análise-causal.html#cb111-12" tabindex="-1"></a></span>
-<span id="cb111-13"><a href="análise-causal.html#cb111-13" tabindex="-1"></a>.build_edges_df <span class="ot">&lt;-</span> <span class="cf">function</span>(dag, nodes_df){</span>
-<span id="cb111-14"><a href="análise-causal.html#cb111-14" tabindex="-1"></a>  ed <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">edges</span>(dag)</span>
-<span id="cb111-15"><a href="análise-causal.html#cb111-15" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">nrow</span>(ed) <span class="sc">==</span> <span class="dv">0</span><span class="dt">L</span>) <span class="fu">return</span>(<span class="fu">data.frame</span>())</span>
-<span id="cb111-16"><a href="análise-causal.html#cb111-16" tabindex="-1"></a>  x_of <span class="ot">&lt;-</span> <span class="cf">function</span>(nm) nodes_df<span class="sc">$</span>x[<span class="fu">match</span>(nm, nodes_df<span class="sc">$</span>name)]</span>
-<span id="cb111-17"><a href="análise-causal.html#cb111-17" tabindex="-1"></a>  y_of <span class="ot">&lt;-</span> <span class="cf">function</span>(nm) nodes_df<span class="sc">$</span>y[<span class="fu">match</span>(nm, nodes_df<span class="sc">$</span>name)]</span>
-<span id="cb111-18"><a href="análise-causal.html#cb111-18" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb111-19"><a href="análise-causal.html#cb111-19" tabindex="-1"></a>    <span class="at">x     =</span> <span class="fu">x_of</span>(ed<span class="sc">$</span>v), <span class="at">y    =</span> <span class="fu">y_of</span>(ed<span class="sc">$</span>v),</span>
-<span id="cb111-20"><a href="análise-causal.html#cb111-20" tabindex="-1"></a>    <span class="at">xend  =</span> <span class="fu">x_of</span>(ed<span class="sc">$</span>w), <span class="at">yend =</span> <span class="fu">y_of</span>(ed<span class="sc">$</span>w),</span>
-<span id="cb111-21"><a href="análise-causal.html#cb111-21" tabindex="-1"></a>    <span class="at">panel =</span> nodes_df<span class="sc">$</span>panel[<span class="dv">1</span>], <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb111-22"><a href="análise-causal.html#cb111-22" tabindex="-1"></a>  )</span>
-<span id="cb111-23"><a href="análise-causal.html#cb111-23" tabindex="-1"></a>}</span>
-<span id="cb111-24"><a href="análise-causal.html#cb111-24" tabindex="-1"></a></span>
-<span id="cb111-25"><a href="análise-causal.html#cb111-25" tabindex="-1"></a><span class="co"># Encurtar arestas para não invadir os nós</span></span>
-<span id="cb111-26"><a href="análise-causal.html#cb111-26" tabindex="-1"></a>trim_edges_to_node_border <span class="ot">&lt;-</span> <span class="cf">function</span>(edges, <span class="at">node_r =</span> <span class="fl">0.085</span>){</span>
-<span id="cb111-27"><a href="análise-causal.html#cb111-27" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">nrow</span>(edges) <span class="sc">==</span> <span class="dv">0</span><span class="dt">L</span>) <span class="fu">return</span>(edges)</span>
-<span id="cb111-28"><a href="análise-causal.html#cb111-28" tabindex="-1"></a>  dx  <span class="ot">&lt;-</span> edges<span class="sc">$</span>xend <span class="sc">-</span> edges<span class="sc">$</span>x</span>
-<span id="cb111-29"><a href="análise-causal.html#cb111-29" tabindex="-1"></a>  dy  <span class="ot">&lt;-</span> edges<span class="sc">$</span>yend <span class="sc">-</span> edges<span class="sc">$</span>y</span>
-<span id="cb111-30"><a href="análise-causal.html#cb111-30" tabindex="-1"></a>  L   <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(dx<span class="sc">*</span>dx <span class="sc">+</span> dy<span class="sc">*</span>dy)</span>
-<span id="cb111-31"><a href="análise-causal.html#cb111-31" tabindex="-1"></a>  ux  <span class="ot">&lt;-</span> dx <span class="sc">/</span> L</span>
-<span id="cb111-32"><a href="análise-causal.html#cb111-32" tabindex="-1"></a>  uy  <span class="ot">&lt;-</span> dy <span class="sc">/</span> L</span>
-<span id="cb111-33"><a href="análise-causal.html#cb111-33" tabindex="-1"></a>  <span class="co"># recua na origem e no destino</span></span>
-<span id="cb111-34"><a href="análise-causal.html#cb111-34" tabindex="-1"></a>  edges<span class="sc">$</span>x    <span class="ot">&lt;-</span> edges<span class="sc">$</span>x    <span class="sc">+</span> ux <span class="sc">*</span> node_r</span>
-<span id="cb111-35"><a href="análise-causal.html#cb111-35" tabindex="-1"></a>  edges<span class="sc">$</span>y    <span class="ot">&lt;-</span> edges<span class="sc">$</span>y    <span class="sc">+</span> uy <span class="sc">*</span> node_r</span>
-<span id="cb111-36"><a href="análise-causal.html#cb111-36" tabindex="-1"></a>  edges<span class="sc">$</span>xend <span class="ot">&lt;-</span> edges<span class="sc">$</span>xend <span class="sc">-</span> ux <span class="sc">*</span> node_r</span>
-<span id="cb111-37"><a href="análise-causal.html#cb111-37" tabindex="-1"></a>  edges<span class="sc">$</span>yend <span class="ot">&lt;-</span> edges<span class="sc">$</span>yend <span class="sc">-</span> uy <span class="sc">*</span> node_r</span>
-<span id="cb111-38"><a href="análise-causal.html#cb111-38" tabindex="-1"></a>  edges</span>
-<span id="cb111-39"><a href="análise-causal.html#cb111-39" tabindex="-1"></a>}</span>
-<span id="cb111-40"><a href="análise-causal.html#cb111-40" tabindex="-1"></a></span>
-<span id="cb111-41"><a href="análise-causal.html#cb111-41" tabindex="-1"></a><span class="co"># ---------- DAGs ----------</span></span>
-<span id="cb111-42"><a href="análise-causal.html#cb111-42" tabindex="-1"></a>dag_ind <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">&quot;dag { X Y }&quot;</span>)</span>
-<span id="cb111-43"><a href="análise-causal.html#cb111-43" tabindex="-1"></a>dagitty<span class="sc">::</span><span class="fu">coordinates</span>(dag_ind) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Y=</span><span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Y=</span><span class="dv">0</span>))</span>
-<span id="cb111-44"><a href="análise-causal.html#cb111-44" tabindex="-1"></a></span>
-<span id="cb111-45"><a href="análise-causal.html#cb111-45" tabindex="-1"></a>dag_chain <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">&quot;dag { X -&gt; M -&gt; Y }&quot;</span>)</span>
-<span id="cb111-46"><a href="análise-causal.html#cb111-46" tabindex="-1"></a>dagitty<span class="sc">::</span><span class="fu">coordinates</span>(dag_chain) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">M=</span><span class="fl">0.5</span>, <span class="at">Y=</span><span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">M=</span><span class="dv">0</span>, <span class="at">Y=</span><span class="dv">0</span>))</span>
-<span id="cb111-47"><a href="análise-causal.html#cb111-47" tabindex="-1"></a></span>
-<span id="cb111-48"><a href="análise-causal.html#cb111-48" tabindex="-1"></a>dag_fork <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">&quot;dag { X &lt;- Z -&gt; Y }&quot;</span>)</span>
-<span id="cb111-49"><a href="análise-causal.html#cb111-49" tabindex="-1"></a>dagitty<span class="sc">::</span><span class="fu">coordinates</span>(dag_fork) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="fl">0.5</span>, <span class="at">Y=</span><span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="dv">0</span>, <span class="at">Y=</span><span class="dv">0</span>))</span>
-<span id="cb111-50"><a href="análise-causal.html#cb111-50" tabindex="-1"></a></span>
-<span id="cb111-51"><a href="análise-causal.html#cb111-51" tabindex="-1"></a>dag_coll <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">&quot;dag { X -&gt; Z &lt;- Y }&quot;</span>)</span>
-<span id="cb111-52"><a href="análise-causal.html#cb111-52" tabindex="-1"></a>dagitty<span class="sc">::</span><span class="fu">coordinates</span>(dag_coll) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="fl">0.5</span>, <span class="at">Y=</span><span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="dv">0</span>, <span class="at">Y=</span><span class="dv">0</span>))</span>
-<span id="cb111-53"><a href="análise-causal.html#cb111-53" tabindex="-1"></a></span>
-<span id="cb111-54"><a href="análise-causal.html#cb111-54" tabindex="-1"></a><span class="co"># ---------- Data frames ----------</span></span>
-<span id="cb111-55"><a href="análise-causal.html#cb111-55" tabindex="-1"></a>nodes_all <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb111-56"><a href="análise-causal.html#cb111-56" tabindex="-1"></a>  <span class="fu">.build_nodes_df</span>(dag_ind,   <span class="st">&quot;1) Independência&quot;</span>),</span>
-<span id="cb111-57"><a href="análise-causal.html#cb111-57" tabindex="-1"></a>  <span class="fu">.build_nodes_df</span>(dag_chain, <span class="st">&quot;2) Cadeia (X → M → Y)&quot;</span>),</span>
-<span id="cb111-58"><a href="análise-causal.html#cb111-58" tabindex="-1"></a>  <span class="fu">.build_nodes_df</span>(dag_fork,  <span class="st">&quot;3) Garfo (X ← Z → Y)&quot;</span>),</span>
-<span id="cb111-59"><a href="análise-causal.html#cb111-59" tabindex="-1"></a>  <span class="fu">.build_nodes_df</span>(dag_coll,  <span class="st">&quot;4) Colisor (X → Z ← Y)&quot;</span>)</span>
-<span id="cb111-60"><a href="análise-causal.html#cb111-60" tabindex="-1"></a>)</span>
-<span id="cb111-61"><a href="análise-causal.html#cb111-61" tabindex="-1"></a></span>
-<span id="cb111-62"><a href="análise-causal.html#cb111-62" tabindex="-1"></a>edges_all <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb111-63"><a href="análise-causal.html#cb111-63" tabindex="-1"></a>  <span class="fu">.build_edges_df</span>(dag_ind,   <span class="fu">subset</span>(nodes_all, panel <span class="sc">==</span> <span class="st">&quot;1) Independência&quot;</span>)),</span>
-<span id="cb111-64"><a href="análise-causal.html#cb111-64" tabindex="-1"></a>  <span class="fu">.build_edges_df</span>(dag_chain, <span class="fu">subset</span>(nodes_all, panel <span class="sc">==</span> <span class="st">&quot;2) Cadeia (X → M → Y)&quot;</span>)),</span>
-<span id="cb111-65"><a href="análise-causal.html#cb111-65" tabindex="-1"></a>  <span class="fu">.build_edges_df</span>(dag_fork,  <span class="fu">subset</span>(nodes_all, panel <span class="sc">==</span> <span class="st">&quot;3) Garfo (X ← Z → Y)&quot;</span>)),</span>
-<span id="cb111-66"><a href="análise-causal.html#cb111-66" tabindex="-1"></a>  <span class="fu">.build_edges_df</span>(dag_coll,  <span class="fu">subset</span>(nodes_all, panel <span class="sc">==</span> <span class="st">&quot;4) Colisor (X → Z ← Y)&quot;</span>))</span>
-<span id="cb111-67"><a href="análise-causal.html#cb111-67" tabindex="-1"></a>)</span>
-<span id="cb111-68"><a href="análise-causal.html#cb111-68" tabindex="-1"></a></span>
-<span id="cb111-69"><a href="análise-causal.html#cb111-69" tabindex="-1"></a><span class="co"># *** Ajuste importante: encurtar arestas ***</span></span>
-<span id="cb111-70"><a href="análise-causal.html#cb111-70" tabindex="-1"></a>edges_all <span class="ot">&lt;-</span> <span class="fu">trim_edges_to_node_border</span>(edges_all, <span class="at">node_r =</span> <span class="fl">0.085</span>)  <span class="co"># aumente/diminua se mudar o size do nó</span></span>
-<span id="cb111-71"><a href="análise-causal.html#cb111-71" tabindex="-1"></a></span>
-<span id="cb111-72"><a href="análise-causal.html#cb111-72" tabindex="-1"></a><span class="co"># ---------- Plot ----------</span></span>
-<span id="cb111-73"><a href="análise-causal.html#cb111-73" tabindex="-1"></a>p <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb111-74"><a href="análise-causal.html#cb111-74" tabindex="-1"></a>  <span class="co"># Arestas com setas visíveis</span></span>
-<span id="cb111-75"><a href="análise-causal.html#cb111-75" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_segment</span>(</span>
-<span id="cb111-76"><a href="análise-causal.html#cb111-76" tabindex="-1"></a>    <span class="at">data =</span> edges_all,</span>
-<span id="cb111-77"><a href="análise-causal.html#cb111-77" tabindex="-1"></a>    <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">xend =</span> xend, <span class="at">yend =</span> yend),</span>
-<span id="cb111-78"><a href="análise-causal.html#cb111-78" tabindex="-1"></a>    <span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.28</span>, <span class="st">&quot;in&quot;</span>), <span class="at">ends =</span> <span class="st">&quot;last&quot;</span>, <span class="at">type =</span> <span class="st">&quot;closed&quot;</span>),</span>
-<span id="cb111-79"><a href="análise-causal.html#cb111-79" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">1</span></span>
-<span id="cb111-80"><a href="análise-causal.html#cb111-80" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb111-81"><a href="análise-causal.html#cb111-81" tabindex="-1"></a>  <span class="co"># Nós grandes (círculo branco com contorno)</span></span>
-<span id="cb111-82"><a href="análise-causal.html#cb111-82" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(</span>
-<span id="cb111-83"><a href="análise-causal.html#cb111-83" tabindex="-1"></a>    <span class="at">data =</span> nodes_all,</span>
-<span id="cb111-84"><a href="análise-causal.html#cb111-84" tabindex="-1"></a>    <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y),</span>
-<span id="cb111-85"><a href="análise-causal.html#cb111-85" tabindex="-1"></a>    <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb111-86"><a href="análise-causal.html#cb111-86" tabindex="-1"></a>    <span class="at">stroke =</span> <span class="fl">1.6</span>, <span class="at">size =</span> <span class="dv">14</span></span>
-<span id="cb111-87"><a href="análise-causal.html#cb111-87" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb111-88"><a href="análise-causal.html#cb111-88" tabindex="-1"></a>  <span class="co"># Letras dentro dos círculos</span></span>
-<span id="cb111-89"><a href="análise-causal.html#cb111-89" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_text</span>(</span>
-<span id="cb111-90"><a href="análise-causal.html#cb111-90" tabindex="-1"></a>    <span class="at">data =</span> nodes_all,</span>
-<span id="cb111-91"><a href="análise-causal.html#cb111-91" tabindex="-1"></a>    <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">label =</span> name),</span>
-<span id="cb111-92"><a href="análise-causal.html#cb111-92" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">6</span>, <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">vjust =</span> <span class="fl">0.35</span>, <span class="at">hjust =</span> <span class="fl">0.5</span></span>
-<span id="cb111-93"><a href="análise-causal.html#cb111-93" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb111-94"><a href="análise-causal.html#cb111-94" tabindex="-1"></a>  ggdag<span class="sc">::</span><span class="fu">theme_dag</span>() <span class="sc">+</span></span>
-<span id="cb111-95"><a href="análise-causal.html#cb111-95" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(<span class="sc">~</span> panel, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb111-96"><a href="análise-causal.html#cb111-96" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb111-97"><a href="análise-causal.html#cb111-97" tabindex="-1"></a>    <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb111-98"><a href="análise-causal.html#cb111-98" tabindex="-1"></a>    <span class="at">panel.spacing =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="dv">5</span>, <span class="st">&quot;lines&quot;</span>),</span>
-<span id="cb111-99"><a href="análise-causal.html#cb111-99" tabindex="-1"></a>    <span class="at">plot.margin =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="st">&quot;cm&quot;</span>)</span>
-<span id="cb111-100"><a href="análise-causal.html#cb111-100" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb111-101"><a href="análise-causal.html#cb111-101" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">&quot;off&quot;</span>)</span>
-<span id="cb111-102"><a href="análise-causal.html#cb111-102" tabindex="-1"></a></span>
-<span id="cb111-103"><a href="análise-causal.html#cb111-103" tabindex="-1"></a><span class="fu">print</span>(p)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="análise-causal.html#cb115-1" tabindex="-1"></a><span class="co"># ---------- Funções auxiliares ----------</span></span>
+<span id="cb115-2"><a href="análise-causal.html#cb115-2" tabindex="-1"></a>.build_nodes_df <span class="ot">&lt;-</span> <span class="cf">function</span>(dag, panel_label){</span>
+<span id="cb115-3"><a href="análise-causal.html#cb115-3" tabindex="-1"></a>  coords <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">coordinates</span>(dag)</span>
+<span id="cb115-4"><a href="análise-causal.html#cb115-4" tabindex="-1"></a>  nms <span class="ot">&lt;-</span> <span class="fu">union</span>(<span class="fu">names</span>(coords<span class="sc">$</span>x), <span class="fu">names</span>(coords<span class="sc">$</span>y))</span>
+<span id="cb115-5"><a href="análise-causal.html#cb115-5" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">unname</span>(coords<span class="sc">$</span>x[nms]); <span class="fu">names</span>(x) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb115-6"><a href="análise-causal.html#cb115-6" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">unname</span>(coords<span class="sc">$</span>y[nms]); <span class="fu">names</span>(y) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb115-7"><a href="análise-causal.html#cb115-7" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb115-8"><a href="análise-causal.html#cb115-8" tabindex="-1"></a>    <span class="at">name  =</span> nms, <span class="at">x =</span> <span class="fu">as.numeric</span>(x), <span class="at">y =</span> <span class="fu">as.numeric</span>(y),</span>
+<span id="cb115-9"><a href="análise-causal.html#cb115-9" tabindex="-1"></a>    <span class="at">panel =</span> panel_label, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb115-10"><a href="análise-causal.html#cb115-10" tabindex="-1"></a>  )</span>
+<span id="cb115-11"><a href="análise-causal.html#cb115-11" tabindex="-1"></a>}</span>
+<span id="cb115-12"><a href="análise-causal.html#cb115-12" tabindex="-1"></a></span>
+<span id="cb115-13"><a href="análise-causal.html#cb115-13" tabindex="-1"></a>.build_edges_df <span class="ot">&lt;-</span> <span class="cf">function</span>(dag, nodes_df){</span>
+<span id="cb115-14"><a href="análise-causal.html#cb115-14" tabindex="-1"></a>  ed <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">edges</span>(dag)</span>
+<span id="cb115-15"><a href="análise-causal.html#cb115-15" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">nrow</span>(ed) <span class="sc">==</span> <span class="dv">0</span><span class="dt">L</span>) <span class="fu">return</span>(<span class="fu">data.frame</span>())</span>
+<span id="cb115-16"><a href="análise-causal.html#cb115-16" tabindex="-1"></a>  x_of <span class="ot">&lt;-</span> <span class="cf">function</span>(nm) nodes_df<span class="sc">$</span>x[<span class="fu">match</span>(nm, nodes_df<span class="sc">$</span>name)]</span>
+<span id="cb115-17"><a href="análise-causal.html#cb115-17" tabindex="-1"></a>  y_of <span class="ot">&lt;-</span> <span class="cf">function</span>(nm) nodes_df<span class="sc">$</span>y[<span class="fu">match</span>(nm, nodes_df<span class="sc">$</span>name)]</span>
+<span id="cb115-18"><a href="análise-causal.html#cb115-18" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb115-19"><a href="análise-causal.html#cb115-19" tabindex="-1"></a>    <span class="at">x     =</span> <span class="fu">x_of</span>(ed<span class="sc">$</span>v), <span class="at">y    =</span> <span class="fu">y_of</span>(ed<span class="sc">$</span>v),</span>
+<span id="cb115-20"><a href="análise-causal.html#cb115-20" tabindex="-1"></a>    <span class="at">xend  =</span> <span class="fu">x_of</span>(ed<span class="sc">$</span>w), <span class="at">yend =</span> <span class="fu">y_of</span>(ed<span class="sc">$</span>w),</span>
+<span id="cb115-21"><a href="análise-causal.html#cb115-21" tabindex="-1"></a>    <span class="at">panel =</span> nodes_df<span class="sc">$</span>panel[<span class="dv">1</span>], <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb115-22"><a href="análise-causal.html#cb115-22" tabindex="-1"></a>  )</span>
+<span id="cb115-23"><a href="análise-causal.html#cb115-23" tabindex="-1"></a>}</span>
+<span id="cb115-24"><a href="análise-causal.html#cb115-24" tabindex="-1"></a></span>
+<span id="cb115-25"><a href="análise-causal.html#cb115-25" tabindex="-1"></a><span class="co"># Encurtar arestas para não invadir os nós</span></span>
+<span id="cb115-26"><a href="análise-causal.html#cb115-26" tabindex="-1"></a>trim_edges_to_node_border <span class="ot">&lt;-</span> <span class="cf">function</span>(edges, <span class="at">node_r =</span> <span class="fl">0.085</span>){</span>
+<span id="cb115-27"><a href="análise-causal.html#cb115-27" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">nrow</span>(edges) <span class="sc">==</span> <span class="dv">0</span><span class="dt">L</span>) <span class="fu">return</span>(edges)</span>
+<span id="cb115-28"><a href="análise-causal.html#cb115-28" tabindex="-1"></a>  dx  <span class="ot">&lt;-</span> edges<span class="sc">$</span>xend <span class="sc">-</span> edges<span class="sc">$</span>x</span>
+<span id="cb115-29"><a href="análise-causal.html#cb115-29" tabindex="-1"></a>  dy  <span class="ot">&lt;-</span> edges<span class="sc">$</span>yend <span class="sc">-</span> edges<span class="sc">$</span>y</span>
+<span id="cb115-30"><a href="análise-causal.html#cb115-30" tabindex="-1"></a>  L   <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(dx<span class="sc">*</span>dx <span class="sc">+</span> dy<span class="sc">*</span>dy)</span>
+<span id="cb115-31"><a href="análise-causal.html#cb115-31" tabindex="-1"></a>  ux  <span class="ot">&lt;-</span> dx <span class="sc">/</span> L</span>
+<span id="cb115-32"><a href="análise-causal.html#cb115-32" tabindex="-1"></a>  uy  <span class="ot">&lt;-</span> dy <span class="sc">/</span> L</span>
+<span id="cb115-33"><a href="análise-causal.html#cb115-33" tabindex="-1"></a>  <span class="co"># recua na origem e no destino</span></span>
+<span id="cb115-34"><a href="análise-causal.html#cb115-34" tabindex="-1"></a>  edges<span class="sc">$</span>x    <span class="ot">&lt;-</span> edges<span class="sc">$</span>x    <span class="sc">+</span> ux <span class="sc">*</span> node_r</span>
+<span id="cb115-35"><a href="análise-causal.html#cb115-35" tabindex="-1"></a>  edges<span class="sc">$</span>y    <span class="ot">&lt;-</span> edges<span class="sc">$</span>y    <span class="sc">+</span> uy <span class="sc">*</span> node_r</span>
+<span id="cb115-36"><a href="análise-causal.html#cb115-36" tabindex="-1"></a>  edges<span class="sc">$</span>xend <span class="ot">&lt;-</span> edges<span class="sc">$</span>xend <span class="sc">-</span> ux <span class="sc">*</span> node_r</span>
+<span id="cb115-37"><a href="análise-causal.html#cb115-37" tabindex="-1"></a>  edges<span class="sc">$</span>yend <span class="ot">&lt;-</span> edges<span class="sc">$</span>yend <span class="sc">-</span> uy <span class="sc">*</span> node_r</span>
+<span id="cb115-38"><a href="análise-causal.html#cb115-38" tabindex="-1"></a>  edges</span>
+<span id="cb115-39"><a href="análise-causal.html#cb115-39" tabindex="-1"></a>}</span>
+<span id="cb115-40"><a href="análise-causal.html#cb115-40" tabindex="-1"></a></span>
+<span id="cb115-41"><a href="análise-causal.html#cb115-41" tabindex="-1"></a><span class="co"># ---------- DAGs ----------</span></span>
+<span id="cb115-42"><a href="análise-causal.html#cb115-42" tabindex="-1"></a>dag_ind <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">&quot;dag { X Y }&quot;</span>)</span>
+<span id="cb115-43"><a href="análise-causal.html#cb115-43" tabindex="-1"></a>dagitty<span class="sc">::</span><span class="fu">coordinates</span>(dag_ind) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Y=</span><span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Y=</span><span class="dv">0</span>))</span>
+<span id="cb115-44"><a href="análise-causal.html#cb115-44" tabindex="-1"></a></span>
+<span id="cb115-45"><a href="análise-causal.html#cb115-45" tabindex="-1"></a>dag_chain <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">&quot;dag { X -&gt; M -&gt; Y }&quot;</span>)</span>
+<span id="cb115-46"><a href="análise-causal.html#cb115-46" tabindex="-1"></a>dagitty<span class="sc">::</span><span class="fu">coordinates</span>(dag_chain) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">M=</span><span class="fl">0.5</span>, <span class="at">Y=</span><span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">M=</span><span class="dv">0</span>, <span class="at">Y=</span><span class="dv">0</span>))</span>
+<span id="cb115-47"><a href="análise-causal.html#cb115-47" tabindex="-1"></a></span>
+<span id="cb115-48"><a href="análise-causal.html#cb115-48" tabindex="-1"></a>dag_fork <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">&quot;dag { X &lt;- Z -&gt; Y }&quot;</span>)</span>
+<span id="cb115-49"><a href="análise-causal.html#cb115-49" tabindex="-1"></a>dagitty<span class="sc">::</span><span class="fu">coordinates</span>(dag_fork) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="fl">0.5</span>, <span class="at">Y=</span><span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="dv">0</span>, <span class="at">Y=</span><span class="dv">0</span>))</span>
+<span id="cb115-50"><a href="análise-causal.html#cb115-50" tabindex="-1"></a></span>
+<span id="cb115-51"><a href="análise-causal.html#cb115-51" tabindex="-1"></a>dag_coll <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">&quot;dag { X -&gt; Z &lt;- Y }&quot;</span>)</span>
+<span id="cb115-52"><a href="análise-causal.html#cb115-52" tabindex="-1"></a>dagitty<span class="sc">::</span><span class="fu">coordinates</span>(dag_coll) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="fl">0.5</span>, <span class="at">Y=</span><span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="at">X=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="dv">0</span>, <span class="at">Y=</span><span class="dv">0</span>))</span>
+<span id="cb115-53"><a href="análise-causal.html#cb115-53" tabindex="-1"></a></span>
+<span id="cb115-54"><a href="análise-causal.html#cb115-54" tabindex="-1"></a><span class="co"># ---------- Data frames ----------</span></span>
+<span id="cb115-55"><a href="análise-causal.html#cb115-55" tabindex="-1"></a>nodes_all <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb115-56"><a href="análise-causal.html#cb115-56" tabindex="-1"></a>  <span class="fu">.build_nodes_df</span>(dag_ind,   <span class="st">&quot;1) Independência&quot;</span>),</span>
+<span id="cb115-57"><a href="análise-causal.html#cb115-57" tabindex="-1"></a>  <span class="fu">.build_nodes_df</span>(dag_chain, <span class="st">&quot;2) Cadeia (X → M → Y)&quot;</span>),</span>
+<span id="cb115-58"><a href="análise-causal.html#cb115-58" tabindex="-1"></a>  <span class="fu">.build_nodes_df</span>(dag_fork,  <span class="st">&quot;3) Garfo (X ← Z → Y)&quot;</span>),</span>
+<span id="cb115-59"><a href="análise-causal.html#cb115-59" tabindex="-1"></a>  <span class="fu">.build_nodes_df</span>(dag_coll,  <span class="st">&quot;4) Colisor (X → Z ← Y)&quot;</span>)</span>
+<span id="cb115-60"><a href="análise-causal.html#cb115-60" tabindex="-1"></a>)</span>
+<span id="cb115-61"><a href="análise-causal.html#cb115-61" tabindex="-1"></a></span>
+<span id="cb115-62"><a href="análise-causal.html#cb115-62" tabindex="-1"></a>edges_all <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb115-63"><a href="análise-causal.html#cb115-63" tabindex="-1"></a>  <span class="fu">.build_edges_df</span>(dag_ind,   <span class="fu">subset</span>(nodes_all, panel <span class="sc">==</span> <span class="st">&quot;1) Independência&quot;</span>)),</span>
+<span id="cb115-64"><a href="análise-causal.html#cb115-64" tabindex="-1"></a>  <span class="fu">.build_edges_df</span>(dag_chain, <span class="fu">subset</span>(nodes_all, panel <span class="sc">==</span> <span class="st">&quot;2) Cadeia (X → M → Y)&quot;</span>)),</span>
+<span id="cb115-65"><a href="análise-causal.html#cb115-65" tabindex="-1"></a>  <span class="fu">.build_edges_df</span>(dag_fork,  <span class="fu">subset</span>(nodes_all, panel <span class="sc">==</span> <span class="st">&quot;3) Garfo (X ← Z → Y)&quot;</span>)),</span>
+<span id="cb115-66"><a href="análise-causal.html#cb115-66" tabindex="-1"></a>  <span class="fu">.build_edges_df</span>(dag_coll,  <span class="fu">subset</span>(nodes_all, panel <span class="sc">==</span> <span class="st">&quot;4) Colisor (X → Z ← Y)&quot;</span>))</span>
+<span id="cb115-67"><a href="análise-causal.html#cb115-67" tabindex="-1"></a>)</span>
+<span id="cb115-68"><a href="análise-causal.html#cb115-68" tabindex="-1"></a></span>
+<span id="cb115-69"><a href="análise-causal.html#cb115-69" tabindex="-1"></a><span class="co"># *** Ajuste importante: encurtar arestas ***</span></span>
+<span id="cb115-70"><a href="análise-causal.html#cb115-70" tabindex="-1"></a>edges_all <span class="ot">&lt;-</span> <span class="fu">trim_edges_to_node_border</span>(edges_all, <span class="at">node_r =</span> <span class="fl">0.085</span>)</span>
+<span id="cb115-71"><a href="análise-causal.html#cb115-71" tabindex="-1"></a></span>
+<span id="cb115-72"><a href="análise-causal.html#cb115-72" tabindex="-1"></a><span class="co"># ---------- Plot ----------</span></span>
+<span id="cb115-73"><a href="análise-causal.html#cb115-73" tabindex="-1"></a>p <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb115-74"><a href="análise-causal.html#cb115-74" tabindex="-1"></a>  <span class="co"># Arestas com setas visíveis</span></span>
+<span id="cb115-75"><a href="análise-causal.html#cb115-75" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_segment</span>(</span>
+<span id="cb115-76"><a href="análise-causal.html#cb115-76" tabindex="-1"></a>    <span class="at">data =</span> edges_all,</span>
+<span id="cb115-77"><a href="análise-causal.html#cb115-77" tabindex="-1"></a>    <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">xend =</span> xend, <span class="at">yend =</span> yend),</span>
+<span id="cb115-78"><a href="análise-causal.html#cb115-78" tabindex="-1"></a>    <span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;in&quot;</span>), <span class="at">ends =</span> <span class="st">&quot;last&quot;</span>, <span class="at">type =</span> <span class="st">&quot;closed&quot;</span>),</span>
+<span id="cb115-79"><a href="análise-causal.html#cb115-79" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb115-80"><a href="análise-causal.html#cb115-80" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb115-81"><a href="análise-causal.html#cb115-81" tabindex="-1"></a>  <span class="co"># Nós grandes (círculo branco com contorno)</span></span>
+<span id="cb115-82"><a href="análise-causal.html#cb115-82" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(</span>
+<span id="cb115-83"><a href="análise-causal.html#cb115-83" tabindex="-1"></a>    <span class="at">data =</span> nodes_all,</span>
+<span id="cb115-84"><a href="análise-causal.html#cb115-84" tabindex="-1"></a>    <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y),</span>
+<span id="cb115-85"><a href="análise-causal.html#cb115-85" tabindex="-1"></a>    <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb115-86"><a href="análise-causal.html#cb115-86" tabindex="-1"></a>    <span class="at">stroke =</span> <span class="fl">1.6</span>, <span class="at">size =</span> <span class="dv">14</span></span>
+<span id="cb115-87"><a href="análise-causal.html#cb115-87" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb115-88"><a href="análise-causal.html#cb115-88" tabindex="-1"></a>  <span class="co"># Letras dentro dos círculos</span></span>
+<span id="cb115-89"><a href="análise-causal.html#cb115-89" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_text</span>(</span>
+<span id="cb115-90"><a href="análise-causal.html#cb115-90" tabindex="-1"></a>    <span class="at">data =</span> nodes_all,</span>
+<span id="cb115-91"><a href="análise-causal.html#cb115-91" tabindex="-1"></a>    <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">label =</span> name),</span>
+<span id="cb115-92"><a href="análise-causal.html#cb115-92" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">6</span>, <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">vjust =</span> <span class="fl">0.35</span>, <span class="at">hjust =</span> <span class="fl">0.5</span></span>
+<span id="cb115-93"><a href="análise-causal.html#cb115-93" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb115-94"><a href="análise-causal.html#cb115-94" tabindex="-1"></a>  ggdag<span class="sc">::</span><span class="fu">theme_dag</span>() <span class="sc">+</span></span>
+<span id="cb115-95"><a href="análise-causal.html#cb115-95" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(<span class="sc">~</span> panel, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb115-96"><a href="análise-causal.html#cb115-96" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb115-97"><a href="análise-causal.html#cb115-97" tabindex="-1"></a>    <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb115-98"><a href="análise-causal.html#cb115-98" tabindex="-1"></a>    <span class="at">panel.spacing =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="dv">5</span>, <span class="st">&quot;lines&quot;</span>),</span>
+<span id="cb115-99"><a href="análise-causal.html#cb115-99" tabindex="-1"></a>    <span class="at">plot.margin =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="st">&quot;cm&quot;</span>)</span>
+<span id="cb115-100"><a href="análise-causal.html#cb115-100" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb115-101"><a href="análise-causal.html#cb115-101" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">&quot;off&quot;</span>)</span>
+<span id="cb115-102"><a href="análise-causal.html#cb115-102" tabindex="-1"></a></span>
+<span id="cb115-103"><a href="análise-causal.html#cb115-103" tabindex="-1"></a><span class="fu">print</span>(p)</span></code></pre></div>
 </details>
 </div>
 </div>

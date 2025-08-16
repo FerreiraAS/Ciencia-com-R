@@ -94,7 +94,7 @@ source("covers/cover_4.R", local = knitr::knit_global())
 ```
 
 ```{r sobre, echo = FALSE, results = "asis", eval = knitr::is_html_output()}
-cat('# Capa {.unnumbered}')
+cat('# **Capa** {.unnumbered}')
 ```
 
 ```{r capa, fig.align = 'right', echo = FALSE, results = "asis", include = identical(knitr:::pandoc_to(), 'html'), eval = knitr::is_html_output()}
@@ -115,21 +115,6 @@ cat('</center>')
 ```
 
 <br>
-
-```{r ficha, echo = FALSE, results = "asis", eval = !knitr::is_html_output()}
-cat(paste0('Copyright © 2023-', format(Sys.Date(), "%Y")), 'Arthur de Sá Ferreira')
-cat('\n\n')
-cat('\n\n')
-cat('Todos os direitos reservados. Nenhuma parte deste livro pode ser reproduzida ou usada de qualquer maneira sem a permissão prévia por escrito do proprietário dos direitos autorais, exceto para o uso de breves citações em uma resenha do livro.')
-cat('\n\n')
-cat('Para solicitar permissões, entre em contato com cienciacomr@gmail.com')
-cat('\n\n')
-cat('Capa dura: ISBN')
-cat('\n\n')
-cat('Brochura: ISBN')
-cat('\n\n')
-cat('E-book: ISBN')
-```
 
 ```{r license, echo = FALSE, results = "asis"}
 if(knitr::is_html_output()){
@@ -160,10 +145,10 @@ source(file.path("R", "savePost.R"), local = knitr::knit_global())
 rmd_files <- list.files("rmd", pattern = "\\.Rmd$", full.names = TRUE)
 
 # remove specific chapters
-rmd_files <- rmd_files[!grepl("agradecimentos.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("dedicatoria.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("agradecimentos.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("apresentacao.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("autor.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("prefacio.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-1.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-2.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-3.Rmd", rmd_files)]
@@ -172,9 +157,8 @@ rmd_files <- rmd_files[!grepl("parte-5.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-6.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-7.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-8.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("shiny-apps.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("fontes-externas.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("diretrizes-listas.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-9.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-10.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("apendice.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("referencias.Rmd", rmd_files)]
 

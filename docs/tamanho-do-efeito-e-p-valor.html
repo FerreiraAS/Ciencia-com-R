@@ -189,11 +189,11 @@ div.csl-indent {
 <li><a style="text-align:center; border-width:3px;border-style:solid; border-color:white; border-radius:15px; padding:5px; background-color:#276DC2; text-decoration:none; color:white" href="https://ferreiraas.github.io/Ciencia-com-R-Consultoria/"><b>e-Book | Consultoria</b></a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Capa</a></li>
-<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i>Dedicatória</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Capa</strong></a></li>
+<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i><strong>Dedicatória</strong></a></li>
 <li class="chapter" data-level="" data-path="agradecimentos.html"><a href="agradecimentos.html"><i class="fa fa-check"></i><strong>Agradecimentos</strong></a></li>
+<li class="chapter" data-level="" data-path="apresentacao.html"><a href="apresentacao.html"><i class="fa fa-check"></i><strong>Apresentação</strong></a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i><strong>Sobre o autor</strong></a></li>
-<li class="chapter" data-level="" data-path="prefacio.html"><a href="prefacio.html"><i class="fa fa-check"></i><strong>Prefácio</strong></a></li>
 <li class="chapter" data-level="" data-path="parte-1.html"><a href="parte-1.html"><i class="fa fa-check"></i><em>PARTE 1: FUNDAMENTOS ESTATÍSTICOS</em></a></li>
 <li class="chapter" data-level="1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html"><i class="fa fa-check"></i><b>1</b> <strong>Pensamento estatístico</strong></a>
 <ul>
@@ -622,9 +622,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="17" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>17</b> <strong>Shiny Apps</strong></a>
 <ul>
-<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i>Aplicativos por delineamento de estudo</a>
+<li class="chapter" data-level="17.1" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i><b>17.1</b> Aplicativos por delineamento de estudo</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#ensaios-cl%C3%ADnicos"><i class="fa fa-check"></i>Ensaios clínicos</a></li>
+<li class="chapter" data-level="17.1.1" data-path="shiny-apps.html"><a href="shiny-apps.html#qual-shiny-app-usar-para-ensaios-experimentais"><i class="fa fa-check"></i><b>17.1.1</b> Qual Shiny App usar para ensaios experimentais?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-5.html"><a href="parte-5.html"><i class="fa fa-check"></i><em>PARTE 5: ANÁLISES DESCRITIVAS E EXPLORATÓRIAS</em></a></li>
@@ -1509,273 +1509,273 @@ div.csl-indent {
 <div id="efeito-de-interação-2" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Efeito de interação<a href="#efeito-de-intera%C3%A7%C3%A3o-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="tamanho-do-efeito-e-p-valor.html#cb94-1" tabindex="-1"></a><span class="co"># Simulate data</span></span>
-<span id="cb94-2"><a href="tamanho-do-efeito-e-p-valor.html#cb94-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For reproducibility</span></span>
-<span id="cb94-3"><a href="tamanho-do-efeito-e-p-valor.html#cb94-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span>  <span class="co"># Number of observations</span></span>
-<span id="cb94-4"><a href="tamanho-do-efeito-e-p-valor.html#cb94-4" tabindex="-1"></a></span>
-<span id="cb94-5"><a href="tamanho-do-efeito-e-p-valor.html#cb94-5" tabindex="-1"></a><span class="co"># Create a dataframe with two time points and different offsets</span></span>
-<span id="cb94-6"><a href="tamanho-do-efeito-e-p-valor.html#cb94-6" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb94-7"><a href="tamanho-do-efeito-e-p-valor.html#cb94-7" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&#39;&quot;</span>), <span class="at">each =</span> n <span class="sc">*</span> <span class="dv">2</span>),</span>
-<span id="cb94-8"><a href="tamanho-do-efeito-e-p-valor.html#cb94-8" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">each =</span> n),</span>
-<span id="cb94-9"><a href="tamanho-do-efeito-e-p-valor.html#cb94-9" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(</span>
-<span id="cb94-10"><a href="tamanho-do-efeito-e-p-valor.html#cb94-10" tabindex="-1"></a>    <span class="dv">5</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb94-11"><a href="tamanho-do-efeito-e-p-valor.html#cb94-11" tabindex="-1"></a>    <span class="co"># Group A at time 1</span></span>
-<span id="cb94-12"><a href="tamanho-do-efeito-e-p-valor.html#cb94-12" tabindex="-1"></a>    <span class="dv">15</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb94-13"><a href="tamanho-do-efeito-e-p-valor.html#cb94-13" tabindex="-1"></a>    <span class="co"># Group A at time 2</span></span>
-<span id="cb94-14"><a href="tamanho-do-efeito-e-p-valor.html#cb94-14" tabindex="-1"></a>    <span class="dv">10</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb94-15"><a href="tamanho-do-efeito-e-p-valor.html#cb94-15" tabindex="-1"></a>    <span class="co"># Group B&#39; at time 1</span></span>
-<span id="cb94-16"><a href="tamanho-do-efeito-e-p-valor.html#cb94-16" tabindex="-1"></a>    <span class="dv">20</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb94-17"><a href="tamanho-do-efeito-e-p-valor.html#cb94-17" tabindex="-1"></a>    <span class="co"># Group B&#39; at time 2</span></span>
-<span id="cb94-18"><a href="tamanho-do-efeito-e-p-valor.html#cb94-18" tabindex="-1"></a>    <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb94-19"><a href="tamanho-do-efeito-e-p-valor.html#cb94-19" tabindex="-1"></a>    <span class="co"># Group B at time 1</span></span>
-<span id="cb94-20"><a href="tamanho-do-efeito-e-p-valor.html#cb94-20" tabindex="-1"></a>    <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)   <span class="co"># Group B at time 2</span></span>
-<span id="cb94-21"><a href="tamanho-do-efeito-e-p-valor.html#cb94-21" tabindex="-1"></a>  )</span>
-<span id="cb94-22"><a href="tamanho-do-efeito-e-p-valor.html#cb94-22" tabindex="-1"></a>)</span>
-<span id="cb94-23"><a href="tamanho-do-efeito-e-p-valor.html#cb94-23" tabindex="-1"></a></span>
-<span id="cb94-24"><a href="tamanho-do-efeito-e-p-valor.html#cb94-24" tabindex="-1"></a><span class="co"># add offset to group B at 2</span></span>
-<span id="cb94-25"><a href="tamanho-do-efeito-e-p-valor.html#cb94-25" tabindex="-1"></a>data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb94-26"><a href="tamanho-do-efeito-e-p-valor.html#cb94-26" tabindex="-1"></a>                data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb94-27"><a href="tamanho-do-efeito-e-p-valor.html#cb94-27" tabindex="-1"></a>                                                   data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">1</span>]</span>
-<span id="cb94-28"><a href="tamanho-do-efeito-e-p-valor.html#cb94-28" tabindex="-1"></a>data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb94-29"><a href="tamanho-do-efeito-e-p-valor.html#cb94-29" tabindex="-1"></a>                data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb94-30"><a href="tamanho-do-efeito-e-p-valor.html#cb94-30" tabindex="-1"></a>                                                   data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>] <span class="sc">+</span> <span class="dv">5</span></span>
-<span id="cb94-31"><a href="tamanho-do-efeito-e-p-valor.html#cb94-31" tabindex="-1"></a></span>
-<span id="cb94-32"><a href="tamanho-do-efeito-e-p-valor.html#cb94-32" tabindex="-1"></a><span class="co"># Calculate means for plotting</span></span>
-<span id="cb94-33"><a href="tamanho-do-efeito-e-p-valor.html#cb94-33" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(response <span class="sc">~</span> group <span class="sc">+</span> time, data, mean)</span>
-<span id="cb94-34"><a href="tamanho-do-efeito-e-p-valor.html#cb94-34" tabindex="-1"></a></span>
-<span id="cb94-35"><a href="tamanho-do-efeito-e-p-valor.html#cb94-35" tabindex="-1"></a><span class="co"># Create the plot</span></span>
-<span id="cb94-36"><a href="tamanho-do-efeito-e-p-valor.html#cb94-36" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(means,</span>
-<span id="cb94-37"><a href="tamanho-do-efeito-e-p-valor.html#cb94-37" tabindex="-1"></a>                ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
-<span id="cb94-38"><a href="tamanho-do-efeito-e-p-valor.html#cb94-38" tabindex="-1"></a>                  <span class="at">x =</span> time,</span>
-<span id="cb94-39"><a href="tamanho-do-efeito-e-p-valor.html#cb94-39" tabindex="-1"></a>                  <span class="at">y =</span> response,</span>
-<span id="cb94-40"><a href="tamanho-do-efeito-e-p-valor.html#cb94-40" tabindex="-1"></a>                  <span class="at">color =</span> group,</span>
-<span id="cb94-41"><a href="tamanho-do-efeito-e-p-valor.html#cb94-41" tabindex="-1"></a>                  <span class="at">group =</span> group</span>
-<span id="cb94-42"><a href="tamanho-do-efeito-e-p-valor.html#cb94-42" tabindex="-1"></a>                )) <span class="sc">+</span></span>
-<span id="cb94-43"><a href="tamanho-do-efeito-e-p-valor.html#cb94-43" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span>               <span class="co"># Draw lines for means</span></span>
-<span id="cb94-44"><a href="tamanho-do-efeito-e-p-valor.html#cb94-44" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>              <span class="co"># Add points for means</span></span>
-<span id="cb94-45"><a href="tamanho-do-efeito-e-p-valor.html#cb94-45" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Tempo&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Resposta&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-46"><a href="tamanho-do-efeito-e-p-valor.html#cb94-46" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb94-47"><a href="tamanho-do-efeito-e-p-valor.html#cb94-47" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;gray&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span>  <span class="co"># Custom colors</span></span>
-<span id="cb94-48"><a href="tamanho-do-efeito-e-p-valor.html#cb94-48" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb94-49"><a href="tamanho-do-efeito-e-p-valor.html#cb94-49" tabindex="-1"></a>  <span class="co"># minumum theme</span></span>
-<span id="cb94-50"><a href="tamanho-do-efeito-e-p-valor.html#cb94-50" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb94-51"><a href="tamanho-do-efeito-e-p-valor.html#cb94-51" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb94-52"><a href="tamanho-do-efeito-e-p-valor.html#cb94-52" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb94-53"><a href="tamanho-do-efeito-e-p-valor.html#cb94-53" tabindex="-1"></a>    <span class="at">panel.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb94-54"><a href="tamanho-do-efeito-e-p-valor.html#cb94-54" tabindex="-1"></a>    <span class="at">axis.line =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)</span>
-<span id="cb94-55"><a href="tamanho-do-efeito-e-p-valor.html#cb94-55" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-56"><a href="tamanho-do-efeito-e-p-valor.html#cb94-56" tabindex="-1"></a>  <span class="co"># move legent to the top left corner</span></span>
-<span id="cb94-57"><a href="tamanho-do-efeito-e-p-valor.html#cb94-57" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb94-58"><a href="tamanho-do-efeito-e-p-valor.html#cb94-58" tabindex="-1"></a>                 <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb94-59"><a href="tamanho-do-efeito-e-p-valor.html#cb94-59" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito esperado sem interação&quot;</span></span>
-<span id="cb94-60"><a href="tamanho-do-efeito-e-p-valor.html#cb94-60" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
-<span id="cb94-61"><a href="tamanho-do-efeito-e-p-valor.html#cb94-61" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb94-62"><a href="tamanho-do-efeito-e-p-valor.html#cb94-62" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
-<span id="cb94-63"><a href="tamanho-do-efeito-e-p-valor.html#cb94-63" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb94-64"><a href="tamanho-do-efeito-e-p-valor.html#cb94-64" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
-<span id="cb94-65"><a href="tamanho-do-efeito-e-p-valor.html#cb94-65" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Sem efeito de </span><span class="sc">\n</span><span class="st"> interação&quot;</span>,</span>
-<span id="cb94-66"><a href="tamanho-do-efeito-e-p-valor.html#cb94-66" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb94-67"><a href="tamanho-do-efeito-e-p-valor.html#cb94-67" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>,</span>
-<span id="cb94-68"><a href="tamanho-do-efeito-e-p-valor.html#cb94-68" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
-<span id="cb94-69"><a href="tamanho-do-efeito-e-p-valor.html#cb94-69" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
-<span id="cb94-70"><a href="tamanho-do-efeito-e-p-valor.html#cb94-70" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-71"><a href="tamanho-do-efeito-e-p-valor.html#cb94-71" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito esperado com interação&quot;</span></span>
-<span id="cb94-72"><a href="tamanho-do-efeito-e-p-valor.html#cb94-72" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
-<span id="cb94-73"><a href="tamanho-do-efeito-e-p-valor.html#cb94-73" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb94-74"><a href="tamanho-do-efeito-e-p-valor.html#cb94-74" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
-<span id="cb94-75"><a href="tamanho-do-efeito-e-p-valor.html#cb94-75" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb94-76"><a href="tamanho-do-efeito-e-p-valor.html#cb94-76" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
-<span id="cb94-77"><a href="tamanho-do-efeito-e-p-valor.html#cb94-77" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Com efeito de </span><span class="sc">\n</span><span class="st"> interação&quot;</span>,</span>
-<span id="cb94-78"><a href="tamanho-do-efeito-e-p-valor.html#cb94-78" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb94-79"><a href="tamanho-do-efeito-e-p-valor.html#cb94-79" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb94-80"><a href="tamanho-do-efeito-e-p-valor.html#cb94-80" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
-<span id="cb94-81"><a href="tamanho-do-efeito-e-p-valor.html#cb94-81" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
-<span id="cb94-82"><a href="tamanho-do-efeito-e-p-valor.html#cb94-82" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-83"><a href="tamanho-do-efeito-e-p-valor.html#cb94-83" tabindex="-1"></a>  <span class="co"># draw dashed arrow of effect from B&#39; to B at time 2</span></span>
-<span id="cb94-84"><a href="tamanho-do-efeito-e-p-valor.html#cb94-84" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_segment</span>(</span>
-<span id="cb94-85"><a href="tamanho-do-efeito-e-p-valor.html#cb94-85" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
-<span id="cb94-86"><a href="tamanho-do-efeito-e-p-valor.html#cb94-86" tabindex="-1"></a>      <span class="at">x =</span> <span class="dv">2</span>,</span>
-<span id="cb94-87"><a href="tamanho-do-efeito-e-p-valor.html#cb94-87" tabindex="-1"></a>      <span class="at">xend =</span> <span class="dv">2</span>,</span>
-<span id="cb94-88"><a href="tamanho-do-efeito-e-p-valor.html#cb94-88" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb94-89"><a href="tamanho-do-efeito-e-p-valor.html#cb94-89" tabindex="-1"></a>                               data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
-<span id="cb94-90"><a href="tamanho-do-efeito-e-p-valor.html#cb94-90" tabindex="-1"></a>      <span class="at">yend =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb94-91"><a href="tamanho-do-efeito-e-p-valor.html#cb94-91" tabindex="-1"></a>                                  data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>])</span>
-<span id="cb94-92"><a href="tamanho-do-efeito-e-p-valor.html#cb94-92" tabindex="-1"></a>    ),</span>
-<span id="cb94-93"><a href="tamanho-do-efeito-e-p-valor.html#cb94-93" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(</span>
-<span id="cb94-94"><a href="tamanho-do-efeito-e-p-valor.html#cb94-94" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">&quot;open&quot;</span>,</span>
-<span id="cb94-95"><a href="tamanho-do-efeito-e-p-valor.html#cb94-95" tabindex="-1"></a>      <span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;inches&quot;</span>),</span>
-<span id="cb94-96"><a href="tamanho-do-efeito-e-p-valor.html#cb94-96" tabindex="-1"></a>      <span class="at">ends =</span> <span class="st">&quot;both&quot;</span>,</span>
-<span id="cb94-97"><a href="tamanho-do-efeito-e-p-valor.html#cb94-97" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">20</span></span>
-<span id="cb94-98"><a href="tamanho-do-efeito-e-p-valor.html#cb94-98" tabindex="-1"></a>    ),</span>
-<span id="cb94-99"><a href="tamanho-do-efeito-e-p-valor.html#cb94-99" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb94-100"><a href="tamanho-do-efeito-e-p-valor.html#cb94-100" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span></span>
-<span id="cb94-101"><a href="tamanho-do-efeito-e-p-valor.html#cb94-101" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-102"><a href="tamanho-do-efeito-e-p-valor.html#cb94-102" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito de interação&quot;</span></span>
-<span id="cb94-103"><a href="tamanho-do-efeito-e-p-valor.html#cb94-103" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
-<span id="cb94-104"><a href="tamanho-do-efeito-e-p-valor.html#cb94-104" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb94-105"><a href="tamanho-do-efeito-e-p-valor.html#cb94-105" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
-<span id="cb94-106"><a href="tamanho-do-efeito-e-p-valor.html#cb94-106" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">!=</span> <span class="st">&quot;A&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb94-107"><a href="tamanho-do-efeito-e-p-valor.html#cb94-107" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
-<span id="cb94-108"><a href="tamanho-do-efeito-e-p-valor.html#cb94-108" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Tamanho de efeito </span><span class="sc">\n</span><span class="st"> estimado&quot;</span>,</span>
-<span id="cb94-109"><a href="tamanho-do-efeito-e-p-valor.html#cb94-109" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb94-110"><a href="tamanho-do-efeito-e-p-valor.html#cb94-110" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb94-111"><a href="tamanho-do-efeito-e-p-valor.html#cb94-111" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
-<span id="cb94-112"><a href="tamanho-do-efeito-e-p-valor.html#cb94-112" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
-<span id="cb94-113"><a href="tamanho-do-efeito-e-p-valor.html#cb94-113" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-114"><a href="tamanho-do-efeito-e-p-valor.html#cb94-114" tabindex="-1"></a>  <span class="co"># augment x axis margins to make room for annotations</span></span>
-<span id="cb94-115"><a href="tamanho-do-efeito-e-p-valor.html#cb94-115" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_x_continuous</span>(</span>
-<span id="cb94-116"><a href="tamanho-do-efeito-e-p-valor.html#cb94-116" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb94-117"><a href="tamanho-do-efeito-e-p-valor.html#cb94-117" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Antes&quot;</span>, <span class="st">&quot;Depois&quot;</span>),</span>
-<span id="cb94-118"><a href="tamanho-do-efeito-e-p-valor.html#cb94-118" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.3</span>)</span>
-<span id="cb94-119"><a href="tamanho-do-efeito-e-p-valor.html#cb94-119" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="tamanho-do-efeito-e-p-valor.html#cb98-1" tabindex="-1"></a><span class="co"># Simulate data</span></span>
+<span id="cb98-2"><a href="tamanho-do-efeito-e-p-valor.html#cb98-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb98-3"><a href="tamanho-do-efeito-e-p-valor.html#cb98-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span>  <span class="co"># Number of observations</span></span>
+<span id="cb98-4"><a href="tamanho-do-efeito-e-p-valor.html#cb98-4" tabindex="-1"></a></span>
+<span id="cb98-5"><a href="tamanho-do-efeito-e-p-valor.html#cb98-5" tabindex="-1"></a><span class="co"># Create a dataframe with two time points and different offsets</span></span>
+<span id="cb98-6"><a href="tamanho-do-efeito-e-p-valor.html#cb98-6" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb98-7"><a href="tamanho-do-efeito-e-p-valor.html#cb98-7" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&#39;&quot;</span>), <span class="at">each =</span> n <span class="sc">*</span> <span class="dv">2</span>),</span>
+<span id="cb98-8"><a href="tamanho-do-efeito-e-p-valor.html#cb98-8" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">each =</span> n),</span>
+<span id="cb98-9"><a href="tamanho-do-efeito-e-p-valor.html#cb98-9" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(</span>
+<span id="cb98-10"><a href="tamanho-do-efeito-e-p-valor.html#cb98-10" tabindex="-1"></a>    <span class="dv">5</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb98-11"><a href="tamanho-do-efeito-e-p-valor.html#cb98-11" tabindex="-1"></a>    <span class="co"># Group A at time 1</span></span>
+<span id="cb98-12"><a href="tamanho-do-efeito-e-p-valor.html#cb98-12" tabindex="-1"></a>    <span class="dv">15</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb98-13"><a href="tamanho-do-efeito-e-p-valor.html#cb98-13" tabindex="-1"></a>    <span class="co"># Group A at time 2</span></span>
+<span id="cb98-14"><a href="tamanho-do-efeito-e-p-valor.html#cb98-14" tabindex="-1"></a>    <span class="dv">10</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb98-15"><a href="tamanho-do-efeito-e-p-valor.html#cb98-15" tabindex="-1"></a>    <span class="co"># Group B&#39; at time 1</span></span>
+<span id="cb98-16"><a href="tamanho-do-efeito-e-p-valor.html#cb98-16" tabindex="-1"></a>    <span class="dv">20</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb98-17"><a href="tamanho-do-efeito-e-p-valor.html#cb98-17" tabindex="-1"></a>    <span class="co"># Group B&#39; at time 2</span></span>
+<span id="cb98-18"><a href="tamanho-do-efeito-e-p-valor.html#cb98-18" tabindex="-1"></a>    <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb98-19"><a href="tamanho-do-efeito-e-p-valor.html#cb98-19" tabindex="-1"></a>    <span class="co"># Group B at time 1</span></span>
+<span id="cb98-20"><a href="tamanho-do-efeito-e-p-valor.html#cb98-20" tabindex="-1"></a>    <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)   <span class="co"># Group B at time 2</span></span>
+<span id="cb98-21"><a href="tamanho-do-efeito-e-p-valor.html#cb98-21" tabindex="-1"></a>  )</span>
+<span id="cb98-22"><a href="tamanho-do-efeito-e-p-valor.html#cb98-22" tabindex="-1"></a>)</span>
+<span id="cb98-23"><a href="tamanho-do-efeito-e-p-valor.html#cb98-23" tabindex="-1"></a></span>
+<span id="cb98-24"><a href="tamanho-do-efeito-e-p-valor.html#cb98-24" tabindex="-1"></a><span class="co"># add offset to group B at 2</span></span>
+<span id="cb98-25"><a href="tamanho-do-efeito-e-p-valor.html#cb98-25" tabindex="-1"></a>data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-26"><a href="tamanho-do-efeito-e-p-valor.html#cb98-26" tabindex="-1"></a>                data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-27"><a href="tamanho-do-efeito-e-p-valor.html#cb98-27" tabindex="-1"></a>                                                   data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb98-28"><a href="tamanho-do-efeito-e-p-valor.html#cb98-28" tabindex="-1"></a>data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-29"><a href="tamanho-do-efeito-e-p-valor.html#cb98-29" tabindex="-1"></a>                data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-30"><a href="tamanho-do-efeito-e-p-valor.html#cb98-30" tabindex="-1"></a>                                                   data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>] <span class="sc">+</span> <span class="dv">5</span></span>
+<span id="cb98-31"><a href="tamanho-do-efeito-e-p-valor.html#cb98-31" tabindex="-1"></a></span>
+<span id="cb98-32"><a href="tamanho-do-efeito-e-p-valor.html#cb98-32" tabindex="-1"></a><span class="co"># Calculate means for plotting</span></span>
+<span id="cb98-33"><a href="tamanho-do-efeito-e-p-valor.html#cb98-33" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(response <span class="sc">~</span> group <span class="sc">+</span> time, data, mean)</span>
+<span id="cb98-34"><a href="tamanho-do-efeito-e-p-valor.html#cb98-34" tabindex="-1"></a></span>
+<span id="cb98-35"><a href="tamanho-do-efeito-e-p-valor.html#cb98-35" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb98-36"><a href="tamanho-do-efeito-e-p-valor.html#cb98-36" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(means,</span>
+<span id="cb98-37"><a href="tamanho-do-efeito-e-p-valor.html#cb98-37" tabindex="-1"></a>                ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb98-38"><a href="tamanho-do-efeito-e-p-valor.html#cb98-38" tabindex="-1"></a>                  <span class="at">x =</span> time,</span>
+<span id="cb98-39"><a href="tamanho-do-efeito-e-p-valor.html#cb98-39" tabindex="-1"></a>                  <span class="at">y =</span> response,</span>
+<span id="cb98-40"><a href="tamanho-do-efeito-e-p-valor.html#cb98-40" tabindex="-1"></a>                  <span class="at">color =</span> group,</span>
+<span id="cb98-41"><a href="tamanho-do-efeito-e-p-valor.html#cb98-41" tabindex="-1"></a>                  <span class="at">group =</span> group</span>
+<span id="cb98-42"><a href="tamanho-do-efeito-e-p-valor.html#cb98-42" tabindex="-1"></a>                )) <span class="sc">+</span></span>
+<span id="cb98-43"><a href="tamanho-do-efeito-e-p-valor.html#cb98-43" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span>               <span class="co"># Draw lines for means</span></span>
+<span id="cb98-44"><a href="tamanho-do-efeito-e-p-valor.html#cb98-44" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>              <span class="co"># Add points for means</span></span>
+<span id="cb98-45"><a href="tamanho-do-efeito-e-p-valor.html#cb98-45" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Tempo&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Resposta&quot;</span>) <span class="sc">+</span></span>
+<span id="cb98-46"><a href="tamanho-do-efeito-e-p-valor.html#cb98-46" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb98-47"><a href="tamanho-do-efeito-e-p-valor.html#cb98-47" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;gray&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span>  <span class="co"># Custom colors</span></span>
+<span id="cb98-48"><a href="tamanho-do-efeito-e-p-valor.html#cb98-48" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb98-49"><a href="tamanho-do-efeito-e-p-valor.html#cb98-49" tabindex="-1"></a>  <span class="co"># minumum theme</span></span>
+<span id="cb98-50"><a href="tamanho-do-efeito-e-p-valor.html#cb98-50" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb98-51"><a href="tamanho-do-efeito-e-p-valor.html#cb98-51" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb98-52"><a href="tamanho-do-efeito-e-p-valor.html#cb98-52" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb98-53"><a href="tamanho-do-efeito-e-p-valor.html#cb98-53" tabindex="-1"></a>    <span class="at">panel.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb98-54"><a href="tamanho-do-efeito-e-p-valor.html#cb98-54" tabindex="-1"></a>    <span class="at">axis.line =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb98-55"><a href="tamanho-do-efeito-e-p-valor.html#cb98-55" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb98-56"><a href="tamanho-do-efeito-e-p-valor.html#cb98-56" tabindex="-1"></a>  <span class="co"># move legent to the top left corner</span></span>
+<span id="cb98-57"><a href="tamanho-do-efeito-e-p-valor.html#cb98-57" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb98-58"><a href="tamanho-do-efeito-e-p-valor.html#cb98-58" tabindex="-1"></a>                 <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb98-59"><a href="tamanho-do-efeito-e-p-valor.html#cb98-59" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito esperado sem interação&quot;</span></span>
+<span id="cb98-60"><a href="tamanho-do-efeito-e-p-valor.html#cb98-60" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb98-61"><a href="tamanho-do-efeito-e-p-valor.html#cb98-61" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb98-62"><a href="tamanho-do-efeito-e-p-valor.html#cb98-62" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
+<span id="cb98-63"><a href="tamanho-do-efeito-e-p-valor.html#cb98-63" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-64"><a href="tamanho-do-efeito-e-p-valor.html#cb98-64" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
+<span id="cb98-65"><a href="tamanho-do-efeito-e-p-valor.html#cb98-65" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Sem efeito de </span><span class="sc">\n</span><span class="st"> interação&quot;</span>,</span>
+<span id="cb98-66"><a href="tamanho-do-efeito-e-p-valor.html#cb98-66" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb98-67"><a href="tamanho-do-efeito-e-p-valor.html#cb98-67" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb98-68"><a href="tamanho-do-efeito-e-p-valor.html#cb98-68" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb98-69"><a href="tamanho-do-efeito-e-p-valor.html#cb98-69" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
+<span id="cb98-70"><a href="tamanho-do-efeito-e-p-valor.html#cb98-70" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb98-71"><a href="tamanho-do-efeito-e-p-valor.html#cb98-71" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito esperado com interação&quot;</span></span>
+<span id="cb98-72"><a href="tamanho-do-efeito-e-p-valor.html#cb98-72" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb98-73"><a href="tamanho-do-efeito-e-p-valor.html#cb98-73" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb98-74"><a href="tamanho-do-efeito-e-p-valor.html#cb98-74" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
+<span id="cb98-75"><a href="tamanho-do-efeito-e-p-valor.html#cb98-75" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-76"><a href="tamanho-do-efeito-e-p-valor.html#cb98-76" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
+<span id="cb98-77"><a href="tamanho-do-efeito-e-p-valor.html#cb98-77" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Com efeito de </span><span class="sc">\n</span><span class="st"> interação&quot;</span>,</span>
+<span id="cb98-78"><a href="tamanho-do-efeito-e-p-valor.html#cb98-78" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb98-79"><a href="tamanho-do-efeito-e-p-valor.html#cb98-79" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb98-80"><a href="tamanho-do-efeito-e-p-valor.html#cb98-80" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb98-81"><a href="tamanho-do-efeito-e-p-valor.html#cb98-81" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
+<span id="cb98-82"><a href="tamanho-do-efeito-e-p-valor.html#cb98-82" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb98-83"><a href="tamanho-do-efeito-e-p-valor.html#cb98-83" tabindex="-1"></a>  <span class="co"># draw dashed arrow of effect from B&#39; to B at time 2</span></span>
+<span id="cb98-84"><a href="tamanho-do-efeito-e-p-valor.html#cb98-84" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_segment</span>(</span>
+<span id="cb98-85"><a href="tamanho-do-efeito-e-p-valor.html#cb98-85" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb98-86"><a href="tamanho-do-efeito-e-p-valor.html#cb98-86" tabindex="-1"></a>      <span class="at">x =</span> <span class="dv">2</span>,</span>
+<span id="cb98-87"><a href="tamanho-do-efeito-e-p-valor.html#cb98-87" tabindex="-1"></a>      <span class="at">xend =</span> <span class="dv">2</span>,</span>
+<span id="cb98-88"><a href="tamanho-do-efeito-e-p-valor.html#cb98-88" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-89"><a href="tamanho-do-efeito-e-p-valor.html#cb98-89" tabindex="-1"></a>                               data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
+<span id="cb98-90"><a href="tamanho-do-efeito-e-p-valor.html#cb98-90" tabindex="-1"></a>      <span class="at">yend =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-91"><a href="tamanho-do-efeito-e-p-valor.html#cb98-91" tabindex="-1"></a>                                  data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>])</span>
+<span id="cb98-92"><a href="tamanho-do-efeito-e-p-valor.html#cb98-92" tabindex="-1"></a>    ),</span>
+<span id="cb98-93"><a href="tamanho-do-efeito-e-p-valor.html#cb98-93" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(</span>
+<span id="cb98-94"><a href="tamanho-do-efeito-e-p-valor.html#cb98-94" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">&quot;open&quot;</span>,</span>
+<span id="cb98-95"><a href="tamanho-do-efeito-e-p-valor.html#cb98-95" tabindex="-1"></a>      <span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;inches&quot;</span>),</span>
+<span id="cb98-96"><a href="tamanho-do-efeito-e-p-valor.html#cb98-96" tabindex="-1"></a>      <span class="at">ends =</span> <span class="st">&quot;both&quot;</span>,</span>
+<span id="cb98-97"><a href="tamanho-do-efeito-e-p-valor.html#cb98-97" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">20</span></span>
+<span id="cb98-98"><a href="tamanho-do-efeito-e-p-valor.html#cb98-98" tabindex="-1"></a>    ),</span>
+<span id="cb98-99"><a href="tamanho-do-efeito-e-p-valor.html#cb98-99" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb98-100"><a href="tamanho-do-efeito-e-p-valor.html#cb98-100" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span></span>
+<span id="cb98-101"><a href="tamanho-do-efeito-e-p-valor.html#cb98-101" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb98-102"><a href="tamanho-do-efeito-e-p-valor.html#cb98-102" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito de interação&quot;</span></span>
+<span id="cb98-103"><a href="tamanho-do-efeito-e-p-valor.html#cb98-103" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb98-104"><a href="tamanho-do-efeito-e-p-valor.html#cb98-104" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb98-105"><a href="tamanho-do-efeito-e-p-valor.html#cb98-105" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
+<span id="cb98-106"><a href="tamanho-do-efeito-e-p-valor.html#cb98-106" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">!=</span> <span class="st">&quot;A&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb98-107"><a href="tamanho-do-efeito-e-p-valor.html#cb98-107" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
+<span id="cb98-108"><a href="tamanho-do-efeito-e-p-valor.html#cb98-108" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Tamanho de efeito </span><span class="sc">\n</span><span class="st"> estimado&quot;</span>,</span>
+<span id="cb98-109"><a href="tamanho-do-efeito-e-p-valor.html#cb98-109" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb98-110"><a href="tamanho-do-efeito-e-p-valor.html#cb98-110" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb98-111"><a href="tamanho-do-efeito-e-p-valor.html#cb98-111" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb98-112"><a href="tamanho-do-efeito-e-p-valor.html#cb98-112" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
+<span id="cb98-113"><a href="tamanho-do-efeito-e-p-valor.html#cb98-113" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb98-114"><a href="tamanho-do-efeito-e-p-valor.html#cb98-114" tabindex="-1"></a>  <span class="co"># augment x axis margins to make room for annotations</span></span>
+<span id="cb98-115"><a href="tamanho-do-efeito-e-p-valor.html#cb98-115" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_x_continuous</span>(</span>
+<span id="cb98-116"><a href="tamanho-do-efeito-e-p-valor.html#cb98-116" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb98-117"><a href="tamanho-do-efeito-e-p-valor.html#cb98-117" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Antes&quot;</span>, <span class="st">&quot;Depois&quot;</span>),</span>
+<span id="cb98-118"><a href="tamanho-do-efeito-e-p-valor.html#cb98-118" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.3</span>)</span>
+<span id="cb98-119"><a href="tamanho-do-efeito-e-p-valor.html#cb98-119" tabindex="-1"></a>  )</span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="tamanho-do-efeito-e-p-valor.html#cb95-1" tabindex="-1"></a><span class="co"># Simulate data</span></span>
-<span id="cb95-2"><a href="tamanho-do-efeito-e-p-valor.html#cb95-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For reproducibility</span></span>
-<span id="cb95-3"><a href="tamanho-do-efeito-e-p-valor.html#cb95-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span>  <span class="co"># Number of observations</span></span>
-<span id="cb95-4"><a href="tamanho-do-efeito-e-p-valor.html#cb95-4" tabindex="-1"></a></span>
-<span id="cb95-5"><a href="tamanho-do-efeito-e-p-valor.html#cb95-5" tabindex="-1"></a><span class="co"># Create a dataframe with two time points and different offsets</span></span>
-<span id="cb95-6"><a href="tamanho-do-efeito-e-p-valor.html#cb95-6" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb95-7"><a href="tamanho-do-efeito-e-p-valor.html#cb95-7" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&#39;&quot;</span>), <span class="at">each =</span> n <span class="sc">*</span> <span class="dv">2</span>),</span>
-<span id="cb95-8"><a href="tamanho-do-efeito-e-p-valor.html#cb95-8" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">each =</span> n),</span>
-<span id="cb95-9"><a href="tamanho-do-efeito-e-p-valor.html#cb95-9" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(</span>
-<span id="cb95-10"><a href="tamanho-do-efeito-e-p-valor.html#cb95-10" tabindex="-1"></a>    <span class="dv">5</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb95-11"><a href="tamanho-do-efeito-e-p-valor.html#cb95-11" tabindex="-1"></a>    <span class="co"># Group A at time 1</span></span>
-<span id="cb95-12"><a href="tamanho-do-efeito-e-p-valor.html#cb95-12" tabindex="-1"></a>    <span class="dv">15</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb95-13"><a href="tamanho-do-efeito-e-p-valor.html#cb95-13" tabindex="-1"></a>    <span class="co"># Group A at time 2</span></span>
-<span id="cb95-14"><a href="tamanho-do-efeito-e-p-valor.html#cb95-14" tabindex="-1"></a>    <span class="dv">10</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb95-15"><a href="tamanho-do-efeito-e-p-valor.html#cb95-15" tabindex="-1"></a>    <span class="co"># Group B&#39; at time 1</span></span>
-<span id="cb95-16"><a href="tamanho-do-efeito-e-p-valor.html#cb95-16" tabindex="-1"></a>    <span class="dv">20</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb95-17"><a href="tamanho-do-efeito-e-p-valor.html#cb95-17" tabindex="-1"></a>    <span class="co"># Group B&#39; at time 2</span></span>
-<span id="cb95-18"><a href="tamanho-do-efeito-e-p-valor.html#cb95-18" tabindex="-1"></a>    <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb95-19"><a href="tamanho-do-efeito-e-p-valor.html#cb95-19" tabindex="-1"></a>    <span class="co"># Group B at time 1</span></span>
-<span id="cb95-20"><a href="tamanho-do-efeito-e-p-valor.html#cb95-20" tabindex="-1"></a>    <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)   <span class="co"># Group B at time 2</span></span>
-<span id="cb95-21"><a href="tamanho-do-efeito-e-p-valor.html#cb95-21" tabindex="-1"></a>  )</span>
-<span id="cb95-22"><a href="tamanho-do-efeito-e-p-valor.html#cb95-22" tabindex="-1"></a>)</span>
-<span id="cb95-23"><a href="tamanho-do-efeito-e-p-valor.html#cb95-23" tabindex="-1"></a></span>
-<span id="cb95-24"><a href="tamanho-do-efeito-e-p-valor.html#cb95-24" tabindex="-1"></a><span class="co"># add offset to group B at 2</span></span>
-<span id="cb95-25"><a href="tamanho-do-efeito-e-p-valor.html#cb95-25" tabindex="-1"></a>data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb95-26"><a href="tamanho-do-efeito-e-p-valor.html#cb95-26" tabindex="-1"></a>                data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb95-27"><a href="tamanho-do-efeito-e-p-valor.html#cb95-27" tabindex="-1"></a>                                                   data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">1</span>]</span>
-<span id="cb95-28"><a href="tamanho-do-efeito-e-p-valor.html#cb95-28" tabindex="-1"></a>data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb95-29"><a href="tamanho-do-efeito-e-p-valor.html#cb95-29" tabindex="-1"></a>                data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb95-30"><a href="tamanho-do-efeito-e-p-valor.html#cb95-30" tabindex="-1"></a>                                                   data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>] <span class="sc">-</span> <span class="dv">5</span></span>
-<span id="cb95-31"><a href="tamanho-do-efeito-e-p-valor.html#cb95-31" tabindex="-1"></a></span>
-<span id="cb95-32"><a href="tamanho-do-efeito-e-p-valor.html#cb95-32" tabindex="-1"></a><span class="co"># Calculate means for plotting</span></span>
-<span id="cb95-33"><a href="tamanho-do-efeito-e-p-valor.html#cb95-33" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(response <span class="sc">~</span> group <span class="sc">+</span> time, data, mean)</span>
-<span id="cb95-34"><a href="tamanho-do-efeito-e-p-valor.html#cb95-34" tabindex="-1"></a></span>
-<span id="cb95-35"><a href="tamanho-do-efeito-e-p-valor.html#cb95-35" tabindex="-1"></a><span class="co"># Create the plot</span></span>
-<span id="cb95-36"><a href="tamanho-do-efeito-e-p-valor.html#cb95-36" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(means,</span>
-<span id="cb95-37"><a href="tamanho-do-efeito-e-p-valor.html#cb95-37" tabindex="-1"></a>                ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
-<span id="cb95-38"><a href="tamanho-do-efeito-e-p-valor.html#cb95-38" tabindex="-1"></a>                  <span class="at">x =</span> time,</span>
-<span id="cb95-39"><a href="tamanho-do-efeito-e-p-valor.html#cb95-39" tabindex="-1"></a>                  <span class="at">y =</span> response,</span>
-<span id="cb95-40"><a href="tamanho-do-efeito-e-p-valor.html#cb95-40" tabindex="-1"></a>                  <span class="at">color =</span> group,</span>
-<span id="cb95-41"><a href="tamanho-do-efeito-e-p-valor.html#cb95-41" tabindex="-1"></a>                  <span class="at">group =</span> group</span>
-<span id="cb95-42"><a href="tamanho-do-efeito-e-p-valor.html#cb95-42" tabindex="-1"></a>                )) <span class="sc">+</span></span>
-<span id="cb95-43"><a href="tamanho-do-efeito-e-p-valor.html#cb95-43" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span>               <span class="co"># Draw lines for means</span></span>
-<span id="cb95-44"><a href="tamanho-do-efeito-e-p-valor.html#cb95-44" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>              <span class="co"># Add points for means</span></span>
-<span id="cb95-45"><a href="tamanho-do-efeito-e-p-valor.html#cb95-45" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Tempo&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Resposta&quot;</span>) <span class="sc">+</span></span>
-<span id="cb95-46"><a href="tamanho-do-efeito-e-p-valor.html#cb95-46" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb95-47"><a href="tamanho-do-efeito-e-p-valor.html#cb95-47" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;gray&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span>  <span class="co"># Custom colors</span></span>
-<span id="cb95-48"><a href="tamanho-do-efeito-e-p-valor.html#cb95-48" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb95-49"><a href="tamanho-do-efeito-e-p-valor.html#cb95-49" tabindex="-1"></a>  <span class="co"># minumum theme</span></span>
-<span id="cb95-50"><a href="tamanho-do-efeito-e-p-valor.html#cb95-50" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb95-51"><a href="tamanho-do-efeito-e-p-valor.html#cb95-51" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb95-52"><a href="tamanho-do-efeito-e-p-valor.html#cb95-52" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb95-53"><a href="tamanho-do-efeito-e-p-valor.html#cb95-53" tabindex="-1"></a>    <span class="at">panel.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb95-54"><a href="tamanho-do-efeito-e-p-valor.html#cb95-54" tabindex="-1"></a>    <span class="at">axis.line =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)</span>
-<span id="cb95-55"><a href="tamanho-do-efeito-e-p-valor.html#cb95-55" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb95-56"><a href="tamanho-do-efeito-e-p-valor.html#cb95-56" tabindex="-1"></a>  <span class="co"># move legent to the top left corner</span></span>
-<span id="cb95-57"><a href="tamanho-do-efeito-e-p-valor.html#cb95-57" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb95-58"><a href="tamanho-do-efeito-e-p-valor.html#cb95-58" tabindex="-1"></a>                 <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb95-59"><a href="tamanho-do-efeito-e-p-valor.html#cb95-59" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito esperado sem interação&quot;</span></span>
-<span id="cb95-60"><a href="tamanho-do-efeito-e-p-valor.html#cb95-60" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
-<span id="cb95-61"><a href="tamanho-do-efeito-e-p-valor.html#cb95-61" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb95-62"><a href="tamanho-do-efeito-e-p-valor.html#cb95-62" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
-<span id="cb95-63"><a href="tamanho-do-efeito-e-p-valor.html#cb95-63" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb95-64"><a href="tamanho-do-efeito-e-p-valor.html#cb95-64" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
-<span id="cb95-65"><a href="tamanho-do-efeito-e-p-valor.html#cb95-65" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Sem efeito de </span><span class="sc">\n</span><span class="st"> interação&quot;</span>,</span>
-<span id="cb95-66"><a href="tamanho-do-efeito-e-p-valor.html#cb95-66" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb95-67"><a href="tamanho-do-efeito-e-p-valor.html#cb95-67" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>,</span>
-<span id="cb95-68"><a href="tamanho-do-efeito-e-p-valor.html#cb95-68" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
-<span id="cb95-69"><a href="tamanho-do-efeito-e-p-valor.html#cb95-69" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
-<span id="cb95-70"><a href="tamanho-do-efeito-e-p-valor.html#cb95-70" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb95-71"><a href="tamanho-do-efeito-e-p-valor.html#cb95-71" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito esperado com interação&quot;</span></span>
-<span id="cb95-72"><a href="tamanho-do-efeito-e-p-valor.html#cb95-72" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
-<span id="cb95-73"><a href="tamanho-do-efeito-e-p-valor.html#cb95-73" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb95-74"><a href="tamanho-do-efeito-e-p-valor.html#cb95-74" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
-<span id="cb95-75"><a href="tamanho-do-efeito-e-p-valor.html#cb95-75" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb95-76"><a href="tamanho-do-efeito-e-p-valor.html#cb95-76" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
-<span id="cb95-77"><a href="tamanho-do-efeito-e-p-valor.html#cb95-77" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Com efeito de </span><span class="sc">\n</span><span class="st"> interação&quot;</span>,</span>
-<span id="cb95-78"><a href="tamanho-do-efeito-e-p-valor.html#cb95-78" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb95-79"><a href="tamanho-do-efeito-e-p-valor.html#cb95-79" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb95-80"><a href="tamanho-do-efeito-e-p-valor.html#cb95-80" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
-<span id="cb95-81"><a href="tamanho-do-efeito-e-p-valor.html#cb95-81" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
-<span id="cb95-82"><a href="tamanho-do-efeito-e-p-valor.html#cb95-82" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb95-83"><a href="tamanho-do-efeito-e-p-valor.html#cb95-83" tabindex="-1"></a>  <span class="co"># draw dashed arrow of effect from B&#39; to B at time 2</span></span>
-<span id="cb95-84"><a href="tamanho-do-efeito-e-p-valor.html#cb95-84" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_segment</span>(</span>
-<span id="cb95-85"><a href="tamanho-do-efeito-e-p-valor.html#cb95-85" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
-<span id="cb95-86"><a href="tamanho-do-efeito-e-p-valor.html#cb95-86" tabindex="-1"></a>      <span class="at">x =</span> <span class="dv">2</span>,</span>
-<span id="cb95-87"><a href="tamanho-do-efeito-e-p-valor.html#cb95-87" tabindex="-1"></a>      <span class="at">xend =</span> <span class="dv">2</span>,</span>
-<span id="cb95-88"><a href="tamanho-do-efeito-e-p-valor.html#cb95-88" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb95-89"><a href="tamanho-do-efeito-e-p-valor.html#cb95-89" tabindex="-1"></a>                               data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
-<span id="cb95-90"><a href="tamanho-do-efeito-e-p-valor.html#cb95-90" tabindex="-1"></a>      <span class="at">yend =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb95-91"><a href="tamanho-do-efeito-e-p-valor.html#cb95-91" tabindex="-1"></a>                                  data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>])</span>
-<span id="cb95-92"><a href="tamanho-do-efeito-e-p-valor.html#cb95-92" tabindex="-1"></a>    ),</span>
-<span id="cb95-93"><a href="tamanho-do-efeito-e-p-valor.html#cb95-93" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(</span>
-<span id="cb95-94"><a href="tamanho-do-efeito-e-p-valor.html#cb95-94" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">&quot;open&quot;</span>,</span>
-<span id="cb95-95"><a href="tamanho-do-efeito-e-p-valor.html#cb95-95" tabindex="-1"></a>      <span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;inches&quot;</span>),</span>
-<span id="cb95-96"><a href="tamanho-do-efeito-e-p-valor.html#cb95-96" tabindex="-1"></a>      <span class="at">ends =</span> <span class="st">&quot;both&quot;</span>,</span>
-<span id="cb95-97"><a href="tamanho-do-efeito-e-p-valor.html#cb95-97" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">20</span></span>
-<span id="cb95-98"><a href="tamanho-do-efeito-e-p-valor.html#cb95-98" tabindex="-1"></a>    ),</span>
-<span id="cb95-99"><a href="tamanho-do-efeito-e-p-valor.html#cb95-99" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb95-100"><a href="tamanho-do-efeito-e-p-valor.html#cb95-100" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span></span>
-<span id="cb95-101"><a href="tamanho-do-efeito-e-p-valor.html#cb95-101" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb95-102"><a href="tamanho-do-efeito-e-p-valor.html#cb95-102" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito de interação&quot;</span></span>
-<span id="cb95-103"><a href="tamanho-do-efeito-e-p-valor.html#cb95-103" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
-<span id="cb95-104"><a href="tamanho-do-efeito-e-p-valor.html#cb95-104" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb95-105"><a href="tamanho-do-efeito-e-p-valor.html#cb95-105" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
-<span id="cb95-106"><a href="tamanho-do-efeito-e-p-valor.html#cb95-106" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">!=</span> <span class="st">&quot;A&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb95-107"><a href="tamanho-do-efeito-e-p-valor.html#cb95-107" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
-<span id="cb95-108"><a href="tamanho-do-efeito-e-p-valor.html#cb95-108" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Tamanho de efeito </span><span class="sc">\n</span><span class="st"> estimado&quot;</span>,</span>
-<span id="cb95-109"><a href="tamanho-do-efeito-e-p-valor.html#cb95-109" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb95-110"><a href="tamanho-do-efeito-e-p-valor.html#cb95-110" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb95-111"><a href="tamanho-do-efeito-e-p-valor.html#cb95-111" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
-<span id="cb95-112"><a href="tamanho-do-efeito-e-p-valor.html#cb95-112" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
-<span id="cb95-113"><a href="tamanho-do-efeito-e-p-valor.html#cb95-113" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb95-114"><a href="tamanho-do-efeito-e-p-valor.html#cb95-114" tabindex="-1"></a>  <span class="co"># augment x axis margins to make room for annotations</span></span>
-<span id="cb95-115"><a href="tamanho-do-efeito-e-p-valor.html#cb95-115" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_x_continuous</span>(</span>
-<span id="cb95-116"><a href="tamanho-do-efeito-e-p-valor.html#cb95-116" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb95-117"><a href="tamanho-do-efeito-e-p-valor.html#cb95-117" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Antes&quot;</span>, <span class="st">&quot;Depois&quot;</span>),</span>
-<span id="cb95-118"><a href="tamanho-do-efeito-e-p-valor.html#cb95-118" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.3</span>)</span>
-<span id="cb95-119"><a href="tamanho-do-efeito-e-p-valor.html#cb95-119" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="tamanho-do-efeito-e-p-valor.html#cb99-1" tabindex="-1"></a><span class="co"># Simulate data</span></span>
+<span id="cb99-2"><a href="tamanho-do-efeito-e-p-valor.html#cb99-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb99-3"><a href="tamanho-do-efeito-e-p-valor.html#cb99-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span>  <span class="co"># Number of observations</span></span>
+<span id="cb99-4"><a href="tamanho-do-efeito-e-p-valor.html#cb99-4" tabindex="-1"></a></span>
+<span id="cb99-5"><a href="tamanho-do-efeito-e-p-valor.html#cb99-5" tabindex="-1"></a><span class="co"># Create a dataframe with two time points and different offsets</span></span>
+<span id="cb99-6"><a href="tamanho-do-efeito-e-p-valor.html#cb99-6" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb99-7"><a href="tamanho-do-efeito-e-p-valor.html#cb99-7" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&#39;&quot;</span>), <span class="at">each =</span> n <span class="sc">*</span> <span class="dv">2</span>),</span>
+<span id="cb99-8"><a href="tamanho-do-efeito-e-p-valor.html#cb99-8" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">each =</span> n),</span>
+<span id="cb99-9"><a href="tamanho-do-efeito-e-p-valor.html#cb99-9" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(</span>
+<span id="cb99-10"><a href="tamanho-do-efeito-e-p-valor.html#cb99-10" tabindex="-1"></a>    <span class="dv">5</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb99-11"><a href="tamanho-do-efeito-e-p-valor.html#cb99-11" tabindex="-1"></a>    <span class="co"># Group A at time 1</span></span>
+<span id="cb99-12"><a href="tamanho-do-efeito-e-p-valor.html#cb99-12" tabindex="-1"></a>    <span class="dv">15</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb99-13"><a href="tamanho-do-efeito-e-p-valor.html#cb99-13" tabindex="-1"></a>    <span class="co"># Group A at time 2</span></span>
+<span id="cb99-14"><a href="tamanho-do-efeito-e-p-valor.html#cb99-14" tabindex="-1"></a>    <span class="dv">10</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb99-15"><a href="tamanho-do-efeito-e-p-valor.html#cb99-15" tabindex="-1"></a>    <span class="co"># Group B&#39; at time 1</span></span>
+<span id="cb99-16"><a href="tamanho-do-efeito-e-p-valor.html#cb99-16" tabindex="-1"></a>    <span class="dv">20</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb99-17"><a href="tamanho-do-efeito-e-p-valor.html#cb99-17" tabindex="-1"></a>    <span class="co"># Group B&#39; at time 2</span></span>
+<span id="cb99-18"><a href="tamanho-do-efeito-e-p-valor.html#cb99-18" tabindex="-1"></a>    <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb99-19"><a href="tamanho-do-efeito-e-p-valor.html#cb99-19" tabindex="-1"></a>    <span class="co"># Group B at time 1</span></span>
+<span id="cb99-20"><a href="tamanho-do-efeito-e-p-valor.html#cb99-20" tabindex="-1"></a>    <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)   <span class="co"># Group B at time 2</span></span>
+<span id="cb99-21"><a href="tamanho-do-efeito-e-p-valor.html#cb99-21" tabindex="-1"></a>  )</span>
+<span id="cb99-22"><a href="tamanho-do-efeito-e-p-valor.html#cb99-22" tabindex="-1"></a>)</span>
+<span id="cb99-23"><a href="tamanho-do-efeito-e-p-valor.html#cb99-23" tabindex="-1"></a></span>
+<span id="cb99-24"><a href="tamanho-do-efeito-e-p-valor.html#cb99-24" tabindex="-1"></a><span class="co"># add offset to group B at 2</span></span>
+<span id="cb99-25"><a href="tamanho-do-efeito-e-p-valor.html#cb99-25" tabindex="-1"></a>data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb99-26"><a href="tamanho-do-efeito-e-p-valor.html#cb99-26" tabindex="-1"></a>                data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb99-27"><a href="tamanho-do-efeito-e-p-valor.html#cb99-27" tabindex="-1"></a>                                                   data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb99-28"><a href="tamanho-do-efeito-e-p-valor.html#cb99-28" tabindex="-1"></a>data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb99-29"><a href="tamanho-do-efeito-e-p-valor.html#cb99-29" tabindex="-1"></a>                data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb99-30"><a href="tamanho-do-efeito-e-p-valor.html#cb99-30" tabindex="-1"></a>                                                   data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>] <span class="sc">-</span> <span class="dv">5</span></span>
+<span id="cb99-31"><a href="tamanho-do-efeito-e-p-valor.html#cb99-31" tabindex="-1"></a></span>
+<span id="cb99-32"><a href="tamanho-do-efeito-e-p-valor.html#cb99-32" tabindex="-1"></a><span class="co"># Calculate means for plotting</span></span>
+<span id="cb99-33"><a href="tamanho-do-efeito-e-p-valor.html#cb99-33" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(response <span class="sc">~</span> group <span class="sc">+</span> time, data, mean)</span>
+<span id="cb99-34"><a href="tamanho-do-efeito-e-p-valor.html#cb99-34" tabindex="-1"></a></span>
+<span id="cb99-35"><a href="tamanho-do-efeito-e-p-valor.html#cb99-35" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb99-36"><a href="tamanho-do-efeito-e-p-valor.html#cb99-36" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(means,</span>
+<span id="cb99-37"><a href="tamanho-do-efeito-e-p-valor.html#cb99-37" tabindex="-1"></a>                ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb99-38"><a href="tamanho-do-efeito-e-p-valor.html#cb99-38" tabindex="-1"></a>                  <span class="at">x =</span> time,</span>
+<span id="cb99-39"><a href="tamanho-do-efeito-e-p-valor.html#cb99-39" tabindex="-1"></a>                  <span class="at">y =</span> response,</span>
+<span id="cb99-40"><a href="tamanho-do-efeito-e-p-valor.html#cb99-40" tabindex="-1"></a>                  <span class="at">color =</span> group,</span>
+<span id="cb99-41"><a href="tamanho-do-efeito-e-p-valor.html#cb99-41" tabindex="-1"></a>                  <span class="at">group =</span> group</span>
+<span id="cb99-42"><a href="tamanho-do-efeito-e-p-valor.html#cb99-42" tabindex="-1"></a>                )) <span class="sc">+</span></span>
+<span id="cb99-43"><a href="tamanho-do-efeito-e-p-valor.html#cb99-43" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span>               <span class="co"># Draw lines for means</span></span>
+<span id="cb99-44"><a href="tamanho-do-efeito-e-p-valor.html#cb99-44" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>              <span class="co"># Add points for means</span></span>
+<span id="cb99-45"><a href="tamanho-do-efeito-e-p-valor.html#cb99-45" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Tempo&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Resposta&quot;</span>) <span class="sc">+</span></span>
+<span id="cb99-46"><a href="tamanho-do-efeito-e-p-valor.html#cb99-46" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb99-47"><a href="tamanho-do-efeito-e-p-valor.html#cb99-47" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;gray&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span>  <span class="co"># Custom colors</span></span>
+<span id="cb99-48"><a href="tamanho-do-efeito-e-p-valor.html#cb99-48" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb99-49"><a href="tamanho-do-efeito-e-p-valor.html#cb99-49" tabindex="-1"></a>  <span class="co"># minumum theme</span></span>
+<span id="cb99-50"><a href="tamanho-do-efeito-e-p-valor.html#cb99-50" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb99-51"><a href="tamanho-do-efeito-e-p-valor.html#cb99-51" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb99-52"><a href="tamanho-do-efeito-e-p-valor.html#cb99-52" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb99-53"><a href="tamanho-do-efeito-e-p-valor.html#cb99-53" tabindex="-1"></a>    <span class="at">panel.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb99-54"><a href="tamanho-do-efeito-e-p-valor.html#cb99-54" tabindex="-1"></a>    <span class="at">axis.line =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb99-55"><a href="tamanho-do-efeito-e-p-valor.html#cb99-55" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb99-56"><a href="tamanho-do-efeito-e-p-valor.html#cb99-56" tabindex="-1"></a>  <span class="co"># move legent to the top left corner</span></span>
+<span id="cb99-57"><a href="tamanho-do-efeito-e-p-valor.html#cb99-57" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb99-58"><a href="tamanho-do-efeito-e-p-valor.html#cb99-58" tabindex="-1"></a>                 <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb99-59"><a href="tamanho-do-efeito-e-p-valor.html#cb99-59" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito esperado sem interação&quot;</span></span>
+<span id="cb99-60"><a href="tamanho-do-efeito-e-p-valor.html#cb99-60" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb99-61"><a href="tamanho-do-efeito-e-p-valor.html#cb99-61" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb99-62"><a href="tamanho-do-efeito-e-p-valor.html#cb99-62" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
+<span id="cb99-63"><a href="tamanho-do-efeito-e-p-valor.html#cb99-63" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb99-64"><a href="tamanho-do-efeito-e-p-valor.html#cb99-64" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
+<span id="cb99-65"><a href="tamanho-do-efeito-e-p-valor.html#cb99-65" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Sem efeito de </span><span class="sc">\n</span><span class="st"> interação&quot;</span>,</span>
+<span id="cb99-66"><a href="tamanho-do-efeito-e-p-valor.html#cb99-66" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb99-67"><a href="tamanho-do-efeito-e-p-valor.html#cb99-67" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb99-68"><a href="tamanho-do-efeito-e-p-valor.html#cb99-68" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb99-69"><a href="tamanho-do-efeito-e-p-valor.html#cb99-69" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
+<span id="cb99-70"><a href="tamanho-do-efeito-e-p-valor.html#cb99-70" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb99-71"><a href="tamanho-do-efeito-e-p-valor.html#cb99-71" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito esperado com interação&quot;</span></span>
+<span id="cb99-72"><a href="tamanho-do-efeito-e-p-valor.html#cb99-72" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb99-73"><a href="tamanho-do-efeito-e-p-valor.html#cb99-73" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb99-74"><a href="tamanho-do-efeito-e-p-valor.html#cb99-74" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
+<span id="cb99-75"><a href="tamanho-do-efeito-e-p-valor.html#cb99-75" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb99-76"><a href="tamanho-do-efeito-e-p-valor.html#cb99-76" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
+<span id="cb99-77"><a href="tamanho-do-efeito-e-p-valor.html#cb99-77" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Com efeito de </span><span class="sc">\n</span><span class="st"> interação&quot;</span>,</span>
+<span id="cb99-78"><a href="tamanho-do-efeito-e-p-valor.html#cb99-78" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb99-79"><a href="tamanho-do-efeito-e-p-valor.html#cb99-79" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb99-80"><a href="tamanho-do-efeito-e-p-valor.html#cb99-80" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb99-81"><a href="tamanho-do-efeito-e-p-valor.html#cb99-81" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
+<span id="cb99-82"><a href="tamanho-do-efeito-e-p-valor.html#cb99-82" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb99-83"><a href="tamanho-do-efeito-e-p-valor.html#cb99-83" tabindex="-1"></a>  <span class="co"># draw dashed arrow of effect from B&#39; to B at time 2</span></span>
+<span id="cb99-84"><a href="tamanho-do-efeito-e-p-valor.html#cb99-84" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_segment</span>(</span>
+<span id="cb99-85"><a href="tamanho-do-efeito-e-p-valor.html#cb99-85" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb99-86"><a href="tamanho-do-efeito-e-p-valor.html#cb99-86" tabindex="-1"></a>      <span class="at">x =</span> <span class="dv">2</span>,</span>
+<span id="cb99-87"><a href="tamanho-do-efeito-e-p-valor.html#cb99-87" tabindex="-1"></a>      <span class="at">xend =</span> <span class="dv">2</span>,</span>
+<span id="cb99-88"><a href="tamanho-do-efeito-e-p-valor.html#cb99-88" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&#39;&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb99-89"><a href="tamanho-do-efeito-e-p-valor.html#cb99-89" tabindex="-1"></a>                               data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
+<span id="cb99-90"><a href="tamanho-do-efeito-e-p-valor.html#cb99-90" tabindex="-1"></a>      <span class="at">yend =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb99-91"><a href="tamanho-do-efeito-e-p-valor.html#cb99-91" tabindex="-1"></a>                                  data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>])</span>
+<span id="cb99-92"><a href="tamanho-do-efeito-e-p-valor.html#cb99-92" tabindex="-1"></a>    ),</span>
+<span id="cb99-93"><a href="tamanho-do-efeito-e-p-valor.html#cb99-93" tabindex="-1"></a>    <span class="at">arrow =</span> ggplot2<span class="sc">::</span><span class="fu">arrow</span>(</span>
+<span id="cb99-94"><a href="tamanho-do-efeito-e-p-valor.html#cb99-94" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">&quot;open&quot;</span>,</span>
+<span id="cb99-95"><a href="tamanho-do-efeito-e-p-valor.html#cb99-95" tabindex="-1"></a>      <span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;inches&quot;</span>),</span>
+<span id="cb99-96"><a href="tamanho-do-efeito-e-p-valor.html#cb99-96" tabindex="-1"></a>      <span class="at">ends =</span> <span class="st">&quot;both&quot;</span>,</span>
+<span id="cb99-97"><a href="tamanho-do-efeito-e-p-valor.html#cb99-97" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">20</span></span>
+<span id="cb99-98"><a href="tamanho-do-efeito-e-p-valor.html#cb99-98" tabindex="-1"></a>    ),</span>
+<span id="cb99-99"><a href="tamanho-do-efeito-e-p-valor.html#cb99-99" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb99-100"><a href="tamanho-do-efeito-e-p-valor.html#cb99-100" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span></span>
+<span id="cb99-101"><a href="tamanho-do-efeito-e-p-valor.html#cb99-101" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb99-102"><a href="tamanho-do-efeito-e-p-valor.html#cb99-102" tabindex="-1"></a>  <span class="co"># annotate plot with &quot;Efeito de interação&quot;</span></span>
+<span id="cb99-103"><a href="tamanho-do-efeito-e-p-valor.html#cb99-103" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb99-104"><a href="tamanho-do-efeito-e-p-valor.html#cb99-104" tabindex="-1"></a>    <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb99-105"><a href="tamanho-do-efeito-e-p-valor.html#cb99-105" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">2</span>,</span>
+<span id="cb99-106"><a href="tamanho-do-efeito-e-p-valor.html#cb99-106" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">mean</span>(data<span class="sc">$</span>response[data<span class="sc">$</span>group <span class="sc">!=</span> <span class="st">&quot;A&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb99-107"><a href="tamanho-do-efeito-e-p-valor.html#cb99-107" tabindex="-1"></a>                             data<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">2</span>]),</span>
+<span id="cb99-108"><a href="tamanho-do-efeito-e-p-valor.html#cb99-108" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">&quot;Tamanho de efeito </span><span class="sc">\n</span><span class="st"> estimado&quot;</span>,</span>
+<span id="cb99-109"><a href="tamanho-do-efeito-e-p-valor.html#cb99-109" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb99-110"><a href="tamanho-do-efeito-e-p-valor.html#cb99-110" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb99-111"><a href="tamanho-do-efeito-e-p-valor.html#cb99-111" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb99-112"><a href="tamanho-do-efeito-e-p-valor.html#cb99-112" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span></span>
+<span id="cb99-113"><a href="tamanho-do-efeito-e-p-valor.html#cb99-113" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb99-114"><a href="tamanho-do-efeito-e-p-valor.html#cb99-114" tabindex="-1"></a>  <span class="co"># augment x axis margins to make room for annotations</span></span>
+<span id="cb99-115"><a href="tamanho-do-efeito-e-p-valor.html#cb99-115" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_x_continuous</span>(</span>
+<span id="cb99-116"><a href="tamanho-do-efeito-e-p-valor.html#cb99-116" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb99-117"><a href="tamanho-do-efeito-e-p-valor.html#cb99-117" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Antes&quot;</span>, <span class="st">&quot;Depois&quot;</span>),</span>
+<span id="cb99-118"><a href="tamanho-do-efeito-e-p-valor.html#cb99-118" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.3</span>)</span>
+<span id="cb99-119"><a href="tamanho-do-efeito-e-p-valor.html#cb99-119" tabindex="-1"></a>  )</span></code></pre></div>
 </details>
 </div>
 <div id="p-valor-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>P-valor<a href="tamanho-do-efeito-e-p-valor.html#p-valor-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="tamanho-do-efeito-e-p-valor.html#cb96-1" tabindex="-1"></a><span class="co"># Criar grid 10x10 (100 quadrados)</span></span>
-<span id="cb96-2"><a href="tamanho-do-efeito-e-p-valor.html#cb96-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)  <span class="co"># Para reprodutibilidade</span></span>
-<span id="cb96-3"><a href="tamanho-do-efeito-e-p-valor.html#cb96-3" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb96-4"><a href="tamanho-do-efeito-e-p-valor.html#cb96-4" tabindex="-1"></a></span>
-<span id="cb96-5"><a href="tamanho-do-efeito-e-p-valor.html#cb96-5" tabindex="-1"></a><span class="co"># Criar vetor de cor com todos brancos</span></span>
-<span id="cb96-6"><a href="tamanho-do-efeito-e-p-valor.html#cb96-6" tabindex="-1"></a>grid<span class="sc">$</span>cor <span class="ot">&lt;-</span> <span class="st">&quot;branco&quot;</span></span>
-<span id="cb96-7"><a href="tamanho-do-efeito-e-p-valor.html#cb96-7" tabindex="-1"></a></span>
-<span id="cb96-8"><a href="tamanho-do-efeito-e-p-valor.html#cb96-8" tabindex="-1"></a><span class="co"># Selecionar aleatoriamente 5 índices para serem cinza escuro</span></span>
-<span id="cb96-9"><a href="tamanho-do-efeito-e-p-valor.html#cb96-9" tabindex="-1"></a>cinzas <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">5</span>)</span>
-<span id="cb96-10"><a href="tamanho-do-efeito-e-p-valor.html#cb96-10" tabindex="-1"></a>grid<span class="sc">$</span>cor[cinzas] <span class="ot">&lt;-</span> <span class="st">&quot;cinza escuro&quot;</span></span>
-<span id="cb96-11"><a href="tamanho-do-efeito-e-p-valor.html#cb96-11" tabindex="-1"></a></span>
-<span id="cb96-12"><a href="tamanho-do-efeito-e-p-valor.html#cb96-12" tabindex="-1"></a><span class="co"># Criar o gráfico</span></span>
-<span id="cb96-13"><a href="tamanho-do-efeito-e-p-valor.html#cb96-13" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(grid, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">fill =</span> cor)) <span class="sc">+</span></span>
-<span id="cb96-14"><a href="tamanho-do-efeito-e-p-valor.html#cb96-14" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb96-15"><a href="tamanho-do-efeito-e-p-valor.html#cb96-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;cinza escuro&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray30&quot;</span>, <span class="st">&quot;branco&quot;</span> <span class="ot">=</span> <span class="st">&quot;white&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb96-16"><a href="tamanho-do-efeito-e-p-valor.html#cb96-16" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
-<span id="cb96-17"><a href="tamanho-do-efeito-e-p-valor.html#cb96-17" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb96-18"><a href="tamanho-do-efeito-e-p-valor.html#cb96-18" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb96-19"><a href="tamanho-do-efeito-e-p-valor.html#cb96-19" tabindex="-1"></a>        <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb96-20"><a href="tamanho-do-efeito-e-p-valor.html#cb96-20" tabindex="-1"></a>        <span class="at">axis.ticks =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb96-21"><a href="tamanho-do-efeito-e-p-valor.html#cb96-21" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb96-22"><a href="tamanho-do-efeito-e-p-valor.html#cb96-22" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Visualização de p &lt; 0,05 (5 quadrados aleatórios em 100)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="tamanho-do-efeito-e-p-valor.html#cb100-1" tabindex="-1"></a><span class="co"># Criar grid 10x10 (100 quadrados)</span></span>
+<span id="cb100-2"><a href="tamanho-do-efeito-e-p-valor.html#cb100-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)  <span class="co"># Para reprodutibilidade</span></span>
+<span id="cb100-3"><a href="tamanho-do-efeito-e-p-valor.html#cb100-3" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb100-4"><a href="tamanho-do-efeito-e-p-valor.html#cb100-4" tabindex="-1"></a></span>
+<span id="cb100-5"><a href="tamanho-do-efeito-e-p-valor.html#cb100-5" tabindex="-1"></a><span class="co"># Criar vetor de cor com todos brancos</span></span>
+<span id="cb100-6"><a href="tamanho-do-efeito-e-p-valor.html#cb100-6" tabindex="-1"></a>grid<span class="sc">$</span>cor <span class="ot">&lt;-</span> <span class="st">&quot;branco&quot;</span></span>
+<span id="cb100-7"><a href="tamanho-do-efeito-e-p-valor.html#cb100-7" tabindex="-1"></a></span>
+<span id="cb100-8"><a href="tamanho-do-efeito-e-p-valor.html#cb100-8" tabindex="-1"></a><span class="co"># Selecionar aleatoriamente 5 índices para serem cinza escuro</span></span>
+<span id="cb100-9"><a href="tamanho-do-efeito-e-p-valor.html#cb100-9" tabindex="-1"></a>cinzas <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">5</span>)</span>
+<span id="cb100-10"><a href="tamanho-do-efeito-e-p-valor.html#cb100-10" tabindex="-1"></a>grid<span class="sc">$</span>cor[cinzas] <span class="ot">&lt;-</span> <span class="st">&quot;cinza escuro&quot;</span></span>
+<span id="cb100-11"><a href="tamanho-do-efeito-e-p-valor.html#cb100-11" tabindex="-1"></a></span>
+<span id="cb100-12"><a href="tamanho-do-efeito-e-p-valor.html#cb100-12" tabindex="-1"></a><span class="co"># Criar o gráfico</span></span>
+<span id="cb100-13"><a href="tamanho-do-efeito-e-p-valor.html#cb100-13" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(grid, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">fill =</span> cor)) <span class="sc">+</span></span>
+<span id="cb100-14"><a href="tamanho-do-efeito-e-p-valor.html#cb100-14" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb100-15"><a href="tamanho-do-efeito-e-p-valor.html#cb100-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;cinza escuro&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray30&quot;</span>, <span class="st">&quot;branco&quot;</span> <span class="ot">=</span> <span class="st">&quot;white&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb100-16"><a href="tamanho-do-efeito-e-p-valor.html#cb100-16" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb100-17"><a href="tamanho-do-efeito-e-p-valor.html#cb100-17" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb100-18"><a href="tamanho-do-efeito-e-p-valor.html#cb100-18" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb100-19"><a href="tamanho-do-efeito-e-p-valor.html#cb100-19" tabindex="-1"></a>        <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb100-20"><a href="tamanho-do-efeito-e-p-valor.html#cb100-20" tabindex="-1"></a>        <span class="at">axis.ticks =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb100-21"><a href="tamanho-do-efeito-e-p-valor.html#cb100-21" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb100-22"><a href="tamanho-do-efeito-e-p-valor.html#cb100-22" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Visualização de p &lt; 0,05 (5 quadrados aleatórios em 100)&quot;</span>)</span></code></pre></div>
 </details>
 </div>
 </div>

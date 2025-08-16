@@ -189,11 +189,11 @@ div.csl-indent {
 <li><a style="text-align:center; border-width:3px;border-style:solid; border-color:white; border-radius:15px; padding:5px; background-color:#276DC2; text-decoration:none; color:white" href="https://ferreiraas.github.io/Ciencia-com-R-Consultoria/"><b>e-Book | Consultoria</b></a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Capa</a></li>
-<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i>Dedicatória</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Capa</strong></a></li>
+<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i><strong>Dedicatória</strong></a></li>
 <li class="chapter" data-level="" data-path="agradecimentos.html"><a href="agradecimentos.html"><i class="fa fa-check"></i><strong>Agradecimentos</strong></a></li>
+<li class="chapter" data-level="" data-path="apresentacao.html"><a href="apresentacao.html"><i class="fa fa-check"></i><strong>Apresentação</strong></a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i><strong>Sobre o autor</strong></a></li>
-<li class="chapter" data-level="" data-path="prefacio.html"><a href="prefacio.html"><i class="fa fa-check"></i><strong>Prefácio</strong></a></li>
 <li class="chapter" data-level="" data-path="parte-1.html"><a href="parte-1.html"><i class="fa fa-check"></i><em>PARTE 1: FUNDAMENTOS ESTATÍSTICOS</em></a></li>
 <li class="chapter" data-level="1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html"><i class="fa fa-check"></i><b>1</b> <strong>Pensamento estatístico</strong></a>
 <ul>
@@ -622,9 +622,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="17" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>17</b> <strong>Shiny Apps</strong></a>
 <ul>
-<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i>Aplicativos por delineamento de estudo</a>
+<li class="chapter" data-level="17.1" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i><b>17.1</b> Aplicativos por delineamento de estudo</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#ensaios-cl%C3%ADnicos"><i class="fa fa-check"></i>Ensaios clínicos</a></li>
+<li class="chapter" data-level="17.1.1" data-path="shiny-apps.html"><a href="shiny-apps.html#qual-shiny-app-usar-para-ensaios-experimentais"><i class="fa fa-check"></i><b>17.1.1</b> Qual Shiny App usar para ensaios experimentais?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-5.html"><a href="parte-5.html"><i class="fa fa-check"></i><em>PARTE 5: ANÁLISES DESCRITIVAS E EXPLORATÓRIAS</em></a></li>
@@ -1509,188 +1509,188 @@ div.csl-indent {
 <div id="análise-inferencial-de-correlação-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Análise inferencial de correlação<a href="#an%C3%A1lise-inferencial-de-correla%C3%A7%C3%A3o-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="correlação.html#cb100-1" tabindex="-1"></a><span class="co"># Function to generate data with a given correlation</span></span>
-<span id="cb100-2"><a href="correlação.html#cb100-2" tabindex="-1"></a>generate_data <span class="ot">&lt;-</span> <span class="cf">function</span>(n, rho) {</span>
-<span id="cb100-3"><a href="correlação.html#cb100-3" tabindex="-1"></a>  Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, rho, rho, <span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb100-4"><a href="correlação.html#cb100-4" tabindex="-1"></a>  MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="at">n =</span> n,</span>
-<span id="cb100-5"><a href="correlação.html#cb100-5" tabindex="-1"></a>                <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb100-6"><a href="correlação.html#cb100-6" tabindex="-1"></a>                <span class="at">Sigma =</span> Sigma)</span>
-<span id="cb100-7"><a href="correlação.html#cb100-7" tabindex="-1"></a>}</span>
-<span id="cb100-8"><a href="correlação.html#cb100-8" tabindex="-1"></a></span>
-<span id="cb100-9"><a href="correlação.html#cb100-9" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
-<span id="cb100-10"><a href="correlação.html#cb100-10" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb100-11"><a href="correlação.html#cb100-11" tabindex="-1"></a></span>
-<span id="cb100-12"><a href="correlação.html#cb100-12" tabindex="-1"></a><span class="co"># Number of points</span></span>
-<span id="cb100-13"><a href="correlação.html#cb100-13" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb100-14"><a href="correlação.html#cb100-14" tabindex="-1"></a></span>
-<span id="cb100-15"><a href="correlação.html#cb100-15" tabindex="-1"></a><span class="co"># Different levels of correlation including zero correlation</span></span>
-<span id="cb100-16"><a href="correlação.html#cb100-16" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.9</span>, <span class="sc">-</span><span class="fl">0.7</span>, <span class="sc">-</span><span class="fl">0.4</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>)</span>
-<span id="cb100-17"><a href="correlação.html#cb100-17" tabindex="-1"></a></span>
-<span id="cb100-18"><a href="correlação.html#cb100-18" tabindex="-1"></a><span class="co"># Generate data for each correlation</span></span>
-<span id="cb100-19"><a href="correlação.html#cb100-19" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(correlations, <span class="cf">function</span>(rho) {</span>
-<span id="cb100-20"><a href="correlação.html#cb100-20" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">generate_data</span>(n, rho)</span>
-<span id="cb100-21"><a href="correlação.html#cb100-21" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x =</span> data[, <span class="dv">1</span>],</span>
-<span id="cb100-22"><a href="correlação.html#cb100-22" tabindex="-1"></a>             <span class="at">y =</span> data[, <span class="dv">2</span>],</span>
-<span id="cb100-23"><a href="correlação.html#cb100-23" tabindex="-1"></a>             <span class="at">correlation =</span> rho)</span>
-<span id="cb100-24"><a href="correlação.html#cb100-24" tabindex="-1"></a>})</span>
-<span id="cb100-25"><a href="correlação.html#cb100-25" tabindex="-1"></a></span>
-<span id="cb100-26"><a href="correlação.html#cb100-26" tabindex="-1"></a><span class="co"># Combine data into a single dataframe</span></span>
-<span id="cb100-27"><a href="correlação.html#cb100-27" tabindex="-1"></a>data_all <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, data_list)</span>
-<span id="cb100-28"><a href="correlação.html#cb100-28" tabindex="-1"></a></span>
-<span id="cb100-29"><a href="correlação.html#cb100-29" tabindex="-1"></a><span class="co"># Define the order of the plots to place zero correlation in the center</span></span>
-<span id="cb100-30"><a href="correlação.html#cb100-30" tabindex="-1"></a>plot_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.9</span>, <span class="sc">-</span><span class="fl">0.7</span>, <span class="sc">-</span><span class="fl">0.4</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>)</span>
-<span id="cb100-31"><a href="correlação.html#cb100-31" tabindex="-1"></a>data_all<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fu">factor</span>(data_all<span class="sc">$</span>correlation, <span class="at">levels =</span> plot_order)</span>
-<span id="cb100-32"><a href="correlação.html#cb100-32" tabindex="-1"></a></span>
-<span id="cb100-33"><a href="correlação.html#cb100-33" tabindex="-1"></a><span class="co"># Custom labels for correlation</span></span>
-<span id="cb100-34"><a href="correlação.html#cb100-34" tabindex="-1"></a>data_all<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">factor</span>(data_all<span class="sc">$</span>correlation,</span>
-<span id="cb100-35"><a href="correlação.html#cb100-35" tabindex="-1"></a>                         <span class="at">levels =</span> plot_order,</span>
-<span id="cb100-36"><a href="correlação.html#cb100-36" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">paste</span>(<span class="st">&quot;r =&quot;</span>, <span class="fu">format</span>(plot_order, <span class="at">nsmall =</span> <span class="dv">3</span>)))</span>
-<span id="cb100-37"><a href="correlação.html#cb100-37" tabindex="-1"></a></span>
-<span id="cb100-38"><a href="correlação.html#cb100-38" tabindex="-1"></a><span class="co"># Plot using ggplot2</span></span>
-<span id="cb100-39"><a href="correlação.html#cb100-39" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(data_all, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb100-40"><a href="correlação.html#cb100-40" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb100-41"><a href="correlação.html#cb100-41" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb100-42"><a href="correlação.html#cb100-42" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>,</span>
-<span id="cb100-43"><a href="correlação.html#cb100-43" tabindex="-1"></a>                       <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb100-44"><a href="correlação.html#cb100-44" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>( <span class="sc">~</span> label,</span>
-<span id="cb100-45"><a href="correlação.html#cb100-45" tabindex="-1"></a>                       <span class="at">nrow =</span> <span class="dv">3</span>,</span>
-<span id="cb100-46"><a href="correlação.html#cb100-46" tabindex="-1"></a>                       <span class="at">ncol =</span> <span class="dv">3</span>,</span>
-<span id="cb100-47"><a href="correlação.html#cb100-47" tabindex="-1"></a>                       <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>) <span class="sc">+</span></span>
-<span id="cb100-48"><a href="correlação.html#cb100-48" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;X&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Y&quot;</span>) <span class="sc">+</span></span>
-<span id="cb100-49"><a href="correlação.html#cb100-49" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb100-50"><a href="correlação.html#cb100-50" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb100-51"><a href="correlação.html#cb100-51" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb100-52"><a href="correlação.html#cb100-52" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb100-53"><a href="correlação.html#cb100-53" tabindex="-1"></a>    <span class="at">panel.border =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb100-54"><a href="correlação.html#cb100-54" tabindex="-1"></a>    <span class="at">axis.line =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>),</span>
-<span id="cb100-55"><a href="correlação.html#cb100-55" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="dv">1</span></span>
-<span id="cb100-56"><a href="correlação.html#cb100-56" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="correlação.html#cb104-1" tabindex="-1"></a><span class="co"># Function to generate data with a given correlation</span></span>
+<span id="cb104-2"><a href="correlação.html#cb104-2" tabindex="-1"></a>generate_data <span class="ot">&lt;-</span> <span class="cf">function</span>(n, rho) {</span>
+<span id="cb104-3"><a href="correlação.html#cb104-3" tabindex="-1"></a>  Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, rho, rho, <span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb104-4"><a href="correlação.html#cb104-4" tabindex="-1"></a>  MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="at">n =</span> n,</span>
+<span id="cb104-5"><a href="correlação.html#cb104-5" tabindex="-1"></a>                <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb104-6"><a href="correlação.html#cb104-6" tabindex="-1"></a>                <span class="at">Sigma =</span> Sigma)</span>
+<span id="cb104-7"><a href="correlação.html#cb104-7" tabindex="-1"></a>}</span>
+<span id="cb104-8"><a href="correlação.html#cb104-8" tabindex="-1"></a></span>
+<span id="cb104-9"><a href="correlação.html#cb104-9" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb104-10"><a href="correlação.html#cb104-10" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb104-11"><a href="correlação.html#cb104-11" tabindex="-1"></a></span>
+<span id="cb104-12"><a href="correlação.html#cb104-12" tabindex="-1"></a><span class="co"># Number of points</span></span>
+<span id="cb104-13"><a href="correlação.html#cb104-13" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb104-14"><a href="correlação.html#cb104-14" tabindex="-1"></a></span>
+<span id="cb104-15"><a href="correlação.html#cb104-15" tabindex="-1"></a><span class="co"># Different levels of correlation including zero correlation</span></span>
+<span id="cb104-16"><a href="correlação.html#cb104-16" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.9</span>, <span class="sc">-</span><span class="fl">0.7</span>, <span class="sc">-</span><span class="fl">0.4</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>)</span>
+<span id="cb104-17"><a href="correlação.html#cb104-17" tabindex="-1"></a></span>
+<span id="cb104-18"><a href="correlação.html#cb104-18" tabindex="-1"></a><span class="co"># Generate data for each correlation</span></span>
+<span id="cb104-19"><a href="correlação.html#cb104-19" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(correlations, <span class="cf">function</span>(rho) {</span>
+<span id="cb104-20"><a href="correlação.html#cb104-20" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">generate_data</span>(n, rho)</span>
+<span id="cb104-21"><a href="correlação.html#cb104-21" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x =</span> data[, <span class="dv">1</span>],</span>
+<span id="cb104-22"><a href="correlação.html#cb104-22" tabindex="-1"></a>             <span class="at">y =</span> data[, <span class="dv">2</span>],</span>
+<span id="cb104-23"><a href="correlação.html#cb104-23" tabindex="-1"></a>             <span class="at">correlation =</span> rho)</span>
+<span id="cb104-24"><a href="correlação.html#cb104-24" tabindex="-1"></a>})</span>
+<span id="cb104-25"><a href="correlação.html#cb104-25" tabindex="-1"></a></span>
+<span id="cb104-26"><a href="correlação.html#cb104-26" tabindex="-1"></a><span class="co"># Combine data into a single dataframe</span></span>
+<span id="cb104-27"><a href="correlação.html#cb104-27" tabindex="-1"></a>data_all <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, data_list)</span>
+<span id="cb104-28"><a href="correlação.html#cb104-28" tabindex="-1"></a></span>
+<span id="cb104-29"><a href="correlação.html#cb104-29" tabindex="-1"></a><span class="co"># Define the order of the plots to place zero correlation in the center</span></span>
+<span id="cb104-30"><a href="correlação.html#cb104-30" tabindex="-1"></a>plot_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.9</span>, <span class="sc">-</span><span class="fl">0.7</span>, <span class="sc">-</span><span class="fl">0.4</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>)</span>
+<span id="cb104-31"><a href="correlação.html#cb104-31" tabindex="-1"></a>data_all<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fu">factor</span>(data_all<span class="sc">$</span>correlation, <span class="at">levels =</span> plot_order)</span>
+<span id="cb104-32"><a href="correlação.html#cb104-32" tabindex="-1"></a></span>
+<span id="cb104-33"><a href="correlação.html#cb104-33" tabindex="-1"></a><span class="co"># Custom labels for correlation</span></span>
+<span id="cb104-34"><a href="correlação.html#cb104-34" tabindex="-1"></a>data_all<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">factor</span>(data_all<span class="sc">$</span>correlation,</span>
+<span id="cb104-35"><a href="correlação.html#cb104-35" tabindex="-1"></a>                         <span class="at">levels =</span> plot_order,</span>
+<span id="cb104-36"><a href="correlação.html#cb104-36" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">paste</span>(<span class="st">&quot;r =&quot;</span>, <span class="fu">format</span>(plot_order, <span class="at">nsmall =</span> <span class="dv">3</span>)))</span>
+<span id="cb104-37"><a href="correlação.html#cb104-37" tabindex="-1"></a></span>
+<span id="cb104-38"><a href="correlação.html#cb104-38" tabindex="-1"></a><span class="co"># Plot using ggplot2</span></span>
+<span id="cb104-39"><a href="correlação.html#cb104-39" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(data_all, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb104-40"><a href="correlação.html#cb104-40" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb104-41"><a href="correlação.html#cb104-41" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb104-42"><a href="correlação.html#cb104-42" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb104-43"><a href="correlação.html#cb104-43" tabindex="-1"></a>                       <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb104-44"><a href="correlação.html#cb104-44" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>( <span class="sc">~</span> label,</span>
+<span id="cb104-45"><a href="correlação.html#cb104-45" tabindex="-1"></a>                       <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb104-46"><a href="correlação.html#cb104-46" tabindex="-1"></a>                       <span class="at">ncol =</span> <span class="dv">3</span>,</span>
+<span id="cb104-47"><a href="correlação.html#cb104-47" tabindex="-1"></a>                       <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>) <span class="sc">+</span></span>
+<span id="cb104-48"><a href="correlação.html#cb104-48" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;X&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb104-49"><a href="correlação.html#cb104-49" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb104-50"><a href="correlação.html#cb104-50" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb104-51"><a href="correlação.html#cb104-51" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb104-52"><a href="correlação.html#cb104-52" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb104-53"><a href="correlação.html#cb104-53" tabindex="-1"></a>    <span class="at">panel.border =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb104-54"><a href="correlação.html#cb104-54" tabindex="-1"></a>    <span class="at">axis.line =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>),</span>
+<span id="cb104-55"><a href="correlação.html#cb104-55" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="dv">1</span></span>
+<span id="cb104-56"><a href="correlação.html#cb104-56" tabindex="-1"></a>  )</span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="correlação.html#cb101-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb101-2"><a href="correlação.html#cb101-2" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> datasets<span class="sc">::</span>anscombe</span>
-<span id="cb101-3"><a href="correlação.html#cb101-3" tabindex="-1"></a>anscombe.dt<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>])</span>
-<span id="cb101-4"><a href="correlação.html#cb101-4" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> anscombe.dt[<span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)]</span>
-<span id="cb101-5"><a href="correlação.html#cb101-5" tabindex="-1"></a></span>
-<span id="cb101-6"><a href="correlação.html#cb101-6" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb101-7"><a href="correlação.html#cb101-7" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb101-8"><a href="correlação.html#cb101-8" tabindex="-1"></a>  anscombe.dt,</span>
-<span id="cb101-9"><a href="correlação.html#cb101-9" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb101-10"><a href="correlação.html#cb101-10" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb101-11"><a href="correlação.html#cb101-11" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb101-12"><a href="correlação.html#cb101-12" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb101-13"><a href="correlação.html#cb101-13" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb101-14"><a href="correlação.html#cb101-14" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Quarteto de Anscombe.&quot;</span></span>
-<span id="cb101-15"><a href="correlação.html#cb101-15" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb101-16"><a href="correlação.html#cb101-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb101-17"><a href="correlação.html#cb101-17" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb101-18"><a href="correlação.html#cb101-18" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb101-19"><a href="correlação.html#cb101-19" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb101-20"><a href="correlação.html#cb101-20" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb101-21"><a href="correlação.html#cb101-21" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb101-22"><a href="correlação.html#cb101-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb101-23"><a href="correlação.html#cb101-23" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb101-24"><a href="correlação.html#cb101-24" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span>
-<span id="cb101-25"><a href="correlação.html#cb101-25" tabindex="-1"></a></span>
-<span id="cb101-26"><a href="correlação.html#cb101-26" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> anscombe.dt <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>ID)</span>
-<span id="cb101-27"><a href="correlação.html#cb101-27" tabindex="-1"></a></span>
-<span id="cb101-28"><a href="correlação.html#cb101-28" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;&lt;br&gt;&#39;</span>)</span>
-<span id="cb101-29"><a href="correlação.html#cb101-29" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;&lt;br&gt;&#39;</span>)</span>
-<span id="cb101-30"><a href="correlação.html#cb101-30" tabindex="-1"></a></span>
-<span id="cb101-31"><a href="correlação.html#cb101-31" tabindex="-1"></a><span class="co"># exibe a tabela descritiva</span></span>
-<span id="cb101-32"><a href="correlação.html#cb101-32" tabindex="-1"></a>anscombe.summ <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb101-33"><a href="correlação.html#cb101-33" tabindex="-1"></a>  <span class="st">&quot;X1Y1&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb101-34"><a href="correlação.html#cb101-34" tabindex="-1"></a>  <span class="st">&quot;X2Y2&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb101-35"><a href="correlação.html#cb101-35" tabindex="-1"></a>  <span class="st">&quot;X3Y3&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb101-36"><a href="correlação.html#cb101-36" tabindex="-1"></a>  <span class="st">&quot;X4Y4&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
-<span id="cb101-37"><a href="correlação.html#cb101-37" tabindex="-1"></a>)</span>
-<span id="cb101-38"><a href="correlação.html#cb101-38" tabindex="-1"></a>ff <span class="ot">&lt;-</span> y <span class="sc">~</span> x</span>
-<span id="cb101-39"><a href="correlação.html#cb101-39" tabindex="-1"></a>mods <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">as.list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">paste0</span>(<span class="st">&quot;lm&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
-<span id="cb101-40"><a href="correlação.html#cb101-40" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
-<span id="cb101-41"><a href="correlação.html#cb101-41" tabindex="-1"></a>  ff[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">paste0</span>(<span class="fu">c</span>(<span class="st">&quot;y&quot;</span>, <span class="st">&quot;x&quot;</span>), i), as.name)</span>
-<span id="cb101-42"><a href="correlação.html#cb101-42" tabindex="-1"></a>  mods[[i]] <span class="ot">&lt;-</span> lmi <span class="ot">&lt;-</span> <span class="fu">lm</span>(ff, <span class="at">data =</span> anscombe.dt)</span>
-<span id="cb101-43"><a href="correlação.html#cb101-43" tabindex="-1"></a>  <span class="co"># observacoes</span></span>
-<span id="cb101-44"><a href="correlação.html#cb101-44" tabindex="-1"></a>  anscombe.summ[<span class="dv">1</span>, i] <span class="ot">&lt;-</span> <span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>]</span>
-<span id="cb101-45"><a href="correlação.html#cb101-45" tabindex="-1"></a>  <span class="co"># media x,y</span></span>
-<span id="cb101-46"><a href="correlação.html#cb101-46" tabindex="-1"></a>  anscombe.summ[<span class="dv">2</span>, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)])</span>
-<span id="cb101-47"><a href="correlação.html#cb101-47" tabindex="-1"></a>  anscombe.summ[<span class="dv">3</span>, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
-<span id="cb101-48"><a href="correlação.html#cb101-48" tabindex="-1"></a>  <span class="co"># variancia x,y</span></span>
-<span id="cb101-49"><a href="correlação.html#cb101-49" tabindex="-1"></a>  anscombe.summ[<span class="dv">4</span>, i] <span class="ot">&lt;-</span> <span class="fu">var</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)])</span>
-<span id="cb101-50"><a href="correlação.html#cb101-50" tabindex="-1"></a>  anscombe.summ[<span class="dv">5</span>, i] <span class="ot">&lt;-</span> <span class="fu">var</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
-<span id="cb101-51"><a href="correlação.html#cb101-51" tabindex="-1"></a>  <span class="co"># correlacao</span></span>
-<span id="cb101-52"><a href="correlação.html#cb101-52" tabindex="-1"></a>  anscombe.summ[<span class="dv">6</span>, i] <span class="ot">&lt;-</span></span>
-<span id="cb101-53"><a href="correlação.html#cb101-53" tabindex="-1"></a>    <span class="fu">cor</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)], anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
-<span id="cb101-54"><a href="correlação.html#cb101-54" tabindex="-1"></a>  <span class="co"># coeficiente angular</span></span>
-<span id="cb101-55"><a href="correlação.html#cb101-55" tabindex="-1"></a>  anscombe.summ[<span class="dv">7</span>, i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmi)[<span class="dv">2</span>]</span>
-<span id="cb101-56"><a href="correlação.html#cb101-56" tabindex="-1"></a>  <span class="co"># coeficiente linear</span></span>
-<span id="cb101-57"><a href="correlação.html#cb101-57" tabindex="-1"></a>  anscombe.summ[<span class="dv">8</span>, i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmi)[<span class="dv">1</span>]</span>
-<span id="cb101-58"><a href="correlação.html#cb101-58" tabindex="-1"></a>  <span class="co"># coeficiente de determinacao</span></span>
-<span id="cb101-59"><a href="correlação.html#cb101-59" tabindex="-1"></a>  anscombe.summ[<span class="dv">9</span>, i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(lmi)<span class="sc">$</span>r.squared</span>
-<span id="cb101-60"><a href="correlação.html#cb101-60" tabindex="-1"></a>}</span>
-<span id="cb101-61"><a href="correlação.html#cb101-61" tabindex="-1"></a><span class="fu">rownames</span>(anscombe.summ) <span class="ot">&lt;-</span></span>
-<span id="cb101-62"><a href="correlação.html#cb101-62" tabindex="-1"></a>  <span class="fu">c</span>(</span>
-<span id="cb101-63"><a href="correlação.html#cb101-63" tabindex="-1"></a>    <span class="st">&quot;Observações&quot;</span>,</span>
-<span id="cb101-64"><a href="correlação.html#cb101-64" tabindex="-1"></a>    <span class="st">&quot;Média x&quot;</span>,</span>
-<span id="cb101-65"><a href="correlação.html#cb101-65" tabindex="-1"></a>    <span class="st">&quot;Média y&quot;</span>,</span>
-<span id="cb101-66"><a href="correlação.html#cb101-66" tabindex="-1"></a>    <span class="st">&quot;Variância x&quot;</span>,</span>
-<span id="cb101-67"><a href="correlação.html#cb101-67" tabindex="-1"></a>    <span class="st">&quot;Variância y&quot;</span>,</span>
-<span id="cb101-68"><a href="correlação.html#cb101-68" tabindex="-1"></a>    <span class="st">&quot;Correlação&quot;</span>,</span>
-<span id="cb101-69"><a href="correlação.html#cb101-69" tabindex="-1"></a>    <span class="st">&quot;Coeficiente angular&quot;</span>,</span>
-<span id="cb101-70"><a href="correlação.html#cb101-70" tabindex="-1"></a>    <span class="st">&quot;Coeficiente linear&quot;</span>,</span>
-<span id="cb101-71"><a href="correlação.html#cb101-71" tabindex="-1"></a>    <span class="st">&quot;Coeficiente de determinação&quot;</span></span>
-<span id="cb101-72"><a href="correlação.html#cb101-72" tabindex="-1"></a>  )</span>
-<span id="cb101-73"><a href="correlação.html#cb101-73" tabindex="-1"></a>anscombe.summ <span class="ot">&lt;-</span> <span class="fu">round</span>(anscombe.summ, <span class="dv">2</span>)</span>
-<span id="cb101-74"><a href="correlação.html#cb101-74" tabindex="-1"></a></span>
-<span id="cb101-75"><a href="correlação.html#cb101-75" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
-<span id="cb101-76"><a href="correlação.html#cb101-76" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb101-77"><a href="correlação.html#cb101-77" tabindex="-1"></a>  anscombe.summ,</span>
-<span id="cb101-78"><a href="correlação.html#cb101-78" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb101-79"><a href="correlação.html#cb101-79" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb101-80"><a href="correlação.html#cb101-80" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb101-81"><a href="correlação.html#cb101-81" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb101-82"><a href="correlação.html#cb101-82" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb101-83"><a href="correlação.html#cb101-83" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos.&quot;</span></span>
-<span id="cb101-84"><a href="correlação.html#cb101-84" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb101-85"><a href="correlação.html#cb101-85" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb101-86"><a href="correlação.html#cb101-86" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
-<span id="cb101-87"><a href="correlação.html#cb101-87" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb101-88"><a href="correlação.html#cb101-88" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb101-89"><a href="correlação.html#cb101-89" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb101-90"><a href="correlação.html#cb101-90" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb101-91"><a href="correlação.html#cb101-91" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb101-92"><a href="correlação.html#cb101-92" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb101-93"><a href="correlação.html#cb101-93" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(anscombe.summ)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="correlação.html#cb105-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb105-2"><a href="correlação.html#cb105-2" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> datasets<span class="sc">::</span>anscombe</span>
+<span id="cb105-3"><a href="correlação.html#cb105-3" tabindex="-1"></a>anscombe.dt<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>])</span>
+<span id="cb105-4"><a href="correlação.html#cb105-4" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> anscombe.dt[<span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)]</span>
+<span id="cb105-5"><a href="correlação.html#cb105-5" tabindex="-1"></a></span>
+<span id="cb105-6"><a href="correlação.html#cb105-6" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb105-7"><a href="correlação.html#cb105-7" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb105-8"><a href="correlação.html#cb105-8" tabindex="-1"></a>  anscombe.dt,</span>
+<span id="cb105-9"><a href="correlação.html#cb105-9" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb105-10"><a href="correlação.html#cb105-10" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb105-11"><a href="correlação.html#cb105-11" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb105-12"><a href="correlação.html#cb105-12" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb105-13"><a href="correlação.html#cb105-13" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb105-14"><a href="correlação.html#cb105-14" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Quarteto de Anscombe.&quot;</span></span>
+<span id="cb105-15"><a href="correlação.html#cb105-15" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-16"><a href="correlação.html#cb105-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb105-17"><a href="correlação.html#cb105-17" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb105-18"><a href="correlação.html#cb105-18" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb105-19"><a href="correlação.html#cb105-19" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb105-20"><a href="correlação.html#cb105-20" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb105-21"><a href="correlação.html#cb105-21" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb105-22"><a href="correlação.html#cb105-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-23"><a href="correlação.html#cb105-23" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-24"><a href="correlação.html#cb105-24" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span>
+<span id="cb105-25"><a href="correlação.html#cb105-25" tabindex="-1"></a></span>
+<span id="cb105-26"><a href="correlação.html#cb105-26" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> anscombe.dt <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>ID)</span>
+<span id="cb105-27"><a href="correlação.html#cb105-27" tabindex="-1"></a></span>
+<span id="cb105-28"><a href="correlação.html#cb105-28" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;&lt;br&gt;&#39;</span>)</span>
+<span id="cb105-29"><a href="correlação.html#cb105-29" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;&lt;br&gt;&#39;</span>)</span>
+<span id="cb105-30"><a href="correlação.html#cb105-30" tabindex="-1"></a></span>
+<span id="cb105-31"><a href="correlação.html#cb105-31" tabindex="-1"></a><span class="co"># exibe a tabela descritiva</span></span>
+<span id="cb105-32"><a href="correlação.html#cb105-32" tabindex="-1"></a>anscombe.summ <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb105-33"><a href="correlação.html#cb105-33" tabindex="-1"></a>  <span class="st">&quot;X1Y1&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb105-34"><a href="correlação.html#cb105-34" tabindex="-1"></a>  <span class="st">&quot;X2Y2&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb105-35"><a href="correlação.html#cb105-35" tabindex="-1"></a>  <span class="st">&quot;X3Y3&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb105-36"><a href="correlação.html#cb105-36" tabindex="-1"></a>  <span class="st">&quot;X4Y4&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
+<span id="cb105-37"><a href="correlação.html#cb105-37" tabindex="-1"></a>)</span>
+<span id="cb105-38"><a href="correlação.html#cb105-38" tabindex="-1"></a>ff <span class="ot">&lt;-</span> y <span class="sc">~</span> x</span>
+<span id="cb105-39"><a href="correlação.html#cb105-39" tabindex="-1"></a>mods <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">as.list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">paste0</span>(<span class="st">&quot;lm&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb105-40"><a href="correlação.html#cb105-40" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb105-41"><a href="correlação.html#cb105-41" tabindex="-1"></a>  ff[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">paste0</span>(<span class="fu">c</span>(<span class="st">&quot;y&quot;</span>, <span class="st">&quot;x&quot;</span>), i), as.name)</span>
+<span id="cb105-42"><a href="correlação.html#cb105-42" tabindex="-1"></a>  mods[[i]] <span class="ot">&lt;-</span> lmi <span class="ot">&lt;-</span> <span class="fu">lm</span>(ff, <span class="at">data =</span> anscombe.dt)</span>
+<span id="cb105-43"><a href="correlação.html#cb105-43" tabindex="-1"></a>  <span class="co"># observacoes</span></span>
+<span id="cb105-44"><a href="correlação.html#cb105-44" tabindex="-1"></a>  anscombe.summ[<span class="dv">1</span>, i] <span class="ot">&lt;-</span> <span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>]</span>
+<span id="cb105-45"><a href="correlação.html#cb105-45" tabindex="-1"></a>  <span class="co"># media x,y</span></span>
+<span id="cb105-46"><a href="correlação.html#cb105-46" tabindex="-1"></a>  anscombe.summ[<span class="dv">2</span>, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)])</span>
+<span id="cb105-47"><a href="correlação.html#cb105-47" tabindex="-1"></a>  anscombe.summ[<span class="dv">3</span>, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
+<span id="cb105-48"><a href="correlação.html#cb105-48" tabindex="-1"></a>  <span class="co"># variancia x,y</span></span>
+<span id="cb105-49"><a href="correlação.html#cb105-49" tabindex="-1"></a>  anscombe.summ[<span class="dv">4</span>, i] <span class="ot">&lt;-</span> <span class="fu">var</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)])</span>
+<span id="cb105-50"><a href="correlação.html#cb105-50" tabindex="-1"></a>  anscombe.summ[<span class="dv">5</span>, i] <span class="ot">&lt;-</span> <span class="fu">var</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
+<span id="cb105-51"><a href="correlação.html#cb105-51" tabindex="-1"></a>  <span class="co"># correlacao</span></span>
+<span id="cb105-52"><a href="correlação.html#cb105-52" tabindex="-1"></a>  anscombe.summ[<span class="dv">6</span>, i] <span class="ot">&lt;-</span></span>
+<span id="cb105-53"><a href="correlação.html#cb105-53" tabindex="-1"></a>    <span class="fu">cor</span>(anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, i)], anscombe.dt[, <span class="fu">paste0</span>(<span class="st">&quot;y&quot;</span>, i)])</span>
+<span id="cb105-54"><a href="correlação.html#cb105-54" tabindex="-1"></a>  <span class="co"># coeficiente angular</span></span>
+<span id="cb105-55"><a href="correlação.html#cb105-55" tabindex="-1"></a>  anscombe.summ[<span class="dv">7</span>, i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmi)[<span class="dv">2</span>]</span>
+<span id="cb105-56"><a href="correlação.html#cb105-56" tabindex="-1"></a>  <span class="co"># coeficiente linear</span></span>
+<span id="cb105-57"><a href="correlação.html#cb105-57" tabindex="-1"></a>  anscombe.summ[<span class="dv">8</span>, i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmi)[<span class="dv">1</span>]</span>
+<span id="cb105-58"><a href="correlação.html#cb105-58" tabindex="-1"></a>  <span class="co"># coeficiente de determinacao</span></span>
+<span id="cb105-59"><a href="correlação.html#cb105-59" tabindex="-1"></a>  anscombe.summ[<span class="dv">9</span>, i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(lmi)<span class="sc">$</span>r.squared</span>
+<span id="cb105-60"><a href="correlação.html#cb105-60" tabindex="-1"></a>}</span>
+<span id="cb105-61"><a href="correlação.html#cb105-61" tabindex="-1"></a><span class="fu">rownames</span>(anscombe.summ) <span class="ot">&lt;-</span></span>
+<span id="cb105-62"><a href="correlação.html#cb105-62" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb105-63"><a href="correlação.html#cb105-63" tabindex="-1"></a>    <span class="st">&quot;Observações&quot;</span>,</span>
+<span id="cb105-64"><a href="correlação.html#cb105-64" tabindex="-1"></a>    <span class="st">&quot;Média x&quot;</span>,</span>
+<span id="cb105-65"><a href="correlação.html#cb105-65" tabindex="-1"></a>    <span class="st">&quot;Média y&quot;</span>,</span>
+<span id="cb105-66"><a href="correlação.html#cb105-66" tabindex="-1"></a>    <span class="st">&quot;Variância x&quot;</span>,</span>
+<span id="cb105-67"><a href="correlação.html#cb105-67" tabindex="-1"></a>    <span class="st">&quot;Variância y&quot;</span>,</span>
+<span id="cb105-68"><a href="correlação.html#cb105-68" tabindex="-1"></a>    <span class="st">&quot;Correlação&quot;</span>,</span>
+<span id="cb105-69"><a href="correlação.html#cb105-69" tabindex="-1"></a>    <span class="st">&quot;Coeficiente angular&quot;</span>,</span>
+<span id="cb105-70"><a href="correlação.html#cb105-70" tabindex="-1"></a>    <span class="st">&quot;Coeficiente linear&quot;</span>,</span>
+<span id="cb105-71"><a href="correlação.html#cb105-71" tabindex="-1"></a>    <span class="st">&quot;Coeficiente de determinação&quot;</span></span>
+<span id="cb105-72"><a href="correlação.html#cb105-72" tabindex="-1"></a>  )</span>
+<span id="cb105-73"><a href="correlação.html#cb105-73" tabindex="-1"></a>anscombe.summ <span class="ot">&lt;-</span> <span class="fu">round</span>(anscombe.summ, <span class="dv">2</span>)</span>
+<span id="cb105-74"><a href="correlação.html#cb105-74" tabindex="-1"></a></span>
+<span id="cb105-75"><a href="correlação.html#cb105-75" tabindex="-1"></a><span class="co"># exibe a tabela de dados</span></span>
+<span id="cb105-76"><a href="correlação.html#cb105-76" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb105-77"><a href="correlação.html#cb105-77" tabindex="-1"></a>  anscombe.summ,</span>
+<span id="cb105-78"><a href="correlação.html#cb105-78" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb105-79"><a href="correlação.html#cb105-79" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb105-80"><a href="correlação.html#cb105-80" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb105-81"><a href="correlação.html#cb105-81" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb105-82"><a href="correlação.html#cb105-82" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb105-83"><a href="correlação.html#cb105-83" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos.&quot;</span></span>
+<span id="cb105-84"><a href="correlação.html#cb105-84" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-85"><a href="correlação.html#cb105-85" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb105-86"><a href="correlação.html#cb105-86" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>),</span>
+<span id="cb105-87"><a href="correlação.html#cb105-87" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb105-88"><a href="correlação.html#cb105-88" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb105-89"><a href="correlação.html#cb105-89" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb105-90"><a href="correlação.html#cb105-90" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb105-91"><a href="correlação.html#cb105-91" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-92"><a href="correlação.html#cb105-92" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-93"><a href="correlação.html#cb105-93" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(anscombe.summ)[<span class="dv">1</span>], <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="correlação.html#cb102-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb102-2"><a href="correlação.html#cb102-2" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> datasets<span class="sc">::</span>anscombe</span>
-<span id="cb102-3"><a href="correlação.html#cb102-3" tabindex="-1"></a>anscombe.dt<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>])</span>
-<span id="cb102-4"><a href="correlação.html#cb102-4" tabindex="-1"></a></span>
-<span id="cb102-5"><a href="correlação.html#cb102-5" tabindex="-1"></a><span class="co"># exibe o gráfico</span></span>
-<span id="cb102-6"><a href="correlação.html#cb102-6" tabindex="-1"></a>datLong <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb102-7"><a href="correlação.html#cb102-7" tabindex="-1"></a>  <span class="at">group  =</span> <span class="fu">paste0</span>(<span class="st">&quot;Quarteto &quot;</span>, <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">11</span>)),</span>
-<span id="cb102-8"><a href="correlação.html#cb102-8" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">unlist</span>(anscombe.dt[, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)]),</span>
-<span id="cb102-9"><a href="correlação.html#cb102-9" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">unlist</span>(anscombe.dt[, <span class="fu">c</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>)])</span>
-<span id="cb102-10"><a href="correlação.html#cb102-10" tabindex="-1"></a>)</span>
-<span id="cb102-11"><a href="correlação.html#cb102-11" tabindex="-1"></a><span class="fu">rownames</span>(datLong) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb102-12"><a href="correlação.html#cb102-12" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> datLong,</span>
-<span id="cb102-13"><a href="correlação.html#cb102-13" tabindex="-1"></a>                <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">group =</span> group)) <span class="sc">+</span></span>
-<span id="cb102-14"><a href="correlação.html#cb102-14" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb102-15"><a href="correlação.html#cb102-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(</span>
-<span id="cb102-16"><a href="correlação.html#cb102-16" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb102-17"><a href="correlação.html#cb102-17" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb102-18"><a href="correlação.html#cb102-18" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb102-19"><a href="correlação.html#cb102-19" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;grey&quot;</span></span>
-<span id="cb102-20"><a href="correlação.html#cb102-20" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb102-21"><a href="correlação.html#cb102-21" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(<span class="sc">~</span> group) <span class="sc">+</span></span>
-<span id="cb102-22"><a href="correlação.html#cb102-22" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb102-23"><a href="correlação.html#cb102-23" tabindex="-1"></a>    <span class="at">panel.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb102-24"><a href="correlação.html#cb102-24" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb102-25"><a href="correlação.html#cb102-25" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb102-26"><a href="correlação.html#cb102-26" tabindex="-1"></a>    <span class="at">axis.line =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)</span>
-<span id="cb102-27"><a href="correlação.html#cb102-27" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb102-28"><a href="correlação.html#cb102-28" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb102-29"><a href="correlação.html#cb102-29" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_fixed</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="correlação.html#cb106-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb106-2"><a href="correlação.html#cb106-2" tabindex="-1"></a>anscombe.dt <span class="ot">&lt;-</span> datasets<span class="sc">::</span>anscombe</span>
+<span id="cb106-3"><a href="correlação.html#cb106-3" tabindex="-1"></a>anscombe.dt<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">dim</span>(anscombe.dt)[<span class="dv">1</span>])</span>
+<span id="cb106-4"><a href="correlação.html#cb106-4" tabindex="-1"></a></span>
+<span id="cb106-5"><a href="correlação.html#cb106-5" tabindex="-1"></a><span class="co"># exibe o gráfico</span></span>
+<span id="cb106-6"><a href="correlação.html#cb106-6" tabindex="-1"></a>datLong <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb106-7"><a href="correlação.html#cb106-7" tabindex="-1"></a>  <span class="at">group  =</span> <span class="fu">paste0</span>(<span class="st">&quot;Quarteto &quot;</span>, <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">11</span>)),</span>
+<span id="cb106-8"><a href="correlação.html#cb106-8" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">unlist</span>(anscombe.dt[, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)]),</span>
+<span id="cb106-9"><a href="correlação.html#cb106-9" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">unlist</span>(anscombe.dt[, <span class="fu">c</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>)])</span>
+<span id="cb106-10"><a href="correlação.html#cb106-10" tabindex="-1"></a>)</span>
+<span id="cb106-11"><a href="correlação.html#cb106-11" tabindex="-1"></a><span class="fu">rownames</span>(datLong) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb106-12"><a href="correlação.html#cb106-12" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> datLong,</span>
+<span id="cb106-13"><a href="correlação.html#cb106-13" tabindex="-1"></a>                <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">group =</span> group)) <span class="sc">+</span></span>
+<span id="cb106-14"><a href="correlação.html#cb106-14" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">fill =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb106-15"><a href="correlação.html#cb106-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(</span>
+<span id="cb106-16"><a href="correlação.html#cb106-16" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb106-17"><a href="correlação.html#cb106-17" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb106-18"><a href="correlação.html#cb106-18" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb106-19"><a href="correlação.html#cb106-19" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;grey&quot;</span></span>
+<span id="cb106-20"><a href="correlação.html#cb106-20" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb106-21"><a href="correlação.html#cb106-21" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(<span class="sc">~</span> group) <span class="sc">+</span></span>
+<span id="cb106-22"><a href="correlação.html#cb106-22" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb106-23"><a href="correlação.html#cb106-23" tabindex="-1"></a>    <span class="at">panel.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb106-24"><a href="correlação.html#cb106-24" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb106-25"><a href="correlação.html#cb106-25" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb106-26"><a href="correlação.html#cb106-26" tabindex="-1"></a>    <span class="at">axis.line =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb106-27"><a href="correlação.html#cb106-27" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb106-28"><a href="correlação.html#cb106-28" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb106-29"><a href="correlação.html#cb106-29" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_fixed</span>()</span></code></pre></div>
 </details>
 </div>
 <div id="colinearidade-1" class="section level2 unnumbered unlisted hasAnchor">

@@ -189,11 +189,11 @@ div.csl-indent {
 <li><a style="text-align:center; border-width:3px;border-style:solid; border-color:white; border-radius:15px; padding:5px; background-color:#276DC2; text-decoration:none; color:white" href="https://ferreiraas.github.io/Ciencia-com-R-Consultoria/"><b>e-Book | Consultoria</b></a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Capa</a></li>
-<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i>Dedicatória</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Capa</strong></a></li>
+<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i><strong>Dedicatória</strong></a></li>
 <li class="chapter" data-level="" data-path="agradecimentos.html"><a href="agradecimentos.html"><i class="fa fa-check"></i><strong>Agradecimentos</strong></a></li>
+<li class="chapter" data-level="" data-path="apresentacao.html"><a href="apresentacao.html"><i class="fa fa-check"></i><strong>Apresentação</strong></a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i><strong>Sobre o autor</strong></a></li>
-<li class="chapter" data-level="" data-path="prefacio.html"><a href="prefacio.html"><i class="fa fa-check"></i><strong>Prefácio</strong></a></li>
 <li class="chapter" data-level="" data-path="parte-1.html"><a href="parte-1.html"><i class="fa fa-check"></i><em>PARTE 1: FUNDAMENTOS ESTATÍSTICOS</em></a></li>
 <li class="chapter" data-level="1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html"><i class="fa fa-check"></i><b>1</b> <strong>Pensamento estatístico</strong></a>
 <ul>
@@ -622,9 +622,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="17" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>17</b> <strong>Shiny Apps</strong></a>
 <ul>
-<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i>Aplicativos por delineamento de estudo</a>
+<li class="chapter" data-level="17.1" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i><b>17.1</b> Aplicativos por delineamento de estudo</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#ensaios-cl%C3%ADnicos"><i class="fa fa-check"></i>Ensaios clínicos</a></li>
+<li class="chapter" data-level="17.1.1" data-path="shiny-apps.html"><a href="shiny-apps.html#qual-shiny-app-usar-para-ensaios-experimentais"><i class="fa fa-check"></i><b>17.1.1</b> Qual Shiny App usar para ensaios experimentais?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-5.html"><a href="parte-5.html"><i class="fa fa-check"></i><em>PARTE 5: ANÁLISES DESCRITIVAS E EXPLORATÓRIAS</em></a></li>
@@ -1509,341 +1509,341 @@ div.csl-indent {
 <div id="modelos-de-meta-análise-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Modelos de meta-análise<a href="#modelos-de-meta-an%C3%A1lise-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="meta-análise.html#cb118-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
-<span id="cb118-2"><a href="meta-análise.html#cb118-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb118-3"><a href="meta-análise.html#cb118-3" tabindex="-1"></a></span>
-<span id="cb118-4"><a href="meta-análise.html#cb118-4" tabindex="-1"></a><span class="co"># Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)</span></span>
-<span id="cb118-5"><a href="meta-análise.html#cb118-5" tabindex="-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb118-6"><a href="meta-análise.html#cb118-6" tabindex="-1"></a>n_t <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Tratamento</span></span>
-<span id="cb118-7"><a href="meta-análise.html#cb118-7" tabindex="-1"></a>n_c <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Controle</span></span>
-<span id="cb118-8"><a href="meta-análise.html#cb118-8" tabindex="-1"></a></span>
-<span id="cb118-9"><a href="meta-análise.html#cb118-9" tabindex="-1"></a><span class="co"># Médias e desvios-padrão simulados</span></span>
-<span id="cb118-10"><a href="meta-análise.html#cb118-10" tabindex="-1"></a>mu_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.00</span>, <span class="at">sd =</span> <span class="fl">0.40</span>)</span>
-<span id="cb118-11"><a href="meta-análise.html#cb118-11" tabindex="-1"></a>mu_t <span class="ot">&lt;-</span> mu_c <span class="sc">+</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.30</span>, <span class="at">sd =</span> <span class="fl">0.15</span>)  <span class="co"># efeito médio positivo para Tratamento</span></span>
-<span id="cb118-12"><a href="meta-análise.html#cb118-12" tabindex="-1"></a>sd_c <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
-<span id="cb118-13"><a href="meta-análise.html#cb118-13" tabindex="-1"></a>sd_t <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
-<span id="cb118-14"><a href="meta-análise.html#cb118-14" tabindex="-1"></a></span>
-<span id="cb118-15"><a href="meta-análise.html#cb118-15" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb118-16"><a href="meta-análise.html#cb118-16" tabindex="-1"></a>  <span class="at">study_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;Trial_&quot;</span>, <span class="fu">seq_len</span>(k)),</span>
-<span id="cb118-17"><a href="meta-análise.html#cb118-17" tabindex="-1"></a>  <span class="at">n_t      =</span> n_t,</span>
-<span id="cb118-18"><a href="meta-análise.html#cb118-18" tabindex="-1"></a>  <span class="at">n_c      =</span> n_c,</span>
-<span id="cb118-19"><a href="meta-análise.html#cb118-19" tabindex="-1"></a>  <span class="at">mean_t   =</span> mu_t,</span>
-<span id="cb118-20"><a href="meta-análise.html#cb118-20" tabindex="-1"></a>  <span class="at">mean_c   =</span> mu_c,</span>
-<span id="cb118-21"><a href="meta-análise.html#cb118-21" tabindex="-1"></a>  <span class="at">sd_t     =</span> sd_t,</span>
-<span id="cb118-22"><a href="meta-análise.html#cb118-22" tabindex="-1"></a>  <span class="at">sd_c     =</span> sd_c,</span>
-<span id="cb118-23"><a href="meta-análise.html#cb118-23" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb118-24"><a href="meta-análise.html#cb118-24" tabindex="-1"></a>)</span>
-<span id="cb118-25"><a href="meta-análise.html#cb118-25" tabindex="-1"></a></span>
-<span id="cb118-26"><a href="meta-análise.html#cb118-26" tabindex="-1"></a><span class="co"># Calcular SMD (Hedges g) com escalc()</span></span>
-<span id="cb118-27"><a href="meta-análise.html#cb118-27" tabindex="-1"></a><span class="co"># measure = &quot;SMD&quot; usa a correção de Hedges por padrão (J)</span></span>
-<span id="cb118-28"><a href="meta-análise.html#cb118-28" tabindex="-1"></a>es <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">escalc</span>(</span>
-<span id="cb118-29"><a href="meta-análise.html#cb118-29" tabindex="-1"></a>  <span class="at">measure =</span> <span class="st">&quot;SMD&quot;</span>,</span>
-<span id="cb118-30"><a href="meta-análise.html#cb118-30" tabindex="-1"></a>  <span class="at">m1i =</span> dat<span class="sc">$</span>mean_t,</span>
-<span id="cb118-31"><a href="meta-análise.html#cb118-31" tabindex="-1"></a>  <span class="at">sd1i =</span> dat<span class="sc">$</span>sd_t,</span>
-<span id="cb118-32"><a href="meta-análise.html#cb118-32" tabindex="-1"></a>  <span class="at">n1i =</span> dat<span class="sc">$</span>n_t,</span>
-<span id="cb118-33"><a href="meta-análise.html#cb118-33" tabindex="-1"></a>  <span class="at">m2i =</span> dat<span class="sc">$</span>mean_c,</span>
-<span id="cb118-34"><a href="meta-análise.html#cb118-34" tabindex="-1"></a>  <span class="at">sd2i =</span> dat<span class="sc">$</span>sd_c,</span>
-<span id="cb118-35"><a href="meta-análise.html#cb118-35" tabindex="-1"></a>  <span class="at">n2i =</span> dat<span class="sc">$</span>n_c,</span>
-<span id="cb118-36"><a href="meta-análise.html#cb118-36" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb118-37"><a href="meta-análise.html#cb118-37" tabindex="-1"></a>  <span class="at">vtype =</span> <span class="st">&quot;UB&quot;</span></span>
-<span id="cb118-38"><a href="meta-análise.html#cb118-38" tabindex="-1"></a>)</span>
-<span id="cb118-39"><a href="meta-análise.html#cb118-39" tabindex="-1"></a></span>
-<span id="cb118-40"><a href="meta-análise.html#cb118-40" tabindex="-1"></a><span class="co"># --- modelo de efeito fixo) ---</span></span>
-<span id="cb118-41"><a href="meta-análise.html#cb118-41" tabindex="-1"></a>res_fe <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(<span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
-<span id="cb118-42"><a href="meta-análise.html#cb118-42" tabindex="-1"></a>                           <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
-<span id="cb118-43"><a href="meta-análise.html#cb118-43" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;FE&quot;</span>)</span>
-<span id="cb118-44"><a href="meta-análise.html#cb118-44" tabindex="-1"></a></span>
-<span id="cb118-45"><a href="meta-análise.html#cb118-45" tabindex="-1"></a><span class="co"># --- modelo de efeito aleatório (REML) ---</span></span>
-<span id="cb118-46"><a href="meta-análise.html#cb118-46" tabindex="-1"></a>res_re <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(</span>
-<span id="cb118-47"><a href="meta-análise.html#cb118-47" tabindex="-1"></a>  <span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
-<span id="cb118-48"><a href="meta-análise.html#cb118-48" tabindex="-1"></a>  <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
-<span id="cb118-49"><a href="meta-análise.html#cb118-49" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;REML&quot;</span>  <span class="co"># método para efeito aleatório</span></span>
-<span id="cb118-50"><a href="meta-análise.html#cb118-50" tabindex="-1"></a>)</span>
-<span id="cb118-51"><a href="meta-análise.html#cb118-51" tabindex="-1"></a>tau2   <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_re<span class="sc">$</span>tau2)</span>
-<span id="cb118-52"><a href="meta-análise.html#cb118-52" tabindex="-1"></a>fe_est <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_fe<span class="sc">$</span>b)</span>
-<span id="cb118-53"><a href="meta-análise.html#cb118-53" tabindex="-1"></a>re_est <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_re<span class="sc">$</span>b)</span>
-<span id="cb118-54"><a href="meta-análise.html#cb118-54" tabindex="-1"></a></span>
-<span id="cb118-55"><a href="meta-análise.html#cb118-55" tabindex="-1"></a><span class="co"># --- preparar dados (Trial_1 no topo) ---</span></span>
-<span id="cb118-56"><a href="meta-análise.html#cb118-56" tabindex="-1"></a>plotdat <span class="ot">&lt;-</span> es <span class="sc">%&gt;%</span></span>
-<span id="cb118-57"><a href="meta-análise.html#cb118-57" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">se =</span> base<span class="sc">::</span><span class="fu">sqrt</span>(vi),</span>
-<span id="cb118-58"><a href="meta-análise.html#cb118-58" tabindex="-1"></a>                <span class="at">study_id =</span> base<span class="sc">::</span><span class="fu">factor</span>(study_id, <span class="at">levels =</span> study_id))</span>
-<span id="cb118-59"><a href="meta-análise.html#cb118-59" tabindex="-1"></a></span>
-<span id="cb118-60"><a href="meta-análise.html#cb118-60" tabindex="-1"></a><span class="co"># --- curvas para FE (sd = se) ---</span></span>
-<span id="cb118-61"><a href="meta-análise.html#cb118-61" tabindex="-1"></a>curve_FE <span class="ot">&lt;-</span> plotdat <span class="sc">%&gt;%</span></span>
-<span id="cb118-62"><a href="meta-análise.html#cb118-62" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb118-63"><a href="meta-análise.html#cb118-63" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">do</span>({</span>
-<span id="cb118-64"><a href="meta-análise.html#cb118-64" tabindex="-1"></a>    m <span class="ot">&lt;-</span> .<span class="sc">$</span>yi</span>
-<span id="cb118-65"><a href="meta-análise.html#cb118-65" tabindex="-1"></a>    s <span class="ot">&lt;-</span> .<span class="sc">$</span>se</span>
-<span id="cb118-66"><a href="meta-análise.html#cb118-66" tabindex="-1"></a>    xseq <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">seq</span>(m <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> s, m <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> s, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
-<span id="cb118-67"><a href="meta-análise.html#cb118-67" tabindex="-1"></a>    tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb118-68"><a href="meta-análise.html#cb118-68" tabindex="-1"></a>      <span class="at">study_id =</span> .<span class="sc">$</span>study_id,</span>
-<span id="cb118-69"><a href="meta-análise.html#cb118-69" tabindex="-1"></a>      <span class="at">model =</span> <span class="st">&quot;FE&quot;</span>,</span>
-<span id="cb118-70"><a href="meta-análise.html#cb118-70" tabindex="-1"></a>      <span class="at">x =</span> xseq,</span>
-<span id="cb118-71"><a href="meta-análise.html#cb118-71" tabindex="-1"></a>      <span class="at">density =</span> stats<span class="sc">::</span><span class="fu">dnorm</span>(xseq, <span class="at">mean =</span> m, <span class="at">sd =</span> s)</span>
-<span id="cb118-72"><a href="meta-análise.html#cb118-72" tabindex="-1"></a>    )</span>
-<span id="cb118-73"><a href="meta-análise.html#cb118-73" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
-<span id="cb118-74"><a href="meta-análise.html#cb118-74" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span>
-<span id="cb118-75"><a href="meta-análise.html#cb118-75" tabindex="-1"></a></span>
-<span id="cb118-76"><a href="meta-análise.html#cb118-76" tabindex="-1"></a><span class="co"># --- curvas para RE (sd = sqrt(se^2 + tau2)) ---</span></span>
-<span id="cb118-77"><a href="meta-análise.html#cb118-77" tabindex="-1"></a>curve_RE <span class="ot">&lt;-</span> plotdat <span class="sc">%&gt;%</span></span>
-<span id="cb118-78"><a href="meta-análise.html#cb118-78" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb118-79"><a href="meta-análise.html#cb118-79" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">do</span>({</span>
-<span id="cb118-80"><a href="meta-análise.html#cb118-80" tabindex="-1"></a>    m <span class="ot">&lt;-</span> .<span class="sc">$</span>yi</span>
-<span id="cb118-81"><a href="meta-análise.html#cb118-81" tabindex="-1"></a>    s <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">sqrt</span>(.<span class="sc">$</span>se<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> tau2)</span>
-<span id="cb118-82"><a href="meta-análise.html#cb118-82" tabindex="-1"></a>    xseq <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">seq</span>(m <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> s, m <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> s, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
-<span id="cb118-83"><a href="meta-análise.html#cb118-83" tabindex="-1"></a>    tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb118-84"><a href="meta-análise.html#cb118-84" tabindex="-1"></a>      <span class="at">study_id =</span> .<span class="sc">$</span>study_id,</span>
-<span id="cb118-85"><a href="meta-análise.html#cb118-85" tabindex="-1"></a>      <span class="at">model =</span> <span class="st">&quot;RE&quot;</span>,</span>
-<span id="cb118-86"><a href="meta-análise.html#cb118-86" tabindex="-1"></a>      <span class="at">x =</span> xseq,</span>
-<span id="cb118-87"><a href="meta-análise.html#cb118-87" tabindex="-1"></a>      <span class="at">density =</span> stats<span class="sc">::</span><span class="fu">dnorm</span>(xseq, <span class="at">mean =</span> m, <span class="at">sd =</span> s)</span>
-<span id="cb118-88"><a href="meta-análise.html#cb118-88" tabindex="-1"></a>    )</span>
-<span id="cb118-89"><a href="meta-análise.html#cb118-89" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
-<span id="cb118-90"><a href="meta-análise.html#cb118-90" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span>
-<span id="cb118-91"><a href="meta-análise.html#cb118-91" tabindex="-1"></a></span>
-<span id="cb118-92"><a href="meta-análise.html#cb118-92" tabindex="-1"></a><span class="co"># --- juntar e normalizar ---</span></span>
-<span id="cb118-93"><a href="meta-análise.html#cb118-93" tabindex="-1"></a>curve_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(curve_FE, curve_RE) <span class="sc">%&gt;%</span></span>
-<span id="cb118-94"><a href="meta-análise.html#cb118-94" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(study_id, model) <span class="sc">%&gt;%</span></span>
-<span id="cb118-95"><a href="meta-análise.html#cb118-95" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">density =</span> density <span class="sc">/</span> base<span class="sc">::</span><span class="fu">max</span>(density)) <span class="sc">%&gt;%</span></span>
-<span id="cb118-96"><a href="meta-análise.html#cb118-96" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span>
-<span id="cb118-97"><a href="meta-análise.html#cb118-97" tabindex="-1"></a></span>
-<span id="cb118-98"><a href="meta-análise.html#cb118-98" tabindex="-1"></a><span class="co"># --- paleta ---</span></span>
-<span id="cb118-99"><a href="meta-análise.html#cb118-99" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">FE =</span> <span class="st">&quot;gray20&quot;</span>, <span class="at">RE =</span> <span class="st">&quot;steelblue4&quot;</span>)</span>
-<span id="cb118-100"><a href="meta-análise.html#cb118-100" tabindex="-1"></a>lts  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">FE =</span> <span class="st">&quot;solid&quot;</span>, <span class="at">RE =</span> <span class="st">&quot;longdash&quot;</span>)</span>
-<span id="cb118-101"><a href="meta-análise.html#cb118-101" tabindex="-1"></a></span>
-<span id="cb118-102"><a href="meta-análise.html#cb118-102" tabindex="-1"></a><span class="co"># --- plot ---</span></span>
-<span id="cb118-103"><a href="meta-análise.html#cb118-103" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(curve_data,</span>
-<span id="cb118-104"><a href="meta-análise.html#cb118-104" tabindex="-1"></a>                ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
-<span id="cb118-105"><a href="meta-análise.html#cb118-105" tabindex="-1"></a>                  <span class="at">x =</span> x,</span>
-<span id="cb118-106"><a href="meta-análise.html#cb118-106" tabindex="-1"></a>                  <span class="at">y =</span> density,</span>
-<span id="cb118-107"><a href="meta-análise.html#cb118-107" tabindex="-1"></a>                  <span class="at">color =</span> model,</span>
-<span id="cb118-108"><a href="meta-análise.html#cb118-108" tabindex="-1"></a>                  <span class="at">linetype =</span> model</span>
-<span id="cb118-109"><a href="meta-análise.html#cb118-109" tabindex="-1"></a>                )) <span class="sc">+</span></span>
-<span id="cb118-110"><a href="meta-análise.html#cb118-110" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb118-111"><a href="meta-análise.html#cb118-111" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(</span>
-<span id="cb118-112"><a href="meta-análise.html#cb118-112" tabindex="-1"></a>    <span class="sc">~</span> study_id,</span>
-<span id="cb118-113"><a href="meta-análise.html#cb118-113" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">1</span>,</span>
-<span id="cb118-114"><a href="meta-análise.html#cb118-114" tabindex="-1"></a>    <span class="at">strip.position =</span> <span class="st">&quot;left&quot;</span>,</span>
-<span id="cb118-115"><a href="meta-análise.html#cb118-115" tabindex="-1"></a>    <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span></span>
-<span id="cb118-116"><a href="meta-análise.html#cb118-116" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb118-117"><a href="meta-análise.html#cb118-117" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_vline</span>(</span>
-<span id="cb118-118"><a href="meta-análise.html#cb118-118" tabindex="-1"></a>    <span class="at">xintercept =</span> fe_est,</span>
-<span id="cb118-119"><a href="meta-análise.html#cb118-119" tabindex="-1"></a>    <span class="at">color =</span> cols[<span class="st">&quot;FE&quot;</span>],</span>
-<span id="cb118-120"><a href="meta-análise.html#cb118-120" tabindex="-1"></a>    <span class="at">linetype =</span> lts[<span class="st">&quot;FE&quot;</span>],</span>
-<span id="cb118-121"><a href="meta-análise.html#cb118-121" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
-<span id="cb118-122"><a href="meta-análise.html#cb118-122" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb118-123"><a href="meta-análise.html#cb118-123" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_vline</span>(</span>
-<span id="cb118-124"><a href="meta-análise.html#cb118-124" tabindex="-1"></a>    <span class="at">xintercept =</span> re_est,</span>
-<span id="cb118-125"><a href="meta-análise.html#cb118-125" tabindex="-1"></a>    <span class="at">color =</span> cols[<span class="st">&quot;RE&quot;</span>],</span>
-<span id="cb118-126"><a href="meta-análise.html#cb118-126" tabindex="-1"></a>    <span class="at">linetype =</span> lts[<span class="st">&quot;RE&quot;</span>],</span>
-<span id="cb118-127"><a href="meta-análise.html#cb118-127" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
-<span id="cb118-128"><a href="meta-análise.html#cb118-128" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb118-129"><a href="meta-análise.html#cb118-129" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols, <span class="at">name =</span> <span class="st">&quot;Modelo&quot;</span>) <span class="sc">+</span></span>
-<span id="cb118-130"><a href="meta-análise.html#cb118-130" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> lts, <span class="at">name =</span> <span class="st">&quot;Modelo&quot;</span>) <span class="sc">+</span></span>
-<span id="cb118-131"><a href="meta-análise.html#cb118-131" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
-<span id="cb118-132"><a href="meta-análise.html#cb118-132" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Curvas Normais por Estudo: FE vs RE&quot;</span>,</span>
-<span id="cb118-133"><a href="meta-análise.html#cb118-133" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Curvas por estudo (FE = σ; RE = √(σ² + τ²)). Linhas verticais: pooled FE (preta) e pooled RE (azul).&quot;</span>,</span>
-<span id="cb118-134"><a href="meta-análise.html#cb118-134" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Hedges g&quot;</span>,</span>
-<span id="cb118-135"><a href="meta-análise.html#cb118-135" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Densidade (normalizada)&quot;</span></span>
-<span id="cb118-136"><a href="meta-análise.html#cb118-136" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb118-137"><a href="meta-análise.html#cb118-137" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb118-138"><a href="meta-análise.html#cb118-138" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">strip.text.y.left =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>),</span>
-<span id="cb118-139"><a href="meta-análise.html#cb118-139" tabindex="-1"></a>                 <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="meta-análise.html#cb122-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
+<span id="cb122-2"><a href="meta-análise.html#cb122-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb122-3"><a href="meta-análise.html#cb122-3" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="meta-análise.html#cb122-4" tabindex="-1"></a><span class="co"># Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)</span></span>
+<span id="cb122-5"><a href="meta-análise.html#cb122-5" tabindex="-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb122-6"><a href="meta-análise.html#cb122-6" tabindex="-1"></a>n_t <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Tratamento</span></span>
+<span id="cb122-7"><a href="meta-análise.html#cb122-7" tabindex="-1"></a>n_c <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Controle</span></span>
+<span id="cb122-8"><a href="meta-análise.html#cb122-8" tabindex="-1"></a></span>
+<span id="cb122-9"><a href="meta-análise.html#cb122-9" tabindex="-1"></a><span class="co"># Médias e desvios-padrão simulados</span></span>
+<span id="cb122-10"><a href="meta-análise.html#cb122-10" tabindex="-1"></a>mu_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.00</span>, <span class="at">sd =</span> <span class="fl">0.40</span>)</span>
+<span id="cb122-11"><a href="meta-análise.html#cb122-11" tabindex="-1"></a>mu_t <span class="ot">&lt;-</span> mu_c <span class="sc">+</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.30</span>, <span class="at">sd =</span> <span class="fl">0.15</span>)  <span class="co"># efeito médio positivo para Tratamento</span></span>
+<span id="cb122-12"><a href="meta-análise.html#cb122-12" tabindex="-1"></a>sd_c <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
+<span id="cb122-13"><a href="meta-análise.html#cb122-13" tabindex="-1"></a>sd_t <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
+<span id="cb122-14"><a href="meta-análise.html#cb122-14" tabindex="-1"></a></span>
+<span id="cb122-15"><a href="meta-análise.html#cb122-15" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb122-16"><a href="meta-análise.html#cb122-16" tabindex="-1"></a>  <span class="at">study_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;Trial_&quot;</span>, <span class="fu">seq_len</span>(k)),</span>
+<span id="cb122-17"><a href="meta-análise.html#cb122-17" tabindex="-1"></a>  <span class="at">n_t      =</span> n_t,</span>
+<span id="cb122-18"><a href="meta-análise.html#cb122-18" tabindex="-1"></a>  <span class="at">n_c      =</span> n_c,</span>
+<span id="cb122-19"><a href="meta-análise.html#cb122-19" tabindex="-1"></a>  <span class="at">mean_t   =</span> mu_t,</span>
+<span id="cb122-20"><a href="meta-análise.html#cb122-20" tabindex="-1"></a>  <span class="at">mean_c   =</span> mu_c,</span>
+<span id="cb122-21"><a href="meta-análise.html#cb122-21" tabindex="-1"></a>  <span class="at">sd_t     =</span> sd_t,</span>
+<span id="cb122-22"><a href="meta-análise.html#cb122-22" tabindex="-1"></a>  <span class="at">sd_c     =</span> sd_c,</span>
+<span id="cb122-23"><a href="meta-análise.html#cb122-23" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb122-24"><a href="meta-análise.html#cb122-24" tabindex="-1"></a>)</span>
+<span id="cb122-25"><a href="meta-análise.html#cb122-25" tabindex="-1"></a></span>
+<span id="cb122-26"><a href="meta-análise.html#cb122-26" tabindex="-1"></a><span class="co"># Calcular SMD (Hedges g) com escalc()</span></span>
+<span id="cb122-27"><a href="meta-análise.html#cb122-27" tabindex="-1"></a><span class="co"># measure = &quot;SMD&quot; usa a correção de Hedges por padrão (J)</span></span>
+<span id="cb122-28"><a href="meta-análise.html#cb122-28" tabindex="-1"></a>es <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">escalc</span>(</span>
+<span id="cb122-29"><a href="meta-análise.html#cb122-29" tabindex="-1"></a>  <span class="at">measure =</span> <span class="st">&quot;SMD&quot;</span>,</span>
+<span id="cb122-30"><a href="meta-análise.html#cb122-30" tabindex="-1"></a>  <span class="at">m1i =</span> dat<span class="sc">$</span>mean_t,</span>
+<span id="cb122-31"><a href="meta-análise.html#cb122-31" tabindex="-1"></a>  <span class="at">sd1i =</span> dat<span class="sc">$</span>sd_t,</span>
+<span id="cb122-32"><a href="meta-análise.html#cb122-32" tabindex="-1"></a>  <span class="at">n1i =</span> dat<span class="sc">$</span>n_t,</span>
+<span id="cb122-33"><a href="meta-análise.html#cb122-33" tabindex="-1"></a>  <span class="at">m2i =</span> dat<span class="sc">$</span>mean_c,</span>
+<span id="cb122-34"><a href="meta-análise.html#cb122-34" tabindex="-1"></a>  <span class="at">sd2i =</span> dat<span class="sc">$</span>sd_c,</span>
+<span id="cb122-35"><a href="meta-análise.html#cb122-35" tabindex="-1"></a>  <span class="at">n2i =</span> dat<span class="sc">$</span>n_c,</span>
+<span id="cb122-36"><a href="meta-análise.html#cb122-36" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb122-37"><a href="meta-análise.html#cb122-37" tabindex="-1"></a>  <span class="at">vtype =</span> <span class="st">&quot;UB&quot;</span></span>
+<span id="cb122-38"><a href="meta-análise.html#cb122-38" tabindex="-1"></a>)</span>
+<span id="cb122-39"><a href="meta-análise.html#cb122-39" tabindex="-1"></a></span>
+<span id="cb122-40"><a href="meta-análise.html#cb122-40" tabindex="-1"></a><span class="co"># --- modelo de efeito fixo) ---</span></span>
+<span id="cb122-41"><a href="meta-análise.html#cb122-41" tabindex="-1"></a>res_fe <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(<span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
+<span id="cb122-42"><a href="meta-análise.html#cb122-42" tabindex="-1"></a>                           <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
+<span id="cb122-43"><a href="meta-análise.html#cb122-43" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;FE&quot;</span>)</span>
+<span id="cb122-44"><a href="meta-análise.html#cb122-44" tabindex="-1"></a></span>
+<span id="cb122-45"><a href="meta-análise.html#cb122-45" tabindex="-1"></a><span class="co"># --- modelo de efeito aleatório (REML) ---</span></span>
+<span id="cb122-46"><a href="meta-análise.html#cb122-46" tabindex="-1"></a>res_re <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(</span>
+<span id="cb122-47"><a href="meta-análise.html#cb122-47" tabindex="-1"></a>  <span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
+<span id="cb122-48"><a href="meta-análise.html#cb122-48" tabindex="-1"></a>  <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
+<span id="cb122-49"><a href="meta-análise.html#cb122-49" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;REML&quot;</span>  <span class="co"># método para efeito aleatório</span></span>
+<span id="cb122-50"><a href="meta-análise.html#cb122-50" tabindex="-1"></a>)</span>
+<span id="cb122-51"><a href="meta-análise.html#cb122-51" tabindex="-1"></a>tau2   <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_re<span class="sc">$</span>tau2)</span>
+<span id="cb122-52"><a href="meta-análise.html#cb122-52" tabindex="-1"></a>fe_est <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_fe<span class="sc">$</span>b)</span>
+<span id="cb122-53"><a href="meta-análise.html#cb122-53" tabindex="-1"></a>re_est <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_re<span class="sc">$</span>b)</span>
+<span id="cb122-54"><a href="meta-análise.html#cb122-54" tabindex="-1"></a></span>
+<span id="cb122-55"><a href="meta-análise.html#cb122-55" tabindex="-1"></a><span class="co"># --- preparar dados (Trial_1 no topo) ---</span></span>
+<span id="cb122-56"><a href="meta-análise.html#cb122-56" tabindex="-1"></a>plotdat <span class="ot">&lt;-</span> es <span class="sc">%&gt;%</span></span>
+<span id="cb122-57"><a href="meta-análise.html#cb122-57" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">se =</span> base<span class="sc">::</span><span class="fu">sqrt</span>(vi),</span>
+<span id="cb122-58"><a href="meta-análise.html#cb122-58" tabindex="-1"></a>                <span class="at">study_id =</span> base<span class="sc">::</span><span class="fu">factor</span>(study_id, <span class="at">levels =</span> study_id))</span>
+<span id="cb122-59"><a href="meta-análise.html#cb122-59" tabindex="-1"></a></span>
+<span id="cb122-60"><a href="meta-análise.html#cb122-60" tabindex="-1"></a><span class="co"># --- curvas para FE (sd = se) ---</span></span>
+<span id="cb122-61"><a href="meta-análise.html#cb122-61" tabindex="-1"></a>curve_FE <span class="ot">&lt;-</span> plotdat <span class="sc">%&gt;%</span></span>
+<span id="cb122-62"><a href="meta-análise.html#cb122-62" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb122-63"><a href="meta-análise.html#cb122-63" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">do</span>({</span>
+<span id="cb122-64"><a href="meta-análise.html#cb122-64" tabindex="-1"></a>    m <span class="ot">&lt;-</span> .<span class="sc">$</span>yi</span>
+<span id="cb122-65"><a href="meta-análise.html#cb122-65" tabindex="-1"></a>    s <span class="ot">&lt;-</span> .<span class="sc">$</span>se</span>
+<span id="cb122-66"><a href="meta-análise.html#cb122-66" tabindex="-1"></a>    xseq <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">seq</span>(m <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> s, m <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> s, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
+<span id="cb122-67"><a href="meta-análise.html#cb122-67" tabindex="-1"></a>    tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb122-68"><a href="meta-análise.html#cb122-68" tabindex="-1"></a>      <span class="at">study_id =</span> .<span class="sc">$</span>study_id,</span>
+<span id="cb122-69"><a href="meta-análise.html#cb122-69" tabindex="-1"></a>      <span class="at">model =</span> <span class="st">&quot;FE&quot;</span>,</span>
+<span id="cb122-70"><a href="meta-análise.html#cb122-70" tabindex="-1"></a>      <span class="at">x =</span> xseq,</span>
+<span id="cb122-71"><a href="meta-análise.html#cb122-71" tabindex="-1"></a>      <span class="at">density =</span> stats<span class="sc">::</span><span class="fu">dnorm</span>(xseq, <span class="at">mean =</span> m, <span class="at">sd =</span> s)</span>
+<span id="cb122-72"><a href="meta-análise.html#cb122-72" tabindex="-1"></a>    )</span>
+<span id="cb122-73"><a href="meta-análise.html#cb122-73" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb122-74"><a href="meta-análise.html#cb122-74" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span>
+<span id="cb122-75"><a href="meta-análise.html#cb122-75" tabindex="-1"></a></span>
+<span id="cb122-76"><a href="meta-análise.html#cb122-76" tabindex="-1"></a><span class="co"># --- curvas para RE (sd = sqrt(se^2 + tau2)) ---</span></span>
+<span id="cb122-77"><a href="meta-análise.html#cb122-77" tabindex="-1"></a>curve_RE <span class="ot">&lt;-</span> plotdat <span class="sc">%&gt;%</span></span>
+<span id="cb122-78"><a href="meta-análise.html#cb122-78" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb122-79"><a href="meta-análise.html#cb122-79" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">do</span>({</span>
+<span id="cb122-80"><a href="meta-análise.html#cb122-80" tabindex="-1"></a>    m <span class="ot">&lt;-</span> .<span class="sc">$</span>yi</span>
+<span id="cb122-81"><a href="meta-análise.html#cb122-81" tabindex="-1"></a>    s <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">sqrt</span>(.<span class="sc">$</span>se<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> tau2)</span>
+<span id="cb122-82"><a href="meta-análise.html#cb122-82" tabindex="-1"></a>    xseq <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">seq</span>(m <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> s, m <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> s, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
+<span id="cb122-83"><a href="meta-análise.html#cb122-83" tabindex="-1"></a>    tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb122-84"><a href="meta-análise.html#cb122-84" tabindex="-1"></a>      <span class="at">study_id =</span> .<span class="sc">$</span>study_id,</span>
+<span id="cb122-85"><a href="meta-análise.html#cb122-85" tabindex="-1"></a>      <span class="at">model =</span> <span class="st">&quot;RE&quot;</span>,</span>
+<span id="cb122-86"><a href="meta-análise.html#cb122-86" tabindex="-1"></a>      <span class="at">x =</span> xseq,</span>
+<span id="cb122-87"><a href="meta-análise.html#cb122-87" tabindex="-1"></a>      <span class="at">density =</span> stats<span class="sc">::</span><span class="fu">dnorm</span>(xseq, <span class="at">mean =</span> m, <span class="at">sd =</span> s)</span>
+<span id="cb122-88"><a href="meta-análise.html#cb122-88" tabindex="-1"></a>    )</span>
+<span id="cb122-89"><a href="meta-análise.html#cb122-89" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb122-90"><a href="meta-análise.html#cb122-90" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span>
+<span id="cb122-91"><a href="meta-análise.html#cb122-91" tabindex="-1"></a></span>
+<span id="cb122-92"><a href="meta-análise.html#cb122-92" tabindex="-1"></a><span class="co"># --- juntar e normalizar ---</span></span>
+<span id="cb122-93"><a href="meta-análise.html#cb122-93" tabindex="-1"></a>curve_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(curve_FE, curve_RE) <span class="sc">%&gt;%</span></span>
+<span id="cb122-94"><a href="meta-análise.html#cb122-94" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(study_id, model) <span class="sc">%&gt;%</span></span>
+<span id="cb122-95"><a href="meta-análise.html#cb122-95" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">density =</span> density <span class="sc">/</span> base<span class="sc">::</span><span class="fu">max</span>(density)) <span class="sc">%&gt;%</span></span>
+<span id="cb122-96"><a href="meta-análise.html#cb122-96" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span>
+<span id="cb122-97"><a href="meta-análise.html#cb122-97" tabindex="-1"></a></span>
+<span id="cb122-98"><a href="meta-análise.html#cb122-98" tabindex="-1"></a><span class="co"># --- paleta ---</span></span>
+<span id="cb122-99"><a href="meta-análise.html#cb122-99" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">FE =</span> <span class="st">&quot;gray20&quot;</span>, <span class="at">RE =</span> <span class="st">&quot;steelblue4&quot;</span>)</span>
+<span id="cb122-100"><a href="meta-análise.html#cb122-100" tabindex="-1"></a>lts  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">FE =</span> <span class="st">&quot;solid&quot;</span>, <span class="at">RE =</span> <span class="st">&quot;longdash&quot;</span>)</span>
+<span id="cb122-101"><a href="meta-análise.html#cb122-101" tabindex="-1"></a></span>
+<span id="cb122-102"><a href="meta-análise.html#cb122-102" tabindex="-1"></a><span class="co"># --- plot ---</span></span>
+<span id="cb122-103"><a href="meta-análise.html#cb122-103" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(curve_data,</span>
+<span id="cb122-104"><a href="meta-análise.html#cb122-104" tabindex="-1"></a>                ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
+<span id="cb122-105"><a href="meta-análise.html#cb122-105" tabindex="-1"></a>                  <span class="at">x =</span> x,</span>
+<span id="cb122-106"><a href="meta-análise.html#cb122-106" tabindex="-1"></a>                  <span class="at">y =</span> density,</span>
+<span id="cb122-107"><a href="meta-análise.html#cb122-107" tabindex="-1"></a>                  <span class="at">color =</span> model,</span>
+<span id="cb122-108"><a href="meta-análise.html#cb122-108" tabindex="-1"></a>                  <span class="at">linetype =</span> model</span>
+<span id="cb122-109"><a href="meta-análise.html#cb122-109" tabindex="-1"></a>                )) <span class="sc">+</span></span>
+<span id="cb122-110"><a href="meta-análise.html#cb122-110" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb122-111"><a href="meta-análise.html#cb122-111" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(</span>
+<span id="cb122-112"><a href="meta-análise.html#cb122-112" tabindex="-1"></a>    <span class="sc">~</span> study_id,</span>
+<span id="cb122-113"><a href="meta-análise.html#cb122-113" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">1</span>,</span>
+<span id="cb122-114"><a href="meta-análise.html#cb122-114" tabindex="-1"></a>    <span class="at">strip.position =</span> <span class="st">&quot;left&quot;</span>,</span>
+<span id="cb122-115"><a href="meta-análise.html#cb122-115" tabindex="-1"></a>    <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span></span>
+<span id="cb122-116"><a href="meta-análise.html#cb122-116" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb122-117"><a href="meta-análise.html#cb122-117" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_vline</span>(</span>
+<span id="cb122-118"><a href="meta-análise.html#cb122-118" tabindex="-1"></a>    <span class="at">xintercept =</span> fe_est,</span>
+<span id="cb122-119"><a href="meta-análise.html#cb122-119" tabindex="-1"></a>    <span class="at">color =</span> cols[<span class="st">&quot;FE&quot;</span>],</span>
+<span id="cb122-120"><a href="meta-análise.html#cb122-120" tabindex="-1"></a>    <span class="at">linetype =</span> lts[<span class="st">&quot;FE&quot;</span>],</span>
+<span id="cb122-121"><a href="meta-análise.html#cb122-121" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
+<span id="cb122-122"><a href="meta-análise.html#cb122-122" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb122-123"><a href="meta-análise.html#cb122-123" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_vline</span>(</span>
+<span id="cb122-124"><a href="meta-análise.html#cb122-124" tabindex="-1"></a>    <span class="at">xintercept =</span> re_est,</span>
+<span id="cb122-125"><a href="meta-análise.html#cb122-125" tabindex="-1"></a>    <span class="at">color =</span> cols[<span class="st">&quot;RE&quot;</span>],</span>
+<span id="cb122-126"><a href="meta-análise.html#cb122-126" tabindex="-1"></a>    <span class="at">linetype =</span> lts[<span class="st">&quot;RE&quot;</span>],</span>
+<span id="cb122-127"><a href="meta-análise.html#cb122-127" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
+<span id="cb122-128"><a href="meta-análise.html#cb122-128" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb122-129"><a href="meta-análise.html#cb122-129" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols, <span class="at">name =</span> <span class="st">&quot;Modelo&quot;</span>) <span class="sc">+</span></span>
+<span id="cb122-130"><a href="meta-análise.html#cb122-130" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> lts, <span class="at">name =</span> <span class="st">&quot;Modelo&quot;</span>) <span class="sc">+</span></span>
+<span id="cb122-131"><a href="meta-análise.html#cb122-131" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
+<span id="cb122-132"><a href="meta-análise.html#cb122-132" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Curvas Normais por Estudo: FE vs RE&quot;</span>,</span>
+<span id="cb122-133"><a href="meta-análise.html#cb122-133" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Curvas por estudo (FE = σ; RE = √(σ² + τ²)). Linhas verticais: pooled FE (preta) e pooled RE (azul).&quot;</span>,</span>
+<span id="cb122-134"><a href="meta-análise.html#cb122-134" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Hedges g&quot;</span>,</span>
+<span id="cb122-135"><a href="meta-análise.html#cb122-135" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Densidade (normalizada)&quot;</span></span>
+<span id="cb122-136"><a href="meta-análise.html#cb122-136" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb122-137"><a href="meta-análise.html#cb122-137" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb122-138"><a href="meta-análise.html#cb122-138" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">strip.text.y.left =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>),</span>
+<span id="cb122-139"><a href="meta-análise.html#cb122-139" tabindex="-1"></a>                 <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
 </details>
 </div>
 <div id="interpretação-do-forest-plot-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Interpretação do Forest Plot<a href="#interpreta%C3%A7%C3%A3o-do-forest-plot-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="meta-análise.html#cb119-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
-<span id="cb119-2"><a href="meta-análise.html#cb119-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb119-3"><a href="meta-análise.html#cb119-3" tabindex="-1"></a></span>
-<span id="cb119-4"><a href="meta-análise.html#cb119-4" tabindex="-1"></a><span class="co"># Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)</span></span>
-<span id="cb119-5"><a href="meta-análise.html#cb119-5" tabindex="-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb119-6"><a href="meta-análise.html#cb119-6" tabindex="-1"></a>n_t <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Tratamento</span></span>
-<span id="cb119-7"><a href="meta-análise.html#cb119-7" tabindex="-1"></a>n_c <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Controle</span></span>
-<span id="cb119-8"><a href="meta-análise.html#cb119-8" tabindex="-1"></a></span>
-<span id="cb119-9"><a href="meta-análise.html#cb119-9" tabindex="-1"></a><span class="co"># Médias e desvios-padrão simulados</span></span>
-<span id="cb119-10"><a href="meta-análise.html#cb119-10" tabindex="-1"></a>mu_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.00</span>, <span class="at">sd =</span> <span class="fl">0.40</span>)</span>
-<span id="cb119-11"><a href="meta-análise.html#cb119-11" tabindex="-1"></a>mu_t <span class="ot">&lt;-</span> mu_c <span class="sc">+</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.30</span>, <span class="at">sd =</span> <span class="fl">0.15</span>)  <span class="co"># efeito médio positivo para Tratamento</span></span>
-<span id="cb119-12"><a href="meta-análise.html#cb119-12" tabindex="-1"></a>sd_c <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
-<span id="cb119-13"><a href="meta-análise.html#cb119-13" tabindex="-1"></a>sd_t <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
-<span id="cb119-14"><a href="meta-análise.html#cb119-14" tabindex="-1"></a></span>
-<span id="cb119-15"><a href="meta-análise.html#cb119-15" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb119-16"><a href="meta-análise.html#cb119-16" tabindex="-1"></a>  <span class="at">study_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;Trial_&quot;</span>, <span class="fu">seq_len</span>(k)),</span>
-<span id="cb119-17"><a href="meta-análise.html#cb119-17" tabindex="-1"></a>  <span class="at">n_t      =</span> n_t,</span>
-<span id="cb119-18"><a href="meta-análise.html#cb119-18" tabindex="-1"></a>  <span class="at">n_c      =</span> n_c,</span>
-<span id="cb119-19"><a href="meta-análise.html#cb119-19" tabindex="-1"></a>  <span class="at">mean_t   =</span> mu_t,</span>
-<span id="cb119-20"><a href="meta-análise.html#cb119-20" tabindex="-1"></a>  <span class="at">mean_c   =</span> mu_c,</span>
-<span id="cb119-21"><a href="meta-análise.html#cb119-21" tabindex="-1"></a>  <span class="at">sd_t     =</span> sd_t,</span>
-<span id="cb119-22"><a href="meta-análise.html#cb119-22" tabindex="-1"></a>  <span class="at">sd_c     =</span> sd_c,</span>
-<span id="cb119-23"><a href="meta-análise.html#cb119-23" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb119-24"><a href="meta-análise.html#cb119-24" tabindex="-1"></a>)</span>
-<span id="cb119-25"><a href="meta-análise.html#cb119-25" tabindex="-1"></a></span>
-<span id="cb119-26"><a href="meta-análise.html#cb119-26" tabindex="-1"></a><span class="co"># Calcular SMD (Hedges g) com escalc()</span></span>
-<span id="cb119-27"><a href="meta-análise.html#cb119-27" tabindex="-1"></a><span class="co"># measure = &quot;SMD&quot; usa a correção de Hedges por padrão (J)</span></span>
-<span id="cb119-28"><a href="meta-análise.html#cb119-28" tabindex="-1"></a>es <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">escalc</span>(</span>
-<span id="cb119-29"><a href="meta-análise.html#cb119-29" tabindex="-1"></a>  <span class="at">measure =</span> <span class="st">&quot;SMD&quot;</span>,</span>
-<span id="cb119-30"><a href="meta-análise.html#cb119-30" tabindex="-1"></a>  <span class="at">m1i =</span> dat<span class="sc">$</span>mean_t,</span>
-<span id="cb119-31"><a href="meta-análise.html#cb119-31" tabindex="-1"></a>  <span class="at">sd1i =</span> dat<span class="sc">$</span>sd_t,</span>
-<span id="cb119-32"><a href="meta-análise.html#cb119-32" tabindex="-1"></a>  <span class="at">n1i =</span> dat<span class="sc">$</span>n_t,</span>
-<span id="cb119-33"><a href="meta-análise.html#cb119-33" tabindex="-1"></a>  <span class="at">m2i =</span> dat<span class="sc">$</span>mean_c,</span>
-<span id="cb119-34"><a href="meta-análise.html#cb119-34" tabindex="-1"></a>  <span class="at">sd2i =</span> dat<span class="sc">$</span>sd_c,</span>
-<span id="cb119-35"><a href="meta-análise.html#cb119-35" tabindex="-1"></a>  <span class="at">n2i =</span> dat<span class="sc">$</span>n_c,</span>
-<span id="cb119-36"><a href="meta-análise.html#cb119-36" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb119-37"><a href="meta-análise.html#cb119-37" tabindex="-1"></a>  <span class="at">vtype =</span> <span class="st">&quot;UB&quot;</span></span>
-<span id="cb119-38"><a href="meta-análise.html#cb119-38" tabindex="-1"></a>)</span>
-<span id="cb119-39"><a href="meta-análise.html#cb119-39" tabindex="-1"></a></span>
-<span id="cb119-40"><a href="meta-análise.html#cb119-40" tabindex="-1"></a><span class="co"># Ajustar meta-análise de efeito fixo (variância inversa, sem tau^2)</span></span>
-<span id="cb119-41"><a href="meta-análise.html#cb119-41" tabindex="-1"></a>res_fe <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(<span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
-<span id="cb119-42"><a href="meta-análise.html#cb119-42" tabindex="-1"></a>                           <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
-<span id="cb119-43"><a href="meta-análise.html#cb119-43" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;FE&quot;</span>)</span>
-<span id="cb119-44"><a href="meta-análise.html#cb119-44" tabindex="-1"></a></span>
-<span id="cb119-45"><a href="meta-análise.html#cb119-45" tabindex="-1"></a><span class="co"># Forest plot</span></span>
-<span id="cb119-46"><a href="meta-análise.html#cb119-46" tabindex="-1"></a>metafor<span class="sc">::</span><span class="fu">forest</span>(</span>
-<span id="cb119-47"><a href="meta-análise.html#cb119-47" tabindex="-1"></a>  res_fe,</span>
-<span id="cb119-48"><a href="meta-análise.html#cb119-48" tabindex="-1"></a>  <span class="at">slab =</span> es<span class="sc">$</span>study_id,</span>
-<span id="cb119-49"><a href="meta-análise.html#cb119-49" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Hedges g&quot;</span>,</span>
-<span id="cb119-50"><a href="meta-análise.html#cb119-50" tabindex="-1"></a>  <span class="at">header =</span> <span class="st">&quot;Ensaios Clínicos&quot;</span>,</span>
-<span id="cb119-51"><a href="meta-análise.html#cb119-51" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.9</span>,</span>
-<span id="cb119-52"><a href="meta-análise.html#cb119-52" tabindex="-1"></a>  <span class="at">refline =</span> <span class="dv">0</span>,</span>
-<span id="cb119-53"><a href="meta-análise.html#cb119-53" tabindex="-1"></a>  <span class="at">mlab =</span> <span class="st">&quot;Modelo de Efeito Fixo&quot;</span></span>
-<span id="cb119-54"><a href="meta-análise.html#cb119-54" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="meta-análise.html#cb123-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
+<span id="cb123-2"><a href="meta-análise.html#cb123-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb123-3"><a href="meta-análise.html#cb123-3" tabindex="-1"></a></span>
+<span id="cb123-4"><a href="meta-análise.html#cb123-4" tabindex="-1"></a><span class="co"># Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)</span></span>
+<span id="cb123-5"><a href="meta-análise.html#cb123-5" tabindex="-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb123-6"><a href="meta-análise.html#cb123-6" tabindex="-1"></a>n_t <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Tratamento</span></span>
+<span id="cb123-7"><a href="meta-análise.html#cb123-7" tabindex="-1"></a>n_c <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Controle</span></span>
+<span id="cb123-8"><a href="meta-análise.html#cb123-8" tabindex="-1"></a></span>
+<span id="cb123-9"><a href="meta-análise.html#cb123-9" tabindex="-1"></a><span class="co"># Médias e desvios-padrão simulados</span></span>
+<span id="cb123-10"><a href="meta-análise.html#cb123-10" tabindex="-1"></a>mu_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.00</span>, <span class="at">sd =</span> <span class="fl">0.40</span>)</span>
+<span id="cb123-11"><a href="meta-análise.html#cb123-11" tabindex="-1"></a>mu_t <span class="ot">&lt;-</span> mu_c <span class="sc">+</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.30</span>, <span class="at">sd =</span> <span class="fl">0.15</span>)  <span class="co"># efeito médio positivo para Tratamento</span></span>
+<span id="cb123-12"><a href="meta-análise.html#cb123-12" tabindex="-1"></a>sd_c <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
+<span id="cb123-13"><a href="meta-análise.html#cb123-13" tabindex="-1"></a>sd_t <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
+<span id="cb123-14"><a href="meta-análise.html#cb123-14" tabindex="-1"></a></span>
+<span id="cb123-15"><a href="meta-análise.html#cb123-15" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb123-16"><a href="meta-análise.html#cb123-16" tabindex="-1"></a>  <span class="at">study_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;Trial_&quot;</span>, <span class="fu">seq_len</span>(k)),</span>
+<span id="cb123-17"><a href="meta-análise.html#cb123-17" tabindex="-1"></a>  <span class="at">n_t      =</span> n_t,</span>
+<span id="cb123-18"><a href="meta-análise.html#cb123-18" tabindex="-1"></a>  <span class="at">n_c      =</span> n_c,</span>
+<span id="cb123-19"><a href="meta-análise.html#cb123-19" tabindex="-1"></a>  <span class="at">mean_t   =</span> mu_t,</span>
+<span id="cb123-20"><a href="meta-análise.html#cb123-20" tabindex="-1"></a>  <span class="at">mean_c   =</span> mu_c,</span>
+<span id="cb123-21"><a href="meta-análise.html#cb123-21" tabindex="-1"></a>  <span class="at">sd_t     =</span> sd_t,</span>
+<span id="cb123-22"><a href="meta-análise.html#cb123-22" tabindex="-1"></a>  <span class="at">sd_c     =</span> sd_c,</span>
+<span id="cb123-23"><a href="meta-análise.html#cb123-23" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb123-24"><a href="meta-análise.html#cb123-24" tabindex="-1"></a>)</span>
+<span id="cb123-25"><a href="meta-análise.html#cb123-25" tabindex="-1"></a></span>
+<span id="cb123-26"><a href="meta-análise.html#cb123-26" tabindex="-1"></a><span class="co"># Calcular SMD (Hedges g) com escalc()</span></span>
+<span id="cb123-27"><a href="meta-análise.html#cb123-27" tabindex="-1"></a><span class="co"># measure = &quot;SMD&quot; usa a correção de Hedges por padrão (J)</span></span>
+<span id="cb123-28"><a href="meta-análise.html#cb123-28" tabindex="-1"></a>es <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">escalc</span>(</span>
+<span id="cb123-29"><a href="meta-análise.html#cb123-29" tabindex="-1"></a>  <span class="at">measure =</span> <span class="st">&quot;SMD&quot;</span>,</span>
+<span id="cb123-30"><a href="meta-análise.html#cb123-30" tabindex="-1"></a>  <span class="at">m1i =</span> dat<span class="sc">$</span>mean_t,</span>
+<span id="cb123-31"><a href="meta-análise.html#cb123-31" tabindex="-1"></a>  <span class="at">sd1i =</span> dat<span class="sc">$</span>sd_t,</span>
+<span id="cb123-32"><a href="meta-análise.html#cb123-32" tabindex="-1"></a>  <span class="at">n1i =</span> dat<span class="sc">$</span>n_t,</span>
+<span id="cb123-33"><a href="meta-análise.html#cb123-33" tabindex="-1"></a>  <span class="at">m2i =</span> dat<span class="sc">$</span>mean_c,</span>
+<span id="cb123-34"><a href="meta-análise.html#cb123-34" tabindex="-1"></a>  <span class="at">sd2i =</span> dat<span class="sc">$</span>sd_c,</span>
+<span id="cb123-35"><a href="meta-análise.html#cb123-35" tabindex="-1"></a>  <span class="at">n2i =</span> dat<span class="sc">$</span>n_c,</span>
+<span id="cb123-36"><a href="meta-análise.html#cb123-36" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb123-37"><a href="meta-análise.html#cb123-37" tabindex="-1"></a>  <span class="at">vtype =</span> <span class="st">&quot;UB&quot;</span></span>
+<span id="cb123-38"><a href="meta-análise.html#cb123-38" tabindex="-1"></a>)</span>
+<span id="cb123-39"><a href="meta-análise.html#cb123-39" tabindex="-1"></a></span>
+<span id="cb123-40"><a href="meta-análise.html#cb123-40" tabindex="-1"></a><span class="co"># Ajustar meta-análise de efeito fixo (variância inversa, sem tau^2)</span></span>
+<span id="cb123-41"><a href="meta-análise.html#cb123-41" tabindex="-1"></a>res_fe <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(<span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
+<span id="cb123-42"><a href="meta-análise.html#cb123-42" tabindex="-1"></a>                           <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
+<span id="cb123-43"><a href="meta-análise.html#cb123-43" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;FE&quot;</span>)</span>
+<span id="cb123-44"><a href="meta-análise.html#cb123-44" tabindex="-1"></a></span>
+<span id="cb123-45"><a href="meta-análise.html#cb123-45" tabindex="-1"></a><span class="co"># Forest plot</span></span>
+<span id="cb123-46"><a href="meta-análise.html#cb123-46" tabindex="-1"></a>metafor<span class="sc">::</span><span class="fu">forest</span>(</span>
+<span id="cb123-47"><a href="meta-análise.html#cb123-47" tabindex="-1"></a>  res_fe,</span>
+<span id="cb123-48"><a href="meta-análise.html#cb123-48" tabindex="-1"></a>  <span class="at">slab =</span> es<span class="sc">$</span>study_id,</span>
+<span id="cb123-49"><a href="meta-análise.html#cb123-49" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Hedges g&quot;</span>,</span>
+<span id="cb123-50"><a href="meta-análise.html#cb123-50" tabindex="-1"></a>  <span class="at">header =</span> <span class="st">&quot;Ensaios Clínicos&quot;</span>,</span>
+<span id="cb123-51"><a href="meta-análise.html#cb123-51" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.9</span>,</span>
+<span id="cb123-52"><a href="meta-análise.html#cb123-52" tabindex="-1"></a>  <span class="at">refline =</span> <span class="dv">0</span>,</span>
+<span id="cb123-53"><a href="meta-análise.html#cb123-53" tabindex="-1"></a>  <span class="at">mlab =</span> <span class="st">&quot;Modelo de Efeito Fixo&quot;</span></span>
+<span id="cb123-54"><a href="meta-análise.html#cb123-54" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="meta-análise.html#cb120-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
-<span id="cb120-2"><a href="meta-análise.html#cb120-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb120-3"><a href="meta-análise.html#cb120-3" tabindex="-1"></a></span>
-<span id="cb120-4"><a href="meta-análise.html#cb120-4" tabindex="-1"></a><span class="co"># Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)</span></span>
-<span id="cb120-5"><a href="meta-análise.html#cb120-5" tabindex="-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb120-6"><a href="meta-análise.html#cb120-6" tabindex="-1"></a>n_t <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Tratamento</span></span>
-<span id="cb120-7"><a href="meta-análise.html#cb120-7" tabindex="-1"></a>n_c <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Controle</span></span>
-<span id="cb120-8"><a href="meta-análise.html#cb120-8" tabindex="-1"></a></span>
-<span id="cb120-9"><a href="meta-análise.html#cb120-9" tabindex="-1"></a><span class="co"># Médias e desvios-padrão simulados</span></span>
-<span id="cb120-10"><a href="meta-análise.html#cb120-10" tabindex="-1"></a>mu_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.00</span>, <span class="at">sd =</span> <span class="fl">0.40</span>)</span>
-<span id="cb120-11"><a href="meta-análise.html#cb120-11" tabindex="-1"></a>mu_t <span class="ot">&lt;-</span> mu_c <span class="sc">+</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.30</span>, <span class="at">sd =</span> <span class="fl">0.15</span>)  <span class="co"># efeito médio positivo para Tratamento</span></span>
-<span id="cb120-12"><a href="meta-análise.html#cb120-12" tabindex="-1"></a>sd_c <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
-<span id="cb120-13"><a href="meta-análise.html#cb120-13" tabindex="-1"></a>sd_t <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
-<span id="cb120-14"><a href="meta-análise.html#cb120-14" tabindex="-1"></a></span>
-<span id="cb120-15"><a href="meta-análise.html#cb120-15" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb120-16"><a href="meta-análise.html#cb120-16" tabindex="-1"></a>  <span class="at">study_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;Trial_&quot;</span>, <span class="fu">seq_len</span>(k)),</span>
-<span id="cb120-17"><a href="meta-análise.html#cb120-17" tabindex="-1"></a>  <span class="at">n_t      =</span> n_t,</span>
-<span id="cb120-18"><a href="meta-análise.html#cb120-18" tabindex="-1"></a>  <span class="at">n_c      =</span> n_c,</span>
-<span id="cb120-19"><a href="meta-análise.html#cb120-19" tabindex="-1"></a>  <span class="at">mean_t   =</span> mu_t,</span>
-<span id="cb120-20"><a href="meta-análise.html#cb120-20" tabindex="-1"></a>  <span class="at">mean_c   =</span> mu_c,</span>
-<span id="cb120-21"><a href="meta-análise.html#cb120-21" tabindex="-1"></a>  <span class="at">sd_t     =</span> sd_t,</span>
-<span id="cb120-22"><a href="meta-análise.html#cb120-22" tabindex="-1"></a>  <span class="at">sd_c     =</span> sd_c,</span>
-<span id="cb120-23"><a href="meta-análise.html#cb120-23" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb120-24"><a href="meta-análise.html#cb120-24" tabindex="-1"></a>)</span>
-<span id="cb120-25"><a href="meta-análise.html#cb120-25" tabindex="-1"></a></span>
-<span id="cb120-26"><a href="meta-análise.html#cb120-26" tabindex="-1"></a><span class="co"># Calcular SMD (Hedges g) com escalc()</span></span>
-<span id="cb120-27"><a href="meta-análise.html#cb120-27" tabindex="-1"></a><span class="co"># measure = &quot;SMD&quot; usa a correção de Hedges por padrão (J)</span></span>
-<span id="cb120-28"><a href="meta-análise.html#cb120-28" tabindex="-1"></a>es <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">escalc</span>(</span>
-<span id="cb120-29"><a href="meta-análise.html#cb120-29" tabindex="-1"></a>  <span class="at">measure =</span> <span class="st">&quot;SMD&quot;</span>,</span>
-<span id="cb120-30"><a href="meta-análise.html#cb120-30" tabindex="-1"></a>  <span class="at">m1i =</span> dat<span class="sc">$</span>mean_t,</span>
-<span id="cb120-31"><a href="meta-análise.html#cb120-31" tabindex="-1"></a>  <span class="at">sd1i =</span> dat<span class="sc">$</span>sd_t,</span>
-<span id="cb120-32"><a href="meta-análise.html#cb120-32" tabindex="-1"></a>  <span class="at">n1i =</span> dat<span class="sc">$</span>n_t,</span>
-<span id="cb120-33"><a href="meta-análise.html#cb120-33" tabindex="-1"></a>  <span class="at">m2i =</span> dat<span class="sc">$</span>mean_c,</span>
-<span id="cb120-34"><a href="meta-análise.html#cb120-34" tabindex="-1"></a>  <span class="at">sd2i =</span> dat<span class="sc">$</span>sd_c,</span>
-<span id="cb120-35"><a href="meta-análise.html#cb120-35" tabindex="-1"></a>  <span class="at">n2i =</span> dat<span class="sc">$</span>n_c,</span>
-<span id="cb120-36"><a href="meta-análise.html#cb120-36" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb120-37"><a href="meta-análise.html#cb120-37" tabindex="-1"></a>  <span class="at">vtype =</span> <span class="st">&quot;UB&quot;</span></span>
-<span id="cb120-38"><a href="meta-análise.html#cb120-38" tabindex="-1"></a>)</span>
-<span id="cb120-39"><a href="meta-análise.html#cb120-39" tabindex="-1"></a></span>
-<span id="cb120-40"><a href="meta-análise.html#cb120-40" tabindex="-1"></a><span class="co"># Ajustar meta-análise de efeito aleatório (REML)</span></span>
-<span id="cb120-41"><a href="meta-análise.html#cb120-41" tabindex="-1"></a>res_re <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(</span>
-<span id="cb120-42"><a href="meta-análise.html#cb120-42" tabindex="-1"></a>  <span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
-<span id="cb120-43"><a href="meta-análise.html#cb120-43" tabindex="-1"></a>  <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
-<span id="cb120-44"><a href="meta-análise.html#cb120-44" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;REML&quot;</span>  <span class="co"># método para efeito aleatório</span></span>
-<span id="cb120-45"><a href="meta-análise.html#cb120-45" tabindex="-1"></a>)</span>
-<span id="cb120-46"><a href="meta-análise.html#cb120-46" tabindex="-1"></a></span>
-<span id="cb120-47"><a href="meta-análise.html#cb120-47" tabindex="-1"></a><span class="co"># Forest plot</span></span>
-<span id="cb120-48"><a href="meta-análise.html#cb120-48" tabindex="-1"></a>metafor<span class="sc">::</span><span class="fu">forest</span>(</span>
-<span id="cb120-49"><a href="meta-análise.html#cb120-49" tabindex="-1"></a>  res_re,</span>
-<span id="cb120-50"><a href="meta-análise.html#cb120-50" tabindex="-1"></a>  <span class="at">slab =</span> es<span class="sc">$</span>study_id,</span>
-<span id="cb120-51"><a href="meta-análise.html#cb120-51" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Hedges g&quot;</span>,</span>
-<span id="cb120-52"><a href="meta-análise.html#cb120-52" tabindex="-1"></a>  <span class="at">header =</span> <span class="st">&quot;Ensaios Clínicos&quot;</span>,</span>
-<span id="cb120-53"><a href="meta-análise.html#cb120-53" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.9</span>,</span>
-<span id="cb120-54"><a href="meta-análise.html#cb120-54" tabindex="-1"></a>  <span class="at">refline =</span> <span class="dv">0</span>,</span>
-<span id="cb120-55"><a href="meta-análise.html#cb120-55" tabindex="-1"></a>  <span class="at">mlab =</span> <span class="st">&quot;Modelo de Efeito Aleatório (REML)&quot;</span></span>
-<span id="cb120-56"><a href="meta-análise.html#cb120-56" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="meta-análise.html#cb124-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
+<span id="cb124-2"><a href="meta-análise.html#cb124-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb124-3"><a href="meta-análise.html#cb124-3" tabindex="-1"></a></span>
+<span id="cb124-4"><a href="meta-análise.html#cb124-4" tabindex="-1"></a><span class="co"># Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)</span></span>
+<span id="cb124-5"><a href="meta-análise.html#cb124-5" tabindex="-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb124-6"><a href="meta-análise.html#cb124-6" tabindex="-1"></a>n_t <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Tratamento</span></span>
+<span id="cb124-7"><a href="meta-análise.html#cb124-7" tabindex="-1"></a>n_c <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Controle</span></span>
+<span id="cb124-8"><a href="meta-análise.html#cb124-8" tabindex="-1"></a></span>
+<span id="cb124-9"><a href="meta-análise.html#cb124-9" tabindex="-1"></a><span class="co"># Médias e desvios-padrão simulados</span></span>
+<span id="cb124-10"><a href="meta-análise.html#cb124-10" tabindex="-1"></a>mu_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.00</span>, <span class="at">sd =</span> <span class="fl">0.40</span>)</span>
+<span id="cb124-11"><a href="meta-análise.html#cb124-11" tabindex="-1"></a>mu_t <span class="ot">&lt;-</span> mu_c <span class="sc">+</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.30</span>, <span class="at">sd =</span> <span class="fl">0.15</span>)  <span class="co"># efeito médio positivo para Tratamento</span></span>
+<span id="cb124-12"><a href="meta-análise.html#cb124-12" tabindex="-1"></a>sd_c <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
+<span id="cb124-13"><a href="meta-análise.html#cb124-13" tabindex="-1"></a>sd_t <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
+<span id="cb124-14"><a href="meta-análise.html#cb124-14" tabindex="-1"></a></span>
+<span id="cb124-15"><a href="meta-análise.html#cb124-15" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb124-16"><a href="meta-análise.html#cb124-16" tabindex="-1"></a>  <span class="at">study_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;Trial_&quot;</span>, <span class="fu">seq_len</span>(k)),</span>
+<span id="cb124-17"><a href="meta-análise.html#cb124-17" tabindex="-1"></a>  <span class="at">n_t      =</span> n_t,</span>
+<span id="cb124-18"><a href="meta-análise.html#cb124-18" tabindex="-1"></a>  <span class="at">n_c      =</span> n_c,</span>
+<span id="cb124-19"><a href="meta-análise.html#cb124-19" tabindex="-1"></a>  <span class="at">mean_t   =</span> mu_t,</span>
+<span id="cb124-20"><a href="meta-análise.html#cb124-20" tabindex="-1"></a>  <span class="at">mean_c   =</span> mu_c,</span>
+<span id="cb124-21"><a href="meta-análise.html#cb124-21" tabindex="-1"></a>  <span class="at">sd_t     =</span> sd_t,</span>
+<span id="cb124-22"><a href="meta-análise.html#cb124-22" tabindex="-1"></a>  <span class="at">sd_c     =</span> sd_c,</span>
+<span id="cb124-23"><a href="meta-análise.html#cb124-23" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb124-24"><a href="meta-análise.html#cb124-24" tabindex="-1"></a>)</span>
+<span id="cb124-25"><a href="meta-análise.html#cb124-25" tabindex="-1"></a></span>
+<span id="cb124-26"><a href="meta-análise.html#cb124-26" tabindex="-1"></a><span class="co"># Calcular SMD (Hedges g) com escalc()</span></span>
+<span id="cb124-27"><a href="meta-análise.html#cb124-27" tabindex="-1"></a><span class="co"># measure = &quot;SMD&quot; usa a correção de Hedges por padrão (J)</span></span>
+<span id="cb124-28"><a href="meta-análise.html#cb124-28" tabindex="-1"></a>es <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">escalc</span>(</span>
+<span id="cb124-29"><a href="meta-análise.html#cb124-29" tabindex="-1"></a>  <span class="at">measure =</span> <span class="st">&quot;SMD&quot;</span>,</span>
+<span id="cb124-30"><a href="meta-análise.html#cb124-30" tabindex="-1"></a>  <span class="at">m1i =</span> dat<span class="sc">$</span>mean_t,</span>
+<span id="cb124-31"><a href="meta-análise.html#cb124-31" tabindex="-1"></a>  <span class="at">sd1i =</span> dat<span class="sc">$</span>sd_t,</span>
+<span id="cb124-32"><a href="meta-análise.html#cb124-32" tabindex="-1"></a>  <span class="at">n1i =</span> dat<span class="sc">$</span>n_t,</span>
+<span id="cb124-33"><a href="meta-análise.html#cb124-33" tabindex="-1"></a>  <span class="at">m2i =</span> dat<span class="sc">$</span>mean_c,</span>
+<span id="cb124-34"><a href="meta-análise.html#cb124-34" tabindex="-1"></a>  <span class="at">sd2i =</span> dat<span class="sc">$</span>sd_c,</span>
+<span id="cb124-35"><a href="meta-análise.html#cb124-35" tabindex="-1"></a>  <span class="at">n2i =</span> dat<span class="sc">$</span>n_c,</span>
+<span id="cb124-36"><a href="meta-análise.html#cb124-36" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb124-37"><a href="meta-análise.html#cb124-37" tabindex="-1"></a>  <span class="at">vtype =</span> <span class="st">&quot;UB&quot;</span></span>
+<span id="cb124-38"><a href="meta-análise.html#cb124-38" tabindex="-1"></a>)</span>
+<span id="cb124-39"><a href="meta-análise.html#cb124-39" tabindex="-1"></a></span>
+<span id="cb124-40"><a href="meta-análise.html#cb124-40" tabindex="-1"></a><span class="co"># Ajustar meta-análise de efeito aleatório (REML)</span></span>
+<span id="cb124-41"><a href="meta-análise.html#cb124-41" tabindex="-1"></a>res_re <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(</span>
+<span id="cb124-42"><a href="meta-análise.html#cb124-42" tabindex="-1"></a>  <span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
+<span id="cb124-43"><a href="meta-análise.html#cb124-43" tabindex="-1"></a>  <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
+<span id="cb124-44"><a href="meta-análise.html#cb124-44" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;REML&quot;</span>  <span class="co"># método para efeito aleatório</span></span>
+<span id="cb124-45"><a href="meta-análise.html#cb124-45" tabindex="-1"></a>)</span>
+<span id="cb124-46"><a href="meta-análise.html#cb124-46" tabindex="-1"></a></span>
+<span id="cb124-47"><a href="meta-análise.html#cb124-47" tabindex="-1"></a><span class="co"># Forest plot</span></span>
+<span id="cb124-48"><a href="meta-análise.html#cb124-48" tabindex="-1"></a>metafor<span class="sc">::</span><span class="fu">forest</span>(</span>
+<span id="cb124-49"><a href="meta-análise.html#cb124-49" tabindex="-1"></a>  res_re,</span>
+<span id="cb124-50"><a href="meta-análise.html#cb124-50" tabindex="-1"></a>  <span class="at">slab =</span> es<span class="sc">$</span>study_id,</span>
+<span id="cb124-51"><a href="meta-análise.html#cb124-51" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Hedges g&quot;</span>,</span>
+<span id="cb124-52"><a href="meta-análise.html#cb124-52" tabindex="-1"></a>  <span class="at">header =</span> <span class="st">&quot;Ensaios Clínicos&quot;</span>,</span>
+<span id="cb124-53"><a href="meta-análise.html#cb124-53" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.9</span>,</span>
+<span id="cb124-54"><a href="meta-análise.html#cb124-54" tabindex="-1"></a>  <span class="at">refline =</span> <span class="dv">0</span>,</span>
+<span id="cb124-55"><a href="meta-análise.html#cb124-55" tabindex="-1"></a>  <span class="at">mlab =</span> <span class="st">&quot;Modelo de Efeito Aleatório (REML)&quot;</span></span>
+<span id="cb124-56"><a href="meta-análise.html#cb124-56" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 </div>
 <div id="viés-de-publicação-em-meta-análises-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Viés de publicação em meta-análises<a href="#vi%C3%A9s-de-publica%C3%A7%C3%A3o-em-meta-an%C3%A1lises-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="meta-análise.html#cb121-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
-<span id="cb121-2"><a href="meta-análise.html#cb121-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb121-3"><a href="meta-análise.html#cb121-3" tabindex="-1"></a></span>
-<span id="cb121-4"><a href="meta-análise.html#cb121-4" tabindex="-1"></a><span class="co"># Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)</span></span>
-<span id="cb121-5"><a href="meta-análise.html#cb121-5" tabindex="-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb121-6"><a href="meta-análise.html#cb121-6" tabindex="-1"></a>n_t <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Tratamento</span></span>
-<span id="cb121-7"><a href="meta-análise.html#cb121-7" tabindex="-1"></a>n_c <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Controle</span></span>
-<span id="cb121-8"><a href="meta-análise.html#cb121-8" tabindex="-1"></a></span>
-<span id="cb121-9"><a href="meta-análise.html#cb121-9" tabindex="-1"></a><span class="co"># Médias e desvios-padrão simulados</span></span>
-<span id="cb121-10"><a href="meta-análise.html#cb121-10" tabindex="-1"></a>mu_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.00</span>, <span class="at">sd =</span> <span class="fl">0.40</span>)</span>
-<span id="cb121-11"><a href="meta-análise.html#cb121-11" tabindex="-1"></a>mu_t <span class="ot">&lt;-</span> mu_c <span class="sc">+</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.30</span>, <span class="at">sd =</span> <span class="fl">0.15</span>)  <span class="co"># efeito médio positivo para Tratamento</span></span>
-<span id="cb121-12"><a href="meta-análise.html#cb121-12" tabindex="-1"></a>sd_c <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
-<span id="cb121-13"><a href="meta-análise.html#cb121-13" tabindex="-1"></a>sd_t <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
-<span id="cb121-14"><a href="meta-análise.html#cb121-14" tabindex="-1"></a></span>
-<span id="cb121-15"><a href="meta-análise.html#cb121-15" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb121-16"><a href="meta-análise.html#cb121-16" tabindex="-1"></a>  <span class="at">study_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;Trial_&quot;</span>, <span class="fu">seq_len</span>(k)),</span>
-<span id="cb121-17"><a href="meta-análise.html#cb121-17" tabindex="-1"></a>  <span class="at">n_t      =</span> n_t,</span>
-<span id="cb121-18"><a href="meta-análise.html#cb121-18" tabindex="-1"></a>  <span class="at">n_c      =</span> n_c,</span>
-<span id="cb121-19"><a href="meta-análise.html#cb121-19" tabindex="-1"></a>  <span class="at">mean_t   =</span> mu_t,</span>
-<span id="cb121-20"><a href="meta-análise.html#cb121-20" tabindex="-1"></a>  <span class="at">mean_c   =</span> mu_c,</span>
-<span id="cb121-21"><a href="meta-análise.html#cb121-21" tabindex="-1"></a>  <span class="at">sd_t     =</span> sd_t,</span>
-<span id="cb121-22"><a href="meta-análise.html#cb121-22" tabindex="-1"></a>  <span class="at">sd_c     =</span> sd_c,</span>
-<span id="cb121-23"><a href="meta-análise.html#cb121-23" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb121-24"><a href="meta-análise.html#cb121-24" tabindex="-1"></a>)</span>
-<span id="cb121-25"><a href="meta-análise.html#cb121-25" tabindex="-1"></a></span>
-<span id="cb121-26"><a href="meta-análise.html#cb121-26" tabindex="-1"></a><span class="co"># Calcular SMD (Hedges g) com escalc()</span></span>
-<span id="cb121-27"><a href="meta-análise.html#cb121-27" tabindex="-1"></a><span class="co"># measure = &quot;SMD&quot; usa a correção de Hedges por padrão (J)</span></span>
-<span id="cb121-28"><a href="meta-análise.html#cb121-28" tabindex="-1"></a>es <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">escalc</span>(</span>
-<span id="cb121-29"><a href="meta-análise.html#cb121-29" tabindex="-1"></a>  <span class="at">measure =</span> <span class="st">&quot;SMD&quot;</span>,</span>
-<span id="cb121-30"><a href="meta-análise.html#cb121-30" tabindex="-1"></a>  <span class="at">m1i =</span> dat<span class="sc">$</span>mean_t,</span>
-<span id="cb121-31"><a href="meta-análise.html#cb121-31" tabindex="-1"></a>  <span class="at">sd1i =</span> dat<span class="sc">$</span>sd_t,</span>
-<span id="cb121-32"><a href="meta-análise.html#cb121-32" tabindex="-1"></a>  <span class="at">n1i =</span> dat<span class="sc">$</span>n_t,</span>
-<span id="cb121-33"><a href="meta-análise.html#cb121-33" tabindex="-1"></a>  <span class="at">m2i =</span> dat<span class="sc">$</span>mean_c,</span>
-<span id="cb121-34"><a href="meta-análise.html#cb121-34" tabindex="-1"></a>  <span class="at">sd2i =</span> dat<span class="sc">$</span>sd_c,</span>
-<span id="cb121-35"><a href="meta-análise.html#cb121-35" tabindex="-1"></a>  <span class="at">n2i =</span> dat<span class="sc">$</span>n_c,</span>
-<span id="cb121-36"><a href="meta-análise.html#cb121-36" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb121-37"><a href="meta-análise.html#cb121-37" tabindex="-1"></a>  <span class="at">vtype =</span> <span class="st">&quot;UB&quot;</span></span>
-<span id="cb121-38"><a href="meta-análise.html#cb121-38" tabindex="-1"></a>)</span>
-<span id="cb121-39"><a href="meta-análise.html#cb121-39" tabindex="-1"></a></span>
-<span id="cb121-40"><a href="meta-análise.html#cb121-40" tabindex="-1"></a><span class="co"># --- modelo de efeito fixo) ---</span></span>
-<span id="cb121-41"><a href="meta-análise.html#cb121-41" tabindex="-1"></a>res_fe <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(<span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
-<span id="cb121-42"><a href="meta-análise.html#cb121-42" tabindex="-1"></a>                           <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
-<span id="cb121-43"><a href="meta-análise.html#cb121-43" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;FE&quot;</span>)</span>
-<span id="cb121-44"><a href="meta-análise.html#cb121-44" tabindex="-1"></a></span>
-<span id="cb121-45"><a href="meta-análise.html#cb121-45" tabindex="-1"></a><span class="co"># --- modelo de efeito aleatório (REML) ---</span></span>
-<span id="cb121-46"><a href="meta-análise.html#cb121-46" tabindex="-1"></a>res_re <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(</span>
-<span id="cb121-47"><a href="meta-análise.html#cb121-47" tabindex="-1"></a>  <span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
-<span id="cb121-48"><a href="meta-análise.html#cb121-48" tabindex="-1"></a>  <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
-<span id="cb121-49"><a href="meta-análise.html#cb121-49" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;REML&quot;</span>  <span class="co"># método para efeito aleatório</span></span>
-<span id="cb121-50"><a href="meta-análise.html#cb121-50" tabindex="-1"></a>)</span>
-<span id="cb121-51"><a href="meta-análise.html#cb121-51" tabindex="-1"></a>tau2   <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_re<span class="sc">$</span>tau2)</span>
-<span id="cb121-52"><a href="meta-análise.html#cb121-52" tabindex="-1"></a>fe_est <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_fe<span class="sc">$</span>b)</span>
-<span id="cb121-53"><a href="meta-análise.html#cb121-53" tabindex="-1"></a>re_est <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_re<span class="sc">$</span>b)</span>
-<span id="cb121-54"><a href="meta-análise.html#cb121-54" tabindex="-1"></a></span>
-<span id="cb121-55"><a href="meta-análise.html#cb121-55" tabindex="-1"></a><span class="co"># Funnel com “contour enhancement” para significância</span></span>
-<span id="cb121-56"><a href="meta-análise.html#cb121-56" tabindex="-1"></a><span class="co">#    As áreas sombreadas ajudam a distinguir assimetria por viés vs. heterogeneidade/azar.</span></span>
-<span id="cb121-57"><a href="meta-análise.html#cb121-57" tabindex="-1"></a>metafor<span class="sc">::</span><span class="fu">funnel</span>(</span>
-<span id="cb121-58"><a href="meta-análise.html#cb121-58" tabindex="-1"></a>  res_re,</span>
-<span id="cb121-59"><a href="meta-análise.html#cb121-59" tabindex="-1"></a>  <span class="at">xlab   =</span> <span class="st">&quot;Hedges g (SMD)&quot;</span>,</span>
-<span id="cb121-60"><a href="meta-análise.html#cb121-60" tabindex="-1"></a>  <span class="at">ylab   =</span> <span class="st">&quot;Precisão (1/SE)&quot;</span>,</span>
-<span id="cb121-61"><a href="meta-análise.html#cb121-61" tabindex="-1"></a>  <span class="at">yaxis  =</span> <span class="st">&quot;seinv&quot;</span>,</span>
-<span id="cb121-62"><a href="meta-análise.html#cb121-62" tabindex="-1"></a>  <span class="at">level  =</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">95</span>, <span class="dv">99</span>),   <span class="co"># contornos de significância</span></span>
-<span id="cb121-63"><a href="meta-análise.html#cb121-63" tabindex="-1"></a>  <span class="at">refline =</span> <span class="fu">as.numeric</span>(res_re<span class="sc">$</span>b),</span>
-<span id="cb121-64"><a href="meta-análise.html#cb121-64" tabindex="-1"></a>  <span class="at">back   =</span> <span class="st">&quot;gray95&quot;</span>,        <span class="co"># fundo suave</span></span>
-<span id="cb121-65"><a href="meta-análise.html#cb121-65" tabindex="-1"></a>  <span class="at">shade  =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;gray90&quot;</span>, <span class="st">&quot;gray80&quot;</span>)</span>
-<span id="cb121-66"><a href="meta-análise.html#cb121-66" tabindex="-1"></a>)</span>
-<span id="cb121-67"><a href="meta-análise.html#cb121-67" tabindex="-1"></a></span>
-<span id="cb121-68"><a href="meta-análise.html#cb121-68" tabindex="-1"></a><span class="co"># Adiciona rótulos dos estudos</span></span>
-<span id="cb121-69"><a href="meta-análise.html#cb121-69" tabindex="-1"></a><span class="co"># A função funnel() devolve um gráfico, mas não retorna coordenadas,</span></span>
-<span id="cb121-70"><a href="meta-análise.html#cb121-70" tabindex="-1"></a><span class="co"># então usamos os próprios yi e vi para calcular posições</span></span>
-<span id="cb121-71"><a href="meta-análise.html#cb121-71" tabindex="-1"></a><span class="fu">with</span>(es, {</span>
-<span id="cb121-72"><a href="meta-análise.html#cb121-72" tabindex="-1"></a>  precisao <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(vi) <span class="co"># eixo vertical (seinv)</span></span>
-<span id="cb121-73"><a href="meta-análise.html#cb121-73" tabindex="-1"></a>  <span class="fu">text</span>(<span class="at">x =</span> yi, <span class="at">y =</span> precisao, <span class="at">labels =</span> dat<span class="sc">$</span>study_id, <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.7</span>)</span>
-<span id="cb121-74"><a href="meta-análise.html#cb121-74" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="meta-análise.html#cb125-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
+<span id="cb125-2"><a href="meta-análise.html#cb125-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb125-3"><a href="meta-análise.html#cb125-3" tabindex="-1"></a></span>
+<span id="cb125-4"><a href="meta-análise.html#cb125-4" tabindex="-1"></a><span class="co"># Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)</span></span>
+<span id="cb125-5"><a href="meta-análise.html#cb125-5" tabindex="-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb125-6"><a href="meta-análise.html#cb125-6" tabindex="-1"></a>n_t <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Tratamento</span></span>
+<span id="cb125-7"><a href="meta-análise.html#cb125-7" tabindex="-1"></a>n_c <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">200</span>, k, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># tamanho do grupo Controle</span></span>
+<span id="cb125-8"><a href="meta-análise.html#cb125-8" tabindex="-1"></a></span>
+<span id="cb125-9"><a href="meta-análise.html#cb125-9" tabindex="-1"></a><span class="co"># Médias e desvios-padrão simulados</span></span>
+<span id="cb125-10"><a href="meta-análise.html#cb125-10" tabindex="-1"></a>mu_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.00</span>, <span class="at">sd =</span> <span class="fl">0.40</span>)</span>
+<span id="cb125-11"><a href="meta-análise.html#cb125-11" tabindex="-1"></a>mu_t <span class="ot">&lt;-</span> mu_c <span class="sc">+</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> <span class="fl">0.30</span>, <span class="at">sd =</span> <span class="fl">0.15</span>)  <span class="co"># efeito médio positivo para Tratamento</span></span>
+<span id="cb125-12"><a href="meta-análise.html#cb125-12" tabindex="-1"></a>sd_c <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
+<span id="cb125-13"><a href="meta-análise.html#cb125-13" tabindex="-1"></a>sd_t <span class="ot">&lt;-</span> <span class="fu">runif</span>(k, <span class="at">min =</span> <span class="fl">0.6</span>, <span class="at">max =</span> <span class="fl">1.4</span>)</span>
+<span id="cb125-14"><a href="meta-análise.html#cb125-14" tabindex="-1"></a></span>
+<span id="cb125-15"><a href="meta-análise.html#cb125-15" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb125-16"><a href="meta-análise.html#cb125-16" tabindex="-1"></a>  <span class="at">study_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;Trial_&quot;</span>, <span class="fu">seq_len</span>(k)),</span>
+<span id="cb125-17"><a href="meta-análise.html#cb125-17" tabindex="-1"></a>  <span class="at">n_t      =</span> n_t,</span>
+<span id="cb125-18"><a href="meta-análise.html#cb125-18" tabindex="-1"></a>  <span class="at">n_c      =</span> n_c,</span>
+<span id="cb125-19"><a href="meta-análise.html#cb125-19" tabindex="-1"></a>  <span class="at">mean_t   =</span> mu_t,</span>
+<span id="cb125-20"><a href="meta-análise.html#cb125-20" tabindex="-1"></a>  <span class="at">mean_c   =</span> mu_c,</span>
+<span id="cb125-21"><a href="meta-análise.html#cb125-21" tabindex="-1"></a>  <span class="at">sd_t     =</span> sd_t,</span>
+<span id="cb125-22"><a href="meta-análise.html#cb125-22" tabindex="-1"></a>  <span class="at">sd_c     =</span> sd_c,</span>
+<span id="cb125-23"><a href="meta-análise.html#cb125-23" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb125-24"><a href="meta-análise.html#cb125-24" tabindex="-1"></a>)</span>
+<span id="cb125-25"><a href="meta-análise.html#cb125-25" tabindex="-1"></a></span>
+<span id="cb125-26"><a href="meta-análise.html#cb125-26" tabindex="-1"></a><span class="co"># Calcular SMD (Hedges g) com escalc()</span></span>
+<span id="cb125-27"><a href="meta-análise.html#cb125-27" tabindex="-1"></a><span class="co"># measure = &quot;SMD&quot; usa a correção de Hedges por padrão (J)</span></span>
+<span id="cb125-28"><a href="meta-análise.html#cb125-28" tabindex="-1"></a>es <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">escalc</span>(</span>
+<span id="cb125-29"><a href="meta-análise.html#cb125-29" tabindex="-1"></a>  <span class="at">measure =</span> <span class="st">&quot;SMD&quot;</span>,</span>
+<span id="cb125-30"><a href="meta-análise.html#cb125-30" tabindex="-1"></a>  <span class="at">m1i =</span> dat<span class="sc">$</span>mean_t,</span>
+<span id="cb125-31"><a href="meta-análise.html#cb125-31" tabindex="-1"></a>  <span class="at">sd1i =</span> dat<span class="sc">$</span>sd_t,</span>
+<span id="cb125-32"><a href="meta-análise.html#cb125-32" tabindex="-1"></a>  <span class="at">n1i =</span> dat<span class="sc">$</span>n_t,</span>
+<span id="cb125-33"><a href="meta-análise.html#cb125-33" tabindex="-1"></a>  <span class="at">m2i =</span> dat<span class="sc">$</span>mean_c,</span>
+<span id="cb125-34"><a href="meta-análise.html#cb125-34" tabindex="-1"></a>  <span class="at">sd2i =</span> dat<span class="sc">$</span>sd_c,</span>
+<span id="cb125-35"><a href="meta-análise.html#cb125-35" tabindex="-1"></a>  <span class="at">n2i =</span> dat<span class="sc">$</span>n_c,</span>
+<span id="cb125-36"><a href="meta-análise.html#cb125-36" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb125-37"><a href="meta-análise.html#cb125-37" tabindex="-1"></a>  <span class="at">vtype =</span> <span class="st">&quot;UB&quot;</span></span>
+<span id="cb125-38"><a href="meta-análise.html#cb125-38" tabindex="-1"></a>)</span>
+<span id="cb125-39"><a href="meta-análise.html#cb125-39" tabindex="-1"></a></span>
+<span id="cb125-40"><a href="meta-análise.html#cb125-40" tabindex="-1"></a><span class="co"># --- modelo de efeito fixo) ---</span></span>
+<span id="cb125-41"><a href="meta-análise.html#cb125-41" tabindex="-1"></a>res_fe <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(<span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
+<span id="cb125-42"><a href="meta-análise.html#cb125-42" tabindex="-1"></a>                           <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
+<span id="cb125-43"><a href="meta-análise.html#cb125-43" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">&quot;FE&quot;</span>)</span>
+<span id="cb125-44"><a href="meta-análise.html#cb125-44" tabindex="-1"></a></span>
+<span id="cb125-45"><a href="meta-análise.html#cb125-45" tabindex="-1"></a><span class="co"># --- modelo de efeito aleatório (REML) ---</span></span>
+<span id="cb125-46"><a href="meta-análise.html#cb125-46" tabindex="-1"></a>res_re <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">rma.uni</span>(</span>
+<span id="cb125-47"><a href="meta-análise.html#cb125-47" tabindex="-1"></a>  <span class="at">yi =</span> es<span class="sc">$</span>yi,</span>
+<span id="cb125-48"><a href="meta-análise.html#cb125-48" tabindex="-1"></a>  <span class="at">vi =</span> es<span class="sc">$</span>vi,</span>
+<span id="cb125-49"><a href="meta-análise.html#cb125-49" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;REML&quot;</span>  <span class="co"># método para efeito aleatório</span></span>
+<span id="cb125-50"><a href="meta-análise.html#cb125-50" tabindex="-1"></a>)</span>
+<span id="cb125-51"><a href="meta-análise.html#cb125-51" tabindex="-1"></a>tau2   <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_re<span class="sc">$</span>tau2)</span>
+<span id="cb125-52"><a href="meta-análise.html#cb125-52" tabindex="-1"></a>fe_est <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_fe<span class="sc">$</span>b)</span>
+<span id="cb125-53"><a href="meta-análise.html#cb125-53" tabindex="-1"></a>re_est <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(res_re<span class="sc">$</span>b)</span>
+<span id="cb125-54"><a href="meta-análise.html#cb125-54" tabindex="-1"></a></span>
+<span id="cb125-55"><a href="meta-análise.html#cb125-55" tabindex="-1"></a><span class="co"># Funnel com “contour enhancement” para significância</span></span>
+<span id="cb125-56"><a href="meta-análise.html#cb125-56" tabindex="-1"></a><span class="co">#    As áreas sombreadas ajudam a distinguir assimetria por viés vs. heterogeneidade/azar.</span></span>
+<span id="cb125-57"><a href="meta-análise.html#cb125-57" tabindex="-1"></a>metafor<span class="sc">::</span><span class="fu">funnel</span>(</span>
+<span id="cb125-58"><a href="meta-análise.html#cb125-58" tabindex="-1"></a>  res_re,</span>
+<span id="cb125-59"><a href="meta-análise.html#cb125-59" tabindex="-1"></a>  <span class="at">xlab   =</span> <span class="st">&quot;Hedges g (SMD)&quot;</span>,</span>
+<span id="cb125-60"><a href="meta-análise.html#cb125-60" tabindex="-1"></a>  <span class="at">ylab   =</span> <span class="st">&quot;Precisão (1/SE)&quot;</span>,</span>
+<span id="cb125-61"><a href="meta-análise.html#cb125-61" tabindex="-1"></a>  <span class="at">yaxis  =</span> <span class="st">&quot;seinv&quot;</span>,</span>
+<span id="cb125-62"><a href="meta-análise.html#cb125-62" tabindex="-1"></a>  <span class="at">level  =</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">95</span>, <span class="dv">99</span>),   <span class="co"># contornos de significância</span></span>
+<span id="cb125-63"><a href="meta-análise.html#cb125-63" tabindex="-1"></a>  <span class="at">refline =</span> <span class="fu">as.numeric</span>(res_re<span class="sc">$</span>b),</span>
+<span id="cb125-64"><a href="meta-análise.html#cb125-64" tabindex="-1"></a>  <span class="at">back   =</span> <span class="st">&quot;gray95&quot;</span>,        <span class="co"># fundo suave</span></span>
+<span id="cb125-65"><a href="meta-análise.html#cb125-65" tabindex="-1"></a>  <span class="at">shade  =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;gray90&quot;</span>, <span class="st">&quot;gray80&quot;</span>)</span>
+<span id="cb125-66"><a href="meta-análise.html#cb125-66" tabindex="-1"></a>)</span>
+<span id="cb125-67"><a href="meta-análise.html#cb125-67" tabindex="-1"></a></span>
+<span id="cb125-68"><a href="meta-análise.html#cb125-68" tabindex="-1"></a><span class="co"># Adiciona rótulos dos estudos</span></span>
+<span id="cb125-69"><a href="meta-análise.html#cb125-69" tabindex="-1"></a><span class="co"># A função funnel() devolve um gráfico, mas não retorna coordenadas,</span></span>
+<span id="cb125-70"><a href="meta-análise.html#cb125-70" tabindex="-1"></a><span class="co"># então usamos os próprios yi e vi para calcular posições</span></span>
+<span id="cb125-71"><a href="meta-análise.html#cb125-71" tabindex="-1"></a><span class="fu">with</span>(es, {</span>
+<span id="cb125-72"><a href="meta-análise.html#cb125-72" tabindex="-1"></a>  precisao <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(vi) <span class="co"># eixo vertical (seinv)</span></span>
+<span id="cb125-73"><a href="meta-análise.html#cb125-73" tabindex="-1"></a>  <span class="fu">text</span>(<span class="at">x =</span> yi, <span class="at">y =</span> precisao, <span class="at">labels =</span> dat<span class="sc">$</span>study_id, <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.7</span>)</span>
+<span id="cb125-74"><a href="meta-análise.html#cb125-74" tabindex="-1"></a>})</span></code></pre></div>
 </details>
 </div>
 <div id="diretrizes-para-redação-10" class="section level2 unnumbered unlisted hasAnchor">

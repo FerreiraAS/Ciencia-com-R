@@ -194,7 +194,7 @@ edges_all <- rbind(
 )
 
 # *** Ajuste importante: encurtar arestas ***
-edges_all <- trim_edges_to_node_border(edges_all, node_r = 0.085)  # aumente/diminua se mudar o size do nó
+edges_all <- trim_edges_to_node_border(edges_all, node_r = 0.085)
 
 # ---------- Plot ----------
 p <- ggplot2::ggplot() +
@@ -202,7 +202,7 @@ p <- ggplot2::ggplot() +
   ggplot2::geom_segment(
     data = edges_all,
     mapping = ggplot2::aes(x = x, y = y, xend = xend, yend = yend),
-    arrow = grid::arrow(length = grid::unit(0.28, "in"), ends = "last", type = "closed"),
+    arrow = grid::arrow(length = grid::unit(0.25, "in"), ends = "last", type = "closed"),
     linewidth = 1
   ) +
   # Nós grandes (círculo branco com contorno)

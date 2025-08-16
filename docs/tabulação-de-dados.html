@@ -189,11 +189,11 @@ div.csl-indent {
 <li><a style="text-align:center; border-width:3px;border-style:solid; border-color:white; border-radius:15px; padding:5px; background-color:#276DC2; text-decoration:none; color:white" href="https://ferreiraas.github.io/Ciencia-com-R-Consultoria/"><b>e-Book | Consultoria</b></a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Capa</a></li>
-<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i>Dedicatória</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Capa</strong></a></li>
+<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i><strong>Dedicatória</strong></a></li>
 <li class="chapter" data-level="" data-path="agradecimentos.html"><a href="agradecimentos.html"><i class="fa fa-check"></i><strong>Agradecimentos</strong></a></li>
+<li class="chapter" data-level="" data-path="apresentacao.html"><a href="apresentacao.html"><i class="fa fa-check"></i><strong>Apresentação</strong></a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i><strong>Sobre o autor</strong></a></li>
-<li class="chapter" data-level="" data-path="prefacio.html"><a href="prefacio.html"><i class="fa fa-check"></i><strong>Prefácio</strong></a></li>
 <li class="chapter" data-level="" data-path="parte-1.html"><a href="parte-1.html"><i class="fa fa-check"></i><em>PARTE 1: FUNDAMENTOS ESTATÍSTICOS</em></a></li>
 <li class="chapter" data-level="1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html"><i class="fa fa-check"></i><b>1</b> <strong>Pensamento estatístico</strong></a>
 <ul>
@@ -622,9 +622,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="17" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>17</b> <strong>Shiny Apps</strong></a>
 <ul>
-<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i>Aplicativos por delineamento de estudo</a>
+<li class="chapter" data-level="17.1" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i><b>17.1</b> Aplicativos por delineamento de estudo</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#ensaios-cl%C3%ADnicos"><i class="fa fa-check"></i>Ensaios clínicos</a></li>
+<li class="chapter" data-level="17.1.1" data-path="shiny-apps.html"><a href="shiny-apps.html#qual-shiny-app-usar-para-ensaios-experimentais"><i class="fa fa-check"></i><b>17.1.1</b> Qual Shiny App usar para ensaios experimentais?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-5.html"><a href="parte-5.html"><i class="fa fa-check"></i><em>PARTE 5: ANÁLISES DESCRITIVAS E EXPLORATÓRIAS</em></a></li>
@@ -1509,175 +1509,175 @@ div.csl-indent {
 <div id="planilhas-eletrônicas-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Planilhas eletrônicas<a href="#planilhas-eletr%C3%B4nicas-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="tabulação-de-dados.html#cb29-1" tabindex="-1"></a><span class="co"># atribui rótulos para a tabela de dados</span></span>
-<span id="cb29-2"><a href="tabulação-de-dados.html#cb29-2" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb29-3"><a href="tabulação-de-dados.html#cb29-3" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb29-4"><a href="tabulação-de-dados.html#cb29-4" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="tabulação-de-dados.html#cb29-5" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
-<span id="cb29-6"><a href="tabulação-de-dados.html#cb29-6" tabindex="-1"></a>table<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="st">&quot;dado&quot;</span>, <span class="at">nrow =</span> N, <span class="at">ncol =</span> M)</span>
-<span id="cb29-7"><a href="tabulação-de-dados.html#cb29-7" tabindex="-1"></a></span>
-<span id="cb29-8"><a href="tabulação-de-dados.html#cb29-8" tabindex="-1"></a><span class="fu">colnames</span>(table<span class="fl">.0</span>) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;V&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>M))</span>
-<span id="cb29-9"><a href="tabulação-de-dados.html#cb29-9" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb29-10"><a href="tabulação-de-dados.html#cb29-10" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
-<span id="cb29-11"><a href="tabulação-de-dados.html#cb29-11" tabindex="-1"></a>    table<span class="fl">.0</span>[i, j] <span class="ot">&lt;-</span></span>
-<span id="cb29-12"><a href="tabulação-de-dados.html#cb29-12" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">&quot;$x&quot;</span>, <span class="st">&quot;_{&quot;</span>, <span class="fu">as.character</span>(i), <span class="st">&quot;,&quot;</span>, <span class="fu">as.character</span>(j), <span class="st">&quot;}$&quot;</span>)</span>
-<span id="cb29-13"><a href="tabulação-de-dados.html#cb29-13" tabindex="-1"></a>  }</span>
-<span id="cb29-14"><a href="tabulação-de-dados.html#cb29-14" tabindex="-1"></a>}</span>
-<span id="cb29-15"><a href="tabulação-de-dados.html#cb29-15" tabindex="-1"></a></span>
-<span id="cb29-16"><a href="tabulação-de-dados.html#cb29-16" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
-<span id="cb29-17"><a href="tabulação-de-dados.html#cb29-17" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb29-18"><a href="tabulação-de-dados.html#cb29-18" tabindex="-1"></a>  table<span class="fl">.0</span>,</span>
-<span id="cb29-19"><a href="tabulação-de-dados.html#cb29-19" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb29-20"><a href="tabulação-de-dados.html#cb29-20" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb29-21"><a href="tabulação-de-dados.html#cb29-21" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb29-22"><a href="tabulação-de-dados.html#cb29-22" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb29-23"><a href="tabulação-de-dados.html#cb29-23" tabindex="-1"></a>  <span class="at">escape =</span> F,</span>
-<span id="cb29-24"><a href="tabulação-de-dados.html#cb29-24" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Estrutura básica de uma tabela de dados.&quot;</span></span>
-<span id="cb29-25"><a href="tabulação-de-dados.html#cb29-25" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb29-26"><a href="tabulação-de-dados.html#cb29-26" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb29-27"><a href="tabulação-de-dados.html#cb29-27" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>),</span>
-<span id="cb29-28"><a href="tabulação-de-dados.html#cb29-28" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb29-29"><a href="tabulação-de-dados.html#cb29-29" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb29-30"><a href="tabulação-de-dados.html#cb29-30" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb29-31"><a href="tabulação-de-dados.html#cb29-31" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb29-32"><a href="tabulação-de-dados.html#cb29-32" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb29-33"><a href="tabulação-de-dados.html#cb29-33" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(table<span class="fl">.0</span>)[<span class="dv">1</span>], <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
-</details>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="tabulação-de-dados.html#cb30-1" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
-<span id="cb30-2"><a href="tabulação-de-dados.html#cb30-2" tabindex="-1"></a>table<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb30-3"><a href="tabulação-de-dados.html#cb30-3" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="tabulação-de-dados.html#cb30-4" tabindex="-1"></a><span class="co"># atribui rótulos para a tabela de dados</span></span>
-<span id="cb30-5"><a href="tabulação-de-dados.html#cb30-5" tabindex="-1"></a><span class="fu">colnames</span>(table<span class="fl">.1</span>) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Data.Coleta&quot;</span>)</span>
-<span id="cb30-6"><a href="tabulação-de-dados.html#cb30-6" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="tabulação-de-dados.html#cb30-7" tabindex="-1"></a><span class="co"># preenche a tabela com identificação da unidade de análise</span></span>
-<span id="cb30-8"><a href="tabulação-de-dados.html#cb30-8" tabindex="-1"></a>table<span class="fl">.1</span>[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb30-9"><a href="tabulação-de-dados.html#cb30-9" tabindex="-1"></a></span>
-<span id="cb30-10"><a href="tabulação-de-dados.html#cb30-10" tabindex="-1"></a><span class="co"># preenche a tabela com maus exemplos</span></span>
-<span id="cb30-11"><a href="tabulação-de-dados.html#cb30-11" tabindex="-1"></a>table<span class="fl">.1</span>[, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">Sys.Date</span>() <span class="sc">+</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span>
-<span id="cb30-12"><a href="tabulação-de-dados.html#cb30-12" tabindex="-1"></a></span>
-<span id="cb30-13"><a href="tabulação-de-dados.html#cb30-13" tabindex="-1"></a><span class="co"># preenche a tabela com melhores exemplos</span></span>
-<span id="cb30-14"><a href="tabulação-de-dados.html#cb30-14" tabindex="-1"></a>table<span class="fl">.1</span>[, <span class="dv">2</span>] <span class="ot">&lt;-</span></span>
-<span id="cb30-15"><a href="tabulação-de-dados.html#cb30-15" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">as.Date</span>(table<span class="fl">.1</span>[, <span class="dv">2</span>], <span class="at">origin =</span> <span class="st">&quot;1950-01-01&quot;</span>), <span class="st">&quot;%d-%m-%Y&quot;</span>)</span></code></pre></div>
-</details>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="tabulação-de-dados.html#cb31-1" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
-<span id="cb31-2"><a href="tabulação-de-dados.html#cb31-2" tabindex="-1"></a>table<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb31-3"><a href="tabulação-de-dados.html#cb31-3" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="tabulação-de-dados.html#cb31-4" tabindex="-1"></a><span class="co"># atribui rótulos para a tabela de dados</span></span>
-<span id="cb31-5"><a href="tabulação-de-dados.html#cb31-5" tabindex="-1"></a><span class="fu">colnames</span>(table<span class="fl">.2</span>) <span class="ot">&lt;-</span></span>
-<span id="cb31-6"><a href="tabulação-de-dados.html#cb31-6" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Estado Civil&quot;</span>, <span class="st">&quot;Estado.Civil&quot;</span>, <span class="st">&quot;Estado.Civil.Cod&quot;</span>)</span>
-<span id="cb31-7"><a href="tabulação-de-dados.html#cb31-7" tabindex="-1"></a></span>
-<span id="cb31-8"><a href="tabulação-de-dados.html#cb31-8" tabindex="-1"></a><span class="co"># preenche a tabela com identificação da unidade de análise</span></span>
-<span id="cb31-9"><a href="tabulação-de-dados.html#cb31-9" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb31-10"><a href="tabulação-de-dados.html#cb31-10" tabindex="-1"></a></span>
-<span id="cb31-11"><a href="tabulação-de-dados.html#cb31-11" tabindex="-1"></a><span class="co"># preenche a tabela com maus exemplos (&amp;nbsp; representa o caracter &quot; &quot; em HTML)</span></span>
-<span id="cb31-12"><a href="tabulação-de-dados.html#cb31-12" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">2</span>] <span class="ot">&lt;-</span></span>
-<span id="cb31-13"><a href="tabulação-de-dados.html#cb31-13" tabindex="-1"></a>  <span class="fu">c</span>(</span>
-<span id="cb31-14"><a href="tabulação-de-dados.html#cb31-14" tabindex="-1"></a>    <span class="st">&quot;casado&quot;</span>,</span>
-<span id="cb31-15"><a href="tabulação-de-dados.html#cb31-15" tabindex="-1"></a>    <span class="st">&quot;Casado&quot;</span>,</span>
-<span id="cb31-16"><a href="tabulação-de-dados.html#cb31-16" tabindex="-1"></a>    <span class="st">&quot; casado&quot;</span>,</span>
-<span id="cb31-17"><a href="tabulação-de-dados.html#cb31-17" tabindex="-1"></a>    <span class="st">&quot;Solteiro&quot;</span>,</span>
-<span id="cb31-18"><a href="tabulação-de-dados.html#cb31-18" tabindex="-1"></a>    <span class="st">&quot; Casado&quot;</span>,</span>
-<span id="cb31-19"><a href="tabulação-de-dados.html#cb31-19" tabindex="-1"></a>    <span class="st">&quot; solteiro&quot;</span>,</span>
-<span id="cb31-20"><a href="tabulação-de-dados.html#cb31-20" tabindex="-1"></a>    <span class="st">&quot;solteiro&quot;</span>,</span>
-<span id="cb31-21"><a href="tabulação-de-dados.html#cb31-21" tabindex="-1"></a>    <span class="st">&quot;Solteiro &quot;</span>,</span>
-<span id="cb31-22"><a href="tabulação-de-dados.html#cb31-22" tabindex="-1"></a>    <span class="st">&quot; casado&quot;</span>,</span>
-<span id="cb31-23"><a href="tabulação-de-dados.html#cb31-23" tabindex="-1"></a>    <span class="st">&quot; Solteiro &quot;</span></span>
-<span id="cb31-24"><a href="tabulação-de-dados.html#cb31-24" tabindex="-1"></a>  )</span>
-<span id="cb31-25"><a href="tabulação-de-dados.html#cb31-25" tabindex="-1"></a></span>
-<span id="cb31-26"><a href="tabulação-de-dados.html#cb31-26" tabindex="-1"></a><span class="co"># preenche a tabela com melhores exemplos</span></span>
-<span id="cb31-27"><a href="tabulação-de-dados.html#cb31-27" tabindex="-1"></a><span class="co"># altera para caixa baixa</span></span>
-<span id="cb31-28"><a href="tabulação-de-dados.html#cb31-28" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">tolower</span>(table<span class="fl">.2</span>[, <span class="dv">2</span>])</span>
-<span id="cb31-29"><a href="tabulação-de-dados.html#cb31-29" tabindex="-1"></a><span class="co"># remove espaços em branco</span></span>
-<span id="cb31-30"><a href="tabulação-de-dados.html#cb31-30" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">3</span>] <span class="ot">&lt;-</span></span>
-<span id="cb31-31"><a href="tabulação-de-dados.html#cb31-31" tabindex="-1"></a>  <span class="fu">trimws</span>(table<span class="fl">.2</span>[, <span class="dv">3</span>], <span class="at">which =</span> <span class="st">&quot;both&quot;</span>, <span class="at">whitespace =</span> <span class="st">&quot;[</span><span class="sc">\t\r\n</span><span class="st">]&quot;</span>)</span>
-<span id="cb31-32"><a href="tabulação-de-dados.html#cb31-32" tabindex="-1"></a><span class="co"># remove espaço em branco de HTML</span></span>
-<span id="cb31-33"><a href="tabulação-de-dados.html#cb31-33" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;&amp;nbsp;&quot;</span>, <span class="st">&quot;&quot;</span>, table<span class="fl">.2</span>[, <span class="dv">3</span>])</span>
-<span id="cb31-34"><a href="tabulação-de-dados.html#cb31-34" tabindex="-1"></a><span class="co"># converte em fator codificado</span></span>
-<span id="cb31-35"><a href="tabulação-de-dados.html#cb31-35" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">factor</span>(table<span class="fl">.2</span>[, <span class="dv">3</span>])</span></code></pre></div>
-</details>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="tabulação-de-dados.html#cb32-1" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
-<span id="cb32-2"><a href="tabulação-de-dados.html#cb32-2" tabindex="-1"></a>table<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb32-3"><a href="tabulação-de-dados.html#cb32-3" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="tabulação-de-dados.html#cb32-4" tabindex="-1"></a><span class="co"># preenche a tabela com identificação da unidade de análise</span></span>
-<span id="cb32-5"><a href="tabulação-de-dados.html#cb32-5" tabindex="-1"></a>table<span class="fl">.3</span>[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb32-6"><a href="tabulação-de-dados.html#cb32-6" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="tabulação-de-dados.html#cb32-7" tabindex="-1"></a><span class="co"># atribui rótulos para a tabela de dados</span></span>
-<span id="cb32-8"><a href="tabulação-de-dados.html#cb32-8" tabindex="-1"></a><span class="fu">colnames</span>(table<span class="fl">.3</span>) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Filhos&quot;</span>, <span class="st">&quot;Filhos&quot;</span>)</span>
-<span id="cb32-9"><a href="tabulação-de-dados.html#cb32-9" tabindex="-1"></a></span>
-<span id="cb32-10"><a href="tabulação-de-dados.html#cb32-10" tabindex="-1"></a><span class="co"># preenche a tabela com maus exemplos</span></span>
-<span id="cb32-11"><a href="tabulação-de-dados.html#cb32-11" tabindex="-1"></a>table<span class="fl">.3</span>[, <span class="dv">2</span>] <span class="ot">&lt;-</span></span>
-<span id="cb32-12"><a href="tabulação-de-dados.html#cb32-12" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;NaN&quot;</span>, <span class="st">&quot;N/A&quot;</span>, <span class="st">&quot;N.A.&quot;</span>, <span class="dv">0</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;na&quot;</span>, <span class="st">&quot;n.a.&quot;</span>, <span class="st">&quot;999&quot;</span>)</span>
-<span id="cb32-13"><a href="tabulação-de-dados.html#cb32-13" tabindex="-1"></a></span>
-<span id="cb32-14"><a href="tabulação-de-dados.html#cb32-14" tabindex="-1"></a><span class="co"># preenche a tabela com código único</span></span>
-<span id="cb32-15"><a href="tabulação-de-dados.html#cb32-15" tabindex="-1"></a>table<span class="fl">.3</span>[, <span class="dv">3</span>] <span class="ot">&lt;-</span></span>
-<span id="cb32-16"><a href="tabulação-de-dados.html#cb32-16" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;NA|NaN|N/A|N.A.|na|n.a.|</span><span class="sc">\t\r\n</span><span class="st">|^$|</span><span class="sc">\\</span><span class="st">d{3}&quot;</span>, <span class="cn">NA</span>, table<span class="fl">.3</span>[, <span class="dv">2</span>])</span></code></pre></div>
-</details>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="tabulação-de-dados.html#cb33-1" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
-<span id="cb33-2"><a href="tabulação-de-dados.html#cb33-2" tabindex="-1"></a>table.final <span class="ot">&lt;-</span></span>
-<span id="cb33-3"><a href="tabulação-de-dados.html#cb33-3" tabindex="-1"></a>  <span class="fu">data.frame</span>(table<span class="fl">.1</span>[, <span class="dv">1</span>], table<span class="fl">.1</span>[, <span class="dv">2</span>], table<span class="fl">.2</span>[, <span class="dv">3</span>], table<span class="fl">.3</span>[, <span class="dv">3</span>])</span>
-<span id="cb33-4"><a href="tabulação-de-dados.html#cb33-4" tabindex="-1"></a><span class="fu">colnames</span>(table.final) <span class="ot">&lt;-</span></span>
-<span id="cb33-5"><a href="tabulação-de-dados.html#cb33-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Data.Coleta&quot;</span>, <span class="st">&quot;Estado.Civil&quot;</span>, <span class="st">&quot;Numero.Filhos&quot;</span>)</span>
-<span id="cb33-6"><a href="tabulação-de-dados.html#cb33-6" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="tabulação-de-dados.html#cb33-7" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
-<span id="cb33-8"><a href="tabulação-de-dados.html#cb33-8" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb33-9"><a href="tabulação-de-dados.html#cb33-9" tabindex="-1"></a>  table.final,</span>
-<span id="cb33-10"><a href="tabulação-de-dados.html#cb33-10" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;l&quot;</span>,</span>
-<span id="cb33-11"><a href="tabulação-de-dados.html#cb33-11" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb33-12"><a href="tabulação-de-dados.html#cb33-12" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb33-13"><a href="tabulação-de-dados.html#cb33-13" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb33-14"><a href="tabulação-de-dados.html#cb33-14" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Formatação recomendada para tabela de dados.&quot;</span></span>
-<span id="cb33-15"><a href="tabulação-de-dados.html#cb33-15" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb33-16"><a href="tabulação-de-dados.html#cb33-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb33-17"><a href="tabulação-de-dados.html#cb33-17" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>),</span>
-<span id="cb33-18"><a href="tabulação-de-dados.html#cb33-18" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb33-19"><a href="tabulação-de-dados.html#cb33-19" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb33-20"><a href="tabulação-de-dados.html#cb33-20" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb33-21"><a href="tabulação-de-dados.html#cb33-21" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb33-22"><a href="tabulação-de-dados.html#cb33-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
-<span id="cb33-23"><a href="tabulação-de-dados.html#cb33-23" tabindex="-1"></a>    <span class="dv">0</span>,</span>
-<span id="cb33-24"><a href="tabulação-de-dados.html#cb33-24" tabindex="-1"></a>    <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb33-25"><a href="tabulação-de-dados.html#cb33-25" tabindex="-1"></a>    <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span></span>
-<span id="cb33-26"><a href="tabulação-de-dados.html#cb33-26" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb33-27"><a href="tabulação-de-dados.html#cb33-27" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
-<span id="cb33-28"><a href="tabulação-de-dados.html#cb33-28" tabindex="-1"></a>    <span class="fu">dim</span>(table.final)[<span class="dv">1</span>],</span>
-<span id="cb33-29"><a href="tabulação-de-dados.html#cb33-29" tabindex="-1"></a>    <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span></span>
-<span id="cb33-30"><a href="tabulação-de-dados.html#cb33-30" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="tabulação-de-dados.html#cb33-1" tabindex="-1"></a><span class="co"># atribui rótulos para a tabela de dados</span></span>
+<span id="cb33-2"><a href="tabulação-de-dados.html#cb33-2" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb33-3"><a href="tabulação-de-dados.html#cb33-3" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb33-4"><a href="tabulação-de-dados.html#cb33-4" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="tabulação-de-dados.html#cb33-5" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
+<span id="cb33-6"><a href="tabulação-de-dados.html#cb33-6" tabindex="-1"></a>table<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="st">&quot;dado&quot;</span>, <span class="at">nrow =</span> N, <span class="at">ncol =</span> M)</span>
+<span id="cb33-7"><a href="tabulação-de-dados.html#cb33-7" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="tabulação-de-dados.html#cb33-8" tabindex="-1"></a><span class="fu">colnames</span>(table<span class="fl">.0</span>) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;V&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>M))</span>
+<span id="cb33-9"><a href="tabulação-de-dados.html#cb33-9" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb33-10"><a href="tabulação-de-dados.html#cb33-10" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb33-11"><a href="tabulação-de-dados.html#cb33-11" tabindex="-1"></a>    table<span class="fl">.0</span>[i, j] <span class="ot">&lt;-</span></span>
+<span id="cb33-12"><a href="tabulação-de-dados.html#cb33-12" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">&quot;$x&quot;</span>, <span class="st">&quot;_{&quot;</span>, <span class="fu">as.character</span>(i), <span class="st">&quot;,&quot;</span>, <span class="fu">as.character</span>(j), <span class="st">&quot;}$&quot;</span>)</span>
+<span id="cb33-13"><a href="tabulação-de-dados.html#cb33-13" tabindex="-1"></a>  }</span>
+<span id="cb33-14"><a href="tabulação-de-dados.html#cb33-14" tabindex="-1"></a>}</span>
+<span id="cb33-15"><a href="tabulação-de-dados.html#cb33-15" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="tabulação-de-dados.html#cb33-16" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
+<span id="cb33-17"><a href="tabulação-de-dados.html#cb33-17" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb33-18"><a href="tabulação-de-dados.html#cb33-18" tabindex="-1"></a>  table<span class="fl">.0</span>,</span>
+<span id="cb33-19"><a href="tabulação-de-dados.html#cb33-19" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb33-20"><a href="tabulação-de-dados.html#cb33-20" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb33-21"><a href="tabulação-de-dados.html#cb33-21" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb33-22"><a href="tabulação-de-dados.html#cb33-22" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb33-23"><a href="tabulação-de-dados.html#cb33-23" tabindex="-1"></a>  <span class="at">escape =</span> F,</span>
+<span id="cb33-24"><a href="tabulação-de-dados.html#cb33-24" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Estrutura básica de uma tabela de dados.&quot;</span></span>
+<span id="cb33-25"><a href="tabulação-de-dados.html#cb33-25" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-26"><a href="tabulação-de-dados.html#cb33-26" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb33-27"><a href="tabulação-de-dados.html#cb33-27" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>),</span>
+<span id="cb33-28"><a href="tabulação-de-dados.html#cb33-28" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb33-29"><a href="tabulação-de-dados.html#cb33-29" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb33-30"><a href="tabulação-de-dados.html#cb33-30" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb33-31"><a href="tabulação-de-dados.html#cb33-31" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb33-32"><a href="tabulação-de-dados.html#cb33-32" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-33"><a href="tabulação-de-dados.html#cb33-33" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(<span class="fu">dim</span>(table<span class="fl">.0</span>)[<span class="dv">1</span>], <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span>)</span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="tabulação-de-dados.html#cb34-1" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
-<span id="cb34-2"><a href="tabulação-de-dados.html#cb34-2" tabindex="-1"></a>table.final <span class="ot">&lt;-</span></span>
-<span id="cb34-3"><a href="tabulação-de-dados.html#cb34-3" tabindex="-1"></a>  <span class="fu">data.frame</span>(table<span class="fl">.1</span>[, <span class="dv">1</span>], table<span class="fl">.1</span>[, <span class="dv">2</span>], table<span class="fl">.2</span>[, <span class="dv">2</span>], table<span class="fl">.3</span>[, <span class="dv">2</span>])</span>
-<span id="cb34-4"><a href="tabulação-de-dados.html#cb34-4" tabindex="-1"></a><span class="fu">colnames</span>(table.final) <span class="ot">&lt;-</span></span>
-<span id="cb34-5"><a href="tabulação-de-dados.html#cb34-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Data de Coleta&quot;</span>, <span class="st">&quot;Estado Civil&quot;</span>, <span class="st">&quot;Número de Filhos&quot;</span>)</span>
+<span id="cb34-2"><a href="tabulação-de-dados.html#cb34-2" tabindex="-1"></a>table<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb34-3"><a href="tabulação-de-dados.html#cb34-3" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="tabulação-de-dados.html#cb34-4" tabindex="-1"></a><span class="co"># atribui rótulos para a tabela de dados</span></span>
+<span id="cb34-5"><a href="tabulação-de-dados.html#cb34-5" tabindex="-1"></a><span class="fu">colnames</span>(table<span class="fl">.1</span>) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Data.Coleta&quot;</span>)</span>
 <span id="cb34-6"><a href="tabulação-de-dados.html#cb34-6" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="tabulação-de-dados.html#cb34-7" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
-<span id="cb34-8"><a href="tabulação-de-dados.html#cb34-8" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb34-9"><a href="tabulação-de-dados.html#cb34-9" tabindex="-1"></a>  table.final,</span>
-<span id="cb34-10"><a href="tabulação-de-dados.html#cb34-10" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;l&quot;</span>,</span>
-<span id="cb34-11"><a href="tabulação-de-dados.html#cb34-11" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
-<span id="cb34-12"><a href="tabulação-de-dados.html#cb34-12" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb34-13"><a href="tabulação-de-dados.html#cb34-13" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb34-14"><a href="tabulação-de-dados.html#cb34-14" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Formatação não recomendada para tabela de dados.&quot;</span></span>
-<span id="cb34-15"><a href="tabulação-de-dados.html#cb34-15" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb34-16"><a href="tabulação-de-dados.html#cb34-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
-<span id="cb34-17"><a href="tabulação-de-dados.html#cb34-17" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>),</span>
-<span id="cb34-18"><a href="tabulação-de-dados.html#cb34-18" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
-<span id="cb34-19"><a href="tabulação-de-dados.html#cb34-19" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
-<span id="cb34-20"><a href="tabulação-de-dados.html#cb34-20" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
-<span id="cb34-21"><a href="tabulação-de-dados.html#cb34-21" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb34-22"><a href="tabulação-de-dados.html#cb34-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
-<span id="cb34-23"><a href="tabulação-de-dados.html#cb34-23" tabindex="-1"></a>    <span class="dv">0</span>,</span>
-<span id="cb34-24"><a href="tabulação-de-dados.html#cb34-24" tabindex="-1"></a>    <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb34-25"><a href="tabulação-de-dados.html#cb34-25" tabindex="-1"></a>    <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span></span>
-<span id="cb34-26"><a href="tabulação-de-dados.html#cb34-26" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb34-27"><a href="tabulação-de-dados.html#cb34-27" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
-<span id="cb34-28"><a href="tabulação-de-dados.html#cb34-28" tabindex="-1"></a>    <span class="fu">dim</span>(table.final)[<span class="dv">1</span>],</span>
-<span id="cb34-29"><a href="tabulação-de-dados.html#cb34-29" tabindex="-1"></a>    <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span></span>
-<span id="cb34-30"><a href="tabulação-de-dados.html#cb34-30" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb34-7"><a href="tabulação-de-dados.html#cb34-7" tabindex="-1"></a><span class="co"># preenche a tabela com identificação da unidade de análise</span></span>
+<span id="cb34-8"><a href="tabulação-de-dados.html#cb34-8" tabindex="-1"></a>table<span class="fl">.1</span>[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb34-9"><a href="tabulação-de-dados.html#cb34-9" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="tabulação-de-dados.html#cb34-10" tabindex="-1"></a><span class="co"># preenche a tabela com maus exemplos</span></span>
+<span id="cb34-11"><a href="tabulação-de-dados.html#cb34-11" tabindex="-1"></a>table<span class="fl">.1</span>[, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">Sys.Date</span>() <span class="sc">+</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span>
+<span id="cb34-12"><a href="tabulação-de-dados.html#cb34-12" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="tabulação-de-dados.html#cb34-13" tabindex="-1"></a><span class="co"># preenche a tabela com melhores exemplos</span></span>
+<span id="cb34-14"><a href="tabulação-de-dados.html#cb34-14" tabindex="-1"></a>table<span class="fl">.1</span>[, <span class="dv">2</span>] <span class="ot">&lt;-</span></span>
+<span id="cb34-15"><a href="tabulação-de-dados.html#cb34-15" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">as.Date</span>(table<span class="fl">.1</span>[, <span class="dv">2</span>], <span class="at">origin =</span> <span class="st">&quot;1950-01-01&quot;</span>), <span class="st">&quot;%d-%m-%Y&quot;</span>)</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="tabulação-de-dados.html#cb35-1" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
+<span id="cb35-2"><a href="tabulação-de-dados.html#cb35-2" tabindex="-1"></a>table<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb35-3"><a href="tabulação-de-dados.html#cb35-3" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="tabulação-de-dados.html#cb35-4" tabindex="-1"></a><span class="co"># atribui rótulos para a tabela de dados</span></span>
+<span id="cb35-5"><a href="tabulação-de-dados.html#cb35-5" tabindex="-1"></a><span class="fu">colnames</span>(table<span class="fl">.2</span>) <span class="ot">&lt;-</span></span>
+<span id="cb35-6"><a href="tabulação-de-dados.html#cb35-6" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Estado Civil&quot;</span>, <span class="st">&quot;Estado.Civil&quot;</span>, <span class="st">&quot;Estado.Civil.Cod&quot;</span>)</span>
+<span id="cb35-7"><a href="tabulação-de-dados.html#cb35-7" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="tabulação-de-dados.html#cb35-8" tabindex="-1"></a><span class="co"># preenche a tabela com identificação da unidade de análise</span></span>
+<span id="cb35-9"><a href="tabulação-de-dados.html#cb35-9" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb35-10"><a href="tabulação-de-dados.html#cb35-10" tabindex="-1"></a></span>
+<span id="cb35-11"><a href="tabulação-de-dados.html#cb35-11" tabindex="-1"></a><span class="co"># preenche a tabela com maus exemplos (&amp;nbsp; representa o caracter &quot; &quot; em HTML)</span></span>
+<span id="cb35-12"><a href="tabulação-de-dados.html#cb35-12" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">2</span>] <span class="ot">&lt;-</span></span>
+<span id="cb35-13"><a href="tabulação-de-dados.html#cb35-13" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb35-14"><a href="tabulação-de-dados.html#cb35-14" tabindex="-1"></a>    <span class="st">&quot;casado&quot;</span>,</span>
+<span id="cb35-15"><a href="tabulação-de-dados.html#cb35-15" tabindex="-1"></a>    <span class="st">&quot;Casado&quot;</span>,</span>
+<span id="cb35-16"><a href="tabulação-de-dados.html#cb35-16" tabindex="-1"></a>    <span class="st">&quot; casado&quot;</span>,</span>
+<span id="cb35-17"><a href="tabulação-de-dados.html#cb35-17" tabindex="-1"></a>    <span class="st">&quot;Solteiro&quot;</span>,</span>
+<span id="cb35-18"><a href="tabulação-de-dados.html#cb35-18" tabindex="-1"></a>    <span class="st">&quot; Casado&quot;</span>,</span>
+<span id="cb35-19"><a href="tabulação-de-dados.html#cb35-19" tabindex="-1"></a>    <span class="st">&quot; solteiro&quot;</span>,</span>
+<span id="cb35-20"><a href="tabulação-de-dados.html#cb35-20" tabindex="-1"></a>    <span class="st">&quot;solteiro&quot;</span>,</span>
+<span id="cb35-21"><a href="tabulação-de-dados.html#cb35-21" tabindex="-1"></a>    <span class="st">&quot;Solteiro &quot;</span>,</span>
+<span id="cb35-22"><a href="tabulação-de-dados.html#cb35-22" tabindex="-1"></a>    <span class="st">&quot; casado&quot;</span>,</span>
+<span id="cb35-23"><a href="tabulação-de-dados.html#cb35-23" tabindex="-1"></a>    <span class="st">&quot; Solteiro &quot;</span></span>
+<span id="cb35-24"><a href="tabulação-de-dados.html#cb35-24" tabindex="-1"></a>  )</span>
+<span id="cb35-25"><a href="tabulação-de-dados.html#cb35-25" tabindex="-1"></a></span>
+<span id="cb35-26"><a href="tabulação-de-dados.html#cb35-26" tabindex="-1"></a><span class="co"># preenche a tabela com melhores exemplos</span></span>
+<span id="cb35-27"><a href="tabulação-de-dados.html#cb35-27" tabindex="-1"></a><span class="co"># altera para caixa baixa</span></span>
+<span id="cb35-28"><a href="tabulação-de-dados.html#cb35-28" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">tolower</span>(table<span class="fl">.2</span>[, <span class="dv">2</span>])</span>
+<span id="cb35-29"><a href="tabulação-de-dados.html#cb35-29" tabindex="-1"></a><span class="co"># remove espaços em branco</span></span>
+<span id="cb35-30"><a href="tabulação-de-dados.html#cb35-30" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">3</span>] <span class="ot">&lt;-</span></span>
+<span id="cb35-31"><a href="tabulação-de-dados.html#cb35-31" tabindex="-1"></a>  <span class="fu">trimws</span>(table<span class="fl">.2</span>[, <span class="dv">3</span>], <span class="at">which =</span> <span class="st">&quot;both&quot;</span>, <span class="at">whitespace =</span> <span class="st">&quot;[</span><span class="sc">\t\r\n</span><span class="st">]&quot;</span>)</span>
+<span id="cb35-32"><a href="tabulação-de-dados.html#cb35-32" tabindex="-1"></a><span class="co"># remove espaço em branco de HTML</span></span>
+<span id="cb35-33"><a href="tabulação-de-dados.html#cb35-33" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;&amp;nbsp;&quot;</span>, <span class="st">&quot;&quot;</span>, table<span class="fl">.2</span>[, <span class="dv">3</span>])</span>
+<span id="cb35-34"><a href="tabulação-de-dados.html#cb35-34" tabindex="-1"></a><span class="co"># converte em fator codificado</span></span>
+<span id="cb35-35"><a href="tabulação-de-dados.html#cb35-35" tabindex="-1"></a>table<span class="fl">.2</span>[, <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">factor</span>(table<span class="fl">.2</span>[, <span class="dv">3</span>])</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tabulação-de-dados.html#cb36-1" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
+<span id="cb36-2"><a href="tabulação-de-dados.html#cb36-2" tabindex="-1"></a>table<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb36-3"><a href="tabulação-de-dados.html#cb36-3" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="tabulação-de-dados.html#cb36-4" tabindex="-1"></a><span class="co"># preenche a tabela com identificação da unidade de análise</span></span>
+<span id="cb36-5"><a href="tabulação-de-dados.html#cb36-5" tabindex="-1"></a>table<span class="fl">.3</span>[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb36-6"><a href="tabulação-de-dados.html#cb36-6" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="tabulação-de-dados.html#cb36-7" tabindex="-1"></a><span class="co"># atribui rótulos para a tabela de dados</span></span>
+<span id="cb36-8"><a href="tabulação-de-dados.html#cb36-8" tabindex="-1"></a><span class="fu">colnames</span>(table<span class="fl">.3</span>) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Filhos&quot;</span>, <span class="st">&quot;Filhos&quot;</span>)</span>
+<span id="cb36-9"><a href="tabulação-de-dados.html#cb36-9" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="tabulação-de-dados.html#cb36-10" tabindex="-1"></a><span class="co"># preenche a tabela com maus exemplos</span></span>
+<span id="cb36-11"><a href="tabulação-de-dados.html#cb36-11" tabindex="-1"></a>table<span class="fl">.3</span>[, <span class="dv">2</span>] <span class="ot">&lt;-</span></span>
+<span id="cb36-12"><a href="tabulação-de-dados.html#cb36-12" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;NaN&quot;</span>, <span class="st">&quot;N/A&quot;</span>, <span class="st">&quot;N.A.&quot;</span>, <span class="dv">0</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;na&quot;</span>, <span class="st">&quot;n.a.&quot;</span>, <span class="st">&quot;999&quot;</span>)</span>
+<span id="cb36-13"><a href="tabulação-de-dados.html#cb36-13" tabindex="-1"></a></span>
+<span id="cb36-14"><a href="tabulação-de-dados.html#cb36-14" tabindex="-1"></a><span class="co"># preenche a tabela com código único</span></span>
+<span id="cb36-15"><a href="tabulação-de-dados.html#cb36-15" tabindex="-1"></a>table<span class="fl">.3</span>[, <span class="dv">3</span>] <span class="ot">&lt;-</span></span>
+<span id="cb36-16"><a href="tabulação-de-dados.html#cb36-16" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;NA|NaN|N/A|N.A.|na|n.a.|</span><span class="sc">\t\r\n</span><span class="st">|^$|</span><span class="sc">\\</span><span class="st">d{3}&quot;</span>, <span class="cn">NA</span>, table<span class="fl">.3</span>[, <span class="dv">2</span>])</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="tabulação-de-dados.html#cb37-1" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
+<span id="cb37-2"><a href="tabulação-de-dados.html#cb37-2" tabindex="-1"></a>table.final <span class="ot">&lt;-</span></span>
+<span id="cb37-3"><a href="tabulação-de-dados.html#cb37-3" tabindex="-1"></a>  <span class="fu">data.frame</span>(table<span class="fl">.1</span>[, <span class="dv">1</span>], table<span class="fl">.1</span>[, <span class="dv">2</span>], table<span class="fl">.2</span>[, <span class="dv">3</span>], table<span class="fl">.3</span>[, <span class="dv">3</span>])</span>
+<span id="cb37-4"><a href="tabulação-de-dados.html#cb37-4" tabindex="-1"></a><span class="fu">colnames</span>(table.final) <span class="ot">&lt;-</span></span>
+<span id="cb37-5"><a href="tabulação-de-dados.html#cb37-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Data.Coleta&quot;</span>, <span class="st">&quot;Estado.Civil&quot;</span>, <span class="st">&quot;Numero.Filhos&quot;</span>)</span>
+<span id="cb37-6"><a href="tabulação-de-dados.html#cb37-6" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="tabulação-de-dados.html#cb37-7" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
+<span id="cb37-8"><a href="tabulação-de-dados.html#cb37-8" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb37-9"><a href="tabulação-de-dados.html#cb37-9" tabindex="-1"></a>  table.final,</span>
+<span id="cb37-10"><a href="tabulação-de-dados.html#cb37-10" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb37-11"><a href="tabulação-de-dados.html#cb37-11" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb37-12"><a href="tabulação-de-dados.html#cb37-12" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb37-13"><a href="tabulação-de-dados.html#cb37-13" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb37-14"><a href="tabulação-de-dados.html#cb37-14" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Formatação recomendada para tabela de dados.&quot;</span></span>
+<span id="cb37-15"><a href="tabulação-de-dados.html#cb37-15" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-16"><a href="tabulação-de-dados.html#cb37-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb37-17"><a href="tabulação-de-dados.html#cb37-17" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>),</span>
+<span id="cb37-18"><a href="tabulação-de-dados.html#cb37-18" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb37-19"><a href="tabulação-de-dados.html#cb37-19" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb37-20"><a href="tabulação-de-dados.html#cb37-20" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb37-21"><a href="tabulação-de-dados.html#cb37-21" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb37-22"><a href="tabulação-de-dados.html#cb37-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
+<span id="cb37-23"><a href="tabulação-de-dados.html#cb37-23" tabindex="-1"></a>    <span class="dv">0</span>,</span>
+<span id="cb37-24"><a href="tabulação-de-dados.html#cb37-24" tabindex="-1"></a>    <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb37-25"><a href="tabulação-de-dados.html#cb37-25" tabindex="-1"></a>    <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span></span>
+<span id="cb37-26"><a href="tabulação-de-dados.html#cb37-26" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb37-27"><a href="tabulação-de-dados.html#cb37-27" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
+<span id="cb37-28"><a href="tabulação-de-dados.html#cb37-28" tabindex="-1"></a>    <span class="fu">dim</span>(table.final)[<span class="dv">1</span>],</span>
+<span id="cb37-29"><a href="tabulação-de-dados.html#cb37-29" tabindex="-1"></a>    <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span></span>
+<span id="cb37-30"><a href="tabulação-de-dados.html#cb37-30" tabindex="-1"></a>  )</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tabulação-de-dados.html#cb38-1" tabindex="-1"></a><span class="co"># cria a tabela de exemplos</span></span>
+<span id="cb38-2"><a href="tabulação-de-dados.html#cb38-2" tabindex="-1"></a>table.final <span class="ot">&lt;-</span></span>
+<span id="cb38-3"><a href="tabulação-de-dados.html#cb38-3" tabindex="-1"></a>  <span class="fu">data.frame</span>(table<span class="fl">.1</span>[, <span class="dv">1</span>], table<span class="fl">.1</span>[, <span class="dv">2</span>], table<span class="fl">.2</span>[, <span class="dv">2</span>], table<span class="fl">.3</span>[, <span class="dv">2</span>])</span>
+<span id="cb38-4"><a href="tabulação-de-dados.html#cb38-4" tabindex="-1"></a><span class="fu">colnames</span>(table.final) <span class="ot">&lt;-</span></span>
+<span id="cb38-5"><a href="tabulação-de-dados.html#cb38-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;Data de Coleta&quot;</span>, <span class="st">&quot;Estado Civil&quot;</span>, <span class="st">&quot;Número de Filhos&quot;</span>)</span>
+<span id="cb38-6"><a href="tabulação-de-dados.html#cb38-6" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="tabulação-de-dados.html#cb38-7" tabindex="-1"></a><span class="co"># exibe a tabela</span></span>
+<span id="cb38-8"><a href="tabulação-de-dados.html#cb38-8" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb38-9"><a href="tabulação-de-dados.html#cb38-9" tabindex="-1"></a>  table.final,</span>
+<span id="cb38-10"><a href="tabulação-de-dados.html#cb38-10" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb38-11"><a href="tabulação-de-dados.html#cb38-11" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), <span class="st">&quot;html&quot;</span>, <span class="st">&quot;latex&quot;</span>),</span>
+<span id="cb38-12"><a href="tabulação-de-dados.html#cb38-12" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb38-13"><a href="tabulação-de-dados.html#cb38-13" tabindex="-1"></a>  <span class="at">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb38-14"><a href="tabulação-de-dados.html#cb38-14" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Formatação não recomendada para tabela de dados.&quot;</span></span>
+<span id="cb38-15"><a href="tabulação-de-dados.html#cb38-15" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb38-16"><a href="tabulação-de-dados.html#cb38-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(</span>
+<span id="cb38-17"><a href="tabulação-de-dados.html#cb38-17" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>),</span>
+<span id="cb38-18"><a href="tabulação-de-dados.html#cb38-18" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>),</span>
+<span id="cb38-19"><a href="tabulação-de-dados.html#cb38-19" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="fu">ifelse</span>(knitr<span class="sc">::</span><span class="fu">is_html_output</span>(), T, T),</span>
+<span id="cb38-20"><a href="tabulação-de-dados.html#cb38-20" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;center&quot;</span></span>
+<span id="cb38-21"><a href="tabulação-de-dados.html#cb38-21" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb38-22"><a href="tabulação-de-dados.html#cb38-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
+<span id="cb38-23"><a href="tabulação-de-dados.html#cb38-23" tabindex="-1"></a>    <span class="dv">0</span>,</span>
+<span id="cb38-24"><a href="tabulação-de-dados.html#cb38-24" tabindex="-1"></a>    <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb38-25"><a href="tabulação-de-dados.html#cb38-25" tabindex="-1"></a>    <span class="at">extra_css =</span> <span class="st">&quot;border-top: 1px solid; border-bottom: 1px solid&quot;</span></span>
+<span id="cb38-26"><a href="tabulação-de-dados.html#cb38-26" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb38-27"><a href="tabulação-de-dados.html#cb38-27" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(</span>
+<span id="cb38-28"><a href="tabulação-de-dados.html#cb38-28" tabindex="-1"></a>    <span class="fu">dim</span>(table.final)[<span class="dv">1</span>],</span>
+<span id="cb38-29"><a href="tabulação-de-dados.html#cb38-29" tabindex="-1"></a>    <span class="at">extra_css =</span> <span class="st">&quot;border-bottom: 1px solid&quot;</span></span>
+<span id="cb38-30"><a href="tabulação-de-dados.html#cb38-30" tabindex="-1"></a>  )</span></code></pre></div>
 </details>
 </div>
 </div>

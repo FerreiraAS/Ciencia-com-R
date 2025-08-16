@@ -189,11 +189,11 @@ div.csl-indent {
 <li><a style="text-align:center; border-width:3px;border-style:solid; border-color:white; border-radius:15px; padding:5px; background-color:#276DC2; text-decoration:none; color:white" href="https://ferreiraas.github.io/Ciencia-com-R-Consultoria/"><b>e-Book | Consultoria</b></a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Capa</a></li>
-<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i>Dedicatória</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Capa</strong></a></li>
+<li class="chapter" data-level="" data-path="dedicatoria.html"><a href="dedicatoria.html"><i class="fa fa-check"></i><strong>Dedicatória</strong></a></li>
 <li class="chapter" data-level="" data-path="agradecimentos.html"><a href="agradecimentos.html"><i class="fa fa-check"></i><strong>Agradecimentos</strong></a></li>
+<li class="chapter" data-level="" data-path="apresentacao.html"><a href="apresentacao.html"><i class="fa fa-check"></i><strong>Apresentação</strong></a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i><strong>Sobre o autor</strong></a></li>
-<li class="chapter" data-level="" data-path="prefacio.html"><a href="prefacio.html"><i class="fa fa-check"></i><strong>Prefácio</strong></a></li>
 <li class="chapter" data-level="" data-path="parte-1.html"><a href="parte-1.html"><i class="fa fa-check"></i><em>PARTE 1: FUNDAMENTOS ESTATÍSTICOS</em></a></li>
 <li class="chapter" data-level="1" data-path="pensamento-estatistico.html"><a href="pensamento-estatistico.html"><i class="fa fa-check"></i><b>1</b> <strong>Pensamento estatístico</strong></a>
 <ul>
@@ -622,9 +622,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="17" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>17</b> <strong>Shiny Apps</strong></a>
 <ul>
-<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i>Aplicativos por delineamento de estudo</a>
+<li class="chapter" data-level="17.1" data-path="shiny-apps.html"><a href="shiny-apps.html#aplicativos-por-delineamento-de-estudo"><i class="fa fa-check"></i><b>17.1</b> Aplicativos por delineamento de estudo</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#ensaios-cl%C3%ADnicos"><i class="fa fa-check"></i>Ensaios clínicos</a></li>
+<li class="chapter" data-level="17.1.1" data-path="shiny-apps.html"><a href="shiny-apps.html#qual-shiny-app-usar-para-ensaios-experimentais"><i class="fa fa-check"></i><b>17.1.1</b> Qual Shiny App usar para ensaios experimentais?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="parte-5.html"><a href="parte-5.html"><i class="fa fa-check"></i><em>PARTE 5: ANÁLISES DESCRITIVAS E EXPLORATÓRIAS</em></a></li>
@@ -1509,85 +1509,85 @@ div.csl-indent {
 <div id="dados-perdidos-1" class="section level2 unnumbered unlisted hasAnchor">
 <h2>Dados perdidos<a href="dados-perdidos-e-imputados.html#dados-perdidos-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="dados-perdidos-e-imputados.html#cb35-1" tabindex="-1"></a><span class="co"># para reproduzir o exemplo</span></span>
-<span id="cb35-2"><a href="dados-perdidos-e-imputados.html#cb35-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb35-3"><a href="dados-perdidos-e-imputados.html#cb35-3" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="dados-perdidos-e-imputados.html#cb35-4" tabindex="-1"></a><span class="co"># Simulação de dados de um RCT</span></span>
-<span id="cb35-5"><a href="dados-perdidos-e-imputados.html#cb35-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb35-6"><a href="dados-perdidos-e-imputados.html#cb35-6" tabindex="-1"></a>rct_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb35-7"><a href="dados-perdidos-e-imputados.html#cb35-7" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n,</span>
-<span id="cb35-8"><a href="dados-perdidos-e-imputados.html#cb35-8" tabindex="-1"></a>  <span class="at">Grupo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;Controle&quot;</span>, <span class="st">&quot;Intervenção&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb35-9"><a href="dados-perdidos-e-imputados.html#cb35-9" tabindex="-1"></a>  <span class="at">Idade =</span> <span class="fu">sample</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">75</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb35-10"><a href="dados-perdidos-e-imputados.html#cb35-10" tabindex="-1"></a>  <span class="at">Sexo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb35-11"><a href="dados-perdidos-e-imputados.html#cb35-11" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pré)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
-<span id="cb35-12"><a href="dados-perdidos-e-imputados.html#cb35-12" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pós)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">55</span>, <span class="at">sd =</span> <span class="dv">12</span>),</span>
-<span id="cb35-13"><a href="dados-perdidos-e-imputados.html#cb35-13" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb35-14"><a href="dados-perdidos-e-imputados.html#cb35-14" tabindex="-1"></a>)</span>
-<span id="cb35-15"><a href="dados-perdidos-e-imputados.html#cb35-15" tabindex="-1"></a></span>
-<span id="cb35-16"><a href="dados-perdidos-e-imputados.html#cb35-16" tabindex="-1"></a><span class="co"># Simular dados perdidos - MCAR</span></span>
-<span id="cb35-17"><a href="dados-perdidos-e-imputados.html#cb35-17" tabindex="-1"></a>rct_mcar <span class="ot">&lt;-</span> rct_data</span>
-<span id="cb35-18"><a href="dados-perdidos-e-imputados.html#cb35-18" tabindex="-1"></a>rct_mcar[[<span class="st">&quot;Desfecho (pós)&quot;</span>]][<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">30</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb35-19"><a href="dados-perdidos-e-imputados.html#cb35-19" tabindex="-1"></a>rct_mcar<span class="sc">$</span>Idade[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">20</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb35-20"><a href="dados-perdidos-e-imputados.html#cb35-20" tabindex="-1"></a></span>
-<span id="cb35-21"><a href="dados-perdidos-e-imputados.html#cb35-21" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> naniar<span class="sc">::</span><span class="fu">gg_miss_upset</span>(rct_mcar, <span class="at">nsets =</span> <span class="dv">5</span>)</span>
-<span id="cb35-22"><a href="dados-perdidos-e-imputados.html#cb35-22" tabindex="-1"></a>p1</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="dados-perdidos-e-imputados.html#cb39-1" tabindex="-1"></a><span class="co"># para reproduzir o exemplo</span></span>
+<span id="cb39-2"><a href="dados-perdidos-e-imputados.html#cb39-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb39-3"><a href="dados-perdidos-e-imputados.html#cb39-3" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="dados-perdidos-e-imputados.html#cb39-4" tabindex="-1"></a><span class="co"># Simulação de dados de um RCT</span></span>
+<span id="cb39-5"><a href="dados-perdidos-e-imputados.html#cb39-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb39-6"><a href="dados-perdidos-e-imputados.html#cb39-6" tabindex="-1"></a>rct_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb39-7"><a href="dados-perdidos-e-imputados.html#cb39-7" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n,</span>
+<span id="cb39-8"><a href="dados-perdidos-e-imputados.html#cb39-8" tabindex="-1"></a>  <span class="at">Grupo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;Controle&quot;</span>, <span class="st">&quot;Intervenção&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-9"><a href="dados-perdidos-e-imputados.html#cb39-9" tabindex="-1"></a>  <span class="at">Idade =</span> <span class="fu">sample</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">75</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-10"><a href="dados-perdidos-e-imputados.html#cb39-10" tabindex="-1"></a>  <span class="at">Sexo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-11"><a href="dados-perdidos-e-imputados.html#cb39-11" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pré)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
+<span id="cb39-12"><a href="dados-perdidos-e-imputados.html#cb39-12" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pós)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">55</span>, <span class="at">sd =</span> <span class="dv">12</span>),</span>
+<span id="cb39-13"><a href="dados-perdidos-e-imputados.html#cb39-13" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb39-14"><a href="dados-perdidos-e-imputados.html#cb39-14" tabindex="-1"></a>)</span>
+<span id="cb39-15"><a href="dados-perdidos-e-imputados.html#cb39-15" tabindex="-1"></a></span>
+<span id="cb39-16"><a href="dados-perdidos-e-imputados.html#cb39-16" tabindex="-1"></a><span class="co"># Simular dados perdidos - MCAR</span></span>
+<span id="cb39-17"><a href="dados-perdidos-e-imputados.html#cb39-17" tabindex="-1"></a>rct_mcar <span class="ot">&lt;-</span> rct_data</span>
+<span id="cb39-18"><a href="dados-perdidos-e-imputados.html#cb39-18" tabindex="-1"></a>rct_mcar[[<span class="st">&quot;Desfecho (pós)&quot;</span>]][<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">30</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb39-19"><a href="dados-perdidos-e-imputados.html#cb39-19" tabindex="-1"></a>rct_mcar<span class="sc">$</span>Idade[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">20</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb39-20"><a href="dados-perdidos-e-imputados.html#cb39-20" tabindex="-1"></a></span>
+<span id="cb39-21"><a href="dados-perdidos-e-imputados.html#cb39-21" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> naniar<span class="sc">::</span><span class="fu">gg_miss_upset</span>(rct_mcar, <span class="at">nsets =</span> <span class="dv">5</span>)</span>
+<span id="cb39-22"><a href="dados-perdidos-e-imputados.html#cb39-22" tabindex="-1"></a>p1</span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="dados-perdidos-e-imputados.html#cb36-1" tabindex="-1"></a><span class="co"># para reproduzir o exemplo</span></span>
-<span id="cb36-2"><a href="dados-perdidos-e-imputados.html#cb36-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb36-3"><a href="dados-perdidos-e-imputados.html#cb36-3" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="dados-perdidos-e-imputados.html#cb36-4" tabindex="-1"></a><span class="co"># Simulação de dados de um RCT</span></span>
-<span id="cb36-5"><a href="dados-perdidos-e-imputados.html#cb36-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb36-6"><a href="dados-perdidos-e-imputados.html#cb36-6" tabindex="-1"></a>rct_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb36-7"><a href="dados-perdidos-e-imputados.html#cb36-7" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n,</span>
-<span id="cb36-8"><a href="dados-perdidos-e-imputados.html#cb36-8" tabindex="-1"></a>  <span class="at">Grupo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;Controle&quot;</span>, <span class="st">&quot;Intervenção&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb36-9"><a href="dados-perdidos-e-imputados.html#cb36-9" tabindex="-1"></a>  <span class="at">Idade =</span> <span class="fu">sample</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">75</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb36-10"><a href="dados-perdidos-e-imputados.html#cb36-10" tabindex="-1"></a>  <span class="at">Sexo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb36-11"><a href="dados-perdidos-e-imputados.html#cb36-11" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pré)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
-<span id="cb36-12"><a href="dados-perdidos-e-imputados.html#cb36-12" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pós)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">55</span>, <span class="at">sd =</span> <span class="dv">12</span>),</span>
-<span id="cb36-13"><a href="dados-perdidos-e-imputados.html#cb36-13" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb36-14"><a href="dados-perdidos-e-imputados.html#cb36-14" tabindex="-1"></a>)</span>
-<span id="cb36-15"><a href="dados-perdidos-e-imputados.html#cb36-15" tabindex="-1"></a></span>
-<span id="cb36-16"><a href="dados-perdidos-e-imputados.html#cb36-16" tabindex="-1"></a><span class="co"># Simular dados perdidos - MAR</span></span>
-<span id="cb36-17"><a href="dados-perdidos-e-imputados.html#cb36-17" tabindex="-1"></a>rct_mar <span class="ot">&lt;-</span> rct_data</span>
-<span id="cb36-18"><a href="dados-perdidos-e-imputados.html#cb36-18" tabindex="-1"></a>rct_mar[[<span class="st">&quot;Desfecho (pós)&quot;</span>]][rct_mar<span class="sc">$</span>Grupo <span class="sc">==</span> <span class="st">&quot;Intervenção&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb36-19"><a href="dados-perdidos-e-imputados.html#cb36-19" tabindex="-1"></a>                              <span class="fu">runif</span>(n) <span class="sc">&lt;</span> <span class="fl">0.3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb36-20"><a href="dados-perdidos-e-imputados.html#cb36-20" tabindex="-1"></a>rct_mar<span class="sc">$</span>Idade[rct_mar<span class="sc">$</span>Sexo <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> <span class="fu">runif</span>(n) <span class="sc">&lt;</span> <span class="fl">0.2</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb36-21"><a href="dados-perdidos-e-imputados.html#cb36-21" tabindex="-1"></a></span>
-<span id="cb36-22"><a href="dados-perdidos-e-imputados.html#cb36-22" tabindex="-1"></a><span class="co"># Visualização dos padrões de dados ausentes</span></span>
-<span id="cb36-23"><a href="dados-perdidos-e-imputados.html#cb36-23" tabindex="-1"></a>graphics<span class="sc">::</span><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
-<span id="cb36-24"><a href="dados-perdidos-e-imputados.html#cb36-24" tabindex="-1"></a></span>
-<span id="cb36-25"><a href="dados-perdidos-e-imputados.html#cb36-25" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> naniar<span class="sc">::</span><span class="fu">gg_miss_upset</span>(rct_mar, <span class="at">nsets =</span> <span class="dv">5</span>)</span>
-<span id="cb36-26"><a href="dados-perdidos-e-imputados.html#cb36-26" tabindex="-1"></a>p2</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="dados-perdidos-e-imputados.html#cb40-1" tabindex="-1"></a><span class="co"># para reproduzir o exemplo</span></span>
+<span id="cb40-2"><a href="dados-perdidos-e-imputados.html#cb40-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb40-3"><a href="dados-perdidos-e-imputados.html#cb40-3" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="dados-perdidos-e-imputados.html#cb40-4" tabindex="-1"></a><span class="co"># Simulação de dados de um RCT</span></span>
+<span id="cb40-5"><a href="dados-perdidos-e-imputados.html#cb40-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb40-6"><a href="dados-perdidos-e-imputados.html#cb40-6" tabindex="-1"></a>rct_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb40-7"><a href="dados-perdidos-e-imputados.html#cb40-7" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n,</span>
+<span id="cb40-8"><a href="dados-perdidos-e-imputados.html#cb40-8" tabindex="-1"></a>  <span class="at">Grupo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;Controle&quot;</span>, <span class="st">&quot;Intervenção&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb40-9"><a href="dados-perdidos-e-imputados.html#cb40-9" tabindex="-1"></a>  <span class="at">Idade =</span> <span class="fu">sample</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">75</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb40-10"><a href="dados-perdidos-e-imputados.html#cb40-10" tabindex="-1"></a>  <span class="at">Sexo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb40-11"><a href="dados-perdidos-e-imputados.html#cb40-11" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pré)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
+<span id="cb40-12"><a href="dados-perdidos-e-imputados.html#cb40-12" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pós)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">55</span>, <span class="at">sd =</span> <span class="dv">12</span>),</span>
+<span id="cb40-13"><a href="dados-perdidos-e-imputados.html#cb40-13" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb40-14"><a href="dados-perdidos-e-imputados.html#cb40-14" tabindex="-1"></a>)</span>
+<span id="cb40-15"><a href="dados-perdidos-e-imputados.html#cb40-15" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="dados-perdidos-e-imputados.html#cb40-16" tabindex="-1"></a><span class="co"># Simular dados perdidos - MAR</span></span>
+<span id="cb40-17"><a href="dados-perdidos-e-imputados.html#cb40-17" tabindex="-1"></a>rct_mar <span class="ot">&lt;-</span> rct_data</span>
+<span id="cb40-18"><a href="dados-perdidos-e-imputados.html#cb40-18" tabindex="-1"></a>rct_mar[[<span class="st">&quot;Desfecho (pós)&quot;</span>]][rct_mar<span class="sc">$</span>Grupo <span class="sc">==</span> <span class="st">&quot;Intervenção&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb40-19"><a href="dados-perdidos-e-imputados.html#cb40-19" tabindex="-1"></a>                              <span class="fu">runif</span>(n) <span class="sc">&lt;</span> <span class="fl">0.3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb40-20"><a href="dados-perdidos-e-imputados.html#cb40-20" tabindex="-1"></a>rct_mar<span class="sc">$</span>Idade[rct_mar<span class="sc">$</span>Sexo <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">&amp;</span> <span class="fu">runif</span>(n) <span class="sc">&lt;</span> <span class="fl">0.2</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb40-21"><a href="dados-perdidos-e-imputados.html#cb40-21" tabindex="-1"></a></span>
+<span id="cb40-22"><a href="dados-perdidos-e-imputados.html#cb40-22" tabindex="-1"></a><span class="co"># Visualização dos padrões de dados ausentes</span></span>
+<span id="cb40-23"><a href="dados-perdidos-e-imputados.html#cb40-23" tabindex="-1"></a>graphics<span class="sc">::</span><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
+<span id="cb40-24"><a href="dados-perdidos-e-imputados.html#cb40-24" tabindex="-1"></a></span>
+<span id="cb40-25"><a href="dados-perdidos-e-imputados.html#cb40-25" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> naniar<span class="sc">::</span><span class="fu">gg_miss_upset</span>(rct_mar, <span class="at">nsets =</span> <span class="dv">5</span>)</span>
+<span id="cb40-26"><a href="dados-perdidos-e-imputados.html#cb40-26" tabindex="-1"></a>p2</span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="dados-perdidos-e-imputados.html#cb37-1" tabindex="-1"></a><span class="co"># para reproduzir o exemplo</span></span>
-<span id="cb37-2"><a href="dados-perdidos-e-imputados.html#cb37-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb37-3"><a href="dados-perdidos-e-imputados.html#cb37-3" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="dados-perdidos-e-imputados.html#cb37-4" tabindex="-1"></a><span class="co"># Simulação de dados de um RCT</span></span>
-<span id="cb37-5"><a href="dados-perdidos-e-imputados.html#cb37-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb37-6"><a href="dados-perdidos-e-imputados.html#cb37-6" tabindex="-1"></a>rct_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb37-7"><a href="dados-perdidos-e-imputados.html#cb37-7" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n,</span>
-<span id="cb37-8"><a href="dados-perdidos-e-imputados.html#cb37-8" tabindex="-1"></a>  <span class="at">Grupo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;Controle&quot;</span>, <span class="st">&quot;Intervenção&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-9"><a href="dados-perdidos-e-imputados.html#cb37-9" tabindex="-1"></a>  <span class="at">Idade =</span> <span class="fu">sample</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">75</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-10"><a href="dados-perdidos-e-imputados.html#cb37-10" tabindex="-1"></a>  <span class="at">Sexo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-11"><a href="dados-perdidos-e-imputados.html#cb37-11" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pré)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
-<span id="cb37-12"><a href="dados-perdidos-e-imputados.html#cb37-12" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pós)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">55</span>, <span class="at">sd =</span> <span class="dv">12</span>),</span>
-<span id="cb37-13"><a href="dados-perdidos-e-imputados.html#cb37-13" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb37-14"><a href="dados-perdidos-e-imputados.html#cb37-14" tabindex="-1"></a>)</span>
-<span id="cb37-15"><a href="dados-perdidos-e-imputados.html#cb37-15" tabindex="-1"></a></span>
-<span id="cb37-16"><a href="dados-perdidos-e-imputados.html#cb37-16" tabindex="-1"></a><span class="co"># Simular dados perdidos - MNAR</span></span>
-<span id="cb37-17"><a href="dados-perdidos-e-imputados.html#cb37-17" tabindex="-1"></a>rct_mnar <span class="ot">&lt;-</span> rct_data</span>
-<span id="cb37-18"><a href="dados-perdidos-e-imputados.html#cb37-18" tabindex="-1"></a>rct_mnar[[<span class="st">&quot;Desfecho (pós)&quot;</span>]][rct_mnar[[<span class="st">&quot;Desfecho (pós)&quot;</span>]] <span class="sc">&gt;</span> <span class="dv">60</span> <span class="sc">&amp;</span></span>
-<span id="cb37-19"><a href="dados-perdidos-e-imputados.html#cb37-19" tabindex="-1"></a>                               <span class="fu">runif</span>(n) <span class="sc">&lt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb37-20"><a href="dados-perdidos-e-imputados.html#cb37-20" tabindex="-1"></a>rct_mnar[[<span class="st">&quot;Desfecho (pré)&quot;</span>]][rct_mnar[[<span class="st">&quot;Desfecho (pré)&quot;</span>]] <span class="sc">&lt;</span> <span class="dv">45</span> <span class="sc">&amp;</span></span>
-<span id="cb37-21"><a href="dados-perdidos-e-imputados.html#cb37-21" tabindex="-1"></a>                               <span class="fu">runif</span>(n) <span class="sc">&lt;</span> <span class="fl">0.4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb37-22"><a href="dados-perdidos-e-imputados.html#cb37-22" tabindex="-1"></a></span>
-<span id="cb37-23"><a href="dados-perdidos-e-imputados.html#cb37-23" tabindex="-1"></a><span class="co"># Visualização dos padrões de dados ausentes</span></span>
-<span id="cb37-24"><a href="dados-perdidos-e-imputados.html#cb37-24" tabindex="-1"></a>graphics<span class="sc">::</span><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
-<span id="cb37-25"><a href="dados-perdidos-e-imputados.html#cb37-25" tabindex="-1"></a></span>
-<span id="cb37-26"><a href="dados-perdidos-e-imputados.html#cb37-26" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> naniar<span class="sc">::</span><span class="fu">gg_miss_upset</span>(rct_mnar, <span class="at">nsets =</span> <span class="dv">5</span>)</span>
-<span id="cb37-27"><a href="dados-perdidos-e-imputados.html#cb37-27" tabindex="-1"></a>p3</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="dados-perdidos-e-imputados.html#cb41-1" tabindex="-1"></a><span class="co"># para reproduzir o exemplo</span></span>
+<span id="cb41-2"><a href="dados-perdidos-e-imputados.html#cb41-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb41-3"><a href="dados-perdidos-e-imputados.html#cb41-3" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="dados-perdidos-e-imputados.html#cb41-4" tabindex="-1"></a><span class="co"># Simulação de dados de um RCT</span></span>
+<span id="cb41-5"><a href="dados-perdidos-e-imputados.html#cb41-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb41-6"><a href="dados-perdidos-e-imputados.html#cb41-6" tabindex="-1"></a>rct_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb41-7"><a href="dados-perdidos-e-imputados.html#cb41-7" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n,</span>
+<span id="cb41-8"><a href="dados-perdidos-e-imputados.html#cb41-8" tabindex="-1"></a>  <span class="at">Grupo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;Controle&quot;</span>, <span class="st">&quot;Intervenção&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-9"><a href="dados-perdidos-e-imputados.html#cb41-9" tabindex="-1"></a>  <span class="at">Idade =</span> <span class="fu">sample</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">75</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-10"><a href="dados-perdidos-e-imputados.html#cb41-10" tabindex="-1"></a>  <span class="at">Sexo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-11"><a href="dados-perdidos-e-imputados.html#cb41-11" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pré)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
+<span id="cb41-12"><a href="dados-perdidos-e-imputados.html#cb41-12" tabindex="-1"></a>  <span class="st">&quot;Desfecho (pós)&quot;</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">55</span>, <span class="at">sd =</span> <span class="dv">12</span>),</span>
+<span id="cb41-13"><a href="dados-perdidos-e-imputados.html#cb41-13" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb41-14"><a href="dados-perdidos-e-imputados.html#cb41-14" tabindex="-1"></a>)</span>
+<span id="cb41-15"><a href="dados-perdidos-e-imputados.html#cb41-15" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="dados-perdidos-e-imputados.html#cb41-16" tabindex="-1"></a><span class="co"># Simular dados perdidos - MNAR</span></span>
+<span id="cb41-17"><a href="dados-perdidos-e-imputados.html#cb41-17" tabindex="-1"></a>rct_mnar <span class="ot">&lt;-</span> rct_data</span>
+<span id="cb41-18"><a href="dados-perdidos-e-imputados.html#cb41-18" tabindex="-1"></a>rct_mnar[[<span class="st">&quot;Desfecho (pós)&quot;</span>]][rct_mnar[[<span class="st">&quot;Desfecho (pós)&quot;</span>]] <span class="sc">&gt;</span> <span class="dv">60</span> <span class="sc">&amp;</span></span>
+<span id="cb41-19"><a href="dados-perdidos-e-imputados.html#cb41-19" tabindex="-1"></a>                               <span class="fu">runif</span>(n) <span class="sc">&lt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb41-20"><a href="dados-perdidos-e-imputados.html#cb41-20" tabindex="-1"></a>rct_mnar[[<span class="st">&quot;Desfecho (pré)&quot;</span>]][rct_mnar[[<span class="st">&quot;Desfecho (pré)&quot;</span>]] <span class="sc">&lt;</span> <span class="dv">45</span> <span class="sc">&amp;</span></span>
+<span id="cb41-21"><a href="dados-perdidos-e-imputados.html#cb41-21" tabindex="-1"></a>                               <span class="fu">runif</span>(n) <span class="sc">&lt;</span> <span class="fl">0.4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb41-22"><a href="dados-perdidos-e-imputados.html#cb41-22" tabindex="-1"></a></span>
+<span id="cb41-23"><a href="dados-perdidos-e-imputados.html#cb41-23" tabindex="-1"></a><span class="co"># Visualização dos padrões de dados ausentes</span></span>
+<span id="cb41-24"><a href="dados-perdidos-e-imputados.html#cb41-24" tabindex="-1"></a>graphics<span class="sc">::</span><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
+<span id="cb41-25"><a href="dados-perdidos-e-imputados.html#cb41-25" tabindex="-1"></a></span>
+<span id="cb41-26"><a href="dados-perdidos-e-imputados.html#cb41-26" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> naniar<span class="sc">::</span><span class="fu">gg_miss_upset</span>(rct_mnar, <span class="at">nsets =</span> <span class="dv">5</span>)</span>
+<span id="cb41-27"><a href="dados-perdidos-e-imputados.html#cb41-27" tabindex="-1"></a>p3</span></code></pre></div>
 </details>
 </div>
 <div id="dados-imputados-1" class="section level2 unnumbered unlisted hasAnchor">
