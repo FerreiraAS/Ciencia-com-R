@@ -221,8 +221,9 @@ p <- ggplot2::ggplot() +
   ggdag::theme_dag() +
   ggplot2::facet_wrap(~ panel, ncol = 2) +
   ggplot2::theme(
-    plot.title   = ggplot2::element_text(hjust = 0.5, size = 14),
-    panel.spacing = grid::unit(5, "lines")
+    plot.title = ggplot2::element_text(hjust = 0.5, size = 14),
+    panel.spacing = grid::unit(5, "lines"),
+    plot.margin = grid::unit(c(0.5, 0.5, 0.5, 0.5), "cm")
   ) +
   ggplot2::coord_cartesian(clip = "off")
 
