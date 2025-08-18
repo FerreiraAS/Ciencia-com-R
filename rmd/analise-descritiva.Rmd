@@ -50,7 +50,7 @@
 
 <br>
 
-```{r casas-decimais, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r casas-decimais, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 # Criar um dataframe com exemplos de casas decimais e dígitos significativos
 dados <- data.frame(
   Valor = c(0.00789, 0.0456, 45.600, 123.456, 7890)
@@ -106,7 +106,7 @@ kableExtra::kable(
 
 <br>
 
-```{r arredondamento, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r arredondamento, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 # Criar um dataframe com exemplos de casas decimais e dígitos significativos
 dados <- data.frame(
   Valor = c(0.00789, 0.0456, 45.600, 123.456, 7890)
@@ -376,11 +376,9 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://sear
 
 -   Gráfico de barras: Mais usado para comparar frequências absolutas ou relativas entre categorias.[@REF]
 
--   Gráfico de barras empilhadas: Útil para comparar proporções entre grupos em mais de uma variável categórica.[@REF]
-
 <br>
 
-```{r graficos-var-categoricas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de barras simples representando frequências por categoria."}
+```{r graficos-var-categoricas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de barras simples representando frequências por categoria."}
 # Criar um conjunto de dados de exemplo
 dados <- data.frame(
   Grupo = rep(c("A", "B", "C"), each = 3),
@@ -402,7 +400,11 @@ ggplot2::ggplot(dados_barras, ggplot2::aes(x = Categoria, y = Total, fill = Cate
 
 <br>
 
-```{r graficos-var-categoricas-empilhados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de barras empilhadas representando frequências por categoria."}
+-   Gráfico de barras empilhadas: Útil para comparar proporções entre grupos em mais de uma variável categórica.[@REF]
+
+<br>
+
+```{r graficos-var-categoricas-empilhados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de barras empilhadas representando frequências por categoria."}
 # Criar um conjunto de dados de exemplo
 dados <- data.frame(
   Grupo = rep(c("A", "B", "C"), each = 3),
@@ -426,17 +428,11 @@ ggplot2::ggplot(dados, ggplot2::aes(x = Grupo, y = Contagem, fill = Categoria)) 
 
 ### Quais são os tipos de gráficos para variáveis numéricas?
 
--   Histograma: Distribuição de frequência de uma variável contínua. Mostra a forma da distribuição (simétrica, assimétrica, bimodal...).[@REF]
-
--   Diagrama de caixa (*boxplot*): Resume mediana, quartis e valores extremos. Excelente para comparar grupos.[@REF]
-
--   Gráfico de densidade: Similar ao histograma, mas mais suave. Útil para avaliar a distribuição.[@REF]
-
--   Gráfico de linha: Usado para séries temporais (ex: evolução de uma medida ao longo do tempo).[@REF]
+-   Histograma: Distribuição de frequência de uma variável contínua. Mostra a forma da distribuição (simétrica, assimétrica, bimodal).[@REF]
 
 <br>
 
-```{r graficos-var-numericas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Histograma da variável 'valor'."}
+```{r graficos-var-numericas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Histograma da variável 'valor'."}
 # Simular dados
 dados <- data.frame(valor = stats::rnorm(1000, mean = 50, sd = 10))
 
@@ -450,7 +446,11 @@ ggplot2::ggplot(dados, ggplot2::aes(x = valor)) +
 
 <br>
 
-```{r boxplot-grupos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Boxplot por grupo."}
+-   Diagrama de caixa (*boxplot*): Resume mediana, quartis e valores extremos. Excelente para comparar grupos.[@REF]
+
+<br>
+
+```{r boxplot-grupos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Boxplot por grupo."}
 # Simular dados com dois grupos
 dados <- data.frame(
   grupo = rep(c("Controle", "Tratamento"), each = 100),
@@ -468,7 +468,34 @@ ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, fill = grupo)) +
 
 <br>
 
-```{r grafico-densidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de densidade da variável 'valor'."}
+- Gráfico de violino: Combina boxplot e densidade, mostrando a distribuição da variável. Útil para comparar grupos.[@REF]
+
+<br>
+
+```{r violin-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Violin plot por grupo."}
+# Simular dados com dois grupos
+dados <- data.frame(
+  grupo = rep(c("Controle", "Tratamento"), each = 100),
+  medida = c(stats::rnorm(100, mean = 50, sd = 5),
+             stats::rnorm(100, mean = 55, sd = 7))
+)
+
+# Violin plot
+ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, fill = grupo)) +
+  ggplot2::geom_violin(trim = FALSE, alpha = 0.6) +
+  ggplot2::geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA) +
+  ggplot2::labs(title = "Violin Plot por Grupo",
+                x = "Grupo", y = "Medida") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+-   Gráfico de densidade: Similar ao histograma, mas mais suave. Útil para avaliar a distribuição.[@REF]
+
+<br>
+
+```{r grafico-densidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de densidade da variável 'valor'."}
 # Simular dados
 dados <- data.frame(valor = stats::rnorm(1000, mean = 0, sd = 1))
 
@@ -482,15 +509,36 @@ ggplot2::ggplot(dados, ggplot2::aes(x = valor)) +
 
 <br>
 
+- Gráfico de pontos (*dot plot*): Mostra cada valor individualmente, útil para pequenas amostras e para visualizar a distribuição.[@REF]
+
+<br>
+
+```{r grafico-pontos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de pontos da variável 'valor'."}
+# Simular dados
+set.seed(123)
+dados <- data.frame(
+  grupo = rep(c("Controle", "Tratamento"), each = 20),
+  medida = c(stats::rnorm(20, mean = 50, sd = 5),
+             stats::rnorm(20, mean = 55, sd = 5))
+)
+
+# Dot plot
+ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, color = grupo)) +
+  ggplot2::geom_dotplot(binaxis = "y", stackdir = "center", dotsize = 0.7) +
+  ggplot2::labs(title = "Dot Plot por Grupo",
+                x = "Grupo", y = "Medida") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
 ### Quais são os tipos de gráficos para relações entre variáveis?
 
 -   Gráfico de dispersão (*scatter plot*): Mostra a relação entre duas variáveis quantitativas. Ideal para investigar correlações.[@REF]
 
--   Gráfico de bolhas (*bubble chart*): Expande o gráfico de dispersão adicionando uma terceira variável (tamanho da bolha).[@REF]
-
 <br>
 
-```{r graficos-relacoes, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de dispersão representando a relação entre duas variáveis."}
+```{r graficos-relacoes, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de dispersão representando a relação entre duas variáveis."}
 # Simular dados
 dados <- data.frame(
   x = stats::rnorm(100, mean = 50, sd = 10),
@@ -507,7 +555,11 @@ ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y)) +
 
 <br>
 
-```{r graficos-bolhas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de bolhas representando a relação entre três variáveis."}
+-   Gráfico de bolhas (*bubble chart*): Expande o gráfico de dispersão adicionando uma terceira variável (tamanho da bolha).[@REF]
+
+<br>
+
+```{r graficos-bolhas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de bolhas representando a relação entre três variáveis."}
 # Simular dados com três variáveis
 dados <- data.frame(
   x = stats::rnorm(100, 10, 3),
@@ -531,7 +583,7 @@ ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y, size = z)) +
 
 <br>
 
-```{r grafico-linha, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de linha representando uma série temporal."}
+```{r grafico-linha, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de linha representando uma série temporal."}
 # Simular série temporal
 set.seed(42)
 tempo <- seq.Date(from = as.Date("2025-01-01"), by = "day", length.out = 100)
@@ -553,15 +605,9 @@ ggplot2::ggplot(dados, ggplot2::aes(x = data, y = valor)) +
 
 -   Gráfico de radar (ou gráfico de aranha): Representa várias variáveis em um único gráfico, útil para comparar perfis.[@REF]
 
--   Gráfico de matriz de dispersão: Mostra relações entre múltiplas variáveis quantitativas, útil para identificar padrões.[@REF]
-
--   Gráfico de correlação: Representa a relação entre duas variáveis, com pontos e uma linha de tendência.[@REF]
-
--   Gráfico de calor (*heatmap*): Representa dados em uma matriz, com cores indicando intensidade ou frequência.[@REF]
-
 <br>
 
-```{r graficos-multivariados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico radar representando múltiplas variáveis."}
+```{r graficos-multivariados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico radar representando múltiplas variáveis."}
 # Simular dados para 3 perfis com 5 variáveis
 dados <- data.frame(
   Max = c(10, 10, 10, 10, 10),
@@ -582,7 +628,11 @@ fmsb::radarchart(dados,
 
 <br>
 
-```{r graficos-matriz-dispersao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Matriz de dispersão representando relações entre múltiplas variáveis."}
+-   Gráfico de matriz de dispersão: Mostra relações entre múltiplas variáveis quantitativas, útil para identificar padrões.[@REF]
+
+<br>
+
+```{r graficos-matriz-dispersao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Matriz de dispersão representando relações entre múltiplas variáveis."}
 # Instalar se necessário: install.packages("GGally")
 library(GGally)
 
@@ -599,7 +649,11 @@ GGally::ggpairs(dados, title = "Matriz de Dispersão")
 
 <br>
 
-```{r graficos-correlacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de correlação entre duas variáveis com linha de tendência."}
+-   Gráfico de correlação: Representa a relação entre duas variáveis, com pontos e uma linha de tendência.[@REF]
+
+<br>
+
+```{r graficos-correlacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de correlação entre duas variáveis com linha de tendência."}
 # Simular dados com correlação
 set.seed(1)
 x <- stats::rnorm(100)
@@ -617,7 +671,11 @@ ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y)) +
 
 <br>
 
-```{r graficos-heatmap, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Mapa de calor da correlação entre variáveis."}
+-   Gráfico de calor (*heatmap*): Representa dados em uma matriz, com cores indicando intensidade ou frequência.[@REF]
+
+<br>
+
+```{r graficos-heatmap, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Mapa de calor da correlação entre variáveis."}
 # Simular matriz de correlação
 set.seed(2)
 dados <- data.frame(
@@ -693,7 +751,7 @@ Os pacotes *ggplot2*[@ggplot2], *plotly*[@plotly] e *corrplot*[@corrplot] fornec
 
 <br>
 
-```{r bar-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráficos de barras represetando médias, barras de erro e dados individuais."}
+```{r bar-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráficos de barras represetando médias, barras de erro e dados individuais."}
 # Gerar dados de exemplo
 set.seed(123)
 df <- base::expand.grid(Fator1 = c("A", "B"),

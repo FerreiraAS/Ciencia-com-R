@@ -94,13 +94,13 @@ Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \
 
 <br>
 
-```{r regressao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão linear."}
+```{r regressao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão linear."}
 # simulate X
 set.seed(123)
 X <- rnorm(100, mean = 50, sd = 10)
 
 # simulate Y based on X
-Y <- 5 + 2 * X + rnorm(100, mean = 0, sd = 5)
+Y <- 5 + 2 * X + rnorm(100, mean = 0, sd = 30)
 
 # create a dataframe
 data <- data.frame(X, Y)
@@ -108,11 +108,15 @@ data <- data.frame(X, Y)
 # create the regression model
 model <- lm(Y ~ X, data = data)
 
-# plot the regression line
 ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_point() +
-  ggplot2::geom_smooth(method = "lm", color = "blue") +
-  ggplot2::labs(title = "Regressão linear", x = "Variável Independente (X)", y = "Variável Dependente (Y)") +
+  ggplot2::geom_smooth(method = "lm",
+                       color = "blue",   # cor da linha
+                       fill = "grey70",  # cor da área IC95%
+                       se = TRUE) +      # mostra o intervalo de confiança
+  ggplot2::labs(title = "Regressão linear", 
+                x = "Variável Independente (X)", 
+                y = "Variável Dependente (Y)") +
   ggplot2::theme_minimal()
 ```
 
@@ -124,13 +128,13 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-```{r regressao-nao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão não-linear."}
+```{r regressao-nao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão não-linear."}
 # simulate X
 set.seed(123)
 X <- seq(-10, 10, length.out = 100)
 
 # simulate Y based on a non-linear function of X
-Y <- 5 + 2 * X^2 + rnorm(100, mean = 0, sd = 5)
+Y <- 5 + 2 * X^2 + rnorm(100, mean = 0, sd = 30)
 
 # create a dataframe
 data <- data.frame(X, Y)
@@ -143,8 +147,12 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_point() +
   ggplot2::geom_smooth(method = "lm",
                        formula = y ~ poly(x, 2),
-                       color = "blue") +
-  ggplot2::labs(title = "Regressão não-linear", x = "Variável Independente (X)", y = "Variável Dependente (Y)") +
+                       color = "blue",
+                       fill = "grey70", # cor da área do IC
+                       se = TRUE) +     # ativa o intervalo de confiança
+  ggplot2::labs(title = "Regressão não-linear", 
+                x = "Variável Independente (X)", 
+                y = "Variável Dependente (Y)") +
   ggplot2::theme_minimal()
 ```
 
@@ -156,13 +164,13 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-```{r regressao-polinomial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão polinomial."}
+```{r regressao-polinomial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão polinomial."}
 # simulate X
 set.seed(123)
 X <- seq(-10, 10, length.out = 100)
 
 # simulate Y based on a polynomial function of X
-Y <- 5 + 2 * X^3 - 0.1 * X^2 + rnorm(100, mean = 0, sd = 5)
+Y <- 5 + 2 * X^3 - 0.1 * X^2 + rnorm(100, mean = 0, sd = 30)
 
 # create a dataframe
 data <- data.frame(X, Y)
@@ -170,13 +178,16 @@ data <- data.frame(X, Y)
 # create the regression model
 model <- lm(Y ~ poly(X, 3), data = data)
 
-# plot the regression line
 ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_point() +
-  ggplot2::geom_smooth(method = "lm", formula = y ~ poly(x, 3), color = "blue") +
+  ggplot2::geom_smooth(method = "lm",
+                       formula = y ~ poly(x, 3),
+                       color = "blue",      # cor da linha
+                       fill = "grey70",     # cor da faixa IC95%
+                       se = TRUE) +         # ativa o intervalo de confiança
   ggplot2::labs(title = "Regressão polinomial",
-       x = "Variável Independente (X)",
-       y = "Variável Dependente (Y)") +
+                x = "Variável Independente (X)",
+                y = "Variável Dependente (Y)") +
   ggplot2::theme_minimal()
 ```
 
@@ -188,7 +199,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-```{r regressao-ridge, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão ridge."}
+```{r regressao-ridge, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão ridge."}
 # simulate X
 set.seed(123)
 X <- seq(-10, 10, length.out = 100)
@@ -225,7 +236,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-```{r regressao-logistica, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão logística."}
+```{r regressao-logistica, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão logística."}
 # simulate X
 set.seed(123)
 X <- rnorm(100, mean = 50, sd = 10)
@@ -304,7 +315,7 @@ O pacote *fastDummies*[@fastDummies] fornece a função [*dummy_cols*](https://w
 
 <br>
 
-```{r multicolinearidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Multicolinearidade entre variáveis candidatas em modelos de regressão multivariável."}
+```{r multicolinearidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Multicolinearidade entre variáveis candidatas em modelos de regressão multivariável."}
 # Set the seed for reproducibility
 set.seed(123)
 
@@ -431,7 +442,7 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 <br>
 
-```{r suposicoes, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Diagnóstico de regressão para avaliar suposições do modelo: linearidade, normalidade dos resíduos, homocedasticidade e alavancagem."}
+```{r suposicoes, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Diagnóstico de regressão para avaliar suposições do modelo: linearidade, normalidade dos resíduos, homocedasticidade e alavancagem."}
 # Definir semente
 set.seed(123)
 

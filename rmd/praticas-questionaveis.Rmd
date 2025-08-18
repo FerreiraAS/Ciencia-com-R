@@ -36,7 +36,7 @@
 
 <br>
 
-```{r praticas-questionaveis, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r praticas-questionaveis, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 # Carregar pacotes
 library(dplyr)
 
@@ -53,6 +53,7 @@ praticas_questionaveis <- tibble::tibble(
     "Duplicate publication",
     "Spin (doloso)",
     "Data distortion",
+    "SPARKing",
     
     "HARKing",
     "Storytelling",
@@ -70,34 +71,14 @@ praticas_questionaveis <- tibble::tibble(
     "Publication bias"
   ),
   Intencionalidade = c(
-    # 10 intencionais
-    "Má conduta",
-    "Má conduta",
-    "Má conduta",
-    "Má conduta",
-    "Má conduta",
-    "Má conduta",
-    "Má conduta",
-    "Má conduta",
-    "Má conduta",
-    "Má conduta",
+    # 11 intencionais (inclui SPARKing)
+    rep("Má conduta", 11),
     
     # 8 zona cinzenta
-    "Zona cinzenta",
-    "Zona cinzenta",
-    "Zona cinzenta",
-    "Zona cinzenta",
-    "Zona cinzenta",
-    "Zona cinzenta",
-    "Zona cinzenta",
-    "Zona cinzenta",
+    rep("Zona cinzenta", 8),
     
     # 5 não intencionais
-    "Não intencional",
-    "Não intencional",
-    "Não intencional",
-    "Não intencional",
-    "Não intencional"
+    rep("Não intencional", 5)
   ),
   Definição = c(
     "Inventar dados inexistentes",
@@ -110,6 +91,7 @@ praticas_questionaveis <- tibble::tibble(
     "Publicar o mesmo estudo em mais de uma revista",
     "Apresentar os resultados de forma a exagerar efeitos positivos",
     "Modificar dados ou gráficos para torná-los mais convincentes",
+    "Ajustar o tamanho da amostra após a coleta dos dados para obter significância estatística",
     
     "Criar hipóteses após ver os dados (sem pré-registro)",
     "Construir uma narrativa forçada para justificar os achados",
@@ -135,7 +117,11 @@ praticas_questionaveis <- praticas_questionaveis %>%
     levels = c("Má conduta", "Zona cinzenta", "Não intencional")
   ))
 
-# Exibir com cores
+bg_color <- function(hex, latex) {
+  if (knitr::is_html_output()) hex else latex
+}
+
+# Criar tabela com kableExtra
 kableExtra::kable(
   praticas_questionaveis,
   align = "c",
@@ -154,15 +140,15 @@ kableExtra::kable(
   kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
   kableExtra::row_spec(
     which(praticas_questionaveis$Intencionalidade == "Má conduta"),
-    background = "#ffcdd2"
+    background = bg_color("#FFCDD2", "lightred")
   ) %>%
   kableExtra::row_spec(
     which(praticas_questionaveis$Intencionalidade == "Zona cinzenta"),
-    background = "#fff9c4"
+    background = bg_color("#FFF9C4", "lightyellow")
   ) %>%
   kableExtra::row_spec(
     which(praticas_questionaveis$Intencionalidade == "Não intencional"),
-    background = "#e8f5e9"
+    background = bg_color("#E8F5E9", "lightgreen")
   ) %>%
   kableExtra::row_spec(nrow(praticas_questionaveis), extra_css = "border-bottom: 1px solid")
 ```
@@ -190,6 +176,8 @@ kableExtra::kable(
 -   *P-hacking* é a prática de manipular os dados ou análises para obter resultados estatisticamente significativos, como realizar múltiplos testes sem correção adequada.[@degroot2014; @andrade2021; @stefan2023]
 
 -   *P-hacking* reverso é a prática de manipular os dados ou análises para obter resultados não estatisticamente significativos, como realizar múltiplos testes sem correção adequada, o que pode levar a conclusões enviesadas e enganosas.[@chuard2019]
+
+- *SPARKing* (*Sample size Planning After the Results are Known*) é uma mal prática que envolve o ajuste do tamanho da amostra após a coleta dos dados, com o objetivo de obter resultados estatisticamente significativos.[@Sasaki2023]
 
 -   *Data peeking* é a prática de analisar os dados repetidamente antes de completar a coleta, visando interromper a coleta quando um resultado desejado é alcançado.[@armitage1969]
 

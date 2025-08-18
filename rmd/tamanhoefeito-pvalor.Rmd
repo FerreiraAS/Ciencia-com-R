@@ -68,23 +68,23 @@ O pacote *pwr*[@pwr] fornece a função [*cohen.ES*](https://www.rdocumentation.
 
 <br>
 
-## Efeito fixo
+## Efeitos brutos e padronizados
 
 <br>
 
-### O que é efeito fixo?
+### O que é efeito bruto?
 
--   .[@REF]
+-   .[@greenland1986]
 
-<br>
-
-## Efeito aleatório
+-   .[@greenland1991]
 
 <br>
 
-### O que é efeito aleatório?
+### O que é efeito padronizado?
 
--   .[@REF]
+-   .[@greenland1986]
+
+-   .[@greenland1991]
 
 <br>
 
@@ -93,22 +93,6 @@ O pacote *pwr*[@pwr] fornece a função [*cohen.ES*](https://www.rdocumentation.
 <br>
 
 ### O que é efeito principal?
-
--   .[@Bours2023]
-
-<br>
-
-## Efeito de modificação
-
-<br>
-
-### O que é um modificador de efeito?
-
--   .[@Bours2023]
-
-<br>
-
-### O que é efeito de modificação?
 
 -   .[@Bours2023]
 
@@ -124,7 +108,7 @@ O pacote *pwr*[@pwr] fornece a função [*cohen.ES*](https://www.rdocumentation.
 
 -   .[@Bours2023]
 
-```{r efeito-interacao-direta, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Análise de efeito de interação (direta) entre grupos e tempo. Retas paralelas sugerem ausência de efeito de interação."}
+```{r efeito-interacao-direta, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Análise de efeito de interação (direta) entre grupos e tempo. Retas paralelas sugerem ausência de efeito de interação."}
 # Simulate data
 set.seed(123)  # For reproducibility
 n <- 5  # Number of observations
@@ -248,7 +232,7 @@ ggplot2::ggplot(means,
 
 <br>
 
-```{r efeito-interacao-inversa, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Análise de efeito de interação (inversa) entre grupos e tempo. Retas paralelas sugerem ausência de efeito de interação."}
+```{r efeito-interacao-inversa, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Análise de efeito de interação (inversa) entre grupos e tempo. Retas paralelas sugerem ausência de efeito de interação."}
 # Simulate data
 set.seed(123)  # For reproducibility
 n <- 5  # Number of observations
@@ -434,23 +418,19 @@ O pacote *emmeans*[@emmeans] fornece a função [*emmeans*](https://www.rdocumen
 
 <br>
 
-## Efeitos brutos e padronizados
+## Efeito de modificação
 
 <br>
 
-### O que é efeito bruto?
+### O que é um modificador de efeito?
 
--   .[@greenland1986]
-
--   .[@greenland1991]
+-   .[@Bours2023]
 
 <br>
 
-### O que é efeito padronizado?
+### O que é efeito de modificação?
 
--   .[@greenland1986]
-
--   .[@greenland1991]
+-   .[@Bours2023]
 
 <br>
 
@@ -524,7 +504,7 @@ O pacote *Superpower*[@Superpower] fornece a função [*ANOVA_compromise*](https
 
 <br>
 
-```{r p-valores, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Visualização espacial de p < 0,05 (5 quadrados aleatórios em 100)."}
+```{r p-valores, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Visualização espacial de p < 0,05 (5 quadrados aleatórios em 100)."}
 # Criar grid 10x10 (100 quadrados)
 set.seed(42)  # Para reprodutibilidade
 grid <- expand.grid(x = 1:10, y = 1:10)

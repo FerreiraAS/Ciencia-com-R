@@ -12,6 +12,54 @@
 
 <br>
 
+```{r dados-perdidos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(123)
+
+# Simulação de dados de um RCT (n = 10)
+n <- 10
+rct10 <- data.frame(
+  id = 1:n,
+  Grupo = sample(c("Controle", "Intervenção"), n, replace = TRUE),
+  Idade = sample(40:75, n, replace = TRUE),
+  Sexo = sample(c("M", "F"), n, replace = TRUE),
+  "Desfecho (pré)" = rnorm(n, mean = 50, sd = 10),
+  "Desfecho (pós)" = rnorm(n, mean = 55, sd = 12),
+  check.names = FALSE
+)
+
+# Introduzir dados perdidos (MCAR)
+rct10[["Desfecho (pós)"]][sample(1:n, 3)] <- NA  # 3 perdas no pós
+rct10$Idade[sample(1:n, 2)] <- NA                # 2 perdas em Idade
+
+# (Opcional) arredondar desfechos para visualização
+rct10[["Desfecho (pré)"]] <- round(rct10[["Desfecho (pré)"]], 1)
+rct10[["Desfecho (pós)"]] <- round(rct10[["Desfecho (pós)"]], 1)
+
+# exibir a tabela de 10 indivíduos simulada
+kableExtra::kable(
+  rct10,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE,
+  caption = "Tabela simulada com 10 indivíduos de um RCT (dados com perdas aleatórias)."
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec((dim(rct10)[1] - 1), bold = TRUE, extra_css = "border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(rct10)[1], extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *base*[@base] fornece a função [*is.na*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/na) para identificar que elementos de um objeto são dados perdidos.
 :::
@@ -34,7 +82,7 @@ O pacote *base*[@base] fornece a função [*is.na*](https://www.rdocumentation.o
 
 <br>
 
-```{r mcar, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de dados perdidos completamente ao acaso (MCAR) em um estudo randomizado controlado (RCT)."}
+```{r mcar, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de dados perdidos completamente ao acaso (MCAR) em um estudo randomizado controlado (RCT)."}
 # para reproduzir o exemplo
 set.seed(123)
 
@@ -64,7 +112,7 @@ p1
 -   Dados perdidos ao acaso (*missing at random*, MAR), em que a probabilidade de ocorrência de dados perdidos é relacionada a outras variáveis medidas.[@Heymans2022; @carpenter2021]
 <br>
 
-```{r mar, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de dados perdidos ao acaso (MAR) em um estudo randomizado controlado (RCT)."}
+```{r mar, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de dados perdidos ao acaso (MAR) em um estudo randomizado controlado (RCT)."}
 # para reproduzir o exemplo
 set.seed(123)
 
@@ -99,7 +147,7 @@ p2
 
 <br>
 
-```{r mnar, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de dados perdidos não ao acaso (MNAR) em um estudo randomizado controlado (RCT)."}
+```{r mnar, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de dados perdidos não ao acaso (MNAR) em um estudo randomizado controlado (RCT)."}
 # para reproduzir o exemplo
 set.seed(123)
 

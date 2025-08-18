@@ -16,7 +16,7 @@
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de instrumento com 3 itens tipo Likert com 5 categorias cada."}
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de instrumento com 3 itens tipo Likert com 5 categorias cada."}
 # reprodutibilidade
 set.seed(1234)
 
@@ -103,6 +103,16 @@ dados[, 5:6] <- base::round(dados[, 5:6], digits = 2)
 alinhamento <- base::rep("c", base::ncol(dados))
 alinhamento[1] <- "l"
 
+# Ajuste de rótulos
+names(dados) <- c(
+  "Itens",
+  "Discordância",
+  "Neutro",
+  "Concordância",
+  "Média",
+  "DP"
+)
+
 # Render da tabela
 kableExtra::kable(
   dados,
@@ -174,7 +184,7 @@ O pacote *ggstats*[@ggstats] fornece a função [*gglikert*](https://www.rdocume
 
 ### O que são medidas únicas?
 
-```{r k1, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "hide"}
+```{r k1, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "hide"}
 # sorteia participante para relatar no texto
 set.seed(1)
 k1 <- sample(1:10, 1)
@@ -232,14 +242,14 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-unicas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r medidas-unicas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 ```
 
 <br>
 
 ### O que são medidas repetidas?
 
-```{r k2, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "hide"}
+```{r k2, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "hide"}
 # sorteia participante para relatar no texto
 set.seed(2)
 k2 <- sample(1:10, 1)
@@ -303,7 +313,7 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-repetidas-separadas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r medidas-repetidas-separadas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 ```
 
 ```{r medidas-repetidas-agregadas, include = FALSE, echo = FALSE, results = "hide"}
@@ -375,7 +385,7 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-repetidas-agregadas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r medidas-repetidas-agregadas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 ```
 
 <br>
@@ -388,7 +398,7 @@ O pacote *stats*[@stats] fornece a função [*aggregate*](https://www.rdocumenta
 
 ### O que são medidas seriadas?
 
-```{r k3, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "hide"}
+```{r k3, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "hide"}
 # sorteia participante para relatar no texto
 set.seed(2)
 k2 <- sample(1:10, 1)
@@ -487,7 +497,7 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-seriadas-separadas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r medidas-seriadas-separadas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 ```
 
 ```{r medidas-seriadas-agregadas, include = FALSE, echo = FALSE, results = "hide"}
@@ -590,7 +600,7 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-seriadas-agregadas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r medidas-seriadas-agregadas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 ```
 
 <br>
@@ -603,7 +613,7 @@ O pacote *stats*[@stats] fornece a função [*aggregate*](https://www.rdocumenta
 
 ### O que são medidas múltiplas?
 
-```{r k4, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "hide"}
+```{r k4, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "hide"}
 # sorteia participante para relatar no texto
 set.seed(4)
 k4 <- sample(1:10, 1)
@@ -665,7 +675,7 @@ kableExtra::kable(
 
 <br>
 
-```{r medidas-multiplas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.fullwidth = TRUE}
+```{r medidas-multiplas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 ```
 
 <br>
@@ -730,7 +740,7 @@ O pacote *stats*[@stats] fornece a função [*aggregate*](https://www.rdocumenta
 
 <br>
 
-```{r acuracia-precisao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.cap = "Acurácia e precisão como propriedades de uma medida."}
+```{r acuracia-precisao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Acurácia e precisão como propriedades de uma medida."}
 # função para criar o alvo
 make_target_plot <- function(title, m_shift = 0, sd_spread = 0.1) {
   tibble::tibble(
@@ -779,7 +789,7 @@ gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 2)
 
 <br>
 
-```{r vies-variabilidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.cap = "Viés e variabilidade de uma medida."}
+```{r vies-variabilidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Viés e variabilidade de uma medida."}
 # para reprodutibilidade
 set.seed(1234)
 

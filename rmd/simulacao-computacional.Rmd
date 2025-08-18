@@ -2,6 +2,66 @@
 
 <br>
 
+## Simulações computacionais
+
+<br>
+
+### O que são simulações computacionais?
+
+-   Simulações computacionais consistem na geração de dados artificiais baseados em regras matemáticas e estatísticas, permitindo testar hipóteses, validar métodos e explorar cenários complexos sem necessidade de dados reais.[@hinsen2011]
+
+-   A simulação é frequentemente usada em estatística para avaliar o desempenho de testes, estimadores e modelos sob diferentes condições.
+
+<br>
+
+### Por que usar simulações?
+
+-   Testar o comportamento de métodos estatísticos sob diferentes premissas (ex: normalidade, homocedasticidade, tamanho amostral).
+
+-   Avaliar a robustez de algoritmos computacionais.
+
+-   Reproduzir processos naturais ou sociais para compreensão teórica.
+
+<br>
+
+```{r, echo=TRUE, results='asis'}
+# Simulação de 1000 médias de amostras de tamanho 30 de uma N(0,1)
+set.seed(123)
+n_sim <- 1000
+amostras <- replicate(n_sim, mean(rnorm(30, mean = 0, sd = 1)))
+hist(
+  amostras,
+  main = "Distribuição das médias simuladas",
+  xlab = "Média",
+  col = "lightblue",
+  border = "white"
+)
+```
+
+<br>
+
+### Quais são as boas práticas em simulações computacionais?
+
+-   Defina claramente o objetivo da simulação e as hipóteses a serem testadas, incluindo quais aspectos do fenômeno ou do método você pretende avaliar.[@eglen2017]
+
+-   Use uma semente para o gerador de números aleatórios com set.seed() para garantir a reprodutibilidade dos resultados.[@REF]
+
+-   Documente detalhadamente o processo de simulação, incluindo os parâmetros utilizados, a lógica do algoritmo e as suposições feitas.[@trisovic2022a]
+
+-   Realize múltiplas simulações (ex.: 1000 ou mais) para obter estimativas estáveis e resultados mais robustos e confiáveis.[@REF]
+
+-   Analise os resultados de forma crítica, considerando a variabilidade, as limitações do modelo e possíveis vieses do processo de simulação.[@REF]
+
+-   Use funções vetorizadas para otimizar o desempenho e reduzir o tempo de execução da simulação.[@REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote base[@base] fornece a função [*set.seed*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Random) para especificar uma semente e garantir a reprodutibilidade de computações que envolvem números aleatórios.
+:::
+
+<br>
+
 ## Características
 
 <br>
@@ -19,6 +79,106 @@
 ### O que é o método de Monte Carlo?
 
 -   .[@REF]
+
+<br>
+
+```{r monte-carlo-distribuicao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Convergência do histograma para a PDF teórica da Normal(0,1) com o aumento do tamanho amostral (n = 10, 100, 1000, 10000)."}
+# reproducibilidade
+set.seed(42)
+
+# Tamanhos de amostra
+sizes <- c(10, 100, 1000, 10000)
+
+# Dados simulados
+normal_data <- lapply(sizes, function(n) {
+  tibble::tibble(
+    x = rnorm(n, mean = 0, sd = 1),
+    n = factor(paste0("n = ", n), levels = paste0("n = ", sizes))
+  )
+}) %>% dplyr::bind_rows()
+
+# PDF teórica Normal(0,1)
+x_seq <- seq(-4, 4, length.out = 400)
+pdf_norm <- tibble::tibble(x = x_seq, y = dnorm(x_seq, mean = 0, sd = 1))
+
+# Figura 2x2
+normal_plot_2x2 <-
+  ggplot2::ggplot(normal_data, ggplot2::aes(x = x)) +
+  ggplot2::geom_histogram(ggplot2::aes(y = ..density..), bins = 30, fill = "skyblue", color = "white") +
+  ggplot2::geom_line(
+    data = pdf_norm, ggplot2::aes(x = x, y = y),
+    linewidth = 1, inherit.aes = FALSE
+  ) +
+  ggplot2::facet_wrap(~ n, ncol = 2) +
+  ggplot2::coord_cartesian(xlim = c(-4, 4)) +
+  ggplot2::labs(
+    title = "Convergência do histograma → Normal(0,1)",
+    x = "Valor", y = "Densidade"
+  ) +
+  ggplot2::theme_minimal(base_size = 14)
+
+normal_plot_2x2
+```
+
+<br>
+
+```{r monte-carlo-convergencia, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Convergência da média e do desvio-padrão amostral para os valores teóricos (0 e 1, respectivamente) com o aumento do tamanho amostral (n = 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)."}
+# Pacotes
+library(dplyr)
+
+# reproducibilidade
+set.seed(42)
+
+# Tamanhos de amostra e número de repetições
+ns   <- c(10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
+reps <- 500
+
+# Função para simular
+sim_summary_normal <- function(ns, reps) {
+  tibble::tibble(n = ns) %>%
+    dplyr::mutate(
+      sims = purrr::map(n, ~ replicate(reps, {
+        x <- rnorm(.x, mean = 0, sd = 1)
+        c(mean = mean(x), sd = sd(x))
+      }))
+    ) %>%
+    dplyr::mutate(
+      mean_vals = purrr::map(sims, ~ .x["mean", ]),
+      sd_vals   = purrr::map(sims, ~ .x["sd", ])
+    ) %>%
+    dplyr::select(-sims) %>%
+    tidyr::pivot_longer(cols = c(mean_vals, sd_vals),
+                 names_to = "stat", values_to = "values") %>%
+    tidyr::unnest(values) %>%
+    dplyr::group_by(n, stat) %>%
+    dplyr::summarise(
+      med = median(values),
+      lo  = quantile(values, 0.05),
+      hi  = quantile(values, 0.95),
+      .groups = "drop"
+    ) %>%
+    dplyr::mutate(
+      stat = recode(stat, mean_vals = "Média", sd_vals = "Desvio-padrão"),
+      true = ifelse(stat == "Média", 0, 1)
+    )
+}
+
+normal_sum <- sim_summary_normal(ns, reps)
+
+# Gráfico
+ggplot2::ggplot(normal_sum, ggplot2::aes(x = n, y = med)) +
+  ggplot2::geom_ribbon(ggplot2::aes(ymin = lo, ymax = hi, fill = stat), alpha = 0.2) +
+  ggplot2::geom_line(ggplot2::aes(color = stat), size = 1) +
+  ggplot2::geom_hline(ggplot2::aes(yintercept = true, color = stat), linetype = 2) +
+  ggplot2::facet_wrap(~ stat, scales = "free_y") +
+  ggplot2::scale_x_log10(breaks = ns) +
+  ggplot2::labs(
+    title = "Convergência da Média e do Desvio-padrão – Normal(0,1)",
+    x = "Tamanho da amostra (n, escala log)", y = "Estimativa"
+  ) +
+  ggplot2::theme_minimal(base_size = 13) +
+  ggplot2::theme(legend.position = "none")
+```
 
 <br>
 

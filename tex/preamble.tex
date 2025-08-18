@@ -14,6 +14,11 @@
 \usepackage{graphicx}
 \usepackage[notransparent]{svg}
 
+\usepackage[table]{xcolor}
+\definecolor{lightred}{HTML}{FFCDD2}
+\definecolor{lightyellow}{HTML}{FFF9C4}
+\definecolor{lightgreen}{HTML}{E8F5E9}
+
 % Ficha / utilidades
 \usepackage{lastpage}
 \usepackage{paralist}
@@ -51,8 +56,15 @@
   arc=4pt}
 
 \newenvironment{infobox}[1]{%
-  \begin{itemize}
-  \renewcommand{\labelitemi}{%
+  \begin{list}{}{%
+    \setlength{\leftmargin}{4em}   % igual ao padding-left do CSS
+    \setlength{\labelsep}{1em}     % distância entre ícone e texto
+    \setlength{\labelwidth}{3em}   % largura reservada ao ícone
+    \setlength{\itemindent}{0pt}   % sem indent extra
+    \setlength{\listparindent}{0pt}
+    \setlength{\rightmargin}{0pt}
+  }
+  \renewcommand{\makelabel}[1]{%
     \raisebox{-.7\height}[0pt][0pt]{%
       {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{#1}}}}
   \setlength{\fboxsep}{1em}
@@ -60,7 +72,7 @@
   \item
 }{%
   \end{blackbox}
-  \end{itemize}
+  \end{list}
 }
 
 % Atalhos para (des)ativar notas de rodapé

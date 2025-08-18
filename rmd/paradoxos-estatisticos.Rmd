@@ -78,7 +78,7 @@
 
 <br>
 
-```{r simpson, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', results = "asis", fig.cap = "Paradoxo de Simpson representado com dados simulados. Os pontos no gráfico representam observações individuais e as linhas de tendência representam as regressões lineares ajustadas para os dados desagregados da população e agregados por subpopulação."}
+```{r simpson, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Paradoxo de Simpson representado com dados simulados. Os pontos no gráfico representam observações individuais e as linhas de tendência representam as regressões lineares ajustadas para os dados desagregados da população e agregados por subpopulação."}
 # Define global shapes and colors
 global_shapes <- c(16, 16)  # Circle and triangle
 global_colors <- c("black", "gray50")  # Black and gray
@@ -133,7 +133,7 @@ aggregated_plot <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y, color = fact
   ggplot2::theme(
     aspect.ratio = 1,
     legend.position = "right",
-    plot.title = ggplot2::element_text(hjust = 0.5)
+    plot.title = ggplot2::element_text(hjust = 0.5, size = 10)
   )
 
 # Plot for disaggregated trends
@@ -159,14 +159,26 @@ disaggregated_plots <- lapply(unique(data$z), function(z_value) {
     ggplot2::theme_minimal() +
     ggplot2::xlim(x_limits) +
     ggplot2::ylim(y_limits) +
-    ggplot2::theme(aspect.ratio = 1)
+    ggplot2::theme(
+      aspect.ratio = 1,
+      plot.title = ggplot2::element_text(size = 10)
+    )
+})
+
+aggregated_plot <- aggregated_plot + 
+  ggplot2::theme(plot.margin = ggplot2::margin(2, 2, 2, 2))
+
+disaggregated_plots <- lapply(disaggregated_plots, function(p) {
+  p + ggplot2::theme(plot.margin = ggplot2::margin(2, 2, 2, 2))
 })
 
 # Arrange plots
 cowplot::plot_grid(
-  cowplot::plot_grid(aggregated_plot),
-  cowplot::plot_grid(plotlist = disaggregated_plots, align = "hv"),
-  nrow = 2
+  aggregated_plot,
+  cowplot::plot_grid(plotlist = disaggregated_plots, align = "v"),
+  ncol = 1,
+  align = "v",
+  axis = "lr"
 )
 ```
 
