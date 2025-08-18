@@ -1,0 +1,109 @@
+# **Scripts** {#scripts .unnumbered .unlisted}
+
+<br>
+
+```{r setup, echo = FALSE, warning = FALSE, message = FALSE, results = 'asis'}
+# delete previously created files
+if (fs::dir_exists("../scripts")) {
+  fs::dir_delete("../scripts")
+}
+
+# === parâmetros ajustáveis ===
+input_dir      <- "rmd"   # onde estão os .Rmd
+output_root    <- "scripts"      # raiz onde serão criadas as pastas
+prefix_index   <- TRUE         # prefixar 001_, 002_... para manter ordem? (TRUE/FALSE)
+
+# --- funções utilitárias ---
+sanitize_label <- function(x) {
+  x <- trimws(x)
+  if (is.na(x) || x == "") "unnamed" else x
+}
+
+extract_r_chunks <- function(lines) {
+  # normaliza quebras (CRLF -> LF) e junta
+  txt <- gsub("\r\n?", "\n", paste(lines, collapse = "\n"))
+
+  # captura blocos com ``` ou ~~~, lembrando a cerca usada no início
+  pattern <- "(?s)(^|\\n)([`~]{3,})\\{\\s*[Rr]([^}]*)\\}\\s*\\n(.*?)(?:\\n\\2\\s*(?=\\n|$))"
+  m <- gregexpr(pattern, txt, perl = TRUE)
+  reg_matches <- regmatches(txt, m)[[1]]
+  if (length(reg_matches) == 0) return(list())
+
+  chunks <- lapply(reg_matches, function(block) {
+    # remove possível \n inicial do bloco
+    block <- sub("^\\n", "", block, perl = TRUE)
+
+    # extrai header e corpo
+    header_pat <- "^\\s*[`~]{3,}\\{\\s*[Rr]([^}]*)\\}\\s*\\n"
+    header <- sub(header_pat, "\\1", block, perl = TRUE)
+
+    body <- sub(header_pat, "", block, perl = TRUE)
+    # remove a cerca de fechamento no final (``` ou ~~~) + espaços/fim de arquivo
+    body <- sub("\\n?\\s*[`~]{3,}\\s*$", "", body, perl = TRUE)
+
+    # limpeza leve nas bordas
+    body <- sub("^\\s*\\n", "", body, perl = TRUE)     # quebra vazia no topo
+    body <- sub("\\s*$", "", body, perl = TRUE)        # espaços finais
+
+    # label = primeiro token antes de vírgula/espaço
+    lab <- trimws(sub("^[,\\s]*", "", header))
+    lab <- sub("[,\\s].*$", "", lab)
+    lab <- sanitize_label(lab)
+    if (identical(lab, "") || is.na(lab)) lab <- "unnamed"
+
+    list(label = lab, code = body)
+  })
+  chunks
+}
+
+if (!fs::dir_exists(output_root)) fs::dir_create(output_root)
+
+rmd_files <- fs::dir_ls(input_dir, glob = "*.Rmd", recurse = FALSE)
+if (length(rmd_files) == 0) stop("Nenhum .Rmd encontrado em `input_dir`.")
+
+for (f in rmd_files) {
+  lines <- readLines(f, warn = FALSE)
+  chunks <- extract_r_chunks(lines)
+
+  base   <- fs::path_ext_remove(fs::path_file(f))          # nome do arquivo sem extensão
+  outdir <- fs::path(output_root, base)                # pasta com o nome do .Rmd
+  if (!fs::dir_exists(outdir)) fs::dir_create(outdir)
+
+  if (length(chunks) == 0) {
+    message("Sem chunks {r} em: ", f)
+    next
+  }
+
+  used <- character(0)
+  ndig <- nchar(as.character(length(chunks)))
+
+  for (i in seq_along(chunks)) {
+    lab <- chunks[[i]]$label
+    if (lab == "unnamed") lab <- paste0("unnamed_", i)
+
+    # garantir unicidade dentro do arquivo
+    candidate <- lab
+    k <- 2
+    while (candidate %in% used) {
+      candidate <- paste0(lab, "_", k)
+      k <- k + 1
+    }
+    used <- c(used, candidate)
+
+    prefix <- if (prefix_index) sprintf(paste0("%0", ndig, "d_"), i) else ""
+    out_file <- fs::path(outdir, paste0(prefix, candidate, ".R"))
+
+    writeLines(chunks[[i]]$code, out_file)
+    message("✓ ", out_file)
+  }
+}
+
+# loop across created folders to delete the last R file
+for (dir in fs::dir_ls(output_root, type = "directory")) {
+  r_files <- fs::dir_ls(dir, glob = "*.R", recurse = FALSE)
+  if (length(r_files) > 0) {
+    last_file <- tail(r_files, n = 1)
+    fs::file_delete(last_file)
+  }
+}
+```
