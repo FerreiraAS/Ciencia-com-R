@@ -426,6 +426,64 @@ ggplot2::ggplot(dados, ggplot2::aes(x = Grupo, y = Contagem, fill = Categoria)) 
 
 <br>
 
+```{r bar-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráficos de barras represetando médias, barras de erro e dados individuais."}
+# Gerar dados de exemplo
+set.seed(123)
+df <- base::expand.grid(Fator1 = c("A", "B"),
+                        Fator2 = c("X", "Y"),
+                        Rep = 1:15) |>
+  dplyr::mutate(Y = stats::rnorm(dplyr::n(), 
+                                 mean = dplyr::if_else(Fator1 == "A", 5, 7) + dplyr::if_else(Fator2 == "X", 0, 2), 
+                                 sd = 1.5))
+
+# Calcular estatísticas por grupo
+summary_df <- df |>
+  dplyr::group_by(Fator1, Fator2) |>
+  dplyr::summarise(
+    media = mean(Y),
+    sd = stats::sd(Y),
+    n = dplyr::n(),
+    se = sd / sqrt(n),
+    ic95 = 1.96 * se,
+    .groups = "drop"
+  )
+
+# 1. Gráfico com apenas as médias
+p1 <- ggplot2::ggplot(summary_df, ggplot2::aes(x = interaction(Fator1, Fator2), y = media, fill = Fator1)) +
+  ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(), width = 0.6) +
+  ggplot2::labs(title = "Média", y = "Média", x = "Grupo") +
+  ggplot2::theme_minimal()
+
+# 2. Gráfico com média + intervalo de confiança
+p2 <- ggplot2::ggplot(summary_df, ggplot2::aes(x = interaction(Fator1, Fator2), y = media, fill = Fator1)) +
+  ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(), width = 0.6) +
+  ggplot2::geom_errorbar(ggplot2::aes(ymin = media - ic95, ymax = media + ic95), width = 0.2) +
+  ggplot2::labs(
+    title = "Média com Intervalo de Confiança",
+    subtitle = "Barras de erro representam IC 95%",
+    y = "Média", x = "Grupo"
+  ) +
+  ggplot2::theme_minimal()
+
+# 3. Gráfico com média + pontos individuais
+p3 <- ggplot2::ggplot(df, ggplot2::aes(x = interaction(Fator1, Fator2), y = Y, fill = Fator1)) +
+  ggplot2::stat_summary(fun = mean, geom = "bar", width = 0.6, color = "black") +
+  ggplot2::geom_jitter(position = ggplot2::position_jitter(width = 0.1), shape = 21, color = "black", size = 2, alpha = 0.6) +
+  ggplot2::labs(
+    title = "Média e Pontos Individuais",
+    subtitle = "Pontos representam dados individuais",
+    y = "Valor", x = "Grupo"
+  ) +
+  ggplot2::guides(fill = "none") +  # <- oculta a legenda
+  ggplot2::theme_minimal()
+
+# Empilhar os gráficos verticalmente
+library(patchwork)
+(p1 / p2 / p3) + patchwork::plot_layout(guides = "collect")
+```
+
+<br>
+
 ### Quais são os tipos de gráficos para variáveis numéricas?
 
 -   Histograma: Distribuição de frequência de uma variável contínua. Mostra a forma da distribuição (simétrica, assimétrica, bimodal).[@REF]
@@ -441,6 +499,24 @@ ggplot2::ggplot(dados, ggplot2::aes(x = valor)) +
   ggplot2::geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
   ggplot2::labs(title = "Histograma da variável 'valor'",
                 x = "Valor", y = "Frequência") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+-   Gráfico de densidade: Similar ao histograma, mas mais suave. Útil para avaliar a distribuição.[@REF]
+
+<br>
+
+```{r grafico-densidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de densidade da variável 'valor'."}
+# Simular dados
+dados <- data.frame(valor = stats::rnorm(1000, mean = 0, sd = 1))
+
+# Gráfico de densidade
+ggplot2::ggplot(dados, ggplot2::aes(x = valor)) +
+  ggplot2::geom_density(fill = "lightblue", alpha = 0.6) +
+  ggplot2::labs(title = "Gráfico de Densidade da variável 'valor'",
+                x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal()
 ```
 
@@ -486,24 +562,6 @@ ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, fill = grupo)) +
   ggplot2::geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA) +
   ggplot2::labs(title = "Violin Plot por Grupo",
                 x = "Grupo", y = "Medida") +
-  ggplot2::theme_minimal()
-```
-
-<br>
-
--   Gráfico de densidade: Similar ao histograma, mas mais suave. Útil para avaliar a distribuição.[@REF]
-
-<br>
-
-```{r grafico-densidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de densidade da variável 'valor'."}
-# Simular dados
-dados <- data.frame(valor = stats::rnorm(1000, mean = 0, sd = 1))
-
-# Gráfico de densidade
-ggplot2::ggplot(dados, ggplot2::aes(x = valor)) +
-  ggplot2::geom_density(fill = "lightblue", alpha = 0.6) +
-  ggplot2::labs(title = "Gráfico de Densidade da variável 'valor'",
-                x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal()
 ```
 
@@ -603,27 +661,24 @@ ggplot2::ggplot(dados, ggplot2::aes(x = data, y = valor)) +
 
 ### Quais são os tipos de gráficos para dados multivariados?
 
--   Gráfico de radar (ou gráfico de aranha): Representa várias variáveis em um único gráfico, útil para comparar perfis.[@REF]
+-   Gráfico de dispersão: Representa a relação entre duas variáveis, com pontos e uma linha de tendência.[@REF]
 
 <br>
 
-```{r graficos-multivariados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico radar representando múltiplas variáveis."}
-# Simular dados para 3 perfis com 5 variáveis
-dados <- data.frame(
-  Max = c(10, 10, 10, 10, 10),
-  Min = c(0, 0, 0, 0, 0),
-  Perfil_A = c(6, 7, 8, 5, 9),
-  Perfil_B = c(8, 6, 7, 6, 7),
-  Perfil_C = c(5, 9, 6, 8, 6)
-)
-rownames(dados) <- c("Max", "Min", "A", "B", "C")
+```{r graficos-correlacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de correlação entre duas variáveis com linha de tendência."}
+# Simular dados com correlação
+set.seed(1)
+x <- stats::rnorm(100)
+y <- 2 * x + stats::rnorm(100, sd = 0.5)
+dados <- data.frame(x = x, y = y)
 
-# Gráfico radar
-fmsb::radarchart(dados,
-                 axistype = 1,
-                 pcol = c("red", "blue", "green"),
-                 plty = 1,
-                 title = "Gráfico de Radar - Perfis Simulados")
+# Gráfico de dispersão com linha de tendência
+ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(color = "darkblue", alpha = 0.6) +
+  ggplot2::geom_smooth(method = "lm", color = "red", se = FALSE) +
+  ggplot2::labs(title = "Correlação entre Variáveis",
+                x = "Variável X", y = "Variável Y") +
+  ggplot2::theme_minimal()
 ```
 
 <br>
@@ -645,28 +700,6 @@ dados <- data.frame(
 
 # Matriz de dispersão
 GGally::ggpairs(dados, title = "Matriz de Dispersão")
-```
-
-<br>
-
--   Gráfico de correlação: Representa a relação entre duas variáveis, com pontos e uma linha de tendência.[@REF]
-
-<br>
-
-```{r graficos-correlacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de correlação entre duas variáveis com linha de tendência."}
-# Simular dados com correlação
-set.seed(1)
-x <- stats::rnorm(100)
-y <- 2 * x + stats::rnorm(100, sd = 0.5)
-dados <- data.frame(x = x, y = y)
-
-# Gráfico de dispersão com linha de tendência
-ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y)) +
-  ggplot2::geom_point(color = "darkblue", alpha = 0.6) +
-  ggplot2::geom_smooth(method = "lm", color = "red", se = FALSE) +
-  ggplot2::labs(title = "Correlação entre Variáveis",
-                x = "Variável X", y = "Variável Y") +
-  ggplot2::theme_minimal()
 ```
 
 <br>
@@ -697,6 +730,31 @@ ggplot2::ggplot(dados_long, ggplot2::aes(x = `Variável 1`, y = `Variável 2`, f
                                 midpoint = 0, limit = c(-1, 1), name = "Correlação") +
   ggplot2::labs(title = "Mapa de Calor da Correlação entre Variáveis") +
   ggplot2::theme_minimal()
+```
+
+<br>
+
+-   Gráfico de radar (ou gráfico de aranha): Representa várias variáveis em um único gráfico, útil para comparar perfis.[@REF]
+
+<br>
+
+```{r graficos-multivariados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico radar representando múltiplas variáveis."}
+# Simular dados para 3 perfis com 5 variáveis
+dados <- data.frame(
+  Max = c(10, 10, 10, 10, 10),
+  Min = c(0, 0, 0, 0, 0),
+  Perfil_A = c(6, 7, 8, 5, 9),
+  Perfil_B = c(8, 6, 7, 6, 7),
+  Perfil_C = c(5, 9, 6, 8, 6)
+)
+rownames(dados) <- c("Max", "Min", "A", "B", "C")
+
+# Gráfico radar
+fmsb::radarchart(dados,
+                 axistype = 1,
+                 pcol = c("red", "blue", "green"),
+                 plty = 1,
+                 title = "Gráfico de Radar - Perfis Simulados")
 ```
 
 <br>
@@ -748,64 +806,6 @@ Os pacotes *ggplot2*[@ggplot2], *plotly*[@plotly] e *corrplot*[@corrplot] fornec
 -   Use *jitter* simétrico em gráficos de pontos para permitir a visualização de todos os dados.[@Weissgerber2019]
 
 -   Prefira palhetas de cor adaptadas para daltônicos.[@Weissgerber2019]
-
-<br>
-
-```{r bar-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráficos de barras represetando médias, barras de erro e dados individuais."}
-# Gerar dados de exemplo
-set.seed(123)
-df <- base::expand.grid(Fator1 = c("A", "B"),
-                        Fator2 = c("X", "Y"),
-                        Rep = 1:15) |>
-  dplyr::mutate(Y = stats::rnorm(dplyr::n(), 
-                                 mean = dplyr::if_else(Fator1 == "A", 5, 7) + dplyr::if_else(Fator2 == "X", 0, 2), 
-                                 sd = 1.5))
-
-# Calcular estatísticas por grupo
-summary_df <- df |>
-  dplyr::group_by(Fator1, Fator2) |>
-  dplyr::summarise(
-    media = mean(Y),
-    sd = stats::sd(Y),
-    n = dplyr::n(),
-    se = sd / sqrt(n),
-    ic95 = 1.96 * se,
-    .groups = "drop"
-  )
-
-# 1. Gráfico com apenas as médias
-p1 <- ggplot2::ggplot(summary_df, ggplot2::aes(x = interaction(Fator1, Fator2), y = media, fill = Fator1)) +
-  ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(), width = 0.6) +
-  ggplot2::labs(title = "Média", y = "Média", x = "Grupo") +
-  ggplot2::theme_minimal()
-
-# 2. Gráfico com média + intervalo de confiança
-p2 <- ggplot2::ggplot(summary_df, ggplot2::aes(x = interaction(Fator1, Fator2), y = media, fill = Fator1)) +
-  ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(), width = 0.6) +
-  ggplot2::geom_errorbar(ggplot2::aes(ymin = media - ic95, ymax = media + ic95), width = 0.2) +
-  ggplot2::labs(
-    title = "Média com Intervalo de Confiança",
-    subtitle = "Barras de erro representam IC 95%",
-    y = "Média", x = "Grupo"
-  ) +
-  ggplot2::theme_minimal()
-
-# 3. Gráfico com média + pontos individuais
-p3 <- ggplot2::ggplot(df, ggplot2::aes(x = interaction(Fator1, Fator2), y = Y, fill = Fator1)) +
-  ggplot2::stat_summary(fun = mean, geom = "bar", width = 0.6, color = "black") +
-  ggplot2::geom_jitter(position = ggplot2::position_jitter(width = 0.1), shape = 21, color = "black", size = 2, alpha = 0.6) +
-  ggplot2::labs(
-    title = "Média e Pontos Individuais",
-    subtitle = "Pontos representam dados individuais",
-    y = "Valor", x = "Grupo"
-  ) +
-  ggplot2::guides(fill = "none") +  # <- oculta a legenda
-  ggplot2::theme_minimal()
-
-# Empilhar os gráficos verticalmente
-library(patchwork)
-(p1 / p2 / p3) + patchwork::plot_layout(guides = "collect")
-```
 
 <br>
 

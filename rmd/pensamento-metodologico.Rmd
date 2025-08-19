@@ -91,6 +91,14 @@ style M fill:#FFFFFF00;
 
 <br>
 
+### Como contribuir para a reprodutibilidade?
+
+-   Disponibilize publicamente os bancos de dados, respeitando as considerações éticas vigentes (ex.: autorização dos participantes e do Comitê de Ética em Pesquisa) e internacionalmente.[@mair2016]
+
+-   Produza manuscritos reprodutíveis - manuscritos executáveis ou relatórios dinâmicos - que permitem a integração do banco de dados da(s) amostra(s), do(s) script(s) de análise estatística (incluindo comentários para sua interpretação), dos pacotes ou bibliotecas utilizados, das fontes e referências bibliográficas citadas, além dos demais elementos textuais (tabelas, gráficos) - todos gerados dinamicamente.[@hinsen2011]
+
+<br>
+
 ## Robustez
 
 <br>
@@ -118,6 +126,120 @@ style M fill:#FFFFFF00;
 ### O que é generalização?
 
 -   Generalização refere-se à extrapolação das conclusões do estudo, observados na amostra, para a população.[@Banerjee2010]
+
+<br>
+
+```{r generalizacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da generalização de uma amostra para a população."}
+# Dados da população e amostra
+set.seed(123)
+pop_n <- 50
+sample_n <- 10
+
+# Reduzindo os raios internos para posicionar os ícones mais perto do centro
+radius_pop <- runif(pop_n, 0.5, 2.5)
+radius_sample <- runif(sample_n, 0.5, 1.5)
+
+# Geração das posições para a população (círculo à esquerda)
+angle_pop <- seq(0, 2 * pi, length.out = pop_n + 1)[-1]
+pop_df <- data.frame(
+  id = 1:pop_n,
+  x_pop = cos(angle_pop) * radius_pop - 4,
+  y_pop = sin(angle_pop) * radius_pop
+)
+
+# Seleção aleatória da amostra
+sample_ids <- sample(pop_df$id, sample_n)
+sample_df <- pop_df %>%
+  dplyr::filter(id %in% sample_ids) %>%
+  dplyr::mutate(
+    angle = seq(0, 2 * pi, length.out = sample_n + 1)[-1],
+    x_sample = cos(angle) * radius_sample + 4,
+    y_sample = sin(angle) * radius_sample
+  )
+
+# Atribui o ícone após os data.frames estarem prontos
+pop_df$label <- "./images/person.svg"
+sample_df$label <- "./images/person.svg"
+
+# Base de setas (amostragem)
+setas_df <- sample_df %>%
+  dplyr::select(id, x_pop, y_pop, x_sample, y_sample)
+
+# Plot
+ggplot2::ggplot() +
+  # Círculo da população
+  ggforce::geom_circle(ggplot2::aes(x0 = -4, y0 = 0, r = 3),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(data = pop_df,
+                      ggplot2::aes(x = x_pop, y = y_pop, image = label),
+                      size = 0.07) +
+  ggplot2::annotate(
+    "text",
+    x = -4, y = 3.5,
+    label = "População",
+    size = 5, fontface = "bold"
+  ) +
+  
+  # Círculo da amostra
+  ggforce::geom_circle(ggplot2::aes(x0 = 4, y0 = 0, r = 1.8),
+                       color = "black",
+                       linewidth = 1) +
+  ggimage::geom_image(
+    data = sample_df,
+    ggplot2::aes(x = x_sample, y = y_sample, image = label),
+    size = 0.07
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = 4, y = 2.3,
+    label = "Amostra",
+    size = 5, fontface = "bold"
+  ) +
+  
+  # Setas (amostragem) população -> amostra
+  ggplot2::geom_curve(
+    data = setas_df,
+    ggplot2::aes(
+      x = x_pop, y = y_pop,
+      xend = x_sample, yend = y_sample
+    ),
+    arrow = ggplot2::arrow(length = grid::unit(0.2, "cm")),
+    color = "lightgray",
+    linewidth = 0.7,
+    curvature = -0.2
+  ) +
+  
+  # NOVO: Seta grossa Amostra -> População (inferência/generalização)
+  ggplot2::geom_curve(
+    ggplot2::aes(x = 4, y = 0, xend = -4, yend = 0),
+    arrow = ggplot2::arrow(length = grid::unit(0.35, "cm"), type = "closed"),
+    curvature = -0.1,
+    color = "darkgray",
+    linewidth = 2
+  ) +
+  # NOVO: Título da seta de inferência
+  ggplot2::annotate(
+    "text",
+    x = 0, y = -2.2,
+    label = "Generalização",
+    color = "darkgray",
+    size = 5,
+    fontface = "italic"
+  ) +
+  
+  ggplot2::coord_fixed() +
+  ggplot2::theme_void() +
+  # Texto "Amostragem"
+  ggplot2::annotate(
+    "text",
+    x = 0, y = 3,
+    label = "Amostragem",
+    color = "darkgray",
+    size = 5,
+    fontface = "italic"
+  )
+```
 
 <br>
 
