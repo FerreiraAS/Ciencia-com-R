@@ -1,0 +1,159 @@
+# **Poder estatístico** {#poder-estatistico}
+
+<br>
+
+## Poder do teste
+
+<br>
+
+### O que é poder do teste?
+
+-   Poder do teste é a probabilidade de rejeitar corretamente a hipótese nula ($H_{0}$) quando esta é falsa.[@Curran-Everett2009]
+
+-   Poder do teste pode ser calculado como ($1 - \beta$).[@Curran-Everett2009]
+
+<br>
+
+### O que é análise de poder do teste?
+
+-   Poder é a probabilidade de que um dado tamanho de efeito será observado em um experimento futuro sob um conjunto de hipóteses - tamanho de efeito real e erro tipo I - para um dado tamanho de amostra.[@heckman2022]
+
+-   O objetivo geral da análise de poder ao projetar um estudo é escolher um tamanho de amostra que controle os 2 tipos de erros de inferência estatística: tipo I ($\alpha$, resultado falso-positivo) e tipo II ($\beta$, resultado falso-negativo).[@heckman2022]
+
+-   Numericamente, o poder de um estudo é calculado como $1-\beta$ e reportado em valor percentual.[@heckman2022]
+
+<br>
+
+### Quando realizar a análise de poder do teste?
+
+-   Na fase de projeto de pesquisa: a análise de poder para determinar o tamanho da amostra objetiva que o tamanho da amostra permita uma probabilidade razoável de detectar um efeito significativo pré-especificado.[@heckman2022]
+
+-   Após a coleta de dados: a análise de poder objetiva informar estudos futuros a respeito do tamanho da amostra necessário para a detecção de um efeito significativo pré-especificado.[@heckman2022]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.2p.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.2p.test) para cálculo do poder do teste de proporção balanceado (2 amostras com mesmo número de participantes).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.2p2n.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.2p.test) para cálculo do poder do teste de proporção não balanceado (2 amostras com diferente número de participantes).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.anova.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.anova.test) para cálculo do poder do teste de análise de variância balanceado (3 ou mais amostras com mesmo número de participantes).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.chisq.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.chisq.test) para cálculo do poder do teste de qui-quadrado $\chi^2$.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.f2.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.f2.test) para cálculo do poder do teste com modelo linear geral.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.norm.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.norm.test) para cálculo do poder do teste de média de uma distribuição normal com variância conhecida.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.p.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.p.test) para cálculo do poder do teste de proporção (1 amostra).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.r.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.r.test) para cálculo do poder to teste de correlação (1 amostra).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.t.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.t.test) para cálculo do poder do teste *t* de diferença de 1 amostra, 2 amostras dependentes ou 2 amostras independentes (grupos balanceados).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *pwr*[@pwr] fornece a função [*pwr.t2n.test*](https://www.rdocumentation.org/packages/pwr/versions/1.3-0/topics/pwr.t2n.test) para cálculo do poder do teste *t* de diferença de 2 amostras independentes (grupos não balanceados).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *longpower*[@longpower] fornece a função [*power.mmrm*](https://www.rdocumentation.org/packages/longpower/versions/1.0.24/topics/power.mmrm) para calcular o poder de testes com análises por modelo de regressão linear misto.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *Superpower*[@Superpower] fornece a função [*power.ftest*](https://www.rdocumentation.org/packages/Superpower/versions/0.2.0/topics/power.ftest) para calcular o poder do teste por análise de testes F.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *Superpower*[@Superpower] fornece a função [*power_oneway_between*](https://www.rdocumentation.org/packages/Superpower/versions/0.2.0/topics/power_oneway_between) para calcular o poder do teste por análise de variância (ANOVA) de 1 fator entre-sujeitos.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *Superpower*[@Superpower] fornece a função [*power_oneway_within*](https://www.rdocumentation.org/packages/Superpower/versions/0.2.0/topics/power_oneway_within) para calcular o poder do teste por análise de variância (ANOVA) de 1 fator intra-sujeitos.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *Superpower*[@Superpower] fornece a função [*power_oneway_ancova*](https://www.rdocumentation.org/packages/Superpower/versions/0.2.0/topics/power_oneway_ancova) para calcular o poder do teste por análise de covariância (ANCOVA).
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *Superpower*[@Superpower] fornece a função [*power_twoway_between*](https://www.rdocumentation.org/packages/Superpower/versions/0.2.0/topics/power_twoway_between) para calcular o poder do teste por análise de covariância (ANOVA) de 2 fatores entre-sujeitos.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *Superpower*[@Superpower] fornece a função [*power_threeway_between*](https://www.rdocumentation.org/packages/Superpower/versions/0.2.0/topics/power_threeway_between) para calcular o poder do teste por análise de covariância (ANOVA) de 3 fatores entre-sujeitos.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *InteractionPoweR*[@InteractionPoweR] fornece a função [*power_interaction*](https://www.rdocumentation.org/packages/InteractionPoweR/versions/0.2.1/topics/power_interaction) para calcular o poder do teste por análise de efeito de interações.
+:::
+
+<br>
+
+### Por que a análise de poder do teste *post hoc* é inadequada?
+
+-   A análise do poder é teoricamente incorreta, uma vez que a probabilidade calculada $1-\beta$ expressa a probabilidade de um evento futuro, o que não é mais relevante quando o evento de interesse já ocorreu.[@Cummings2003; @heckman2022]
+
+<br>
+
+### O que pode ser realizado ao invés da análise de poder?
+
+-   Após a coleta e análise de dados, recomenda-se realizar a análise e interpretação dos resultados a partir do tamanho do efeito e do seu intervalo de confiança no nível de significância $\alpha$ pré-estabelecido.[@heckman2022]
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>
