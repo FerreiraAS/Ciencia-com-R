@@ -165,15 +165,15 @@ gridExtra::grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, ncol = 4, nrow = 2)
 
 -   Distribuições contínuas:
 
-    -   Uniforme: resultados que possuem a mesma densidade.[@REF]
+    -   Uniforme: .[@REF]
 
-    -   Exponencial: tempo entre eventos.[@REF]
+    -   Exponencial: .[@REF]
 
     -   Normal: .[@REF]
 
-    -   Aproximação binomial: número de sucessos em uma grande quantidade de tentativas.[@REF]
+    -   Aproximação binomial: .[@REF]
 
-    -   Aproximação Poisson: número de ocorrências em um intervalo de tempo fixo.[@REF]
+    -   Aproximação Poisson: .[@REF]
 
     -   t-Student: .[@REF]
 
@@ -715,11 +715,11 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 ### Que parâmetros de tendência central podem ser estimados?
 
--   *Média*: aritmética, ponderada, geométrica ou harmônica.[@kanji2006; @Ali2016; @s.2011a]
+-   Média aritmética, ponderada, geométrica ou harmônica.[@kanji2006; @Ali2016; @s.2011a]
 
--   *Mediana*.[@kanji2006; @Ali2016; @s.2011]
+-   Mediana.[@kanji2006; @Ali2016; @s.2011]
 
--   *Moda*.[@kanji2006; @Ali2016; @s.2011]
+-   Moda.[@kanji2006; @Ali2016; @s.2011]
 
 -   A posição relativa das medidas de tendência central (média, mediana e moda) depende da forma da distribuição.[@s.2011]
 
@@ -883,17 +883,17 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 ### Que parâmetros de dispersão podem ser estimados?
 
--   *Variância*.[@kanji2006; @Ali2016]
+-   Variância.[@kanji2006; @Ali2016]
 
--   *Desvio-padrão*: Informam sobre a dispersão da população e são, portanto, úteis como preditores da variação em novas amostras.[@Curran-Everett2008; @krzywinski2013; @manikandan2011]
+-   Desvio-padrão: Informam sobre a dispersão da população e são, portanto, úteis como preditores da variação em novas amostras.[@Curran-Everett2008; @krzywinski2013; @manikandan2011]
 
--   *Erro-padrão*: Refletem a incerteza na média e sua dependência do tamanho da amostra.[@Curran-Everett2008; @krzywinski2013]
+-   Erro-padrão: Refletem a incerteza na média e sua dependência do tamanho da amostra.[@Curran-Everett2008; @krzywinski2013]
 
--   *Amplitude*.[@kanji2006; @Ali2016; @manikandan2011]
+-   Amplitude.[@kanji2006; @Ali2016; @manikandan2011]
 
--   *Intervalo interquartil*.[@kanji2006; @Ali2016; @manikandan2011]
+-   Intervalo interquartil.[@kanji2006; @Ali2016; @manikandan2011]
 
--   *Intervalo de confiança*: Captura a média populacional correspondente ao nível de significância $\alpha$ pré-estabelecido.[@kanji2006; @Cumming2007; @krzywinski2013; @Ali2016]
+-   Intervalo de confiança: Captura a média populacional correspondente ao nível de significância $\alpha$ pré-estabelecido.[@kanji2006; @Cumming2007; @krzywinski2013; @Ali2016]
 
 <br>
 
@@ -1072,13 +1072,13 @@ O pacote *stats*[@stats] fornece a função [*confint*](https://www.rdocumentati
 
 ### Que parâmetros de proporção podem ser estimados?
 
--   *Frequência absoluta*.[@Altman1994; @kanji2006; @Ali2016]
+-   Frequência absoluta.[@Altman1994; @kanji2006; @Ali2016]
 
--   *Frequência relativa*.[@Altman1994; @kanji2006; @Ali2016]
+-   Frequência relativa.[@Altman1994; @kanji2006; @Ali2016]
 
--   *Percentil*.[@Altman1994; @kanji2006; @Ali2016]
+-   Percentil.[@Altman1994; @kanji2006; @Ali2016]
 
--   *Quantil*: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem:[@Altman1994]
+-   Quantil: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem:[@Altman1994]
 
     -   Tercil: 2 valores que dividem a amostra em 3 grupos de tamanhos iguais.[@Altman1994]
 
@@ -1114,15 +1114,9 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 ### Que parâmetros de distribuição podem ser estimados?
 
--   *Assimetria*.[@kanji2006]
+-   Assimetria.[@kanji2006]
 
--   *Curtose*.[@kanji2006]
-
-<br>
-
-```{r}
-
-```
+-   Curtose.[@kanji2006]
 
 <br>
 
@@ -1138,9 +1132,9 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 ### Que parâmetros extremos podem ser estimados?
 
--   *Mínimo*.[@Ali2016]
+-   Mínimo.[@Ali2016]
 
--   *Máximo*.[@Ali2016]
+-   Máximo.[@Ali2016]
 
 <br>
 
@@ -1184,26 +1178,23 @@ data_ext$outlier_resid <- abs(data_ext$resid_std) > thr_resid
 data_ext$influente     <- data_ext$cook_d > thr_cook
 
 # 5) Plot: pontos normais, outliers e influentes
-library(ggplot2)
-ggplot(data_ext, aes(x = X, y = Y)) +
-  geom_point(aes(
-    color = case_when(
+ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point(ggplot2::aes(
+    color = dplyr::case_when(
       influente ~ "Influente (Cook)",
       outlier_resid ~ "Outlier (resíduo)",
       TRUE ~ "Normal"
     ),
     shape = is_extreme
   ), size = 2.4) +
-  scale_color_manual(values = c(
+  ggplot2::scale_color_manual(values = c(
     "Normal" = "grey30",
     "Outlier (resíduo)" = "red",
     "Influente (Cook)" = "orange"
   )) +
-  scale_shape_manual(values = c(`FALSE` = 16, `TRUE` = 17),
-                     labels = c("FALSE" = "Gerado normal", "TRUE" = "Injetado extremo"),
-                     name = "Origem do ponto") +
-  geom_smooth(method = "lm", se = FALSE, color = "blue") +
-  labs(
+  ggplot2::scale_shape_manual(values = c(`FALSE` = 16, `TRUE` = 17), guide = "none") +  # <- legenda removida aqui
+  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  ggplot2::labs(
     title = "Regressão linear com valores extremos",
     subtitle = paste0("Outlier (|resíduo| > ", thr_resid,
                       "); Influente (Cook > ", round(thr_cook, 3), ")"),
@@ -1211,15 +1202,122 @@ ggplot(data_ext, aes(x = X, y = Y)) +
     y = "Variável Dependente (Y)",
     color = "Classificação"
   ) +
-  theme_minimal()
+  ggplot2::theme_minimal()
 ```
-
 
 <br>
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
-:::
+```{r regressao-linear-influentes, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Alavancagem vs Resíduos Padronizados com distância de Cook para análise da influência de pontos."}
+# Reprodutibilidade
+set.seed(123)
+
+# 1) Dados "normais"
+n <- 100
+X <- rnorm(n, mean = 50, sd = 10)
+Y <- 5 + 2 * X + rnorm(n, mean = 0, sd = 5)
+data <- data.frame(X, Y, is_extreme = FALSE)
+
+# 2) Injeta valores extremos
+X_ext1 <- rnorm(5, mean = 50, sd = 10)
+Y_ext1 <- 5 + 2 * X_ext1 + rnorm(5, mean = 0, sd = 25) + 60
+X_ext2 <- c(5, 95, 110, -10, 120)
+Y_ext2 <- 5 + 2 * X_ext2 + rnorm(5, mean = 0, sd = 5)
+
+data_ext <- rbind(
+  data,
+  data.frame(X = X_ext1, Y = Y_ext1, is_extreme = TRUE),
+  data.frame(X = X_ext2, Y = Y_ext2, is_extreme = TRUE)
+)
+
+# 3) Ajuste do modelo
+model <- stats::lm(Y ~ X, data = data_ext)
+
+# 4) Diagnósticos
+data_ext$resid_std <- stats::rstandard(model)
+data_ext$cook_d    <- stats::cooks.distance(model)
+data_ext$leverage  <- stats::hatvalues(model)
+
+thr_resid <- 2
+thr_cook  <- 4 / nrow(data_ext)
+data_ext$outlier_resid <- abs(data_ext$resid_std) > thr_resid
+data_ext$influente     <- data_ext$cook_d > thr_cook
+
+# Curvas de Cook's distance
+p <- length(stats::coef(model))
+D_levels <- c(0.5, 1)
+h <- data_ext$leverage
+h_min <- max(min(h), 1e-4)
+h_max <- min(max(h), 0.999)
+
+curve_df <- do.call(rbind, lapply(D_levels, function(D) {
+  xs <- seq(h_min, h_max, length.out = 400)
+  ys <- sqrt(D * p * (1 - xs) / xs)
+  data.frame(
+    leverage = c(xs, xs),
+    resid    = c(ys, -ys),
+    D        = factor(D),
+    bound    = rep(c("upper", "lower"), each = length(xs))
+  )
+}))
+
+x_lab <- stats::quantile(h, 0.80, na.rm = TRUE)
+label_df <- data.frame(
+  leverage = x_lab,
+  resid =  sqrt(D_levels * p * (1 - x_lab) / x_lab),
+  D = factor(D_levels)
+)
+
+# Plot
+ggplot2::ggplot(data_ext, ggplot2::aes(x = leverage, y = resid_std)) +
+  ggplot2::geom_point(ggplot2::aes(
+    color = dplyr::case_when(
+      influente ~ "Influente (Cook)",
+      outlier_resid ~ "Outlier (resíduo)",
+      TRUE ~ "Normal"
+    ),
+    shape = is_extreme,
+    size  = cook_d
+  )) +
+  ggplot2::geom_hline(yintercept = c(-thr_resid, thr_resid),
+                      linetype = "dashed", color = "blue") +
+  ggplot2::geom_vline(xintercept = 2 * mean(data_ext$leverage),
+                      linetype = "dotted", color = "darkgreen") +
+  ggplot2::geom_line(
+    data = curve_df,
+    ggplot2::aes(x = leverage, y = resid,
+                 group = interaction(D, bound), linetype = D),
+    color = "purple", linewidth = 0.6
+  ) +
+  ggplot2::geom_text(
+    data = label_df,
+    ggplot2::aes(x = leverage, y = resid, label = paste0("Cook D=", D)),
+    color = "purple", hjust = -0.05, vjust = -0.4, size = 3.4, show.legend = FALSE
+  ) +
+
+  ggplot2::scale_color_manual(values = c(
+    "Normal" = "grey30",
+    "Outlier (resíduo)" = "red",
+    "Influente (Cook)" = "orange"
+  )) +
+  ggplot2::scale_shape_manual(values = c(`FALSE` = 16, `TRUE` = 17),
+                              guide = "none") +      # remove legenda de shape
+  ggplot2::scale_size_continuous(range = c(2, 8), guide = "none") +  # remove legenda de size
+  ggplot2::scale_linetype_manual(values = c("0.5" = "longdash", "1" = "solid"),
+                                 name = "Curvas de Cook") +
+
+  ggplot2::labs(
+    title = "Alavancage vs Resíduos Padronizados",
+    x = "Alavancagem (leverage)",
+    y = "Resíduo Padronizado",
+    color = "Classificação"
+  ) +
+  ggplot2::coord_cartesian(xlim = c(h_min, h_max)) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    legend.position = "right",
+    panel.grid.minor = ggplot2::element_blank()
+  )
+```
 
 <br>
 

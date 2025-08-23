@@ -35,6 +35,8 @@
 <br>
 
 ```{r crosstable, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
 cross.table <-
   matrix(
     c(
@@ -144,6 +146,51 @@ ESP = \dfrac{VN}{VN+FP}
 
 <br>
 
+```{r sensibilidade-especificidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Trade-off entre sensibilidade e especificidade em função do limiar de probabilidade (t) para um modelo de classificação."}
+# ---- Parâmetros dos grupos (ajuste à sua realidade) ----
+# "doente": previsões tendem a ser altas
+alpha_d   <- 9;  beta_d   <- 3   # média ≈ 0.75
+# "não-doente": previsões tendem a ser baixas
+alpha_nd  <- 3;  beta_nd  <- 9   # média ≈ 0.25
+
+# ---- Grade de limiares (probabilidade no eixo x) ----
+t <- seq(0, 1, length.out = 1001)
+
+# ---- Curvas: Sensibilidade(t) e Especificidade(t) ----
+sens <- 1 - pbeta(t, shape1 = alpha_d,  shape2 = beta_d)   # P(score >= t | doente)
+spec <-     pbeta(t, shape1 = alpha_nd, shape2 = beta_nd)  # P(score <  t | não-doente)
+
+df <- tibble::tibble(
+  threshold = t,
+  Sensibilidade = sens,
+  Especificidade = spec,
+  Youden = sens + spec - 1
+)
+
+# ---- Limiar ótimo (Youden J) ----
+opt <- df |>  dplyr::slice_max(Youden, n = 1)
+
+# ---- Plot ----
+ggplot2::ggplot(df, ggplot2::aes(x = threshold)) +
+  ggplot2::geom_line(ggplot2::aes(y = Sensibilidade), linewidth = 1) +
+  ggplot2::geom_line(ggplot2::aes(y = Especificidade), linetype = 2, linewidth = 1) +
+  ggplot2::geom_vline(xintercept = opt$threshold, linetype = 3) +
+  ggplot2::annotate("point", x = opt$threshold, y = 0.5*(opt$Sensibilidade + opt$Especificidade), size = 2) +
+  ggplot2::scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0,1)) +
+  ggplot2::labs(
+    x = "Limiar de probabilidade (t)",
+    y = "Proporção de casos corretamente identificados",
+    title = "Trade-off entre Sensibilidade e Especificidade",
+    subtitle = sprintf("Limiar de Youden ≈ %.1f%% | Sens=%.1f%%, Esp=%.1f%%",
+                       100*opt$threshold, 100*opt$Sensibilidade, 100*opt$Especificidade),
+    caption = "Linhas: sólida = Sensibilidade; tracejada = Especificidade"
+  ) +
+  ggplot2::theme_minimal(base_size = 12)
+```
+
+<br>
+
 -   Valor preditivo positivo ($VPP$), equação \@ref(eq:vpp): Proporção de casos corretamente identificados como verdadeiro-positivos.[@greenhalgh1997b]
 
 <br>
@@ -187,6 +234,8 @@ DOR = \dfrac{VP}{FN} \div \dfrac{FP}{VN} = \dfrac{VP \cdot VN}{FP \cdot FN}
 <br>
 
 ```{r crosstable-prob, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
 cross.table <-
   matrix(
     c(

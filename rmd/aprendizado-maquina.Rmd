@@ -56,6 +56,45 @@
 
 <br>
 
+```{r logistica-vs-arvore, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Comparação entre modelos de regressão logística e árvore de decisão."}
+# Reprodutibilidade
+set.seed(42)
+
+# Dados sintéticos
+x1 <- rnorm(200)
+x2 <- rnorm(200)
+y <- ifelse(x1^2 + x2^2 > 1, 1, 0)
+df <- data.frame(x1, x2, y = factor(y))
+
+# Ajustar modelos
+glm_mod <- glm(y ~ x1 + x2, data=df, family=binomial)
+tree_mod <- rpart::rpart(y ~ x1 + x2, data=df)
+
+# Grade para visualizar
+grid <- expand.grid(
+  x1 = seq(min(x1)-1, max(x1)+1, length=200),
+  x2 = seq(min(x2)-1, max(x2)+1, length=200)
+)
+
+grid$glm_pred <- predict(glm_mod, newdata=grid, type="response") > 0.5
+grid$tree_pred <- predict(tree_mod, newdata=grid, type="class")
+
+# Plot lado a lado
+p1 <- ggplot2::ggplot() +
+  ggplot2::geom_tile(data=grid, ggplot2::aes(x1, x2, fill=glm_pred), alpha=0.3) +
+  ggplot2::geom_point(data=df, ggplot2::aes(x1, x2, color=y)) +
+  ggplot2::labs(title="Logística (linear)") + ggplot2::theme_minimal()
+
+p2 <- ggplot2::ggplot() +
+  ggplot2::geom_tile(data=grid, ggplot2::aes(x1, x2, fill=tree_pred), alpha=0.3) +
+  ggplot2::geom_point(data=df, ggplot2::aes(x1, x2, color=y)) +
+  ggplot2::labs(title="Árvore (não linear)") + ggplot2::theme_minimal()
+
+gridExtra::grid.arrange(p1, p2, ncol=2)
+```
+
+<br>
+
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *h2o*[\@correctR](https://cran.r-project.org/web/packages/h2o/index.html) fornece funções construir modelos de aprendizado de máquina.
 :::
