@@ -1124,9 +1124,11 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 <br>
 
-### O que são extremos?
+### O que são valores extremos?
 
 -   Valores extremos podem constituir valores legítimos ou ilegítimos de uma distribuição.[@leys2019]
+
+- Valores extremos, quando raros ou desproporcionais, podem se tornar discrepantes ou influentes, afetando as análises estatísticas, sendo recomendado uma análise robusta.[@REF]
 
 <br>
 
@@ -1138,7 +1140,7 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 <br>
 
-```{r regressao-linear-extremos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão linear com valores extremos."}
+```{r regressao-extremos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão linear com valores extremos."}
 # Reprodutibilidade
 set.seed(123)
 
@@ -1146,315 +1148,54 @@ set.seed(123)
 n <- 100
 X <- rnorm(n, mean = 50, sd = 10)
 Y <- 5 + 2 * X + rnorm(n, mean = 0, sd = 5)
-data <- data.frame(X, Y, is_extreme = FALSE)
-
-# 2) Injeta valores extremos
-#   a) Outliers verticais (grande erro em Y)
-X_ext1 <- rnorm(5, mean = 50, sd = 10)
-Y_ext1 <- 5 + 2 * X_ext1 + rnorm(5, mean = 0, sd = 25) + 60
-
-#   b) Alta alavancagem (X muito distante)
-X_ext2 <- c(5, 95, 110, -10, 120)  # bem fora do centro
-Y_ext2 <- 5 + 2 * X_ext2 + rnorm(5, mean = 0, sd = 5)
-
-data_ext <- rbind(
-  data,
-  data.frame(X = X_ext1, Y = Y_ext1, is_extreme = TRUE),
-  data.frame(X = X_ext2, Y = Y_ext2, is_extreme = TRUE)
-)
-
-# 3) Ajuste do modelo
-model <- lm(Y ~ X, data = data_ext)
-
-# 4) Diagnósticos
-data_ext$resid_std <- rstandard(model)
-data_ext$cook_d   <- cooks.distance(model)
-
-# Regras simples:
-thr_resid <- 2                        # |resíduo padronizado| > 2
-thr_cook  <- 4 / nrow(data_ext)       # regra prática para Cook
-
-data_ext$outlier_resid <- abs(data_ext$resid_std) > thr_resid
-data_ext$influente     <- data_ext$cook_d > thr_cook
-
-# 5) Plot: pontos normais, outliers e influentes
-ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
-  ggplot2::geom_point(ggplot2::aes(
-    color = dplyr::case_when(
-      influente ~ "Influente (Cook)",
-      outlier_resid ~ "Outlier (resíduo)",
-      TRUE ~ "Normal"
-    ),
-    shape = is_extreme
-  ), size = 2.4) +
-  ggplot2::scale_color_manual(values = c(
-    "Normal" = "grey30",
-    "Outlier (resíduo)" = "red",
-    "Influente (Cook)" = "orange"
-  )) +
-  ggplot2::scale_shape_manual(values = c(`FALSE` = 16, `TRUE` = 17), guide = "none") +  # <- legenda removida aqui
-  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "blue") +
-  ggplot2::labs(
-    title = "Regressão linear com valores extremos",
-    subtitle = paste0("Outlier (|resíduo| > ", thr_resid,
-                      "); Influente (Cook > ", round(thr_cook, 3), ")"),
-    x = "Variável Independente (X)",
-    y = "Variável Dependente (Y)",
-    color = "Classificação"
-  ) +
-  ggplot2::theme_minimal()
-```
-
-<br>
-
-```{r regressao-linear-influentes, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Alavancagem vs Resíduos Padronizados com distância de Cook para análise da influência de pontos."}
-# Reprodutibilidade
-set.seed(123)
-
-# 1) Dados "normais"
-n <- 100
-X <- rnorm(n, mean = 50, sd = 10)
-Y <- 5 + 2 * X + rnorm(n, mean = 0, sd = 5)
-data <- data.frame(X, Y, is_extreme = FALSE)
+data <- data.frame(X, Y)
 
 # 2) Injeta valores extremos
 X_ext1 <- rnorm(5, mean = 50, sd = 10)
 Y_ext1 <- 5 + 2 * X_ext1 + rnorm(5, mean = 0, sd = 25) + 60
+
 X_ext2 <- c(5, 95, 110, -10, 120)
 Y_ext2 <- 5 + 2 * X_ext2 + rnorm(5, mean = 0, sd = 5)
 
-data_ext <- rbind(
+data_ext <- dplyr::bind_rows(
   data,
-  data.frame(X = X_ext1, Y = Y_ext1, is_extreme = TRUE),
-  data.frame(X = X_ext2, Y = Y_ext2, is_extreme = TRUE)
+  data.frame(X = X_ext1, Y = Y_ext1),
+  data.frame(X = X_ext2, Y = Y_ext2)
 )
 
-# 3) Ajuste do modelo
-model <- stats::lm(Y ~ X, data = data_ext)
-
-# 4) Diagnósticos
-data_ext$resid_std <- stats::rstandard(model)
-data_ext$cook_d    <- stats::cooks.distance(model)
-data_ext$leverage  <- stats::hatvalues(model)
-
-thr_resid <- 2
-thr_cook  <- 4 / nrow(data_ext)
-data_ext$outlier_resid <- abs(data_ext$resid_std) > thr_resid
-data_ext$influente     <- data_ext$cook_d > thr_cook
-
-# Curvas de Cook's distance
-p <- length(stats::coef(model))
-D_levels <- c(0.5, 1)
-h <- data_ext$leverage
-h_min <- max(min(h), 1e-4)
-h_max <- min(max(h), 0.999)
-
-curve_df <- do.call(rbind, lapply(D_levels, function(D) {
-  xs <- seq(h_min, h_max, length.out = 400)
-  ys <- sqrt(D * p * (1 - xs) / xs)
-  data.frame(
-    leverage = c(xs, xs),
-    resid    = c(ys, -ys),
-    D        = factor(D),
-    bound    = rep(c("upper", "lower"), each = length(xs))
-  )
-}))
-
-x_lab <- stats::quantile(h, 0.80, na.rm = TRUE)
-label_df <- data.frame(
-  leverage = x_lab,
-  resid =  sqrt(D_levels * p * (1 - x_lab) / x_lab),
-  D = factor(D_levels)
-)
+# Identifica min e max
+extremos <- data_ext %>%
+  dplyr::filter(
+    X == min(X) | X == max(X) |
+    Y == min(Y) | Y == max(Y)
+  ) %>%
+  dplyr::mutate(tipo = dplyr::case_when(
+    X == min(X) ~ "X mínimo",
+    X == max(X) ~ "X máximo",
+    Y == min(Y) ~ "Y mínimo",
+    Y == max(Y) ~ "Y máximo"
+  ))
 
 # Plot
-ggplot2::ggplot(data_ext, ggplot2::aes(x = leverage, y = resid_std)) +
-  ggplot2::geom_point(ggplot2::aes(
-    color = dplyr::case_when(
-      influente ~ "Influente (Cook)",
-      outlier_resid ~ "Outlier (resíduo)",
-      TRUE ~ "Normal"
-    ),
-    shape = is_extreme,
-    size  = cook_d
-  )) +
-  ggplot2::geom_hline(yintercept = c(-thr_resid, thr_resid),
-                      linetype = "dashed", color = "blue") +
-  ggplot2::geom_vline(xintercept = 2 * mean(data_ext$leverage),
-                      linetype = "dotted", color = "darkgreen") +
-  ggplot2::geom_line(
-    data = curve_df,
-    ggplot2::aes(x = leverage, y = resid,
-                 group = interaction(D, bound), linetype = D),
-    color = "purple", linewidth = 0.6
-  ) +
-  ggplot2::geom_text(
-    data = label_df,
-    ggplot2::aes(x = leverage, y = resid, label = paste0("Cook D=", D)),
-    color = "purple", hjust = -0.05, vjust = -0.4, size = 3.4, show.legend = FALSE
-  ) +
-
+ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
+  # todos os pontos em cinza
+  ggplot2::geom_point(color = "grey70", size = 2) +
+  # destaca apenas os extremos, com legenda
+  ggplot2::geom_point(data = extremos, ggplot2::aes(color = tipo), size = 3) +
+  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "blue") +
   ggplot2::scale_color_manual(values = c(
-    "Normal" = "grey30",
-    "Outlier (resíduo)" = "red",
-    "Influente (Cook)" = "orange"
+    "X mínimo" = "red",
+    "X máximo" = "orange",
+    "Y mínimo" = "purple",
+    "Y máximo" = "darkgreen"
   )) +
-  ggplot2::scale_shape_manual(values = c(`FALSE` = 16, `TRUE` = 17),
-                              guide = "none") +      # remove legenda de shape
-  ggplot2::scale_size_continuous(range = c(2, 8), guide = "none") +  # remove legenda de size
-  ggplot2::scale_linetype_manual(values = c("0.5" = "longdash", "1" = "solid"),
-                                 name = "Curvas de Cook") +
-
   ggplot2::labs(
-    title = "Alavancage vs Resíduos Padronizados",
-    x = "Alavancagem (leverage)",
-    y = "Resíduo Padronizado",
-    color = "Classificação"
+    title = "Valores extremos",
+    x = "X", y = "Y", color = "Extremos"
   ) +
-  ggplot2::coord_cartesian(xlim = c(h_min, h_max)) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(
-    legend.position = "right",
-    panel.grid.minor = ggplot2::element_blank()
-  )
-```
-
-<br>
-
-## Valores discrepantes
-
-<br>
-
-### O que são valores discrepantes (*outliers*)?
-
--   Em termos gerais, um valor discrepante - "fora da curva" ou *outlier* - é uma observação que possui um valor relativamente grande ou pequeno em comparação com a maioria das observações.[@zuur2009]
-
--   Um valor discrepante é uma observação incomum que exerce influência indevida em uma análise.[@zuur2009]
-
--   Valores discrepantes são dados com valores altos de resíduos.[@leys2019]
-
-<br>
-
-```{r regressao-linear-outliers, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão linear com valores discrepantes."}
-# Reprodutibilidade
-set.seed(123)
-
-# simulate X
-X <- rnorm(100, mean = 50, sd = 10)
-
-# simulate Y based on X
-Y <- 5 + 2 * X + rnorm(100, mean = 0, sd = 5)
-
-# create a dataframe
-data <- data.frame(X, Y)
-
-# create the regression model
-model <- lm(Y ~ X, data = data)
-
-# calcular resíduos padronizados
-data$resid <- rstandard(model)
-
-# marcar outliers (|resíduo padronizado| > 2)
-data$outlier <- abs(data$resid) > 2
-
-# plot the regression line e outliers
-ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
-  ggplot2::geom_point(ggplot2::aes(color = outlier)) +
-  ggplot2::scale_color_manual(values = c("black", "red"),
-                              labels = c("Normal", "Discrepante"),
-                              name = "Pontos") +
-  ggplot2::geom_smooth(method = "lm", color = "blue") +
-  ggplot2::labs(title = "Regressão linear",
-                x = "Variável Independente (X)",
-                y = "Variável Dependente (Y)") +
   ggplot2::theme_minimal()
+
 ```
-
-<br>
-
-### Quais são os tipos de valores discrepantes?
-
--   Valores discrepantes podem ser categorizados em três subtipos: *outliers* de erro, *outliers* interessantes e *outliers* aleatórios.[@leys2019]
-
--   Os valores discrepantes de erro são observações claramente não legítimas, distantes de outros dados devido a imprecisões por erro de mensuração e/ou codificação.[@leys2019]
-
--   Os valores discrepantes interessantes não são claramente erros, mas podem refletir um processo/mecanismo potencialmente interessante para futuras pesquisas.[@leys2019]
-
--   Os valores discrepantes aleatórios são observações que resultam por acaso, sem qualquer padrão ou tendência conhecida.[@leys2019]
-
--   Valores discrepantes podem ser univariados ou multivariados.[@leys2019]
-
-<br>
-
-### Por que é importante avaliar valores discrepantes?
-
--   Excluir o valor discrepante implica em reduzir inadequadamente a variância, ao remover um valor que de fato pertence à distribuição considerada.[@leys2019]
-
--   Manter os dados inalterados (mantendo o valor discrepante) implica em aumentar inadequadamente a variância, pois a observação não pertence à distribuição que fundamenta o experimento.[@leys2019]
-
--   Em ambos os casos, uma decisão errada pode influenciar o erro do tipo I ($\alpha$ — rejeitar uma hipótese verdadeira) ou o erro do tipo II ($\beta$ — não rejeitar uma hipótese falsa).[@leys2019]
-
-<br>
-
-### Como detectar valores discrepantes?
-
--   Na maioria das vezes, não há como saber de qual distribuição uma observação provém. Por isso, não é possível ter certeza se um valor é legítimo ou não dentro do contexto do experimento.[@leys2019]
-
--   Recomenda-se seguir um procedimento em duas etapas: detectar possíveis candidatos a *outliers* usando ferramentas quantitativas; e gerenciar os outliers, decidindo manter, remover ou recodificar os valores, com base em informações qualitativas.[@leys2019]
-
--   A detecção de outliers deve ser aplicada apenas uma vez no conjunto de dados; um erro comum é identificar e tratar os outliers (como remover ou recodificar) e, em seguida, reaplicar o procedimento no conjunto de dados já modificado.[@leys2019]
-
--   A detecção ou o tratamento dos *outliers* não deve ser realizada após a análise dos resultados, pois isso introduz viés nos resultados.[@leys2019]
-
-<br>
-
-### Quais são os métodos para detectar valores discrepantes?
-
--   Valores univariados são comumente considerados *outliers* quando são mais extremos do que a média ± (desvio padrão × constante), podenso essa constante ser 3 (99,7% das observações estão dentro de 3 desvios-padrão da média) ou 3,29 (99,9% estão dentro de 3,29 desvios-padrão).[@leys2019]
-
--   Para detectar *outliers* univariados, recomenda-se o uso da Mediana da Desviação Absoluta (Median Absolute Deviation, MAD), calculado a partir de um intervalo em torno da mediana, multiplicado por uma constante (valor padrão: 1,4826).[@leys2013; @leys2019]
-
--   Para detectar *outliers* multivariados, comumente utiliza-se a distância de Mahalanobis, que identifica valores muito distantes do centróide formado pela maioria dos dados (por exemplo, 99%).[@leys2019]
-
--   Para detectar *outliers* multivariados, recomenda-se o Determinante de Mínima Covariância (Minimum Covariance Determinant, MCD), pois possui o maior ponto de quebra possível e utiliza a mediana, que é o indicador mais robusto em presença de outliers.[@leys2018; @leys2019]
-
-<br>
-
-### Como manejar os valores discrepantes?
-
--   Manter *outliers* pode ser uma boa decisão se a maioria desses valores realmente pertence à distribuição de interesse. Manter *outliers* que pertencem a uma distribuição alternativa pode ser problemático, pois um teste pode se tornar significativo apenas por causa de um ou poucos outliers.[@leys2019]
-
--   Remover *outliers* pode ser eficaz quando eles distorcem a estimativa dos parâmetros da distribuição. Remover *outliers* que pertencem legitimamente à distribuição pode reduzir artificialmente a estimativa do erro.[@leys2019]
-
--   Remover *outliers* leva à perda de observações, especialmente em conjuntos de dados com muitas variáveis, quando outliers univariados são excluídos em cada variável.[@leys2019]
-
--   Recodificar *outliers* evita a perda de uma grande quantidade de dados, mas deve ser baseada em argumentos razoáveis e convincentes.[@leys2019]
-
--   Erros de observação e de medição são uma justificativa válida para descartar observações discrepantes.[@zuur2009]
-
-<br>
-
-### Como conduzir análises com valores discrepantes?
-
--   É importante reportar se existem valores discrepantes e como foram tratados.[@zuur2009]
-
--   Valores discrepantes na variável de desfecho podem exigir uma abordagem mais refinada, especialmente quando representam uma variação real na variável que está sendo medida.[@zuur2009]
-
--   Valores discrepantes em uma (co)variável podem surgir devido a um projeto experimental inadequado; nesse caso, abandonar a observação ou transformar a covariável são opções adequadas.[@zuur2009]
-
--   Valores discrepantes podem ser recodificados usando a Winsorização,[@Tukey1963] que transforma os *outliers* em valores de percentis específicos (como o 5º e o 95º).[@leys2019]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *outliers*[@outliers] fornece a função [*outlier*](https://www.rdocumentation.org/packages/outliers/versions/0.15/topics/outlier) para identificar os valores mais distantes da média.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *outliers*[@outliers] fornece a função [*rm.outlier*](https://www.rdocumentation.org/packages/outliers/versions/0.15/topics/rm.outlier) para remover os valores mais distantes da média detectados por testes de hipótese e/ou substitui-los pela média ou mediana.
-:::
 
 <br>
 
