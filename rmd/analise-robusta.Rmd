@@ -8,17 +8,17 @@
 
 ### O que é análise robusta?
 
-- Análise robusta é uma abordagem estatística que busca fornecer resultados confiáveis mesmo quando as suposições clássicas dos modelos estatísticos são violadas, como normalidade e homocedasticidade. Ela utiliza métodos que são menos sensíveis a outliers e outras irregularidades nos dados.[@WRS2]
+-   Análise robusta é uma abordagem estatística que busca fornecer resultados confiáveis mesmo quando as suposições clássicas dos modelos estatísticos são violadas, como normalidade e homocedasticidade. Ela utiliza métodos que são menos sensíveis a outliers e outras irregularidades nos dados.[@WRS2]
 
 <br>
 
 ### Por que usar análise robusta?
 
-- Métodos clássicos como ANOVA e regressão por mínimos quadrados assumem normalidade e homocedasticidade — suposições frequentemente violadas na prática. Violações dessas suposições podem comprometer os resultados, reduzindo o poder estatístico, distorcendo os intervalos de confiança e obscurecendo as reais diferenças entre grupos.[@WRS2]
+-   Métodos clássicos como ANOVA e regressão por mínimos quadrados assumem normalidade e homocedasticidade — suposições frequentemente violadas na prática. Violações dessas suposições podem comprometer os resultados, reduzindo o poder estatístico, distorcendo os intervalos de confiança e obscurecendo as reais diferenças entre grupos.[@WRS2]
 
-- Testar previamente as suposições não é suficiente: testes de homocedasticidade têm baixo poder e não garantem segurança analítica.[@WRS2]
+-   Testar previamente as suposições não é suficiente: testes de homocedasticidade têm baixo poder e não garantem segurança analítica.[@WRS2]
 
-- Métodos estatísticos robustos oferecem uma solução mais segura e eficaz, lidando melhor com dados não ideais.[@WRS2]
+-   Métodos estatísticos robustos oferecem uma solução mais segura e eficaz, lidando melhor com dados não ideais.[@WRS2]
 
 <br>
 
@@ -26,9 +26,17 @@
 
 <br>
 
-- Em alguns casos, os métodos robustos confirmam os resultados clássicos; em outros, revelam interpretações completamente diferentes. A única forma de saber o impacto real dos métodos robustos é usá-los e comparar com os métodos tradicionais.[@WRS2]
+-   Em alguns casos, os métodos robustos confirmam os resultados clássicos; em outros, revelam interpretações completamente diferentes. A única forma de saber o impacto real dos métodos robustos é usá-los e comparar com os métodos tradicionais.[@WRS2]
 
-- Mínimos e máximos são parâmetros descritivos, mas em certas condições podem se tornar discrepantes ou influentes, distorcendo análises. Nesses casos, a análise robusta oferece alternativas mais seguras.[@REF]
+-   Mínimos e máximos são parâmetros descritivos, mas em certas condições podem se tornar discrepantes ou influentes, distorcendo análises. Nesses casos, a análise robusta oferece alternativas mais seguras.[@REF]
+
+<br>
+
+### Por que métodos robustos são preferíveis?
+
+-   Métodos robustos têm a vantagem de resistir à influência de valores extremos, fornecendo medidas de posição e dispersão mais estáveis.[@daszykowski2007]
+
+-   Estimadores robustos oferecem maior segurança na presença de até 50% de contaminação nos dados, o que representa um ganho significativo em relação aos métodos clássicos.[@daszykowski2007]
 
 <br>
 
@@ -44,9 +52,9 @@
 
 -   Valores discrepantes são dados com valores altos de resíduos.[@leys2019]
 
-- Nem todo valor extremo é um valor discrepante, e nem todo valor discrepante será influente.[@REF]
+-   Nem todo valor extremo é um valor discrepante, e nem todo valor discrepante será influente.[@REF]
 
-- Alguns valores discrepantes são apenas pontos incomuns, outros de fato mudam os resultados e por isso são chamados de influentes.[@REF]
+-   Alguns valores discrepantes são apenas pontos incomuns, outros de fato mudam os resultados e por isso são chamados de influentes.[@REF]
 
 <br>
 
@@ -161,6 +169,22 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
+### Quais testes são apropriados para detectar valores discrepantes?
+
+-   A escolha do método de detecção depende da natureza do outlier, se univariado ou multivariado.[@daszykowski2007]
+
+-   Para valores univariados, podem ser usados box-plots (com pontos além de 1,5 vezes o intervalo interquartílico), z-scores clássicos ($|z| > 2.5$ ou $|z| > 3$) ou z-scores robustos, que substituem média por mediana e desvio-padrão por estimadores robustos.[@daszykowski2007]
+
+-   Para valores multivariados, recomenda-se a distância de Mahalanobis para medir o afastamento em relação ao centróide, com ajustes robustos de covariância como MCD (Minimum Covariance Determinant) ou MVE (Minimum Volume Ellipsoid).[@daszykowski2007]
+
+-   Técnicas baseadas em PCA robusta (ROBPCA, PP-PCA, SPCA, EPCA) também podem ser aplicadas para reduzir dimensionalidade e expor outliers mascarados.[@daszykowski2007]
+
+-   Métodos de trimming multivariado (MVT) podem iterativamente remover observações mais distantes, mas apresentam limitações em alta dimensionalidade.[@daszykowski2007]
+
+-   Estimadores com alto ponto de quebra, como o MCD, permitem detectar até 50% de outliers antes de comprometer a análise.[@daszykowski2007]
+
+<br>
+
 ### Como manejar os valores discrepantes?
 
 -   Manter *outliers* pode ser uma boa decisão se a maioria desses valores realmente pertence à distribuição de interesse. Manter *outliers* que pertencem a uma distribuição alternativa pode ser problemático, pois um teste pode se tornar significativo apenas por causa de um ou poucos outliers.[@leys2019]
@@ -269,6 +293,18 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
   ) +
   ggplot2::theme_minimal()
 ```
+
+<br>
+
+### O que é função de influência?
+
+-   A função de influência mede a sensibilidade de um estimador a pequenas contaminações nos dados. Um estimador é considerado robusto se sua função de influência for limitada, indicando que valores extremos não exercem impacto desproporcional.[@loh2025]
+
+<br>
+
+### O que é ponto de quebra?
+
+- O ponto de quebra representa a fração mínima de observações contaminadas necessária para distorcer um estimador até o infinito. Por exemplo, a média tem ponto de quebra 0, enquanto a mediana atinge o ponto de quebra máximo (50%).[@loh2025]
 
 <br>
 
@@ -391,9 +427,23 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = leverage, y = resid_std)) +
 
 <br>
 
+## Métodos robustos de tratamento de *outliers*
+
+<br>
+
 ### O que é Winsorização?
 
-- Winsorização é uma técnica que substitui os valores extremos (outliers) por valores menos extremos, preservando a estrutura dos dados. Isso é feito definindo limites superior e inferior e substituindo os valores que ultrapassam esses limites pelos próprios limites.[@WRS2]
+-   Winsorização é uma técnica que substitui os valores extremos (outliers) por valores menos extremos, preservando a estrutura dos dados. Isso é feito definindo limites superior e inferior e substituindo os valores que ultrapassam esses limites pelos próprios limites.[@WRS2]
+
+<br>
+
+### Quais são as alternativas à Winsorização?
+
+- Podar (trimming): remove diretamente uma fração fixa das observações mais extremas.[@REF]
+
+- Estimadores robustos (M, S, MM): resistem à influência de outliers sem transformar os dados.[@REF]
+
+- Transformações de variáveis: reduzem a assimetria e impacto de valores extremos, mas mudam a escala interpretativa.[@REF]
 
 <br>
 

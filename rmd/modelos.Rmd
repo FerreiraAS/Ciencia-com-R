@@ -14,7 +14,7 @@
 
 ### Por que a escolha do modelo é complexa?
 
-- Há inúmeras combinações possíveis de variáveis, formas funcionais (lineares, quadráticas, transformações), interações e formas do desfecho, o que torna o espaço de possibilidades muito amplo.[@Greenland1989]
+-   Há inúmeras combinações possíveis de variáveis, formas funcionais (lineares, quadráticas, transformações), interações e formas do desfecho, o que torna o espaço de possibilidades muito amplo.[@Greenland1989]
 
 <br>
 
@@ -36,13 +36,109 @@ O pacote *equatiomatic*[@equatiomatic] fornece a função [*extract_eq*](https:/
 
 ### O que são cadeias de Markov?
 
--   .[@REF]
+-   As cadeias de Markov descrevem processos em que o estado futuro depende apenas do estado presente, e não da trajetória passada.[@häggström2007]
 
 <br>
 
-### Como construir uma cadeia de Markov?
+```{r markov, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Cadeia de Markov com 3 estados (a, b, c) e suas probabilidades de transição."}
+library(markovchain)
 
--   [@REF]
+# --- Modelo de 3 estados (a, b, c) ---
+estados <- c("a","b","c")
+P <- matrix(c(0.5, 0.4, 0.1,
+              0.2, 0.6, 0.2,
+              0.3, 0.3, 0.4),
+            nrow = 3, byrow = TRUE,
+            dimnames = list(estados, estados))
+
+# Criando a cadeia de Markov
+mc <- new("markovchain",
+          states = estados,
+          transitionMatrix = P,
+          name = "MC_3Estados")
+
+# --- Gráfico com setas (usa plot do próprio pacote) ---
+markovchain::plot(mc, 
+                  vertex.size = 40,
+                  vertex.label.cex = 1.5
+)
+```
+
+<br>
+
+```{r markov-sim, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Trajetória de estados e proporção acumulada por estado em uma cadeia de Markov com 3 estados (a, b, c)."}
+# --- Modelo de 3 estados (a, b, c) ---
+estados <- c("a","b","c")
+P <- base::matrix(c(0.5, 0.4, 0.1,
+                    0.2, 0.6, 0.2,
+                    0.3, 0.3, 0.4),
+                  nrow = 3, byrow = TRUE,
+                  dimnames = list(estados, estados))
+
+# Criando a cadeia de Markov (S4)
+mc <- methods::new("markovchain",
+                   states = estados,
+                   transitionMatrix = P,
+                   name = "MC_3Estados")
+
+# --- Simulação da cadeia ao longo do tempo ---
+base::set.seed(123)
+n_passos <- 200
+
+traj <- markovchain::markovchainSequence(
+  n = n_passos,
+  markovchain = mc,
+  t0 = "a",
+  include = TRUE
+)
+
+tempo <- 0:n_passos
+estados_niveis <- mc@states
+y <- base::match(traj, estados_niveis)
+
+# --- Dados para gráfico 1 (trajetória) ---
+df_traj <- base::data.frame(
+  tempo = tempo,
+  estado = base::match(traj, estados_niveis)  # numérico 1,2,3
+)
+
+# --- Dados para gráfico 2 (proporção acumulada) ---
+df_prop <- base::data.frame(
+  tempo = tempo,
+  a = base::cumsum(traj == "a") / (tempo + 1),
+  b = base::cumsum(traj == "b") / (tempo + 1),
+  c = base::cumsum(traj == "c") / (tempo + 1)
+)
+
+df_prop_long <- tidyr::pivot_longer(
+  df_prop,
+  cols = -tempo,
+  names_to = "estado",
+  values_to = "proporcao"
+)
+
+g1 <- ggplot2::ggplot(df_traj,
+                      ggplot2::aes(x = tempo, y = estado)) +
+  ggplot2::geom_step(linewidth = 1, color = "steelblue") +
+  ggplot2::scale_y_continuous(
+    breaks = 1:base::length(estados_niveis),
+    labels = estados_niveis
+  ) +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::labs(title = "Trajetória de Estados",
+                x = "Tempo (passos)", y = "Estado")
+
+g2 <- ggplot2::ggplot(df_prop_long,
+                      ggplot2::aes(x = tempo, y = proporcao, group = estado)) +
+  ggplot2::geom_line(linewidth = 1) +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::labs(title = "Proporção Acumulada por Estado",
+                x = "Tempo (passos)", y = "Proporção") +
+  ggplot2::ylim(0, 1)
+
+# --- Combinar em dois painéis (superior e inferior) ---
+patchwork::wrap_plots(g1, g2, ncol = 1)
+```
 
 <br>
 
@@ -102,7 +198,7 @@ O pacote *performance*[@performance] fornece a função [*check_model*](https://
 
 ### Como avaliar a qualidade de ajuste de um modelo?
 
-- .[@REF]
+-   .[@REF]
 
 <br>
 

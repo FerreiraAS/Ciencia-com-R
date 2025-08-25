@@ -12,6 +12,30 @@
 
 <br>
 
+## Representação de texto
+
+<br>
+
+### O que é tokenização?
+
+- Tokenização é o processo de dividir texto contínuo em unidades menores (tokens), como palavras, pontuação, subpalavras ou caracteres. O objetivo é criar uma representação discreta sobre a qual modelos podem calcular frequências, probabilidades e relações.[@REF]
+
+- É comum combinar tokenização com normalização (*lowercase*), remoção de *stopwords*, lematização/*stemming* e regras para números e pontuação.[@REF]
+
+<br>
+
+### Modelagem com N-gramas
+
+<br>
+
+### O que são n-gramas?
+
+- Um n-grama é uma sequência contígua de n tokens, tais como: 1-gramas (unigramas), 2-gramas (bigramas), 3-gramas (trigramas). [@REF]
+
+- Contagens de n-gramas aproximam dependências locais no texto e servem de base para DTM/TF-IDF, modelos de linguagem clássicos e detecção de coligações.[@REF]
+
+<br>
+
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *tidytext*[@tidytext] fornece a função [*unnest_token*](https://www.rdocumentation.org/packages/tidytext/versions/0.4.3/topics/unnest_tokens) para transformar um texto em um *data frame* com uma coluna para cada palavra.
 :::

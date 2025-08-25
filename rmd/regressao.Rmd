@@ -30,13 +30,21 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 -   Linear.[@REF]
 
--   Nào-linear.[@REF]
+-   Não-linear.[@REF]
 
 -   Polinomial.[@REF]
 
 -   Ridge.[@REF]
 
 -   Lasso.[@REF]
+
+-  Logística.[@REF]
+
+-   Poisson.[@REF]
+
+<br>
+
+## Estruturas de análise de regressão
 
 <br>
 
@@ -85,6 +93,10 @@ Y_2 &= \beta_{02} + \beta_{21} X_1 + \beta_{22} X_2 + \dots + \beta_{2n} X_n + \
 &\vdots \\
 Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \epsilon_m
 \end{align}
+
+<br>
+
+## Tipos de modelos de regressão
 
 <br>
 
@@ -230,6 +242,12 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
+### O que são análises de regressão Lasso?
+
+-   .[@REF]
+
+<br>
+
 ### O que são análises de regressão logística?
 
 -   (equação \@ref(eq:regressao-logistica)) .[@REF]
@@ -268,7 +286,76 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-## Preparação de variáveis para regressão
+### O que são análises de regressão de Poisson?
+
+- .[@REF]
+
+<br>
+
+```{r regressao-poisson, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão de Poisson."}
+# Reprodutibilidade
+set.seed(123)
+
+# Simulação de dados
+X <- rnorm(100, mean = 50, sd = 10)
+beta0 <- -2.5
+beta1 <- 0.05
+mu <- exp(beta0 + beta1 * X)
+Y <- rpois(100, lambda = mu)
+
+data <- data.frame(X = X, Y = Y)
+mod_pois <- glm(Y ~ X, data = data, family = poisson(link = "log"))
+
+# Diagnóstico rápido de sobredispersão
+phi <- sum(residuals(mod_pois, type = "pearson")^2) / mod_pois$df.residual
+
+# Predições no grid
+x_grid <- seq(min(data$X), max(data$X), length.out = 200)
+pred <- predict(mod_pois,
+                newdata = data.frame(X = x_grid),
+                type = "link", se.fit = TRUE)
+
+link_fit <- pred$fit
+link_se  <- pred$se.fit
+link_lwr <- link_fit - 1.96 * link_se
+link_upr <- link_fit + 1.96 * link_se
+
+mu_hat <- exp(link_fit)
+mu_lwr <- exp(link_lwr)
+mu_upr <- exp(link_upr)
+
+plot_df <- data.frame(
+  X = x_grid,
+  mu_hat = mu_hat,
+  mu_lwr = mu_lwr,
+  mu_upr = mu_upr
+)
+
+# Plot
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_jitter(width = 0, height = 0.1, alpha = 0.6) +
+  ggplot2::geom_ribbon(
+    data = plot_df,
+    aes(x = X, ymin = mu_lwr, ymax = mu_upr),
+    inherit.aes = FALSE,
+    alpha = 0.2
+  ) +
+  ggplot2::geom_line(
+    data = plot_df,
+    aes(x = X, y = mu_hat),
+    linewidth = 1
+  ) +
+  ggplot2::labs(
+    title = "Regressão de Poisson (link log)",
+    x = "Variável Independente (X)",
+    y = "Contagem esperada (E[Y|X])"
+  ) +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+## Preparação de variáveis
 
 <br>
 
@@ -431,7 +518,7 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 <br>
 
-## Suposições dos modelos
+## Suposições dos modelos de regressão
 
 <br>
 

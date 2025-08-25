@@ -1128,7 +1128,7 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 -   Valores extremos podem constituir valores legítimos ou ilegítimos de uma distribuição.[@leys2019]
 
-- Valores extremos, quando raros ou desproporcionais, podem se tornar discrepantes ou influentes, afetando as análises estatísticas, sendo recomendado uma análise robusta.[@REF]
+-   Valores extremos, quando raros ou desproporcionais, podem se tornar discrepantes ou influentes, afetando as análises estatísticas, sendo recomendado uma análise robusta.[@REF]
 
 <br>
 
@@ -1196,6 +1196,99 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
   ggplot2::theme_minimal()
 
 ```
+
+<br>
+
+## Robustez em medidas de localização
+
+<br>
+
+### O que é ponto de quebra (*breakdown value*)?
+
+-   É a menor proporção de contaminação que pode levar o estimador a resultados arbitrariamente errados; quanto maior, mais robusto.[@rousseeuw2011]
+
+<br>
+
+### Por que a média não é robusta?
+
+-   Porque tem ponto de quebra $~0%$ e função influência não limitada; um único *outlier* pode distorcer a média arbitrariamente.[@rousseeuw2011]
+
+<br>
+
+### Qual a alternativa robusta para localização?
+
+-   Mediana, com $~50%$ de ponto de quebra e função influência limitada.[@rousseeuw2011]
+
+<br>
+
+### Como estimar escala de forma robusta?
+
+-   Median Absolute Deviation (MAD), equação \@ref(eq:mad), com correção 1,483 para normalidade, com $~50%$ de ponto de quebra..[@rousseeuw2011]
+
+<br>
+
+```{=tex}
+\begin{equation}
+(\#eq:max)
+MAD = 1.483 \cdot \text{median}(|x_i - \text{median}(x)|)
+\end{equation}
+```
+
+<br>
+
+- Primeiro quartil das diferenças pareadas ($Qn$), equação \@ref(eq:qn), com $~50%$ de ponto de quebra.[@rousseeuw2011]
+
+<br>
+
+```{=tex}
+\begin{equation}
+(\#eq:qn)
+Qn = 2.2219 \cdot \text{first quartile}(|x_i - x_j|; i < j)
+\end{equation}
+```
+
+<br>
+
+-   O intervalo interquartil ($IQR$), equação \@ref(eq;iqr) é robusto, com ponto de quebra $~25%$, sendo simples de interpretar e útil em boxplots.[@rousseeuw2011]
+
+<br>
+
+```{=tex}
+\begin{equation}
+(\#eq:iqr)
+IQR = Q3 - Q1
+\end{equation}
+```
+
+<br>
+
+## Parâmetros robustos
+
+<br>
+
+### O que são parâmetros robustos?
+
+-   Parâmetros robustos são medidas de posição e dispersão que permanecem estáveis mesmo na presença de valores discrepantes.[@burke1998; @daszykowski2007]
+
+<br>
+
+### Que parâmetros robustos podem ser estimados?
+
+-   Mediana em vez da média aritmética, pois é menos sensível a valores extremos.[@daszykowski2007]
+
+-   MAD (Median Absolute Deviation) em vez do desvio padrão, que pode ser escalonado por 1.483 para comparabilidade.[@daszykowski2007]
+
+-   Qn e Sn como estimadores alternativos de dispersão robusta.[@daszykowski2007]
+
+-   Média e variância Winsorizadas como opções intermediárias, reduzindo a influência dos *outliers*.[@daszykowski2007]
+
+<br>
+
+### Por que utilizar parâmetros robustos?
+
+-   Eles garantem maior confiabilidade quando os dados não seguem a normalidade ou apresentam contaminação por *outliers*.[@daszykowski2007]
+
+-   Permitem análises mais estáveis em estudos exploratórios, evitando decisões equivocadas sobre variabilidade ou tendência central.[@daszykowski2007]
 
 <br>
 
