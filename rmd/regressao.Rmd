@@ -28,19 +28,19 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 ### Quais são os algoritmos de regressão?
 
--   Linear.[@REF]
+- Linear: Simples, Múltipla, Polinomial.[@REF]
 
--   Não-linear.[@REF]
+- Linear generalizado: Binomial (logística), Multinomial, Ordinal, Poisson, Binomial negativa, Gama.[@REF]
 
--   Polinomial.[@REF]
+- Não-linear (nos parâmetros).[@REF]
 
--   Ridge.[@REF]
+- Aditivo generalizado.[@REF]
 
--   Lasso.[@REF]
+- Efeitos mistos: Linear, Generalizado.[@REF]
 
--  Logística.[@REF]
+- Sobrevida: Cox, Weibull, Exponencial, Log-normal, Log-logístico.[@REF]
 
--   Poisson.[@REF]
+- Regularização: Ridge, Lasso.[@REF]
 
 <br>
 
@@ -96,13 +96,22 @@ Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \
 
 <br>
 
-## Tipos de modelos de regressão
+## Tipos e famílias de modelos de regressão
 
 <br>
 
-### O que são análises de regressão linear?
+### O que são modelos de regressão linear?
 
--   .[@REF]
+- Modelos lineares (equação \@ref(eq:regressao-linear)) descrevem uma relação linear nos parâmetros entre um desfecho contínuo $Y$ e um ou mais preditores $X$.[@REF]
+
+- Assumem erros independentes, de média zero e variância constante (homocedasticidade).[@REF] 
+
+- A normalidade dos resíduos é uma hipótese comum para inferência estatística, mas não obrigatória para estimação dos coeficientes.[@REF]
+
+\begin{equation}
+(\#eq:regressao-linear)
+Y = \beta_0 + \sum_{i=1}^{n} \beta_i X_i + \epsilon
+\end{equation}
 
 <br>
 
@@ -134,9 +143,50 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-### O que são análises de regressão não-linear?
+### O que são modelos de regressão polinomial?
 
--   .[@REF]
+- São extensões da regressão linear em que se incluem termos elevados a potências das variáveis independentes (ex.: $X^2$, $X^3$), permitindo capturar relações curvas.[@REF]
+
+- Modelos de regressão polinomial continuam sendo lineares nos parâmetros, por isso ainda se enquadram como um caso particular da regressão linear.[@REF]
+
+<br>
+
+```{r regressao-polinomial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão polinomial."}
+# simulate X
+set.seed(123)
+X <- seq(-10, 10, length.out = 100)
+
+# simulate Y based on a polynomial function of X
+Y <- 5 + 2 * X^3 - 0.1 * X^2 + rnorm(100, mean = 0, sd = 30)
+
+# create a dataframe
+data <- data.frame(X, Y)
+
+# create the regression model
+model <- lm(Y ~ poly(X, 3), data = data)
+
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(method = "lm",
+                       formula = y ~ poly(x, 3),
+                       color = "blue",      # cor da linha
+                       fill = "grey70",     # cor da faixa IC95%
+                       se = TRUE) +         # ativa o intervalo de confiança
+  ggplot2::labs(title = "Regressão polinomial",
+                x = "Variável Independente (X)",
+                y = "Variável Dependente (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### O que são modelos de regressão não-linear?
+
+- São modelos em que a relação entre os parâmetros e a variável resposta não é linear.  
+
+- Podem assumir formas funcionais mais complexas (ex.: exponencial, logarítmica, logística).[@REF]
+
+- Importante diferenciar "não-linear na variável" (ex.: polinomial) de "não-linear no parâmetro" (ex.: modelos logísticos de crescimento).[@REF]
 
 <br>
 
@@ -170,91 +220,17 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-### O que são análises de regressão polinomial?
+### O que são modelos de regressão logística?
 
--   .[@REF]
+- Modelos logísticos são casos de regressão linear generalizada em que a resposta $Y$ é binária.[@REF]
 
-<br>
+- A equação \@ref(eq:regressao-logistica) modela a razão de chances (*odds*) em função dos preditores.[@REF]
 
-```{r regressao-polinomial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão polinomial."}
-# simulate X
-set.seed(123)
-X <- seq(-10, 10, length.out = 100)
-
-# simulate Y based on a polynomial function of X
-Y <- 5 + 2 * X^3 - 0.1 * X^2 + rnorm(100, mean = 0, sd = 30)
-
-# create a dataframe
-data <- data.frame(X, Y)
-
-# create the regression model
-model <- lm(Y ~ poly(X, 3), data = data)
-
-ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
-  ggplot2::geom_point() +
-  ggplot2::geom_smooth(method = "lm",
-                       formula = y ~ poly(x, 3),
-                       color = "blue",      # cor da linha
-                       fill = "grey70",     # cor da faixa IC95%
-                       se = TRUE) +         # ativa o intervalo de confiança
-  ggplot2::labs(title = "Regressão polinomial",
-                x = "Variável Independente (X)",
-                y = "Variável Dependente (Y)") +
-  ggplot2::theme_minimal()
-```
-
-<br>
-
-### O que são análises de regressão ridge?
-
--   .[@REF]
-
-<br>
-
-```{r regressao-ridge, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão ridge."}
-# simulate X
-set.seed(123)
-X <- seq(-10, 10, length.out = 100)
-Y <- 5 + 2 * X + rnorm(100, mean = 0, sd = 5)
-data <- data.frame(X, Y)
-
-# criar matriz de preditores com intercepto
-X_matrix <- model.matrix(~ X, data = data)
-
-# ajustar modelo de regressão ridge
-model <- glmnet::glmnet(X_matrix, data$Y, alpha = 0)
-
-# predições (usando lambda padrão)
-predicted_Y <- predict(model, newx = X_matrix, s = 0.01)
-
-# adicionar ao dataframe
-data$Y_pred <- as.numeric(predicted_Y)
-
-# plotar com ggplot
-ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
-  ggplot2::geom_point(color = "gray40") +
-  ggplot2::geom_line(ggplot2::aes(y = Y_pred), color = "blue", size = 1) +
-  ggplot2::labs(title = "Regressão Ridge",
-       x = "Variável Independente (X)",
-       y = "Variável Dependente (Y)") +
-  ggplot2::theme_minimal()
-```
-
-<br>
-
-### O que são análises de regressão Lasso?
-
--   .[@REF]
-
-<br>
-
-### O que são análises de regressão logística?
-
--   (equação \@ref(eq:regressao-logistica)) .[@REF]
+- A ligação (*link*) usada é o logit.[@REF]
 
 \begin{equation}
 (\#eq:regressao-logistica)
-\log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X + ... + \beta_n X_n + \epsilon
+\log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X + ... + \beta_n X_n
 \end{equation}
 
 <br>
@@ -286,9 +262,31 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-### O que são análises de regressão de Poisson?
+### O que são modelos de regressão multinomial?
 
-- .[@REF]
+- Modelos de regressão multinomial são usados quando a variável resposta é categórica com mais de dois níveis não ordenados.[@REF]
+
+- Estendem a regressão logística binária, modelando as razões de chances (*odds ratios*) de cada categoria em relação a uma categoria de referência.[@REF]
+
+<br>
+
+### O que são modelos de regressão ordinal?
+
+- Modelos de regressão ordinal são usados quando a variável resposta é categórica com mais de dois níveis ordenados.[@REF]
+
+- Modelam a probabilidade acumulada de estar em ou abaixo de cada categoria, usando uma função de ligação logit, probit ou log-log.[@REF]
+
+- Assumem a proporcionalidade dos coeficientes entre as categorias (*proportional odds*).[@REF]
+
+<br>
+
+### O que são modelos de regressão de Poisson?
+
+- Modelos de regressão de Poisson são usados quando a variável resposta é uma contagem de eventos não negativos.[@REF]
+
+- Assumem que $Y \sim Poisson(\mu)$, com $\mu = E[Y|X]$ relacionado aos preditores via função de ligação log.[@REF] 
+
+- A sobre-dispersão (variância maior que a média) pode exigir modelos alternativos como a regressão binomial negativa.[@REF]
 
 <br>
 
@@ -352,6 +350,95 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ) +
   ggplot2::theme_minimal()
 ```
+
+<br>
+
+### O que são modelos de regressão binomial negativa?
+
+- Modelos de regressão binomial negativa são usados para contagens superdispersas, onde a variância excede a média.[@REF]
+
+- Introduzem um parâmetro de dispersão adicional para modelar a variabilidade extra.[@REF]
+
+- A função de ligação log é comumente usada, semelhante à regressão de Poisson.[@REF]
+
+<br>
+
+### O que são modelos de regressão Gama?
+
+- Modelos de regressão Gama são usados para variáveis resposta contínuas e positivas, frequentemente com distribuição assimétrica.[@REF]
+
+- A função de ligação log é comumente usada para garantir predições positivas.[@REF]
+
+<br>
+
+### O que são modelos de regressão com efeitos mistos?
+
+- Modelos de efeitos mistos incorporam efeitos fixos (coeficientes comuns a todos os indivíduos) e efeitos aleatórios (variações específicas de grupos ou indivíduos).[@REF]
+
+- Usados para dados hierárquicos ou longitudinais, onde observações estão agrupadas (ex.: pacientes dentro de hospitais).[@REF]
+
+- Permitem modelar correlações intra-grupo e variabilidade entre grupos.[@REF]
+
+<br>
+
+### O que são modelos de regressão com efeitos mistos generalizados?
+
+- Modelos de efeitos mistos generalizados (GLMM) estendem os modelos de efeitos mistos para variáveis resposta que seguem distribuições da família exponencial (ex.: binomial, Poisson).[@REF]
+
+- Combinam a flexibilidade dos modelos lineares generalizados com a capacidade de modelar correlações e variabilidade entre grupos.[@REF]
+
+- Usados para dados hierárquicos ou longitudinais com desfechos não normais.[@REF]
+
+<br>
+
+### O que são modelos de regressão ridge?
+
+- Regressão ridge é um modelo linear regularizado que adiciona uma penalização L2 à soma dos quadrados dos coeficientes.[@REF]
+
+- Ajuda a reduzir multicolinearidade e overfitting, encolhendo os coeficientes em direção a zero, mas nunca os tornando exatamente nulos.[@REF]
+
+- O  hiperparâmetro de regularização é $\lambda$, controlando a intensidade da penalização. Valores maiores de $\lambda$ resultam em maior encolhimento dos coeficientes.[@REF]
+
+<br>
+
+```{r regressao-ridge, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão ridge."}
+# simulate X
+set.seed(123)
+X <- seq(-10, 10, length.out = 100)
+Y <- 5 + 2 * X + rnorm(100, mean = 0, sd = 5)
+data <- data.frame(X, Y)
+
+# criar matriz de preditores com intercepto
+X_matrix <- model.matrix(~ X, data = data)
+
+# ajustar modelo de regressão ridge
+model <- glmnet::glmnet(X_matrix, data$Y, alpha = 0)
+
+# predições (usando lambda padrão)
+predicted_Y <- predict(model, newx = X_matrix, s = 0.01)
+
+# adicionar ao dataframe
+data$Y_pred <- as.numeric(predicted_Y)
+
+# plotar com ggplot
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point(color = "gray40") +
+  ggplot2::geom_line(ggplot2::aes(y = Y_pred), color = "blue", size = 1) +
+  ggplot2::labs(title = "Regressão Ridge",
+       x = "Variável Independente (X)",
+       y = "Variável Dependente (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### O que são modelos de regressão lasso?
+
+- Regressão lasso (Least Absolute Shrinkage and Selection Operator) utiliza penalização L1, que pode zerar coeficientes.[@REF]
+
+- Além de reduzir overfitting, também realiza seleção automática de variáveis.[@REF]  
+
+- Enquanto a regressão ridge mantém todos os preditores, a lasso pode excluir variáveis irrelevantes.[@REF]
 
 <br>
 
