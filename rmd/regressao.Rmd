@@ -270,6 +270,77 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
+```{r regressao-multinomial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão multinomial"}
+library(tidyr)
+
+# Reprodutibilidade
+set.seed(123)
+
+# 1) Simular X e Y (categorias A/B/C) via softmax
+n <- 200
+X <- rnorm(n, mean = 50, sd = 10)
+
+# Defina preditores lineares por categoria (um "modelo verdadeiro" para simulação)
+# A será a categoria de referência implícita no cálculo de probabilidades
+eta_A <- 0
+eta_B <- -2 + 0.05*X   # prob de B cresce com X
+eta_C <-  2 - 0.08*X   # prob de C decresce com X
+
+# Softmax para probabilidades
+expA <- exp(eta_A)
+expB <- exp(eta_B)
+expC <- exp(eta_C)
+den  <- expA + expB + expC
+pA <- expA / den
+pB <- expB / den
+pC <- expC / den
+
+# Amostrar categoria observada
+Y_cat <- sapply(seq_len(n), function(i) {
+  sample(c("A","B","C"), size = 1, prob = c(pA[i], pB[i], pC[i]))
+})
+Y_cat <- factor(Y_cat, levels = c("A","B","C"))
+
+# Data frame
+data <- data.frame(X = X, Y = Y_cat)
+
+# 2) Ajustar regressão multinomial
+# Por padrão, nnet::multinom usa a 1ª categoria (A) como referência
+model <- nnet::multinom(Y ~ X, data = data, trace = FALSE)
+
+# 3) Prever probabilidades ao longo de X para plotar as curvas
+grid <- data.frame(X = seq(min(data$X), max(data$X), length.out = 200))
+pred_probs <- predict(model, newdata = grid, type = "probs") %>% as.data.frame()
+colnames(pred_probs) <- levels(data$Y)  # garantir nomes A, B, C
+pred_long <- dplyr::bind_cols(grid, pred_probs) |>
+  tidyr::pivot_longer(cols = c("A","B","C"),
+               names_to = "categoria", values_to = "prob")
+
+# 4) Gráficos
+
+# (A) Dispersão: X vs Categoria observada (jitter no eixo Y)
+p_obs <- ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y, color = Y)) +
+  ggplot2::geom_jitter(height = 0.08, width = 0, alpha = 0.7, size = 2) +
+  ggplot2::labs(title = "Observações",
+       x = "Variável Independente (X)",
+       y = "Categoria observada") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "none")
+
+# (B) Curvas de probabilidade prevista por X
+p_prob <- ggplot2::ggplot(pred_long, ggplot2::aes(x = X, y = prob, color = categoria)) +
+  ggplot2::geom_line(linewidth = 1.2) +
+  ggplot2::labs(title = "Regressão Multinomial: Probabilidades preditas",
+       x = "Variável Independente (X)",
+       y = "Probabilidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(accuracy = 1))
+
+print(p_prob)
+```
+
+<br>
+
 ### O que são modelos de regressão ordinal?
 
 - Modelos de regressão ordinal são usados quando a variável resposta é categórica com mais de dois níveis ordenados.[@REF]

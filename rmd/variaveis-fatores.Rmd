@@ -142,6 +142,74 @@ O pacote *MASS*[@MASS] fornece a função [*boxcox*](https://www.rdocumentation.
 
 <br>
 
+## Centralização de variáveis (centering)
+
+<br>
+
+### O que é centralização?
+
+- É uma transformação linear em que se subtrai a média da variável de cada observação. O objetivo é recentrar a variável em torno de zero, sem alterar a sua variabilidade (desvio-padrão).{@REF}
+
+<br>
+
+### Por que centralizar?
+
+- Facilita a interpretação dos coeficientes de regressão, especialmente em modelos com termos de interação.[@REF]
+
+- Reduz a multicolinearidade entre variáveis e seus termos de interação ou polinomiais.[@REF]
+
+- Mantém a escala original (apenas desloca a média).[@REF]
+
+<br>
+
+## Padronização de variáveis
+
+<br>
+
+### O que é padronização?
+
+- Padronização é a transformação de uma variável contínua para uma escala comum, permitindo comparações entre variáveis medidas em diferentes unidades ou magnitudes.[@REF]
+
+<br>
+
+### Por que padronizar?
+
+- Facilita a interpretação em análises multivariadas.[@REF]
+
+- Evita que variáveis em escalas maiores dominem os resultados de algoritmos que dependem de distância.[@REF]
+
+- Melhora a comparabilidade entre estudos e bases de dados diferentes..[@REF]
+
+<br>
+
+### Quais são os métodos de padronização mais comuns?
+
+- Escore-Z (Z-score): subtrair a média e dividir pelo desvio-padrão.[@REF]
+
+- Escala Min-Max: transformar para o intervalo [0,1].[@REF]
+
+- Normalização (L1 ou L2): usada em aprendizado de máquina para vetores de características.[@REF]
+
+- Transformações específicas de área: padronização por peso corporal, por superfície corporal, por tempo etc.[@REF]
+
+<br>
+
+### Quais são as boas práticas de nomenclatura ao padronizar variáveis?
+
+- Usar sufixos como `_z` ou `_std` para indicar padronização (`altura_z`, `peso_std`).[@REF]
+
+- Documentar no dicionário de dados como cada variável foi transformada.[@REF]
+
+- Evitar substituir a variável original: manter sempre a versão bruta e a padronizada.[@REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base] fornece a função [*scale*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/scale) para calcular automaticamente a padronização (média = 0, desvio padrão = 1).  
+:::
+
+<br>
+
 ## Categorização de variáveis contínuas
 
 <br>
