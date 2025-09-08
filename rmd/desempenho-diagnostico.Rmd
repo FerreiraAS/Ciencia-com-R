@@ -34,7 +34,7 @@
 
 <br>
 
-```{r crosstable, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r crosstable-2x2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 library(dplyr)
 
 cross.table <-
@@ -86,6 +86,9 @@ kableExtra::kable(
 -   Tabelas de confusão também podem ser visualizadas em formato de árvores de frequência.[@steckelberg2004]
 
 ```{r frequency-tree, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Árvore de frequência do desempenho diagnóstico de uma tabela de confusão 2x2 representando um método novo (dicotômico) comparado ao método padrão-ouro ou referência (dicotômico)."}
+# Reprodutibilidade
+set.seed(123)
+
 # generate data
 gold.std <- rbinom(n = 100, size = 1, prob = 0.5)
 new.test <- rbinom(n = 100, size = 1, prob = 0.5)
@@ -170,21 +173,35 @@ df <- tibble::tibble(
 # ---- Limiar ótimo (Youden J) ----
 opt <- df |>  dplyr::slice_max(Youden, n = 1)
 
+# Texto do rótulo no ponto de Youden
+lbl <- sprintf("t* = %.1f%%\nSens = %.1f%%\nEsp = %.1f%%",
+               100*opt$threshold, 100*opt$Sensibilidade, 100*opt$Especificidade)
+
 # ---- Plot ----
 ggplot2::ggplot(df, ggplot2::aes(x = threshold)) +
   ggplot2::geom_line(ggplot2::aes(y = Sensibilidade), linewidth = 1) +
   ggplot2::geom_line(ggplot2::aes(y = Especificidade), linetype = 2, linewidth = 1) +
   ggplot2::geom_vline(xintercept = opt$threshold, linetype = 3) +
-  ggplot2::annotate("point", x = opt$threshold, y = 0.5*(opt$Sensibilidade + opt$Especificidade), size = 2) +
+  ggplot2::annotate("point",
+                    x = opt$threshold,
+                    y = 0.5*(opt$Sensibilidade + opt$Especificidade),
+                    size = 2
+  ) +
+  # 👉 rótulo com t* (ajuste hjust/vjust conforme preferir)
+  ggplot2::annotate("text",
+                    x = opt$threshold,
+                    y = 0.75,                 # posição vertical do texto
+                    label = lbl,
+                    hjust = -0.1, vjust = 1,  # empurra um pouco para a direita do t*
+                    size = 3.5
+  ) +
   ggplot2::scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
   ggplot2::scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0,1)) +
   ggplot2::labs(
     x = "Limiar de probabilidade (t)",
     y = "Proporção de casos corretamente identificados",
     title = "Trade-off entre Sensibilidade e Especificidade",
-    subtitle = sprintf("Limiar de Youden ≈ %.1f%% | Sens=%.1f%%, Esp=%.1f%%",
-                       100*opt$threshold, 100*opt$Sensibilidade, 100*opt$Especificidade),
-    caption = "Linhas: sólida = Sensibilidade; tracejada = Especificidade"
+    caption = "Linhas: sólida = Sensibilidade; tracejada = Especificidade; pontilhada = Limiar ótimo (Youden J)"
   ) +
   ggplot2::theme_minimal(base_size = 12)
 ```
@@ -213,7 +230,25 @@ VPN = \dfrac{VN}{VN+FN}
 
 <br>
 
--   Acurácia ($ACU$), equação \@ref(eq:acu): Proporção de casos e controle corretamente identificados.[@greenhalgh1997b]
+- Razão de verossimilhança positiva ($LR+$), equação \@ref(eq:lrplus): Quantifica o quanto a probabilidade de a condição estar presente aumenta quando o teste é positivo.[@REF]
+
+\begin{equation}
+(\#eq:lrplus)
+LR+ = \dfrac{SEN}{1 - ESP} = \dfrac{VP/(VP+FN)}{FP/(FP+VN)}
+\end{equation}
+
+<br>
+
+- Razão de verossimilhança negativa ($LR-$), equação \@ref(eq:lrminus): Quantifica o quanto a probabilidade de a condição estar presente diminui quando o teste é negativo.[@REF]
+
+\begin{equation}
+(\#eq:lrminus)
+LR- = \dfrac{1 - SEN}{ESP} = \dfrac{FN/(VP+FN)}{VN/(FP+VN)}
+\end{equation}
+
+<br>
+
+-   Acurácia ($ACU$), equação \@ref(eq:acu): Proporção de casos e controles corretamente identificados.[@greenhalgh1997b]
 
 <br>
 
@@ -224,11 +259,24 @@ ACU = \dfrac{VP+VN}{VP+VN+FP+FN}
 
 <br>
 
--   Razão de chances diagnóstica ($DOR$), equação \@ref(eq:dor): Razão entre a chance de um teste ser positivo quando a condição está presente e a chance de um teste ser positivo quando a condição está ausente.[@Glas2003]
+-   Razão de chances diagnóstica ($DOR$), equações \@ref(eq:dor1), \@ref(eq:dor2) e \@ref(eq:dor3): Razão entre a chance de um teste ser positivo quando a condição está presente e a chance de um teste ser positivo quando a condição está ausente.[@Glas2003]
 
 \begin{equation}
-(\#eq:dor)
+(\#eq:dor1)
 DOR = \dfrac{VP}{FN} \div \dfrac{FP}{VN} = \dfrac{VP \cdot VN}{FP \cdot FN}
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:dor2)
+DOR = \dfrac{SEN/(1-SEN)}{(1-ESP)/ESP} = \dfrac{SEN \cdot ESP}{(1-SEN) \cdot (1-ESP)}
+\end{equation}
+<br>
+
+\begin{equation}
+(\#eq:dor3)
+DOR = \dfrac{LR+}{LR-}
 \end{equation}
 
 <br>
@@ -303,6 +351,147 @@ O pacote *caret*[@caret] fornece a função [*confusionMatrix*](https://www.rdoc
 
 <br>
 
+## Tabelas 2x3
+
+<br>
+
+### O que é uma tabela de confusão 2x3?
+
+-   É a extensão da tabela 2×2 que inclui uma terceira decisão (deferimento/*boundary*) além de aceitar (positivo) e rejeitar (negativo).[@xu2020]
+
+-   As colunas\*\* representam as decisões\*\* ($POS$, $BND$, $NEG$) e as linhas representam a verdade de referência (condição presente vs ausente).[@xu2020]
+
+-   Essa formulação vem do arcabouço de *Three-Way Decisions (3WD)*, que particiona o universo em três regiões por dois limiares $\alpha$ e $\beta$.[@xu2020]
+
+<br>
+
+### Como as regiões POS, BND e NEG são definidas?
+
+-   Dado um escore ou probabilidade condicional $Pr(C\mid[x])$ para a classe $C$, classifica-se como $POS$ (aceitar) quando $Pr(C\mid[x]) \ge \alpha$, como $BND$ (deferir) quando $\beta < Pr(C\mid[x]) < \alpha$ e como $NEG$ (rejeitar) quando $Pr(C\mid[x]) \le \beta$, sendo que os limiares $(\alpha,\beta)$ determinam simultaneamente as três regiões e os *trade-offs* entre acurácia e comprometimento.[@xu2020]
+
+<br>
+
+### Qual é o formato de uma tabela 2×3?
+
+-   Estrutura geral (linhas = condição real; colunas = decisão):
+
+```{r crosstable-2x3, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# matriz 2x3 (referência vs decisão) — células simbólicas
+cross3 <- matrix(
+  c("$|POS\\cap C|$",   "$|BND\\cap C|$",   "$|NEG\\cap C|$",
+    "$|POS\\cap C^c|$", "$|BND\\cap C^c|$", "$|NEG\\cap C^c|$"),
+  nrow = 2, byrow = TRUE
+)
+rownames(cross3) <- c("Condição presente (C)", "Condição ausente ($C^c$)")
+colnames(cross3) <- c("POS (aceitar)", "BND (deferir)", "NEG (rejeitar)")
+
+# ---- adicionar totais (simbólicos) ----
+# adiciona coluna "Total"
+cross3_totais <- cbind(
+  cross3,
+  "Total" = c(
+    "$|POS\\cap C|+|BND\\cap C|+|NEG\\cap C|$",
+    "$|POS\\cap C^c|+|BND\\cap C^c|+|NEG\\cap C^c|$"
+  )
+)
+
+# adiciona linha "Total"
+linha_total <- matrix(
+  c(
+    "$|POS\\cap C|+|POS\\cap C^c|$",
+    "$|BND\\cap C|+|BND\\cap C^c|$",
+    "$|NEG\\cap C|+|NEG\\cap C^c|$",
+    "$N$"
+  ),
+  nrow = 1
+)
+rownames(linha_total) <- "Total"
+colnames(linha_total) <- colnames(cross3_totais)
+
+cross3_totais <- rbind(cross3_totais, linha_total)
+
+# ---- renderização kable/kableExtra ----
+kableExtra::kable(
+  cross3_totais,
+  align   = "c",
+  format  = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  escape  = FALSE,
+  caption = "Tabela de confusão 3-vias (2×3) com totais: referência vs decisão (3WD)."
+) |>
+  kableExtra::kable_styling(
+    latex_options     = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width        = ifelse(knitr::is_html_output(), TRUE, TRUE),
+    position          = "center"
+  ) |>
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") |>
+  kableExtra::row_spec(nrow(cross3_totais)-1, bold = TRUE, extra_css = "border-bottom: 1px solid") |>  # penúltima linha (antes do total) com borda
+  kableExtra::column_spec(1, bold = TRUE) |>
+  kableExtra::row_spec(nrow(cross3_totais), extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+### Quais são as medidas básicas na 2×3?
+
+-   Acurácia em POS ($M_{PT}$), equação \@ref(eq:mpt): Proporção de positivos corretamente identificados na região POS.[@xu2020]
+
+\begin{equation}
+(\#eq:mpt)
+M_{PT} = \dfrac{|POS \cap C|}{|POS|}
+\end{equation}
+
+-   Erro em POS ($M_{PF}$), equação \@ref(eq:mpf): Proporção de negativos incorretamente classificados na região POS.[@xu2020]
+
+\begin{equation}
+(\#eq:mpf)
+M_{PF} = \dfrac{|POS \cap C^{c}|}{|POS|}
+\end{equation}
+
+-   Acurácia em NEG ($M_{NF}$), equação \@ref(eq:mnf): Proporção de negativos corretamente identificados na região NEG.[@xu2020]
+
+\begin{equation}
+(\#eq:mnf)
+M_{NF} = \dfrac{|NEG \cap C^{c}|}{|NEG|}
+\end{equation}
+
+-   Erro em NEG ($M_{NT}$), equação \@ref(eq:mnt): Proporção de positivos incorretamente classificados na região NEG.[@xu2020]
+
+\begin{equation}
+(\#eq:mnt)
+M_{NT} = \dfrac{|NEG \cap C|}{|NEG|}
+\end{equation}
+
+-   Frações em BND ($M_{BT}$ e $M_{BF}$), equações \@ref(eq:mbt) e \@ref(eq:mbf): Proporção de deferimentos verdadeiros e falsos.[@xu2020]
+
+\begin{equation}
+(\#eq:mbt)
+M_{BT} = \dfrac{|BND \cap C|}{|BND|}
+\end{equation}
+\begin{equation}
+(\#eq:mbf)
+M_{BF} = \dfrac{|BND \cap C^{c}|}{|BND|}
+\end{equation}
+
+<br>
+
+### Como escolher os limiares \(\alpha\) e \(\beta\)?
+
+-   Os limiares \((\alpha,\beta)\) controlam o tamanho das regiões $POS$, $NEG$ e $BND$ e, portanto, os *trade-offs* entre “acertar mais” (acurácia nas regiões) e “decidir mais” (comprometimento; menos deferimentos).[@xu2020]
+
+<br>
+
+### Quando preferir 3-vias em vez de 2×2?
+
+-   Quando o custo de erro é assimétrico e/ou há incerteza relevante.[@xu2020]
+
+-   O deferimento ($BND$) evita decisões precipitadas e permite avaliação adicional, equilibrando acurácia e cobertura.[@xu2020]
+
+-   É particularmente útil em triagens diagnósticas com etapas confirmatórias.[@xu2020]
+
+<br>
+
 ## Curvas ROC
 
 <br>
@@ -327,7 +516,7 @@ O pacote *caret*[@caret] fornece a função [*confusionMatrix*](https://www.rdoc
 
 -   O ponto de corte em uma curva ROC representa um balanço entre sensibilidade e especificidade, ou seja, a taxa de verdadeiros positivos e a taxa de falsos positivos.[@he2024; @park2004]
 
--   O método de Youden (equação \@ref(eq:youden) maximiza maximiza a diferença entre a taxa de verdadeiros positivos e a taxa de falsos positivos. O ponto de corte ideal será aquele com maior valor de $Y$.[@YOUDEN1950]
+-   O método de Youden (equação \@ref(eq:youden) maximiza a diferença entre a taxa de verdadeiros positivos e a taxa de falsos positivos. O ponto de corte ideal será aquele com maior valor de $Y$.[@YOUDEN1950]
 
 \begin{equation}
 (\#eq:youden)
@@ -389,11 +578,11 @@ O pacote *proc*[@pROC] fornece a função [*plot.roc*](https://www.rdocumentatio
 
 -   Porque indica desempenho pior que o acaso.[@he2024]
 
--   Geralmente decorre de seleção incorreta da direção do teste ou variável de estado.[@he2024]
+-   Geralmente decorre de seleção incorreta da direção do teste ou da variável de estado.[@he2024]
 
 -   Verifique se o software está configurado para maiores valores indicam presença do evento ou o inverso.[@he2024]
 
--   Ajustar a direção do teste para que $AUC ≥ 0.5$.[@he2024]
+-   Ajuste a direção do teste para que $AUC ≥ 0.5$.[@he2024]
 
 <br>
 

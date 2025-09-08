@@ -302,6 +302,8 @@ ggplot2::ggplot() +
 <br>
 
 ```{r erro-amostragem, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da amostragem de uma população para a amostra."}
+library(dplyr)
+
 # Reprodutibilidade
 set.seed(123)
 
@@ -352,6 +354,12 @@ resumo <- amostras %>%
 
 amostras$nivel <- as.numeric(factor(amostras$amostra))  # 1..5
 
+amostras$amostra <- factor(amostras$amostra, 
+                           levels = paste("Amostra", n_amostras:1))
+
+resumo$amostra <- factor(resumo$amostra, 
+                         levels = paste("Amostra", n_amostras:1))
+
 g1 <- ggplot2::ggplot() +
   # densidade da população ao fundo
   ggplot2::geom_density(data = pop, ggplot2::aes(x = valor, y = ggplot2::after_stat(scaled)),
@@ -377,11 +385,9 @@ g1 <- ggplot2::ggplot() +
     subtitle = sprintf("Cada amostra tem sua própria média", mu_pop),
     x = "Valor",
     y = NULL
-  ) +
-  ggplot2::theme_minimal(base_size = 12)
+  )
 
-# Imprimir resultados
-print(g1)
+g1
 ```
 
 <br>

@@ -24,6 +24,49 @@
 
 <br>
 
+```{r kaplan-meier, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Curvas de Kaplan–Meier simuladas para dois grupos (controle e tratamento)."}
+# Reprodutibilidade
+set.seed(123)
+
+# simulação simples
+n <- 200
+grupo <- rbinom(n, 1, 0.5)  # 0 = controle, 1 = tratamento
+HR_true <- 0.65
+lambda0 <- 0.03
+u <- runif(n)
+hazard_i <- lambda0 * (HR_true ^ grupo)
+tempo_evento <- -log(u) / hazard_i
+tempo_cens   <- rexp(n, rate = 0.02)
+
+tempo  <- pmin(tempo_evento, tempo_cens)
+status <- as.integer(tempo_evento <= tempo_cens)
+
+dados <- data.frame(
+  tempo = tempo,
+  status = status,
+  grupo = factor(grupo, labels = c("Controle","Tratamento"))
+)
+
+# Kaplan–Meier
+ajuste_km <- survival::survfit(survival::Surv(tempo, status) ~ grupo, data = dados)
+
+# gráfico
+survminer::ggsurvplot(
+  ajuste_km,
+  data = dados,
+  conf.int = TRUE,              # intervalo de confiança
+  pval = TRUE,                  # p-valor log-rank
+  risk.table = TRUE,            # tabela de nº em risco
+  xlab = "Tempo (unidades simuladas)",
+  ylab = "Probabilidade de Sobrevida",
+  title = "Curvas de Kaplan–Meier",
+  legend.title = "Grupo",
+  ggtheme = ggplot2::theme_minimal()
+)
+```
+
+<br>
+
 ```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
 cat(readLines("citation.html"), sep = "\n")
 ```

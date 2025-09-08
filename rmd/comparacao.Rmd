@@ -18,6 +18,66 @@ O pacote *cocor*[@cocor] fornece as funções [cocor.indep.groups](https://www.r
 
 <br>
 
+## F-teste
+
+<br>
+
+### O que é o F-teste?
+
+-   O F-teste é uma estatística que compara a variabilidade entre grupos com a variabilidade dentro dos grupos.[@REF]
+
+-   A estatística é calculada como $F=\dfrac{\text{QM}_{\text{entre}}}{\text{QM}_{\text{dentro}}}$, onde $\text{QM}$ são “quadrados médios”, com $gl_{1}$ e $gl_{2}$ definidos pelo desenho (ex.: fatores e resíduos).[@REF]
+
+<br>
+
+### Quando usar o F-teste?
+
+-   ANOVA de um fator (≥3 grupos) e ANOVA multifatorial (efeitos principais e interações).[@REF]
+
+-   GLM / regressão linear: teste global $H_{0}:\beta_{1}=\cdots=\beta_{p}=0$.[@REF]
+
+-   ANCOVA (comparação de grupos ajustando covariáveis).[@REF]
+
+-   Contrastes planejados ou pós-hoc (usando a razão F correspondente).[@REF]
+
+<br>
+
+### Quais são os pressupostos?
+
+-   Observações independentes.[@REF]
+
+-   Normalidade (aproximada) dos resíduos.[@REF]
+
+-   Homogeneidade de variâncias entre grupos (homoscedasticidade).[@REF]
+
+-   Se houver violações importantes: considerar ANOVA de Welch, transformações apropriadas ou alternativas não paramétricas (ex.: Kruskal–Wallis para um fator).[@REF]
+
+<br>
+
+### Como interpretar o resultado?
+
+-   Valor de $F$ elevado com $P<\alpha$ indica evidência contra $H_{0}$ (diferenças entre grupos/modelo com ajuste significativo).[@REF]
+
+-   Relate sempre $gl_{1}$, $gl_{2}$, $F$ e $P$, além de um tamanho de efeito (ex.: $\eta^{2}$, $\eta^{2}_{p}$ ou $\omega^{2}$) e intervalo de confianca quando possível.[@REF]
+
+-   Após rejeitar $H_{0}$, use contrastes ou pós-hoc com ajuste para múltiplas comparações para localizar as diferenças.[@REF]
+
+<br>
+
+### O que reportar em publicações?
+
+-   Estrutura do desenho (fatores, níveis, balanceamento).[@REF]
+
+-   Verificação/diagnóstico dos pressupostos.[@REF]
+
+-   Estatística $F$ com $gl$ e $P$.[@REF]
+
+-   Tamanho de efeito e intervalo de confiança.[@REF]
+
+-   Método de ajuste para múltiplas comparações quando aplicável.[@REF] 
+
+<br>
+
 ```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
 cat(readLines("citation.html"), sep = "\n")
 ```
