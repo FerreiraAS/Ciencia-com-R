@@ -42,6 +42,16 @@
 
 <br>
 
+### O que é representatividade e por que ela importa?
+
+- Representatividade refere-se ao grau em que uma amostra reflete com fidelidade as características da população de referência.[@martínez-mesa2016]
+
+- Quando a amostra contém menos indivíduos do que o número mínimo necessário, mas mantém a representatividade, a inferência estatística ainda é possível, embora possa haver redução da precisão e/ou do poder estatístico para detectar os efeitos.[@martínez-mesa2016]
+
+- Amostras não representativas comprometem a validade da inferência estatística, mesmo quando o tamanho da amostra atende aos requisitos de poder da análise.[@martínez-mesa2016]
+
+<br>
+
 ## Amostra
 
 <br>
@@ -56,22 +66,11 @@
 
 ### Por que usar dados de amostras?
 
-- Estudos com amostras, em vez de censos, são preferíveis por diversas razões, dentre elas: questões éticas; limitações orçamentárias; desafios logísticos; restrição de tempo; e 
-tamanho populacional desconhecido.[@martínez-mesa2016]
+- Estudos com amostras, em vez de censos, são preferíveis por diversas razões, dentre elas: questões éticas; limitações orçamentárias; desafios logísticos; restrição de tempo; e tamanho populacional desconhecido.[@martínez-mesa2016]
 
 -   Dados de uma amostra de tamanho suficiente e características representativas podem ser utilizados para inferência sobre uma população.[@kwak2017]
 
 -   Em geral, amostras de tamanhos maiores possuem médias mais próximas da média populacional e menores variâncias.[@kwak2017]
-
-<br>
-
-### O que é representatividade amostral e por que ela importa?
-
-- Representatividade amostral refere-se ao grau em que uma amostra reflete com fidelidade as características da população de referência.[@martínez-mesa2016]
-
-- Quando a amostra contém menos indivíduos do que o número mínimo necessário, mas mantém a representatividade, a inferência estatística ainda é possível, embora possa haver redução da precisão e/ou do poder estatístico para detectar os efeitos.[@martínez-mesa2016]
-
-- Amostras não representativas comprometem a validade da inferência estatística, mesmo quando o tamanho da amostra atende aos requisitos de poder da análise.[@martínez-mesa2016]
 
 <br>
 
@@ -85,9 +84,13 @@ tamanho populacional desconhecido.[@martínez-mesa2016]
 
 <br>
 
-```{r populacao-amostra, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da amostragem de uma população para a amostra."}
-# Dados da população e amostra
+```{r populacao-amostra, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da amostragem: seleção de uma população para a amostra."}
+library(dplyr)
+
+# Reprodutibilidade
 set.seed(123)
+
+# Dados da população e amostra
 pop_n <- 50
 sample_n <- 10
 
@@ -217,6 +220,169 @@ ggplot2::ggplot() +
 ### O que é erro de amostragem?
 
 - Erro de amostragem é a variação natural entre os resultados obtidos a partir de uma amostra e os resultados que seriam obtidos caso toda a população fosse examinada. Reflete o grau de incerteza inerente à generalização de uma amostra para a população.[@martínez-mesa2016]
+
+<br>
+
+```{r erro-amostragem-esquematico, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática do erro de amostragem: seleção de várias amostras independentes de uma população."}
+# Reprodutibilidade
+set.seed(123)
+
+# parâmetros
+pop_n <- 80       # tamanho da população
+sample_n <- 12    # tamanho de cada amostra
+n_amostras <- 5   # número de amostras
+svg_size <- 0.035
+
+# --- População ---
+radius_pop <- runif(pop_n, 0.5, 2.5)
+angle_pop <- seq(0, 2*pi, length.out = pop_n + 1)[-1]
+pop_df <- data.frame(
+  id = 1:pop_n,
+  x_pop = cos(angle_pop) * radius_pop - 6,
+  y_pop = sin(angle_pop) * radius_pop,
+  label = "./images/person.svg"
+)
+
+# --- Amostras independentes ---
+offsets <- seq(6, -6, length.out = n_amostras)  # posições verticais para separar círculos
+lista_amostras <- lapply(seq_len(n_amostras), function(i){
+  ids <- sample(pop_df$id, sample_n)
+  radius <- runif(sample_n, 0.2, 0.8)
+  angle <- seq(0, 2*pi, length.out = sample_n+1)[-1]
+  tibble::tibble(
+    amostra = paste0("Amostra ", i),
+    id = ids,
+    x = cos(angle) * radius + 6,
+    y = sin(angle) * radius + offsets[i],
+    label = "./images/person.svg"
+  )
+})
+amostras_df <- dplyr::bind_rows(lista_amostras)
+
+# círculos das amostras
+circulos_amostras <- data.frame(
+  x0 = 6,
+  y0 = offsets,
+  r = 1.0,
+  amostra = paste0("Amostra ", 1:n_amostras)
+)
+
+# --- Setas População → Amostras ---
+setas <- dplyr::inner_join(
+  dplyr::select(pop_df, id, x_pop, y_pop),
+  dplyr::select(amostras_df, id, amostra, x, y),
+  by = "id"
+) %>%
+  dplyr::rename(xend = x, yend = y, x = x_pop, y = y_pop)
+
+# --- Gráfico ---
+ggplot2::ggplot() +
+  # círculo população
+  ggforce::geom_circle(ggplot2::aes(x0 = -6, y0 = 0, r = 3), color = "black") +
+  ggimage::geom_image(data = pop_df, ggplot2::aes(x = x_pop, y = y_pop, image = label), size = svg_size) +
+  ggplot2::annotate("text", x = -6, y = 3.5, label = "População", fontface = "bold", size = 5) +
+  
+  # círculos das amostras
+  ggforce::geom_circle(data = circulos_amostras, ggplot2::aes(x0 = x0, y0 = y0, r = r), color = "black") +
+  ggimage::geom_image(data = amostras_df, ggplot2::aes(x = x, y = y, image = label), size = svg_size) +
+  ggplot2::geom_text(data = circulos_amostras,
+            ggplot2::aes(x = x0, y = y0 + r + 0.4, label = amostra),
+            fontface = "bold", size = 4) +
+  
+  # setas
+  ggplot2::geom_curve(data = setas,
+             ggplot2::aes(x = x, y = y, xend = xend, yend = yend),
+             arrow = ggplot2::arrow(length = grid::unit(0.18, "cm")),
+             color = "gray50", curvature = -0.2, linewidth = 0.6) +
+  
+  ggplot2::coord_fixed() +
+  ggplot2::theme_void()
+```
+
+<br>
+
+```{r erro-amostragem, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da amostragem de uma população para a amostra."}
+# Reprodutibilidade
+set.seed(123)
+
+# ----- 1) Defina população e parâmetros -----
+N <- 1000          # tamanho da população
+mu <- 50           # média "verdadeira" para gerar a população
+sd_pop <- 10       # desvio-padrão populacional usado na geração
+n <- 30            # tamanho de cada amostra
+n_amostras <- 5    # número de amostras independentes
+
+# População fixa (a "verdade" do experimento)
+pop <- tibble::tibble(
+  id = 1:N,
+  valor = rnorm(N, mean = mu, sd = sd_pop)
+)
+
+mu_pop <- mean(pop$valor)
+sd_pop_emp <- sd(pop$valor)
+
+# ----- 2) Desenhe 5 amostras independentes desta mesma população -----
+amostras <- purrr::map_dfr(1:n_amostras, function(i) {
+  idx <- sample(pop$id, n, replace = FALSE)  # SRS sem reposição
+  tibble::tibble(
+    amostra = paste0("Amostra ", i),
+    id = idx
+  ) %>%
+    dplyr::left_join(pop, by = "id")
+})
+
+# Resumo das amostras: média, EP e erro em relação à média populacional
+resumo <- amostras %>%
+  dplyr::group_by(amostra) %>%
+  dplyr::summarise(
+    n = n(),
+    media = mean(valor),
+    sd_amostra = sd(valor),
+    EP = sd_amostra / sqrt(n),
+    erro = media - mu_pop,
+    .groups = "drop"
+  )
+
+# ----- 3) GRÁFICO 1: População (densidade) + 5 amostras em "tapetes" -----
+# Mapeamos cada amostra para uma faixa no eixo Y (fator numérico) e exibimos:
+# - densidade da população (cinza, ao fundo)
+# - pontos das observações de cada amostra (jitter)
+# - linha vertical da média populacional
+# - linha vertical da média de cada amostra
+
+amostras$nivel <- as.numeric(factor(amostras$amostra))  # 1..5
+
+g1 <- ggplot2::ggplot() +
+  # densidade da população ao fundo
+  ggplot2::geom_density(data = pop, ggplot2::aes(x = valor, y = ggplot2::after_stat(scaled)),
+               fill = "grey80", alpha = 0.7) +
+  # jitter de pontos por amostra (deslocados no Y)
+  ggplot2::geom_point(data = amostras,
+             ggplot2::aes(x = valor, y = nivel),
+             position = ggplot2::position_jitter(height = 0.08), size = 1.3, alpha = 0.75) +
+  # linha da média populacional
+  ggplot2::geom_vline(xintercept = mu_pop, linetype = 2, linewidth = 0.7) +
+  # linhas das médias de cada amostra
+  ggplot2::geom_segment(data = resumo,
+               ggplot2::aes(x = media, xend = media,
+                   y = as.numeric(factor(amostra)) - 0.35,
+                   yend = as.numeric(factor(amostra)) + 0.35),
+               linewidth = 1) +
+  ggplot2::scale_y_continuous(
+    breaks = unique(amostras$nivel),
+    labels = levels(factor(amostras$amostra))
+  ) +
+  ggplot2::labs(
+    title = "Mesma população → amostras diferentes",
+    subtitle = sprintf("Cada amostra tem sua própria média", mu_pop),
+    x = "Valor",
+    y = NULL
+  ) +
+  ggplot2::theme_minimal(base_size = 12)
+
+# Imprimir resultados
+print(g1)
+```
 
 <br>
 
