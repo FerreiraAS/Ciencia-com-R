@@ -10,7 +10,7 @@
 
 -   Tamanho da amostra $n$ é a quantidade de participantes (ou unidades de análise) necessárias para conduzir um estudo a fim de testar uma hipótese.[@rodríguezdeláguila2014]
 
--   .[@Banerjee2010]
+-   O cálculo do tamanho da amostra depende de quatro pilares interligados — tamanho de efeito esperado, variabilidade, nível de significância ($\alpha$) e poder ($1-\beta$) — cuja combinação determina o $n$ necessário para detectar efeitos de interesse com precisão adequada.[@Banerjee2010]
 
 <br>
 
@@ -58,7 +58,155 @@ O pacote *pwr*[@pwr] fornece a função [*plot.power.htest*](https://www.rdocume
 
 -   Estudos com poder \<80% não são necessariamente antiéticos.[@Bacchetti2005]
 
+-   Metas convencionais de poder (80–90%) são guias pragmáticos e não regras morais rígidas; estudos com poder <80% não são automaticamente antiéticos quando bem justificados.[@Bacchetti2005]
+
 -   Grandes estudos podem ser desejáveis por outras razões que não as éticas.[@Bacchetti2005]
+
+<br>
+
+## Saturação em pesquisas qualitativas
+
+<br>
+
+### O que é saturação de dados em pesquisas qualitativas?
+
+-   Saturação é o ponto em que a coleta de dados não produz novas informações, categorias ou temas, indicando que o fenômeno investigado já foi suficientemente explorado.[@ahmed2025]
+
+-   Essa noção surgiu na teoria fundamentada com o termo "saturação teórica", mas hoje é amplamente usada em diferentes tradições qualitativas, incluindo fenomenologia, etnografia e análise temática.[@hennink2022]
+
+<br>
+
+### Quais tipos de saturação existem?
+
+-   Saturação de códigos: ocorre quando não emergem novos códigos relevantes nos dados[@hennink2022]
+
+-   Saturação de significados: atinge-se quando a profundidade e a variação dos significados de um tema foram plenamente exploradas.[@hennink2022]
+
+-   Saturação teórica: quando categorias estão suficientemente desenvolvidas e suas relações esclarecidas.[@ahmed2025]
+
+-   Saturação de metatemas: em pesquisas multicêntricas, quando os grandes temas transversais já foram identificados.[@wutich2024]
+
+<br>
+
+```{r saturacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Curvas de poder para testes t (quantitativo). Linhas sólidas: α=0,05 | tracejadas: α=0,01 | linhas horizontais em 80% e 90% de poder.", out.width = "100%"}
+# Reprodutibilidade
+set.seed(123)
+
+# Gera grade de cenários
+grid_q <- expand.grid(
+  n = seq(10, 200, by = 2),
+  d = c(0.3, 0.5, 0.8),     # efeitos pequeno, médio, grande (Cohen)
+  alpha = c(0.05, 0.01),
+  design = c("t_indep", "t_dep") # 2 amostras indep. vs pareado (aprox com testes diferentes)
+)
+
+# Função segura para calcular poder com pwr
+calc_power <- function(n, d, alpha, design){
+  k <- 2
+  if (design == "t_indep") {
+    out <- pwr::pwr.t.test(n = n/ k * 1, d = d, sig.level = alpha, type = "two.sample", alternative = "two.sided")
+    return(out$power)
+  } else {
+    # dependente (pareado) usa 1-amostra no d de diferenças (aprox. didática)
+    out <- pwr::pwr.t.test(n = n, d = d, sig.level = alpha, type = "one.sample", alternative = "two.sided")
+    return(out$power)
+  }
+}
+
+grid_q$power <- mapply(calc_power, grid_q$n, grid_q$d, grid_q$alpha, grid_q$design)
+
+# Plot principal
+plt_power <- ggplot2::ggplot(grid_q, ggplot2::aes(x = n, y = power, linetype = factor(alpha), group = interaction(d, alpha, design))) +
+  ggplot2::geom_hline(yintercept = 0.8, linewidth = 0.4, alpha = 0.6) +
+  ggplot2::geom_hline(yintercept = 0.9, linewidth = 0.4, alpha = 0.6, linetype = "dashed") +
+  ggplot2::geom_line(aes(size = factor(d), alpha = design)) +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0,1)) +
+  ggplot2::scale_size_manual(values = c("0.3" = 0.4, "0.5" = 0.8, "0.8" = 1.2), name = "Efeito (d)") +
+  ggplot2::scale_linetype_discrete(name = "α") +
+  ggplot2::scale_alpha_discrete(name = "Desenho", labels = c(t_dep = "Pareado", t_indep = "2 amostras")) +
+  ggplot2::labs(x = "Tamanho da amostra (n total)", y = "Poder estatístico",
+       title = "Curvas de poder para testes t (quantitativo)",
+       subtitle = "Linhas sólidas: α=0,05 | tracejadas: α=0,01 | linhas horizontais em 80% e 90% de poder") +
+  ggplot2::theme_minimal(base_size = 12) +
+  ggplot2::theme(legend.position = "bottom")
+
+plt_power
+```
+
+<br>
+
+```{r saturacao2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Curvas de saturação para estudos qualitativos de descoberta de temas.", out.width = "100%"}
+# Função que gera curva de saturação (descoberta cumulativa de "temas")
+simulate_saturation <- function(n_interviews = 60, base_prob = 0.25, decay = 0.05, seed = 123){
+  set.seed(seed)
+  # prob de descobrir algo novo decai globalmente com mais coletas
+  p_new <- pmax(base_prob * exp(-decay * (1:n_interviews)), 0.001)
+  # número esperado de "descobertas" por entrevista (0/1) — ilustração
+  new_theme <- rbinom(n_interviews, size = 1, prob = p_new)
+  cum_themes <- cumsum(new_theme)
+  data.frame(k = 1:n_interviews, new_theme, cum_themes, p_new)
+}
+
+# Dois cenários: homogêneo (satura rápido) vs heterogêneo (satura devagar)
+sat_hom <- simulate_saturation(n_interviews = 60, base_prob = 0.35, decay = 0.09, seed = 42)
+sat_het <- simulate_saturation(n_interviews = 60, base_prob = 0.30, decay = 0.04, seed = 99)
+
+sat_hom$scenario <- "Homogêneo (temas recorrentes)"
+sat_het$scenario <- "Heterogêneo (temas dispersos)"
+sat <- dplyr::bind_rows(sat_hom, sat_het)
+
+# Normaliza para "proporção do total de temas" (para visual comparável)
+sat <- sat %>%
+  dplyr::group_by(scenario) %>%
+  dplyr::mutate(prop_sat = cum_themes / max(cum_themes)) %>%
+  dplyr::ungroup()
+
+plt_sat <- ggplot2::ggplot(sat, ggplot2::aes(x = k, y = prop_sat, color = scenario)) +
+  ggplot2::geom_hline(yintercept = 0.9, linewidth = 0.4, linetype = "dashed", alpha = 0.7) +
+  ggplot2::geom_line(linewidth = 1) +
+  ggplot2::labs(x = "Número de entrevistas/grupos (k)",
+       y = "Saturação acumulada (proporção de temas)",
+       title = "Curvas de saturação (qualitativo)",
+       subtitle = "Traço 0,90 indica um limiar ilustrativo de saturação temática") +
+  ggplot2::theme_minimal(base_size = 12) +
+  ggplot2::theme(legend.position = "bottom")
+
+plt_sat
+```
+
+<br>
+
+### Quantas entrevistas ou grupos focais são necessários para alcançar saturação?
+
+-   Estudos empíricos mostram que a saturação de códigos pode ser atingida com 9 a 17 entrevistas em populações homogêneas e objetivos específicos.[@hennink2022]
+
+-   Para saturação de significados, podem ser necessárias entre 16 e 24 entrevistas.[@hennink2022]
+
+-   Em grupos focais, a saturação temática pode ocorrer com 4 a 8 grupos homogêneos.[@hennink2022]
+
+-   Revisões recentes sugerem que a saturação teórica exige 20 a 30 entrevistas ou mais, dependendo da complexidade do estudo.[@wutich2024]
+
+<br>
+
+### Quais debates existem sobre o conceito de saturação?
+
+-   Defensores argumentam que a saturação é central para garantir rigor e confiança nos resultados qualitativos.[@ahmed2025]
+
+-   Críticos sugerem que o conceito pode ser usado de forma rígida, levando a coletas excessivas ou pouco sensíveis a perspectivas únicas.[@ahmed2025]
+
+-   Pesquisadores contemporâneos recomendam usar a saturação de forma flexível, adaptada ao contexto, método e população estudada.[@wutich2024]
+
+<br>
+
+### Quais recomendações práticas para tamanho de amostras de estudos qualitativos?
+
+-   Para entrevistas individuais: 9–12 entrevistas podem ser suficientes para saturação temática em contextos homogêneos, mas estudos heterogêneos ou multicêntricos exigem mais casos.[@hennink2022; @wutich2024]
+
+-   Para grupos focais: 4–8 grupos são geralmente adequados.[@hennink2022]
+
+-   Para estudos multicêntricos: recomenda-se 20–40 entrevistas por local para alcançar saturação de metatemas.[@wutich2024]
+
+- É importante relatar não apenas o número de entrevistas, mas também como e quando a saturação foi avaliada.[@vasileiou2018]
 
 <br>
 
@@ -80,7 +228,7 @@ O pacote *pwr*[@pwr] fornece a função [*plot.power.htest*](https://www.rdocume
 
 -   Utilizar os limites dos intervalos de confiança de estudos-piloto de ensaios clínicos como estimativa do tamanho do efeito pode aumentar o poder estatístico da análise se comparado ao uso das estimativas pontuais obtidas no mesmo piloto.[@ying2023]
 
--   Embora os testes de hipótese considerem efeito nulo para a hipótese nula --- ex.: dferença de média ($H_{0}: \mu_{1} - \mu_{2}=0$), correlação ($H_{0}: r=0$), associação ($H_{0}: \beta=0$ ou $H_{0}: OR=1$) ---, em geral é improvável que os efeitos populacionais sejam de fato nulos (isto é, exatamente 0).[@Andrade2020]
+-   Embora os testes de hipótese considerem efeito nulo para a hipótese nula --- ex.: diferença de média ($H_{0}: \mu_{1} - \mu_{2}=0$), correlação ($H_{0}: r=0$), associação ($H_{0}: \beta=0$ ou $H_{0}: OR=1$) ---, em geral é improvável que os efeitos populacionais sejam de fato nulos (isto é, exatamente 0).[@Andrade2020]
 
 <br>
 
@@ -150,6 +298,7 @@ O pacote *longpower*[@longpower] fornece a função [*power.mmrm*](https://www.r
 
 <br>
 
+
 ## Perdas de amostra
 
 <br>
@@ -164,9 +313,9 @@ O pacote *longpower*[@longpower] fornece a função [*power.mmrm*](https://www.r
 
 ### Por que a perda de amostra é um problema?
 
--   A perda de amostra pode levar a uma redução do poder do estudo, aumentando a probabilidade de erro tipo II ($\beta$).[@REF]
+-   A perda de amostra reduz o tamanho efetivo de $n$ e, portanto, o poder estatístico do estudo, elevando a probabilidade de erro tipo II ($\beta$).[@van2022a; @rodríguezdeláguila2014]
 
--   A perda de amostra pode levar a um viés de seleção, pois os participantes que permanecem no estudo podem ser diferentes daqueles que foram perdidos.[@REF]
+-   A atrição diferencial também pode introduzir viés de seleção (ou de atrito), quando as características dos participantes que permanecem diferem sistematicamente das daqueles que se perdem ao seguimento.[@rodríguezdeláguila2014]
 
 <br>
 
@@ -208,6 +357,14 @@ n' = \dfrac{n}{1-d}
 -   Em estudos que envolvem condições raras, pode ser difícil recrutar o número necessário de participantes devido à limitada disponibilidade de casos da população. Mesmo assim, é aconselhável determinar o tamanho da amostra.[@rodríguezdeláguila2014]
 
 -   Quando um estudo deste tipo não é possível, as considerações referentes ao tamanho da amostra são justificadas de acordo com o número máximo de pacientes que podem ser recrutados no decorrer do estudo.[@rodríguezdeláguila2014]
+
+### Como justificar o tamanho da amostra em estudos qualitativos?
+
+-   Pesquisas qualitativas devem apresentar uma justificativa explícita da amostra, relacionando-a à estratégia de coleta, aos objetivos e ao critério de saturação adotado.[@vasileiou2018]
+
+-   A noção de "poder da informação" (*information power*) indica que quanto mais relevante e focada é a amostra em relação à pergunta de pesquisa, menor pode ser o número de participantes.[@vasileiou2018]
+
+-   Relatar claramente o processo de decisão aumenta a transparência e a credibilidade da pesquisa.[@vasileiou2018]
 
 <br>
 
