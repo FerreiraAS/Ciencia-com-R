@@ -61,6 +61,12 @@
 <script src="libs/DiagrammeR-binding-1.0.11/DiagrammeR.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 <link rel="shortcut icon" href="favicon_io/android-chrome-192x192.png" sizes="192x192" type="image/png">
 <link rel="shortcut icon" href="favicon_io/android-chrome-512x512.png" sizes="512x512" type="image/png">
 <link rel="apple-touch-icon" href="favicon_io/apple-touch-icon.png" type="image/png">
@@ -719,18 +725,34 @@ div.csl-indent {
 <li class="chapter" data-level="20.5.2" data-path="rmd/analise-descritiva.html"><a href="#o-que-%C3%A9-a-fal%C3%A1cia-da-tabela-2"><i class="fa fa-check"></i><b>20.5.2</b> O que é a falácia da ‘Tabela 2’?</a></li>
 <li class="chapter" data-level="20.5.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-construir-a-tabela-2"><i class="fa fa-check"></i><b>20.5.3</b> Como construir a ‘Tabela 2’?</a></li>
 </ul></li>
-<li class="chapter" data-level="20.6" data-path="rmd/analise-descritiva.html"><a href="#gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6</b> Gráficos</a>
+<li class="chapter" data-level="20.6" data-path="rmd/analise-descritiva.html"><a href="#visualiza%C3%A7%C3%A3o-efetiva-de-dados"><i class="fa fa-check"></i><b>20.6</b> Visualização efetiva de dados</a>
 <ul>
-<li class="chapter" data-level="20.6.1" data-path="rmd/analise-descritiva.html"><a href="#o-que-s%C3%A3o-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.1</b> O que são gráficos?</a></li>
-<li class="chapter" data-level="20.6.2" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-categ%C3%B3ricas"><i class="fa fa-check"></i><b>20.6.2</b> Quais são os tipos de gráficos para variáveis categóricas?</a></li>
-<li class="chapter" data-level="20.6.3" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-num%C3%A9ricas"><i class="fa fa-check"></i><b>20.6.3</b> Quais são os tipos de gráficos para variáveis numéricas?</a></li>
-<li class="chapter" data-level="20.6.4" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-rela%C3%A7%C3%B5es-entre-vari%C3%A1veis"><i class="fa fa-check"></i><b>20.6.4</b> Quais são os tipos de gráficos para relações entre variáveis?</a></li>
-<li class="chapter" data-level="20.6.5" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-s%C3%A9ries-temporais"><i class="fa fa-check"></i><b>20.6.5</b> Quais são os tipos de gráficos para séries temporais?</a></li>
-<li class="chapter" data-level="20.6.6" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-multivariados"><i class="fa fa-check"></i><b>20.6.6</b> Quais são os tipos de gráficos para dados multivariados?</a></li>
-<li class="chapter" data-level="20.6.7" data-path="rmd/analise-descritiva.html"><a href="#que-elementos-incluir-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.7</b> Que elementos incluir em gráficos?</a></li>
-<li class="chapter" data-level="20.6.8" data-path="rmd/analise-descritiva.html"><a href="#para-que-servem-as-barras-de-erro-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.8</b> Para que servem as barras de erro em gráficos?</a></li>
-<li class="chapter" data-level="20.6.9" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-as-boas-pr%C3%A1ticas-na-elabora%C3%A7%C3%A3o-de-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.9</b> Quais são as boas práticas na elaboração de gráficos?</a></li>
-<li class="chapter" data-level="20.6.10" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-exportar-figuras-em-formato-tiff"><i class="fa fa-check"></i><b>20.6.10</b> Como exportar figuras em formato TIFF?</a></li>
+<li class="chapter" data-level="20.6.1" data-path="rmd/analise-descritiva.html"><a href="#por-que-come%C3%A7ar-pela-mensagem-antes-do-gr%C3%A1fico"><i class="fa fa-check"></i><b>20.6.1</b> Por que começar pela mensagem antes do gráfico?</a></li>
+<li class="chapter" data-level="20.6.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-escolher-a-geometria-e-mostrar-os-dados"><i class="fa fa-check"></i><b>20.6.2</b> Como escolher a geometria e “mostrar os dados”?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.7" data-path="rmd/analise-descritiva.html"><a href="#gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7</b> Gráficos</a>
+<ul>
+<li class="chapter" data-level="20.7.1" data-path="rmd/analise-descritiva.html"><a href="#o-que-s%C3%A3o-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.1</b> O que são gráficos?</a></li>
+<li class="chapter" data-level="20.7.2" data-path="rmd/analise-descritiva.html"><a href="#o-que-torna-um-bom-gr%C3%A1fico-t%C3%A3o-poderoso"><i class="fa fa-check"></i><b>20.7.2</b> O que torna um bom gráfico tão poderoso?</a></li>
+<li class="chapter" data-level="20.7.3" data-path="rmd/analise-descritiva.html"><a href="#que-elementos-incluir-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.3</b> Que elementos incluir em gráficos?</a></li>
+<li class="chapter" data-level="20.7.4" data-path="rmd/analise-descritiva.html"><a href="#para-que-servem-as-barras-de-erro-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.4</b> Para que servem as barras de erro em gráficos?</a></li>
+<li class="chapter" data-level="20.7.5" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-principais-obst%C3%A1culos-para-bons-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.5</b> Quais são os principais obstáculos para bons gráficos?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.8" data-path="rmd/analise-descritiva.html"><a href="#tipos-de-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.8</b> Tipos de gráficos</a>
+<ul>
+<li class="chapter" data-level="20.8.1" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-categ%C3%B3ricas"><i class="fa fa-check"></i><b>20.8.1</b> Quais são os tipos de gráficos para variáveis categóricas?</a></li>
+<li class="chapter" data-level="20.8.2" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-num%C3%A9ricas"><i class="fa fa-check"></i><b>20.8.2</b> Quais são os tipos de gráficos para variáveis numéricas?</a></li>
+<li class="chapter" data-level="20.8.3" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-rela%C3%A7%C3%B5es-entre-vari%C3%A1veis"><i class="fa fa-check"></i><b>20.8.3</b> Quais são os tipos de gráficos para relações entre variáveis?</a></li>
+<li class="chapter" data-level="20.8.4" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-longitudinais"><i class="fa fa-check"></i><b>20.8.4</b> Quais são os tipos de gráficos para dados longitudinais?</a></li>
+<li class="chapter" data-level="20.8.5" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-s%C3%A9ries-temporais"><i class="fa fa-check"></i><b>20.8.5</b> Quais são os tipos de gráficos para séries temporais?</a></li>
+<li class="chapter" data-level="20.8.6" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-multivariados"><i class="fa fa-check"></i><b>20.8.6</b> Quais são os tipos de gráficos para dados multivariados?</a></li>
+<li class="chapter" data-level="20.8.7" data-path="rmd/analise-descritiva.html"><a href="#quais-s%C3%A3o-as-boas-pr%C3%A1ticas-na-elabora%C3%A7%C3%A3o-de-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.8.7</b> Quais são as boas práticas na elaboração de gráficos?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.9" data-path="rmd/analise-descritiva.html"><a href="#gr%C3%A1ficos-din%C3%A2micos"><i class="fa fa-check"></i><b>20.9</b> Gráficos dinâmicos</a>
+<ul>
+<li class="chapter" data-level="20.9.1" data-path="rmd/analise-descritiva.html"><a href="#o-que-s%C3%A3o-visualiza%C3%A7%C3%B5es-din%C3%A2micas"><i class="fa fa-check"></i><b>20.9.1</b> O que são visualizações dinâmicas?</a></li>
+<li class="chapter" data-level="20.9.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#quando-preferir-interatividade"><i class="fa fa-check"></i><b>20.9.2</b> Quando preferir interatividade?</a></li>
+<li class="chapter" data-level="20.9.3" data-path="rmd/analise-descritiva.html"><a href="#quando-preferir-anima%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>20.9.3</b> Quando preferir animação?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="distribuicoes-parametros.html"><a href="distribuicoes-parametros.html"><i class="fa fa-check"></i><b>21</b> <strong>Distribuições e parâmetros</strong></a>
@@ -1715,7 +1737,9 @@ div.csl-indent {
 <div id="o-que-são-casas-decimais" class="section level3 hasAnchor" number="20.2.1">
 <h3><span class="header-section-number">20.2.1</span> O que são casas decimais?<a href="#o-que-s%C3%A3o-casas-decimais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>O número de casas decimais refere-se à quantidade de dígitos que aparecem após a vírgula decimal.<span class="citation"><sup><a href="#ref-Cole2015a">188</a>,<a href="#ref-cole2015b">189</a></sup></span></li>
+<li><p>O número de casas decimais refere-se à quantidade de dígitos que aparecem após a vírgula decimal.<span class="citation"><sup><a href="#ref-Cole2015a">188</a>,<a href="#ref-cole2015b">189</a></sup></span></p></li>
+<li><p>Para tamanhos de efeito: use 2–3 dígitos significativos.<span class="citation"><sup><a href="#ref-Weissgerber2019">190</a></sup></span></p></li>
+<li><p>Para medidas de variabilidade (SD/SE/IC): use 1–2 dígitos significativos.<span class="citation"><sup><a href="#ref-Weissgerber2019">190</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -1958,14 +1982,14 @@ Sem casa decimal [Margem de erro]
 <div id="por-que-usar-tabelas" class="section level3 hasAnchor" number="20.3.1">
 <h3><span class="header-section-number">20.3.1</span> Por que usar tabelas?<a href="analise-descritiva.html#por-que-usar-tabelas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Tabelas complementam o texto (e vice-versa), e podem apresentar os dados de modo mais acessível e informativo.<span class="citation"><sup><a href="#ref-Inskip2017">190</a></sup></span></li>
+<li>Tabelas complementam o texto (e vice-versa), e podem apresentar os dados de modo mais acessível e informativo.<span class="citation"><sup><a href="#ref-Inskip2017">191</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="que-informações-incluir-nas-tabelas" class="section level3 hasAnchor" number="20.3.2">
 <h3><span class="header-section-number">20.3.2</span> Que informações incluir nas tabelas?<a href="#que-informa%C3%A7%C3%B5es-incluir-nas-tabelas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Título ou legenda, uma síntese descritiva (geralmente por meio de parâmetros descritivos), intervalos de confiança e/ou P-valores conforme necessário para adequada interpretação.<span class="citation"><sup><a href="#ref-Inskip2017">190</a>,<a href="#ref-Kwak2021">191</a></sup></span></li>
+<li>Título ou legenda, uma síntese descritiva (geralmente por meio de parâmetros descritivos), intervalos de confiança e/ou P-valores conforme necessário para adequada interpretação.<span class="citation"><sup><a href="#ref-Inskip2017">191</a>,<a href="#ref-Kwak2021">192</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
@@ -1984,11 +2008,7 @@ Sem casa decimal [Margem de erro]
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>flextable</em><span class="citation"><sup><a href="#ref-flextable">192</a></sup></span> fornece as funções <a href="https://search.r-project.org/CRAN/refmans/flextable/html/flextable.html"><em>flextable</em></a>, <a href="https://search.r-project.org/CRAN/refmans/flextable/html/as_flextable.html"><em>as_flextable</em></a> e <a href="https://search.r-project.org/CRAN/refmans/flextable/html/save_as_docx.html"><em>save_as_docx</em></a> para criar e salvar tabelas formatadas em DOCX.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>rempsyc</em><span class="citation"><sup><a href="#ref-rempsyc">193</a></sup></span> fornece a função <a href="https://search.r-project.org/CRAN/refmans/rempsyc/html/nice_table.html"><em>nice_table</em></a> para criar tabelas formatadas.</p>
+<p>O pacote <em>gtsummary</em><span class="citation"><sup><a href="#ref-gtsummary">193</a></sup></span> fornece a função <a href="https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html"><em>tbl_summary</em></a> para construção da ‘Tabela 1’ com dados descritivos.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
@@ -1996,19 +2016,23 @@ Sem casa decimal [Margem de erro]
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>gtsummary</em><span class="citation"><sup><a href="#ref-gtsummary">195</a></sup></span> fornece a função <a href="https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html"><em>tbl_summary</em></a> para construção da ‘Tabela 1’ com dados descritivos.</p>
+<p>O pacote <em>flextable</em><span class="citation"><sup><a href="#ref-flextable">195</a></sup></span> fornece as funções <a href="https://search.r-project.org/CRAN/refmans/flextable/html/flextable.html"><em>flextable</em></a>, <a href="https://search.r-project.org/CRAN/refmans/flextable/html/as_flextable.html"><em>as_flextable</em></a> e <a href="https://search.r-project.org/CRAN/refmans/flextable/html/save_as_docx.html"><em>save_as_docx</em></a> para criar e salvar tabelas formatadas em DOCX.</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>rempsyc</em><span class="citation"><sup><a href="#ref-rempsyc">196</a></sup></span> fornece a função <a href="https://search.r-project.org/CRAN/refmans/rempsyc/html/nice_table.html"><em>nice_table</em></a> para criar tabelas formatadas.</p>
 </div>
 <p><br></p>
 </div>
 <div id="quais-são-os-erros-mais-comuns-de-preenchimento-de-tabelas" class="section level3 hasAnchor" number="20.3.4">
 <h3><span class="header-section-number">20.3.4</span> Quais são os erros mais comuns de preenchimento de tabelas?<a href="#quais-s%C3%A3o-os-erros-mais-comuns-de-preenchimento-de-tabelas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Erros tipográficos.<span class="citation"><sup><a href="#ref-barnett2023">196</a></sup></span></p></li>
-<li><p>Ausência de rótulos ou unidades nas variáveis.<span class="citation"><sup><a href="#ref-barnett2023">196</a></sup></span></p></li>
-<li><p>Relatar estatísticas incorretamente, tais como rotular variáveis contínuas como porcentagens.<span class="citation"><sup><a href="#ref-barnett2023">196</a></sup></span></p></li>
-<li><p>Estatísticas descritivas de tendência central (ex.: médias) relatadas sem a estatística de dispersão correspondente (ex.: desvio-padrão).<span class="citation"><sup><a href="#ref-barnett2023">196</a></sup></span></p></li>
-<li><p>Desvio-padrão nulo (<span class="math inline">\(\sigma=0\)</span>).<span class="citation"><sup><a href="#ref-barnett2023">196</a></sup></span></p></li>
-<li><p>Valores porcentuais que não correspondem ao numerador dividido pelo denominador.<span class="citation"><sup><a href="#ref-barnett2023">196</a></sup></span></p></li>
+<li><p>Erros tipográficos.<span class="citation"><sup><a href="#ref-barnett2023">197</a></sup></span></p></li>
+<li><p>Ausência de rótulos ou unidades nas variáveis.<span class="citation"><sup><a href="#ref-barnett2023">197</a></sup></span></p></li>
+<li><p>Relatar estatísticas incorretamente, tais como rotular variáveis contínuas como porcentagens.<span class="citation"><sup><a href="#ref-barnett2023">197</a></sup></span></p></li>
+<li><p>Estatísticas descritivas de tendência central (ex.: médias) relatadas sem a estatística de dispersão correspondente (ex.: desvio-padrão).<span class="citation"><sup><a href="#ref-barnett2023">197</a></sup></span></p></li>
+<li><p>Desvio-padrão nulo (<span class="math inline">\(\sigma=0\)</span>).<span class="citation"><sup><a href="#ref-barnett2023">197</a></sup></span></p></li>
+<li><p>Valores porcentuais que não correspondem ao numerador dividido pelo denominador.<span class="citation"><sup><a href="#ref-barnett2023">197</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -2019,32 +2043,33 @@ Sem casa decimal [Margem de erro]
 <div id="o-que-é-a-tabela-1" class="section level3 hasAnchor" number="20.4.1">
 <h3><span class="header-section-number">20.4.1</span> O que é a ‘Tabela 1’?<a href="#o-que-%C3%A9-a-tabela-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>A ‘Tabela 1’ descreve as características demográficas, sociais e clínicas da amostra, completa ou agrupada por algum fator, geralmente por meio de parâmetros de tendência central e dispersão.<span class="citation"><sup><a href="#ref-Westreich2013">197</a>,<a href="#ref-chen2020">198</a></sup></span></li>
+<li>A ‘Tabela 1’ descreve as características demográficas, sociais e clínicas da amostra, completa ou agrupada por algum fator, geralmente por meio de parâmetros de tendência central e dispersão.<span class="citation"><sup><a href="#ref-Westreich2013">198</a>,<a href="#ref-chen2020">199</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="qual-a-utilidade-da-tabela-1" class="section level3 hasAnchor" number="20.4.2">
 <h3><span class="header-section-number">20.4.2</span> Qual a utilidade da ‘Tabela 1’?<a href="analise-descritiva.html#qual-a-utilidade-da-tabela-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Descrever (conhecer) as características da amostra e dos grupos sendo comparados, quando aplicável.<span class="citation"><sup><a href="#ref-chen2020">198</a></sup></span></p></li>
-<li><p>Verificar aderência ao protocolo do estudo, incluindo critérios de inclusão/exclusão, tamanho da amostra e perdas amostrais.<span class="citation"><sup><a href="#ref-chen2020">198</a></sup></span></p></li>
-<li><p>Permitir a replicação do estudo.<span class="citation"><sup><a href="#ref-chen2020">198</a></sup></span></p></li>
-<li><p>Meta-analisar os dados junto a estudos similares.<span class="citation"><sup><a href="#ref-chen2020">198</a></sup></span></p></li>
-<li><p>Avaliar a generalização (validade externa) das conclusões do estudo.<span class="citation"><sup><a href="#ref-chen2020">198</a></sup></span></p></li>
+<li><p>Descrever (conhecer) as características da amostra e dos grupos sendo comparados, quando aplicável.<span class="citation"><sup><a href="#ref-chen2020">199</a></sup></span></p></li>
+<li><p>Verificar aderência ao protocolo do estudo, incluindo critérios de inclusão/exclusão, tamanho da amostra e perdas amostrais.<span class="citation"><sup><a href="#ref-chen2020">199</a></sup></span></p></li>
+<li><p>Permitir a replicação do estudo.<span class="citation"><sup><a href="#ref-chen2020">199</a></sup></span></p></li>
+<li><p>Meta-analisar os dados junto a estudos similares.<span class="citation"><sup><a href="#ref-chen2020">199</a></sup></span></p></li>
+<li><p>Avaliar a generalização (validade externa) das conclusões do estudo.<span class="citation"><sup><a href="#ref-chen2020">199</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-é-a-falácia-da-tabela-1" class="section level3 hasAnchor" number="20.4.3">
 <h3><span class="header-section-number">20.4.3</span> O que é a falácia da ‘Tabela 1’?<a href="#o-que-%C3%A9-a-fal%C3%A1cia-da-tabela-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Falácia da Tabela 1 ocorre pela interpretação errônea dos P-valores na comparação entre grupos, na linha de base, de um ensaio clínico aleatorizado.<span class="citation"><sup><a href="#ref-pijls2022">199</a></sup></span></li>
+<li><p>Falácia da Tabela 1 ocorre pela interpretação errônea dos P-valores na comparação entre grupos, na linha de base, de um ensaio clínico aleatorizado.<span class="citation"><sup><a href="#ref-pijls2022">200</a></sup></span></p></li>
+<li><p>Não interprete P da linha de base em ensaios clínicos como “desequilíbrio” (falácia da Tabela 1). Mantenha P-valor apenas como descritivo (ou omita), enfatizando desenho e aleatorização.<span class="citation"><sup><a href="#ref-Weissgerber2019">190</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-construir-a-tabela-1" class="section level3 hasAnchor" number="20.4.4">
 <h3><span class="header-section-number">20.4.4</span> Como construir a ‘Tabela 1’?<a href="analise-descritiva.html#como-construir-a-tabela-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>A Tabela 1 geralmente é utilizada para descrever as características da amostra estudada, possibilitando a análise de ameaças à validade interna e/ou externa ao estudo.<span class="citation"><sup><a href="#ref-greenhalgh1997">200</a>,<a href="#ref-Hayes-Larson2019">201</a></sup></span></li>
+<li>A Tabela 1 geralmente é utilizada para descrever as características da amostra estudada, possibilitando a análise de ameaças à validade interna e/ou externa ao estudo.<span class="citation"><sup><a href="#ref-greenhalgh1997">201</a>,<a href="#ref-Hayes-Larson2019">202</a></sup></span></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
@@ -2052,7 +2077,528 @@ Sem casa decimal [Margem de erro]
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>gtsummary</em><span class="citation"><sup><a href="#ref-gtsummary">195</a></sup></span> fornece a função <a href="https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html"><em>tbl_summary</em></a> para construção da ‘Tabela 1’ com dados descritivos.</p>
+<p>O pacote <em>gtsummary</em><span class="citation"><sup><a href="#ref-gtsummary">193</a></sup></span> fornece a função <a href="https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html"><em>tbl_summary</em></a> para construção da ‘Tabela 1’ com dados descritivos.</p>
+</div>
+<p><br></p>
+<div id="mlvuytmmcw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mlvuytmmcw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mlvuytmmcw thead, #mlvuytmmcw tbody, #mlvuytmmcw tfoot, #mlvuytmmcw tr, #mlvuytmmcw td, #mlvuytmmcw th {
+  border-style: none;
+}
+
+#mlvuytmmcw p {
+  margin: 0;
+  padding: 0;
+}
+
+#mlvuytmmcw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mlvuytmmcw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mlvuytmmcw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mlvuytmmcw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mlvuytmmcw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mlvuytmmcw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mlvuytmmcw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mlvuytmmcw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mlvuytmmcw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mlvuytmmcw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mlvuytmmcw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mlvuytmmcw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mlvuytmmcw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mlvuytmmcw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mlvuytmmcw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mlvuytmmcw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mlvuytmmcw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mlvuytmmcw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mlvuytmmcw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mlvuytmmcw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mlvuytmmcw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mlvuytmmcw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mlvuytmmcw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mlvuytmmcw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mlvuytmmcw .gt_left {
+  text-align: left;
+}
+
+#mlvuytmmcw .gt_center {
+  text-align: center;
+}
+
+#mlvuytmmcw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mlvuytmmcw .gt_font_normal {
+  font-weight: normal;
+}
+
+#mlvuytmmcw .gt_font_bold {
+  font-weight: bold;
+}
+
+#mlvuytmmcw .gt_font_italic {
+  font-style: italic;
+}
+
+#mlvuytmmcw .gt_super {
+  font-size: 65%;
+}
+
+#mlvuytmmcw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mlvuytmmcw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mlvuytmmcw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mlvuytmmcw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mlvuytmmcw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mlvuytmmcw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mlvuytmmcw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mlvuytmmcw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mlvuytmmcw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <caption><span id="tab:tabela-1">Tabela 20.3: </span><span class='gt_from_md'><strong>Tabela 1. Características da amostra por grupo.</strong></span></caption>
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class='gt_from_md'><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="n"><span class='gt_from_md'><strong>N</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_1"><span class='gt_from_md'><strong>Controle</strong><br />
+N = 103</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_2"><span class='gt_from_md'><strong>Intervenção</strong><br />
+N = 97</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class='gt_from_md'><strong>p-value</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Sexo</td>
+<td headers="n" class="gt_row gt_center">200</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center">0.060</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    F</td>
+<td headers="n" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center">49 (48%)</td>
+<td headers="stat_2" class="gt_row gt_center">59 (61%)</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    M</td>
+<td headers="n" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center">54 (52%)</td>
+<td headers="stat_2" class="gt_row gt_center">38 (39%)</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Idade</td>
+<td headers="n" class="gt_row gt_center">200</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Mean (SD)</td>
+<td headers="n" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center">61 (12)</td>
+<td headers="stat_2" class="gt_row gt_center">60 (12)</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Median [Q1, Q3]</td>
+<td headers="n" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center">61 [53, 69]</td>
+<td headers="stat_2" class="gt_row gt_center">60 [53, 69]</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">IMC</td>
+<td headers="n" class="gt_row gt_center">200</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Mean (SD)</td>
+<td headers="n" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center">26.8 (3.7)</td>
+<td headers="stat_2" class="gt_row gt_center">27.5 (4.0)</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Median [Q1, Q3]</td>
+<td headers="n" class="gt_row gt_center"><br /></td>
+<td headers="stat_1" class="gt_row gt_center">26.6 [24.5, 29.7]</td>
+<td headers="stat_2" class="gt_row gt_center">27.6 [25.6, 29.9]</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="5"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class='gt_from_md'>n (%)</span></td>
+    </tr>
+    <tr>
+      <td class="gt_footnote" colspan="5"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span> <span class='gt_from_md'>Pearson’s Chi-squared test; Wilcoxon rank sum test</span></td>
+    </tr>
+  </tfoot>
+</table>
 </div>
 <p><br></p>
 </div>
@@ -2063,47 +2609,633 @@ Sem casa decimal [Margem de erro]
 <div id="qual-a-utilidade-da-tabela-2" class="section level3 hasAnchor" number="20.5.1">
 <h3><span class="header-section-number">20.5.1</span> Qual a utilidade da ‘Tabela 2’?<a href="analise-descritiva.html#qual-a-utilidade-da-tabela-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>A Tabela 2 mostra associações ajustadas multivariadas com o resultado para variáveis resumidas na Tabela 1.<span class="citation"><sup><a href="#ref-Westreich2013">197</a></sup></span></li>
+<li>A Tabela 2 mostra associações ajustadas multivariadas com o resultado para variáveis resumidas na Tabela 1.<span class="citation"><sup><a href="#ref-Westreich2013">198</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-é-a-falácia-da-tabela-2" class="section level3 hasAnchor" number="20.5.2">
 <h3><span class="header-section-number">20.5.2</span> O que é a falácia da ‘Tabela 2’?<a href="#o-que-%C3%A9-a-fal%C3%A1cia-da-tabela-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>A Tabela 2 pode induzir ao erro de interpretação pelas estimativas de efeitos para covariáveis do modelo também serem utilizados para controlar a confusão da exposição.<span class="citation"><sup><a href="#ref-Westreich2013">197</a>,<a href="#ref-bandoli2018">202</a></sup></span></p></li>
-<li><p>Ao apresentar estimativas de efeito ajustadas para covariáveis juntamente com a estimativa de efeito ajustada para a exposição primária, a Tabela 2 sugere implicitamente que todas estas estimativas podem ser interpretadas de forma semelhante, se não de forma idêntica, como estimativa do efeito total.<span class="citation"><sup><a href="#ref-Westreich2013">197</a>,<a href="#ref-bandoli2018">202</a></sup></span></p></li>
-<li><p>A falácia da Tabela 2 pode ser evitada limitando-se a tabela a estimativas das medidas primárias do efeito de exposição nos diferentes modelos, com as covariáveis secundárias de “ajuste” relatadas em uma nota de rodapé, juntamente com a forma como foram categorizadas ou modeladas.<span class="citation"><sup><a href="#ref-Westreich2013">197</a></sup></span></p></li>
+<li><p>A Tabela 2 pode induzir ao erro de interpretação pelas estimativas de efeitos para covariáveis do modelo também serem utilizados para controlar a confusão da exposição.<span class="citation"><sup><a href="#ref-Westreich2013">198</a>,<a href="#ref-bandoli2018">203</a></sup></span></p></li>
+<li><p>Ao apresentar estimativas de efeito ajustadas para covariáveis juntamente com a estimativa de efeito ajustada para a exposição primária, a Tabela 2 sugere implicitamente que todas estas estimativas podem ser interpretadas de forma semelhante, se não de forma idêntica, como estimativa do efeito total.<span class="citation"><sup><a href="#ref-Westreich2013">198</a>,<a href="#ref-bandoli2018">203</a></sup></span></p></li>
+<li><p>A falácia da Tabela 2 pode ser evitada limitando-se a tabela a estimativas das medidas primárias do efeito de exposição nos diferentes modelos, com as covariáveis secundárias de “ajuste” relatadas em uma nota de rodapé, juntamente com a forma como foram categorizadas ou modeladas.<span class="citation"><sup><a href="#ref-Westreich2013">198</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-construir-a-tabela-2" class="section level3 hasAnchor" number="20.5.3">
 <h3><span class="header-section-number">20.5.3</span> Como construir a ‘Tabela 2’?<a href="analise-descritiva.html#como-construir-a-tabela-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>A Tabela 2 pode ser utilizada para apresentar estimativas de múltiplos efeitos ajustados de um mesmo modelo estatístico.<span class="citation"><sup><a href="#ref-Westreich2013">197</a></sup></span></li>
+<li>A Tabela 2 pode ser utilizada para apresentar estimativas de múltiplos efeitos ajustados de um mesmo modelo estatístico.<span class="citation"><sup><a href="#ref-Westreich2013">198</a></sup></span></li>
 </ul>
+<p><br></p>
+<div id="mlvuytmmcw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mlvuytmmcw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mlvuytmmcw thead, #mlvuytmmcw tbody, #mlvuytmmcw tfoot, #mlvuytmmcw tr, #mlvuytmmcw td, #mlvuytmmcw th {
+  border-style: none;
+}
+
+#mlvuytmmcw p {
+  margin: 0;
+  padding: 0;
+}
+
+#mlvuytmmcw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mlvuytmmcw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mlvuytmmcw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mlvuytmmcw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mlvuytmmcw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mlvuytmmcw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mlvuytmmcw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mlvuytmmcw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mlvuytmmcw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mlvuytmmcw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mlvuytmmcw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mlvuytmmcw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mlvuytmmcw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mlvuytmmcw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mlvuytmmcw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mlvuytmmcw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mlvuytmmcw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mlvuytmmcw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mlvuytmmcw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mlvuytmmcw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mlvuytmmcw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mlvuytmmcw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mlvuytmmcw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mlvuytmmcw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mlvuytmmcw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mlvuytmmcw .gt_left {
+  text-align: left;
+}
+
+#mlvuytmmcw .gt_center {
+  text-align: center;
+}
+
+#mlvuytmmcw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mlvuytmmcw .gt_font_normal {
+  font-weight: normal;
+}
+
+#mlvuytmmcw .gt_font_bold {
+  font-weight: bold;
+}
+
+#mlvuytmmcw .gt_font_italic {
+  font-style: italic;
+}
+
+#mlvuytmmcw .gt_super {
+  font-size: 65%;
+}
+
+#mlvuytmmcw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mlvuytmmcw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mlvuytmmcw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mlvuytmmcw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mlvuytmmcw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mlvuytmmcw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mlvuytmmcw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mlvuytmmcw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mlvuytmmcw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <caption><span id="tab:tabela-2">Tabela 20.4: </span><span class='gt_from_md'><strong>Tabela 2. Associação ajustada (OR) com sexo feminino como desfecho.</strong></span></caption>
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class='gt_from_md'><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class='gt_from_md'><strong>OR</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class='gt_from_md'><strong>95% CI</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class='gt_from_md'><strong>p-value</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Idade</td>
+<td headers="estimate" class="gt_row gt_center">1.02</td>
+<td headers="conf.low" class="gt_row gt_center">1.00, 1.05</td>
+<td headers="p.value" class="gt_row gt_center">0.087</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">IMC</td>
+<td headers="estimate" class="gt_row gt_center">1.05</td>
+<td headers="conf.low" class="gt_row gt_center">0.97, 1.13</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Grupo</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Controle</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Intervenção</td>
+<td headers="estimate" class="gt_row gt_center">1.70</td>
+<td headers="conf.low" class="gt_row gt_center">0.97, 3.03</td>
+<td headers="p.value" class="gt_row gt_center">0.067</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="4"><span class='gt_from_md'>Abbreviations: CI = Confidence Interval, OR = Odds Ratio</span></td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
 <p><br></p>
 <div class="infobox Rlogo">
 <p>O pacote <em>table1</em><span class="citation"><sup><a href="#ref-table1">194</a></sup></span> fornece a função <a href="https://search.r-project.org/CRAN/refmans/table1/html/table1.html"><em>table1</em></a> para construção de tabelas.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>gtsummary</em><span class="citation"><sup><a href="#ref-gtsummary">195</a></sup></span> fornece a função <a href="https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html"><em>tbl_summary</em></a> para construção da ‘Tabela 1’ com dados descritivos.</p>
+<p>O pacote <em>gtsummary</em><span class="citation"><sup><a href="#ref-gtsummary">193</a></sup></span> fornece a função <a href="https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html"><em>tbl_summary</em></a> para construção da ‘Tabela 1’ com dados descritivos.</p>
 </div>
 <p><br></p>
 </div>
 </div>
-<div id="gráficos" class="section level2 hasAnchor" number="20.6">
-<h2><span class="header-section-number">20.6</span> Gráficos<a href="#gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="visualização-efetiva-de-dados" class="section level2 hasAnchor" number="20.6">
+<h2><span class="header-section-number">20.6</span> Visualização efetiva de dados<a href="#visualiza%C3%A7%C3%A3o-efetiva-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-são-gráficos" class="section level3 hasAnchor" number="20.6.1">
-<h3><span class="header-section-number">20.6.1</span> O que são gráficos?<a href="#o-que-s%C3%A3o-gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="por-que-começar-pela-mensagem-antes-do-gráfico" class="section level3 hasAnchor" number="20.6.1">
+<h3><span class="header-section-number">20.6.1</span> Por que começar pela mensagem antes do gráfico?<a href="#por-que-come%C3%A7ar-pela-mensagem-antes-do-gr%C3%A1fico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Gráficos são utilizados para apresentar dados (geralmente em grande quantidade) de modo mais intuitivo e fácil de compreender.<span class="citation"><sup><a href="#ref-Park2022">203</a></sup></span></li>
+<li>A figura deve responder a uma pergunta clara (comparação? tendência? composição?) e isso orienta a escolha do tipo de gráfico, dados e anotações. Esboce a mensagem e a pergunta antes de abrir o software.<span class="citation"><sup><a href="#ref-midway2020">204</a></sup></span></li>
+</ul>
+</div>
+<div id="como-escolher-a-geometria-e-mostrar-os-dados" class="section level3 hasAnchor" number="20.6.2">
+<h3><span class="header-section-number">20.6.2</span> Como escolher a geometria e “mostrar os dados”?<a href="analise-descritiva.html#como-escolher-a-geometria-e-mostrar-os-dados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Prefira geometrias que revelem distribuição/variabilidade (pontos, <em>boxplots</em>, violinos) em vez de médias sozinhas. Sempre que possível, <strong>exiba os dados brutos</strong> (pontos com <em>jitter</em>) junto da estatística-resumo.<span class="citation"><sup><a href="#ref-midway2020">204</a></sup></span></li>
+</ul>
+<p><br></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="analise-descritiva.html#cb4-1" tabindex="-1"></a><span class="co"># Reprodutibilidade</span></span>
+<span id="cb4-2"><a href="analise-descritiva.html#cb4-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="analise-descritiva.html#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="analise-descritiva.html#cb4-4" tabindex="-1"></a><span class="co"># Gerar dados de exemplo</span></span>
+<span id="cb4-5"><a href="analise-descritiva.html#cb4-5" tabindex="-1"></a>df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb4-6"><a href="analise-descritiva.html#cb4-6" tabindex="-1"></a>  <span class="at">grupo =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Controle&quot;</span>,<span class="st">&quot;Intervenção&quot;</span>), <span class="at">each =</span> <span class="dv">40</span>),</span>
+<span id="cb4-7"><a href="analise-descritiva.html#cb4-7" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="dv">10</span>, <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="fl">11.5</span>, <span class="fl">2.5</span>))</span>
+<span id="cb4-8"><a href="analise-descritiva.html#cb4-8" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="analise-descritiva.html#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="analise-descritiva.html#cb4-10" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(df, ggplot2<span class="sc">::</span><span class="fu">aes</span>(grupo, y, <span class="at">fill =</span> grupo)) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="analise-descritiva.html#cb4-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_violin</span>(<span class="at">alpha=</span>.<span class="dv">3</span>, <span class="at">color=</span><span class="cn">NA</span>, <span class="at">trim=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="analise-descritiva.html#cb4-12" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>(<span class="at">width=</span>.<span class="dv">15</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="analise-descritiva.html#cb4-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_jitter</span>(<span class="at">width=</span>.<span class="dv">08</span>, <span class="at">alpha=</span>.<span class="dv">6</span>, <span class="at">size=</span><span class="fl">1.6</span>) <span class="sc">+</span></span>
+<span id="cb4-14"><a href="analise-descritiva.html#cb4-14" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x=</span><span class="cn">NULL</span>, <span class="at">y=</span><span class="st">&quot;Desfecho (unid.)&quot;</span>,</span>
+<span id="cb4-15"><a href="analise-descritiva.html#cb4-15" tabindex="-1"></a>                <span class="at">title=</span><span class="st">&quot;Mostrar dados + resumo &gt; apenas médias&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-16"><a href="analise-descritiva.html#cb4-16" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-17"><a href="analise-descritiva.html#cb4-17" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">guides</span>(<span class="at">fill=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+</details>
+<p><img src="Ciencia-com-R_files/figure-html/viz-geom-mostrar-dados-1.png" width="672" /></p>
+<p><br></p>
+</div>
+</div>
+<div id="gráficos" class="section level2 hasAnchor" number="20.7">
+<h2><span class="header-section-number">20.7</span> Gráficos<a href="#gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-são-gráficos" class="section level3 hasAnchor" number="20.7.1">
+<h3><span class="header-section-number">20.7.1</span> O que são gráficos?<a href="#o-que-s%C3%A3o-gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Gráficos são utilizados para apresentar dados (geralmente em grande quantidade) de modo mais intuitivo e fácil de compreender.<span class="citation"><sup><a href="#ref-Park2022">205</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
-<div id="quais-são-os-tipos-de-gráficos-para-variáveis-categóricas" class="section level3 hasAnchor" number="20.6.2">
-<h3><span class="header-section-number">20.6.2</span> Quais são os tipos de gráficos para variáveis categóricas?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-categ%C3%B3ricas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-torna-um-bom-gráfico-tão-poderoso" class="section level3 hasAnchor" number="20.7.2">
+<h3><span class="header-section-number">20.7.2</span> O que torna um bom gráfico tão poderoso?<a href="#o-que-torna-um-bom-gr%C3%A1fico-t%C3%A3o-poderoso" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>“Não há ferramenta estatística tão poderosa quanto um gráfico bem escolhido”: gráficos ajudam a explorar dados, comunicar resultados e suportar decisões de forma clara e rápida.<span class="citation"><sup><a href="#ref-vandemeulebroecke2018">206</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="que-elementos-incluir-em-gráficos" class="section level3 hasAnchor" number="20.7.3">
+<h3><span class="header-section-number">20.7.3</span> Que elementos incluir em gráficos?<a href="#que-elementos-incluir-em-gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Título, eixos horizontal e vertical com respectivas unidades, escalas em intervalos representativos das variáveis, legenda com símbolos, síntese descritiva dos valores e respectiva margem de erro, conforme necessário para adequada interpretação.<span class="citation"><sup><a href="#ref-Park2022">205</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="para-que-servem-as-barras-de-erro-em-gráficos" class="section level3 hasAnchor" number="20.7.4">
+<h3><span class="header-section-number">20.7.4</span> Para que servem as barras de erro em gráficos?<a href="#para-que-servem-as-barras-de-erro-em-gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Barras de erro ajudam ao autor a apresentar as informações que descrevem os dados (por exemplo, em uma análise descritiva) ou sobre as inferências ou conclusões tomadas a partir de dados.<span class="citation"><sup><a href="#ref-Cumming2007">207</a>,<a href="#ref-krzywinski2013">208</a></sup></span></p></li>
+<li><p>Barras de erro mais longas representam mais imprecisão (maiores erros), enquanto barras mais curtas representam mais precisão na estimativa.<span class="citation"><sup><a href="#ref-Cumming2007">207</a></sup></span></p></li>
+<li><p>Barras de erro descritivas geralmente apresentam a amplitude (mínimo-máximo) ou desvio-padrão.<span class="citation"><sup><a href="#ref-Cumming2007">207</a></sup></span></p></li>
+<li><p>Barras de erro inferenciais geralmente apresentam o erro-padrão ou intervalo de confiança no nível de significância <span class="math inline">\(\alpha\)</span> pré-estabelecido.<span class="citation"><sup><a href="#ref-Cumming2007">207</a>,<a href="#ref-krzywinski2013">208</a></sup></span></p></li>
+<li><p>Barras de erro com desvio-padrão são úteis para descrever a variabilidade dos dados, enquanto as barras de erro com erro padrão da média são úteis para descrever a precisão do parâmetro estimado (média) e sua relação com o tamanho da amostra.<span class="citation"><sup><a href="#ref-krzywinski2013">208</a></sup></span></p></li>
+<li><p>Barras de erro com intervalo de confiança são úteis para fornecer uma estimativa da incerteza da estimativa do parâmetro populacional.<span class="citation"><sup><a href="#ref-krzywinski2013">208</a></sup></span></p></li>
+<li><p>O comprimento das barras de erro sugere graficamente a imprecisão dos dados do estudo, uma vez que o valor verdadeiro da população pode estar em qualquer nível do intervalo da barra.<span class="citation"><sup><a href="#ref-Cumming2007">207</a></sup></span></p></li>
+<li><p>De modo contraintuitivo, um espaço entre as barras não garante significância, nem a sobreposição a descarta—depende do tipo de barra.<span class="citation"><sup><a href="#ref-krzywinski2013">208</a></sup></span></p></li>
+<li><p>Para amostras pequenas é preferível apresentar os dados brutos, uma vez que as barras de erro não serão muito informativas.<span class="citation"><sup><a href="#ref-krzywinski2013">208</a></sup></span></p></li>
+</ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:barras-erro-simples"></span>
+<img src="Ciencia-com-R_files/figure-html/barras-erro-simples-1.png" alt="Exemplos de gráficos com barras de erro e dados brutos." width="672" />
+<p class="caption">
+Figura 20.1: Exemplos de gráficos com barras de erro e dados brutos.
+</p>
+</div>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:barras-erro"></span>
+<img src="Ciencia-com-R_files/figure-html/barras-erro-1.png" alt="Exemplos de gráficos com barras de erro e dados brutos em diferentes cenários." width="672" />
+<p class="caption">
+Figura 20.2: Exemplos de gráficos com barras de erro e dados brutos em diferentes cenários.
+</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>Os pacotes <em>ggplot2</em><span class="citation"><sup><a href="#ref-ggplot2">184</a></sup></span>, <em>plotly</em><span class="citation"><sup><a href="#ref-plotly">209</a></sup></span> e <em>corrplot</em><span class="citation"><sup><a href="#ref-corrplot">210</a></sup></span> fornecem diversas funções para construção de gráficos tais como <a href="https://www.rdocumentation.org/packages/ggplot2/versions/3.4.3/topics/ggplot"><em>ggplot</em></a>, <a href="https://www.rdocumentation.org/packages/plotly/versions/4.10.2/topics/plot_ly"><em>plot_ly</em></a> e <a href="https://www.rdocumentation.org/packages/corrplot/versions/0.92/topics/corrplot"><em>corrplot</em></a> respectivamente.</p>
+</div>
+<p><br></p>
+</div>
+<div id="quais-são-os-principais-obstáculos-para-bons-gráficos" class="section level3 hasAnchor" number="20.7.5">
+<h3><span class="header-section-number">20.7.5</span> Quais são os principais obstáculos para bons gráficos?<a href="#quais-s%C3%A3o-os-principais-obst%C3%A1culos-para-bons-gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Dificuldade técnica, negligência no ensino tradicional e o foco em “beleza” sem clareza podem levar a gráficos ruins, mesmo quando bem intencionados.<span class="citation"><sup><a href="#ref-vandemeulebroecke2018">206</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="tipos-de-gráficos" class="section level2 hasAnchor" number="20.8">
+<h2><span class="header-section-number">20.8</span> Tipos de gráficos<a href="#tipos-de-gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="quais-são-os-tipos-de-gráficos-para-variáveis-categóricas" class="section level3 hasAnchor" number="20.8.1">
+<h3><span class="header-section-number">20.8.1</span> Quais são os tipos de gráficos para variáveis categóricas?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-categ%C3%B3ricas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Gráfico de barras: Mais usado para comparar frequências absolutas ou relativas entre categorias.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
@@ -2111,7 +3243,7 @@ Sem casa decimal [Margem de erro]
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:graficos-var-categoricas"></span>
 <img src="Ciencia-com-R_files/figure-html/graficos-var-categoricas-1.png" alt="Gráfico de barras simples representando frequências por categoria." width="672" />
 <p class="caption">
-Figura 20.1: Gráfico de barras simples representando frequências por categoria.
+Figura 20.3: Gráfico de barras simples representando frequências por categoria.
 </p>
 </div>
 <p><br></p>
@@ -2122,20 +3254,20 @@ Figura 20.1: Gráfico de barras simples representando frequências por categoria
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:graficos-var-categoricas-empilhados"></span>
 <img src="Ciencia-com-R_files/figure-html/graficos-var-categoricas-empilhados-1.png" alt="Gráfico de barras empilhadas representando frequências por categoria." width="672" />
 <p class="caption">
-Figura 20.2: Gráfico de barras empilhadas representando frequências por categoria.
+Figura 20.4: Gráfico de barras empilhadas representando frequências por categoria.
 </p>
 </div>
 <p><br></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:bar-plot"></span>
 <img src="Ciencia-com-R_files/figure-html/bar-plot-1.png" alt="Gráficos de barras represetando médias, barras de erro e dados individuais." width="672" />
 <p class="caption">
-Figura 20.3: Gráficos de barras represetando médias, barras de erro e dados individuais.
+Figura 20.5: Gráficos de barras represetando médias, barras de erro e dados individuais.
 </p>
 </div>
 <p><br></p>
 </div>
-<div id="quais-são-os-tipos-de-gráficos-para-variáveis-numéricas" class="section level3 hasAnchor" number="20.6.3">
-<h3><span class="header-section-number">20.6.3</span> Quais são os tipos de gráficos para variáveis numéricas?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-num%C3%A9ricas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-os-tipos-de-gráficos-para-variáveis-numéricas" class="section level3 hasAnchor" number="20.8.2">
+<h3><span class="header-section-number">20.8.2</span> Quais são os tipos de gráficos para variáveis numéricas?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-num%C3%A9ricas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Histograma: Distribuição de frequência de uma variável contínua. Mostra a forma da distribuição (simétrica, assimétrica, bimodal).<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
@@ -2143,7 +3275,7 @@ Figura 20.3: Gráficos de barras represetando médias, barras de erro e dados in
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:graficos-var-numericas"></span>
 <img src="Ciencia-com-R_files/figure-html/graficos-var-numericas-1.png" alt="Histograma da variável 'valor'." width="672" />
 <p class="caption">
-Figura 20.4: Histograma da variável ‘valor’.
+Figura 20.6: Histograma da variável ‘valor’.
 </p>
 </div>
 <p><br></p>
@@ -2154,7 +3286,7 @@ Figura 20.4: Histograma da variável ‘valor’.
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:grafico-densidade"></span>
 <img src="Ciencia-com-R_files/figure-html/grafico-densidade-1.png" alt="Gráfico de densidade da variável 'valor'." width="672" />
 <p class="caption">
-Figura 20.5: Gráfico de densidade da variável ‘valor’.
+Figura 20.7: Gráfico de densidade da variável ‘valor’.
 </p>
 </div>
 <p><br></p>
@@ -2165,7 +3297,7 @@ Figura 20.5: Gráfico de densidade da variável ‘valor’.
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:boxplot-grupos"></span>
 <img src="Ciencia-com-R_files/figure-html/boxplot-grupos-1.png" alt="Boxplot por grupo." width="672" />
 <p class="caption">
-Figura 20.6: Boxplot por grupo.
+Figura 20.8: Boxplot por grupo.
 </p>
 </div>
 <p><br></p>
@@ -2176,7 +3308,7 @@ Figura 20.6: Boxplot por grupo.
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:violin-plot"></span>
 <img src="Ciencia-com-R_files/figure-html/violin-plot-1.png" alt="Violin plot por grupo." width="672" />
 <p class="caption">
-Figura 20.7: Violin plot por grupo.
+Figura 20.9: Violin plot por grupo.
 </p>
 </div>
 <p><br></p>
@@ -2187,13 +3319,13 @@ Figura 20.7: Violin plot por grupo.
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:grafico-pontos"></span>
 <img src="Ciencia-com-R_files/figure-html/grafico-pontos-1.png" alt="Gráfico de pontos da variável 'valor'." width="672" />
 <p class="caption">
-Figura 20.8: Gráfico de pontos da variável ‘valor’.
+Figura 20.10: Gráfico de pontos da variável ‘valor’.
 </p>
 </div>
 <p><br></p>
 </div>
-<div id="quais-são-os-tipos-de-gráficos-para-relações-entre-variáveis" class="section level3 hasAnchor" number="20.6.4">
-<h3><span class="header-section-number">20.6.4</span> Quais são os tipos de gráficos para relações entre variáveis?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-rela%C3%A7%C3%B5es-entre-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-os-tipos-de-gráficos-para-relações-entre-variáveis" class="section level3 hasAnchor" number="20.8.3">
+<h3><span class="header-section-number">20.8.3</span> Quais são os tipos de gráficos para relações entre variáveis?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-rela%C3%A7%C3%B5es-entre-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Gráfico de dispersão (<em>scatter plot</em>): Mostra a relação entre duas variáveis quantitativas. Ideal para investigar correlações.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
@@ -2201,7 +3333,7 @@ Figura 20.8: Gráfico de pontos da variável ‘valor’.
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:graficos-relacoes"></span>
 <img src="Ciencia-com-R_files/figure-html/graficos-relacoes-1.png" alt="Gráfico de dispersão representando a relação entre duas variáveis." width="672" />
 <p class="caption">
-Figura 20.9: Gráfico de dispersão representando a relação entre duas variáveis.
+Figura 20.11: Gráfico de dispersão representando a relação entre duas variáveis.
 </p>
 </div>
 <p><br></p>
@@ -2212,13 +3344,27 @@ Figura 20.9: Gráfico de dispersão representando a relação entre duas variáv
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:graficos-bolhas"></span>
 <img src="Ciencia-com-R_files/figure-html/graficos-bolhas-1.png" alt="Gráfico de bolhas representando a relação entre três variáveis." width="672" />
 <p class="caption">
-Figura 20.10: Gráfico de bolhas representando a relação entre três variáveis.
+Figura 20.12: Gráfico de bolhas representando a relação entre três variáveis.
 </p>
 </div>
 <p><br></p>
 </div>
-<div id="quais-são-os-tipos-de-gráficos-para-séries-temporais" class="section level3 hasAnchor" number="20.6.5">
-<h3><span class="header-section-number">20.6.5</span> Quais são os tipos de gráficos para séries temporais?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-s%C3%A9ries-temporais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-os-tipos-de-gráficos-para-dados-longitudinais" class="section level3 hasAnchor" number="20.8.4">
+<h3><span class="header-section-number">20.8.4</span> Quais são os tipos de gráficos para dados longitudinais?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-longitudinais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Gráfico de <em>spaghetti</em>: Mostra trajetórias individuais ao longo do tempo, útil para dados longitudinais.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+</ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:graficos-longitudinais"></span>
+<img src="Ciencia-com-R_files/figure-html/graficos-longitudinais-1.png" alt="Gráfico spaghetti representando dados longitudinais." width="672" />
+<p class="caption">
+Figura 20.13: Gráfico spaghetti representando dados longitudinais.
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="quais-são-os-tipos-de-gráficos-para-séries-temporais" class="section level3 hasAnchor" number="20.8.5">
+<h3><span class="header-section-number">20.8.5</span> Quais são os tipos de gráficos para séries temporais?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-s%C3%A9ries-temporais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Gráfico de linhas: Mostra a evolução de uma variável ao longo do tempo, com pontos conectados por linhas.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
@@ -2226,13 +3372,13 @@ Figura 20.10: Gráfico de bolhas representando a relação entre três variávei
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:grafico-linha"></span>
 <img src="Ciencia-com-R_files/figure-html/grafico-linha-1.png" alt="Gráfico de linha representando uma série temporal." width="672" />
 <p class="caption">
-Figura 20.11: Gráfico de linha representando uma série temporal.
+Figura 20.14: Gráfico de linha representando uma série temporal.
 </p>
 </div>
 <p><br></p>
 </div>
-<div id="quais-são-os-tipos-de-gráficos-para-dados-multivariados" class="section level3 hasAnchor" number="20.6.6">
-<h3><span class="header-section-number">20.6.6</span> Quais são os tipos de gráficos para dados multivariados?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-multivariados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-os-tipos-de-gráficos-para-dados-multivariados" class="section level3 hasAnchor" number="20.8.6">
+<h3><span class="header-section-number">20.8.6</span> Quais são os tipos de gráficos para dados multivariados?<a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-multivariados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Gráfico de dispersão: Representa a relação entre duas variáveis, com pontos e uma linha de tendência.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
@@ -2240,7 +3386,7 @@ Figura 20.11: Gráfico de linha representando uma série temporal.
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:graficos-correlacao"></span>
 <img src="Ciencia-com-R_files/figure-html/graficos-correlacao-1.png" alt="Gráfico de correlação entre duas variáveis com linha de tendência." width="672" />
 <p class="caption">
-Figura 20.12: Gráfico de correlação entre duas variáveis com linha de tendência.
+Figura 20.15: Gráfico de correlação entre duas variáveis com linha de tendência.
 </p>
 </div>
 <p><br></p>
@@ -2251,7 +3397,7 @@ Figura 20.12: Gráfico de correlação entre duas variáveis com linha de tendê
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:graficos-matriz-dispersao"></span>
 <img src="Ciencia-com-R_files/figure-html/graficos-matriz-dispersao-1.png" alt="Matriz de dispersão representando relações entre múltiplas variáveis." width="672" />
 <p class="caption">
-Figura 20.13: Matriz de dispersão representando relações entre múltiplas variáveis.
+Figura 20.16: Matriz de dispersão representando relações entre múltiplas variáveis.
 </p>
 </div>
 <p><br></p>
@@ -2262,7 +3408,7 @@ Figura 20.13: Matriz de dispersão representando relações entre múltiplas var
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:graficos-heatmap"></span>
 <img src="Ciencia-com-R_files/figure-html/graficos-heatmap-1.png" alt="Mapa de calor da correlação entre variáveis." width="672" />
 <p class="caption">
-Figura 20.14: Mapa de calor da correlação entre variáveis.
+Figura 20.17: Mapa de calor da correlação entre variáveis.
 </p>
 </div>
 <p><br></p>
@@ -2273,66 +3419,77 @@ Figura 20.14: Mapa de calor da correlação entre variáveis.
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:graficos-multivariados"></span>
 <img src="Ciencia-com-R_files/figure-html/graficos-multivariados-1.png" alt="Gráfico radar representando múltiplas variáveis." width="672" />
 <p class="caption">
-Figura 20.15: Gráfico radar representando múltiplas variáveis.
+Figura 20.18: Gráfico radar representando múltiplas variáveis.
 </p>
 </div>
 <p><br></p>
 </div>
-<div id="que-elementos-incluir-em-gráficos" class="section level3 hasAnchor" number="20.6.7">
-<h3><span class="header-section-number">20.6.7</span> Que elementos incluir em gráficos?<a href="#que-elementos-incluir-em-gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-as-boas-práticas-na-elaboração-de-gráficos" class="section level3 hasAnchor" number="20.8.7">
+<h3><span class="header-section-number">20.8.7</span> Quais são as boas práticas na elaboração de gráficos?<a href="#quais-s%C3%A3o-as-boas-pr%C3%A1ticas-na-elabora%C3%A7%C3%A3o-de-gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Título, eixos horizontal e vertical com respectivas unidades, escalas em intervalos representativos das variáveis, legenda com símbolos, síntese descritiva dos valores e respectiva margem de erro, conforme necessário para adequada interpretação.<span class="citation"><sup><a href="#ref-Park2022">203</a></sup></span></li>
+<li><p>O tamanho da amostra total e subgrupos, se houver, deve estar descrito na figura ou na sua legenda.<span class="citation"><sup><a href="#ref-Cumming2007">207</a></sup></span></p></li>
+<li><p>Para análise inferencial de figuras, as barras de erro representadas por erro-padrão ou intervalo de confiança no nível de significância <span class="math inline">\(\alpha\)</span> pré-estabelecido são preferíveis à amplitude ou desvio-padrão.<span class="citation"><sup><a href="#ref-Cumming2007">207</a>,<a href="#ref-krzywinski2013">208</a></sup></span></p></li>
+<li><p>Evite gráficos de barra e mostre a distribuição dos dados sempre que possível.<span class="citation"><sup><a href="#ref-Weissgerber2019">190</a></sup></span></p></li>
+<li><p>Exiba os pontos de dados em boxplots.<span class="citation"><sup><a href="#ref-Weissgerber2019">190</a></sup></span></p></li>
+<li><p>Use <em>jitter</em> simétrico em gráficos de pontos para permitir a visualização de todos os dados.<span class="citation"><sup><a href="#ref-Weissgerber2019">190</a></sup></span></p></li>
+<li><p>Prefira palhetas de cor adaptadas para daltônicos.<span class="citation"><sup><a href="#ref-Weissgerber2019">190</a></sup></span></p></li>
+<li><p>Uma boa legenda torna a figura autossuficiente: descreva amostra (n), geometrias, métricas de incerteza, escalas/unidades e mensagem principal. Se houver modelo, indique fórmula/ajustes em nota.<span class="citation"><sup><a href="#ref-midway2020">204</a></sup></span></p></li>
+<li><p>Evite gráficos de barras com médias para variáveis contínuas; prefira pontos/box/violino e, em amostras pequenas, exiba todos os dados.<span class="citation"><sup><a href="#ref-Weissgerber2019">190</a></sup></span></p></li>
+<li><p>Antes de finalizar um gráfico, faça as seguintes perguntas: (1) Mensagem está explícita? (2) Geometria adequada e dados visíveis? (3) Incerteza correta e rotulada? (4) Cores informativas e acessíveis? (5) Escalas comparáveis (se facetou)? (6) Legenda/caption autossuficiente? (7) Diferença clara entre dados e modelos? (8) Arquivo exportado na resolução/tamanho exigidos?<span class="citation"><sup><a href="#ref-midway2020">204</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>Os pacotes <em>ggplot2</em><span class="citation"><sup><a href="#ref-ggplot2">184</a></sup></span>, <em>plotly</em><span class="citation"><sup><a href="#ref-plotly">204</a></sup></span> e <em>corrplot</em><span class="citation"><sup><a href="#ref-corrplot">205</a></sup></span> fornecem diversas funções para construção de gráficos tais como <a href="https://www.rdocumentation.org/packages/ggplot2/versions/3.4.3/topics/ggplot"><em>ggplot</em></a>, <a href="https://www.rdocumentation.org/packages/plotly/versions/4.10.2/topics/plot_ly"><em>plot_ly</em></a> e <a href="https://www.rdocumentation.org/packages/corrplot/versions/0.92/topics/corrplot"><em>corrplot</em></a> respectivamente.</p>
-</div>
-<p><br></p>
-</div>
-<div id="para-que-servem-as-barras-de-erro-em-gráficos" class="section level3 hasAnchor" number="20.6.8">
-<h3><span class="header-section-number">20.6.8</span> Para que servem as barras de erro em gráficos?<a href="#para-que-servem-as-barras-de-erro-em-gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Barras de erro ajudam ao autor a apresentar as informações que descrevem os dados (por exemplo, em uma análise descritiva) ou sobre as inferências ou conclusões tomadas a partir de dados.<span class="citation"><sup><a href="#ref-Cumming2007">206</a>,<a href="#ref-krzywinski2013">207</a></sup></span></p></li>
-<li><p>Barras de erro mais longas representam mais imprecisão (maiores erros), enquanto barras mais curtas representam mais precisão na estimativa.<span class="citation"><sup><a href="#ref-Cumming2007">206</a></sup></span></p></li>
-<li><p>Barras de erro descritivas geralmente apresentam a amplitude (mínimo-máximo) ou desvio-padrão.<span class="citation"><sup><a href="#ref-Cumming2007">206</a></sup></span></p></li>
-<li><p>Barras de erro inferenciais geralmente apresentam o erro-padrão ou intervalo de confiança no nível de significância <span class="math inline">\(\alpha\)</span> pré-estabelecido.<span class="citation"><sup><a href="#ref-Cumming2007">206</a>,<a href="#ref-krzywinski2013">207</a></sup></span></p></li>
-<li><p>Barras de erro com desvio-padrão são úteis para descrever a variabilidade dos dados, enquanto as barras de erro com erro padrão da média são úteis para descrever a precisão do parâmetro estimado (média) e sua relação com o tamanho da amostra.<span class="citation"><sup><a href="#ref-krzywinski2013">207</a></sup></span></p></li>
-<li><p>Barras de erro com intervalo de confiança são úteis para fornecer uma estimativa da incerteza da estimativa do parâmetro populacional.<span class="citation"><sup><a href="#ref-krzywinski2013">207</a></sup></span></p></li>
-<li><p>O comprimento das barras de erro sugere graficamente a imprecisão dos dados do estudo, uma vez que o valor verdadeiro da população pode estar em qualquer nível do intervalo da barra.<span class="citation"><sup><a href="#ref-Cumming2007">206</a></sup></span></p></li>
-<li><p>De modo contraintuitivo, um espaço entre as barras não garante significância, nem a sobreposição a descarta—depende do tipo de barra.<span class="citation"><sup><a href="#ref-krzywinski2013">207</a></sup></span></p></li>
-<li><p>Para amostras pequenas é preferível apresentar os dados brutos, uma vez que as barras de erro não serão muito informativas.<span class="citation"><sup><a href="#ref-krzywinski2013">207</a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="quais-são-as-boas-práticas-na-elaboração-de-gráficos" class="section level3 hasAnchor" number="20.6.9">
-<h3><span class="header-section-number">20.6.9</span> Quais são as boas práticas na elaboração de gráficos?<a href="#quais-s%C3%A3o-as-boas-pr%C3%A1ticas-na-elabora%C3%A7%C3%A3o-de-gr%C3%A1ficos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>O tamanho da amostra total e subgrupos, se houver, deve estar descrito na figura ou na sua legenda.<span class="citation"><sup><a href="#ref-Cumming2007">206</a></sup></span></p></li>
-<li><p>Para análise inferencial de figuras, as barras de erro representadas por erro-padrão ou intervalo de confiança no nível de significância <span class="math inline">\(\alpha\)</span> pré-estabelecido são preferíveis à amplitude ou desvio-padrão.<span class="citation"><sup><a href="#ref-Cumming2007">206</a>,<a href="#ref-krzywinski2013">207</a></sup></span></p></li>
-<li><p>Evite gráficos de barra e mostre a distribuição dos dados sempre que possível.<span class="citation"><sup><a href="#ref-Weissgerber2019">208</a></sup></span></p></li>
-<li><p>Exiba os pontos de dados em boxplots.<span class="citation"><sup><a href="#ref-Weissgerber2019">208</a></sup></span></p></li>
-<li><p>Use <em>jitter</em> simétrico em gráficos de pontos para permitir a visualização de todos os dados.<span class="citation"><sup><a href="#ref-Weissgerber2019">208</a></sup></span></p></li>
-<li><p>Prefira palhetas de cor adaptadas para daltônicos.<span class="citation"><sup><a href="#ref-Weissgerber2019">208</a></sup></span></p></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>ggsci</em><span class="citation"><sup><a href="#ref-ggsci">209</a></sup></span> fornece palhetas de cores tais como <a href="https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_lancet"><em>pal_lancet</em></a>, <a href="https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_nejm"><em>pal_nejm</em></a> e <a href="https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_npg"><em>pal_npg</em></a> inspiradas em publicações científicas para uso em gráficos.</p>
+<p>O pacote <em>ggsci</em><span class="citation"><sup><a href="#ref-ggsci">211</a></sup></span> fornece palhetas de cores tais como <a href="https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_lancet"><em>pal_lancet</em></a>, <a href="https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_nejm"><em>pal_nejm</em></a> e <a href="https://www.rdocumentation.org/packages/ggsci/versions/3.0.0/topics/pal_npg"><em>pal_npg</em></a> inspiradas em publicações científicas para uso em gráficos.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>grDevices</em><span class="citation"><sup><a href="#ref-grDevices">210</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/grDevices/versions/3.6.2/topics/dev"><em>dev.new</em></a> para controlar diversos aspectos do gráfico, tais como tamanho e resolução.</p>
+<p>O pacote <em>grDevices</em><span class="citation"><sup><a href="#ref-grDevices">212</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/grDevices/versions/3.6.2/topics/dev"><em>dev.new</em></a> para controlar diversos aspectos do gráfico, tais como tamanho e resolução.</p>
 </div>
-<p><br></p>
-</div>
-<div id="como-exportar-figuras-em-formato-tiff" class="section level3 hasAnchor" number="20.6.10">
-<h3><span class="header-section-number">20.6.10</span> Como exportar figuras em formato TIFF?<a href="analise-descritiva.html#como-exportar-figuras-em-formato-tiff" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><br></p>
-<ul>
-<li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
-</ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>tiff</em><span class="citation"><sup><a href="#ref-tiff">211</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/tiff/versions/0.1-11/topics/writeTIFF"><em>writeTIFF</em></a> para exportar gráficos em formato TIFF.</p>
+<p>O pacote <em>tiff</em><span class="citation"><sup><a href="#ref-tiff">213</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/tiff/versions/0.1-11/topics/writeTIFF"><em>writeTIFF</em></a> para exportar gráficos em formato TIFF.</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="gráficos-dinâmicos" class="section level2 hasAnchor" number="20.9">
+<h2><span class="header-section-number">20.9</span> Gráficos dinâmicos<a href="#gr%C3%A1ficos-din%C3%A2micos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-são-visualizações-dinâmicas" class="section level3 hasAnchor" number="20.9.1">
+<h3><span class="header-section-number">20.9.1</span> O que são visualizações dinâmicas?<a href="#o-que-s%C3%A3o-visualiza%C3%A7%C3%B5es-din%C3%A2micas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Visualizações dinâmicas combinam interatividade (exploração ativa pelo leitor) e animação (mudanças ao longo do tempo/iterações) para empacotar informação rica em exibições simples, tornando comunicação e exploração mais transparentes.<span class="citation"><sup><a href="#ref-wiebels2023">214</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+<div id="quando-preferir-interatividade" class="section level3 hasAnchor" number="20.9.2">
+<h3><span class="header-section-number">20.9.2</span> Quando preferir interatividade?<a href="analise-descritiva.html#quando-preferir-interatividade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Durante exploração de dados em equipe: destacar pontos/linhas por participante, filtrar subconjuntos e inspecionar impactos de escolhas analíticas (p.ex., outliers) sem gerar múltiplas figuras novas.<span class="citation"><sup><a href="#ref-wiebels2023">214</a></sup></span></li>
+</ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:grafico-interativo"></span>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-f7202f4a63f76b2c09a9" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-f7202f4a63f76b2c09a9">{"x":{"visdat":{"2205405ba1be":["function () ","plotlyVisDat"]},"cur_data":"2205405ba1be","attrs":{"2205405ba1be":{"y":{},"x":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"},"2205405ba1be.1":{"y":{},"x":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","mode":"markers","hoverinfo":"x+y+text","text":{},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"boxmode":"group","xaxis":{"domain":[0,1],"automargin":true,"title":"Semana","type":"category","categoryorder":"array","categoryarray":["1","5","16","20"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Desempenho"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(102,194,165,0.5)","y":[13.951781276852518,11.661153638598568,13.444383558874941,10.311162786174993,14.554587370002295,9.3137789016395551,13.530681337721393,12.928405139960747,12.53598655608106,13.335045374270484,12.796934567727558,10.723857938139863,11.464574191952977,12.719759129771424,9.3742678121185818,10.232060780662588,16.154189589169292,7.8015487355980442,9.5229880693434339,13.980866179328071,14.177323726396155,13.679704508376519,12.113717277366774,12.647756102360541,10.190662664818095,10.69563230325976,11.475090724078102,10.130674318188595,13.64232242526835,8.7514816530801269,9.9391926610394137,9.4761413760539988,12.78436925179296,9.7371234766925632,13.088288968016323,14.353217869469143,12.050457138478075,13.030266339384069,10.691780479965157,13.007283981655133],"x":["1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20"],"type":"box","name":"Controle","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"line":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(141,160,203,0.5)","y":[9.4557615553432068,11.846457692602685,11.309361248641171,13.467364879507628,14.175125990038941,13.401135590830414,13.1144809707192,12.422960068224279,10.286448580451124,10.507161970753215,14.595967240802828,11.960895605563231,17.741794847144476,12.437420022809105,12.066891340597751,14.767676363244737,11.756207857363359,11.298904855599538,15.198927242261327,14.462548155131365,14.052492393629018,10.951102299920587,17.592412484293003,11.13160718849651,12.277372340925075,12.902927454091083,16.429548249200678,11.351037750541575,9.7207444480019216,15.351297140768152,14.796292416798423,15.431038270083963,10.413609728948771,15.847703294327694,14.14087997262811,14.938560072626503,11.820295811858614,13.788303263087002,13.252580244017159,18.516503806422403],"x":["1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20"],"type":"box","name":"Intervenção","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"line":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[13.951781276852518,11.661153638598568,13.444383558874941,10.311162786174993,14.554587370002295,9.3137789016395551,13.530681337721393,12.928405139960747,12.53598655608106,13.335045374270484,12.796934567727558,10.723857938139863,11.464574191952977,12.719759129771424,9.3742678121185818,10.232060780662588,16.154189589169292,7.8015487355980442,9.5229880693434339,13.980866179328071,14.177323726396155,13.679704508376519,12.113717277366774,12.647756102360541,10.190662664818095,10.69563230325976,11.475090724078102,10.130674318188595,13.64232242526835,8.7514816530801269,9.9391926610394137,9.4761413760539988,12.78436925179296,9.7371234766925632,13.088288968016323,14.353217869469143,12.050457138478075,13.030266339384069,10.691780479965157,13.007283981655133],"x":["1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20"],"type":"scatter","mode":"markers","hoverinfo":["x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text"],"text":["Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle","Grupo: Controle"],"name":"Controle","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[9.4557615553432068,11.846457692602685,11.309361248641171,13.467364879507628,14.175125990038941,13.401135590830414,13.1144809707192,12.422960068224279,10.286448580451124,10.507161970753215,14.595967240802828,11.960895605563231,17.741794847144476,12.437420022809105,12.066891340597751,14.767676363244737,11.756207857363359,11.298904855599538,15.198927242261327,14.462548155131365,14.052492393629018,10.951102299920587,17.592412484293003,11.13160718849651,12.277372340925075,12.902927454091083,16.429548249200678,11.351037750541575,9.7207444480019216,15.351297140768152,14.796292416798423,15.431038270083963,10.413609728948771,15.847703294327694,14.14087997262811,14.938560072626503,11.820295811858614,13.788303263087002,13.252580244017159,18.516503806422403],"x":["1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20","1","5","16","20"],"type":"scatter","mode":"markers","hoverinfo":["x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text","x+y+text"],"text":["Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção","Grupo: Intervenção"],"name":"Intervenção","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"line":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figura 20.19: Exemplo de gráfico interativo com Plotly.
+</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>plotly</em><span class="citation"><sup><a href="#ref-plotly-2">215</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/plotly/versions/4.11.0/topics/plot_ly"><em>plot_ly</em></a> para gerar gráficos interativos.</p>
+</div>
+<p><br></p>
+</div>
+<div id="quando-preferir-animação" class="section level3 hasAnchor" number="20.9.3">
+<h3><span class="header-section-number">20.9.3</span> Quando preferir animação?<a href="#quando-preferir-anima%C3%A7%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Em apresentações e para ilustrar variação ao longo de tempo/condição/algoritmo, evitando painéis 3D ou facets excessivos. A animação guia a atenção e revela mudanças de forma passiva e fluida.<span class="citation"><sup><a href="#ref-wiebels2023">214</a></sup></span></li>
+</ul>
+<p><br></p>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>gganimate</em><span class="citation"><sup><a href="#ref-gganimate"><strong>gganimate?</strong></a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/gganimate/versions/1.0.7/topics/transition_states"><em>transition_states</em></a> para criar gráficos animados a partir de gráficos estáticos do <em>ggplot2</em>.</p>
 </div>
 <p><br></p>
 <style>
@@ -2388,71 +3545,83 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
 <div id="ref-cole2015b" class="csl-entry">
 <div class="csl-left-margin">189. </div><div class="csl-right-inline">Cole TJ. Too many digits: the presentation of numerical data. <em>Archives of Disease in Childhood</em>. 2015;100(7):608–609. doi:<a href="https://doi.org/10.1136/archdischild-2014-307149">10.1136/archdischild-2014-307149</a></div>
 </div>
+<div id="ref-Weissgerber2019" class="csl-entry">
+<div class="csl-left-margin">190. </div><div class="csl-right-inline">Weissgerber TL, Winham SJ, Heinzen EP, et al. Reveal, Don<span>’</span>t Conceal. <em>Circulation</em>. 2019;140(18):1506–1518. doi:<a href="https://doi.org/10.1161/circulationaha.118.037777">10.1161/circulationaha.118.037777</a></div>
+</div>
 <div id="ref-Inskip2017" class="csl-entry">
-<div class="csl-left-margin">190. </div><div class="csl-right-inline">Inskip H, Ntani G, Westbury L, et al. Getting started with tables. <em>Archives of Public Health</em>. 2017;75(1). doi:<a href="https://doi.org/10.1186/s13690-017-0180-1">10.1186/s13690-017-0180-1</a></div>
+<div class="csl-left-margin">191. </div><div class="csl-right-inline">Inskip H, Ntani G, Westbury L, et al. Getting started with tables. <em>Archives of Public Health</em>. 2017;75(1). doi:<a href="https://doi.org/10.1186/s13690-017-0180-1">10.1186/s13690-017-0180-1</a></div>
 </div>
 <div id="ref-Kwak2021" class="csl-entry">
-<div class="csl-left-margin">191. </div><div class="csl-right-inline">Kwak SG, Kang H, Kim JH, et al. The principles of presenting statistical results: Table. <em>Korean Journal of Anesthesiology</em>. 2021;74(2):115–119. doi:<a href="https://doi.org/10.4097/kja.20582">10.4097/kja.20582</a></div>
+<div class="csl-left-margin">192. </div><div class="csl-right-inline">Kwak SG, Kang H, Kim JH, et al. The principles of presenting statistical results: Table. <em>Korean Journal of Anesthesiology</em>. 2021;74(2):115–119. doi:<a href="https://doi.org/10.4097/kja.20582">10.4097/kja.20582</a></div>
 </div>
-<div id="ref-flextable" class="csl-entry">
-<div class="csl-left-margin">192. </div><div class="csl-right-inline">Gohel D, Skintzos P. <em>flextable: Functions for Tabular Reporting</em>.; 2023. <a href="https://CRAN.R-project.org/package=flextable">https://CRAN.R-project.org/package=flextable.</a></div>
-</div>
-<div id="ref-rempsyc" class="csl-entry">
-<div class="csl-left-margin">193. </div><div class="csl-right-inline">Thériault R. <span></span>rempsyc<span></span>: Convenience functions for psychology. <em>Journal of Open Source Software</em>. 2023;8:5466. doi:<a href="https://doi.org/10.21105/joss.05466">10.21105/joss.05466</a></div>
+<div id="ref-gtsummary" class="csl-entry">
+<div class="csl-left-margin">193. </div><div class="csl-right-inline">Sjoberg DD, Whiting K, Curry M, Lavery JA, Larmarange J. Reproducible Summary Tables with the gtsummary Package. <em>The R Journal</em>. 2021;13:570–580. doi:<a href="https://doi.org/10.32614/RJ-2021-053">10.32614/RJ-2021-053</a></div>
 </div>
 <div id="ref-table1" class="csl-entry">
 <div class="csl-left-margin">194. </div><div class="csl-right-inline">Rich B. <em>table1: Tables of Descriptive Statistics in HTML</em>.; 2023. <a href="https://CRAN.R-project.org/package=table1">https://CRAN.R-project.org/package=table1.</a></div>
 </div>
-<div id="ref-gtsummary" class="csl-entry">
-<div class="csl-left-margin">195. </div><div class="csl-right-inline">Sjoberg DD, Whiting K, Curry M, Lavery JA, Larmarange J. Reproducible Summary Tables with the gtsummary Package. <em>The R Journal</em>. 2021;13:570–580. doi:<a href="https://doi.org/10.32614/RJ-2021-053">10.32614/RJ-2021-053</a></div>
+<div id="ref-flextable" class="csl-entry">
+<div class="csl-left-margin">195. </div><div class="csl-right-inline">Gohel D, Skintzos P. <em>flextable: Functions for Tabular Reporting</em>.; 2023. <a href="https://CRAN.R-project.org/package=flextable">https://CRAN.R-project.org/package=flextable.</a></div>
+</div>
+<div id="ref-rempsyc" class="csl-entry">
+<div class="csl-left-margin">196. </div><div class="csl-right-inline">Thériault R. <span></span>rempsyc<span></span>: Convenience functions for psychology. <em>Journal of Open Source Software</em>. 2023;8:5466. doi:<a href="https://doi.org/10.21105/joss.05466">10.21105/joss.05466</a></div>
 </div>
 <div id="ref-barnett2023" class="csl-entry">
-<div class="csl-left-margin">196. </div><div class="csl-right-inline">Barnett A. Automated detection of over- and under-dispersion in baseline tables in randomised controlled trials. <em>F1000Research</em>. 2023;11:783. doi:<a href="https://doi.org/10.12688/f1000research.123002.2">10.12688/f1000research.123002.2</a></div>
+<div class="csl-left-margin">197. </div><div class="csl-right-inline">Barnett A. Automated detection of over- and under-dispersion in baseline tables in randomised controlled trials. <em>F1000Research</em>. 2023;11:783. doi:<a href="https://doi.org/10.12688/f1000research.123002.2">10.12688/f1000research.123002.2</a></div>
 </div>
 <div id="ref-Westreich2013" class="csl-entry">
-<div class="csl-left-margin">197. </div><div class="csl-right-inline">Westreich D, Greenland S. The Table 2 Fallacy: Presenting and Interpreting Confounder and Modifier Coefficients. <em>American Journal of Epidemiology</em>. 2013;177(4):292–298. doi:<a href="https://doi.org/10.1093/aje/kws412">10.1093/aje/kws412</a></div>
+<div class="csl-left-margin">198. </div><div class="csl-right-inline">Westreich D, Greenland S. The Table 2 Fallacy: Presenting and Interpreting Confounder and Modifier Coefficients. <em>American Journal of Epidemiology</em>. 2013;177(4):292–298. doi:<a href="https://doi.org/10.1093/aje/kws412">10.1093/aje/kws412</a></div>
 </div>
 <div id="ref-chen2020" class="csl-entry">
-<div class="csl-left-margin">198. </div><div class="csl-right-inline">Chen H, Lu Y, Slye N. Testing for baseline differences in clinical trials. <em>International Journal of Clinical Trials</em>. 2020;7(2):150. doi:<a href="https://doi.org/10.18203/2349-3259.ijct20201720">10.18203/2349-3259.ijct20201720</a></div>
+<div class="csl-left-margin">199. </div><div class="csl-right-inline">Chen H, Lu Y, Slye N. Testing for baseline differences in clinical trials. <em>International Journal of Clinical Trials</em>. 2020;7(2):150. doi:<a href="https://doi.org/10.18203/2349-3259.ijct20201720">10.18203/2349-3259.ijct20201720</a></div>
 </div>
 <div id="ref-pijls2022" class="csl-entry">
-<div class="csl-left-margin">199. </div><div class="csl-right-inline">Pijls BG. The Table I Fallacy: P Values in Baseline Tables of Randomized Controlled Trials. <em>Journal of Bone and Joint Surgery</em>. 2022;104(16):e71. doi:<a href="https://doi.org/10.2106/jbjs.21.01166">10.2106/jbjs.21.01166</a></div>
+<div class="csl-left-margin">200. </div><div class="csl-right-inline">Pijls BG. The Table I Fallacy: P Values in Baseline Tables of Randomized Controlled Trials. <em>Journal of Bone and Joint Surgery</em>. 2022;104(16):e71. doi:<a href="https://doi.org/10.2106/jbjs.21.01166">10.2106/jbjs.21.01166</a></div>
 </div>
 <div id="ref-greenhalgh1997" class="csl-entry">
-<div class="csl-left-margin">200. </div><div class="csl-right-inline">Greenhalgh T. How to read a paper: Statistics for the non-statistician. I: Different types of data need different statistical tests. <em>BMJ</em>. 1997;315(7104):364–366. doi:<a href="https://doi.org/10.1136/bmj.315.7104.364">10.1136/bmj.315.7104.364</a></div>
+<div class="csl-left-margin">201. </div><div class="csl-right-inline">Greenhalgh T. How to read a paper: Statistics for the non-statistician. I: Different types of data need different statistical tests. <em>BMJ</em>. 1997;315(7104):364–366. doi:<a href="https://doi.org/10.1136/bmj.315.7104.364">10.1136/bmj.315.7104.364</a></div>
 </div>
 <div id="ref-Hayes-Larson2019" class="csl-entry">
-<div class="csl-left-margin">201. </div><div class="csl-right-inline">Hayes-Larson E, Kezios KL, Mooney SJ, Lovasi G. Who is in this study, anyway? Guidelines for a useful Table 1. <em>Journal of Clinical Epidemiology</em>. 2019;114:125–132. doi:<a href="https://doi.org/10.1016/j.jclinepi.2019.06.011">10.1016/j.jclinepi.2019.06.011</a></div>
+<div class="csl-left-margin">202. </div><div class="csl-right-inline">Hayes-Larson E, Kezios KL, Mooney SJ, Lovasi G. Who is in this study, anyway? Guidelines for a useful Table 1. <em>Journal of Clinical Epidemiology</em>. 2019;114:125–132. doi:<a href="https://doi.org/10.1016/j.jclinepi.2019.06.011">10.1016/j.jclinepi.2019.06.011</a></div>
 </div>
 <div id="ref-bandoli2018" class="csl-entry">
-<div class="csl-left-margin">202. </div><div class="csl-right-inline">Bandoli G, Palmsten K, Chambers CD, Jelliffe-Pawlowski LL, Baer RJ, Thompson CA. Revisiting the Table 2 fallacy: A motivating example examining preeclampsia and preterm birth. <em>Paediatric and Perinatal Epidemiology</em>. 2018;32(4):390–397. doi:<a href="https://doi.org/10.1111/ppe.12474">10.1111/ppe.12474</a></div>
+<div class="csl-left-margin">203. </div><div class="csl-right-inline">Bandoli G, Palmsten K, Chambers CD, Jelliffe-Pawlowski LL, Baer RJ, Thompson CA. Revisiting the Table 2 fallacy: A motivating example examining preeclampsia and preterm birth. <em>Paediatric and Perinatal Epidemiology</em>. 2018;32(4):390–397. doi:<a href="https://doi.org/10.1111/ppe.12474">10.1111/ppe.12474</a></div>
+</div>
+<div id="ref-midway2020" class="csl-entry">
+<div class="csl-left-margin">204. </div><div class="csl-right-inline">Midway SR. Principles of Effective Data Visualization. <em>Patterns</em>. 2020;1(9):100141. doi:<a href="https://doi.org/10.1016/j.patter.2020.100141">10.1016/j.patter.2020.100141</a></div>
 </div>
 <div id="ref-Park2022" class="csl-entry">
-<div class="csl-left-margin">203. </div><div class="csl-right-inline">Park JH, Lee DK, Kang H, et al. The principles of presenting statistical results using figures. <em>Korean Journal of Anesthesiology</em>. 2022;75(2):139–150. doi:<a href="https://doi.org/10.4097/kja.21508">10.4097/kja.21508</a></div>
+<div class="csl-left-margin">205. </div><div class="csl-right-inline">Park JH, Lee DK, Kang H, et al. The principles of presenting statistical results using figures. <em>Korean Journal of Anesthesiology</em>. 2022;75(2):139–150. doi:<a href="https://doi.org/10.4097/kja.21508">10.4097/kja.21508</a></div>
 </div>
-<div id="ref-plotly" class="csl-entry">
-<div class="csl-left-margin">204. </div><div class="csl-right-inline">Sievert C. <em>Interactive Web-Based Data Visualization with R, plotly, and shiny</em>. Chapman; Hall/CRC; 2020. <a href="https://plotly-r.com">https://plotly-r.com.</a></div>
-</div>
-<div id="ref-corrplot" class="csl-entry">
-<div class="csl-left-margin">205. </div><div class="csl-right-inline">Wei T, Simko V. <em>R package ’corrplot’: Visualization of a Correlation Matrix</em>.; 2024. <a href="https://github.com/taiyun/corrplot">https://github.com/taiyun/corrplot.</a></div>
+<div id="ref-vandemeulebroecke2018" class="csl-entry">
+<div class="csl-left-margin">206. </div><div class="csl-right-inline">Vandemeulebroecke M, Baillie M, Carr D, et al. How can we make better graphs? An initiative to increase the graphical expertise and productivity of quantitative scientists. <em>Pharmaceutical Statistics</em>. 2018;18(1):106–114. doi:<a href="https://doi.org/10.1002/pst.1912">10.1002/pst.1912</a></div>
 </div>
 <div id="ref-Cumming2007" class="csl-entry">
-<div class="csl-left-margin">206. </div><div class="csl-right-inline">Cumming G, Fidler F, Vaux DL. Error bars in experimental biology. <em>The Journal of Cell Biology</em>. 2007;177(1):7–11. doi:<a href="https://doi.org/10.1083/jcb.200611141">10.1083/jcb.200611141</a></div>
+<div class="csl-left-margin">207. </div><div class="csl-right-inline">Cumming G, Fidler F, Vaux DL. Error bars in experimental biology. <em>The Journal of Cell Biology</em>. 2007;177(1):7–11. doi:<a href="https://doi.org/10.1083/jcb.200611141">10.1083/jcb.200611141</a></div>
 </div>
 <div id="ref-krzywinski2013" class="csl-entry">
-<div class="csl-left-margin">207. </div><div class="csl-right-inline">Krzywinski M, Altman N. Error bars. <em>Nature Methods</em>. 2013;10(10):921–922. doi:<a href="https://doi.org/10.1038/nmeth.2659">10.1038/nmeth.2659</a></div>
+<div class="csl-left-margin">208. </div><div class="csl-right-inline">Krzywinski M, Altman N. Error bars. <em>Nature Methods</em>. 2013;10(10):921–922. doi:<a href="https://doi.org/10.1038/nmeth.2659">10.1038/nmeth.2659</a></div>
 </div>
-<div id="ref-Weissgerber2019" class="csl-entry">
-<div class="csl-left-margin">208. </div><div class="csl-right-inline">Weissgerber TL, Winham SJ, Heinzen EP, et al. Reveal, Don<span>’</span>t Conceal. <em>Circulation</em>. 2019;140(18):1506–1518. doi:<a href="https://doi.org/10.1161/circulationaha.118.037777">10.1161/circulationaha.118.037777</a></div>
+<div id="ref-plotly" class="csl-entry">
+<div class="csl-left-margin">209. </div><div class="csl-right-inline">Sievert C. <em>Interactive Web-Based Data Visualization with R, plotly, and shiny</em>. Chapman; Hall/CRC; 2020. <a href="https://plotly-r.com">https://plotly-r.com.</a></div>
+</div>
+<div id="ref-corrplot" class="csl-entry">
+<div class="csl-left-margin">210. </div><div class="csl-right-inline">Wei T, Simko V. <em>R package ’corrplot’: Visualization of a Correlation Matrix</em>.; 2024. <a href="https://github.com/taiyun/corrplot">https://github.com/taiyun/corrplot.</a></div>
 </div>
 <div id="ref-ggsci" class="csl-entry">
-<div class="csl-left-margin">209. </div><div class="csl-right-inline">Xiao N. <em>ggsci: Scientific Journal and Sci-Fi Themed Color Palettes for <span></span>ggplot2<span></span></em>.; 2023. <a href="https://CRAN.R-project.org/package=ggsci">https://CRAN.R-project.org/package=ggsci.</a></div>
+<div class="csl-left-margin">211. </div><div class="csl-right-inline">Xiao N. <em>ggsci: Scientific Journal and Sci-Fi Themed Color Palettes for <span></span>ggplot2<span></span></em>.; 2023. <a href="https://CRAN.R-project.org/package=ggsci">https://CRAN.R-project.org/package=ggsci.</a></div>
 </div>
 <div id="ref-grDevices" class="csl-entry">
-<div class="csl-left-margin">210. </div><div class="csl-right-inline">R Core Team. <em>R: A Language and Environment for Statistical Computing</em>.; 2024. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
+<div class="csl-left-margin">212. </div><div class="csl-right-inline">R Core Team. <em>R: A Language and Environment for Statistical Computing</em>.; 2024. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
 </div>
 <div id="ref-tiff" class="csl-entry">
-<div class="csl-left-margin">211. </div><div class="csl-right-inline">Urbanek S, Johnson K. <em>tiff: Read and Write TIFF Images</em>.; 2022. <a href="https://CRAN.R-project.org/package=tiff">https://CRAN.R-project.org/package=tiff.</a></div>
+<div class="csl-left-margin">213. </div><div class="csl-right-inline">Urbanek S, Johnson K. <em>tiff: Read and Write TIFF Images</em>.; 2022. <a href="https://CRAN.R-project.org/package=tiff">https://CRAN.R-project.org/package=tiff.</a></div>
+</div>
+<div id="ref-wiebels2023" class="csl-entry">
+<div class="csl-left-margin">214. </div><div class="csl-right-inline">Wiebels K, Moreau D. Dynamic Data Visualizations to Enhance Insight and Communication Across the Life Cycle of a Scientific Project. <em>Advances in Methods and Practices in Psychological Science</em>. 2023;6(3). doi:<a href="https://doi.org/10.1177/25152459231160103">10.1177/25152459231160103</a></div>
+</div>
+<div id="ref-plotly-2" class="csl-entry">
+<div class="csl-left-margin">215. </div><div class="csl-right-inline">Sievert C. Interactive Web-Based Data Visualization with R, plotly, and shiny. 2020. <a href="https://plotly-r.com">https://plotly-r.com.</a></div>
 </div>
 </div>
             </section>

@@ -38,6 +38,10 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 -   O número de casas decimais refere-se à quantidade de dígitos que aparecem após a vírgula decimal.[@Cole2015a; @cole2015b]
 
+-   Para tamanhos de efeito: use 2–3 dígitos significativos.[@Weissgerber2019]
+
+-   Para medidas de variabilidade (SD/SE/IC): use 1–2 dígitos significativos.[@Weissgerber2019]
+
 <br>
 
 ### O que são dígitos significativos?
@@ -143,23 +147,18 @@ dados$Valor <- sapply(1:nrow(dados), function(i) {
 })
 
 # Função para calcular arredondamento e faixa de erro
-calcular_erro <- function(valor, casas) {
-  original_value <- as.numeric(gsub(",", ".", valor))
-  rounded_value <- round(as.numeric(gsub(",", ".", original_value)), casas)
-
-  # Calcular a faixa de erro
-  if (casas == 2) {
-    lower_bound <- rounded_value - 0.005
-    upper_bound <- rounded_value + 0.005
-  } else if (casas == 1) {
-    lower_bound <- rounded_value - 0.05
-    upper_bound <- rounded_value + 0.05
-  } else {
-    lower_bound <- rounded_value - 0.5
-    upper_bound <- rounded_value + 0.5
-  }
-  
-  return(paste0(format(rounded_value, nsmall = casas, decimal.mark = ","), " [", format(round(lower_bound, casas + 1), nsmall = casas + 1, decimal.mark = ","), ", ", format(round(upper_bound, casas + 1), nsmall = casas + 1, decimal.mark = ","), "]"))
+calcular_erro <- function(x_str, casas){
+  x <- as.numeric(gsub(",", ".", x_str))
+  r <- round(x, casas)
+  half <- 0.5 * 10^(-casas)
+  paste0(
+    format(r, nsmall=casas, decimal.mark=","),
+    " [",
+    format(r - half, nsmall=casas+1, decimal.mark=","),
+    ", ",
+    format(r + half, nsmall=casas+1, decimal.mark=","),
+    "]"
+  )
 }
 
 dados$'2 Casas decimais [Margem de erro]' <- sapply(dados$Valor, function(x) {
@@ -247,13 +246,7 @@ kableExtra::kable(
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *flextable*[@flextable] fornece as funções [*flextable*](https://search.r-project.org/CRAN/refmans/flextable/html/flextable.html), [*as_flextable*](https://search.r-project.org/CRAN/refmans/flextable/html/as_flextable.html) e [*save_as_docx*](https://search.r-project.org/CRAN/refmans/flextable/html/save_as_docx.html) para criar e salvar tabelas formatadas em DOCX.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *rempsyc*[@rempsyc] fornece a função [*nice_table*](https://search.r-project.org/CRAN/refmans/rempsyc/html/nice_table.html) para criar tabelas formatadas.
+O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html) para construção da 'Tabela 1' com dados descritivos.
 :::
 
 <br>
@@ -265,7 +258,13 @@ O pacote *table1*[@table1] fornece a função [*table1*](https://search.r-projec
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html) para construção da 'Tabela 1' com dados descritivos.
+O pacote *flextable*[@flextable] fornece as funções [*flextable*](https://search.r-project.org/CRAN/refmans/flextable/html/flextable.html), [*as_flextable*](https://search.r-project.org/CRAN/refmans/flextable/html/as_flextable.html) e [*save_as_docx*](https://search.r-project.org/CRAN/refmans/flextable/html/save_as_docx.html) para criar e salvar tabelas formatadas em DOCX.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *rempsyc*[@rempsyc] fornece a função [*nice_table*](https://search.r-project.org/CRAN/refmans/rempsyc/html/nice_table.html) para criar tabelas formatadas.
 :::
 
 <br>
@@ -314,6 +313,8 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://sear
 
 -   Falácia da Tabela 1 ocorre pela interpretação errônea dos P-valores na comparação entre grupos, na linha de base, de um ensaio clínico aleatorizado.[@pijls2022]
 
+-   Não interprete P da linha de base em ensaios clínicos como “desequilíbrio” (falácia da Tabela 1). Mantenha P-valor apenas como descritivo (ou omita), enfatizando desenho e aleatorização.[@Weissgerber2019]
+
 <br>
 
 ### Como construir a 'Tabela 1'?
@@ -331,6 +332,35 @@ O pacote *table1*[@table1] fornece a função [*table1*](https://search.r-projec
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html) para construção da 'Tabela 1' com dados descritivos.
 :::
+
+<br>
+
+```{r tabela-1, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(123)
+
+# Gerar dados de exemplo
+dados <- tibble::tibble(
+  Grupo = sample(c("Controle","Intervenção"), 200, TRUE),
+  Sexo  = sample(c("F","M"), 200, TRUE),
+  Idade = round(rnorm(200, 60, 12), 1),
+  IMC   = round(rnorm(200, 27, 4), 1)
+)
+
+tbl1 <-
+  dados |>
+  gtsummary::tbl_summary(
+    by = Grupo,
+    type = list(Idade ~ "continuous2", IMC ~ "continuous2"),
+    statistic = gtsummary::all_continuous() ~ c("{mean} ({sd})", "{median} [{p25}, {p75}]"),
+    missing_text = "Dados ausentes"
+  ) |>
+  gtsummary::add_n() |>
+  gtsummary::add_p() |>
+  gtsummary::modify_caption("**Tabela 1. Características da amostra por grupo.**")
+
+tbl1
+```
 
 <br>
 
@@ -360,6 +390,31 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://sear
 
 <br>
 
+```{r tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(123)
+
+# Gerar dados de exemplo
+dados <- tibble::tibble(
+  Grupo = sample(c("Controle", "Intervenção"), 200, TRUE),
+  Sexo  = sample(c("F", "M"), 200, TRUE),
+  Idade = round(rnorm(200, 60, 12), 1),
+  IMC   = round(rnorm(200, 27, 4), 1)
+)
+
+# install.packages(c("broom","gtsummary"))
+mod <- glm(I(Sexo == "F") ~ Idade + IMC + Grupo,
+           data = dados,
+           family = binomial)
+
+tab2 <- gtsummary::tbl_regression(mod, exponentiate = TRUE) |>
+  gtsummary::modify_caption("**Tabela 2. Associação ajustada (OR) com sexo feminino como desfecho.**")
+
+tab2
+```
+
+<br>
+
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *table1*[@table1] fornece a função [*table1*](https://search.r-project.org/CRAN/refmans/table1/html/table1.html) para construção de tabelas.
 :::
@@ -372,6 +427,42 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://sear
 
 <br>
 
+## Visualização efetiva de dados
+
+<br>
+
+### Por que começar pela mensagem antes do gráfico?
+
+-   A figura deve responder a uma pergunta clara (comparação? tendência? composição?) e isso orienta a escolha do tipo de gráfico, dados e anotações. Esboce a mensagem e a pergunta antes de abrir o software.[@midway2020]
+
+### Como escolher a geometria e “mostrar os dados”?
+
+-   Prefira geometrias que revelem distribuição/variabilidade (pontos, *boxplots*, violinos) em vez de médias sozinhas. Sempre que possível, **exiba os dados brutos** (pontos com *jitter*) junto da estatística-resumo.[@midway2020]
+
+<br>
+
+```{r viz-geom-mostrar-dados, warning=FALSE, message=FALSE}
+# Reprodutibilidade
+set.seed(1)
+
+# Gerar dados de exemplo
+df <- tibble::tibble(
+  grupo = rep(c("Controle","Intervenção"), each = 40),
+  y = c(rnorm(40, 10, 2), rnorm(40, 11.5, 2.5))
+)
+
+ggplot2::ggplot(df, ggplot2::aes(grupo, y, fill = grupo)) +
+  ggplot2::geom_violin(alpha=.3, color=NA, trim=FALSE) +
+  ggplot2::geom_boxplot(width=.15, outlier.shape = NA) +
+  ggplot2::geom_jitter(width=.08, alpha=.6, size=1.6) +
+  ggplot2::labs(x=NULL, y="Desfecho (unid.)",
+                title="Mostrar dados + resumo > apenas médias") +
+  ggplot2::theme_minimal() +
+  ggplot2::guides(fill="none")
+```
+
+<br>
+
 ## Gráficos
 
 <br>
@@ -379,6 +470,138 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://sear
 ### O que são gráficos?
 
 -   Gráficos são utilizados para apresentar dados (geralmente em grande quantidade) de modo mais intuitivo e fácil de compreender.[@Park2022]
+
+<br>
+
+### O que torna um bom gráfico tão poderoso?
+
+-   “Não há ferramenta estatística tão poderosa quanto um gráfico bem escolhido”: gráficos ajudam a explorar dados, comunicar resultados e suportar decisões de forma clara e rápida.[@vandemeulebroecke2018]
+
+<br>
+
+### Que elementos incluir em gráficos?
+
+-   Título, eixos horizontal e vertical com respectivas unidades, escalas em intervalos representativos das variáveis, legenda com símbolos, síntese descritiva dos valores e respectiva margem de erro, conforme necessário para adequada interpretação.[@Park2022]
+
+<br>
+
+### Para que servem as barras de erro em gráficos?
+
+-   Barras de erro ajudam ao autor a apresentar as informações que descrevem os dados (por exemplo, em uma análise descritiva) ou sobre as inferências ou conclusões tomadas a partir de dados.[@Cumming2007; @krzywinski2013]
+
+-   Barras de erro mais longas representam mais imprecisão (maiores erros), enquanto barras mais curtas representam mais precisão na estimativa.[@Cumming2007]
+
+-   Barras de erro descritivas geralmente apresentam a amplitude (mínimo-máximo) ou desvio-padrão.[@Cumming2007]
+
+-   Barras de erro inferenciais geralmente apresentam o erro-padrão ou intervalo de confiança no nível de significância $\alpha$ pré-estabelecido.[@Cumming2007; @krzywinski2013]
+
+-   Barras de erro com desvio-padrão são úteis para descrever a variabilidade dos dados, enquanto as barras de erro com erro padrão da média são úteis para descrever a precisão do parâmetro estimado (média) e sua relação com o tamanho da amostra.[@krzywinski2013]
+
+-   Barras de erro com intervalo de confiança são úteis para fornecer uma estimativa da incerteza da estimativa do parâmetro populacional.[@krzywinski2013]
+
+-   O comprimento das barras de erro sugere graficamente a imprecisão dos dados do estudo, uma vez que o valor verdadeiro da população pode estar em qualquer nível do intervalo da barra.[@Cumming2007]
+
+-   De modo contraintuitivo, um espaço entre as barras não garante significância, nem a sobreposição a descarta—depende do tipo de barra.[@krzywinski2013]
+
+-   Para amostras pequenas é preferível apresentar os dados brutos, uma vez que as barras de erro não serão muito informativas.[@krzywinski2013]
+
+<br>
+
+```{r barras-erro-simples, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplos de gráficos com barras de erro e dados brutos."}
+# Reprodutibilidade
+set.seed(42)
+
+# Gerar dados de exemplo
+g1 <- rnorm(10, 100, 12)
+g2 <- rnorm(16, 106, 20)
+d  <- data.frame(value=c(g1,g2), group=rep(c("G1","G2"), c(length(g1),length(g2))))
+
+se_fun <- function(z){ m <- mean(z); se <- sd(z)/sqrt(length(z)); c(y=m, ymin=m-se, ymax=m+se) }
+sd_fun <- function(z){ m <- mean(z); sdv <- sd(z); c(y=m, ymin=m-sdv, ymax=m+sdv) }
+
+# Média ± SE
+p1 <- ggplot2::ggplot(d, ggplot2::aes(group, value)) +
+  ggplot2::stat_summary(fun=mean, geom="bar") +
+  ggplot2::stat_summary(fun.data=se_fun, geom="errorbar", width=.2) +
+  ggplot2::ggtitle("Média ± SE")
+
+# Média ± SD
+p2 <- ggplot2::ggplot(d, ggplot2::aes(group, value)) +
+  ggplot2::stat_summary(fun=mean, geom="bar") +
+  ggplot2::stat_summary(fun.data=sd_fun, geom="errorbar", width=.2) +
+  ggplot2::ggtitle("Média ± SD")
+
+# Dispersão univariada (recomendado)
+p3 <- ggplot2::ggplot(d, ggplot2::aes(group, value)) +
+  ggplot2::geom_point(position=ggplot2::position_jitter(width=.08, height=0), alpha=.85) +
+  ggplot2::ggtitle("Dispersão (um ponto por observação)")
+
+# Combinar em 3 painéis horizontais
+library(patchwork)
+p1 + p2 + p3
+```
+
+<br>
+
+```{r barras-erro, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplos de gráficos com barras de erro e dados brutos em diferentes cenários."}
+# Reprodutibilidade
+set.seed(123)
+
+n1 <- 8; n2 <- 8
+
+# Cenário A: ambos ~N(0,1)
+A1 <- rnorm(n1, 5, 1); A2 <- rnorm(n2, 6, 1)
+
+# Cenário B: diferença “criada” por um outlier
+B1 <- rnorm(n1, 5.2, 1); B2 <- c(rnorm(n2-1, 5.3, 1), 9.5)
+
+# Cenário C: bimodal em um grupo
+C1 <- c(rnorm(n1/2, 4.5, .5), rnorm(n1/2, 6, .5)); C2 <- rnorm(n2, 5.5, .8)
+
+make_df <- function(x,y,lab) tibble::tibble(value=c(x,y), group=rep(c("G1","G2"), c(length(x),length(y))), scen=lab)
+df <- dplyr::bind_rows(
+  make_df(A1,A2,"A: Normal vs Normal"),
+  make_df(B1,B2,"B: Outlier"),
+  make_df(C1,C2,"C: Bimodal")
+)
+
+library(patchwork)
+
+# Barras (média ± SE)
+p_bar <- ggplot2::ggplot(df, ggplot2::aes(group, value)) +
+  ggplot2::stat_summary(fun=mean, geom="bar") +
+  ggplot2::stat_summary(fun.data=\(z) c(y=mean(z), 
+                               ymin=mean(z)-sd(z)/sqrt(length(z)), 
+                               ymax=mean(z)+sd(z)/sqrt(length(z))), 
+               geom="errorbar", width=.2) +
+  ggplot2::facet_wrap(~scen) +
+  ggplot2::ggtitle("Média ± SE (Barras)")
+
+# Dispersões
+p_disp <- ggplot2::ggplot(df, ggplot2::aes(group, value)) +
+  ggplot2::geom_point(position=ggplot2::position_jitter(width=.08, height=0), alpha=.8) +
+  ggplot2::facet_wrap(~scen) +
+  ggplot2::ggtitle("Dispersão dos Dados (Pontos)")
+
+# Combinar em 2 painéis verticais
+p_bar / p_disp
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+Os pacotes *ggplot2*[@ggplot2], *plotly*[@plotly] e *corrplot*[@corrplot] fornecem diversas funções para construção de gráficos tais como [*ggplot*](https://www.rdocumentation.org/packages/ggplot2/versions/3.4.3/topics/ggplot), [*plot_ly*](https://www.rdocumentation.org/packages/plotly/versions/4.10.2/topics/plot_ly) e [*corrplot*](https://www.rdocumentation.org/packages/corrplot/versions/0.92/topics/corrplot) respectivamente.
+:::
+
+<br>
+
+### Quais são os principais obstáculos para bons gráficos?
+
+-   Dificuldade técnica, negligência no ensino tradicional e o foco em “beleza” sem clareza podem levar a gráficos ruins, mesmo quando bem intencionados.[@vandemeulebroecke2018]
+
+<br>
+
+## Tipos de gráficos
 
 <br>
 
@@ -554,7 +777,7 @@ ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, fill = grupo)) +
 
 <br>
 
-- Gráfico de violino: Combina boxplot e densidade, mostrando a distribuição da variável. Útil para comparar grupos.[@REF]
+-   Gráfico de violino: Combina boxplot e densidade, mostrando a distribuição da variável. Útil para comparar grupos.[@REF]
 
 <br>
 
@@ -577,7 +800,7 @@ ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, fill = grupo)) +
 
 <br>
 
-- Gráfico de pontos (*dot plot*): Mostra cada valor individualmente, útil para pequenas amostras e para visualizar a distribuição.[@REF]
+-   Gráfico de pontos (*dot plot*): Mostra cada valor individualmente, útil para pequenas amostras e para visualizar a distribuição.[@REF]
 
 <br>
 
@@ -641,6 +864,37 @@ ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y, size = z)) +
   ggplot2::labs(title = "Gráfico de Bolhas",
                 x = "Eixo X", y = "Eixo Y", size = "Variável Z") +
   ggplot2::theme_minimal()
+```
+
+<br>
+
+### Quais são os tipos de gráficos para dados longitudinais?
+
+-   Gráfico de *spaghetti*: Mostra trajetórias individuais ao longo do tempo, útil para dados longitudinais.[@REF]
+
+<br>
+
+```{r graficos-longitudinais, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico spaghetti representando dados longitudinais."}
+# Reprodutibilidade
+set.seed(1)
+
+# Simular dados longitudinais
+n <- 15
+id <- factor(seq_len(n))
+pre  <- rnorm(n, 50, 6)
+post <- pre + rnorm(n, 3, 4)   # efeito médio ~3, mas heterogêneo
+
+dfp <- data.frame(
+    id,
+    time = factor(rep(c("Pré","Pós"), each=n), levels=c("Pré","Pós")),
+    value = c(pre, post)
+)
+
+# Linhas por sujeito (spaghetti plot)
+ggplot2::ggplot(dfp, ggplot2::aes(time, value, group=id)) +
+    ggplot2::geom_point() +
+    ggplot2::geom_line(alpha=.6) +
+    ggplot2::labs(x=NULL, y="Valor")
 ```
 
 <br>
@@ -769,40 +1023,6 @@ fmsb::radarchart(dados,
 
 <br>
 
-### Que elementos incluir em gráficos?
-
--   Título, eixos horizontal e vertical com respectivas unidades, escalas em intervalos representativos das variáveis, legenda com símbolos, síntese descritiva dos valores e respectiva margem de erro, conforme necessário para adequada interpretação.[@Park2022]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-Os pacotes *ggplot2*[@ggplot2], *plotly*[@plotly] e *corrplot*[@corrplot] fornecem diversas funções para construção de gráficos tais como [*ggplot*](https://www.rdocumentation.org/packages/ggplot2/versions/3.4.3/topics/ggplot), [*plot_ly*](https://www.rdocumentation.org/packages/plotly/versions/4.10.2/topics/plot_ly) e [*corrplot*](https://www.rdocumentation.org/packages/corrplot/versions/0.92/topics/corrplot) respectivamente.
-:::
-
-<br>
-
-### Para que servem as barras de erro em gráficos?
-
--   Barras de erro ajudam ao autor a apresentar as informações que descrevem os dados (por exemplo, em uma análise descritiva) ou sobre as inferências ou conclusões tomadas a partir de dados.[@Cumming2007; @krzywinski2013]
-
--   Barras de erro mais longas representam mais imprecisão (maiores erros), enquanto barras mais curtas representam mais precisão na estimativa.[@Cumming2007]
-
--   Barras de erro descritivas geralmente apresentam a amplitude (mínimo-máximo) ou desvio-padrão.[@Cumming2007]
-
--   Barras de erro inferenciais geralmente apresentam o erro-padrão ou intervalo de confiança no nível de significância $\alpha$ pré-estabelecido.[@Cumming2007; @krzywinski2013]
-
--   Barras de erro com desvio-padrão são úteis para descrever a variabilidade dos dados, enquanto as barras de erro com erro padrão da média são úteis para descrever a precisão do parâmetro estimado (média) e sua relação com o tamanho da amostra.[@krzywinski2013]
-
--   Barras de erro com intervalo de confiança são úteis para fornecer uma estimativa da incerteza da estimativa do parâmetro populacional.[@krzywinski2013]
-
--   O comprimento das barras de erro sugere graficamente a imprecisão dos dados do estudo, uma vez que o valor verdadeiro da população pode estar em qualquer nível do intervalo da barra.[@Cumming2007]
-
--   De modo contraintuitivo, um espaço entre as barras não garante significância, nem a sobreposição a descarta—depende do tipo de barra.[@krzywinski2013]
-
--   Para amostras pequenas é preferível apresentar os dados brutos, uma vez que as barras de erro não serão muito informativas.[@krzywinski2013]
-
-<br>
-
 ### Quais são as boas práticas na elaboração de gráficos?
 
 -   O tamanho da amostra total e subgrupos, se houver, deve estar descrito na figura ou na sua legenda.[@Cumming2007]
@@ -816,6 +1036,12 @@ Os pacotes *ggplot2*[@ggplot2], *plotly*[@plotly] e *corrplot*[@corrplot] fornec
 -   Use *jitter* simétrico em gráficos de pontos para permitir a visualização de todos os dados.[@Weissgerber2019]
 
 -   Prefira palhetas de cor adaptadas para daltônicos.[@Weissgerber2019]
+
+-   Uma boa legenda torna a figura autossuficiente: descreva amostra (n), geometrias, métricas de incerteza, escalas/unidades e mensagem principal. Se houver modelo, indique fórmula/ajustes em nota.[@midway2020]
+
+-   Evite gráficos de barras com médias para variáveis contínuas; prefira pontos/box/violino e, em amostras pequenas, exiba todos os dados.[@Weissgerber2019]
+
+-   Antes de finalizar um gráfico, faça as seguintes perguntas: (1) Mensagem está explícita? (2) Geometria adequada e dados visíveis? (3) Incerteza correta e rotulada? (4) Cores informativas e acessíveis? (5) Escalas comparáveis (se facetou)? (6) Legenda/caption autossuficiente? (7) Diferença clara entre dados e modelos? (8) Arquivo exportado na resolução/tamanho exigidos?[@midway2020]
 
 <br>
 
@@ -831,16 +1057,118 @@ O pacote *grDevices*[@grDevices] fornece a função [*dev.new*](https://www.rdoc
 
 <br>
 
-### Como exportar figuras em formato TIFF?
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *tiff*[@tiff] fornece a função [*writeTIFF*](https://www.rdocumentation.org/packages/tiff/versions/0.1-11/topics/writeTIFF) para exportar gráficos em formato TIFF.
+:::
 
 <br>
 
--   .[@REF]
+## Gráficos dinâmicos
+
+<br>
+
+### O que são visualizações dinâmicas?
+
+-   Visualizações dinâmicas combinam interatividade (exploração ativa pelo leitor) e animação (mudanças ao longo do tempo/iterações) para empacotar informação rica em exibições simples, tornando comunicação e exploração mais transparentes.[@wiebels2023]
+
+<br>
+
+### Quando preferir interatividade?
+
+-   Durante exploração de dados em equipe: destacar pontos/linhas por participante, filtrar subconjuntos e inspecionar impactos de escolhas analíticas (p.ex., outliers) sem gerar múltiplas figuras novas.[@wiebels2023]
+
+<br>
+
+```{r grafico-interativo, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.fullwidth=TRUE, fig.cap='Exemplo de gráfico interativo com Plotly.'}
+library(dplyr)
+
+g <- tibble::tibble(
+  grupo = rep(c("Controle", "Intervenção"), each = 40),
+  semana = rep(c(1, 5, 16, 20), times = 20),
+  y = rnorm(80, 12, 2) + ifelse(grupo == "Intervenção" &
+                                  semana >= 16, 2, 0)
+)
+
+plotly::plot_ly(
+  g,
+  y =  ~ y,
+  x =  ~ as.factor(semana),
+  color =  ~ grupo,
+  type = "box"
+) %>%
+  plotly::layout(
+    boxmode = "group",
+    xaxis = list(title = "Semana"),
+    yaxis = list(title = "Desempenho")
+  ) %>%
+  plotly::add_trace(
+    type = "scatter",
+    mode = "markers",
+    hoverinfo = "x+y+text",
+    text =  ~ paste("Grupo:", grupo)
+  )
+```
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *tiff*[@tiff] fornece a função [*writeTIFF*](https://www.rdocumentation.org/packages/tiff/versions/0.1-11/topics/writeTIFF) para exportar gráficos em formato TIFF.
+O pacote *plotly*[@plotly-2] fornece a função [*plot_ly*](https://www.rdocumentation.org/packages/plotly/versions/4.11.0/topics/plot_ly) para gerar gráficos interativos.
+:::
+
+<br>
+
+### Quando preferir animação?
+
+-   Em apresentações e para ilustrar variação ao longo de tempo/condição/algoritmo, evitando painéis 3D ou facets excessivos. A animação guia a atenção e revela mudanças de forma passiva e fluida.[@wiebels2023]
+
+<br>
+
+```{r grafico-animado, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.fullwidth=TRUE, fig.cap='Exemplo de gráfico animado com gganimate.'}
+# # Reprodutibilidade
+# set.seed(123)
+# 
+# # Simular dados
+# d <- tibble::tibble(
+#   tp = factor(rep(1:3, each = 80)),
+#   x = rnorm(240, 2000, 400),
+#   y = x + rnorm(240, 400, 300)
+# )
+# 
+# # Gráfico animado
+# p <- ggplot2::ggplot(d, ggplot2::aes(x, y, color = tp)) +
+#   ggplot2::geom_point(alpha = .5) +
+#   ggplot2::geom_smooth(method = "lm", se = FALSE) +
+#   ggplot2::labs(x = "Tempo (passado)", y = "Tempo (futuro)") +
+#   gganimate::transition_states(tp, wrap = FALSE) + gganimate::shadow_mark()
+# 
+# # Se HTML → salva GIF e mostra
+# if (knitr::is_html_output()) {
+#   anim <- gganimate::animate(p,
+#                              end_pause = 20,
+#                              width = 600,
+#                              height = 400)
+#   gganimate::anim_save("../images/animacao.gif", animation = anim)
+#   knitr::include_graphics("../images/animacao.gif")
+# }
+# 
+# # Se PDF → salva um frame estático (PNG)
+# if (knitr::is_latex_output()) {
+#   anim <- gganimate::animate(
+#     p,
+#     end_pause = 20,
+#     nframes = 1,
+#     width = 600,
+#     height = 400
+#   )
+#   gganimate::anim_save("../images/animacao_frame.png", animation = anim)
+#   knitr::include_graphics("../images/animacao_frame.png")
+# }
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *gganimate*[@gganimate] fornece a função [*transition_states*](https://www.rdocumentation.org/packages/gganimate/versions/1.0.7/topics/transition_states) para criar gráficos animados a partir de gráficos estáticos do *ggplot2*.
 :::
 
 <br>

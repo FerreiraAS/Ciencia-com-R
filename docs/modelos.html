@@ -61,6 +61,12 @@
 <script src="libs/DiagrammeR-binding-1.0.11/DiagrammeR.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 <link rel="shortcut icon" href="favicon_io/android-chrome-192x192.png" sizes="192x192" type="image/png">
 <link rel="shortcut icon" href="favicon_io/android-chrome-512x512.png" sizes="512x512" type="image/png">
 <link rel="apple-touch-icon" href="favicon_io/apple-touch-icon.png" type="image/png">
@@ -719,18 +725,34 @@ div.csl-indent {
 <li class="chapter" data-level="20.5.2" data-path="rmd/modelos.html"><a href="#o-que-%C3%A9-a-fal%C3%A1cia-da-tabela-2"><i class="fa fa-check"></i><b>20.5.2</b> O que é a falácia da ‘Tabela 2’?</a></li>
 <li class="chapter" data-level="20.5.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-construir-a-tabela-2"><i class="fa fa-check"></i><b>20.5.3</b> Como construir a ‘Tabela 2’?</a></li>
 </ul></li>
-<li class="chapter" data-level="20.6" data-path="rmd/modelos.html"><a href="#gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6</b> Gráficos</a>
+<li class="chapter" data-level="20.6" data-path="rmd/modelos.html"><a href="#visualiza%C3%A7%C3%A3o-efetiva-de-dados"><i class="fa fa-check"></i><b>20.6</b> Visualização efetiva de dados</a>
 <ul>
-<li class="chapter" data-level="20.6.1" data-path="rmd/modelos.html"><a href="#o-que-s%C3%A3o-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.1</b> O que são gráficos?</a></li>
-<li class="chapter" data-level="20.6.2" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-categ%C3%B3ricas"><i class="fa fa-check"></i><b>20.6.2</b> Quais são os tipos de gráficos para variáveis categóricas?</a></li>
-<li class="chapter" data-level="20.6.3" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-num%C3%A9ricas"><i class="fa fa-check"></i><b>20.6.3</b> Quais são os tipos de gráficos para variáveis numéricas?</a></li>
-<li class="chapter" data-level="20.6.4" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-rela%C3%A7%C3%B5es-entre-vari%C3%A1veis"><i class="fa fa-check"></i><b>20.6.4</b> Quais são os tipos de gráficos para relações entre variáveis?</a></li>
-<li class="chapter" data-level="20.6.5" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-s%C3%A9ries-temporais"><i class="fa fa-check"></i><b>20.6.5</b> Quais são os tipos de gráficos para séries temporais?</a></li>
-<li class="chapter" data-level="20.6.6" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-multivariados"><i class="fa fa-check"></i><b>20.6.6</b> Quais são os tipos de gráficos para dados multivariados?</a></li>
-<li class="chapter" data-level="20.6.7" data-path="rmd/modelos.html"><a href="#que-elementos-incluir-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.7</b> Que elementos incluir em gráficos?</a></li>
-<li class="chapter" data-level="20.6.8" data-path="rmd/modelos.html"><a href="#para-que-servem-as-barras-de-erro-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.8</b> Para que servem as barras de erro em gráficos?</a></li>
-<li class="chapter" data-level="20.6.9" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-as-boas-pr%C3%A1ticas-na-elabora%C3%A7%C3%A3o-de-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.9</b> Quais são as boas práticas na elaboração de gráficos?</a></li>
-<li class="chapter" data-level="20.6.10" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-exportar-figuras-em-formato-tiff"><i class="fa fa-check"></i><b>20.6.10</b> Como exportar figuras em formato TIFF?</a></li>
+<li class="chapter" data-level="20.6.1" data-path="rmd/modelos.html"><a href="#por-que-come%C3%A7ar-pela-mensagem-antes-do-gr%C3%A1fico"><i class="fa fa-check"></i><b>20.6.1</b> Por que começar pela mensagem antes do gráfico?</a></li>
+<li class="chapter" data-level="20.6.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-escolher-a-geometria-e-mostrar-os-dados"><i class="fa fa-check"></i><b>20.6.2</b> Como escolher a geometria e “mostrar os dados”?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.7" data-path="rmd/modelos.html"><a href="#gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7</b> Gráficos</a>
+<ul>
+<li class="chapter" data-level="20.7.1" data-path="rmd/modelos.html"><a href="#o-que-s%C3%A3o-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.1</b> O que são gráficos?</a></li>
+<li class="chapter" data-level="20.7.2" data-path="rmd/modelos.html"><a href="#o-que-torna-um-bom-gr%C3%A1fico-t%C3%A3o-poderoso"><i class="fa fa-check"></i><b>20.7.2</b> O que torna um bom gráfico tão poderoso?</a></li>
+<li class="chapter" data-level="20.7.3" data-path="rmd/modelos.html"><a href="#que-elementos-incluir-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.3</b> Que elementos incluir em gráficos?</a></li>
+<li class="chapter" data-level="20.7.4" data-path="rmd/modelos.html"><a href="#para-que-servem-as-barras-de-erro-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.4</b> Para que servem as barras de erro em gráficos?</a></li>
+<li class="chapter" data-level="20.7.5" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-principais-obst%C3%A1culos-para-bons-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.5</b> Quais são os principais obstáculos para bons gráficos?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.8" data-path="rmd/modelos.html"><a href="#tipos-de-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.8</b> Tipos de gráficos</a>
+<ul>
+<li class="chapter" data-level="20.8.1" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-categ%C3%B3ricas"><i class="fa fa-check"></i><b>20.8.1</b> Quais são os tipos de gráficos para variáveis categóricas?</a></li>
+<li class="chapter" data-level="20.8.2" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-num%C3%A9ricas"><i class="fa fa-check"></i><b>20.8.2</b> Quais são os tipos de gráficos para variáveis numéricas?</a></li>
+<li class="chapter" data-level="20.8.3" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-rela%C3%A7%C3%B5es-entre-vari%C3%A1veis"><i class="fa fa-check"></i><b>20.8.3</b> Quais são os tipos de gráficos para relações entre variáveis?</a></li>
+<li class="chapter" data-level="20.8.4" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-longitudinais"><i class="fa fa-check"></i><b>20.8.4</b> Quais são os tipos de gráficos para dados longitudinais?</a></li>
+<li class="chapter" data-level="20.8.5" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-s%C3%A9ries-temporais"><i class="fa fa-check"></i><b>20.8.5</b> Quais são os tipos de gráficos para séries temporais?</a></li>
+<li class="chapter" data-level="20.8.6" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-multivariados"><i class="fa fa-check"></i><b>20.8.6</b> Quais são os tipos de gráficos para dados multivariados?</a></li>
+<li class="chapter" data-level="20.8.7" data-path="rmd/modelos.html"><a href="#quais-s%C3%A3o-as-boas-pr%C3%A1ticas-na-elabora%C3%A7%C3%A3o-de-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.8.7</b> Quais são as boas práticas na elaboração de gráficos?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.9" data-path="rmd/modelos.html"><a href="#gr%C3%A1ficos-din%C3%A2micos"><i class="fa fa-check"></i><b>20.9</b> Gráficos dinâmicos</a>
+<ul>
+<li class="chapter" data-level="20.9.1" data-path="rmd/modelos.html"><a href="#o-que-s%C3%A3o-visualiza%C3%A7%C3%B5es-din%C3%A2micas"><i class="fa fa-check"></i><b>20.9.1</b> O que são visualizações dinâmicas?</a></li>
+<li class="chapter" data-level="20.9.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#quando-preferir-interatividade"><i class="fa fa-check"></i><b>20.9.2</b> Quando preferir interatividade?</a></li>
+<li class="chapter" data-level="20.9.3" data-path="rmd/modelos.html"><a href="#quando-preferir-anima%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>20.9.3</b> Quando preferir animação?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="distribuicoes-parametros.html"><a href="distribuicoes-parametros.html"><i class="fa fa-check"></i><b>21</b> <strong>Distribuições e parâmetros</strong></a>
@@ -1697,19 +1719,19 @@ div.csl-indent {
 <div id="o-que-é-modelagem" class="section level3 hasAnchor" number="31.1.2">
 <h3><span class="header-section-number">31.1.2</span> O que é modelagem?<a href="#o-que-%C3%A9-modelagem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Modelagem é o processo de usar dados para selecionar um modelo matemático explícito que represente o processo gerador dos dados.<span class="citation"><sup><a href="#ref-Greenland1989">296</a></sup></span></li>
+<li>Modelagem é o processo de usar dados para selecionar um modelo matemático explícito que represente o processo gerador dos dados.<span class="citation"><sup><a href="#ref-Greenland1989">300</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="por-que-a-escolha-do-modelo-é-complexa" class="section level3 hasAnchor" number="31.1.3">
 <h3><span class="header-section-number">31.1.3</span> Por que a escolha do modelo é complexa?<a href="#por-que-a-escolha-do-modelo-%C3%A9-complexa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Há inúmeras combinações possíveis de variáveis, formas funcionais (lineares, quadráticas, transformações), interações e formas do desfecho, o que torna o espaço de possibilidades muito amplo.<span class="citation"><sup><a href="#ref-Greenland1989">296</a></sup></span></p></li>
-<li><p>Todos os modelos são errados, mas alguns são úteis.<span class="citation"><sup><a href="#ref-box1976">297</a></sup></span></p></li>
+<li><p>Há inúmeras combinações possíveis de variáveis, formas funcionais (lineares, quadráticas, transformações), interações e formas do desfecho, o que torna o espaço de possibilidades muito amplo.<span class="citation"><sup><a href="#ref-Greenland1989">300</a></sup></span></p></li>
+<li><p>Todos os modelos são errados, mas alguns são úteis.<span class="citation"><sup><a href="#ref-box1976">301</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>equatiomatic</em><span class="citation"><sup><a href="#ref-equatiomatic">298</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/equatiomatic/versions/0.3.1/topics/extract_eq"><em>extract_eq</em></a> para extrair a equação dos modelos em formato LaTeX para visualização.</p>
+<p>O pacote <em>equatiomatic</em><span class="citation"><sup><a href="#ref-equatiomatic">302</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/equatiomatic/versions/0.3.1/topics/extract_eq"><em>extract_eq</em></a> para extrair a equação dos modelos em formato LaTeX para visualização.</p>
 </div>
 <p><br></p>
 </div>
@@ -1745,7 +1767,7 @@ Figura 31.2: Trajetória de estados e proporção acumulada por estado em uma ca
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>markovchain</em><span class="citation"><sup><a href="#ref-markovchain">299</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/markovchain/versions/0.9.5/topics/createSequenceMatrix"><em>markovchainFit</em></a> ajusta uma cadeia com base em dados observados.</p>
+<p>O pacote <em>markovchain</em><span class="citation"><sup><a href="#ref-markovchain">303</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/markovchain/versions/0.9.5/topics/createSequenceMatrix"><em>markovchainFit</em></a> ajusta uma cadeia com base em dados observados.</p>
 </div>
 <p><br></p>
 </div>
@@ -1792,7 +1814,7 @@ Figura 31.2: Trajetória de estados e proporção acumulada por estado em uma ca
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>performance</em><span class="citation"><sup><a href="#ref-performance">300</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/check_model"><em>check_model</em></a> para analisar a colinearidade entre variáveis, a normalidade da distribuição das variáveis e a heteroscedasticidade.</p>
+<p>O pacote <em>performance</em><span class="citation"><sup><a href="#ref-performance">304</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/check_model"><em>check_model</em></a> para analisar a colinearidade entre variáveis, a normalidade da distribuição das variáveis e a heteroscedasticidade.</p>
 </div>
 <p><br></p>
 </div>
@@ -1881,11 +1903,11 @@ Desvio residual (Sigma)
 </table>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>performance</em><span class="citation"><sup><a href="#ref-performance">300</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/model_performance"><em>model_performance</em></a> para calcular as métricas de ajuste da regressão adequadas ao modelo pré-especificado.</p>
+<p>O pacote <em>performance</em><span class="citation"><sup><a href="#ref-performance">304</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/model_performance"><em>model_performance</em></a> para calcular as métricas de ajuste da regressão adequadas ao modelo pré-especificado.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>performance</em><span class="citation"><sup><a href="#ref-performance">300</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/compare_performance"><em>compare_performance</em></a> para comparar o desempenho e a qualidade do ajuste de diversos modelos de regressão pré-especificados.</p>
+<p>O pacote <em>performance</em><span class="citation"><sup><a href="#ref-performance">304</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/compare_performance"><em>compare_performance</em></a> para comparar o desempenho e a qualidade do ajuste de diversos modelos de regressão pré-especificados.</p>
 </div>
 <p><br></p>
 </div>
@@ -1922,7 +1944,7 @@ Desvio residual (Sigma)
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>correctR</em><span class="citation"><sup><a href="#ref-correctR">301</a></sup></span> fornece funções para comparar o desempenho e a qualidade do ajuste de diversos modelos de aprendizagem de máquina em amostras correlacionadas.</p>
+<p>O pacote <em>correctR</em><span class="citation"><sup><a href="#ref-correctR">305</a></sup></span> fornece funções para comparar o desempenho e a qualidade do ajuste de diversos modelos de aprendizagem de máquina em amostras correlacionadas.</p>
 </div>
 <p><br></p>
 <style>
@@ -1958,22 +1980,22 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
 <h3><strong>Referências</strong><a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-Greenland1989" class="csl-entry">
-<div class="csl-left-margin">296. </div><div class="csl-right-inline">Greenland S. Modeling and variable selection in epidemiologic analysis. <em>American Journal of Public Health</em>. 1989;79(3):340–349. doi:<a href="https://doi.org/10.2105/ajph.79.3.340">10.2105/ajph.79.3.340</a></div>
+<div class="csl-left-margin">300. </div><div class="csl-right-inline">Greenland S. Modeling and variable selection in epidemiologic analysis. <em>American Journal of Public Health</em>. 1989;79(3):340–349. doi:<a href="https://doi.org/10.2105/ajph.79.3.340">10.2105/ajph.79.3.340</a></div>
 </div>
 <div id="ref-box1976" class="csl-entry">
-<div class="csl-left-margin">297. </div><div class="csl-right-inline">Box GEP. Science and Statistics. <em>Journal of the American Statistical Association</em>. 1976;71(356):791–799. doi:<a href="https://doi.org/10.1080/01621459.1976.10480949">10.1080/01621459.1976.10480949</a></div>
+<div class="csl-left-margin">301. </div><div class="csl-right-inline">Box GEP. Science and Statistics. <em>Journal of the American Statistical Association</em>. 1976;71(356):791–799. doi:<a href="https://doi.org/10.1080/01621459.1976.10480949">10.1080/01621459.1976.10480949</a></div>
 </div>
 <div id="ref-equatiomatic" class="csl-entry">
-<div class="csl-left-margin">298. </div><div class="csl-right-inline">Anderson D, Heiss A, Sumners J. <em>equatiomatic: Transform Models into <span></span>LaTeX<span></span> Equations</em>.; 2024. <a href="https://CRAN.R-project.org/package=equatiomatic">https://CRAN.R-project.org/package=equatiomatic.</a></div>
+<div class="csl-left-margin">302. </div><div class="csl-right-inline">Anderson D, Heiss A, Sumners J. <em>equatiomatic: Transform Models into <span></span>LaTeX<span></span> Equations</em>.; 2024. <a href="https://CRAN.R-project.org/package=equatiomatic">https://CRAN.R-project.org/package=equatiomatic.</a></div>
 </div>
 <div id="ref-markovchain" class="csl-entry">
-<div class="csl-left-margin">299. </div><div class="csl-right-inline">Spedicato GA. <span>Discrete Time Markov Chains with R</span>. <em><span>The R Journal</span></em>. 2017;9(2):84–104. doi:<a href="https://doi.org/10.32614/RJ-2017-036">10.32614/RJ-2017-036</a></div>
+<div class="csl-left-margin">303. </div><div class="csl-right-inline">Spedicato GA. <span>Discrete Time Markov Chains with R</span>. <em><span>The R Journal</span></em>. 2017;9(2):84–104. doi:<a href="https://doi.org/10.32614/RJ-2017-036">10.32614/RJ-2017-036</a></div>
 </div>
 <div id="ref-performance" class="csl-entry">
-<div class="csl-left-margin">300. </div><div class="csl-right-inline">Lüdecke D, Ben-Shachar MS, Patil I, Waggoner P, Makowski D. <span></span>performance<span></span>: An <span></span>R<span></span> Package for Assessment, Comparison and Testing of Statistical Models. <em>Journal of Open Source Software</em>. 2021;6:3139. doi:<a href="https://doi.org/10.21105/joss.03139">10.21105/joss.03139</a></div>
+<div class="csl-left-margin">304. </div><div class="csl-right-inline">Lüdecke D, Ben-Shachar MS, Patil I, Waggoner P, Makowski D. <span></span>performance<span></span>: An <span></span>R<span></span> Package for Assessment, Comparison and Testing of Statistical Models. <em>Journal of Open Source Software</em>. 2021;6:3139. doi:<a href="https://doi.org/10.21105/joss.03139">10.21105/joss.03139</a></div>
 </div>
 <div id="ref-correctR" class="csl-entry">
-<div class="csl-left-margin">301. </div><div class="csl-right-inline">Henderson T. <em>correctR: Corrected Test Statistics for Comparing Machine Learning Models on Correlated Samples</em>.; 2025. <a href="https://CRAN.R-project.org/package=correctR">https://CRAN.R-project.org/package=correctR.</a></div>
+<div class="csl-left-margin">305. </div><div class="csl-right-inline">Henderson T. <em>correctR: Corrected Test Statistics for Comparing Machine Learning Models on Correlated Samples</em>.; 2025. <a href="https://CRAN.R-project.org/package=correctR">https://CRAN.R-project.org/package=correctR.</a></div>
 </div>
 </div>
             </section>

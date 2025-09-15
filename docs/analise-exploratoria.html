@@ -61,6 +61,12 @@
 <script src="libs/DiagrammeR-binding-1.0.11/DiagrammeR.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 <link rel="shortcut icon" href="favicon_io/android-chrome-192x192.png" sizes="192x192" type="image/png">
 <link rel="shortcut icon" href="favicon_io/android-chrome-512x512.png" sizes="512x512" type="image/png">
 <link rel="apple-touch-icon" href="favicon_io/apple-touch-icon.png" type="image/png">
@@ -719,18 +725,34 @@ div.csl-indent {
 <li class="chapter" data-level="20.5.2" data-path="rmd/analise-exploratoria.html"><a href="#o-que-%C3%A9-a-fal%C3%A1cia-da-tabela-2"><i class="fa fa-check"></i><b>20.5.2</b> O que é a falácia da ‘Tabela 2’?</a></li>
 <li class="chapter" data-level="20.5.3" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-construir-a-tabela-2"><i class="fa fa-check"></i><b>20.5.3</b> Como construir a ‘Tabela 2’?</a></li>
 </ul></li>
-<li class="chapter" data-level="20.6" data-path="rmd/analise-exploratoria.html"><a href="#gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6</b> Gráficos</a>
+<li class="chapter" data-level="20.6" data-path="rmd/analise-exploratoria.html"><a href="#visualiza%C3%A7%C3%A3o-efetiva-de-dados"><i class="fa fa-check"></i><b>20.6</b> Visualização efetiva de dados</a>
 <ul>
-<li class="chapter" data-level="20.6.1" data-path="rmd/analise-exploratoria.html"><a href="#o-que-s%C3%A3o-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.1</b> O que são gráficos?</a></li>
-<li class="chapter" data-level="20.6.2" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-categ%C3%B3ricas"><i class="fa fa-check"></i><b>20.6.2</b> Quais são os tipos de gráficos para variáveis categóricas?</a></li>
-<li class="chapter" data-level="20.6.3" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-num%C3%A9ricas"><i class="fa fa-check"></i><b>20.6.3</b> Quais são os tipos de gráficos para variáveis numéricas?</a></li>
-<li class="chapter" data-level="20.6.4" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-rela%C3%A7%C3%B5es-entre-vari%C3%A1veis"><i class="fa fa-check"></i><b>20.6.4</b> Quais são os tipos de gráficos para relações entre variáveis?</a></li>
-<li class="chapter" data-level="20.6.5" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-s%C3%A9ries-temporais"><i class="fa fa-check"></i><b>20.6.5</b> Quais são os tipos de gráficos para séries temporais?</a></li>
-<li class="chapter" data-level="20.6.6" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-multivariados"><i class="fa fa-check"></i><b>20.6.6</b> Quais são os tipos de gráficos para dados multivariados?</a></li>
-<li class="chapter" data-level="20.6.7" data-path="rmd/analise-exploratoria.html"><a href="#que-elementos-incluir-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.7</b> Que elementos incluir em gráficos?</a></li>
-<li class="chapter" data-level="20.6.8" data-path="rmd/analise-exploratoria.html"><a href="#para-que-servem-as-barras-de-erro-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.8</b> Para que servem as barras de erro em gráficos?</a></li>
-<li class="chapter" data-level="20.6.9" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-as-boas-pr%C3%A1ticas-na-elabora%C3%A7%C3%A3o-de-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.6.9</b> Quais são as boas práticas na elaboração de gráficos?</a></li>
-<li class="chapter" data-level="20.6.10" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-exportar-figuras-em-formato-tiff"><i class="fa fa-check"></i><b>20.6.10</b> Como exportar figuras em formato TIFF?</a></li>
+<li class="chapter" data-level="20.6.1" data-path="rmd/analise-exploratoria.html"><a href="#por-que-come%C3%A7ar-pela-mensagem-antes-do-gr%C3%A1fico"><i class="fa fa-check"></i><b>20.6.1</b> Por que começar pela mensagem antes do gráfico?</a></li>
+<li class="chapter" data-level="20.6.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#como-escolher-a-geometria-e-mostrar-os-dados"><i class="fa fa-check"></i><b>20.6.2</b> Como escolher a geometria e “mostrar os dados”?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.7" data-path="rmd/analise-exploratoria.html"><a href="#gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7</b> Gráficos</a>
+<ul>
+<li class="chapter" data-level="20.7.1" data-path="rmd/analise-exploratoria.html"><a href="#o-que-s%C3%A3o-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.1</b> O que são gráficos?</a></li>
+<li class="chapter" data-level="20.7.2" data-path="rmd/analise-exploratoria.html"><a href="#o-que-torna-um-bom-gr%C3%A1fico-t%C3%A3o-poderoso"><i class="fa fa-check"></i><b>20.7.2</b> O que torna um bom gráfico tão poderoso?</a></li>
+<li class="chapter" data-level="20.7.3" data-path="rmd/analise-exploratoria.html"><a href="#que-elementos-incluir-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.3</b> Que elementos incluir em gráficos?</a></li>
+<li class="chapter" data-level="20.7.4" data-path="rmd/analise-exploratoria.html"><a href="#para-que-servem-as-barras-de-erro-em-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.4</b> Para que servem as barras de erro em gráficos?</a></li>
+<li class="chapter" data-level="20.7.5" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-principais-obst%C3%A1culos-para-bons-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.7.5</b> Quais são os principais obstáculos para bons gráficos?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.8" data-path="rmd/analise-exploratoria.html"><a href="#tipos-de-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.8</b> Tipos de gráficos</a>
+<ul>
+<li class="chapter" data-level="20.8.1" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-categ%C3%B3ricas"><i class="fa fa-check"></i><b>20.8.1</b> Quais são os tipos de gráficos para variáveis categóricas?</a></li>
+<li class="chapter" data-level="20.8.2" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-vari%C3%A1veis-num%C3%A9ricas"><i class="fa fa-check"></i><b>20.8.2</b> Quais são os tipos de gráficos para variáveis numéricas?</a></li>
+<li class="chapter" data-level="20.8.3" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-rela%C3%A7%C3%B5es-entre-vari%C3%A1veis"><i class="fa fa-check"></i><b>20.8.3</b> Quais são os tipos de gráficos para relações entre variáveis?</a></li>
+<li class="chapter" data-level="20.8.4" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-longitudinais"><i class="fa fa-check"></i><b>20.8.4</b> Quais são os tipos de gráficos para dados longitudinais?</a></li>
+<li class="chapter" data-level="20.8.5" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-s%C3%A9ries-temporais"><i class="fa fa-check"></i><b>20.8.5</b> Quais são os tipos de gráficos para séries temporais?</a></li>
+<li class="chapter" data-level="20.8.6" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-os-tipos-de-gr%C3%A1ficos-para-dados-multivariados"><i class="fa fa-check"></i><b>20.8.6</b> Quais são os tipos de gráficos para dados multivariados?</a></li>
+<li class="chapter" data-level="20.8.7" data-path="rmd/analise-exploratoria.html"><a href="#quais-s%C3%A3o-as-boas-pr%C3%A1ticas-na-elabora%C3%A7%C3%A3o-de-gr%C3%A1ficos"><i class="fa fa-check"></i><b>20.8.7</b> Quais são as boas práticas na elaboração de gráficos?</a></li>
+</ul></li>
+<li class="chapter" data-level="20.9" data-path="rmd/analise-exploratoria.html"><a href="#gr%C3%A1ficos-din%C3%A2micos"><i class="fa fa-check"></i><b>20.9</b> Gráficos dinâmicos</a>
+<ul>
+<li class="chapter" data-level="20.9.1" data-path="rmd/analise-exploratoria.html"><a href="#o-que-s%C3%A3o-visualiza%C3%A7%C3%B5es-din%C3%A2micas"><i class="fa fa-check"></i><b>20.9.1</b> O que são visualizações dinâmicas?</a></li>
+<li class="chapter" data-level="20.9.2" data-path="analise-descritiva.html"><a href="analise-descritiva.html#quando-preferir-interatividade"><i class="fa fa-check"></i><b>20.9.2</b> Quando preferir interatividade?</a></li>
+<li class="chapter" data-level="20.9.3" data-path="rmd/analise-exploratoria.html"><a href="#quando-preferir-anima%C3%A7%C3%A3o"><i class="fa fa-check"></i><b>20.9.3</b> Quando preferir animação?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="distribuicoes-parametros.html"><a href="distribuicoes-parametros.html"><i class="fa fa-check"></i><b>21</b> <strong>Distribuições e parâmetros</strong></a>
