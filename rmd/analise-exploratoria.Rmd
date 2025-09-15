@@ -14,6 +14,12 @@
 
 <br>
 
+### Quais são os objetivos centrais da análise exploratória de dados?
+
+-   A análise exploratória de dados (EDA) tem dois objetivos principais: (a) descrição dos dados e (b) formulação de modelos. A descrição envolve resumir os dados e destacar características essenciais, enquanto a formulação de modelos auxilia na geração de hipóteses e na escolha de procedimentos estatísticos adequados.[@chatfield1986]
+
+<br>
+
 ### Por que conduzir a análise exploratória de dados?
 
 -   A condução de análise exploratória de dados pode ajudar a identificar padrões e pode orientar trabalhos futuros, mas os resultados não devem ser interpretados como inferências sobre uma população.[@zuur2009]
@@ -58,6 +64,18 @@ O pacote *radiant*[@radiant] fornece a função [*radiant*](https://www.rdocumen
 
 <br>
 
+## Ingredientes da análise exploratória de dados
+
+<br>
+
+### Quais são os principais elementos que compõem a análise exploratória de dados?
+
+-  Verificação da qualidade dos dados (erros, ausências, *outliers*), o cálculo de estatísticas descritivas (média, desvio-padrão, intervalos, correlações) e o uso de representações gráficas como histogramas, diagramas de dispersão, *boxplots* e gráficos de séries temporais.[@chatfield1986]
+
+- Técnicas multivariadas exploratórias, como análise de componentes principais e análise de clusters, podem revelar padrões em dados complexos.[@chatfield1986]
+
+<br>
+
 ### Quais etapas constituem a análise exploratória de dados?
 
 -   Cada combinação de problema de pesquisa e delineamento de estudo pode demandar um plano de análise exploratório distinto.[@zuur2009]
@@ -67,6 +85,8 @@ O pacote *radiant*[@radiant] fornece a função [*radiant*](https://www.rdocumen
     -   Boxplots
 
     -   Gráficos quantil-quantil (Q-Q)
+
+-   A análise exploratória valoriza o uso de gráficos interativos e técnicas de *brushing* e *linking*, que permitem explorar padrões ocultos, relacionar múltiplas variáveis e destacar subconjuntos de observações.[@behrens1997]
 
 <br>
 
@@ -133,6 +153,14 @@ O pacote *ggcleveland*[@ggcleveland] fornece a função [*gg_coplot*](https://ww
     -   Gráfico de série temporal das variáveis
 
     -   Gráfico de autocorrelação entre as variáveis
+
+-   Medidas como mediana, *trimean*, distância absoluta mediana e procedimentos de *winsorizing* ou *trimming* são preferidos, pois reduzem a influência de valores extremos e oferecem resumos mais fiéis [@behrens1997].
+
+-   A análise exploratória adota o esquema `dados = ajuste + resíduo`, no qual o analista ajusta modelos provisórios, examina resíduos e refina os modelos em ciclos sucessivos de aproximação.[@behrens1997]
+
+-   Valores discrepantes (*outliers*) não devem ser ignorados; eles podem indicar erros de coleta ou fenômenos relevantes. *Fringeliers*, casos menos extremos mas recorrentes, também merecem atenção.[@behrens1997]
+
+-   Transformar variáveis em novas formas (por exemplo, log ou inverso) pode revelar simetrias ocultas e tornar relações mais claras e lineares.[@behrens1997]
 
 <br>
 

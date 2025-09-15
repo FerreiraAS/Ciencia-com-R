@@ -223,6 +223,14 @@ O pacote *outliers*[@outliers] fornece a função [*rm.outlier*](https://www.rdo
 
 <br>
 
+### Como lidar com *outliers* na análise exploratória de dados?
+
+-   Após a detecção, três estratégias principais podem ser adotadas: (1) manter os outliers, (2) removê-los ou (3) recodificá-los (por exemplo, com Winsorização). A escolha deve ser justificada com base no contexto teórico e nas características do banco de dados. Idealmente, erros devem ser corrigidos ou removidos, enquanto outliers interessantes podem gerar novas hipóteses de pesquisa.[@leys2019]
+
+-   A decisão sobre como lidar com outliers deve ser definida *a priori* e preferencialmente registrada em plataformas de pré-registro. Essa prática aumenta a transparência, reduz a flexibilidade analítica e evita inflar taxas de erro tipo I.[@leys2019]
+
+<br>
+
 ## Valores influentes
 
 <br>
@@ -304,7 +312,7 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 ### O que é ponto de quebra?
 
-- O ponto de quebra representa a fração mínima de observações contaminadas necessária para distorcer um estimador até o infinito. Por exemplo, a média tem ponto de quebra 0, enquanto a mediana atinge o ponto de quebra máximo (50%).[@loh2025]
+-   O ponto de quebra representa a fração mínima de observações contaminadas necessária para distorcer um estimador até o infinito. Por exemplo, a média tem ponto de quebra 0, enquanto a mediana atinge o ponto de quebra máximo (50%).[@loh2025]
 
 <br>
 
@@ -439,11 +447,11 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = leverage, y = resid_std)) +
 
 ### Quais são as alternativas à Winsorização?
 
-- Podar (trimming): remove diretamente uma fração fixa das observações mais extremas.[@REF]
+-   Podar (trimming): remove diretamente uma fração fixa das observações mais extremas.[@REF]
 
-- Estimadores robustos (M, S, MM): resistem à influência de outliers sem transformar os dados.[@REF]
+-   Estimadores robustos (M, S, MM): resistem à influência de outliers sem transformar os dados.[@REF]
 
-- Transformações de variáveis: reduzem a assimetria e impacto de valores extremos, mas mudam a escala interpretativa.[@REF]
+-   Transformações de variáveis: reduzem a assimetria e impacto de valores extremos, mas mudam a escala interpretativa.[@REF]
 
 <br>
 
