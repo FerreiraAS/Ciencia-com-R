@@ -175,19 +175,19 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 -   Para valores univariados, podem ser usados box-plots (com pontos além de 1,5 vezes o intervalo interquartílico), z-scores clássicos ($|z| > 2.5$ ou $|z| > 3$) ou z-scores robustos, que substituem média por mediana e desvio-padrão por estimadores robustos.[@daszykowski2007]
 
--   Para valores multivariados, recomenda-se a distância de Mahalanobis para medir o afastamento em relação ao centróide, com ajustes robustos de covariância como MCD (Minimum Covariance Determinant) ou MVE (Minimum Volume Ellipsoid).[@daszykowski2007]
+-   Para valores multivariados, recomenda-se a distância de Mahalanobis para medir o afastamento em relação ao centróide, com ajustes robustos de covariância como MCD (*Minimum Covariance Determinant*) ou MVE (*Minimum Volume Ellipsoid*).[@daszykowski2007]
 
--   Técnicas baseadas em PCA robusta (ROBPCA, PP-PCA, SPCA, EPCA) também podem ser aplicadas para reduzir dimensionalidade e expor outliers mascarados.[@daszykowski2007]
+-   Técnicas baseadas em PCA robusta (ROBPCA, PP-PCA, SPCA, EPCA) também podem ser aplicadas para reduzir dimensionalidade e expor *outliers* mascarados.[@daszykowski2007]
 
--   Métodos de trimming multivariado (MVT) podem iterativamente remover observações mais distantes, mas apresentam limitações em alta dimensionalidade.[@daszykowski2007]
+-   Métodos de *trimming* multivariado (MVT) podem iterativamente remover observações mais distantes, mas apresentam limitações em alta dimensionalidade.[@daszykowski2007]
 
--   Estimadores com alto ponto de quebra, como o MCD, permitem detectar até 50% de outliers antes de comprometer a análise.[@daszykowski2007]
+-   Estimadores com alto ponto de quebra, como o MCD, permitem detectar até 50% de *outliers* antes de comprometer a análise.[@daszykowski2007]
 
 <br>
 
 ### Como manejar os valores discrepantes?
 
--   Manter *outliers* pode ser uma boa decisão se a maioria desses valores realmente pertence à distribuição de interesse. Manter *outliers* que pertencem a uma distribuição alternativa pode ser problemático, pois um teste pode se tornar significativo apenas por causa de um ou poucos outliers.[@leys2019]
+-   Manter *outliers* pode ser uma boa decisão se a maioria desses valores realmente pertence à distribuição de interesse. Manter *outliers* que pertencem a uma distribuição alternativa pode ser problemático, pois um teste pode se tornar significativo apenas por causa de um ou poucos *outliers.*[@leys2019]
 
 -   Remover *outliers* pode ser eficaz quando eles distorcem a estimativa dos parâmetros da distribuição. Remover *outliers* que pertencem legitimamente à distribuição pode reduzir artificialmente a estimativa do erro.[@leys2019]
 
@@ -441,15 +441,15 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = leverage, y = resid_std)) +
 
 ### O que é Winsorização?
 
--   Winsorização é uma técnica que substitui os valores extremos (outliers) por valores menos extremos, preservando a estrutura dos dados. Isso é feito definindo limites superior e inferior e substituindo os valores que ultrapassam esses limites pelos próprios limites.[@WRS2]
+-   Winsorização é uma técnica que substitui os valores extremos (*outliers*) por valores menos extremos, preservando a estrutura dos dados. Isso é feito definindo limites superior e inferior e substituindo os valores que ultrapassam esses limites pelos próprios limites.[@WRS2]
 
 <br>
 
 ### Quais são as alternativas à Winsorização?
 
--   Podar (trimming): remove diretamente uma fração fixa das observações mais extremas.[@REF]
+-   Podar (*trimming*): remove diretamente uma fração fixa das observações mais extremas.[@REF]
 
--   Estimadores robustos (M, S, MM): resistem à influência de outliers sem transformar os dados.[@REF]
+-   Estimadores robustos: resistem à influência de outliers sem transformar os dados.[@REF]
 
 -   Transformações de variáveis: reduzem a assimetria e impacto de valores extremos, mas mudam a escala interpretativa.[@REF]
 

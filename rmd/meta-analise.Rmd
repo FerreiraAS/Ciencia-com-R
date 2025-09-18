@@ -16,16 +16,32 @@
 
 ## Modelos de meta-análise
 
--   **Modelo de efeitos fixos**: assume que todos os estudos avaliam o mesmo efeito verdadeiro, e a variação observada é apenas devido ao erro de amostragem. É adequado quando os estudos são homogêneos e as diferenças entre eles são pequenas.[@borenstein2010]
+<br>
 
--   **Modelo de efeitos aleatórios**: assume que os estudos avaliam efeitos verdadeiros diferentes, com uma distribuição normal. É mais apropriado quando há heterogeneidade entre os estudos, pois considera a variação entre eles além do erro de amostragem.[@borenstein2010]
+### Quais são os principais modelos de meta-análise?
 
--   **Modelo de efeitos de rede**: estende a meta-análise para comparar múltiplas intervenções simultaneamente, mesmo que não tenham sido comparadas diretamente em estudos. É útil para avaliar a eficácia relativa de várias intervenções.[@REF]
+-   Modelo de efeitos fixos: assume que todos os estudos avaliam o mesmo efeito verdadeiro, e a variação observada é apenas devido ao erro de amostragem. É adequado quando os estudos são homogêneos e as diferenças entre eles são pequenas.[@borenstein2010]
+
+-   Modelo de efeitos aleatórios: assume que os estudos avaliam efeitos verdadeiros diferentes, com uma distribuição normal. É mais apropriado quando há heterogeneidade entre os estudos, pois considera a variação entre eles além do erro de amostragem.[@borenstein2010]
+
+-   Modelo de efeitos de rede: estende a meta-análise para comparar múltiplas intervenções simultaneamente, mesmo que não tenham sido comparadas diretamente em estudos. É útil para avaliar a eficácia relativa de várias intervenções.[@REF]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *metafor*[@metafor] fornece a função [*forest*](https://cran.r-project.org/web/packages/metafor/index.html) para criar figuras tipo *forest plot*.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *netmeta*[@netmeta] fornece a função [*netmeta*](https://CRAN.R-project.org/package=netmeta) para realizar meta-análise de rede usando método de grafo.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *gemtc*[@gemtc] fornece a função [*mtc.model*](https://CRAN.R-project.org/package=gemtc) para criar modelos de meta-análise de rede.
 :::
 
 <br>
@@ -238,13 +254,13 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*ma_r*](https://www.rdocume
 
 <br>
 
-## Interpretação do Forest Plot
+## Interpretação do *Forest Plot*
 
 <br>
 
-### O que é um forest plot?
+### O que é um *forest plot*?
 
--   Um forest plot é uma representação gráfica dos achados de uma meta-análise. Ele resume os resultados de estudos individuais e apresenta uma estimativa combinada do efeito, permitindo interpretação visual da magnitude, direção e significância estatística dos resultados.[@dettori2021]
+-   Um *forest plot* é uma representação gráfica dos achados de uma meta-análise. Ele resume os resultados de estudos individuais e apresenta uma estimativa combinada do efeito, permitindo interpretação visual da magnitude, direção e significância estatística dos resultados.[@dettori2021]
 
 <br>
 
@@ -368,13 +384,13 @@ metafor::forest(
 
 <br>
 
-### 2. Quais são as seis colunas básicas que um forest plot geralmente apresenta?
+### 2. Quais são as seis colunas básicas que um *forest plot* geralmente apresenta?
 
 -   As seis colunas básicas incluem: estudos incluídos (e subgrupos, se analisados); dados do grupo de intervenção, dados do grupo controle; peso de cada estudo; medida numérica do efeito; representação gráfica do efeito.[@dettori2021]
 
 <br>
 
-### Como diferenciar um desfecho binário de um contínuo em um forest plot?
+### Como diferenciar um desfecho binário de um contínuo em um *forest plot*?
 
 -   Em desfechos binários, são mostrados número de eventos e total da amostra, sendo o efeito medido por *risk ratio* ($RR$) ou *odds ratio* ($OR$).[@dettori2021]
 
@@ -402,7 +418,7 @@ metafor::forest(
 
 <br>
 
-### 6. Como interpretar o diamante na parte inferior do forest plot?
+### 6. Como interpretar o diamante na parte inferior do *forest plot*?
 
 -   O diamante representa o efeito combinado dos estudos incluídos.[@dettori2021]
 
@@ -412,7 +428,7 @@ metafor::forest(
 
 <br>
 
-### Como a heterogeneidade pode ser avaliada no forest plot?
+### Como a heterogeneidade pode ser avaliada no *forest plot*?
 
 -   A variabilidade nos resultados dos estudos incluídos é avaliada pela sobreposição dos intervalos de confiança dos estudos; pelo teste do qui-quadrado ($chi^2$) e pelo valor de $I^{2}$.[@dettori2021]
 
@@ -605,9 +621,9 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*plot_funnel*](https://www.
 
 ### Quais são as diretrizes para redação de meta-análises?
 
--   Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas para cada tipo de meta-análises.
+-   Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
 
-    -   *The PRISMA 2020 statement: An updated guideline for reporting systematic reviews*:[@page2021] <https://www.equator-network.org/reporting-guidelines/prisma/>
+-   *The PRISMA 2020 statement: An updated guideline for reporting systematic reviews*:[@page2021] <https://www.equator-network.org/reporting-guidelines/prisma/>
 
 <br>
 

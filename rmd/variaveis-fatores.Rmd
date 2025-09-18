@@ -96,7 +96,7 @@ O pacote *base*[@base] fornece as funções [*as.Date*](https://www.rdocumentati
 
 <br>
 
-### Quais transformações podem ser aplicadas?
+### Quais transformações de variáveis podem ser aplicadas?
 
 -   Distribuições com assimetria à direita:[@osborne2010]
 
@@ -108,6 +108,53 @@ O pacote *base*[@base] fornece as funções [*as.Date*](https://www.rdocumentati
 
     -   Transformação inversa
 
+```{r assimetria-direita, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Transformações de variáveis com assimetria à direita (Original, Raiz quadrada, Log natural, Log10, Inversa).", out.width = "100%"}
+# Reprodutibilidade
+base::set.seed(123)
+n <- 2000L
+x <- stats::rlnorm(n, 0, 1)
+
+# Criar data.frame
+df <- base::data.frame(
+  valor = base::c(x, sqrt(x), log(x), log10(x), 1/x),
+  transform = base::factor(
+    rep(c("Original",
+          "Raiz quadrada (√x)",
+          "Log natural (ln x)",
+          "Log10 (log10 x)",
+          "Inversa (1/x)"), each = n),
+    levels = c("Original",
+               "Raiz quadrada (√x)",
+               "Log natural (ln x)",
+               "Log10 (log10 x)",
+               "Inversa (1/x)")
+  )
+)
+
+# Histogramas
+g_base <- ggplot2::ggplot(df, ggplot2::aes(x = valor)) +
+  ggplot2::geom_histogram(
+    bins = 30, fill = "lightblue", color = "black", linewidth = 0.2
+  ) +
+  ggplot2::labs(x = "Valor", y = "Frequência") +
+  ggplot2::theme_minimal(base_size = 12) +
+  ggplot2::theme(
+    strip.text = ggplot2::element_text(face = "bold"),
+    plot.title = ggplot2::element_text(face = "bold")
+  )
+
+# Gráficos das transformações
+g1 <- g_base +
+  ggplot2::facet_wrap(~ transform, scales = "free") +
+  ggplot2::labs(title = "Transformações (Raiz, Log, Log10, Inversa)") +
+  ggplot2::facet_wrap(~ transform, scales = "free", nrow = 1) +
+  ggplot2::theme(axis.title.y = ggplot2::element_blank())
+
+print(g1)
+```
+
+<br>
+
 -   Distribuições com assimetria à esquerda:[@osborne2010]
 
     -   Reflexão e raiz quadrada
@@ -117,6 +164,65 @@ O pacote *base*[@base] fornece as funções [*as.Date*](https://www.rdocumentati
     -   Reflexão e logaritmo base 10
 
     -   Reflexão e transformação inversa
+
+<br>
+
+```{r assimetria-esquerda, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Transformações de variáveis com assimetria à esquerda (Original, Reflexão + Raiz quadrada, Reflexão + Log natural, Reflexão + Log10, Reflexão + Inversa).", out.width = "100%"}
+# Reprodutibilidade
+base::set.seed(123)
+n <- 2000L
+
+# Aqui eu gero uma distribuição assimétrica à ESQUERDA
+# partindo de uma lognormal refletida apenas para fins de exemplo.
+x_right <- stats::rlnorm(n, meanlog = 0, sdlog = 1)    # assimétrica à direita
+C <- max(x_right) + 1                                   # constante de reflexão > max(x)
+x_left <- C - x_right                                   # agora é assimétrica à esquerda (positiva)
+
+# Transformações por REFLEXÃO (Osborne, 2010)
+x_reflect_sqrt  <- sqrt(x_left)     # Reflexão + raiz quadrada
+x_reflect_logn  <- log(x_left)      # Reflexão + log natural
+x_reflect_log10 <- log10(x_left)    # Reflexão + log base 10
+x_reflect_inv   <- 1 / x_left       # Reflexão + inversa
+
+# Empacotar em data.frame
+df <- base::data.frame(
+  valor = base::c(x_left, x_reflect_sqrt, x_reflect_logn, x_reflect_log10, x_reflect_inv),
+  transform = base::factor(
+    rep(c("Original (assimetria à esquerda)",
+          "Reflexão + Raiz quadrada (√x*)",
+          "Reflexão + Log natural (ln x*)",
+          "Reflexão + Log10 (log10 x*)",
+          "Reflexão + Inversa (1/x*)"), each = n),
+    levels = c("Original (assimetria à esquerda)",
+               "Reflexão + Raiz quadrada (√x*)",
+               "Reflexão + Log natural (ln x*)",
+               "Reflexão + Log10 (log10 x*)",
+               "Reflexão + Inversa (1/x*)")
+  )
+)
+
+# Gráfico base
+g_base <- ggplot2::ggplot(df, ggplot2::aes(x = valor)) +
+  ggplot2::geom_histogram(
+    bins = 30, fill = "lightblue", color = "black", linewidth = 0.2
+  ) +
+  ggplot2::labs(x = "Valor", y = "Frequência") +
+  ggplot2::theme_minimal(base_size = 12) +
+  ggplot2::theme(
+    strip.text = ggplot2::element_text(face = "bold"),
+    plot.title  = ggplot2::element_text(face = "bold")
+  )
+
+# Painel com as transformações por reflexão
+g_reflect <- g_base +
+  ggplot2::facet_wrap(~ transform, scales = "free", nrow = 1) +
+  ggplot2::labs(title = "Transformações para assimetria à esquerda (via reflexão)") +
+  ggplot2::theme(axis.title.y = ggplot2::element_blank())
+
+print(g_reflect)
+```
+
+<br>
 
 -   Transformação arco-seno.[@osborne2010]
 
@@ -148,7 +254,7 @@ O pacote *MASS*[@MASS] fornece a função [*boxcox*](https://www.rdocumentation.
 
 ### O que é centralização?
 
-- É uma transformação linear em que se subtrai a média da variável de cada observação. O objetivo é recentrar a variável em torno de zero, sem alterar a sua variabilidade (desvio-padrão).{@REF}
+- É uma transformação linear em que se subtrai a média da variável de cada observação. O objetivo é recentrar a variável em torno de zero, sem alterar a sua variabilidade.[@REF]
 
 <br>
 

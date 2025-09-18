@@ -256,7 +256,7 @@ graphics::text(x_out, 0.85, "Saída",     cex = 0.9)
 
 ### Quais são as funções de ativação mais comuns?
 
--   As funções de ativação introduzem não-linearidades nas redes neurais, permitindo que aprendam padrões complexos, tais como a sigmoide \@ref(eq:sigmoide), ReLU \@ref(eq:relu) e tangente hiperbólica \@ref(eq:tanh).[@REF]
+-   As funções de ativação introduzem não-linearidades nas redes neurais, permitindo que aprendam padrões complexos, tais como a sigmoide \@ref(eq:sigmoide), tangente hiperbólica \@ref(eq:tanh) e unidade linear retificada (ReLU) \@ref(eq:relu).[@REF]
 
 \begin{equation}
 (\#eq:sigmoide)
@@ -266,15 +266,15 @@ f(x) = \frac{1}{1 + e^{-x}}
 <br>
 
 \begin{equation}
-(\#eq:relu)
-f(x) = \max(0, x)
+(\#eq:tanh)
+f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
 \end{equation}
 
 <br>
 
 \begin{equation}
-(\#eq:tanh)
-f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+(\#eq:relu)
+f(x) = \max(0, x)
 \end{equation}
 
 <br>

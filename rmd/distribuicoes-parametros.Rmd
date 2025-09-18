@@ -22,9 +22,111 @@
 
 -   A quantidade de intervalos pode ser determinada pelo método de Sturges, que é dado pela fórmula $k = 1 + 3.322 \times \log_{10}(n)$, onde $k$ é o número de intervalos e $n$ é o número de observações.[@sturges1926]
 
--   A quantidade de intervalos pode ser determinada pelo método de Scott, que é dado pela fórmula $h = 3.5 \times \text{sd}(x) \times n^{-1/3}$, onde $h$ é a largura do intervalo, $\text{sd}(x)$ é o desvio padrão e $n$ é o número de observações.[@scott1979]
+-   A quantidade de intervalos pode ser determinada pelo método de Scott, que é dado pela fórmula $h = 3.5 \times \text{sd}(x) \times n^{-1/3}$, onde $h$ é a largura do intervalo, $\text{sd}(x)$ é o desvio-padrão e $n$ é o número de observações.[@scott1979]
 
 -   A quantidade de intervalos pode ser determinada pelo método de Freedman-Diaconis, que é dado pela fórmula $h = 2 \times \text{IQR}(x) \times n^{-1/3}$, onde $h$ é a largura do intervalo, $\text{IQR}(x)$ é o intervalo interquartil e $n$ é o número de observações.[@freedman1981]
+
+<br>
+
+```{r distribuicao-histograma, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Histogramas com diferentes métodos de binning.: Sturges, Scott e Freedman-Diaconis."}
+# Reprodutibilidade
+set.seed(123)
+
+# Simulação de dados
+x <- rnorm(1000, mean = 0, sd = 1)
+
+# 2) Funções auxiliares para binning
+calc_bins_sturges <- function(x) {
+  n <- length(x)
+  k <- ceiling(1 + 3.322 * log10(n))      # = ceiling(1 + log2(n))
+  rng <- range(x, na.rm = TRUE)
+  bw  <- diff(rng) / k
+  list(k = k, bw = bw)
+}
+
+calc_bw_scott <- function(x) {
+  n  <- length(x)
+  sx <- stats::sd(x, na.rm = TRUE)
+  bw <- 3.5 * sx * n^(-1/3)
+  bw
+}
+
+calc_bw_fd <- function(x) {
+  n   <- length(x)
+  iq  <- IQR(x, na.rm = TRUE)
+  bw  <- 2 * iq * n^(-1/3)
+  bw
+}
+
+# Tratamento para casos degenerados (sd = 0, IQR = 0, n pequeno etc.)
+safe_bw <- function(bw, x) {
+  if (!is.finite(bw) || bw <= 0) {
+    # fallback: divide o range em 10 classes
+    bw <- diff(range(x, na.rm = TRUE)) / 10
+  }
+  bw
+}
+
+# Origem dos intervalos (para alinhar quebras)
+compute_origin <- function(x, bw) {
+  minx <- min(x, na.rm = TRUE)
+  floor(minx / bw) * bw
+}
+
+# 3) Cálculos
+stg   <- calc_bins_sturges(x)
+bw_st <- safe_bw(stg$bw, x)
+bw_sc <- safe_bw(calc_bw_scott(x), x)
+bw_fd <- safe_bw(calc_bw_fd(x), x)
+
+origin_st <- compute_origin(x, bw_st)
+origin_sc <- compute_origin(x, bw_sc)
+origin_fd <- compute_origin(x, bw_fd)
+
+xr <- range(x, na.rm = TRUE)
+
+# 4) Plots com bordas e cor padrão
+cor_padrao <- "lightblue"
+base <- ggplot2::ggplot(data.frame(x = x), ggplot2::aes(x = x)) +
+  ggplot2::theme_minimal(base_size = 12) +
+  ggplot2::labs(x = "x", y = "Frequência") +
+  ggplot2::coord_cartesian(xlim = xr)
+
+p_st <- base +
+  ggplot2::geom_histogram(
+    binwidth = bw_st, boundary = origin_st, closed = "right",
+    color = "black", fill = cor_padrao
+  ) +
+  ggplot2::labs(
+    title = "Sturges",
+    subtitle = sprintf("binwidth = %.4f", stg$k, bw_st)
+  )
+
+p_sc <- base +
+  ggplot2::geom_histogram(
+    binwidth = bw_sc, boundary = origin_sc, closed = "right",
+    color = "black", fill = cor_padrao
+  ) +
+  ggplot2::labs(
+    title = "Scott",
+    subtitle = sprintf("binwidth = %.4f", bw_sc)
+  )
+
+p_fd <- base +
+  ggplot2::geom_histogram(
+    binwidth = bw_fd, boundary = origin_fd, closed = "right",
+    color = "black", fill = cor_padrao
+  ) +
+  ggplot2::labs(
+    title = "Freedman–Diaconis",
+    subtitle = sprintf("binwidth = %.4f", bw_fd)
+  )
+
+# 5) Combinação horizontal
+(p_st + p_sc + p_fd) + patchwork::plot_layout(ncol = 3)
+```
+
+<br>
 
 -   A largura das classes pode ser determinada dividindo o intervalo total de observações pelo número de classes. Recomenda-se larguras iguais, mas larguras desiguais podem ser usadas quando existirem grandes lacunas nos dados ou em contextos específicos. Os intervalos devem ser mutuamente exclusivos e não sobrepostos, evitando intervalos abertos (ex.: \<5, \>10).[@s2011]
 
@@ -52,7 +154,7 @@ O pacote *ggplot2*[@ggplot2] fornece a função [geom_freqpoly](https://www.rdoc
 
 ### Quais características definem uma distribuição?
 
--   Uma distribuição pode ser definida por modelos matemáticos e caracterizada por parâmetros de tendência central, dispersão, simetria e curtose.
+-   Uma distribuição pode ser definida por modelos matemáticos e caracterizada por parâmetros de tendência central, dispersão, simetria e curtose.[@REF]
 
 <br>
 
@@ -1120,6 +1222,109 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 <br>
 
+```{r distribuicoes-parametros, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Parâmetros de distribuição: Assimetria e Curtose."}
+# Reprodutibilidade
+set.seed(123)
+
+# 1) Gerar dados
+n <- 1000
+dados_normal      <- rnorm(n, mean = 0, sd = 1)
+dados_assimetrico <- rlnorm(n, meanlog = 0, sdlog = 1)
+
+df <- tibble::tibble(
+  valor = c(dados_normal, dados_assimetrico),
+  tipo  = rep(c("Normal", "Assimétrico (Log-normal)"), each = n)
+)
+
+# 2) Estatísticas-resumo
+resumo <- df |>
+  dplyr::group_by(tipo) |>
+  dplyr::summarise(
+    n       = n(),
+    media   = mean(valor),
+    mediana = median(valor),
+    sd      = sd(valor),
+    skew    = e1071::skewness(valor, type = 2),
+    kurt    = e1071::kurtosis(valor, type = 2),     # kurtose "total" (Pearson)
+    excess  = kurt - 3                       # excess kurtosis
+  )
+
+# 3) Histograma + densidade
+g_hist <- ggplot2::ggplot(df, ggplot2::aes(x = valor)) +
+  ggplot2::geom_histogram(aes(y = ggplot2::after_stat(density), fill = tipo),
+                 bins = 30, alpha = 0.60, color = "white") +
+  ggplot2::geom_density(color = "black", linewidth = 1) +
+  ggplot2::facet_wrap(~ tipo, scales = "free") +
+  ggplot2::geom_vline(data = resumo, ggplot2::aes(xintercept = media), linetype = 2) +
+  ggplot2::geom_vline(data = resumo, ggplot2::aes(xintercept = mediana), linetype = 3) +
+  ggplot2::labs(
+    title = "Distribuições: Normal vs. Log-normal (Assimétrica)",
+    subtitle = "Linhas tracejadas: média (--) e mediana (---)",
+    x = "Valor", y = "Densidade"
+  ) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "none")
+
+g_hist
+```
+
+<br>
+
+```{r curtose, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Parâmetros de distribuição: Curtose em distribuições simétricas (normal vs. uniforme)."}
+# Reprodutibilidade
+set.seed(123)
+
+# 1) Gerar dados (simétricos, com caudas diferentes)
+n <- 1000
+x_norm <- rnorm(n, mean = 0, sd = 1)            # referência
+x_t5   <- rt(n, df = 5)                         # caudas pesadas
+x_unif <- runif(n, min = -sqrt(3), max = sqrt(3)) # sd = 1 por construção
+
+# Padronizar para isolar curtose (mesma média e sd)
+std <- function(x) as.numeric(scale(x))
+x_norm <- std(x_norm)
+x_t5   <- std(x_t5)
+x_unif <- std(x_unif)
+
+df <- tibble::tibble(
+  valor = c(x_norm, x_t5, x_unif),
+  tipo  = rep(c("Normal", "t (df=5) — caudas pesadas", "Uniforme — caudas leves"), each = n)
+)
+
+# 2) Estatísticas-resumo (inclui excesso de curtose)
+resumo <- df %>%
+  dplyr::group_by(tipo) %>%
+  dplyr::summarise(
+    n       = n(),
+    media   = mean(valor),
+    sd      = sd(valor),
+    skew    = e1071::skewness(valor, type = 2),
+    kurt    = e1071::kurtosis(valor, type = 2),  # kurtose total (Pearson)
+    excess  = kurt - 3
+  )
+
+# 3) Histograma + densidade (facet por distribuição)
+g_kurt_hist <- ggplot2::ggplot(df, ggplot2::aes(x = valor)) +
+  ggplot2::geom_histogram(
+    ggplot2::aes(y = ggplot2::after_stat(density), fill = tipo),
+    bins = 30, alpha = 0.60, color = "white"
+  ) +
+  ggplot2::geom_density(color = "black", linewidth = 1) +
+  ggplot2::facet_wrap(~ tipo, scales = "free_y") +
+  ggplot2::labs(
+    title = "Curtose na prática: Normal vs. t(df=5) vs. Uniforme",
+    subtitle = "Todas padronizadas (média = 0, sd = 1). Curtose difere apenas nas caudas.",
+    x = "Valor", y = "Densidade"
+  ) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "none")
+
+# 6) Mostrar gráficos
+g_kurt_hist
+```
+
+<br>
+
 ## Extremos
 
 <br>
@@ -1223,7 +1428,7 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 ### Como estimar escala de forma robusta?
 
--   Median Absolute Deviation (MAD), equação \@ref(eq:mad), com correção 1,483 para normalidade, com $~50%$ de ponto de quebra..[@rousseeuw2011]
+-   Median Absolute Deviation (MAD) \@ref(eq:mad), com correção 1,483 para normalidade, com $~50%$ de ponto de quebra..[@rousseeuw2011]
 
 <br>
 
@@ -1236,7 +1441,7 @@ MAD = 1.483 \cdot \text{median}(|x_i - \text{median}(x)|)
 
 <br>
 
-- Primeiro quartil das diferenças pareadas ($Qn$), equação \@ref(eq:qn), com $~50%$ de ponto de quebra.[@rousseeuw2011]
+- Primeiro quartil das diferenças pareadas ($Qn$) \@ref(eq:qn), com $~50%$ de ponto de quebra.[@rousseeuw2011]
 
 <br>
 
@@ -1249,7 +1454,7 @@ Qn = 2.2219 \cdot \text{first quartile}(|x_i - x_j|; i < j)
 
 <br>
 
--   O intervalo interquartil ($IQR$), equação \@ref(eq;iqr) é robusto, com ponto de quebra $~25%$, sendo simples de interpretar e útil em boxplots.[@rousseeuw2011]
+-   O intervalo interquartil ($IQR$) \@ref(eq;iqr) é robusto, com ponto de quebra $~25%$, sendo simples de interpretar e útil em boxplots.[@rousseeuw2011]
 
 <br>
 

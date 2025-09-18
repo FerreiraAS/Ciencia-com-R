@@ -50,7 +50,7 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 ### O que são análises de regressão simples?
 
--   A análise de regressão simples consiste em modelos estatísticos com 1 variável dependente (desfecho) e 1 variável independente (preditor).[@Hidalgo2013]
+-   A análise de regressão simples consiste em modelos estatísticos com uma variável dependente (desfecho) e uma variável independente (preditor).[@Hidalgo2013]
 
 -   A equação de regressão simples é expressa como \@ref(eq:regressao-simples), onde $Y$ é a variável dependente, $X$ é a variável independente, $\beta_0$ é o intercepto (constante), $\beta_1$ é o coeficiente de regressão da variável independente e $\epsilon$ representa o erro aleatório do modelo.[@Hidalgo2013]
 
@@ -65,7 +65,7 @@ Y = \beta_0 + \beta_1 X + \epsilon
 
 ### O que são análises de regressão multivariável?
 
--   A análise multivariável (ou múltiplo) consiste em modelos estatísticos com 1 variável dependente (desfecho) e duas ou mais variáveis independentes.[@Hidalgo2013]
+-   A análise multivariável (ou múltiplo) consiste em modelos estatísticos com uma variável dependente (desfecho) e duas ou mais variáveis independentes.[@Hidalgo2013]
 
 -   A equação de regressão multivariável é expressa como \@ref(eq:regressao-multivariavel), onde $Y$ é a variável dependente, $X_1, X_2, ..., X_n$ são as variáveis independentes, $\beta_0$ é o intercepto (constante), $\beta_1, \beta_2, ..., \beta_n$ são os coeficientes de regressão das variáveis independentes e $\epsilon$ representa o erro aleatório do modelo.[@Hidalgo2013]
 
@@ -80,7 +80,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n + \epsilon
 
 ### O que são análises de regressão multivariada?
 
--   A análise multivariada consiste em modelos estatísticos com 2 ou mais variáveis dependente (desfechos) e duas ou mais variáveis independentes.[@Hidalgo2013]
+-   A análise multivariada consiste em modelos estatísticos com duas ou mais variáveis dependente (desfechos) e duas ou mais variáveis independentes.[@Hidalgo2013]
 
 -   A equação de regressão multivariada é expressa como \@ref(eq:regressao-multivariada), onde $Y_1, Y_2, ..., Y_m$ são as variáveis dependentes, $X_1, X_2, ..., X_n$ são as variáveis independentes, $\beta_{0j}$ é o intercepto (constante) da variável dependente $Y_j$, $\beta_{ij}$ são os coeficientes de regressão das variáveis independentes para a variável dependente $Y_j$ e $\epsilon_j$ representa o erro aleatório do modelo para a variável dependente $Y_j$.[@Hidalgo2013]
 
@@ -102,16 +102,16 @@ Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \
 
 ### O que são modelos de regressão linear?
 
-- Modelos lineares (equação \@ref(eq:regressao-linear)) descrevem uma relação linear nos parâmetros entre um desfecho contínuo $Y$ e um ou mais preditores $X$.[@REF]
-
-- Assumem erros independentes, de média zero e variância constante (homocedasticidade).[@REF] 
-
-- A normalidade dos resíduos é uma hipótese comum para inferência estatística, mas não obrigatória para estimação dos coeficientes.[@REF]
+- Modelos lineares \@ref(eq:regressao-linear) descrevem uma relação linear nos parâmetros entre um desfecho contínuo $Y$ e um ou mais preditores $X$.[@REF]
 
 \begin{equation}
 (\#eq:regressao-linear)
 Y = \beta_0 + \sum_{i=1}^{n} \beta_i X_i + \epsilon
 \end{equation}
+
+- Assumem erros independentes, de média zero e variância constante (homocedasticidade).[@REF] 
+
+- A normalidade dos resíduos é uma hipótese comum para inferência estatística, mas não obrigatória para estimação dos coeficientes.[@REF]
 
 <br>
 
@@ -226,11 +226,18 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 - A equação \@ref(eq:regressao-logistica) modela a razão de chances (*odds*) em função dos preditores.[@REF]
 
-- A ligação (*link*) usada é o logit.[@REF]
-
 \begin{equation}
 (\#eq:regressao-logistica)
 \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X + ... + \beta_n X_n
+\end{equation}
+
+<br>
+
+- A ligação (*link*) usada é o logit \@ref(eq:link-logit).[@REF]
+
+\begin{equation}
+(\#eq:link-logit)
+g(p) = \log\left(\frac{p}{1-p}\right)
 \end{equation}
 
 <br>
@@ -446,7 +453,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 - Modelos de efeitos mistos incorporam efeitos fixos (coeficientes comuns a todos os indivíduos) e efeitos aleatórios (variações específicas de grupos ou indivíduos).[@REF]
 
-- Usados para dados hierárquicos ou longitudinais, onde observações estão agrupadas (ex.: pacientes dentro de hospitais).[@REF]
+- Usados para dados hierárquicos ou longitudinais, onde observações estão agrupadas.[@REF]
 
 - Permitem modelar correlações intra-grupo e variabilidade entre grupos.[@REF]
 
@@ -505,9 +512,9 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são modelos de regressão lasso?
 
-- Regressão lasso (Least Absolute Shrinkage and Selection Operator) utiliza penalização L1, que pode zerar coeficientes.[@REF]
+- Regressão lasso (*Least Absolute Shrinkage and Selection Operator*) utiliza penalização L1, que pode zerar coeficientes.[@REF]
 
-- Além de reduzir overfitting, também realiza seleção automática de variáveis.[@REF]  
+- Além de reduzir *overfitting*, também realiza seleção automática de variáveis.[@REF]  
 
 - Enquanto a regressão ridge mantém todos os preditores, a lasso pode excluir variáveis irrelevantes.[@REF]
 
@@ -672,7 +679,7 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 ### Quando devemos forçar uma variável no modelo?
 
-- Sempre que houver base teórica ou evidência prévia forte (por exemplo, idade em estudos de câncer), ou se for a variável de exposição principal.[@Greenland1989]
+- Sempre que houver base teórica ou evidência prévia forte, ou se for a variável de exposição principal.[@Greenland1989]
 
 <br>
 
