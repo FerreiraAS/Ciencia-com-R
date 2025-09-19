@@ -24,22 +24,6 @@
 
 <br>
 
-```{r, echo=TRUE, results='asis'}
-# Simulação de 1000 médias de amostras de tamanho 30 de uma N(0,1)
-set.seed(123)
-n_sim <- 1000
-amostras <- replicate(n_sim, mean(rnorm(30, mean = 0, sd = 1)))
-hist(
-  amostras,
-  main = "Distribuição das médias simuladas",
-  xlab = "Média",
-  col = "lightblue",
-  border = "white"
-)
-```
-
-<br>
-
 ### Quais são as boas práticas em simulações computacionais?
 
 -   Defina claramente o objetivo da simulação e as hipóteses a serem testadas, incluindo quais aspectos do fenômeno ou do método você pretende avaliar.[@eglen2017]
