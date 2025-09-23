@@ -164,7 +164,7 @@ rmd_files <- rmd_files[!grepl("scripts.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("referencias.Rmd", rmd_files)]
 
 # read bib file
-bib <- RefManageR::ReadBib(file.path("bib", "references.bib"))
+bib <- RefManageR::ReadBib(file.path("./bib", "references.bib"))
 
 # loop over all chapters
 for (k in seq_along(rmd_files)) {

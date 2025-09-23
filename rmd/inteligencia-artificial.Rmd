@@ -34,6 +34,13 @@
 
 -   Neuronios artificiais (ou perceptrons) são modelos matemáticos que imitam o funcionamento dos neurônios biológicos, recebendo entradas, aplicando pesos e uma função de ativação para produzir uma saída.[@mcculloch1943; @rosenblatt1958; @rosenblatt1960]
 
+-   A equação geral de um neurônio artificial é dada por \@ref(eq:neuronio), onde $x_i$ são as entradas, $w_i$ os pesos, $b$ o viés e $\phi$ a função de ativação:
+
+\begin{equation}
+(\#eq:neuronio)
+y = \phi\left(\sum_{i=1}^{d} w_i\,x_i + b\right)
+\end{equation}
+
 <br>
 
 ```{r neuronio-artificial, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática de um neurônio computacional." }
@@ -256,25 +263,25 @@ graphics::text(x_out, 0.85, "Saída",     cex = 0.9)
 
 ### Quais são as funções de ativação mais comuns?
 
--   As funções de ativação introduzem não-linearidades nas redes neurais, permitindo que aprendam padrões complexos, como sigmoide \@ref(eq:sigmoide), tangente hiperbólica \@ref(eq:tanh) e unidade linear retificada (ReLU) \@ref(eq:relu).[@REF]
+- As funções de ativação introduzem não-linearidades nas redes neurais, permitindo que aprendam padrões complexos, como sigmoide \@ref(eq:sigmoide), tangente hiperbólica \@ref(eq:tanh) e unidade linear retificada (ReLU) \@ref(eq:relu).[@REF]
 
 \begin{equation}
 (\#eq:sigmoide)
-f(x) = \frac{1}{1 + e^{-x}}
+\sigma(z) = \frac{1}{1 + e^{-z}}
 \end{equation}
 
 <br>
 
 \begin{equation}
 (\#eq:tanh)
-f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+\tanh(z) = \frac{e^{z} - e^{-z}}{e^{z} + e^{-z}}
 \end{equation}
 
 <br>
 
 \begin{equation}
 (\#eq:relu)
-f(x) = \max(0, x)
+\operatorname{ReLU}(z) = \max(0, z)
 \end{equation}
 
 <br>

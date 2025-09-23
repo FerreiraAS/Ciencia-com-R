@@ -32,6 +32,12 @@ O pacote *equatiomatic*[@equatiomatic] fornece a função [*extract_eq*](https:/
 
 <br>
 
+### O que diferencia modelos clássicos e modernos em predição?
+
+-   Modelos clássicos, como a regressão logística e as árvores de decisão, contrastam com os modelos modernos, como máquinas de vetor de suporte, redes neurais e *random forests* , principalmente pela maior flexibilidade e capacidade destes últimos de capturar não linearidades e interações.[@vanderploeg2014]
+
+<br>
+
 ## Modelos estocásticos
 
 <br>
@@ -200,13 +206,140 @@ O pacote *performance*[@performance] fornece a função [*check_model*](https://
 
 <br>
 
+## Fome de dados
+
+<br>
+
+### O que significa "fome de dados"?
+
+- *Data hungry* descreve a necessidade de um modelo contar com muitos eventos por variável (EPV) para alcançar estabilidade estatística.
+
+- Enquanto a regressão logística (LR) atinge desempenho estável com cerca de **20–50 EPV**, modelos como random forest (RF), redes neurais (NN) e máquinas de vetor de suporte (SVM) podem demandar **>200 EPV** para reduzir o otimismo e estabilizar a AUC.
+
+<br>
+
+### Por que a "fome de dados" é relevante?
+
+- Em bases de dados pequenas, modelos clássicos tendem a ser mais robustos e menos suscetíveis a superajuste.[@vanderploeg2014]
+
+- O uso de modelos modernos só se justifica quando há grandes bases de dados, caso contrário o ganho em acurácia é marginal.[@vanderploeg2014]
+
+- Esse conceito conecta diretamente a escolha do modelo ao planejamento amostral.[@vanderploeg2014]
+
+<br>
+
+## Desempenho e estabilidade de modelos
+
+<br>
+
+### Como avaliar o desempenho dos modelos?
+
+- Pela área sob a curva ROC em conjunto com o otimismo (diferença entre AUC aparente e validada).[@vanderploeg2014]
+
+- O desempenho melhora com maior tamanho amostral, mas de forma desigual entre técnicas.[@vanderploeg2014]
+
+<br>
+
+### Qual modelo alcança estabilidade mais rapidamente?
+
+- Regressão logística é o mais estável e menos *data hungry*.[@vanderploeg2014]
+
+- Árvore de decisão para classificação e regressão estabiliza rápido, mas em nível de desempenho baixo.[@vanderploeg2014]
+
+- Máquina de vetores de suporte, redes neurais e *random forests* apresentam instabilidade mesmo em amostras muito grandes.[@vanderploeg2014]
+
+<br>
+
 ## Avaliação de modelos
 
 <br>
 
 ### Como avaliar a qualidade de ajuste de um modelo?
 
--   .[@REF]
+-   Coeficiente de determinação ($R^2$) e $R^2$ ajustado: Medem a proporção da variabilidade dos dados explicada pelo modelo. O $R^2$ ajustado penaliza a inclusão de variáveis irrelevantes.[@REF]
+
+<br>
+
+```{r r2-ajuste, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplos de ajuste de modelos de regressão linear simples (y ~ x) com diferentes níveis de ruído (R²). Cada painel mostra a reta ajustada (cinza) e os valores observados (pontos). Os valores anotados indicam o coeficiente angular simulado (β), o coeficiente angular estimado (β̂) e o R² observado.", out.width = "100%"}
+# Reprodutibilidade
+base::set.seed(123)
+
+# Parâmetros
+n          <- 150
+beta_true  <- 1.0                  # Inclinação verdadeira (simulada)
+r2_targets <- c(0.85, 0.50, 0.15)  # Níveis com ruído
+
+# Gera x comum e sinal verdadeiro (sem intercepto)
+x   <- stats::rnorm(n, mean = 0, sd = 1)
+y_s <- beta_true * x
+var_signal <- stats::var(y_s)
+
+# Função para adicionar ruído baseado no R² alvo (usa variância amostral do sinal)
+build_df <- function(R2_target) {
+  se <- sqrt((1 - R2_target) / R2_target * var_signal)
+  y  <- y_s + stats::rnorm(n, mean = 0, sd = se)
+  data.frame(x = x, y = y, grupo = sprintf("ruido_%.2f", R2_target), alvo = R2_target)
+}
+
+# Data frames com ruído
+dfs_ruido <- lapply(r2_targets, build_df)
+df_ruido  <- base::do.call(base::rbind, dfs_ruido)
+
+# Data frame perfeito (sem ruído)
+df_perfeito <- data.frame(x = x, y = y_s, grupo = "perfeito", alvo = 1.00)
+
+# Combina e define ordem dos painéis (perfeito primeiro)
+layout_df <- base::rbind(df_perfeito, df_ruido)
+layout_df$grupo <- factor(layout_df$grupo, levels = c("perfeito", sprintf("ruido_%.2f", r2_targets)))
+
+# Ajusta lm(y ~ x) por grupo para anotar β̂ e R² observado
+obs <- do.call(rbind, lapply(split(layout_df, layout_df$grupo), function(dd) {
+  fit <- stats::lm(y ~ x, data = dd)
+  R2  <- summary(fit)$r.squared
+  data.frame(
+    grupo    = dd$grupo[1],
+    beta_hat = unname(coef(fit)[["x"]]),
+    R2_obs   = R2
+  )
+}))
+
+# Rótulos dos painéis: β simulado | β̂ | R²
+make_label <- function(g, b_true, b_hat, r2) {
+  titulo <- if (g == "perfeito") "Perfeita (sem ruído)" else "Com ruído"
+  sprintf("%s\nβ simulado = %.2f | β̂ = %.2f | R² = %.2f",
+          titulo, b_true, b_hat, r2)
+}
+
+obs$label <- mapply(make_label, as.character(obs$grupo),
+                    MoreArgs = list(b_true = beta_true),
+                    b_hat = obs$beta_hat, r2 = obs$R2_obs)
+
+# Junta o rótulo ao DF para facetar
+layout_df <- merge(layout_df, obs[, c("grupo","label")], by = "grupo", all.x = TRUE)
+
+# Plot
+ggplot2::ggplot(layout_df, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(alpha = 0.7) +
+  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "gray40") +
+  ggplot2::facet_wrap(~ label, nrow = 1) +
+  ggplot2::labs(x = "X", y = "Y") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    axis.line        = ggplot2::element_line(color = "black"),
+    aspect.ratio     = 1,
+    panel.spacing    = grid::unit(0.6, "lines"),
+    strip.text       = ggplot2::element_text(face = "bold"),
+    plot.margin      = ggplot2::margin(10, 5, 10, 5)
+  )
+```
+
+-   Erro quadrático médio ($RMSE$): Mede a média dos erros ao quadrado entre os valores observados e os valores previstos pelo modelo. Valores menores indicam melhor ajuste.[@REF]
+
+-   Critério de Informação Akaike ($AIC$) e Critério de Informação Bayesiano ($BIC$): Avaliam o ajuste do modelo penalizando a complexidade (número de parâmetros). Modelos com menor AIC ou BIC são preferíveis.[@REF]
+
+-   Desvio residual ($\sigma$): Mede a variabilidade dos resíduos do modelo. Valores menores indicam melhor ajuste.[@REF]
 
 <br>
 
@@ -246,7 +379,7 @@ resultado_df$Métrica <- dplyr::recode(
   R2 = "$R^2$",
   R2_adjusted = "$R^2$ ajustado",
   RMSE = "Erro quadrático médio (RMSE)",
-  Sigma = "Desvio residual (Sigma)"
+  Sigma = "Desvio residual (sigma)"
 )
 
 # Exibindo com estilo avançado

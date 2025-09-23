@@ -1,7 +1,7 @@
 W <- 8.27
 H <- 11.69
 
-refs <- as.character(length(bibtex::read.bib("./bib/references.bib")))
+refs <- as.character(length(RefManageR::ReadBib("./bib/references.bib")))
 
 texto <- paste0('
   "<p style=\"font-size: 60px;\"><b>Ciência com R</b></p>

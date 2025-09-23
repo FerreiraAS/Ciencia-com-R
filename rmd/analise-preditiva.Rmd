@@ -24,13 +24,94 @@ O pacote *ggeffects*[@ggeffects] fornece a função [*test_response*](https://ww
 
 <br>
 
+### Como árvores de decisão são usadas para predição?
+
+- Utilizam padrões históricos para prever resultados futuros em novos registros.[@Song2015]
+Identificam combinações de fatores que elevam ou reduzem o risco de um evento clínico.[@Song2015]
+
+- Podem ser aplicadas em diagnósticos médicos para prever subtipos de condições ou diferentes respostas terapêuticas.[@Song2015]
+
+<br>
+
+## Interpretação e aplicação
+
+<br>
+
+### Quais são as implicações do uso de árvores de decisão em predição?
+
+- Tornam os resultados mais compreensíveis para clínicos e pesquisadores, com regras “se-então” claras.[@Song2015]
+
+- Auxiliam na formulação de hipóteses clínicas e direcionamento de futuras pesquisas.[@Song2015]
+
+- Podem ser estendidas para predição de sobrevivência, subgrupos de tratamento e análise de custo-benefício.[@Song2015]
+
+<br>
+
+## Análise de curva de decisão
+
+<br>
+
+### O que é a análise de curva de decisão?
+
+-   Análise de curva de decisão é um método para avaliar a utilidade clínica de modelos preditivos em comparação às estratégias padrão “tratar todos” ou “tratar ninguém”.[@hozo2023]
+
+<br>
+
+### O que significam os eixos da curva de decisão?
+
+-   O eixo vertical mostra o benefício líquido, ganho obtido ao usar o modelo em relação às estratégias de referência. O eixo horizontal mostra a preferência, que corresponde ao limiar de decisão: a probabilidade mínima de evento a partir da qual se recomenda intervir.[@vickers2019]
+
+-   O limiar reflete o equilíbrio entre o risco de perder casos da doença e o risco de intervenções desnecessárias.[@vickers2019]
+
+<br>
+
+### Como interpretar o benefício líquido?
+
+- O benefício líquido é o número de verdadeiros positivos obtidos ajustado pelo “custo” dos falsos positivos, expresso na mesma unidade dos verdadeiros positivos.[@vickers2019]
+
+- Quando a estratégia padrão é “tratar todos”, o benefício líquido também pode ser expresso como intervenções desnecessárias evitadas, facilitando a interpretação clínica.[@vickers2019]
+
+<br>
+
+### Por que é importante comparar sempre com “tratar todos” e “tratar nenhum”?
+
+- Porque essas duas estratégias são frequentemente plausíveis em contextos reais: tratar todos os pacientes de risco ou tratar nenhum.[@vickers2019]
+
+- Um modelo ou teste só é considerado útil se apresentar maior benefício líquido do que ambas as estratégias, garantindo que realmente agrega valor clínico.[@vickers2019]
+
+- Essa comparação evita que um modelo com bom AUC mas má calibração seja usado, já que pode apresentar net benefit inferior às estratégias padrão.[@vickers2019]
+
+<br>
+
+### Quais são os limites e usos da análise de curva de decisão?
+
+- A análise de curva de decisão não substitui uma análise de decisão completa ou uma avaliação de custo-efetividade, mas é mais simples e prática, exigindo apenas a definição de um intervalo de limiares de decisão razoáveis.[@vickers2019]
+
+- Em situações claras (modelo com nenhum benefício ou benefício amplo), pode dispensar análises complexas.[@vickers2019]
+
+- Em casos ambíguos, serve como primeiro passo antes de análises mais detalhadas.[@vickers2019]
+
+<br>
+
+### A análise de curva de decisão pode ser conduzida sem dados individuais de pacientes?
+
+-   Em modelos bem calibrados e com tamanho amostral adequado, a análise de curva de decisão pode ser realizada utilizando apenas estimativas sumárias (média e desvio-padrão).[@hozo2023]
+
+<br>
+
+### Como funciona o cálculo do benefício líquido?
+
+-   O benefício líquido é estimado contrastando verdadeiros positivos e falsos positivos em diferentes limiares de decisão.[@hozo2023]
+
+<br>
+
 ## Risco de vieses em estudos de predição
 
 <br>
 
 ### Como avaliar o risco de vieses em estudos de predição?
 
-- Para estudos de modelos preditivos recomenda-se aplicar a ferramenta PROBAST para avaliar risco de viés.[@wolff2019]
+-   Para estudos de modelos preditivos recomenda-se aplicar a ferramenta PROBAST para avaliar risco de viés.[@wolff2019]
 
 <br>
 

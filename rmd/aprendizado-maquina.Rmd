@@ -46,6 +46,32 @@
 
 <br>
 
+### Quais são os limites do progresso em classificadores supervisionados?
+
+-   Os maiores ganhos de acurácia vêm de modelos simples, como análise discriminante linear; métodos mais sofisticados oferecem apenas ganhos marginais.[@hand2006]
+
+-   O aumento da complexidade do modelo traz retornos decrescentes em termos de redução da taxa de erro.[@hand2006]
+
+<br>
+
+### Quais problemas práticos limitam a generalização de classificadores?
+
+- *Population drift*: mudanças na distribuição dos dados ao longo do tempo degradam a performance de modelos.[@hand2006]
+
+- *Sample selectivity bias*: amostras de treino podem não representar a população futura, levando a superestimação de desempenho.[@hand2006]
+
+- Erros de rótulo e definições arbitrárias de classes comprometem a validade dos modelos.[@hand2006]
+
+<br>
+
+### Por que estudos comparativos entre classificadores podem ser enganosos?
+
+- Resultados dependem da experiência do pesquisador com cada método, da escolha dos conjuntos de dados e do critério de avaliação usado.[@hand2006]
+
+- Diferenças pequenas em acurácia frequentemente desaparecem quando se consideram incertezas reais de aplicação.[@hand2006]
+
+<Br>
+
 ## Principais algoritmos
 
 <br>
@@ -53,6 +79,94 @@
 ### Quais são os principais algoritmos de aprendizado de máquina?
 
 -   Modelos de regressão não penalizados, modelos de regressão penalizados, modelos baseados em árvores, modelos baseados em vizinhos, redes neurais, máquinas de vetores de suporte, Naive Bayes e ensembles do tipo Superlearner.[@andaurnavarro2023]
+
+<br>
+
+## Árvores de decisão
+
+<br>
+
+### O que são árvores de decisão?
+
+-   São modelos de aprendizado supervisionado que dividem os dados em ramos e folhas, representando regras de decisão de forma hierárquica.[@hozo2023]
+
+-   Podem lidar eficientemente com grandes conjuntos de dados sem pressupor estrutura paramétrica complexa.[@Song2015]
+
+-   São aplicáveis a variáveis contínuas e discretas, tanto como preditoras quanto como desfechos.[@Song2015]
+
+<br>
+
+```{r arvore-decisao, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de árvore de decisão para predizer depressão a partir de idade, tabagismo e sintomas."}
+# Dados simulados
+set.seed(123)
+
+# Gerar dados
+n <- 200
+df <- data.frame(
+  idade = sample(20:70, n, replace=TRUE),
+  tabagismo = sample(c("Sim", "Não"), n, replace=TRUE, prob=c(0.3,0.7)),
+  sintomas = sample(0:3, n, replace=TRUE),
+  depressao = sample(c("Sim","Não"), n, replace=TRUE, prob=c(0.4,0.6))
+)
+
+# Ajuste de árvore de decisão
+mod <- rpart::rpart(depressao ~ idade + tabagismo + sintomas, data=df, method="class")
+
+# Visualização
+rpart.plot::rpart.plot(mod, type=3, extra=104, fallen.leaves=TRUE)
+```
+
+<br>
+
+### Quais são os principais usos de árvores de decisão?
+
+-   Seleção de variáveis relevantes em cenários com muitos preditores, como registros clínicos eletrônicos.[@Song2015]
+
+-   Avaliação da importância relativa das variáveis, com base na redução da pureza dos nós ou da acurácia ao remover variáveis.[@Song2015]
+
+-   Tratamento de valores ausentes, seja classificando-os como categoria própria ou imputando-os por previsão dentro da árvore.[@Song2015]
+
+-   Predição de novos casos a partir de dados históricos.[@Song2015]
+
+-   Manipulação de dados, colapsando categorias muito numerosas ou subdividindo variáveis contínuas assimétricas.[@Song2015]
+
+<br>
+
+### Quais são os componentes básicos de uma árvore de decisão?
+
+-   Nós raiz (ou de decisão): subdividem todos os registros iniciais.[@Song2015]
+
+-   Nós internos (ou de chance): representam subdivisões intermediárias.[@Song2015]
+
+-   Nós folha (ou finais): resultados finais após sucessivas divisões.[@Song2015]
+
+-   Ramos: representam condições “se-então”, ligando nós em sequência até a classificação final.[@Song2015]
+
+<br>
+
+### Como funcionam splitting, stopping e pruning?
+
+-   *Splitting*: divide registros em subconjuntos mais homogêneos com base em métricas como entropia, índice de Gini e ganho de informação.[@Song2015]
+
+-   *Stopping*: evita árvores excessivamente complexas ao definir parâmetros como número mínimo de registros por nó ou profundidade máxima.[@Song2015]
+
+-   *Pruning*: reduz árvores grandes eliminando ramos pouco informativos, usando validação ou métodos como qui-quadrado.[@Song2015]
+
+<br>
+
+### Quais são as vantagens e limitações de árvores de decisão?
+
+-   Vantagens: simplificam relações complexas; são intuitivas e fáceis de interpretar; não exigem pressupostos de distribuição; lidam bem com valores ausentes e dados enviesados; são robustas a *outliers*.[@Song2015]
+
+-   Limitações: podem sofrer *overfitting* ou *underfitting* em amostras pequenas; podem selecionar variáveis correlacionadas sem relação causal real.[@Song2015]
+
+<br>
+
+### Como se comparam à regressão logística?
+
+-   A regressão logística assume relações lineares entre variáveis e log-odds.[@hozo2023]
+
+-   Árvores de decisão permitem capturar relações não lineares e interações de forma automática.[@hozo2023]
 
 <br>
 

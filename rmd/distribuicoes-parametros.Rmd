@@ -741,6 +741,70 @@ ggpubr::ggarrange(
 
 <br>
 
+## Distribuições multivariadas
+
+<br>
+
+### O que são distribuições multivariadas?
+
+-   Distribuições multivariadas descrevem a probabilidade conjunta de duas ou mais variáveis aleatórias.[@REF]
+
+-   Exemplos de distribuições multivariadas incluem a distribuição normal multivariada, a distribuição t multivariada, a distribuição binomial multinomial e a distribuição de Dirichlet.[@REF]
+
+<br>
+
+```{r distribuicao-multivariada, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuição normal bivariada e amostra simulada com histogramas marginais."}
+# Definição da média e matriz de covariância
+mu <- c(0, 0)
+sigma <- matrix(c(1, 0.6,
+                  0.6, 1), nrow = 2)
+
+# Amostra simulada
+set.seed(123)
+amostra <- as.data.frame(MASS::mvrnorm(n = 1000, mu = mu, Sigma = sigma))
+
+# Criação da grade para o gráfico de contorno
+x_vals <- seq(-4, 4, length.out = 100)
+y_vals <- seq(-4, 4, length.out = 100)
+grid <- expand.grid(x = x_vals, y = y_vals)
+
+# Calculando a densidade para cada ponto da grade usando mvtnorm
+z_vals <- mvtnorm::dmvnorm(grid, mean = mu, sigma = sigma)
+
+# Adiciona a densidade no grid
+grid$z <- z_vals
+
+# Gráfico da densidade (contornos)
+p1 <- ggplot2::ggplot(grid, ggplot2::aes(x = x, y = y, z = z)) +
+  ggplot2::geom_contour_filled() +
+  ggplot2::labs(title = "Distribuição Normal Bivariada",
+       x = "X", y = "Y") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(text = ggplot2::element_text(size = 8),
+        aspect.ratio = 1)
+
+# Scatter plot
+p_scatter <- ggplot2::ggplot(amostra, ggplot2::aes(x = V1, y = V2)) +
+  ggplot2::geom_point(alpha = 0.3, color = "steelblue") +
+  ggplot2::labs(title = "Amostra da Normal Bivariada com Histogramas Marginais",
+       x = "X", y = "Y") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(text = ggplot2::element_text(size = 8),
+        aspect.ratio = 1)
+
+# Adiciona histogramas marginais
+p_scatter_marginal <- ggExtra::ggMarginal(p_scatter,
+                                 type = "histogram",
+                                 bins = 30,
+                                 fill = "skyblue",
+                                 color = "white")
+
+# Mostrar lado a lado
+cowplot::plot_grid(p1, p_scatter_marginal, ncol = 2, align = "h")
+```
+
+<br>
+
 ## Parâmetros
 
 <br>

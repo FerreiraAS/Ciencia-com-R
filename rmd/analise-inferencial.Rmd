@@ -94,35 +94,55 @@
 
 ### Quais são os tipos de teste de hipóteses?
 
--   Teste (clássico) de significância da hipótese nula.[@lakens2018]
+-   Teste (clássico) de significância da hipótese nula: verifica evidência contra $H_{0}$ usando P-valor.[@lakens2018]
 
--   Teste de mínimos efeitos.[@lakens2018]
+-   Teste de mínimos efeitos (MOTE/MOST/SESOI): testa se o efeito é pelo menos tão grande quanto um limiar de relevância (SESOI). Rejeitar $H_{0}$ sugere efeito grande o suficiente.[@lakens2018]
 
--   Teste de equivalência.[@lakens2018]
+-   Teste de equivalência (TOST): testa se o efeito está dentro de uma margem de equivalência clinicamente irrelevante (entre $\Delta$ e $-\Delta$). Rejeitar $H_{0}$ sugere equivalência prática.[@lakens2018]
 
--   Teste de inferioridade.[@lakens2018]
+-   Teste de superioridade: avalia se um tratamento/intervenção supera o controle por uma margem $>0$ ou $>\Delta$.[@lakens2018]
 
--   Teste de não-inferioridade.[@REF]
+-   Teste de não-inferioridade: avalia se o tratamento não é pior que o controle por mais do que $-\Delta$.[@REF]
 
--   Teste de superioridade.[@REF]
+- Teste de inferioridade: avalia se o tratamento é pior que o controle (por exemplo, para checar segurança).[@REF]
+
+<br>
+
+### O que reportar após um teste de hipótese?
+
+-   P-valores, como estimativa da significância estatística.[@Sullivan2012]
+
+-   Tamanho do efeito, como estimativa de significância substantiva.[@Sullivan2012]
+
+<br>
+
+## Comparações múltiplas
 
 <br>
 
 ### O que é uma família de hipóteses?
 
--   .[@REF]
+- Família de hipóteses é um conjunto de comparações/inferências que, por desenho ou análise, devem ser consideradas juntas para controle do erro tipo I global (ex.: todas as comparações de um desfecho primário, todos os subgrupos pré-especificados, todos os desfechos coprimários).[@REF]
+
+- O controle do *family-wise error rate* (FWER) ou do *false discovery rate* (FDR) deve considerar a família pertinente, não comparações isoladas.[@REF]
 
 <br>
 
 ### O que são testes *ad hoc* e *post hoc*?
 
--   .[@REF]
+- *Ad hoc*: análises/decisões não planejadas a priori, motivadas por inspeção dos dados. Úteis para gerar hipóteses, não para confirmá-las.[@REF]
+
+- *Post hoc*: procedimentos de comparações múltiplas aplicados após um teste global (ex.: ANOVA) ter indicado diferença (ex.: Tukey, Bonferroni, Holm). Visam controlar o erro tipo I em múltiplas comparações.[@REF]
 
 <br>
 
 ### Como ajustar a análise inferencial para hipóteses múltiplas?
 
--   .[@REF]
+- Defina a família (o que entra no ajuste) e priorize desfechos (primário, coprimários, secundários).[@REF]
+
+- Aplique métodos de controle FWER (Bonferroni, Holm, Hochberg, Dunnett para múltiplos vs. controle) ou controle FDR (Benjamini–Hochberg) conforme o objetivo (confirmação vs. exploração).[@REF]
+
+- Em planos confirmatórios, use hierarquização/gatekeeping: testa-se em sequência; a alocação de $\alpha$ passa adiante apenas se houver significância no nível anterior.[@REF]
 
 <br>
 
@@ -134,7 +154,11 @@ O pacote *stats*[@stats] fornece a função [*p.adjust*](https://www.rdocumentat
 
 ### O que são testes unicaudais e bicaudais?
 
--   .[@REF]
+- teste unicaudal procura evidência em uma direção específica (ex.: “maior que 0”). Toda a região crítica está numa só cauda; tem maior poder para aquela direção, mas não detecta sinal oposto.[@REF]
+
+- Teste bicaudal procura evidência em qualquer direção (ex.: “diferente de 0”). Divide $\alpha$ em duas caudas (direita e esquerda). É a escolha padrão quando ambas as direções são plausíveis.[@REF]
+
+- A decisão entre uma ou duas caudas deve ser pré-especificada com justificativa substantiva.[@REF]
 
 <br>
 
@@ -423,14 +447,6 @@ ggplot2::annotate(
 
 <br>
 
-### O que reportar após um teste de hipótese?
-
--   P-valores, como estimativa da significância estatística.[@Sullivan2012]
-
--   Tamanho do efeito, como estimativa de significância substantiva (clínica).[@Sullivan2012]
-
-<br>
-
 ## Inferência visual
 
 <br>
@@ -675,7 +691,7 @@ plot_base <- ggplot2::ggplot() +
   ) +
   # Títulos e legendas
   ggplot2::labs(
-    title = "Erros tipo I e II",
+    title = "Erros tipo I (α) e II (β)",
     x = "Efeito",
     y = "Densidade",
     color = "Distribuições",
