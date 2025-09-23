@@ -123,6 +123,7 @@ p_fd <- base +
   )
 
 # 5) Combinação horizontal
+library(patchwork)
 (p_st + p_sc + p_fd) + patchwork::plot_layout(ncol = 3)
 ```
 
@@ -1295,10 +1296,8 @@ n <- 1000
 dados_normal      <- rnorm(n, mean = 0, sd = 1)
 dados_assimetrico <- rlnorm(n, meanlog = 0, sdlog = 1)
 
-df <- tibble::tibble(
-  valor = c(dados_normal, dados_assimetrico),
-  tipo  = rep(c("Normal", "Assimétrico (Log-normal)"), each = n)
-)
+df <- tibble::tibble(valor = c(dados_normal, dados_assimetrico),
+                     tipo  = rep(c("Normal", "Assimétrico (Log-normal)"), each = n))
 
 # 2) Estatísticas-resumo
 resumo <- df |>
@@ -1309,22 +1308,32 @@ resumo <- df |>
     mediana = median(valor),
     sd      = sd(valor),
     skew    = e1071::skewness(valor, type = 2),
-    kurt    = e1071::kurtosis(valor, type = 2),     # kurtose "total" (Pearson)
+    kurt    = e1071::kurtosis(valor, type = 2),
+    # kurtose "total" (Pearson)
     excess  = kurt - 3                       # excess kurtosis
   )
 
 # 3) Histograma + densidade
 g_hist <- ggplot2::ggplot(df, ggplot2::aes(x = valor)) +
-  ggplot2::geom_histogram(aes(y = ggplot2::after_stat(density), fill = tipo),
-                 bins = 30, alpha = 0.60, color = "white") +
+  ggplot2::geom_histogram(
+    ggplot2::aes(y = ggplot2::after_stat(density), fill = tipo),
+    bins = 30,
+    alpha = 0.60,
+    color = "white"
+  ) +
   ggplot2::geom_density(color = "black", linewidth = 1) +
   ggplot2::facet_wrap(~ tipo, scales = "free") +
-  ggplot2::geom_vline(data = resumo, ggplot2::aes(xintercept = media), linetype = 2) +
-  ggplot2::geom_vline(data = resumo, ggplot2::aes(xintercept = mediana), linetype = 3) +
+  ggplot2::geom_vline(data = resumo,
+                      ggplot2::aes(xintercept = media),
+                      linetype = 2) +
+  ggplot2::geom_vline(data = resumo,
+                      ggplot2::aes(xintercept = mediana),
+                      linetype = 3) +
   ggplot2::labs(
     title = "Distribuições: Normal vs. Log-normal (Assimétrica)",
     subtitle = "Linhas tracejadas: média (--) e mediana (---)",
-    x = "Valor", y = "Densidade"
+    x = "Valor",
+    y = "Densidade"
   ) +
   ggplot2::theme_minimal() +
   ggplot2::theme(legend.position = "none")

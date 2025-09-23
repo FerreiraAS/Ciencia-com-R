@@ -540,6 +540,208 @@ ggplot2::ggplot(grid, ggplot2::aes(x = x, y = y, fill = cor)) +
 
 <br>
 
+## P-valor de 2ª geração
+
+<br>
+
+### O que é o P-valor de 2ª geração?
+
+-   O p-valor de 2ª geração (SGPV) resume a fração das hipóteses apoiadas pelos dados que também pertencem à hipótese nula intervalar (intervalo de equivalência previamente especificado). Quantifica quanto do intervalo de estimativa (p.ex., IC95%) recai dentro da zona de indiferença científica/clinicamente irrelevante.[@blume2018]
+
+-   Essa abordagem exige declarar a hipótese nula como intervalo (e não um ponto), incorporando o que é considerado “efeito sem relevância prática” segundo o contexto científico (precisão de medida, relevância clínica etc.).[@blume2018]
+
+<br>
+
+### Como definir a hipótese nula intervalar e $\delta$?
+
+-   Especifique $H_0$ como um intervalo de equivalência $[H_0^{-}, H_0^{+}]$ que contém efeitos considerados praticamente nulos. Defina $\delta$ como a meia-largura do intervalo de equivalência ($\delta = (H_0^{+} - H_0^{-})/2$).[@blume2018]
+
+-   A escolha deve ser a priori e justificada por critérios científicos (p.ex., MCID, precisão de medida).[@blume2018]
+
+<br>
+
+### Como calcular o SGPV?
+
+-   Seja $I=[a,b]$ o intervalo apoiado pelos dados (p.ex., IC 95%) e $H_0$ o intervalo nulo. O SGPV é \@ref(eq:sgpv), onde $|I|$ é a largura do intervalo de estimativa, $|H_0|$ é a largura do intervalo nulo e $|I \cap H_0|$ é a largura da sobreposição entre os dois intervalos. O SGPV é restrito ao intervalo $[0,1]$.[@blume2018]
+
+\begin{equation}
+(\#eq:sgpv)
+p_{\delta} = \frac{|\,I \cap H_0\,|}{|\,I\,|} \times \max\!\left\{ \frac{|\,I\,|}{2|\,H_0\,|}, \, 1 \right\}
+\end{equation}
+
+<br>
+
+-   Quando $|I|<2|H_0|$, $p_{\delta}$ é apenas a fração de sobreposição $|I\cap H_0|/|I|$.[@blume2018]
+
+-   Quando $|I|>2|H_0|$, o SGPV reduz-se a $\tfrac{1}{2}\times \dfrac{|,I\cap H_0,|}{|,H_0,|}\le \tfrac{1}{2}$, sinalizando inconclusão por imprecisão.[@blume2018]
+
+<br>
+
+```{r sgpv, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# --- Função SGPV ---
+sgpv <- function(I, H0) {
+  stopifnot(length(I) == 2, length(H0) == 2, I[1] < I[2], H0[1] < H0[2])
+  a <- I[1]; b <- I[2]
+  hmin <- H0[1]; hmax <- H0[2]
+  len_I  <- b - a
+  len_H0 <- hmax - hmin
+  # sobreposição
+  left  <- max(a, hmin)
+  right <- min(b, hmax)
+  overlap <- max(0, right - left)
+  prop_overlap <- if (len_I > 0) overlap / len_I else 0
+  # correção para amostra pequena (|I| > 2|H0| => <= 0.5)
+  small_sample_corr <- max(len_I / (2 * len_H0), 1)
+  p_delta <- prop_overlap * small_sample_corr
+  p_delta <- max(0, min(1, p_delta)) # restringe a [0,1]
+  list(p_delta = p_delta,
+       overlap = overlap,
+       prop_overlap = prop_overlap,
+       small_sample_corr = small_sample_corr,
+       len_I = len_I, len_H0 = len_H0)
+}
+
+# --- p-valor (bicaudal) a partir de um IC 95% simétrico ---
+p_from_ci <- function(I, level = 0.95, null = 0) {
+  a <- I[1]; b <- I[2]
+  z <- qnorm(1 - (1 - level)/2)
+  half_width <- (b - a) / 2
+  se <- half_width / z
+  est <- (a + b) / 2
+  z_obs <- abs((est - null) / se)
+  p <- 2 * (1 - pnorm(z_obs))
+  c(est = est, se = se, p_value = p)
+}
+
+# --- Cenários ---
+H0 <- c(-0.10, 0.10)
+cenarios <- list(
+  `1` = c(0.35, 0.55),
+  `2` = c(-0.05, 0.08),
+  `3` = c(-0.50, 0.70),
+  `4` = c(0.05, 0.25),
+  `5` = c(-0.25, -0.05),
+  `6` = c(0.15, 0.55),
+  `7` = c(-0.55, -0.15)
+)
+
+# --- Monta data.frame (com check.names = FALSE para preservar nomes) ---
+dados <- do.call(rbind, lapply(names(cenarios), function(id) {
+  I <- cenarios[[id]]
+  pd <- sgpv(I, H0)$p_delta
+  pv <- p_from_ci(I)
+  concl <- if (pd == 0) {
+    "Apoia alternativas (SGPV=0)"
+  } else if (pd == 1) {
+    "Equivalência (SGPV=1)"
+  } else {
+    "Inconclusivo (0<pδ<1)"
+  }
+  data.frame(
+    Cenário = as.integer(id),
+    a = I[1],
+    b = I[2],
+    H0_min = H0[1],
+    H0_max = H0[2],
+    theta_hat = pv["est"],
+    SE = pv["se"],
+    "p-valor (bicaudal)" = pv["p_value"],
+    "SGPV (pδ)" = pd,
+    Conclusão = concl,
+    check.names = FALSE
+  )
+}))
+
+# --- Formatação numérica ---
+fmt <- function(x, k = 3) formatC(x, digits = k, format = "f")
+dados$a <- fmt(dados$a)
+dados$b <- fmt(dados$b)
+dados$H0_min <- fmt(dados$H0_min)
+dados$H0_max <- fmt(dados$H0_max)
+dados$theta_hat <- fmt(dados$theta_hat)
+dados$SE <- fmt(dados$SE, 4)
+dados$`p-valor (bicaudal)` <- fmt(as.numeric(dados$`p-valor (bicaudal)`), 3)
+# if P<0,001 show this
+dados$`p-valor (bicaudal)`[as.numeric(dados$`p-valor (bicaudal)`) < 0.001] <- "<0,001"
+dados$`SGPV (pδ)` <- fmt(as.numeric(dados$`SGPV (pδ)`), 3)
+
+# --- Cabeçalhos finais com LaTeX/HTML ---
+colnames(dados) <- c(
+  "Cenário",
+  "$a$",
+  "$b$",
+  "$H_0^{-}$",
+  "$H_0^{+}$",
+  "$\\hat\\theta$",
+  "$SE$",
+  "p-valor (bicaudal)",
+  "$p_{\\delta}$",
+  "Conclusão (SGPV)"
+)
+
+# remove row names
+rownames(dados) <- NULL
+
+# --- Tabela kableExtra ---
+kableExtra::kable(
+  dados,
+  align = c("c","c","c","c","c","c","c","c","c","c"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE,
+  caption = "Comparação entre p-valor (bicaudal, inferido do IC 95\\%) e SGPV ($p_{\\delta}$) nos cenários simulados."
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("condensed", "hover", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE,
+           extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(nrow(dados), extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+### Como interpretar o SGPV?
+
+-   $p_{\delta}=0$: dados apoiam apenas hipóteses alternativas relevantes (IC totalmente fora da equivalência).[@blume2018]
+
+-   $p_{\delta}=1$: dados apoiam apenas hipóteses nulas (equivalentes) (IC totalmente dentro da equivalência).[@blume2018] $0<p_{\delta}<1$: inconclusivo; o valor expressa o grau de inconclusão. Em particular, $p_{\delta}=\tfrac{1}{2}$ indica inconclusão estrita.[@blume2018]
+
+-   O SGPV é descritivo (não é probabilidade posterior de $H_0$).[@blume2018]
+
+<br>
+
+### Relação com testes de equivalência (TOST)
+
+-   Tanto SGPV quanto TOST comparam o IC com os limites de equivalência. Se o IC $(1-2\alpha)$ (p.ex., 90% quando $\alpha=0{,}05$) cai inteiro dentro dos limites, TOST conclui equivalência — situação análoga a $p_{\delta}=1$.[@lakens2020]
+
+-   Com ICs simétricos, há pontos de ancoragem em que as estatísticas coincidem: quando $p_{\text{TOST}}=0{,}5$, então $\mathrm{SGPV}=0{,}5$; quando o IC toca o limite mas fica inteiramente dentro (fronteira), $p_{\text{TOST}}=0{,}025$ e $\mathrm{SGPV}=1$; quando o IC fica inteiramente fora tocando o limite, $p_{\text{TOST}}=0{,}975$ e $\mathrm{SGPV}=0$.[@lakens2020]
+
+-   Em ICs assimétricos ou quando $|I|>2|H_0|$, o SGPV fica difícil de interpretar quando $0<p_{\delta}<1$; nesses cenários, o TOST costuma diferenciar melhor os resultados.[@lakens2020]
+
+<br>
+
+### Propriedades frequenciais e múltiplas comparações
+
+-   Usando ICs $100(1-\alpha)%$, sob qualquer hipótese em $H_0$, $\Pr(p_{\delta}=0)\le \alpha$ e $\to 0$ com o aumento de $n$; fora de $H_0$, $\Pr(p_{\delta}=0)\to 1$ quando $n$ cresce.[@blume2018]
+
+-   O SGPV mitiga naturalmente inflação de erro Tipo I em muitas comparações e prioriza relevância científica (não requer ajustes ad hoc).[@blume2018]
+
+<br>
+
+## Boas práticas
+
+-   Defina $H_0$ intervalar e $\delta$ a priori com justificativa científica.[@blume2018; @lakens2020]
+
+-   Reporte: estimativa pontual, IC, limites de equivalência e $p_{\delta}$; interprete $p_{\delta}\in{0,1}$ de forma dicotômica e $0<p_{\delta}<1$ como inconclusivo; quando necessário, complemente com TOST.[@blume2018; @lakens2020]
+
+<br>
+
 ```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
 cat(readLines("citation.html"), sep = "\n")
 ```

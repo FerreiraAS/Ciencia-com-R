@@ -942,6 +942,29 @@ ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y, size = z)) +
 
 <br>
 
+- Sankey plot: Visualiza fluxos entre categorias em diferentes etapas ou grupos. Útil para mostrar proporções e transições.[@REF]
+
+<br>
+
+```{r sankey-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Sankey plot representando fluxos entre categorias."}
+# Dados de exemplo
+nodes <- data.frame(name = c("Grupo A", "Grupo B", "Grupo C", "Destino X", "Destino Y"))
+links <- data.frame(
+  source = c(0, 1, 2, 0, 1),
+  target = c(3, 3, 3, 4, 4),
+  value  = c(10, 5, 15, 20, 10)
+)
+
+networkD3::sankeyNetwork(
+  Links = links, Nodes = nodes,
+  Source = "source", Target = "target",
+  Value = "value", NodeID = "name",
+  fontSize = 12, nodeWidth = 30
+)
+```
+
+<br>
+
 ### Quais são os tipos de gráficos para dados longitudinais?
 
 -   Gráfico de *spaghetti*: Mostra trajetórias individuais ao longo do tempo, útil para dados longitudinais.[@REF]
