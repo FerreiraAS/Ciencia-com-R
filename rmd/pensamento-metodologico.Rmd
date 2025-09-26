@@ -22,41 +22,58 @@
 
 <br>
 
-```{r, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Mapa mental da relação entre o pensamento estatístico e o pensamento metodológico."}
-DiagrammeR::mermaid(
-  "
+```{r mapa-mental, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE,fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Mapa mental da relação entre o pensamento estatístico e o pensamento metodológico.", out.width = "100%"}
+# Cria o gráfico
+g <- DiagrammeR::grViz("
+digraph {
+  graph [layout = dot, rankdir = TB]
+  
+  node [shape = rectangle, style = filled, fillcolor = lightblue]
+  A [label = 'Projeto de pesquisa']
+  B [label = 'Geração e especificação de hipóteses']
+  C [label = 'Delineamento do estudo']
+  D [label = 'Realização do estudo e coleta de dados']
+  E [label = 'Análise de dados e teste de hipóteses']
+  F [label = 'Interpretação de resultados']
+  G [label = 'Publicação e/ou próximo experimento']
+  
+  node [fillcolor = lightyellow]
+  H [label = 'Elaboração das hipóteses nula e alternativa']
+  I [label = 'Seleção das análises descritiva/inferencial']
+  J [label = 'Análise inicial de dados']
+  K [label = 'Análise inferencial']
+  L [label = 'Tamanho do efeito e P-valor']
+  M [label = 'Redação dos resultados']
+  
+  // Conexões principais
+  A -> B [style = dashed]
+  B -> C
+  C -> D
+  D -> E
+  E -> F
+  F -> G
+  
+  // Conexões secundárias
+  H -> I -> J -> K -> L -> M
+  
+  // Conexões pontilhadas
+  H -> B [style = dotted]
+  I -> C [style = dotted]
+  J -> D [style = dotted]
+  K -> E [style = dotted]
+  L -> F [style = dotted]
+  M -> G [style = dotted]
+}
+")
 
-graph TB
+# Exporta para SVG
+svg <- DiagrammeRsvg::export_svg(g)
 
-A(Projeto <br/>de pesquisa) --- B(Geração e especificação <br/> de hipóteses)
-B(Geração e especificação <br/> de hipóteses)-->C(Delineamento <br/> do estudo)
-C(Delineamento do estudo)-->D(Realização do estudo <br/> e coleta de dados)
-D(Realização do estudo e coleta de dados)-->E(Análise de dados e teste de hipóteses)
-E(Análise de dados <br/> e teste de hipóteses)-->F(Interpretação de resultados)
-F(Interpretação <br/> de resultados)-->G(Publicação e/ou realização <br/> do próximo experimento)
+# Converte SVG em PNG (ou PDF se quiser)
+rsvg::rsvg_png(charToRaw(svg), file = "./images/mapa-mental.png", width = 1200, height = 1000)
 
-H(Elaboração das hipóteses <br/> nula e alternativa)-.->B(Geração e especificação <br/> de hipóteses)
-I(Seleção das análises <br/> descritiva/inferencial e testes)-.->C(Delineamento <br/> do estudo)
-J(Análise inicial <br/> de dados)-.->D(Realização do estudo <br/> e coleta de dados)
-K(Análise <br/> inferencial)-.->E(Análise de dados <br/> e teste de hipóteses)
-L(Tamanho do efeito <br/> e P-valor)-.->F(Interpretação <br/> de resultados)
-M(Redação <br/> dos resultados)-.->G(Publicação e/ou realização <br/> do próximo experimento)
-
-H-->I
-I-->J
-J-->K
-K-->L
-L-->M
-
-style H fill:#FFFFFF00;
-style I fill:#FFFFFF00;
-style J fill:#FFFFFF00;
-style K fill:#FFFFFF00;
-style L fill:#FFFFFF00;
-style M fill:#FFFFFF00;
-
-"
-)
+# Exibe a imagem
+knitr::include_graphics("./images/mapa-mental.png")
 ```
 
 <br>
