@@ -206,28 +206,6 @@ O pacote *performance*[@performance] fornece a função [*check_model*](https://
 
 <br>
 
-## Fome de dados
-
-<br>
-
-### O que significa "fome de dados"?
-
-- *Data hungry* descreve a necessidade de um modelo contar com muitos eventos por variável (EPV) para alcançar estabilidade estatística.
-
-- Enquanto a regressão logística (LR) atinge desempenho estável com cerca de **20–50 EPV**, modelos como random forest (RF), redes neurais (NN) e máquinas de vetor de suporte (SVM) podem demandar **>200 EPV** para reduzir o otimismo e estabilizar a AUC.
-
-<br>
-
-### Por que a "fome de dados" é relevante?
-
-- Em bases de dados pequenas, modelos clássicos tendem a ser mais robustos e menos suscetíveis a superajuste.[@vanderploeg2014]
-
-- O uso de modelos modernos só se justifica quando há grandes bases de dados, caso contrário o ganho em acurácia é marginal.[@vanderploeg2014]
-
-- Esse conceito conecta diretamente a escolha do modelo ao planejamento amostral.[@vanderploeg2014]
-
-<br>
-
 ## Desempenho e estabilidade de modelos
 
 <br>
@@ -256,7 +234,21 @@ O pacote *performance*[@performance] fornece a função [*check_model*](https://
 
 ### Como avaliar a qualidade de ajuste de um modelo?
 
--   Coeficiente de determinação ($R^2$) e $R^2$ ajustado: Medem a proporção da variabilidade dos dados explicada pelo modelo. O $R^2$ ajustado penaliza a inclusão de variáveis irrelevantes.[@REF]
+-   Coeficiente de determinação ($R^2$) \@ref(eq:r2) e $R^2$ ajustado \@ref(eq:r2adj): Medem a proporção da variabilidade dos dados explicada pelo modelo. O $R^2$ ajustado penaliza a inclusão de variáveis irrelevantes.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:r2)
+R^2 = 1 - \frac{SS_{res}}{SS_{tot}}
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:r2adj)
+R^2_{ajustado} = 1 - (1 - R^2)\frac{n - 1}{n - p - 1}
+\end{equation}
 
 <br>
 
@@ -317,11 +309,14 @@ obs$label <- mapply(make_label, as.character(obs$grupo),
 # Junta o rótulo ao DF para facetar
 layout_df <- merge(layout_df, obs[, c("grupo","label")], by = "grupo", all.x = TRUE)
 
-# Plot
+# reorder by R2
+layout_df$label <- factor(layout_df$label, levels = obs$label[order(-obs$R2_obs)])
+
+# Plot (monocromático e em 2x2)
 ggplot2::ggplot(layout_df, ggplot2::aes(x = x, y = y)) +
-  ggplot2::geom_point(alpha = 0.7) +
-  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "gray40") +
-  ggplot2::facet_wrap(~ label, nrow = 1) +
+  ggplot2::geom_point(alpha = 0.7, color = "black") +
+  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "black") +
+  ggplot2::facet_wrap(~ label, ncol = 2) +
   ggplot2::labs(x = "X", y = "Y") +
   ggplot2::theme_minimal() +
   ggplot2::theme(
@@ -335,9 +330,36 @@ ggplot2::ggplot(layout_df, ggplot2::aes(x = x, y = y)) +
   )
 ```
 
--   Erro quadrático médio ($RMSE$): Mede a média dos erros ao quadrado entre os valores observados e os valores previstos pelo modelo. Valores menores indicam melhor ajuste.[@REF]
+<br>
 
--   Critério de Informação Akaike ($AIC$) e Critério de Informação Bayesiano ($BIC$): Avaliam o ajuste do modelo penalizando a complexidade (número de parâmetros). Modelos com menor AIC ou BIC são preferíveis.[@REF]
+-   Erro quadrático médio ($RMSE$) \@ref(eq:rmse): Mede a média dos erros ao quadrado entre os valores observados e os valores previstos pelo modelo, onde $y_i$ são os valores observados, $\hat{y}_i$ são os valores previstos pelo modelo, e $n$ é o número de observações. Valores menores indicam melhor ajuste.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:rmse)
+RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+\end{equation}
+
+<br>
+
+-   Critério de Informação Akaike ($AIC$) \@ref(eq:aic) e Critério de Informação Bayesiano ($BIC$) \@ref(eq:bic): Avaliam o ajuste do modelo penalizando a complexidade (número de parâmetros), onde $k$ é o número de parâmetros do modelo, $L$ é a verossimilhança máxima do modelo, e $n$ é o tamanho da amostra. Modelos com menor AIC ou BIC são preferíveis.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:aic)
+AIC = 2k - 2\ln(L)
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:bic)
+BIC = \ln(n)k - 2\ln(L)
+\end{equation}
+
+<br>
 
 -   Desvio residual ($\sigma$): Mede a variabilidade dos resíduos do modelo. Valores menores indicam melhor ajuste.[@REF]
 

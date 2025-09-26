@@ -132,7 +132,7 @@
 
 - *Ad hoc*: análises/decisões não planejadas a priori, motivadas por inspeção dos dados. Úteis para gerar hipóteses, não para confirmá-las.[@REF]
 
-- *Post hoc*: procedimentos de comparações múltiplas aplicados após um teste global (ex.: ANOVA) ter indicado diferença (ex.: Tukey, Bonferroni, Holm). Visam controlar o erro tipo I em múltiplas comparações.[@REF]
+- *Post hoc*: procedimentos de comparações múltiplas aplicados após um teste global ter indicado efeito significativo. Visam controlar o erro tipo I em múltiplas comparações.[@REF]
 
 <br>
 
@@ -154,7 +154,7 @@ O pacote *stats*[@stats] fornece a função [*p.adjust*](https://www.rdocumentat
 
 ### O que são testes unicaudais e bicaudais?
 
-- teste unicaudal procura evidência em uma direção específica (ex.: “maior que 0”). Toda a região crítica está numa só cauda; tem maior poder para aquela direção, mas não detecta sinal oposto.[@REF]
+- Teste unicaudal procura evidência em uma direção específica (ex.: “maior que 0”). Toda a região crítica está numa só cauda; tem maior poder para aquela direção, mas não detecta sinal oposto.[@REF]
 
 - Teste bicaudal procura evidência em qualquer direção (ex.: “diferente de 0”). Divide $\alpha$ em duas caudas (direita e esquerda). É a escolha padrão quando ambas as direções são plausíveis.[@REF]
 
@@ -463,7 +463,7 @@ ggplot2::annotate(
 
 -   Intervalos de confiança fornecem estimativas pontuais e intervalares na mesma unidade de medida da variável.[@cumming2005]
 
--   Existe uma relação entre o intervalo de confiança e o valor de P obtido pelo teste de significância de hipótese nula, em que ambos consideram o mesmo nível de significância $\alpha$ pré-estabelecido.[@cumming2005]
+-   Existe uma relação entre o intervalo de confiança e o P-valor obtido pelo teste de significância de hipótese nula $H_{0}$, em que ambos consideram o mesmo nível de significância $\alpha$ pré-estabelecido.[@cumming2005]
 
 <br>
 
@@ -497,15 +497,15 @@ ggplot2::annotate(
 
 <br>
 
-### O que são resultados 'positivos' e 'negativos' ou inconclusivos em teste de hipótese?
+### O que são resultados  positivos" e "negativos" (inconclusivos) em teste de hipótese?
 
--   Resultados 'positivos' compreendem um P-valor dentro da zona crítica estatisticamente significativa (ex.: $P<0,05$ ou outro ponto de corte) e sugerem que os autores rejeitem a hipótese nula ($H_{0}$), confirmando assim sua hipótese científica.[@greenhalgh1997a]
+-   Resultados "positivos"  compreendem um P-valor dentro da zona crítica estatisticamente significativa (ex.: $P<0,05$ ou outro ponto de corte) e sugerem que os autores rejeitem a hipótese nula ($H_{0}$), confirmando assim sua hipótese científica.[@greenhalgh1997a]
 
--   Resultados 'negativos' ou inconclusivos compreendem um P-valor fora da zona crítica estatisticamente significativa (ex.: $P \geq 0,05$ ou outro ponto de corte) e sugerem que os autores não rejeitem a hipótese nula ($H_{0}$) porque o efeito observado é nulo (logo, *negativo*), ou porque o estudo não possui poder suficiente para detectá-lo, não permitindo portanto afirmar a hipótese científica (logo, *inconclusivo*).[@greenhalgh1997a]
+-   Resultados "negativos" ou inconclusivos compreendem um P-valor fora da zona crítica estatisticamente significativa (ex.: $P \geq 0,05$ ou outro ponto de corte) e sugerem que os autores não rejeitem a hipótese nula ($H_{0}$) porque o efeito observado é nulo (logo, "negativo"), ou porque o estudo não possui poder suficiente para detectá-lo, não permitindo portanto afirmar a hipótese científica (logo, inconclusivo).[@greenhalgh1997a]
 
 <br>
 
-### Qual a importância de resultados 'negativos'?
+### Qual a importância de resultados "negativos"?
 
 -   Conhecer resultados negativos contribui com uma visão mais ampla do campo de estudo junto aos resultados positivos.[@weintraub2016]
 

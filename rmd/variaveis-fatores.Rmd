@@ -294,9 +294,61 @@ O pacote *MASS*[@MASS] fornece a função [*boxcox*](https://www.rdocumentation.
 
 - Escala Min-Max: transformar para o intervalo [0,1].[@REF]
 
-- Normalização (L1 ou L2): usada em aprendizado de máquina para vetores de características.[@REF]
+<br>
 
-- Transformações específicas de área: padronização por peso corporal, por superfície corporal, por tempo etc.[@REF]
+```{r padronizacao, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.fullwidth=TRUE, fig.cap='Comparação entre variáveis originais e padronizadas (Z-score e Min-Max).', out.width='100%'}
+# Reprodutibilidade
+set.seed(123)
+
+# 1. Gerar dados simulados
+dados <- rnorm(100, mean = 50, sd = 10)
+
+# 2. Padronizações
+z_score <- scale(dados)
+min_max <- (dados - min(dados)) / (max(dados) - min(dados))
+
+# 3. Data frame tidy
+resultado <- data.frame(
+  Original = dados,
+  Z_Score = as.numeric(z_score),
+  Min_Max = min_max
+)
+
+# Função para gerar par de gráficos (histograma + boxplot com pontos)
+make_plots <- function(v, nome) {
+  df <- data.frame(valor = v)
+  
+  # Histograma
+  p_hist <- ggplot2::ggplot(df, ggplot2::aes(x = valor)) +
+    ggplot2::geom_histogram(bins = 15, fill = "skyblue", color = "black", alpha = 0.7) +
+    ggplot2::labs(title = paste("Histograma -", nome), x = "Valor", y = "Frequência") +
+    ggplot2::theme_minimal()
+  
+  # Boxplot + pontos
+  p_box <- ggplot2::ggplot(df, ggplot2::aes(x = nome, y = valor)) +
+    ggplot2::geom_boxplot(fill = "orange", color = "black", alpha = 0.6, width = 0.3) +
+    ggplot2::geom_jitter(width = 0.1, alpha = 0.6, color = "blue") +
+    ggplot2::labs(title = paste("Boxplot -", nome), x = "", y = "Valor") +
+    ggplot2::theme_minimal()
+  
+  list(p_hist, p_box)
+}
+
+# 4. Criar gráficos para cada método
+plots_original <- make_plots(resultado$Original, "Original")
+plots_zscore   <- make_plots(resultado$Z_Score, "Z-Score")
+plots_minmax   <- make_plots(resultado$Min_Max, "Min-Max")
+
+# ---------------------------
+# 5. Organizar em grid (3 linhas, 2 colunas)
+# ---------------------------
+gridExtra::grid.arrange(
+  plots_original[[1]], plots_original[[2]],
+  plots_zscore[[1]],   plots_zscore[[2]],
+  plots_minmax[[1]],   plots_minmax[[2]],
+  ncol = 2, nrow = 3
+)
+```
 
 <br>
 

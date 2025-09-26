@@ -254,7 +254,7 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*ma_r*](https://www.rdocume
 
 <br>
 
-## Interpretação do *Forest Plot*
+## Interpretação do *forest plot*
 
 <br>
 
@@ -384,7 +384,7 @@ metafor::forest(
 
 <br>
 
-### 2. Quais são as seis colunas básicas que um *forest plot* geralmente apresenta?
+### Quais são as seis colunas básicas que um *forest plot* geralmente apresenta?
 
 -   As seis colunas básicas incluem: estudos incluídos (e subgrupos, se analisados); dados do grupo de intervenção, dados do grupo controle; peso de cada estudo; medida numérica do efeito; representação gráfica do efeito.[@dettori2021]
 
@@ -398,7 +398,7 @@ metafor::forest(
 
 <br>
 
-### 4. O que representa o ponto central da caixa e o tamanho desta no gráfico?
+### O que representa o ponto central da caixa e o tamanho desta no gráfico?
 
 -   O ponto central indica a estimativa pontual do efeito (melhor estmativa para o efeito real).[@dettori2021]
 
@@ -406,7 +406,7 @@ metafor::forest(
 
 <br>
 
-### 5. Qual é o significado da linha vertical do “nenhum efeito”?
+### Qual é o significado da linha vertical do “nenhum efeito”?
 
 -   É a linha de referência que indica efeito nulo.[@dettori2021]
 
@@ -418,7 +418,7 @@ metafor::forest(
 
 <br>
 
-### 6. Como interpretar o diamante na parte inferior do *forest plot*?
+### Como interpretar o diamante na parte inferior do *forest plot*?
 
 -   O diamante representa o efeito combinado dos estudos incluídos.[@dettori2021]
 
@@ -440,6 +440,109 @@ metafor::forest(
 
 <br>
 
+```{r ma-forest-plot-i2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Forest plots ilustrativos para faixas usuais de $I^2$."}
+# Reprodutibilidade
+set.seed(123)
+
+# Calcula tau^2 aproximado para atingir um I^2 alvo (fração 0-1)
+tau2_from_I2 <- function(I2_target, vbar) {
+  if (I2_target <= 0) return(0)
+  (I2_target / (1 - I2_target)) * vbar
+}
+
+# Simula uma meta-análise 2 braços (diferença de médias) com I^2 na faixa desejada
+simulate_meta_in_band <- function(band = c(0, 0.4),
+                                  k = 12,
+                                  mu = 0.30,
+                                  n_range = c(40, 200),
+                                  sd_range = c(0.6, 1.4),
+                                  max_tries = 200) {
+  band <- sort(band)
+  I2_target <- mean(band)
+  
+  tries <- 0
+  last_fit <- NULL
+  
+  repeat {
+    tries <- tries + 1
+    n_t <- sample(n_range[1]:n_range[2], k, replace = TRUE)
+    n_c <- sample(n_range[1]:n_range[2], k, replace = TRUE)
+    sd  <- runif(k, sd_range[1], sd_range[2])
+    vi  <- sd^2 / n_t + sd^2 / n_c
+    vbar <- mean(vi)
+    
+    tau2 <- tau2_from_I2(I2_target, vbar)
+    
+    ui <- rnorm(k, 0, sqrt(tau2))
+    theta_i <- mu + ui
+    yi <- rnorm(k, theta_i, sqrt(vi))
+    
+    # rótulos já na chamada do modelo
+    slabs <- paste0("Trial_", seq_len(k),
+                    "  (nT=", n_t, ", nC=", n_c, ")")
+    
+    fit <- metafor::rma(yi = yi, vi = vi, slab = slabs, method = "REML")
+    I2_obs <- as.numeric(fit$I2) / 100
+    last_fit <- list(fit = fit,
+                     tau2_true = tau2,
+                     I2_target = I2_target,
+                     I2_obs = I2_obs,
+                     tries = tries)
+    
+    if (I2_obs >= band[1] && I2_obs <= band[2]) break
+    if (tries >= max_tries) {
+      warning(sprintf("Não convergiu exatamente para a faixa [%g, %g]. I^2=%.1f%%",
+                      band[1]*100, band[2]*100, I2_obs*100))
+      break
+    }
+  }
+  class(last_fit) <- "meta_sim"
+  last_fit
+}
+
+# Plot com título mostrando I^2 e tau^2
+plot_forest <- function(obj, main = "") {
+  fit <- obj$fit
+  metafor::forest(fit,
+         xlab = "Diferença de médias",
+         alim = c(min(fit$yi) - 0.5, max(fit$yi) + 0.5),
+         header = c("Estudo", "DM [IC 95%]"),
+         cex = 0.8)
+  title(main = main, cex.main = 0.95, line = 1)
+  mtext(sprintf("I^2 obs = %.1f%%   |   tau^2 (verdadeiro) ≈ %.3f   |   Tentativas: %d",
+                fit$I2, obj$tau2_true, obj$tries),
+        side = 3, line = -1.0, cex = 0.75)
+}
+
+# ---- Faixas desejadas --------------------------------------
+bands <- list(
+  `0–40%`  = c(0.00, 0.40),
+  `30–60%` = c(0.30, 0.60),
+  `50–90%` = c(0.50, 0.90),
+  `75–100%`= c(0.75, 1.00)
+)
+
+# ---- Simulação dos 4 cenários ------------------------------
+set.seed(20250926)
+
+sim_low    <- simulate_meta_in_band(band = bands[[1]], k = 12)
+sim_mod    <- simulate_meta_in_band(band = bands[[2]], k = 12)
+sim_subst  <- simulate_meta_in_band(band = bands[[3]], k = 12)
+sim_cons   <- simulate_meta_in_band(band = bands[[4]], k = 12)
+
+# ---- Forest plots (2x2) -----------------------------------
+op <- par(mfrow = c(2, 2), mar = c(4, 4, 4, 1))
+
+plot_forest(sim_low,   main = "Faixa 0–40% (pode não ser importante)")
+plot_forest(sim_mod,   main = "Faixa 30–60% (moderada)")
+plot_forest(sim_subst, main = "Faixa 50–90% (substancial)")
+plot_forest(sim_cons,  main = "Faixa 75–100% (considerável)")
+
+par(op)
+```
+
+<br>
+
 ## Viés de publicação em meta-análises
 
 <br>
@@ -452,7 +555,7 @@ metafor::forest(
 
 ### Quais métodos podem ser usados para identificar viés de publicação?
 
--   O método mais simples é o **funnel plot**, que representa a estimativa de efeito de cada estudo em função de sua precisão ($1/SE$).[@egger1997]
+-   O método mais simples é o *funnel plot*, que representa a estimativa de efeito de cada estudo em função de sua precisão ($1/SE$).[@egger1997]
 
 -   Na ausência de viés, espera-se uma distribuição simétrica (“forma de funil”). Assimetria pode indicar viés de publicação, heterogeneidade entre estudos ou efeitos de tamanho de estudo (*small-study effects*).[@egger1997]
 
@@ -466,81 +569,76 @@ metafor::forest(
 
 <br>
 
-```{r ma-funnel-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de funil de meta-análise com 10 ensaios clínicos simulados."}
+```{r ma-funnel-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráficos de funil simulados com baixa e alta heterogeneidade."}
 # Reprodutibilidade
 set.seed(123)
 
-# Simular dados de 10 ensaios clínicos (Tratamento vs. Controle)
-k   <- 10
-n_t <- sample(30:200, k, replace = TRUE)  # tamanho do grupo Tratamento
-n_c <- sample(30:200, k, replace = TRUE)  # tamanho do grupo Controle
+# Função para simular estudos
+simulate_data <- function(k, mean_delta, sd_delta, prefix="") {
+  n_t <- sample(50:200, k, replace = TRUE)
+  n_c <- sample(50:200, k, replace = TRUE)
+  
+  true_delta <- rnorm(k, mean = mean_delta, sd = sd_delta)
+  mu_c <- rnorm(k, mean = 0, sd = 0.30)
+  mu_t <- mu_c + true_delta
+  sd_c <- runif(k, min = 0.7, max = 1.2)
+  sd_t <- runif(k, min = 0.7, max = 1.2)
+  
+  dat <- data.frame(
+    study_id = paste0(prefix, seq_len(k)),
+    n_t, n_c, mu_t, mu_c, sd_t, sd_c,
+    stringsAsFactors = FALSE
+  )
+  
+  es <- metafor::escalc(measure="SMD",
+               m1i=mu_t, sd1i=sd_t, n1i=n_t,
+               m2i=mu_c, sd2i=sd_c, n2i=n_c,
+               vtype="UB", data=dat)
+  list(es=es, dat=dat)
+}
 
-# Médias e desvios-padrão simulados
-mu_c <- rnorm(k, mean = 0.00, sd = 0.40)
-mu_t <- mu_c + rnorm(k, mean = 0.30, sd = 0.15)  # efeito médio positivo para Tratamento
-sd_c <- runif(k, min = 0.6, max = 1.4)
-sd_t <- runif(k, min = 0.6, max = 1.4)
+# --- Exemplo A: Baixa heterogeneidade ---
+simA <- simulate_data(12, mean_delta=0.30, sd_delta=0.05, prefix="A_")
+resA <- metafor::rma.uni(yi=simA$es$yi, vi=simA$es$vi, method="REML")
 
-dat <- data.frame(
-  study_id = paste0("Trial_", seq_len(k)),
-  n_t      = n_t,
-  n_c      = n_c,
-  mean_t   = mu_t,
-  mean_c   = mu_c,
-  sd_t     = sd_t,
-  sd_c     = sd_c,
-  stringsAsFactors = FALSE
-)
+# --- Exemplo B: Alta heterogeneidade ---
+simB <- simulate_data(12, mean_delta=0.30, sd_delta=0.60, prefix="B_")
+resB <- metafor::rma.uni(yi=simB$es$yi, vi=simB$es$vi, method="REML")
 
-# Calcular SMD (Hedges g) com escalc()
-# measure = "SMD" usa a correção de Hedges por padrão (J)
-es <- metafor::escalc(
-  measure = "SMD",
-  m1i = dat$mean_t,
-  sd1i = dat$sd_t,
-  n1i = dat$n_t,
-  m2i = dat$mean_c,
-  sd2i = dat$sd_c,
-  n2i = dat$n_c,
-  data = dat,
-  vtype = "UB"
-)
+# --- Plot lado a lado ---
+par(mfrow=c(1,2))   # 1 linha, 2 colunas
 
-# --- modelo de efeito fixo) ---
-res_fe <- metafor::rma.uni(yi = es$yi,
-                           vi = es$vi,
-                           method = "FE")
-
-# --- modelo de efeito aleatório (REML) ---
-res_re <- metafor::rma.uni(
-  yi = es$yi,
-  vi = es$vi,
-  method = "REML"  # método para efeito aleatório
-)
-tau2   <- base::as.numeric(res_re$tau2)
-fe_est <- base::as.numeric(res_fe$b)
-re_est <- base::as.numeric(res_re$b)
-
-# Funnel com “contour enhancement” para significância
-#    As áreas sombreadas ajudam a distinguir assimetria por viés vs. heterogeneidade/azar.
-metafor::funnel(
-  res_re,
-  xlab   = "Hedges g (SMD)",
-  ylab   = "Precisão (1/SE)",
-  yaxis  = "seinv",
-  level  = c(90, 95, 99),   # contornos de significância
-  refline = as.numeric(res_re$b),
-  back   = "gray95",        # fundo suave
-  shade  = c("white", "gray90", "gray80")
-)
-
-# Adiciona rótulos dos estudos
-# A função funnel() devolve um gráfico, mas não retorna coordenadas,
-# então usamos os próprios yi e vi para calcular posições
-with(es, {
-  precisao <- 1 / sqrt(vi) # eixo vertical (seinv)
-  text(x = yi, y = precisao, labels = dat$study_id, pos = 4, cex = 0.7)
+# Funnel A
+metafor::funnel(resA,
+       xlab="Hedges g (SMD)",
+       ylab="Precisão (1/SE)",
+       yaxis="seinv",
+       level=c(90,95,99),
+       refline=as.numeric(resA$b),
+       main=paste0("Baixa heterogeneidade\n tau²=", round(resA$tau2,3),
+                   " | I²=", round(resA$I2,1), "%"),
+       back="gray95", shade=c("white","gray90","gray80"))
+with(simA$es, {
+  precisao <- 1/sqrt(vi)
+  text(x=yi, y=precisao, labels=simA$dat$study_id, pos=4, cex=0.7)
 })
+
+# Funnel B
+metafor::funnel(resB,
+       xlab="Hedges g (SMD)",
+       ylab="Precisão (1/SE)",
+       yaxis="seinv",
+       level=c(90,95,99),
+       refline=as.numeric(resB$b),
+       main=paste0("Alta heterogeneidade\n tau²=", round(resB$tau2,3),
+                   " | I²=", round(resB$I2,1), "%"),
+       back="gray95", shade=c("white","gray90","gray80"))
+with(simB$es, {
+  precisao <- 1/sqrt(vi)
+  text(x=yi, y=precisao, labels=simB$dat$study_id, pos=4, cex=0.7)
+})
+
+par(mfrow=c(1,1))
 ```
 
 <br>
@@ -624,6 +722,8 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*plot_funnel*](https://www.
 -   Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
 
 -   *The PRISMA 2020 statement: An updated guideline for reporting systematic reviews*:[@page2021] <https://www.equator-network.org/reporting-guidelines/prisma/>
+
+-   *Transparent reporting of multivariable prediction models for individual prognosis or diagnosis: checklist for systematic reviews and meta-analyses (TRIPOD-SRMA)*.[@snell2023] <https://www.equator-network.org/reporting-guidelines/tripod-srma/>
 
 <br>
 

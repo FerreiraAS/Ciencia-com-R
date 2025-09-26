@@ -427,7 +427,7 @@ tab_falacia <- gtsummary::tbl_merge(
   list(tab_cru, tab_aj),
   tab_spanner = c("**Sem ajuste**", "**Ajustado**")
 ) |>
-  gtsummary::modify_caption("**Tabela 2. (Exemplo clássico suscetível à Falácia da Tabela 2).**")
+  gtsummary::modify_caption("**Exemplo clássico de apresentação suscetível à Falácia da 'Tabela 2'.**")
 
 tab_falacia
 ```
@@ -473,7 +473,7 @@ tab_aj <- gtsummary::tbl_regression(mod_aj, exponentiate = TRUE, include = "Grup
 
 tab_anti <- gtsummary::tbl_merge(list(tab_cru, tab_aj),
                                  tab_spanner = c("**Sem ajuste**", "**Ajustado**")) |>
-  gtsummary::modify_caption("**Tabela 2. Exposição (OR; 95% IC) com e sem ajuste.**")
+  gtsummary::modify_caption("**Exposição (OR; 95% IC) com e sem ajuste.**")
 
 # adiciona a nota de rodapé (corrigindo o erro)
 tab_anti_gt <- gtsummary::as_gt(tab_anti) |>

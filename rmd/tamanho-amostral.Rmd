@@ -210,6 +210,28 @@ plt_sat
 
 <br>
 
+## Fome de dados
+
+<br>
+
+### O que significa "fome de dados"?
+
+- *Data hungry* descreve a necessidade de um modelo contar com muitos eventos por variável (EPV) para alcançar estabilidade estatística.
+
+- Enquanto a regressão logística (LR) atinge desempenho estável com cerca de 20–50 EPV, modelos como random forest (RF), redes neurais (NN) e máquinas de vetor de suporte (SVM) podem demandar >200 EPV para reduzir o otimismo e estabilizar a AUC.
+
+<br>
+
+### Por que a "fome de dados" é relevante?
+
+- Em bases de dados pequenas, modelos clássicos tendem a ser mais robustos e menos suscetíveis a superajuste.[@vanderploeg2014]
+
+- O uso de modelos modernos só se justifica quando há grandes bases de dados, caso contrário o ganho em acurácia é marginal.[@vanderploeg2014]
+
+- Esse conceito conecta diretamente a escolha do modelo ao planejamento amostral.[@vanderploeg2014]
+
+<br>
+
 ## Eventos por variável (EPV) em modelos preditivos
 
 <br>
@@ -220,7 +242,7 @@ plt_sat
 
 - Árvore de decisão para classificação e regressão: cerca de 60 EPV.[@vanderploeg2014]
 
-- Máquina de vetores de suporte, redes neurais e *random forests* : muitas vezes >200 EPV e ainda instáveis.[@vanderploeg2014]
+- Máquina de vetores de suporte, redes neurais e *random forests*: muitas vezes >200 EPV e ainda instáveis.[@vanderploeg2014]
 
 <br>
 
@@ -359,6 +381,8 @@ O pacote *longpower*[@longpower] fornece a função [*power.mmrm*](https://www.r
 
 -   O tamanho da amostra pode ser ajustado durante o estudo para compensar a perda de amostra, desde que o aumento seja suficiente para manter o poder do estudo.[@rodríguezdeláguila2014]
 
+<br>
+
 ### Como ajustar para perda amostral?
 
 -   Aumentar o tamanho da amostra estimada $n$ pela porcentagem $d$ de perdas esperada ou prevista, para obter o tamanho da amostra efetiva $n'$ com base em \@ref(eq:samplesizeadj1):[@rodríguezdeláguila2014]
@@ -381,6 +405,8 @@ n' = \dfrac{n}{1-d}
 -   Em estudos que envolvem condições raras, pode ser difícil recrutar o número necessário de participantes devido à limitada disponibilidade de casos da população. Mesmo assim, é aconselhável determinar o tamanho da amostra.[@rodríguezdeláguila2014]
 
 -   Quando um estudo deste tipo não é possível, as considerações referentes ao tamanho da amostra são justificadas de acordo com o número máximo de pacientes que podem ser recrutados no decorrer do estudo.[@rodríguezdeláguila2014]
+
+<br>
 
 ### Como justificar o tamanho da amostra em estudos qualitativos?
 
