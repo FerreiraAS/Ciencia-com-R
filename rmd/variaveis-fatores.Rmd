@@ -228,11 +228,9 @@ print(g_reflect)
 
 -   Transformação de Box-Cox.[@box1964]
 
--   Transformação de escore padrão (Z-score ou padronização).
+-   Transformação de escore padrão (Z-score).
 
 -   Escala Mínimo-Máximo (0,1).
-
--   Normalização (normas L1, L2).
 
 -   Diferenciação.
 
@@ -290,9 +288,21 @@ O pacote *MASS*[@MASS] fornece a função [*boxcox*](https://www.rdocumentation.
 
 ### Quais são os métodos de padronização mais comuns?
 
-- Escore-Z (Z-score): subtrair a média e dividir pelo desvio-padrão.[@REF]
+- Escore-Z (Z-score) \@ref(eq:zscore): subtrair a média e dividir pelo desvio-padrão.[@REF]
 
-- Escala Min-Max: transformar para o intervalo [0,1].[@REF]
+\begin{equation}
+(\#eq:zscore)
+Z = \frac{X - \mu}{\sigma}
+\end{equation}
+
+<br>
+
+- Escala Min-Max \@ref(eq:minmax): transformar para o intervalo [0,1].[@REF]
+
+\begin{equation}
+(\#eq:minmax)
+X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}
+\end{equation}
 
 <br>
 

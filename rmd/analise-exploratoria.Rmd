@@ -154,6 +154,64 @@ O pacote *ggcleveland*[@ggcleveland] fornece a função [*gg_coplot*](https://ww
 
     -   Gráfico de autocorrelação entre as variáveis
 
+<br>
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.cap= "Séries temporais e autocorrelação de duas séries simuladas com fraca e forte autocorrelação.", out.width='80%', fig.align='center'}
+sim_ar1 <- function(n, phi = 0.8, mu = 0, sd = 1, x0 = 0) {
+  e <- rnorm(n, 0, sd)
+  x <- numeric(n)
+  x[1] <- x0
+  for (t in 2:n) x[t] <- mu + phi*(x[t-1] - mu) + e[t]
+  x
+}
+
+acf_to_df <- function(x, lag.max = NULL) {
+  a <- stats::acf(x, lag.max = lag.max, plot = FALSE, na.action = na.omit)
+  n <- sum(!is.na(x))
+  tibble::tibble(lag = as.integer(a$lag),
+         acf = as.numeric(a$acf),
+         ci  = 1.96 / sqrt(n)) |>
+    dplyr::filter(lag >= 0)
+}
+
+plot_ts <- function(x, titulo = "Série temporal") {
+  tibble::tibble(t = seq_along(x), y = x) |>
+    ggplot2::ggplot(ggplot2::aes(t, y)) +
+    ggplot2::geom_line() +
+    ggplot2::labs(x = "Tempo", y = NULL, title = titulo) +
+    ggplot2::theme_minimal(base_size = 12)
+}
+
+plot_acf <- function(x, titulo = "ACF", lag.max = 40) {
+  acf_df <- acf_to_df(x, lag.max = lag.max)
+  ggplot2::ggplot(acf_df, ggplot2::aes(lag, acf)) +
+    ggplot2::geom_hline(yintercept = 0) +
+    ggplot2::geom_ribbon(ggplot2::aes(ymin = -ci, ymax = ci), alpha = 0.15) +
+    ggplot2::geom_segment(ggplot2::aes(xend = lag, yend = 0)) +
+    ggplot2::labs(x = "Defasagem (lag)", y = "ACF", title = titulo) +
+    ggplot2::theme_minimal(base_size = 12)
+}
+
+# Dados: fraca vs forte ACF
+set.seed(123)
+n <- 250
+serie_fraca <- sim_ar1(n, phi = 0.10, sd = 1.0)  # fraca autocorrelação
+serie_forte <- sim_ar1(n, phi = 0.90, sd = 1.0)  # forte autocorrelação
+
+# Gráficos individuais
+g_ts_fraca <- plot_ts(serie_fraca, "Série temporal — Fraca autocorrelação (φ = 0.10)")
+g_ts_forte <- plot_ts(serie_forte, "Série temporal — Forte autocorrelação (φ = 0.90)")
+g_acf_fraca <- plot_acf(serie_fraca, "ACF — Fraca autocorrelação", lag.max = 40)
+g_acf_forte <- plot_acf(serie_forte, "ACF — Forte autocorrelação", lag.max = 40)
+
+# Figura 2x2
+library(patchwork)
+fig_2x2 <- (g_ts_fraca | g_ts_forte) / (g_acf_fraca | g_acf_forte)
+fig_2x2
+```
+
+<br>
+
 -   Medidas como mediana, *trimean*, distância absoluta mediana e procedimentos de *winsorizing* ou *trimming* são preferidos, pois reduzem a influência de valores extremos e oferecem resumos mais fiéis.[@behrens1997]
 
 -   A análise exploratória adota o esquema `dados = ajuste + resíduo`, no qual o analista ajusta modelos provisórios, examina resíduos e refina os modelos em ciclos sucessivos de aproximação.[@behrens1997]
