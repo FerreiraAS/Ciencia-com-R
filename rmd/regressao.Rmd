@@ -40,7 +40,7 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 - Sobrevida: Cox, Weibull, Exponencial, Log-normal, Log-logístico.[@REF]
 
-- Regularização: Ridge, Lasso.[@REF]
+- Regularização: Ridge, LASSO[@REF]
 
 <br>
 
@@ -510,13 +510,13 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-### O que são modelos de regressão lasso?
+### O que são modelos de regressão LASSO?
 
-- Regressão lasso (*Least Absolute Shrinkage and Selection Operator*) utiliza penalização L1, que pode zerar coeficientes.[@REF]
+- Regressão LASSO (*Least Absolute Shrinkage and Selection Operator*) utiliza penalização L1, que pode zerar coeficientes.[@REF]
 
 - Além de reduzir *overfitting*, também realiza seleção automática de variáveis.[@REF]  
 
-- Enquanto a regressão ridge mantém todos os preditores, a lasso pode excluir variáveis irrelevantes.[@REF]
+- Enquanto a regressão ridge mantém todos os preditores, a LASSO pode excluir variáveis irrelevantes.[@REF]
 
 <br>
 
@@ -631,7 +631,7 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 - Use técnicas de seleção de variáveis, como seleção passo a passo, para identificar e remover variáveis redundantes.[@Kim2019]
 
-- Use técnicas de regularização, como regressão ridge ou lasso, que podem lidar com multicolinearidade ao penalizar coeficientes de regressão.[@Kim2019]
+- Use técnicas de regularização, como regressão ridge ou LASSO, que podem lidar com multicolinearidade ao penalizar coeficientes de regressão.[@Kim2019]
 
 <br>
 
@@ -641,7 +641,7 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 ### Correlação bivariada pode ser usada para seleção de variáveis em modelos de regressão multivariável?
 
--   Seleção bivariada de variáveis - isto é, aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável - é um dos erros mais comuns na literatura.[@Dales1978; @Sun1996; @heinze2016]
+-   Seleção bivariada de variáveis --- isto é, aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável --- é um dos erros mais comuns na literatura.[@Dales1978; @Sun1996; @heinze2016]
 
 -   A seleção bivariada de variáveis torna o modelo mais suscetível a otimismo no ajuste se as variáveis de confundimento não são adequadamente controladas.[@Dales1978; @Sun1996]
 

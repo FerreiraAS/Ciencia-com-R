@@ -230,7 +230,14 @@ O pacote *metafor*[@metafor] fornece a função [*conv.fivenum*](https://cran.r-
 
 ### Como avaliar a heterogeneidade entre os estudos?
 
--   A heterogeneidade - variação não-aleatória - no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo $I^{2}$.[@Rücker2008; @Borenstein2022]
+-   A heterogeneidade --- variação não-aleatória --- no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo $I^{2}$ \@ref(eq:i-sqr).[@Rücker2008; @Borenstein2022]
+
+\begin{equation}
+(\#eq:i-sqr)
+I^{2} = \max \left( 0, \frac{Q - df}{Q} \right) \times 100\%
+\end{equation}
+
+<br>
 
 -   $I^{2}$ representa qual proporção da variância observada reflete a variância nos efeitos verdadeiros em vez do erro de amostragem.[@Borenstein2022]
 
@@ -430,7 +437,7 @@ metafor::forest(
 
 ### Como a heterogeneidade pode ser avaliada no *forest plot*?
 
--   A variabilidade nos resultados dos estudos incluídos é avaliada pela sobreposição dos intervalos de confiança dos estudos; pelo teste do qui-quadrado ($chi^2$) e pelo valor de $I^{2}$.[@dettori2021]
+-   A variabilidade nos resultados dos estudos incluídos é avaliada pela sobreposição dos intervalos de confiança dos estudos; pelo teste do qui-quadrado ($\chi^2$) e pelo valor de $I^{2}$.[@dettori2021]
 
 <br>
 
@@ -507,11 +514,8 @@ plot_forest <- function(obj, main = "") {
          xlab = "Diferença de médias",
          alim = c(min(fit$yi) - 0.5, max(fit$yi) + 0.5),
          header = c("Estudo", "DM [IC 95%]"),
-         cex = 0.8)
-  title(main = main, cex.main = 0.95, line = 1)
-  mtext(sprintf("I^2 obs = %.1f%%   |   tau^2 (verdadeiro) ≈ %.3f   |   Tentativas: %d",
-                fit$I2, obj$tau2_true, obj$tries),
-        side = 3, line = -1.0, cex = 0.75)
+         cex = 0.5)
+  title(main = main, cex.main = 0.65, line = 1, adj = 0)
 }
 
 # ---- Faixas desejadas --------------------------------------
@@ -531,7 +535,7 @@ sim_subst  <- simulate_meta_in_band(band = bands[[3]], k = 12)
 sim_cons   <- simulate_meta_in_band(band = bands[[4]], k = 12)
 
 # ---- Forest plots (2x2) -----------------------------------
-op <- par(mfrow = c(2, 2), mar = c(4, 4, 4, 1))
+op <- par(mfrow = c(2, 2), mar = c(3, 3, 2, 1))
 
 plot_forest(sim_low,   main = "Faixa 0–40% (pode não ser importante)")
 plot_forest(sim_mod,   main = "Faixa 30–60% (moderada)")
@@ -608,6 +612,12 @@ resB <- metafor::rma.uni(yi=simB$es$yi, vi=simB$es$vi, method="REML")
 # --- Plot lado a lado ---
 par(mfrow=c(1,2))   # 1 linha, 2 colunas
 
+# Definir limites comuns
+# Limite simétrico no eixo x
+xmax <- max(abs(c(simA$es$yi, simB$es$yi))) * 1.5
+xlim <- c(-xmax, xmax)
+ylim <- range(c(1/sqrt(simA$es$vi), 1/sqrt(simB$es$vi))) * c(0.9, 1.1)
+
 # Funnel A
 metafor::funnel(resA,
        xlab="Hedges g (SMD)",
@@ -617,7 +627,9 @@ metafor::funnel(resA,
        refline=as.numeric(resA$b),
        main=paste0("Baixa heterogeneidade\n tau²=", round(resA$tau2,3),
                    " | I²=", round(resA$I2,1), "%"),
-       back="gray95", shade=c("white","gray90","gray80"))
+       back="gray95", shade=c("white","gray90","gray80"),
+       xlim=xlim, ylim=ylim)
+
 with(simA$es, {
   precisao <- 1/sqrt(vi)
   text(x=yi, y=precisao, labels=simA$dat$study_id, pos=4, cex=0.7)
@@ -632,7 +644,9 @@ metafor::funnel(resB,
        refline=as.numeric(resB$b),
        main=paste0("Alta heterogeneidade\n tau²=", round(resB$tau2,3),
                    " | I²=", round(resB$I2,1), "%"),
-       back="gray95", shade=c("white","gray90","gray80"))
+       back="gray95", shade=c("white","gray90","gray80"),
+       xlim=xlim, ylim=ylim)
+
 with(simB$es, {
   precisao <- 1/sqrt(vi)
   text(x=yi, y=precisao, labels=simB$dat$study_id, pos=4, cex=0.7)

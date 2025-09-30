@@ -26,17 +26,22 @@ O pacote *cocor*[@cocor] fornece as funções [cocor.indep.groups](https://www.r
 
 -   O F-teste é uma estatística que compara a variabilidade entre grupos com a variabilidade dentro dos grupos.[@REF]
 
--   A estatística é calculada como $F=\dfrac{\text{QM}_{\text{entre}}}{\text{QM}_{\text{dentro}}}$, onde $\text{QM}$ são “quadrados médios”, com $gl_{1}$ e $gl_{2}$ definidos pelo desenho (ex.: fatores e resíduos).[@REF]
+-   A estatística é calculada como \@ref(eq:f-teste), onde $\text{QM}$ são “quadrados médios”, com $gl_{1}$ e $gl_{2}$ definidos pelo desenho (ex.: fatores e resíduos).[@REF]
+
+\begin{equation}
+(\#eq:f-teste)
+F=\dfrac{\text{QM}_{\text{entre}}}{\text{QM}_{\text{dentro}}}
+\end{equation}
 
 <br>
 
 ### Quando usar o F-teste?
 
--   ANOVA de um fator (≥3 grupos) e ANOVA multifatorial (efeitos principais e interações).[@REF]
+-   Análise de variância de um fator (≥3 grupos) e ANOVA multifatorial (efeitos principais e interações).[@REF]
 
--   GLM / regressão linear: teste global $H_{0}:\beta_{1}=\cdots=\beta_{p}=0$.[@REF]
+-   Modelo linear generalizado / regressão linear: teste global $H_{0}:\beta_{1}=\cdots=\beta_{p}=0$.[@REF]
 
--   ANCOVA (comparação de grupos ajustando covariáveis).[@REF]
+-   Análise de covariância (comparação de grupos ajustando covariáveis).[@REF]
 
 -   Contrastes planejados ou pós-hoc (usando a razão F correspondente).[@REF]
 

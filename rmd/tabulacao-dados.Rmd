@@ -33,8 +33,6 @@ O pacote *DataEditR*[@DataEditR] fornece a função [*data_edit*](https://www.rd
 
 -   Use apenas 1 (uma) linha de cabeçalho para nomear os fatores e variáveis do seu estudo.[@broman2018]
 
--   Tipicamente, cada linha representa um participante e cada coluna representa uma variável ou fator do estudo. Estudos com medidas repetidas dos participantes podem conter múltiplas linhas para o mesmo participante (repetindo os dados na mesma coluna, conhecido como *formato curto*) ou só uma linha para o participante (repetindo os dados em colunas separadas, conhecido como *formato longo* ).[@Juluru2015]
-
 <br>
 
 ```{r tabela-0, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
@@ -75,6 +73,103 @@ kableExtra::kable(
 
 <br>
 
+-   Tipicamente, cada linha representa um participante e cada coluna representa uma variável ou fator do estudo. Estudos com medidas repetidas dos participantes podem conter múltiplas linhas para o mesmo participante (repetindo os dados na mesma coluna, conhecido como *formato curto*) ou só uma linha para o participante (repetindo os dados em colunas separadas, conhecido como *formato longo* ).[@Juluru2015]
+
+<br>
+
+```{r tabela-0-long, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# parâmetros
+N <- 5
+M <- 4
+
+# cria a tabela larga
+table.0 <- matrix("dado", nrow = N, ncol = M)
+
+colnames(table.0) <- paste0("V", seq(1:M))
+for (i in 1:N) {
+  for (j in 1:M) {
+    table.0[i, j] <- paste0("$x", "_{", i, ",", j, "}$")
+  }
+}
+
+# converte para data.frame
+df <- as.data.frame(table.0) %>%
+  dplyr::mutate(Linha = 1:N)
+
+# transforma em formato longo
+df.long <- df %>%
+  tidyr::pivot_longer(
+    cols = tidyr::starts_with("V"),
+    names_to = "Variavel",
+    values_to = "Valor"
+  ) %>%
+  dplyr::arrange(Linha)
+
+# exibe tabela longa
+kableExtra::kable(
+  df.long,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = F,
+  caption = "Formato longo para medidas repetidas (múltiplas linhas por sujeito; colunas = variáveis)"
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("striped"),
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(nrow(df.long), bold = TRUE, extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+```{r tabela-0-wide, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reproducibilidade
+set.seed(1)
+
+# Parâmetros
+N_subjects <- 5   # sujeitos
+T_times    <- 4   # tempos (T1..T4)
+
+# 1) Exemplo LONGO: id × tempo → valor (apenas 1 variável)
+df_long_1v <- expand.grid(
+  id    = 1:N_subjects,
+  tempo = paste0("T", 1:T_times),
+  stringsAsFactors = FALSE
+) %>%
+  dplyr::arrange(id, tempo) %>%
+  dplyr::mutate(
+    valor = paste0("$x_{", id, ",", tempo, "}$")  # notação simbólica
+  )
+
+# 2) LARGO por tempo: colunas T1..T4
+df_wide_1v <- df_long_1v %>%
+  tidyr::pivot_wider(
+    id_cols    = id,
+    names_from = tempo,
+    values_from = valor
+  ) %>%
+  dplyr::arrange(id)
+
+# 3) Exibir
+kableExtra::kable(
+  df_wide_1v,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE, escape = FALSE,
+  caption = "Formato largo para medidas repetidas (1 variável; colunas = tempos)"
+) %>%
+  kableExtra::kable_styling(full_width = TRUE) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(nrow(df_wide_1v), bold = TRUE, extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
 ### O que usar para organizar tabelas para análise computadorizada?
 
 -   Seja consistente em: códigos para as variáveis categóricas; códigos para dados perdidos; nomes das variáveis; identificadores de participantes; nome dos arquivos; formato de datas; uso de caracteres de espaço.[@broman2018; @Juluru2015]
@@ -97,7 +192,7 @@ O pacote *data.table*[@data.table] fornece a função [*melt.data.table*](https:
 
 -   Não inclua análises estatísticas ou gráficos nas tabelas de dados brutos.[@broman2018]
 
--   Não utilize cores como informação. Se necessário, crie colunas adicionais - variáveis instrumentais ou auxiliares - para identificar a informação de modo que possa ser analisada.[@broman2018]
+-   Não utilize cores como informação. Se necessário, crie colunas adicionais --- variáveis instrumentais ou auxiliares --- para identificar a informação de modo que possa ser analisada.[@broman2018]
 
 -   Não use células mescladas.
 

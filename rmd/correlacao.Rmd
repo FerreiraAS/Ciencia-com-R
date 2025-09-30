@@ -275,21 +275,28 @@ O pacote *anscombiser*[@anscombiser] fornece a função [*anscombise*](https://w
 
 ### Quais coeficientes podem ser usados em análises de correlação?
 
--   Coeficiente de correlação de Pearson ($r$).[@khamis2008; @allison2022]
+-   Coeficiente de correlação de Pearson ($r$) \@ref(eq:pearson).[@khamis2008; @allison2022]
 
-    -   O coeficiente de correlação de Pearson ($r$) avalia a força e direção da relação linear entre duas variáveis quantitativas.[@khamis2008; @allison2022]
+\begin{equation}
+(\#eq:pearson)
+r = \dfrac{n \sum{x_i y_i} - \sum{x_i} \sum{y_i}}{\sqrt{\left[n \sum{x_i^2} - (\sum{x_i})^2\right]\left[n \sum{y_i^2} - (\sum{y_i})^2\right]}}
+\end{equation}
 
-    -   Tipo: paramétrico.[@khamis2008; @allison2022]
+<br>
 
-    -   Hipóteses:[@allison2022]
+- O coeficiente de correlação de Pearson ($r$) avalia a força e direção da relação linear entre duas variáveis quantitativas.[@khamis2008; @allison2022]
 
-        -   Nula ($H_{0}$): $r=0$
+- Tipo: paramétrico.[@khamis2008; @allison2022]
 
-        -   Alternativa ($H_{1}$): $r≠0$
+- Hipóteses:[@allison2022]
 
-    -   Tamanho do efeito:[@khamis2008; @allison2022]
+- Nula ($H_{0}$): $r=0$
 
-        -   Coeficiente de correlação de Pearson ($r$)
+- Alternativa ($H_{1}$): $r≠0$
+
+- Tamanho do efeito:[@khamis2008; @allison2022]
+
+- Coeficiente de correlação de Pearson ($r$)
 
 <br>
 
@@ -305,21 +312,28 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
--   Coeficiente de correlação ponto-bisserial ($r_{s}$).[@khamis2008]
+-   Coeficiente de correlação ponto-bisserial ($r_{s}$) \@ref(eq:biserial).[@khamis2008]
 
-    -   O coeficiente de correlação ponto-bisserial ($r_{s}$) avalia a força e direção da relação linear entre uma variável quantitativa e outra dicotômica.[@khamis2008]
+\begin{equation}
+(\#eq:biserial)
+r_{s} = \dfrac{M_{1} - M_{0}}{s_{y}} \sqrt{\dfrac{n_{1}n_{0}}{n^2}}
+\end{equation}
 
-    -   Tipo: paramétrico.[@khamis2008]
+<br>
 
-    -   Hipóteses:[@khamis2008]
+- O coeficiente de correlação ponto-bisserial ($r_{s}$) avalia a força e direção da relação linear entre uma variável quantitativa e outra dicotômica.[@khamis2008]
 
-        -   Nula ($H_{0}$): $r_{s}=0$
+- Tipo: paramétrico.[@khamis2008]
 
-        -   Alternativa ($H_{1}$): $r_{s}≠0$
+- Hipóteses:[@khamis2008]
 
-    -   Tamanho do efeito:[@khamis2008]
+- Nula ($H_{0}$): $r_{s}=0$
 
-        -   Coeficiente de correlação ponto-bisserial ($r_{s}$)
+- Alternativa ($H_{1}$): $r_{s}≠0$
+
+- Tamanho do efeito:[@khamis2008]
+
+- Coeficiente de correlação ponto-bisserial ($r_{s}$)
 
 <br>
 
@@ -335,23 +349,30 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
--   Coeficiente de correlação de Spearman ($\rho$).[@khamis2008; @allison2022]
+-   Coeficiente de correlação de Spearman ($\rho$) \@ref(eq:spearman).[@khamis2008; @allison2022]
 
-    -   O coeficiente de correlação de Spearman ($\rho$) avalia a força e direção da relação monotônica entre duas variáveis quantitativas.[@khamis2008; @allison2022]
+\begin{equation}
+(\#eq:spearman)
+\rho = 1 - \dfrac{6 \Sigma d_{i}^2}{n(n^2 - 1)}
+\end{equation}
 
-    -   O coeficiente de correlação de Spearman ($\rho$) pode ser também definida como a correlação de Pearson ($r$) entre as classificações (*ranks*) das duas variáveis quantitativas.[@khamis2008; @allison2022]
+<br>
 
-    -   Tipo: não-paramétrico.[@khamis2008; @allison2022]
+- O coeficiente de correlação de Spearman ($\rho$) avalia a força e direção da relação monotônica entre duas variáveis quantitativas.[@khamis2008; @allison2022]
 
-    -   Hipóteses:[@khamis2008; @allison2022]
+- O coeficiente de correlação de Spearman ($\rho$) pode ser também definida como a correlação de Pearson ($r$) entre as classificações (*ranks*) das duas variáveis quantitativas.[@khamis2008; @allison2022]
 
-        -   Nula ($H_{0}$): $\rho=0$
+- Tipo: não-paramétrico.[@khamis2008; @allison2022]
 
-        -   Alternativa ($H_{1}$): $\rho≠0$
+- Hipóteses:[@khamis2008; @allison2022]
 
-    -   Tamanho do efeito:[@khamis2008; @allison2022]
+- Nula ($H_{0}$): $\rho=0$
 
-        -   Coeficiente de correlação de Spearman ($\rho$)
+- Alternativa ($H_{1}$): $\rho≠0$
+
+- Tamanho do efeito:[@khamis2008; @allison2022]
+
+- Coeficiente de correlação de Spearman ($\rho$)
 
 <br>
 
@@ -367,23 +388,30 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
--   Coeficiente de Kendall ($\tau$).[@khamis2008; @allison2022]
+-   Coeficiente de Kendall ($\tau$) \@ref(eq:kendall).[@khamis2008; @allison2022]
 
-    -   O coeficiente Kendall $\tau$ avalia a força e direção da relação monotônica entre duas variáveis quantitativas ou qualitativas.[@khamis2008; @allison2022]
+\begin{equation}
+(\#eq:kendall)
+\tau = \dfrac{(n_{c} - n_{d})}{\dfrac{1}{2}n(n-1)}
+\end{equation}
 
-    -   O coeficiente Kendall $\tau$ é definido como a proporção de todos os pares concordantes menos a proporção de todos os pares discordantes.[@khamis2008; @allison2022]
+<br>
 
-    -   Tipo: não-paramétrico.[@khamis2008; @allison2022]
+- O coeficiente Kendall $\tau$ avalia a força e direção da relação monotônica entre duas variáveis quantitativas ou qualitativas.[@khamis2008; @allison2022]
 
-    -   Hipóteses:[@khamis2008; @allison2022]
+- O coeficiente Kendall $\tau$ é definido como a proporção de todos os pares concordantes menos a proporção de todos os pares discordantes.[@khamis2008; @allison2022]
 
-        -   Nula ($H_{0}$): $\tau=0$
+- Tipo: não-paramétrico.[@khamis2008; @allison2022]
 
-        -   Alternativa ($H_{1}$): $\tau≠0$
+- Hipóteses:[@khamis2008; @allison2022]
 
-    -   Tamanho do efeito:[@khamis2008; @allison2022]
+- Nula ($H_{0}$): $\tau=0$
 
-        -   Kendall $\tau$
+- Alternativa ($H_{1}$): $\tau≠0$
+
+- Tamanho do efeito:[@khamis2008; @allison2022]
+
+- Kendall $\tau$
 
 <br>
 
@@ -399,39 +427,53 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
--   Coeficiente de Cramér ($V$).[@REF]
+-   Coeficiente de Cramér ($V$) \@ref(eq:cramer).[@REF]
 
-    -   O coeficiente Cramér ($V$) avalia a força e direção da relação entre duas variáveis qualitativas.[@REF]
-
-    -   Tipo: não-paramétrico.[@REF]
-
-    -   Hipóteses:[@REF]
-
-        -   Nula ($H_{0}$): $V=0$
-
-        -   Alternativa ($H_{1}$): $V≠0$
-
-    -   Tamanho do efeito:[@REF]
-
-        -   Coeficiente Cramer ($V$)
+\begin{equation}
+(\#eq:cramer)
+V = \sqrt{\dfrac{\chi^2/n}{\min(k-1, r-1)}}
+\end{equation}
 
 <br>
 
--   Coeficiente de Sheperd $\phi$.[@REF]
+- O coeficiente Cramér ($V$) avalia a força e direção da relação entre duas variáveis qualitativas.[@REF]
 
-    -   O coeficiente Phi ($\phi$) avalia a força e direção da relação entre duas variáveis dicotômicas.[@REF]
+- Tipo: não-paramétrico.[@REF]
 
-    -   Tipo: não-paramétrico.[@REF]
+- Hipóteses:[@REF]
 
-    -   Hipóteses:[@REF]
+- Nula ($H_{0}$): $V=0$
 
-        -   Nula ($H_{0}$): $\phi=0$
+- Alternativa ($H_{1}$): $V≠0$
 
-        -   Alternativa ($H_{1}$): $\phi≠0$
+- Tamanho do efeito:[@REF]
 
-    -   Tamanho do efeito:[@REF]
+- Coeficiente Cramer ($V$)
 
-        -   Coeficiente Phi ($\phi$)
+<br>
+
+-   Coeficiente de Sheperd ($\phi$)  \@ref(eq:sheperd).[@REF]
+
+\begin{equation}
+(\#eq:sheperd)
+\phi = \sqrt{\dfrac{\chi^2}{n}}
+\end{equation}
+
+<br>
+
+- O coeficiente Phi ($\phi$) avalia a força e direção da relação entre duas variáveis dicotômicas.[@REF]
+
+- Tipo: não-paramétrico.[@REF]
+
+- Hipóteses:[@REF]
+
+- Nula ($H_{0}$): $\phi=0$
+
+- Alternativa ($H_{1}$): $\phi≠0$
+
+- Tamanho do efeito:[@REF]
+
+- Coeficiente Phi ($\phi$)
 
 <br>
 

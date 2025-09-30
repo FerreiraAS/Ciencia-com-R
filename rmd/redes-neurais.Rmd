@@ -111,27 +111,6 @@ graphics::par(op)
 
 <br>
 
-```{r perceptron-exemplo, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de um perceptron (regressão logística) para classificação linear."}
-# Reprodutibilidade
-set.seed(123)
-
-# Gerar dados sintéticos para um problema de classificação linear
-n <- 100
-x1 <- runif(n, -1, 1)
-x2 <- runif(n, -1, 1)
-y <- ifelse(x1 + x2 > 0, 1, 0)
-df <- data.frame(x1, x2, y = factor(y))
-
-# Ajustar um modelo perceptron (regressão logística)
-ggplot2::ggplot(df, ggplot2::aes(x1, x2, color=y)) +
-  ggplot2::geom_point(size=3) +
-  ggplot2::geom_abline(intercept=0, slope=-1, linetype="dashed") +
-  ggplot2::theme_minimal() +
-  ggplot2::labs(title="Perceptron: fronteira de decisão linear")
-```
-
-<br>
-
 ## Rede neural artificial
 
 <br>
@@ -318,6 +297,27 @@ gridExtra::grid.arrange(p1, p2, p3, ncol=3)
 ### Como ele é visualizado?
 
 -   O espaço de decisão pode ser visualizado graficamente, especialmente em problemas de classificação binária ou multiclasse, onde as regiões correspondem às classes previstas pelo modelo.[@REF]
+
+<br>
+
+```{r perceptron-exemplo, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Espaço de decisão de um perceptron (regressão logística)."}
+# Reprodutibilidade
+set.seed(123)
+
+# Gerar dados sintéticos para um problema de classificação linear
+n <- 100
+x1 <- runif(n, -1, 1)
+x2 <- runif(n, -1, 1)
+y <- ifelse(x1 + x2 > 0, 1, 0)
+df <- data.frame(x1, x2, y = factor(y))
+
+# Ajustar um modelo perceptron (regressão logística)
+ggplot2::ggplot(df, ggplot2::aes(x1, x2, color=y)) +
+  ggplot2::geom_point(size=3) +
+  ggplot2::geom_abline(intercept=0, slope=-1, linetype="dashed") +
+  ggplot2::theme_minimal() +
+  ggplot2::labs(title="Perceptron: fronteira de decisão linear")
+```
 
 <br>
 

@@ -882,7 +882,7 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 ### Que parâmetros de erro podem ser estimados?
 
-- Margem de erro (ME).[ \@ref(eq:me).
+- Margem de erro (ME).\@ref(eq:me).
 
 \begin{equation}
 (\#eq:me)
@@ -891,27 +891,32 @@ ME = z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
 
 <br>
 
--   Erro padrão da média (EPM) \@ref(eq:sem).
+-   Erro-padrão da média (EPM) \@ref(eq:sem) ($sigma$ conhecido) e \@ref(eq:sem-unk) ($sigma$  desconhecido).[@Curran-Everett2008; @krzywinski2013]
 
 \begin{equation}
 (\#eq:sem)
 EPM = \frac{\sigma}{\sqrt{n}}
 \end{equation}
 
+\begin{equation}
+(\#eq:sem-unk)
+\widehat{EPM} = \frac{s}{\sqrt{n}}
+\end{equation}
+
 <br>
 
--   Intervalo de confiança \@ref(eq:ic-known) \@ref(eq:ic-unknown): Captura a média populacional correspondente ao nível de significância $\alpha$ pré-estabelecido.[@kanji2006; @Cumming2007; @krzywinski2013; @Ali2016]
+- Intervalo de confiança para variância conhecida \@ref(eq:ic-known) e desconhecida \@ref(eq:ic-unknown): Captura a média populacional correspondente ao nível de significância $\alpha$ pré-estabelecido [@kanji2006; @Cumming2007; @krzywinski2013; @Ali2016].
 
 \begin{equation}
 (\#eq:ic-known)
-IC = \bar{x} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} \tag{eq:ic}
+IC = \bar{x} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
 \end{equation}
 
 <br>
 
 \begin{equation}
 (\#eq:ic-unknown)
-IC = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}} \tag{eq:ic}
+IC = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}
 \end{equation}
 
 <br>
@@ -922,11 +927,64 @@ IC = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}} \tag{eq:ic}
 
 ### Que parâmetros de tendência central podem ser estimados?
 
--   Média aritmética, ponderada, geométrica ou harmônica.[@kanji2006; @Ali2016; @s.2011a]
+-   Média aritmética \@ref(eq:media-aritm), ponderada \@ref(eq:media-pond), geométrica \@ref(eq:media-geom) ou harmônica \@ref(eq:media-harm).[@kanji2006; @Ali2016; @s.2011a]
 
--   Mediana.[@kanji2006; @Ali2016; @s.2011]
+\begin{equation}
+(\#eq:media-aritm)
+\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}
+\end{equation}
 
--   Moda.[@kanji2006; @Ali2016; @s.2011]
+<br>
+
+\begin{equation}
+(\#eq:media-pond)
+\bar{x}_p = \frac{\sum_{i=1}^{n} w_i x_i}{\sum_{i=1}^{n} w_i}
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:media-geom)
+\bar{x}_g = \left( \prod_{i=1}^{n} x_i \right)^{\frac{1}{n}}
+\end{equation}
+
+<br>
+\begin{equation}
+(\#eq:media-harm)
+\bar{x}_h = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}}
+\end{equation}
+
+<br>
+
+-   Mediana \@ref(eq:mediana).[@kanji2006; @Ali2016; @s.2011]
+
+\begin{equation}
+(\#eq:mediana)
+\tilde{x} = \begin{cases}
+x_{\left(\frac{n+1}{2}\right)}, & \text{se } n \text{ é ímpar} \\
+\frac{x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2} + 1\right)}}{2}, & \text{se } n \text{ é par}
+\end{cases}
+\end{equation}
+
+<br>
+
+-   Moda \@ref(eq:moda), onde $f(x)$ é a função de frequência absoluta ou relativa e $x_1, x_2, \ldots, x_n$ são os valores observados.[@kanji2006; @Ali2016; @s.2011]
+
+\begin{equation}
+(\#eq:moda)
+\operatorname{Mo} \in \arg\max_{x \in \{x_1,\ldots,x_n\}} f(x)
+\end{equation}
+
+<br>
+
+-   Moda (dados agrupados) \@ref(eq:moda-agrupada), onde: $L$ = limite inferior da classe modal; $f_1$ = frequência da classe modal; $f_0$ = frequência da classe anterior à classe modal; $f_2$ = frequência da classe posterior à classe modal; $h$ = amplitude da classe modal.
+
+\begin{equation}
+(\#eq:moda-agrupada)
+\operatorname{Mo} = L + \frac{(f_1 - f_0)}{(f_1 - f_0) + (f_1 - f_2)} \cdot h
+\end{equation}
+
+<br>
 
 -   A posição relativa das medidas de tendência central (média, mediana e moda) depende da forma da distribuição.[@s.2011]
 
@@ -1090,15 +1148,39 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 ### Que parâmetros de dispersão podem ser estimados?
 
--   Variância.[@kanji2006; @Ali2016]
+-   Variância \@ref(eq:variancia).[@kanji2006; @Ali2016]
 
--   Desvio-padrão: Informam sobre a dispersão da população e são, portanto, úteis como preditores da variação em novas amostras.[@Curran-Everett2008; @krzywinski2013; @manikandan2011]
+\begin{equation}
+(\#eq:variancia)
+s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
+\end{equation}
 
--   Erro-padrão: Refletem a incerteza na média e sua dependência do tamanho da amostra.[@Curran-Everett2008; @krzywinski2013]
+<br>
 
--   Amplitude.[@kanji2006; @Ali2016; @manikandan2011]
+-   Desvio-padrão \@ref(eq:desvpad).[@Curran-Everett2008; @krzywinski2013; @manikandan2011]
 
--   Intervalo interquartil.[@kanji2006; @Ali2016; @manikandan2011]
+\begin{equation}
+(\#eq:desvpad)
+s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}}
+\end{equation}
+
+<br>
+
+-   Amplitude \@ref(eq:amplitude).[@kanji2006; @Ali2016; @manikandan2011]
+
+\begin{equation}
+(\#eq:amplitude)
+A = x_{\max} - x_{\min}
+\end{equation}
+
+<br>
+
+-   Intervalo interquartil \@ref(eq:iqr).[@kanji2006; @Ali2016; @manikandan2011]
+
+\begin{equation}
+(\#eq:iqr)
+IQR = Q_3 - Q_1
+\end{equation}
 
 <br>
 
@@ -1251,7 +1333,7 @@ O pacote *stats*[@stats] fornece a função [*confint*](https://www.rdocumentati
 
 -   Desvio-padrão é apropriado quando a média é utilizada como parâmetro de tendência central em distribuições simétricas.[@manikandan2011]
 
--   Amplitue ou intervalo interquartil são apropriadas para variáveis ordinais ou distribuições assimétricas.[@manikandan2011]
+-   Amplitude ou intervalo interquartil são apropriadas para variáveis ordinais ou distribuições assimétricas.[@manikandan2011]
 
 <br>
 
@@ -1259,7 +1341,12 @@ O pacote *stats*[@stats] fornece a função [*confint*](https://www.rdocumentati
 
 -   Correção de Bessel é um ajuste feito no denominador da fórmula de variância da amostra --- ou seja, o número de graus de liberdade --- para evitar que a variância amostral seja menor do que a variância populacional.[@sahai1992]
 
--   A correção de Bessel é feita subtraindo-se 1 do número de observações da amostra, ou seja, $n - 1$.[@sahai1992]
+-   A correção de Bessel é feita subtraindo-se 1 do número de observações da amostra, ou seja, $n - 1$ \@ref(eq:bessel).[@sahai1992]
+
+\begin{equation}
+(\#eq:bessel)
+s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
+\end{equation}
 
 <br>
 
@@ -1277,11 +1364,32 @@ O pacote *stats*[@stats] fornece a função [*confint*](https://www.rdocumentati
 
 ### Que parâmetros de proporção podem ser estimados?
 
--   Frequência absoluta.[@Altman1994; @kanji2006; @Ali2016]
+-   Frequência absoluta \@ref(eq:freq-absoluta).[@Altman1994; @kanji2006; @Ali2016]
 
--   Frequência relativa.[@Altman1994; @kanji2006; @Ali2016]
+\begin{equation}
+(\#eq:freq-absoluta)
+f_i = n_i
+\end{equation}
 
--   Percentil.[@Altman1994; @kanji2006; @Ali2016]
+<br>
+
+-   Frequência relativa \@ref(eq:freq-relativa).[@Altman1994; @kanji2006; @Ali2016]
+
+\begin{equation}
+(\#eq:freq-relativa)
+fr_i = \frac{n_i}{N}
+\end{equation}
+
+<br>
+
+-   Percentil \@ref(eq:percentil), onde $k$ é o percentil desejado (0 a 100) e $n$ é o número total de observações na amostra.[@Altman1994; @kanji2006; @Ali2016]
+
+\begin{equation}
+(\#eq:percentil)
+P_k = x_{\left(\frac{k}{100} \cdot (n+1)\right)}
+\end{equation}
+
+<br>
 
 -   Quantil: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem:[@Altman1994]
 
@@ -1313,15 +1421,125 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 <br>
 
+## Extremos
+
+<br>
+
+### O que são valores extremos?
+
+-   Valores extremos podem constituir valores legítimos ou ilegítimos de uma distribuição.[@leys2019]
+
+<br>
+
+### Que parâmetros extremos podem ser estimados?
+
+-   Mínimo \@ref(eq:min).[@Ali2016]
+
+\begin{equation}
+(\#eq:min)
+\text{Mínimo} = \min(x_1, x_2, \ldots, x_n)
+\end{equation}
+
+<br>
+
+-   Máximo \@ref(eq:max).[@Ali2016]
+
+\begin{equation}
+(\#eq:max)
+\text{Máximo} = \max(x_1, x_2, \ldots, x_n)
+\end{equation}
+
+<br>
+
+```{r regressao-extremos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão linear com valores extremos."}
+# Reprodutibilidade
+set.seed(123)
+
+# 1) Dados "normais"
+n <- 100
+X <- rnorm(n, mean = 50, sd = 10)
+Y <- 5 + 2 * X + rnorm(n, mean = 0, sd = 5)
+data <- data.frame(X, Y)
+
+# 2) Injeta valores extremos
+X_ext1 <- rnorm(5, mean = 50, sd = 10)
+Y_ext1 <- 5 + 2 * X_ext1 + rnorm(5, mean = 0, sd = 25) + 60
+
+X_ext2 <- c(5, 95, 110, -10, 120)
+Y_ext2 <- 5 + 2 * X_ext2 + rnorm(5, mean = 0, sd = 5)
+
+data_ext <- dplyr::bind_rows(
+  data,
+  data.frame(X = X_ext1, Y = Y_ext1),
+  data.frame(X = X_ext2, Y = Y_ext2)
+)
+
+# Identifica min e max
+extremos <- data_ext %>%
+  dplyr::filter(
+    X == min(X) | X == max(X) |
+    Y == min(Y) | Y == max(Y)
+  ) %>%
+  dplyr::mutate(tipo = dplyr::case_when(
+    X == min(X) ~ "X mínimo",
+    X == max(X) ~ "X máximo",
+    Y == min(Y) ~ "Y mínimo",
+    Y == max(Y) ~ "Y máximo"
+  ))
+
+# Plot
+ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
+  # todos os pontos em cinza
+  ggplot2::geom_point(color = "grey70", size = 2) +
+  # destaca apenas os extremos, com legenda
+  ggplot2::geom_point(data = extremos, ggplot2::aes(color = tipo), size = 3) +
+  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  ggplot2::scale_color_manual(values = c(
+    "X mínimo" = "red",
+    "X máximo" = "orange",
+    "Y mínimo" = "purple",
+    "Y máximo" = "darkgreen"
+  )) +
+  ggplot2::labs(
+    title = "Valores extremos",
+    x = "X", y = "Y", color = "Extremos"
+  ) +
+  ggplot2::theme_minimal()
+
+```
+
+<br>
+
 ## Distribuição
 
 <br>
 
 ### Que parâmetros de distribuição podem ser estimados?
 
--   Assimetria.[@kanji2006]
+-   Assimetria \@ref(eq:skew).[@kanji2006]
 
--   Curtose.[@kanji2006]
+\begin{equation}
+(\#eq:skew)
+\gamma_1 = \frac{\frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^3}{\left(\frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2\right)^{3/2}}
+\end{equation}
+
+<br>
+
+-   Curtose \@ref(eq:kurt).[@kanji2006]
+
+\begin{equation}
+(\#eq:kurt)
+\gamma_2 = \frac{\frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^4}{\left(\frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2\right)^{2}}
+\end{equation}
+
+<br>
+
+-   Excesso de Curtose \@ref(eq:exkurt).[@kanji2006]
+
+\begin{equation}
+(\#eq:exkurt)
+\kappa = \gamma_2 - 3
+\end{equation}
 
 <br>
 
@@ -1436,85 +1654,6 @@ g_kurt_hist
 
 <br>
 
-## Extremos
-
-<br>
-
-### O que são valores extremos?
-
--   Valores extremos podem constituir valores legítimos ou ilegítimos de uma distribuição.[@leys2019]
-
--   Valores extremos, quando raros ou desproporcionais, podem se tornar discrepantes ou influentes, afetando as análises estatísticas, sendo recomendado uma análise robusta.[@REF]
-
-<br>
-
-### Que parâmetros extremos podem ser estimados?
-
--   Mínimo.[@Ali2016]
-
--   Máximo.[@Ali2016]
-
-<br>
-
-```{r regressao-extremos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão linear com valores extremos."}
-# Reprodutibilidade
-set.seed(123)
-
-# 1) Dados "normais"
-n <- 100
-X <- rnorm(n, mean = 50, sd = 10)
-Y <- 5 + 2 * X + rnorm(n, mean = 0, sd = 5)
-data <- data.frame(X, Y)
-
-# 2) Injeta valores extremos
-X_ext1 <- rnorm(5, mean = 50, sd = 10)
-Y_ext1 <- 5 + 2 * X_ext1 + rnorm(5, mean = 0, sd = 25) + 60
-
-X_ext2 <- c(5, 95, 110, -10, 120)
-Y_ext2 <- 5 + 2 * X_ext2 + rnorm(5, mean = 0, sd = 5)
-
-data_ext <- dplyr::bind_rows(
-  data,
-  data.frame(X = X_ext1, Y = Y_ext1),
-  data.frame(X = X_ext2, Y = Y_ext2)
-)
-
-# Identifica min e max
-extremos <- data_ext %>%
-  dplyr::filter(
-    X == min(X) | X == max(X) |
-    Y == min(Y) | Y == max(Y)
-  ) %>%
-  dplyr::mutate(tipo = dplyr::case_when(
-    X == min(X) ~ "X mínimo",
-    X == max(X) ~ "X máximo",
-    Y == min(Y) ~ "Y mínimo",
-    Y == max(Y) ~ "Y máximo"
-  ))
-
-# Plot
-ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
-  # todos os pontos em cinza
-  ggplot2::geom_point(color = "grey70", size = 2) +
-  # destaca apenas os extremos, com legenda
-  ggplot2::geom_point(data = extremos, ggplot2::aes(color = tipo), size = 3) +
-  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "blue") +
-  ggplot2::scale_color_manual(values = c(
-    "X mínimo" = "red",
-    "X máximo" = "orange",
-    "Y mínimo" = "purple",
-    "Y máximo" = "darkgreen"
-  )) +
-  ggplot2::labs(
-    title = "Valores extremos",
-    x = "X", y = "Y", color = "Extremos"
-  ) +
-  ggplot2::theme_minimal()
-
-```
-
-<br>
-
 ## Robustez em medidas de localização
 
 <br>
@@ -1543,12 +1682,10 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-```{=tex}
 \begin{equation}
 (\#eq:max)
 MAD = 1.483 \cdot \text{median}(|x_i - \text{median}(x)|)
 \end{equation}
-```
 
 <br>
 
@@ -1556,25 +1693,14 @@ MAD = 1.483 \cdot \text{median}(|x_i - \text{median}(x)|)
 
 <br>
 
-```{=tex}
 \begin{equation}
 (\#eq:qn)
 Qn = 2.2219 \cdot \text{first quartile}(|x_i - x_j|; i < j)
 \end{equation}
-```
 
 <br>
 
--   O intervalo interquartil ($IQR$) \@ref(eq;iqr) é robusto, com ponto de quebra $~25%$, sendo simples de interpretar e útil em boxplots.[@rousseeuw2011]
-
-<br>
-
-```{=tex}
-\begin{equation}
-(\#eq:iqr)
-IQR = Q3 - Q1
-\end{equation}
-```
+-   O intervalo interquartil ($IQR$) \@ref(eq:iqr) é robusto, com ponto de quebra $~25%$, sendo simples de interpretar e útil em boxplots.[@rousseeuw2011]
 
 <br>
 

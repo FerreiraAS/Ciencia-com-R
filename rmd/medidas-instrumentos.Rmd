@@ -686,7 +686,7 @@ O pacote *stats*[@stats] fornece a função [*aggregate*](https://www.rdocumenta
 
 <br>
 
-## Erros de medida
+## Erro de medida
 
 <br>
 
@@ -717,11 +717,6 @@ N     <- 1e6         # tamanho da simulação (grande para boa aproximação)
 # Simulação de medidas com erro
 X <- rnorm(N, mean = theta, sd = sigma)
 
-# --- 1) Probabilidade de "acertar no ponto" é 0 em distribuição contínua ---
-# Na simulação, P(X == theta) ≈ 0 (via contagem)
-p_empirico_ponto <- mean(X == theta)  # deve ser 0 na prática
-cat("Probabilidade empírica de X == θ (com N grande):", p_empirico_ponto, "\n")
-
 # --- 2) Probabilidade de cair em uma faixa |X - θ| ≤ ε é > 0 ---
 # Forma analítica (Normal): P(|X-θ| ≤ ε) = 2 * Φ(ε/σ) - 1
 Phi <- pnorm
@@ -743,12 +738,36 @@ g1 <- ggplot2::ggplot(df_plot, ggplot2::aes(x = X)) +
   ggplot2::geom_density() +
   ggplot2::geom_vline(xintercept = theta, linetype = "dashed") +
   ggplot2::labs(
-    title = "Densidade de X = θ + erro (Normal)",
-    subtitle = "Linha tracejada marca θ (ponto com probabilidade 0)",
+    title = "Probabilidade de X = θ é 0",
     x = "Medida observada X", y = "Densidade"
   )
 
-# (b) Curva P(|X-θ| ≤ ε) vs ε: analítica x empírica
+# (b) Densidade com faixa ±ε sombreada
+eps_show <- 0.5  # escolha a precisão-alvo (faixa ±ε que você quer ilustrar)
+a <- theta - eps_show
+b <- theta + eps_show
+
+# Densidade empírica para sombrear a área da faixa
+dens <- density(X, n = 2048)
+df_dens <- data.frame(x = dens$x, y = dens$y)
+
+p_band <- 2 * pnorm(eps_show / sigma) - 1
+
+g_mid <- ggplot2::ggplot(df_dens, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_line() +
+  ggplot2::geom_area(
+    data = subset(df_dens, x >= a & x <= b),
+    ggplot2::aes(y = y),
+    alpha = 0.3
+  ) +
+  ggplot2::geom_vline(xintercept = theta, linetype = "dashed") +
+  ggplot2::geom_vline(xintercept = c(a, b), linetype = "dotted") +
+  ggplot2::labs(
+    title = "Faixa de Medida com Erro (±ε)",
+    x = "Medida observada X", y = "Densidade"
+  )
+
+# (c) Curva P(|X-θ| ≤ ε) vs ε: analítica x empírica
 df_eps <- data.frame(
   epsilon = rep(faixa_eps, 2),
   prob    = c(prob_analitica, prob_empirica),
@@ -779,31 +798,6 @@ g2 <- ggplot2::ggplot() +
     x = "ε (precisão)", y = "Probabilidade"
   ) +
   ggplot2::theme(legend.position = "bottom")
-
-eps_show <- 0.5  # escolha a precisão-alvo (faixa ±ε que você quer ilustrar)
-a <- theta - eps_show
-b <- theta + eps_show
-
-# Densidade empírica para sombrear a área da faixa
-dens <- density(X, n = 2048)
-df_dens <- data.frame(x = dens$x, y = dens$y)
-
-p_band <- 2 * pnorm(eps_show / sigma) - 1
-
-g_mid <- ggplot2::ggplot(df_dens, ggplot2::aes(x = x, y = y)) +
-  ggplot2::geom_line() +
-  ggplot2::geom_area(
-    data = subset(df_dens, x >= a & x <= b),
-    ggplot2::aes(y = y),
-    alpha = 0.3
-  ) +
-  ggplot2::geom_vline(xintercept = theta, linetype = "dashed") +
-  ggplot2::geom_vline(xintercept = c(a, b), linetype = "dotted") +
-  ggplot2::labs(
-    title = "Faixa de Medida com Erro (±ε)",
-    subtitle = sprintf("ε = %.2f  |  P(|X-θ| ≤ ε) ≈ %.3f", eps_show, p_band),
-    x = "Medida observada X", y = "Densidade"
-  )
 
 library(patchwork)
 g1 + g_mid + g2
