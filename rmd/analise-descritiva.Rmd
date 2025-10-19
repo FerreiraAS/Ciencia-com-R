@@ -965,11 +965,111 @@ networkD3::sankeyNetwork(
 
 <br>
 
-- Gráfico de patrs: Mostra a composição percentual de uma variável categórica. Útil para visualizar proporções.[@REF]
+- Grágfico de *parcats*: Mostra relações entre múltiplas variáveis categóricas em paralelo. Útil para visualizar fluxos e proporções.[@REF]
 
 <br>
 
-```{r}
+```{r parcats-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de categorias paralelas (parcats) representando transições entre categorias ao longo do tempo."}
+# Reprodutibilidade
+set.seed(42)
+
+# 1) Criar um dataset "tidy" simulando transições de categorias ao longo do tempo
+n <- 300
+
+# categorias de exemplo (pode trocar pelos seus rótulos)
+cats <- c("Low", "Medium", "High")
+
+dados <- tibble::tibble(
+  id   = 1:n,
+  T1   = sample(cats, n, replace = TRUE, prob = c(0.45, 0.35, 0.20)),
+  T2   = sample(cats, n, replace = TRUE, prob = c(0.35, 0.40, 0.25)),
+  T3   = sample(cats, n, replace = TRUE, prob = c(0.30, 0.45, 0.25)),
+  # um grupo/segmento opcional para colorir os fluxos
+  Segment = sample(c("Group A", "Group B"), n, replace = TRUE, prob = c(0.55, 0.45))
+)
+
+# Se quiser garantir a ordem dos níveis:
+ordem <- c("Low", "Medium", "High")
+dados <- dados %>%
+  mutate(
+    T1 = factor(T1, levels = ordem),
+    T2 = factor(T2, levels = ordem),
+    T3 = factor(T3, levels = ordem),
+    Segment = factor(Segment)
+  )
+
+# 2) Preparar as "dimensions" do parcats
+dim_T1 <- list(
+  label = "Time 1",
+  values = dados$T1,
+  categoryorder = "array",
+  categoryarray = ordem
+)
+
+dim_T2 <- list(
+  label = "Time 2",
+  values = dados$T2,
+  categoryorder = "array",
+  categoryarray = ordem
+)
+
+dim_T3 <- list(
+  label = "Time 3",
+  values = dados$T3,
+  categoryorder = "array",
+  categoryarray = ordem
+)
+
+# 3) Linha/colorização dos fluxos
+seg_levels <- levels(dados$Segment)
+seg_index  <- as.integer(dados$Segment)
+
+# Uma escala de cores simples com base nos níveis (pode ajustar)
+colorscale <- list(
+  list(0,  "#1f77b4"), # azul
+  list(1,  "#ff7f0e")  # laranja
+)
+
+line_cfg <- list(
+  color    = seg_index,     # numérico mapeado a colorscale
+  colorscale = colorscale,
+  cmin     = 1,
+  cmax     = length(seg_levels),
+  shape    = "hspline"      # curvas suaves; pode usar "linear"
+)
+
+# 4) Construir o gráfico parcats
+p <- plotly::plot_ly(
+  type       = "parcats",
+  dimensions = list(dim_T1, dim_T2, dim_T3),
+  line       = line_cfg,
+  labelfont  = list(size = 12),
+  tickfont   = list(size = 11),
+  hoveron    = "category",      # hover em categorias (ou "color" / "dimension")
+  arrangement= "freeform",      # "perpendicular" também é uma boa opção
+  bundlecolors = TRUE           # agrupa as cores de caminhos semelhantes
+) %>%
+  plotly::layout(
+    title = list(
+      text = paste0(
+        "Parallel Categories • parcats (plotly)\n",
+        "<sub>Easily visualize flows in categorical data — ideal for longitudinal data, surveys, multi-stage classification, transitions</sub>"
+      )
+    ),
+    margin = list(l = 40, r = 40, t = 80, b = 40)
+  )
+
+# Exibir
+p
+```
+
+<br>
+
+- Gráfico de *parts*: Mostra a composição percentual de uma variável categórica. Útil para visualizar proporções.[@REF]
+
+<br>
+
+```{r graficos-pares, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de pares representando correlações entre múltiplas variáveis."}
 # Reprodutibilidade
 set.seed(123)
 

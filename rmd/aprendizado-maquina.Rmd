@@ -12,6 +12,118 @@
 
 <br>
 
+```{r aprendizagem-maquina, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE,fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Mapa mental de algoritmos de aprendizado de máquina.", out.width = "100%"}
+
+col_root  <- "#E57E25"   # laranja (Aprendizado de Máquina)
+col_sup   <- "#CFE9CF"   # verde claro (Supervisionado)
+col_uns   <- "#FFD778"   # amarelo (Não Supervisionado)
+col_semi  <- "#CFCFD3"   # cinza (Semi-supervisionado)
+col_reinf <- "#B9CDF3"   # azul claro (Reforço)
+col_text_dark <- "#333333"
+
+dot <- sprintf('
+digraph ml {
+  graph [
+    rankdir=LR
+    bgcolor="white"
+    nodesep=0.45
+    ranksep=0.55
+  ]
+
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=11 color="#666666" fontcolor="%1$s"]
+  edge [color="#888888" arrowsize=0.6 penwidth=1.1]
+
+  # Raiz
+  ML  [label="Aprendizado de Máquina", fillcolor="%2$s", fontcolor="white", penwidth=1.2]
+
+  # Primeira camada
+  SUP [label="Supervisionado",         fillcolor="%3$s"]
+  UNS [label="Não Supervisionado",     fillcolor="%4$s"]
+  SEMI[label="Semi-Supervisionado",    fillcolor="%5$s"]
+  REIN[label="Aprendizado por Reforço",fillcolor="%6$s"]
+
+  ML -> {SUP UNS SEMI REIN}
+
+  # ---------------- Supervisionado ----------------
+  CLC [label="Classificação", fillcolor="%3$s"]
+  RGR [label="Regressão",     fillcolor="%3$s"]
+  SUP -> {CLC RGR}
+
+  NB   [label="Naïve Bayes",                               fillcolor="%3$s"]
+  LR   [label="Regressão Logística",                       fillcolor="%3$s"]
+  KNN  [label="K-Vizinhos Mais Próximos (KNN)",            fillcolor="%3$s"]
+  RF   [label="Floresta Aleatória",                        fillcolor="%3$s"]
+  SVM  [label="Máquina de Vetores de Suporte (SVM)",       fillcolor="%3$s"]
+  DT   [label="Árvore de Decisão",                         fillcolor="%3$s"]
+  CLC -> {NB LR KNN RF SVM DT}
+
+  SLR  [label="Regressão Linear Simples",  fillcolor="%3$s"]
+  MLR  [label="Regressão Multivariada",    fillcolor="%3$s"]
+  LASSO[label="Regressão Lasso",           fillcolor="%3$s"]
+  RGR -> {SLR MLR LASSO}
+
+  # ---------------- Não Supervisionado ----------------
+  CLU [label="Agrupamento (Clustering)", fillcolor="%4$s"]
+  ASC [label="Associação",               fillcolor="%4$s"]
+  ANO [label="Detecção de Anomalias",    fillcolor="%4$s"]
+  UNS -> {CLU ASC ANO}
+
+  KMEANS [label="K-Means (K-médias)",                                   fillcolor="%4$s"]
+  DBSCAN [label="DBSCAN",                                                fillcolor="%4$s"]
+  PCA    [label="Análise de Componentes Principais (PCA)",               fillcolor="%4$s"]
+  ICA    [label="Análise de Componentes Independentes (ICA)",            fillcolor="%4$s"]
+  CLU -> {KMEANS DBSCAN PCA ICA}
+
+  FPG   [label="Crescimento de Padrões Frequentes (FP-Growth)", fillcolor="%4$s"]
+  APR   [label="Algoritmo Apriori",                              fillcolor="%4$s"]
+  ASC -> {FPG APR}
+
+  ZS    [label="Z-score",                        fillcolor="%4$s"]
+  IFOR  [label="Floresta de Isolamento",         fillcolor="%4$s"]
+  ANO -> {ZS IFOR}
+
+  # ---------------- Semi-Supervisionado ----------------
+  SS_C [label="Classificação", fillcolor="%5$s"]
+  SS_R [label="Regressão",     fillcolor="%5$s"]
+  SEMI -> {SS_C SS_R}
+
+  ST    [label="Auto-Treinamento (Self-Training)", fillcolor="%5$s"]
+  COT   [label="Co-Treinamento (Co-Training)",     fillcolor="%5$s"]
+  SS_C -> ST
+  SS_R -> COT
+
+  # ---------------- Reforço ----------------
+  MF   [label="Sem Modelo (Model-Free)",     fillcolor="%6$s"]
+  MB   [label="Baseado em Modelo (Model-Based)", fillcolor="%6$s"]
+  REIN -> {MF MB}
+
+  PO   [label="Otimização de Política", fillcolor="%6$s"]
+  QL   [label="Q-Learning",            fillcolor="%6$s"]
+  MF -> {PO QL}
+
+  LTM  [label="Aprender o Modelo",  fillcolor="%6$s"]
+  GTM  [label="Dado o Modelo",      fillcolor="%6$s"]
+  MB -> {LTM GTM}
+
+  {rank=same; SUP; UNS; SEMI; REIN}
+  {rank=same; CLC; RGR; CLU; ASC; ANO; SS_C; SS_R; MF; MB}
+}
+', col_text_dark, col_root, col_sup, col_uns, col_semi, col_reinf)
+
+g <- DiagrammeR::grViz(dot)
+
+# Exporta para SVG
+svg <- DiagrammeRsvg::export_svg(g)
+
+# Converte SVG em PNG (ou PDF se quiser)
+rsvg::rsvg_png(charToRaw(svg), file = "./images/aprendizado-maquina.png", width = 1200, height = 1000)
+
+# Exibe a imagem
+knitr::include_graphics("./images/aprendizado-maquina.png")
+```
+
+<br>
+
 ## Tipos de aprendizado
 
 <br>

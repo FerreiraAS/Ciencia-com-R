@@ -521,6 +521,134 @@ O pacote *GGally*[@GGally] fornece a função [*ggally_cor*](https://www.rdocume
 
 <br>
 
+## Correlação entre conjuntos de variáveis
+
+<br>
+
+### O que é correlação entre conjuntos de variáveis?
+
+- A Correlação Canônica (CCA) analisa a relação entre dois conjuntos de variáveis simultaneamente.[@REF]
+
+- Busca combinações lineares que maximizam a correlação entre os dois blocos.[@REF]
+
+<br>
+
+### Quando usar CCA?
+
+- Quando existem dois blocos distintos de variáveis.[@REF]
+
+- Quando a correlação bivariada é insuficiente para captar padrões multivariados.[@REF]
+
+<br>
+
+### Quais são os principais resultados?
+
+- Correlação canônica ($\rho_1$, $\rho_2$, $...$): força da associação entre os escores dos blocos.[@REF]
+
+- Escores canônicos ($U$ e $V$): novas variáveis representando os blocos.[@REF]
+
+- *Loadings* e *cross-loadings*: indicam quais variáveis mais contribuem para cada eixo.[@REF]
+
+<br>
+
+### Como interpretar a CCA?
+
+- $\rho_1$ indica a força do primeiro eixo canônico ($U_1 \leftrightarrow V_1$).[@REF]
+
+- Gráficos de $U_1$ vs $V_1$ podem revelar padrões por grupo ou gradiente.[@REF]
+
+- *Loadings/cross-loadings* mostram quais variáveis explicam a correlação.[@REF]
+
+<br>
+
+### Quais suposições e cuidados?
+
+- As variáveis devem estar padronizadas (escalas comparáveis).[@REF]
+
+- Preferível $n>$ número de variáveis em cada bloco.[@REF]
+
+- Atenção a multicolinearidade alta (pode exigir CCA regularizada).[@REF]
+
+<br>
+
+### O que reportar nos resultados?
+
+- Valores de $\rho_1$, $\rho_2$, $...$ comteste de Wilks e p-valores.[@REF]
+
+- Figura $U_1$ vs. $V_1$ com interpretação.[@REF]
+
+- Tabela de *loadings* ou *cross-loadings* destacando contribuições relevantes.[@REF]
+
+- Uma interpretação substantiva da relação entre os blocos.[@REF]
+
+<br>
+
+```{r cca-example, echo=TRUE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de análise de correlação canônica (CCA) entre dois conjuntos de variáveis."}
+# Reproducibilidade
+set.seed(123)
+
+# Suponha X: variáveis ambientais; Y: traços de plantas
+n  <- 120
+X  <- scale(cbind(pH = rnorm(n, 6.5, .4),
+temp = rnorm(n, 20, 3),
+rain = rnorm(n, 1000, 120)))
+Y  <- scale(cbind(height = 0.4*X[, "temp"] - 0.3*X[, "pH"] + rnorm(n,0,.6),
+leaf   = 0.3*X[, "rain"] + 0.25*X[, "temp"] + rnorm(n,0,.6),
+chl    = -0.35*X[, "pH"] + 0.3*X[, "rain"] + rnorm(n,0,.6)))
+
+# (Opcional) fator de cor para o scatter
+classe <- factor(sample(c("Forest","Herb","Planted","Shrub"), n, TRUE))
+
+# ---- CCA (base R) ----
+fit <- cancor(X, Y)   # stats::cancor
+rho <- fit$cor        # correlações canônicas
+
+# Escores canônicos (U e V)
+
+U <- scale(X) %*% fit$xcoef
+V <- scale(Y) %*% fit$ycoef
+U1 <- U[,1]; V1 <- V[,1]
+
+# ---- Teste sequencial (Wilks) ----
+
+# wilks <- CCP::p.asym(rho, N=n, p=ncol(X), q=ncol(Y), tstat="Wilks")
+# wilks_tab <- transform(wilks, rho=round(rho,3),
+# p.value=signif(p.value,3))
+
+# ---- Loadings e cross-loadings (correlações com escores) ----
+
+# Loadings: var-X com U1.., var-Y com V1..
+
+loadX <- cor(X, U[,1:min(ncol(X), ncol(Y))])
+loadY <- cor(Y, V[,1:min(ncol(X), ncol(Y))])
+
+# Cross-loadings: var-X com V1.., var-Y com U1..
+
+crossX <- cor(X, V[,1:min(ncol(X), ncol(Y))])
+crossY <- cor(Y, U[,1:min(ncol(X), ncol(Y))])
+
+# ---- Visualizações ----
+
+p1 <- ggplot2::ggplot(data.frame(U1=U1, V1=V1, classe=classe),
+ggplot2::aes(U1, V1, shape=classe)) +
+ggplot2::geom_point(alpha=.75) +
+ggplot2::geom_smooth(method="lm", se=FALSE) +
+ggplot2::labs(x="U1 (X → a1)", y="V1 (Y → b1)",
+subtitle=paste0("ρ1 = ", round(rho[1], 3))) +
+ggplot2::theme_minimal()
+
+# Heatmap de cross-loadings (quais variáveis de X e Y conectam-se ao outro bloco)
+
+cx <- reshape2::melt(round(crossX, 2), varnames=c("VarX","CompV"),
+value.name="cross")
+cy <- reshape2::melt(round(crossY, 2), varnames=c("VarY","CompU"),
+value.name="cross")
+
+print(p1)
+```
+
+<br>
+
 ```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
 cat(readLines("citation.html"), sep = "\n")
 ```
