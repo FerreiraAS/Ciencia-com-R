@@ -42,6 +42,8 @@
 
 -   Definir claramente os problemas e os objetivos da pesquisa são o ponto de partida de todos os estudos científicos.[@van2022a]
 
+-   Além do papel técnico, os testes de hipótese carregam uma dimensão interpretativa que molda como os pesquisadores comunicam descobertas. Estudos recentes destacam o caráter pragmático e dicotômico dessas decisões.[@uyguntunç2023]
+
 <br>
 
 ### Quais são as fontes de ideias para gerar hipóteses científicas?
@@ -104,7 +106,7 @@
 
 -   Teste de não-inferioridade: avalia se o tratamento não é pior que o controle por mais do que $-\Delta$.[@REF]
 
-- Teste de inferioridade: avalia se o tratamento é pior que o controle (por exemplo, para checar segurança).[@REF]
+-   Teste de inferioridade: avalia se o tratamento é pior que o controle (por exemplo, para checar segurança).[@REF]
 
 <br>
 
@@ -122,27 +124,27 @@
 
 ### O que é uma família de hipóteses?
 
-- Família de hipóteses é um conjunto de comparações/inferências que, por desenho ou análise, devem ser consideradas juntas para controle do erro tipo I global (ex.: todas as comparações de um desfecho primário, todos os subgrupos pré-especificados, todos os desfechos coprimários).[@REF]
+-   Família de hipóteses é um conjunto de comparações/inferências que, por desenho ou análise, devem ser consideradas juntas para controle do erro tipo I global (ex.: todas as comparações de um desfecho primário, todos os subgrupos pré-especificados, todos os desfechos coprimários).[@REF]
 
-- O controle do *family-wise error rate* (FWER) ou do *false discovery rate* (FDR) deve considerar a família pertinente, não comparações isoladas.[@REF]
+-   O controle do *family-wise error rate* (FWER) ou do *false discovery rate* (FDR) deve considerar a família pertinente, não comparações isoladas.[@REF]
 
 <br>
 
 ### O que são testes *ad hoc* e *post hoc*?
 
-- *Ad hoc*: análises/decisões não planejadas a priori, motivadas por inspeção dos dados. Úteis para gerar hipóteses, não para confirmá-las.[@REF]
+-   *Ad hoc*: análises/decisões não planejadas a priori, motivadas por inspeção dos dados. Úteis para gerar hipóteses, não para confirmá-las.[@REF]
 
-- *Post hoc*: procedimentos de comparações múltiplas aplicados após um teste global ter indicado efeito significativo. Visam controlar o erro tipo I em múltiplas comparações.[@REF]
+-   *Post hoc*: procedimentos de comparações múltiplas aplicados após um teste global ter indicado efeito significativo. Visam controlar o erro tipo I em múltiplas comparações.[@REF]
 
 <br>
 
 ### Como ajustar a análise inferencial para hipóteses múltiplas?
 
-- Defina a família (o que entra no ajuste) e priorize desfechos (primário, coprimários, secundários).[@REF]
+-   Defina a família (o que entra no ajuste) e priorize desfechos (primário, coprimários, secundários).[@REF]
 
-- Aplique métodos de controle FWER (Bonferroni, Holm, Hochberg, Dunnett para múltiplos vs. controle) ou controle FDR (Benjamini–Hochberg) conforme o objetivo (confirmação vs. exploração).[@REF]
+-   Aplique métodos de controle FWER (Bonferroni, Holm, Hochberg, Dunnett para múltiplos vs. controle) ou controle FDR (Benjamini–Hochberg) conforme o objetivo (confirmação vs. exploração).[@REF]
 
-- Em planos confirmatórios, use hierarquização/gatekeeping: testa-se em sequência; a alocação de $\alpha$ passa adiante apenas se houver significância no nível anterior.[@REF]
+-   Em planos confirmatórios, use hierarquização/gatekeeping: testa-se em sequência; a alocação de $\alpha$ passa adiante apenas se houver significância no nível anterior.[@REF]
 
 <br>
 
@@ -154,7 +156,7 @@ O pacote *stats*[@stats] fornece a função [*p.adjust*](https://www.rdocumentat
 
 ### O que são testes unicaudais e bicaudais?
 
-- Teste unicaudal procura evidência em uma direção específica (ex.: “maior que 0”). Toda a região crítica está numa só cauda; tem maior poder para aquela direção, mas não detecta sinal oposto.[@REF]
+-   Teste unicaudal procura evidência em uma direção específica (ex.: “maior que 0”). Toda a região crítica está numa só cauda; tem maior poder para aquela direção, mas não detecta sinal oposto.[@REF]
 
 <br>
 
@@ -330,7 +332,7 @@ ggplot2::ggplot(dados, ggplot2::aes(x = x, y = densidade)) +
 
 <br>
 
-- Teste bicaudal procura evidência em qualquer direção (ex.: “diferente de 0”). Divide $\alpha$ em duas caudas (direita e esquerda). É a escolha padrão quando ambas as direções são plausíveis.[@REF]
+-   Teste bicaudal procura evidência em qualquer direção (ex.: “diferente de 0”). Divide $\alpha$ em duas caudas (direita e esquerda). É a escolha padrão quando ambas as direções são plausíveis.[@REF]
 
 <br>
 
@@ -497,9 +499,9 @@ ggplot2::annotate(
 
 <br>
 
-### O que são resultados  positivos" e "negativos" (inconclusivos) em teste de hipótese?
+### O que são resultados positivos" e "negativos" (inconclusivos) em teste de hipótese?
 
--   Resultados "positivos"  compreendem um P-valor dentro da zona crítica estatisticamente significativa (ex.: $P<0,05$ ou outro ponto de corte) e sugerem que os autores rejeitem a hipótese nula ($H_{0}$), confirmando assim sua hipótese científica.[@greenhalgh1997a]
+-   Resultados "positivos" compreendem um P-valor dentro da zona crítica estatisticamente significativa (ex.: $P<0,05$ ou outro ponto de corte) e sugerem que os autores rejeitem a hipótese nula ($H_{0}$), confirmando assim sua hipótese científica.[@greenhalgh1997a]
 
 -   Resultados "negativos" ou inconclusivos compreendem um P-valor fora da zona crítica estatisticamente significativa (ex.: $P \geq 0,05$ ou outro ponto de corte) e sugerem que os autores não rejeitem a hipótese nula ($H_{0}$) porque o efeito observado é nulo (logo, "negativo"), ou porque o estudo não possui poder suficiente para detectá-lo, não permitindo portanto afirmar a hipótese científica (logo, inconclusivo).[@greenhalgh1997a]
 
@@ -520,6 +522,8 @@ ggplot2::annotate(
 -   Em estudos (geralmente com amostras pequenas), resultados estatisticamente não significativos (com P-valores iguais ou maiores do limiar pré-estabelecido, $P \geq \alpha$) não devem ser interpretados como evidência de inexistência do efeito.[@altman1995]
 
 -   Geralmente é razoável aceitar uma nova conclusão apenas quando há dados a seu favor ('resultados positivos'). Também é razoável questionar se apenas a ausência de dados a seu favor ('resultados negativos') justifica suficientemente a rejeição de tal conclusão.[@altman1995]
+
+-   A prática estatística convencional tende a reduzir a incerteza científica a decisões docotômicas. Essa simplificação, embora pragmática, possui implicações epistemológicas importantes: os testes de hipótese produzem não apenas juízos empíricos, mas também atos de fala pragmáticos que comunicam graus de confiança e orientam ações científicas.[@uyguntunç2023]
 
 <br>
 

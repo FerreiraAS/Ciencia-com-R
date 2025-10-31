@@ -28,19 +28,19 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://w
 
 ### Quais são os algoritmos de regressão?
 
-- Linear: Simples, Múltipla, Polinomial.[@REF]
+-   Linear: Simples, Múltipla, Polinomial.[@REF]
 
-- Linear generalizado: Binomial (logística), Multinomial, Ordinal, Poisson, Binomial negativa, Gama.[@REF]
+-   Linear generalizado: Binomial (logística), Multinomial, Ordinal, Poisson, Binomial negativa, Gama.[@REF]
 
-- Não-linear (nos parâmetros).[@REF]
+-   Não-linear (nos parâmetros).[@REF]
 
-- Aditivo generalizado.[@REF]
+-   Aditivo generalizado.[@REF]
 
-- Efeitos mistos: Linear, Generalizado.[@REF]
+-   Efeitos mistos: Linear, Generalizado.[@REF]
 
-- Sobrevida: Cox, Weibull, Exponencial, Log-normal, Log-logístico.[@REF]
+-   Sobrevida: Cox, Weibull, Exponencial, Log-normal, Log-logístico.[@REF]
 
-- Regularização: Ridge, LASSO[@REF]
+-   Regularização: Ridge, LASSO[@REF]
 
 <br>
 
@@ -102,16 +102,16 @@ Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \
 
 ### O que são modelos de regressão linear?
 
-- Modelos lineares \@ref(eq:regressao-linear) descrevem uma relação linear nos parâmetros entre um desfecho contínuo $Y$ e um ou mais preditores $X$.[@REF]
+-   Modelos lineares \@ref(eq:regressao-linear) descrevem uma relação linear nos parâmetros entre um desfecho contínuo $Y$ e um ou mais preditores $X$.[@REF]
 
 \begin{equation}
 (\#eq:regressao-linear)
 Y = \beta_0 + \sum_{i=1}^{n} \beta_i X_i + \epsilon
 \end{equation}
 
-- Assumem erros independentes, de média zero e variância constante (homocedasticidade).[@REF] 
+-   Assumem erros independentes, de média zero e variância constante (homocedasticidade).[@REF]
 
-- A normalidade dos resíduos é uma hipótese comum para inferência estatística, mas não obrigatória para estimação dos coeficientes.[@REF]
+-   A normalidade dos resíduos é uma hipótese comum para inferência estatística, mas não obrigatória para estimação dos coeficientes.[@REF]
 
 <br>
 
@@ -145,9 +145,9 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são modelos de regressão polinomial?
 
-- São extensões da regressão linear em que se incluem termos elevados a potências das variáveis independentes (ex.: $X^2$, $X^3$), permitindo capturar relações curvas.[@REF]
+-   São extensões da regressão linear em que se incluem termos elevados a potências das variáveis independentes (ex.: $X^2$, $X^3$), permitindo capturar relações curvas.[@REF]
 
-- Modelos de regressão polinomial continuam sendo lineares nos parâmetros, por isso ainda se enquadram como um caso particular da regressão linear.[@REF]
+-   Modelos de regressão polinomial continuam sendo lineares nos parâmetros, por isso ainda se enquadram como um caso particular da regressão linear.[@REF]
 
 <br>
 
@@ -182,11 +182,11 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são modelos de regressão não-linear?
 
-- São modelos em que a relação entre os parâmetros e a variável resposta não é linear.  
+-   São modelos em que a relação entre os parâmetros e a variável resposta não é linear.
 
-- Podem assumir formas funcionais mais complexas (ex.: exponencial, logarítmica, logística).[@REF]
+-   Podem assumir formas funcionais mais complexas (ex.: exponencial, logarítmica, logística).[@REF]
 
-- Importante diferenciar "não-linear na variável" (ex.: polinomial) de "não-linear no parâmetro" (ex.: modelos logísticos de crescimento).[@REF]
+-   Importante diferenciar "não-linear na variável" (ex.: polinomial) de "não-linear no parâmetro" (ex.: modelos logísticos de crescimento).[@REF]
 
 <br>
 
@@ -222,9 +222,9 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são modelos de regressão logística?
 
-- Modelos logísticos são casos de regressão linear generalizada em que a resposta $Y$ é binária.[@REF]
+-   Modelos logísticos são casos de regressão linear generalizada em que a resposta $Y$ é binária.[@REF]
 
-- A equação \@ref(eq:regressao-logistica) modela a razão de chances (*odds*) em função dos preditores.[@REF]
+-   A equação \@ref(eq:regressao-logistica) modela a razão de chances (*odds*) em função dos preditores.[@REF]
 
 \begin{equation}
 (\#eq:regressao-logistica)
@@ -233,7 +233,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-- A ligação (*link*) usada é o logit \@ref(eq:link-logit).[@REF]
+-   A ligação (*link*) usada é o logit \@ref(eq:link-logit).[@REF]
 
 \begin{equation}
 (\#eq:link-logit)
@@ -271,9 +271,9 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são modelos de regressão multinomial?
 
-- Modelos de regressão multinomial são usados quando a variável resposta é categórica com mais de dois níveis não ordenados.[@REF]
+-   Modelos de regressão multinomial são usados quando a variável resposta é categórica com mais de dois níveis não ordenados.[@REF]
 
-- Estendem a regressão logística binária, modelando as razões de chances (*odds ratios*) de cada categoria em relação a uma categoria de referência.[@REF]
+-   Estendem a regressão logística binária, modelando as razões de chances (*odds ratios*) de cada categoria em relação a uma categoria de referência.[@REF]
 
 <br>
 
@@ -350,21 +350,21 @@ print(p_prob)
 
 ### O que são modelos de regressão ordinal?
 
-- Modelos de regressão ordinal são usados quando a variável resposta é categórica com mais de dois níveis ordenados.[@REF]
+-   Modelos de regressão ordinal são usados quando a variável resposta é categórica com mais de dois níveis ordenados.[@REF]
 
-- Modelam a probabilidade acumulada de estar em ou abaixo de cada categoria, usando uma função de ligação logit, probit ou log-log.[@REF]
+-   Modelam a probabilidade acumulada de estar em ou abaixo de cada categoria, usando uma função de ligação logit, probit ou log-log.[@REF]
 
-- Assumem a proporcionalidade dos coeficientes entre as categorias (*proportional odds*).[@REF]
+-   Assumem a proporcionalidade dos coeficientes entre as categorias (*proportional odds*).[@REF]
 
 <br>
 
 ### O que são modelos de regressão de Poisson?
 
-- Modelos de regressão de Poisson são usados quando a variável resposta é uma contagem de eventos não negativos.[@REF]
+-   Modelos de regressão de Poisson são usados quando a variável resposta é uma contagem de eventos não negativos.[@REF]
 
-- Assumem que $Y \sim Poisson(\mu)$, com $\mu = E[Y|X]$ relacionado aos preditores via função de ligação log.[@REF] 
+-   Assumem que $Y \sim Poisson(\mu)$, com $\mu = E[Y|X]$ relacionado aos preditores via função de ligação log.[@REF]
 
-- A sobre-dispersão (variância maior que a média) pode exigir modelos alternativos como a regressão binomial negativa.[@REF]
+-   A sobre-dispersão (variância maior que a média) pode exigir modelos alternativos como a regressão binomial negativa.[@REF]
 
 <br>
 
@@ -433,49 +433,49 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são modelos de regressão binomial negativa?
 
-- Modelos de regressão binomial negativa são usados para contagens superdispersas, onde a variância excede a média.[@REF]
+-   Modelos de regressão binomial negativa são usados para contagens superdispersas, onde a variância excede a média.[@REF]
 
-- Introduzem um parâmetro de dispersão adicional para modelar a variabilidade extra.[@REF]
+-   Introduzem um parâmetro de dispersão adicional para modelar a variabilidade extra.[@REF]
 
-- A função de ligação log é comumente usada, semelhante à regressão de Poisson.[@REF]
+-   A função de ligação log é comumente usada, semelhante à regressão de Poisson.[@REF]
 
 <br>
 
 ### O que são modelos de regressão Gama?
 
-- Modelos de regressão Gama são usados para variáveis resposta contínuas e positivas, frequentemente com distribuição assimétrica.[@REF]
+-   Modelos de regressão Gama são usados para variáveis resposta contínuas e positivas, frequentemente com distribuição assimétrica.[@REF]
 
-- A função de ligação log é comumente usada para garantir predições positivas.[@REF]
+-   A função de ligação log é comumente usada para garantir predições positivas.[@REF]
 
 <br>
 
 ### O que são modelos de regressão com efeitos mistos?
 
-- Modelos de efeitos mistos incorporam efeitos fixos (coeficientes comuns a todos os indivíduos) e efeitos aleatórios (variações específicas de grupos ou indivíduos).[@REF]
+-   Modelos de efeitos mistos incorporam efeitos fixos (coeficientes comuns a todos os indivíduos) e efeitos aleatórios (variações específicas de grupos ou indivíduos).[@REF]
 
-- Usados para dados hierárquicos ou longitudinais, onde observações estão agrupadas.[@REF]
+-   Usados para dados hierárquicos ou longitudinais, onde observações estão agrupadas.[@REF]
 
-- Permitem modelar correlações intra-grupo e variabilidade entre grupos.[@REF]
+-   Permitem modelar correlações intra-grupo e variabilidade entre grupos.[@REF]
 
 <br>
 
 ### O que são modelos de regressão com efeitos mistos generalizados?
 
-- Modelos de efeitos mistos generalizados (GLMM) estendem os modelos de efeitos mistos para variáveis resposta que seguem distribuições da família exponencial (ex.: binomial, Poisson).[@REF]
+-   Modelos de efeitos mistos generalizados (GLMM) estendem os modelos de efeitos mistos para variáveis resposta que seguem distribuições da família exponencial (ex.: binomial, Poisson).[@REF]
 
-- Combinam a flexibilidade dos modelos lineares generalizados com a capacidade de modelar correlações e variabilidade entre grupos.[@REF]
+-   Combinam a flexibilidade dos modelos lineares generalizados com a capacidade de modelar correlações e variabilidade entre grupos.[@REF]
 
-- Usados para dados hierárquicos ou longitudinais com desfechos não normais.[@REF]
+-   Usados para dados hierárquicos ou longitudinais com desfechos não normais.[@REF]
 
 <br>
 
 ### O que são modelos de regressão ridge?
 
-- Regressão ridge é um modelo linear regularizado que adiciona uma penalização L2 à soma dos quadrados dos coeficientes.[@REF]
+-   Regressão ridge é um modelo linear regularizado que adiciona uma penalização L2 à soma dos quadrados dos coeficientes.[@REF]
 
-- Ajuda a reduzir multicolinearidade e overfitting, encolhendo os coeficientes em direção a zero, mas nunca os tornando exatamente nulos.[@REF]
+-   Ajuda a reduzir multicolinearidade e overfitting, encolhendo os coeficientes em direção a zero, mas nunca os tornando exatamente nulos.[@REF]
 
-- O  hiperparâmetro de regularização é $\lambda$, controlando a intensidade da penalização. Valores maiores de $\lambda$ resultam em maior encolhimento dos coeficientes.[@REF]
+-   O hiperparâmetro de regularização é $\lambda$, controlando a intensidade da penalização. Valores maiores de $\lambda$ resultam em maior encolhimento dos coeficientes.[@REF]
 
 <br>
 
@@ -512,11 +512,11 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são modelos de regressão LASSO?
 
-- Regressão LASSO (*Least Absolute Shrinkage and Selection Operator*) utiliza penalização L1, que pode zerar coeficientes.[@REF]
+-   Regressão LASSO (*Least Absolute Shrinkage and Selection Operator*) utiliza penalização L1, que pode zerar coeficientes.[@REF]
 
-- Além de reduzir *overfitting*, também realiza seleção automática de variáveis.[@REF]  
+-   Além de reduzir *overfitting*, também realiza seleção automática de variáveis.[@REF]
 
-- Enquanto a regressão ridge mantém todos os preditores, a LASSO pode excluir variáveis irrelevantes.[@REF]
+-   Enquanto a regressão ridge mantém todos os preditores, a LASSO pode excluir variáveis irrelevantes.[@REF]
 
 <br>
 
@@ -542,9 +542,9 @@ O pacote *fastDummies*[@fastDummies] fornece a função [*dummy_cols*](https://w
 
 ### Por que é comum escolher a categoria mais frequente como referência em modelos epidemiológicos?
 
-- Maior estabilidade estatística: a categoria mais frequente costuma gerar estimativas mais estáveis, com menor erro padrão nos coeficientes das demais categorias.[@REF]
+-   Maior estabilidade estatística: a categoria mais frequente costuma gerar estimativas mais estáveis, com menor erro padrão nos coeficientes das demais categorias.[@REF]
 
-- A escolha da referência não altera o ajuste nem o valor predito pelo modelo — apenas muda o ponto de comparação.[@REF]
+-   A escolha da referência não altera o ajuste nem o valor predito pelo modelo — apenas muda o ponto de comparação.[@REF]
 
 <br>
 
@@ -560,15 +560,15 @@ O pacote *fastDummies*[@fastDummies] fornece a função [*dummy_cols*](https://w
 
 ### Como diagnosticar multicolinearidade de forma quantitativa?
 
-- Verifique a existência de multicolinearidade entre as variáveis candidatas.[@Sun1996]
+-   Verifique a existência de multicolinearidade entre as variáveis candidatas.[@Sun1996]
 
-- O Coeficiente de determinação ($R^2$) é uma medida de quão bem as variáveis independentes explicam a variabilidade da variável dependente. Valores próximos a 1 indicam que as variáveis independentes estão fortemente correlacionadas entre si, o que pode indicar multicolinearidade.[@Kim2019]
+-   O Coeficiente de determinação ($R^2$) é uma medida de quão bem as variáveis independentes explicam a variabilidade da variável dependente. Valores próximos a 1 indicam que as variáveis independentes estão fortemente correlacionadas entre si, o que pode indicar multicolinearidade.[@Kim2019]
 
--  O Fator de Inflação da Variância (*variance inflation factor*, VIF) é uma medida que quantifica o quanto a variância de um coeficiente de regressão é inflacionada devido à multicolinearidade. Valores de VIF maiores que 10 são frequentemente considerados indicativos de multicolinearidade significativa.[@Kim2019]
+-   O Fator de Inflação da Variância (*variance inflation factor*, VIF) é uma medida que quantifica o quanto a variância de um coeficiente de regressão é inflacionada devido à multicolinearidade. Valores de VIF maiores que 10 são frequentemente considerados indicativos de multicolinearidade significativa.[@Kim2019]
 
-- O recíproco da VIF é chamado de Tolerância, que mede a proporção da variância de uma variável independente que não é explicada pelas outras variáveis independentes. Valores baixos de Tolerância (geralmente abaixo de 0.1) indicam multicolinearidade.[@Kim2019]
+-   O recíproco da VIF é chamado de Tolerância, que mede a proporção da variância de uma variável independente que não é explicada pelas outras variáveis independentes. Valores baixos de Tolerância (geralmente abaixo de 0.1) indicam multicolinearidade.[@Kim2019]
 
-- O número de condições (*Condition Number*) é uma medida que avalia a estabilidade numérica de um modelo de regressão. Valores altos (entre 10 de 30) indicam multicolinearidade, e valores maiores que 30 indicam forte multicolinearidade.[@Kim2019]
+-   O número de condições (*Condition Number*) é uma medida que avalia a estabilidade numérica de um modelo de regressão. Valores altos (entre 10 de 30) indicam multicolinearidade, e valores maiores que 30 indicam forte multicolinearidade.[@Kim2019]
 
 <br>
 
@@ -619,19 +619,19 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 ### O que fazer em caso de multicolinearidade elevada?
 
-- Verifique a transformação (codificação) de variáveis numéricas em categóricas.[@Kim2019]
+-   Verifique a transformação (codificação) de variáveis numéricas em categóricas.[@Kim2019]
 
-- Aumente o tamanho da amostra, se possível, para reduzir a multicolinearidade.[@Kim2019]
+-   Aumente o tamanho da amostra, se possível, para reduzir a multicolinearidade.[@Kim2019]
 
-- Combine níveis de variáveis categóricas com baixa frequência de ocorrência.[@Kim2019]
+-   Combine níveis de variáveis categóricas com baixa frequência de ocorrência.[@Kim2019]
 
-- Combine variáveis numéricas altamente correlacionadas em uma única variável composta, como a média ou soma das variáveis.[@Kim2019] 
+-   Combine variáveis numéricas altamente correlacionadas em uma única variável composta, como a média ou soma das variáveis.[@Kim2019]
 
-- Considere a exclusão de variáveis altamente correlacionadas do modelo, especialmente se elas não forem essenciais para a análise.[@Kim2019]
+-   Considere a exclusão de variáveis altamente correlacionadas do modelo, especialmente se elas não forem essenciais para a análise.[@Kim2019]
 
-- Use técnicas de seleção de variáveis, como seleção passo a passo, para identificar e remover variáveis redundantes.[@Kim2019]
+-   Use técnicas de seleção de variáveis, como seleção passo a passo, para identificar e remover variáveis redundantes.[@Kim2019]
 
-- Use técnicas de regularização, como regressão ridge ou LASSO, que podem lidar com multicolinearidade ao penalizar coeficientes de regressão.[@Kim2019]
+-   Use técnicas de regularização, como regressão ridge ou LASSO, que podem lidar com multicolinearidade ao penalizar coeficientes de regressão.[@Kim2019]
 
 <br>
 
@@ -649,7 +649,7 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 ### Variáveis sem significância estatística devem ser excluídas do modelo final?
 
--   Eliminar uma variável de um modelo significa anular o seu coeficiente de regressão ($\beta = 0$), mesmo que o valor estimado pelos dados seja outro. Desta forma, os resultados se afasTAM de uma solução de máxima verossimilhança (que tem fundamento teórico) e o modelo resultante é intencionalmente subótimo.[@heinze2016]
+-   Eliminar uma variável de um modelo significa anular o seu coeficiente de regressão ($\beta = 0$), mesmo que o valor estimado pelos dados seja outro. Desta forma, os resultados se afastam de uma solução de máxima verossimilhança (que tem fundamento teórico) e o modelo resultante é intencionalmente subótimo.[@heinze2016]
 
 -   Os coeficientes de regressão geralmente dependem do conjunto de variáveis do modelo e, portanto, podem mudam de valor ("mudança na estimativa" positiva ou negativa) se uma (ou mais) variável(is) for(em) eliminada(s) do modelo.[@heinze2016]
 
@@ -679,7 +679,94 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 ### Quando devemos forçar uma variável no modelo?
 
-- Sempre que houver base teórica ou evidência prévia forte, ou se for a variável de exposição principal.[@Greenland1989]
+-   Sempre que houver base teórica ou evidência prévia forte, ou se for a variável de exposição principal.[@Greenland1989]
+
+<br>
+
+## Seleção de variáveis em regressão
+
+<br>
+
+### O que é seleção de variáveis em regressão?
+
+-   Seleção de variáveis em regressão consiste em identificar, dentre um conjunto de preditores disponíveis, quais devem ser incluídos no modelo para otimizar o equilíbrio entre ajuste e parcimônia.[@lindsey2011]
+
+<br>
+
+### Quais são os principais critérios de informação usados na seleção de variáveis?
+
+-   Critérios de informação avaliam o ajuste do modelo penalizando a complexidade (número de preditores), ajudando a evitar *overfitting*.[@lindsey2011]
+
+-   $R^2_{adj}$ \@ref(eq:R2-ajustado) penaliza o $R^2$ pelo número de preditores, reduzindo o viés em modelos com muitas variáveis, onde $n$ é o tamanho amostral, $k$ o número de preditores, $RSS$ a soma dos quadrados dos resíduos e $SST$ a soma total dos quadrados.
+
+<br>
+
+\begin{equation}
+(\#eq:R2-ajustado)
+R^2_{adj} = 1 - \frac{(n-1)}{(n - k - 1)} \cdot \frac{RSS}{SST}
+\end{equation}
+
+<br>
+
+-   $AIC$ (Akaike Information Criterion) \@ref(eq:AIC) mede o equilíbrio entre ajuste e complexidade:
+
+<br>
+
+\begin{equation}
+(\#eq:AIC)
+AIC = n \cdot \log\left(\frac{RSS}{n}\right) + 2k + n + n \cdot \log(2\pi)
+\end{equation}
+
+<br>
+
+-   $AICc$ \@ref(eq:AICc) é uma versão corrigida do AIC, preferida para amostras pequenas:
+
+<br>
+
+\begin{equation}
+(\#eq:AICc)
+AIC_c = AIC + \frac{2(k+2)(k+3)}{n - (k + 2) - 1}
+\end{equation}
+
+<br>
+
+-   $C_p$ de Mallows compara o erro do modelo reduzido com o modelo completo, idealmente satisfazendo $C_p \approx p$, onde $m$ é o número total de preditores disponíveis, $p$ o número de parâmetros (incluindo o intercepto), e $RSS_{FULL}$ o erro quadrático residual do modelo completo:
+
+<br>
+
+\begin{equation}
+(\#eq:Cp)
+C_p = (n - m - 1)\frac{RSS}{RSS_{FULL}} - (n - 2p)
+\end{equation}
+
+<br>
+
+-   $BIC$ (Bayesian Information Criterion) \@ref(eq:BIC) penaliza fortemente modelos complexos:
+
+<br>
+
+\begin{equation}
+(\#eq:BIC)
+BIC = n \cdot \log\left(\frac{RSS}{n}\right) + k \cdot \log(n) + n + n \cdot \log(2\pi)
+\end{equation}
+
+<br>
+
+### Quais algoritmos podem ser usados para seleção automática?
+
+-   Seleção progressiva (*forward selection*): começa com o modelo nulo e adiciona, a cada iteração, a variável que mais melhora o critério escolhido. O processo para quando nenhuma nova variável melhora o modelo.[@lindsey2011]
+
+-   Eliminação retrógrada (*backward elimination*): parte do modelo completo e remove, a cada iteração, a variável cuja exclusão mais melhora o critério. O processo para quando nenhuma remoção melhora o ajuste.[@lindsey2011]
+
+-   *Leaps-and-bounds*: método exato que examina apenas uma fração dos $2^m$ modelos possíveis, determinando os melhores subconjuntos para cada tamanho de preditor (usando os critérios AIC, BIC, AICc, R² ajustado e Cp).[@lindsey2011]
+
+-   Esses métodos podem divergir em presença de alta multicolinearidade ou amostras pequenas, e devem ser acompanhados de diagnóstico de resíduos e validação cruzada.[@lindsey2011]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *leaps*[@leaps] fornece a função [*regsubsets*](https://www.rdocumentation.org/packages/leaps/versions/3.1/topics/regsubsets) para realizar os métodos de seleção de variáveis.
+:::
 
 <br>
 
@@ -695,7 +782,7 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 ### Como avaliar as suposições de uma regressão?
 
-- Usando diagnóstico de regressão (ex.: análise de resíduos, gráficos de valores observados vs. preditos) e comparação com análises estratificadas.[@Greenland1989]
+-   Usando diagnóstico de regressão (ex.: análise de resíduos, gráficos de valores observados vs. preditos) e comparação com análises estratificadas.[@Greenland1989]
 
 <br>
 

@@ -1206,10 +1206,16 @@ div.csl-indent {
 <li class="chapter" data-level="32.6.4" data-path="regressao.html"><a href="regressao.html#o-que-pode-ser-feito-para-reduzir-o-n%C3%BAmero-de-vari%C3%A1veis-candidatas-em-modelos-de-regress%C3%A3o-multivari%C3%A1vel"><i class="fa fa-check"></i><b>32.6.4</b> O que pode ser feito para reduzir o número de variáveis candidatas em modelos de regressão multivariável?</a></li>
 <li class="chapter" data-level="32.6.5" data-path="regressao.html"><a href="regressao.html#quando-devemos-for%C3%A7ar-uma-vari%C3%A1vel-no-modelo"><i class="fa fa-check"></i><b>32.6.5</b> Quando devemos forçar uma variável no modelo?</a></li>
 </ul></li>
-<li class="chapter" data-level="32.7" data-path="regressao.html"><a href="regressao.html#suposi%C3%A7%C3%B5es-dos-modelos-de-regress%C3%A3o"><i class="fa fa-check"></i><b>32.7</b> Suposições dos modelos de regressão</a>
+<li class="chapter" data-level="32.7" data-path="regressao.html"><a href="regressao.html#sele%C3%A7%C3%A3o-de-vari%C3%A1veis-em-regress%C3%A3o"><i class="fa fa-check"></i><b>32.7</b> Seleção de variáveis em regressão</a>
 <ul>
-<li class="chapter" data-level="32.7.1" data-path="regressao.html"><a href="regressao.html#quais-suposi%C3%A7%C3%B5es-s%C3%A3o-feitas-para-regress%C3%A3o"><i class="fa fa-check"></i><b>32.7.1</b> Quais suposições são feitas para regressão?</a></li>
-<li class="chapter" data-level="32.7.2" data-path="regressao.html"><a href="regressao.html#como-avaliar-as-suposi%C3%A7%C3%B5es-de-uma-regress%C3%A3o"><i class="fa fa-check"></i><b>32.7.2</b> Como avaliar as suposições de uma regressão?</a></li>
+<li class="chapter" data-level="32.7.1" data-path="regressao.html"><a href="regressao.html#o-que-%C3%A9-sele%C3%A7%C3%A3o-de-vari%C3%A1veis-em-regress%C3%A3o"><i class="fa fa-check"></i><b>32.7.1</b> O que é seleção de variáveis em regressão?</a></li>
+<li class="chapter" data-level="32.7.2" data-path="regressao.html"><a href="regressao.html#quais-s%C3%A3o-os-principais-crit%C3%A9rios-de-informa%C3%A7%C3%A3o-usados-na-sele%C3%A7%C3%A3o-de-vari%C3%A1veis"><i class="fa fa-check"></i><b>32.7.2</b> Quais são os principais critérios de informação usados na seleção de variáveis?</a></li>
+<li class="chapter" data-level="32.7.3" data-path="regressao.html"><a href="regressao.html#quais-algoritmos-podem-ser-usados-para-sele%C3%A7%C3%A3o-autom%C3%A1tica"><i class="fa fa-check"></i><b>32.7.3</b> Quais algoritmos podem ser usados para seleção automática?</a></li>
+</ul></li>
+<li class="chapter" data-level="32.8" data-path="regressao.html"><a href="regressao.html#suposi%C3%A7%C3%B5es-dos-modelos-de-regress%C3%A3o"><i class="fa fa-check"></i><b>32.8</b> Suposições dos modelos de regressão</a>
+<ul>
+<li class="chapter" data-level="32.8.1" data-path="regressao.html"><a href="regressao.html#quais-suposi%C3%A7%C3%B5es-s%C3%A3o-feitas-para-regress%C3%A3o"><i class="fa fa-check"></i><b>32.8.1</b> Quais suposições são feitas para regressão?</a></li>
+<li class="chapter" data-level="32.8.2" data-path="regressao.html"><a href="regressao.html#como-avaliar-as-suposi%C3%A7%C3%B5es-de-uma-regress%C3%A3o"><i class="fa fa-check"></i><b>32.8.2</b> Como avaliar as suposições de uma regressão?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="33" data-path="redes.html"><a href="redes.html"><i class="fa fa-check"></i><b>33</b> <strong>Redes</strong></a>
@@ -1982,6 +1988,7 @@ Figura 3.1: Mapa mental da relação entre o pensamento estatístico e o pensame
 <ul>
 <li><p>Na prática, há um <em>continuum</em> entre exploração e confirmação; muitos estudos combinam elementos de ambos em momentos distintos (p.ex., análises principais confirmatórias + análises de sensibilidade/descoberta).<span class="citation"><sup><a href="#ref-rubin2022">24</a></sup></span></p></li>
 <li><p>Análises exploratórias não são inerentemente inferiores: quando bem justificadas e comparando explicações alternativas, podem aumentar a rigorosidade do teste e produzir inferências informativas.<span class="citation"><sup><a href="#ref-rubin2022">24</a></sup></span></p></li>
+<li><p>A discussão contemporânea sobre a distinção entre estudos confirmatórios e exploratórios também enfatiza a necessidade de justificar o tamanho de efeito mínimo de interesse (SESOI) e aplicar testes severos conforme o arcabouço de falsificacionismo metodológico.<span class="citation"><sup><a href="#ref-sp%C3%A4th2025">25</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -2013,7 +2020,8 @@ Figura 3.1: Mapa mental da relação entre o pensamento estatístico e o pensame
 <div id="o-que-é-pré-registro" class="section level3 hasAnchor" number="3.7.1">
 <h3><span class="header-section-number">3.7.1</span> O que é pré-registro?<a href="pensamento-metodologico.html#o-que-%C3%A9-pr%C3%A9-registro" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+<li><p>Pré-registro é o ato de registrar publicamente o plano de pesquisa antes da coleta de dados ou análise.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
+<li><p>O pré-registro é um elemento central das práticas abertas que aumentam a severidade de testes estatísticos e reduzem a flexibilidade analítica oportunista.<span class="citation"><sup><a href="#ref-sp%C3%A4th2025">25</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -2024,24 +2032,25 @@ Figura 3.1: Mapa mental da relação entre o pensamento estatístico e o pensame
 <div id="o-que-é-reprodutibilidade" class="section level3 hasAnchor" number="3.8.1">
 <h3><span class="header-section-number">3.8.1</span> O que é reprodutibilidade?<a href="pensamento-metodologico.html#o-que-%C3%A9-reprodutibilidade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Reprodutibilidade é a habilidade de se obter resultados iguais ou similares quando uma análise ou teste estatístico é repetido.<span class="citation"><sup><a href="#ref-resnik2016">25</a>–<a href="#ref-mair2016">27</a></sup></span></li>
+<li>Reprodutibilidade é a habilidade de se obter resultados iguais ou similares quando uma análise ou teste estatístico é repetido.<span class="citation"><sup><a href="#ref-resnik2016">26</a>–<a href="#ref-mair2016">28</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="por-que-reprodutibilidade-é-importante" class="section level3 hasAnchor" number="3.8.2">
 <h3><span class="header-section-number">3.8.2</span> Por que reprodutibilidade é importante?<a href="pensamento-metodologico.html#por-que-reprodutibilidade-%C3%A9-importante" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Analisar a reprodutibilidade pode fornecer evidências a respeito da objetividade e confiabilidade dos achados, em detrimento de terem sido obtidos devido a vieses ou ao acaso.<span class="citation"><sup><a href="#ref-resnik2016">25</a></sup></span></p></li>
-<li><p>A reprodutibilidade não é apenas uma questão metodológica, mas também ética, uma vez que pode envolver mal práticas científicas como fabricação e/ou falsificação de dados.<span class="citation"><sup><a href="#ref-resnik2016">25</a></sup></span></p></li>
-<li><p>Reprodutibilidade pode ser considerada um padrão mínimo em pesquisa científica.<span class="citation"><sup><a href="#ref-hofner2015">26</a></sup></span></p></li>
+<li><p>Analisar a reprodutibilidade pode fornecer evidências a respeito da objetividade e confiabilidade dos achados, em detrimento de terem sido obtidos devido a vieses ou ao acaso.<span class="citation"><sup><a href="#ref-resnik2016">26</a></sup></span></p></li>
+<li><p>A reprodutibilidade não é apenas uma questão metodológica, mas também ética, uma vez que pode envolver mal práticas científicas como fabricação e/ou falsificação de dados.<span class="citation"><sup><a href="#ref-resnik2016">26</a></sup></span></p></li>
+<li><p>Reprodutibilidade pode ser considerada um padrão mínimo em pesquisa científica.<span class="citation"><sup><a href="#ref-hofner2015">27</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-contribuir-para-a-reprodutibilidade" class="section level3 hasAnchor" number="3.8.3">
 <h3><span class="header-section-number">3.8.3</span> Como contribuir para a reprodutibilidade?<a href="pensamento-metodologico.html#como-contribuir-para-a-reprodutibilidade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Disponibilize publicamente os bancos de dados, respeitando as considerações éticas vigentes (ex.: autorização dos participantes e do Comitê de Ética em Pesquisa) e internacionalmente.<span class="citation"><sup><a href="#ref-mair2016">27</a></sup></span></p></li>
-<li><p>Produza manuscritos reprodutíveis — manuscritos executáveis ou relatórios dinâmicos — que permitem a integração do banco de dados da(s) amostra(s), do(s) script(s) de análise estatística (incluindo comentários para sua interpretação), dos pacotes ou bibliotecas utilizados, das fontes e referências bibliográficas citadas, além dos demais elementos textuais (tabelas, gráficos) - todos gerados dinamicamente.<span class="citation"><sup><a href="#ref-hinsen2011">28</a></sup></span></p></li>
+<li><p>Disponibilize publicamente os bancos de dados, respeitando as considerações éticas vigentes (ex.: autorização dos participantes e do Comitê de Ética em Pesquisa) e internacionalmente.<span class="citation"><sup><a href="#ref-mair2016">28</a></sup></span></p></li>
+<li><p>Produza manuscritos reprodutíveis — manuscritos executáveis ou relatórios dinâmicos — que permitem a integração do banco de dados da(s) amostra(s), do(s) script(s) de análise estatística (incluindo comentários para sua interpretação), dos pacotes ou bibliotecas utilizados, das fontes e referências bibliográficas citadas, além dos demais elementos textuais (tabelas, gráficos) - todos gerados dinamicamente.<span class="citation"><sup><a href="#ref-hinsen2011">29</a></sup></span></p></li>
+<li><p>Ao adotar delineamentos confirmatórios e justificar previamente hipóteses e tamanhos de efeito, o pesquisador contribui não apenas para a reprodutibilidade, mas também para a “severidade” inferencial.<span class="citation"><sup><a href="#ref-sp%C3%A4th2025">25</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -2063,7 +2072,7 @@ Figura 3.1: Mapa mental da relação entre o pensamento estatístico e o pensame
 <div id="o-que-é-replicabilidade" class="section level3 hasAnchor" number="3.10.1">
 <h3><span class="header-section-number">3.10.1</span> O que é replicabilidade?<a href="pensamento-metodologico.html#o-que-%C3%A9-replicabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Replicabilidade é a habilidade de se obter conclusões iguais ou similares quando um experimento é repetido.<span class="citation"><sup><a href="#ref-hofner2015">26</a>,<a href="#ref-mair2016">27</a></sup></span></li>
+<li>Replicabilidade é a habilidade de se obter conclusões iguais ou similares quando um experimento é repetido.<span class="citation"><sup><a href="#ref-hofner2015">27</a>,<a href="#ref-mair2016">28</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
@@ -2138,16 +2147,16 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
 <div class="csl-left-margin">24. </div><div class="csl-right-inline">Rubin M, Donkin C. Exploratory hypothesis tests can be more compelling than confirmatory hypothesis tests. <em>Philosophical Psychology</em>. 2022;37(8):2019–2047. doi:<a href="https://doi.org/10.1080/09515089.2022.2113771">10.1080/09515089.2022.2113771</a></div>
 </div>
 <div id="ref-resnik2016" class="csl-entry">
-<div class="csl-left-margin">25. </div><div class="csl-right-inline">Resnik DB, Shamoo AE. Reproducibility and Research Integrity. <em>Accountability in Research</em>. 2016;24(2):116–123. doi:<a href="https://doi.org/10.1080/08989621.2016.1257387">10.1080/08989621.2016.1257387</a></div>
+<div class="csl-left-margin">26. </div><div class="csl-right-inline">Resnik DB, Shamoo AE. Reproducibility and Research Integrity. <em>Accountability in Research</em>. 2016;24(2):116–123. doi:<a href="https://doi.org/10.1080/08989621.2016.1257387">10.1080/08989621.2016.1257387</a></div>
 </div>
 <div id="ref-hofner2015" class="csl-entry">
-<div class="csl-left-margin">26. </div><div class="csl-right-inline">Hofner B, Schmid M, Edler L. Reproducible research in statistics: A review and guidelines for the <span><em>Biometrical Journal</em></span>. <em>Biometrical Journal</em>. 2015;58(2):416–427. doi:<a href="https://doi.org/10.1002/bimj.201500156">10.1002/bimj.201500156</a></div>
+<div class="csl-left-margin">27. </div><div class="csl-right-inline">Hofner B, Schmid M, Edler L. Reproducible research in statistics: A review and guidelines for the <span><em>Biometrical Journal</em></span>. <em>Biometrical Journal</em>. 2015;58(2):416–427. doi:<a href="https://doi.org/10.1002/bimj.201500156">10.1002/bimj.201500156</a></div>
 </div>
 <div id="ref-mair2016" class="csl-entry">
-<div class="csl-left-margin">27. </div><div class="csl-right-inline">Mair P. Thou Shalt Be Reproducible! A Technology Perspective. <em>Frontiers in Psychology</em>. 2016;7. doi:<a href="https://doi.org/10.3389/fpsyg.2016.01079">10.3389/fpsyg.2016.01079</a></div>
+<div class="csl-left-margin">28. </div><div class="csl-right-inline">Mair P. Thou Shalt Be Reproducible! A Technology Perspective. <em>Frontiers in Psychology</em>. 2016;7. doi:<a href="https://doi.org/10.3389/fpsyg.2016.01079">10.3389/fpsyg.2016.01079</a></div>
 </div>
 <div id="ref-hinsen2011" class="csl-entry">
-<div class="csl-left-margin">28. </div><div class="csl-right-inline">Hinsen K. A data and code model for reproducible research and executable papers. <em>Procedia Computer Science</em>. 2011;4:579–588. doi:<a href="https://doi.org/10.1016/j.procs.2011.04.061">10.1016/j.procs.2011.04.061</a></div>
+<div class="csl-left-margin">29. </div><div class="csl-right-inline">Hinsen K. A data and code model for reproducible research and executable papers. <em>Procedia Computer Science</em>. 2011;4:579–588. doi:<a href="https://doi.org/10.1016/j.procs.2011.04.061">10.1016/j.procs.2011.04.061</a></div>
 </div>
 </div>
             </section>
