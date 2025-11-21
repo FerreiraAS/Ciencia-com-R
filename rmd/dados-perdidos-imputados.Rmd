@@ -272,6 +272,116 @@ O pacote *stats*[@stats] fornece a função [*complete.cases*](https://www.rdocu
 
 <br>
 
+```{r impacto-imputacao, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Impacto de métodos de imputação na distribuição de uma variável contínua com dados perdidos.", out.width = "100%"}
+# para reproduzir o exemplo
+set.seed(123)
+
+# 1. Simular dados contínuos
+n <- 300
+x <- rnorm(n, mean = 50, sd = 10)
+
+# 2. Introduzir dados perdidos (MCAR)
+prop_na <- 0.20
+na_idx <- sample(1:n, size = n * prop_na)
+x_miss <- x
+x_miss[na_idx] <- NA
+
+# 3. Função da moda contínua (pico da densidade)
+get_mode <- function(v) {
+  d <- density(v, na.rm = TRUE)
+  d$x[which.max(d$y)]
+}
+
+# Estatísticas com NA
+media   <- mean(x_miss, na.rm = TRUE)
+mediana <- median(x_miss, na.rm = TRUE)
+moda    <- get_mode(x_miss)
+
+# 4. Imputações simples
+x_mean   <- ifelse(is.na(x_miss), media, x_miss)
+x_median <- ifelse(is.na(x_miss), mediana, x_miss)
+x_mode   <- ifelse(is.na(x_miss), moda, x_miss)
+
+# 5. Imputação por PMM (Predictive Mean Matching)
+library(mice)
+
+# Variável auxiliar para permitir o modelo de imputação
+df_mice <- data.frame(
+  valor = x_miss,
+  aux   = x + rnorm(n, 0, 5)  # variável auxiliar correlacionada (~0.8)
+)
+
+imp <- mice(df_mice, method = "pmm", m = 1, printFlag = FALSE)
+x_pmm <- complete(imp)$valor
+
+# 6. Médias e vieses
+mean_original <- mean(x)
+
+bias_mean   <- mean(x_mean)   - mean_original
+bias_median <- mean(x_median) - mean_original
+bias_mode   <- mean(x_mode)   - mean_original
+bias_pmm    <- mean(x_pmm)    - mean_original
+
+# 7. Data frame longo
+df <- tibble::tibble(
+  Método = c(rep("Original", n),
+             rep("Imputação: Média", n),
+             rep("Imputação: Mediana", n),
+             rep("Imputação: Moda", n),
+             rep("Imputação: PMM (MICE)", n)),
+  Valor = c(x,
+            x_mean,
+            x_median,
+            x_mode,
+            x_pmm)
+)
+
+# 8. Criar rótulos com viés
+label_fun <- function(meth) {
+  if (meth == "Original") {
+    paste0("Original\nMédia = ", round(mean_original, 2))
+  } else if (meth == "Imputação: Média") {
+    paste0("Imputação: Média\nMédia = ", round(mean(x_mean), 2),
+           " | Viés = ", round(bias_mean, 2))
+  } else if (meth == "Imputação: Mediana") {
+    paste0("Imputação: Mediana\nMédia = ", round(mean(x_median), 2),
+           " | Viés = ", round(bias_median, 2))
+  } else if (meth == "Imputação: Moda") {
+    paste0("Imputação: Moda\nMédia = ", round(mean(x_mode), 2),
+           " | Viés = ", round(bias_mode, 2))
+  } else {
+    paste0("Imputação: PMM (MICE)\nMédia = ", round(mean(x_pmm), 2),
+           " | Viés = ", round(bias_pmm, 2))
+  }
+}
+
+df$Painel <- factor(df$Método,
+                    levels = c("Original",
+                               "Imputação: Média",
+                               "Imputação: Mediana",
+                               "Imputação: Moda",
+                               "Imputação: PMM (MICE)"))
+
+df$Painel_label <- sapply(as.character(df$Painel), label_fun)
+
+# 9. Plot final com 5 painéis verticais
+ggplot2::ggplot(df, ggplot2::aes(x = Valor)) +
+  ggplot2::geom_histogram(ggplot2::aes(y = ggplot2::after_stat(density)),
+                 bins = 30, fill = "skyblue", alpha = 0.5) +
+  ggplot2::geom_density(color = "blue", size = 1) +
+  ggplot2::geom_density(data = df |> dplyr::filter(Método == "Original"),
+               ggplot2::aes(x = Valor),
+               color = "red", size = 1, linetype = "dashed") +
+  ggplot2::facet_wrap(~ Painel_label, ncol = 1, scales = "free_y") +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::labs(
+    x = "Valor",
+    y = "Densidade"
+  )
+```
+
+<br>
+
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 Os pacotes *mice*[@mice] e *miceadds*[@miceadds] fornecem funções [*mice*](https://www.rdocumentation.org/packages/mice/versions/3.16.0/topics/mice) e [*mi.anova*](https://www.rdocumentation.org/packages/miceadds/versions/3.16-18/topics/mi.anova) para imputação multivariada por equações encadeadas, respectivamente, para imputação de dados.
 :::
