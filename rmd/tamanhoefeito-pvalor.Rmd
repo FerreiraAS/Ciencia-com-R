@@ -697,7 +697,7 @@ colnames(dados) <- c(
 rownames(dados) <- NULL
 
 # --- Tabela kableExtra ---
-kableExtra::kable(
+knitr::kable(
   dados,
   align = c("c","c","c","c","c","c","c","c","c","c"),
   format = ifelse(knitr::is_html_output(), "html", "latex"),

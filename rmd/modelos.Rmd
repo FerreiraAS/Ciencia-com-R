@@ -405,7 +405,7 @@ resultado_df$Métrica <- dplyr::recode(
 )
 
 # Exibindo com estilo avançado
-kableExtra::kable(
+knitr::kable(
   resultado_df,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),

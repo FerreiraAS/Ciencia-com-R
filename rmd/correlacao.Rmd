@@ -138,7 +138,7 @@ anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
 anscombe.dt <- anscombe.dt[c(9, 1:8)]
 
 # exibe a tabela de dados
-kableExtra::kable(
+knitr::kable(
   anscombe.dt,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
@@ -207,7 +207,7 @@ rownames(anscombe.summ) <-
 anscombe.summ <- round(anscombe.summ, 2)
 
 # exibe a tabela de dados
-kableExtra::kable(
+knitr::kable(
   anscombe.summ,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),

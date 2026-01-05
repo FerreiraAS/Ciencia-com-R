@@ -60,7 +60,7 @@ colnames(cross.table) <-
   c("Condição presente", "Condição ausente", "Total")
 
 # exibe a tabela de dados
-kableExtra::kable(
+knitr::kable(
   cross.table,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
@@ -316,7 +316,7 @@ colnames(cross.table) <- c("Condição presente",
                            "Probabilidades")
 
 # exibe a tabela de dados
-kableExtra::kable(
+knitr::kable(
   cross.table,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
@@ -411,7 +411,7 @@ colnames(linha_total) <- colnames(cross3_totais)
 cross3_totais <- rbind(cross3_totais, linha_total)
 
 # ---- renderização kable/kableExtra ----
-kableExtra::kable(
+knitr::kable(
   cross3_totais,
   align   = "c",
   format  = ifelse(knitr::is_html_output(), "html", "latex"),

@@ -52,7 +52,7 @@ for (i in 1:N) {
 }
 
 # exibe a tabela
-kableExtra::kable(
+knitr::kable(
   table.0,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
@@ -106,7 +106,7 @@ df.long <- df %>%
   dplyr::arrange(Linha)
 
 # exibe tabela longa
-kableExtra::kable(
+knitr::kable(
   df.long,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
@@ -156,7 +156,7 @@ df_wide_1v <- df_long_1v %>%
   dplyr::arrange(id)
 
 # 3) Exibir
-kableExtra::kable(
+knitr::kable(
   df_wide_1v,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
@@ -285,7 +285,7 @@ colnames(table.final) <-
   c("ID", "Data.Coleta", "Estado.Civil", "Numero.Filhos")
 
 # exibe a tabela
-kableExtra::kable(
+knitr::kable(
   table.final,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
@@ -320,7 +320,7 @@ colnames(table.final) <-
   c("ID", "Data de Coleta", "Estado Civil", "Número de Filhos")
 
 # exibe a tabela
-kableExtra::kable(
+knitr::kable(
   table.final,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),

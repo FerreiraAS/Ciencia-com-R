@@ -89,7 +89,7 @@ dados$Valor <- sapply(1:nrow(dados), function(i) {
 })
 
 # exibe a tabela de dados
-kableExtra::kable(
+knitr::kable(
   dados,
   align = c("r", "c", "c"),
   format = ifelse(knitr::is_html_output(), "html", "latex"),
@@ -174,7 +174,7 @@ dados$'Sem casa decimal [Margem de erro]' <- sapply(dados$Valor, function(x) {
 })
 
 # exibe a tabela de dados
-kableExtra::kable(
+knitr::kable(
   dados,
   align = c("r", "c", "c", "r", "r", "r"),
   format = ifelse(knitr::is_html_output(), "html", "latex"),
@@ -359,7 +359,7 @@ tbl1 <- dados |>
   ) |>
   gtsummary::add_n() |>
   gtsummary::add_p() |>
-  gtsummary::modify_caption("**Características da amostra por grupo.**")
+  gtsummary::modify_caption("Características da amostra por grupo.")
 
 tbl1
 ```
@@ -416,18 +416,18 @@ gtsummary::theme_gtsummary_language("pt")
 tab_cru <- gtsummary::tbl_regression(
   mod_cru, exponentiate = TRUE
 ) |>
-  gtsummary::modify_caption("**Tabela 2a. OR bruto (modelo sem covariáveis).**")
+  gtsummary::modify_caption("Tabela 2a. OR bruto (modelo sem covariáveis).")
 
 tab_aj <- gtsummary::tbl_regression(
   mod_aj, exponentiate = TRUE
 ) |>
-  gtsummary::modify_caption("**Tabela 2b. OR ajustado (inclui covariáveis).**")
+  gtsummary::modify_caption("Tabela 2b. OR ajustado (inclui covariáveis).")
 
 tab_falacia <- gtsummary::tbl_merge(
   list(tab_cru, tab_aj),
-  tab_spanner = c("**Sem ajuste**", "**Ajustado**")
+  tab_spanner = c("Sem ajuste", "Ajustado")
 ) |>
-  gtsummary::modify_caption("**Exemplo clássico de apresentação suscetível à Falácia da 'Tabela 2'.**")
+  gtsummary::modify_caption("Exemplo clássico de apresentação suscetível à Falácia da 'Tabela 2'.")
 
 tab_falacia
 ```
@@ -472,14 +472,14 @@ tab_cru <- gtsummary::tbl_regression(mod_cru, exponentiate = TRUE, include = "Gr
 tab_aj <- gtsummary::tbl_regression(mod_aj, exponentiate = TRUE, include = "Grupo")
 
 tab_anti <- gtsummary::tbl_merge(list(tab_cru, tab_aj),
-                                 tab_spanner = c("**Sem ajuste**", "**Ajustado**")) |>
-  gtsummary::modify_caption("**Exposição (OR; 95% IC) com e sem ajuste.**")
+                                 tab_spanner = c("Sem ajuste", "Ajustado")) |>
+  gtsummary::modify_caption("Exposição (OR; 95% IC) com e sem ajuste.")
 
 # adiciona a nota de rodapé (corrigindo o erro)
 tab_anti_gt <- gtsummary::as_gt(tab_anti) |>
   gt::tab_source_note(
     gt::md(
-      "**Nota.** Modelo ajustado por Idade (contínua) e IMC (contínuo).
+      "*Nota.* Modelo ajustado por Idade (contínua) e IMC (contínuo).
  Covariáveis são usadas apenas para controle de confusão e não devem ser interpretadas como efeitos causais (*Falácia da Tabela 2*)."
     )
   )
@@ -511,7 +511,7 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://sear
 
 ### Como escolher a geometria e “mostrar os dados”?
 
--   Prefira geometrias que revelem distribuição/variabilidade (pontos, *boxplots*, violinos) em vez de médias sozinhas. Sempre que possível, **exiba os dados brutos** (pontos com *jitter*) junto da estatística-resumo.[@midway2020]
+-   Prefira geometrias que revelem distribuição/variabilidade (pontos, *boxplots*, violinos) em vez de médias sozinhas. Sempre que possível, exiba os dados brutos (pontos com *jitter*) junto da estatística-resumo.[@midway2020]
 
 <br>
 

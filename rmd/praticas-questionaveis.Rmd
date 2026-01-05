@@ -124,7 +124,7 @@ bg_color <- function(hex, latex) {
 }
 
 # Criar tabela com kableExtra
-kableExtra::kable(
+knitr::kable(
   praticas_questionaveis,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),

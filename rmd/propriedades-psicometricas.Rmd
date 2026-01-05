@@ -12,7 +12,7 @@
 
 <br>
 
-```{r crosstable-psicometria, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r crosstable-psicometria, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão sobre propriedades psicométricas de instrumentos."}
 library(dplyr)
 cross.table.psico <-
   matrix(
@@ -30,14 +30,13 @@ colnames(cross.table.psico) <-
   c("Concordância alta", "Concordância baixa")
 
 # exibe a tabela de dados
-kableExtra::kable(
+knitr::kable(
   cross.table.psico,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = FALSE,
-  caption = "Tabela de confusão sobre propriedades psicométricas de instrumentos."
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("basic"),
@@ -235,7 +234,7 @@ O pacote *psych*[@psych] fornece a função [*icc*](https://www.rdocumentation.o
 
 -   Coeficiente de Cohen $\kappa$: mede a concordância corrigida pelo acaso.[@scott1955; @cohen1960]
 
-```{r crosstable-kappa-2x2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r crosstable-kappa-2x2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 2x2 para análise de concordância de testes e variáveis dicotômicas."}
 library(dplyr)
 cross.table.kappa <-
   matrix(
@@ -254,14 +253,13 @@ colnames(cross.table.kappa) <-
   c("Teste positivo", "Teste negativo", "Total")
 
 # exibe a tabela de dados
-kableExtra::kable(
+knitr::kable(
   cross.table.kappa,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = FALSE,
-  caption = "Tabela de confusão 2x2 para análise de concordância de testes e variáveis dicotômicas."
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("basic"),
@@ -307,7 +305,7 @@ O pacote *psych*[@psych] fornece a função [*tetrachoric*](https://www.rdocumen
 
 -   Coeficiente de Cohen ponderado $\kappa_{w}$: mede a concordância corrigida pelo acaso.[@scott1955; @cohen1960]
 
-```{r crosstable-kappa-3x3, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r crosstable-kappa-3x3, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 3x3 para análise de concordância de testes e variáveis dicotômicas."}
 library(dplyr)
 cross.table.kappa <-
   matrix(
@@ -327,14 +325,13 @@ colnames(cross.table.kappa) <-
   c("Grave", "Moderado", "Leve", "Total")
 
 # exibe a tabela de dados
-kableExtra::kable(
+knitr::kable(
   cross.table.kappa,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = FALSE,
-  caption = "Tabela de confusão 3x3 para análise de concordância de testes e variáveis dicotômicas."
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("basic"),

@@ -37,7 +37,7 @@ rct10[["Desfecho (pré)"]] <- round(rct10[["Desfecho (pré)"]], 1)
 rct10[["Desfecho (pós)"]] <- round(rct10[["Desfecho (pós)"]], 1)
 
 # exibir a tabela de 10 indivíduos simulada
-kableExtra::kable(
+knitr::kable(
   rct10,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
