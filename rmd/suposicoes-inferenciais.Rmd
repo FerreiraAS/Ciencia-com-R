@@ -10,7 +10,7 @@
 
 <br>
 
-## Suposições comuns em análises inferenciais
+## Suposições gerais em análises inferenciais
 
 <br>
 
@@ -66,11 +66,39 @@
 
 <br>
 
+## Suposições causais que conectam dados observados a efeitos causais
+
+<br>
+
+### Quais são as suposições causais que conectam dados observados a efeitos causais?
+
+- Ausência de correlação espúria: associações observadas refletem relações sistemáticas e não flutuações aleatórias; quanto maior a amostra, mais plausível essa condição.[@REF]
+
+- Consistência: os valores observados do tratamento correspondem a intervenções bem definidas e coincidem com os valores dos contrafactuais relevantes.[@REF]
+
+- Intercambialidade: condicionalmente às covariáveis medidas, a atribuição do tratamento é independente dos desfechos potenciais.[@REF]
+
+- Positividade: para todos os valores das covariáveis consideradas, a probabilidade de receber cada nível do tratamento é maior que zero.[@REF]
+
+- Fidelidade: efeitos causais não se cancelam sistematicamente no agregado populacional, de modo que efeitos médios nulos correspondem à ausência de efeito causal relevante.[@REF]
+
+<br>
+
+### Qual a relação dessas suposições com as demais suposições inferenciais?
+
+- Essas suposições operam antes do modelo estatístico.[@REF]
+
+- Não são verificáveis por diagnóstico residual ou testes de ajuste.[@REF]
+
+- Mesmo com todas as suposições estatísticas satisfeitas, a inferência causal pode falhar se qualquer uma dessas suposições não for atendida.[@REF]
+
+<br>
+
 ## Diagnóstico e verificação
 
 <br>
 
-### O que fazer quando suposições falham?
+### O que fazer quando suposições gerais falham?
 
 - Transformações: .[REF]
 
@@ -79,6 +107,26 @@
 - Reamostragem: .[REF]
 
 - Modelos alternativos: .[REF]
+
+<br>
+
+### O que fazer quando as suposições causais falham?
+
+- Clarificar o alvo causal: redefinir a população, o tratamento ou o efeito de interesse.[REF]
+
+- Análise de sensibilidade: avaliar quanto confundimento não medido seria necessário para invalidar as conclusões.[REF]
+
+- Restringir o suporte: limitar a análise a regiões com positividade plausível (suporte comum).[REF]
+
+- Estratificação ou ajuste enriquecido: incluir covariáveis adicionais relevantes, quando disponíveis.[REF]
+
+- Modelagem causal explícita: usar DAGs para tornar suposições transparentes e discutíveis.[REF]
+
+- Estimativas parciais ou locais: reportar efeitos condicionais ou locais quando o efeito médio não é identificável.[REF]
+
+- Conclusões mais fracas: interpretar resultados como associações ajustadas, não como efeitos causais.[REF]
+
+- Relato explícito das falhas: documentar quais suposições não são plausíveis e por quê.[REF]
 
 <br>
 

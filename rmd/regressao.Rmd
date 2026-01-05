@@ -140,9 +140,9 @@ model <- lm(Y ~ X, data = data)
 ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_point() +
   ggplot2::geom_smooth(method = "lm",
-                       color = "blue",   # cor da linha
-                       fill = "grey70",  # cor da área IC95%
-                       se = TRUE) +      # mostra o intervalo de confiança
+                       color = "blue",
+                       fill = "grey70",
+                       se = TRUE) +
   ggplot2::labs(title = "Regressão linear", 
                 x = "Variável Independente (X)", 
                 y = "Variável Dependente (Y)") +
@@ -177,9 +177,9 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_point() +
   ggplot2::geom_smooth(method = "lm",
                        formula = y ~ poly(x, 3),
-                       color = "blue",      # cor da linha
-                       fill = "grey70",     # cor da faixa IC95%
-                       se = TRUE) +         # ativa o intervalo de confiança
+                       color = "blue",
+                       fill = "grey70",
+                       se = TRUE) +
   ggplot2::labs(title = "Regressão polinomial",
                 x = "Variável Independente (X)",
                 y = "Variável Dependente (Y)") +
@@ -218,8 +218,8 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_smooth(method = "lm",
                        formula = y ~ poly(x, 2),
                        color = "blue",
-                       fill = "grey70", # cor da área do IC
-                       se = TRUE) +     # ativa o intervalo de confiança
+                       fill = "grey70",
+                       se = TRUE) +
   ggplot2::labs(title = "Regressão não-linear", 
                 x = "Variável Independente (X)", 
                 y = "Variável Dependente (Y)") +

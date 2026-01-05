@@ -20,6 +20,8 @@
 
 -   Análise causal implica em contrafactual, no sentido de que a análise causal é baseada na comparação entre o que realmente aconteceu e o que teria acontecido se uma ou mais variáveis tivessem sido diferentes.[@gerring2012]
 
+- Análise causal refere-se ao processo conceitual e analítico, enquanto inferência causal diz respeito às conclusões extraídas a partir de dados.[@REF]
+
 <br>
 
 ### Quais os dois grandes tipos de causalidade?
@@ -27,6 +29,26 @@
 -   Baseada em experiência: conhecimento empírico, muitas vezes sem compreensão dos mecanismos. Estatística tem papel central na causalidade baseada em experiência.[@aalen2007]
 
 -   Mecanicista: busca entender processos internos e mecanismos. Estatística tem seu papel ainda limitado, mas crescente, especialmente em sistemas complexos.[@aalen2007]
+
+<br>
+
+### Como realizar uma análise causal?
+
+- Formular explicitamente uma pergunta causal, definindo qual intervenção hipotética está sendo considerada e qual efeito se deseja estimar.[@REF]
+
+- Especificar a ordem temporal entre exposição, desfecho e demais variáveis, assegurando que a causa preceda o efeito.[@REF]
+
+- Tornar explícitas as suposições causais sobre o sistema em estudo, preferencialmente por meio de um diagrama causal (DAG).[@REF]
+
+- Identificar confundidores, mediadores e colisores com base na estrutura causal assumida, e não apenas em critérios estatísticos.[@REF]
+
+- Definir o conjunto mínimo de ajuste necessário para bloquear caminhos espúrios entre exposição e desfecho.[@REF]
+
+- Escolher métodos estatísticos compatíveis com a pergunta causal (ex.: regressão ajustada, ponderação por escore de propensão, g-methods), reconhecendo que o método não cria causalidade.[@REF]
+
+- Avaliar limitações como confundimento residual, viés de seleção e erro de medida, discutindo seu impacto potencial nas inferências.[@REF]
+
+- Interpretar os resultados em termos causais explícitos, distinguindo claramente associação de efeito causal.[@REF]
 
 <br>
 
@@ -322,24 +344,6 @@
 
 <br>
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *dagitty*[@dagitty] fornece a função [*dagitty*](https://cran.r-project.org/web/packages/dagitty/index.html) para criar um objeto grafo a partir de uma descrição textual.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *ggdag*[@ggdag] fornece a função [*ggdag*](https://www.rdocumentation.org/packages/ggdag/versions/0.2.10/topics/ggdag) para criar figuras de grafos.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *performance*[@performance] fornece a função [*check_dag*](https://easystats.github.io/performance/reference/check_dag.html) para criar, verificar e visualizar os modelos em grafos.
-:::
-
-<br>
-
 ```{r dag, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Padrões causais básicos: independência, cadeia, garfo e colisor.", out.width = "90%"}
 # ---------- Funções auxiliares ----------
 .build_nodes_df <- function(dag, panel_label){
@@ -445,6 +449,48 @@ p <- ggplot2::ggplot() +
 
 print(p)
 ```
+
+<br>
+
+### Quais são as regras básicas para análise causal?
+
+- Variáveis causalmente independentes tendem a não ser correlacionadas, exceto na presença de confundimento ou viés de seleção.[@REF]
+
+- Influência causal pode criar correlação estatística, mas correlação não é condição necessária nem suficiente para causalidade.[@REF]
+
+- Confundimento cria correlação espúria entre exposição e desfecho, mesmo na ausência de efeito causal direto.[@REF]
+
+- Aleatorização protege a variável de exposição contra influência causal de fatores antecedentes, reduzindo confundimento pré-exposição.[@REF]
+
+<br>
+
+### Quais são as regras básicas para ajuste?
+
+- Controlar por um confundidor bloqueia caminhos causais espúrios e reduz viés na estimativa do efeito causal.[@REF]
+
+- Controlar por um mediador bloqueia parte ou todo o efeito causal total, sendo inadequado quando o objetivo é estimar o efeito total da exposição.[@REF]
+
+- Controlar por um colisor cria correlação espúria entre as variáveis que o causam, introduzindo viés mesmo quando não havia associação prévia.[@REF]
+
+- Controlar por uma variável descendente de um colisor pode reabrir parcialmente caminhos espúrios, produzindo viés de seleção.[@REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *dagitty*[@dagitty] fornece a função [*dagitty*](https://cran.r-project.org/web/packages/dagitty/index.html) para criar um objeto grafo a partir de uma descrição textual.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *ggdag*[@ggdag] fornece a função [*ggdag*](https://www.rdocumentation.org/packages/ggdag/versions/0.2.10/topics/ggdag) para criar figuras de grafos.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *performance*[@performance] fornece a função [*check_dag*](https://easystats.github.io/performance/reference/check_dag.html) para criar, verificar e visualizar os modelos em grafos.
+:::
 
 <br>
 

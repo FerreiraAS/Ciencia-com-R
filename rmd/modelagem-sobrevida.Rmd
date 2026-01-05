@@ -62,9 +62,9 @@ ajuste_km <- survival::survfit(survival::Surv(tempo, status) ~ grupo, data = dad
 survminer::ggsurvplot(
   ajuste_km,
   data = dados,
-  conf.int = TRUE,              # intervalo de confiança
-  pval = TRUE,                  # p-valor log-rank
-  risk.table = TRUE,            # tabela de nº em risco
+  conf.int = TRUE,
+  pval = TRUE,
+  risk.table = TRUE,
   xlab = "Tempo (unidades simuladas)",
   ylab = "Probabilidade de Sobrevida",
   title = "Curvas de Kaplan–Meier",
