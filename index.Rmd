@@ -93,8 +93,7 @@ file.copy(
   recursive = FALSE,
   copy.mode = TRUE
 )
-try(unlink("Ciencia-com-R.docx"), silent = TRUE
-)
+try(unlink("Ciencia-com-R.docx"), silent = TRUE)
 ```
 
 ```{r cover-generator, echo = FALSE, include = FALSE, eval = knitr::is_html_output()}
@@ -168,8 +167,10 @@ rmd_files <- rmd_files[!grepl("parte-7.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-8.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-9.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("parte-10.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("parte-11.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("apendice.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("scripts.Rmd", rmd_files)]
+rmd_files <- rmd_files[!grepl("shiny-apps.Rmd", rmd_files)]
 rmd_files <- rmd_files[!grepl("referencias.Rmd", rmd_files)]
 
 # read bib file
