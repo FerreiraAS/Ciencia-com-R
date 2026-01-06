@@ -410,6 +410,84 @@ knitr::kable(
 
 <br>
 
+## Distribuição de confiança
+
+### O que é distribuição de confiança?
+
+- Distribuição de confiança é uma representação contínua da evidência inferencial sobre um parâmetro de interesse. Ela mostra, para cada valor possível do tamanho do efeito, o nível de confiança associado, sendo uma generalização visual do intervalo de confiança e do P-valor.[@REF]
+
+```{r confidence-distribution, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Distribuição de confiança para o tamanho do efeito estimado."}
+# reprodutibilidade
+set.seed(123)
+
+# Tamanho amostral
+n <- 60
+
+# Parâmetros verdadeiros
+mu_control <- 0
+mu_treat   <- -35
+sd_common  <- 80
+
+# Dados simulados
+control <- rnorm(n, mean = mu_control, sd = sd_common)
+treat   <- rnorm(n, mean = mu_treat,   sd = sd_common)
+
+# Estimativa do efeito (diferença de médias)
+theta_hat <- mean(treat) - mean(control)
+
+# Erro padrão
+se <- sqrt(var(treat)/n + var(control)/n)
+
+# Hipótese nula
+theta0 <- 0
+
+# Grade de efeitos plausíveis
+theta <- seq(theta_hat - 5*se, theta_hat + 5*se, length.out = 500)
+
+# Confidence distribution
+z <- abs((theta - theta_hat) / se)
+confidence <- 100 * (1 - 2 * (1 - pnorm(z)))
+
+df <- data.frame(theta, confidence)
+
+# P-valor (derivado da mesma estrutura)
+z0 <- abs((theta_hat - theta0) / se)
+p_value <- 2 * (1 - pnorm(z0))
+
+# Plot
+ggplot2::ggplot(df, ggplot2::aes(x = theta, y = confidence)) +
+  ggplot2::geom_line(linewidth = 1) +
+  ggplot2::geom_vline(xintercept = theta_hat,
+                      color = "red", linewidth = 0.8) +
+  ggplot2::geom_vline(xintercept = theta0,
+                      color = "blue", linetype = "dashed") +
+  ggplot2::geom_hline(yintercept = 95,
+                      color = "red", linetype = "dotted") +
+  ggplot2::geom_hline(yintercept = 100 * (1 - p_value),
+                      color = "blue", linetype = "dashed") +
+  ggplot2::annotate("text",
+                    x = theta_hat, y = 5,
+                    label = "Estimativa",
+                    hjust = -0.1) +
+  ggplot2::annotate("text",
+                    x = theta0, y = 5,
+                    label = "Hipótese nula",
+                    hjust = -0.1) +
+  ggplot2::annotate("text",
+                    x = min(theta),
+                    y = 100 * (1 - p_value) + 3,
+                    label = paste0("P-valor = ", round(p_value, 3)),
+                    hjust = 0) +
+  ggplot2::labs(
+    title = "Distribuição de confiança para o tamanho de efeito observado",
+    x = "Efeito estimado",
+    y = "Confiança (%)"
+  ) +
+  ggplot2::theme_minimal(base_size = 13)
+```
+
+<br>
+
 ## Boas práticas
 
 -   Defina $H_0$ intervalar e $\delta$ a priori com justificativa científica.[@blume2018; @lakens2020]

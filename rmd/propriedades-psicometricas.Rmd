@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Propriedades psicométricas** {#propriedades-psicometricas}
 
 <br>
@@ -63,25 +62,7 @@ knitr::kable(
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *lavaan*[@lavaan] fornece a função [*cfa*](https://www.rdocumentation.org/packages/lavaan/versions/0.6-16/topics/cfa) para implementar modelos de análise fatorial confirmatória.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *lavaan*[@lavaan] fornece a função [*modificationIndices*](https://www.rdocumentation.org/packages/lavaan/versions/0.6-16/topics/modificationIndices) para calcular os índices de modificação.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *semTools*[@semTools] fornece a função [*reliability*](https://www.rdocumentation.org/packages/semTools/versions/0.5-6/topics/reliability-deprecated) para analisar a confiabilidade de um instrumento.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psych*[@psych] fornece a função [*icc*](https://www.rdocumentation.org/packages/psych/versions/2.3.6/topics/ICC) para calcular a confiabilidade utilizando coeficientes de correlação intraclasse.
 :::
 
 <br>
@@ -103,6 +84,12 @@ O pacote *psych*[@psych] fornece a função [*icc*](https://www.rdocumentation.o
 ### O que é análise fatorial confirmatória?
 
 -   .[@REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *lavaan*[@lavaan] fornece a função [*cfa*](https://www.rdocumentation.org/packages/lavaan/versions/0.6-16/topics/cfa) para implementar modelos de análise fatorial confirmatória.
+:::
 
 <br>
 
@@ -285,6 +272,24 @@ knitr::kable(
 
 <br>
 
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *irr*[@irr] fornece a função [*kappa2*](https://www.rdocumentation.org/packages/irr/versions/0.84.1/topics/kappa2) para estimar a confiabilidade utilizando coeficiente $\kappa$ de Cohen para 2 examinadores.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *irr*[@irr] fornece a função [*kappam.fleiss*](https://www.rdocumentation.org/packages/irr/versions/0.84.1/topics/kappam.fleiss) para estimar a confiabilidade utilizando coeficiente $\kappa$ de Fleiss para mais de 2 examinadores.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *irr*[@irr] fornece a função [*kappam.light*](https://www.rdocumentation.org/packages/irr/versions/0.84.1/topics/kappam.light) para estimar a confiabilidade utilizando coeficiente $\kappa$ de Light para mais de 2 examinadores em dados categóricos.
+:::
+
+<br>
+
 -   Coeficiente de correlação tetracórica $r_{tet}$.[@i.mathe1901; @banerjee1999]
 
 <br>
@@ -304,6 +309,12 @@ O pacote *psych*[@psych] fornece a função [*tetrachoric*](https://www.rdocumen
 -   Qui-quadrado $\chi^2$ a partir da tabela de contigência não é recomendado porque tal teste analisa associação.[@banerjee1999]
 
 -   A família de coeficientes de Cohen $\kappa$ não é adequada para analisar concordância quando as variáveis são aparentemente (e não originalmente) dicotômicas.[@banerjee1999]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *irr*[@irr] fornece a função [*agree*](https://www.rdocumentation.org/packages/irr/versions/0.84.1/topics/agree) para estimar a concordância percentual entre examinadores.
+:::
 
 <br>
 
@@ -428,6 +439,42 @@ O pacote *BlandAltmanLeh*[@BlandAltmanLeh] fornece as funções [*bland.altman.s
 ### Quais métodos são adequados para análise de confiabilidade?
 
 -   .[@REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *semTools*[@semTools] fornece a função [*reliability*](https://www.rdocumentation.org/packages/semTools/versions/0.5-6/topics/reliability-deprecated) para analisar a confiabilidade de um instrumento.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *psych*[@psych] fornece a função [*icc*](https://www.rdocumentation.org/packages/psych/versions/2.3.6/topics/ICC) para estimar a confiabilidade utilizando coeficientes de correlação intraclasse.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *multilevel*[@jomo] fornece a função [*mult.icc*](https://www.rdocumentation.org/packages/multilevel/versions/2.5/topics/mult.icc) para estimar a confiabilidade utlizando diversos coeficientes de correlação intraclasse.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *multilevel*[@jomo] fornece a função [*cronbach*](https://www.rdocumentation.org/packages/multilevel/versions/2.5/topics/cronbach) para estimar a confiabilidade utlizando o $\alpha$ de Cronbach.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *irr*[@irr] fornece a função [*kripp.alpha*](https://www.rdocumentation.org/packages/irr/versions/0.84.1/topics/kripp.alpha) para estimar a confiabilidade utilizando coeficiente $\alpha$ de Krippendorff.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *irr*[@irr] fornece a função [*iota*](https://www.rdocumentation.org/packages/irr/versions/0.84.1/topics/iota) para estimar a confiabilidade utilizando coeficiente $\iota$.
+:::
 
 <br>
 

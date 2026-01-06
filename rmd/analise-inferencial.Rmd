@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Análise inferencial** {#analise-inferencial}
 
 <br>
@@ -123,6 +122,189 @@
 -   P-valores, como estimativa da significância estatística.[@Sullivan2012]
 
 -   Tamanho do efeito, como estimativa de significância substantiva.[@Sullivan2012]
+
+<br>
+
+## Intervalos de confiança e raciocínio de longo prazo
+
+<br>
+
+### O que é um intervalo de confiança?
+
+-   Um intervalo de confiança é um procedimento inferencial utilizado para estimar um parâmetro populacional desconhecido a partir de dados amostrais, levando em conta a variabilidade inerente ao processo de amostragem.[@neyman1937]
+
+-   Diferentemente de uma estatística descritiva, o intervalo de confiança não é uma propriedade fixa do parâmetro, mas uma propriedade do procedimento estatístico utilizado para estimá-lo.[@goodman2016]
+
+-   O parâmetro populacional é considerado fixo (embora desconhecido), enquanto o intervalo de confiança é uma quantidade aleatória, pois depende da amostra observada.[@REF]
+
+<br>
+
+### Intervalos de confiança e a lógica frequentista
+
+-   No paradigma frequentista, a probabilidade é interpretada como uma frequência relativa observável no longo prazo, associada a um processo repetível.[@neyman1937]
+
+-   Um intervalo de confiança de nível $(1-\alpha)$ é construído de modo que, se o mesmo procedimento de amostragem e análise fosse repetido indefinidamente sob as mesmas condições, aproximadamente $(1-\alpha)\times100\%$ dos intervalos assim gerados conteriam o verdadeiro valor do parâmetro populacional.[@goodman2016]
+
+-   Portanto, a probabilidade associada ao intervalo de confiança refere-se ao desempenho do procedimento no longo prazo, e não à probabilidade de o parâmetro estar contido em um intervalo específico observado.
+
+<br>
+
+```{r , echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Simulação ilustrativa de intervalos de confiança (IC) em 100 experimentos independentes, cada um com 1.000 observações amostradas de uma população normal padrão (média = 0, desvio-padrão = 1). Os ICs são construídos no nível de 95%. O gráfico superior mostra os ICs individuais para cada experimento, indicando se o IC cobre ou não a média verdadeira (μ = 0). O gráfico inferior apresenta a distribuição das médias amostrais obtidas nos experimentos, juntamente com o IC teórico para a média populacional. Observe que aproximadamente 95% dos ICs individuais cobrem a média verdadeira, ilustrando o conceito de cobertura no longo prazo associado aos intervalos de confiança."}
+# reprodutibilidade
+set.seed(123)
+
+# Parâmetros do mundo real
+mu_true <- 0
+sigma  <- 1
+n      <- 1000
+alpha  <- 0.05
+
+# Número de experimentos
+n_exp <- 100
+
+# Simulação
+sim_results <- lapply(1:n_exp, function(i) {
+  x <- rnorm(n, mean = mu_true, sd = sigma)
+  xbar <- mean(x)
+  se   <- sd(x) / sqrt(n)
+  z    <- qnorm(1 - alpha / 2)
+  tibble::tibble(
+    experimento = i,
+    Média = xbar,
+    ic_inf = xbar - z * se,
+    ic_sup = xbar + z * se,
+    cobre_mu = (xbar - z * se <= mu_true) &
+               (xbar + z * se >= mu_true)
+  )
+})
+
+df <- dplyr::bind_rows(sim_results)
+x_limits <- range(c(df$ic_inf, df$ic_sup))
+z <- qnorm(1 - alpha / 2)
+se_mean <- sigma / sqrt(n)
+ic_mu_inf <- mu_true - z * se_mean
+ic_mu_sup <- mu_true + z * se_mean
+df_ic <- data.frame(
+  x = c(ic_mu_inf, ic_mu_sup),
+  tipo = "IC 95%"
+)
+
+# Gráfico 1: Intervalos de Confiança
+p_ic <- ggplot2::ggplot(df, ggplot2::aes(y = experimento, x = Média)) +
+  ggplot2::geom_errorbarh(
+    ggplot2::aes(xmin = ic_inf, xmax = ic_sup, color = cobre_mu),
+    width = 0.3,
+    linewidth = 0.5
+  ) +
+  ggplot2::geom_point(ggplot2::aes(color = cobre_mu), size = 2) +
+  ggplot2::geom_vline(
+    xintercept = mu_true,
+    linetype = "dashed",
+    linewidth = 0.5
+  ) +
+  ggplot2::scale_color_manual(
+    values = c("TRUE" = "blue", "FALSE" = "red"),
+    labels = c("TRUE" = "IC cobre μ", "FALSE" = "IC não cobre μ"),
+    name = NULL
+  ) +
+  ggplot2::labs(
+    x = "Estimativa da média",
+    y = "Experimento",
+    title = "Intervalos de Confiança (95%) em Experimentos Independentes"
+  ) +
+  ggplot2::coord_cartesian(xlim = x_limits) +
+  ggplot2::theme_minimal(base_size = 13) +
+  ggplot2::theme(
+    axis.text.x = ggplot2::element_blank(),
+    legend.position = "right"
+  ) +
+  ggplot2::theme(
+    panel.grid = ggplot2::element_blank(),
+    axis.line  = ggplot2::element_line(
+      linewidth = 0.6,
+      colour = "black"
+    )
+  )
+
+# Gráfico 2: Distribuição das médias amostrais
+p_dist <- ggplot2::ggplot(df, ggplot2::aes(x = Média)) +
+  ggplot2::geom_density(
+    ggplot2::aes(fill = "Médias amostrais"),
+    alpha = 0.6,
+    linewidth = 1
+  ) +
+  ggplot2::geom_vline(
+    ggplot2::aes(xintercept = mu_true,
+                 linetype = "Média verdadeira (μ)"),
+    linewidth = 1
+  ) +
+  ggplot2::geom_vline(
+    data = df_ic,
+    ggplot2::aes(xintercept = x,
+                 linetype = tipo),
+    linewidth = 0.8
+  ) +
+  ggplot2::scale_fill_manual(
+    name = NULL,
+    values = c("Médias amostrais" = "grey70")
+  ) +
+  ggplot2::scale_linetype_manual(
+    name = NULL,
+    values = c(
+      "Média verdadeira (μ)" = "dashed",
+      "IC 95%"               = "dotted"
+    )
+  ) +
+  ggplot2::labs(
+    y = "Densidade",
+    title = "Distribuição das Médias Amostrais"
+  ) +
+  ggplot2::coord_cartesian(xlim = x_limits) +
+  ggplot2::theme_minimal(base_size = 13) +
+  ggplot2::theme(
+    panel.grid = ggplot2::element_blank(),
+    axis.line  = ggplot2::element_line(
+      linewidth = 0.6,
+      colour = "black"
+    )
+  )
+
+# Combinação dos gráficos
+p_ic / p_dist+
+  patchwork::plot_layout(heights = c(5, 1))
+```
+
+<br>
+
+### O que um intervalo de confiança não representa
+
+-   Um intervalo de confiança não deve ser interpretado como a probabilidade de que o parâmetro esteja contido naquele intervalo específico.[@greenland2016]
+
+-   Após os dados terem sido observados e o intervalo calculado, o parâmetro populacional ou está dentro do intervalo ou não está; não há incerteza probabilística sobre isso no sentido frequentista.[@greenland2016]
+
+-   A incerteza expressa pelo intervalo de confiança refere-se à variabilidade do processo inferencial, e não a uma distribuição de probabilidade do parâmetro.[@greenland2016]
+
+<br>
+
+### Relação entre intervalos de confiança e testes de hipóteses
+
+-   Intervalos de confiança e testes de hipótese frequentistas são derivados do mesmo modelo probabilístico subjacente e utilizam as mesmas suposições estatísticas.[@cumming2005]
+
+-   Em testes bicaudais, qualquer valor hipotético do parâmetro que esteja fora do intervalo de confiança de nível $(1-\alpha)$ corresponde a uma hipótese nula que seria rejeitada ao nível de significância $\alpha$.[@cumming2005]
+
+-   De forma análoga, valores do parâmetro que estejam dentro do intervalo de confiança correspondem a hipóteses nulas para as quais não haveria evidência suficiente para rejeição ao nível $\alpha$.[@cumming2005]
+
+-   Apesar dessa equivalência formal, intervalos de confiança e testes de hipótese respondem a perguntas distintas: testes enfatizam decisões dicotômicas, enquanto intervalos de confiança enfatizam estimação e incerteza.[@cumming2005]
+
+<br>
+
+### Por que intervalos de confiança são centrais na inferência científica
+
+-   Intervalos de confiança permitem avaliar simultaneamente a magnitude do efeito e a incerteza associada à sua estimativa, na mesma unidade de medida da variável de interesse.[@cumming2005]
+
+-   Essa abordagem favorece interpretações substantivas e científicas dos resultados, em oposição a decisões puramente dicotômicas baseadas em pontos de corte arbitrários.[@cumming2005]
+
+-   Quando corretamente interpretados, intervalos de confiança promovem uma comunicação mais informativa da evidência científica e reduzem interpretações equivocadas associadas ao uso exclusivo de P-valores.[@greenland2016]
 
 <br>
 
@@ -531,11 +713,11 @@ ggplot2::annotate(
 
 -   Geralmente é razoável aceitar uma nova conclusão apenas quando há dados a seu favor ('resultados positivos'). Também é razoável questionar se apenas a ausência de dados a seu favor ('resultados negativos') justifica suficientemente a rejeição de tal conclusão.[@altman1995]
 
--   A prática estatística convencional tende a reduzir a incerteza científica a decisões docotômicas. Essa simplificação, embora pragmática, possui implicações epistemológicas importantes: os testes de hipótese produzem não apenas juízos empíricos, mas também atos de fala pragmáticos que comunicam graus de confiança e orientam ações científicas.[@uyguntunç2023]
+-   A prática estatística convencional tende a reduzir a incerteza científica a decisões docotômicas. Essa simplificação possui implicações epistemológicas importantes: os testes de hipótese produzem não apenas juízos empíricos, mas também atos pragmáticos que comunicam graus de confiança e orientam ações.[@uyguntunç2023]
 
 <br>
 
-## Erros de inferência
+## Erros de inferência I, II, S e M
 
 <br>
 
