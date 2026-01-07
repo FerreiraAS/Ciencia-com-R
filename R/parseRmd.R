@@ -1,65 +1,98 @@
-ParseRmdContent <- function(rmd_files, bib, k) {
-    # parse Rmd files to get questions, answers, section and chapter
-    rmd_rawdata <- parsermd::parse_rmd(rmd_files[k], allow_incomplete = FALSE, parse_yaml = FALSE) |>
-        tibble::as_tibble()
-
-    # clean R chunks and headings
-    rmd_data <- rmd_rawdata[rmd_rawdata$type != "rmd_chunk", ]
-    rmd_data <- rmd_data[rmd_data$type != "rmd_heading", ]
-
-    # keep rows with complete headers 1 to 3
-    rmd_data <- rmd_data[complete.cases(dplyr::select(rmd_data, c("sec_h1", "sec_h2", "sec_h3"))), ]
+ParseRmdContent <- function(rmd_files, bib) {
+  
+  for (k in seq_along(rmd_files)) {
     
-    # remove last row
-    rmd_data <- rmd_data[-nrow(rmd_data), ]
-
-    # loop over all answers
-    for (i in 1:(nrow(rmd_data))) {
-        chapter <- rmd_data[i, ]$sec_h1
-        # remove ** from chapter
-        chapter <- gsub("\\*\\*", "", chapter)
-        # remove {} content from chapter
-        chapter <- gsub("\\{.*?\\}", "", chapter)
-        # trim ws
-        chapter <- trimws(chapter)
-        
-        section <- rmd_data[i, ]$sec_h2
-        # remove {.numbered} from section
-        section <- gsub("\\{.numbered\\}", "", section)
-
-        question <- rmd_data[i, ]$sec_h3
-
-        answers <- rmd_data[i, ] |> parsermd::as_document()
-        # keep only rows starting with '- '
-        answers <- answers[grep("^- ", answers)]
-        # remove - from answers
-        answers <- gsub("^- ", "", answers)
-        # replace $$ by $ from LaTeX equations
-        answers <- gsub("\\$\\$", "$", answers)
-        # replacE $ in begining of any word string by $\\
-        answers <- gsub("\\$([a-zA-Z])", "$\\\\\\1", answers)
-        # replace $\\ by $ from answers
-        answers <- gsub("\\$\\\\", "$", answers)
-
-        # Extrair todas as chaves citadas (removendo o '@' e separando por ponto e vírgula)
-        key <- unlist(regmatches(answers, gregexpr("@[[:alnum:]]+", answers)))
-        key <- gsub("@", "", key)
-        
-        # Remover a parte da citação do texto
-        answers <- trimws(gsub("\\s*\\[@.*?\\]", "", answers), which = "left")
-        
-        # Chave string separada por ponto e vírgula
-        key_string <- paste(key, collapse = "; ")
-        
-        entry <- data.frame(chapter = rep(chapter, length(answers)), section = rep(section,
-            length(answers)), question = rep(question, length(answers)), answer = answers,
-            key = key_string)
-
-        if (nrow(entry) != 0) {
-            for (j in 1:nrow(entry)) {
-                # save post to PNG
-                SavePost(entry[j, ], bib)
-            }
-        }
+    message("📄 Processando: ", rmd_files[k])
+    
+    # =========================================================
+    # 1. Parse do Rmd → AST (NÃO converter ainda!)
+    # =========================================================
+    ast <- parsermd::parse_rmd(rmd_files[k])
+    
+    # =========================================================
+    # 2. Documento textual completo (a partir do AST)
+    # =========================================================
+    doc <- parsermd::as_document(ast)
+    
+    # =========================================================
+    # 3. Só agora converter o AST em tibble para navegação
+    # =========================================================
+    rmd <- tibble::as_tibble(ast) |>
+      dplyr::filter(!type %in% c("rmd_chunk", "rmd_heading")) |>
+      dplyr::filter(!is.na(sec_h1), !is.na(sec_h2))
+    
+    if (nrow(rmd) == 0) next
+    
+    # Remover última linha espúria
+    rmd <- rmd[-nrow(rmd), ]
+    
+    for (i in seq_len(nrow(rmd))) {
+      
+      # ---------------- Capítulo ----------------
+      chapter <- rmd$sec_h1[i]
+      chapter <- gsub("\\*\\*", "", chapter)
+      chapter <- gsub("\\{.*?\\}", "", chapter)
+      chapter <- trimws(chapter)
+      
+      # ---------------- Seção ----------------
+      section <- rmd$sec_h2[i]
+      section <- gsub("\\{.*?\\}", "", section)
+      section <- trimws(section)
+      
+      # ---------------- Pergunta ----------------
+      question <- ifelse(
+        is.na(rmd$sec_h3[i]),
+        "Sem pergunta explícita",
+        trimws(rmd$sec_h3[i])
+      )
+      
+      # ---------------- Intervalo textual ----------------
+      start <- rmd$line[i]
+      end   <- rmd$end_line[i]
+      
+      if (is.na(start) || is.na(end)) next
+      if (start > length(doc) || end > length(doc)) next
+      
+      block <- doc[start:end]
+      
+      # ---------------- Respostas ----------------
+      answers <- block[
+        grepl("^\\s*([-*]|[0-9]+\\.)\\s+", block)
+      ]
+      
+      if (length(answers) == 0) next
+      
+      answers <- gsub("^\\s*([-*]|[0-9]+\\.)\\s+", "", answers)
+      answers <- trimws(answers)
+      
+      # ---------------- LaTeX ----------------
+      answers <- gsub("\\$\\$", "$", answers)
+      answers <- gsub("\\$([a-zA-Z])", "$\\\\\\1", answers)
+      answers <- gsub("\\$\\\\", "$", answers)
+      
+      # ---------------- Citações ----------------
+      keys <- unique(unlist(
+        regmatches(answers, gregexpr("@[[:alnum:]]+", answers))
+      ))
+      keys <- gsub("@", "", keys)
+      
+      answers <- gsub("\\s*\\[@[^\\]]+\\]", "", answers)
+      answers <- trimws(answers)
+      
+      if (length(answers) == 0) next
+      
+      entries <- data.frame(
+        chapter  = chapter,
+        section  = section,
+        question = question,
+        answer   = answers,
+        key      = paste(keys, collapse = "; "),
+        stringsAsFactors = FALSE
+      )
+      
+      for (j in seq_len(nrow(entries))) {
+        SavePost(entries[j, ], bib)
+      }
     }
+  }
 }

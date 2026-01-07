@@ -3,7 +3,7 @@ title: '**Ciência com R**'
 subtitle: 'Perguntas e respostas para pesquisadores e analistas de dados'
 
 author: >
-  © 2023–2025 by Arthur de Sá Ferreira
+  © 2023–2026 by Arthur de Sá Ferreira
   <br>
   <a href="https://orcid.org/0000-0001-7014-2002" target="orcid.widget" rel="me noopener noreferrer">
     <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width: 1em; margin-inline-start: 0.0em" alt="ORCID iD icon"/>
@@ -178,7 +178,7 @@ bib <- RefManageR::ReadBib(file.path("./bib", "references.bib"))
 
 # loop over all chapters
 for (k in seq_along(rmd_files)) {
-  ParseRmdContent(rmd_files, bib, k)
+  ParseRmdContent(rmd_files, bib)
 }
 ```
 

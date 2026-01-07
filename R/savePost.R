@@ -1,122 +1,107 @@
 SavePost <- function(entry, bib) {
-    chapter <- entry$chapter
-    section <- entry$section
-    question <- entry$question
-    answer <- entry$answer
-    key <- entry$key
-
-    # detect if there is a r`` code block
-    if (grepl("`r", answer)) {
-        # extract code block
-        code <- gsub(".*`r", "", answer)
-        code <- gsub("`.*", "", code)
-        # evaluate code
-        code.eval <- eval(parse(text = code))
-        # replace code block with result
-        answer <- gsub("`r.*`", code.eval, answer)
-    }
-
-    # double $ to do not convert to math
-    answer <- gsub("\\$", "$$", answer)
-    # convert markdown to HTML text
-    answer <- markdown::markdownToHTML(text = answer, fragment.only = TRUE)
-    # convert back $$ to $
-    answer <- gsub("\\$\\$", "$", answer)
-    # remove HTML <p> tags
-    answer <- gsub("<p>", "", answer)
-    answer <- gsub("</p>", "", answer)
-    # remove \n t the end
-    answer <- gsub("\n", "", answer)
-
-    # function to convert italic and bold to tex
-    emphasis <- function(text) {
-        text <- gsub("<em>", "\\\textit{", text)
-        text <- gsub("</em>", "}", text)
-        text <- gsub("<strong>", "\\\textbf{", text)
-        text <- gsub("</strong>", "}", text)
-        return(text)
-    }
-
-    question <- emphasis(question)
-    answer <- emphasis(answer)
+  
+  chapter  <- entry$chapter
+  section  <- entry$section
+  question <- entry$question
+  answer   <- entry$answer
+  key      <- entry$key
+  
+  # ---------- Executa bloco `r ----------
+  if (grepl("`r", answer)) {
+    code <- gsub(".*`r", "", answer)
+    code <- gsub("`.*", "", code)
     
-    # convert keys string to vector
-    key <- unlist(strsplit(key, "; "))
-    # remove repeated keys
-    key <- unique(key)
-    # remove empty keys
-    key <- key[key != ""]
+    code.eval <- tryCatch(
+      eval(parse(text = code)),
+      error = function(e) "[ERRO NO CÓDIGO R]"
+    )
     
-    citations <- c()
-    # get citation for each key
-    for (j in 1:length(key)) {
-        source <- bib[key[j]]
-        citation <- format(source, style = "text")
-        
-        citation <- gsub("\\[1\\]", "", citation)  # Remove reference number [1]
-        citation <- gsub("_", "", citation)  # Remove underline characters
-        citation <- gsub(".\n<.*?>.", "", citation)  # Remove content within .\n< >. 
-        citation <- gsub("<.*?>.", "", citation)  # Remove content within < >.
-        
-        citations <- c(citations, citation)
-    }
-    
-    # Merge all citations
-    citations <- paste0("[", seq(1,length(citations)), "]", citations, collapse = "\\\\newline")
-
-    # Ensure chapter folder exists
-    chapter_folder <- file.path(getwd(), "posts", chapter)
-    dir.create(chapter_folder, showWarnings = FALSE, recursive = TRUE)
-
-    # Ensure section folder exists
-    section_folder <- file.path(chapter_folder, section)
-    dir.create(section_folder, showWarnings = FALSE, recursive = TRUE)
-
-    # File name based on question
-    file_name <- paste0(gsub(" ", "_", question), ".png")
-    # add a number to file name
-    file_name <- paste0(as.character(length(list.files(section_folder, pattern = ".png"))),
-        "_", file_name)
-    file_path <- file.path(section_folder, file_name)
-
-    # read tex file
-    tex <- readLines(file.path("tex", "POST.tex"))
-
-    # replace CAPITULO with chapter
-    tex <- gsub("CAPITULO", chapter, tex)
-    # replace SECAO with section
-    tex <- gsub("SECAO", section, tex)
-    # replace QUESTAO with question
-    tex <- gsub("QUESTAO", question, tex)
-    # replace RESPOSTA with answer
-    tex <- gsub("RESPOSTA", answer, tex)
-    # replace CITACAO with citation
-    tex <- gsub("CITACAO", citations, tex)
-    # escape & character
-    tex <- gsub("\\&", "\\\\&", tex)
-    # escape % character
-    tex <- gsub("\\%", "\\\\%", tex)
-
-    # compile tex
-    writeLines(tex, file.path("posts", "POST.tex"))
-
-    # render text file to pdf
-    tools::texi2pdf(file.path("posts", "POST.tex"), clean = TRUE)
-
-    # move pdf to posts
-    file.rename(from = file.path("POST.pdf"), to = file.path("posts", "POST.pdf"))
-
-    # render PDF to PNG file
-    bitmap <- pdftools::pdf_render_page(file.path("posts", "POST.pdf"), dpi = 300)
-    png::writePNG(bitmap, file_path)
-
-    img <- magick::image_read(file_path)
-    cover <- magick::image_read(file.path(getwd(), "images", "Cover_1.png"))
-    cover <- magick::image_scale(cover, "400x400")  # Ajuste o tamanho conforme necessário
-    img <- magick::image_composite(img, cover, offset = "+1200+0")  # Ajuste a posição conforme necessário
-    magick::image_write(img, path = file_path, format = "png", quality = 100, density = 300)
-
-    # delete pdf and tex files
-    file.remove(file.path("posts", "POST.pdf"))
-    file.remove(file.path("posts", "POST.tex"))
+    answer <- gsub("`r.*`", as.character(code.eval), answer)
+  }
+  
+  # ---------- Markdown → HTML ----------
+  answer <- gsub("\\$", "$$", answer)
+  answer <- markdown::markdownToHTML(answer, fragment.only = TRUE)
+  answer <- gsub("\\$\\$", "$", answer)
+  answer <- gsub("</?p>", "", answer)
+  answer <- gsub("\n$", "", answer)
+  
+  # ---------- Ênfase ----------
+  emphasis <- function(x) {
+    x <- gsub("<em>", "\\\\textit{", x)
+    x <- gsub("</em>", "}", x)
+    x <- gsub("<strong>", "\\\\textbf{", x)
+    x <- gsub("</strong>", "}", x)
+    x
+  }
+  
+  question <- emphasis(question)
+  answer   <- emphasis(answer)
+  
+  # ---------- Citações ----------
+  key <- unique(strsplit(key, "; ")[[1]])
+  key <- key[key != ""]
+  
+  citations <- c()
+  for (k in key) {
+    src <- bib[k]
+    if (is.null(src)) next
+    cit <- format(src, style = "text")
+    cit <- gsub("\\[\\d+\\]", "", cit)
+    cit <- gsub("_", "", cit)
+    cit <- gsub("<.*?>", "", cit)
+    citations <- c(citations, cit)
+  }
+  
+  citation_block <- if (length(citations) > 0) {
+    paste0("[", seq_along(citations), "] ", citations,
+           collapse = "\\\\newline")
+  } else {
+    ""
+  }
+  
+  # ---------- Pastas ----------
+  base <- file.path(getwd(), "posts", chapter, section)
+  dir.create(base, recursive = TRUE, showWarnings = FALSE)
+  
+  n <- length(list.files(base, pattern = "\\.png$"))
+  fname <- paste0(n + 1, "_", gsub("\\s+", "_", question), ".png")
+  fpath <- file.path(base, fname)
+  
+  # ---------- TeX ----------
+  tex <- readLines(file.path("tex", "POST.tex"))
+  tex <- gsub("CAPITULO", chapter, tex)
+  tex <- gsub("SECAO", section, tex)
+  tex <- gsub("QUESTAO", question, tex)
+  tex <- gsub("RESPOSTA", answer, tex)
+  tex <- gsub("CITACAO", citation_block, tex)
+  tex <- gsub("\\&", "\\\\&", tex)
+  tex <- gsub("\\%", "\\\\%", tex)
+  
+  writeLines(tex, file.path("posts", "POST.tex"))
+  
+  ok <- tryCatch(
+    tools::texi2pdf("posts/POST.tex", clean = TRUE),
+    error = function(e) FALSE
+  )
+  
+  if (!ok) return(invisible(NULL))
+  
+  file.rename("POST.pdf", "posts/POST.pdf")
+  
+  img <- pdftools::pdf_render_page("posts/POST.pdf", dpi = 300)
+  png::writePNG(img, fpath)
+  
+  cover <- magick::image_read("images/Cover_1.png") |>
+    magick::image_scale("400x400")
+  
+  final <- magick::image_composite(
+    magick::image_read(fpath),
+    cover,
+    offset = "+1200+0"
+  )
+  
+  magick::image_write(final, fpath, density = 300)
+  
+  file.remove("posts/POST.pdf", "posts/POST.tex")
 }
