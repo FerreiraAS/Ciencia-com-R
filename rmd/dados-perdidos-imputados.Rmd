@@ -20,7 +20,7 @@
 
 <br>
 
-```{r dados-perdidos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r dados-perdidos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Simulação de uma amostra (n=10) de um ensaio clínico aleatorizado (dados com perdas aleatórias)."}
 # Reprodutibilidade
 set.seed(123)
 
@@ -51,8 +51,7 @@ knitr::kable(
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = FALSE,
-  caption = "Simulação de uma amostra (n=10) de um ensaio clínico aleatorizado (dados com perdas aleatórias)."
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("basic"),

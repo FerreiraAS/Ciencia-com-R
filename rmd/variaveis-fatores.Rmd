@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 ```{=openxml}
 <w:p>
   <w:r>
@@ -5,7 +10,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Variáveis e fatores** {#variaveis-fatores}
 
 <br>
@@ -34,7 +38,7 @@
 
     -   Contínua: representam ordem e magnitude entre valores.
 
-        -   Contínua (números inteiros) vs. Discreta (números racionais).
+        -   Discreta (valores inteiros ou contáveis) vs. Contínua (valores em escala contínua).
 
         -   Intervalo (valor '0' é arbitrário) vs. Razão (valor '0' verdadeiro).
 
@@ -76,13 +80,15 @@ O pacote *base*[@base] fornece as funções [*as.numeric*](https://www.rdocument
 O pacote *base*[@base] fornece as funções [*as.Date*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/as.Date) e [*as.logical*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/logical) para criar objetos em formato de data e lógicos (VERDADEIRO, FALSO), respectivamente.
 :::
 
-### Por que é importante classificar as variáveis?
-
--   Identificar corretamente os tipos de variáveis da pesquisa é uma das etapas da escolha dos métodos estatísticos adequados para as análises e representações no texto, tabelas e gráficos.[@Dettori2018]
-
 <br>
 
 ## Transformação de variáveis
+
+<br>
+
+### Por que é importante classificar as variáveis?
+
+-   Identificar corretamente os tipos de variáveis da pesquisa é uma das etapas da escolha dos métodos estatísticos adequados para as análises e representações no texto, tabelas e gráficos.[@Dettori2018]
 
 <br>
 
@@ -106,15 +112,9 @@ O pacote *base*[@base] fornece as funções [*as.Date*](https://www.rdocumentati
 
 ### Quais transformações de variáveis podem ser aplicadas?
 
--   Distribuições com assimetria à direita:[@osborne2010]
+-   Distribuições com assimetria à direita: raiz quadrada, logaritmo natural, logaritmo base 10, transformação inversa.[@osborne2010]
 
-    -   Raiz quadrada
-
-    -   Logaritmo natural
-
-    -   Logaritmo base 10
-
-    -   Transformação inversa
+<br>
 
 ```{r assimetria-direita, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Transformações de variáveis com assimetria à direita (Original, Raiz quadrada, Log natural, Log10, Inversa).", out.width = "100%"}
 # Reprodutibilidade
@@ -163,15 +163,7 @@ print(g1)
 
 <br>
 
--   Distribuições com assimetria à esquerda:[@osborne2010]
-
-    -   Reflexão e raiz quadrada
-
-    -   Reflexão e logaritmo natural
-
-    -   Reflexão e logaritmo base 10
-
-    -   Reflexão e transformação inversa
+-   Distribuições com assimetria à esquerda: reflexão e raiz quadrada, reflexão e logaritmo natural, reflexão e logaritmo base 10, reflexão e transformação inversa.[@osborne2010]
 
 <br>
 
@@ -232,13 +224,64 @@ print(g_reflect)
 
 <br>
 
--   Transformação arco-seno.[@osborne2010]
+-   Transformação $z$ de Fisher \@ref(eq:fisher-z).[REF]
 
--   Transformação de Box-Cox.[@box1964]
+<br>
 
--   Transformação de escore padrão (Z-score).
+\begin{equation}
+(\#eq:fisher-z)
+Z = \frac{1}{2} \ln\left(\frac{1 + r}{1 - r}\right)
+\end{equation}
 
--   Escala Mínimo-Máximo (0,1).
+<br>
+
+-   Transformação de Box-Cox \@ref(eq:box-cox).[@box1964]
+
+<br>
+
+\begin{equation}
+(\#eq:box-cox)
+Y(\lambda) =
+\begin{cases}
+\frac{Y^{\lambda} - 1}{\lambda}, & \text{se } \lambda \neq 0 \\
+\ln(Y), & \text{se } \lambda = 0
+\end{cases}
+\end{equation}
+
+<br>
+
+-   Transformação arco-seno \@ref(eq:arco-seno).[@osborne2010]
+
+<br>
+
+\begin{equation}
+(\#eq:arco-seno)
+Y' = \arcsin(\sqrt{Y})
+\end{equation}
+
+<br>
+
+-   Transformação  escore padrão (Z-score) \@ref(eq:zscore).[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:zscore)
+Z = \frac{X - \mu}{\sigma}
+\end{equation}
+
+<br>
+
+-   Escala Mínimo-Máximo (0,1) \@ref(eq:minmax).[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:minmax)
+X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}
+\end{equation}
+
+<br>
 
 -   Diferenciação.
 
@@ -260,17 +303,17 @@ O pacote *MASS*[@MASS] fornece a função [*boxcox*](https://www.rdocumentation.
 
 ### O que é centralização?
 
-- É uma transformação linear em que se subtrai a média da variável de cada observação. O objetivo é recentrar a variável em torno de zero, sem alterar a sua variabilidade.[@REF]
+-   É uma transformação linear em que se subtrai a média da variável de cada observação. O objetivo é recentrar a variável em torno de zero, sem alterar a sua variabilidade.[@REF]
 
 <br>
 
 ### Por que centralizar?
 
-- Facilita a interpretação dos coeficientes de regressão, especialmente em modelos com termos de interação.[@REF]
+-   Facilita a interpretação dos coeficientes de regressão, especialmente em modelos com termos de interação.[@REF]
 
-- Reduz a multicolinearidade entre variáveis e seus termos de interação ou polinomiais.[@REF]
+-   Reduz a multicolinearidade entre variáveis e seus termos de interação ou polinomiais.[@REF]
 
-- Mantém a escala original (apenas desloca a média).[@REF]
+-   Mantém a escala original (apenas desloca a média).[@REF]
 
 <br>
 
@@ -280,23 +323,23 @@ O pacote *MASS*[@MASS] fornece a função [*boxcox*](https://www.rdocumentation.
 
 ### O que é padronização?
 
-- Padronização é a transformação de uma variável contínua para uma escala comum, permitindo comparações entre variáveis medidas em diferentes unidades ou magnitudes.[@REF]
+-   Padronização é a transformação de uma variável contínua para uma escala comum, permitindo comparações entre variáveis medidas em diferentes unidades ou magnitudes.[@REF]
 
 <br>
 
 ### Por que padronizar?
 
-- Facilita a interpretação em análises multivariadas.[@REF]
+-   Facilita a interpretação em análises multivariadas.[@REF]
 
-- Evita que variáveis em escalas maiores dominem os resultados de algoritmos que dependem de distância.[@REF]
+-   Evita que variáveis em escalas maiores dominem os resultados de algoritmos que dependem de distância.[@REF]
 
-- Melhora a comparabilidade entre estudos e bases de dados diferentes..[@REF]
+-   Melhora a comparabilidade entre estudos e bases de dados diferentes.[@REF]
 
 <br>
 
 ### Quais são os métodos de padronização mais comuns?
 
-- Escore-Z (Z-score) \@ref(eq:zscore): subtrair a média e dividir pelo desvio-padrão.[@REF]
+-   Escore-Z (Z-score) \@ref(eq:zscore): subtrair a média e dividir pelo desvio-padrão.[@REF]
 
 \begin{equation}
 (\#eq:zscore)
@@ -305,7 +348,7 @@ Z = \frac{X - \mu}{\sigma}
 
 <br>
 
-- Escala Min-Max \@ref(eq:minmax): transformar para o intervalo [0,1].[@REF]
+-   Escala Min-Max \@ref(eq:minmax): transformar para o intervalo [0,1].[@REF]
 
 \begin{equation}
 (\#eq:minmax)
@@ -372,16 +415,16 @@ gridExtra::grid.arrange(
 
 ### Quais são as boas práticas de nomenclatura ao padronizar variáveis?
 
-- Usar sufixos como `_z` ou `_std` para indicar padronização (`altura_z`, `peso_std`).[@REF]
+-   Usar sufixos como `_z` ou `_std` para indicar padronização (`altura_z`, `peso_std`).[@REF]
 
-- Documentar no dicionário de dados como cada variável foi transformada.[@REF]
+-   Documentar no dicionário de dados como cada variável foi transformada.[@REF]
 
-- Evitar substituir a variável original: manter sempre a versão bruta e a padronizada.[@REF]
+-   Evitar substituir a variável original: manter sempre a versão bruta e a padronizada.[@REF]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *base*[@base] fornece a função [*scale*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/scale) para calcular automaticamente a padronização (média = 0, desvio padrão = 1).  
+O pacote *base*[@base] fornece a função [*scale*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/scale) para calcular automaticamente a padronização (média = 0, desvio padrão = 1).
 :::
 
 <br>
@@ -501,6 +544,136 @@ O pacote *questionr*[@questionr] fornece a função [*irec*](https://www.rdocume
     -   Risco relativo ($RR$).[@Greiner2000]
 
     -   Kappa ($\kappa$).[@fleiss1971].
+
+<br>
+
+## Representação de variáveis categóricas
+
+<br>
+
+### O que são variáveis indicadoras (dummy variables)?
+
+-   Variáveis indicadoras são variáveis dicotômicas criadas a partir dos níveis de um fator.[@REF]
+
+-   Cada variável indicadora assume o valor $1$ quando a observação pertence àquela categoria e $0$ caso contrário.[@REF]
+
+-   Variáveis indicadoras não representam magnitude ou ordem, apenas a presença ou ausência de uma categoria.[@REF]
+
+<br>
+
+```{r variaveis-indicadoras, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de variáveis indicadoras (dummy variables) criadas a partir de variáveis categóricas Sexo e Grupo."}
+# Carregar pacotes
+library(dplyr)
+
+# 1. Simular dados
+set.seed(123)
+
+n <- 12
+dados <- data.frame(
+  id = 1:n,
+  sexo = factor(
+    sample(c("Masculino", "Feminino"), n, replace = TRUE)
+  ),
+  grupo = factor(
+    sample(c("Controle", "Tratamento A", "Tratamento B"), n, replace = TRUE)
+  )
+)
+
+# 2. Criar variáveis indicadoras (dummy)
+dummies_sexo  <- model.matrix(~ sexo,  data = dados)[, -1, drop = FALSE]
+dummies_grupo <- model.matrix(~ grupo, data = dados)[, -1, drop = FALSE]
+
+# 3. Juntar tudo em um único data.frame
+tabela_dummy <- cbind(
+  dados,
+  as.data.frame(dummies_sexo),
+  as.data.frame(dummies_grupo)
+)
+
+# Renomear colunas para clareza
+colnames(tabela_dummy) <- c(
+  "ID",
+  "Sexo",
+  "Grupo",
+  "Sexo_Feminino",
+  "Grupo_TratA",
+  "Grupo_TratB"
+)
+
+# 4. Tabela
+knitr::kable(
+  tabela_dummy,
+  align = c("c"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = TRUE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = base::ifelse(knitr::is_html_output(), TRUE, TRUE),
+    position = "center"
+  )
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função [*model.matrix*](https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/model.matrix) para expandir variáveis categóricas em variáveis indicadoras.
+:::
+
+<br>
+
+### Por que variáveis indicadoras são importantes?
+
+-   Permitem a inclusão de fatores em modelos estatísticos.[@REF]
+
+-   Tornam explícitas as comparações entre categorias.[@REF]
+
+-   Garantem coerência matemática sem perder o significado conceitual das categorias.[@REF]
+
+<br>
+
+### Quantas variáveis indicadoras são necessárias para um fator?
+
+-   Um fator com k níveis é representado por $k − 1$ variáveis indicadoras.[@REF]
+
+-   O nível que não gera uma variável indicadora explícita é chamado de nível de referência.[@REF]
+
+<br>
+
+### O que é o nível de referência?
+
+-   O nível de referência é a categoria usada como base de comparação para as demais.[@REF]
+
+-   Os coeficientes associados às variáveis indicadoras representam diferenças em relação a esse nível de referência.[@REF]
+
+<br>
+
+### Por que não se usam k variáveis indicadoras para $k$ níveis?
+
+-   Utilizar $k$ variáveis indicadoras gera redundância perfeita entre as variáveis.[@REF]
+
+-   Essa redundância causa problemas de identificabilidade nos modelos, fenômeno conhecido como *dummy trap*.[@REF]
+
+<br>
+
+### Variáveis indicadoras são uma forma de dicotomização?
+
+-   Variáveis indicadoras são dicotômicas, mas não resultam da dicotomização de variáveis contínuas.[@REF]
+
+-   Variáveis indicadoras são criadas a partir de variáveis categóricas multinominais, preservando toda a informação original do fator.[@REF]
+
+-   Variáveis indicadoras não reduzem informação, enquanto a dicotomização de variáveis contínuas descarta informação por construção.[@REF]
+
+<br>
+
+### Variáveis indicadoras alteram os dados originais?
+
+-   Não. Variáveis indicadoras apenas representam os níveis do fator de forma numérica.[@REF]
+
+-   A variável categórica original permanece intacta no conjunto de dados.[@REF]
 
 <br>
 

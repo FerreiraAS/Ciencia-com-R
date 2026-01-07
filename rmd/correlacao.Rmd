@@ -139,7 +139,7 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*correct_r*](https://www.rd
 
 <br>
 
-```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos."}
 library(dplyr)
 anscombe.dt <- datasets::anscombe
 anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
@@ -221,8 +221,7 @@ knitr::kable(
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = FALSE,
-  caption = "Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos."
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("basic"),

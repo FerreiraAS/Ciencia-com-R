@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 ```{=openxml}
 <w:p>
   <w:r>
@@ -43,5 +48,753 @@
 -   .[@nayak2011]
 
 -   .[@shankar2014]
+
+<br>
+
+```{r selecao-testes, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+df_descricao <- data.frame(
+  `Delineamento do estudo` = c("Transversal", "Transversal"),
+  `Qtd. de variáveis / fatores` = c("1 variável", "1 variável"),
+  `Níveis do fator` = c("–", "–"),
+  `Relação entre amostras` = c("–", "–"),
+  `Tipo de variáveis` = c("Contínua", "Categórica"),
+  `Teste estatístico` = c(
+    "Média (DP) IC95\\% / Mediana (IIQ) IC95\\%",
+    "Frequências e proporções"
+  ),
+  stringsAsFactors = FALSE
+)
+
+df_comparacao <- data.frame(
+  `Delineamento do estudo` = c(
+    "Transversal","Transversal","Transversal",
+    "Experimental / observacional","Pareado / longitudinal",
+    "Experimental / observacional","Experimental / observacional",
+    "Longitudinal","Experimental / observacional","Longitudinal",
+    "Experimental / observacional",
+    "Experimental / observacional",
+    "Transversal","Transversal"
+  ),
+  `Qtd. de variáveis / fatores` = c(
+    "1 variável","1 variável","1 variável",
+    "1 fator + 1 resposta","1 fator + 1 resposta","1 fator + 1 resposta",
+    "1 fator + ≥ 1 covariável + 1 resposta",
+    "1 fator + 1 resposta","1 fator + 1 resposta","1 fator + 1 resposta",
+    "1 fator + ≥ 2 respostas",
+    "1 fator + 1 resposta",
+    "2 correlações","≥ 3 variáveis contínuas"
+  ),
+  `Níveis do fator` = c(
+    "–","≥ 2","–",
+    "2","2","≥ 3","≥ 2",
+    "≥ 3","2","≥ 3",
+    "≥ 2","2",
+    "–","–"
+  ),
+  `Relação entre amostras` = c(
+    "–","–","–",
+    "Independentes","Dependentes","Independentes","Independentes",
+    "Dependentes","Independentes","Dependentes",
+    "Independentes","Independentes",
+    "Independentes","Dependentes"
+  ),
+  `Tipo de variáveis` = c(
+    "Contínua","Categórica","Categórica dicotômica",
+    "Contínua ~ categórica","Contínua ~ categórica","Contínua ~ categórica",
+    "Contínua ~ categórica + covariável",
+    "Contínua ~ categórica","Ordinal / não normal","Ordinal / não normal",
+    "Contínuas múltiplas",
+    "Contínua / ordinal",
+    "Contínua × contínua","Contínua × contínua"
+  ),
+  `Teste estatístico` = c(
+    "t de Student (1 amostra) / Wilcoxon one-sample",
+    "Qui-quadrado de aderência",
+    "Teste binomial (1 amostra)",
+    "t de Student independente / t de Welch",
+    "t pareado",
+    "ANOVA one-way",
+    "ANCOVA",
+    "ANOVA de medidas repetidas",
+    "Mann–Whitney U / Kruskal–Wallis",
+    "Wilcoxon pareado / Friedman",
+    "MANOVA",
+    "Brunner–Munzel",
+    "Fisher r-to-z (correlações independentes)",
+    "Steiger / Meng–Rosenthal–Rubin (correlações dependentes)"
+  ),
+  stringsAsFactors = FALSE
+)
+
+df_associacao <- data.frame(
+  `Delineamento do estudo` = rep("Transversal", 8),
+  `Qtd. de variáveis / fatores` = rep("2 variáveis", 8),
+  `Níveis do fator` = rep("–", 8),
+  `Relação entre amostras` = rep("–", 8),
+  `Tipo de variáveis` = c(
+    "Contínua × contínua",
+    "Ordinal / não normal",
+    "Ordinal × ordinal",
+    "Ordinal × ordinal",
+    "Ordinal × ordinal",
+    "Categórica × categórica (2×2)",
+    "Categórica × categórica (freq. pequenas)",
+    "Categórica × categórica (R×C)"
+  ),
+  `Teste estatístico` = c(
+    "Correlação de Pearson",
+    "Correlação de Spearman / Kendall",
+    "Gamma de Goodman–Kruskal",
+    "Tau-b de Kendall",
+    "Somers’ D",
+    "Qui-quadrado / Fisher + Phi (φ)",
+    "Exato de Fisher",
+    "Qui-quadrado + V de Cramér"
+  ),
+  stringsAsFactors = FALSE
+)
+
+df_predicao <- data.frame(
+  `Delineamento do estudo` = rep("Observacional / experimental", 2),
+  `Qtd. de variáveis / fatores` = rep("≥ 1 preditor + 1 resposta", 2),
+  `Níveis do fator` = rep("–", 2),
+  `Relação entre amostras` = rep("–", 2),
+  `Tipo de variáveis` = c("Contínua", "Binária"),
+  `Teste estatístico` = c(
+    "Regressão linear",
+    "Regressão logística"
+  ),
+  stringsAsFactors = FALSE
+)
+
+df_contagem <- data.frame(
+  `Delineamento do estudo` = "Observacional",
+  `Qtd. de variáveis / fatores` = "≥ 1 preditor + 1 resposta",
+  `Níveis do fator` = "–",
+  `Relação entre amostras` = "–",
+  `Tipo de variáveis` = "Contagem",
+  `Teste estatístico` = "Poisson / Binomial negativa",
+  stringsAsFactors = FALSE
+)
+
+df_sobrevida <- data.frame(
+  `Delineamento do estudo` = rep("Longitudinal", 2),
+  `Qtd. de variáveis / fatores` = c(
+    "≥ 1 preditor + tempo",
+    "≥ 1 preditor + tempo"
+  ),
+  `Níveis do fator` = rep("≥ 2", 2),
+  `Relação entre amostras` = rep("Independentes", 2),
+  `Tipo de variáveis` = c(
+    "Tempo",
+    "Tempo (riscos competitivos)"
+  ),
+  `Teste estatístico` = c(
+    "Log-rank / Modelo de Cox",
+    "Modelo de riscos competitivos de Fine–Gray"
+  ),
+  stringsAsFactors = FALSE
+)
+
+df_concordancia <- data.frame(
+  `Delineamento do estudo` = rep("Metodológico", 4),
+  `Qtd. de variáveis / fatores` = c(
+    "2 avaliadores",
+    "≥ 2 avaliadores",
+    "2 avaliadores",
+    "2 medidas"
+  ),
+  `Níveis do fator` = c("–", "–", "≥ 3", "–"),
+  `Relação entre amostras` = rep("Dependentes", 4),
+  `Tipo de variáveis` = c(
+    "Categórica nominal",
+    "Categórica nominal",
+    "Categórica ordinal",
+    "Contínua"
+  ),
+  `Teste estatístico` = c(
+    "Kappa de Cohen",
+    "Kappa de Fleiss",
+    "Kappa de Light",
+    "Coeficiente de Correlação Intraclasse (ICC)"
+  ),
+  stringsAsFactors = FALSE
+)
+
+df_ajuste_multivariado <- data.frame(
+  `Delineamento do estudo` = "Longitudinal / clusterizado",
+  `Qtd. de variáveis / fatores` = "≥ 1 fator + resposta",
+  `Níveis do fator` = "–",
+  `Relação entre amostras` = "Dependentes / clusters",
+  `Tipo de variáveis` = "Contínua / categórica",
+  `Teste estatístico` = "Modelos lineares mistos (LMM / GLMM)",
+  stringsAsFactors = FALSE
+)
+
+df_desempenho_diagnostico <- data.frame(
+  `Delineamento do estudo` = rep("Transversal / longitudinal", 4),
+  `Qtd. de variáveis / fatores` = c(
+    "1 teste + 1 padrão-ouro",
+    "1 teste + 1 padrão-ouro",
+    "1 escore contínuo + 1 desfecho",
+    "1 modelo + 1 desfecho"
+  ),
+  `Níveis do fator` = c("2", "2", "–", "–"),
+  `Relação entre amostras` = rep("Pareadas", 4),
+  `Tipo de variáveis` = c(
+    "Binária × binária",
+    "Binária × binária",
+    "Contínua × binária",
+    "Probabilidade × binária"
+  ),
+  `Teste estatístico` = c(
+    "Sensibilidade, Especificidade, VPP, VPN, Acurácia",
+    "Razões de verossimilhança (LR+ / LR−)",
+    "Curva ROC + AUC (IC95\\%)",
+    "ROC / AUC + calibração (Brier, Hosmer–Lemeshow)"
+  ),
+  stringsAsFactors = FALSE
+)
+
+df_diagnostico <- data.frame(
+  `Delineamento do estudo` = rep("Transversal", 10),
+  `Qtd. de variáveis / fatores` = c(
+    "1 variável", "1 variável", "1 variável", "1 variável",
+    "≥ 2 variáveis", "≥ 2 variáveis", "≥ 2 variáveis",
+    "1 fator + 1 resposta", "1 fator + 1 resposta", "1 fator + 1 resposta"
+  ),
+  `Níveis do fator` = c(
+    "–","–","–","–","–","–","–",
+    "≥ 2","≥ 2","≥ 2"
+  ),
+  `Relação entre amostras` = c(
+    "–","–","–","–","–","–","–",
+    "Independentes","Independentes","Independentes"
+  ),
+  `Tipo de variáveis` = c(
+    "Contínua","Contínua","Contínua","Contínua",
+    "Contínuas múltiplas","Contínuas múltiplas","Contínuas múltiplas",
+    "Contínua ~ categórica","Contínua ~ categórica","Contínua ~ categórica"
+  ),
+  `Teste estatístico` = c(
+    "Shapiro–Wilk",
+    "Kolmogorov–Smirnov / Lilliefors",
+    "Anderson–Darling",
+    "Jarque–Bera",
+    "Teste de Mardia (assimetria e curtose)",
+    "Henze–Zirkler",
+    "Royston (Shapiro–Wilk multivariado)",
+    "Levene",
+    "Brown–Forsythe",
+    "Bartlett (quando normalidade é plausível)"
+  ),
+  stringsAsFactors = FALSE
+)
+
+df_estados <- data.frame(
+  `Delineamento do estudo` = c(
+    "Longitudinal",
+    "Longitudinal",
+    "Longitudinal"
+  ),
+  `Qtd. de variáveis / fatores` = c(
+    "≥ 2 estados ao longo do tempo",
+    "Estados + covariáveis",
+    "Estados + tempo contínuo"
+  ),
+  `Níveis do fator` = c(
+    "≥ 2",
+    "≥ 2",
+    "≥ 2"
+  ),
+  `Relação entre amostras` = c(
+    "Dependentes (medidas repetidas)",
+    "Dependentes (medidas repetidas)",
+    "Dependentes (medidas repetidas)"
+  ),
+  `Tipo de variáveis` = c(
+    "Categórica (estados)",
+    "Estados categóricos + preditores",
+    "Estados categóricos ao longo do tempo"
+  ),
+  `Teste estatístico` = c(
+    "Modelo de Markov (tempo discreto)",
+    "Modelo de Markov com covariáveis / HMM",
+    "Modelo de Markov em tempo contínuo (CTMC)"
+  ),
+  stringsAsFactors = FALSE
+)
+
+# renomear colunas
+labels <- c(
+  "Delineamento do estudo",
+  "Qtd. de variáveis / fatores",
+  "Níveis do fator",
+  "Relação entre amostras",
+  "Tipo de variáveis",
+  "Teste estatístico"
+)
+# aplicar em todas as tabelas
+colnames(df_descricao) <- labels
+colnames(df_comparacao) <- labels
+colnames(df_associacao) <- labels
+colnames(df_predicao) <- labels
+colnames(df_contagem) <- labels
+colnames(df_sobrevida) <- labels
+colnames(df_concordancia) <- labels
+colnames(df_ajuste_multivariado) <- labels
+colnames(df_desempenho_diagnostico) <- labels
+colnames(df_diagnostico) <- labels
+colnames(df_estados) <- labels
+```
+
+\blandscape
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Descrição."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_descricao,
+    align = c("l"),
+    format = "html",
+    escape = TRUE
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_descricao)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_descricao)) {
+  df_descricao <- data.frame(df_descricao, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_descricao,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_descricao), ncol(df_descricao)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_descricao),
+      bold = TRUE
+    )
+}
+```
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Comparação."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_comparacao,
+    align = c("l"),
+    format = "html",
+    escape = TRUE
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_comparacao)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_comparacao)) {
+  df_comparacao <- data.frame(df_comparacao, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_comparacao,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_comparacao), ncol(df_comparacao)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_comparacao),
+      bold = TRUE
+    )
+}
+```
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Associação."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_associacao,
+    align = c("l"),
+    format = "html",
+    escape = TRUE
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_associacao)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_associacao)) {
+  df_associacao <- data.frame(df_associacao, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_associacao,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_associacao), ncol(df_associacao)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_associacao),
+      bold = TRUE
+    )
+}
+```
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Predição."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_predicao,
+    align = c("l"),
+    format = "html",
+    escape = TRUE
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_predicao)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_predicao)) {
+  df_predicao <- data.frame(df_predicao, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_predicao,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_predicao), ncol(df_predicao)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_predicao),
+      bold = TRUE
+    )
+}
+```
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Contagem."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_contagem,
+    align = c("l"),
+    format = "html",
+    escape = TRUE
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_contagem)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_contagem)) {
+  df_contagem <- data.frame(df_contagem, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_contagem,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_contagem), ncol(df_contagem)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_contagem),
+      bold = TRUE
+    )
+}
+```
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Sobrevida."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_sobrevida,
+    align = c("l"),
+    format = "html",
+    escape = TRUE
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_sobrevida)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_sobrevida)) {
+  df_sobrevida <- data.frame(df_sobrevida, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_sobrevida,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_sobrevida), ncol(df_sobrevida)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_sobrevida),
+      bold = TRUE
+    )
+}
+```
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Concordância."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_concordancia,
+    align = c("l"),
+    format = "html",
+    escape = TRUE
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_concordancia)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_concordancia)) {
+  df_concordancia <- data.frame(df_concordancia, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_concordancia,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_concordancia), ncol(df_concordancia)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_concordancia),
+      bold = TRUE
+    )
+}
+```
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Ajuste multivariado."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_ajuste_multivariado,
+    align = c("l"),
+    format = "html",
+    escape = TRUE
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_ajuste_multivariado)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_ajuste_multivariado)) {
+  df_ajuste_multivariado <- data.frame(df_ajuste_multivariado, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_ajuste_multivariado,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_ajuste_multivariado), ncol(df_ajuste_multivariado)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_ajuste_multivariado),
+      bold = TRUE
+    )
+}
+```
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Desempenho diagnóstico."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_desempenho_diagnostico,
+    align = c("l"),
+    format = "html",
+    escape = TRUE,
+    caption = 
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_desempenho_diagnostico)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_desempenho_diagnostico)) {
+  df_desempenho_diagnostico <- data.frame(df_desempenho_diagnostico, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_desempenho_diagnostico,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_desempenho_diagnostico), ncol(df_desempenho_diagnostico)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_desempenho_diagnostico),
+      bold = TRUE
+    )
+}
+```
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Diagnóstico."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_diagnostico,
+    align = c("l"),
+    format = "html",
+    escape = TRUE
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_diagnostico)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_diagnostico)) {
+  df_diagnostico <- data.frame(df_diagnostico, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_diagnostico,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_diagnostico), ncol(df_diagnostico)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_diagnostico),
+      bold = TRUE
+    )
+}
+```
+
+<br>
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Transição de estados."}
+if (knitr::is_html_output()) {
+  knitr::kable(
+    df_estados,
+    align = c("l"),
+    format = "html",
+    escape = TRUE
+  ) |>
+    kableExtra::kable_styling(
+      bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+      full_width = TRUE,
+      position = "center"
+    ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(df_estados)[1], extra_css = "border-bottom: 1px solid")
+} else if (knitr::is_latex_output() && !sjmisc::is_empty(df_estados)) {
+  df_estados <- data.frame(df_estados, check.names = FALSE)
+  options(tinytable_print_output = "latex")
+  tinytable::tt(
+    df_estados,
+    align   = c("l"),
+    width   = rep(1 / ncol(df_estados), ncol(df_estados)) * (29 - 2.5 - 2.5),
+    caption = knitr::opts_current$get("tab.cap")
+  ) |>
+    tinytable::theme_latex(
+      rowhead   = 1,
+      multipage = TRUE,
+      placement = "H",
+      table     = FALSE
+    ) |>
+    tinytable::style_tt(
+      i = 0, j = 1:ncol(df_estados),
+      bold = TRUE
+    )
+}
+```
+
+\elandscape
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
 
 <br>

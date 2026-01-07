@@ -82,5 +82,15 @@
 % Atalhos para (des)ativar o título
 \AtBeginDocument{\let\maketitle\relax}
 
+% Define landscape environment to use with large PDF tables
+\usepackage{tabularray}
+\usepackage{pdflscape}
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+% to Portuguese in long tables
+\UseTblrLibrary{booktabs}
+\DefTblrTemplate{contfoot-text}{default}{Continuado na próxima página}
+\DefTblrTemplate{conthead-text}{default}{(Continuado)}
+
 % Capítulos não numerados e paginação em algarismos romanos
 \frontmatter

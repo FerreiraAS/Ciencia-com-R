@@ -68,7 +68,7 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 <br>
 
-```{r casas-decimais, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r casas-decimais, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Quantidade de casas decimais e dígitos significativos."}
 library(dplyr)
 
 # Criar um dataframe com exemplos de casas decimais e dígitos significativos
@@ -103,13 +103,12 @@ knitr::kable(
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = FALSE,
-  caption = "Quantidade de casas decimais e dígitos significativos."
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("basic"),
     bootstrap_options = c("basic", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), T, T),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
     position = "center"
   ) %>%
   kableExtra::row_spec(0,
@@ -126,7 +125,7 @@ knitr::kable(
 
 <br>
 
-```{r arredondamento, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r arredondamento, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Valores originais, arredondamentos e erros de arredondamento por casas decimais."}
 library(dplyr)
 
 # Criar um dataframe com exemplos de casas decimais e dígitos significativos
@@ -188,8 +187,7 @@ knitr::kable(
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = FALSE,
-  caption = "Valores originais, arredondamentos e erros de arredondamento por casas decimais."
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("basic"),

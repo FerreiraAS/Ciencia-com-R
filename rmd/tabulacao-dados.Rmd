@@ -43,7 +43,7 @@ O pacote *DataEditR*[@DataEditR] fornece a função [*data_edit*](https://www.rd
 
 <br>
 
-```{r tabela-0, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r tabela-0, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Estrutura básica de uma tabela de dados."}
 # atribui rótulos para a tabela de dados
 N <- 5
 M <- 4
@@ -66,13 +66,12 @@ knitr::kable(
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = F,
-  caption = "Estrutura básica de uma tabela de dados."
+  escape = F
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), T, T),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
     position = "center"
   ) %>%
   kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
@@ -85,7 +84,7 @@ knitr::kable(
 
 <br>
 
-```{r tabela-0-long, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r tabela-0-long, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Formato longo para medidas repetidas (múltiplas linhas por sujeito; colunas = variáveis)"}
 # parâmetros
 N <- 5
 M <- 4
@@ -120,8 +119,7 @@ knitr::kable(
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = F,
-  caption = "Formato longo para medidas repetidas (múltiplas linhas por sujeito; colunas = variáveis)"
+  escape = F
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
@@ -135,7 +133,7 @@ knitr::kable(
 
 <br>
 
-```{r tabela-0-wide, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r tabela-0-wide, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Formato largo para medidas repetidas (1 variável; colunas = tempos)"}
 # Reproducibilidade
 set.seed(1)
 
@@ -168,8 +166,7 @@ knitr::kable(
   df_wide_1v,
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
-  booktabs = TRUE, escape = FALSE,
-  caption = "Formato largo para medidas repetidas (1 variável; colunas = tempos)"
+  booktabs = TRUE, escape = FALSE
 ) %>%
   kableExtra::kable_styling(full_width = TRUE) %>%
   kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
@@ -285,7 +282,7 @@ table.3[, 3] <-
   gsub("NA|NaN|N/A|N.A.|na|n.a.|\t\r\n|^$|\\d{3}", NA, table.3[, 2])
 ```
 
-```{r tabela-recomendada, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r tabela-recomendada, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Formatação recomendada para tabela de dados."}
 # cria a tabela de exemplos
 table.final <-
   data.frame(table.1[, 1], table.1[, 2], table.2[, 3], table.3[, 3])
@@ -298,13 +295,12 @@ knitr::kable(
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  linesep = "",
-  caption = "Formatação recomendada para tabela de dados."
+  linesep = ""
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), T, T),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
     position = "center"
   ) %>%
   kableExtra::row_spec(
@@ -320,7 +316,7 @@ knitr::kable(
 
 <br>
 
-```{r tabela-evite, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r tabela-evite, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Formatação não recomendada para tabela de dados."}
 # cria a tabela de exemplos
 table.final <-
   data.frame(table.1[, 1], table.1[, 2], table.2[, 2], table.3[, 2])
@@ -333,13 +329,12 @@ knitr::kable(
   align = "c",
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  linesep = "",
-  caption = "Formatação não recomendada para tabela de dados."
+  linesep = ""
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("striped"),
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), T, T),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
     position = "center"
 ) %>%
   kableExtra::row_spec(

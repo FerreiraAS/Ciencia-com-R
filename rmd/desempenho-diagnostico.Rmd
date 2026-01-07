@@ -42,7 +42,7 @@
 
 <br>
 
-```{r crosstable-2x2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r crosstable-2x2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas."}
 library(dplyr)
 
 cross.table <-
@@ -74,13 +74,12 @@ knitr::kable(
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = FALSE,
-  caption = "Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas."
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("basic"),
     bootstrap_options = c("basic", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), T, T),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
     position = "center"
   ) %>%
   kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
@@ -289,7 +288,7 @@ DOR = \dfrac{LR+}{LR-}
 
 <br>
 
-```{r crosstable-prob, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r crosstable-prob, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Probabilidades calculados a partir da tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas."}
 library(dplyr)
 
 cross.table <-
@@ -330,13 +329,12 @@ knitr::kable(
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = FALSE,
-  caption = "Probabilidades calculados a partir da tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas."
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("basic"),
     bootstrap_options = c("basic", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), T, T),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
     position = "center"
   ) %>%
   kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
@@ -383,7 +381,7 @@ O pacote *caret*[@caret] fornece a função [*confusionMatrix*](https://www.rdoc
 
 -   Estrutura geral (linhas = condição real; colunas = decisão):
 
-```{r crosstable-2x3, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r crosstable-2x3, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 3-vias (2×3) com totais: referência vs decisão (3WD)."}
 # matriz 2x3 (referência vs decisão) — células simbólicas
 cross3 <- matrix(
   c("$|POS\\cap C|$",   "$|BND\\cap C|$",   "$|NEG\\cap C|$",
@@ -424,8 +422,7 @@ knitr::kable(
   align   = "c",
   format  = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
-  escape  = FALSE,
-  caption = "Tabela de confusão 3-vias (2×3) com totais: referência vs decisão (3WD)."
+  escape  = FALSE
 ) |>
   kableExtra::kable_styling(
     latex_options     = c("basic"),
