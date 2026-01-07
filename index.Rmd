@@ -138,47 +138,36 @@ if(knitr::is_html_output()){
 }
 ```
 
-```{r post, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE, eval = FALSE}
+```{r post, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE, eval = TRUE}
 # delete .PNG files from posts folder
 delete_files <- list.dirs("posts", full.names = TRUE)
 unlink(delete_files, recursive = TRUE)
 # create folder "posts"
 dir.create("posts", showWarnings = FALSE)
 
-# source scripts
-source(file.path("R", "parseRmd.R"), local = knitr::knit_global())
-source(file.path("R", "savePost.R"), local = knitr::knit_global())
-
-# read all file chapters
-rmd_files <- list.files("rmd", pattern = "\\.Rmd$", full.names = TRUE)
-
-# remove specific chapters
-rmd_files <- rmd_files[!grepl("dedicatoria.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("agradecimentos.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("apresentacao.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("autor.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-1.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-2.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-3.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-4.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-5.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-6.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-7.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-8.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-9.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-10.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("parte-11.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("apendice.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("scripts.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("shiny-apps.Rmd", rmd_files)]
-rmd_files <- rmd_files[!grepl("referencias.Rmd", rmd_files)]
-
 # read bib file
 bib <- RefManageR::ReadBib(file.path("./bib", "references.bib"))
 
-# loop over all chapters
-for (k in seq_along(rmd_files)) {
-  ParseRmdContent(rmd_files, bib)
+# read TeX file
+tex_data <- TeXCheckR::read_tex_document(
+  file.path("./docs", "Ciencia-com-R.tex")
+)
+# source scripts
+source(file.path("R", "tex_to_df.R"), local = knitr::knit_global())
+df <- parse_tex_structure(tex_data)
+
+# clean df
+df <- df |>
+  dplyr::filter(
+    !is.na(references),
+    references != "REF",
+    item != ".\\textsuperscript{\\citeproc{ref-REF}{\\textbf{REF?}}}"
+  )
+
+# save all posts
+source(file.path("R", "savePost.R"), local = knitr::knit_global())
+for (i in 1:nrow(df)) {
+  SavePost_df(entry = df[i, ], bib = bib)
 }
 ```
 

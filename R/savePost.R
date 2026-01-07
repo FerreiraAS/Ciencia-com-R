@@ -1,13 +1,14 @@
-SavePost <- function(entry, bib) {
+SavePost_df <- function(entry, bib) {
   
-  chapter  <- entry$chapter
-  section  <- entry$section
-  question <- entry$question
-  answer   <- entry$answer
-  key      <- entry$key
+  # ---------- Mapping from df ----------
+  chapter    <- entry$chapter
+  section    <- entry$section
+  question   <- entry$subsection
+  answer     <- entry$item
+  key        <- entry$references
   
   # ---------- Executa bloco `r ----------
-  if (grepl("`r", answer)) {
+  if (!is.na(answer) && grepl("`r", answer)) {
     code <- gsub(".*`r", "", answer)
     code <- gsub("`.*", "", code)
     
@@ -19,31 +20,43 @@ SavePost <- function(entry, bib) {
     answer <- gsub("`r.*`", as.character(code.eval), answer)
   }
   
-  # ---------- Markdown → HTML ----------
-  answer <- gsub("\\$", "$$", answer)
-  answer <- markdown::markdownToHTML(answer, fragment.only = TRUE)
-  answer <- gsub("\\$\\$", "$", answer)
-  answer <- gsub("</?p>", "", answer)
-  answer <- gsub("\n$", "", answer)
+  # Remove TODOS os citeproc (1 ou vários)
+  answer <- gsub(
+    "\\\\citeproc\\{[^}]*\\}\\{[^}]*\\}",
+    "",
+    answer
+  )
   
-  # ---------- Ênfase ----------
-  emphasis <- function(x) {
-    x <- gsub("<em>", "\\\\textit{", x)
-    x <- gsub("</em>", "}", x)
-    x <- gsub("<strong>", "\\\\textbf{", x)
-    x <- gsub("</strong>", "}", x)
-    x
-  }
+  # Remove o textsuperscript agora vazio ou só com vírgulas
+  answer <- gsub(
+    "\\\\textsuperscript\\{[[:space:],]*\\}",
+    "",
+    answer
+  )
   
-  question <- emphasis(question)
-  answer   <- emphasis(answer)
+  # Remove equations
+  answer <- gsub(
+    "\\\\eqref\\{[^}]+\\}",
+    "",
+    answer
+  )
+  
+  # remove double spaces
+  answer <- gsub(
+    "\\s*\\\\eqref\\{[^}]+\\}\\s*",
+    " ",
+    answer
+  )
+  
+  # Escapa barras invertidas
+  answer <- gsub("\\\\", "\\\\\\\\", answer)
   
   # ---------- Citações ----------
-  key <- unique(strsplit(key, "; ")[[1]])
-  key <- key[key != ""]
+  refs <- if (!is.na(key)) unique(strsplit(key, "; ")[[1]]) else character(0)
+  refs <- refs[refs != ""]
   
   citations <- c()
-  for (k in key) {
+  for (k in refs) {
     src <- bib[k]
     if (is.null(src)) next
     cit <- format(src, style = "text")
@@ -65,7 +78,11 @@ SavePost <- function(entry, bib) {
   dir.create(base, recursive = TRUE, showWarnings = FALSE)
   
   n <- length(list.files(base, pattern = "\\.png$"))
-  fname <- paste0(n + 1, "_", gsub("\\s+", "_", question), ".png")
+  fname <- paste0(
+    n + 1, "_",
+    gsub("\\s+", "_", question),
+    ".png"
+  )
   fpath <- file.path(base, fname)
   
   # ---------- TeX ----------
@@ -75,17 +92,10 @@ SavePost <- function(entry, bib) {
   tex <- gsub("QUESTAO", question, tex)
   tex <- gsub("RESPOSTA", answer, tex)
   tex <- gsub("CITACAO", citation_block, tex)
-  tex <- gsub("\\&", "\\\\&", tex)
-  tex <- gsub("\\%", "\\\\%", tex)
   
   writeLines(tex, file.path("posts", "POST.tex"))
   
-  ok <- tryCatch(
-    tools::texi2pdf("posts/POST.tex", clean = TRUE),
-    error = function(e) FALSE
-  )
-  
-  if (!ok) return(invisible(NULL))
+  tools::texi2pdf("posts/POST.tex", clean = TRUE)
   
   file.rename("POST.pdf", "posts/POST.pdf")
   
