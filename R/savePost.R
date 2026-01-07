@@ -7,6 +7,12 @@ SavePost_df <- function(entry, bib) {
   answer     <- entry$item
   key        <- entry$references
   
+  escape_latex <- function(x) {
+    x <- gsub("\\\\", "\\\\textbackslash{}", x)
+    x <- gsub("([#$%&_{}])", "\\\\\\1", x)
+    x
+  }
+  
   # ---------- Executa bloco `r ----------
   if (!is.na(answer) && grepl("`r", answer)) {
     code <- gsub(".*`r", "", answer)
@@ -54,6 +60,9 @@ SavePost_df <- function(entry, bib) {
   # ---------- Citações ----------
   refs <- if (!is.na(key)) unique(strsplit(key, "; ")[[1]]) else character(0)
   refs <- refs[refs != ""]
+  # drop REF from vector
+  refs <- refs[!grepl("REF", refs)]
+  
   
   citations <- c()
   for (k in refs) {
@@ -63,15 +72,19 @@ SavePost_df <- function(entry, bib) {
     cit <- gsub("\\[\\d+\\]", "", cit)
     cit <- gsub("_", "", cit)
     cit <- gsub("<.*?>", "", cit)
+    cit <- gsub("(\\s*\\.){2,}\\s*$", ".", cit)
+    cit <- escape_latex(cit)
     citations <- c(citations, cit)
   }
   
   citation_block <- if (length(citations) > 0) {
     paste0("[", seq_along(citations), "] ", citations,
-           collapse = "\\\\newline")
+           collapse = "\\newline")
   } else {
     ""
   }
+  # Escapa barras invertidas
+  citation_block <- gsub("\\\\", "\\\\\\\\", citation_block)
   
   # ---------- Pastas ----------
   base <- file.path(getwd(), "posts", chapter, section)
@@ -95,14 +108,14 @@ SavePost_df <- function(entry, bib) {
   
   writeLines(tex, file.path("posts", "POST.tex"))
   
-  tools::texi2pdf("posts/POST.tex", clean = TRUE)
+  tools::texi2pdf("posts/POST.tex", clean = TRUE, quiet = TRUE)
   
   file.rename("POST.pdf", "posts/POST.pdf")
   
   img <- pdftools::pdf_render_page("posts/POST.pdf", dpi = 300)
   png::writePNG(img, fpath)
   
-  cover <- magick::image_read("images/Cover_1.png") |>
+  cover <- magick::image_read("images/Cover_2.png") |>
     magick::image_scale("400x400")
   
   final <- magick::image_composite(

@@ -138,7 +138,7 @@ if(knitr::is_html_output()){
 }
 ```
 
-```{r post, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE, eval = TRUE}
+```{r post, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE, eval = all(knitr::is_html_output(), FALSE)}
 # delete .PNG files from posts folder
 delete_files <- list.dirs("posts", full.names = TRUE)
 unlink(delete_files, recursive = TRUE)
@@ -160,6 +160,7 @@ df <- parse_tex_structure(tex_data)
 df <- df |>
   dplyr::filter(
     !is.na(references),
+    !grepl("REF", item),
     references != "REF",
     item != ".\\textsuperscript{\\citeproc{ref-REF}{\\textbf{REF?}}}"
   )
