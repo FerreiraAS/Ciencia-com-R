@@ -33,6 +33,10 @@ df <- df |>
 # save all posts
 source(file.path("R", "savePost.R"), local = knitr::knit_global())
 for (i in 1:nrow(df)) {
+  # progress bar
+  cat(paste0(round(i / nrow(df) * 100), '% completed'))
   SavePost_df(entry = df[i, ], bib = bib)
+  if (i == nrow(df)) cat(': Done')
+  else cat('\014')
 }
 ```
