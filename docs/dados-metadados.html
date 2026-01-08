@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 10 Variáveis e fatores | Ciência com R</title>
+  <title>Capítulo 11 Dados e metadados | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas à análise estatística de dados, revisitando os principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 10 Variáveis e fatores | Ciência com R" />
+  <meta property="og:title" content="Capítulo 11 Dados e metadados | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas à análise estatística de dados, revisitando os principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 10 Variáveis e fatores | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 11 Dados e metadados | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas à análise estatística de dados, revisitando os principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="parte-3.html"/>
-<link rel="next" href="dados-metadados.html"/>
+<link rel="prev" href="variaveis-fatores.html"/>
+<link rel="next" href="medidas-instrumentos.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -69,12 +69,12 @@
 <link rel="icon" href="favicon_io/favicon-16x16.png" sizes="16x16" type="image/png">
 <link rel="icon" href="favicon_io/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="shortcut icon" href="favicon_io/favicon.ico" type="image/x-icon">
-<meta property="og:title" content="Capítulo 10 Variáveis e fatores | Ciência com R" />
+<meta property="og:title" content="Capítulo 11 Dados e metadados | Ciência com R" />
 <meta property="og:description" content="Perguntas e respostas para pesquisadores e analistas de dados" />
 <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/favicon_io/android-chrome-512x512.png" />
 <meta property="og:url" content="https://ferreiraas.github.io/Ciencia-com-R/" />
 <meta property="og:type" content="book" />
-<meta property="og:site_name" content="Capítulo 10 Variáveis e fatores | Ciência com R" />
+<meta property="og:site_name" content="Capítulo 11 Dados e metadados | Ciência com R" />
 <meta name="citation_doi" content="doi:10.5281/zenodo.8320232"/><meta name="Doi" content="doi:10.5281/zenodo.8320232"/>
 <meta name="DC.Identifier" content="doi:10.5281/zenodo.8320232"/>
 <meta name="DC.DOI" content="doi:10.5281/zenodo.8320232"/>
@@ -1974,714 +1974,99 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="variaveis-fatores" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">Capítulo 10</span> <strong>Variáveis e fatores</strong><a href="variaveis-fatores.html#variaveis-fatores" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="dados-metadados" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">Capítulo 11</span> <strong>Dados e metadados</strong><a href="dados-metadados.html#dados-metadados" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="variáveis" class="section level2 hasAnchor" number="10.1">
-<h2><span class="header-section-number">10.1</span> Variáveis<a href="variaveis-fatores.html#vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="dados" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Dados<a href="dados-metadados.html#dados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-são-variáveis" class="section level3 hasAnchor" number="10.1.1">
-<h3><span class="header-section-number">10.1.1</span> O que são variáveis?<a href="variaveis-fatores.html#o-que-s%C3%A3o-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-são-dados" class="section level3 hasAnchor" number="11.1.1">
+<h3><span class="header-section-number">11.1.1</span> O que são dados?<a href="dados-metadados.html#o-que-s%C3%A3o-dados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Variáveis são informações que podem variar entre medidas em diferentes indivíduos e/ou repetições.<span class="citation"><sup><a href="#ref-Altman1999">107</a></sup></span></p></li>
-<li><p>Variáveis definem características de uma amostra extraída da população, tipicamente observados por aplicação de métodos de amostragem (isto é, seleção) da população de interesse.<span class="citation"><sup><a href="#ref-vetter2017">108</a></sup></span></p></li>
+<li><p>“Tudo são dados”.<span class="citation"><sup><a href="#ref-Olson2021">132</a></sup></span></p></li>
+<li><p>Dados coletados em um estudo geralmente contêm erros de mensuração e/ou classificação, dados perdidos e são agrupados por alguma unidade de análise.<span class="citation"><sup><a href="#ref-van2022a">133</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
-<div id="como-são-classificadas-as-variáveis" class="section level3 hasAnchor" number="10.1.2">
-<h3><span class="header-section-number">10.1.2</span> Como são classificadas as variáveis?<a href="variaveis-fatores.html#como-s%C3%A3o-classificadas-as-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-as-fontes-de-dados" class="section level3 hasAnchor" number="11.1.2">
+<h3><span class="header-section-number">11.1.2</span> Quais são as fontes de dados?<a href="dados-metadados.html#quais-s%C3%A3o-as-fontes-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Quanto à informação:<span class="citation"><sup><a href="#ref-vetter2017">108</a>–<a href="#ref-kaliyadan2019">111</a></sup></span></p>
-<ul>
-<li><p>Quantitativa</p></li>
-<li><p>Qualitativa</p></li>
-</ul></li>
-<li><p>Quanto ao conteúdo:<span class="citation"><sup><a href="#ref-vetter2017">108</a>–<a href="#ref-barkan2015">112</a></sup></span></p>
-<ul>
-<li><p>Contínua: representam ordem e magnitude entre valores.</p>
-<ul>
-<li><p>Discreta (valores inteiros ou contáveis) vs. Contínua (valores em escala contínua).</p></li>
-<li><p>Intervalo (valor ‘0’ é arbitrário) vs. Razão (valor ‘0’ verdadeiro).</p></li>
-</ul></li>
-<li><p>Categórica ordinal (numérica ou nominal): representam ordem, mas não magnitude entre valores.</p></li>
-<li><p>Categórica nominal (multinominal ou dicotômica): não representam ordem ou magnitude, apenas categorias.</p></li>
-</ul></li>
-<li><p>Quanto à interpretação:<span class="citation"><sup><a href="#ref-vetter2017">108</a>–<a href="#ref-kaliyadan2019">111</a></sup></span></p>
-<ul>
-<li><p>Dependente (desfecho)</p></li>
-<li><p>Independente (preditora, covariável, confundidora, controle)</p></li>
-<li><p>Mediadora</p></li>
-<li><p>Moderadora</p></li>
-<li><p>Modificadora</p></li>
-<li><p>Auxiliar</p></li>
-<li><p>Indicadora</p></li>
-</ul></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base">55</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/class"><em>class</em></a> para identificar qual é o tipo do objeto.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base">55</a></sup></span> fornece as funções <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric"><em>as.numeric</em></a> e <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/character"><em>as.character</em></a> para criar objetos numéricos e categóricos, respectivamente.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base">55</a></sup></span> fornece as funções <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/as.Date"><em>as.Date</em></a> e <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/logical"><em>as.logical</em></a> para criar objetos em formato de data e lógicos (VERDADEIRO, FALSO), respectivamente.</p>
-</div>
-<p><br></p>
-</div>
-</div>
-<div id="transformação-de-variáveis" class="section level2 hasAnchor" number="10.2">
-<h2><span class="header-section-number">10.2</span> Transformação de variáveis<a href="variaveis-fatores.html#transforma%C3%A7%C3%A3o-de-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="por-que-é-importante-classificar-as-variáveis" class="section level3 hasAnchor" number="10.2.1">
-<h3><span class="header-section-number">10.2.1</span> Por que é importante classificar as variáveis?<a href="variaveis-fatores.html#por-que-%C3%A9-importante-classificar-as-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Identificar corretamente os tipos de variáveis da pesquisa é uma das etapas da escolha dos métodos estatísticos adequados para as análises e representações no texto, tabelas e gráficos.<span class="citation"><sup><a href="#ref-Dettori2018">110</a></sup></span></li>
+<li><p>Experimentos.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
+<li><p>Mundo real.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
+<li><p>Simulação.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
-<div id="o-que-é-transformação-de-variáveis" class="section level3 hasAnchor" number="10.2.2">
-<h3><span class="header-section-number">10.2.2</span> O que é transformação de variáveis?<a href="variaveis-fatores.html#o-que-%C3%A9-transforma%C3%A7%C3%A3o-de-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-são-dados-primários-e-secundários" class="section level3 hasAnchor" number="11.1.3">
+<h3><span class="header-section-number">11.1.3</span> O que são dados primários e secundários?<a href="dados-metadados.html#o-que-s%C3%A3o-dados-prim%C3%A1rios-e-secund%C3%A1rios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Transformação significa aplicar uma função matemática à variável medida em sua unidade original.<span class="citation"><sup><a href="#ref-Bland1996">113</a></sup></span></p></li>
-<li><p>A transformação visa atender aos pressupostos dos modelos estatísticos quanto à distribuição da variável, em geral a distribuição gaussiana.<span class="citation"><sup><a href="#ref-vetter2017">108</a>,<a href="#ref-Bland1996">113</a></sup></span></p></li>
-<li><p>A dicotomização pode ser interpretada como um caso particular de agrupamento.<span class="citation"><sup><a href="#ref-Fedorov2009">114</a></sup></span></p></li>
+<li><p>Dados primários são dados originais coletados intencionalmente para uma determinada análise exploratória ou inferencial planejada a priori.<span class="citation"><sup><a href="#ref-vetter2017">108</a></sup></span></p></li>
+<li><p>Dados secundários compreendem dados coletados inicialmente para análises de um estudo, e são subsequentemente utilizados para outras análises.<span class="citation"><sup><a href="#ref-vetter2017">108</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
-<div id="por-que-transformar-variáveis" class="section level3 hasAnchor" number="10.2.3">
-<h3><span class="header-section-number">10.2.3</span> Por que transformar variáveis?<a href="variaveis-fatores.html#por-que-transformar-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Muitos procedimentos estatísticos supõem que as variáveis — ou seus termos de erro, mais especificamente — são normalmente distribuídas. A violação dessa suposição pode aumentar suas chances de cometer um erro do tipo I ou II.<span class="citation"><sup><a href="#ref-osborne2010">115</a></sup></span></p></li>
-<li><p>Mesmo quando se está usando análises consideradas robustas para violações dessas suposições ou testes não paramétricos (que não assumem explicitamente termos de erro normalmente distribuídos), atender a essas questões pode melhorar os resultados das análises (por exemplo, Zimmerman, 1995).<span class="citation"><sup><a href="#ref-osborne2010">115</a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="quais-transformações-de-variáveis-podem-ser-aplicadas" class="section level3 hasAnchor" number="10.2.4">
-<h3><span class="header-section-number">10.2.4</span> Quais transformações de variáveis podem ser aplicadas?<a href="variaveis-fatores.html#quais-transforma%C3%A7%C3%B5es-de-vari%C3%A1veis-podem-ser-aplicadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Distribuições com assimetria à direita: raiz quadrada, logaritmo natural, logaritmo base 10, transformação inversa.<span class="citation"><sup><a href="#ref-osborne2010">115</a></sup></span></li>
-</ul>
-<p><br></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:assimetria-direita"></span>
-<img src="Ciencia-com-R_files/figure-html/assimetria-direita-1.png" alt="Transformações de variáveis com assimetria à direita (Original, Raiz quadrada, Log natural, Log10, Inversa)." width="100%" />
-<p class="caption">
-Figura 10.1: Transformações de variáveis com assimetria à direita (Original, Raiz quadrada, Log natural, Log10, Inversa).
-</p>
-</div>
-<p><br></p>
-<ul>
-<li>Distribuições com assimetria à esquerda: reflexão e raiz quadrada, reflexão e logaritmo natural, reflexão e logaritmo base 10, reflexão e transformação inversa.<span class="citation"><sup><a href="#ref-osborne2010">115</a></sup></span></li>
-</ul>
-<p><br></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:assimetria-esquerda"></span>
-<img src="Ciencia-com-R_files/figure-html/assimetria-esquerda-1.png" alt="Transformações de variáveis com assimetria à esquerda (Original, Reflexão + Raiz quadrada, Reflexão + Log natural, Reflexão + Log10, Reflexão + Inversa)." width="100%" />
-<p class="caption">
-Figura 10.2: Transformações de variáveis com assimetria à esquerda (Original, Reflexão + Raiz quadrada, Reflexão + Log natural, Reflexão + Log10, Reflexão + Inversa).
-</p>
-</div>
-<p><br></p>
-<ul>
-<li>Transformação <span class="math inline">\(z\)</span> de Fisher <a href="variaveis-fatores.html#eq:fisher-z">(10.1)</a>.[REF]</li>
-</ul>
-<p><br></p>
-<p><span class="math display" id="eq:fisher-z">\[\begin{equation}
-\tag{10.1}
-Z = \frac{1}{2} \ln\left(\frac{1 + r}{1 - r}\right)
-\end{equation}\]</span></p>
-<p><br></p>
-<ul>
-<li>Transformação de Box-Cox <a href="variaveis-fatores.html#eq:box-cox">(10.2)</a>.<span class="citation"><sup><a href="#ref-box1964">116</a></sup></span></li>
-</ul>
-<p><br></p>
-<p><span class="math display" id="eq:box-cox">\[\begin{equation}
-\tag{10.2}
-Y(\lambda) =
-\begin{cases}
-\frac{Y^{\lambda} - 1}{\lambda}, &amp; \text{se } \lambda \neq 0 \\
-\ln(Y), &amp; \text{se } \lambda = 0
-\end{cases}
-\end{equation}\]</span></p>
-<p><br></p>
-<ul>
-<li>Transformação arco-seno <a href="variaveis-fatores.html#eq:arco-seno">(10.3)</a>.<span class="citation"><sup><a href="#ref-osborne2010">115</a></sup></span></li>
-</ul>
-<p><br></p>
-<p><span class="math display" id="eq:arco-seno">\[\begin{equation}
-\tag{10.3}
-Y&#39; = \arcsin(\sqrt{Y})
-\end{equation}\]</span></p>
-<p><br></p>
-<ul>
-<li>Transformação escore padrão (Z-score) <a href="variaveis-fatores.html#eq:zscore">(10.4)</a>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
-</ul>
-<p><br></p>
-<p><span class="math display" id="eq:zscore">\[\begin{equation}
-\tag{10.4}
-Z = \frac{X - \mu}{\sigma}
-\end{equation}\]</span></p>
-<p><br></p>
-<ul>
-<li>Escala Mínimo-Máximo (0,1) <a href="variaveis-fatores.html#eq:minmax">(10.5)</a>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
-</ul>
-<p><br></p>
-<p><span class="math display" id="eq:minmax">\[\begin{equation}
-\tag{10.5}
-X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}
-\end{equation}\]</span></p>
-<p><br></p>
-<ul>
-<li><p>Diferenciação.</p></li>
-<li><p>Categorização.</p></li>
-<li><p>Dicotomização.</p></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>MASS</em><span class="citation"><sup><a href="#ref-MASS">117</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/MASS/versions/7.3-58.3/topics/boxcox"><em>boxcox</em></a> para executar a transformação de Box-Cox.<span class="citation"><sup><a href="#ref-box1964">116</a></sup></span></p>
-</div>
-<p><br></p>
-</div>
-</div>
-<div id="centralização-de-variáveis-centering" class="section level2 hasAnchor" number="10.3">
-<h2><span class="header-section-number">10.3</span> Centralização de variáveis (<em>centering</em>)<a href="variaveis-fatores.html#centraliza%C3%A7%C3%A3o-de-vari%C3%A1veis-centering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-é-centralização" class="section level3 hasAnchor" number="10.3.1">
-<h3><span class="header-section-number">10.3.1</span> O que é centralização?<a href="variaveis-fatores.html#o-que-%C3%A9-centraliza%C3%A7%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>É uma transformação linear em que se subtrai a média da variável de cada observação. O objetivo é recentrar a variável em torno de zero, sem alterar a sua variabilidade.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
-</ul>
-<p><br></p>
-</div>
-<div id="por-que-centralizar" class="section level3 hasAnchor" number="10.3.2">
-<h3><span class="header-section-number">10.3.2</span> Por que centralizar?<a href="variaveis-fatores.html#por-que-centralizar" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Facilita a interpretação dos coeficientes de regressão, especialmente em modelos com termos de interação.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Reduz a multicolinearidade entre variáveis e seus termos de interação ou polinomiais.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Mantém a escala original (apenas desloca a média).<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-</div>
-<div id="padronização-de-variáveis" class="section level2 hasAnchor" number="10.4">
-<h2><span class="header-section-number">10.4</span> Padronização de variáveis<a href="variaveis-fatores.html#padroniza%C3%A7%C3%A3o-de-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-é-padronização" class="section level3 hasAnchor" number="10.4.1">
-<h3><span class="header-section-number">10.4.1</span> O que é padronização?<a href="variaveis-fatores.html#o-que-%C3%A9-padroniza%C3%A7%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Padronização é a transformação de uma variável contínua para uma escala comum, permitindo comparações entre variáveis medidas em diferentes unidades ou magnitudes.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
-</ul>
-<p><br></p>
-</div>
-<div id="por-que-padronizar" class="section level3 hasAnchor" number="10.4.2">
-<h3><span class="header-section-number">10.4.2</span> Por que padronizar?<a href="variaveis-fatores.html#por-que-padronizar" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Facilita a interpretação em análises multivariadas.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Evita que variáveis em escalas maiores dominem os resultados de algoritmos que dependem de distância.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Melhora a comparabilidade entre estudos e bases de dados diferentes.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="quais-são-os-métodos-de-padronização-mais-comuns" class="section level3 hasAnchor" number="10.4.3">
-<h3><span class="header-section-number">10.4.3</span> Quais são os métodos de padronização mais comuns?<a href="variaveis-fatores.html#quais-s%C3%A3o-os-m%C3%A9todos-de-padroniza%C3%A7%C3%A3o-mais-comuns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Escore-Z (Z-score) <a href="variaveis-fatores.html#eq:zscore">(10.4)</a>: subtrair a média e dividir pelo desvio-padrão.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
-</ul>
-<p><span class="math display" id="eq:zscore">\[\begin{equation}
-\tag{10.4}
-Z = \frac{X - \mu}{\sigma}
-\end{equation}\]</span></p>
-<p><br></p>
-<ul>
-<li>Escala Min-Max <a href="variaveis-fatores.html#eq:minmax">(10.5)</a>: transformar para o intervalo [0,1].<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
-</ul>
-<p><span class="math display" id="eq:minmax">\[\begin{equation}
-\tag{10.5}
-X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}
-\end{equation}\]</span></p>
-<p><br></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:padronizacao"></span>
-<img src="Ciencia-com-R_files/figure-html/padronizacao-1.png" alt="Comparação entre variáveis originais e padronizadas (Z-score e Min-Max)." width="100%" />
-<p class="caption">
-Figura 10.3: Comparação entre variáveis originais e padronizadas (Z-score e Min-Max).
-</p>
-</div>
-<p><br></p>
-</div>
-<div id="quais-são-as-boas-práticas-de-nomenclatura-ao-padronizar-variáveis" class="section level3 hasAnchor" number="10.4.4">
-<h3><span class="header-section-number">10.4.4</span> Quais são as boas práticas de nomenclatura ao padronizar variáveis?<a href="variaveis-fatores.html#quais-s%C3%A3o-as-boas-pr%C3%A1ticas-de-nomenclatura-ao-padronizar-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Usar sufixos como <code>_z</code> ou <code>_std</code> para indicar padronização (<code>altura_z</code>, <code>peso_std</code>).<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Documentar no dicionário de dados como cada variável foi transformada.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Evitar substituir a variável original: manter sempre a versão bruta e a padronizada.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base">55</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/scale"><em>scale</em></a> para calcular automaticamente a padronização (média = 0, desvio padrão = 1).</p>
-</div>
-<p><br></p>
-</div>
-</div>
-<div id="categorização-de-variáveis-contínuas" class="section level2 hasAnchor" number="10.5">
-<h2><span class="header-section-number">10.5</span> Categorização de variáveis contínuas<a href="variaveis-fatores.html#categoriza%C3%A7%C3%A3o-de-vari%C3%A1veis-cont%C3%ADnuas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-é-categorização-de-uma-variável" class="section level3 hasAnchor" number="10.5.1">
-<h3><span class="header-section-number">10.5.1</span> O que é categorização de uma variável?<a href="variaveis-fatores.html#o-que-%C3%A9-categoriza%C3%A7%C3%A3o-de-uma-vari%C3%A1vel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-são-dados-quantitativos-e-qualitativos" class="section level3 hasAnchor" number="11.1.4">
+<h3><span class="header-section-number">11.1.4</span> O que são dados quantitativos e qualitativos?<a href="dados-metadados.html#o-que-s%C3%A3o-dados-quantitativos-e-qualitativos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
-<div id="por-que-não-é-recomendado-categorizar-variáveis-contínuas" class="section level3 hasAnchor" number="10.5.2">
-<h3><span class="header-section-number">10.5.2</span> Por que não é recomendado categorizar variáveis contínuas?<a href="variaveis-fatores.html#por-que-n%C3%A3o-%C3%A9-recomendado-categorizar-vari%C3%A1veis-cont%C3%ADnuas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="big-data" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> <em>Big data</em><a href="dados-metadados.html#big-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-são-big-data" class="section level3 hasAnchor" number="11.2.1">
+<h3><span class="header-section-number">11.2.1</span> O que são <em>big data</em>?<a href="dados-metadados.html#o-que-s%C3%A3o-big-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Nenhum dos argumentos usados para defender a categorização de variáveis se sustenta sob uma análise técnica rigorosa.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a></sup></span></p></li>
-<li><p>Categorizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de categorizar, priorize as variáveis contínuas.<span class="citation"><sup><a href="#ref-Altman2006">119</a>–<a href="#ref-Collins2016">121</a></sup></span></p></li>
-<li><p>Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.<span class="citation"><sup><a href="#ref-Altman2006">119</a>–<a href="#ref-Collins2016">121</a></sup></span></p></li>
-<li><p>Caso exista um ponto de corte ou limiar verdadeiro que discrimine três ou mais grupos independentes, identificar tal ponto de corte ainda é um desafio.<span class="citation"><sup><a href="#ref-Prince2017">122</a></sup></span></p></li>
-<li><p>Categorização de variáveis contínuas aumenta a quantidade de testes de hipótese para comparações pareadas entre os quantis, inflando, portanto, o erro tipo I.<span class="citation"><sup><a href="#ref-Bennette2012">123</a></sup></span></p></li>
-<li><p>Categorização de variáveis contínuas requer uma função teórica que pressupõe a homogeneidade da variável dentro dos grupos, levando tanto a uma perda de poder como a uma estimativa imprecisa.<span class="citation"><sup><a href="#ref-Bennette2012">123</a></sup></span></p></li>
-<li><p>Categorização de variáveis contínuas pode dificultar a comparação de resultados entre estudos devido aos pontos de corte baseados em dados de um banco usados para definir as categorias.<span class="citation"><sup><a href="#ref-Bennette2012">123</a></sup></span></p></li>
+<li><em>Big data </em> refere-se a bancos de dados muito grandes com um mecanismo “R” — aleatório (<em>Random</em>), auto-reportado (<em>self-Reported</em>), reportado administrativamente (<em>administratively reported</em>), seletivamente respondido (<em>selectively repondend</em>) — descontrolado ou desconhecido.<span class="citation"><sup><a href="#ref-meng2018">72</a></sup></span></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="metadados" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Metadados<a href="dados-metadados.html#metadados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-são-metadados" class="section level3 hasAnchor" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> O que são metadados?<a href="dados-metadados.html#o-que-s%C3%A3o-metadados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Metadados são informações técnicas relacionadas às variáveis do estudo, tais como rótulos, limites de valores plausíveis, códigos para dados perdidos e unidades de medida.<span class="citation"><sup><a href="#ref-Baillie2022">134</a></sup></span></p></li>
+<li><p>Metadados também são informações relacionadas ao delineamento e/ou protocolo do estudo, recrutamento dos participantes, e métodos para realização das medidas.<span class="citation"><sup><a href="#ref-Baillie2022">134</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="quais-são-as-recomendações-para-os-metadados-de-um-banco-de-dados" class="section level3 hasAnchor" number="11.3.2">
+<h3><span class="header-section-number">11.3.2</span> Quais são as recomendações para os metadados de um banco de dados?<a href="dados-metadados.html#quais-s%C3%A3o-as-recomenda%C3%A7%C3%B5es-para-os-metadados-de-um-banco-de-dados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Utilize rótulos padronizados para variáveis e fatores para facilitar o reuso (reprodutibilidade) do conjuntos de dados e scripts de análise.<span class="citation"><sup><a href="#ref-buttliere2021">135</a></sup></span></p></li>
+<li><p>Crie rótulos de variáveis concisos, claros e mutuamente exclusivos.<span class="citation"><sup><a href="#ref-buttliere2021">135</a></sup></span></p></li>
+<li><p>Evite muitas letras maiúsculas ou outros caracteres especiais que usam a <em>shift</em>.<span class="citation"><sup><a href="#ref-buttliere2021">135</a></sup></span></p></li>
+<li><p>Na existência de versões de instrumentos publicadas em diferentes anos, use o ano de publicação das escalas no rótulo.<span class="citation"><sup><a href="#ref-buttliere2021">135</a></sup></span></p></li>
+<li><p>Divida o rótulo da variável ou fator em partes e ordene-as do mais geral para o mais particular geral (ex.: experimento -&gt; repetição -&gt; escala -&gt; item).<span class="citation"><sup><a href="#ref-buttliere2021">135</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>questionr</em><span class="citation"><sup><a href="#ref-questionr">124</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/questionr/versions/0.7.8/topics/irec"><em>irec</em></a> para executar uma interface interativa para codificação de variáveis categóricas.</p>
+<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base">55</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/names"><em>names</em></a> para declarar o nome de uma variável.</p>
 </div>
-<p><br></p>
-</div>
-<div id="quais-são-as-alternativas-à-categorização-de-variáveis-contínuas" class="section level3 hasAnchor" number="10.5.3">
-<h3><span class="header-section-number">10.5.3</span> Quais são as alternativas à categorização de variáveis contínuas?<a href="variaveis-fatores.html#quais-s%C3%A3o-as-alternativas-%C3%A0-categoriza%C3%A7%C3%A3o-de-vari%C3%A1veis-cont%C3%ADnuas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Análise com os dados das variáveis na escala de medida original.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a></sup></span></p></li>
-<li><p>Análise com modelos de regressão com pesos locais (<em>lowess</em>) tais como <em>splines</em> e polinômios fracionais.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-</div>
-<div id="dicotomização-de-variáveis-contínuas" class="section level2 hasAnchor" number="10.6">
-<h2><span class="header-section-number">10.6</span> Dicotomização de variáveis contínuas<a href="variaveis-fatores.html#dicotomiza%C3%A7%C3%A3o-de-vari%C3%A1veis-cont%C3%ADnuas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-são-variáveis-dicotômicas" class="section level3 hasAnchor" number="10.6.1">
-<h3><span class="header-section-number">10.6.1</span> O que são variáveis dicotômicas?<a href="variaveis-fatores.html#o-que-s%C3%A3o-vari%C3%A1veis-dicot%C3%B4micas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Variáveis dicotômicas (ou binárias) podem representar categorias naturais tipo “presente/ausente”, “sim/não”.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Variáveis dicotômicas podem representar categorias fictícias, criadas a partir de variáveis multinominais, em que cada nível é convertido em uma variável dicotômica indicatoda (<em>dummy</em>).<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Dicotomização é considerado um artefato da análise de dados, uma vez que é realizada após a coleta de dados.<span class="citation"><sup><a href="#ref-aguinis2008">125</a></sup></span></p></li>
-<li><p>Geralmente são representadas por “1” (presente, sucesso) e “0” (ausente, falha).<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="quais-argumentos-são-usados-para-defender-a-categorização-ou-dicotomização-de-variáveis-contínuas" class="section level3 hasAnchor" number="10.6.2">
-<h3><span class="header-section-number">10.6.2</span> Quais argumentos são usados para defender a categorização ou dicotomização de variáveis contínuas?<a href="variaveis-fatores.html#quais-argumentos-s%C3%A3o-usados-para-defender-a-categoriza%C3%A7%C3%A3o-ou-dicotomiza%C3%A7%C3%A3o-de-vari%C3%A1veis-cont%C3%ADnuas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>O argumento principal para dicotomização de variáveis é que tal procedimento facilita e simplifica a apresentação dos resultados, principalmente para o público em geral.<span class="citation"><sup><a href="#ref-Fedorov2009">114</a></sup></span></p></li>
-<li><p>Os pesquisadores não conhecem as consequências estatísticas da dicotomização.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a></sup></span></p></li>
-<li><p>Os pesquisadores não conhecem os métodos adequados de análise não-paramétrica, não-linear e robusta.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a></sup></span></p></li>
-<li><p>As categorias representam características existentes dos participantes da pesquisa, de modo que as análises devam ser feitas por grupos e não por indivíduos.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a></sup></span></p></li>
-<li><p>A confiabilidade da(s) variável(eis) medida(s) é baixa e, portanto, categorizar os participantes resultaria em uma medida mais confiável.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="por-que-não-é-recomendado-dicotomizar-variáveis-contínuas" class="section level3 hasAnchor" number="10.6.3">
-<h3><span class="header-section-number">10.6.3</span> Por que não é recomendado dicotomizar variáveis contínuas?<a href="variaveis-fatores.html#por-que-n%C3%A3o-%C3%A9-recomendado-dicotomizar-vari%C3%A1veis-cont%C3%ADnuas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Nenhum dos argumentos usados para defender a dicotomização de variáveis se sustenta sob uma análise técnica rigorosa.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a></sup></span></p></li>
-<li><p>Dicotomizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de dicotomizar, priorize as variáveis contínuas.<span class="citation"><sup><a href="#ref-Altman2006">119</a>–<a href="#ref-Collins2016">121</a></sup></span></p></li>
-<li><p>Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.<span class="citation"><sup><a href="#ref-Altman2006">119</a>–<a href="#ref-Collins2016">121</a></sup></span></p></li>
-<li><p>Dicotomização causa perda de informação e consequentemente perda de poder estatístico para detectar efeitos.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a>,<a href="#ref-Altman2006">119</a></sup></span></p></li>
-<li><p>Dicotomização também classifica indivíduos com valores próximos na variável contínua como indivíduos em pontos opostos e extremos, artificialmente sugerindo que são muito diferentes.<span class="citation"><sup><a href="#ref-Altman2006">119</a></sup></span></p></li>
-<li><p>Dicotomização pode diminuir a variabilidade das variáveis.<span class="citation"><sup><a href="#ref-Altman2006">119</a></sup></span></p></li>
-<li><p>Dicotomização pode ocultar não-linearidades presentes na variável contínua.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a>,<a href="#ref-Altman2006">119</a></sup></span></p></li>
-<li><p>A média ou a mediana, embora amplamente utilizadas, não são bons parâmetros para dicotomizar variáveis.<span class="citation"><sup><a href="#ref-Fedorov2009">114</a>,<a href="#ref-Altman2006">119</a></sup></span></p></li>
-<li><p>Caso exista um ponto de corte ou limiar verdadeiro que discrimine dois grupos independentes, identificar tal ponto de corte ainda é um desafio.<span class="citation"><sup><a href="#ref-Prince2017">122</a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="quais-cenários-legitimam-a-dicotomização-das-variáveis-contínuas" class="section level3 hasAnchor" number="10.6.4">
-<h3><span class="header-section-number">10.6.4</span> Quais cenários legitimam a dicotomização das variáveis contínuas?<a href="variaveis-fatores.html#quais-cen%C3%A1rios-legitimam-a-dicotomiza%C3%A7%C3%A3o-das-vari%C3%A1veis-cont%C3%ADnuas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Quando existem dados e/ou análises que suportem a existência — não apenas a suposição ou teorização — de categorias com um ponto de corte claro e com significado entre elas.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a></sup></span></p></li>
-<li><p>Quando a distribuição da variável contínua é muito assimétrica, de modo que uma grande quantidade de observações está em um dos extremos da escala.<span class="citation"><sup><a href="#ref-MacCallum2002">118</a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="quais-métodos-são-usados-para-dicotomizar-variáveis-contínuas" class="section level3 hasAnchor" number="10.6.5">
-<h3><span class="header-section-number">10.6.5</span> Quais métodos são usados para dicotomizar variáveis contínuas?<a href="variaveis-fatores.html#quais-m%C3%A9todos-s%C3%A3o-usados-para-dicotomizar-vari%C3%A1veis-cont%C3%ADnuas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Em termos de tabelas de contingência 2x2, os seguintes métodos permitem<span class="citation"><sup><a href="#ref-Prince2017">122</a></sup></span> a identificação do limiar verdadeiro:</p>
-<ul>
-<li><p>Youden.<span class="citation"><sup><a href="#ref-YOUDEN1950">126</a></sup></span></p></li>
-<li><p>Gini Index.<span class="citation"><sup><a href="#ref-strobl2007">127</a></sup></span></p></li>
-<li><p>Estatística qui-quadrado (<span class="math inline">\(\chi^2\)</span>).<span class="citation"><sup><a href="#ref-pearson1900">128</a></sup></span></p></li>
-<li><p>Risco relativo (<span class="math inline">\(RR\)</span>).<span class="citation"><sup><a href="#ref-Greiner2000">129</a></sup></span></p></li>
-<li><p>Kappa (<span class="math inline">\(\kappa\)</span>).<span class="citation"><sup><a href="#ref-fleiss1971">130</a></sup></span>.</p></li>
-</ul></li>
-</ul>
-<p><br></p>
-</div>
-</div>
-<div id="representação-de-variáveis-categóricas" class="section level2 hasAnchor" number="10.7">
-<h2><span class="header-section-number">10.7</span> Representação de variáveis categóricas<a href="variaveis-fatores.html#representa%C3%A7%C3%A3o-de-vari%C3%A1veis-categ%C3%B3ricas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-são-variáveis-indicadoras-dummy-variables" class="section level3 hasAnchor" number="10.7.1">
-<h3><span class="header-section-number">10.7.1</span> O que são variáveis indicadoras (dummy variables)?<a href="variaveis-fatores.html#o-que-s%C3%A3o-vari%C3%A1veis-indicadoras-dummy-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Variáveis indicadoras são variáveis dicotômicas criadas a partir dos níveis de um fator.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Cada variável indicadora assume o valor <span class="math inline">\(1\)</span> quando a observação pertence àquela categoria e <span class="math inline">\(0\)</span> caso contrário.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Variáveis indicadoras não representam magnitude ou ordem, apenas a presença ou ausência de uma categoria.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-<table class="table table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:variaveis-indicadoras">Tabela 10.1: </span>Tabela de variáveis indicadoras (dummy variables) criadas a partir de variáveis categóricas Sexo e Grupo.
-</caption>
-<thead>
-<tr>
-<th style="text-align:center;">
-ID
-</th>
-<th style="text-align:center;">
-Sexo
-</th>
-<th style="text-align:center;">
-Grupo
-</th>
-<th style="text-align:center;">
-Sexo_Feminino
-</th>
-<th style="text-align:center;">
-Grupo_TratA
-</th>
-<th style="text-align:center;">
-Grupo_TratB
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:center;">
-Masculino
-</td>
-<td style="text-align:center;">
-Tratamento A
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:center;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:center;">
-Masculino
-</td>
-<td style="text-align:center;">
-Controle
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-3
-</td>
-<td style="text-align:center;">
-Masculino
-</td>
-<td style="text-align:center;">
-Tratamento A
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:center;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4
-</td>
-<td style="text-align:center;">
-Feminino
-</td>
-<td style="text-align:center;">
-Tratamento B
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-5
-</td>
-<td style="text-align:center;">
-Masculino
-</td>
-<td style="text-align:center;">
-Controle
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-6
-</td>
-<td style="text-align:center;">
-Feminino
-</td>
-<td style="text-align:center;">
-Tratamento B
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-7
-</td>
-<td style="text-align:center;">
-Feminino
-</td>
-<td style="text-align:center;">
-Tratamento B
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-8
-</td>
-<td style="text-align:center;">
-Feminino
-</td>
-<td style="text-align:center;">
-Controle
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-9
-</td>
-<td style="text-align:center;">
-Masculino
-</td>
-<td style="text-align:center;">
-Controle
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-10
-</td>
-<td style="text-align:center;">
-Masculino
-</td>
-<td style="text-align:center;">
-Controle
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-11
-</td>
-<td style="text-align:center;">
-Feminino
-</td>
-<td style="text-align:center;">
-Controle
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-12
-</td>
-<td style="text-align:center;">
-Feminino
-</td>
-<td style="text-align:center;">
-Tratamento B
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-1
-</td>
-</tr>
-</tbody>
-</table>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats">131</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/model.matrix"><em>model.matrix</em></a> para expandir variáveis categóricas em variáveis indicadoras.</p>
+<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base">55</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/labels"><em>labels</em></a> para declarar o rótulo de uma variável.</p>
 </div>
-<p><br></p>
-</div>
-<div id="por-que-variáveis-indicadoras-são-importantes" class="section level3 hasAnchor" number="10.7.2">
-<h3><span class="header-section-number">10.7.2</span> Por que variáveis indicadoras são importantes?<a href="variaveis-fatores.html#por-que-vari%C3%A1veis-indicadoras-s%C3%A3o-importantes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Permitem a inclusão de fatores em modelos estatísticos.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Tornam explícitas as comparações entre categorias.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Garantem coerência matemática sem perder o significado conceitual das categorias.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="quantas-variáveis-indicadoras-são-necessárias-para-um-fator" class="section level3 hasAnchor" number="10.7.3">
-<h3><span class="header-section-number">10.7.3</span> Quantas variáveis indicadoras são necessárias para um fator?<a href="variaveis-fatores.html#quantas-vari%C3%A1veis-indicadoras-s%C3%A3o-necess%C3%A1rias-para-um-fator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Um fator com k níveis é representado por <span class="math inline">\(k − 1\)</span> variáveis indicadoras.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>O nível que não gera uma variável indicadora explícita é chamado de nível de referência.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="o-que-é-o-nível-de-referência" class="section level3 hasAnchor" number="10.7.4">
-<h3><span class="header-section-number">10.7.4</span> O que é o nível de referência?<a href="variaveis-fatores.html#o-que-%C3%A9-o-n%C3%ADvel-de-refer%C3%AAncia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>O nível de referência é a categoria usada como base de comparação para as demais.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Os coeficientes associados às variáveis indicadoras representam diferenças em relação a esse nível de referência.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="por-que-não-se-usam-k-variáveis-indicadoras-para-k-níveis" class="section level3 hasAnchor" number="10.7.5">
-<h3><span class="header-section-number">10.7.5</span> Por que não se usam k variáveis indicadoras para <span class="math inline">\(k\)</span> níveis?<a href="variaveis-fatores.html#por-que-n%C3%A3o-se-usam-k-vari%C3%A1veis-indicadoras-para-k-n%C3%ADveis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Utilizar <span class="math inline">\(k\)</span> variáveis indicadoras gera redundância perfeita entre as variáveis.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Essa redundância causa problemas de identificabilidade nos modelos, fenômeno conhecido como <em>dummy trap</em>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="variáveis-indicadoras-são-uma-forma-de-dicotomização" class="section level3 hasAnchor" number="10.7.6">
-<h3><span class="header-section-number">10.7.6</span> Variáveis indicadoras são uma forma de dicotomização?<a href="variaveis-fatores.html#vari%C3%A1veis-indicadoras-s%C3%A3o-uma-forma-de-dicotomiza%C3%A7%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Variáveis indicadoras são dicotômicas, mas não resultam da dicotomização de variáveis contínuas.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Variáveis indicadoras são criadas a partir de variáveis categóricas multinominais, preservando toda a informação original do fator.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Variáveis indicadoras não reduzem informação, enquanto a dicotomização de variáveis contínuas descarta informação por construção.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="variáveis-indicadoras-alteram-os-dados-originais" class="section level3 hasAnchor" number="10.7.7">
-<h3><span class="header-section-number">10.7.7</span> Variáveis indicadoras alteram os dados originais?<a href="variaveis-fatores.html#vari%C3%A1veis-indicadoras-alteram-os-dados-originais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Não. Variáveis indicadoras apenas representam os níveis do fator de forma numérica.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>A variável categórica original permanece intacta no conjunto de dados.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-</div>
-<div id="fatores" class="section level2 hasAnchor" number="10.8">
-<h2><span class="header-section-number">10.8</span> Fatores<a href="variaveis-fatores.html#fatores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-são-fatores" class="section level3 hasAnchor" number="10.8.1">
-<h3><span class="header-section-number">10.8.1</span> O que são fatores?<a href="variaveis-fatores.html#o-que-s%C3%A3o-fatores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Fator é um sinônimo de variável categórica.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Na modelagem, fator é sinônimo de variável preditora, em particular quando se refere à modelagem de efeitos fixos e aleatórios – os fatores (variáveis) são fatores fixos ou fatores aleatórios.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Fatores são variáveis controladas pelos pesquisadores em um experimento para determinar seu efeito na(s) variável(ies) de resposta. Um fator pode assumir apenas um pequeno número de valores, conhecidos como níveis. Os fatores podem ser uma variável categórica ou baseados em uma variável contínua, mas usam apenas um número limitado de valores escolhidos pelos experimentadores.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base">55</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/factor"><em>as.factor</em></a> para converter uma variável em fator.</p>
+<p>O pacote <em>units</em><span class="citation"><sup><a href="#ref-units">136</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/units/versions/0.8-3/topics/units"><em>units</em></a> para declarar as unidades de medida de uma variável.</p>
 </div>
-<p><br></p>
-</div>
-<div id="o-que-são-níveis-de-um-fator" class="section level3 hasAnchor" number="10.8.2">
-<h3><span class="header-section-number">10.8.2</span> O que são níveis de um fator?<a href="variaveis-fatores.html#o-que-s%C3%A3o-n%C3%ADveis-de-um-fator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Níveis de um fator são as possíveis categorias que descrevem um fator.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
-</ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>base</em><span class="citation"><sup><a href="#ref-base">55</a></sup></span> fornece as funções <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/levels"><em>levels</em></a> e <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/nlevels"><em>nlevels</em></a> para listar os níveis e a quantidade deles em um fator.</p>
+<p>O pacote <em>units</em><span class="citation"><sup><a href="#ref-units">136</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/units/versions/0.8-3/topics/valid_udunits"><em>valid_udunits</em></a> para listar as opções de unidades de medida de uma variável.</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>janitor</em><span class="citation"><sup><a href="#ref-janitor">137</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/janitor/versions/2.2.0/topics/clean_names"><em>clean_names</em></a> para formatar de modo padronizado o nome das variáveis utilizando apenas caracteres, números e o símbolo ‘_’.</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>Hmisc</em><span class="citation"><sup><a href="#ref-Hmisc">138</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/Hmisc/versions/5.1-0/topics/contents"><em>contents</em></a> para criar um objeto com os metadados (nomes, rótulos, unidades, quantidade e níveis das variáveis categóricas, e quantidade de dados perdidos) de um dataframe.</p>
 </div>
 <p><br></p>
 <style>
@@ -2719,74 +2104,32 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
 <div id="ref-base" class="csl-entry">
 <div class="csl-left-margin">55. </div><div class="csl-right-inline">R Core Team. <em><span>R</span>: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing; 2023. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
 </div>
-<div id="ref-Altman1999" class="csl-entry">
-<div class="csl-left-margin">107. </div><div class="csl-right-inline">Altman DG, Bland JM. Statistics notes Variables and parameters. <em>BMJ</em>. 1999;318(7199):1667–1667. doi:<a href="https://doi.org/10.1136/bmj.318.7199.1667">10.1136/bmj.318.7199.1667</a></div>
+<div id="ref-meng2018" class="csl-entry">
+<div class="csl-left-margin">72. </div><div class="csl-right-inline">Meng XL. Statistical paradises and paradoxes in big data (I): Law of large populations, big data paradox, and the 2016 US presidential election. <em>The Annals of Applied Statistics</em>. 2018;12(2). doi:<a href="https://doi.org/10.1214/18-aoas1161sf">10.1214/18-aoas1161sf</a></div>
 </div>
 <div id="ref-vetter2017" class="csl-entry">
 <div class="csl-left-margin">108. </div><div class="csl-right-inline">Vetter TR. Fundamentals of Research Data and Variables. <em>Anesthesia &amp; Analgesia</em>. 2017;125(4):1375–1380. doi:<a href="https://doi.org/10.1213/ane.0000000000002370">10.1213/ane.0000000000002370</a></div>
 </div>
-<div id="ref-Dettori2018" class="csl-entry">
-<div class="csl-left-margin">110. </div><div class="csl-right-inline">Dettori JR, Norvell DC. The Anatomy of Data. <em>Global Spine Journal</em>. 2018;8(3):311–313. doi:<a href="https://doi.org/10.1177/2192568217746998">10.1177/2192568217746998</a></div>
+<div id="ref-Olson2021" class="csl-entry">
+<div class="csl-left-margin">132. </div><div class="csl-right-inline">Olson K. What Are Data? <em>Qualitative Health Research</em>. 2021;31(9):1567–1569. doi:<a href="https://doi.org/10.1177/10497323211015960">10.1177/10497323211015960</a></div>
 </div>
-<div id="ref-kaliyadan2019" class="csl-entry">
-<div class="csl-left-margin">111. </div><div class="csl-right-inline">Kaliyadan F, Kulkarni V. Types of variables, descriptive statistics, and sample size. <em>Indian Dermatology Online Journal</em>. 2019;10(1):82. doi:<a href="https://doi.org/10.4103/idoj.idoj_468_18">10.4103/idoj.idoj_468_18</a></div>
+<div id="ref-van2022a" class="csl-entry">
+<div class="csl-left-margin">133. </div><div class="csl-right-inline">Smeden M van. A Very Short List of Common Pitfalls in Research Design, Data Analysis, and Reporting. <em>PRiMER</em>. 2022;6. doi:<a href="https://doi.org/10.22454/PRiMER.2022.511416">10.22454/PRiMER.2022.511416</a></div>
 </div>
-<div id="ref-barkan2015" class="csl-entry">
-<div class="csl-left-margin">112. </div><div class="csl-right-inline">Barkan H. Statistics in clinical research: Important considerations. <em>Annals of Cardiac Anaesthesia</em>. 2015;18(1):74. doi:<a href="https://doi.org/10.4103/0971-9784.148325">10.4103/0971-9784.148325</a></div>
+<div id="ref-Baillie2022" class="csl-entry">
+<div class="csl-left-margin">134. </div><div class="csl-right-inline">Baillie M, Cessie S le, Schmidt CO, Lusa L, Huebner M. Ten simple rules for initial data analysis. <em>PLOS Computational Biology</em>. 2022;18(2):e1009819. doi:<a href="https://doi.org/10.1371/journal.pcbi.1009819">10.1371/journal.pcbi.1009819</a></div>
 </div>
-<div id="ref-Bland1996" class="csl-entry">
-<div class="csl-left-margin">113. </div><div class="csl-right-inline">Bland JM, Altman DG. Statistics Notes: Transforming data. <em>BMJ</em>. 1996;312(7033):770–770. doi:<a href="https://doi.org/10.1136/bmj.312.7033.770">10.1136/bmj.312.7033.770</a></div>
+<div id="ref-buttliere2021" class="csl-entry">
+<div class="csl-left-margin">135. </div><div class="csl-right-inline">Buttliere B. Adopting standard variable labels solves many of the problems with sharing and reusing data. <em>Methodological Innovations</em>. 2021;14(2):205979912110266. doi:<a href="https://doi.org/10.1177/20597991211026616">10.1177/20597991211026616</a></div>
 </div>
-<div id="ref-Fedorov2009" class="csl-entry">
-<div class="csl-left-margin">114. </div><div class="csl-right-inline">Fedorov V, Mannino F, Zhang R. Consequences of dichotomization. <em>Pharmaceutical Statistics</em>. 2009;8(1):50–61. doi:<a href="https://doi.org/10.1002/pst.331">10.1002/pst.331</a></div>
+<div id="ref-units" class="csl-entry">
+<div class="csl-left-margin">136. </div><div class="csl-right-inline">Pebesma E, Mailund T, Hiebert J. Measurement Units in <span></span>R<span></span>. <em>The R Journal</em>. 2016;8. doi:<a href="https://doi.org/10.32614/RJ-2016-061">10.32614/RJ-2016-061</a></div>
 </div>
-<div id="ref-osborne2010" class="csl-entry">
-<div class="csl-left-margin">115. </div><div class="csl-right-inline">Osborne J. Improving your data transformations: Applying the Box-Cox transformation. <em>University of Massachusetts Amherst</em>. 2010. doi:<a href="https://doi.org/10.7275/QBPC-GK17">10.7275/QBPC-GK17</a></div>
+<div id="ref-janitor" class="csl-entry">
+<div class="csl-left-margin">137. </div><div class="csl-right-inline">Firke S. <em>janitor: Simple Tools for Examining and Cleaning Dirty Data</em>.; 2023. <a href="https://CRAN.R-project.org/package=janitor">https://CRAN.R-project.org/package=janitor.</a></div>
 </div>
-<div id="ref-box1964" class="csl-entry">
-<div class="csl-left-margin">116. </div><div class="csl-right-inline">Box GEP, Cox DR. An Analysis of Transformations. <em>Journal of the Royal Statistical Society: Series B (Methodological)</em>. 1964;26(2):211–243. doi:<a href="https://doi.org/10.1111/j.2517-6161.1964.tb00553.x">10.1111/j.2517-6161.1964.tb00553.x</a></div>
-</div>
-<div id="ref-MASS" class="csl-entry">
-<div class="csl-left-margin">117. </div><div class="csl-right-inline">Venables WN, Ripley BD. <em>Modern Applied Statistics with S</em>. Springer; 2002. <a href="https://www.stats.ox.ac.uk/pub/MASS4/">https://www.stats.ox.ac.uk/pub/MASS4/.</a></div>
-</div>
-<div id="ref-MacCallum2002" class="csl-entry">
-<div class="csl-left-margin">118. </div><div class="csl-right-inline">MacCallum RC, Zhang S, Preacher KJ, Rucker DD. On the practice of dichotomization of quantitative variables. <em>Psychological Methods</em>. 2002;7(1):19–40. doi:<a href="https://doi.org/10.1037/1082-989x.7.1.19">10.1037/1082-989x.7.1.19</a></div>
-</div>
-<div id="ref-Altman2006" class="csl-entry">
-<div class="csl-left-margin">119. </div><div class="csl-right-inline">Altman DG, Royston P. The cost of dichotomising continuous variables. <em>BMJ</em>. 2006;332(7549):1080.1. doi:<a href="https://doi.org/10.1136/bmj.332.7549.1080">10.1136/bmj.332.7549.1080</a></div>
-</div>
-<div id="ref-Collins2016" class="csl-entry">
-<div class="csl-left-margin">121. </div><div class="csl-right-inline">Collins GS, Ogundimu EO, Cook JA, Manach YL, Altman DG. Quantifying the impact of different approaches for handling continuous predictors on the performance of a prognostic model. <em>Statistics in Medicine</em>. 2016;35(23):4124–4135. doi:<a href="https://doi.org/10.1002/sim.6986">10.1002/sim.6986</a></div>
-</div>
-<div id="ref-Prince2017" class="csl-entry">
-<div class="csl-left-margin">122. </div><div class="csl-right-inline">Nelson SLP, Ramakrishnan V, Nietert PJ, Kamen DL, Ramos PS, Wolf BJ. An evaluation of common methods for dichotomization of continuous variables to discriminate disease status. <em>Communications in Statistics – Theory and Methods</em>. 2017;46(21):10823–10834. doi:<a href="https://doi.org/10.1080/03610926.2016.1248783">10.1080/03610926.2016.1248783</a></div>
-</div>
-<div id="ref-Bennette2012" class="csl-entry">
-<div class="csl-left-margin">123. </div><div class="csl-right-inline">Bennette C, Vickers A. Against quantiles: categorization of continuous variables in epidemiologic research, and its discontents. <em>BMC Medical Research Methodology</em>. 2012;12(1). doi:<a href="https://doi.org/10.1186/1471-2288-12-21">10.1186/1471-2288-12-21</a></div>
-</div>
-<div id="ref-questionr" class="csl-entry">
-<div class="csl-left-margin">124. </div><div class="csl-right-inline">Barnier J, Briatte F, Larmarange J. <em>questionr: Functions to Make Surveys Processing Easier</em>.; 2023. <a href="https://CRAN.R-project.org/package=questionr">https://CRAN.R-project.org/package=questionr.</a></div>
-</div>
-<div id="ref-aguinis2008" class="csl-entry">
-<div class="csl-left-margin">125. </div><div class="csl-right-inline">Aguinis H, Pierce CA, Culpepper SA. Scale Coarseness as a Methodological Artifact. <em>Organizational Research Methods</em>. 2008;12(4):623–652. doi:<a href="https://doi.org/10.1177/1094428108318065">10.1177/1094428108318065</a></div>
-</div>
-<div id="ref-YOUDEN1950" class="csl-entry">
-<div class="csl-left-margin">126. </div><div class="csl-right-inline">Youden WJ. Index for rating diagnostic tests. <em>Cancer</em>. 1950;3(1):32–35. doi:<a href="https://doi.org/10.1002/1097-0142(1950)3:1%3C32::aid-cncr2820030106%3E3.0.co;2-3">10.1002/1097-0142(1950)3:1&lt;32::aid-cncr2820030106&gt;3.0.co;2-3</a></div>
-</div>
-<div id="ref-strobl2007" class="csl-entry">
-<div class="csl-left-margin">127. </div><div class="csl-right-inline">Strobl C, Boulesteix AL, Augustin T. Unbiased split selection for classification trees based on the Gini Index. <em>Computational Statistics &amp; Data Analysis</em>. 2007;52(1):483–501. doi:<a href="https://doi.org/10.1016/j.csda.2006.12.030">10.1016/j.csda.2006.12.030</a></div>
-</div>
-<div id="ref-pearson1900" class="csl-entry">
-<div class="csl-left-margin">128. </div><div class="csl-right-inline">Pearson K. X. <span><em>On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling</em></span>. <em>The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science</em>. 1900;50(302):157–175. doi:<a href="https://doi.org/10.1080/14786440009463897">10.1080/14786440009463897</a></div>
-</div>
-<div id="ref-Greiner2000" class="csl-entry">
-<div class="csl-left-margin">129. </div><div class="csl-right-inline">Greiner M, Pfeiffer D, Smith RD. Principles and practical application of the receiver-operating characteristic analysis for diagnostic tests. <em>Preventive Veterinary Medicine</em>. 2000;45(1-2):23–41. doi:<a href="https://doi.org/10.1016/s0167-5877(00)00115-x">10.1016/s0167-5877(00)00115-x</a></div>
-</div>
-<div id="ref-fleiss1971" class="csl-entry">
-<div class="csl-left-margin">130. </div><div class="csl-right-inline">Fleiss JL. Measuring nominal scale agreement among many raters. <em>Psychological Bulletin</em>. 1971;76(5):378–382. doi:<a href="https://doi.org/10.1037/h0031619">10.1037/h0031619</a></div>
-</div>
-<div id="ref-stats" class="csl-entry">
-<div class="csl-left-margin">131. </div><div class="csl-right-inline">R Core Team. <em>R: A Language and Environment for Statistical Computing</em>.; 2025. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
+<div id="ref-Hmisc" class="csl-entry">
+<div class="csl-left-margin">138. </div><div class="csl-right-inline">Harrell Jr FE. <em>Hmisc: Harrell Miscellaneous</em>.; 2023. <a href="https://CRAN.R-project.org/package=Hmisc">https://CRAN.R-project.org/package=Hmisc.</a></div>
 </div>
 </div>
             </section>
@@ -2794,8 +2137,8 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
           </div>
         </div>
       </div>
-<a href="parte-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dados-metadados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="variaveis-fatores.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="medidas-instrumentos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
