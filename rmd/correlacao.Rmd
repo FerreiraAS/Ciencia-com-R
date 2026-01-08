@@ -139,7 +139,7 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*correct_r*](https://www.rd
 
 <br>
 
-```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos."}
+```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Quarteto de Anscombe."}
 library(dplyr)
 anscombe.dt <- datasets::anscombe
 anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
@@ -152,8 +152,7 @@ knitr::kable(
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   linesep = "",
-  escape = FALSE,
-  caption = "Quarteto de Anscombe."
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(
     latex_options = c("basic"),
@@ -164,11 +163,17 @@ knitr::kable(
   kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
   kableExtra::column_spec(1, bold = TRUE) %>%
   kableExtra::row_spec(dim(anscombe.dt)[1], extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+```{r anscombe-summary, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos."}
+library(dplyr)
+anscombe.dt <- datasets::anscombe
+anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
+anscombe.dt <- anscombe.dt[c(9, 1:8)]
 
 anscombe.dt <- anscombe.dt %>% dplyr::select(-ID)
-
-cat('<br>')
-cat('<br>')
 
 # exibe a tabela descritiva
 anscombe.summ <- data.frame(

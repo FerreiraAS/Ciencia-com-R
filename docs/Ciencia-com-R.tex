@@ -828,7 +828,7 @@ P(E) = \frac{\text{número de desfechos em } E}{\text{número de desfechos em } 
 \begin{itemize}
 \tightlist
 \item
-  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.35 e variância \(\sigma^{2}\) = 0.23. A distribuição amostral da média de 100 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.349 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
+  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.46 e variância \(\sigma^{2}\) = 0.251. A distribuição amostral da média de 100 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.461 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
 \end{itemize}
 
 \begin{figure}
@@ -2712,28 +2712,6 @@ Y' = \arcsin(\sqrt{Y})
 \end{equation}
 
 \begin{itemize}
-\tightlist
-\item
-  Transformação escore padrão (Z-score) \eqref{eq:zscore}.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
-\end{itemize}
-
-\begin{equation}
-\label{eq:zscore}
-Z = \frac{X - \mu}{\sigma}
-\end{equation}
-
-\begin{itemize}
-\tightlist
-\item
-  Escala Mínimo-Máximo (0,1) \eqref{eq:minmax}.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
-\end{itemize}
-
-\begin{equation}
-\label{eq:minmax}
-X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}
-\end{equation}
-
-\begin{itemize}
 \item
   Diferenciação.
 \item
@@ -3107,6 +3085,14 @@ O pacote \emph{base}\textsuperscript{\citeproc{ref-base}{55}} fornece as funçõ
   Dados coletados em um estudo geralmente contêm erros de mensuração e/ou classificação, dados perdidos e são agrupados por alguma unidade de análise.\textsuperscript{\citeproc{ref-van2022a}{133}}
 \end{itemize}
 
+\subsection{\texorpdfstring{O que são \emph{big data}?}{O que são big data?}}\label{o-que-suxe3o-big-data}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Big data} refere-se a bancos de dados muito grandes com um mecanismo ``R'' --- aleatório (\emph{Random}), auto-reportado (\emph{self-Reported}), reportado administrativamente (\emph{administratively Reported}), seletivamente respondido (\emph{selectively Responded}) --- descontrolado ou desconhecido.\textsuperscript{\citeproc{ref-meng2018}{72}}
+\end{itemize}
+
 \subsection{Quais são as fontes de dados?}\label{quais-suxe3o-as-fontes-de-dados}
 
 \begin{itemize}
@@ -3133,16 +3119,6 @@ O pacote \emph{base}\textsuperscript{\citeproc{ref-base}{55}} fornece as funçõ
 \tightlist
 \item
   .\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
-\end{itemize}
-
-\section{\texorpdfstring{\emph{Big data}}{Big data}}\label{big-data}
-
-\subsection{\texorpdfstring{O que são \emph{big data}?}{O que são big data?}}\label{o-que-suxe3o-big-data}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{Big data } refere-se a bancos de dados muito grandes com um mecanismo ``R'' --- aleatório (\emph{Random}), auto-reportado (\emph{self-Reported}), reportado administrativamente (\emph{administratively reported}), seletivamente respondido (\emph{selectively repondend}) --- descontrolado ou desconhecido.\textsuperscript{\citeproc{ref-meng2018}{72}}
 \end{itemize}
 
 \section{Metadados}\label{metadados}
@@ -8971,7 +8947,7 @@ O pacote \emph{psychmeta}\textsuperscript{\citeproc{ref-psychmeta}{297}} fornece
 
 \begin{table}
 \centering
-\caption{\label{tab:anscombe-data}Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos.}
+\caption{\label{tab:anscombe-summary}Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos.}
 \centering
 \begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
 \toprule
@@ -11835,7 +11811,75 @@ O pacote \emph{base}\textsuperscript{\citeproc{ref-base}{55}} fornece a função
   .\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
 \end{itemize}
 
-\section{Método de Monte Carlo}\label{muxe9todo-de-monte-carlo}
+\section{Métodos de simulação}\label{muxe9todos-de-simulauxe7uxe3o}
+
+\subsection{Simulações computacionais dependem da distribuição Normal?}\label{simulauxe7uxf5es-computacionais-dependem-da-distribuiuxe7uxe3o-normal}
+
+\begin{itemize}
+\item
+  Não. Simulações computacionais não dependem da distribuição Normal.
+  Qualquer distribuição de probabilidade pode ser usada para gerar dados artificiais, desde que represente adequadamente o mecanismo gerador do fenômeno em estudo.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\item
+  A escolha da distribuição depende da natureza da variável (contínua ou discreta), do domínio dos valores possíveis e da estrutura probabilística do processo observado.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\item
+  Distribuições como Binomial, Poisson e Exponencial são frequentemente utilizadas em simulações para representar proporções, contagens de eventos e tempos até a ocorrência de eventos, respectivamente.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\item
+  Simulações baseadas em diferentes distribuições permitem avaliar o desempenho de métodos estatísticos e algoritmos inferenciais sob condições realistas e variadas, incluindo assimetria, discretação e presença de valores extremos.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\end{itemize}
+
+\subsection{Como escolher a distribuição adequada em um estudo de simulação?}\label{como-escolher-a-distribuiuxe7uxe3o-adequada-em-um-estudo-de-simulauxe7uxe3o}
+
+\begin{itemize}
+\item
+  A escolha da distribuição deve ser guiada pelo mecanismo gerador dos dados do fenômeno de interesse, e não por conveniência matemática.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\item
+  Aspectos como o tipo da variável, assimetria, limites naturais e frequência de eventos devem ser considerados na especificação da distribuição.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\item
+  Em estudos de simulação, é comum avaliar múltiplas distribuições para investigar a sensibilidade dos resultados às suposições do modelo.\textsuperscript{\citeproc{ref-Eglen2017}{42}}
+\end{itemize}
+
+\subsection{Como simular dados de diferentes distribuições?}\label{como-simular-dados-de-diferentes-distribuiuxe7uxf5es}
+
+\begin{itemize}
+\tightlist
+\item
+  Use funções específicas para cada distribuição, disponíveis nas bibliotecas estatísticas da linguagem utilizada.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\end{itemize}
+
+\begin{infobox}{images/Rlogo}
+O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{131}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/Normal}{\emph{rnorm}} para simular dados de uma distribuição normal.
+
+\end{infobox}
+
+\begin{infobox}{images/Rlogo}
+O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{131}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/rbinom}{\emph{rbinom}} para simular dados de uma distribuição Binomial.
+
+\end{infobox}
+
+\begin{infobox}{images/Rlogo}
+O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{131}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/rpois}{\emph{rpois}} para simular dados de uma distribuição Poisson.
+
+\end{infobox}
+
+\begin{infobox}{images/Rlogo}
+O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{131}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/rexp}{\emph{rexp}} para simular dados de uma distribuição Exponencial.
+
+\end{infobox}
+
+\begin{figure}
+
+{\centering \includegraphics{Ciencia-com-R_files/figure-latex/simulacao-distribuicoes-1} 
+
+}
+
+\caption{Dados simulados a partir de diferentes distribuições: Normal(0,1), Binomial(1,0.4), Poisson(2) e Exponencial(1).}\label{fig:simulacao-distribuicoes}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Independentemente da distribuição utilizada, o procedimento de simulação segue os mesmos princípios computacionais, diferindo apenas na função geradora dos números aleatórios.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\end{itemize}
 
 \subsection{O que é o método de Monte Carlo?}\label{o-que-uxe9-o-muxe9todo-de-monte-carlo}
 

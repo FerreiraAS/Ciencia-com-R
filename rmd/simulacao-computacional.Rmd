@@ -64,7 +64,97 @@ O pacote *base*[@base] fornece a função [*set.seed*](https://www.rdocumentatio
 
 <br>
 
-## Método de Monte Carlo
+## Métodos de simulação
+
+<br>
+
+### Simulações computacionais dependem da distribuição Normal?
+
+- Não. Simulações computacionais não dependem da distribuição Normal. 
+  Qualquer distribuição de probabilidade pode ser usada para gerar dados artificiais, desde que represente adequadamente o mecanismo gerador do fenômeno em estudo.[@REF]
+
+- A escolha da distribuição depende da natureza da variável (contínua ou discreta), do domínio dos valores possíveis e da estrutura probabilística do processo observado.[@REF]
+
+- Distribuições como Binomial, Poisson e Exponencial são frequentemente utilizadas em simulações para representar proporções, contagens de eventos e tempos até a ocorrência de eventos, respectivamente.[@REF]
+
+- Simulações baseadas em diferentes distribuições permitem avaliar o desempenho de métodos estatísticos e algoritmos inferenciais sob condições realistas e variadas, incluindo assimetria, discretação e presença de valores extremos.[@REF]
+
+<br>
+
+### Como escolher a distribuição adequada em um estudo de simulação?
+
+- A escolha da distribuição deve ser guiada pelo mecanismo gerador dos dados do fenômeno de interesse, e não por conveniência matemática.[@REF]
+
+- Aspectos como o tipo da variável, assimetria, limites naturais e frequência de eventos devem ser considerados na especificação da distribuição.[@REF]
+
+- Em estudos de simulação, é comum avaliar múltiplas distribuições para investigar a sensibilidade dos resultados às suposições do modelo.[@Eglen2017]
+
+<br>
+
+### Como simular dados de diferentes distribuições?
+
+- Use funções específicas para cada distribuição, disponíveis nas bibliotecas estatísticas da linguagem utilizada.[@REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função [*rnorm*](https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/Normal) para simular dados de uma distribuição normal.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função [*rbinom*](https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/rbinom) para simular dados de uma distribuição Binomial.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função [*rpois*](https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/rpois) para simular dados de uma distribuição Poisson.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função [*rexp*](https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/rexp) para simular dados de uma distribuição Exponencial.
+:::
+
+<br>
+
+```{r simulacao-distribuicoes, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Dados simulados a partir de diferentes distribuições: Normal(0,1), Binomial(1,0.4), Poisson(2) e Exponencial(1)."}
+library(dplyr)
+
+# reproducibilidade
+set.seed(123)
+
+# Número de observações
+n <- 1000
+
+# Simulação de dados
+sim_data <- tibble::tibble(
+  Normal = rnorm(n, mean = 0, sd = 1),
+  Binomial = rbinom(n, size = 1, prob = 0.4),
+  Poisson = rpois(n, lambda = 2),
+  Exponencial = rexp(n, rate = 1)
+) %>%
+  tidyr::pivot_longer(cols = everything(),
+                      names_to = "Distribuicao",
+                      values_to = "Valor")
+
+# Gráfico
+ggplot2::ggplot(sim_data, ggplot2::aes(x = Valor)) +
+  ggplot2::geom_histogram(bins = 30, fill = "skyblue", color = "white") +
+  ggplot2::facet_wrap(~ Distribuicao, scales = "free") +
+  ggplot2::labs(
+    title = "Dados simulados a partir de diferentes distribuições",
+    x = "Valor", y = "Frequência"
+  ) +
+  ggplot2::theme_minimal(base_size = 13)
+```
+
+<br>
+
+- Independentemente da distribuição utilizada, o procedimento de simulação segue os mesmos princípios computacionais, diferindo apenas na função geradora dos números aleatórios.[@REF]
 
 <br>
 

@@ -110,7 +110,7 @@ parse_tex_structure <- function(tex_vec) {
     if (stringr::str_detect(line, "^\\\\chapter\\{")) {
       current_chapter <- extract_latex_argument(line, "chapter")
       current_chapter <- strip_outer_textbf(current_chapter)
-      
+
       current_section <- NA_character_
       current_subsection <- NA_character_
     }
