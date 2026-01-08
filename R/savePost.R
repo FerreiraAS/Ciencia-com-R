@@ -10,16 +10,35 @@ SavePost_df <- function(entry, bib) {
   
   is_graphic <- is.na(answer) && !is.na(graphic)
   
+  num_dir <- function(id, label) {
+    sprintf(
+      "%02d_%s",
+      as.integer(id),
+      gsub("\\s+", "_", label)
+    )
+  }
+  
+  chapter_dir    <- num_dir(entry$chapter_id, chapter)
+  section_dir    <- num_dir(entry$section_id, section)
+  subsection_dir <- num_dir(entry$subsection_id, question)
+  
   if (is_graphic) {
     
-    base <- file.path(getwd(), "posts", chapter, section)
+    base <- file.path(
+      getwd(),
+      "posts",
+      chapter_dir,
+      section_dir,
+      subsection_dir
+    )
     dir.create(base, recursive = TRUE, showWarnings = FALSE)
     
     n <- length(list.files(base, pattern = "\\.png$", recursive = TRUE))
-    fname <- paste0(
-      n + 1, "_",
-      gsub("\\s+", "_", question),
-      ".png"
+    n <- length(list.files(base, pattern = "\\.png$", recursive = TRUE))
+    fname <- sprintf(
+      "%02d_%s.png",
+      n + 1,
+      gsub("\\s+", "_", question)
     )
     fpath <- file.path(base, fname)
     
@@ -27,7 +46,7 @@ SavePost_df <- function(entry, bib) {
     tex <- gsub("CAPITULO", chapter, tex)
     tex <- gsub("SECAO", section, tex)
     tex <- gsub("FIGURA", graphic, tex)
-
+    
     writeLines(tex, file.path("posts", "POST.tex"))
     
     tools::texi2pdf("posts/POST.tex", clean = TRUE, quiet = TRUE)
@@ -52,7 +71,7 @@ SavePost_df <- function(entry, bib) {
     
     return(invisible(NULL))
   }
-
+  
   escape_latex <- function(x) {
     x <- gsub("\\\\", "\\\\textbackslash{}", x)
     x <- gsub("([#$%&_{}])", "\\\\\\1", x)
@@ -133,14 +152,24 @@ SavePost_df <- function(entry, bib) {
   citation_block <- gsub("\\\\", "\\\\\\\\", citation_block)
   
   # ---------- Pastas ----------
-  base <- file.path(getwd(), "posts", chapter, section)
+  chapter_dir <- num_dir(entry$chapter_id, chapter)
+  section_dir <- num_dir(entry$section_id, section)
+  
+  base <- file.path(
+    getwd(),
+    "posts",
+    chapter_dir,
+    section_dir,
+    subsection_dir
+  )
   dir.create(base, recursive = TRUE, showWarnings = FALSE)
   
   n <- length(list.files(base, pattern = "\\.png$"))
-  fname <- paste0(
-    n + 1, "_",
-    gsub("\\s+", "_", question),
-    ".png"
+  n <- length(list.files(base, pattern = "\\.png$", recursive = TRUE))
+  fname <- sprintf(
+    "%02d_%s.png",
+    n + 1,
+    gsub("\\s+", "_", question)
   )
   fpath <- file.path(base, fname)
   

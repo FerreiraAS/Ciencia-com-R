@@ -18,7 +18,7 @@ tex_data <- TeXCheckR::read_tex_document(
 source(file.path("R", "tex_to_df.R"), local = knitr::knit_global())
 df <- parse_tex_structure(tex_data)
 
-# clean df
+# CLEAN df
 df <- df |>
   dplyr::filter(
     !is.na(graphic) |
@@ -28,6 +28,37 @@ df <- df |>
           references != "REF" &
           item != ".\\textsuperscript{\\citeproc{ref-REF}{\\textbf{REF?}}}"
       )
+  )
+
+# BUILD CHAPTER INDEX (order = first appearance in df)
+chapter_index <- df |>
+  dplyr::distinct(chapter) |>
+  dplyr::mutate(chapter_id = dplyr::row_number())
+
+# BUILD SECTION INDEX (restart at 1 per chapter)
+section_index <- df |>
+  dplyr::distinct(chapter, section) |>
+  dplyr::group_by(chapter) |>
+  dplyr::mutate(section_id = dplyr::row_number()) |>
+  dplyr::ungroup()
+
+# BUILD SUBSECTION INDEX (restart at 1 per chapter + section)
+subsection_index <- df |>
+  dplyr::distinct(chapter, section, subsection) |>
+  dplyr::group_by(chapter, section) |>
+  dplyr::mutate(subsection_id = dplyr::row_number()) |>
+  dplyr::ungroup()
+
+# JOIN INDICES BACK INTO df
+df <- df |>
+  dplyr::left_join(chapter_index, by = "chapter") |>
+  dplyr::left_join(section_index, by = c("chapter", "section"))
+
+# JOIN SUBSECTION INDEX BACK INTO df
+df <- df |>
+  dplyr::left_join(
+    subsection_index,
+    by = c("chapter", "section", "subsection")
   )
 
 # save all posts
