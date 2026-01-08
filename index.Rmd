@@ -138,40 +138,6 @@ if(knitr::is_html_output()){
 }
 ```
 
-```{r post, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE, eval = all(knitr::is_html_output(), FALSE)}
-# delete .PNG files from posts folder
-delete_files <- list.dirs("posts", full.names = TRUE)
-unlink(delete_files, recursive = TRUE)
-# create folder "posts"
-dir.create("posts", showWarnings = FALSE)
-
-# read bib file
-bib <- RefManageR::ReadBib(file.path("./bib", "references.bib"))
-
-# read TeX file
-tex_data <- TeXCheckR::read_tex_document(
-  file.path("./docs", "Ciencia-com-R.tex")
-)
-# source scripts
-source(file.path("R", "tex_to_df.R"), local = knitr::knit_global())
-df <- parse_tex_structure(tex_data)
-
-# clean df
-df <- df |>
-  dplyr::filter(
-    !is.na(references),
-    !grepl("REF", item),
-    references != "REF",
-    item != ".\\textsuperscript{\\citeproc{ref-REF}{\\textbf{REF?}}}"
-  )
-
-# save all posts
-source(file.path("R", "savePost.R"), local = knitr::knit_global())
-for (i in 1:nrow(df)) {
-  SavePost_df(entry = df[i, ], bib = bib)
-}
-```
-
 <br>
 
 ```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}

@@ -1,12 +1,58 @@
 SavePost_df <- function(entry, bib) {
   
   # ---------- Mapping from df ----------
-  chapter    <- entry$chapter
-  section    <- entry$section
-  question   <- entry$subsection
-  answer     <- entry$item
-  key        <- entry$references
+  chapter  <- entry$chapter
+  section  <- entry$section
+  question <- entry$subsection
+  answer   <- entry$item
+  graphic  <- entry$graphic
+  key      <- entry$references
   
+  is_graphic <- is.na(answer) && !is.na(graphic)
+  
+  if (is_graphic) {
+    
+    base <- file.path(getwd(), "posts", chapter, section)
+    dir.create(base, recursive = TRUE, showWarnings = FALSE)
+    
+    n <- length(list.files(base, pattern = "\\.png$", recursive = TRUE))
+    fname <- paste0(
+      n + 1, "_",
+      gsub("\\s+", "_", question),
+      ".png"
+    )
+    fpath <- file.path(base, fname)
+    
+    tex <- readLines(file.path("tex", "post_figure.tex"))
+    tex <- gsub("CAPITULO", chapter, tex)
+    tex <- gsub("SECAO", section, tex)
+    tex <- gsub("FIGURA", graphic, tex)
+
+    writeLines(tex, file.path("posts", "POST.tex"))
+    
+    tools::texi2pdf("posts/POST.tex", clean = TRUE, quiet = TRUE)
+    
+    file.rename("POST.pdf", "posts/POST.pdf")
+    
+    img <- pdftools::pdf_render_page("posts/POST.pdf", dpi = 300)
+    png::writePNG(img, fpath)
+    
+    cover <- magick::image_read("images/Cover_2.png") |>
+      magick::image_scale("400x400")
+    
+    final <- magick::image_composite(
+      magick::image_read(fpath),
+      cover,
+      offset = "+1200+0"
+    )
+    
+    magick::image_write(final, fpath, density = 300)
+    
+    file.remove("posts/POST.pdf", "posts/POST.tex")
+    
+    return(invisible(NULL))
+  }
+
   escape_latex <- function(x) {
     x <- gsub("\\\\", "\\\\textbackslash{}", x)
     x <- gsub("([#$%&_{}])", "\\\\\\1", x)
