@@ -5,6 +5,7 @@
   </w:r>
 </w:p>
 ```
+
 # **Redes neurais** {#redes-meurais}
 
 <br>
@@ -122,103 +123,73 @@ graphics::par(op)
 
 <br>
 
-### O que é uma rede neural?
+### O que é uma rede neural artificial?
 
--   .[@REF]
+-   Redes neurais artificiais são modelos computacionais compostos por camadas de neurônios artificiais interconectados, nos quais cada camada aplica transformações lineares seguidas de funções não lineares, permitindo a aproximação de relações complexas entre variáveis de entrada e saída.[@REF]
 
 <br>
 
-```{r rede-neural, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática de uma rede neural."}
+```{r rede-neural, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática de uma rede neural simples com camada de entrada e saída."}
 ## ===== configuração geral =====
 graphics::par(mar = c(0,0,0,0))
 diagram::openplotmat()  # sem título
 
-# raios/estética
-r_node <- 0.045   # raio dos neurônios (círculos)
-lwd_ar <- 1.4     # espessura das arestas
-arr_len <- 0.25   # tamanho da seta
+# raios / estética
+r_node  <- 0.045   # raio dos neurônios
+lwd_ar  <- 1.4     # espessura das arestas
+arr_len <- 0.25    # tamanho da seta
 
-# posições (x fixo por camada; y distribuído verticalmente)
-x_in   <- 0.10
-x_h1   <- 0.35
-x_h2   <- 0.60
-x_out  <- 0.85
+# posições (somente entrada e saída)
+x_in  <- 0.15
+x_out <- 0.85
 
-y_in   <- c(0.60, 0.40)        # 2 entradas
-y_h1   <- c(0.70, 0.50, 0.30)  # 3 na primeira oculta
-y_h2   <- c(0.70, 0.50, 0.30)  # 3 na segunda oculta
-y_out  <- 0.50                 # 1 saída
+y_in  <- c(0.65, 0.50, 0.35)  # 3 entradas
+y_out <- 0.50                 # 1 saída
 
-# pontos (x,y) por camada
+# pontos (x,y)
 pos_in  <- cbind(rep(x_in,  length(y_in)),  y_in)
-pos_h1  <- cbind(rep(x_h1,  length(y_h1)),  y_h1)
-pos_h2  <- cbind(rep(x_h2,  length(y_h2)),  y_h2)
 pos_out <- cbind(x_out, y_out)
 
-## ===== helper: encurtar setas para encostar na borda do círculo =====
+## ===== helper: encurtar setas =====
 encurta <- function(p1, p2, dist) {
   v <- p2 - p1
   v <- v / sqrt(sum(v^2))
   p2 - v * dist
 }
 
-## ===== desenhar nós (círculos) =====
+## ===== desenhar nós =====
 # entradas
 for (i in seq_len(nrow(pos_in))) {
-  diagram::textellipse(pos_in[i,], r_node, r_node, lab = paste0("x", i),
-                       box.col = "lightblue")
-}
-
-# hidden 1
-for (j in seq_len(nrow(pos_h1))) {
-  diagram::textellipse(pos_h1[j,], r_node, r_node, lab = paste0("h1", j),
-                       box.col = "lightgreen")
-}
-
-# hidden 2
-for (k in seq_len(nrow(pos_h2))) {
-  diagram::textellipse(pos_h2[k,], r_node, r_node, lab = paste0("h2", k),
-                       box.col = "khaki1")
+  diagram::textellipse(
+    pos_in[i,], r_node, r_node,
+    lab = paste0("x", i),
+    box.col = "lightblue"
+  )
 }
 
 # saída
-diagram::textellipse(pos_out, r_node, r_node, lab = "y",
-                     box.col = "salmon")
+diagram::textellipse(
+  pos_out, r_node, r_node,
+  lab = "y",
+  box.col = "salmon"
+)
 
-## ===== conectar camadas (totalmente conectadas) =====
-# entradas -> hidden1
+## ===== conectar entrada -> saída =====
 for (i in seq_len(nrow(pos_in))) {
-  for (j in seq_len(nrow(pos_h1))) {
-    from <- encurta(pos_h1[j,], pos_in[i,],  r_node)  # sai da borda do nó origem
-    to   <- encurta(pos_in[i,], pos_h1[j,],  r_node)  # chega na borda do nó alvo
-    diagram::straightarrow(from = from, to = to, arr.pos = 0.9,
-                           arr.length = arr_len, lwd = lwd_ar)
-  }
+  from <- encurta(pos_out, pos_in[i,], r_node)
+  to   <- encurta(pos_in[i,], pos_out, r_node)
+  diagram::straightarrow(
+    from = from,
+    to   = to,
+    arr.pos = 0.9,
+    arr.length = arr_len,
+    lwd = lwd_ar
+  )
 }
 
-# hidden1 -> hidden2
-for (j in seq_len(nrow(pos_h1))) {
-  for (k in seq_len(nrow(pos_h2))) {
-    from <- encurta(pos_h2[k,], pos_h1[j,],  r_node)
-    to   <- encurta(pos_h1[j,], pos_h2[k,],  r_node)
-    diagram::straightarrow(from = from, to = to, arr.pos = 0.9,
-                           arr.length = arr_len, lwd = lwd_ar)
-  }
-}
-
-# hidden2 -> saída
-for (k in seq_len(nrow(pos_h2))) {
-  from <- encurta(pos_out, pos_h2[k,], r_node)
-  to   <- encurta(pos_h2[k,], pos_out, r_node)
-  diagram::straightarrow(from = from, to = to, arr.pos = 0.9,
-                         arr.length = arr_len, lwd = lwd_ar)
-}
-
-## ===== rótulos de camadas (opcional; pode remover) =====
-graphics::text(x_in,  0.85, "Entradas",  cex = 0.9)
-graphics::text(x_h1,  0.85, "Camada\nEscondida 1",  cex = 0.9)
-graphics::text(x_h2,  0.85, "Camada\nEscondida 2",  cex = 0.9)
-graphics::text(x_out, 0.85, "Saída",     cex = 0.9)
+## ===== rótulos das camadas =====
+graphics::text(x_in,  0.85, "Entradas", cex = 0.9)
+graphics::text(x_out, 0.85, "Saída",    cex = 0.9)
 ```
 
 <br>
@@ -255,6 +226,14 @@ O pacote *neuralnet*[@neuralnet] fornece a função [*neuralnet*](https://www.rd
 (\#eq:relu)
 \operatorname{ReLU}(z) = \max(0, z)
 \end{equation}
+
+<br>
+
+- Ao manter gradientes constantes na região positiva, a ReLU favorece estabilidade numérica e eficiência computacional em redes multicamadas.[@REF
+
+- Diferentemente das funções sigmoide e tangente hiperbólica, a ReLU preserva gradientes úteis em regiões amplas do espaço de entrada.[@REF]
+
+- Sem funções de ativação não lineares, uma rede neural profunda se reduz a um modelo linear equivalente.[@REF]
 
 <br>
 
@@ -441,6 +420,117 @@ p_mlp <- ggplot2::ggplot() +
 
 # Painel lado a lado
 gridExtra::grid.arrange(p_glm, p_mlp, ncol = 2)
+```
+
+<br>
+
+## Redes neurais multicamadas
+
+<br>
+
+### O que são redes neurais multicamadas?
+
+<br>
+
+- Redes neurais multicamadas são redes neurais artificiais que contêm uma ou mais camadas escondidas entre a camada de entrada e a camada de saída, permitindo a composição sucessiva de transformações não lineares e, consequentemente, maior capacidade de representação de funções complexas.[@REF]
+
+- Essa estrutura amplia o espaço de decisão do modelo sem exigir especificação explícita de interações ou transformações entre variáveis.[@REF]
+
+- À medida que a profundidade da rede aumenta, passa-se do ajuste de parâmetros para o aprendizado de representações internas dos dados, caracterizando um regime distinto de modelagem conhecido como aprendizado profundo.[@REF]
+
+<br>
+
+```{r rede-neural-multicamadas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática de uma rede neural multicamadas com 2 camadas escondidas além das camadas de entrada e saída."}
+## ===== configuração geral =====
+graphics::par(mar = c(0,0,0,0))
+diagram::openplotmat()  # sem título
+
+# raios/estética
+r_node <- 0.045   # raio dos neurônios (círculos)
+lwd_ar <- 1.4     # espessura das arestas
+arr_len <- 0.25   # tamanho da seta
+
+# posições (x fixo por camada; y distribuído verticalmente)
+x_in   <- 0.10
+x_h1   <- 0.35
+x_h2   <- 0.60
+x_out  <- 0.85
+
+y_in   <- c(0.60, 0.40)        # 2 entradas
+y_h1   <- c(0.70, 0.50, 0.30)  # 3 na primeira oculta
+y_h2   <- c(0.70, 0.50, 0.30)  # 3 na segunda oculta
+y_out  <- 0.50                 # 1 saída
+
+# pontos (x,y) por camada
+pos_in  <- cbind(rep(x_in,  length(y_in)),  y_in)
+pos_h1  <- cbind(rep(x_h1,  length(y_h1)),  y_h1)
+pos_h2  <- cbind(rep(x_h2,  length(y_h2)),  y_h2)
+pos_out <- cbind(x_out, y_out)
+
+## ===== helper: encurtar setas para encostar na borda do círculo =====
+encurta <- function(p1, p2, dist) {
+  v <- p2 - p1
+  v <- v / sqrt(sum(v^2))
+  p2 - v * dist
+}
+
+## ===== desenhar nós (círculos) =====
+# entradas
+for (i in seq_len(nrow(pos_in))) {
+  diagram::textellipse(pos_in[i,], r_node, r_node, lab = paste0("x", i),
+                       box.col = "lightblue")
+}
+
+# hidden 1
+for (j in seq_len(nrow(pos_h1))) {
+  diagram::textellipse(pos_h1[j,], r_node, r_node, lab = paste0("h1", j),
+                       box.col = "lightgreen")
+}
+
+# hidden 2
+for (k in seq_len(nrow(pos_h2))) {
+  diagram::textellipse(pos_h2[k,], r_node, r_node, lab = paste0("h2", k),
+                       box.col = "khaki1")
+}
+
+# saída
+diagram::textellipse(pos_out, r_node, r_node, lab = "y",
+                     box.col = "salmon")
+
+## ===== conectar camadas (totalmente conectadas) =====
+# entradas -> hidden1
+for (i in seq_len(nrow(pos_in))) {
+  for (j in seq_len(nrow(pos_h1))) {
+    from <- encurta(pos_h1[j,], pos_in[i,],  r_node)  # sai da borda do nó origem
+    to   <- encurta(pos_in[i,], pos_h1[j,],  r_node)  # chega na borda do nó alvo
+    diagram::straightarrow(from = from, to = to, arr.pos = 0.9,
+                           arr.length = arr_len, lwd = lwd_ar)
+  }
+}
+
+# hidden1 -> hidden2
+for (j in seq_len(nrow(pos_h1))) {
+  for (k in seq_len(nrow(pos_h2))) {
+    from <- encurta(pos_h2[k,], pos_h1[j,],  r_node)
+    to   <- encurta(pos_h1[j,], pos_h2[k,],  r_node)
+    diagram::straightarrow(from = from, to = to, arr.pos = 0.9,
+                           arr.length = arr_len, lwd = lwd_ar)
+  }
+}
+
+# hidden2 -> saída
+for (k in seq_len(nrow(pos_h2))) {
+  from <- encurta(pos_out, pos_h2[k,], r_node)
+  to   <- encurta(pos_h2[k,], pos_out, r_node)
+  diagram::straightarrow(from = from, to = to, arr.pos = 0.9,
+                         arr.length = arr_len, lwd = lwd_ar)
+}
+
+## ===== rótulos de camadas (opcional; pode remover) =====
+graphics::text(x_in,  0.85, "Entradas",  cex = 0.9)
+graphics::text(x_h1,  0.85, "Camada\nEscondida 1",  cex = 0.9)
+graphics::text(x_h2,  0.85, "Camada\nEscondida 2",  cex = 0.9)
+graphics::text(x_out, 0.85, "Saída",     cex = 0.9)
 ```
 
 <br>

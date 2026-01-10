@@ -200,6 +200,96 @@ knitr::include_graphics("./images/aprendizado-maquina.png")
 
 -   Modelos de regressão não penalizados, modelos de regressão penalizados, modelos baseados em árvores, modelos baseados em vizinhos, redes neurais, máquinas de vetores de suporte, Naive Bayes e ensembles do tipo Superlearner.[@andaurnavarro2023]
 
+- Do ponto de vista matemático, redes neurais não contradizem a estatística clássica; elas a estendem, substituindo modelos explícitos por representações aprendidas.[@REF]
+
+<br>
+
+```{r rede-neural-vs-regressao, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Equivalência conceitual entre modelos de regressão e redes neurais artificiais."}
+library(dplyr)
+
+tabela_equivalencia <- data.frame(
+  `Modelos de regressão` = c(
+    "Variável preditora (x)",
+    "Coeficiente (β)",
+    "Intercepto (β₀)",
+    "Combinação linear (β₀ + Σ βᵢxᵢ)",
+    "Função de ligação (link)",
+    "Regressão linear",
+    "Regressão logística",
+    "Log-odds",
+    "Predição (ŷ)",
+    "Função de perda",
+    "Máxima verossimilhança",
+    "Gradiente da verossimilhança",
+    "Regularização (L1, L2)",
+    "Interações explícitas",
+    "Modelo interpretável"
+  ),
+  `Redes neurais artificiais` = c(
+    "Neurônio de entrada",
+    "Peso (w)",
+    "Viés (b)",
+    "Soma ponderada (Σ wᵢxᵢ + b)",
+    "Função de ativação",
+    "Neurônio linear",
+    "Perceptron com ativação sigmoide",
+    "Entrada da função sigmoide",
+    "Saída do neurônio",
+    "Função de perda (loss)",
+    "Otimização da função de perda",
+    "Retropropagação (backpropagation)",
+    "Penalização de pesos (weight decay)",
+    "Interações aprendidas implicitamente",
+    "Modelo geralmente opaco"
+  ),
+  `Papel conceitual` = c(
+    "Informação observada fornecida ao modelo",
+    "Intensidade e direção da influência da variável",
+    "Deslocamento da fronteira de decisão",
+    "Agregação das entradas antes da não linearidade",
+    "Introdução de não linearidade",
+    "Modelo puramente linear",
+    "Classificação binária probabilística",
+    "Escala interna antes da probabilidade",
+    "Resposta estimada do modelo",
+    "Quantificação do erro de predição",
+    "Ajuste dos parâmetros do modelo",
+    "Direção de atualização dos parâmetros",
+    "Controle de complexidade e overfitting",
+    "Modelagem de efeitos combinados",
+    "Trade-off entre interpretação e flexibilidade"
+  )
+)
+
+# renomear colunas
+colnames(tabela_equivalencia) <- c(
+  "Modelos de regressão",
+  "Redes neurais artificiais",
+  "Papel conceitual"
+  )
+
+knitr::kable(
+  tabela_equivalencia,
+  align = c("l"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+)  %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0,
+                       bold = TRUE,
+                       extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(tabela_equivalencia)[1],
+                       extra_css = "border-bottom: 1px solid")
+```
+
 <br>
 
 ## Regressão logística
