@@ -201,5 +201,5 @@ SavePost_df <- function(entry, bib) {
   
   magick::image_write(final, fpath, density = 300)
   
-  file.remove("posts/POST.pdf", "posts/POST.tex")
+  file.remove("posts/POST.pdf", "posts/POST.tex", "POST.log", "POST.aux", "POST.out")
 }
