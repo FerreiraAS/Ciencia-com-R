@@ -83,8 +83,51 @@ Os pacotes *jmv*[@jmv] e *jmvconnect*[@jmvconnect] fornecem funções para anál
 ```{r RStudioConsole, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, out.width = "100%", fig.cap = "Interface do RStudio. Fonte: https://docs.posit.co/ide/user/"}
 # insert image from html page
 myurl <- "https://docs.posit.co/ide/user/ide/guide/ui/images/rstudio-panes-labeled.jpeg"
-utils::download.file(url = myurl, destfile = 'images/RStudioConsole.jpeg', mode = 'wb')
-knitr::include_graphics('images/RStudioConsole.jpeg')
+
+# Salva em PNG para LaTeX e HTML
+latex.path <- file.path(
+ getwd(),
+  "Ciencia-com-R_files",
+  "figure-latex"
+)
+html.path <- file.path(
+ getwd(),
+  "Ciencia-com-R_files",
+  "figure-html"
+)
+file.name <- "RStudioConsole.jpeg"
+
+dir.create(latex.path, recursive = TRUE, showWarnings = FALSE)
+dir.create(html.path, recursive = TRUE, showWarnings = FALSE)
+
+pandoc_to <- knitr::pandoc_to()
+
+# Decide output directory
+out_path <- switch(
+  pandoc_to,
+  "latex"  = latex.path,
+  "beamer" = latex.path,
+  "pdf"    = latex.path,
+  "epub"   = html.path,
+  "html"   = html.path,
+  "html4"  = html.path,
+  "html5"  = html.path,
+  "docx"   = html.path,
+  "pptx"   = html.path,
+  html.path
+)
+# Download image to a temp file
+download.file(
+  url = myurl,
+  destfile = file.path(out_path, file.name),
+  mode = "wb",
+  quiet = TRUE
+)
+
+jpeg_file <- file.path(out_path, file.name)
+
+# Include graphic (works for all targets above)
+knitr::include_graphics(jpeg_file)
 ```
 
 <br>

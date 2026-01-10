@@ -123,11 +123,51 @@ g <- DiagrammeR::grViz(dot)
 # Exporta para SVG
 svg <- DiagrammeRsvg::export_svg(g)
 
-# Converte SVG em PNG (ou PDF se quiser)
-rsvg::rsvg_png(charToRaw(svg), file = "images/aprendizado-maquina.png", width = 1200, height = 1000)
+# Salva em PNG para LaTeX e HTML
+latex.path <- file.path(
+ getwd(),
+  "Ciencia-com-R_files",
+  "figure-latex"
+)
+html.path <- file.path(
+ getwd(),
+  "Ciencia-com-R_files",
+  "figure-html"
+)
+file.name <- "aprendizado-maquina.png"
 
-# Exibe a imagem
-knitr::include_graphics("images/aprendizado-maquina.png")
+dir.create(latex.path, recursive = TRUE, showWarnings = FALSE)
+dir.create(html.path, recursive = TRUE, showWarnings = FALSE)
+
+pandoc_to <- knitr::pandoc_to()
+
+# Decide output directory
+out_path <- switch(
+  pandoc_to,
+  "latex"  = latex.path,
+  "beamer" = latex.path,
+  "pdf"    = latex.path,
+  "epub"   = html.path,
+  "html"   = html.path,
+  "html4"  = html.path,
+  "html5"  = html.path,
+  "docx"   = html.path,
+  "pptx"   = html.path,
+  html.path
+)
+
+# Render SVG to PNG
+png_file <- file.path(out_path, file.name)
+
+rsvg::rsvg_png(
+  charToRaw(svg),
+  file   = png_file,
+  width  = 1200,
+  height = 1000
+)
+
+# Include graphic (works for all targets above)
+knitr::include_graphics(png_file)
 ```
 
 <br>
