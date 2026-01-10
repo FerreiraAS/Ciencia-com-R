@@ -1376,50 +1376,6 @@ O pacote *plotly*[@plotly] fornece a função [*plot_ly*](https://www.rdocumenta
 
 <br>
 
-```{r grafico-animado, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.fullwidth=TRUE, fig.cap='Exemplo de gráfico animado com gganimate.'}
-# # Reprodutibilidade
-# set.seed(123)
-# 
-# # Simular dados
-# d <- tibble::tibble(
-#   tp = factor(rep(1:3, each = 80)),
-#   x = rnorm(240, 2000, 400),
-#   y = x + rnorm(240, 400, 300)
-# )
-# 
-# # Gráfico animado
-# p <- ggplot2::ggplot(d, ggplot2::aes(x, y, color = tp)) +
-#   ggplot2::geom_point(alpha = .5) +
-#   ggplot2::geom_smooth(method = "lm", se = FALSE) +
-#   ggplot2::labs(x = "Tempo (passado)", y = "Tempo (futuro)") +
-#   gganimate::transition_states(tp, wrap = FALSE) + gganimate::shadow_mark()
-# 
-# # Se HTML → salva GIF e mostra
-# if (knitr::is_html_output()) {
-#   anim <- gganimate::animate(p,
-#                              end_pause = 20,
-#                              width = 600,
-#                              height = 400)
-#   gganimate::anim_save("../images/animacao.gif", animation = anim)
-#   knitr::include_graphics("../images/animacao.gif")
-# }
-# 
-# # Se PDF → salva um frame estático (PNG)
-# if (knitr::is_latex_output()) {
-#   anim <- gganimate::animate(
-#     p,
-#     end_pause = 20,
-#     nframes = 1,
-#     width = 600,
-#     height = 400
-#   )
-#   gganimate::anim_save("../images/animacao_frame.png", animation = anim)
-#   knitr::include_graphics("../images/animacao_frame.png")
-# }
-```
-
-<br>
-
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *gganimate*[@gganimate] fornece a função [*transition_states*](https://www.rdocumentation.org/packages/gganimate/versions/1.0.7/topics/transition_states) para criar gráficos animados a partir de gráficos estáticos do *ggplot2*[@ggplot2].
 :::

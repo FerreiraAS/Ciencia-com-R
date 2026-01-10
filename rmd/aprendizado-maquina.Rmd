@@ -20,7 +20,7 @@
 
 <br>
 
-```{r aprendizagem-maquina, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE,fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Mapa mental de algoritmos de aprendizado de máquina.", out.width = "100%"}
+```{r aprendizado-maquina, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Mapa mental de algoritmos de aprendizado de máquina.", out.width = "100%"}
 
 col_root  <- "#E57E25"   # laranja (Aprendizado de Máquina)
 col_sup   <- "#CFE9CF"   # verde claro (Supervisionado)
@@ -124,10 +124,10 @@ g <- DiagrammeR::grViz(dot)
 svg <- DiagrammeRsvg::export_svg(g)
 
 # Converte SVG em PNG (ou PDF se quiser)
-rsvg::rsvg_png(charToRaw(svg), file = "./images/aprendizado-maquina.png", width = 1200, height = 1000)
+rsvg::rsvg_png(charToRaw(svg), file = "images/aprendizado-maquina.png", width = 1200, height = 1000)
 
 # Exibe a imagem
-knitr::include_graphics("./images/aprendizado-maquina.png")
+knitr::include_graphics("images/aprendizado-maquina.png")
 ```
 
 <br>

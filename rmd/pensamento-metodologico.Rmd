@@ -30,7 +30,7 @@
 
 <br>
 
-```{r mapa-mental, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE,fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Mapa mental da relação entre o pensamento estatístico e o pensamento metodológico.", out.width = "100%"}
+```{r mapa-mental, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Mapa mental da relação entre o pensamento estatístico e o pensamento metodológico.", out.width = "100%"}
 # Cria o gráfico
 g <- DiagrammeR::grViz("
 digraph {
@@ -78,10 +78,10 @@ digraph {
 svg <- DiagrammeRsvg::export_svg(g)
 
 # Converte SVG em PNG (ou PDF se quiser)
-rsvg::rsvg_png(charToRaw(svg), file = "./images/mapa-mental.png", width = 1200, height = 1000)
+rsvg::rsvg_png(charToRaw(svg), file = "images/mapa-mental.png", width = 1200, height = 1000)
 
 # Exibe a imagem
-knitr::include_graphics("./images/mapa-mental.png")
+knitr::include_graphics("images/mapa-mental.png")
 ```
 
 <br>

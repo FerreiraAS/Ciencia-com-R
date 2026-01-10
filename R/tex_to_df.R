@@ -52,9 +52,11 @@ normalize_texorpdfstring <- function(text) {
   )
 }
 
+# Extrai o argumento de \includegraphics dentro de \centering
 extract_includegraphics <- function(line) {
   
   m <- regexpr("\\\\centering \\\\includegraphics\\{", line)
+
   if (m == -1) return(NA_character_)
   
   pos <- m + attr(m, "match.length")
@@ -76,6 +78,7 @@ extract_includegraphics <- function(line) {
   paste(out, collapse = "")
 }
 
+# Extrai referências citadas no texto
 extract_references <- function(text) {
   refs <- stringr::str_extract_all(
     text,

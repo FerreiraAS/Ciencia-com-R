@@ -8,8 +8,6 @@ SavePost_df <- function(entry, bib) {
   graphic  <- entry$graphic
   key      <- entry$references
   
-  is_graphic <- is.na(answer) && !is.na(graphic)
-  
   num_dir <- function(id, label) {
     sprintf(
       "%02d_%s",
@@ -21,6 +19,8 @@ SavePost_df <- function(entry, bib) {
   chapter_dir    <- num_dir(entry$chapter_id, chapter)
   section_dir    <- num_dir(entry$section_id, section)
   subsection_dir <- num_dir(entry$subsection_id, question)
+  
+  is_graphic <- is.na(answer) && !is.na(graphic)
   
   if (is_graphic) {
     
@@ -56,7 +56,7 @@ SavePost_df <- function(entry, bib) {
     img <- pdftools::pdf_render_page("posts/POST.pdf", dpi = 300)
     png::writePNG(img, fpath)
     
-    cover <- magick::image_read("images/Cover_2.png") |>
+    cover <- magick::image_read("images/Cover_1.png") |>
       magick::image_scale("400x400")
     
     final <- magick::image_composite(
@@ -190,7 +190,7 @@ SavePost_df <- function(entry, bib) {
   img <- pdftools::pdf_render_page("posts/POST.pdf", dpi = 300)
   png::writePNG(img, fpath)
   
-  cover <- magick::image_read("images/Cover_2.png") |>
+  cover <- magick::image_read("images/Cover_1.png") |>
     magick::image_scale("400x400")
   
   final <- magick::image_composite(
