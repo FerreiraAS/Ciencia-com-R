@@ -221,6 +221,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.4.1" data-path="pensamento-probabilistico.html"><a href="pensamento-probabilistico.html#o-que-%C3%A9-probabilidade"><i class="fa fa-check"></i><b>1.4.1</b> O que é probabilidade?</a></li>
 <li class="chapter" data-level="1.4.2" data-path="pensamento-probabilistico.html"><a href="pensamento-probabilistico.html#quais-s%C3%A3o-os-axiomas-da-probabilidade"><i class="fa fa-check"></i><b>1.4.2</b> Quais são os axiomas da probabilidade?</a></li>
+<li class="chapter" data-level="1.4.3" data-path="pensamento-probabilistico.html"><a href="pensamento-probabilistico.html#quais-as-consequ%C3%AAncias-dos-axiomas-da-probabilidade"><i class="fa fa-check"></i><b>1.4.3</b> Quais as consequências dos axiomas da probabilidade?</a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="pensamento-probabilistico.html"><a href="pensamento-probabilistico.html#independ%C3%AAncia-e-probabilidade"><i class="fa fa-check"></i><b>1.5</b> Independência e probabilidade</a>
 <ul>
@@ -2789,137 +2790,6 @@ Pressão arterial, braço esquerdo (mmHg) amplitude
 <li><p>A medida de pressão arterial bilateral resulta em um conjunto de valores pontuais (ex.: braço esquerdo = <strong>114 mmHg</strong>, braço direito = <strong>118 mmHg</strong> para o participante <strong>#8</strong>). Neste caso, ambos os valores pontuais são considerados representativos daquela unidade de análise.</p></li>
 </ul>
 <p><br></p>
-<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:medidas-multiplas">Tabela 12.7: </span>Dados brutos com medidas múltiplas.
-</caption>
-<thead>
-<tr>
-<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
-Unidade de análise
-</th>
-<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
-Pressão arterial, braço esquerdo (mmHg)
-</th>
-<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
-Pressão arterial, braço direito (mmHg)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:center;">
-117
-</td>
-<td style="text-align:center;">
-115
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:center;">
-120
-</td>
-<td style="text-align:center;">
-118
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-3
-</td>
-<td style="text-align:center;">
-112
-</td>
-<td style="text-align:center;">
-118
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4
-</td>
-<td style="text-align:center;">
-112
-</td>
-<td style="text-align:center;">
-112
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-5
-</td>
-<td style="text-align:center;">
-116
-</td>
-<td style="text-align:center;">
-112
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-6
-</td>
-<td style="text-align:center;">
-112
-</td>
-<td style="text-align:center;">
-118
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-7
-</td>
-<td style="text-align:center;">
-115
-</td>
-<td style="text-align:center;">
-113
-</td>
-</tr>
-<tr>
-<td style="text-align:center;font-weight: bold;background-color: rgba(230, 230, 230, 255) !important;">
-8
-</td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(230, 230, 230, 255) !important;">
-114
-</td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(230, 230, 230, 255) !important;">
-118
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-9
-</td>
-<td style="text-align:center;">
-119
-</td>
-<td style="text-align:center;">
-114
-</td>
-</tr>
-<tr>
-<td style="text-align:center;border-bottom: 1px solid">
-10
-</td>
-<td style="text-align:center;border-bottom: 1px solid">
-112
-</td>
-<td style="text-align:center;border-bottom: 1px solid">
-116
-</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
 <div class="infobox Rlogo">
 <p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats">131</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/aggregate"><em>aggregate</em></a> para agregar medidas repetidas utilizando uma função personalizada.</p>
 </div>
@@ -2939,9 +2809,9 @@ Pressão arterial, braço direito (mmHg)
 </ul>
 <p><br></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:erro-medida"></span>
-<img src="Ciencia-com-R_files/figure-html/erro-medida-1.png" alt="Ilustração do conceito de erro de medida em um modelo simples com erro normal. A linha tracejada indica o valor verdadeiro (desconhecido na prática). A área sombreada representa a probabilidade de cair na faixa |X - θ| ≤ ε, que é &gt; 0. A probabilidade de 'acertar no ponto' X = θ é 0 (linha tracejada)." width="672" />
+<img src="Ciencia-com-R_files/figure-html/erro-medida-1.png" alt="Ilustração do conceito de erro de medida em um modelo simples com erro normal. A linha tracejada indica o valor verdadeiro (desconhecido na prática). A área sombreada representa a probabilidade de cair na faixa $|X - θ| \leq ε$, que é $&gt;0$. A probabilidade de 'acertar no ponto' $X = θ$ é $0$ (linha tracejada)." width="672" />
 <p class="caption">
-Figura 12.2: Ilustração do conceito de erro de medida em um modelo simples com erro normal. A linha tracejada indica o valor verdadeiro (desconhecido na prática). A área sombreada representa a probabilidade de cair na faixa |X - θ| ≤ ε, que é &gt; 0. A probabilidade de ‘acertar no ponto’ X = θ é 0 (linha tracejada).
+Figura 12.2: Ilustração do conceito de erro de medida em um modelo simples com erro normal. A linha tracejada indica o valor verdadeiro (desconhecido na prática). A área sombreada representa a probabilidade de cair na faixa <span class="math inline">\(|X - θ| \leq ε\)</span>, que é <span class="math inline">\(&gt;0\)</span>. A probabilidade de ‘acertar no ponto’ <span class="math inline">\(X = θ\)</span> é <span class="math inline">\(0\)</span> (linha tracejada).
 </p>
 </div>
 <p><br></p>

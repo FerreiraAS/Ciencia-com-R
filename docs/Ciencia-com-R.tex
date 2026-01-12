@@ -635,27 +635,24 @@ P(E) = \frac{\text{número de desfechos em } E}{\text{número de desfechos em } 
 
 \begin{itemize}
 \item
-  A probabilidade de um evento é um número real que satisfaz os seguintes axiomas descritos por Andrei Nikolaevich Kolmogorov em 1950:\textsuperscript{\citeproc{ref-grami2023}{1},\citeproc{ref-Viti2015}{2}}
-
-  \begin{itemize}
-  \item
-    Axioma I. Probabilidades de um evento \(E\) são números não-negativos: \(P(E) \geq 0\).
-  \item
-    Axioma II. Probabilidade de todos os eventos do espaço amostral \(A\) ocorrerem é 100\%: \(P(S)=1\).
-  \item
-    Axioma III. A probabilidade de um conjunto \emph{k} de eventos mutuamente exclusivos é igual a soma da probabilidade de cada evento: \(P(E_{1} \cup E_{2} \cup ... E_{k}) = P(E_{1}) + P(E_{2}) + ... + P(E_{k})\).
-  \end{itemize}
+  A probabilidade de um evento é um número real que satisfaz os seguintes axiomas descritos por Andrei Nikolaevich Kolmogorov em 1950\textsuperscript{\citeproc{ref-grami2023}{1},\citeproc{ref-Viti2015}{2}}
 \item
-  Os axiomas possuem as seguintes consequências:\textsuperscript{\citeproc{ref-grami2023}{1}}
+  Axioma I. Probabilidades de um evento \(E\) são números não-negativos: \(P(E) \geq 0\).\textsuperscript{\citeproc{ref-grami2023}{1},\citeproc{ref-Viti2015}{2}}
+\item
+  Axioma II. Probabilidade de todos os eventos do espaço amostral \(A\) ocorrerem é 100\%: \(P(S)=1\).\textsuperscript{\citeproc{ref-grami2023}{1},\citeproc{ref-Viti2015}{2}}
+\item
+  Axioma III. A probabilidade de um conjunto \emph{k} de eventos mutuamente exclusivos é igual a soma da probabilidade de cada evento: \(P(E_{1} \cup E_{2} \cup ... E_{k}) = P(E_{1}) + P(E_{2}) + ... + P(E_{k})\).\textsuperscript{\citeproc{ref-grami2023}{1},\citeproc{ref-Viti2015}{2}}
+\end{itemize}
 
-  \begin{itemize}
-  \item
-    A soma da probabilidade de dois eventos que dividem o espaço amostral é 100\%: \(P(E)+P(E)^C=1\).
-  \item
-    O valor máximo de probabilidade de um evento é 100\%: \(P(S)≤1\).
-  \item
-    A probabilidade é uma função não decrescente do número de desfechos de um evento.
-  \end{itemize}
+\subsection{Quais as consequências dos axiomas da probabilidade?}\label{quais-as-consequuxeancias-dos-axiomas-da-probabilidade}
+
+\begin{itemize}
+\item
+  A soma da probabilidade de dois eventos que dividem o espaço amostral é \(100\%\): \(P(E)+P(E)^C=1\).\textsuperscript{\citeproc{ref-grami2023}{1}}
+\item
+  O valor máximo de probabilidade de um evento é 100\%: \(P(S) \leq 1\).\textsuperscript{\citeproc{ref-grami2023}{1}}
+\item
+  A probabilidade é uma função não decrescente do número de desfechos de um evento.\textsuperscript{\citeproc{ref-grami2023}{1}}
 \end{itemize}
 
 \section{Independência e probabilidade}\label{independuxeancia-e-probabilidade}
@@ -828,7 +825,7 @@ P(E) = \frac{\text{número de desfechos em } E}{\text{número de desfechos em } 
 \begin{itemize}
 \tightlist
 \item
-  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.47 e variância \(\sigma^{2}\) = 0.252. A distribuição amostral da média de 100 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.47 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
+  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.49 e variância \(\sigma^{2}\) = 0.252. A distribuição amostral da média de 100 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.491 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
 \end{itemize}
 
 \begin{figure}
@@ -3442,28 +3439,6 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{131}} fornece a funç
   A medida de pressão arterial bilateral resulta em um conjunto de valores pontuais (ex.: braço esquerdo = \textbf{114 mmHg}, braço direito = \textbf{118 mmHg} para o participante \textbf{\#8}). Neste caso, ambos os valores pontuais são considerados representativos daquela unidade de análise.
 \end{itemize}
 
-\begin{table}
-\centering
-\caption{\label{tab:medidas-multiplas}Dados brutos com medidas múltiplas.}
-\centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X}
-\toprule
-\textbf{Unidade de análise} & \textbf{Pressão arterial, braço esquerdo (mmHg)} & \textbf{Pressão arterial, braço direito (mmHg)}\\
-\midrule
-\cellcolor{gray!10}{1} & \cellcolor{gray!10}{117} & \cellcolor{gray!10}{115}\\
-2 & 120 & 118\\
-\cellcolor{gray!10}{3} & \cellcolor{gray!10}{112} & \cellcolor{gray!10}{118}\\
-4 & 112 & 112\\
-\cellcolor{gray!10}{5} & \cellcolor{gray!10}{116} & \cellcolor{gray!10}{112}\\
-6 & 112 & 118\\
-\cellcolor{gray!10}{7} & \cellcolor{gray!10}{115} & \cellcolor{gray!10}{113}\\
-\cellcolor[HTML]{E6E6E6}{\textbf{8}} & \cellcolor[HTML]{E6E6E6}{\textbf{114}} & \cellcolor[HTML]{E6E6E6}{\textbf{118}}\\
-\cellcolor{gray!10}{9} & \cellcolor{gray!10}{119} & \cellcolor{gray!10}{114}\\
-10 & 112 & 116\\
-\bottomrule
-\end{tabu}
-\end{table}
-
 \begin{infobox}{images/Rlogo}
 O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{131}} fornece a função \href{https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/aggregate}{\emph{aggregate}} para agregar medidas repetidas utilizando uma função personalizada.
 
@@ -3490,7 +3465,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{131}} fornece a funç
 
 }
 
-\caption{Ilustração do conceito de erro de medida em um modelo simples com erro normal. A linha tracejada indica o valor verdadeiro (desconhecido na prática). A área sombreada representa a probabilidade de cair na faixa |X - θ| ≤ ε, que é > 0. A probabilidade de 'acertar no ponto' X = θ é 0 (linha tracejada).}\label{fig:erro-medida}
+\caption{Ilustração do conceito de erro de medida em um modelo simples com erro normal. A linha tracejada indica o valor verdadeiro (desconhecido na prática). A área sombreada representa a probabilidade de cair na faixa $|X - θ| \leq ε$, que é $>0$. A probabilidade de 'acertar no ponto' $X = θ$ é $0$ (linha tracejada).}\label{fig:erro-medida}
 \end{figure}
 
 \subsection{Quais fontes de variabilidade são comumente investigadas?}\label{quais-fontes-de-variabilidade-suxe3o-comumente-investigadas}

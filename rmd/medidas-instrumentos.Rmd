@@ -627,7 +627,7 @@ set.seed(4)
 k4 <- sample(1:10, 1)
 ```
 
-```{r medidas-multiplas, include = FALSE, echo = FALSE, results = "hide"}
+```{r medidas-multiplas-tabela, include = FALSE, echo = FALSE, results = "hide"}
 # para reprodutibilidade das simulações
 set.seed(4)
 
@@ -683,11 +683,6 @@ knitr::kable(
 
 <br>
 
-```{r medidas-multiplas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
-```
-
-<br>
-
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *stats*[@stats] fornece a função [*aggregate*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/aggregate) para agregar medidas repetidas utilizando uma função personalizada.
 :::
@@ -710,7 +705,7 @@ O pacote *stats*[@stats] fornece a função [*aggregate*](https://www.rdocumenta
 
 <br>
 
-```{r erro-medida, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Ilustração do conceito de erro de medida em um modelo simples com erro normal. A linha tracejada indica o valor verdadeiro (desconhecido na prática). A área sombreada representa a probabilidade de cair na faixa |X - θ| ≤ ε, que é > 0. A probabilidade de 'acertar no ponto' X = θ é 0 (linha tracejada)."}
+```{r erro-medida, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Ilustração do conceito de erro de medida em um modelo simples com erro normal. A linha tracejada indica o valor verdadeiro (desconhecido na prática). A área sombreada representa a probabilidade de cair na faixa $|X - θ| \\leq ε$, que é $>0$. A probabilidade de 'acertar no ponto' $X = θ$ é $0$ (linha tracejada)."}
 # Erro de Medida: ponto tem P = 0, intervalos têm P > 0
 # Modelo: X = θ + E, com E ~ Normal(0, σ^2)
 
@@ -725,8 +720,8 @@ N     <- 1e6         # tamanho da simulação (grande para boa aproximação)
 # Simulação de medidas com erro
 X <- rnorm(N, mean = theta, sd = sigma)
 
-# --- 2) Probabilidade de cair em uma faixa |X - θ| ≤ ε é > 0 ---
-# Forma analítica (Normal): P(|X-θ| ≤ ε) = 2 * Φ(ε/σ) - 1
+# --- 2) Probabilidade de cair em uma faixa |X - θ| \leq ε é > 0 ---
+# Forma analítica (Normal): P(|X-θ| \leq ε) = 2 * Φ(ε/σ) - 1
 Phi <- pnorm
 faixa_eps <- c(0.01, 0.05, 0.1, 0.25, 0.5, 1, 1.5, 2, 3)
 
@@ -775,7 +770,7 @@ g_mid <- ggplot2::ggplot(df_dens, ggplot2::aes(x = x, y = y)) +
     x = "Medida observada X", y = "Densidade"
   )
 
-# (c) Curva P(|X-θ| ≤ ε) vs ε: analítica x empírica
+# (c) Curva P(|X-θ| \leq ε) vs ε: analítica x empírica
 df_eps <- data.frame(
   epsilon = rep(faixa_eps, 2),
   prob    = c(prob_analitica, prob_empirica),
@@ -802,7 +797,7 @@ g2 <- ggplot2::ggplot() +
   ) +
   ggplot2::scale_color_discrete(name = NULL) +
   ggplot2::labs(
-    title = "Probabilidade de cair na faixa |X - θ| ≤ ε",
+    title = "Probabilidade de cair na faixa |X - θ| \\leq ε",
     x = "ε (precisão)", y = "Probabilidade"
   ) +
   ggplot2::theme(legend.position = "bottom")
