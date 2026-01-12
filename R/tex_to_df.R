@@ -53,19 +53,22 @@ normalize_texorpdfstring <- function(text) {
 }
 
 # Extrai o argumento de \includegraphics dentro de \centering
+detect_includegraphics <- function(line) {
+  stringr::str_detect(line, "\\\\includegraphics")
+}
 extract_includegraphics <- function(line) {
   
   m <- regexpr(
-    "\\\\centering\\s+\\\\includegraphics(?:\\[[^\\]]*\\])?\\{",
+    "\\\\includegraphics(?:\\[[^\\]]*\\])?\\{",
     line
   )
   
   if (m == -1) return(NA_character_)
   
   pos <- m + attr(m, "match.length")
+  chars <- strsplit(line, "")[[1]]
   
   depth <- 1
-  chars <- strsplit(line, "")[[1]]
   out <- character()
   
   while (pos <= length(chars) && depth > 0) {
@@ -197,13 +200,10 @@ parse_tex_structure <- function(tex_vec) {
       next
     } 
     # ---- Includegraphics ----
-    else if (stringr::str_detect(
-      line,
-      "\\\\includegraphics(?:\\[[^\\]]*\\])?\\{"
-    )) {
+    else if (detect_includegraphics(line)) {
       
       graphic_path <- extract_includegraphics(line)
-      
+
       caption <- extract_caption(tex_vec, i)
       
       rows[[length(rows) + 1]] <- tibble::tibble(

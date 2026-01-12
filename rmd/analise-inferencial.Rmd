@@ -351,7 +351,7 @@ O pacote *stats*[@stats] fornece a função [*p.adjust*](https://www.rdocumentat
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese unicaudal à direita, aplicado quando se busca evidência de efeitos positivos (valores significativamente maiores que o esperado sob $H_0$)."}
+```{r unicaudal-direita, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese unicaudal à direita, aplicado quando se busca evidência de efeitos positivos (valores significativamente maiores que o esperado sob $H_0$)."}
 # Parâmetros
 mu0 <- 0
 sigma <- 1
@@ -437,7 +437,7 @@ ggplot2::ggplot(dados, ggplot2::aes(x = x, y = densidade)) +
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese unicaudal à esquerda, aplicado quando se busca evidência de efeitos negativos (valores significativamente menores que o esperado sob $H_0$)."}
+```{r unicaudal-esquerda, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese unicaudal à esquerda, aplicado quando se busca evidência de efeitos negativos (valores significativamente menores que o esperado sob $H_0$)."}
 # Parâmetros
 mu0 <- 0
 sigma <- 1
@@ -527,7 +527,7 @@ ggplot2::ggplot(dados, ggplot2::aes(x = x, y = densidade)) +
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese bicaudal, aplicado quando se busca evidência de efeitos positivos ou negativos (valores significativamente diferentes do esperado sob $H_0$)."}
+```{r bicaudal, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de um teste de hipótese bicaudal, aplicado quando se busca evidência de efeitos positivos ou negativos (valores significativamente diferentes do esperado sob $H_0$)."}
 # Parâmetros
 mu0 <- 0
 sigma <- 1
@@ -736,7 +736,7 @@ ggplot2::annotate(
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de erros tipos I e II de inferência estatística."}
+```{r tabela-erros-I-II, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de erros tipos I e II de inferência estatística."}
 # Cria uma tabela de erros tipo I e II
 cross.table.erros <-
   matrix(
@@ -779,7 +779,7 @@ knitr::kable(
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica dos erros tipo I e tipo II em um teste de hipótese (bicaudal)."}
+```{r grafico-erro-tipo-I-II, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica dos erros tipo I e tipo II em um teste de hipótese (bicaudal)."}
 # Parâmetros
 mu0 <- 0
 mu1 <- 1
@@ -1012,7 +1012,7 @@ ggplot2::ggplot(data.frame(p_values), ggplot2::aes(x = p_values)) +
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de erro tipo S de inferência estatística."}
+```{r grafico-erro-tipo-S, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de erro tipo S de inferência estatística."}
 # Cria uma tabela de erros tipo S
 cross.table.erros <-
   matrix(
@@ -1053,7 +1053,7 @@ knitr::kable(
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica do erro tipo S (sinal) em um teste de hipótese (bicaudal)."}
+```{r grafico-erro-tipo-S-bicaudal, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica do erro tipo S (sinal) em um teste de hipótese (bicaudal)."}
 # Reprodutibilidade
 set.seed(123)
 
@@ -1168,7 +1168,7 @@ plot_base
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de erro tipo M de inferência estatística."}
+```{r tabela-erro-tipo-M, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de erro tipo M de inferência estatística."}
 # Cria uma tabela de erros tipo M
 cross.table.erros <-
   matrix(
@@ -1209,7 +1209,7 @@ knitr::kable(
 
 <br>
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica do erro tipo M (magnitude) em um teste de hipótese (bicaudal)."}
+```{r grafico-erro-tipo-M, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica do erro tipo M (magnitude) em um teste de hipótese (bicaudal)."}
 # Reprodutibilidade
 set.seed(123)
 
