@@ -37,7 +37,9 @@ texto <- paste0('
   \n *FORMATO DE PERGUNTAS E RESPOSTAS*: Mantenha uma conversa direta e objetiva com o autor. Descubra respostas para as perguntas comumente feitas por estudantes, pesquisadores e profissionais em todas as fases de sua jornada acadêmica e científica.
   \n *APRENDIZADO PROGRESSIVO*: Navegue por uma progressão de conceitos e aplicações. Capítulos são estruturados didaticamente para maior clareza educacional, com referências cruzadas para garantir uma compreensão coesa dos tópicos inter-relacionados, reduzindo a fragmentação do conteúdo.
   \n *INSIGHTS ATUALIZADOS*: Fique à frente da curva com as referências e insights mais recentes. Dr. [Seu nome] lança luz sobre preconceitos, paradoxos, mitos e práticas ilícitas na área, oferecendo uma clareza inestimável até mesmo para os pesquisadores mais experientes.
-  \n *SUPORTE DA LITERATURA*: Com um total de ', perguntas, ' perguntas, ', respostas, ' respostas, ', figuras, ' figuras e ', refs, ' referências, cada capítulo é apoiado por uma extensa bibliografia, permitindo que você aprofunde seu conhecimento e explore tópicos adicionais.
+  \n
+  <br>
+  \n Com um total de ', perguntas, ' perguntas, ', respostas, ' respostas, ', figuras, ' figuras e ', refs, ' referências, cada capítulo é apoiado por uma extensa bibliografia, permitindo que você aprofunde seu conhecimento e explore tópicos adicionais.
   \n
   <br>
   \n
