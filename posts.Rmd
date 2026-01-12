@@ -1,15 +1,6 @@
 # CREATE POSTS
 
 ```{r read, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE}
-# delete .PNG files from posts folder
-delete_files <- list.dirs("posts", full.names = TRUE)
-unlink(delete_files, recursive = TRUE)
-# create folder "posts"
-dir.create("posts", showWarnings = FALSE)
-
-# read bib file
-bib <- RefManageR::ReadBib(file.path("./bib", "references.bib"))
-
 # read TeX file
 tex_data <- TeXCheckR::read_tex_document(
   file.path("./docs", "Ciencia-com-R.tex")
@@ -64,6 +55,15 @@ df <- df |>
 
 
 ```{r save, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE}
+# delete .PNG files from posts folder
+delete_files <- list.dirs("posts", full.names = TRUE)
+unlink(delete_files, recursive = TRUE)
+# create folder "posts"
+dir.create("posts", showWarnings = FALSE)
+
+# read bib file
+bib <- RefManageR::ReadBib(file.path("./bib", "references.bib"))
+
 # save all posts
 source(file.path("R", "savePost.R"), local = knitr::knit_global())
 for (i in 1:nrow(df)) {
