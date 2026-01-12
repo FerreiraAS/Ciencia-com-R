@@ -54,34 +54,27 @@ normalize_texorpdfstring <- function(text) {
 
 # Extrai o argumento de \includegraphics dentro de \centering
 detect_includegraphics <- function(line) {
-  stringr::str_detect(line, "\\\\includegraphics")
+  stringr::str_detect(
+    line,
+    "\\\\centering[^\\n]*\\\\includegraphics"
+  )
 }
-extract_includegraphics <- function(line) {
+
+extract_includegraphics <- function(tex_vec, i, max_lookahead = 3) {
   
-  m <- regexpr(
-    "\\\\includegraphics(?:\\[[^\\]]*\\])?\\{",
-    line
+  # collapse current + next few lines
+  end <- min(length(tex_vec), i + max_lookahead)
+  block <- paste(tex_vec[i:end], collapse = " ")
+  
+  m <- regexec(
+    "\\\\includegraphics(?:\\[[^\\]]*\\])?\\{([^}]+)\\}",
+    block,
+    perl = TRUE
   )
   
-  if (m == -1) return(NA_character_)
+  res <- regmatches(block, m)[[1]]
   
-  pos <- m + attr(m, "match.length")
-  chars <- strsplit(line, "")[[1]]
-  
-  depth <- 1
-  out <- character()
-  
-  while (pos <= length(chars) && depth > 0) {
-    ch <- chars[pos]
-    
-    if (ch == "{") depth <- depth + 1
-    if (ch == "}") depth <- depth - 1
-    
-    if (depth > 0) out <- c(out, ch)
-    pos <- pos + 1
-  }
-  
-  paste(out, collapse = "")
+  if (length(res) >= 2) res[2] else NA_character_
 }
 
 # Extrai legenda associada a um includegraphics
@@ -202,8 +195,8 @@ parse_tex_structure <- function(tex_vec) {
     # ---- Includegraphics ----
     else if (detect_includegraphics(line)) {
       
-      graphic_path <- extract_includegraphics(line)
-
+      graphic_path <- extract_includegraphics(tex_vec, i)
+      
       caption <- extract_caption(tex_vec, i)
       
       rows[[length(rows) + 1]] <- tibble::tibble(

@@ -3,6 +3,28 @@ H <- 11.69
 
 refs <- as.character(length(RefManageR::ReadBib("./bib/references.bib")))
 
+tex_data <- TeXCheckR::read_tex_document(
+  file.path("./docs", "Ciencia-com-R.tex")
+)
+source(file.path("R", "tex_to_df.R"), local = knitr::knit_global())
+df <- parse_tex_structure(tex_data)
+
+# unique questions in subsection column
+perguntas <- df |>
+  dplyr::distinct(subsection) |>
+  dplyr::filter(!is.na(subsection)) |>
+  nrow()
+
+# unique respostas in item column
+respostas <- df |>
+  dplyr::distinct(item) |>
+  dplyr::filter(!is.na(item)) |>
+  nrow()
+
+figuras <- df |>
+  dplyr::filter(!is.na(graphic)) |>
+  nrow()
+
 texto <- paste0('
   <p style=\"font-size: 60px;\"><b>Ciência com R</b></p>
   \n
@@ -15,7 +37,7 @@ texto <- paste0('
   \n *FORMATO DE PERGUNTAS E RESPOSTAS*: Mantenha uma conversa direta e objetiva com o autor. Descubra respostas para as perguntas comumente feitas por estudantes, pesquisadores e profissionais em todas as fases de sua jornada acadêmica e científica.
   \n *APRENDIZADO PROGRESSIVO*: Navegue por uma progressão de conceitos e aplicações. Capítulos são estruturados didaticamente para maior clareza educacional, com referências cruzadas para garantir uma compreensão coesa dos tópicos inter-relacionados, reduzindo a fragmentação do conteúdo.
   \n *INSIGHTS ATUALIZADOS*: Fique à frente da curva com as referências e insights mais recentes. Dr. [Seu nome] lança luz sobre preconceitos, paradoxos, mitos e práticas ilícitas na área, oferecendo uma clareza inestimável até mesmo para os pesquisadores mais experientes.
-  \n *SUPORTE DA LITERATURA*: Com um total de ', refs, ' referências, cada capítulo é apoiado por uma extensa bibliografia, permitindo que você aprofunde seu conhecimento e explore tópicos adicionais.
+  \n *SUPORTE DA LITERATURA*: Com um total de ', perguntas, ' perguntas, ', respostas, ' respostas, ', figuras, ' figuras e ', refs, ' referências, cada capítulo é apoiado por uma extensa bibliografia, permitindo que você aprofunde seu conhecimento e explore tópicos adicionais.
   \n
   <br>
   \n
