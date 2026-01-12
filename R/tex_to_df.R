@@ -55,8 +55,11 @@ normalize_texorpdfstring <- function(text) {
 # Extrai o argumento de \includegraphics dentro de \centering
 extract_includegraphics <- function(line) {
   
-  m <- regexpr("\\\\centering \\\\includegraphics\\{", line)
-
+  m <- regexpr(
+    "\\\\centering\\s+\\\\includegraphics(?:\\[[^\\]]*\\])?\\{",
+    line
+  )
+  
   if (m == -1) return(NA_character_)
   
   pos <- m + attr(m, "match.length")
@@ -76,6 +79,30 @@ extract_includegraphics <- function(line) {
   }
   
   paste(out, collapse = "")
+}
+
+# Extrai legenda associada a um includegraphics
+extract_caption <- function(tex_vec, start_index, max_lookahead = 5) {
+  
+  end <- min(length(tex_vec), start_index + max_lookahead)
+  
+  for (j in seq(start_index + 1, end)) {
+    line <- tex_vec[j]
+    
+    if (stringr::str_detect(line, "^\\\\caption\\{")) {
+      return(extract_latex_argument(line, "caption"))
+    }
+    
+    # Stop early if another includegraphics or section starts
+    if (stringr::str_detect(
+      line,
+      "^\\\\(includegraphics|section|subsection|chapter)"
+    )) {
+      break
+    }
+  }
+  
+  NA_character_
 }
 
 # Extrai referências citadas no texto
@@ -113,7 +140,7 @@ parse_tex_structure <- function(tex_vec) {
     if (stringr::str_detect(line, "^\\\\chapter\\{")) {
       current_chapter <- extract_latex_argument(line, "chapter")
       current_chapter <- strip_outer_textbf(current_chapter)
-
+      
       current_section <- NA_character_
       current_subsection <- NA_character_
     }
@@ -162,6 +189,7 @@ parse_tex_structure <- function(tex_vec) {
         subsection = current_subsection,
         item       = item_text,
         graphic    = NA_character_,
+        caption    = NA_character_,
         references = extract_references(item_text)
       )
       
@@ -169,9 +197,14 @@ parse_tex_structure <- function(tex_vec) {
       next
     } 
     # ---- Includegraphics ----
-    else if (stringr::str_detect(line, "\\\\includegraphics\\{")) {
+    else if (stringr::str_detect(
+      line,
+      "\\\\includegraphics(?:\\[[^\\]]*\\])?\\{"
+    )) {
       
       graphic_path <- extract_includegraphics(line)
+      
+      caption <- extract_caption(tex_vec, i)
       
       rows[[length(rows) + 1]] <- tibble::tibble(
         chapter    = current_chapter,
@@ -179,6 +212,7 @@ parse_tex_structure <- function(tex_vec) {
         subsection = current_subsection,
         item       = NA_character_,
         graphic    = graphic_path,
+        caption    = caption,
         references = NA_character_
       )
       

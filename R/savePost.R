@@ -6,6 +6,7 @@ SavePost_df <- function(entry, bib) {
   question <- entry$subsection
   answer   <- entry$item
   graphic  <- entry$graphic
+  caption  <- entry$caption
   key      <- entry$references
   
   num_dir <- function(id, label) {
@@ -46,6 +47,7 @@ SavePost_df <- function(entry, bib) {
     tex <- gsub("CAPITULO", chapter, tex)
     tex <- gsub("SECAO", section, tex)
     tex <- gsub("FIGURA", graphic, tex)
+    tex <- gsub("LEGENDA", ifelse(is.na(caption), "", caption), tex)
     
     writeLines(tex, file.path("posts", "POST.tex"))
     

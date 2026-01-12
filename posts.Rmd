@@ -1,6 +1,6 @@
 # CREATE POSTS
 
-```{r post, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE}
+```{r read, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE}
 # delete .PNG files from posts folder
 delete_files <- list.dirs("posts", full.names = TRUE)
 unlink(delete_files, recursive = TRUE)
@@ -60,7 +60,10 @@ df <- df |>
     subsection_index,
     by = c("chapter", "section", "subsection")
   )
+```
 
+
+```{r save, echo = FALSE, results = FALSE, warning = FALSE, message = FALSE}
 # save all posts
 source(file.path("R", "savePost.R"), local = knitr::knit_global())
 for (i in 1:nrow(df)) {
