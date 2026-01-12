@@ -126,8 +126,15 @@ download.file(
 
 jpeg_file <- file.path(out_path, file.name)
 
+png_file <- sub("\\.jpeg$", ".png", jpeg_file)
+magick::image_read(jpeg_file) |>
+  magick::image_write(path = png_file, format = "png")
+
+# delete JPEG
+invisible(file.remove(jpeg_file, showWarnings = FALSE))
+
 # Include graphic (works for all targets above)
-knitr::include_graphics(jpeg_file)
+knitr::include_graphics(png_file)
 ```
 
 <br>
