@@ -24,6 +24,7 @@ texto <- paste0('
   Tome decisões informadas, evite armadilhas e destaque-se em sua pesquisa científica com \"Ciência com R\". Os insights profundos do Dr. Arthur de Sá Ferreira permitirão que você transforme seus dados em descobertas significativas, colocando você no caminho da excelência em pesquisa.
 ')
 
+# save PNG
 grDevices::png(
   file = "images/Cover_4.png",
   width = W,
