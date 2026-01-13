@@ -1,21 +1,18 @@
 extract_latex_argument <- function(line, command) {
   
-  pattern <- paste0("^\\\\", command, "\\{")
-  if (!grepl(pattern, line)) return(NA_character_)
-  
+  pattern <- paste0("\\\\", command, "\\{")
   start <- regexpr(pattern, line)
-  pos <- start + attr(start, "match.length")
+  if (start == -1) return(NA_character_)
   
+  pos <- start + attr(start, "match.length")
   depth <- 1
   chars <- strsplit(line, "")[[1]]
   out <- character()
   
   while (pos <= length(chars) && depth > 0) {
     ch <- chars[pos]
-    
     if (ch == "{") depth <- depth + 1
     if (ch == "}") depth <- depth - 1
-    
     if (depth > 0) out <- c(out, ch)
     pos <- pos + 1
   }
@@ -101,6 +98,15 @@ extract_caption <- function(tex_vec, start_index, max_lookahead = 5) {
   NA_character_
 }
 
+escape_markdown_math <- function(text) {
+  if (is.na(text)) return(text)
+  
+  text <- gsub("\\\\", "\\\\\\\\", text)
+  text <- gsub("\\$", "\\\\$", text)
+  
+  text
+}
+
 # Extrai referências citadas no texto
 extract_references <- function(text) {
   refs <- stringr::str_extract_all(
@@ -177,7 +183,7 @@ parse_tex_structure <- function(tex_vec) {
       }
       
       # Normalizações finais do item
-      item_text <- normalize_inline_math(item_text)
+      # item_text <- normalize_inline_math(item_text)
       
       rows[[length(rows) + 1]] <- tibble::tibble(
         chapter    = current_chapter,
@@ -198,6 +204,8 @@ parse_tex_structure <- function(tex_vec) {
       graphic_path <- extract_includegraphics(tex_vec, i)
       
       caption <- extract_caption(tex_vec, i)
+      caption_safe <- escape_markdown_math(caption)
+      
       
       rows[[length(rows) + 1]] <- tibble::tibble(
         chapter    = current_chapter,
@@ -205,7 +213,7 @@ parse_tex_structure <- function(tex_vec) {
         subsection = current_subsection,
         item       = NA_character_,
         graphic    = graphic_path,
-        caption    = caption,
+        caption    = caption_safe,
         references = NA_character_
       )
       
