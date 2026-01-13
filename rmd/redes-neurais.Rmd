@@ -280,6 +280,119 @@ gridExtra::grid.arrange(p1, p2, p3, ncol=3)
 
 <br>
 
+## Funções de perda
+
+<br>
+
+### O que são funções de perda?
+
+- Funções de perda (*loss functions*) quantificam o erro cometido por um modelo ao comparar suas predições com os valores reais observados.[@REF]
+
+- Funções de perda definem formalmente o objetivo do aprendizado, indicando o que significa “errar pouco” ou “errar muito” em um problema específico.[@REF]
+
+- Durante o treinamento de modelos supervisionados, a função de perda orienta o ajuste dos parâmetros ao medir a discrepância entre saída prevista e desfecho verdadeiro.[@REF]
+
+- Em redes neurais, a minimização da função de perda é realizada por métodos iterativos baseados em gradientes, como a retropropagação do erro.[@REF]
+
+- A escolha da função de perda está intimamente ligada à natureza do problema (regressão, classificação, probabilidade, ranking) e influencia diretamente o espaço de decisão aprendido pelo modelo.[@REF]
+
+<br>
+
+### Quais são as funções de perda mais comuns?
+
+- Erro quadrático médio (Mean Squared Error, MSE \@ref(eq:loss-mse)): Essa função penaliza erros grandes de forma mais severa, sendo adequada quando desvios elevados são indesejáveis e a média do erro quadrático é uma medida relevante de desempenho.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:loss-mse)
+\mathcal{L}_{\mathrm{MSE}}(y, \hat{y})
+= \frac{1}{n}\sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+\end{equation}
+
+<br>
+
+- Erro absoluto médio (Mean Absolute Error, MAE\@ref(eq:loss-mae)): Essa função atribui peso linear aos erros, tornando-se mais robusta a valores extremos quando comparada ao erro quadrático médio.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:loss-mae)
+\mathcal{L}_{\mathrm{MAE}}(y, \hat{y})
+= \frac{1}{n}\sum_{i=1}^{n} \lvert y_i - \hat{y}_i \rvert
+\end{equation}
+
+<br>
+
+- Erro quadrático médio logarítmico (Mean Squared Logarithmic Error, MSLE \@ref(eq:loss-msle)): Essa função enfatiza erros relativos, sendo particularmente útil quando diferenças proporcionais são mais relevantes do que diferenças absolutas.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:loss-msle)
+\mathcal{L}_{\mathrm{MSLE}}(y, \hat{y})
+= \frac{1}{n}\sum_{i=1}^{n}
+\left(\log(1+y_i) - \log(1+\hat{y}_i)\right)^2
+\end{equation}
+
+<br>
+
+- Entropia cruzada binária (Binary Cross-Entropy, BCE \@ref(eq:loss-bce)): Essa função mede a discrepância entre probabilidades previstas e observadas, sendo o critério padrão em problemas de classificação binária probabilística.
+
+<br>
+
+\begin{equation}
+(\#eq:loss-bce)
+\mathcal{L}_{\mathrm{BCE}}(y, \hat{y})
+= -\frac{1}{n}\sum_{i=1}^{n}
+\left[
+y_i \log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)
+\right]
+\end{equation}
+
+<br>
+
+- Entropia cruzada categórica (Categorical Cross-Entropy \@ref(eq:loss-cce)): Essa função generaliza a entropia cruzada para múltiplas classes, penalizando previsões probabilísticas inconsistentes com a classe verdadeira.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:loss-cce)
+\mathcal{L}_{\mathrm{CCE}}(y, \hat{y})
+= -\frac{1}{n}\sum_{i=1}^{n}
+\sum_{k=1}^{K} y_{ik}\log(\hat{y}_{ik})
+\end{equation}
+
+<br>
+
+- Função logística (log-verossimilhança negativa \@ref(eq:loss-logistic)): Essa função expressa o critério de máxima verossimilhança da regressão logística, conectando inferência estatística e aprendizado supervisionado.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:loss-logistic)
+\mathcal{L}_{\mathrm{log}}(y, \hat{p})
+= -\sum_{i=1}^{n}
+\left[
+y_i \log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)
+\right]
+\end{equation}
+
+<br>
+
+- Função hinge (*Support Vector Machines* \@ref(eq:loss-hinge)): Essa função busca maximizar a margem entre classes, penalizando classificações incorretas ou pouco confiantes em relação à fronteira de decisão.
+
+<br>
+
+\begin{equation}
+(\#eq:loss-hinge)
+\mathcal{L}_{\mathrm{hinge}}(y, f(x))
+= \frac{1}{n}\sum_{i=1}^{n}
+\max\left(0,\, 1 - y_i f(x_i)\right)
+\end{equation}
+
+<br>
+
 ## Espaço de decisão
 
 <br>

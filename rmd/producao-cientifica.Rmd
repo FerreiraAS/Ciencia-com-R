@@ -1,0 +1,257 @@
+```{=openxml}
+<w:p>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
+</w:p>
+```
+
+# **Produção científica do autor** {#producao-cientifica .unnumbered}
+
+<br>
+
+```{r read-papers, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', results = "asis", out.width = "100%", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
+library(dplyr)
+
+my_orcid <- c("0000-0001-7014-2002")
+my_name <- c("Arthur de Sá Ferreira")
+
+# baixa todos os artigos (com repetições)
+my_works <- rorcid::works(my_orcid) %>%
+  tibble::as_tibble() %>%
+  janitor::clean_names()
+
+# check if has data to continue
+if (!sjmisc::is_empty(my_works)) {
+  my_works %>%
+    dplyr::mutate(created_date_value = anytime::anydate(created_date_value / 1000))
+  
+  # drop empty elements from external_ids_external_id list
+  my_works <-
+    my_works[lapply(my_works$external_ids_external_id, length) > 0,]
+  
+  my_works_ids <- my_works %>%
+    tidyr::unnest(external_ids_external_id) %>%
+    janitor::clean_names()
+  
+  # get ISSN first
+    my_dois_works_issn <-
+    my_works_ids[my_works_ids$external_id_type == 'issn', ]
+  # select put_code and issn
+  my_dois_works_issn <-
+    my_dois_works_issn[, c("put_code", "external_id_value")]
+  # parse issn (if length == 9 remove -)
+  my_dois_works_issn$external_id_value <-
+    gsub("-", "", my_dois_works_issn$external_id_value)
+  # mutate issn string into two columns (strings separated by space)
+  my_dois_works_issn <-
+    tidyr::separate(my_dois_works_issn,
+                    external_id_value,
+                    into = c("ISSN", "issn_2"),
+                    sep = " ")
+  
+  # seleciona os artigos com DOI
+  my_dois_works <-
+    my_works_ids[my_works_ids$external_id_type == 'doi', ]
+  my_dois_works$external_id_value <-
+    tolower(my_dois_works$external_id_value)
+  
+  # remove as repetições pelo DOI
+  my_dois_works <-
+    my_dois_works[!duplicated(my_dois_works[, "external_id_value"]),]
+  
+  # add ISSN by match put_code
+  my_dois_works$ISSN <- my_dois_works_issn$ISSN[match(my_dois_works$put_code,
+                                 my_dois_works_issn$put_code)]
+}
+
+```
+
+## Artigos em periódicos científicos {.unnumbered}
+
+<br>
+
+```{r journal-article, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+# get citations from DOI
+citations <- rcrossref::cr_cn(
+  dois = my_dois_works$external_id_value[my_dois_works$type == 'journal-article'],
+  format = "text",
+  style = "american-medical-association-10th-edition",
+  locale = "pt-BR"
+  )
+
+# print
+for (i in 1:length(citations)) {
+  cat(paste0(citations[i], "\n\n"))
+}
+```
+
+<br>
+
+## Preprints {.unnumbered}
+
+<br>
+
+```{r preprint, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+# get citations from DOI
+citations <- rcrossref::cr_cn(
+  dois = my_dois_works$external_id_value[my_dois_works$type == 'preprint'],
+  format = "text",
+  style = "american-medical-association-10th-edition",
+  locale = "pt-BR"
+  )
+
+# print
+for (i in 1:length(citations)) {
+  cat(paste0(citations[i], "\n\n"))
+}
+```
+
+<br>
+
+## Resumos publicados em eventos científicos {.unnumbered}
+
+<br>
+
+```{r conference-paper, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+# get citations from DOI
+citations <- rcrossref::cr_cn(
+  dois = my_dois_works$external_id_value[my_dois_works$type == 'conference-paper'],
+  format = "text",
+  style = "american-medical-association-10th-edition",
+  locale = "pt-BR"
+  )
+
+# print
+for (i in 1:length(citations)) {
+  cat(paste0(citations[i], "\n\n"))
+}
+```
+
+<br>
+
+## Livros editorados {.unnumbered}
+
+<br>
+
+```{r edited-book, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+# get citations from DOI
+citations <- rcrossref::cr_cn(
+  dois = my_dois_works$external_id_value[my_dois_works$type == 'edited-book'],
+  format = "text",
+  style = "american-medical-association-10th-edition",
+  locale = "pt-BR"
+  )
+
+# print
+for (i in 1:length(citations)) {
+  cat(paste0(citations[i], "\n\n"))
+}
+```
+
+<br>
+
+## Capítulos de livro {.unnumbered}
+
+<br>
+
+```{r book-chapter, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+# get citations from DOI
+citations <- rcrossref::cr_cn(
+  dois = my_dois_works$external_id_value[my_dois_works$type == 'book-chapter'],
+  format = "text",
+  style = "american-medical-association-10th-edition",
+  locale = "pt-BR"
+  )
+
+# print
+for (i in 1:length(citations)) {
+  cat(paste0(citations[i], "\n\n"))
+}
+```
+
+<br>
+
+## Aulas {.unnumbered}
+
+<br>
+
+```{r lecture-speech, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+# get citations from DOI
+citations <- rcrossref::cr_cn(
+  dois = my_dois_works$external_id_value[my_dois_works$type == 'lecture-speech'],
+  format = "text",
+  style = "american-medical-association-10th-edition",
+  locale = "pt-BR"
+  )
+
+# print
+for (i in seq_along(citations)) {
+  cat(paste0(i, ". ", citations[i], "\n\n"))
+}
+```
+
+<br>
+
+## Programas de computador {.unnumbered}
+
+<br>
+
+```{r software, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+# get citations from DOI
+citations <- rcrossref::cr_cn(
+  dois = my_dois_works$external_id_value[my_dois_works$type == 'software'],
+  format = "text",
+  style = "american-medical-association-10th-edition",
+  locale = "pt-BR"
+  )
+
+# print
+for (i in seq_along(citations)) {
+  cat(paste0(i, ". ", citations[i], "\n\n"))
+}
+```
+
+<br>
+
+## Bancos de dados {.unnumbered}
+
+<br>
+
+```{r data-set, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+# get citations from DOI
+citations <- rcrossref::cr_cn(
+  dois = my_dois_works$external_id_value[my_dois_works$type == 'data-set'],
+  format = "text",
+  style = "american-medical-association-10th-edition",
+  locale = "pt-BR"
+  )
+
+# print
+for (i in seq_along(citations)) {
+  cat(paste0(i, ". ", citations[i], "\n\n"))
+}
+```
+
+<br>
+
+## Outros {.unnumbered}
+
+<br>
+
+```{r other, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+# get citations from DOI
+citations <- rcrossref::cr_cn(
+  dois = my_dois_works$external_id_value[my_dois_works$type == 'other'],
+  format = "text",
+  style = "american-medical-association-10th-edition",
+  locale = "pt-BR"
+  )
+
+# print
+for (i in seq_along(citations)) {
+  cat(paste0(i, ". ", citations[i], "\n\n"))
+}
+```
+
+<br>
