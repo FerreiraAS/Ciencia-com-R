@@ -107,7 +107,7 @@ SavePost_df <- function(entry, bib) {
     answer
   )
   
-  # Remove equations
+  # Remove equations references
   answer <- gsub(
     "\\\\eqref\\{[^}]+\\}",
     "",

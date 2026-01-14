@@ -1,3 +1,11 @@
+normalize_titles <- function(x) {
+  gsub(
+    "\\\\emph\\{([^}]*)\\}",
+    "\\\\\\\\emph{\\1}",
+    x
+  )
+}
+
 extract_latex_argument <- function(line, command) {
   
   pattern <- paste0("\\\\", command, "\\{")
@@ -27,15 +35,6 @@ strip_outer_textbf <- function(text) {
   res <- regmatches(text, m)[[1]]
   
   if (length(res) > 1) res[2] else text
-}
-
-normalize_inline_math <- function(text) {
-  gsub(
-    "\\\\\\((.*?)\\\\\\)",
-    "$\\1$",
-    text,
-    perl = TRUE
-  )
 }
 
 # Remove \texorpdfstring{A}{B} -> A
@@ -142,20 +141,25 @@ parse_tex_structure <- function(tex_vec) {
     if (stringr::str_detect(line, "^\\\\chapter\\{")) {
       current_chapter <- extract_latex_argument(line, "chapter")
       current_chapter <- strip_outer_textbf(current_chapter)
+      current_chapter <- normalize_titles(current_chapter)
       
       current_section <- NA_character_
+      
       current_subsection <- NA_character_
     }
     
     # ---- Section ----
     else if (stringr::str_detect(line, "^\\\\section\\{")) {
       current_section <- extract_latex_argument(line, "section")
+      current_section <- normalize_titles(current_section)
+      
       current_subsection <- NA_character_
     }
     
     # ---- Subsection ----
     else if (stringr::str_detect(line, "^\\\\subsection\\{")) {
       current_subsection <- extract_latex_argument(line, "subsection")
+      current_subsection <- normalize_titles(current_subsection)
     }
     
     # ---- Item ----
@@ -181,9 +185,6 @@ parse_tex_structure <- function(tex_vec) {
           i <- j
         }
       }
-      
-      # Normalizações finais do item
-      # item_text <- normalize_inline_math(item_text)
       
       rows[[length(rows) + 1]] <- tibble::tibble(
         chapter    = current_chapter,
