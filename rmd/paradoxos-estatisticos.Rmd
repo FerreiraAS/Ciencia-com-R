@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Paradoxos estatísticos** {#paradoxos-estatisticos}
 
 <br>
@@ -22,19 +21,93 @@
 
 ### O que é o paradoxo de Abelson?
 
--   .[@abelson1985]
+-   Um baixo percentual de variância explicada não implica que o fator causal seja irrelevante. Em processos cumulativos, efeitos pequenos podem produzir consequências grandes.[@abelson1985]
+
+-   Esse paradoxo alerta contra o uso ingênuo de medidas como $R^2$ ou “% de explicação” para julgar a importância prática de um fator.[@REF]
+
+<br>
+
+```{r abelson, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.cap='Simulação do paradoxo de Abelson. Mesmo com uma diferença pequena de habilidade entre dois jogadores (A e B), o jogador B tende a vencer a maioria das tentativas devido ao alto ruído por tentativa. No entanto, a análise por tentativa mostra um baixo valor de $R^2$, indicando que a habilidade explica pouco da variação no desempenho observado. Isso ilustra como um fator causal pode ser importante na prática, mesmo quando a variância explicada é baixa.'}
+# reprodutibilidade
+set.seed(123)
+
+# simulação dos dados
+n_trials   <- 1000
+skill_diff <- 0.05
+noise_sd  <- 1
+
+# geração dos dados
+data <- tibble::tibble(
+  Jogador    = rep(c("A", "B"), each = n_trials),
+  Tentativa  = rep(seq_len(n_trials), times = 2),
+  Habilidade = rep(c(0, skill_diff), each = n_trials),
+  Desempenho = Habilidade + rnorm(2 * n_trials, sd = noise_sd)
+)
+
+# ajuste dos modelos
+model_micro <- lm(Desempenho ~ Habilidade, data = data)
+
+tbl_micro <- model_micro %>%
+  gtsummary::tbl_regression(
+    intercept = FALSE,
+    estimate_fun = ~gtsummary::style_number(.x, digits = 3)
+  ) %>%
+  gtsummary::add_glance_table(
+    include = r.squared,
+    fmt_fun = r.squared ~ function(x) gtsummary::style_number(x, digits = 3),
+    label = r.squared ~ "R² (variância explicada)"
+  ) %>%
+  gtsummary::modify_caption(
+    "**Modelo micro (por tentativa): Desempenho ~ Habilidade**"
+  )
+
+data_macro <- data %>%
+  dplyr::mutate(
+    bloco = rep(seq_len(10), each = n_trials / 10, times = 2)
+  ) %>%
+  dplyr::group_by(Jogador, Habilidade, bloco) %>%
+  dplyr::summarise(
+    Total_bloco = sum(Desempenho),
+    .groups = "drop"
+  )
+
+model_macro <- lm(Total_bloco ~ Habilidade, data = data_macro)
+
+tbl_macro <- model_macro %>%
+  gtsummary::tbl_regression(
+    intercept = FALSE,
+    estimate_fun = ~gtsummary::style_number(.x, digits = 3)
+  ) %>%
+  gtsummary::add_glance_table(
+    include = r.squared,
+    fmt_fun = r.squared ~ function(x) gtsummary::style_number(x, digits = 3),
+    label = r.squared ~ "R² (variância explicada)"
+  )
+
+gtsummary::tbl_stack(
+  tbls = list(tbl_micro, tbl_macro),
+  group_header = c(
+    "Nível micro — eventos individuais",
+    "Nível macro — resultado acumulado"
+  )
+) %>%
+  gtsummary::modify_header(
+    label     = "**Variável explicativa**",
+    estimate  = "**Estimativa**",
+    conf.low  = "**IC 95%**",
+    p.value   = "**P-valor**"
+  ) %>%
+  gtsummary::remove_abbreviation() %>%
+  gtsummary::modify_footnote(
+    conf.low ~ "IC = Intervalo de confiança"
+)
+```
 
 <br>
 
 ### O que é o paradoxo de Berkson?
 
 -   .[@berkson1946]
-
-<br>
-
-### O que é o paradoxo de grandes dados (*big data*)?
-
-- *Big Data*: "Quanto maior a quantidade de dados, maior a certeza de que vamos nos enganar".[@meng2018]
 
 <br>
 
@@ -71,6 +144,12 @@
 ### O que é o paradoxo de Lord?
 
 -   .[@lord1967; @lord1969]
+
+<br>
+
+### O que é o paradoxo de Meng?
+
+-   *Big Data*: "Quanto maior a quantidade de dados, maior a certeza de que vamos nos enganar".[@meng2018]
 
 <br>
 
@@ -198,9 +277,68 @@ cowplot::plot_grid(
 
 <br>
 
-### O que é o paradoxo de Stein?
+### O que é o paradoxo de James-Stein?
 
--   .[@stein1956]
+-   O paradoxo de James-Stein mostra que, ao estimar simultaneamente 3 ou mais médias de variáveis normais independentes (com perda quadrática), o estimador “óbvio” $X_i$ --- que é ótimo para cada média isoladamente --- deixa de ser ótimo no conjunto, existindo estimadores que têm erro médio total menor.[@stein1956;@james_estimation_1961]
+
+-   O resultado é paradoxal porque essa melhoria exige “misturar” as estimativas entre si (como no estimador de James–Stein), introduzindo um viés controlado que reduz o erro global, algo impossível quando $n \leq 2$.[@stein1956;@james_estimation_1961]
+
+<br>
+
+```{r james-stein, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.cap='Simulação do paradoxo de Stein. Comparação do erro médio quadrático entre o estimador clássico (média amostral) e o estimador de James-Stein para diferentes números de médias sendo estimadas simultaneamente. Estimadores aparentemente piores localmente podem ser melhores globalmente quando o objetivo é reduzir o erro total.'}
+# Reprodutibilidade
+set.seed(123)
+
+# Função de simulação
+simula_stein <- function(n, B = 10000, theta_val = 3) {
+  
+  theta <- rep(theta_val, n)
+  
+  james_stein <- function(X) {
+    shrink <- 1 - (n - 2) / sum(X^2)
+    shrink * X
+  }
+  
+  erro_mle <- numeric(B)
+  erro_js  <- numeric(B)
+  
+  for (b in 1:B) {
+    X <- rnorm(n, mean = theta, sd = 1)
+    
+    erro_mle[b] <- sum((X - theta)^2)
+    erro_js[b]  <- sum((james_stein(X) - theta)^2)
+  }
+  
+  data.frame(
+    Erro = c(erro_mle, erro_js),
+    Estimador = rep(c("Maximum Likelihood Estimate", "James–Stein"), each = B),
+    Dimensao = paste("n =", n)
+  )
+}
+
+# Simulações
+df_n2 <- simula_stein(n = 2)
+df_n5 <- simula_stein(n = 5)
+
+df <- rbind(df_n2, df_n5)
+
+# Gráfico lado a lado
+ggplot2::ggplot(df, ggplot2::aes(x = Erro, fill = Estimador)) +
+  ggplot2::geom_density(alpha = 0.5) +
+  ggplot2::facet_wrap(~ Dimensao, scales = "free_x") +
+  ggplot2::labs(
+    title = "Paradoxo de Stein",
+    subtitle = "n = 2 (sem paradoxo) vs n = 5 (com paradoxo)",
+    x = "Erro quadrático total",
+    y = "Densidade",
+    fill = NULL
+  ) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  )
+```
 
 <br>
 
