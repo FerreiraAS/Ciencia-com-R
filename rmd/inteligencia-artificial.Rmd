@@ -26,7 +26,13 @@
 
 <br>
 
-## IA generativa e grandes modelos de linguagem
+## Inteligência artificial generativa
+
+<br>
+
+### O que é IA generativa?
+
+-   .[@REF]
 
 <br>
 
@@ -36,7 +42,7 @@
 
 <br>
 
-### Como funcionam modelos como GPT, BERT e similares?
+### Como funcionam modelos os grandes modelos de linguagem?
 
 -   .[@REF]
 
@@ -152,6 +158,42 @@ gridExtra::grid.arrange(g_seq, g_att, g_pred, ncol = 1, heights = c(1.2, 1.2, 1.
 
 <br>
 
+## Inteligência artificial explicável (*eXplainable Artificial Intelligence, XAI)*
+
+<br>
+
+### Quais princípios são utilizados para descrever explicabilidade de IA?
+
+- Explicabilidade: capacidade de revelar e resumir, em termos compreensíveis, os motivos por trás das decisões de um modelo, incluindo métodos post-hoc que explicam resultados após a predição.[@ali2023]
+
+- Interpretabilidade: capacidade de compreender o funcionamento interno do modelo a partir de suas próprias estruturas, por meio de técnicas intrínsecas que tornam o processo decisório inteligível.[@ali2023]
+
+- Transparência: geração de explicações claras e legíveis por humanos sobre as decisões do modelo, essencial para avaliar sua qualidade e resistir a usos adversariais.[@ali2023]
+
+- Equidade: capacidade do modelo de tomar decisões imparciais, sem favorecer ou discriminar grupos, mitigando vieses associados a características sociais, econômicas ou demográficas.[@ali2023]
+
+- Robustez: capacidade do modelo de manter desempenho estável diante de incertezas ou pequenas perturbações nos dados de entrada, incluindo ataques adversariais.[@ali2023]
+
+- Satisfação: grau em que técnicas de explicabilidade aumentam a utilidade, a usabilidade e a aceitação do sistema baseado em aprendizado de máquina.[@ali2023]
+
+- Estabilidade: capacidade de produzir explicações consistentes para entradas semelhantes, evitando variações arbitrárias nas interpretações.[@ali2023]
+
+- Responsabilidade: alinhamento do modelo a valores sociais, éticos e morais, sustentado por transparência, responsabilização, equidade e ética, como base para uma IA responsável.[@ali2023]
+
+<br>
+
+### Por que explicar modelos de IA?
+
+- Para tornar as decisões defensáveis: compreender como e por que um modelo chega a determinado resultado é essencial para avaliar a legitimidade de suas decisões e sustentar seu uso em contextos críticos.[@adadi2018; @vilone2021]
+
+- Para tornar o sistema governável: explicações permitem enxergar o funcionamento interno do modelo, facilitando sua supervisão, auditoria, correção de erros e detecção de vieses ou fragilidades.[@adadi2018; @vilone2021]
+
+- Para aperfeiçoar o desempenho: ao revelar como o modelo utiliza informações, as explicações orientam ajustes que aumentam sua precisão, eficiência e robustez.[@adadi2018; @vilone2021]
+
+- Para ampliar o conhecimento: modelos explicáveis não apenas produzem previsões, mas também ajudam a identificar padrões, relações e hipóteses novas, contribuindo para a geração de conhecimento científico.[@adadi2018; @vilone2021]
+
+<br>
+
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *keras*[\@keras](https://cran.r-project.org/web/packages/keras/index.html) possuu funções para criar, treinar e avaliar modelos de redes neurais.
 :::
@@ -159,13 +201,13 @@ O pacote *keras*[\@keras](https://cran.r-project.org/web/packages/keras/index.ht
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *tensorflow*[@tensorflow](https://cran.r-project.org/web/packages/tensorflow/index.html) fornece uma interface para o TensorFlow, uma biblioteca de código aberto amplamente utilizada para aprendizado de máquina e redes neurais.
+O pacote *tensorflow*[\@tensorflow](https://cran.r-project.org/web/packages/tensorflow/index.html) fornece uma interface para o TensorFlow, uma biblioteca de código aberto amplamente utilizada para aprendizado de máquina e redes neurais.
 :::
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *torch*[@torch](https://cran.r-project.org/web/packages/torch/index.html) permite criar e treinar redes neurais com alto desempenho.
+O pacote *torch*[\@torch](https://cran.r-project.org/web/packages/torch/index.html) permite criar e treinar redes neurais com alto desempenho.
 :::
 
 <br>
@@ -173,6 +215,175 @@ O pacote *torch*[@torch](https://cran.r-project.org/web/packages/torch/index.htm
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *reticulate*[\@reticulate](https://cran.r-project.org/web/packages/reticulate/index.html) integra R e Python em um mesmo ambiente de trabalho, permitindo chamar funções Python a partir de R e facilitar o uso de bibliotecas de IA disponíveis nesse ecossistema.
 :::
+
+<br>
+
+## Limitações fundamentais de modelos generativos
+
+<br>
+
+### O que são alucinações em IA generativa?
+
+- Alucinações em IA generativa ocorrem quando um modelo produz saídas linguisticamente plausíveis, porém factualmente incorretas, inexistentes ou não verificáveis, sem que haja erro numérico ou falha no processo de treinamento.[@REF]
+
+<br>
+
+```{r alucinacoes, echo=FALSE, warning=FALSE, message=FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Funcionamento conceitual de modelos de linguagem e origem das alucinações. O painel A ilustra o fluxo abstrato de um LLM até a predição do próximo token; o painel B mostra a escolha baseada em plausibilidade linguística; o painel C evidencia que essa otimização probabilística pode gerar respostas fluentes, porém factualmente falsas."}
+# reprodutibilidade
+set.seed(42)
+
+# Painel A — Pipeline conceitual do LLM
+df_pipe <- data.frame(
+  etapa = factor(
+    c("Texto\nde entrada", "Tokenização", "Embeddings",
+      "Atenção", "Predição do\npróximo token"),
+    levels = c("Texto\nde entrada", "Tokenização",
+               "Embeddings", "Atenção", "Predição do\npróximo token")
+  ),
+  x = 1:5,
+  y = rep(1, 5)
+)
+
+p_pipeline <- ggplot2::ggplot(df_pipe, ggplot2::aes(x, y, label = etapa)) +
+  ggplot2::geom_rect(ggplot2::aes(xmin = x - 0.45, xmax = x + 0.45,
+                ymin = y - 0.25, ymax = y + 0.25),
+            fill = "white", color = "black") +
+  ggplot2::geom_text(size = 3.5) +
+  ggplot2::geom_segment(ggplot2::aes(x = x + 0.45, xend = x + 0.55,
+                   y = y, yend = y),
+               arrow = ggplot2::arrow(length = unit(0.15, "cm")),
+               linewidth = 0.6) +
+  ggplot2::labs(title = "A) Funcionamento conceitual de um LLM") +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = element_text(face = "bold", size = 12))
+
+# Painel B — Distribuição do próximo token
+tokens <- c("descoberta", "modelo", "artigo", "estudo", "teoria")
+prob <- c(0.38, 0.27, 0.18, 0.11, 0.06)
+
+df_prob <- data.frame(token = tokens, prob = prob)
+
+p_prob <- ggplot2::ggplot(df_prob, ggplot2::aes(x = reorder(token, prob), y = prob)) +
+  ggplot2::geom_col(fill = "#3182BD") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_y_continuous(labels = scales::percent) +
+  ggplot2::labs(
+    title = "B) Próximo token mais provável",
+    subtitle = "Escolha baseada em plausibilidade linguística",
+    x = NULL,
+    y = "Probabilidade"
+  ) +
+  ggplot2::theme_minimal(base_size = 11) +
+  ggplot2::theme(plot.title = ggplot2::element_text(face = "bold"))
+
+# Painel C — Espaço de alucinação
+n <- 300
+df_space <- data.frame(
+  plausibilidade = runif(n),
+  veracidade     = runif(n)
+)
+
+df_space$regiao <- ifelse(
+  df_space$plausibilidade > 0.6 & df_space$veracidade <= 0.4,
+  "Alucinação",
+  "Outros"
+)
+
+exemplos <- data.frame(
+  plausibilidade = c(0.85),
+  veracidade     = c(0.20),
+  texto = "Resposta fluente,\nmas factualmente falsa"
+)
+
+p_space <- ggplot2::ggplot(df_space, ggplot2::aes(plausibilidade, veracidade)) +
+  ggplot2::geom_point(
+    aes(color = regiao),
+    alpha = 0.4, size = 2
+  ) +
+  ggplot2::geom_vline(xintercept = 0.6, linetype = "dashed") +
+  ggplot2::geom_hline(yintercept = 0.6, linetype = "dashed") +
+  ggplot2::geom_point(
+    data = exemplos,
+    ggplot2::aes(plausibilidade, veracidade),
+    inherit.aes = FALSE,
+    shape = 21, fill = "white", size = 4, stroke = 1.2
+  ) +
+  ggrepel::geom_text_repel(
+    data = exemplos,
+    aes(plausibilidade, veracidade, label = texto),
+    inherit.aes = FALSE,
+    size = 3.2
+  ) +
+  ggplot2::scale_color_manual(
+    values = c("Alucinação" = "#D32F2F", "Outros" = "#9E9E9E")
+  ) +
+  ggplot2::labs(
+    title = "C) Alucinação em modelos generativos",
+    x = "Plausibilidade linguística",
+    y = "Veracidade factual",
+    color = NULL
+  ) +
+  ggplot2::theme_minimal(base_size = 11) +
+  ggplot2::theme(plot.title = ggplot2::element_text(face = "bold"),
+        legend.position = "none")
+
+# Figura final (3 painéis)
+gridExtra::grid.arrange(
+  p_pipeline,
+  p_prob,
+  p_space,
+  ncol = 1,
+  heights = c(1, 1.2, 1.6)
+)
+```
+
+<br>
+
+### Por que modelos generativos alucinam?
+
+- Modelos generativos são treinados para maximizar a probabilidade do próximo token dado um contexto, e não para verificar fatos ou manter correspondência com a realidade externa.[@REF]
+
+- O critério de otimização privilegia a verossimilhança estatística da linguagem, não a veracidade epistemológica do conteúdo.[@REF]
+
+<br>
+
+### Alucinações indicam erro do modelo?
+
+- Alucinações não indicam que o modelo “aprendeu errado”, mas que ele aprendeu exatamente o que foi solicitado: produzir linguagem plausível, não conhecimento verdadeiro.[@REF]
+
+- Do ponto de vista matemático, uma resposta alucinatória pode ser ótima segundo a função de perda, mesmo sendo incorreta no mundo real.[@REF]
+
+<br>
+
+### Qual a diferença entre erro estatístico e alucinação?
+
+- Erros estatísticos decorrem de limitações de generalização, ruído nos dados ou inadequação do modelo ao problema.[@REF]
+
+- Alucinações decorrem da ausência de mecanismos internos de checagem factual e constituem um fenômeno semântico e comunicacional, não um erro numérico.[@REF]
+
+<br>
+
+### Quais tipos de alucinação são mais comuns?
+
+- Alucinação factual: afirmação de fatos inexistentes ou incorretos.[@REF]
+
+- Alucinação de fonte: citação de autores, artigos ou documentos inexistentes.[@REF]
+
+- Alucinação causal: inferência de relações de causa e efeito sem fundamento empírico.[@REF]
+
+<br>
+
+### Por que alucinações são um problema prático?
+
+- Porque a fluência linguística do modelo pode induzir confiança indevida em informações erradas, especialmente em contextos científicos, clínicos, jurídicos e educacionais.[@REF]
+
+<br>
+
+### É possível eliminar completamente as alucinações?
+
+- Até o momento, não. Alucinações são uma consequência estrutural do paradigma generativo probabilístico e podem apenas ser mitigadas, não eliminadas.[@REF]
+
+- Estratégias como *prompting* controlado, ajuste de temperatura, recuperação de informações externas e validação pós-geração reduzem sua frequência, mas não suprimem o fenômeno.[@REF]
 
 <br>
 
