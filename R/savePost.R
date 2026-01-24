@@ -59,12 +59,12 @@ SavePost_df <- function(entry, bib) {
     png::writePNG(img, fpath)
     
     cover <- magick::image_read("images/Cover_1.png") |>
-      magick::image_scale("400x400")
+      magick::image_scale("200x200")
     
     final <- magick::image_composite(
       magick::image_read(fpath),
       cover,
-      offset = "+1200+0"
+      offset = "+930+0"
     )
     
     magick::image_write(final, fpath, density = 300)
@@ -193,12 +193,12 @@ SavePost_df <- function(entry, bib) {
   png::writePNG(img, fpath)
   
   cover <- magick::image_read("images/Cover_1.png") |>
-    magick::image_scale("400x400")
+    magick::image_scale("200x200")
   
   final <- magick::image_composite(
     magick::image_read(fpath),
     cover,
-    offset = "+1200+0"
+    offset = "+930+0"
   )
   
   magick::image_write(final, fpath, density = 300)
