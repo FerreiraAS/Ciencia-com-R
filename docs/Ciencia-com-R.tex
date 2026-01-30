@@ -826,7 +826,7 @@ P(E) = \frac{\text{número de desfechos em } E}{\text{número de desfechos em } 
 \begin{itemize}
 \tightlist
 \item
-  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.5 e variância \(\sigma^{2}\) = 0.253. A distribuição amostral da média de 100 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.501 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
+  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.45 e variância \(\sigma^{2}\) = 0.25. A distribuição amostral da média de 100 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.451 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
 \end{itemize}
 
 \begin{figure}
@@ -11267,6 +11267,56 @@ O pacote \emph{reticulate}\href{https://cran.r-project.org/web/packages/reticula
 O pacote \emph{fastml}\textsuperscript{\citeproc{ref-fastml}{344}} fornece a função \href{https://cran.r-project.org/web/packages/fastml/fastml.pdf}{\emph{train\_models}} para treinar algoritmos de aprendizado de máquina em dados de treinamento pré-processados.
 
 \end{infobox}
+
+\section{Representação de dados e engenharia de atributos}\label{representauxe7uxe3o-de-dados-e-engenharia-de-atributos}
+
+\subsection{Como representar texto como vetores?}\label{como-representar-texto-como-vetores}
+
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
+
+\subsection{\texorpdfstring{O que é \emph{one-hot}, \emph{multi-hot} e \emph{count encoding}?}{O que é one-hot, multi-hot e count encoding?}}\label{o-que-uxe9-one-hot-multi-hot-e-count-encoding}
+
+\begin{itemize}
+\item
+  \emph{One-hot encoding}: cria uma coluna binária para cada categoria de uma variável categórica, indicando a presença (1) ou ausência (0) da categoria em cada observação.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\item
+  \emph{Multi-hot encoding}: semelhante ao one-hot, mas permite que múltiplas categorias sejam representadas simultaneamente em uma única observação, útil para variáveis com múltiplas seleções.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\item
+  \emph{Count encoding}: substitui categorias por contagens de sua ocorrência no conjunto de dados, capturando a frequência relativa de cada categoria.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+\end{itemize}
+
+\begin{table}
+\centering
+\caption{\label{tab:hot-encoding}Exemplo de codificação one-hot, multi-hot e count encoding para representação de texto.}
+\centering
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{Termo} & \textbf{avalia} & \textbf{cuidado} & \textbf{equipe} & \textbf{executa} & \textbf{final} & \textbf{planeja} & \textbf{projeto} & \textbf{revisa} & \textbf{tarefas}\\
+\midrule
+equipe & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & \vphantom{1} 0\\
+planeja & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+projeto & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & \vphantom{2} 0\\
+cuidado & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+equipe & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+executa & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+tarefas & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \vphantom{1} 1\\
+projeto & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & \vphantom{1} 0\\
+revisa & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+tarefas & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+avalia & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+projeto & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+final & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+\cellcolor[HTML]{F2F2F2}{\textbf{One-hot encoding}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}}\\
+\cellcolor[HTML]{F2F2F2}{\textbf{Multi-hot encoding}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}}\\
+\cellcolor[HTML]{F2F2F2}{\textbf{Count encoding}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{2}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{3}} & \cellcolor[HTML]{F2F2F2}{\textbf{1}} & \cellcolor[HTML]{F2F2F2}{\textbf{2}}\\
+\bottomrule
+\multicolumn{10}{l}{\rule{0pt}{1em}\textit{Frase original:}}\\
+\multicolumn{10}{l}{\rule{0pt}{1em}A equipe planeja o projeto com cuidado, a equipe executa as tarefas do projeto, revisa as tarefas e avalia o projeto final.}\\
+\end{tabu}
+\end{table}
 
 \section{Tipos de aprendizado}\label{tipos-de-aprendizado}
 

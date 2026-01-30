@@ -180,6 +180,132 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 <br>
 
+## Representação de dados e engenharia de atributos
+
+<br>
+
+### Como representar texto como vetores?
+
+- 
+
+<br>
+
+### O que é *one-hot*, *multi-hot* e *count encoding*?
+
+-  *One-hot encoding*: cria uma coluna binária para cada categoria de uma variável categórica, indicando a presença (1) ou ausência (0) da categoria em cada observação.[@REF]
+
+-  *Multi-hot encoding*: semelhante ao one-hot, mas permite que múltiplas categorias sejam representadas simultaneamente em uma única observação, útil para variáveis com múltiplas seleções.[@REF]
+
+-  *Count encoding*: substitui categorias por contagens de sua ocorrência no conjunto de dados, capturando a frequência relativa de cada categoria.[@REF]
+
+<br>
+
+```{r hot-encoding, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de codificação one-hot, count encoding e multi-hot encoding."}
+library(dplyr)
+
+# Texto original
+texto <- "A equipe planeja o projeto com cuidado, a equipe executa as tarefas do projeto, revisa as tarefas e avalia o projeto final."
+
+# Tokenização simples
+tokens <- texto %>%
+  stringr::str_to_lower() %>%
+  stringr::str_replace_all("[[:punct:]]", "") %>%
+  stringr::str_split("\\s+") %>%
+  unlist() %>%
+  purrr::discard(~ .x == "")
+
+# remove stop words
+stop_words <- stopwords::stopwords("pt")
+tokens <- tokens[!tokens %in% stop_words]
+
+# Vocabulário
+vocab <- sort(unique(tokens))
+
+# One-hot por token (token-level)
+token_matrix <- matrix(
+  0,
+  nrow = length(tokens),
+  ncol = length(vocab),
+  dimnames = list(NULL, vocab)
+)
+
+for (i in seq_along(tokens)) {
+  token_matrix[i, tokens[i]] <- 1
+}
+
+# Agregações (document-level)
+count_encoding     <- colSums(token_matrix)
+multi_hot_encoding <- as.numeric(count_encoding > 0)
+
+# One-hot agregado (binário)
+one_hot_aggregated <- multi_hot_encoding
+
+# Construir data.frame final
+final_df <- data.frame(
+  Termo = c(
+    tokens,
+    "One-hot encoding",
+    "Multi-hot encoding",
+    "Count encoding"
+  ),
+  rbind(
+    token_matrix,
+    one_hot_aggregated,
+    multi_hot_encoding,
+    count_encoding
+  ),
+  check.names = FALSE
+)
+
+rownames(final_df) <- NULL
+
+# Impressão com kable
+knitr::kable(
+  final_df,
+  align = c("l", rep("c", ncol(final_df) - 1)),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE,
+  caption = "Exemplo de codificação one-hot, multi-hot e count encoding para representação de texto."
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE,
+    extra_css = "border-top: 1px solid black; border-bottom: 1px solid black;"
+  ) %>%
+  kableExtra::row_spec(
+    nrow(final_df) - 2,
+    bold = TRUE,
+    background = "#F2F2F2",
+    extra_css = "border-top: 1px solid black; border-bottom: 1px solid black;"
+  ) %>%
+  kableExtra::row_spec(
+    nrow(final_df) - 1,
+    bold = TRUE,
+    background = "#F2F2F2",
+    extra_css = "border-top: 1px solid black; border-bottom: 1px solid black;"
+  ) %>%
+  kableExtra::row_spec(
+    nrow(final_df), 
+    bold = TRUE,
+    background = "#F2F2F2",
+    extra_css = "border-top: 1px solid black; border-bottom: 1px solid black;"
+  ) %>% 
+  kableExtra::footnote(
+    general_title = "Frase original:",
+    general = texto
+  )
+```
+
+<br>
+
 ## Tipos de aprendizado
 
 <br>
