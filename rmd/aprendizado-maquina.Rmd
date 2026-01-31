@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Aprendizado de máquina** {#aprendizado-maquina}
 
 <br>
@@ -186,17 +185,17 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 ### Como representar texto como vetores?
 
-- 
+-   
 
 <br>
 
 ### O que é *one-hot*, *multi-hot* e *count encoding*?
 
--  *One-hot encoding*: cria uma coluna binária para cada categoria de uma variável categórica, indicando a presença (1) ou ausência (0) da categoria em cada observação.[@REF]
+-   *One-hot encoding*: cria uma coluna binária para cada categoria de uma variável categórica, indicando a presença (1) ou ausência (0) da categoria em cada observação.[@REF]
 
--  *Multi-hot encoding*: semelhante ao one-hot, mas permite que múltiplas categorias sejam representadas simultaneamente em uma única observação, útil para variáveis com múltiplas seleções.[@REF]
+-   *Multi-hot encoding*: semelhante ao one-hot, mas permite que múltiplas categorias sejam representadas simultaneamente em uma única observação, útil para variáveis com múltiplas seleções.[@REF]
 
--  *Count encoding*: substitui categorias por contagens de sua ocorrência no conjunto de dados, capturando a frequência relativa de cada categoria.[@REF]
+-   *Count encoding*: substitui categorias por contagens de sua ocorrência no conjunto de dados, capturando a frequência relativa de cada categoria.[@REF]
 
 <br>
 
@@ -706,7 +705,157 @@ O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html)
 
 ### O que é análise de componentes principais?
 
--   .[@REF]
+- A análise de componentes principais (*Principal Component Analysis*, PCA) é uma técnica estatística amplamente utilizada para redução de dimensionalidade, para representar dados de alta dimensão por um conjunto menor de variáveis, preservando o máximo possível da variabilidade original.[@dyer2023]
+
+- O primeiro componente principal é definido como a direção, de comprimento unitário, que maximiza a variância dos dados projetados. Ele corresponde ao eixo ao longo do qual os dados apresentam a maior dispersão, concentrando a maior quantidade de informação estatística disponível.[@dyer2023]
+
+- O segundo componente principal é a direção que maximiza a variância restante, sob a condição de ser ortogonal ao primeiro componente. Essa restrição garante que cada novo componente adicione informação nova, não redundante, à representação dos dados.[@dyer2023]
+
+- Esse procedimento é repetido para os componentes subsequentes, de forma que cada componente principal seja ortogonal aos anteriores e capture a maior variância possível ainda não explicada, resultando em uma ordenação natural dos componentes por importância.[@dyer2023]
+
+- Ao final do processo, a PCA produz uma base ortogonal que impõe uma geometria específica à representação dos dados, restringindo a forma como os dados podem ser reconstruídos a partir dos componentes principais.[@dyer2023]
+
+- Embora os componentes principais descrevam de maneira eficiente a variabilidade dos dados, eles nem sempre correspondem aos fatores geradores subjacentes do fenômeno estudado. A PCA pode ainda introduzir padrões artificiais, criando uma aparência de estrutura que não reflete necessariamente os processos reais de geração dos dados.[@dyer2023]
+
+<br>
+
+```{r pca-facto-mineR, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Análise de Componentes Principais (PCA). O PC1 maximiza variância total, mas pode não alinhar com o fator latente real (z1)."}
+# Reprodutibilidade
+set.seed(123)
+
+# Função de rotação 2D
+rot2 <- function(theta) {
+  matrix(c(cos(theta), -sin(theta),
+           sin(theta),  cos(theta)), nrow = 2, byrow = TRUE)
+}
+
+# Gerando dados — Cenário 1
+n <- 800
+
+# Fatores geradores latentes
+z1 <- rnorm(n)
+z2 <- rnorm(n)
+Z  <- cbind(z1, z2)
+
+# Mistura linear (sinal)
+theta <- pi / 5
+A <- rot2(theta) %*% diag(c(1.2, 0.6))
+X_signal <- Z %*% t(A)
+
+# Ruído anisotrópico
+noise_theta <- pi / 10
+B <- rot2(noise_theta) %*% diag(c(0.9, 0.15)) %*% t(rot2(noise_theta))
+E <- matrix(rnorm(n * 2), n, 2) %*% chol(B)
+
+X <- X_signal + E
+colnames(X) <- c("x1", "x2")
+
+df_raw <- data.frame(x1 = X[,1], x2 = X[,2], z1 = z1)
+
+# PCA com FactoMineR
+res_pca <- FactoMineR::PCA(
+  X,
+  scale.unit = FALSE,
+  graph = FALSE
+)
+
+# Scores (indivíduos)
+df_scores <- as.data.frame(res_pca$ind$coord[, 1:2])
+colnames(df_scores) <- c("PC1", "PC2")
+df_scores$z1 <- z1
+
+# Loadings (variáveis)
+df_load <- as.data.frame(res_pca$var$coord[, 1:2])
+df_load$var <- rownames(df_load)
+
+# Variância explicada
+df_var <- data.frame(
+  PC = factor(c("PC1", "PC2"), levels = c("PC1", "PC2")),
+  var = res_pca$eig[1:2, 2] / 100
+)
+
+# Gráfico 1 — Espaço original
+p_raw <- ggplot2::ggplot(df_raw, ggplot2::aes(x1, x2, color = z1)) +
+  ggplot2::geom_point(alpha = 0.65, size = 1.6) +
+  ggplot2::coord_equal() +
+  ggplot2::labs(
+    title = "Espaço original",
+    subtitle = "Cor indica o fator gerador real (z1)",
+    x = "x1", y = "x2", color = "z1"
+  ) +
+  ggplot2::theme_minimal(base_size = 12)
+
+# Gráfico 2 — Espaço PCA
+p_pca <- ggplot2::ggplot(df_scores, ggplot2::aes(PC1, PC2, color = z1)) +
+  ggplot2::geom_point(alpha = 0.65, size = 1.6) +
+  ggplot2::coord_equal() +
+  ggplot2::labs(
+    title = "Espaço PCA",
+    subtitle = sprintf(
+      "Var(PC1)=%.1f%% | Var(PC2)=%.1f%%",
+      res_pca$eig[1,2], res_pca$eig[2,2]
+    ),
+    x = "PC1", y = "PC2", color = "z1"
+  ) +
+  ggplot2::theme_minimal(base_size = 12)
+
+# Gráfico 3 — Biplot
+scale_loading <- 3
+df_load$PC1s <- df_load$Dim.1 * scale_loading
+df_load$PC2s <- df_load$Dim.2 * scale_loading
+
+p_biplot <- ggplot2::ggplot(df_scores, ggplot2::aes(PC1, PC2)) +
+  ggplot2::geom_point(alpha = 0.35, size = 1.4) +
+  ggplot2::geom_segment(
+    data = df_load,
+    ggplot2::aes(x = 0, y = 0, xend = PC1s, yend = PC2s),
+    arrow = arrow(length = ggplot2::unit(0.18, "inches")),
+    linewidth = 0.9
+  ) +
+  ggplot2::geom_text(
+    data = df_load,
+    ggplot2::aes(x = PC1s, y = PC2s, label = var),
+    vjust = -0.6,
+    size = 4
+  ) +
+  ggplot2::coord_equal() +
+  ggplot2::labs(
+    title = "Biplot",
+    subtitle = "PCs descrevem variância, não fatores geradores",
+    x = "PC1", y = "PC2"
+  ) +
+  ggplot2::theme_minimal(base_size = 12)
+
+# Gráfico 4 — Variância explicada
+p_var <- ggplot2::ggplot(df_var, ggplot2::aes(PC, var)) +
+  ggplot2::geom_col() +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  ggplot2::labs(
+    title = "Scree plot",
+    subtitle = sprintf(
+      "Variância total dos dados originais: %.1f%%",
+      sum(res_pca$eig[, 2])
+    ),
+    x = NULL,
+    y = "Proporção"
+  ) +
+  ggplot2::theme_minimal(base_size = 12)
+
+# Painel final 2x2
+panel <- (p_raw | p_pca) / (p_biplot | p_var) +
+  patchwork::plot_annotation(
+    title = "PCA: máxima variância ≠ fator gerador",
+  )
+
+print(panel)
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.
+:::
+
 
 <br>
 

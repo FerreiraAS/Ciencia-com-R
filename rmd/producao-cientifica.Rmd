@@ -71,7 +71,7 @@ if (!sjmisc::is_empty(my_works)) {
 
 <br>
 
-```{r journal-article, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+```{r journal-article, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
 # get citations from DOI
 citations <- rcrossref::cr_cn(
   dois = my_dois_works$external_id_value[my_dois_works$type == 'journal-article'],
@@ -92,7 +92,7 @@ for (i in 1:length(citations)) {
 
 <br>
 
-```{r preprint, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+```{r preprint, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
 # get citations from DOI
 citations <- rcrossref::cr_cn(
   dois = my_dois_works$external_id_value[my_dois_works$type == 'preprint'],
@@ -113,7 +113,7 @@ for (i in 1:length(citations)) {
 
 <br>
 
-```{r conference-paper, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+```{r conference-paper, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
 # get citations from DOI
 citations <- rcrossref::cr_cn(
   dois = my_dois_works$external_id_value[my_dois_works$type == 'conference-paper'],
@@ -134,7 +134,7 @@ for (i in 1:length(citations)) {
 
 <br>
 
-```{r edited-book, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+```{r edited-book, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
 # get citations from DOI
 citations <- rcrossref::cr_cn(
   dois = my_dois_works$external_id_value[my_dois_works$type == 'edited-book'],
@@ -155,7 +155,7 @@ for (i in 1:length(citations)) {
 
 <br>
 
-```{r book-chapter, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+```{r book-chapter, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
 # get citations from DOI
 citations <- rcrossref::cr_cn(
   dois = my_dois_works$external_id_value[my_dois_works$type == 'book-chapter'],
@@ -176,7 +176,7 @@ for (i in 1:length(citations)) {
 
 <br>
 
-```{r lecture-speech, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+```{r lecture-speech, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
 # get citations from DOI
 citations <- rcrossref::cr_cn(
   dois = my_dois_works$external_id_value[my_dois_works$type == 'lecture-speech'],
@@ -197,7 +197,7 @@ for (i in seq_along(citations)) {
 
 <br>
 
-```{r software, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+```{r software, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
 # get citations from DOI
 citations <- rcrossref::cr_cn(
   dois = my_dois_works$external_id_value[my_dois_works$type == 'software'],
@@ -218,7 +218,7 @@ for (i in seq_along(citations)) {
 
 <br>
 
-```{r data-set, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+```{r data-set, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
 # get citations from DOI
 citations <- rcrossref::cr_cn(
   dois = my_dois_works$external_id_value[my_dois_works$type == 'data-set'],
@@ -239,7 +239,7 @@ for (i in seq_along(citations)) {
 
 <br>
 
-```{r other, echo = FALSE, warning = FALSE, message = FALSE, results = "asis"}
+```{r other, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
 # get citations from DOI
 citations <- rcrossref::cr_cn(
   dois = my_dois_works$external_id_value[my_dois_works$type == 'other'],

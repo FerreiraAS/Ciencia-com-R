@@ -3161,8 +3161,24 @@ Figura 42.4: Comparação entre modelos de regressão logística e árvore de de
 <div id="o-que-é-análise-de-componentes-principais" class="section level3 hasAnchor" number="42.10.1">
 <h3><span class="header-section-number">42.10.1</span> O que é análise de componentes principais?<a href="aprendizado-maquina.html#o-que-%C3%A9-an%C3%A1lise-de-componentes-principais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+<li><p>A análise de componentes principais (<em>Principal Component Analysis</em>, PCA) é uma técnica estatística amplamente utilizada para redução de dimensionalidade, para representar dados de alta dimensão por um conjunto menor de variáveis, preservando o máximo possível da variabilidade original.<span class="citation"><sup><a href="#ref-dyer2023">348</a></sup></span></p></li>
+<li><p>O primeiro componente principal é definido como a direção, de comprimento unitário, que maximiza a variância dos dados projetados. Ele corresponde ao eixo ao longo do qual os dados apresentam a maior dispersão, concentrando a maior quantidade de informação estatística disponível.<span class="citation"><sup><a href="#ref-dyer2023">348</a></sup></span></p></li>
+<li><p>O segundo componente principal é a direção que maximiza a variância restante, sob a condição de ser ortogonal ao primeiro componente. Essa restrição garante que cada novo componente adicione informação nova, não redundante, à representação dos dados.<span class="citation"><sup><a href="#ref-dyer2023">348</a></sup></span></p></li>
+<li><p>Esse procedimento é repetido para os componentes subsequentes, de forma que cada componente principal seja ortogonal aos anteriores e capture a maior variância possível ainda não explicada, resultando em uma ordenação natural dos componentes por importância.<span class="citation"><sup><a href="#ref-dyer2023">348</a></sup></span></p></li>
+<li><p>Ao final do processo, a PCA produz uma base ortogonal que impõe uma geometria específica à representação dos dados, restringindo a forma como os dados podem ser reconstruídos a partir dos componentes principais.<span class="citation"><sup><a href="#ref-dyer2023">348</a></sup></span></p></li>
+<li><p>Embora os componentes principais descrevam de maneira eficiente a variabilidade dos dados, eles nem sempre correspondem aos fatores geradores subjacentes do fenômeno estudado. A PCA pode ainda introduzir padrões artificiais, criando uma aparência de estrutura que não reflete necessariamente os processos reais de geração dos dados.<span class="citation"><sup><a href="#ref-dyer2023">348</a></sup></span></p></li>
 </ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:pca-facto-mineR"></span>
+<img src="Ciencia-com-R_files/figure-html/pca-facto-mineR-1.png" alt="Análise de Componentes Principais (PCA). O PC1 maximiza variância total, mas pode não alinhar com o fator latente real (z1)." width="672" />
+<p class="caption">
+Figura 42.5: Análise de Componentes Principais (PCA). O PC1 maximiza variância total, mas pode não alinhar com o fator latente real (z1).
+</p>
+</div>
+<p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>mlr3</em><a href="https://cran.r-project.org/web/packages/mlr3/index.html">@mlr3</a> fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.</p>
+</div>
 <p><br></p>
 </div>
 </div>
@@ -3218,9 +3234,9 @@ Figura 42.4: Comparação entre modelos de regressão logística e árvore de de
 <div id="qual-é-o-impacto-do-desbalanceamento-de-classes-na-calibração-de-modelos" class="section level3 hasAnchor" number="42.13.4">
 <h3><span class="header-section-number">42.13.4</span> Qual é o impacto do desbalanceamento de classes na calibração de modelos?<a href="aprendizado-maquina.html#qual-%C3%A9-o-impacto-do-desbalanceamento-de-classes-na-calibra%C3%A7%C3%A3o-de-modelos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Corrigir o desbalanceamento de classes nem sempre melhora a calibração e, em alguns casos, pode piorá-la.<span class="citation"><sup><a href="#ref-carriero2025">348</a></sup></span></p></li>
-<li><p>Em simulações computacionais, modelos sem correção tiveram calibração igual ou superior aos corrigidos.<span class="citation"><sup><a href="#ref-carriero2025">348</a></sup></span></p></li>
-<li><p>A piora observada foi caracterizada por superestimação do risco, nem sempre reversível com re-calibração.<span class="citation"><sup><a href="#ref-carriero2025">348</a></sup></span></p></li>
+<li><p>Corrigir o desbalanceamento de classes nem sempre melhora a calibração e, em alguns casos, pode piorá-la.<span class="citation"><sup><a href="#ref-carriero2025">349</a></sup></span></p></li>
+<li><p>Em simulações computacionais, modelos sem correção tiveram calibração igual ou superior aos corrigidos.<span class="citation"><sup><a href="#ref-carriero2025">349</a></sup></span></p></li>
+<li><p>A piora observada foi caracterizada por superestimação do risco, nem sempre reversível com re-calibração.<span class="citation"><sup><a href="#ref-carriero2025">349</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <style>
@@ -3279,8 +3295,11 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
 <div id="ref-andaurnavarro2023" class="csl-entry">
 <div class="csl-left-margin">347. </div><div class="csl-right-inline">Andaur Navarro CL, Damen JAA, Smeden M van, et al. Systematic review identifies the design and methodological conduct of studies on machine learning-based prediction models. <em>Journal of Clinical Epidemiology</em>. 2023;154:8–22. doi:<a href="https://doi.org/10.1016/j.jclinepi.2022.11.015">10.1016/j.jclinepi.2022.11.015</a></div>
 </div>
+<div id="ref-dyer2023" class="csl-entry">
+<div class="csl-left-margin">348. </div><div class="csl-right-inline">Dyer EL, Kording K. Why the simplest explanation isn<span>’</span>t always the best. <em>Proceedings of the National Academy of Sciences</em>. 2023;120(52). doi:<a href="https://doi.org/10.1073/pnas.2319169120">10.1073/pnas.2319169120</a></div>
+</div>
 <div id="ref-carriero2025" class="csl-entry">
-<div class="csl-left-margin">348. </div><div class="csl-right-inline">Carriero A, Luijken K, Hond A de, Moons KGM, Calster B van, Smeden M van. The Harms of Class Imbalance Corrections for Machine Learning Based Prediction Models: A Simulation Study. <em>Statistics in Medicine</em>. 2025;44(3-4). doi:<a href="https://doi.org/10.1002/sim.10320">10.1002/sim.10320</a></div>
+<div class="csl-left-margin">349. </div><div class="csl-right-inline">Carriero A, Luijken K, Hond A de, Moons KGM, Calster B van, Smeden M van. The Harms of Class Imbalance Corrections for Machine Learning Based Prediction Models: A Simulation Study. <em>Statistics in Medicine</em>. 2025;44(3-4). doi:<a href="https://doi.org/10.1002/sim.10320">10.1002/sim.10320</a></div>
 </div>
 </div>
             </section>
