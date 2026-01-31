@@ -470,9 +470,52 @@ knitr::kable(
 
 <br>
 
-### O que são é regressão logística?
+### O que é regressão logística?
 
--   .[@REF]
+-   Modelos logísticos são casos de regressão linear generalizada em que a resposta $Y$ é binária.[@fernandes2020]
+
+-   A equação \@ref(eq:regressao-logistica) modela a razão de chances (*odds*) em função dos preditores.[@fernandes2020]
+
+\begin{equation}
+(\#eq:regressao-logistica)
+\log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X + ... + \beta_n X_n
+\end{equation}
+
+<br>
+
+-   A ligação (*link*) usada é o logit \@ref(eq:link-logit).[@fernandes2020]
+
+\begin{equation}
+(\#eq:link-logit)
+g(p) = \log\left(\frac{p}{1-p}\right)
+\end{equation}
+
+<br>
+
+```{r ml-regressao-logistica, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão logística."}
+# simulate X
+set.seed(123)
+X <- rnorm(100, mean = 50, sd = 10)
+
+# simulate a binary outcome Y based on X
+prob <- 1 / (1 + exp(-( -5 + 0.1 * X)))  # logistic function
+Y <- rbinom(100, size = 1, prob = prob) # sample Y ~ Bernoulli(prob)
+
+# create a dataframe
+data <- data.frame(X, Y)
+
+# create the logistic regression model
+model <- glm(Y ~ X, data = data, family = binomial)
+
+# plot the regression line
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(method = "glm", method.args = list(family = "binomial"), color = "blue") +
+  ggplot2::labs(title = "Regressão logística",
+       x = "Variável Independente (X)",
+       y = "Probabilidade de Sucesso (Y)") +
+  ggplot2::theme_minimal()
+```
 
 <br>
 

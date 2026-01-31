@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Regressão** {#regressao}
 
 <br>
@@ -230,9 +229,9 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são modelos de regressão logística?
 
--   Modelos logísticos são casos de regressão linear generalizada em que a resposta $Y$ é binária.[@REF]
+-   Modelos logísticos são casos de regressão linear generalizada em que a resposta $Y$ é binária.[@fernandes2020]
 
--   A equação \@ref(eq:regressao-logistica) modela a razão de chances (*odds*) em função dos preditores.[@REF]
+-   A equação \@ref(eq:regressao-logistica) modela a razão de chances (*odds*) em função dos preditores.[@fernandes2020]
 
 \begin{equation}
 (\#eq:regressao-logistica)
@@ -241,7 +240,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
--   A ligação (*link*) usada é o logit \@ref(eq:link-logit).[@REF]
+-   A ligação (*link*) usada é o logit \@ref(eq:link-logit).[@fernandes2020]
 
 \begin{equation}
 (\#eq:link-logit)
@@ -250,7 +249,13 @@ g(p) = \log\left(\frac{p}{1-p}\right)
 
 <br>
 
-```{r regressao-logistica, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão logística."}
+- A interpretação dos coeficientes $\beta_i$ pode ser feita em termos de razões de chances (*odds ratios*, $OR$), por exponenciação dos coeficientes: $OR_i = e^{\beta_i}$, o que representa o fator multiplicativo na $OR$ do desfecho para cada aumento de uma unidade em $X_i$ (mantendo os demais preditores constantes).[@fernandes2020]
+
+- A intepretação pode ser feita por estimativa da variação percentual na chance ($OR$) de ocorrência de $Y$, calculando $(e^b - 1) \times 100$, de modo que um aumento de 1 unidade em $X$ está associado a um aumento de $(e^b - 1) \times 100\%$ na chance de $Y$ ocorrer (mantidos os demais preditores constantes).
+
+<br>
+
+```{r regr-regressao-logistica, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão logística."}
 # simulate X
 set.seed(123)
 X <- rnorm(100, mean = 50, sd = 10)
