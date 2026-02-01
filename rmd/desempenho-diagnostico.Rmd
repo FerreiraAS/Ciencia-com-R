@@ -605,7 +605,7 @@ O pacote *proc*[@pROC] fornece a função [*plot.roc*](https://www.rdocumentatio
 
 <br>
 
-```{r roc, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Curva ROC (Receiver Operating Characteristic) para um modelos de classificação com diferentes desempenhos diagnósticos."}
+```{r roc, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Curva ROC (Receiver Operating Characteristic) para um modelos de classificação com diferentes desempenhos diagnósticos.", fig.width=15, fig.height=4, dpi=300, out.width="100%"}
 # reproduzível
 set.seed(123)
 
@@ -831,19 +831,52 @@ df <- df %>%
     size_pt = scales::rescale(tot_n, to = c(2.5, 6))  # point size by N
   )
 
-# ---- ggplot crosshair in ROC space ----
+# ---- plot crosshair ----
 p <- ggplot2::ggplot(df, ggplot2::aes(x = fpr, y = sens)) +
-  ggplot2::geom_errorbar(ggplot2::aes(ymin = sens_low, ymax = sens_up), width = 0.008, alpha = 0.8) +
-  ggplot2::geom_errorbarh(ggplot2::aes(xmin = fpr_low, xmax = fpr_up), height = 0.008, alpha = 0.8) +
-  ggplot2::geom_point(aes(size = size_pt), shape = 21, fill = "gray20", color = "white") +
+  ggplot2::geom_abline(
+    slope = 1, intercept = 0,
+    linetype = "dashed", colour = "grey50", linewidth = 0.6
+  ) +
+  ggplot2::geom_errorbar(
+    ggplot2::aes(ymin = sens_low, ymax = sens_up),
+    width = 0.008, alpha = 0.8
+  ) +
+  ggplot2::geom_errorbarh(
+    ggplot2::aes(xmin = fpr_low, xmax = fpr_up),
+    height = 0.008, alpha = 0.8
+  ) +
+  ggplot2::geom_point(
+    ggplot2::aes(size = size_pt),
+    shape = 21, fill = "gray20", color = "white"
+  ) +
   ggplot2::scale_size_identity() +
-  ggplot2::coord_equal(xlim = c(0, 1), ylim = c(0, 1)) +
+  ggplot2::coord_equal(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
   ggplot2::labs(
     x = "1 – Specificity (False Positive Rate)",
     y = "Sensitivity (True Positive Rate)"
   ) +
-  ggplot2::theme_minimal(base_size = 14) +
-  ggplot2::theme(panel.grid.minor = ggplot2::element_blank())
+  ggplot2::theme(
+    # remove all grid lines
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+
+    # white background
+    panel.background = ggplot2::element_blank(),
+
+    # square black border
+    panel.border = ggplot2::element_rect(
+      colour = "black", fill = NA, linewidth = 0.8
+    ),
+
+    # keep axis lines off (border replaces them)
+    axis.line = ggplot2::element_blank(),
+
+    # ticks visible
+    axis.ticks = ggplot2::element_line(colour = "black"),
+
+    # clean text
+    text = ggplot2::element_text(size = 14)
+  )
 
 p
 ```

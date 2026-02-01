@@ -636,7 +636,7 @@ rpart.plot::rpart.plot(mod, type=3, extra=104, fallen.leaves=TRUE)
 
 <br>
 
-```{r logistica-vs-arvore, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Comparação entre modelos de regressão logística e árvore de decisão."}
+```{r logistica-vs-arvore, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Comparação entre modelos de regressão logística e árvore de decisão.", fig.width=15, fig.height=8, out.width="100%"}
 # Reprodutibilidade
 set.seed(42)
 
@@ -659,16 +659,40 @@ grid <- expand.grid(
 grid$glm_pred <- predict(glm_mod, newdata=grid, type="response") > 0.5
 grid$tree_pred <- predict(tree_mod, newdata=grid, type="class")
 
+lims <- range(c(df$x1, df$x2), na.rm = TRUE)
+
 # Plot lado a lado
 p1 <- ggplot2::ggplot() +
-  ggplot2::geom_tile(data=grid, ggplot2::aes(x1, x2, fill=glm_pred), alpha=0.3) +
-  ggplot2::geom_point(data=df, ggplot2::aes(x1, x2, color=y)) +
-  ggplot2::labs(title="Logística (linear)") + ggplot2::theme_minimal()
+  ggplot2::geom_tile(
+    data = grid,
+    ggplot2::aes(x1, x2, fill = glm_pred),
+    alpha = 0.3
+  ) +
+  ggplot2::geom_point(
+    data = df,
+    ggplot2::aes(x1, x2, color = y)
+  ) +
+  ggplot2::scale_x_continuous(limits = lims) +
+  ggplot2::scale_y_continuous(limits = lims) +
+  ggplot2::coord_equal(expand = FALSE) +
+  ggplot2::labs(title = "Logística (linear)") +
+  ggplot2::theme_minimal()
 
 p2 <- ggplot2::ggplot() +
-  ggplot2::geom_tile(data=grid, ggplot2::aes(x1, x2, fill=tree_pred), alpha=0.3) +
-  ggplot2::geom_point(data=df, ggplot2::aes(x1, x2, color=y)) +
-  ggplot2::labs(title="Árvore (não linear)") + ggplot2::theme_minimal()
+  ggplot2::geom_tile(
+    data = grid,
+    ggplot2::aes(x1, x2, fill = tree_pred),
+    alpha = 0.3
+  ) +
+  ggplot2::geom_point(
+    data = df,
+    ggplot2::aes(x1, x2, color = y)
+  ) +
+  ggplot2::scale_x_continuous(limits = lims) +
+  ggplot2::scale_y_continuous(limits = lims) +
+  ggplot2::coord_equal(expand = FALSE) +
+  ggplot2::labs(title = "Árvore (não linear)") +
+  ggplot2::theme_minimal()
 
 gridExtra::grid.arrange(p1, p2, ncol=2)
 ```

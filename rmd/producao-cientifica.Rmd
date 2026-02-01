@@ -16,6 +16,8 @@ library(dplyr)
 my_orcid <- c("0000-0001-7014-2002")
 my_name <- c("Arthur de Sá Ferreira")
 
+options(timeout = 60)
+
 # baixa todos os artigos (com repetições)
 my_works <- rorcid::works(my_orcid) %>%
   tibble::as_tibble() %>%
@@ -64,7 +66,6 @@ if (!sjmisc::is_empty(my_works)) {
   my_dois_works$ISSN <- my_dois_works_issn$ISSN[match(my_dois_works$put_code,
                                  my_dois_works_issn$put_code)]
 }
-
 ```
 
 ## Artigos em periódicos científicos {.unnumbered}
@@ -72,18 +73,19 @@ if (!sjmisc::is_empty(my_works)) {
 <br>
 
 ```{r journal-article, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
-# get citations from DOI
-citations <- rcrossref::cr_cn(
-  dois = my_dois_works$external_id_value[my_dois_works$type == 'journal-article'],
-  format = "text",
-  style = "american-medical-association-10th-edition",
-  locale = "pt-BR"
-  )
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "journal-article"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
 
-# print
-for (i in 1:length(citations)) {
-  cat(paste0(citations[i], "\n\n"))
-}
+cat(paste0(citations, collapse = "\n\n"))
 ```
 
 <br>
@@ -93,18 +95,19 @@ for (i in 1:length(citations)) {
 <br>
 
 ```{r preprint, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
-# get citations from DOI
-citations <- rcrossref::cr_cn(
-  dois = my_dois_works$external_id_value[my_dois_works$type == 'preprint'],
-  format = "text",
-  style = "american-medical-association-10th-edition",
-  locale = "pt-BR"
-  )
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "preprint"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
 
-# print
-for (i in 1:length(citations)) {
-  cat(paste0(citations[i], "\n\n"))
-}
+cat(paste0(citations, collapse = "\n\n"))
 ```
 
 <br>
@@ -114,18 +117,19 @@ for (i in 1:length(citations)) {
 <br>
 
 ```{r conference-paper, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
-# get citations from DOI
-citations <- rcrossref::cr_cn(
-  dois = my_dois_works$external_id_value[my_dois_works$type == 'conference-paper'],
-  format = "text",
-  style = "american-medical-association-10th-edition",
-  locale = "pt-BR"
-  )
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "conference-paper"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
 
-# print
-for (i in 1:length(citations)) {
-  cat(paste0(citations[i], "\n\n"))
-}
+cat(paste0(citations, collapse = "\n\n"))
 ```
 
 <br>
@@ -135,18 +139,19 @@ for (i in 1:length(citations)) {
 <br>
 
 ```{r edited-book, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
-# get citations from DOI
-citations <- rcrossref::cr_cn(
-  dois = my_dois_works$external_id_value[my_dois_works$type == 'edited-book'],
-  format = "text",
-  style = "american-medical-association-10th-edition",
-  locale = "pt-BR"
-  )
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "edited-book"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
 
-# print
-for (i in 1:length(citations)) {
-  cat(paste0(citations[i], "\n\n"))
-}
+cat(paste0(citations, collapse = "\n\n"))
 ```
 
 <br>
@@ -156,18 +161,19 @@ for (i in 1:length(citations)) {
 <br>
 
 ```{r book-chapter, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
-# get citations from DOI
-citations <- rcrossref::cr_cn(
-  dois = my_dois_works$external_id_value[my_dois_works$type == 'book-chapter'],
-  format = "text",
-  style = "american-medical-association-10th-edition",
-  locale = "pt-BR"
-  )
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "book-chapter"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
 
-# print
-for (i in 1:length(citations)) {
-  cat(paste0(citations[i], "\n\n"))
-}
+cat(paste0(citations, collapse = "\n\n"))
 ```
 
 <br>
@@ -177,18 +183,22 @@ for (i in 1:length(citations)) {
 <br>
 
 ```{r lecture-speech, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
-# get citations from DOI
-citations <- rcrossref::cr_cn(
-  dois = my_dois_works$external_id_value[my_dois_works$type == 'lecture-speech'],
-  format = "text",
-  style = "american-medical-association-10th-edition",
-  locale = "pt-BR"
-  )
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "lecture-speech"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
 
-# print
-for (i in seq_along(citations)) {
-  cat(paste0(i, ". ", citations[i], "\n\n"))
-}
+# paste number (e.g., 1.) before each citation
+citations <- paste0(seq_along(citations), ". ", citations)
+
+cat(paste0(citations, collapse = "\n\n"))
 ```
 
 <br>
@@ -198,18 +208,22 @@ for (i in seq_along(citations)) {
 <br>
 
 ```{r software, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
-# get citations from DOI
-citations <- rcrossref::cr_cn(
-  dois = my_dois_works$external_id_value[my_dois_works$type == 'software'],
-  format = "text",
-  style = "american-medical-association-10th-edition",
-  locale = "pt-BR"
-  )
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "software"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
 
-# print
-for (i in seq_along(citations)) {
-  cat(paste0(i, ". ", citations[i], "\n\n"))
-}
+# paste number (e.g., 1.) before each citation
+citations <- paste0(seq_along(citations), ". ", citations)
+
+cat(paste0(citations, collapse = "\n\n"))
 ```
 
 <br>
@@ -219,18 +233,22 @@ for (i in seq_along(citations)) {
 <br>
 
 ```{r data-set, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
-# get citations from DOI
-citations <- rcrossref::cr_cn(
-  dois = my_dois_works$external_id_value[my_dois_works$type == 'data-set'],
-  format = "text",
-  style = "american-medical-association-10th-edition",
-  locale = "pt-BR"
-  )
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "data-set"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
 
-# print
-for (i in seq_along(citations)) {
-  cat(paste0(i, ". ", citations[i], "\n\n"))
-}
+# paste number (e.g., 1.) before each citation
+citations <- paste0(seq_along(citations), ". ", citations)
+
+cat(paste0(citations, collapse = "\n\n"))
 ```
 
 <br>
@@ -240,18 +258,22 @@ for (i in seq_along(citations)) {
 <br>
 
 ```{r other, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
-# get citations from DOI
-citations <- rcrossref::cr_cn(
-  dois = my_dois_works$external_id_value[my_dois_works$type == 'other'],
-  format = "text",
-  style = "american-medical-association-10th-edition",
-  locale = "pt-BR"
-  )
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "other"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
 
-# print
-for (i in seq_along(citations)) {
-  cat(paste0(i, ". ", citations[i], "\n\n"))
-}
+# paste number (e.g., 1.) before each citation
+citations <- paste0(seq_along(citations), ". ", citations)
+
+cat(paste0(citations, collapse = "\n\n"))
 ```
 
 <br>

@@ -237,7 +237,7 @@ O pacote *neuralnet*[@neuralnet] fornece a função [*neuralnet*](https://www.rd
 
 <br>
 
-```{r funcoes-ativacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráficos das funções de ativação mais comuns."}
+```{r funcoes-ativacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Gráficos das funções de ativação mais comuns.", fig.width=15, fig.height=4, out.width="100%"}
 # grid comum
 z <- seq(-6, 6, length.out = 400)
 df <- data.frame(z = z)
@@ -503,7 +503,7 @@ y_i \log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)
 
 <br>
 
-```{r perceptron-exemplo, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Espaço de decisão de um perceptron (regressão logística)."}
+```{r perceptron-exemplo, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Espaço de decisão de um perceptron (regressão logística).", fig.width=15, fig.height=8, out.width="100%"}
 # Reprodutibilidade
 set.seed(123)
 
@@ -514,17 +514,23 @@ x2 <- runif(n, -1, 1)
 y <- ifelse(x1 + x2 > 0, 1, 0)
 df <- data.frame(x1, x2, y = factor(y))
 
-# Ajustar um modelo perceptron (regressão logística)
-ggplot2::ggplot(df, ggplot2::aes(x1, x2, color=y)) +
-  ggplot2::geom_point(size=3) +
-  ggplot2::geom_abline(intercept=0, slope=-1, linetype="dashed") +
+# common limits
+lims <- range(c(df$x1, df$x2), na.rm = TRUE)
+
+# Plot com ggplot2
+ggplot2::ggplot(df, ggplot2::aes(x1, x2, color = y)) +
+  ggplot2::geom_point(size = 3) +
+  ggplot2::geom_abline(intercept = 0, slope = -1, linetype = "dashed") +
+  ggplot2::scale_x_continuous(limits = lims) +
+  ggplot2::scale_y_continuous(limits = lims) +
+  ggplot2::coord_equal(expand = FALSE) +
   ggplot2::theme_minimal() +
-  ggplot2::labs(title="Perceptron: fronteira de decisão linear")
+  ggplot2::labs(title = "Perceptron: fronteira de decisão linear")
 ```
 
 <br>
 
-```{r espaco-de-decisao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Comparação do espaço de decisão entre um modelo linear (regressão logística) e um modelo não linear (MLP)."}
+```{r espaco-de-decisao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Comparação do espaço de decisão entre um modelo linear (regressão logística) e um modelo não linear (MLP).", fig.width=15, fig.height=8, out.width="100%"}
 ## 1) Dados sintéticos (XOR)
 base::set.seed(123)
 
@@ -585,6 +591,8 @@ theme_clean <- ggplot2::theme_minimal(base_size = 12) +
                  plot.title = ggplot2::element_text(face = "bold"),
                  plot.subtitle = ggplot2::element_text(margin = ggplot2::margin(t = 2)))
 
+lims <- range(c(df$x1, df$x2), na.rm = TRUE)
+
 # (a) Fronteira GLM (linear)
 p_glm <- ggplot2::ggplot() +
   ggplot2::geom_raster(
@@ -600,9 +608,14 @@ p_glm <- ggplot2::ggplot() +
   common_points +
   ggplot2::scale_fill_manual(values = c("#6BAED6","#FD8D3C")) +
   ggplot2::scale_color_manual(values = c("#3182BD","#E6550D")) +
-  ggplot2::labs(title = "Modelo Linear",
-                subtitle = "Regressão logística (fronteira linear)",
-                x = "x1", y = "x2") +
+  ggplot2::scale_x_continuous(limits = lims) +
+  ggplot2::scale_y_continuous(limits = lims) +
+  ggplot2::coord_equal(expand = FALSE) +
+  ggplot2::labs(
+    title = "Modelo Linear",
+    subtitle = "Regressão logística (fronteira linear)",
+    x = "x1", y = "x2"
+  ) +
   theme_clean
 
 # (b) Fronteira MLP (não linear)
@@ -620,9 +633,14 @@ p_mlp <- ggplot2::ggplot() +
   common_points +
   ggplot2::scale_fill_manual(values = c("#6BAED6","#FD8D3C")) +
   ggplot2::scale_color_manual(values = c("#3182BD","#E6550D")) +
-  ggplot2::labs(title = "Modelo Não Linear",
-                subtitle = "Rede neural (1 camada escondida) — fronteira não linear",
-                x = "x1", y = "x2") +
+  ggplot2::scale_x_continuous(limits = lims) +
+  ggplot2::scale_y_continuous(limits = lims) +
+  ggplot2::coord_equal(expand = FALSE) +
+  ggplot2::labs(
+    title = "Modelo Não Linear",
+    subtitle = "Rede neural (1 camada escondida) — fronteira não linear",
+    x = "x1", y = "x2"
+  ) +
   theme_clean
 
 # Painel lado a lado

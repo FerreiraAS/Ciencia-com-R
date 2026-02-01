@@ -3028,24 +3028,26 @@ V = \sqrt{\dfrac{\chi^2/n}{\min(k-1, r-1)}}
 <span id="cb2-41"><a href="correlacao.html#cb2-41" tabindex="-1"></a>crossX <span class="ot">&lt;-</span> <span class="fu">cor</span>(X, V[,<span class="dv">1</span><span class="sc">:</span><span class="fu">min</span>(<span class="fu">ncol</span>(X), <span class="fu">ncol</span>(Y))])</span>
 <span id="cb2-42"><a href="correlacao.html#cb2-42" tabindex="-1"></a>crossY <span class="ot">&lt;-</span> <span class="fu">cor</span>(Y, U[,<span class="dv">1</span><span class="sc">:</span><span class="fu">min</span>(<span class="fu">ncol</span>(X), <span class="fu">ncol</span>(Y))])</span>
 <span id="cb2-43"><a href="correlacao.html#cb2-43" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="correlacao.html#cb2-44" tabindex="-1"></a><span class="co"># ---- Visualizações ----</span></span>
-<span id="cb2-45"><a href="correlacao.html#cb2-45" tabindex="-1"></a></span>
-<span id="cb2-46"><a href="correlacao.html#cb2-46" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">U1=</span>U1, <span class="at">V1=</span>V1, <span class="at">classe=</span>classe),</span>
-<span id="cb2-47"><a href="correlacao.html#cb2-47" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">aes</span>(U1, V1, <span class="at">shape=</span>classe)) <span class="sc">+</span></span>
-<span id="cb2-48"><a href="correlacao.html#cb2-48" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">75</span>) <span class="sc">+</span></span>
-<span id="cb2-49"><a href="correlacao.html#cb2-49" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb2-50"><a href="correlacao.html#cb2-50" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;U1 (X → a1)&quot;</span>, <span class="at">y=</span><span class="st">&quot;V1 (Y → b1)&quot;</span>,</span>
-<span id="cb2-51"><a href="correlacao.html#cb2-51" tabindex="-1"></a><span class="at">subtitle=</span><span class="fu">paste0</span>(<span class="st">&quot;ρ1 = &quot;</span>, <span class="fu">round</span>(rho[<span class="dv">1</span>], <span class="dv">3</span>))) <span class="sc">+</span></span>
-<span id="cb2-52"><a href="correlacao.html#cb2-52" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span>
-<span id="cb2-53"><a href="correlacao.html#cb2-53" tabindex="-1"></a></span>
-<span id="cb2-54"><a href="correlacao.html#cb2-54" tabindex="-1"></a><span class="co"># Heatmap de cross-loadings (quais variáveis de X e Y conectam-se ao outro bloco)</span></span>
-<span id="cb2-55"><a href="correlacao.html#cb2-55" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="correlacao.html#cb2-56" tabindex="-1"></a>cx <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(<span class="fu">round</span>(crossX, <span class="dv">2</span>), <span class="at">varnames=</span><span class="fu">c</span>(<span class="st">&quot;VarX&quot;</span>,<span class="st">&quot;CompV&quot;</span>),</span>
-<span id="cb2-57"><a href="correlacao.html#cb2-57" tabindex="-1"></a><span class="at">value.name=</span><span class="st">&quot;cross&quot;</span>)</span>
-<span id="cb2-58"><a href="correlacao.html#cb2-58" tabindex="-1"></a>cy <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(<span class="fu">round</span>(crossY, <span class="dv">2</span>), <span class="at">varnames=</span><span class="fu">c</span>(<span class="st">&quot;VarY&quot;</span>,<span class="st">&quot;CompU&quot;</span>),</span>
-<span id="cb2-59"><a href="correlacao.html#cb2-59" tabindex="-1"></a><span class="at">value.name=</span><span class="st">&quot;cross&quot;</span>)</span>
-<span id="cb2-60"><a href="correlacao.html#cb2-60" tabindex="-1"></a></span>
-<span id="cb2-61"><a href="correlacao.html#cb2-61" tabindex="-1"></a><span class="fu">print</span>(p1)</span></code></pre></div>
+<span id="cb2-44"><a href="correlacao.html#cb2-44" tabindex="-1"></a><span class="co"># common limits for U1 and V1</span></span>
+<span id="cb2-45"><a href="correlacao.html#cb2-45" tabindex="-1"></a>lims <span class="ot">&lt;-</span> <span class="fu">range</span>(<span class="fu">c</span>(U1, V1), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-46"><a href="correlacao.html#cb2-46" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="correlacao.html#cb2-47" tabindex="-1"></a>p1_equal <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(</span>
+<span id="cb2-48"><a href="correlacao.html#cb2-48" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">U1 =</span> U1, <span class="at">V1 =</span> V1, <span class="at">classe =</span> classe),</span>
+<span id="cb2-49"><a href="correlacao.html#cb2-49" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">aes</span>(U1, V1, <span class="at">shape =</span> classe)</span>
+<span id="cb2-50"><a href="correlacao.html#cb2-50" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb2-51"><a href="correlacao.html#cb2-51" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">75</span>) <span class="sc">+</span></span>
+<span id="cb2-52"><a href="correlacao.html#cb2-52" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-53"><a href="correlacao.html#cb2-53" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> lims) <span class="sc">+</span></span>
+<span id="cb2-54"><a href="correlacao.html#cb2-54" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> lims) <span class="sc">+</span></span>
+<span id="cb2-55"><a href="correlacao.html#cb2-55" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb2-56"><a href="correlacao.html#cb2-56" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
+<span id="cb2-57"><a href="correlacao.html#cb2-57" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;U1 (X → a1)&quot;</span>,</span>
+<span id="cb2-58"><a href="correlacao.html#cb2-58" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;V1 (Y → b1)&quot;</span>,</span>
+<span id="cb2-59"><a href="correlacao.html#cb2-59" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">&quot;ρ1 = &quot;</span>, <span class="fu">round</span>(rho[<span class="dv">1</span>], <span class="dv">3</span>))</span>
+<span id="cb2-60"><a href="correlacao.html#cb2-60" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-61"><a href="correlacao.html#cb2-61" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>()</span>
+<span id="cb2-62"><a href="correlacao.html#cb2-62" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="correlacao.html#cb2-63" tabindex="-1"></a><span class="fu">print</span>(p1_equal)</span></code></pre></div>
 </details>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:cca-example"></span>
 <img src="Ciencia-com-R_files/figure-html/cca-example-1.png" alt="Exemplo de análise de correlação canônica (CCA) entre dois conjuntos de variáveis." width="672" />
