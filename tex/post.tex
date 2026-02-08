@@ -1,5 +1,7 @@
+% initialize document
 \documentclass{article}
 
+% packages
 \usepackage[brazilian]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -8,25 +10,36 @@
 \usepackage[spaces,obeyspaces,hyphens]{url}
 \usepackage[linktoc=all]{hyperref}
 \usepackage{graphicx}
-
-\usepackage[
-  paperwidth=3.6in,
-  paperheight=4.8in,
-  margin=0.254in,
-  heightrounded
-]{geometry}
-
+\usepackage{tikz}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins}
-
+\usepackage{fontawesome5}
 \usepackage{xcolor}
 \usepackage{pagecolor}
-
 \usepackage[none]{hyphenat}
 \usepackage{setspace}
 
-\pagecolor{black}
-\color{white}
+% margins
+\usepackage[
+  paperwidth=3.6in,
+  paperheight=4.8in,
+  top=0.127in,
+  bottom=0in,
+  left=0.254in,
+  right=0.254in,
+  noheadfoot
+]{geometry}
+
+\definecolor{custom_background}{HTML}{ECEDEE}
+\definecolor{custom_title}{HTML}{545454}
+\definecolor{custom_section}{HTML}{545454}
+\definecolor{custom_question}{HTML}{545454}
+\definecolor{custom_answer}{HTML}{545454}
+\definecolor{custom_reference}{HTML}{ffffff}
+\definecolor{custom_footnote}{HTML}{989898}
+\definecolor{instagram}{HTML}{E4405F}
+
+\pagecolor{custom_background}
 
 \linespread{1.00}
 
@@ -34,41 +47,94 @@
 
 {\setlength{\parindent}{0cm}
 
-\textcolor{white}{\small CAPITULO}
+\newlength{\coverW}
+\setlength{\coverW}{0.90in}
 
-\vspace{0.25in}
+\noindent
+\begin{minipage}[t]{\dimexpr\textwidth-\coverW\relax}
+  \raggedright
+  \textbf{\textcolor{custom_title}{\large CAPITULO}}\par
+  \vspace{0.063in}
+  \textbf{\textcolor{custom_section}{\normalsize SECAO}}\par
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{\coverW}
+  % reservado para livro.png
+\end{minipage}
 
-\textcolor{white}{\Large SECAO}
-
-\vspace{0.5in}
+% \vspace*{\fill}
+\vspace*{0.45in}
 
 \begin{tcolorbox}[
   colback=white,
   arc=3mm,
   sharp corners=east,
   boxsep=10pt,
-  left=5pt,
-  right=5pt,
-  top=15pt,
-  bottom=15pt,
+  left=0pt,
+  right=0pt,
+  top=0pt,
+  bottom=0pt,
   enhanced,
   drop shadow
 ]
-{\setstretch{1.25}
-\centering{\textcolor{black}{\LARGE \textbf{QUESTAO}}}
+{\setstretch{1.50}
+\centering{\textcolor{custom_question}{\Large \textbf{\MakeUppercase{QUESTAO}}}}
 \par}
 \end{tcolorbox}
 
 \vspace*{\fill}
 
 \sloppy
-\raggedright{\textcolor{white}{\large RESPOSTA}}
+\raggedright{\textcolor{custom_answer}{\large \textbf{RESPOSTA}}}
 
 \vspace*{\fill}
 
+\noindent
+\begin{tcolorbox}[
+  colback=custom_footnote,
+  colframe=custom_footnote,
+  boxrule=0pt,
+  arc=0mm,
+  left=10pt,
+  right=10pt,
+  top=2pt,
+  bottom=2pt,
+  enhanced,
+  width=\dimexpr\textwidth+0.508in\relax,
+  enlarge left by=-0.254in,
+  enlarge right by=-0.254in
+]
 {\setstretch{0.25}
-\textcolor{white}{\tiny CITACAO}
+\raggedright
+\textcolor{custom_reference}{\fontsize{6pt}{7pt}\selectfont CITACAO}
 \par}
+\end{tcolorbox}
+
+\noindent
+\begin{tcolorbox}[
+  colback=white,
+  colframe=white,
+  boxrule=0pt,
+  arc=2mm,
+  left=20pt,
+  right=20pt,
+  top=2pt,
+  bottom=2pt,
+  enhanced
+]
+{\setstretch{0.25}
+\centering
+{\textcolor{custom_title}{\fontsize{6pt}{7pt}\selectfont
+\faInstagram\ \textcolor{instagram}{cienciacomR}\quad
+\faUserTie\ \textbf{Arthur de Sá Ferreira, DSc}
+}}
+\par}
+\end{tcolorbox}
+
+\begin{tikzpicture}[remember picture, overlay]
+  \draw[white, line width=10.0pt]
+    (current page.north west) rectangle (current page.south east);
+\end{tikzpicture}
 
 }
 

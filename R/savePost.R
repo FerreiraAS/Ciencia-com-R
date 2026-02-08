@@ -58,13 +58,13 @@ SavePost_df <- function(entry, bib) {
     img <- pdftools::pdf_render_page("posts/POST.pdf", dpi = 300)
     png::writePNG(img, fpath)
     
-    cover <- magick::image_read("images/Cover_1.png") |>
-      magick::image_scale("200x200")
+    cover <- magick::image_read("images/livro.png") |>
+      magick::image_scale("250x250")
     
     final <- magick::image_composite(
       magick::image_read(fpath),
       cover,
-      offset = "+930+0"
+      offset = "+850+30"
     )
     
     magick::image_write(final, fpath, density = 300)
@@ -192,13 +192,13 @@ SavePost_df <- function(entry, bib) {
   img <- pdftools::pdf_render_page("posts/POST.pdf", dpi = 300)
   png::writePNG(img, fpath)
   
-  cover <- magick::image_read("images/Cover_1.png") |>
-    magick::image_scale("200x200")
+  cover <- magick::image_read("images/livro.png") |>
+    magick::image_scale("250x250")
   
   final <- magick::image_composite(
     magick::image_read(fpath),
     cover,
-    offset = "+930+0"
+    offset = "+850+30"
   )
   
   magick::image_write(final, fpath, density = 300)
