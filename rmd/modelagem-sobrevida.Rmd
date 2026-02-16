@@ -5,18 +5,7 @@
   </w:r>
 </w:p>
 ```
-
 # **Modelagem de sobrevida** {#modelagem-sobrevida}
-
-<br>
-
-## Sobrevida
-
-<br>
-
-### O que é sobrevida?
-
--   A sobrevida é um termo utilizado em estatística e análise de dados para descrever o tempo que decorre até a ocorrência de um evento específico, como a morte, a falha de um equipamento ou a recidiva de uma doença. Em estudos clínicos, por exemplo, a sobrevida pode referir-se ao tempo que um paciente vive após o diagnóstico de uma doença ou após o início de um tratamento.[@REF]
 
 <br>
 
@@ -26,13 +15,260 @@
 
 ### O que é análise de sobrevida?
 
--   A análise de sobrevida é uma área da estatística que se concentra no estudo desses tempos até o evento, levando em consideração que nem todos os indivíduos podem ter experimentado o evento durante o período de estudo (censura).[@REF]
+-   É um conjunto de métodos estatísticos utilizados para analisar o tempo até a ocorrência de um evento de interesse.[@in2018]
 
--   Métodos comuns de análise de sobrevida incluem a estimativa da função de sobrevivência, a análise de Kaplan-Meier e modelos de regressão como o modelo de riscos proporcionais de Cox.[@REF]
+<br>
+
+### Quando usar análise de sobrevida?
+
+-   Use quando o desfecho envolve tempo até o evento, nem todos os indivíduos apresentam o evento, há diferentes tempos de seguimento e existem perdas de acompanhamento (censura).[@in2018]
+
+<br>
+
+## Eventos
+
+-   O evento não precisa ser morte --- pode ser qualquer desfecho binário que ocorra (ou não) durante o período de observação, tais como: tempo até recidiva de doença; até ocorrência de um sintoma; até falha terapêutica.[@in2018]
+
+<br>
+
+### O que caracteriza um “evento” em análise de sobrevida?
+
+-   É um desfecho binário que indica se o evento ocorreu ($=1$) ou foi censurado/não ocorreu até o tempo observado ($=0$).[@in2018]
+
+<br>
+
+## Dados censurados
+
+<br>
+
+### O que são dados censurados?
+
+-   São observações em que o evento não ocorreu até o fim do estudo, geralmente porque o participante foi perdido no seguimento ou o estudo terminou antes do evento ocorrer.[@in2018]
+
+-   Na análise tradicional, esses casos seriam excluídos. Na análise de sobrevida, eles são incorporados ao modelo.[@in2018]
+
+<br>
+
+### Quais são os tipos de censura de dados?
+
+-   Censura à direita: O evento não ocorreu até o fim do estudo ou perda de seguimento.[@in2018]
+
+-   Censura à esquerda: O evento ocorreu antes do início do estudo.[@in2018]
+
+-   Censura intervalar: O evento ocorreu entre dois pontos de tempo, mas o momento exato é desconhecido.[@in2018]
+
+<br>
+
+## Medidas de associação em análise de sobrevida
+
+<br>
+
+### O que é a função de sobrevida?
+
+-   A função de sobrevida, $S(t)$, representa a probabilidade de o evento não ter ocorrido até o tempo $t$, isto é, $S(t)=P(T>t)$.[@in2018]
+
+<br>
+
+### O que é a função de risco?
+
+-   A função de risco, $h(t)$, representa a taxa instantânea de ocorrência do evento no tempo $t$, condicional ao fato de o indivíduo ainda não ter apresentado o evento até esse momento.[@in2018]
+
+<br>
+
+### O que é a razão de risco (*hazard ratio*)?
+
+-   A razão de risco (hazard ratio, $HR$) é a razão entre as taxas instantâneas de ocorrência do evento em dois grupos ao longo do tempo.[@in2018]
+
+-   O hazard ratio compara riscos instantâneos e não probabilidades acumuladas.[@in2018]
+
+-   $HR > 1$: O grupo de tratamento tem um risco maior de evento em comparação ao grupo controle.[@in2018]
+
+-   $HR = 1$: Não há diferença no risco de evento entre os grupos.[@in2018]
+
+-   $HR < 1$: O grupo de tratamento tem um risco menor de evento em comparação ao grupo controle.[@in2018]
+
+<br>
+
+### Qual é a diferença entre modelos de Kaplan–Meier e Cox?
+
+-   Kaplan–Meier estima a função de sobrevida sem ajustar para covariáveis.[@in2018]
+
+-   O teste log-rank compara curvas entre grupos.[@in2018]
+
+-   O modelo de Cox permite ajustar para múltiplas covariáveis e estima razões de risco ajustadas.[@in2018]
+
+<br>
+
+### O que é o tempo médio de sobrevida restrito?
+
+-   O tempo médio de sobrevida restrito (*Restricted Mean Survival Time*, $RMST$) é definido como a área sob a curva de sobrevida até um tempo pré-especificado $\tau$ \@ref(eq:rmst).[@hanada2024]
+
+<br>
+
+\begin{equation}
+\label{eq:rmst}
+\mu(\tau) = \int_0^{\tau} S(t) dt
+\end{equation}
+
+<br>
+
+-   Diferentemente do $HR$, o $RMST$ não depende da suposição de riscos proporcionais.[@hanada2024]
+
+<br>
+
+-   O $RMST$ corresponde à média truncada do tempo até o evento e por isso possui interpretação clínica direta (diferença média de tempo).[@hanada2024]
+
+-   Essa diferença corresponde à área entre as curvas de sobrevida até o tempo $\tau$.[@hanada2024]
+
+-   $RMST$ é robusto quando há violação da suposição de riscos proporcionais.[@hanada2024]
+
+-   $RMST$ é recomendado quando há separação tardia das curvas.[@hanada2024]
+
+-   Enquanto o $HR$ mede uma razão instantânea de riscos, o $RMST$ mede uma diferença média acumulada de tempo.
+
+<br>
+
+## Modelo de Kaplan–Meier
+
+<br>
+
+### O que é a curva de Kaplan–Meier?
+
+-   A curva de Kaplan–Meier é uma estimativa não paramétrica da função de sobrevida ao longo do tempo, que leva em consideração os dados censurados.[@in2018]
+
+-   Ela é construída a partir dos tempos de evento e censura, e mostra a probabilidade de sobrevivência em diferentes pontos no tempo.[@in2018]
+
+-   A curva de Kaplan–Meier é útil para comparar a sobrevida entre grupos e para visualizar a distribuição do tempo até o evento.[@in2018]
+
+<br>
+
+### Como interpretar as curvas de Kaplan–Meier?
+
+-   A curva mostra a probabilidade de sobrevivência ao longo do tempo para um grupo específico.[@in2018]
+
+-   A distância entre as curvas de diferentes grupos pode indicar diferenças na sobrevida.[@in2018]
+
+-   O teste log-rank pode ser usado para avaliar se as diferenças entre as curvas são estatisticamente significativas.[@in2018]
 
 <br>
 
 ```{r kaplan-meier, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Curvas de Kaplan–Meier simuladas para dois grupos (controle e tratamento)."}
+# Reprodutibilidade
+set.seed(123)
+
+# simulação simples
+n <- 200
+Grupo <- rbinom(n, 1, 0.5)  # 0 = controle, 1 = tratamento
+HR_true <- 0.65
+lambda0 <- 0.03
+u <- runif(n)
+hazard_i <- lambda0 * (HR_true ^ Grupo)
+tempo_evento <- -log(u) / hazard_i
+tempo_cens   <- rexp(n, rate = 0.02)
+
+tempo  <- pmin(tempo_evento, tempo_cens)
+status <- as.integer(tempo_evento <= tempo_cens)
+
+dados <- data.frame(
+  tempo = tempo,
+  status = status,
+  Grupo = factor(Grupo, labels = c("Controle","Tratamento"))
+)
+
+# Kaplan–Meier
+ajuste_km <- survival::survfit(survival::Surv(tempo, status) ~ Grupo, data = dados)
+
+# gráfico
+survminer::ggsurvplot(
+  ajuste_km,
+  data = dados,
+  conf.int = TRUE,
+  pval = TRUE,
+  risk.table = TRUE,
+  xlab = "Tempo (unidades simuladas)",
+  ylab = "Probabilidade de Sobrevida",
+  title = "Curvas de Kaplan–Meier",
+  legend.title = "Grupo",
+  ggtheme = ggplot2::theme_minimal()
+)
+```
+
+<br>
+
+```{r km-tabela, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, results = "asis", fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), fig.fullwidth = TRUE, fig.cap = "Tabela resumo das curvas de Kaplan–Meier por grupo, incluindo número de eventos, censuras e mediana de sobrevida com IC 95%."}
+# Medianas e IC 95%
+medianas <- survminer::surv_median(ajuste_km)
+
+# Resumo por Grupo
+tabela_km <-
+  dados %>%
+  dplyr::group_by(Grupo) %>%
+  dplyr::summarise(
+    N = n(),
+    Eventos = sum(status),
+    Censuras = sum(status == 0),
+    .groups = "drop"
+  ) %>%
+  dplyr::left_join(
+    medianas %>%
+      dplyr::mutate(Grupo = gsub("Grupo=", "", strata)) %>%
+      dplyr::select(Grupo, median, lower, upper),
+    by = "Grupo"
+  ) %>%
+  dplyr::mutate(
+    `Mediana (IC 95%)` =
+      paste0(
+        round(median,2),
+        " (",
+        round(lower,2), " – ",
+        round(upper,2), ")"
+      )
+  ) %>%
+  dplyr::select(Grupo, N, Eventos, Censuras, `Mediana (IC 95%)`)
+
+# Teste log-rank
+teste_logrank <- survival::survdiff(survival::Surv(tempo, status) ~ Grupo, data = dados)
+p_logrank <- 1 - pchisq(teste_logrank$chisq, df = 1)
+
+# Tabela formatada
+tabela_final <-
+  tabela_km %>%
+  gt::gt() %>%
+  gt::tab_source_note(
+    source_note = paste0("Teste log-rank: p = ",
+                         signif(p_logrank,3))
+  )
+
+tabela_final
+```
+
+<br>
+
+## Modelos de Cox
+
+<br>
+
+### O que é o modelo de Cox?
+
+-   O modelo de Cox, ou modelo de riscos proporcionais de Cox, é um modelo de regressão semiparamétrico utilizado para analisar a relação entre o tempo até o evento e um conjunto de covariáveis.[@in2018]
+
+-   O modelo de Cox assume que a razão de riscos entre os grupos é constante ao longo do tempo (proporcionalidade dos riscos).[@in2018]
+
+<br>
+
+### Como interpretar o coeficiente do modelo de Cox?
+
+-   O modelo estima o logaritmo da razão de riscos ($log(HR)$).[@in2018]
+
+-   A exponenciação do coeficiente fornece o $HR$.[@in2018]
+
+-   Valores de $HR < 1$ indicam efeito protetor.[@in2018]
+
+-   Valores de $HR > 1$ indicam aumento do risco.[@in2018]
+
+<br>
+
+```{r cox, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Curvas ajustadas pelo modelo de Cox para dois grupos (controle e tratamento)."}
 # Reprodutibilidade
 set.seed(123)
 
@@ -55,28 +291,93 @@ dados <- data.frame(
   grupo = factor(grupo, labels = c("Controle","Tratamento"))
 )
 
-# Kaplan–Meier
-ajuste_km <- survival::survfit(survival::Surv(tempo, status) ~ grupo, data = dados)
+# 2. Ajuste do Modelo de Cox
+modelo_cox <- survival::coxph(survival::Surv(tempo, status) ~ grupo, data = dados)
 
-# gráfico
+# 3. Hazard Ratio e IC 95%
+HR <- exp(coef(modelo_cox))
+IC <- exp(confint(modelo_cox))
+
+# 4. Teste de Riscos Proporcionais
+teste_ph <- survival::cox.zph(modelo_cox)
+
+# 5. Curvas ajustadas pelo modelo de Cox
+# Criar dados para predição
+novos_dados <- data.frame(
+  grupo = factor(c("Controle","Tratamento"),
+                 levels = c("Controle","Tratamento"))
+)
+
+ajuste_cox <- survival::survfit(modelo_cox, newdata = novos_dados)
+
 survminer::ggsurvplot(
-  ajuste_km,
+  ajuste_cox,
   data = dados,
   conf.int = TRUE,
   pval = TRUE,
-  risk.table = TRUE,
+  legend.title = "Grupo",
+  legend.labs = c("Controle","Tratamento"),
   xlab = "Tempo (unidades simuladas)",
   ylab = "Probabilidade de Sobrevida",
-  title = "Curvas de Kaplan–Meier",
-  legend.title = "Grupo",
+  title = "Curvas Ajustadas pelo Modelo de Cox",
   ggtheme = ggplot2::theme_minimal()
 )
 ```
 
 <br>
 
+```{r cox-tabela, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, results = "asis", fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), fig.fullwidth = TRUE, fig.cap = "Tabela resumo do modelo de Cox, incluindo Hazard Ratio (HR), IC 95% e p-valor para o efeito do grupo."}
+library(dplyr)
+
+# Ajuste do modelo
+modelo_cox <- survival::coxph(
+  survival::Surv(tempo, status) ~ grupo,
+  data = dados
+)
+
+# Calcular N total e número de eventos
+N_total <- nrow(dados)
+Eventos_total <- sum(dados$status)
+
+eventos_por_grupo <-
+  dados %>%
+  dplyr::group_by(grupo) %>%
+  dplyr::summarise(
+    N = n(),
+    Eventos = sum(status),
+    Taxa_evento = round(100 * mean(status), 1),
+    .groups = "drop"
+  )
+
+# Criar tabela
+tabela_cox <-
+  modelo_cox %>%
+  gtsummary::tbl_regression(
+    exponentiate = TRUE,
+    label = list(grupo ~ "Grupo")
+  ) %>%
+  gtsummary::add_global_p() %>%
+  gtsummary::bold_p(t = 0.05) %>%
+  gtsummary::modify_header(
+    estimate ~ "**HR**",
+    conf.low ~ "**IC 95% (inf)**",
+    conf.high ~ "**IC 95% (sup)**",
+    p.value ~ "**p-valor**"
+  )
+
+tabela_cox
+```
+
+<br>
+
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *survival*[@survival] fornece a função [*survfit*]<https://www.rdocumentation.org/packages/survival/versions/3.8-3/topics/survfit>) para criar curvas de sobrevida.
+O pacote *survival*[@survival] fornece a função [*survfit*](https://www.rdocumentation.org/packages/survival/versions/3.8-3/topics/survfit) para criar curvas de sobrevida.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *survminer*[@survminer] fornece a função [*ggsurvplot*](https://www.rdocumentation.org/packages/survminer/versions/0.4.2/topics/ggsurvplot) para criar curvas de sobrevida.
 :::
 
 <br>
