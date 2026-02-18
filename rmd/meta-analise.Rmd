@@ -204,8 +204,6 @@ ggplot2::ggplot(curve_data,
 
 ### O que fazer quando os estudos apresentam resultados com diferentes parâmetros?
 
-<br>
-
 -   Quando os estudos reportam médias e desvios-padrão, os dados podem ser usados diretamente na metanálise.[@REF]
 
 -   Quando apresentam mediana e intervalo interquartil (ou mínimo–máximo), existem métodos estatísticos para converter em média e DP.[@hozo2005]
@@ -240,6 +238,8 @@ O pacote *metafor*[@metafor] fornece a função [*conv.fivenum*](https://cran.r-
 
 -   A heterogeneidade --- variação não-aleatória --- no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo $I^{2}$ \@ref(eq:i-sqr).[@Rücker2008; @Borenstein2022]
 
+<br>
+
 \begin{equation}
 (\#eq:i-sqr)
 I^{2} = \max \left( 0, \frac{Q - df}{Q} \right) \times 100\%
@@ -269,7 +269,7 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*ma_r*](https://www.rdocume
 
 <br>
 
-## Interpretação do *forest plot*
+## *Forest plot*
 
 <br>
 
@@ -555,23 +555,124 @@ par(op)
 
 <br>
 
-## Viés de publicação em meta-análises
+## *Crosshair*
 
 <br>
 
-### O que é viés de publicação?
+### O que um gráfico de cruzes (*crosshair*)?
 
--   O viés de publicação ocorre quando estudos com resultados não significativos ou contrários à hipótese tendem a não ser publicados, afetando a estimativa final da meta-análise e podendo levar a conclusões incorretas.[@song2000]
+- .[@phillips2010]
 
 <br>
 
-### Quais métodos podem ser usados para identificar viés de publicação?
+```{r crosshair, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de cruzes (*crosshair*) em espaço ROC (*Receiver Operating Characteristic*) para 15 estudos simulados de desempenho diagnóstico."}
+# Reprodutibilidade
+set.seed(123)
 
--   O método mais simples é o *funnel plot*, que representa a estimativa de efeito de cada estudo em função de sua precisão ($1/SE$).[@egger1997]
+# ---- simulate 2x2 tables ----
+n_studies <- 15
+Nd <- sample(60:200, n_studies, replace = TRUE)
+Nn <- sample(60:220, n_studies, replace = TRUE)
 
--   Na ausência de viés, espera-se uma distribuição simétrica (“forma de funil”). Assimetria pode indicar viés de publicação, heterogeneidade entre estudos ou efeitos de tamanho de estudo (*small-study effects*).[@egger1997]
+true_sens <- rbeta(n_studies, 20, 6)
+true_spec <- rbeta(n_studies, 25, 8)
 
--   Para *odds ratios* ($OR$), a correlação entre $ln(OR)$ e seu erro padrão pode gerar assimetria mesmo sem viés, por isso recomenda-se, nesses casos, plotar em função do tamanho amostral.[@peters2006]
+TP <- rbinom(n_studies, Nd, true_sens)
+FN <- Nd - TP
+TN <- rbinom(n_studies, Nn, true_spec)
+FP <- Nn - TN
+
+df <- data.frame(
+  study = paste0("Estudo_", sprintf("%02d", seq_len(n_studies))),
+  TP, FN, FP, TN,
+  Nd, Nn
+)
+
+# ---- helpers: exact (Clopper–Pearson) CI via binom.test ----
+binom_ci <- function(x, n, conf = 0.95) binom.test(x, n, conf.level = conf)$conf.int
+
+df <- df %>%
+  rowwise() %>%
+  dplyr::mutate(
+    sens = TP / (TP + FN),
+    spec = TN / (TN + FP),
+    # exact CI
+    sens_ci = list(binom_ci(TP, TP + FN)),
+    spec_ci = list(binom_ci(TN, TN + FP))
+  ) %>%
+  dplyr::mutate(
+    sens_low = sens_ci[[1]], sens_up = sens_ci[[2]],
+    spec_low = spec_ci[[1]], spec_up = spec_ci[[2]]
+  ) %>%
+  dplyr::ungroup() %>%
+  # ---- ROC space: FPR = 1 - Specificity ----
+  dplyr::mutate(
+    fpr     = 1 - spec,
+    fpr_low = 1 - spec_up,   # invert bounds
+    fpr_up  = 1 - spec_low,
+    tot_n   = Nd + Nn,
+    size_pt = scales::rescale(tot_n, to = c(2.5, 6))  # point size by N
+  )
+
+# ---- plot crosshair ----
+p <- ggplot2::ggplot(df, ggplot2::aes(x = fpr, y = sens)) +
+  ggplot2::geom_abline(
+    slope = 1, intercept = 0,
+    linetype = "dashed", colour = "grey50", linewidth = 0.6
+  ) +
+  ggplot2::geom_errorbar(
+    ggplot2::aes(ymin = sens_low, ymax = sens_up),
+    width = 0.008, alpha = 0.8
+  ) +
+  ggplot2::geom_errorbarh(
+    ggplot2::aes(xmin = fpr_low, xmax = fpr_up),
+    height = 0.008, alpha = 0.8
+  ) +
+  ggplot2::geom_point(
+    ggplot2::aes(size = size_pt),
+    shape = 21, fill = "gray20", color = "white"
+  ) +
+  ggplot2::scale_size_identity() +
+  ggplot2::coord_equal(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
+  ggplot2::labs(
+    x = "1 – Specificity (False Positive Rate)",
+    y = "Sensitivity (True Positive Rate)"
+  ) +
+  ggplot2::theme(
+    # remove all grid lines
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+
+    # white background
+    panel.background = ggplot2::element_blank(),
+
+    # square black border
+    panel.border = ggplot2::element_rect(
+      colour = "black", fill = NA, linewidth = 0.8
+    ),
+
+    # keep axis lines off (border replaces them)
+    axis.line = ggplot2::element_blank(),
+
+    # ticks visible
+    axis.ticks = ggplot2::element_line(colour = "black"),
+
+    # clean text
+    text = ggplot2::element_text(size = 14)
+  )
+
+p
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *mada*[@mada] fornece a função [*crosshair*](https://www.rdocumentation.org/packages/mada/versions/0.5.11/topics/crosshair) para criar um gráfico *crosshair*[@phillips2010] a partir de dados de verdadeiro-positivo, falso-positivo, verdadeiro-negativo e verdadeiro-positivo de tabelas de confusão 2x2.
+:::
+
+<br>
+
+## *Funnel plot*
 
 <br>
 
@@ -665,6 +766,22 @@ par(mfrow=c(1,1))
 
 <br>
 
+### O que é viés de publicação?
+
+-   O viés de publicação ocorre quando estudos com resultados não significativos ou contrários à hipótese tendem a não ser publicados, afetando a estimativa final da meta-análise e podendo levar a conclusões incorretas.[@song2000]
+
+<br>
+
+### Quais métodos podem ser usados para identificar viés de publicação?
+
+-   O método mais simples é o *funnel plot*, que representa a estimativa de efeito de cada estudo em função de sua precisão ($1/SE$).[@egger1997]
+
+-   Na ausência de viés, espera-se uma distribuição simétrica (“forma de funil”). Assimetria pode indicar viés de publicação, heterogeneidade entre estudos ou efeitos de tamanho de estudo (*small-study effects*).[@egger1997]
+
+-   Para *odds ratios* ($OR$), a correlação entre $ln(OR)$ e seu erro padrão pode gerar assimetria mesmo sem viés, por isso recomenda-se, nesses casos, plotar em função do tamanho amostral.[@peters2006]
+
+<br>
+
 ### A assimetria do *funnel plot* indica sempre viés de publicação?
 
 -   Viéses de relato (*reporting biases*), como viés de publicação, viés de linguagem ou de citação.[@sterne2011]
@@ -682,6 +799,10 @@ par(mfrow=c(1,1))
 -   O método *trim and fill* “apara” (trim) os estudos que causam assimetria no funnel plot, estima o número de estudos possivelmente ausentes (não publicados) e “preenche” (fill) o gráfico com esses estudos simulados, recalculando o efeito combinado.[@duval2000]
 
 -   O método assume que a assimetria é causada unicamente por viés de publicação, podendo levar a conclusões equivocadas quando há outras causas, como heterogeneidade. [@duval2000]
+
+<br>
+
+## Testes de assimetria do *funnel plot*
 
 <br>
 

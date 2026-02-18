@@ -140,10 +140,14 @@ O pacote *riskyr*[@riskyr] fornece a função [*plot_prism*](https://www.rdocume
 
 -   Sensibilidade ($SEN$) \@ref(eq:sen): Proporção de verdadeiro-positivos dentre aqueles com a condição.[@greenhalgh1997b]
 
+<br>
+
 \begin{equation}
 (\#eq:sen)
 SEN = \dfrac{VP}{VP+FN}
 \end{equation}
+
+<br>
 
 -   Especificidade ($ESP$) \@ref(eq:esp): Proporção de verdadeiro-negativos dentre aqueles sem a condição.[@greenhalgh1997b]
 
@@ -239,6 +243,8 @@ VPN = \dfrac{VN}{VN+FN}
 
 - Razão de verossimilhança positiva ($LR+$) \@ref(eq:lrplus): Quantifica o quanto a probabilidade de a condição estar presente aumenta quando o teste é positivo.[@REF]
 
+<br>
+
 \begin{equation}
 (\#eq:lrplus)
 LR+ = \dfrac{SEN}{1 - ESP} = \dfrac{VP/(VP+FN)}{FP/(FP+VN)}
@@ -247,6 +253,8 @@ LR+ = \dfrac{SEN}{1 - ESP} = \dfrac{VP/(VP+FN)}{FP/(FP+VN)}
 <br>
 
 - Razão de verossimilhança negativa ($LR-$) \@ref(eq:lrminus): Quantifica o quanto a probabilidade de a condição estar presente diminui quando o teste é negativo.[@REF]
+
+<br>
 
 \begin{equation}
 (\#eq:lrminus)
@@ -268,6 +276,8 @@ ACU = \dfrac{VP+VN}{VP+VN+FP+FN}
 
 -   Razão de chances diagnóstica ($DOR$) \@ref(eq:dor1), \@ref(eq:dor2) e \@ref(eq:dor3): Razão entre a chance de um teste ser positivo quando a condição está presente e a chance de um teste ser positivo quando a condição está ausente.[@Glas2003]
 
+<br>
+
 \begin{equation}
 (\#eq:dor1)
 DOR = \dfrac{VP}{FN} \div \dfrac{FP}{VN} = \dfrac{VP \cdot VN}{FP \cdot FN}
@@ -279,6 +289,7 @@ DOR = \dfrac{VP}{FN} \div \dfrac{FP}{VN} = \dfrac{VP \cdot VN}{FP \cdot FN}
 (\#eq:dor2)
 DOR = \dfrac{SEN/(1-SEN)}{(1-ESP)/ESP} = \dfrac{SEN \cdot ESP}{(1-SEN) \cdot (1-ESP)}
 \end{equation}
+
 <br>
 
 \begin{equation}
@@ -442,19 +453,29 @@ knitr::kable(
 
 -   Acurácia em POS ($M_{PT}$), equação \@ref(eq:mpt): Proporção de positivos corretamente identificados na região POS.[@xu2020]
 
+<br>
+
 \begin{equation}
 (\#eq:mpt)
 M_{PT} = \dfrac{|POS \cap C|}{|POS|}
 \end{equation}
 
+<br>
+
 -   Erro em POS ($M_{PF}$), equação \@ref(eq:mpf): Proporção de negativos incorretamente classificados na região POS.[@xu2020]
+
+<br>
 
 \begin{equation}
 (\#eq:mpf)
 M_{PF} = \dfrac{|POS \cap C^{c}|}{|POS|}
 \end{equation}
 
+<br>
+
 -   Acurácia em NEG ($M_{NF}$), equação \@ref(eq:mnf): Proporção de negativos corretamente identificados na região NEG.[@xu2020]
+
+<br>
 
 \begin{equation}
 (\#eq:mnf)
@@ -463,17 +484,26 @@ M_{NF} = \dfrac{|NEG \cap C^{c}|}{|NEG|}
 
 -   Erro em NEG ($M_{NT}$), equação \@ref(eq:mnt): Proporção de positivos incorretamente classificados na região NEG.[@xu2020]
 
+<br>
+
 \begin{equation}
 (\#eq:mnt)
 M_{NT} = \dfrac{|NEG \cap C|}{|NEG|}
 \end{equation}
 
+<br>
+
 -   Frações em BND ($M_{BT}$ e $M_{BF}$), equações \@ref(eq:mbt) e \@ref(eq:mbf): Proporção de deferimentos verdadeiros e falsos.[@xu2020]
+
+<br>
 
 \begin{equation}
 (\#eq:mbt)
 M_{BT} = \dfrac{|BND \cap C|}{|BND|}
 \end{equation}
+
+<br>
+
 \begin{equation}
 (\#eq:mbf)
 M_{BF} = \dfrac{|BND \cap C^{c}|}{|BND|}
@@ -523,12 +553,18 @@ M_{BF} = \dfrac{|BND \cap C^{c}|}{|BND|}
 
 -   O método de Youden (equação \@ref(eq:youden) maximiza a diferença entre a taxa de verdadeiros positivos e a taxa de falsos positivos. O ponto de corte ideal será aquele com maior valor de $Y$.[@YOUDEN1950]
 
+<br>
+
 \begin{equation}
 (\#eq:youden)
 Y = SEN + ESP - 1
 \end{equation}
 
+<br>
+
 -   O método da distância Euclidiana (\@ref(eq:euclidean) minimiza a distância entre um ponto da curva ROC e o ponto (0,1), que representa sensibilidade perfeita ($SEN = 100%$) e especificidade perfeita ($ESP = 100%$). O ponto de corte ideal será aquele com menor valor de $D$.[@yarnold2014]
+
+<br>
 
 \begin{equation}
 (\#eq:euclidean)
@@ -549,6 +585,8 @@ D = \sqrt{(1 - SEN)^2 + (1 - ESP)^2}
 
 -   Método não paramétrico: soma das áreas trapezoidais sob a curva empírica \@ref(eq:auc). Pode subestimar AUC quando os dados são discretos.[@park2004]
 
+<br>
+
 \begin{equation}
 (\#eq:auc)
 AUC = \sum_{i=1}^{n-1} (x_{i+1} - x_i) \cdot \dfrac{y_i + y_{i+1}}{2}
@@ -557,6 +595,8 @@ AUC = \sum_{i=1}^{n-1} (x_{i+1} - x_i) \cdot \dfrac{y_i + y_{i+1}}{2}
 <br>
 
 -   Método paramétrico (binormal): mais robusto para dados em escala ordinal, com viés reduzido \@ref(eq:auc-binormal), onde$\Phi$ é a função de distribuição acumulada da Normal padrão, $\mu_1$ e $\mu_0$ são as médias dos escores para os grupos positivo e negativo, respectivamente, e $\sigma_1^2$ e $\sigma_0^2$ são as variâncias dos escores para os grupos positivo e negativo, respectivamente.[@park2004]
+
+<br>
 
 \begin{equation}
 (\#eq:auc-binormal)
@@ -769,123 +809,6 @@ print(p)
 ### Como analisar o desempenho diagnóstico em desfechos com distribuição trimodal na população?
 
 -   Limiares duplos podem ser utilizados para análise de desempenho diagnóstico de testes com distribuição trimodal.[@ferreira2021]
-
-<br>
-
-## Gráficos de cruzes
-
-<br>
-
-### O que um gráfico de cruzes (*crosshair*)?
-
-- .[@phillips2010]
-
-<br>
-
-```{r crosshair, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de cruzes (*crosshair*) em espaço ROC (*Receiver Operating Characteristic*) para 15 estudos simulados de desempenho diagnóstico."}
-# Reprodutibilidade
-set.seed(123)
-
-# ---- simulate 2x2 tables ----
-n_studies <- 15
-Nd <- sample(60:200, n_studies, replace = TRUE)
-Nn <- sample(60:220, n_studies, replace = TRUE)
-
-true_sens <- rbeta(n_studies, 20, 6)
-true_spec <- rbeta(n_studies, 25, 8)
-
-TP <- rbinom(n_studies, Nd, true_sens)
-FN <- Nd - TP
-TN <- rbinom(n_studies, Nn, true_spec)
-FP <- Nn - TN
-
-df <- data.frame(
-  study = paste0("Estudo_", sprintf("%02d", seq_len(n_studies))),
-  TP, FN, FP, TN,
-  Nd, Nn
-)
-
-# ---- helpers: exact (Clopper–Pearson) CI via binom.test ----
-binom_ci <- function(x, n, conf = 0.95) binom.test(x, n, conf.level = conf)$conf.int
-
-df <- df %>%
-  rowwise() %>%
-  dplyr::mutate(
-    sens = TP / (TP + FN),
-    spec = TN / (TN + FP),
-    # exact CI
-    sens_ci = list(binom_ci(TP, TP + FN)),
-    spec_ci = list(binom_ci(TN, TN + FP))
-  ) %>%
-  dplyr::mutate(
-    sens_low = sens_ci[[1]], sens_up = sens_ci[[2]],
-    spec_low = spec_ci[[1]], spec_up = spec_ci[[2]]
-  ) %>%
-  dplyr::ungroup() %>%
-  # ---- ROC space: FPR = 1 - Specificity ----
-  dplyr::mutate(
-    fpr     = 1 - spec,
-    fpr_low = 1 - spec_up,   # invert bounds
-    fpr_up  = 1 - spec_low,
-    tot_n   = Nd + Nn,
-    size_pt = scales::rescale(tot_n, to = c(2.5, 6))  # point size by N
-  )
-
-# ---- plot crosshair ----
-p <- ggplot2::ggplot(df, ggplot2::aes(x = fpr, y = sens)) +
-  ggplot2::geom_abline(
-    slope = 1, intercept = 0,
-    linetype = "dashed", colour = "grey50", linewidth = 0.6
-  ) +
-  ggplot2::geom_errorbar(
-    ggplot2::aes(ymin = sens_low, ymax = sens_up),
-    width = 0.008, alpha = 0.8
-  ) +
-  ggplot2::geom_errorbarh(
-    ggplot2::aes(xmin = fpr_low, xmax = fpr_up),
-    height = 0.008, alpha = 0.8
-  ) +
-  ggplot2::geom_point(
-    ggplot2::aes(size = size_pt),
-    shape = 21, fill = "gray20", color = "white"
-  ) +
-  ggplot2::scale_size_identity() +
-  ggplot2::coord_equal(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
-  ggplot2::labs(
-    x = "1 – Specificity (False Positive Rate)",
-    y = "Sensitivity (True Positive Rate)"
-  ) +
-  ggplot2::theme(
-    # remove all grid lines
-    panel.grid.major = ggplot2::element_blank(),
-    panel.grid.minor = ggplot2::element_blank(),
-
-    # white background
-    panel.background = ggplot2::element_blank(),
-
-    # square black border
-    panel.border = ggplot2::element_rect(
-      colour = "black", fill = NA, linewidth = 0.8
-    ),
-
-    # keep axis lines off (border replaces them)
-    axis.line = ggplot2::element_blank(),
-
-    # ticks visible
-    axis.ticks = ggplot2::element_line(colour = "black"),
-
-    # clean text
-    text = ggplot2::element_text(size = 14)
-  )
-
-p
-```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *mada*[@mada] fornece a função [*crosshair*](https://www.rdocumentation.org/packages/mada/versions/0.5.11/topics/crosshair) para criar um gráfico *crosshair*[@phillips2010] a partir de dados de verdadeiro-positivo, falso-positivo, verdadeiro-negativo e verdadeiro-positivo de tabelas de confusão 2x2.
-:::
 
 <br>
 

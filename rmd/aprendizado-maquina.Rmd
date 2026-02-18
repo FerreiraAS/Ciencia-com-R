@@ -185,7 +185,7 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 ### Como representar texto como vetores?
 
--   
+-   .[@REF]
 
 <br>
 
@@ -328,8 +328,6 @@ d(x, y) = \sum_{i=1}^{n} |x_i - y_i|
 
 <br>
 
-<br>
-
 -   Distância Euclidiana \@ref(eq:euclidiana): raiz quadrada da soma dos quadrados das diferenças entre as coordenadas dos pontos.[@REF]
 
 <br>
@@ -349,6 +347,8 @@ d(x, y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}
 (\#eq:minkowski)
 d(x, y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{\frac{1}{p}}
 \end{equation}
+
+<br>
 
 -   Distância Chebyshev \@ref(eq:chebyshev): máximum das diferenças absolutas entre as coordenadas dos pontos, representando a distância em um espaço onde o movimento é permitido em todas as direções.[@REF]
 
@@ -380,8 +380,6 @@ d(x, y) = \max_{i} |x_i - y_i|
 (\#eq:hamming)
 d(x, y) = \sum_{i=1}^{n} \mathbf{1}(x_i \neq y_i)
 \end{equation}
-
-<br>
 
 <br>
 
@@ -631,6 +629,8 @@ knitr::kable(
 
 -   Acurácia ($ACU$) \@ref(eq:acu): Proporção de classificações corretas (verdadeiros-positivos e verdadeiros-negativos) em relação ao total de casos.[@hicks2022]
 
+<br>
+
 \begin{equation}
 (\#eq:acu)
 ACU = \dfrac{VP + VN}{VP + FN + VN + FP}
@@ -779,6 +779,8 @@ knitr::kable(
 
 -   A equação \@ref(eq:regressao-logistica) modela a razão de chances (*odds*) em função dos preditores.[@fernandes2020]
 
+<br>
+
 \begin{equation}
 (\#eq:regressao-logistica)
 \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X + ... + \beta_n X_n
@@ -787,6 +789,8 @@ knitr::kable(
 <br>
 
 -   A ligação (*link*) usada é o logit \@ref(eq:link-logit).[@fernandes2020]
+
+<br>
 
 \begin{equation}
 (\#eq:link-logit)
@@ -1004,7 +1008,7 @@ gridExtra::grid.arrange(p1, p2, ncol=2)
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *h2o*[\@correctR](https://cran.r-project.org/web/packages/h2o/index.html) fornece funções construir modelos de aprendizado de máquina.
+O pacote *h2o*[@h2o] fornece funções construir modelos de aprendizado de máquina.
 :::
 
 <br>
@@ -1016,13 +1020,13 @@ O pacote *correctR*[@correctR] fornece as funções [*kfold_ttest*](https://clou
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *caret*[\@caret](https://cran.r-project.org/web/packages/caret/index.html) fornece um conjunto de funções para pré-processamento, ajuste, avaliação e comparação de modelos de aprendizado de máquina.
+O pacote *caret*[@caret](https://cran.r-project.org/web/packages/caret/index.html) fornece um conjunto de funções para pré-processamento, ajuste, avaliação e comparação de modelos de aprendizado de máquina.
 :::
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.
+O pacote *mlr3*[@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.
 :::
 
 <br>
@@ -1181,7 +1185,7 @@ print(panel)
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.
+O pacote *mlr3*[@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.
 :::
 
 <br>

@@ -111,10 +111,14 @@ Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \
 
 -   Modelos lineares \@ref(eq:regressao-linear) descrevem uma relação linear nos parâmetros entre um desfecho contínuo $Y$ e um ou mais preditores $X$.[@REF]
 
+<br>
+
 \begin{equation}
 (\#eq:regressao-linear)
 Y = \beta_0 + \sum_{i=1}^{n} \beta_i X_i + \epsilon
 \end{equation}
+
+<br>
 
 -   Assumem erros independentes, de média zero e variância constante (homocedasticidade).[@REF]
 
@@ -233,6 +237,8 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 -   A equação \@ref(eq:regressao-logistica) modela a razão de chances (*odds*) em função dos preditores.[@fernandes2020]
 
+<br>
+
 \begin{equation}
 (\#eq:regressao-logistica)
 \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X + ... + \beta_n X_n
@@ -241,6 +247,8 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 <br>
 
 -   A ligação (*link*) usada é o logit \@ref(eq:link-logit).[@fernandes2020]
+
+<br>
 
 \begin{equation}
 (\#eq:link-logit)

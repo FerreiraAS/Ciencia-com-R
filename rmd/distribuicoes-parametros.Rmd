@@ -892,6 +892,8 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 - Margem de erro (ME).\@ref(eq:me).
 
+<br>
+
 \begin{equation}
 (\#eq:me)
 ME = z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
@@ -901,10 +903,14 @@ ME = z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
 
 -   Erro-padrão da média (EPM) \@ref(eq:sem) ($sigma$ conhecido) e \@ref(eq:sem-unk) ($sigma$  desconhecido).[@Curran-Everett2008; @krzywinski2013]
 
+<br>
+
 \begin{equation}
 (\#eq:sem)
 EPM = \frac{\sigma}{\sqrt{n}}
 \end{equation}
+
+<br>
 
 \begin{equation}
 (\#eq:sem-unk)
@@ -914,6 +920,8 @@ EPM = \frac{\sigma}{\sqrt{n}}
 <br>
 
 - Intervalo de confiança para variância conhecida \@ref(eq:ic-known) e desconhecida \@ref(eq:ic-unknown): Captura a média populacional correspondente ao nível de significância $\alpha$ pré-estabelecido [@kanji2006; @Cumming2007; @krzywinski2013; @Ali2016].
+
+<br>
 
 \begin{equation}
 (\#eq:ic-known)
@@ -937,6 +945,8 @@ IC = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}
 
 -   Média aritmética \@ref(eq:media-aritm), ponderada \@ref(eq:media-pond), geométrica \@ref(eq:media-geom) ou harmônica \@ref(eq:media-harm).[@kanji2006; @Ali2016; @s.2011a]
 
+<br>
+
 \begin{equation}
 (\#eq:media-aritm)
 \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}
@@ -957,6 +967,7 @@ IC = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}
 \end{equation}
 
 <br>
+
 \begin{equation}
 (\#eq:media-harm)
 \bar{x}_h = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}}
@@ -965,6 +976,8 @@ IC = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}
 <br>
 
 -   Mediana \@ref(eq:mediana).[@kanji2006; @Ali2016; @s.2011]
+
+<br>
 
 \begin{equation}
 (\#eq:mediana)
@@ -978,6 +991,8 @@ x_{\left(\frac{n+1}{2}\right)}, & \text{se } n \text{ é ímpar} \\
 
 -   Moda \@ref(eq:moda), onde $f(x)$ é a função de frequência absoluta ou relativa e $x_1, x_2, \ldots, x_n$ são os valores observados.[@kanji2006; @Ali2016; @s.2011]
 
+<br>
+
 \begin{equation}
 (\#eq:moda)
 \operatorname{Mo} \in \arg\max_{x \in \{x_1,\ldots,x_n\}} f(x)
@@ -986,6 +1001,8 @@ x_{\left(\frac{n+1}{2}\right)}, & \text{se } n \text{ é ímpar} \\
 <br>
 
 -   Moda (dados agrupados) \@ref(eq:moda-agrupada), onde: $L$ = limite inferior da classe modal; $f_1$ = frequência da classe modal; $f_0$ = frequência da classe anterior à classe modal; $f_2$ = frequência da classe posterior à classe modal; $h$ = amplitude da classe modal.
+
+<br>
 
 \begin{equation}
 (\#eq:moda-agrupada)
@@ -1158,6 +1175,8 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 -   Variância \@ref(eq:variancia).[@kanji2006; @Ali2016]
 
+<br>
+
 \begin{equation}
 (\#eq:variancia)
 s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
@@ -1166,6 +1185,8 @@ s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 <br>
 
 -   Desvio-padrão \@ref(eq:desvpad).[@Curran-Everett2008; @krzywinski2013; @manikandan2011]
+
+<br>
 
 \begin{equation}
 (\#eq:desvpad)
@@ -1176,6 +1197,8 @@ s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}}
 
 -   Amplitude \@ref(eq:amplitude).[@kanji2006; @Ali2016; @manikandan2011]
 
+<br>
+
 \begin{equation}
 (\#eq:amplitude)
 A = x_{\max} - x_{\min}
@@ -1184,6 +1207,8 @@ A = x_{\max} - x_{\min}
 <br>
 
 -   Intervalo interquartil \@ref(eq:iqr).[@kanji2006; @Ali2016; @manikandan2011]
+
+<br>
 
 \begin{equation}
 (\#eq:iqr)
@@ -1337,9 +1362,7 @@ O pacote *stats*[@stats] fornece a função [*confint*](https://www.rdocumentati
 
 ### Como escolher o parâmetro de dispersão?
 
-<br>
-
--   Desvio-padrão é apropriado quando a média é utilizada como parâmetro de tendência central em distribuições simétricas.[@manikandan2011]
+-   Desvio-padrão $\sigma$ é apropriado quando a média é utilizada como parâmetro de tendência central em distribuições simétricas.[@manikandan2011]
 
 -   Amplitude ou intervalo interquartil são apropriadas para variáveis ordinais ou distribuições assimétricas.[@manikandan2011]
 
@@ -1350,6 +1373,8 @@ O pacote *stats*[@stats] fornece a função [*confint*](https://www.rdocumentati
 -   Correção de Bessel é um ajuste feito no denominador da fórmula de variância da amostra --- ou seja, o número de graus de liberdade --- para evitar que a variância amostral seja menor do que a variância populacional.[@sahai1992]
 
 -   A correção de Bessel é feita subtraindo-se 1 do número de observações da amostra, ou seja, $n - 1$ \@ref(eq:bessel).[@sahai1992]
+
+<br>
 
 \begin{equation}
 (\#eq:bessel)
@@ -1374,6 +1399,8 @@ s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 
 -   Frequência absoluta \@ref(eq:freq-absoluta).[@Altman1994; @kanji2006; @Ali2016]
 
+<br>
+
 \begin{equation}
 (\#eq:freq-absoluta)
 f_i = n_i
@@ -1383,6 +1410,8 @@ f_i = n_i
 
 -   Frequência relativa \@ref(eq:freq-relativa).[@Altman1994; @kanji2006; @Ali2016]
 
+<br>
+
 \begin{equation}
 (\#eq:freq-relativa)
 fr_i = \frac{n_i}{N}
@@ -1391,6 +1420,8 @@ fr_i = \frac{n_i}{N}
 <br>
 
 -   Percentil \@ref(eq:percentil), onde $k$ é o percentil desejado (0 a 100) e $n$ é o número total de observações na amostra.[@Altman1994; @kanji2006; @Ali2016]
+
+<br>
 
 \begin{equation}
 (\#eq:percentil)
@@ -1443,6 +1474,8 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 -   Mínimo \@ref(eq:min).[@Ali2016]
 
+<br>
+
 \begin{equation}
 (\#eq:min)
 \text{Mínimo} = \min(x_1, x_2, \ldots, x_n)
@@ -1451,6 +1484,8 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 <br>
 
 -   Máximo \@ref(eq:max).[@Ali2016]
+
+<br>
 
 \begin{equation}
 (\#eq:max)
@@ -1526,6 +1561,8 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 -   Assimetria \@ref(eq:skew).[@kanji2006]
 
+<br>
+
 \begin{equation}
 (\#eq:skew)
 \gamma_1 = \frac{\frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^3}{\left(\frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2\right)^{3/2}}
@@ -1535,6 +1572,8 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 -   Curtose \@ref(eq:kurt).[@kanji2006]
 
+<br>
+
 \begin{equation}
 (\#eq:kurt)
 \gamma_2 = \frac{\frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^4}{\left(\frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2\right)^{2}}
@@ -1543,6 +1582,8 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 <br>
 
 -   Excesso de Curtose \@ref(eq:exkurt).[@kanji2006]
+
+<br>
 
 \begin{equation}
 (\#eq:exkurt)
