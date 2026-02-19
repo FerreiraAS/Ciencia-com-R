@@ -95,6 +95,14 @@
 
 <br>
 
+### Quantos períodos são usualmente utilizados?
+
+-   A mediana observada em ensaios recentes foi de 6 períodos (intervalo interquartil 4–8).[@hawksworth2024]
+
+-   Esse número parece representar um equilíbrio entre maior precisão estatística (mais períodos) e viabilidade prática e adesão do paciente (menos períodos).[@hawksworth2024]
+
+<br>
+
 ### Como é feita a randomização?
 
 -   A ordem dos tratamentos em cada ciclo é definida aleatoriamente (ex.: AB, BA, AB…).[@senn2024]
@@ -126,6 +134,20 @@
 -   Comparações intraindivíduo (testes pareados ou estimativas de efeito médio por paciente).[@senn2024]
 
 -   Combinação de múltiplos n-de-1 por meio de meta-análises ou modelos mistos para inferências em nível populacional.[@senn2024]
+
+<br>
+
+### Quais métodos estatísticos têm sido utilizados recentemente?
+
+- Diversos métodos têm sido aplicados, incluindo testes *t*, modelos de regressão, modelos Bayesianos, testes não paramétricos, modelos mistos, e inspeção gráfica.[@hawksworth2024]
+
+<br>
+
+### É adequado utilizar P-valores em ensaios n-de-1?
+
+- Em ensaios n-de-1 a interpretação deve ser cautelosa, pois um P-valor não significativo não exclui a presença de efeito clinicamente relevante.[@hawksworth2024]
+
+- Estimativas pontuais e intervalos de confiança podem ser mais informativos para decisões clínicas individuais.[@hawksworth2024]
 
 <br>
 
@@ -213,22 +235,23 @@ O pacote *lattice*[@lattice] fornece a função [*xyplot*](https://www.rdocument
 
 ### Como um conjunto de ensaios n-de-1 pode ser analisado conjuntamente?
 
-- Ele pode ser tratado de forma análoga a uma meta-análise de ensaios clínicos independentes, utilizando métodos e softwares padrão com pequenas adaptações.[@senn2024]
+-   Ele pode ser tratado de forma análoga a uma meta-análise de ensaios clínicos independentes, utilizando métodos e softwares padrão com pequenas adaptações.[@senn2024]
 
-- Devido ao pequeno número de graus de liberdade por paciente, a estimativa ingênua de variâncias é inadequada, sendo necessário assumir variância intraindivíduo constante entre pacientes e utilizar uma variância agrupada.[@senn2024]
+-   Devido ao pequeno número de graus de liberdade por paciente, a estimativa ingênua de variâncias é inadequada, sendo necessário assumir variância intraindivíduo constante entre pacientes e utilizar uma variância agrupada.[@senn2024]
 
-- A variância agrupada é estimada a partir da soma dos quadrados corrigida das estimativas individuais, dividida pelo total de graus de liberdade, produzindo uma estimativa comum da variância intraindivíduo.[@senn2024]
+-   A variância agrupada é estimada a partir da soma dos quadrados corrigida das estimativas individuais, dividida pelo total de graus de liberdade, produzindo uma estimativa comum da variância intraindivíduo.[@senn2024]
 
 <br>
 
 ### Por que a meta-análise com efeitos aleatórios produz intervalos de confiança mais amplos?
 
-- Porque ela estima um efeito de tratamento aplicável a uma população mais ampla e “semelhante”, tratando os pacientes estudados como uma amostra aleatória e incorporando a variabilidade entre indivíduos à incerteza do efeito estimado.[@senn2024]
+-   Porque ela estima um efeito de tratamento aplicável a uma população mais ampla e “semelhante”, tratando os pacientes estudados como uma amostra aleatória e incorporando a variabilidade entre indivíduos à incerteza do efeito estimado.[@senn2024]
 
 <br>
 
 ### Qual é a principal vantagem da abordagem meta-analítica?
-- A vantagem é responder a uma pergunta inferencial mais relevante, sobre efeitos esperados em populações futuras.[@senn2024]
+
+-   A vantagem é responder a uma pergunta inferencial mais relevante, sobre efeitos esperados em populações futuras.[@senn2024]
 
 <br>
 
@@ -246,7 +269,7 @@ O pacote *lattice*[@lattice] fornece a função [*xyplot*](https://www.rdocument
 
 -   Em amostras muito pequenas, pode ser necessário usar variâncias externas ou modelos mistos.[@senn2024]
 
-- A abordagem meta-analítica assume forte similaridade entre os pacientes estudados e a população-alvo.[@senn2024]
+-   A abordagem meta-analítica assume forte similaridade entre os pacientes estudados e a população-alvo.[@senn2024]
 
 <br>
 

@@ -493,6 +493,60 @@ grid.arrange(
 
 <br>
 
+### Quais métricas são indicadas para avaliar modelos preditivos?
+
+-   A área sob a curva ROC (AUROC) como medida de discriminação, um gráfico de calibração para avaliar a concordância entre probabilidades estimadas e proporções observadas, uma medida de utilidade clínica como o *net benefit* por meio de *decision curve analysis*, e um gráfico que mostre a distribuição das probabilidades preditas por categoria de desfecho.[@vancalster2025]
+
+<br>
+
+### Quais métricas são consideradas inadequadas ou problemáticas?
+
+- O F1-score ($F1$) é explicitamente desencorajado como métrica principal porque não tem um foco claro em desempenho estatístico e é  uma medida inadequada dentro de sua própria categoria conceitual.[@vancalster2025]
+
+- Todas as métricas puramente baseadas em classificação dependente de limiar são consideradas impróprias para limiares clinicamente relevantes, exceto quando o limiar é 0,5 ou igual à prevalência verdadeira.[@vancalster2025]
+
+- Métricas derivadas da matriz de confusão, como acurácia, sensibilidade, especificidade e medidas relacionadas, não devem ser usadas isoladamente como critério principal de avaliação, pois dependem fortemente da escolha do limiar e não refletem diretamente a utilidade clínica.[@vancalster2025]
+
+<br>
+
+## Desbalanceamento de classes
+
+<br>
+
+### O que é desbalanceamento de classes (*class imbalance*)?
+
+-   Ocorre quando as classes do desfecho (por exemplo, presença vs. ausência de um evento) não estão igualmente representadas nos dados de treinamento.[@REF]
+
+<br>
+
+### Por que o desbalanceamento é um problema?
+
+-   Modelos podem aprender a priorizar a classe mais frequente, obtendo alta acurácia global, mas baixo desempenho para a classe minoritária.[@REF]
+
+-   Isso pode comprometer métricas como sensibilidade, especificidade e, em alguns casos, a calibração.[@REF]
+
+<br>
+
+### Quais são as abordagens mais comuns para lidar com desbalanceamento de classes?
+
+-   Reamostragem aleatória: superamostragem da classe minoritária; subamostragem da classe majoritária).[@REF]
+
+-   Ajuste de pesos: penaliza mais os erros na classe menos frequente.[@REF]
+
+-   Alteração do limiar de decisão: muda o ponto de corte de probabilidade para otimizar métricas específicas.[@REF]
+
+<br>
+
+### Qual é o impacto do desbalanceamento de classes na calibração de modelos?
+
+-   Corrigir o desbalanceamento de classes nem sempre melhora a calibração e, em alguns casos, pode piorá-la.[@carriero2025]
+
+-   Em simulações computacionais, modelos sem correção tiveram calibração igual ou superior aos corrigidos.[@carriero2025]
+
+-   A piora observada foi caracterizada por superestimação do risco, nem sempre reversível com re-calibração.[@carriero2025]
+
+<br>
+
 ## Tipos de aprendizado
 
 <br>
@@ -509,19 +563,7 @@ grid.arrange(
 
 <br>
 
-### O que é aprendizado semi-supervisionado?
-
--   .[@REF]
-
-<br>
-
 ### O que é aprendizado por reforço?
-
--   .[@REF]
-
-<br>
-
-### O que é aprendizado profundo?
 
 -   .[@REF]
 
@@ -1020,13 +1062,13 @@ O pacote *correctR*[@correctR] fornece as funções [*kfold_ttest*](https://clou
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *caret*[@caret](https://cran.r-project.org/web/packages/caret/index.html) fornece um conjunto de funções para pré-processamento, ajuste, avaliação e comparação de modelos de aprendizado de máquina.
+O pacote *caret*[\@caret](https://cran.r-project.org/web/packages/caret/index.html) fornece um conjunto de funções para pré-processamento, ajuste, avaliação e comparação de modelos de aprendizado de máquina.
 :::
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *mlr3*[@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.
+O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.
 :::
 
 <br>
@@ -1185,7 +1227,7 @@ print(panel)
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *mlr3*[@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.
+O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) fornece funções para fluxos de trabalho complexos, incluindo pré-processamento, ajuste de hiperparâmetros e integração com diversos algoritmos.
 :::
 
 <br>
@@ -1207,44 +1249,6 @@ O pacote *mlr3*[@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html) 
 ### O que são *ensemble*?
 
 -   .[@REF]
-
-<br>
-
-## Desbalanceamento de classes
-
-<br>
-
-### O que é desbalanceamento de classes (*class imbalance*)?
-
--   Ocorre quando as classes do desfecho (por exemplo, presença vs. ausência de um evento) não estão igualmente representadas nos dados de treinamento.[@REF]
-
-<br>
-
-### Por que o desbalanceamento é um problema?
-
--   Modelos podem aprender a priorizar a classe mais frequente, obtendo alta acurácia global, mas baixo desempenho para a classe minoritária.[@REF]
-
--   Isso pode comprometer métricas como sensibilidade, especificidade e, em alguns casos, a calibração.[@REF]
-
-<br>
-
-### Quais são as abordagens mais comuns para lidar com desbalanceamento de classes?
-
--   Reamostragem aleatória: superamostragem da classe minoritária; subamostragem da classe majoritária).[@REF]
-
--   Ajuste de pesos: penaliza mais os erros na classe menos frequente.[@REF]
-
--   Alteração do limiar de decisão: muda o ponto de corte de probabilidade para otimizar métricas específicas.[@REF]
-
-<br>
-
-### Qual é o impacto do desbalanceamento de classes na calibração de modelos?
-
--   Corrigir o desbalanceamento de classes nem sempre melhora a calibração e, em alguns casos, pode piorá-la.[@carriero2025]
-
--   Em simulações computacionais, modelos sem correção tiveram calibração igual ou superior aos corrigidos.[@carriero2025]
-
--   A piora observada foi caracterizada por superestimação do risco, nem sempre reversível com re-calibração.[@carriero2025]
 
 <br>
 
