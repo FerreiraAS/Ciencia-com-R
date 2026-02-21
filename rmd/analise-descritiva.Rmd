@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Análise descritiva** {#analise-descritiva}
 
 <br>
@@ -946,7 +945,7 @@ ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y, size = z)) +
 
 <br>
 
-- Gr;afico Sankey: Visualiza fluxos entre categorias em diferentes etapas ou grupos. Útil para mostrar proporções e transições.[@REF]
+-   Gr;afico Sankey: Visualiza fluxos entre categorias em diferentes etapas ou grupos. Útil para mostrar proporções e transições.[@wise2022]
 
 <br>
 
@@ -969,7 +968,7 @@ networkD3::sankeyNetwork(
 
 <br>
 
-- Grágfico de *parcats*: Mostra relações entre múltiplas variáveis categóricas em paralelo. Útil para visualizar fluxos e proporções.[@REF]
+-   Grágfico de *parcats*: Mostra relações entre múltiplas variáveis categóricas em paralelo. Útil para visualizar fluxos e proporções.[@REF]
 
 <br>
 
@@ -1069,7 +1068,7 @@ p
 
 <br>
 
-- Gráfico de *parts*: Mostra a composição percentual de uma variável categórica. Útil para visualizar proporções.[@REF]
+-   Gráfico de *parts*: Mostra a composição percentual de uma variável categórica. Útil para visualizar proporções.[@REF]
 
 <br>
 
@@ -1121,11 +1120,11 @@ p1
 
 ### Quais são os tipos de gráficos para dados longitudinais?
 
--   Gráfico de *spaghetti*: Mostra trajetórias individuais ao longo do tempo, útil para dados longitudinais.[@REF]
+-   Gráfico de *spaghetti*: Mostra trajetórias individuais ao longo do tempo, útil para dados longitudinais de variáveis contínuas.[@swihart2010; @wise2022]
 
 <br>
 
-```{r graficos-longitudinais, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico spaghetti representando dados longitudinais."}
+```{r graficos-longitudinais-spaghetti, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico spaghetti representando dados longitudinais."}
 # Reprodutibilidade
 set.seed(1)
 
@@ -1146,6 +1145,37 @@ ggplot2::ggplot(dfp, ggplot2::aes(time, value, group=id)) +
     ggplot2::geom_point() +
     ggplot2::geom_line(alpha=.6) +
     ggplot2::labs(x=NULL, y="Valor")
+```
+
+<br>
+
+-   Gráfico de *lasagna*: Mostra trajetórias individuais ao longo do tempo, útil para dados longitudinais de variáveis categóricas.[@swihart2010; @wise2022]
+
+<br>
+
+```{r graficos-longitudinais-lasagna, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico spaghetti representando dados longitudinais."}
+# Reprodutibilidade
+set.seed(1)
+
+# Simular dados longitudinais categóricos
+n <- 15
+id <- factor(seq_len(n))
+pre  <- sample(c("Baixo", "Médio", "Alto"), n,
+                replace = TRUE, prob = c(0.4, 0.4, 0.2))
+post <- sample(c("Baixo", "Médio", "Alto"), n,
+                 replace = TRUE, prob = c(0.3, 0.5, 0.2))
+dfp <- data.frame(
+    id,
+    time = factor(rep(c("Pré","Pós"), each=n), levels=c("Pré","Pós")),
+    value = c(pre, post)
+)
+
+# Gráfico de lasanha (lasagna plot)
+ggplot2::ggplot(dfp, ggplot2::aes(time, id, fill = value)) +
+    ggplot2::geom_tile(color = "white") +
+    ggplot2::scale_fill_manual(values = c("Baixo" = "lightblue", "Médio" = "lightgreen", "Alto" = "salmon")) +
+    ggplot2::labs(x=NULL, y="Sujeito", fill="Categoria") +
+    ggplot2::theme_minimal()
 ```
 
 <br>
