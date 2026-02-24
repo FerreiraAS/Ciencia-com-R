@@ -1204,6 +1204,144 @@ ggplot2::ggplot(dados, ggplot2::aes(x = data, y = valor)) +
 
 <br>
 
+### Quais são os tipos de gráficos para avaliação de resposta longitudinal?
+
+-   *Waterfall plot*: Representa a melhor variação percentual individual em relação ao baseline, geralmente ordenada do pior ao melhor respondedor. Pode mascarar a dinâmica temporal e induzir interpretações equivocadas quando usado isoladamente.[@mercier2019]
+
+<br>
+
+```{r graficos-longitudinais-waterfall, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico waterfall representando a melhor variação percentual em relação ao baseline para cada paciente."}
+# Simulação de dados de resposta
+set.seed(123)
+
+# Número de pacientes
+n_pat <- 30
+
+# Criar tempos de avaliação
+weeks <- c(0, 4, 8, 12, 16, 20)
+
+# Simular baseline (SLD em mm)
+baseline <- rnorm(n_pat, mean = 100, sd = 25)
+
+# Criar dataset longitudinal
+data_long <- expand.grid(
+  id = 1:n_pat,
+  week = weeks
+) %>%
+  dplyr::arrange(id, week) %>%
+  dplyr::group_by(id) %>%
+  dplyr::mutate(
+    baseline = baseline[id],
+    # efeito de tratamento heterogêneo
+    slope = rnorm(1, mean = -2, sd = 2),
+    noise = rnorm(n(), 0, 5),
+    SLD = baseline + slope * week + noise
+  ) %>%
+  dplyr::ungroup()
+
+# Garantir valores positivos
+data_long$SLD[data_long$SLD < 5] <- 5
+
+# Calcular % de mudança em relação ao baseline
+data_long <- data_long %>%
+  dplyr::group_by(id) %>%
+  dplyr::mutate(
+    pct_change = 100 * (SLD - dplyr::first(SLD)) / dplyr::first(SLD)
+  ) %>%
+  dplyr::ungroup()
+
+# 1) WATERFALL PLOT
+waterfall_data <- data_long %>%
+  dplyr::group_by(id) %>%
+  dplyr::summarise(
+    best_response = min(pct_change)
+  ) %>%
+  dplyr::arrange(best_response) %>%
+  dplyr::mutate(id = factor(id, levels = id))
+
+p_waterfall <- ggplot2::ggplot(waterfall_data, 
+                      ggplot2::aes(x = id, y = best_response)) +
+  ggplot2::geom_bar(stat = "identity", fill = "steelblue") +
+  ggplot2::geom_hline(yintercept = -30, linetype = "dashed", color = "red") +
+  ggplot2::labs(
+    title = "Waterfall Plot",
+    subtitle = "Melhor variação percentual em relação ao baseline",
+    x = "Paciente (ordenado)",
+    y = "% de mudança (melhor resposta)"
+  ) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(axis.text.x = ggplot2::element_blank(),
+        axis.ticks.x = ggplot2::element_blank())
+
+p_waterfall
+```
+
+<br>
+
+-   *Spider plot*: Mostra a variação percentual de uma variável ao longo do tempo para cada indivíduo, permitindo visualizar a trajetória longitudinal da resposta. Ainda assim, o uso de percentual de mudança apresenta limitações estatísticas, incluindo assimetria e dependência do valor basal.[@mercier2019]
+
+<br>
+
+```{r graficos-longitudinais-spider, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico spider representando a variação percentual do SLD ao longo do tempo para cada paciente."}
+# Simulação de dados de resposta
+set.seed(123)
+
+# Número de pacientes
+n_pat <- 30
+
+# Criar tempos de avaliação
+weeks <- c(0, 4, 8, 12, 16, 20)
+
+# Simular baseline (SLD em mm)
+baseline <- rnorm(n_pat, mean = 100, sd = 25)
+
+# Criar dataset longitudinal
+data_long <- expand.grid(
+  id = 1:n_pat,
+  week = weeks
+) %>%
+  dplyr::arrange(id, week) %>%
+  dplyr::group_by(id) %>%
+  dplyr::mutate(
+    baseline = baseline[id],
+    # efeito de tratamento heterogêneo
+    slope = rnorm(1, mean = -2, sd = 2),
+    noise = rnorm(n(), 0, 5),
+    SLD = baseline + slope * week + noise
+  ) %>%
+  dplyr::ungroup()
+
+# Garantir valores positivos
+data_long$SLD[data_long$SLD < 5] <- 5
+
+# Calcular % de mudança em relação ao baseline
+data_long <- data_long %>%
+  dplyr::group_by(id) %>%
+  dplyr::mutate(
+    pct_change = 100 * (SLD - dplyr::first(SLD)) / dplyr::first(SLD)
+  ) %>%
+  dplyr::ungroup()
+
+# SPIDER PLOT
+p_spider <- ggplot2::ggplot(data_long,
+                   ggplot2::aes(x = week,
+                       y = pct_change,
+                       group = id)) +
+  ggplot2::geom_line(alpha = 0.5) +
+  ggplot2::geom_hline(yintercept = -30, linetype = "dashed", color = "red") +
+  ggplot2::labs(
+    title = "Spider Plot",
+    subtitle = "Variação percentual do SLD ao longo do tempo",
+    x = "Semana",
+    y = "% de mudança vs baseline"
+  ) +
+  ggplot2::theme_minimal()
+
+p_spider
+```
+
+<br>
+
 ### Quais são os tipos de gráficos para dados multivariados?
 
 -   Gráfico de dispersão: Representa a relação entre duas variáveis, com pontos e uma linha de tendência.[@REF]
