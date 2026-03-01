@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Poder estatístico** {#poder-estatistico}
 
 <br>
@@ -150,6 +149,8 @@ O pacote *InteractionPoweR*[@InteractionPoweR] fornece a função [*power_intera
 
 ### Por que a análise de poder do teste *post hoc* é inadequada?
 
+-   Calcular poder após o teste não muda a interpretação.[@hoenig2001]
+
 -   A análise do poder é teoricamente incorreta, uma vez que a probabilidade calculada $1-\beta$ expressa a probabilidade de um evento futuro, o que não é mais relevante quando o evento de interesse já ocorreu.[@Cummings2003; @heckman2022]
 
 <br>
@@ -160,13 +161,63 @@ O pacote *InteractionPoweR*[@InteractionPoweR] fornece a função [*power_intera
 
 <br>
 
-## Impacto do desequilíbrio no poder estatístico
+### Por que o desequilíbrio entre grupos pode ser problemático para o poder do teste?
 
-- O desequilíbrio entre grupos pode reduzir o poder estatístico do teste, especialmente quando o efeito esperado é pequeno ou moderado. Simulações demonstram que o tamanho total da amostra influencia mais o poder do que o desequilíbrio isoladamente; entretanto, em estudos pequenos, o desequilíbrio pode reduzir o poder de forma clinicamente relevante.[@shibasaki2018]
+-   O desequilíbrio entre grupos pode reduzir o poder estatístico do teste, especialmente quando o efeito esperado é pequeno ou moderado.[@shibasaki2018]
 
-- Remover participantes para “corrigir” desequilíbrio pode reduzir ainda mais o poder do estudo do que manter o desequilíbrio existente.[@shibasaki2018]
+- O tamanho total da amostra influencia mais o poder do que o desequilíbrio isoladamente. Em estudos pequenos, o desequilíbrio pode reduzir o poder de forma clinicamente relevante.[@shibasaki2018]
 
-- O controle inadequado da randomização compromete a validade interna do ensaio.[@shibasaki2018]
+-   Remover participantes para “corrigir” desequilíbrio pode reduzir ainda mais o poder do estudo do que manter o desequilíbrio existente.[@shibasaki2018]
+
+-   O controle inadequado da randomização compromete a validade interna do ensaio.[@shibasaki2018]
+
+<br>
+
+## Poder observado
+
+<br>
+
+### Qual é a relação entre poder observado e P-valor?
+
+-   O chamado “poder observado” é uma transformação matemática direta do P-valor; portanto, não adiciona qualquer nova informação à interpretação do teste estatístico.[@hoenig2001]
+
+-   Se o P-valor é não significativo, o poder observado será baixo.[@hoenig2001]
+
+-   Se o P-valor é limítrofe, o poder observado $≈ 0,5$.[@hoenig2001]
+
+-   Se o P-valor é altamente significativo, o poder observado será alto.[@hoenig2001]
+
+<br>
+
+## Poder de salvaguarda
+
+<br>
+
+### O que é poder de salvaguarda?
+
+- Poder de salvaguarda é uma abordagem prospectiva de análise de poder que incorpora explicitamente a incerteza do tamanho de efeito estimado no estudo original.[@perugini2014]
+
+- Em vez de utilizar diretamente o tamanho de efeito observado, utiliza-se o limite inferior do intervalo de confiança do tamanho de efeito como estimativa conservadora do efeito populacional.[@perugini2014]
+
+- O método reconhece que o intervalo de confiança representa o conjunto de valores plausíveis para o verdadeiro efeito populacional e, portanto, deve ser considerado no planejamento amostral.[@perugini2014]
+
+- O poder de salvaguarda aumenta a probabilidade de que o poder nominal planejado seja efetivamente alcançado no estudo futuro.[@perugini2014]
+
+- O método não substitui a interpretação baseada em tamanho de efeito e intervalo de confiança, mas constitui uma estratégia mais prudente para o planejamento prospectivo de estudos confirmatórios ou de replicação.[@perugini2014]
+
+<br>
+
+### Por que utilizar o poder de salvaguarda?
+
+- A análise de poder tradicional utiliza o tamanho de efeito observado como se fosse o verdadeiro valor populacional, desconsiderando a imprecisão inerente à estimativa amostral.[@perugini2014]
+
+- Em amostras pequenas ou moderadas, o tamanho de efeito observado pode estar superestimado devido à variabilidade amostral e viés de publicação.[@perugini2014]
+
+- Caso o efeito verdadeiro seja menor do que o observado inicialmente, o poder real do estudo planejado poderá ser substancialmente inferior ao poder nominal desejado.[@perugini2014]
+
+- Simulações demonstram que, em cenários comuns de pesquisa com efeitos pequenos a moderados, o poder tradicional frequentemente produz poder real inferior ao planejado, enquanto o poder de salvaguarda tende a oferecer proteção contra esse subdimensionamento.[@perugini2014]
+
+- A adoção do limite inferior do intervalo de confiança operacionaliza um nível explícito de proteção contra superestimação do tamanho de efeito.[@perugini2014]
 
 <br>
 
