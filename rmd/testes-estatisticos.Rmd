@@ -19,6 +19,8 @@
 <br>
 
 ```{r qui-quadrado, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
 # Reprodutibilidade
 base::set.seed(1234)
 
@@ -29,7 +31,7 @@ trial <-
       x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
       levels = c("A","B")
     )
-  ) |>
+  ) %>%
   dplyr::mutate(
     p_resp = dplyr::if_else(Tratamento == "A", 0.7, 0.4),
     y      = stats::rbinom(n = n, size = 1L, prob = p_resp),
@@ -37,11 +39,11 @@ trial <-
       x = dplyr::if_else(y == 1L, "Respondeu", "Não respondeu"),
       levels = c("Respondeu","Não respondeu")
     )
-  ) |>
+  ) %>%
   dplyr::select(Tratamento, Resposta)
 
 tbl_yates <-
-  trial |>
+  trial %>%
   gtsummary::tbl_cross(
     row = Tratamento,
     col = Resposta,
@@ -51,16 +53,16 @@ tbl_yates <-
     margin = c("row","column"),
     missing = "no",
     margin_text = "Total"
-  ) |>
+  ) %>%
   gtsummary::add_p(
     test = "chisq.test",
     test.args = list(correct = TRUE),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
-  ) |>
-  gtsummary::modify_header(p.value = "**P-valor**") |>
-  gtsummary::bold_labels() |>
-  gtsummary::modify_caption("Teste Qui-quadrado (com correção de Yates)") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste Qui-quadrado (com correção de Yates)") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
@@ -71,6 +73,8 @@ tbl_yates
 <br>
 
 ```{r qui-quadrado-yates, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
 # Reprodutibilidade
 base::set.seed(1234)
 
@@ -81,7 +85,7 @@ trial <-
       x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
       levels = c("A","B")
     )
-  ) |>
+  ) %>%
   dplyr::mutate(
     p_resp = dplyr::if_else(Tratamento == "A", 0.7, 0.4),
     y      = stats::rbinom(n = n, size = 1L, prob = p_resp),
@@ -89,11 +93,11 @@ trial <-
       x = dplyr::if_else(y == 1L, "Respondeu", "Não respondeu"),
       levels = c("Respondeu","Não respondeu")
     )
-  ) |>
+  ) %>%
   dplyr::select(Tratamento, Resposta)
 
 tbl_no_yates <-
-  trial |>
+  trial %>%
   gtsummary::tbl_cross(
     row = Tratamento,
     col = Resposta,
@@ -103,16 +107,16 @@ tbl_no_yates <-
     margin = c("row","column"),
     missing = "no",
     margin_text = "Total"
-  ) |>
+  ) %>%
   gtsummary::add_p(
     test = "chisq.test",
     test.args = list(correct = FALSE),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
-  ) |>
-  gtsummary::modify_header(p.value = "**P-valor**") |>
-  gtsummary::bold_labels() |>
-  gtsummary::modify_caption("Teste Qui-quadrado (sem correção de Yates)") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste Qui-quadrado (sem correção de Yates)") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
@@ -137,7 +141,7 @@ trial <-
       x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
       levels = c("A","B")
     )
-  ) |>
+  ) %>%
   dplyr::mutate(
     p_resp = dplyr::if_else(Tratamento == "A", 0.7, 0.4),
     y      = stats::rbinom(n = n, size = 1L, prob = p_resp),
@@ -145,11 +149,11 @@ trial <-
       x = dplyr::if_else(y == 1L, "Respondeu", "Não respondeu"),
       levels = c("Respondeu","Não respondeu")
     )
-  ) |>
+  ) %>%
   dplyr::select(Tratamento, Resposta)
 
 tbl_fisher <-
-  trial |>
+  trial %>%
   gtsummary::tbl_cross(
     row = Tratamento,
     col = Resposta,
@@ -159,15 +163,15 @@ tbl_fisher <-
     margin = c("row","column"),
     missing = "no",
     margin_text = "Total"
-  ) |>
+  ) %>%
   gtsummary::add_p(
     test = "fisher.test",
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
-  ) |>
-  gtsummary::modify_header(p.value = "**P-valor**") |>
-  gtsummary::bold_labels() |>
-  gtsummary::modify_caption("Teste exato de Fisher") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste exato de Fisher") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
@@ -192,7 +196,7 @@ dados_mcnemar <-
   tibble::tibble(
     id  = 1:n,
     Pre = stats::rbinom(n, 1, 0.55)
-  ) |>
+  ) %>%
   dplyr::mutate(
     p_pos = dplyr::if_else(Pre == 1L, 0.70, 0.40),
     Pos   = stats::rbinom(n, 1, p_pos),
@@ -211,8 +215,8 @@ tab_cross <-
     statistic = "{n} ({p}%)",
     margin    = c("row","column"),
     margin_text = "Total"
-  ) |>
-  gtsummary::bold_labels() |>
+  ) %>%
+  gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste de McNemar")
 
 # McNemar (p único para a tabela)
@@ -221,8 +225,8 @@ mc     <- stats::mcnemar.test(tab_pp, correct = TRUE)
 p_txt  <- if (mc$p.value < 0.001) "<0.001" else sprintf("%.3f", mc$p.value)
 
 # Converter para gt e acrescentar o rodapé com o p
-tab_cross |>
-  gtsummary::as_gt() |>
+tab_cross %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     paste0(
       "McNemar χ² = ", round(unname(mc$statistic), 3),
@@ -252,7 +256,7 @@ df_q <-
 
 # Longo com rótulos em vez de 0/1
 df_long <-
-  tidyr::pivot_longer(df_q, -id, names_to="Tempo", values_to="Resposta") |>
+  tidyr::pivot_longer(df_q, -id, names_to="Tempo", values_to="Resposta") %>%
   dplyr::mutate(
     Tempo    = factor(Tempo, levels=c("T1","T2","T3")),
     Resposta = factor(dplyr::if_else(Resposta==1,"Positivo","Negativo"),
@@ -272,9 +276,9 @@ tbl_q <-
     digits    = 0,
     statistic = "{n} ({p}%)",
     margin    = "row"
-  ) |>
-  gtsummary::modify_caption("Teste Q de Cochran") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_caption("Teste Q de Cochran") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     paste0(
       "Cochran Q χ²(", q_res$df, ") = ", round(q_res$statistic,3),
@@ -309,25 +313,25 @@ dados_trend <-
     Grupo     = grupos,
     Sucessos  = sucesso,
     Total     = total
-  ) |>
+  ) %>%
   dplyr::mutate(Proporcao = Sucessos/Total)
 
 # Converter para formato adequado ao tbl_cross:
 # duas categorias em 'Status' (Sucesso/Fracasso) + coluna de pesos 'n'
 dados_trend_tbl <-
-  dados_trend |>
-  dplyr::mutate(Fracassos = Total - Sucessos) |>
+  dados_trend %>%
+  dplyr::mutate(Fracassos = Total - Sucessos) %>%
   tidyr::pivot_longer(
     cols = c(Sucessos, Fracassos),
     names_to = "Status_raw",
     values_to = "n"
-  ) |>
+  ) %>%
   dplyr::mutate(
     Status = dplyr::recode(Status_raw,
                            Sucessos = "Sucesso",
                            Fracassos = "Fracasso"),
     Status = factor(Status, levels = c("Sucesso","Fracasso"))
-  ) |>
+  ) %>%
   dplyr::select(Grupo, Status, n)
 
 # Tabela cruzada com pesos
@@ -340,10 +344,10 @@ tbl_trend <-
     digits    = 0,
     statistic = "{n} ({p}%)",
     margin    = "row"
-  ) |>
-  gtsummary::modify_caption("Teste de Cochran–Armitage") |>
-  gtsummary::bold_labels() |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_caption("Teste de Cochran–Armitage") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     paste0(
       "χ²(", trend$parameter, ") = ", round(trend$statistic, 3),
@@ -380,9 +384,9 @@ tbl_assoc <-
     percent = "row",
     digits  = 0,
     statistic = "{n} ({p}%)"
-  ) |>
-  gtsummary::add_p(test = "chisq.test") |>
-  gtsummary::modify_caption("Medidas de associação") |>
+  ) %>%
+  gtsummary::add_p(test = "chisq.test") %>%
+  gtsummary::modify_caption("Medidas de associação") %>%
   gtsummary::bold_labels()
 
 # ---- calcular OR e RR manualmente ----
@@ -406,8 +410,8 @@ nota_assoc <- paste0(
 )
 
 # ---- exibir ----
-tbl_assoc |>
-  gtsummary::as_gt() |>
+tbl_assoc %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(nota_assoc)
 ```
 
@@ -432,30 +436,30 @@ trial <-
       x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
       levels = c("A","B")
     )
-  ) |>
+  ) %>%
   dplyr::mutate(
     mu    = dplyr::if_else(Tratamento == "A", 50, 55),
     desvio= dplyr::if_else(Tratamento == "A", 10, 10),
     Desfecho     = stats::rnorm(n = n, mean = mu, sd = desvio)
-  ) |>
+  ) %>%
   dplyr::select(Tratamento, Desfecho)
 
 trial_t <- 
-  trial |>
+  trial %>%
   gtsummary::tbl_summary(
     by = Tratamento,
     statistic = base::list(Desfecho ~ "{mean} ({sd})"),
     digits    = base::list(Desfecho ~ 2)
-  ) |>
+  ) %>%
   gtsummary::add_p(
     test = Desfecho ~ "t.test",
     test.args = base::list(var.equal = TRUE),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
-  ) |>
-  gtsummary::modify_header(p.value = "**P-valor**") |>
-  gtsummary::bold_labels() |>
-  gtsummary::modify_caption("Teste t de Student") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste t de Student") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0(
       "Tamanho do efeito (d de Cohen): ",
@@ -487,30 +491,30 @@ trial <-
       x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
       levels = c("A","B")
     )
-  ) |>
+  ) %>%
   dplyr::mutate(
     mu    = dplyr::if_else(Tratamento == "A", 50, 55),
     desvio= dplyr::if_else(Tratamento == "A", 10, 10),
     Desfecho     = stats::rnorm(n = n, mean = mu, sd = desvio)
-  ) |>
+  ) %>%
   dplyr::select(Tratamento, Desfecho)
 
 trial_t <- 
-  trial |>
+  trial %>%
   gtsummary::tbl_summary(
     by = Tratamento,
     statistic = base::list(Desfecho ~ "{mean} ({sd})"),
     digits    = base::list(Desfecho ~ 2)
-  ) |>
+  ) %>%
   gtsummary::add_p(
     test = Desfecho ~ "t.test",
     test.args = base::list(var.equal = FALSE),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
-  ) |>
-  gtsummary::modify_header(p.value = "**P-valor**") |>
-  gtsummary::bold_labels() |>
-  gtsummary::modify_caption("Teste t de Welch") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste t de Welch") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0(
       "Tamanho do efeito (d de Cohen): ",
@@ -543,32 +547,32 @@ trial_ind <-
       x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
       levels = c("A","B")
     )
-  ) |>
+  ) %>%
   dplyr::mutate(
     mu     = dplyr::if_else(Tratamento == "A", 50, 55),
     desvio = 10,
     Desfecho = stats::rnorm(n = n, mean = mu, sd = desvio)
-  ) |>
+  ) %>%
   dplyr::select(Tratamento, Desfecho)
 
 # Tamanho de efeito r (Mann–Whitney / Wilcoxon rank-sum)
 eff_ind <- rstatix::wilcox_effsize(data = trial_ind, Desfecho ~ Tratamento)
 
 tbl_mw <- 
-  trial_ind |>
+  trial_ind %>%
   gtsummary::tbl_summary(
     by = Tratamento,
     statistic = base::list(Desfecho ~ "{median} [{p25}, {p75}]"),
     digits    = base::list(Desfecho ~ 2)
-  ) |>
+  ) %>%
   gtsummary::add_p(
     test = Desfecho ~ "wilcox.test",  # Mann–Whitney (rank-sum)
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
-  ) |>
-  gtsummary::modify_header(p.value = "**P-valor**") |>
-  gtsummary::bold_labels() |>
-  gtsummary::modify_caption("Teste de Mann–Whitney (Wilcoxon rank-sum)") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste de Mann–Whitney (Wilcoxon rank-sum)") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0(
       "Tamanho do efeito (r): ",
@@ -604,10 +608,10 @@ dados_long <-
     cols  = c("Pre","Pos"),
     names_to  = "Tempo",
     values_to = "Desfecho"
-  ) |>
+  ) %>%
   dplyr::mutate(
     Tempo = base::factor(Tempo, levels = c("Pre","Pos"), labels = c("Pré","Pós"))
-  ) |>
+  ) %>%
   dplyr::arrange(ID, Tempo)
 
 # Efeito r (pareado)
@@ -619,22 +623,22 @@ eff_paired <- rstatix::wilcox_effsize(
 
 # Tabela + p (Wilcoxon pareado)
 tbl_wilcox <-
-  dados_long |>
-  dplyr::select(-ID) |>
+  dados_long %>%
+  dplyr::select(-ID) %>%
   gtsummary::tbl_summary(
     by = Tempo,
     statistic = base::list(Desfecho ~ "{median} [{p25}, {p75}]"),
     digits    = base::list(Desfecho ~ 2)
-  ) |>
+  ) %>%
   gtsummary::add_p(
     test      = Desfecho ~ "wilcox.test",
     test.args = base::list(paired = TRUE),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
-  ) |>
-  gtsummary::modify_header(p.value = "**P-valor**") |>
-  gtsummary::bold_labels() |>
-  gtsummary::modify_caption("Teste de Wilcoxon (signed-rank)") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste de Wilcoxon (signed-rank)") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0(
       "Tamanho do efeito (r): ",
@@ -663,7 +667,7 @@ trial_anova <-
       x = base::sample(c("A","B","C"), size = n, replace = TRUE),
       levels = c("A","B","C")
     )
-  ) |>
+  ) %>%
   dplyr::mutate(
     mu = dplyr::case_when(
       Grupo == "A" ~ 50,
@@ -671,7 +675,7 @@ trial_anova <-
       TRUE         ~ 60
     ),
     Desfecho = stats::rnorm(n = dplyr::n(), mean = mu, sd = 10)
-  ) |>
+  ) %>%
   dplyr::select(Grupo, Desfecho)
 
 # Rodar ANOVA
@@ -682,20 +686,20 @@ eta2 <- effectsize::eta_squared(anova_obj, partial = FALSE)$Eta2[1]
 
 # Tabela descritiva + p-valor (ANOVA)
 tbl_anova <- 
-  trial_anova |>
+  trial_anova %>%
   gtsummary::tbl_summary(
     by = Grupo,
     statistic = base::list(Desfecho ~ "{mean} ({sd})"),
     digits    = base::list(Desfecho ~ 2)
-  ) |>
+  ) %>%
   gtsummary::add_p(
     test = Desfecho ~ "aov",
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
-  ) |>
-  gtsummary::modify_header(p.value = "**P-valor**") |>
-  gtsummary::bold_labels() |>
-  gtsummary::modify_caption("Análise de variância de um fator") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Análise de variância de um fator") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0("Tamanho do efeito (eta²): ", base::round(eta2, 3))
   )
@@ -715,28 +719,28 @@ format_p <- function(x) {
 
 # Converter em tibble e padronizar nomes/labels
 tukey_tbl <-
-  tibble::as_tibble(posthoc_tukey$Grupo, rownames = "comparacao") |>
+  tibble::as_tibble(posthoc_tukey$Grupo, rownames = "comparacao") %>%
   dplyr::rename(
     diff   = diff,
     lwr    = lwr,
     upr    = upr,
     p_adj  = `p adj`
-  ) |>
+  ) %>%
   dplyr::mutate(
     p_adj = base::signif(p_adj, 3)
   )
 
-tukey_tbl |>
-  gt::gt() |>
-  gt::tab_header(title = "Post hoc de Tukey") |>
+tukey_tbl %>%
+  gt::gt() %>%
+  gt::tab_header(title = "Post hoc de Tukey") %>%
   gt::cols_label(
     comparacao = "Comparação",
     diff       = "Diferença de médias",
     lwr        = "IC95% inferior",
     upr        = "IC95% superior",
     p_adj      = "p (ajustado)"
-  ) |>
-  gt::fmt_number(columns = c("diff", "lwr", "upr"), decimals = 2) |>
+  ) %>%
+  gt::fmt_number(columns = c("diff", "lwr", "upr"), decimals = 2) %>%
   gt::fmt(columns = "p_adj", fns = format_p)
 ```
 
@@ -758,7 +762,7 @@ trial_welch <-
       x = base::sample(c("A","B","C"), size = n, replace = TRUE),
       levels = c("A","B","C")
     )
-  ) |>
+  ) %>%
   dplyr::mutate(
     mu = dplyr::case_when(
       Grupo == "A" ~ 50,
@@ -771,22 +775,22 @@ trial_welch <-
       TRUE         ~ 15
     ),
     Desfecho = stats::rnorm(n = dplyr::n(), mean = mu, sd = sd)
-  ) |>
+  ) %>%
   dplyr::select(Grupo, Desfecho)
 
 # ---- Função de p-valor para ANOVA de Welch (oneway.test) p/ usar no add_p ----
 .welch_p <- function(data, variable, by, ...) {
-  df <- data |>
-    dplyr::select(dplyr::all_of(c(by, variable))) |>
-    stats::setNames(c("by","x")) |>
+  df <- data %>%
+    dplyr::select(dplyr::all_of(c(by, variable))) %>%
+    stats::setNames(c("by","x")) %>%
     dplyr::filter(!base::is.na(by) & !base::is.na(x))
   res <- stats::oneway.test(x ~ by, data = df, var.equal = FALSE)
   tibble::tibble(p.value = res$p.value)
 }
 
 # ---- Eta² (proporção de variância explicada) calculado via somas de quadrados ----
-ss_components <- trial_welch |>
-  dplyr::group_by(Grupo) |>
+ss_components <- trial_welch %>%
+  dplyr::group_by(Grupo) %>%
   dplyr::summarise(n = dplyr::n(),
                    m = base::mean(Desfecho),
                    s2 = stats::var(Desfecho),
@@ -799,20 +803,20 @@ eta2 <- SSb / SSt
 
 # ---- Tabela descritiva + p (Welch) ----
 tbl_welch <-
-  trial_welch |>
+  trial_welch %>%
   gtsummary::tbl_summary(
     by = Grupo,
     statistic = base::list(Desfecho ~ "{mean} ({sd})"),
     digits    = base::list(Desfecho ~ 2)
-  ) |>
+  ) %>%
   gtsummary::add_p(
     test = base::list(Desfecho ~ .welch_p),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
-  ) |>
-  gtsummary::modify_header(p.value = "**P-valor (Welch)**") |>
-  gtsummary::bold_labels() |>
-  gtsummary::modify_caption("Análise de variância de Welch") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor (Welch)**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Análise de variância de Welch") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0("Tamanho do efeito (eta², via SS): ", base::round(eta2, 3))
   )
@@ -820,7 +824,7 @@ tbl_welch <-
 tbl_welch
 
 # ---- Pós-hoc de Games-Howell (robusto a variâncias desiguais) ----
-gh <- rstatix::games_howell_test(trial_welch, Desfecho ~ Grupo) |>
+gh <- rstatix::games_howell_test(trial_welch, Desfecho ~ Grupo) %>%
   dplyr::mutate(
     # arredonda para exibição (se quiser manter valores "crus", remova esta linha)
     p.adj = base::signif(p.adj, 3),
@@ -831,10 +835,10 @@ gh <- rstatix::games_howell_test(trial_welch, Desfecho ~ Grupo) |>
     )
   )
 
-gh |>
-  dplyr::select(group1, group2, estimate, conf.low, conf.high, p_fmt) |>
-  gt::gt() |>
-  gt::tab_header(title = "Post hoc de Games-Howell") |>
+gh %>%
+  dplyr::select(group1, group2, estimate, conf.low, conf.high, p_fmt) %>%
+  gt::gt() %>%
+  gt::tab_header(title = "Post hoc de Games-Howell") %>%
   gt::cols_label(
     group1 = "Grupo 1",
     group2 = "Grupo 2",
@@ -842,7 +846,7 @@ gh |>
     conf.low = "IC95% inferior",
     conf.high = "IC95% superior",
     p_fmt = "p (ajustado)"
-  ) |>
+  ) %>%
   gt::fmt_number(columns = c("estimate","conf.low","conf.high"), decimals = 2)
 
 ```
@@ -866,7 +870,7 @@ trial_kw <-
       x = base::sample(c("A","B","C"), size = n, replace = TRUE),
       levels = c("A","B","C")
     )
-  ) |>
+  ) %>%
   dplyr::mutate(
     meanlog = dplyr::case_when(
       Grupo == "A" ~ 3.6,   # ~ mediana ≈ e^{meanlog} ≈ 36.6
@@ -875,7 +879,7 @@ trial_kw <-
     ),
     sdlog   = 0.5,
     Desfecho = stats::rlnorm(n = dplyr::n(), meanlog = meanlog, sdlog = sdlog)
-  ) |>
+  ) %>%
   dplyr::select(Grupo, Desfecho)
 
 # Efeito: epsilon² e eta²_H (fórmulas padrão)
@@ -888,20 +892,20 @@ eps2   <- (H - k + 1) / (N - k)
 
 # Tabela descritiva + p-valor
 tbl_kw <- 
-  trial_kw |>
+  trial_kw %>%
   gtsummary::tbl_summary(
     by = Grupo,
     statistic = base::list(Desfecho ~ "{median} [{p25}, {p75}]"),
     digits    = base::list(Desfecho ~ 2)
-  ) |>
+  ) %>%
   gtsummary::add_p(
     test = Desfecho ~ "kruskal.test",
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
-  ) |>
-  gtsummary::modify_header(p.value = "**P-valor**") |>
-  gtsummary::bold_labels() |>
-  gtsummary::modify_caption("Teste de Kruskal–Wallis") |>
-  gtsummary::as_gt() |>
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste de Kruskal–Wallis") %>%
+  gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0(
       "Tamanho do efeito: epsilon² = ", base::round(eps2, 3)
@@ -916,7 +920,7 @@ posthoc_dunn <-
     data = trial_kw,
     formula = Desfecho ~ Grupo,
     p.adjust.method = "bonferroni"
-  ) |>
+  ) %>%
   dplyr::mutate(
     p = dplyr::case_when(
       p < 0.001 ~ "<0.001",
@@ -928,17 +932,17 @@ posthoc_dunn <-
     )
   )
 
-posthoc_dunn |>
-  dplyr::select(group1, group2, statistic, p, p.adj) |>
-  gt::gt() |>
-  gt::tab_header(title = "Post hoc de Dunn (Bonferroni)") |>
+posthoc_dunn %>%
+  dplyr::select(group1, group2, statistic, p, p.adj) %>%
+  gt::gt() %>%
+  gt::tab_header(title = "Post hoc de Dunn (Bonferroni)") %>%
   gt::cols_label(
     group1        = "Grupo 1",
     group2        = "Grupo 2",
     statistic     = "Z",
     p             = "p",
     p.adj         = "p (ajustado)"
-  ) |>
+  ) %>%
   gt::fmt_number(columns = "statistic", decimals = 3)
 ```
 

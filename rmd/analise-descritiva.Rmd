@@ -339,6 +339,8 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://sear
 <br>
 
 ```{r tabela-1, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
 # Reprodutibilidade
 set.seed(123)
 
@@ -352,16 +354,16 @@ dados <- tibble::tibble(
 
 # Tabela
 gtsummary::theme_gtsummary_language("pt")
-tbl1 <- dados |>
+tbl1 <- dados %>%
   gtsummary::tbl_summary(
     by = Grupo,
     type = list(Idade ~ "continuous2", IMC ~ "continuous2"),
     statistic = gtsummary::all_continuous() ~
       c("{mean} ({sd})", "{median} [{p25}, {p75}]"),
     missing_text = "Dados ausentes"
-  ) |>
-  gtsummary::add_n() |>
-  gtsummary::add_p() |>
+  ) %>%
+  gtsummary::add_n() %>%
+  gtsummary::add_p() %>%
   gtsummary::modify_caption("Características da amostra por grupo.")
 
 tbl1
@@ -390,6 +392,8 @@ tbl1
 <br>
 
 ```{r falacia-tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo clássico suscetível à Falácia da Tabela 2. A Tabela apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis)e a OR ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
+library(dplyr)
+
 # Reprodutibilidade
 set.seed(123)
 
@@ -399,7 +403,7 @@ dados <- tibble::tibble(
   Sexo  = sample(c("F", "M"), 200, TRUE),
   Idade = round(rnorm(200, 60, 12), 1),
   IMC   = round(rnorm(200, 27, 4), 1)
-) |>
+) %>%
   dplyr::mutate(
     # garantir referências "Controle" e "M"
     Grupo = factor(Grupo, levels = c("Controle", "Intervenção")),
@@ -418,18 +422,18 @@ gtsummary::theme_gtsummary_language("pt")
 
 tab_cru <- gtsummary::tbl_regression(
   mod_cru, exponentiate = TRUE
-) |>
+) %>%
   gtsummary::modify_caption("Tabela 2a. OR bruto (modelo sem covariáveis).")
 
 tab_aj <- gtsummary::tbl_regression(
   mod_aj, exponentiate = TRUE
-) |>
+) %>%
   gtsummary::modify_caption("Tabela 2b. OR ajustado (inclui covariáveis).")
 
 tab_falacia <- gtsummary::tbl_merge(
   list(tab_cru, tab_aj),
   tab_spanner = c("Sem ajuste", "Ajustado")
-) |>
+) %>%
   gtsummary::modify_caption("Exemplo clássico de apresentação suscetível à Falácia da 'Tabela 2'.")
 
 tab_falacia
@@ -444,6 +448,8 @@ tab_falacia
 <br>
 
 ```{r tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo clássico suscetível à Falácia da Tabela 2. A Tabela 2 apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis) e ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
+library(dplyr)
+
 # Reprodutibilidade
 set.seed(123)
 
@@ -453,7 +459,7 @@ dados <- tibble::tibble(
   Sexo  = sample(c("F", "M"), 200, TRUE),
   Idade = round(rnorm(200, 60, 12), 1),
   IMC   = round(rnorm(200, 27, 4), 1)
-) |>
+) %>%
   dplyr::mutate(
     # garantir referências "Controle" e "M"
     Grupo = factor(Grupo, levels = c("Controle", "Intervenção")),
@@ -475,11 +481,11 @@ tab_cru <- gtsummary::tbl_regression(mod_cru, exponentiate = TRUE, include = "Gr
 tab_aj <- gtsummary::tbl_regression(mod_aj, exponentiate = TRUE, include = "Grupo")
 
 tab_anti <- gtsummary::tbl_merge(list(tab_cru, tab_aj),
-                                 tab_spanner = c("Sem ajuste", "Ajustado")) |>
+                                 tab_spanner = c("Sem ajuste", "Ajustado")) %>%
   gtsummary::modify_caption("Exposição (OR; 95% IC) com e sem ajuste.")
 
-# adiciona a nota de rodapé (corrigindo o erro)
-tab_anti_gt <- gtsummary::as_gt(tab_anti) |>
+# adiciona a nota de rodapé
+tab_anti_gt <- gtsummary::as_gt(tab_anti) %>%
   gt::tab_source_note(
     gt::md(
       "*Nota.* Modelo ajustado por Idade (contínua) e IMC (contínuo).
@@ -737,18 +743,20 @@ ggplot2::ggplot(dados, ggplot2::aes(x = Grupo, y = Contagem, fill = Categoria)) 
 <br>
 
 ```{r bar-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráficos de barras represetando médias, barras de erro e dados individuais."}
+library(dplyr)
+
 # Gerar dados de exemplo
 set.seed(123)
 df <- base::expand.grid(Fator1 = c("A", "B"),
                         Fator2 = c("X", "Y"),
-                        Rep = 1:15) |>
+                        Rep = 1:15) %>%
   dplyr::mutate(Y = stats::rnorm(dplyr::n(), 
                                  mean = dplyr::if_else(Fator1 == "A", 5, 7) + dplyr::if_else(Fator2 == "X", 0, 2), 
                                  sd = 1.5))
 
 # Calcular estatísticas por grupo
-summary_df <- df |>
-  dplyr::group_by(Fator1, Fator2) |>
+summary_df <- df %>%
+  dplyr::group_by(Fator1, Fator2) %>%
   dplyr::summarise(
     media = mean(Y),
     sd = stats::sd(Y),

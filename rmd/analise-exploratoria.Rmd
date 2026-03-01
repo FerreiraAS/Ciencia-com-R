@@ -165,6 +165,8 @@ O pacote *ggcleveland*[@ggcleveland] fornece a função [*gg_coplot*](https://ww
 <br>
 
 ```{r autocorrelacao, echo=FALSE, warning=FALSE, message=FALSE, fig.cap= "Séries temporais e autocorrelação de duas séries simuladas com fraca e forte autocorrelação.", out.width='80%', fig.align='center'}
+library(dplyr)
+
 sim_ar1 <- function(n, phi = 0.8, mu = 0, sd = 1, x0 = 0) {
   e <- rnorm(n, 0, sd)
   x <- numeric(n)
@@ -178,12 +180,12 @@ acf_to_df <- function(x, lag.max = NULL) {
   n <- sum(!is.na(x))
   tibble::tibble(lag = as.integer(a$lag),
          acf = as.numeric(a$acf),
-         ci  = 1.96 / sqrt(n)) |>
+         ci  = 1.96 / sqrt(n)) %>%
     dplyr::filter(lag >= 0)
 }
 
 plot_ts <- function(x, titulo = "Série temporal") {
-  tibble::tibble(t = seq_along(x), y = x) |>
+  tibble::tibble(t = seq_along(x), y = x) %>%
     ggplot2::ggplot(ggplot2::aes(t, y)) +
     ggplot2::geom_line() +
     ggplot2::labs(x = "Tempo", y = NULL, title = titulo) +

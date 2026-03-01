@@ -161,6 +161,8 @@ ESP = \dfrac{VN}{VN+FP}
 <br>
 
 ```{r sensibilidade-especificidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Trade-off entre sensibilidade e especificidade em função do limiar de probabilidade (t) para um modelo de classificação."}
+library(dplyr)
+
 # ---- Parâmetros dos grupos (ajuste à sua realidade) ----
 # "doente": previsões tendem a ser altas
 alpha_d   <- 9;  beta_d   <- 3   # média ≈ 0.75
@@ -182,7 +184,8 @@ df <- tibble::tibble(
 )
 
 # ---- Limiar ótimo (Youden J) ----
-opt <- df |>  dplyr::slice_max(Youden, n = 1)
+opt <- df %>%
+  dplyr::slice_max(Youden, n = 1)
 
 # Texto do rótulo no ponto de Youden
 lbl <- sprintf("t* = %.1f%%\nSens = %.1f%%\nEsp = %.1f%%",
@@ -393,6 +396,8 @@ O pacote *caret*[@caret] fornece a função [*confusionMatrix*](https://www.rdoc
 -   Estrutura geral (linhas = condição real; colunas = decisão):
 
 ```{r crosstable-2x3, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 3-vias (2×3) com totais: referência vs decisão (3WD)."}
+library(dplyr)
+
 # matriz 2x3 (referência vs decisão) — células simbólicas
 cross3 <- matrix(
   c("$|POS\\cap C|$",   "$|BND\\cap C|$",   "$|NEG\\cap C|$",
@@ -434,16 +439,16 @@ knitr::kable(
   format  = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
   escape  = FALSE
-) |>
+) %>%
   kableExtra::kable_styling(
     latex_options     = c("basic"),
     bootstrap_options = c("basic", "hover", "condensed", "responsive"),
     full_width        = ifelse(knitr::is_html_output(), TRUE, TRUE),
     position          = "center"
-  ) |>
-  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") |>
-  kableExtra::row_spec(nrow(cross3_totais)-1, bold = TRUE, extra_css = "border-bottom: 1px solid") |>  # penúltima linha (antes do total) com borda
-  kableExtra::column_spec(1, bold = TRUE) |>
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(nrow(cross3_totais)-1, bold = TRUE, extra_css = "border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
   kableExtra::row_spec(nrow(cross3_totais), extra_css = "border-bottom: 1px solid")
 ```
 
@@ -646,6 +651,8 @@ O pacote *proc*[@pROC] fornece a função [*plot.roc*](https://www.rdocumentatio
 <br>
 
 ```{r roc, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Curva ROC (Receiver Operating Characteristic) para um modelos de classificação com diferentes desempenhos diagnósticos.", fig.width=15, fig.height=4, dpi=300, out.width="100%"}
+library(dplyr)
+
 # reproduzível
 set.seed(123)
 
@@ -713,9 +720,9 @@ build_roc_summary <- function(df, label_auc) {
     ret = c("threshold","sensitivity","specificity"), transpose = FALSE
   )
 
-  met_youden <- threshold_metrics(df, youden$threshold) |>
+  met_youden <- threshold_metrics(df, youden$threshold) %>%
     dplyr::mutate(Cutoff = "Youden")
-  met_euclid <- threshold_metrics(df, euclid$threshold) |>
+  met_euclid <- threshold_metrics(df, euclid$threshold) %>%
     dplyr::mutate(Cutoff = "Euclidean")
 
   cut_table <- dplyr::bind_rows(
@@ -748,15 +755,15 @@ data_list <- purrr::map(
 
 cutoffs_tbl <- purrr::map_dfr(
   data_list,
-  ~ .x$coords_tbl |>
-    dplyr::mutate(Model = .x$auc_label) |>
+  ~ .x$coords_tbl %>%
+    dplyr::mutate(Model = .x$auc_label) %>%
     dplyr::relocate(Model, Cutoff)
 )
 
 metrics_tbl <- purrr::map_dfr(
   data_list,
-  ~ .x$metrics_tbl |>
-    dplyr::mutate(Model = .x$auc_label) |>
+  ~ .x$metrics_tbl %>%
+    dplyr::mutate(Model = .x$auc_label) %>%
     dplyr::relocate(Model, Cutoff)
 )
 
@@ -769,7 +776,7 @@ roc_df <- purrr::map_dfr(
   }
 )
 
-cut_points <- cutoffs_tbl |>
+cut_points <- cutoffs_tbl %>%
   dplyr::mutate(FPR = 1 - Specificity,
                 TPR = Sensitivity)
 

@@ -21,6 +21,8 @@
 <br>
 
 ```{r RCTapp, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "RCTapp: Shiny app para análise de ensaios clínicos aleatorizados."}
+library(dplyr)
+
 URL.site <- "https://sciencer.shinyapps.io/RCTapp/"
 file.png <- "images/RCTapp.png"
 
@@ -42,8 +44,8 @@ screenshot <- function(b, img_path,
     expand = expand
   )
   
-  magick::image_read(img_path) |>
-    magick::image_shadow() |>
+  magick::image_read(img_path) %>%
+    magick::image_shadow() %>%
     magick::image_write(img_path, quality = 100)
 }
 

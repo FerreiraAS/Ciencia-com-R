@@ -1593,6 +1593,8 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 <br>
 
 ```{r distribuicoes-parametros, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Parâmetros de distribuição: Assimetria e Curtose.", fig.width=15, fig.height=4, out.width="100%"}
+library(dplyr)
+
 # Reprodutibilidade
 set.seed(123)
 
@@ -1605,8 +1607,8 @@ df <- tibble::tibble(valor = c(dados_normal, dados_assimetrico),
                      tipo  = rep(c("Normal", "Assimétrico (Log-normal)"), each = n))
 
 # 2) Estatísticas-resumo
-resumo <- df |>
-  dplyr::group_by(tipo) |>
+resumo <- df %>%
+  dplyr::group_by(tipo) %>%
   dplyr::summarise(
     n       = n(),
     media   = mean(valor),
@@ -1614,8 +1616,7 @@ resumo <- df |>
     sd      = sd(valor),
     skew    = e1071::skewness(valor, type = 2),
     kurt    = e1071::kurtosis(valor, type = 2),
-    # kurtose "total" (Pearson)
-    excess  = kurt - 3                       # excess kurtosis
+    excess  = kurt - 3 
   )
 
 # 3) Histograma + densidade

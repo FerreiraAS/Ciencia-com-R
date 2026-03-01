@@ -351,13 +351,15 @@ colnames(df_estados) <- labels
 \blandscape
 
 ```{r selecao-descricao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Descrição."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_descricao,
     align = c("l"),
     format = "html",
     escape = TRUE
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -374,13 +376,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_descricao), ncol(df_descricao)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_descricao),
       bold = TRUE
@@ -391,13 +393,15 @@ if (knitr::is_html_output()) {
 <br>
 
 ```{r selecao-comparacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Comparação."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_comparacao,
     align = c("l"),
     format = "html",
     escape = TRUE
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -414,13 +418,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_comparacao), ncol(df_comparacao)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_comparacao),
       bold = TRUE
@@ -431,13 +435,15 @@ if (knitr::is_html_output()) {
 <br>
 
 ```{r selecao-associacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Associação."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_associacao,
     align = c("l"),
     format = "html",
     escape = TRUE
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -454,13 +460,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_associacao), ncol(df_associacao)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_associacao),
       bold = TRUE
@@ -471,13 +477,15 @@ if (knitr::is_html_output()) {
 <br>
 
 ```{r selecao-predicao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Predição."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_predicao,
     align = c("l"),
     format = "html",
     escape = TRUE
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -494,13 +502,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_predicao), ncol(df_predicao)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_predicao),
       bold = TRUE
@@ -511,13 +519,15 @@ if (knitr::is_html_output()) {
 <br>
 
 ```{r selecao-contagem, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Contagem."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_contagem,
     align = c("l"),
     format = "html",
     escape = TRUE
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -534,13 +544,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_contagem), ncol(df_contagem)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_contagem),
       bold = TRUE
@@ -551,13 +561,15 @@ if (knitr::is_html_output()) {
 <br>
 
 ```{r selecao-sobrevida, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Sobrevida."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_sobrevida,
     align = c("l"),
     format = "html",
     escape = TRUE
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -574,13 +586,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_sobrevida), ncol(df_sobrevida)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_sobrevida),
       bold = TRUE
@@ -591,13 +603,15 @@ if (knitr::is_html_output()) {
 <br>
 
 ```{r selecao-concordancia, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Concordância."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_concordancia,
     align = c("l"),
     format = "html",
     escape = TRUE
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -614,13 +628,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_concordancia), ncol(df_concordancia)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_concordancia),
       bold = TRUE
@@ -631,13 +645,15 @@ if (knitr::is_html_output()) {
 <br>
 
 ```{r selecao-multivariado, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Ajuste multivariado."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_ajuste_multivariado,
     align = c("l"),
     format = "html",
     escape = TRUE
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -654,13 +670,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_ajuste_multivariado), ncol(df_ajuste_multivariado)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_ajuste_multivariado),
       bold = TRUE
@@ -671,6 +687,8 @@ if (knitr::is_html_output()) {
 <br>
 
 ```{r selecao-desempenho, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Desempenho diagnóstico."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_desempenho_diagnostico,
@@ -678,7 +696,7 @@ if (knitr::is_html_output()) {
     format = "html",
     escape = TRUE,
     caption = 
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -695,13 +713,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_desempenho_diagnostico), ncol(df_desempenho_diagnostico)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_desempenho_diagnostico),
       bold = TRUE
@@ -712,13 +730,15 @@ if (knitr::is_html_output()) {
 <br>
 
 ```{r selecao-diagnostico, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Diagnóstico."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_diagnostico,
     align = c("l"),
     format = "html",
     escape = TRUE
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -735,13 +755,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_diagnostico), ncol(df_diagnostico)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_diagnostico),
       bold = TRUE
@@ -752,13 +772,15 @@ if (knitr::is_html_output()) {
 <br>
 
 ```{r selecao-estados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de seleção de testes estatísticos: Transição de estados."}
+library(dplyr)
+
 if (knitr::is_html_output()) {
   knitr::kable(
     df_estados,
     align = c("l"),
     format = "html",
     escape = TRUE
-  ) |>
+  ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),
       full_width = TRUE,
@@ -775,13 +797,13 @@ if (knitr::is_html_output()) {
     align   = c("l"),
     width   = rep(1 / ncol(df_estados), ncol(df_estados)) * (29 - 2.5 - 2.5),
     caption = knitr::opts_current$get("tab.cap")
-  ) |>
+  ) %>%
     tinytable::theme_latex(
       rowhead   = 1,
       multipage = TRUE,
       placement = "H",
       table     = FALSE
-    ) |>
+    ) %>%
     tinytable::style_tt(
       i = 0, j = 1:ncol(df_estados),
       bold = TRUE

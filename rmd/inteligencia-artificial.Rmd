@@ -49,6 +49,8 @@
 <br>
 
 ```{r llm, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Representação esquemática de um modelo de linguagem grande (LLM)", fig.width=15, fig.height=8, out.width="100%"}
+library(dplyr)
+
 # Reprodutibilidade
 set.seed(42)
 
@@ -88,11 +90,12 @@ softmax <- function(x, temp = 0.8) {
   exp_z / sum(exp_z)
 }
 probs <- softmax(logits, temp = 0.8)
-pred_df <- tibble::tibble(token = names(probs), prob = probs) |>
+pred_df <- tibble::tibble(token = names(probs), prob = probs) %>%
   dplyr::arrange(dplyr::desc(prob))
 
 top_k <- 10
-pred_top <- pred_df |> dplyr::slice(1:top_k) |>
+pred_top <- pred_df %>%
+  dplyr::slice(1:top_k) %>%
   dplyr::mutate(token = factor(token, levels = rev(token)))
 
 # 3) Atenção "toy"
@@ -116,7 +119,7 @@ att_df <- tibble::tibble(idx = seq_along(tokens), token = tokens, att = att_w)
 
 # Painel A: sequência de tokens
 pal <- scales::hue_pal()(length(unique(tokens)))
-tokens_df <- tokens_df |>
+tokens_df <- tokens_df %>%
   dplyr::mutate(tok_id = as.integer(factor(token)),
                 y = 1)
 

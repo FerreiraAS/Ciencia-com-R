@@ -299,6 +299,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 <br>
 
 ```{r regressao-multinomial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão multinomial"}
+library(dplyr)
 library(tidyr)
 
 # Reprodutibilidade
@@ -340,7 +341,7 @@ model <- nnet::multinom(Y ~ X, data = data, trace = FALSE)
 grid <- data.frame(X = seq(min(data$X), max(data$X), length.out = 200))
 pred_probs <- predict(model, newdata = grid, type = "probs") %>% as.data.frame()
 colnames(pred_probs) <- levels(data$Y)  # garantir nomes A, B, C
-pred_long <- dplyr::bind_cols(grid, pred_probs) |>
+pred_long <- dplyr::bind_cols(grid, pred_probs) %>%
   tidyr::pivot_longer(cols = c("A","B","C"),
                names_to = "categoria", values_to = "prob")
 

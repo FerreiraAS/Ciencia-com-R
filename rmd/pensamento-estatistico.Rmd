@@ -429,6 +429,8 @@ g1
 <br>
 
 ```{r reamostragem, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática da reamostragem de uma amostra."}
+library(dplyr)
+
 # reproducibilidade
 set.seed(123)
 
@@ -453,7 +455,7 @@ pop_df <- data.frame(
 radius_sample <- runif(sample_n, 0.4, 1.2)
 angle_sample <- seq(0, 2 * pi, length.out = sample_n + 1)[-1]
 sample_ids <- sample(pop_df$id, sample_n)
-sample_df <- dplyr::filter(pop_df, id %in% sample_ids) |>
+sample_df <- dplyr::filter(pop_df, id %in% sample_ids) %>%
   dplyr::mutate(
     angle = angle_sample,
     x_sample = cos(angle) * radius_sample,
@@ -472,7 +474,7 @@ reamostra_list <- lapply(seq_along(y_offsets), function(i) {
   sample_boot <- dplyr::filter(sample_df, id %in% re_ids)
   
   # Para manter mesmo número de pontos, atribuímos posições sequenciais
-  sample_boot <- dplyr::arrange(sample_boot, id)[seq_len(sample_n), ] |>
+  sample_boot <- dplyr::arrange(sample_boot, id)[seq_len(sample_n), ] %>%
     dplyr::mutate(
       angle = angle_sample,
       x_sample_reamostra = cos(angle) * radius_sample + 6,
@@ -487,7 +489,7 @@ setas_amostra <- dplyr::left_join(
   dplyr::filter(pop_df, id %in% sample_ids),
   dplyr::select(sample_df, id, xend = x_sample, yend = y_sample),
   by = "id"
-) |>
+) %>%
   dplyr::rename(x = x_pop, y = y_pop)
 
 # Setas: Amostra → Reamostras (AGORA COMPLETO)
@@ -502,7 +504,7 @@ setas_reamostras <- dplyr::inner_join(
     grupo
   ),
   by = "id"
-) |>
+) %>%
   dplyr::rename(x = x_amostra,
                 y = y_amostra,
                 xend = x_sample_reamostra,

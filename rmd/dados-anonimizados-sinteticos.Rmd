@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Dados anonimizados e sintéticos** {#dados-anonimizados-sinteticos}
 
 <br>
@@ -16,13 +15,65 @@
 
 ### O que são dados anonimizados?
 
--   .[@REF]
+-   Dados anonimizados são aqueles que passaram por um processo técnico destinado a impedir a identificação direta ou indireta de indivíduos, considerando os meios “razoavelmente prováveis” de reidentificação.[@gadotti2024]
+
+-   A anonimização envolve um trade-off inevitável entre privacidade e utilidade estatística, sendo necessário equilibrar o risco de identificação com a preservação das propriedades analíticas do banco de dados.[@gadotti2024]
+
+-   A anonimização perfeita é, na prática, inalcançável em muitos cenários modernos, especialmente em bases de alta dimensionalidade, devido ao risco de ataques de reidentificação e reconstrução.[@gadotti2024]
 
 <br>
 
-### Com anonimizar os dados de um banco?
+### Por que anonimização perfeita não existe?
 
--   .[@REF]
+-   Ataques evoluem continuamente, explorando novas vulnerabilidades e técnicas de reidentificação.[@gadotti2024]
+
+-   Reconstrução pode ocorrer mesmo em dados agregados.[@gadotti2024]
+
+-   Alta dimensionalidade torna registros únicos, aumentando o risco de reidentificação.[@gadotti2024]
+
+-   Avaliação empírica contra ataques é essencial.[@gadotti2024]
+
+<br>
+
+### Quais são os principais tipos de ataques contra dados anonimizados?
+
+-   Ataques de inferência de pertencimento (membership inference), que verificam se um indivíduo faz parte do banco.[@gadotti2024]
+
+-   Ataques de inferência de atributos (attribute inference), que buscam estimar características sensíveis não observadas diretamente.[@gadotti2024]
+
+-   Ataques de reconstrução, que tentam reconstituir parcialmente ou totalmente o banco original a partir de dados agregados.[@gadotti2024]
+
+<br>
+
+### Como anonimizar os dados de um banco?
+
+-   Abordagens modernas incluem a liberação de dados agregados, geração de dados sintéticos e aplicação de mecanismos formais como privacidade diferencial, que oferecem garantias matemáticas quantificáveis contra inferência excessiva de informações individuais.[@gadotti2024]
+
+-   Pseudonimização: Remoção de identificadores diretos (nome, CPF, telefone, entre outros).[@gadotti2024]
+
+-   Desidentificação por generalização/supressão: Técnicas como k-anonimato, generalização de atributos, ruído etc.[@gadotti2024]
+
+-   O fluxo de anonimização recomendado envolve: remoção de identificadores diretos; definição de variáveis-chave; mensuração de risco; aplicação de métodos de proteção; avaliação simultânea de risco residual e utilidade.[@templ2015]
+
+<br>
+
+### Quais são as limitações das técnicas de anonimização?
+
+-   Pseudonimização é insuficiente, pois atributos combinados podem reidentificar indivíduos.[@gadotti2024]
+
+-   Desidentificação por generalização/supressão não garante proteção adequada em dados de alta dimensionalidade.[@gadotti2024]
+
+-   Diante dessas limitações, a geração de dados sintéticos surge como uma estratégia alternativa de redução de risco, embora também sujeita a desafios técnicos e regulatórios.[@giuffrè2023]
+
+<br>
+
+### Qual é o equilíbrio entre privacidade e utilidade?
+
+-   A anonimização envolve um equilíbrio fundamental entre privacidade e utilidade.[@gadotti2024]
+
+-   Quanto maior a proteção contra reidentificação, maior tende a ser a distorção estatística introduzida nos dados.[@gadotti2024]
+
+-   Técnicas inadequadas podem produzir um mau equilíbrio; técnicas modernas, quando auditadas contra ataques conhecidos, tendem a produzir melhores resultados.[@gadotti2024]
 
 <br>
 
@@ -50,19 +101,39 @@ O pacote *digest*[@digest] fornece a função [*digest*](https://www.rdocumentat
 
 <br>
 
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *sdcMicro*[@sdcMicro] fornece funções proteção de microdados.
+:::
+
+<br>
+
 ## Dados sintéticos
 
 <br>
 
 ### O que são dados sintéticos?
 
--   .[@REF]
+-   Dados sintéticos são bases artificiais geradas a partir de modelos estatísticos treinados sobre dados reais, preservando suas propriedades estatísticas relevantes, mas sem corresponder diretamente aos registros originais.[@gadotti2024]
+
+-   Embora dados sintéticos possam reduzir riscos de reidentificação, eles não são automaticamente seguros, pois modelos geradores podem memorizar registros individuais, tornando possíveis ataques de inferência ou reconstrução.[@gadotti2024]
+
+-   Dados sintéticos têm aplicações promissoras em políticas públicas, modelos preditivos e tecnologia de digital twins na saúde, embora apresentem desafios relacionados a viés, qualidade e governança regulatória.[@giuffrè2023]
+
+-   Dados sintéticos mantêm similaridade estatística e distributiva com os dados originais, sem diferenças significativas nas comparações por testes de hipótese nula.[@naughton2023]
+
+-   A geração de dados sintéticos não elimina todos os riscos de divulgação, especialmente em casos de observações raras ou extremos (por exemplo, recordes ou desempenhos únicos), que podem aumentar o risco de identificação mesmo após a síntese.[@naughton2023]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *synthpop*[@synthpop] fornece a função [*syn*](https://www.rdocumentation.org/packages/synthpop/versions/1.8-0/topics/syn) para criar bancos de dados sintéticos a partir de um banco de dados real.
 :::
+
+<br>
+
+### Como dados sintéticos podem ser usados em *digital twins*?
+
+-   Dados sintéticos podem alimentar modelos de *digital twins*, réplicas virtuais de sistemas hospitalares ou de pacientes, permitindo simular cenários clínicos, testar intervenções e otimizar decisões terapêuticas sem expor dados individuais reais.[@giuffrè2023]
 
 <br>
 

@@ -376,7 +376,7 @@ ggplot2::ggplot(df, ggplot2::aes(x = Valor)) +
   ggplot2::geom_histogram(ggplot2::aes(y = ggplot2::after_stat(density)),
                  bins = 30, fill = "skyblue", alpha = 0.5) +
   ggplot2::geom_density(color = "blue", size = 1) +
-  ggplot2::geom_density(data = df |> dplyr::filter(Método == "Original"),
+  ggplot2::geom_density(data = df %>% dplyr::filter(Método == "Original"),
                ggplot2::aes(x = Valor),
                color = "red", size = 1, linetype = "dashed") +
   ggplot2::facet_wrap(~ Painel_label, ncol = 1, scales = "free_y") +
