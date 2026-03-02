@@ -179,374 +179,6 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 <br>
 
-## Representação de dados e engenharia de atributos
-
-<br>
-
-### Como representar texto como vetores?
-
--   .[@REF]
-
-<br>
-
-### O que é *one-hot*, *multi-hot* e *count encoding*?
-
--   *One-hot encoding*: cria uma coluna binária para cada categoria de uma variável categórica, indicando a presença (1) ou ausência (0) da categoria em cada observação.[@REF]
-
--   *Multi-hot encoding*: semelhante ao one-hot, mas permite que múltiplas categorias sejam representadas simultaneamente em uma única observação, útil para variáveis com múltiplas seleções.[@REF]
-
--   *Count encoding*: substitui categorias por contagens de sua ocorrência no conjunto de dados, capturando a frequência relativa de cada categoria.[@REF]
-
-<br>
-
-```{r hot-encoding, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de codificação one-hot, count encoding e multi-hot encoding."}
-library(dplyr)
-
-# Texto original
-texto <- "A equipe planeja o projeto com cuidado, a equipe executa as tarefas do projeto, revisa as tarefas e avalia o projeto final."
-
-# Tokenização simples
-tokens <- texto %>%
-  stringr::str_to_lower() %>%
-  stringr::str_replace_all("[[:punct:]]", "") %>%
-  stringr::str_split("\\s+") %>%
-  unlist() %>%
-  purrr::discard(~ .x == "")
-
-# remove stop words
-stop_words <- stopwords::stopwords("pt")
-tokens <- tokens[!tokens %in% stop_words]
-
-# Vocabulário
-vocab <- sort(unique(tokens))
-
-# One-hot por token (token-level)
-token_matrix <- matrix(
-  0,
-  nrow = length(tokens),
-  ncol = length(vocab),
-  dimnames = list(NULL, vocab)
-)
-
-for (i in seq_along(tokens)) {
-  token_matrix[i, tokens[i]] <- 1
-}
-
-# Agregações (document-level)
-count_encoding     <- colSums(token_matrix)
-multi_hot_encoding <- as.numeric(count_encoding > 0)
-
-# One-hot agregado (binário)
-one_hot_aggregated <- multi_hot_encoding
-
-# Construir data.frame final
-final_df <- data.frame(
-  Termo = c(
-    tokens,
-    "One-hot encoding",
-    "Multi-hot encoding",
-    "Count encoding"
-  ),
-  rbind(
-    token_matrix,
-    one_hot_aggregated,
-    multi_hot_encoding,
-    count_encoding
-  ),
-  check.names = FALSE
-)
-
-rownames(final_df) <- NULL
-
-# Impressão com kable
-knitr::kable(
-  final_df,
-  align = c("l", rep("c", ncol(final_df) - 1)),
-  format = ifelse(knitr::is_html_output(), "html", "latex"),
-  booktabs = TRUE,
-  linesep = "",
-  escape = FALSE,
-  caption = "Exemplo de codificação one-hot, multi-hot e count encoding para representação de texto."
-) %>%
-  kableExtra::kable_styling(
-    latex_options = c("basic"),
-    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
-    full_width = TRUE,
-    position = "center"
-  ) %>%
-  kableExtra::row_spec(
-    0,
-    bold = TRUE,
-    extra_css = "border-top: 1px solid black; border-bottom: 1px solid black;"
-  ) %>%
-  kableExtra::row_spec(
-    nrow(final_df) - 2,
-    bold = TRUE,
-    background = "#F2F2F2",
-    extra_css = "border-top: 1px solid black; border-bottom: 1px solid black;"
-  ) %>%
-  kableExtra::row_spec(
-    nrow(final_df) - 1,
-    bold = TRUE,
-    background = "#F2F2F2",
-    extra_css = "border-top: 1px solid black; border-bottom: 1px solid black;"
-  ) %>%
-  kableExtra::row_spec(
-    nrow(final_df), 
-    bold = TRUE,
-    background = "#F2F2F2",
-    extra_css = "border-top: 1px solid black; border-bottom: 1px solid black;"
-  ) %>% 
-  kableExtra::footnote(
-    general_title = "Frase original:",
-    general = texto
-  )
-```
-
-<br>
-
-## Métricas de distância e similaridade
-
-<br>
-
-### O que é uma métrica?
-
--   Uma métrica é uma função que quantifica a distância entre dois objetos em um espaço vetorial, obedecendo propriedades como não-negatividade, identidade, simetria e desigualdade triangular.[@REF]
-
-<br>
-
-### Quais são as principais métricas?
-
--   Distância Manhattan \@ref(eq:manhattan): soma das diferenças absolutas entre as coordenadas dos pontos.[@REF]
-
-<br>
-
-\begin{equation}
-(\#eq:manhattan)
-d(x, y) = \sum_{i=1}^{n} |x_i - y_i|
-\end{equation}
-
-<br>
-
--   Distância Euclidiana \@ref(eq:euclidiana): raiz quadrada da soma dos quadrados das diferenças entre as coordenadas dos pontos.[@REF]
-
-<br>
-
-\begin{equation}
-(\#eq:euclidiana)
-d(x, y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}
-\end{equation}
-
-<br>
-
--   Distância Minkowski: \@ref(eq:minkowski): generalização das distâncias de Manhattan e Euclidiana, onde o parâmetro $p$ determina a ordem da métrica. Para $p=1$, é equivalente à distância de Manhattan; para $p=2$, é equivalente à distância Euclidiana.[@REF]
-
-<br>
-
-\begin{equation}
-(\#eq:minkowski)
-d(x, y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{\frac{1}{p}}
-\end{equation}
-
-<br>
-
--   Distância Chebyshev \@ref(eq:chebyshev): máximum das diferenças absolutas entre as coordenadas dos pontos, representando a distância em um espaço onde o movimento é permitido em todas as direções.[@REF]
-
-<br>
-
-\begin{equation}
-(\#eq:chebyshev)
-d(x, y) = \max_{i} |x_i - y_i|
-\end{equation}
-
-<br>
-
--   Similaridade cosseno \@ref(eq:cosine): medida de similaridade entre dois vetores que calcula o cosseno do ângulo entre eles, variando de -1 (totalmente opostos) a 1 (totalmente semelhantes).[@REF]
-
-<br>
-
-\begin{equation}
-(\#eq:cosine)
-\text{similaridade}(x, y) = \frac{x \cdot y}{\|x\| \|y\|}
-\end{equation}
-
-<br>
-
--   Distância de Hamming \@ref(eq:hamming): número de posições em que os símbolos correspondentes de duas sequências de igual comprimento são diferentes, frequentemente usada para medir a diferença entre strings ou códigos binários.[@REF]
-
-<br>
-
-\begin{equation}
-(\#eq:hamming)
-d(x, y) = \sum_{i=1}^{n} \mathbf{1}(x_i \neq y_i)
-\end{equation}
-
-<br>
-
--   Índice de Jaccard \@ref(eq:jaccard): medida de similaridade entre conjuntos, calculada como a razão entre a interseção e a união dos conjuntos, variando de 0 (sem elementos em comum) a 1 (conjuntos idênticos).[@REF]
-
-<br>
-
-\begin{equation}
-(\#eq:jaccard)
-\text{similaridade}(A, B) = \frac{|A \cap B|}{|A \cup B|}
-\end{equation}
-
-<br>
-
-```{r distances, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Visualização de diferentes métricas de distância e similaridade."}
-library(tidyverse)
-library(gridExtra)
-
-# Base points
-x <- c(1, 2)
-y <- c(4, 6)
-
-# Manhattan Distance
-p_manhattan <- ggplot() +
-  geom_segment(aes(x=x[1], y=x[2], xend=y[1], yend=x[2]),
-               size=1.2, color="orange") +
-  geom_segment(aes(x=y[1], y=x[2], xend=y[1], yend=y[2]),
-               size=1.2, color="orange") +
-  geom_point(aes(x=x[1], y=x[2]), size=4) +
-  geom_point(aes(x=y[1], y=y[2]), size=4, color="red") +
-  coord_fixed() +
-  ggtitle("Manhattan Distance (L1)") +
-  theme_minimal()
-
-# Euclidean Distance
-p_euclid <- ggplot() +
-  geom_segment(aes(x=x[1], y=x[2], xend=y[1], yend=y[2]),
-               size=1.2, color="steelblue") +
-  geom_point(aes(x=x[1], y=x[2]), size=4) +
-  geom_point(aes(x=y[1], y=y[2]), size=4, color="red") +
-  coord_fixed() +
-  ggtitle("Euclidean Distance") +
-  theme_minimal()
-
-#  Chebyshev Distance
-p_cheb <- ggplot() +
-  geom_segment(aes(x=x[1], y=x[2], xend=y[1], yend=x[2]),
-               linetype="dashed") +
-  geom_segment(aes(x=y[1], y=x[2], xend=y[1], yend=y[2]),
-               linetype="dashed") +
-  geom_segment(aes(x=x[1], y=x[2], xend=x[1], yend=y[2]),
-               size=1.2, color="purple") +
-  geom_point(aes(x=x[1], y=x[2]), size=4) +
-  geom_point(aes(x=y[1], y=y[2]), size=4, color="red") +
-  coord_fixed() +
-  ggtitle("Chebyshev Distance (L∞)") +
-  theme_minimal()
-
-# Cosine Distance (Angle)
-p_cos <- ggplot() +
-  geom_segment(aes(x=0, y=0, xend=x[1], yend=x[2]),
-               size=1.2, color="blue") +
-  geom_segment(aes(x=0, y=0, xend=y[1], yend=y[2]),
-               size=1.2, color="red") +
-  coord_fixed() +
-  ggtitle("Cosine Similarity (Angle)") +
-  theme_minimal()
-
-# Hamming Distance
-x_bin <- c(1,0,1,0,1)
-y_bin <- c(1,1,0,0,1)
-
-hamming_df <- tibble(
-  pos = 1:5,
-  x = x_bin,
-  y = y_bin,
-  diff = x_bin != y_bin
-)
-
-p_hamming <- ggplot(hamming_df, aes(x=pos, y=1)) +
-  geom_text(aes(label=x), vjust=-1) +
-  geom_text(aes(label=y), y=0.8, vjust=1) +
-  geom_point(aes(color=diff), size=4) +
-  scale_color_manual(values=c("black","red")) +
-  ggtitle("Hamming Distance") +
-  theme_void()
-
-#  Jaccard Distance
-library(ggforce)
-
-p_jaccard <- ggplot() +
-  geom_circle(aes(x0=0, y0=0, r=2), fill="orange", alpha=0.4) +
-  geom_circle(aes(x0=2, y0=0, r=2), fill="blue", alpha=0.4) +
-  coord_fixed() +
-  ggtitle("Jaccard Distance (Set Overlap)") +
-  theme_void()
-
-# Combine panels
-grid.arrange(
-  p_manhattan, p_euclid, p_cos,
-  p_hamming, p_cheb, p_jaccard,
-  ncol=3
-)
-```
-
-<br>
-
-### Como escolher a métrica adequada?
-
--   A escolha da métrica depende do tipo de dados (contínuos, categóricos, binários), da escala das variáveis, da presença de outliers e do objetivo da análise (agrupamento, classificação, etc.).[@REF]
-
-<br>
-
-### Quais métricas são indicadas para avaliar modelos preditivos?
-
--   A área sob a curva ROC (AUROC) como medida de discriminação, um gráfico de calibração para avaliar a concordância entre probabilidades estimadas e proporções observadas, uma medida de utilidade clínica como o *net benefit* por meio de *decision curve analysis*, e um gráfico que mostre a distribuição das probabilidades preditas por categoria de desfecho.[@vancalster2025]
-
-<br>
-
-### Quais métricas são consideradas inadequadas ou problemáticas?
-
-- O F1-score ($F1$) é explicitamente desencorajado como métrica principal porque não tem um foco claro em desempenho estatístico e é  uma medida inadequada dentro de sua própria categoria conceitual.[@vancalster2025]
-
-- Todas as métricas puramente baseadas em classificação dependente de limiar são consideradas impróprias para limiares clinicamente relevantes, exceto quando o limiar é 0,5 ou igual à prevalência verdadeira.[@vancalster2025]
-
-- Métricas derivadas da matriz de confusão, como acurácia, sensibilidade, especificidade e medidas relacionadas, não devem ser usadas isoladamente como critério principal de avaliação, pois dependem fortemente da escolha do limiar e não refletem diretamente a utilidade clínica.[@vancalster2025]
-
-<br>
-
-## Desbalanceamento de classes
-
-<br>
-
-### O que é desbalanceamento de classes (*class imbalance*)?
-
--   Ocorre quando as classes do desfecho (por exemplo, presença vs. ausência de um evento) não estão igualmente representadas nos dados de treinamento.[@REF]
-
-<br>
-
-### Por que o desbalanceamento é um problema?
-
--   Modelos podem aprender a priorizar a classe mais frequente, obtendo alta acurácia global, mas baixo desempenho para a classe minoritária.[@REF]
-
--   Isso pode comprometer métricas como sensibilidade, especificidade e, em alguns casos, a calibração.[@REF]
-
-<br>
-
-### Quais são as abordagens mais comuns para lidar com desbalanceamento de classes?
-
--   Reamostragem aleatória: superamostragem da classe minoritária; subamostragem da classe majoritária).[@REF]
-
--   Ajuste de pesos: penaliza mais os erros na classe menos frequente.[@REF]
-
--   Alteração do limiar de decisão: muda o ponto de corte de probabilidade para otimizar métricas específicas.[@REF]
-
-<br>
-
-### Qual é o impacto do desbalanceamento de classes na calibração de modelos?
-
--   Corrigir o desbalanceamento de classes nem sempre melhora a calibração e, em alguns casos, pode piorá-la.[@carriero2025]
-
--   Em simulações computacionais, modelos sem correção tiveram calibração igual ou superior aos corrigidos.[@carriero2025]
-
--   A piora observada foi caracterizada por superestimação do risco, nem sempre reversível com re-calibração.[@carriero2025]
-
-<br>
-
 ## Tipos de aprendizado
 
 <br>
@@ -594,122 +226,6 @@ grid.arrange(
 -   Diferenças pequenas em acurácia frequentemente desaparecem quando se consideram incertezas reais de aplicação.[@hand2006]
 
 <Br>
-
-## Avaliação de modelos de classificação
-
-<br>
-
-### O que é uma matriz de confusão 2x2?
-
--   A matriz de confusão é uma tabela de contingência 2×2 utilizada para avaliar o desempenho de um classificador binário, comparando as classes verdadeiras observadas com as classes previstas pelo modelo.[@hicks2022]
-
--   Em aprendizado supervisionado, ela permite decompor os erros de classificação e analisar como o modelo se comporta em relação a cada classe.[@hicks2022]
-
-<br>
-
-### Como interpretar uma matriz de confusão 2x2?
-
--   Verdadeiro-positivo ($VP$): instância cuja classe verdadeira é positiva e foi corretamente classificada como positiva.[@hicks2022]
-
--   Falso-negativo ($FN$): instância positiva que foi incorretamente classificada como negativa.[@hicks2022]
-
--   Verdadeiro-negativo ($VN$): instância negativa corretamente classificada como negativa.[@hicks2022]
-
--   Falso-positivo ($FP$): instância negativa incorretamente classificada como positiva.[@hicks2022]
-
-<br>
-
-```{r crosstable-2x2-aprendizado, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas."}
-library(dplyr)
-
-cross.table <-
-  matrix(
-    c(
-      '$VP$',
-      '$FN$',
-      '$VP+FN$',
-      '$FP$',
-      '$VN$',
-      '$FP+VN$',
-      '$VP+FP$',
-      '$FN+VN$',
-      '$N=VP+VN+FP+FN$'
-    ),
-    nrow = 3,
-    ncol = 3,
-    byrow = FALSE
-  )
-rownames(cross.table) <-
-  c("Classe verdadeira correta", "Classe verdadeira incorreta", "Total")
-colnames(cross.table) <-
-  c("Classe predita correta", "Classe predita incorreta", "Total")
-
-# exibe a tabela de dados
-knitr::kable(
-  cross.table,
-  align = "c",
-  format = ifelse(knitr::is_html_output(), "html", "latex"),
-  booktabs = TRUE,
-  linesep = "",
-  escape = FALSE
-) %>%
-  kableExtra::kable_styling(
-    latex_options = c("basic"),
-    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
-    position = "center"
-  ) %>%
-  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
-  kableExtra::row_spec((dim(cross.table)[1] - 1), bold = TRUE, extra_css = "border-bottom: 1px solid") %>%
-  kableExtra::column_spec(1, bold = TRUE) %>%
-  kableExtra::row_spec(dim(cross.table)[1], extra_css = "border-bottom: 1px solid")
-```
-
-<br>
-
-### Quais métricas caracterizam o desempenho de um classificador?
-
--   Acurácia ($ACU$) \@ref(eq:acu): Proporção de classificações corretas (verdadeiros-positivos e verdadeiros-negativos) em relação ao total de casos.[@hicks2022]
-
-<br>
-
-\begin{equation}
-(\#eq:acu)
-ACU = \dfrac{VP + VN}{VP + FN + VN + FP}
-\end{equation}
-
--   Precisão ($PRE$) \@ref(eq:pre): Proporção de verdadeiro-positivos dentre aqueles classificados como positivos.[@hicks2022]
-
-<br>
-
-\begin{equation}
-(\#eq:pre)
-PRE = \dfrac{VP}{VP + FP}
-\end{equation}
-
-<br>
-
--   Revocação ($REV$) \@ref(eq:rev): Proporção de verdadeiro-positivos dentre aqueles com a condição, equivalente à sensibilidade.[@hicks2022]
-
-<br>
-
-\begin{equation}
-(\#eq:rev)
-REV = \dfrac{VP}{VP + FN}
-\end{equation}
-
-<br>
-
--   F1-score ($F1$) \@ref(eq:f1): Média harmônica entre precisão e revocação, balanceando ambos os aspectos do desempenho.[@hicks2022]
-
-<br>
-
-\begin{equation}
-(\#eq:f1)
-F1 = 2 \times \dfrac{PRE \times REC}{PRE + REC}
-\end{equation}
-
-<br>
 
 ## Principais algoritmos
 
@@ -883,16 +399,6 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 <br>
 
 ### O que é *K-nearest neighbours*?
-
--   .[@REF]
-
-<br>
-
-## *K-means Clustering*
-
-<br>
-
-### O que é *K-means clustering*?
 
 -   .[@REF]
 
@@ -1073,6 +579,36 @@ O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html)
 
 <br>
 
+## *Random forests*
+
+<br>
+
+### O que são *random forests*?
+
+-   .[@REF]
+
+<br>
+
+## *Ensemble*
+
+<br>
+
+### O que são *ensemble*?
+
+-   .[@REF]
+
+<br>
+
+## *K-means Clustering*
+
+<br>
+
+### O que é *K-means clustering*?
+
+-   .[@REF]
+
+<br>
+
 ## Análise de componentes principais
 
 <br>
@@ -1183,7 +719,7 @@ p_biplot <- ggplot2::ggplot(df_scores, ggplot2::aes(PC1, PC2)) +
   ggplot2::geom_segment(
     data = df_load,
     ggplot2::aes(x = 0, y = 0, xend = PC1s, yend = PC2s),
-    arrow = arrow(length = ggplot2::unit(0.18, "inches")),
+    arrow = grid::arrow(length = ggplot2::unit(0.18, "inches")),
     linewidth = 0.9
   ) +
   ggplot2::geom_text(
@@ -1232,23 +768,362 @@ O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html)
 
 <br>
 
-## *Random forests*
+## Métricas de distância e similaridade
 
 <br>
 
-### O que são *random forests*?
+### O que é uma métrica?
 
--   .[@REF]
-
-<br>
-
-## *Ensemble*
+-   Uma métrica é uma função que quantifica a distância entre dois objetos em um espaço vetorial, obedecendo propriedades como não-negatividade, identidade, simetria e desigualdade triangular.[@REF]
 
 <br>
 
-### O que são *ensemble*?
+### Quais são as principais métricas?
 
--   .[@REF]
+-   Distância Manhattan \@ref(eq:manhattan): soma das diferenças absolutas entre as coordenadas dos pontos.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:manhattan)
+d(x, y) = \sum_{i=1}^{n} |x_i - y_i|
+\end{equation}
+
+<br>
+
+-   Distância Euclidiana \@ref(eq:euclidiana): raiz quadrada da soma dos quadrados das diferenças entre as coordenadas dos pontos.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:euclidiana)
+d(x, y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}
+\end{equation}
+
+<br>
+
+-   Distância Minkowski: \@ref(eq:minkowski): generalização das distâncias de Manhattan e Euclidiana, onde o parâmetro $p$ determina a ordem da métrica. Para $p=1$, é equivalente à distância de Manhattan; para $p=2$, é equivalente à distância Euclidiana.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:minkowski)
+d(x, y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{\frac{1}{p}}
+\end{equation}
+
+<br>
+
+-   Distância Chebyshev \@ref(eq:chebyshev): máximum das diferenças absolutas entre as coordenadas dos pontos, representando a distância em um espaço onde o movimento é permitido em todas as direções.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:chebyshev)
+d(x, y) = \max_{i} |x_i - y_i|
+\end{equation}
+
+<br>
+
+-   Similaridade cosseno \@ref(eq:cosine): medida de similaridade entre dois vetores que calcula o cosseno do ângulo entre eles, variando de -1 (totalmente opostos) a 1 (totalmente semelhantes).[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:cosine)
+\text{similaridade}(x, y) = \frac{x \cdot y}{\|x\| \|y\|}
+\end{equation}
+
+<br>
+
+-   Distância de Hamming \@ref(eq:hamming): número de posições em que os símbolos correspondentes de duas sequências de igual comprimento são diferentes, frequentemente usada para medir a diferença entre strings ou códigos binários.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:hamming)
+d(x, y) = \sum_{i=1}^{n} \mathbf{1}(x_i \neq y_i)
+\end{equation}
+
+<br>
+
+-   Índice de Jaccard \@ref(eq:jaccard): medida de similaridade entre conjuntos, calculada como a razão entre a interseção e a união dos conjuntos, variando de 0 (sem elementos em comum) a 1 (conjuntos idênticos).[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:jaccard)
+\text{similaridade}(A, B) = \frac{|A \cap B|}{|A \cup B|}
+\end{equation}
+
+<br>
+
+```{r distances, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Visualização de diferentes métricas de distância e similaridade."}
+library(tidyverse)
+library(gridExtra)
+
+# Base points
+x <- c(1, 2)
+y <- c(4, 6)
+
+# Manhattan Distance
+p_manhattan <- ggplot2::ggplot() +
+  ggplot2::geom_segment(ggplot2::aes(x=x[1], y=x[2], xend=y[1], yend=x[2]),
+               size=1.2, color="orange") +
+  ggplot2::geom_segment(ggplot2::aes(x=y[1], y=x[2], xend=y[1], yend=y[2]),
+               size=1.2, color="orange") +
+  ggplot2::geom_point(ggplot2::aes(x=x[1], y=x[2]), size=4) +
+  ggplot2::geom_point(ggplot2::aes(x=y[1], y=y[2]), size=4, color="red") +
+  ggplot2::coord_fixed() +
+  ggplot2::ggtitle("Manhattan Distance (L1)") +
+  ggplot2::theme_minimal()
+
+# Euclidean Distance
+p_euclid <- ggplot2::ggplot() +
+  ggplot2::geom_segment(ggplot2::aes(x=x[1], y=x[2], xend=y[1], yend=y[2]),
+               size=1.2, color="steelblue") +
+  ggplot2::geom_point(ggplot2::aes(x=x[1], y=x[2]), size=4) +
+  ggplot2::geom_point(ggplot2::aes(x=y[1], y=y[2]), size=4, color="red") +
+  ggplot2::coord_fixed() +
+  ggplot2::ggtitle("Euclidean Distance") +
+  ggplot2::theme_minimal()
+
+#  Chebyshev Distance
+p_cheb <- ggplot2::ggplot() +
+  ggplot2::geom_segment(ggplot2::aes(x=x[1], y=x[2], xend=y[1], yend=x[2]),
+               linetype="dashed") +
+  ggplot2::geom_segment(ggplot2::aes(x=y[1], y=x[2], xend=y[1], yend=y[2]),
+               linetype="dashed") +
+  ggplot2::geom_segment(ggplot2::aes(x=x[1], y=x[2], xend=x[1], yend=y[2]),
+               size=1.2, color="purple") +
+  ggplot2::geom_point(ggplot2::aes(x=x[1], y=x[2]), size=4) +
+  ggplot2::geom_point(ggplot2::aes(x=y[1], y=y[2]), size=4, color="red") +
+  ggplot2::coord_fixed() +
+  ggplot2::ggtitle("Chebyshev Distance (L∞)") +
+  ggplot2::theme_minimal()
+
+# Cosine Distance (Angle)
+p_cos <- ggplot2::ggplot() +
+  ggplot2::geom_segment(ggplot2::aes(x=0, y=0, xend=x[1], yend=x[2]),
+               size=1.2, color="blue") +
+  ggplot2::geom_segment(ggplot2::aes(x=0, y=0, xend=y[1], yend=y[2]),
+               size=1.2, color="red") +
+  ggplot2::coord_fixed() +
+  ggplot2::ggtitle("Cosine Similarity (Angle)") +
+  ggplot2::theme_minimal()
+
+# Hamming Distance
+x_bin <- c(1,0,1,0,1)
+y_bin <- c(1,1,0,0,1)
+
+hamming_df <- tibble::tibble(
+  pos = 1:5,
+  x = x_bin,
+  y = y_bin,
+  diff = x_bin != y_bin
+)
+
+p_hamming <- ggplot2::ggplot(hamming_df, ggplot2::aes(x=pos, y=1)) +
+  ggplot2::geom_text(ggplot2::aes(label=x), vjust=-1) +
+  ggplot2::geom_text(ggplot2::aes(label=y), y=0.8, vjust=1) +
+  ggplot2::geom_point(ggplot2::aes(color=diff), size=4) +
+  ggplot2::scale_color_manual(values=c("black","red")) +
+  ggplot2::ggtitle("Hamming Distance") +
+  ggplot2::theme_void()
+
+#  Jaccard Distance
+library(ggforce)
+
+p_jaccard <- ggplot2::ggplot() +
+  ggforce::geom_circle(ggplot2::aes(x0=0, y0=0, r=2), fill="orange", alpha=0.4) +
+  ggforce::geom_circle(ggplot2::aes(x0=2, y0=0, r=2), fill="blue", alpha=0.4) +
+  ggplot2::coord_fixed() +
+  ggplot2::ggtitle("Jaccard Distance (Set Overlap)") +
+  ggplot2::theme_void()
+
+# Combine panels
+library(gridExtra)
+gridExtra::grid.arrange(
+  p_manhattan, p_euclid, p_cos,
+  p_hamming, p_cheb, p_jaccard,
+  ncol=3
+)
+```
+
+<br>
+
+### Como escolher a métrica adequada?
+
+-   A escolha da métrica depende do tipo de dados (contínuos, categóricos, binários), da escala das variáveis, da presença de outliers e do objetivo da análise (agrupamento, classificação, etc.).[@REF]
+
+<br>
+
+### Quais métricas são indicadas para avaliar modelos preditivos?
+
+-   A área sob a curva ROC (AUROC) como medida de discriminação, um gráfico de calibração para avaliar a concordância entre probabilidades estimadas e proporções observadas, uma medida de utilidade clínica como o *net benefit* por meio de *decision curve analysis*, e um gráfico que mostre a distribuição das probabilidades preditas por categoria de desfecho.[@vancalster2025]
+
+<br>
+
+### Quais métricas são consideradas inadequadas ou problemáticas?
+
+- O F1-score ($F1$) é explicitamente desencorajado como métrica principal porque não tem um foco claro em desempenho estatístico e é  uma medida inadequada dentro de sua própria categoria conceitual.[@vancalster2025]
+
+- Todas as métricas puramente baseadas em classificação dependente de limiar são consideradas impróprias para limiares clinicamente relevantes, exceto quando o limiar é 0,5 ou igual à prevalência verdadeira.[@vancalster2025]
+
+- Métricas derivadas da matriz de confusão, como acurácia, sensibilidade, especificidade e medidas relacionadas, não devem ser usadas isoladamente como critério principal de avaliação, pois dependem fortemente da escolha do limiar e não refletem diretamente a utilidade clínica.[@vancalster2025]
+
+<br>
+
+## Avaliação de modelos de classificação
+
+<br>
+
+### O que é uma matriz de confusão 2x2?
+
+-   A matriz de confusão é uma tabela de contingência 2×2 utilizada para avaliar o desempenho de um classificador binário, comparando as classes verdadeiras observadas com as classes previstas pelo modelo.[@hicks2022]
+
+-   Em aprendizado supervisionado, ela permite decompor os erros de classificação e analisar como o modelo se comporta em relação a cada classe.[@hicks2022]
+
+<br>
+
+### Como interpretar uma matriz de confusão 2x2?
+
+-   Verdadeiro-positivo ($VP$): instância cuja classe verdadeira é positiva e foi corretamente classificada como positiva.[@hicks2022]
+
+-   Falso-negativo ($FN$): instância positiva que foi incorretamente classificada como negativa.[@hicks2022]
+
+-   Verdadeiro-negativo ($VN$): instância negativa corretamente classificada como negativa.[@hicks2022]
+
+-   Falso-positivo ($FP$): instância negativa incorretamente classificada como positiva.[@hicks2022]
+
+<br>
+
+```{r crosstable-2x2-aprendizado, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas."}
+library(dplyr)
+
+cross.table <-
+  matrix(
+    c(
+      '$VP$',
+      '$FN$',
+      '$VP+FN$',
+      '$FP$',
+      '$VN$',
+      '$FP+VN$',
+      '$VP+FP$',
+      '$FN+VN$',
+      '$N=VP+VN+FP+FN$'
+    ),
+    nrow = 3,
+    ncol = 3,
+    byrow = FALSE
+  )
+rownames(cross.table) <-
+  c("Classe verdadeira correta", "Classe verdadeira incorreta", "Total")
+colnames(cross.table) <-
+  c("Classe predita correta", "Classe predita incorreta", "Total")
+
+# exibe a tabela de dados
+knitr::kable(
+  cross.table,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec((dim(cross.table)[1] - 1), bold = TRUE, extra_css = "border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(cross.table)[1], extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+### Quais métricas caracterizam o desempenho de um classificador?
+
+-   Acurácia ($ACU$) \@ref(eq:acu): Proporção de classificações corretas (verdadeiros-positivos e verdadeiros-negativos) em relação ao total de casos.[@hicks2022]
+
+<br>
+
+\begin{equation}
+(\#eq:acu)
+ACU = \dfrac{VP + VN}{VP + FN + VN + FP}
+\end{equation}
+
+-   Precisão ($PRE$) \@ref(eq:pre): Proporção de verdadeiro-positivos dentre aqueles classificados como positivos.[@hicks2022]
+
+<br>
+
+\begin{equation}
+(\#eq:pre)
+PRE = \dfrac{VP}{VP + FP}
+\end{equation}
+
+<br>
+
+-   Revocação ($REV$) \@ref(eq:rev): Proporção de verdadeiro-positivos dentre aqueles com a condição, equivalente à sensibilidade.[@hicks2022]
+
+<br>
+
+\begin{equation}
+(\#eq:rev)
+REV = \dfrac{VP}{VP + FN}
+\end{equation}
+
+<br>
+
+-   F1-score ($F1$) \@ref(eq:f1): Média harmônica entre precisão e revocação, balanceando ambos os aspectos do desempenho.[@hicks2022]
+
+<br>
+
+\begin{equation}
+(\#eq:f1)
+F1 = 2 \times \dfrac{PRE \times REC}{PRE + REC}
+\end{equation}
+
+<br>
+
+## Desbalanceamento de classes
+
+<br>
+
+### O que é desbalanceamento de classes (*class imbalance*)?
+
+-   Ocorre quando as classes do desfecho (por exemplo, presença vs. ausência de um evento) não estão igualmente representadas nos dados de treinamento.[@REF]
+
+<br>
+
+### Por que o desbalanceamento é um problema?
+
+-   Modelos podem aprender a priorizar a classe mais frequente, obtendo alta acurácia global, mas baixo desempenho para a classe minoritária.[@REF]
+
+-   Isso pode comprometer métricas como sensibilidade, especificidade e, em alguns casos, a calibração.[@REF]
+
+<br>
+
+### Quais são as abordagens mais comuns para lidar com desbalanceamento de classes?
+
+-   Reamostragem aleatória: superamostragem da classe minoritária; subamostragem da classe majoritária).[@REF]
+
+-   Ajuste de pesos: penaliza mais os erros na classe menos frequente.[@REF]
+
+-   Alteração do limiar de decisão: muda o ponto de corte de probabilidade para otimizar métricas específicas.[@REF]
+
+<br>
+
+### Qual é o impacto do desbalanceamento de classes na calibração de modelos?
+
+-   Corrigir o desbalanceamento de classes nem sempre melhora a calibração e, em alguns casos, pode piorá-la.[@carriero2025]
+
+-   Em simulações computacionais, modelos sem correção tiveram calibração igual ou superior aos corrigidos.[@carriero2025]
+
+-   A piora observada foi caracterizada por superestimação do risco, nem sempre reversível com re-calibração.[@carriero2025]
 
 <br>
 

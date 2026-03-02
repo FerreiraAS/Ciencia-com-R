@@ -129,7 +129,7 @@ grid_q$power <- mapply(calc_power, grid_q$n, grid_q$d, grid_q$alpha, grid_q$desi
 plt_power <- ggplot2::ggplot(grid_q, ggplot2::aes(x = n, y = power, linetype = factor(alpha), group = interaction(d, alpha, design))) +
   ggplot2::geom_hline(yintercept = 0.8, linewidth = 0.4, alpha = 0.6) +
   ggplot2::geom_hline(yintercept = 0.9, linewidth = 0.4, alpha = 0.6, linetype = "dashed") +
-  ggplot2::geom_line(aes(size = factor(d), alpha = design)) +
+  ggplot2::geom_line(ggplot2::aes(size = factor(d), alpha = design)) +
   ggplot2::scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0,1)) +
   ggplot2::scale_size_manual(values = c("0.3" = 0.4, "0.5" = 0.8, "0.8" = 1.2), name = "Efeito (d)") +
   ggplot2::scale_linetype_discrete(name = "α") +

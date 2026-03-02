@@ -1,0 +1,315 @@
+```{=openxml}
+<w:p>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
+</w:p>
+```
+
+# **Tabelas** {#tabelas}
+
+<br>
+
+## Tabelas
+
+<br>
+
+### Por que usar tabelas?
+
+-   Tabelas complementam o texto (e vice-versa), e podem apresentar os dados de modo mais acessível e informativo.[@Inskip2017]
+
+<br>
+
+### Que informações incluir nas tabelas?
+
+-   Título ou legenda, uma síntese descritiva (geralmente por meio de parâmetros descritivos), intervalos de confiança e/ou P-valores conforme necessário para adequada interpretação.[@Inskip2017; @Kwak2021]
+
+<br>
+
+### Quais são os tipos de tabelas?
+
+-   Tabela de frequência: apresenta a quantidade de ocorrências (frequência absoluta e relativa) de cada categoria de uma variável; usada com variáveis qualitativas ou quantitativas discretas.[@REF]
+
+-   Tabela de frequência agrupada: organiza dados contínuos em intervalos de classe (ex: faixas etárias) e mostra as frequências correspondentes.[@REF]
+
+-   Tabela de contingência (ou tabela cruzada): cruza duas variáveis categóricas, permitindo observar possíveis associações entre elas.[@REF]
+
+-   Tabela de medidas descritivas: resume variáveis quantitativas com estatísticas como média, mediana, desvio-padrão, mínimo, máximo e quartis.[@REF]
+
+-   Tabela de comparação entre grupos: apresenta médias, desvios-padrão e ocasionalmente resultados de testes de inferência estatística para comparar dois ou mais grupos.[@REF]
+
+-   Tabela de resultados de testes estatísticos: exibe valores de estatísticas de teste , P valores e intervalos de confiança; usada para mostrar inferências.[@REF]
+
+-   Tabela de regressão (ou de modelos estatísticos): mostra os coeficientes de regressão, erros padrão, intervalos de confiança e P valores para cada variável de um modelo.[@REF]
+
+-   Tabela de séries temporais ou longitudinais: organiza dados medidos em diferentes momentos no tempo, permitindo visualizar tendências ou variações longitudinais.[@REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html) para construção da 'Tabela 1' com dados descritivos.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *table1*[@table1] fornece a função [*table1*](https://search.r-project.org/CRAN/refmans/table1/html/table1.html) para construção de tabelas.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *flextable*[@flextable] fornece as funções [*flextable*](https://search.r-project.org/CRAN/refmans/flextable/html/flextable.html), [*as_flextable*](https://search.r-project.org/CRAN/refmans/flextable/html/as_flextable.html) e [*save_as_docx*](https://search.r-project.org/CRAN/refmans/flextable/html/save_as_docx.html) para criar e salvar tabelas formatadas em DOCX.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *rempsyc*[@rempsyc] fornece a função [*nice_table*](https://search.r-project.org/CRAN/refmans/rempsyc/html/nice_table.html) para criar tabelas formatadas.
+:::
+
+<br>
+
+### Quais são os erros mais comuns de preenchimento de tabelas?
+
+-   Erros tipográficos.[@barnett2023]
+
+-   Ausência de rótulos ou unidades nas variáveis.[@barnett2023]
+
+-   Relatar estatísticas incorretamente, tais como rotular variáveis contínuas como porcentagens.[@barnett2023]
+
+-   Estatísticas descritivas de tendência central (ex.: médias) relatadas sem a estatística de dispersão correspondente (ex.: desvio-padrão).[@barnett2023]
+
+-   Desvio-padrão nulo ($\sigma=0$).[@barnett2023]
+
+-   Valores porcentuais que não correspondem ao numerador dividido pelo denominador.[@barnett2023]
+
+<br>
+
+## Tabela 1
+
+<br>
+
+### O que é a 'Tabela 1'?
+
+-   A 'Tabela 1' descreve as características demográficas, sociais e clínicas da amostra, completa ou agrupada por algum fator, geralmente por meio de parâmetros de tendência central e dispersão.[@Westreich2013; @chen2020]
+
+<br>
+
+### Qual a utilidade da 'Tabela 1'?
+
+-   Descrever (conhecer) as características da amostra e dos grupos sendo comparados, quando aplicável.[@chen2020]
+
+-   Verificar aderência ao protocolo do estudo, incluindo critérios de inclusão/exclusão, tamanho da amostra e perdas amostrais.[@chen2020]
+
+-   Permitir a replicação do estudo.[@chen2020]
+
+-   Meta-analisar os dados junto a estudos similares.[@chen2020]
+
+-   Avaliar a generalização (validade externa) das conclusões do estudo.[@chen2020]
+
+<br>
+
+### O que é a falácia da 'Tabela 1'?
+
+-   Falácia da Tabela 1 ocorre pela interpretação errônea dos P-valores na comparação entre grupos, na linha de base, de um ensaio clínico aleatorizado.[@pijls2022]
+
+-   Não interprete P da linha de base em ensaios clínicos como “desequilíbrio” (falácia da Tabela 1). Mantenha P-valor apenas como descritivo (ou omita), enfatizando desenho e aleatorização.[@Weissgerber2019]
+
+<br>
+
+### Como construir a 'Tabela 1'?
+
+-   A Tabela 1 geralmente é utilizada para descrever as características da amostra estudada, possibilitando a análise de ameaças à validade interna e/ou externa ao estudo.[@greenhalgh1997; @Hayes-Larson2019]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *table1*[@table1] fornece a função [*table1*](https://search.r-project.org/CRAN/refmans/table1/html/table1.html) para construção de tabelas.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html) para construção da 'Tabela 1' com dados descritivos.
+:::
+
+<br>
+
+```{r tabela-1, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(123)
+
+# Gerar dados de exemplo
+dados <- tibble::tibble(
+  Grupo = sample(c("Controle","Intervenção"), 200, TRUE),
+  Sexo  = sample(c("F","M"), 200, TRUE),
+  Idade = round(rnorm(200, 60, 12), 1),
+  IMC   = round(rnorm(200, 27, 4), 1)
+)
+
+# Tabela
+gtsummary::theme_gtsummary_language("pt")
+tbl1 <- dados %>%
+  gtsummary::tbl_summary(
+    by = Grupo,
+    type = list(Idade ~ "continuous2", IMC ~ "continuous2"),
+    statistic = gtsummary::all_continuous() ~
+      c("{mean} ({sd})", "{median} [{p25}, {p75}]"),
+    missing_text = "Dados ausentes"
+  ) %>%
+  gtsummary::add_n() %>%
+  gtsummary::add_p() %>%
+  gtsummary::modify_caption("Características da amostra por grupo.")
+
+tbl1
+```
+
+<br>
+
+## Tabela 2
+
+<br>
+
+### Qual a utilidade da 'Tabela 2'?
+
+-   A Tabela 2 mostra associações ajustadas multivariadas com o resultado para variáveis resumidas na Tabela 1.[@Westreich2013]
+
+<br>
+
+### O que é a falácia da 'Tabela 2'?
+
+-   A Tabela 2 pode induzir ao erro de interpretação pelas estimativas de efeitos para covariáveis do modelo também serem utilizados para controlar a confusão da exposição.[@Westreich2013; @bandoli2018]
+
+-   Ao apresentar estimativas de efeito ajustadas para covariáveis juntamente com a estimativa de efeito ajustada para a exposição primária, a Tabela 2 sugere implicitamente que todas estas estimativas podem ser interpretadas de forma semelhante, se não de forma idêntica, como estimativa do efeito total.[@Westreich2013; @bandoli2018]
+
+-   A falácia da Tabela 2 pode ser evitada limitando-se a tabela a estimativas das medidas primárias do efeito de exposição nos diferentes modelos, com as covariáveis secundárias de "ajuste" relatadas em uma nota de rodapé, juntamente com a forma como foram categorizadas ou modeladas.[@Westreich2013]
+
+<br>
+
+```{r falacia-tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo clássico suscetível à Falácia da Tabela 2. A Tabela apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis)e a OR ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(123)
+
+# Exemplo simulado
+dados <- tibble::tibble(
+  Grupo = sample(c("Controle", "Intervenção"), 200, TRUE),
+  Sexo  = sample(c("F", "M"), 200, TRUE),
+  Idade = round(rnorm(200, 60, 12), 1),
+  IMC   = round(rnorm(200, 27, 4), 1)
+) %>%
+  dplyr::mutate(
+    # garantir referências "Controle" e "M"
+    Grupo = factor(Grupo, levels = c("Controle", "Intervenção")),
+    Sexo  = factor(Sexo,  levels = c("M", "F"))
+  )
+
+# Modelos: cru vs ajustado
+mod_cru <- glm(I(Sexo == "F") ~ Grupo,
+               data = dados, family = binomial)
+
+mod_aj  <- glm(I(Sexo == "F") ~ Grupo + Idade + IMC,
+               data = dados, family = binomial)
+
+# Tabelas com gtsummary
+gtsummary::theme_gtsummary_language("pt")
+
+tab_cru <- gtsummary::tbl_regression(
+  mod_cru, exponentiate = TRUE
+) %>%
+  gtsummary::modify_caption("Tabela 2a. OR bruto (modelo sem covariáveis).")
+
+tab_aj <- gtsummary::tbl_regression(
+  mod_aj, exponentiate = TRUE
+) %>%
+  gtsummary::modify_caption("Tabela 2b. OR ajustado (inclui covariáveis).")
+
+tab_falacia <- gtsummary::tbl_merge(
+  list(tab_cru, tab_aj),
+  tab_spanner = c("Sem ajuste", "Ajustado")
+) %>%
+  gtsummary::modify_caption("Exemplo clássico de apresentação suscetível à Falácia da 'Tabela 2'.")
+
+tab_falacia
+```
+
+<br>
+
+### Como construir a 'Tabela 2'?
+
+-   A Tabela 2 pode ser utilizada para apresentar estimativas de múltiplos efeitos ajustados de um mesmo modelo estatístico.[@Westreich2013]
+
+<br>
+
+```{r tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo clássico suscetível à Falácia da Tabela 2. A Tabela 2 apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis) e ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(123)
+
+# Exemplo simulado
+dados <- tibble::tibble(
+  Grupo = sample(c("Controle", "Intervenção"), 200, TRUE),
+  Sexo  = sample(c("F", "M"), 200, TRUE),
+  Idade = round(rnorm(200, 60, 12), 1),
+  IMC   = round(rnorm(200, 27, 4), 1)
+) %>%
+  dplyr::mutate(
+    # garantir referências "Controle" e "M"
+    Grupo = factor(Grupo, levels = c("Controle", "Intervenção")),
+    Sexo  = factor(Sexo, levels = c("M", "F"))
+  )
+
+# Modelos: cru vs ajustado
+mod_cru <- glm(I(Sexo == "F") ~ Grupo, data = dados, family = binomial)
+
+mod_aj  <- glm(I(Sexo == "F") ~ Grupo + Idade + IMC,
+               data = dados,
+               family = binomial)
+
+# Tabelas com gtsummary
+gtsummary::theme_gtsummary_language("pt")
+
+tab_cru <- gtsummary::tbl_regression(mod_cru, exponentiate = TRUE, include = "Grupo")
+
+tab_aj <- gtsummary::tbl_regression(mod_aj, exponentiate = TRUE, include = "Grupo")
+
+tab_anti <- gtsummary::tbl_merge(list(tab_cru, tab_aj),
+                                 tab_spanner = c("Sem ajuste", "Ajustado")) %>%
+  gtsummary::modify_caption("Exposição (OR; 95% IC) com e sem ajuste.")
+
+# adiciona a nota de rodapé
+tab_anti_gt <- gtsummary::as_gt(tab_anti) %>%
+  gt::tab_source_note(
+    gt::md(
+      "*Nota.* Modelo ajustado por Idade (contínua) e IMC (contínuo).
+ Covariáveis são usadas apenas para controle de confusão e não devem ser interpretadas como efeitos causais (*Falácia da Tabela 2*)."
+    )
+  )
+
+tab_anti_gt
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *table1*[@table1] fornece a função [*table1*](https://search.r-project.org/CRAN/refmans/table1/html/table1.html) para construção de tabelas.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html) para construção da 'Tabela 1' com dados descritivos.
+:::
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>

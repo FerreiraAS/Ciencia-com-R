@@ -10,22 +10,6 @@
 
 <br>
 
-## Inteligência artificial
-
-<br>
-
-### O que é inteligência artificial (IA)?
-
--   .[@REF]
-
-<br>
-
-### Como ela se relaciona com estatística, ciência de dados e aprendizado de máquina?
-
--   .[@REF]
-
-<br>
-
 ## Inteligência artificial generativa
 
 <br>
@@ -300,7 +284,7 @@ exemplos <- data.frame(
 
 p_space <- ggplot2::ggplot(df_space, ggplot2::aes(plausibilidade, veracidade)) +
   ggplot2::geom_point(
-    aes(color = regiao),
+    ggplot2::aes(color = regiao),
     alpha = 0.4, size = 2
   ) +
   ggplot2::geom_vline(xintercept = 0.6, linetype = "dashed") +
@@ -313,7 +297,7 @@ p_space <- ggplot2::ggplot(df_space, ggplot2::aes(plausibilidade, veracidade)) +
   ) +
   ggrepel::geom_text_repel(
     data = exemplos,
-    aes(plausibilidade, veracidade, label = texto),
+    ggplot2::aes(plausibilidade, veracidade, label = texto),
     inherit.aes = FALSE,
     size = 3.2
   ) +

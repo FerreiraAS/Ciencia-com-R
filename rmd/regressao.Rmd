@@ -434,13 +434,13 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_jitter(width = 0, height = 0.1, alpha = 0.6) +
   ggplot2::geom_ribbon(
     data = plot_df,
-    aes(x = X, ymin = mu_lwr, ymax = mu_upr),
+    ggplot2::aes(x = X, ymin = mu_lwr, ymax = mu_upr),
     inherit.aes = FALSE,
     alpha = 0.2
   ) +
   ggplot2::geom_line(
     data = plot_df,
-    aes(x = X, y = mu_hat),
+    ggplot2::aes(x = X, y = mu_hat),
     linewidth = 1
   ) +
   ggplot2::labs(

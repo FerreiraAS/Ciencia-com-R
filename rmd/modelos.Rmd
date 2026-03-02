@@ -213,9 +213,7 @@ O pacote *markovchain*[@markovchain] fornece a função [*markovchainFit*](https
 <br>
 
 ```{r modelo-efeitos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Efeitos fixos, aleatórios e mistos em dados simulados com paradoxo de Simpson. As linhas vermelhas representam os efeitos dentro dos grupos, enquanto as linhas cinza e preta representam os efeitos globais (naive e fixo, respectivamente). O modelo misto (linhas coloridas) captura os efeitos dentro dos grupos sem extrapolar além dos dados observados."}
-library(lme4)
-library(dplyr)
-
+# reprodutibilidade
 set.seed(123)
 
 # 1. Simulate grouped data
@@ -246,7 +244,7 @@ naive_lm <- lm(y ~ x, data = data)
 fixed_lm <- lm(y ~ x, data = data)
 
 # Mixed effects model
-mixed_lmm <- lmer(y ~ x + (x | group), data = data)
+mixed_lmm <- lme4::lmer(y ~ x + (x | group), data = data)
 
 # 3. Prediction grids
 
@@ -265,14 +263,14 @@ pred_fixed <- data.frame(
 
 # Group-specific x grids (no extrapolation)
 pred_mixed <- data %>%
-  group_by(group) %>%
-  summarise(
+  dplyr::group_by(group) %>%
+  dplyr::summarise(
     x_min = min(x),
     x_max = max(x),
     .groups = "drop"
   ) %>%
-  rowwise() %>%
-  do({
+  dplyr::rowwise() %>%
+  dplyr::do({
     g <- .$group
     x_seq <- seq(.$x_min, .$x_max, length.out = 100)
     data.frame(
@@ -316,7 +314,7 @@ ggplot2::ggplot(data, ggplot2::aes(x, y)) +
   # Random effects (mixed model predictions)
   ggplot2::geom_line(
     data = pred_mixed,
-    aes(x, y, group = group, color = group, linetype = "Random effect"),
+    ggplot2::aes(x, y, group = group, color = group, linetype = "Random effect"),
     linewidth = 1
   ) +
   # Legend control
