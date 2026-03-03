@@ -1,0 +1,156 @@
+```{=openxml}
+<w:p>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
+</w:p>
+```
+# **Modelagem estrutural** {#modelagem-estrutural}
+
+<br>
+
+## Modelos estruturais
+
+<br>
+
+### O que é modelagem de equações estruturais (SEM)?
+
+-   A modelagem de equações estruturais (*structural equation nodelling*, SEM) é uma técnica multivariada utilizada para testar e avaliar relações causais diretas e indiretas previamente especificadas entre múltiplas variáveis.[@fan2016]
+
+-   A modelagem de equações estruturais integra análise fatorial confirmatória e análise de caminhos em um único arcabouço estatístico.[@fan2016]
+
+<br>
+
+### Em que a SEM difere de outras abordagens estatísticas?
+
+-   Diferentemente de modelos tradicionais, a SEM permite testar efeitos diretos e indiretos simultaneamente dentro de um sistema de relações causais hipotéticas.[@fan2016]
+
+-   A SEM combina modelo de mensuração (variáveis latentes) e modelo estrutural (relações causais entre variáveis).[@fan2016]
+
+<br>
+
+## Variáveis latentes
+
+<br>
+
+### O que é uma variável latente?
+
+-   Variável latente é um construto não observado diretamente, estimado a partir de indicadores observáveis correlacionados.[@fan2016]
+
+- Variáveis latentes representam construtos teóricos inferidos a partir de padrões de covariância entre indicadores observáveis. Entretanto, sua identificação estatística não implica necessariamente a existência de uma entidade causal subjacente independente.[@revelle2024]
+
+<br>
+
+### O que é análise fatorial confirmatória (CFA)?
+
+-   A análise fatorial confirmatória é o método usado na SEM para estimar variáveis latentes com base em conhecimento teórico prévio sobre seus indicadores.[@fan2016]
+
+-   Diferentemente da análise fatorial exploratória, a CFA exige especificação prévia das relações entre construto e indicadores.[@fan2016]
+
+<br>
+
+## Aplicações avançadas
+
+<br>
+
+### O que é modelo de curva de crescimento latente (LGC)?
+
+-   O modelo de curva de crescimento latente é uma extensão da SEM usada para analisar dados longitudinais, modelando trajetórias de crescimento ao longo do tempo.[@fan2016]
+
+- O modelo LGC permite estimar inclinações e interceptos como variáveis latentes representando mudanças temporais.[@fan2016]
+
+<br>
+
+### O que é SEM Bayesiana?
+
+-   A SEM Bayesiana (BSEM) incorpora distribuições a priori e atualiza parâmetros por meio de inferência Bayesiana, sendo particularmente útil em amostras pequenas.[@fan2016]
+
+-   Sua avaliação de modelo baseia-se em comparação Bayesiana e verificação preditiva posterior, em vez de índices clássicos como χ² ou RMSEA.[@fan2016]
+
+<br>
+
+### O que é PLS-SEM?
+
+-   A PLS-SEM (Partial Least Squares SEM) é uma abordagem orientada à maximização da variância explicada, adequada quando há pouca fundamentação teórica ou amostras pequenas.[@fan2016]
+
+-   A PLS-SEM não exige normalidade multivariada nem grandes tamanhos amostrais.[@fan2016]
+
+<br>
+
+### O que caracteriza a PLS-SEM dentro da família da SEM?
+
+-   A PLS-SEM é uma abordagem de modelagem estrutural orientada à predição, cujo objetivo principal é maximizar a variância explicada das variáveis dependentes.[@legate2023]
+
+-   Diferentemente da SEM baseada em covariância (CB-SEM), que tem foco confirmatório, a PLS-SEM é classificada como uma técnica causal-preditiva.[@legate2023]
+
+-   A distinção entre modelos orientados à confirmação estrutural (CB-SEM) e modelos orientados à predição (PLS-SEM) dialoga com críticas recentes que defendem maior ênfase na utilidade preditiva em vez da busca exclusiva por estrutura latente pura.[@revelle2024]
+
+<br>
+
+### Quando a PLS-SEM deve ser considerada?
+
+-   Quando o objetivo do estudo é predição e identificação de construtos com maior impacto explicativo.[@legate2023]
+
+-   Em contextos com modelos complexos, múltiplos construtos e interesse em maximizar $R^2$.[@legate2023]
+
+-   Em pesquisas com fundamentação teórica ainda em consolidação.[@legate2023]
+
+-   Em situações de amostras moderadas ou pequenas, desde que respeitadas recomendações mínimas de poder estatístico.[@legate2023]
+
+<br>
+
+## Ajuste e avaliação do modelo
+
+<br>
+
+### Quais são os principais índices de ajuste em SEM?
+
+-   O teste qui-quadrado $\chi^2$ avalia discrepância entre matriz observada e matriz reproduzida pelo modelo.[@fan2016]
+
+-   RMSEA e SRMR medem erro de aproximação, sendo valores baixos indicativos de melhor ajuste.[@fan2016]
+
+-   CFI e TLI avaliam ajuste comparativo, sendo valores próximos de 0,95 considerados desejáveis.[@fan2016]
+
+-   AIC e BIC são usados para comparação entre modelos concorrentes.[@fan2016]
+
+- Índices globais de ajuste, embora úteis, não garantem validade teórica nem utilidade prática do modelo. Ajustes elevados podem refletir adequação matemática sem necessariamente traduzir relevância funcional.[@revelle2024]
+
+<br>
+
+## Problemas comuns na aplicação de SEM
+
+<br>
+
+### Quais são problemas frequentes na aplicação de SEM?
+
+-   Falta de justificativa teórica para relações causais especificadas.[@fan2016]
+
+-   Ausência de explicação adequada das variáveis latentes.[@fan2016]
+
+-   Não relato de coeficientes, erros padrão ou valores de $R^2$.[@fan2016]
+
+-   Falta de justificativa do tamanho amostral.[@fan2016]
+
+-   Ausência de validação do modelo.[@fan2016]
+
+<br>
+
+### Por que a especificação do modelo é crítica em SEM?
+
+-   Porque relações causais devem ser fundamentadas teoricamente, incluindo imposição explícita de coeficientes nulos ou covariâncias nulas quando apropriado.[@fan2016]
+
+-   A inclusão de covariâncias não justificadas pode artificialmente melhorar índices de ajuste sem suporte teórico.[@fan2016]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *lavaan*[@lavaan-2] fornece a função [*lavaan*](https://www.rdocumentation.org/packages/lavaan/versions/0.6-2/topics/lavaan) para ajustar modelos estruturais de variáveis latentes.
+:::
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>
