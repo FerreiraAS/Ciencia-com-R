@@ -185,7 +185,11 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 ### O que é aprendizado supervisionado?
 
--   .[@REF]
+- Aprendizado supervisionado é um paradigma em que um conjunto de variáveis preditoras (entradas) é utilizado para prever uma variável resposta previamente rotulada, seja ela quantitativa (regressão) ou qualitativa (classificação).[@bzdok2018]
+
+- O algoritmo aprende padrões gerais a partir de exemplos observados, guiado por um objetivo explícito de predição.[@bzdok2018]
+
+- Durante o treinamento, o modelo ajusta seus parâmetros para minimizar uma função de erro que compara valores previstos com rótulos verdadeiros, buscando equilíbrio entre ajuste aos dados e capacidade de generalização.[@bzdok2018]
 
 <br>
 
@@ -390,7 +394,11 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são máquinas de vetores de suporte?
 
--   .[@REF]
+-   Máquinas de Vetores de Suporte (SVM) são métodos supervisionados que buscam encontrar um hiperplano que maximize a margem entre classes, utilizando apenas os vetores de suporte — os pontos mais próximos da fronteira decisória.[@bzdok2018]
+
+-   O equilíbrio entre margem e penalização de erros é controlado pelo hiperparâmetro $C$, que regula o *trade-off* entre viés e variância.[@bzdok2018]
+
+-   Valores elevados de $C$ reduzem violações da margem, mas aumentam risco de *overfitting*; valores menores favorecem margens mais amplas e maior regularização.[@bzdok2018]
 
 <br>
 
@@ -400,7 +408,9 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que é *K-nearest neighbours*?
 
--   .[@REF]
+- O algoritmo k-nearest neighbors (kNN) classifica novos pontos com base na maioria de votos entre os $k$ vizinhos mais próximos. Diferentemente da SVM linear, não assume fronteira paramétrica específica, sendo considerado método não paramétrico.[@bzdok2018]
+
+- O valor de $k$ atua como parâmetro de regularização: valores pequenos produzem fronteiras altamente flexíveis (alta variância), enquanto valores maiores produzem fronteiras mais suaves (maior viés).[@bzdok2018]
 
 <br>
 
@@ -965,11 +975,11 @@ gridExtra::grid.arrange(
 
 ### Quais métricas são consideradas inadequadas ou problemáticas?
 
-- O F1-score ($F1$) é explicitamente desencorajado como métrica principal porque não tem um foco claro em desempenho estatístico e é  uma medida inadequada dentro de sua própria categoria conceitual.[@vancalster2025]
+-   O F1-score ($F1$) é explicitamente desencorajado como métrica principal porque não tem um foco claro em desempenho estatístico e é uma medida inadequada dentro de sua própria categoria conceitual.[@vancalster2025]
 
-- Todas as métricas puramente baseadas em classificação dependente de limiar são consideradas impróprias para limiares clinicamente relevantes, exceto quando o limiar é 0,5 ou igual à prevalência verdadeira.[@vancalster2025]
+-   Todas as métricas puramente baseadas em classificação dependente de limiar são consideradas impróprias para limiares clinicamente relevantes, exceto quando o limiar é 0,5 ou igual à prevalência verdadeira.[@vancalster2025]
 
-- Métricas derivadas da matriz de confusão, como acurácia, sensibilidade, especificidade e medidas relacionadas, não devem ser usadas isoladamente como critério principal de avaliação, pois dependem fortemente da escolha do limiar e não refletem diretamente a utilidade clínica.[@vancalster2025]
+-   Métricas derivadas da matriz de confusão, como acurácia, sensibilidade, especificidade e medidas relacionadas, não devem ser usadas isoladamente como critério principal de avaliação, pois dependem fortemente da escolha do limiar e não refletem diretamente a utilidade clínica.[@vancalster2025]
 
 <br>
 
