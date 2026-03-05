@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Ensaios cruzados** {#ensaio-cruzado}
 
 <br>
@@ -14,9 +13,221 @@
 
 <br>
 
-### Quais são as características de ensaios cruzados?
+### O que é um ensaio cruzado?
 
--   .[@REF]
+-   Um ensaio cruzado é um tipo de ensaio clínico em que cada participante recebe mais de um tratamento em períodos sucessivos do estudo.[@wellek2012]
+
+-   Nesse delineamento, o próprio participante funciona como seu próprio controle, permitindo comparar os efeitos dos tratamentos dentro do mesmo indivíduo.[@wellek2012]
+
+-   Os tratamentos são administrados em sequência, geralmente separados por um período de washout para eliminar efeitos residuais do tratamento anterior.[@wellek2012]
+
+<br>
+
+```{r ensaio-cruzado, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Delineamento de um ensaio cruzado com dois tratamentos (A e B) e dois períodos de observação. Os participantes são randomizados para receber os tratamentos em ordens diferentes (A–B ou B–A), com um período de washout entre eles. A avaliação final é realizada após o segundo período de tratamento.", out.width = "100%"}
+
+g <- DiagrammeR::grViz("
+digraph crossover_trial {
+
+graph [layout = dot, rankdir = LR]
+
+node [shape = box, style = filled, fillcolor = LightBlue]
+
+A [label = 'Participantes\nrandomizados']
+B [label = 'Sequência A–B']
+C [label = 'Sequência B–A']
+
+D [label = 'Período 1\nTratamento A']
+E [label = 'Período 1\nTratamento B']
+
+F [label = 'Washout']
+G [label = 'Washout']
+
+H [label = 'Período 2\nTratamento B']
+I [label = 'Período 2\nTratamento A']
+
+J [label = 'Avaliação final']
+
+A -> B
+A -> C
+
+B -> D
+C -> E
+
+D -> F
+E -> G
+
+F -> H
+G -> I
+
+H -> J
+I -> J
+
+}
+")
+
+# Exporta para SVG
+svg <- DiagrammeRsvg::export_svg(g)
+
+# Salva em PNG para LaTeX e HTML
+latex.path <- file.path(
+ getwd(),
+  "Ciencia-com-R_files",
+  "figure-latex"
+)
+html.path <- file.path(
+ getwd(),
+  "Ciencia-com-R_files",
+  "figure-html"
+)
+file.name <- "ensaio-cruzado.png"
+
+dir.create(latex.path, recursive = TRUE, showWarnings = FALSE)
+dir.create(html.path, recursive = TRUE, showWarnings = FALSE)
+
+pandoc_to <- knitr::pandoc_to()
+
+# Decide output directory
+out_path <- switch(
+  pandoc_to,
+  "latex"  = latex.path,
+  "beamer" = latex.path,
+  "pdf"    = latex.path,
+  "epub"   = html.path,
+  "html"   = html.path,
+  "html4"  = html.path,
+  "html5"  = html.path,
+  "docx"   = html.path,
+  "pptx"   = html.path,
+  html.path
+)
+
+# Render SVG to PNG
+png_file <- file.path(out_path, file.name)
+
+rsvg::rsvg_png(
+  charToRaw(svg),
+  file   = png_file,
+  width  = 1200,
+  height = 1000
+)
+
+# Include graphic (works for all targets above)
+knitr::include_graphics(png_file)
+```
+
+<br>
+
+### Qual é a principal característica metodológica de ensaios cruzados?
+
+-   Cada participante recebe todos os tratamentos investigados, porém em ordens diferentes determinadas por randomização.[@wellek2012]
+
+-   Os participantes são alocados em grupos de sequência, por exemplo A–B ou B–A.[@wellek2012]
+
+-   A comparação entre tratamentos é baseada nas diferenças intraindividuais entre os períodos de tratamento.[@wellek2012]
+
+<br>
+
+### Quais são os principais componentes de um ensaio cruzado?
+
+-   Períodos de estudo: fases sucessivas em que cada tratamento é administrado.[@wellek2012]
+
+-   Sequências de tratamento: ordem em que os tratamentos são recebidos pelos participantes (ex.: A–B ou B–A).[@wellek2012]
+
+-   Período de *washout*: intervalo entre os períodos de tratamento para evitar efeitos residuais.[@wellek2012]
+
+-   Randomização da sequência: distribuição aleatória dos participantes nas sequências de tratamento.[@wellek2012]
+
+<br>
+
+### Quais são as principais vantagens dos ensaios cruzados?
+
+-   Reduzem o impacto de variáveis de confusão entre participantes, pois cada indivíduo atua como seu próprio controle.[@wellek2012]
+
+-   Possuem maior poder estatístico para detectar diferenças entre tratamentos em comparação com estudos paralelos com o mesmo tamanho amostral.[@wellek2012]
+
+-   Ensaios cruzados requerem amostras menores para alcançar o mesmo nível de poder estatístico, pois a variabilidade entre participantes é controlada pelo próprio delineamento.[@wellek2012]
+
+-   No entanto, o tempo total do estudo pode ser maior, pois cada participante passa por múltiplos períodos de tratamento.[@wellek2012]
+
+<br>
+
+### Quais são as limitações dos ensaios cruzados?
+
+-   Podem ocorrer efeitos de período, nos quais o tempo ou a familiarização com o estudo influencia o desfecho.[@wellek2012]
+
+-   Podem ocorrer efeitos de *carryover*, quando o efeito do tratamento anterior persiste no período seguinte.[@wellek2012]
+
+-   O delineamento exige períodos de washout adequados para minimizar esses efeitos.[@wellek2012]
+
+<br>
+
+## Análise estatística
+
+<br>
+
+### Quais são as considerações para análise estatística de ensaios cruzados?
+
+- Estudos cruzados devem relatar claramente a sequência de tratamento utilizada, o número de participantes em cada sequência e as perdas ocorridas em cada período.[@rosenkranz2014]
+
+- Recomenda-se apresentar resultados por período e por sequência, permitindo avaliar possíveis efeitos de período ou carryover.[@rosenkranz2014]
+
+<br>
+
+### Como os efeitos do tratamento são avaliados em ensaios cruzados?
+
+-   A análise é baseada na diferença intraindivíduo entre os resultados observados nos diferentes períodos de tratamento.[@wellek2012]
+
+-   Essas diferenças são comparadas entre os grupos de sequência definidos pela randomização.[@wellek2012]
+
+- O efeito do tratamento pode ser estimado a partir das diferenças intraindividuais entre os períodos de tratamento.[@wellek2012]
+
+- Essas diferenças são comparadas entre os grupos de sequência definidos pela randomização.[@wellek2012]
+
+- Em delineamentos simples (2x2), essa comparação pode ser realizada utilizando o teste t aplicado às diferenças entre tratamentos.[@wellek2012]
+
+- Modelos lineares mistos são frequentemente utilizados em ensaios cruzados modernos, pois permitem incorporar efeitos de tratamento, período e indivíduo no mesmo modelo.[@rosenkranz2014]
+
+<br>
+
+### Como verificar a presença de efeitos de *carryover*?
+
+-   Deve ser realizado um teste preliminar para avaliar se há efeito residual do tratamento anterior.[@wellek2012]
+
+-   Esse teste compara as somas dos resultados obtidos nos dois períodos entre os grupos de sequência.[@wellek2012]
+
+-   Caso seja detectado efeito de *carryover* significativo, a análise convencional do ensaio cruzado não deve ser aplicada.[@wellek2012]
+
+- Quando o efeito de *carryover* é relevante, o delineamento cruzado pode perder validade, pois os efeitos do tratamento deixam de ser independentes entre períodos.[@rosenkranz2014]
+
+<br>
+
+### O que fazer quando há evidência de *carryover*?
+
+-   Uma abordagem tradicional é analisar apenas os dados do primeiro período do estudo. Nesse caso, o estudo passa a ser analisado de forma semelhante a um ensaio paralelo. Entretanto, essa estratégia pode reduzir a validade estatística das conclusões.[@wellek2012]
+
+<br>
+
+### Como lidar com dados perdidos em ensaios cruzados?
+
+-   Dados perdidos são comuns em ensaios cruzados e podem introduzir viés se não forem tratados adequadamente.[@rosenkranz2014]
+
+-   Modelos de efeitos mistos permitem utilizar todas as observações disponíveis e são especialmente úteis quando há dados incompletos.[@rosenkranz2014]
+
+-   Em situações de possível ausência MNAR, recomenda-se realizar análises de sensibilidade para avaliar a robustez das conclusões.[@rosenkranz2014]
+
+<br>
+
+## Extensões do delineamento
+
+<br>
+
+### Existem variações do ensaio cruzado?
+
+-   Ensaios cruzados podem incluir mais de dois tratamentos ou mais de dois períodos de observação.[@wellek2012]
+
+-   Em estudos de bioequivalência, pode-se utilizar delineamentos replicados com múltiplos períodos.[@wellek2012]
+
+-   Esses delineamentos mais complexos geralmente exigem modelos estatísticos mais avançados, como modelos mistos.[@wellek2012]
 
 <br>
 
@@ -28,7 +239,7 @@
 
 -   Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
 
--   *CONSORT 2010 statement: extension to randomised crossover trials*:[@dwan2019] https://www.equator-network.org/reporting-guidelines/consort-2010-statement-extension-to-randomised-crossover-trials/
+-   *CONSORT 2010 statement: extension to randomised crossover trials*:[@dwan2019] <https://www.equator-network.org/reporting-guidelines/consort-2010-statement-extension-to-randomised-crossover-trials/>
 
 <br>
 

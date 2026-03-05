@@ -247,11 +247,11 @@ P(E) = \frac{\text{número de desfechos em } E}{\text{número de desfechos em } 
 
 -   A probabilidade de um evento é um número real que satisfaz os seguintes axiomas descritos por Andrei Nikolaevich Kolmogorov em 1950[@Viti2015; @grami2023]
 
-- Axioma I. Probabilidades de um evento $E$ são números não-negativos: $P(E) \geq 0$.[@Viti2015; @grami2023]
+-   Axioma I. Probabilidades de um evento $E$ são números não-negativos: $P(E) \geq 0$.[@Viti2015; @grami2023]
 
-- Axioma II. Probabilidade de todos os eventos do espaço amostral $A$ ocorrerem é 100%: $P(S)=1$.[@Viti2015; @grami2023]
+-   Axioma II. Probabilidade de todos os eventos do espaço amostral $A$ ocorrerem é 100%: $P(S)=1$.[@Viti2015; @grami2023]
 
-- Axioma III. A probabilidade de um conjunto *k* de eventos mutuamente exclusivos é igual a soma da probabilidade de cada evento: $P(E_{1} \cup E_{2} \cup ... E_{k}) = P(E_{1}) + P(E_{2}) + ... + P(E_{k})$.[@Viti2015; @grami2023]
+-   Axioma III. A probabilidade de um conjunto *k* de eventos mutuamente exclusivos é igual a soma da probabilidade de cada evento: $P(E_{1} \cup E_{2} \cup ... E_{k}) = P(E_{1}) + P(E_{2}) + ... + P(E_{k})$.[@Viti2015; @grami2023]
 
 <br>
 
@@ -261,7 +261,7 @@ P(E) = \frac{\text{número de desfechos em } E}{\text{número de desfechos em } 
 
 -   O valor máximo de probabilidade de um evento é 100%: $P(S) \leq 1$.[@grami2023]
 
-- A probabilidade é uma função não decrescente do número de desfechos de um evento.[@grami2023]
+-   A probabilidade é uma função não decrescente do número de desfechos de um evento.[@grami2023]
 
 <br>
 
@@ -409,7 +409,75 @@ gridExtra::grid.arrange(evento, p1, evento, p3, evento, p10, nrow = 3)
 
 ### O que é a lei dos números anômalos?
 
--   A lei dos números anômalos --- lei de Benford --- é uma distribuição de probabilidade que descreve a frequência de ocorrência do primeiro dígito em muitos conjuntos de dados do mundo real.[@Benford1938]
+-   A lei dos números anômalos --- lei de Benford --- é uma distribuição de probabilidade que descreve a frequência de ocorrência dos dígitos significativos em muitos conjuntos de dados do mundo real, sendo mais evidente na distribuição do primeiro dígito \@ref(eq:benford).[@Benford1938]
+
+<br>
+
+\begin{equation}
+(\#eq:benford)
+P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
+\end{equation}
+
+<br>
+
+-   A lei tende a ocorrer quando os dados abrangem várias ordens de magnitude, não há limites artificiais, os dados são heterogêneos e os processos são multiplicativos.[@Benford1938]
+
+-   A lei de Benford surge naturalmente quando dados provêm de uma mistura aleatória de diferentes distribuições.[@hill1995]
+
+-   Distribuições invariantes à escala implicam a distribuição logarítmica da lei de Benford.[@hill1995]
+
+-   Essa propriedade implica que a distribuição permanece a mesma independentemente das unidades utilizadas (por exemplo, quilômetros ou milhas, dólares ou euros).[@hill1995]
+
+-   A lei não se aplica a todos os conjuntos de dados, sendo menos adequada quando os valores possuem intervalos restritos ou limites artificiais.[@hill1995]
+
+<br>
+
+```{r lei-benford-simulacao, echo=FALSE, warning=FALSE, message=FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Simulação de números distribuídos log-uniformemente e comparação da frequência do primeiro dígito com a distribuição teórica da lei de Benford.", fig.width=15, fig.height=8, dpi=300, out.width="100%"}
+# reprodutibilidade
+set.seed(1234)
+
+# número de observações
+N <- 10000
+
+# gera números distribuídos log-uniformemente (várias ordens de magnitude)
+x <- 10^(runif(N, min = 0, max = 6))
+
+# função para extrair o primeiro dígito
+primeiro_digito <- function(x){
+  as.numeric(substr(x, 1, 1))
+}
+
+# obtém primeiros dígitos
+digitos <- primeiro_digito(x)
+
+# frequência observada
+obs <- prop.table(table(digitos))
+
+# probabilidade teórica de Benford
+d <- 1:9
+benford <- log10(1 + 1/d)
+
+dados <- data.frame(
+  digito = factor(d),
+  observado = as.numeric(obs),
+  benford = benford
+)
+
+# gráfico comparando distribuição observada e teórica
+library(ggplot2)
+
+ggplot(dados, aes(x = digito)) +
+  geom_col(aes(y = observado), fill = "grey70", color = "black") +
+  geom_point(aes(y = benford), size = 3) +
+  geom_line(aes(y = benford, group = 1), linewidth = 0.8) +
+  labs(
+    x = "Primeiro dígito",
+    y = "Probabilidade",
+    title = "Distribuição do primeiro dígito e Lei de Benford",
+    subtitle = "Barras: frequência simulada | Linha: distribuição teórica"
+  ) +
+  theme_bw()
+```
 
 <br>
 
@@ -441,19 +509,29 @@ gridExtra::grid.arrange(evento, p1, evento, p3, evento, p10, nrow = 3)
 
 ### O que é a lei dos grandes números?
 
--   A lei dos grandes números descreve que, ao realizar o mesmo experimento $E$ um grande número de vezes ($n$), a média $\mu$ dos resultados obtidos tende a se aproximar do valor esperado $E[\bar{X}]$ à medida que mais experimentos forem realizados ($n \to \infty$).[@REF]
+- A lei dos grandes números afirma que, em repetições independentes de um experimento $E$, a frequência relativa de sucessos $\frac{S_n}{n}$ converge para a probabilidade verdadeira $p$ à medida que o número de observações aumenta ($n \to \infty$).[@seneta2013]
 
--   De acordo com a lei dos grandes números, a média amostral converge para a média populacional à medida que o tamanho da amostra aumenta.[@REF]
+- Esse resultado estabelece que estimativas baseadas em amostras tendem a se tornar mais estáveis e representativas da probabilidade verdadeira quando o tamanho da amostra aumenta.[@seneta2013]
+
+- A lei dos grandes números não afirma que a frequência relativa será exatamente igual à probabilidade verdadeira em qualquer amostra finita, mas apenas que a diferença entre essas quantidades tende a diminuir quando o número de observações cresce.[@seneta2013]
+
+- Esse princípio fornece a base teórica para a interpretação frequentista da probabilidade, segundo a qual a probabilidade de um evento pode ser estimada pela frequência relativa de ocorrência em um grande número de repetições do experimento.[@seneta2013]
+
+- A lei dos grandes números também fundamenta muitos métodos estatísticos, pois garante que estatísticas amostrais — como médias e proporções — convergem para seus respectivos valores populacionais quando o tamanho da amostra aumenta.[@seneta2013]
 
 <br>
 
 ### Quais são as versões da lei dos grandes números?
 
--   Lei Fraca dos Grandes Números (de Poisson): "".[@REF]
+- Lei Fraca dos Grandes Números (Bernoulli–Poisson): estabelece que a média amostral $\bar{X}_n$ converge em probabilidade para a média populacional $\mu$ à medida que o tamanho da amostra aumenta ($n \to \infty$).[@seneta2013]
 
--   Lei Fraca dos Grandes Números (de Bernoulli): "".[@REF]
+- Na lei fraca, a probabilidade de que a diferença entre a média amostral $\bar{X}_n$ e a média populacional $\mu$ seja maior que um valor arbitrariamente pequeno $\epsilon$ tende a zero quando o tamanho da amostra aumenta.[@seneta2013]
 
--   Lei Forte dos Grandes Números: "".[@REF]
+- Lei Forte dos Grandes Números: estabelece que a média amostral $\bar{X}_n$ converge quase certamente para a média populacional $\mu$ quando o número de observações tende ao infinito ($n \to \infty$).[@seneta2013]
+
+- A convergência quase certa significa que, com probabilidade igual a 1, a sequência de médias amostrais eventualmente se aproxima arbitrariamente da média populacional.[@seneta2013]
+
+- Em termos conceituais, a lei fraca garante que a média amostral é provavelmente próxima da média verdadeira quando $n$ é grande, enquanto a lei forte garante que a média amostral converge efetivamente para a média verdadeira ao longo de um número infinito de observações.[@seneta2013]
 
 <br>
 

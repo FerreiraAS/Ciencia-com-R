@@ -5,6 +5,7 @@
   </w:r>
 </w:p>
 ```
+
 # **Aprendizado de máquina** {#aprendizado-maquina}
 
 <br>
@@ -185,11 +186,11 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 ### O que é aprendizado supervisionado?
 
-- Aprendizado supervisionado é um paradigma em que um conjunto de variáveis preditoras (entradas) é utilizado para prever uma variável resposta previamente rotulada, seja ela quantitativa (regressão) ou qualitativa (classificação).[@bzdok2018]
+-   Aprendizado supervisionado é um paradigma em que um conjunto de variáveis preditoras (entradas) é utilizado para prever uma variável resposta previamente rotulada, seja ela quantitativa (regressão) ou qualitativa (classificação).[@bzdok2018]
 
-- O algoritmo aprende padrões gerais a partir de exemplos observados, guiado por um objetivo explícito de predição.[@bzdok2018]
+-   O algoritmo aprende padrões gerais a partir de exemplos observados, guiado por um objetivo explícito de predição.[@bzdok2018]
 
-- Durante o treinamento, o modelo ajusta seus parâmetros para minimizar uma função de erro que compara valores previstos com rótulos verdadeiros, buscando equilíbrio entre ajuste aos dados e capacidade de generalização.[@bzdok2018]
+-   Durante o treinamento, o modelo ajusta seus parâmetros para minimizar uma função de erro que compara valores previstos com rótulos verdadeiros, buscando equilíbrio entre ajuste aos dados e capacidade de generalização.[@bzdok2018]
 
 <br>
 
@@ -388,6 +389,20 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
+### Por que utilizar regressão logística em problemas de classificação?
+
+-   Quando a variável resposta é categórica, um método comum para estimar probabilidades e realizar classificação é a regressão logística, que modela a probabilidade de pertencimento a uma classe em função de variáveis preditoras.[@lever2016]
+
+-   Diferentemente da regressão linear, que pode produzir valores fora do intervalo $[0,1]$, a regressão logística utiliza uma função sigmoide que transforma combinações lineares de preditores em probabilidades válidas.[@lever2016]
+
+-   A função logística relaciona a probabilidade $p$ ao logaritmo da razão de chances (log-odds), produzindo uma relação linear entre o log-odds e os preditores.[@lever2016]
+
+-   Essa formulação permite interpretar os coeficientes do modelo como efeitos aditivos sobre o log-odds do evento de interesse.[@lever2016]
+
+-   Uma vez estimados os parâmetros, a probabilidade prevista pode ser obtida pela transformação inversa, o que gera uma curva signmóide, adequada para modelar transições graduais entre classes.[@lever2016]
+
+<br>
+
 ## Máquina de vetores de suporte
 
 <br>
@@ -408,9 +423,9 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que é *K-nearest neighbours*?
 
-- O algoritmo k-nearest neighbors (kNN) classifica novos pontos com base na maioria de votos entre os $k$ vizinhos mais próximos. Diferentemente da SVM linear, não assume fronteira paramétrica específica, sendo considerado método não paramétrico.[@bzdok2018]
+-   O algoritmo k-nearest neighbors (kNN) classifica novos pontos com base na maioria de votos entre os $k$ vizinhos mais próximos. Diferentemente da SVM linear, não assume fronteira paramétrica específica, sendo considerado método não paramétrico.[@bzdok2018]
 
-- O valor de $k$ atua como parâmetro de regularização: valores pequenos produzem fronteiras altamente flexíveis (alta variância), enquanto valores maiores produzem fronteiras mais suaves (maior viés).[@bzdok2018]
+-   O valor de $k$ atua como parâmetro de regularização: valores pequenos produzem fronteiras altamente flexíveis (alta variância), enquanto valores maiores produzem fronteiras mais suaves (maior viés).[@bzdok2018]
 
 <br>
 
@@ -476,7 +491,19 @@ rpart.plot::rpart.plot(mod, type=3, extra=104, fallen.leaves=TRUE)
 
 <br>
 
-### Como funcionam splitting, stopping e pruning?
+### Como árvores de decisão realizam as divisões nos dados?
+
+-   Árvores de decisão são construídas por um processo iterativo de particionamento do espaço dos preditores, no qual os dados são divididos em subconjuntos cada vez mais homogêneos em relação ao desfecho.[@krzywinski2017]
+
+-   Em cada etapa, o algoritmo avalia todos os possíveis pontos de divisão de uma variável preditora e seleciona aquele que maximiza o ganho de informação, isto é, a redução da mistura de classes entre os subconjuntos resultantes.[@krzywinski2017]
+
+-   O processo de divisão continua recursivamente até que seja atingido um critério de parada, como número mínimo de observações por nó, profundidade máxima da árvore ou redução mínima do erro.[@krzywinski2017]
+
+-   Alternativamente, a árvore pode ser inicialmente construída em sua forma completa e posteriormente simplificada por poda (*pruning*), geralmente utilizando validação cruzada para remover ramos pouco informativos e reduzir o risco de *overfitting*.[@krzywinski2017]
+
+<br>
+
+### Como funcionam *splitting*, *stopping* e *pruning*?
 
 -   *Splitting*: divide registros em subconjuntos mais homogêneos com base em métricas como entropia, índice de Gini e ganho de informação.[@Song2015]
 
@@ -615,7 +642,45 @@ O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html)
 
 ### O que é *K-means clustering*?
 
--   .[@REF]
+- O *k-means clustering* é um algoritmo de aprendizado não supervisionado utilizado para particionar um conjunto de dados em $k$ grupos, de modo que observações dentro do mesmo grupo apresentem maior similaridade entre si do que em relação às observações de outros grupos.[@schubert2023]
+
+- O método pode ser interpretado como um problema de quantização de dados, no qual se busca representar um conjunto de $N$ observações em um espaço vetorial $d$ d-dimensional por meio de $k$ centros ou centroides.[@schubert2023]
+
+- O objetivo do algoritmo é minimizar a soma dos quadrados das distâncias entre cada ponto e o centroide do cluster ao qual pertence, conhecida como *within-cluster sum of squares* ($WCSS$) ou *sum of squared errors* ($SSE$).[@schubert2023]
+
+<br>
+
+### Existe um número “ótimo” de *clusters*?
+
+- Diferentemente de muitos problemas de aprendizado supervisionado, não existe necessariamente um único número correto de *clusters.*[@schubert2023]
+
+- A análise de *clusters* deve ser vista como uma técnica exploratória, na qual diferentes soluções podem revelar estruturas relevantes em diferentes níveis de granularidade.[@schubert2023]
+
+- A escolha do número de *clusters* deve considerar não apenas critérios quantitativos, mas também interpretação substantiva e conhecimento do domínio.[@schubert2023]
+
+<br>
+
+### Como escolher o número de *clusters*?
+
+-   Um dos principais desafios na aplicação do algoritmo k-means é determinar o número apropriado de *clusters* $k$, uma vez que esse parâmetro precisa ser especificado antes da execução do algoritmo.[@schubert2023]
+
+-   O algoritmo busca minimizar a soma dos quadrados das distâncias entre cada observação e o centroide do cluster mais próximo, conhecida como soma dos quadrados dentro dos *clusters* (*within-cluster sum of squares*, $WCSS$ ou $SSE$).[@schubert2023]
+
+-   Como o valor da $SSE$ tende a diminuir conforme aumenta o número de *clusters*, torna-se necessário utilizar algum critério para identificar um valor de $k$ que represente uma boa estrutura nos dados.[@schubert2023]
+
+<br>
+
+### Por que o método do “cotovelo” pode ser problemático?
+
+- O método do cotovelo (*elbow method*) consiste em plotar a $SSE$ em função do número de *clusters* e escolher o ponto em que ocorre uma mudança abrupta na inclinação da curva.[@schubert2023]
+
+- A intuição é que, após certo número de *clusters*, o ganho em redução do erro passa a apresentar retornos decrescentes.[@schubert2023]
+
+- Entretanto, curvas semelhantes podem surgir mesmo quando os dados não possuem estrutura de *clusters* real.[@schubert2023]
+
+Em muitos conjuntos de dados reais, o ponto de “cotovelo” não é claramente identificável, o que torna a escolha subjetiva.[@schubert2023]
+
+- Diferentes heurísticas para detectar automaticamente o cotovelo frequentemente produzem resultados inconsistentes ou dependentes da escala dos dados.[@schubert2023]
 
 <br>
 
