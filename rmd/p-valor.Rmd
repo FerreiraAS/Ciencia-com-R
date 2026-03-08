@@ -331,9 +331,9 @@ knitr::kable(
 
 <br>
 
-### Relação com testes de equivalência (TOST)
+### Relação com testes de equivalência
 
--   Tanto SGPV quanto TOST comparam o IC com os limites de equivalência. Se o IC $(1-2\alpha)$ (p.ex., 90% quando $\alpha=0{,}05$) cai inteiro dentro dos limites, TOST conclui equivalência — situação análoga a $p_{\delta}=1$.[@lakens2020]
+-   Tanto SGPV quanto Dois Testes Unicaudais (*Two One-Sided Tests*, TOST) comparam o IC com os limites de equivalência. Se o IC $(1-2\alpha)$ (p.ex., 90% quando $\alpha=0{,}05$) cai inteiro dentro dos limites, TOST conclui equivalência — situação análoga a $p_{\delta}=1$.[@lakens2020]
 
 -   Com ICs simétricos, há pontos de ancoragem em que as estatísticas coincidem: quando $p_{\text{TOST}}=0{,}5$, então $\mathrm{SGPV}=0{,}5$; quando o IC toca o limite mas fica inteiramente dentro (fronteira), $p_{\text{TOST}}=0{,}025$ e $\mathrm{SGPV}=1$; quando o IC fica inteiramente fora tocando o limite, $p_{\text{TOST}}=0{,}975$ e $\mathrm{SGPV}=0$.[@lakens2020]
 
@@ -429,11 +429,11 @@ ggplot2::ggplot(df, ggplot2::aes(x = theta, y = confidence)) +
 
 <br>
 
-## Boas práticas
+### Como interpretar a distribuição de confiança?
 
 -   Defina $H_0$ intervalar e $\delta$ a priori com justificativa científica.[@blume2018; @lakens2020]
 
--   Reporte: estimativa pontual, IC, limites de equivalência e $p_{\delta}$; interprete $p_{\delta}\in{0,1}$ de forma dicotômica e $0<p_{\delta}<1$ como inconclusivo; quando necessário, complemente com TOST.[@blume2018; @lakens2020]
+-   Reporte a estimativa pontual, o intervalo de confiança, os limites de equivalência e $p_{\delta}$; interprete $p_{\delta}\in{0,1}$ de forma dicotômica e $0<p_{\delta}<1$ como inconclusivo; quando necessário, complemente com TOST.[@blume2018; @lakens2020]
 
 <br>
 

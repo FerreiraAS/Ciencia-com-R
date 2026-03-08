@@ -954,7 +954,7 @@ fmsb::radarchart(dados,
 
 <br>
 
-### Quais são as boas práticas na elaboração de gráficos?
+### Quais são as melhores práticas na elaboração de gráficos?
 
 -   O tamanho da amostra total e subgrupos, se houver, deve estar descrito na figura ou na sua legenda.[@Cumming2007]
 
@@ -994,68 +994,18 @@ O pacote *tiff*[@tiff] fornece a função [*writeTIFF*](https://www.rdocumentati
 
 <br>
 
-## Gráficos dinâmicos
+## Fluxogramas
 
 <br>
 
-### O que são visualizações dinâmicas?
+### Quais são os tipos de fluxogramas?
 
--   Visualizações dinâmicas combinam interatividade (exploração ativa pelo leitor) e animação (mudanças ao longo do tempo/iterações) para empacotar informação rica em exibições simples, tornando comunicação e exploração mais transparentes.[@wiebels2023]
-
-<br>
-
-### Quando preferir interatividade?
-
--   Durante exploração de dados em equipe: destacar pontos/linhas por participante, filtrar subconjuntos e inspecionar impactos de escolhas analíticas (p.ex., outliers) sem gerar múltiplas figuras novas.[@wiebels2023]
-
-<br>
-
-```{r grafico-interativo, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.fullwidth=TRUE, fig.cap='Exemplo de gráfico interativo com Plotly.'}
-library(dplyr)
-
-g <- tibble::tibble(
-  grupo = rep(c("Controle", "Intervenção"), each = 40),
-  semana = rep(c(1, 5, 16, 20), times = 20),
-  y = rnorm(80, 12, 2) + ifelse(grupo == "Intervenção" &
-                                  semana >= 16, 2, 0)
-)
-
-plotly::plot_ly(
-  g,
-  y =  ~ y,
-  x =  ~ as.factor(semana),
-  color =  ~ grupo,
-  type = "box"
-) %>%
-  plotly::layout(
-    boxmode = "group",
-    xaxis = list(title = "Semana"),
-    yaxis = list(title = "Desempenho")
-  ) %>%
-  plotly::add_trace(
-    type = "scatter",
-    mode = "markers",
-    hoverinfo = "x+y+text",
-    text =  ~ paste("Grupo:", grupo)
-  )
-```
+- .[@REF]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *plotly*[@plotly] fornece a função [*plot_ly*](https://www.rdocumentation.org/packages/plotly/versions/4.11.0/topics/plot_ly) para gerar gráficos interativos.
-:::
-
-<br>
-
-### Quando preferir animação?
-
--   Em apresentações e para ilustrar variação ao longo de tempo/condição/algoritmo, evitando painéis 3D ou facets excessivos. A animação guia a atenção e revela mudanças de forma passiva e fluida.[@wiebels2023]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *gganimate*[@gganimate] fornece a função [*transition_states*](https://www.rdocumentation.org/packages/gganimate/versions/1.0.7/topics/transition_states) para criar gráficos animados a partir de gráficos estáticos do *ggplot2*[@ggplot2].
+O pacote *PRISMA2020*[@PRISMA2020] fornece a função [*PRISMA_flowdiagram*](https://www.rdocumentation.org/packages/PRISMA2020/versions/1.1.1/topics/PRISMA_flowdiagram) para elaboração do fluxograma de revisões sistemáticas no formato padrão.
 :::
 
 <br>
