@@ -719,7 +719,7 @@ format_p <- function(x) {
 
 # Converter em tibble e padronizar nomes/labels
 tukey_tbl <-
-  tibble::as_tibble(posthoc_tukey$Grupo, rownames = "comparacao") %>%
+  tibble::as_tibble(posthoc_tukey$Grupo, rownames = "Comparação") %>%
   dplyr::rename(
     diff   = diff,
     lwr    = lwr,
@@ -734,7 +734,7 @@ tukey_tbl %>%
   gt::gt() %>%
   gt::tab_header(title = "Post hoc de Tukey") %>%
   gt::cols_label(
-    comparacao = "Comparação",
+    Comparação = "Comparação",
     diff       = "Diferença de médias",
     lwr        = "IC95% inferior",
     upr        = "IC95% superior",
@@ -750,7 +750,7 @@ tukey_tbl %>%
 
 <br>
 
-```{r welch-anova, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r anova-welch, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 # Reprodutibilidade
 base::set.seed(1234)
 
@@ -850,7 +850,6 @@ gh %>%
   gt::fmt_number(columns = c("estimate","conf.low","conf.high"), decimals = 2)
 
 ```
-
 
 <br>
 
