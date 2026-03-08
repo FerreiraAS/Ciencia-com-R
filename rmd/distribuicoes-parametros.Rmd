@@ -10,13 +10,55 @@
 
 <br>
 
+## Fontes de variabilidade
+
+<br>
+
+### O que são fontes de variabilidade?
+
+- A variabilidade observada nos dados não surge de uma única causa, mas de diferentes processos que atuam simultaneamente durante a geração e a coleta dos dados.[@wild2006]
+
+- Compreender de onde vem a variação é essencial para interpretar distribuições, construir modelos e realizar inferência.[@wild2006]
+
+- A distribuição dos dados pode ser entendida como uma descrição da variabilidade resultante desses processos.[@wild2006]
+
+<br>
+
+### Quais são as principais fontes de variabilidade?
+
+- Variabilidade real: resulta de diferenças reais entre indivíduos ou unidades observadas.[@wild2006]
+
+- Variabilidade de medição: decorre de limitações ou imperfeições nos instrumentos e métodos de medição. Mesmo quando o objeto medido não muda, repetidas medições podem produzir valores ligeiramente diferentes.[@wild2006]
+
+- Variabilidade amostral: surge porque diferentes amostras extraídas da mesma população podem produzir resultados distintos.[@wild2006]
+
+- Variabilidade experimental ou ambiental: relaciona-se a mudanças nas condições sob as quais os dados são obtidos, como temperatura, tempo, operador ou local de coleta.[@wild2006]
+
+- Variabilidade aleatória: refere-se à componente imprevisível associada ao acaso em processos naturais ou experimentais.[@wild2006]
+
+<br>
+
+### Por que identificar as fontes de variabilidade é importante?
+
+- Permite distinguir entre variação real do fenômeno e ruído introduzido pelo processo de medição ou amostragem.[@wild2006]
+
+- Ajuda a escolher modelos estatísticos adequados para representar os dados.[@wild2006]
+
+- Orienta o desenho de experimentos e estratégias de amostragem para reduzir fontes indesejadas de variação.[@wild2006]
+
+- Fundamenta a interpretação das distribuições empíricas e teóricas utilizadas na inferência estatística.[@wild2006]
+
+<br>
+
 ## Distribuições de probabilidade
 
 <br>
 
 ### O que são distribuições de probabilidade?
 
--   Uma distribuição de probabilidade é uma função que descreve os valores possíveis ou o intervalo de valores de uma variável (eixo horizontal) e a frequência com que cada valor é observado (eixo vertical).[@vetter2017]
+- A distribuição é o padrão de variação em uma variável ou conjunto de variáveis representado pelos dados.[@wild2006]
+
+- Uma distribuição de probabilidade é uma função que descreve os valores possíveis ou o intervalo de valores de uma variável (eixo horizontal) e a probabilidade ou frequência relativa com que os valores ocorrem (eixo vertical).[@vetter2017]
 
 <br>
 
@@ -107,7 +149,7 @@ p_st <- base +
   ) +
   ggplot2::labs(
     title = "Sturges",
-    subtitle = sprintf("binwidth = %.4f", stg$k, bw_st)
+    subtitle = sprintf("k = %d | binwidth = %.4f", stg$k, bw_st)
   )
 
 p_sc <- base +
@@ -145,18 +187,18 @@ library(patchwork)
 
 -   Histogramas representam a distribuição de frequências de uma variável contínua. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do histograma é igual ao número total de observações.[@s2011]
 
--   *Boxplots* representam a distribuição de frequências de uma variável contínua. A linha central divide os dados em duas partes iguais (mediana ou Q2). A caixa inferior representa o primeiro quartil (Q1) e a caixa superior representa o terceiro quartil (Q3). A linha inferior é o mínimo e a linha superior é o máximo. Os valores atípicos são representados por pontos individuais.[@s2011]
+- *Boxplots* representam a distribuição de frequências de uma variável contínua. A linha central divide os dados em duas partes iguais (mediana ou Q2). A caixa inferior representa o primeiro quartil (Q1) e a caixa superior representa o terceiro quartil (Q3). As linhas geralmente se estendem até 1,5 vezes o intervalo interquartil (IQR). Observações além desse limite são representadas como valores atípicos (representados por pontos individuais).[@s2011]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *grDevices*[@grDevices] fornece a função [nclass](https://www.rdocumentation.org/packages/grDevices/versions/3.6.2/topics/nclass) para determinar a quantidade de classes de um histograma com os métodos de Sturge[@sturges1926], Scott[@scott1979] ou Freedman-Diaconis[@freedman1981].
+O pacote *grDevices*[@grDevices] fornece funções da família [nclass](https://www.rdocumentation.org/packages/grDevices/versions/3.6.2/topics/nclass) para determinar a quantidade de classes de um histograma com os métodos de Sturge[@sturges1926], Scott[@scott1979] ou Freedman-Diaconis[@freedman1981].
 :::
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *ggplot2*[@ggplot2] fornece a função [geom_freqpoly](https://www.rdocumentation.org/packages/ggplot2/versions/3.5.2/topics/geom_freqpoly) para criar histogramas.
+O pacote *ggplot2*[@ggplot2] fornece a função [geom_freqpoly](https://www.rdocumentation.org/packages/ggplot2/versions/3.5.2/topics/geom_freqpoly) para criar polígonos de frequência.
 :::
 
 <br>
@@ -167,15 +209,55 @@ O pacote *ggplot2*[@ggplot2] fornece a função [geom_freqpoly](https://www.rdoc
 
 <br>
 
+## Tipos de distribuições
+
+<br>
+
+### O que são distribuições empíricas?
+
+- Distribuições empíricas são obtidas diretamente a partir dos dados observados, sendo geralmente representadas por histogramas, tabelas de frequência ou funções de distribuição empírica.[@wild2006]
+
+<br>
+
+### O que são distribuições teóricas?
+
+- Distribuições teóricas correspondem a modelos matemáticos utilizados para representar o processo gerador dos dados, como as distribuições normal, binomial ou Poisson.[@wild2006]
+
+- A comparação entre distribuições empíricas e modelos teóricos é um passo fundamental na modelagem estatística e na inferência.[@wild2006]
+
+<br>
+
+### O que são distribuições amostrais?
+
+- Distribuição amostral descreve a distribuição de uma estatística (como a média ou a proporção) quando calculada em múltiplas amostras da mesma população.[@wild2006]
+
+- As distribuições amostrais permitem quantificar a variabilidade associada às estimativas e constituem a base teórica para intervalos de confiança e testes de hipótese.[@wild2006]
+
+<br>
+
+### Por que todas as distribuições são condicionais?
+
+- Uma distribuição descreve a variabilidade de uma variável sob determinadas condições ou suposições.[@wild2006]
+
+- Portanto, toda distribuição deve ser entendida como condicional ao processo gerador dos dados, ao modelo adotado ou às informações disponíveis.[@wild2006]
+
+- Na inferência estatística, muitas distribuições são condicionais aos parâmetros desconhecidos do modelo, como ocorre na distribuição amostral da média ou na distribuição binomial condicionada à probabilidade de sucesso.[@wild2006]
+
+<br>
+
+## Distribuições univariadas
+
+<br>
+
 ### Quais são as distribuições mais comuns?
 
 -   Distribuções discretas:
 
     -   Bernoulli: resultado de um único teste com dois possíveis desfechos (sucesso ou fracasso).[@REF]
 
-    -   Binomial: número de sucessos em *k* tentativas. [@REF]
+    -   Binomial: número de sucessos em *n* tentativas independentes. [@REF]
 
-    -   Geométrica: número de testes até o 1o sucesso.[@REF]
+    -   Geométrica: número de tentativas necessárias até a ocorrência do primeiro sucesso.[@REF]
 
     -   Binomial negativa: número de testes até o *k*-ésimo sucesso.[@REF]
 
@@ -213,10 +295,10 @@ p2 <- ggplot2::ggplot(data.frame(binomial_data), ggplot2::aes(x = binomial_data)
   ggplot2::theme(text = ggplot2::element_text(size = 8))
 
 # 3. Distribuição Geométrica (p = 0.5)
-geom_data <- rgeom(1000, 0.5) # número de tentativas até o 1º sucesso com p = 0.5
+geom_data <- rgeom(1000, 0.5) + 1
 p3 <- ggplot2::ggplot(data.frame(geom_data), ggplot2::aes(x = geom_data)) +
   ggplot2::geom_bar(stat = "count", fill = cor_padrao) +
-  ggplot2::labs(title = "Geométrica", x = "Tentativas até o Sucesso", y = "Frequência") +
+  ggplot2::labs(title = "Geométrica", x = "Tentativas até o 1º sucesso", y = "Frequência") +
   ggplot2::theme_minimal() +
   ggplot2::theme(text = ggplot2::element_text(size = 8))
 
@@ -531,18 +613,20 @@ gridExtra::grid.arrange(p13, ncol = 1, nrow = 1)
 
 ### Quais são as funções de uma distribuição?
 
--   Função de massa de probabilidade (*probability mass function*, pmf).[@REF]
+- Função de massa de probabilidade (*probability mass function*, pmf) para variáveis discretas.[@REF]
 
--   Função de distribuição cumulativa (*cumulative distribution function*, cdf).[@REF]
+- Função de densidade de probabilidade (*probability density function*, pdf) para variáveis contínuas.[@REF]
 
--   Função quantílicas (*quantile function*, qf).[@REF]
+- Função de distribuição acumulada (*cumulative distribution function*, cdf).[@REF]
 
--   Função geradora de números aleatórios (*random function*, rf).[@REF]
+- Função quantílica (*quantile function*).[@REF]
+
+- Função geradora de números aleatórios.[@REF]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats] fornece funções de distribuição de probabilidade (p), funções de densidade (d), funções quantílicas (q) e funções geradores de números aleatórios (r) para as distribuições [normal](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal), [Student t](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/TDist), [binomial](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial), [qui-quadrado](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Chisquare), [uniforme](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Uniform), dentre outras.
+O pacote *stats*[@stats] fornece funções de distribuição e funções geradores de números aleatórios para as distribuições [normal](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Normal), [Student t](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/TDist), [binomial](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Binomial), [qui-quadrado](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Chisquare), [uniforme](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/Uniform), dentre outras.
 :::
 
 <br>
@@ -563,7 +647,9 @@ O pacote *ggfortify*[@ggfortify] fornece a função [ggdistribution](https://www
 
 -   A distribuição normal (ou gaussiana) é uma distribuição com desvios simétricos positivos e negativos em torno de um valor central.[@Ali2016]
 
--   Em uma distribuição normal, o intervalo de 1 desvio-padrão (±1DP) inclui cerca de 68% dos dados; de 2 desvios-padrão (±2DP) cerca de 95% dos dados; e no intervalo de 3 desvios-padrão (±3DP) cerca de 99% dos dados.[@Ali2016]
+-   A relação entre média e desvio-padrão permite interpretar a dispersão dos dados em distribuições aproximadamente normais. A regra empírica estabelece que cerca de 68,2% dos valores situam-se no intervalo $\bar{x} \pm \sigma$, cerca de 95,4% no intervalo $\bar{x} \pm 2\sigma$.[@Ali2016; @darling2022]
+
+-   O desvio-padrão fornece uma medida direta da variabilidade dos dados em torno da média, permitindo avaliar quão dispersos ou concentrados estão os valores observados em uma amostra.[@darling2022]
 
 <br>
 
@@ -850,12 +936,6 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 
 <br>
 
-### Devemos testar as suposições de normalidade?
-
--   Testes preliminares de normalidade não são necessários para a maioria dos testes paramétricos de comparação, pois eles são robustos contra desvios moderados da normalidade. Normalidade da distribuição deve ser estabelecida para a população. [@rochon2012]
-
-<br>
-
 ### Por que as análises paramétricas são preferidas?
 
 -   Em geral, testes paramétricos são mais robustos (isto é, possuem menores erros tipo I e II) que seus testes não-paramétricos correspondentes.[@greenhalgh1997; @schmider2010; @vetter2017]
@@ -881,59 +961,6 @@ O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *base*[@base] fornece a função [*summary*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) para calcular diversos parâmetros descritivos.
 :::
-
-<br>
-
-## Erro
-
-<br>
-
-### Que parâmetros de erro podem ser estimados?
-
-- Margem de erro (ME).\@ref(eq:me).
-
-<br>
-
-\begin{equation}
-(\#eq:me)
-ME = z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
-\end{equation}
-
-<br>
-
--   Erro-padrão da média (EPM) \@ref(eq:sem) ($sigma$ conhecido) e \@ref(eq:sem-unk) ($sigma$  desconhecido).[@Curran-Everett2008; @krzywinski2013]
-
-<br>
-
-\begin{equation}
-(\#eq:sem)
-EPM = \frac{\sigma}{\sqrt{n}}
-\end{equation}
-
-<br>
-
-\begin{equation}
-(\#eq:sem-unk)
-\widehat{EPM} = \frac{s}{\sqrt{n}}
-\end{equation}
-
-<br>
-
-- Intervalo de confiança para variância conhecida \@ref(eq:ic-known) e desconhecida \@ref(eq:ic-unknown): Captura a média populacional correspondente ao nível de significância $\alpha$ pré-estabelecido [@kanji2006; @Cumming2007; @krzywinski2013; @Ali2016].
-
-<br>
-
-\begin{equation}
-(\#eq:ic-known)
-IC = \bar{x} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
-\end{equation}
-
-<br>
-
-\begin{equation}
-(\#eq:ic-unknown)
-IC = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}
-\end{equation}
 
 <br>
 
@@ -1464,12 +1491,6 @@ O pacote *stats*[@base] fornece a função [*quantile*](https://www.rdocumentati
 
 <br>
 
-### O que são valores extremos?
-
--   Valores extremos podem constituir valores legítimos ou ilegítimos de uma distribuição.[@leys2019]
-
-<br>
-
 ### Que parâmetros extremos podem ser estimados?
 
 -   Mínimo \@ref(eq:min).[@Ali2016]
@@ -1550,6 +1571,41 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
   ggplot2::theme_minimal()
 
 ```
+
+<br>
+
+## Erro
+
+<br>
+
+### Que parâmetros de erro podem ser estimados?
+
+-   Margem de erro (ME).\@ref(eq:me).
+
+<br>
+
+\begin{equation}
+(\#eq:me)
+ME = z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
+\end{equation}
+
+<br>
+
+-   Erro-padrão da média (EPM) \@ref(eq:sem) ($sigma$ conhecido) e \@ref(eq:sem-unk) ($sigma$ desconhecido).[@Curran-Everett2008; @krzywinski2013]
+
+<br>
+
+\begin{equation}
+(\#eq:sem)
+EPM = \frac{\sigma}{\sqrt{n}}
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:sem-unk)
+\widehat{EPM} = \frac{s}{\sqrt{n}}
+\end{equation}
 
 <br>
 
@@ -1704,7 +1760,21 @@ g_kurt_hist
 
 <br>
 
-## Robustez em medidas de localização
+## Parâmetros robustos
+
+<br>
+
+### O que são parâmetros robustos?
+
+-   Parâmetros robustos são medidas de posição e dispersão que permanecem estáveis mesmo na presença de valores discrepantes.[@daszykowski2007]
+
+<br>
+
+### Por que utilizar parâmetros robustos?
+
+-   Parâmetros robustos garantem maior confiabilidade quando os dados não seguem a normalidade ou apresentam contaminação por *outliers*.[@daszykowski2007]
+
+-   Parâmetros robustos permitem análises mais estáveis em estudos exploratórios, evitando decisões equivocadas sobre variabilidade ou tendência central.[@daszykowski2007]
 
 <br>
 
@@ -1714,32 +1784,24 @@ g_kurt_hist
 
 <br>
 
-### Por que a média não é robusta?
+### Que parâmetros robustos podem ser estimados?
 
--   Porque tem ponto de quebra $~0%$ e função influência não limitada; um único *outlier* pode distorcer a média arbitrariamente.[@rousseeuw2011]
+-   Média e variância Winsorizadas como opções intermediárias, reduzindo a influência dos *outliers*.[@daszykowski2007]
 
-<br>
+-   Mediana, com $~50%$ de ponto de quebra e função influência limitada.[@daszykowski2007; @rousseeuw2011]
 
-### Qual a alternativa robusta para localização?
-
--   Mediana, com $~50%$ de ponto de quebra e função influência limitada.[@rousseeuw2011]
-
-<br>
-
-### Como estimar escala de forma robusta?
-
--   *Median Absolute Deviation* (MAD) \@ref(eq:mad), com correção 1,483 para normalidade, com $~50%$ de ponto de quebra.[@rousseeuw2011]
+-   *Median Absolute Deviation* (MAD) \@ref(eq:mad), com correção 1,483 para normalidade, com $~50%$ de ponto de quebra.[@daszykowski2007; @rousseeuw2011]
 
 <br>
 
 \begin{equation}
-(\#eq:max)
+(\#eq:mad)
 MAD = 1.483 \cdot \text{median}(|x_i - \text{median}(x)|)
 \end{equation}
 
 <br>
 
-- Primeiro quartil das diferenças pareadas ($Qn$) \@ref(eq:qn), com $~50%$ de ponto de quebra.[@rousseeuw2011]
+-   Primeiro quartil das diferenças pareadas ($Qn$) \@ref(eq:qn), com $~50%$ de ponto de quebra.[@daszykowski2007; @rousseeuw2011]
 
 <br>
 
@@ -1751,36 +1813,6 @@ Qn = 2.2219 \cdot \text{first quartile}(|x_i - x_j|; i < j)
 <br>
 
 -   O intervalo interquartil ($IQR$) \@ref(eq:iqr) é robusto, com ponto de quebra $~25%$, sendo simples de interpretar e útil em boxplots.[@rousseeuw2011]
-
-<br>
-
-## Parâmetros robustos
-
-<br>
-
-### O que são parâmetros robustos?
-
--   Parâmetros robustos são medidas de posição e dispersão que permanecem estáveis mesmo na presença de valores discrepantes.[@daszykowski2007]
-
-<br>
-
-### Que parâmetros robustos podem ser estimados?
-
--   Mediana em vez da média aritmética, pois é menos sensível a valores extremos.[@daszykowski2007]
-
--   *Median Absolute Deviation* (MAD) em vez do desvio-padrão $\sigma$, que pode ser escalonado por 1,483 para comparabilidade.[@daszykowski2007]
-
--   $Qn$ e $Sn$ como estimadores alternativos de dispersão robusta.[@daszykowski2007]
-
--   Média e variância Winsorizadas como opções intermediárias, reduzindo a influência dos *outliers*.[@daszykowski2007]
-
-<br>
-
-### Por que utilizar parâmetros robustos?
-
--   Parâmetros robustos garantem maior confiabilidade quando os dados não seguem a normalidade ou apresentam contaminação por *outliers*.[@daszykowski2007]
-
--   Parâmetros robustos permitem análises mais estáveis em estudos exploratórios, evitando decisões equivocadas sobre variabilidade ou tendência central.[@daszykowski2007]
 
 <br>
 

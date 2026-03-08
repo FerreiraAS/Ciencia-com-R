@@ -224,13 +224,45 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 <br>
 
-### Por que estudos comparativos entre classificadores podem ser enganosos?
+## Fluxo de desenvolvimento de modelos
 
--   Resultados dependem da experiência do pesquisador com cada método, da escolha dos conjuntos de dados e do critério de avaliação usado.[@hand2006]
+<br>
 
--   Diferenças pequenas em acurácia frequentemente desaparecem quando se consideram incertezas reais de aplicação.[@hand2006]
+### Qual é o fluxo típico de desenvolvimento de modelos de aprendizado de máquina?
+
+- Preparação e limpeza dos dados.[@sidey-gibbons2019]
+
+- Divisão em conjuntos de treinamento, validação e teste.[@sidey-gibbons2019]
+
+- Treinamento do modelo.[@sidey-gibbons2019]
+
+- Ajuste de hiperparâmetros.[@sidey-gibbons2019]
+
+- Avaliação do desempenho do modelo.[@sidey-gibbons2019]
+
+- Validação em dados independentes.[@sidey-gibbons2019]
 
 <Br>
+
+### O que são conjuntos de treinamento, validação e teste?
+
+-   O desenvolvimento de modelos de aprendizado de máquina geralmente envolve a divisão do conjunto de dados em subconjuntos de treinamento e validação, permitindo avaliar o desempenho do modelo em dados não utilizados durante o ajuste dos parâmetros.[@sidey-gibbons2019]
+
+- Conjunto de treinamento: usado para ajustar os parâmetros do modelo.[@sidey-gibbons2019]
+
+- Conjunto de validação: usado para comparar modelos e ajustar hiperparâmetros.[@sidey-gibbons2019]
+
+- Conjunto de teste: usado apenas para avaliar o desempenho final do modelo.[@sidey-gibbons2019]
+
+<br>
+
+### O que são hiperparâmetros?
+
+- Parâmetros definidos antes do treinamento do modelo.[@sidey-gibbons2019]
+
+- Hiperparâmetros não são aprendidos diretamente a partir dos dados.[@sidey-gibbons2019]
+
+<br>
 
 ## Principais algoritmos
 
@@ -331,6 +363,14 @@ knitr::kable(
 ```
 
 <br>
+
+### Por que estudos comparativos entre classificadores podem ser enganosos?
+
+-   Resultados dependem da experiência do pesquisador com cada método, da escolha dos conjuntos de dados e do critério de avaliação usado.[@hand2006]
+
+-   Diferenças pequenas em acurácia frequentemente desaparecem quando se consideram incertezas reais de aplicação.[@hand2006]
+
+<Br>
 
 ## Regressão logística
 
@@ -642,21 +682,21 @@ O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html)
 
 ### O que é *K-means clustering*?
 
-- O *k-means clustering* é um algoritmo de aprendizado não supervisionado utilizado para particionar um conjunto de dados em $k$ grupos, de modo que observações dentro do mesmo grupo apresentem maior similaridade entre si do que em relação às observações de outros grupos.[@schubert2023]
+-   O *k-means clustering* é um algoritmo de aprendizado não supervisionado utilizado para particionar um conjunto de dados em $k$ grupos, de modo que observações dentro do mesmo grupo apresentem maior similaridade entre si do que em relação às observações de outros grupos.[@schubert2023]
 
-- O método pode ser interpretado como um problema de quantização de dados, no qual se busca representar um conjunto de $N$ observações em um espaço vetorial $d$ d-dimensional por meio de $k$ centros ou centroides.[@schubert2023]
+-   O método pode ser interpretado como um problema de quantização de dados, no qual se busca representar um conjunto de $N$ observações em um espaço vetorial $d$ d-dimensional por meio de $k$ centros ou centroides.[@schubert2023]
 
-- O objetivo do algoritmo é minimizar a soma dos quadrados das distâncias entre cada ponto e o centroide do cluster ao qual pertence, conhecida como *within-cluster sum of squares* ($WCSS$) ou *sum of squared errors* ($SSE$).[@schubert2023]
+-   O objetivo do algoritmo é minimizar a soma dos quadrados das distâncias entre cada ponto e o centroide do cluster ao qual pertence, conhecida como *within-cluster sum of squares* ($WCSS$) ou *sum of squared errors* ($SSE$).[@schubert2023]
 
 <br>
 
 ### Existe um número “ótimo” de *clusters*?
 
-- Diferentemente de muitos problemas de aprendizado supervisionado, não existe necessariamente um único número correto de *clusters.*[@schubert2023]
+-   Diferentemente de muitos problemas de aprendizado supervisionado, não existe necessariamente um único número correto de *clusters.*[@schubert2023]
 
-- A análise de *clusters* deve ser vista como uma técnica exploratória, na qual diferentes soluções podem revelar estruturas relevantes em diferentes níveis de granularidade.[@schubert2023]
+-   A análise de *clusters* deve ser vista como uma técnica exploratória, na qual diferentes soluções podem revelar estruturas relevantes em diferentes níveis de granularidade.[@schubert2023]
 
-- A escolha do número de *clusters* deve considerar não apenas critérios quantitativos, mas também interpretação substantiva e conhecimento do domínio.[@schubert2023]
+-   A escolha do número de *clusters* deve considerar não apenas critérios quantitativos, mas também interpretação substantiva e conhecimento do domínio.[@schubert2023]
 
 <br>
 
@@ -672,15 +712,15 @@ O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html)
 
 ### Por que o método do “cotovelo” pode ser problemático?
 
-- O método do cotovelo (*elbow method*) consiste em plotar a $SSE$ em função do número de *clusters* e escolher o ponto em que ocorre uma mudança abrupta na inclinação da curva.[@schubert2023]
+-   O método do cotovelo (*elbow method*) consiste em plotar a $SSE$ em função do número de *clusters* e escolher o ponto em que ocorre uma mudança abrupta na inclinação da curva.[@schubert2023]
 
-- A intuição é que, após certo número de *clusters*, o ganho em redução do erro passa a apresentar retornos decrescentes.[@schubert2023]
+-   A intuição é que, após certo número de *clusters*, o ganho em redução do erro passa a apresentar retornos decrescentes.[@schubert2023]
 
-- Entretanto, curvas semelhantes podem surgir mesmo quando os dados não possuem estrutura de *clusters* real.[@schubert2023]
+-   Entretanto, curvas semelhantes podem surgir mesmo quando os dados não possuem estrutura de *clusters* real.[@schubert2023]
 
 Em muitos conjuntos de dados reais, o ponto de “cotovelo” não é claramente identificável, o que torna a escolha subjetiva.[@schubert2023]
 
-- Diferentes heurísticas para detectar automaticamente o cotovelo frequentemente produzem resultados inconsistentes ou dependentes da escala dos dados.[@schubert2023]
+-   Diferentes heurísticas para detectar automaticamente o cotovelo frequentemente produzem resultados inconsistentes ou dependentes da escala dos dados.[@schubert2023]
 
 <br>
 
@@ -1044,11 +1084,17 @@ gridExtra::grid.arrange(
 
 -   Todas as métricas puramente baseadas em classificação dependente de limiar são consideradas impróprias para limiares clinicamente relevantes, exceto quando o limiar é 0,5 ou igual à prevalência verdadeira.[@vancalster2025]
 
--   Métricas derivadas da matriz de confusão, como acurácia, sensibilidade, especificidade e medidas relacionadas, não devem ser usadas isoladamente como critério principal de avaliação, pois dependem fortemente da escolha do limiar e não refletem diretamente a utilidade clínica.[@vancalster2025]
+-   Métricas derivadas da matriz de confusão não devem ser usadas isoladamente como critério principal de avaliação, pois dependem fortemente da escolha do limiar e não refletem diretamente a utilidade clínica, especialmente em contextos clínicos ou em dados desbalanceados.[@vancalster2025]
 
 <br>
 
 ## Avaliação de modelos de classificação
+
+<br>
+
+### Por que é importante avaliar o desempenho de um modelo de classificação?
+
+- Para evitar estimativas otimistas de desempenho, modelos devem ser avaliados em dados que não foram utilizados durante o treinamento. Essa separação entre dados de treinamento e validação permite estimar a capacidade de generalização do algoritmo em novos dados.[@sidey-gibbons2019]
 
 <br>
 
@@ -1159,8 +1205,66 @@ REV = \dfrac{VP}{VP + FN}
 
 \begin{equation}
 (\#eq:f1)
-F1 = 2 \times \dfrac{PRE \times REC}{PRE + REC}
+F1 = 2 \times \dfrac{PRE \times REV}{PRE + REV}
 \end{equation}
+
+<br>
+
+## *Baselines* em classificação
+
+<br>
+
+### O que são *baselines*?
+
+-   *Baselines* são modelos extremamente simples que ignoram as variáveis preditoras e produzem previsões com base apenas na distribuição das classes ou em estratégias aleatórias simples.[@megahed2024]
+
+<br>
+
+### Por que é necessário comparar classificadores com um *baseline*?
+
+-   A avaliação de um classificador requer a comparação com um nível mínimo de desempenho esperado, denominado *baseline*.[@megahed2024]
+
+-   O objetivo de um *baseline* é estabelecer um ponto de referência para determinar se um modelo preditivo realmente apresenta desempenho superior ao acaso ou a estratégias triviais.[@megahed2024]
+
+-   Sem essa referência, métricas aparentemente altas podem ser enganosas, especialmente em conjuntos de dados com desbalanceamento de classes.[@megahed2024]
+
+<br>
+
+### Quais são os principais classificadores *baseline*?
+
+-   *Baselines* baseados em aleatoriedade produzem distribuições de desempenho (por exemplo, acurácia média próxima de 0,5 em classificação binária), de modo que a superioridade de um modelo deve ser avaliada em relação à variabilidade esperada desses valores.[@megahed2024]
+
+-   Esses modelos ignoram completamente as variáveis preditoras e, portanto, representam estratégias mínimas de classificação.[@megahed2024]
+
+-   Predição aleatória uniforme (*uniform random*): cada classe é prevista com igual probabilidade, independentemente da distribuição observada nos dados.[@megahed2024]
+
+-   Predição aleatória proporcional (*proportional random*): as classes são previstas aleatoriamente, mas respeitando as proporções observadas no conjunto de treinamento.[@megahed2024]
+
+-   Predição da classe mais frequente (*most frequent*): o modelo sempre prevê a classe mais comum no conjunto de dados.[@megahed2024]
+
+<br>
+
+### Como o desbalanceamento de classes afeta o *baseline*?
+
+-   Em conjuntos de dados balanceados, os *baselines* uniforme e proporcional tendem a apresentar desempenho semelhante.[@megahed2024]
+
+-   Em dados desbalanceados, o *baseline* proporcional frequentemente apresenta maior acurácia e especificidade, mas sensibilidade muito baixa para a classe minoritária.[@megahed2024]
+
+-   O *baseline* da classe mais frequente pode apresentar acurácia elevada mesmo sem qualquer capacidade real de discriminação.[@megahed2024]
+
+-   Por isso, métricas devem sempre ser interpretadas em relação ao desempenho esperado de um *baseline* apropriado.[@megahed2024]
+
+<br>
+
+### Como usar *baselines* na avaliação de modelos?
+
+-   O desempenho de um classificador deve ser considerado relevante apenas quando supera claramente o desempenho esperado do *baseline*.[@megahed2024]
+
+-   Em dados desbalanceados, o *baseline* proporcional geralmente é o mais adequado, pois incorpora a distribuição real das classes.[@megahed2024]
+
+-   Em aplicações com eventos raros, pode ser apropriado utilizar o *baseline* da classe mais frequente como referência prática.[@megahed2024]
+
+-   Em alguns casos, pode-se avaliar a distribuição de desempenho do *baseline* por simulação para determinar limiares estatisticamente superiores ao acaso.[@megahed2024]
 
 <br>
 

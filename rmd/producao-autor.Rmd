@@ -6,7 +6,7 @@
 </w:p>
 ```
 
-# **Produção do autor** {#producao-cientifica .unnumbered}
+# **Produção do autor** {#producao-autor .unnumbered}
 
 <br>
 
@@ -83,6 +83,13 @@ citations <- tryCatch(
     locale = "pt-BR"
   ),
   error = function(e) character(0)
+)
+
+# if list elements do not start with "1. " paste number before each citation
+citations <- ifelse(
+  !grepl("^\\d+\\. ", citations),
+  paste0("1. ", citations),
+  citations
 )
 
 cat(paste0(citations, collapse = "\n\n"))
