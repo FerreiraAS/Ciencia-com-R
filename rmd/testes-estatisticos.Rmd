@@ -1,8 +1,8 @@
 ```{=openxml}
 <w:p>
-  <w:r>
-    <w:br w:type="page"/>
-  </w:r>
+<w:r>
+<w:br w:type="page"/>
+</w:r>
 </w:p>
 ```
 
@@ -24,7 +24,7 @@ library(dplyr)
 # Reprodutibilidade
 base::set.seed(1234)
 
-n <- 200L
+n <- 100L
 trial <-
   tibble::tibble(
     Tratamento = base::factor(
@@ -56,12 +56,12 @@ tbl_yates <-
   ) %>%
   gtsummary::add_p(
     test = "chisq.test",
-    test.args = list(correct = TRUE),
+    test.args = list(correct = FALSE),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_header(p.value = "**P-valor**") %>%
   gtsummary::bold_labels() %>%
-  gtsummary::modify_caption("Teste Qui-quadrado (com correção de Yates)") %>%
+  gtsummary::modify_caption("Teste Qui-quadrado (sem correção de Yates)") %>%
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
@@ -78,7 +78,7 @@ library(dplyr)
 # Reprodutibilidade
 base::set.seed(1234)
 
-n <- 200L
+n <- 100L
 trial <-
   tibble::tibble(
     Tratamento = base::factor(
@@ -110,12 +110,12 @@ tbl_no_yates <-
   ) %>%
   gtsummary::add_p(
     test = "chisq.test",
-    test.args = list(correct = FALSE),
+    test.args = list(correct = TRUE),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_header(p.value = "**P-valor**") %>%
   gtsummary::bold_labels() %>%
-  gtsummary::modify_caption("Teste Qui-quadrado (sem correção de Yates)") %>%
+  gtsummary::modify_caption("Teste Qui-quadrado (com correção de Yates)") %>%
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
@@ -134,7 +134,7 @@ tbl_no_yates
 # Reprodutibilidade
 base::set.seed(1234)
 
-n <- 200L
+n <- 100L
 trial <-
   tibble::tibble(
     Tratamento = base::factor(
@@ -217,7 +217,59 @@ tab_cross <-
     margin_text = "Total"
   ) %>%
   gtsummary::bold_labels() %>%
-  gtsummary::modify_caption("Teste de McNemar")
+  gtsummary::modify_caption("Teste de McNemar (sem corrreção de Yates)")
+
+# McNemar (p único para a tabela)
+tab_pp <- base::table(dados_mcnemar$Pre, dados_mcnemar$Pos)
+mc     <- stats::mcnemar.test(tab_pp, correct = FALSE)
+p_txt  <- if (mc$p.value < 0.001) "<0.001" else sprintf("%.3f", mc$p.value)
+
+# Converter para gt e acrescentar o rodapé com o p
+tab_cross %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    paste0(
+      "McNemar χ² = ", round(unname(mc$statistic), 3),
+      "; gl = 1; p = ", p_txt
+    )
+  )
+```
+
+<br>
+
+```{r mcnemar-yates, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# McNemar (2x2 pareado) — exibir p no rodapé da tabela
+# ----------------------------------------------------
+base::set.seed(1234)
+
+# Simular dados binários pré/pós pareados
+n <- 100L
+dados_mcnemar <-
+  tibble::tibble(
+    id  = 1:n,
+    Pre = stats::rbinom(n, 1, 0.55)
+  ) %>%
+  dplyr::mutate(
+    p_pos = dplyr::if_else(Pre == 1L, 0.70, 0.40),
+    Pos   = stats::rbinom(n, 1, p_pos),
+    Pre   = base::factor(dplyr::if_else(Pre==1L,"Sim","Não"), levels=c("Sim","Não")),
+    Pos   = base::factor(dplyr::if_else(Pos==1L,"Sim","Não"), levels=c("Sim","Não"))
+  )
+
+# Tabela cruzada com tbl_cross
+tab_cross <-
+  gtsummary::tbl_cross(
+    data      = dados_mcnemar,
+    row       = Pre,
+    col       = Pos,
+    percent   = "cell",
+    digits    = 0,
+    statistic = "{n} ({p}%)",
+    margin    = c("row","column"),
+    margin_text = "Total"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste de McNemar (com corrreção de Yates)")
 
 # McNemar (p único para a tabela)
 tab_pp <- base::table(dados_mcnemar$Pre, dados_mcnemar$Pos)
@@ -365,6 +417,8 @@ tbl_trend
 <br>
 
 ```{r or-rr, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
 # Reprodutibilidade
 set.seed(1234)
 
@@ -375,26 +429,99 @@ tab2x2 <- tibble::tibble(
   n = c(72,28, 55,45)
 )
 
-# Cross table básica com gtsummary
+library(dplyr)
+library(tidyr)
+
+tab_expanded <-
+  tab2x2 %>%
+  tidyr::uncount(n)
+
 tbl_assoc <-
   gtsummary::tbl_cross(
-    data    = tab2x2,
+    data    = tab_expanded,
     row     = Tratamento,
     col     = Resposta,
     percent = "row",
     digits  = 0,
     statistic = "{n} ({p}%)"
   ) %>%
-  gtsummary::add_p(test = "chisq.test") %>%
-  gtsummary::modify_caption("Medidas de associação") %>%
+  gtsummary::add_p(
+    test = "chisq.test",
+    test.args = list(correct = FALSE)
+  ) %>%
+  gtsummary::modify_caption("Medidas de associação (sem correção de Yates)") %>%
   gtsummary::bold_labels()
 
 # ---- calcular OR e RR manualmente ----
 m <- matrix(c(72,28,55,45), nrow = 2, byrow = TRUE,
             dimnames = list(Tratamento=c("A","B"), Resposta=c("Sim","Não")))
 
-or_res <- epitools::oddsratio.wald(m)
-rr_res <- epitools::riskratio.wald(m)
+or_res <- epitools::oddsratio.wald(m, correction = FALSE)
+rr_res <- epitools::riskratio.wald(m, correction = FALSE)
+
+# extrair valores
+or_est <- round(or_res$measure[2,1], 2)
+or_low <- round(or_res$measure[2,2], 2)
+or_high<- round(or_res$measure[2,3], 2)
+rr_est <- round(rr_res$measure[2,1], 2)
+rr_low <- round(rr_res$measure[2,2], 2)
+rr_high<- round(rr_res$measure[2,3], 2)
+
+nota_assoc <- paste0(
+  "OR = ", or_est, " [", or_low, ", ", or_high, "]; ",
+  "RR = ", rr_est, " [", rr_low, ", ", rr_high, "]. "
+)
+
+# ---- exibir ----
+tbl_assoc %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(nota_assoc)
+```
+
+<br>
+
+```{r or-rr-yates, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(1234)
+
+# 2x2 tabela agregada
+tab2x2 <- tibble::tibble(
+  Tratamento = rep(c("A","B"), each=2),
+  Resposta   = rep(c("Sim","Não"), times=2),
+  n = c(72,28, 55,45)
+)
+
+library(dplyr)
+library(tidyr)
+
+tab_expanded <-
+  tab2x2 %>%
+  tidyr::uncount(n)
+
+tbl_assoc <-
+  gtsummary::tbl_cross(
+    data    = tab_expanded,
+    row     = Tratamento,
+    col     = Resposta,
+    percent = "row",
+    digits  = 0,
+    statistic = "{n} ({p}%)"
+  ) %>%
+  gtsummary::add_p(
+    test = "chisq.test",
+    test.args = list(correct = TRUE)
+  ) %>%
+  gtsummary::modify_caption("Medidas de associação (com correção de Yates)") %>%
+  gtsummary::bold_labels()
+
+# ---- calcular OR e RR manualmente ----
+m <- matrix(c(72,28,55,45), nrow = 2, byrow = TRUE,
+            dimnames = list(Tratamento=c("A","B"), Resposta=c("Sim","Não")))
+
+or_res <- epitools::oddsratio.wald(m, correction = TRUE)
+rr_res <- epitools::riskratio.wald(m, correction = TRUE)
 
 # extrair valores
 or_est <- round(or_res$measure[2,1], 2)
@@ -429,18 +556,20 @@ tbl_assoc %>%
 # Reprodutibilidade
 set.seed(1234)
 
-n <- 100L
+n_A <- 20
+n_B <- 80
+
 trial <-
   tibble::tibble(
-    Tratamento = base::factor(
-      x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
+    Tratamento = factor(
+      x = c(rep("A", n_A), rep("B", n_B)),
       levels = c("A","B")
     )
   ) %>%
   dplyr::mutate(
-    mu    = dplyr::if_else(Tratamento == "A", 50, 55),
-    desvio= dplyr::if_else(Tratamento == "A", 10, 10),
-    Desfecho     = stats::rnorm(n = n, mean = mu, sd = desvio)
+    mu     = dplyr::if_else(Tratamento == "A", 50, 55),
+    desvio = dplyr::if_else(Tratamento == "A", 20, 5),
+    Desfecho = stats::rnorm(n = dplyr::n(), mean = mu, sd = desvio)
   ) %>%
   dplyr::select(Tratamento, Desfecho)
 
@@ -448,13 +577,16 @@ trial_t <-
   trial %>%
   gtsummary::tbl_summary(
     by = Tratamento,
-    statistic = base::list(Desfecho ~ "{mean} ({sd})"),
-    digits    = base::list(Desfecho ~ 2)
+    statistic = list(Desfecho ~ "{mean} ({sd})"),
+    digits    = list(Desfecho ~ 2)
   ) %>%
   gtsummary::add_p(
     test = Desfecho ~ "t.test",
-    test.args = base::list(var.equal = TRUE),
+    test.args = list(gtsummary::all_tests("t.test") ~ list(var.equal = TRUE)),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_footnote(
+    update = p.value ~ "Teste t de Student (variâncias iguais)"
   ) %>%
   gtsummary::modify_header(p.value = "**P-valor**") %>%
   gtsummary::bold_labels() %>%
@@ -465,8 +597,67 @@ trial_t <-
       "Tamanho do efeito (d de Cohen): ",
       base::round(
         base::as.numeric(
-          psych::cohen.d(trial$Desfecho, trial$Tratamento == "A")$cohen.d[2]
+          psych::cohen.d(Desfecho ~ Tratamento, data = trial)$cohen.d[2]
         ),
+        3
+      )
+    )
+  )
+
+trial_t
+```
+
+<br>
+
+```{r t-student-pareado, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 40
+
+trial <-
+  tibble::tibble(
+    ID = 1:n,
+    Antes = stats::rnorm(n, mean = 50, sd = 10),
+    Depois = Antes + stats::rnorm(n, mean = 5, sd = 8)
+  )
+
+trial_long <-
+  trial %>%
+  tidyr::pivot_longer(
+    cols = c(Antes, Depois),
+    names_to = "Momento",
+    values_to = "Desfecho"
+  ) %>%
+  dplyr::mutate(
+    Momento = factor(Momento, levels = c("Antes","Depois"))
+  )
+
+trial_t <-
+  trial_long %>%
+  gtsummary::tbl_summary(
+    by = Momento,
+    include = Desfecho,
+    statistic = list(Desfecho ~ "{mean} ({sd})"),
+    digits = list(Desfecho ~ 2)
+  ) %>%
+  gtsummary::add_p(
+    test = Desfecho ~ "paired.t.test",
+    group = ID,
+    pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_footnote(
+    update = p.value ~ "Teste t de Student (pareado)"
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste t de Student pareado") %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    paste0(
+      "Tamanho do efeito (d de Cohen pareado): ",
+      round(
+        effectsize::cohens_d(trial$Depois, trial$Antes, paired = TRUE)$Cohens_d,
         3
       )
     )
@@ -482,20 +673,23 @@ trial_t
 <br>
 
 ```{r welch, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
-base::set.seed(1234)
+# Reprodutibilidade
+set.seed(1234)
 
-n <- 100L
+n_A <- 20
+n_B <- 80
+
 trial <-
   tibble::tibble(
-    Tratamento = base::factor(
-      x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
+    Tratamento = factor(
+      x = c(rep("A", n_A), rep("B", n_B)),
       levels = c("A","B")
     )
   ) %>%
   dplyr::mutate(
-    mu    = dplyr::if_else(Tratamento == "A", 50, 55),
-    desvio= dplyr::if_else(Tratamento == "A", 10, 10),
-    Desfecho     = stats::rnorm(n = n, mean = mu, sd = desvio)
+    mu     = dplyr::if_else(Tratamento == "A", 50, 55),
+    desvio = dplyr::if_else(Tratamento == "A", 20, 5),
+    Desfecho = stats::rnorm(n = dplyr::n(), mean = mu, sd = desvio)
   ) %>%
   dplyr::select(Tratamento, Desfecho)
 
@@ -503,13 +697,16 @@ trial_t <-
   trial %>%
   gtsummary::tbl_summary(
     by = Tratamento,
-    statistic = base::list(Desfecho ~ "{mean} ({sd})"),
-    digits    = base::list(Desfecho ~ 2)
+    statistic = list(Desfecho ~ "{mean} ({sd})"),
+    digits    = list(Desfecho ~ 2)
   ) %>%
   gtsummary::add_p(
     test = Desfecho ~ "t.test",
-    test.args = base::list(var.equal = FALSE),
+    test.args = list(gtsummary::all_tests("t.test") ~ list(var.equal = FALSE)),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_footnote(
+    update = p.value ~ "Teste t de Welch (variâncias desiguais)"
   ) %>%
   gtsummary::modify_header(p.value = "**P-valor**") %>%
   gtsummary::bold_labels() %>%
@@ -520,7 +717,7 @@ trial_t <-
       "Tamanho do efeito (d de Cohen): ",
       base::round(
         base::as.numeric(
-          psych::cohen.d(trial$Desfecho, trial$Tratamento == "A")$cohen.d[2]
+          psych::cohen.d(Desfecho ~ Tratamento, data = trial)$cohen.d[2]
         ),
         3
       )
@@ -556,7 +753,11 @@ trial_ind <-
   dplyr::select(Tratamento, Desfecho)
 
 # Tamanho de efeito r (Mann–Whitney / Wilcoxon rank-sum)
-eff_ind <- rstatix::wilcox_effsize(data = trial_ind, Desfecho ~ Tratamento)
+eff_ind <- rstatix::wilcox_effsize(
+  data = trial_ind,
+  Desfecho ~ Tratamento,
+  paired = FALSE
+)
 
 tbl_mw <- 
   trial_ind %>%
@@ -566,8 +767,11 @@ tbl_mw <-
     digits    = base::list(Desfecho ~ 2)
   ) %>%
   gtsummary::add_p(
-    test = Desfecho ~ "wilcox.test",  # Mann–Whitney (rank-sum)
+    test = Desfecho ~ "wilcox.test",
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_footnote(
+    update = p.value ~ "Teste de Mann–Whitney (Wilcoxon rank-sum, amostras independentes)"
   ) %>%
   gtsummary::modify_header(p.value = "**P-valor**") %>%
   gtsummary::bold_labels() %>%
@@ -591,58 +795,57 @@ tbl_mw
 
 ```{r wilcoxon, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 # Reprodutibilidade
-base::set.seed(1234)
+set.seed(1234)
 
-m <- 60L
-dados_wide <-
+m <- 60
+
+dados_pareados <-
   tibble::tibble(
-    ID   = 1:m,
-    Pre  = stats::rnorm(m, mean = 50, sd = 10),
-    Pos  = stats::rnorm(m, mean = 53, sd = 10)
-  )
-
-# Longo + níveis e ordem corretos p/ pareado
-dados_long <-
+    ID  = 1:m,
+    Pre = rnorm(m, mean = 50, sd = 10),
+    Pos = rnorm(m, mean = 55, sd = 10)
+  ) %>%
   tidyr::pivot_longer(
-    data  = dados_wide,
-    cols  = c("Pre","Pos"),
-    names_to  = "Tempo",
+    cols = c(Pre, Pos),
+    names_to = "Tempo",
     values_to = "Desfecho"
   ) %>%
   dplyr::mutate(
-    Tempo = base::factor(Tempo, levels = c("Pre","Pos"), labels = c("Pré","Pós"))
+    Tempo = factor(Tempo, levels = c("Pre","Pos"), labels = c("Pré","Pós"))
   ) %>%
   dplyr::arrange(ID, Tempo)
 
-# Efeito r (pareado)
+# Tamanho de efeito r (Mann–Whitney / Wilcoxon rank-sum)
 eff_paired <- rstatix::wilcox_effsize(
-  data   = dados_long,
-  formula= Desfecho ~ Tempo,
+  dados_pareados,
+  Desfecho ~ Tempo,
   paired = TRUE
 )
 
 # Tabela + p (Wilcoxon pareado)
 tbl_wilcox <-
-  dados_long %>%
-  dplyr::select(-ID) %>%
+  dados_pareados %>%
   gtsummary::tbl_summary(
     by = Tempo,
-    statistic = base::list(Desfecho ~ "{median} [{p25}, {p75}]"),
-    digits    = base::list(Desfecho ~ 2)
+    include = Desfecho,
+    statistic = list(Desfecho ~ "{median} [{p25}, {p75}]"),
+    digits = list(Desfecho ~ 2)
   ) %>%
   gtsummary::add_p(
-    test      = Desfecho ~ "wilcox.test",
-    test.args = base::list(paired = TRUE),
+    test = Desfecho ~ "wilcox.test",
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_footnote(
+    update = p.value ~ "Teste de Wilcoxon pareado (signed-rank, amostras dependentes)"
   ) %>%
   gtsummary::modify_header(p.value = "**P-valor**") %>%
   gtsummary::bold_labels() %>%
-  gtsummary::modify_caption("Teste de Wilcoxon (signed-rank)") %>%
+  gtsummary::modify_caption("Teste de Wilcoxon pareado (signed-rank)") %>%
   gtsummary::as_gt() %>%
   gt::tab_source_note(
-    base::paste0(
+    paste0(
       "Tamanho do efeito (r): ",
-      base::round(base::as.numeric(eff_paired$effsize), 3)
+      round(as.numeric(eff_paired$effsize), 3)
     )
   )
 
@@ -693,8 +896,11 @@ tbl_anova <-
     digits    = base::list(Desfecho ~ 2)
   ) %>%
   gtsummary::add_p(
-    test = Desfecho ~ "aov",
+    test = Desfecho ~ "oneway.test",
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_footnote(
+    update = p.value ~ "ANOVA de um fator (variâncias iguais)"
   ) %>%
   gtsummary::modify_header(p.value = "**P-valor**") %>%
   gtsummary::bold_labels() %>%
@@ -813,6 +1019,9 @@ tbl_welch <-
     test = base::list(Desfecho ~ .welch_p),
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
+  gtsummary::modify_footnote(
+    update = p.value ~ "ANOVA de Welch (variâncias desiguais)"
+  ) %>%
   gtsummary::modify_header(p.value = "**P-valor (Welch)**") %>%
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Análise de variância de Welch") %>%
@@ -900,6 +1109,9 @@ tbl_kw <-
   gtsummary::add_p(
     test = Desfecho ~ "kruskal.test",
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_footnote(
+    update = p.value ~ "Teste de Kruskal–Wallis (amostras independentes, variáveis assimétricas)"
   ) %>%
   gtsummary::modify_header(p.value = "**P-valor**") %>%
   gtsummary::bold_labels() %>%
