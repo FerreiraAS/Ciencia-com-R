@@ -10,159 +10,533 @@
 
 <br>
 
-## Análise inferencial de associação
+## Testes de Qui-quadrado ($\chi^2$)[@McHugh2013; @Kim2017a]
 
 <br>
 
-### O que é análise de associação?
+```{r qui-quadrado, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
 
--   .[@REF]
+# Reprodutibilidade
+base::set.seed(1234)
 
-<br>
+n <- 100L
+trial <-
+  tibble::tibble(
+    Tratamento = base::factor(
+      x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
+      levels = c("A","B")
+    )
+  ) %>%
+  dplyr::mutate(
+    p_resp = dplyr::if_else(Tratamento == "A", 0.7, 0.4),
+    y      = stats::rbinom(n = n, size = 1L, prob = p_resp),
+    Resposta = base::factor(
+      x = dplyr::if_else(y == 1L, "Respondeu", "Não respondeu"),
+      levels = c("Respondeu","Não respondeu")
+    )
+  ) %>%
+  dplyr::select(Tratamento, Resposta)
 
-## Associação bivariada
+tbl_yates <-
+  trial %>%
+  gtsummary::tbl_cross(
+    row = Tratamento,
+    col = Resposta,
+    statistic = "{n} ({p}%)",
+    digits = 0,
+    percent = "cell",
+    margin = c("row","column"),
+    missing = "no",
+    margin_text = "Total"
+  ) %>%
+  gtsummary::add_p(
+    test = "chisq.test",
+    test.args = list(correct = FALSE),
+    pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste Qui-quadrado (sem correção de Yates)") %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
+  )
 
-<br>
-
-### O que são análises de associação bivariada?
-
--   .[@REF]
-
-<br>
-
-### Quais testes podem ser usados para análises de associação bivariada?
-
--   Teste Qui-quadrado ($\chi^2$).[@McHugh2013; @Kim2017a]
-
-    -   O teste qui-quadrado ($\chi^2$) avalia uma hipótese global se a relação entre duas variáveis e/ou fatores é independente ou associada.[@Kim2017a]
-
-    -   O teste qui-quadrado é utilizado para comparar a distribuição de uma variável categórica em uma amostra ou grupo com a distribuição em outro. Se a distribuição da variável categórica não for muito diferente nos diferentes grupos, pode-se concluir que a distribuição da variável categórica não está relacionada com a variável dos grupos. Pode-se também concluir que a variável categórica e os grupos são independentes.[@Kim2017a]
-
-    -   Tipo: não paramétrico.[@McHugh2013; @Kim2017a]
-
-    -   Suposições:[@McHugh2013; @Kim2017a]
-
-        -   As variáveis são ordinais ou categóricas nominais, de modo que as células representem frequência.
-
-        -   Os níveis dos fatores (variáveis categóricas) são mutuamente exclusivos.
-
-        -   Tamanho de amostra grande e adequado porque é baseado em uma abordagem de aproximação.
-
-        -   Menos de 20% das células com frequências esperadas \< 5
-
-        -   Nenhuma célula com frequência esperada \< 1.
-
-    -   Hipóteses:[@Kim2017a]
-
-        -   Nula ($H_{0}$): independente (sem associação)
-
-        -   Alternativa ($H_{1}$): não independente (associação)
-
-    -   Tamanho do efeito:[@Kim2017a]
-
-        -   Phi ($\phi$), para tabelas de contingência 2x2
-
-        -   Razão de chances ($RC$ ou $OR$), para tabelas de contingência 2x2
-
-        -   Cramer V ($V$), para tabelas de contingência NxM
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-
-O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_cross*](https://www.rdocumentation.org/packages/gtsummary/versions/1.6.3/topics/tbl_cross) para criar uma tabela NxM.
-:::
+tbl_yates
+```
 
 <br>
 
--   Teste Exato de Fisher.[@McHugh2013; @Kim2017a]
+```{r qui-quadrado-yates, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
 
-    -   O teste exato de Fisher avalia a hipótese nula de independência aplicando a distribuição hipergeométrica dos números nas células da tabela.[@Kim2017a]
+# Reprodutibilidade
+base::set.seed(1234)
 
-    -   Hipóteses:[@McHugh2013; @Kim2017a]
+n <- 100L
+trial <-
+  tibble::tibble(
+    Tratamento = base::factor(
+      x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
+      levels = c("A","B")
+    )
+  ) %>%
+  dplyr::mutate(
+    p_resp = dplyr::if_else(Tratamento == "A", 0.7, 0.4),
+    y      = stats::rbinom(n = n, size = 1L, prob = p_resp),
+    Resposta = base::factor(
+      x = dplyr::if_else(y == 1L, "Respondeu", "Não respondeu"),
+      levels = c("Respondeu","Não respondeu")
+    )
+  ) %>%
+  dplyr::select(Tratamento, Resposta)
 
-        -   Nula ($H_{0}$): independente (sem associação)
+tbl_no_yates <-
+  trial %>%
+  gtsummary::tbl_cross(
+    row = Tratamento,
+    col = Resposta,
+    statistic = "{n} ({p}%)",
+    digits = 0,
+    percent = "cell",
+    margin = c("row","column"),
+    missing = "no",
+    margin_text = "Total"
+  ) %>%
+  gtsummary::add_p(
+    test = "chisq.test",
+    test.args = list(correct = TRUE),
+    pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste Qui-quadrado (com correção de Yates)") %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
+  )
 
-        -   Alternativa ($H_{1}$): não independente (associação)
-
-    -   Tamanho do efeito:[@McHugh2013; @Kim2017a]
-
-        -   Phi ($\phi$), para tabelas de contingência 2x2
-
-        -   Razão de chances ($RC$ ou $OR$), para tabelas de contingência 2x2
-
-        -   Cramer V ($V$), para tabelas de contingência NxM
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-
-O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_cross*](https://www.rdocumentation.org/packages/gtsummary/versions/1.6.3/topics/tbl_cross) para criar uma tabela NxM.
-:::
-
-<br>
-
-### Quais testes podem ser usados para análises de associação bivariada entre variáveis contínuas?
-
--  Coeficiente de correlação de Pearson $r$.[@REF]
-
--  Coeficiente de correlação de Spearman $\rho$.[@REF]
-
--  Coeficiente de correlação de Kendall $\tau$.[@REF]
-
-<br>
-
-### Quais testes podem ser usados para análises de associação bivariada entre variáveis dicotômicas?
-
--   Coeficiente de correlação tetracórica $r_{tet}$.[@i.mathe1901; @banerjee1999]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psych*[@psych] fornece a função [*tetrachoric*](https://www.rdocumentation.org/packages/psych/versions/2.3.6/topics/tetrachoric) para calcular o coeficiente de correlação tetracórica ($r_{tet}$).
-:::
-
-<br>
-
-### Quais testes podem ser usados para análises de associação bivariada entre variáveis ordinais sob modelo latente contínuo?
-
--   Coeficiente de correlação policórica $r_{pol}$.[@banerjee1999]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psych*[@psych] fornece a função [*tetrachoric*](https://www.rdocumentation.org/packages/psych/versions/2.3.6/topics/tetrachoric) para calcular o coeficiente de correlação policórica ($r_{pol}$).
-:::
+tbl_no_yates
+```
 
 <br>
 
-### Quais testes podem ser usados para análises de associação bivariada entre variáveis dicotômica e contínua?
-
-- Variável dicotômica real vs. contínua: coeficiente de correlação ponto-bisserial $r_{pb}$.
-
-- Variável dicotômica artificial (corte em variável latente contínua): Coeficiente de correlação bisserial $r_{s}$.[@banerjee1999]
+## Teste exato de Fisher[@McHugh2013; @Kim2017a]
 
 <br>
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psych*[@psych] fornece a função [*tetrachoric*](https://www.rdocumentation.org/packages/psych/versions/2.3.6/topics/tetrachoric) para calcular o coeficiente de correlação bisserial ($r_{s}$).
-:::
+```{r fisher, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+base::set.seed(1234)
+
+n <- 100L
+trial <-
+  tibble::tibble(
+    Tratamento = base::factor(
+      x = base::sample(c("A","B"), size = n, replace = TRUE, prob = c(0.5, 0.5)),
+      levels = c("A","B")
+    )
+  ) %>%
+  dplyr::mutate(
+    p_resp = dplyr::if_else(Tratamento == "A", 0.7, 0.4),
+    y      = stats::rbinom(n = n, size = 1L, prob = p_resp),
+    Resposta = base::factor(
+      x = dplyr::if_else(y == 1L, "Respondeu", "Não respondeu"),
+      levels = c("Respondeu","Não respondeu")
+    )
+  ) %>%
+  dplyr::select(Tratamento, Resposta)
+
+tbl_fisher <-
+  trial %>%
+  gtsummary::tbl_cross(
+    row = Tratamento,
+    col = Resposta,
+    statistic = "{n} ({p}%)",
+    digits = 0,
+    percent = "cell",
+    margin = c("row","column"),
+    missing = "no",
+    margin_text = "Total"
+  ) %>%
+  gtsummary::add_p(
+    test = "fisher.test",
+    pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste exato de Fisher") %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
+  )
+
+tbl_fisher
+```
 
 <br>
 
-## Associação multivariada
+## Teste de McNemar
 
 <br>
 
-### O que são análises de associação multivariada?
+```{r mcnemar, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# McNemar (2x2 pareado) — exibir p no rodapé da tabela
+# ----------------------------------------------------
+base::set.seed(1234)
 
--   .[@REF]
+# Simular dados binários pré/pós pareados
+n <- 100L
+dados_mcnemar <-
+  tibble::tibble(
+    id  = 1:n,
+    Pre = stats::rbinom(n, 1, 0.55)
+  ) %>%
+  dplyr::mutate(
+    p_pos = dplyr::if_else(Pre == 1L, 0.70, 0.40),
+    Pos   = stats::rbinom(n, 1, p_pos),
+    Pre   = base::factor(dplyr::if_else(Pre==1L,"Sim","Não"), levels=c("Sim","Não")),
+    Pos   = base::factor(dplyr::if_else(Pos==1L,"Sim","Não"), levels=c("Sim","Não"))
+  )
+
+# Tabela cruzada com tbl_cross
+tab_cross <-
+  gtsummary::tbl_cross(
+    data      = dados_mcnemar,
+    row       = Pre,
+    col       = Pos,
+    percent   = "cell",
+    digits    = 0,
+    statistic = "{n} ({p}%)",
+    margin    = c("row","column"),
+    margin_text = "Total"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste de McNemar (sem corrreção de Yates)")
+
+# McNemar (p único para a tabela)
+tab_pp <- base::table(dados_mcnemar$Pre, dados_mcnemar$Pos)
+mc     <- stats::mcnemar.test(tab_pp, correct = FALSE)
+p_txt  <- if (mc$p.value < 0.001) "<0.001" else sprintf("%.3f", mc$p.value)
+
+# Converter para gt e acrescentar o rodapé com o p
+tab_cross %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    paste0(
+      "McNemar χ² = ", round(unname(mc$statistic), 3),
+      "; gl = 1; p = ", p_txt
+    )
+  )
+```
 
 <br>
 
-### Quais testes podem ser usados para análises de associação multivariada?
+```{r mcnemar-yates, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# McNemar (2x2 pareado) — exibir p no rodapé da tabela
+# ----------------------------------------------------
+base::set.seed(1234)
 
-- .[@REF]
+# Simular dados binários pré/pós pareados
+n <- 100L
+dados_mcnemar <-
+  tibble::tibble(
+    id  = 1:n,
+    Pre = stats::rbinom(n, 1, 0.55)
+  ) %>%
+  dplyr::mutate(
+    p_pos = dplyr::if_else(Pre == 1L, 0.70, 0.40),
+    Pos   = stats::rbinom(n, 1, p_pos),
+    Pre   = base::factor(dplyr::if_else(Pre==1L,"Sim","Não"), levels=c("Sim","Não")),
+    Pos   = base::factor(dplyr::if_else(Pos==1L,"Sim","Não"), levels=c("Sim","Não"))
+  )
+
+# Tabela cruzada com tbl_cross
+tab_cross <-
+  gtsummary::tbl_cross(
+    data      = dados_mcnemar,
+    row       = Pre,
+    col       = Pos,
+    percent   = "cell",
+    digits    = 0,
+    statistic = "{n} ({p}%)",
+    margin    = c("row","column"),
+    margin_text = "Total"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Teste de McNemar (com corrreção de Yates)")
+
+# McNemar (p único para a tabela)
+tab_pp <- base::table(dados_mcnemar$Pre, dados_mcnemar$Pos)
+mc     <- stats::mcnemar.test(tab_pp, correct = TRUE)
+p_txt  <- if (mc$p.value < 0.001) "<0.001" else sprintf("%.3f", mc$p.value)
+
+# Converter para gt e acrescentar o rodapé com o p
+tab_cross %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    paste0(
+      "McNemar χ² = ", round(unname(mc$statistic), 3),
+      "; gl = 1; p = ", p_txt
+    )
+  )
+```
+
+<br>
+
+## Teste *Q* de Cochran
+
+<br>
+
+```{r cochran-q, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+base::set.seed(1234)
+
+m <- 80L
+df_q <-
+  tibble::tibble(
+    id = 1:m,
+    T1 = stats::rbinom(m, 1, 0.50),
+    T2 = stats::rbinom(m, 1, 0.60),
+    T3 = stats::rbinom(m, 1, 0.72)
+  )
+
+# Longo com rótulos em vez de 0/1
+df_long <-
+  tidyr::pivot_longer(df_q, -id, names_to="Tempo", values_to="Resposta") %>%
+  dplyr::mutate(
+    Tempo    = factor(Tempo, levels=c("T1","T2","T3")),
+    Resposta = factor(dplyr::if_else(Resposta==1,"Positivo","Negativo"),
+                      levels=c("Positivo","Negativo"))
+  )
+
+# Cochran’s Q
+q_res <- rstatix::cochran_qtest(df_long, Resposta ~ Tempo | id)
+
+# Tabela resumo
+tbl_q <-
+  gtsummary::tbl_cross(
+    data      = df_long,
+    row       = Tempo,
+    col       = Resposta,
+    percent   = "cell",
+    digits    = 0,
+    statistic = "{n} ({p}%)",
+    margin    = "row"
+  ) %>%
+  gtsummary::modify_caption("Teste Q de Cochran") %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    paste0(
+      "Cochran Q χ²(", q_res$df, ") = ", round(q_res$statistic,3),
+      ", p = ", ifelse(q_res$p < 0.001, "<0.001", sprintf('%.3f', q_res$p))
+    )
+  )
+
+tbl_q
+```
+
+<br>
+
+## Teste de Cochran–Armitage
+
+<br>
+
+```{r cochran-armitage, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+base::set.seed(1234)
+
+# Exemplo: 3 doses (ordem natural)
+grupos   <- c("Baixa","Média","Alta")
+total    <- c(60, 60, 60)
+sucesso  <- c(22, 30, 41)
+
+# Teste de tendência
+trend <- stats::prop.trend.test(x = sucesso, n = total, score = 1:3)
+
+# Tabela agregada
+dados_trend <-
+  tibble::tibble(
+    Grupo     = grupos,
+    Sucessos  = sucesso,
+    Total     = total
+  ) %>%
+  dplyr::mutate(Proporcao = Sucessos/Total)
+
+# Converter para formato adequado ao tbl_cross:
+# duas categorias em 'Status' (Sucesso/Fracasso) + coluna de pesos 'n'
+dados_trend_tbl <-
+  dados_trend %>%
+  dplyr::mutate(Fracassos = Total - Sucessos) %>%
+  tidyr::pivot_longer(
+    cols = c(Sucessos, Fracassos),
+    names_to = "Status_raw",
+    values_to = "n"
+  ) %>%
+  dplyr::mutate(
+    Status = dplyr::recode(Status_raw,
+                           Sucessos = "Sucesso",
+                           Fracassos = "Fracasso"),
+    Status = factor(Status, levels = c("Sucesso","Fracasso"))
+  ) %>%
+  dplyr::select(Grupo, Status, n)
+
+# Tabela cruzada com pesos
+tbl_trend <-
+  gtsummary::tbl_cross(
+    data      = dados_trend_tbl,
+    row       = Grupo,
+    col       = Status,
+    percent   = "row",
+    digits    = 0,
+    statistic = "{n} ({p}%)",
+    margin    = "row"
+  ) %>%
+  gtsummary::modify_caption("Teste de Cochran–Armitage") %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    paste0(
+      "χ²(", trend$parameter, ") = ", round(trend$statistic, 3),
+      "; p = ", ifelse(trend$p.value < 0.001, "<0.001", sprintf('%.3f', trend$p.value))
+    )
+  )
+
+tbl_trend
+```
+
+<br>
+
+## Razão de changes ($OR$) e risco relativo ($RR$)
+
+<br>
+
+```{r or-rr, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(1234)
+
+# 2x2 tabela agregada
+tab2x2 <- tibble::tibble(
+  Tratamento = rep(c("A","B"), each=2),
+  Resposta   = rep(c("Sim","Não"), times=2),
+  n = c(72,28, 55,45)
+)
+
+library(dplyr)
+library(tidyr)
+
+tab_expanded <-
+  tab2x2 %>%
+  tidyr::uncount(n)
+
+tbl_assoc <-
+  gtsummary::tbl_cross(
+    data    = tab_expanded,
+    row     = Tratamento,
+    col     = Resposta,
+    percent = "row",
+    digits  = 0,
+    statistic = "{n} ({p}%)"
+  ) %>%
+  gtsummary::add_p(
+    test = "chisq.test",
+    test.args = list(correct = FALSE)
+  ) %>%
+  gtsummary::modify_caption("Medidas de associação (sem correção de Yates)") %>%
+  gtsummary::bold_labels()
+
+# ---- calcular OR e RR manualmente ----
+m <- matrix(c(72,28,55,45), nrow = 2, byrow = TRUE,
+            dimnames = list(Tratamento=c("A","B"), Resposta=c("Sim","Não")))
+
+or_res <- epitools::oddsratio.wald(m, correction = FALSE)
+rr_res <- epitools::riskratio.wald(m, correction = FALSE)
+
+# extrair valores
+or_est <- round(or_res$measure[2,1], 2)
+or_low <- round(or_res$measure[2,2], 2)
+or_high<- round(or_res$measure[2,3], 2)
+rr_est <- round(rr_res$measure[2,1], 2)
+rr_low <- round(rr_res$measure[2,2], 2)
+rr_high<- round(rr_res$measure[2,3], 2)
+
+nota_assoc <- paste0(
+  "OR = ", or_est, " [", or_low, ", ", or_high, "]; ",
+  "RR = ", rr_est, " [", rr_low, ", ", rr_high, "]. "
+)
+
+# ---- exibir ----
+tbl_assoc %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(nota_assoc)
+```
+
+<br>
+
+```{r or-rr-yates, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(1234)
+
+# 2x2 tabela agregada
+tab2x2 <- tibble::tibble(
+  Tratamento = rep(c("A","B"), each=2),
+  Resposta   = rep(c("Sim","Não"), times=2),
+  n = c(72,28, 55,45)
+)
+
+library(dplyr)
+library(tidyr)
+
+tab_expanded <-
+  tab2x2 %>%
+  tidyr::uncount(n)
+
+tbl_assoc <-
+  gtsummary::tbl_cross(
+    data    = tab_expanded,
+    row     = Tratamento,
+    col     = Resposta,
+    percent = "row",
+    digits  = 0,
+    statistic = "{n} ({p}%)"
+  ) %>%
+  gtsummary::add_p(
+    test = "chisq.test",
+    test.args = list(correct = TRUE)
+  ) %>%
+  gtsummary::modify_caption("Medidas de associação (com correção de Yates)") %>%
+  gtsummary::bold_labels()
+
+# ---- calcular OR e RR manualmente ----
+m <- matrix(c(72,28,55,45), nrow = 2, byrow = TRUE,
+            dimnames = list(Tratamento=c("A","B"), Resposta=c("Sim","Não")))
+
+or_res <- epitools::oddsratio.wald(m, correction = TRUE)
+rr_res <- epitools::riskratio.wald(m, correction = TRUE)
+
+# extrair valores
+or_est <- round(or_res$measure[2,1], 2)
+or_low <- round(or_res$measure[2,2], 2)
+or_high<- round(or_res$measure[2,3], 2)
+rr_est <- round(rr_res$measure[2,1], 2)
+rr_low <- round(rr_res$measure[2,2], 2)
+rr_high<- round(rr_res$measure[2,3], 2)
+
+nota_assoc <- paste0(
+  "OR = ", or_est, " [", or_low, ", ", or_high, "]; ",
+  "RR = ", rr_est, " [", rr_low, ", ", rr_high, "]. "
+)
+
+# ---- exibir ----
+tbl_assoc %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(nota_assoc)
+```
 
 <br>
 

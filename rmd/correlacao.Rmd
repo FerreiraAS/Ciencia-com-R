@@ -10,31 +10,14 @@
 
 <br>
 
-## Análise inferencial de correlação
+## Coeficiente de correlação de Pearson ($r$) \@ref(eq:pearson).[@khamis2008; @allison2022]
 
 <br>
 
-### O que é covariância?
-
--   .[@REF]
-
-<br>
-
-### O que é correlação?
-
--   .[@REF]
-
-<br>
-
-### Qual é a interpretação das medidas de correlação?
-
--   Os valores de correlação estão no intervalo $[-1; 1]$.[@khamis2008; @barkan2015; @allison2022]
-
--   Valores de correlação positivos representam uma relação direta entre as variáveis, tal que valores maiores de uma variável estão associados a valores maiores de outra variável.[@khamis2008; @allison2022]
-
--   Valores de correlação negativos representam uma relação indireta (ou inversa) entre as variáveis, tal que valores maiores (menores) de uma variável estão associados a valores maiores (menores) de outra variável.[@khamis2008; @allison2022]
-
--   Valores de correlação próximos de $0$ representam a inexistência de relação entre as variáveis.[@khamis2008; @allison2022]
+\begin{equation}
+(\#eq:pearson)
+r = \dfrac{n \sum{x_i y_i} - \sum{x_i} \sum{y_i}}{\sqrt{\left[n \sum{x_i^2} - (\sum{x_i})^2\right]\left[n \sum{y_i^2} - (\sum{y_i})^2\right]}}
+\end{equation}
 
 <br>
 
@@ -104,20 +87,15 @@ ggplot2::ggplot(layout_df, ggplot2::aes(x = x, y = y)) +
 
 <br>
 
-### Quais precauções devem ser tomadas na interpretação de medidas de correlação?
-
--   Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação causa-efeito entre as variáveis.[@khamis2008]
-
--   Tamanhos de efeito grande (ou qualquer outro) não representam necessariamente uma relação de concordância ou confiabilidade entre as variáveis.[@khamis2008]
-
--   Uma escala de medição com representação agregada do constructo na coleta de dados pode subestimar o tamanho do efeito da correlação $r$ em de cerca de 13% e do coeficiente de determinação $R^2$ de cerca de 30%.[@aguinis2008] Neste caso, a correlação desatenuada $r_{x'y'}$ pode ser calculada por \@ref(eq:r-corrected), utilizando a correlação observada $r_{xy}$ e os fatores de correção $r_{xx'}$ e $r_{yy'}$ para o número de intervalos nas variáveis X e Y, respectivamennte:[@aguinis2008]
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função [*cor.test*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test) para calcular o coeficiente de correlação de Pearson ($r$).
+:::
 
 <br>
 
-\begin{equation}
-(\#eq:r-corrected)
-r_{x'y'} = \dfrac{r_{xy}}{r_{xx'}r_{yy'}}
-\end{equation}
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece a função [*correlation*](https://cloud.r-project.org/web/packages/correlation/index.html) para calcular o coeficiente de correlação de Pearson ($r$).
+:::
 
 <br>
 
@@ -133,208 +111,7 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*correct_r*](https://www.rd
 
 <br>
 
--   Os coeficientes de correlação possuem suposições que, se violadas, podem levar a interpretações equivocadas. Nestes cenários, visualizar os dados e as relações entre as variáveis pode contribuir com a interpretação e utilidade dos coeficientes de correlação.[@anscombe1973]
-
--   O quarteto de Anscombe é um conjunto de quatro bancos de dados bivariados que possuem a mesma média, variância, correlação e regressão linear (até a 2a casa decimal), mas que são visualmente diferentes e, assim, demonstram a importância da análise gráfica da correlação.[@anscombe1973]
-
-<br>
-
-```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Quarteto de Anscombe."}
-library(dplyr)
-anscombe.dt <- datasets::anscombe
-anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
-anscombe.dt <- anscombe.dt[c(9, 1:8)]
-
-# exibe a tabela de dados
-knitr::kable(
-  anscombe.dt,
-  align = "c",
-  format = ifelse(knitr::is_html_output(), "html", "latex"),
-  booktabs = TRUE,
-  linesep = "",
-  escape = FALSE
-) %>%
-  kableExtra::kable_styling(
-    latex_options = c("basic"),
-    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), T, T),
-    position = "center"
-  ) %>%
-  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
-  kableExtra::column_spec(1, bold = TRUE) %>%
-  kableExtra::row_spec(dim(anscombe.dt)[1], extra_css = "border-bottom: 1px solid")
-```
-
-<br>
-
-```{r anscombe-summary, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos."}
-library(dplyr)
-anscombe.dt <- datasets::anscombe
-anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
-anscombe.dt <- anscombe.dt[c(9, 1:8)]
-
-anscombe.dt <- anscombe.dt %>% dplyr::select(-ID)
-
-# exibe a tabela descritiva
-anscombe.summ <- data.frame(
-  "X1Y1" = c(NA, NA, NA, NA, NA, NA, NA, NA),
-  "X2Y2" = c(NA, NA, NA, NA, NA, NA, NA, NA),
-  "X3Y3" = c(NA, NA, NA, NA, NA, NA, NA, NA),
-  "X4Y4" = c(NA, NA, NA, NA, NA, NA, NA, NA)
-)
-ff <- y ~ x
-mods <- setNames(as.list(1:4), paste0("lm", 1:4))
-for (i in 1:4) {
-  ff[2:3] <- lapply(paste0(c("y", "x"), i), as.name)
-  mods[[i]] <- lmi <- lm(ff, data = anscombe.dt)
-  # observacoes
-  anscombe.summ[1, i] <- dim(anscombe.dt)[1]
-  # media x,y
-  anscombe.summ[2, i] <- mean(anscombe.dt[, paste0("x", i)])
-  anscombe.summ[3, i] <- mean(anscombe.dt[, paste0("y", i)])
-  # variancia x,y
-  anscombe.summ[4, i] <- var(anscombe.dt[, paste0("x", i)])
-  anscombe.summ[5, i] <- var(anscombe.dt[, paste0("y", i)])
-  # correlacao
-  anscombe.summ[6, i] <-
-    cor(anscombe.dt[, paste0("x", i)], anscombe.dt[, paste0("y", i)])
-  # coeficiente angular
-  anscombe.summ[7, i] <- coef(lmi)[2]
-  # coeficiente linear
-  anscombe.summ[8, i] <- coef(lmi)[1]
-  # coeficiente de determinacao
-  anscombe.summ[9, i] <- summary(lmi)$r.squared
-}
-rownames(anscombe.summ) <-
-  c(
-    "Observações",
-    "Média x",
-    "Média y",
-    "Variância x",
-    "Variância y",
-    "Correlação",
-    "Coeficiente angular",
-    "Coeficiente linear",
-    "Coeficiente de determinação"
-  )
-anscombe.summ <- round(anscombe.summ, 2)
-
-# exibe a tabela de dados
-knitr::kable(
-  anscombe.summ,
-  align = "c",
-  format = ifelse(knitr::is_html_output(), "html", "latex"),
-  booktabs = TRUE,
-  linesep = "",
-  escape = FALSE
-) %>%
-  kableExtra::kable_styling(
-    latex_options = c("basic"),
-    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
-    full_width = ifelse(knitr::is_html_output(), T, T),
-    position = "center"
-  ) %>%
-  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
-  kableExtra::column_spec(1, bold = TRUE) %>%
-  kableExtra::row_spec(dim(anscombe.summ)[1], extra_css = "border-bottom: 1px solid")
-```
-
-<br>
-
-```{r anscombe-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de dispersão do Quarteto de Anscombe para representação gráfica de conjuntos de dados bivariados com parâmetros quase idênticos e relações muito distintas."}
-library(dplyr)
-anscombe.dt <- datasets::anscombe
-anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
-
-# exibe o gráfico
-datLong <- data.frame(
-  group  = paste0("Quarteto ", rep(1:4, each = 11)),
-  x = unlist(anscombe.dt[, c(1:4)]),
-  y = unlist(anscombe.dt[, c(5:8)])
-)
-rownames(datLong) <- NULL
-
-# compute common limits
-lims <- range(c(datLong$x, datLong$y), na.rm = TRUE)
-
-ggplot2::ggplot(
-  data = datLong,
-  mapping = ggplot2::aes(x = x, y = y, group = group)
-) +
-  ggplot2::geom_point(fill = "black") +
-  ggplot2::geom_smooth(
-    method = "lm",
-    se = FALSE,
-    fullrange = TRUE,
-    colour = "grey"
-  ) +
-  ggplot2::facet_wrap(~ group) +
-  ggplot2::scale_x_continuous(limits = lims) +
-  ggplot2::scale_y_continuous(limits = lims) +
-  ggplot2::coord_fixed() +
-  ggplot2::theme(
-    panel.background = ggplot2::element_blank(),
-    panel.grid.major = ggplot2::element_blank(),
-    panel.grid.minor = ggplot2::element_blank(),
-    axis.line = ggplot2::element_line(colour = "black"),
-    legend.key = ggplot2::element_blank()
-  )
-```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *anscombiser*[@anscombiser] fornece a função [*anscombise*](https://www.rdocumentation.org/packages/anscombiser/versions/1.1.0/topics/anscombise) para gerar bancos de dados que compartilham os mesmos valores de parâmetros do Quarteto de Anscombe.
-:::
-
-<br>
-
-## Coeficientes de correlação
-
-<br>
-
-### Quais coeficientes podem ser usados em análises de correlação?
-
--   Coeficiente de correlação de Pearson ($r$) \@ref(eq:pearson).[@khamis2008; @allison2022]
-
-<br>
-
-\begin{equation}
-(\#eq:pearson)
-r = \dfrac{n \sum{x_i y_i} - \sum{x_i} \sum{y_i}}{\sqrt{\left[n \sum{x_i^2} - (\sum{x_i})^2\right]\left[n \sum{y_i^2} - (\sum{y_i})^2\right]}}
-\end{equation}
-
-<br>
-
-- O coeficiente de correlação de Pearson ($r$) avalia a força e direção da relação linear entre duas variáveis quantitativas.[@khamis2008; @allison2022]
-
-- Tipo: paramétrico.[@khamis2008; @allison2022]
-
-- Hipóteses:[@allison2022]
-
-- Nula ($H_{0}$): $r=0$
-
-- Alternativa ($H_{1}$): $r≠0$
-
-- Tamanho do efeito:[@khamis2008; @allison2022]
-
-- Coeficiente de correlação de Pearson ($r$)
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats] fornece a função [*cor.test*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor.test) para calcular o coeficiente de correlação de Pearson ($r$).
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece a função [*correlation*](https://cloud.r-project.org/web/packages/correlation/index.html) para calcular o coeficiente de correlação de Pearson ($r$).
-:::
-
-<br>
-
--   Coeficiente de correlação ponto-bisserial ($r_{s}$) \@ref(eq:biserial).[@khamis2008]
+## Coeficiente de correlação ponto-bisserial ($r_{s}$) \@ref(eq:biserial).[@khamis2008]
 
 <br>
 
@@ -345,19 +122,9 @@ r_{s} = \dfrac{M_{1} - M_{0}}{s_{y}} \sqrt{\dfrac{n_{1}n_{0}}{n^2}}
 
 <br>
 
-- O coeficiente de correlação ponto-bisserial ($r_{s}$) avalia a força e direção da relação linear entre uma variável quantitativa e outra dicotômica.[@khamis2008]
+```{r}
 
-- Tipo: paramétrico.[@khamis2008]
-
-- Hipóteses:[@khamis2008]
-
-- Nula ($H_{0}$): $r_{s}=0$
-
-- Alternativa ($H_{1}$): $r_{s}≠0$
-
-- Tamanho do efeito:[@khamis2008]
-
-- Coeficiente de correlação ponto-bisserial ($r_{s}$)
+```
 
 <br>
 
@@ -373,7 +140,7 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
--   Coeficiente de correlação de Spearman ($\rho$) \@ref(eq:spearman).[@khamis2008; @allison2022]
+## Coeficiente de correlação de Spearman ($\rho$) \@ref(eq:spearman).[@khamis2008; @allison2022]
 
 <br>
 
@@ -384,21 +151,9 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
-- O coeficiente de correlação de Spearman ($\rho$) avalia a força e direção da relação monotônica entre duas variáveis quantitativas.[@khamis2008; @allison2022]
+```{r}
 
-- O coeficiente de correlação de Spearman ($\rho$) pode ser também definida como a correlação de Pearson ($r$) entre as classificações (*ranks*) das duas variáveis quantitativas.[@khamis2008; @allison2022]
-
-- Tipo: não-paramétrico.[@khamis2008; @allison2022]
-
-- Hipóteses:[@khamis2008; @allison2022]
-
-- Nula ($H_{0}$): $\rho=0$
-
-- Alternativa ($H_{1}$): $\rho≠0$
-
-- Tamanho do efeito:[@khamis2008; @allison2022]
-
-- Coeficiente de correlação de Spearman ($\rho$)
+```
 
 <br>
 
@@ -414,7 +169,7 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
--   Coeficiente de Kendall ($\tau$) \@ref(eq:kendall).[@khamis2008; @allison2022]
+## Coeficiente de Kendall ($\tau$) \@ref(eq:kendall).[@khamis2008; @allison2022]
 
 <br>
 
@@ -425,21 +180,9 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
-- O coeficiente Kendall $\tau$ avalia a força e direção da relação monotônica entre duas variáveis quantitativas ou qualitativas.[@khamis2008; @allison2022]
+```{r}
 
-- O coeficiente Kendall $\tau$ é definido como a proporção de todos os pares concordantes menos a proporção de todos os pares discordantes.[@khamis2008; @allison2022]
-
-- Tipo: não-paramétrico.[@khamis2008; @allison2022]
-
-- Hipóteses:[@khamis2008; @allison2022]
-
-- Nula ($H_{0}$): $\tau=0$
-
-- Alternativa ($H_{1}$): $\tau≠0$
-
-- Tamanho do efeito:[@khamis2008; @allison2022]
-
-- Kendall $\tau$
+```
 
 <br>
 
@@ -455,7 +198,7 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
--   Coeficiente de Cramér ($V$) \@ref(eq:cramer).[@REF]
+## Coeficiente de Cramér ($V$) \@ref(eq:cramer).[@REF]
 
 <br>
 
@@ -466,23 +209,13 @@ V = \sqrt{\dfrac{\chi^2/n}{\min(k-1, r-1)}}
 
 <br>
 
-- O coeficiente Cramér ($V$) avalia a força e direção da relação entre duas variáveis qualitativas.[@REF]
+```{r}
 
-- Tipo: não-paramétrico.[@REF]
-
-- Hipóteses:[@REF]
-
-- Nula ($H_{0}$): $V=0$
-
-- Alternativa ($H_{1}$): $V≠0$
-
-- Tamanho do efeito:[@REF]
-
-- Coeficiente Cramer ($V$)
+```
 
 <br>
 
--   Coeficiente de Sheperd ($\phi$)  \@ref(eq:sheperd).[@REF]
+## Coeficiente de Sheperd ($\phi$)  \@ref(eq:sheperd).[@REF]
 
 <br>
 
@@ -493,19 +226,9 @@ V = \sqrt{\dfrac{\chi^2/n}{\min(k-1, r-1)}}
 
 <br>
 
-- O coeficiente Phi ($\phi$) avalia a força e direção da relação entre duas variáveis dicotômicas.[@REF]
+```{r}
 
-- Tipo: não-paramétrico.[@REF]
-
-- Hipóteses:[@REF]
-
-- Nula ($H_{0}$): $\phi=0$
-
-- Alternativa ($H_{1}$): $\phi≠0$
-
-- Tamanho do efeito:[@REF]
-
-- Coeficiente Phi ($\phi$)
+```
 
 <br>
 
@@ -527,159 +250,37 @@ O pacote *corrplot*[@corrplot] fornece a função [*corrplot*](https://www.rdocu
 
 <br>
 
-## Colinearidade
-
-<br>
-
-### O que é colinearidade?
-
--   Colinearidade representa a correlação entre duas variáveis.[@Kim2019]
-
--   Colinearidade exata indica uma relação linear perfeita entre duas variáveis.[@Kim2019]
-
-<br>
-
-### Como identificar colinearidade na matriz de correlação?
-
--   A colinearidade pode ser identificada na matriz de correlação por meio da análise dos coeficientes de correlação entre as variáveis.[@Kim2019]
-
--   Valores de correlação próximos de $1$ ou $-1$ indicam colinearidade entre as variáveis.[@Kim2019]
+## Coeficiente de correlação tetracórica $r_{tet}$.[@i.mathe1901; @banerjee1999]
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *GGally*[@GGally] fornece a função [*ggally_cor*](https://www.rdocumentation.org/packages/GGally/versions/2.2.1/topics/ggally_cor) para estimar a correlação bivariada e exibir o coeficiente de correlação e o P-valor na matriz de correlação.[@GGally]
+O pacote *psych*[@psych] fornece a função [*tetrachoric*](https://www.rdocumentation.org/packages/psych/versions/2.3.6/topics/tetrachoric) para calcular o coeficiente de correlação tetracórica ($r_{tet}$).
 :::
 
 <br>
 
-## Correlação entre conjuntos de variáveis
+## Coeficiente de correlação policórica $r_{pol}$.[@banerjee1999]
 
 <br>
 
-### O que é correlação entre conjuntos de variáveis?
-
-- A Correlação Canônica (CCA) analisa a relação entre dois conjuntos de variáveis simultaneamente.[@REF]
-
-- Busca combinações lineares que maximizam a correlação entre os dois blocos.[@REF]
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *psych*[@psych] fornece a função [*tetrachoric*](https://www.rdocumentation.org/packages/psych/versions/2.3.6/topics/tetrachoric) para calcular o coeficiente de correlação policórica ($r_{pol}$).
+:::
 
 <br>
 
-### Quando usar CCA?
-
-- Quando existem dois blocos distintos de variáveis.[@REF]
-
-- Quando a correlação bivariada é insuficiente para captar padrões multivariados.[@REF]
+## Coeficiente de correlação ponto-bisserial $r_{pb}$.
 
 <br>
 
-### Quais são os principais resultados?
-
-- Correlação canônica ($\rho_1$, $\rho_2$, $...$): força da associação entre os escores dos blocos.[@REF]
-
-- Escores canônicos ($U$ e $V$): novas variáveis representando os blocos.[@REF]
-
-- *Loadings* e *cross-loadings*: indicam quais variáveis mais contribuem para cada eixo.[@REF]
+## Coeficiente de correlação bisserial $r_{s}$.[@banerjee1999]
 
 <br>
 
-### Como interpretar a CCA?
-
-- $\rho_1$ indica a força do primeiro eixo canônico ($U_1 \leftrightarrow V_1$).[@REF]
-
-- Gráficos de $U_1$ vs $V_1$ podem revelar padrões por grupo ou gradiente.[@REF]
-
-- *Loadings/cross-loadings* mostram quais variáveis explicam a correlação.[@REF]
-
-<br>
-
-### Quais suposições e cuidados?
-
-- As variáveis devem estar padronizadas (escalas comparáveis).[@REF]
-
-- Preferível $n>$ número de variáveis em cada bloco.[@REF]
-
-- Atenção a multicolinearidade alta (pode exigir CCA regularizada).[@REF]
-
-<br>
-
-### O que reportar nos resultados?
-
-- Valores de $\rho_1$, $\rho_2$, $...$ comteste de Wilks e p-valores.[@REF]
-
-- Figura $U_1$ vs. $V_1$ com interpretação.[@REF]
-
-- Tabela de *loadings* ou *cross-loadings* destacando contribuições relevantes.[@REF]
-
-- Uma interpretação substantiva da relação entre os blocos.[@REF]
-
-<br>
-
-```{r cca-example, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de análise de correlação canônica (CCA) entre dois conjuntos de variáveis."}
-# Reproducibilidade
-set.seed(123)
-
-# Suponha X: variáveis ambientais; Y: traços de plantas
-n  <- 120
-X  <- scale(cbind(pH = rnorm(n, 6.5, .4),
-temp = rnorm(n, 20, 3),
-rain = rnorm(n, 1000, 120)))
-Y  <- scale(cbind(height = 0.4*X[, "temp"] - 0.3*X[, "pH"] + rnorm(n,0,.6),
-leaf   = 0.3*X[, "rain"] + 0.25*X[, "temp"] + rnorm(n,0,.6),
-chl    = -0.35*X[, "pH"] + 0.3*X[, "rain"] + rnorm(n,0,.6)))
-
-# (Opcional) fator de cor para o scatter
-classe <- factor(sample(c("Forest","Herb","Planted","Shrub"), n, TRUE))
-
-# ---- CCA (base R) ----
-fit <- cancor(X, Y)   # stats::cancor
-rho <- fit$cor        # correlações canônicas
-
-# Escores canônicos (U e V)
-
-U <- scale(X) %*% fit$xcoef
-V <- scale(Y) %*% fit$ycoef
-U1 <- U[,1]; V1 <- V[,1]
-
-# ---- Teste sequencial (Wilks) ----
-
-# wilks <- CCP::p.asym(rho, N=n, p=ncol(X), q=ncol(Y), tstat="Wilks")
-# wilks_tab <- transform(wilks, rho=round(rho,3),
-# p.value=signif(p.value,3))
-
-# ---- Loadings e cross-loadings (correlações com escores) ----
-
-# Loadings: var-X com U1.., var-Y com V1..
-
-loadX <- cor(X, U[,1:min(ncol(X), ncol(Y))])
-loadY <- cor(Y, V[,1:min(ncol(X), ncol(Y))])
-
-# Cross-loadings: var-X com V1.., var-Y com U1..
-
-crossX <- cor(X, V[,1:min(ncol(X), ncol(Y))])
-crossY <- cor(Y, U[,1:min(ncol(X), ncol(Y))])
-
-# common limits for U1 and V1
-lims <- range(c(U1, V1), na.rm = TRUE)
-
-p1_equal <- ggplot2::ggplot(
-  data.frame(U1 = U1, V1 = V1, classe = classe),
-  ggplot2::aes(U1, V1, shape = classe)
-) +
-  ggplot2::geom_point(alpha = .75) +
-  ggplot2::geom_smooth(method = "lm", se = FALSE) +
-  ggplot2::scale_x_continuous(limits = lims) +
-  ggplot2::scale_y_continuous(limits = lims) +
-  ggplot2::coord_fixed() +
-  ggplot2::labs(
-    x = "U1 (X → a1)",
-    y = "V1 (Y → b1)",
-    subtitle = paste0("ρ1 = ", round(rho[1], 3))
-  ) +
-  ggplot2::theme_minimal()
-
-print(p1_equal)
-```
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *psych*[@psych] fornece a função [*tetrachoric*](https://www.rdocumentation.org/packages/psych/versions/2.3.6/topics/tetrachoric) para calcular o coeficiente de correlação bisserial ($r_{s}$).
+:::
 
 <br>
 
