@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Aprendizado de máquina** {#aprendizado-maquina}
 
 <br>
@@ -230,17 +229,17 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 ### Qual é o fluxo típico de desenvolvimento de modelos de aprendizado de máquina?
 
-- Preparação e limpeza dos dados.[@sidey-gibbons2019]
+-   Preparação e limpeza dos dados.[@sidey-gibbons2019]
 
-- Divisão em conjuntos de treinamento, validação e teste.[@sidey-gibbons2019]
+-   Divisão em conjuntos de treinamento, validação e teste.[@sidey-gibbons2019]
 
-- Treinamento do modelo.[@sidey-gibbons2019]
+-   Treinamento do modelo.[@sidey-gibbons2019]
 
-- Ajuste de hiperparâmetros.[@sidey-gibbons2019]
+-   Ajuste de hiperparâmetros.[@sidey-gibbons2019]
 
-- Avaliação do desempenho do modelo.[@sidey-gibbons2019]
+-   Avaliação do desempenho do modelo.[@sidey-gibbons2019]
 
-- Validação em dados independentes.[@sidey-gibbons2019]
+-   Validação em dados independentes.[@sidey-gibbons2019]
 
 <Br>
 
@@ -248,19 +247,19 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 -   O desenvolvimento de modelos de aprendizado de máquina geralmente envolve a divisão do conjunto de dados em subconjuntos de treinamento e validação, permitindo avaliar o desempenho do modelo em dados não utilizados durante o ajuste dos parâmetros.[@sidey-gibbons2019]
 
-- Conjunto de treinamento: usado para ajustar os parâmetros do modelo.[@sidey-gibbons2019]
+-   Conjunto de treinamento: usado para ajustar os parâmetros do modelo.[@sidey-gibbons2019]
 
-- Conjunto de validação: usado para comparar modelos e ajustar hiperparâmetros.[@sidey-gibbons2019]
+-   Conjunto de validação: usado para comparar modelos e ajustar hiperparâmetros.[@sidey-gibbons2019]
 
-- Conjunto de teste: usado apenas para avaliar o desempenho final do modelo.[@sidey-gibbons2019]
+-   Conjunto de teste: usado apenas para avaliar o desempenho final do modelo.[@sidey-gibbons2019]
 
 <br>
 
 ### O que são hiperparâmetros?
 
-- Parâmetros definidos antes do treinamento do modelo.[@sidey-gibbons2019]
+-   Parâmetros definidos antes do treinamento do modelo.[@sidey-gibbons2019]
 
-- Hiperparâmetros não são aprendidos diretamente a partir dos dados.[@sidey-gibbons2019]
+-   Hiperparâmetros não são aprendidos diretamente a partir dos dados.[@sidey-gibbons2019]
 
 <br>
 
@@ -1074,17 +1073,21 @@ gridExtra::grid.arrange(
 
 ### Quais métricas são indicadas para avaliar modelos preditivos?
 
--   A área sob a curva ROC (AUROC) como medida de discriminação, um gráfico de calibração para avaliar a concordância entre probabilidades estimadas e proporções observadas, uma medida de utilidade clínica como o *net benefit* por meio de *decision curve analysis*, e um gráfico que mostre a distribuição das probabilidades preditas por categoria de desfecho.[@vancalster2025]
+-   A área sob a curva ROC (AUROC) como medida de discriminação, um gráfico de calibração para avaliar a concordância entre probabilidades estimadas e proporções observadas, uma medida de utilidade clínica como o *net benefit* por meio de *decision curve analysis*, e um gráfico que mostre a distribuição das probabilidades preditas por categoria de desfecho.[@vancalster2025; @assel2025]
 
 <br>
 
 ### Quais métricas são consideradas inadequadas ou problemáticas?
 
--   O F1-score ($F1$) é explicitamente desencorajado como métrica principal porque não tem um foco claro em desempenho estatístico e é uma medida inadequada dentro de sua própria categoria conceitual.[@vancalster2025]
-
 -   Todas as métricas puramente baseadas em classificação dependente de limiar são consideradas impróprias para limiares clinicamente relevantes, exceto quando o limiar é 0,5 ou igual à prevalência verdadeira.[@vancalster2025]
 
 -   Métricas derivadas da matriz de confusão não devem ser usadas isoladamente como critério principal de avaliação, pois dependem fortemente da escolha do limiar e não refletem diretamente a utilidade clínica, especialmente em contextos clínicos ou em dados desbalanceados.[@vancalster2025]
+
+- O F-score $F_{\beta}$ pode produzir classificações de modelos inconsistentes com a utilidade clínica, favorecendo modelos menos úteis em cenários reais de decisão médica.[@assel2025]
+
+- O F-score $F_{\beta}$ exige a dicotomização das probabilidades preditas, o que é indesejável em modelos, já que a tomada de decisão frequentemente depende de uma faixa contínua de riscos e de limiares que variam entre indivíduos e contextos.[@assel2025]
+
+-   O F1-score ($F1$) é explicitamente desencorajado como métrica principal porque não tem um foco claro em desempenho estatístico e é uma medida inadequada dentro de sua própria categoria conceitual.[@vancalster2025]
 
 <br>
 
@@ -1094,7 +1097,7 @@ gridExtra::grid.arrange(
 
 ### Por que é importante avaliar o desempenho de um modelo de classificação?
 
-- Para evitar estimativas otimistas de desempenho, modelos devem ser avaliados em dados que não foram utilizados durante o treinamento. Essa separação entre dados de treinamento e validação permite estimar a capacidade de generalização do algoritmo em novos dados.[@sidey-gibbons2019]
+-   Para evitar estimativas otimistas de desempenho, modelos devem ser avaliados em dados que não foram utilizados durante o treinamento. Essa separação entre dados de treinamento e validação permite estimar a capacidade de generalização do algoritmo em novos dados.[@sidey-gibbons2019]
 
 <br>
 
@@ -1199,7 +1202,18 @@ REV = \dfrac{VP}{VP + FN}
 
 <br>
 
--   F1-score ($F1$) \@ref(eq:f1): Média harmônica entre precisão e revocação, balanceando ambos os aspectos do desempenho.[@hicks2022]
+-   F-beta score ($F_{\beta}$) \@ref(eq:fbeta): Média harmônica ponderada entre precisão e revocação, onde $\beta < 1$ prioriza precisão ($PRE$) e $\beta > 1$ prioriza sensibilidade $SEN$ ou $REV$.[@assel2025]
+
+<br>
+
+\begin{equation}
+(\#eq:fbeta)
+F_{\beta} = \dfrac{(1+\beta^{2}) \times TP}{(1+\beta^{2}) \times TP + \beta^{2} \times FN + FP}
+\end{equation}
+
+<br>
+
+-   F1-score ($F1$) \@ref(eq:f1): Média harmônica entre precisão e revocação, balanceando ambos os aspectos do desempenho ($\beta = 1$).[@hicks2022]
 
 <br>
 

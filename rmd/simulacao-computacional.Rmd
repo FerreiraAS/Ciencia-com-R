@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Simulação computacional** {#simulacao-computacional}
 
 <br>
@@ -16,51 +15,67 @@
 
 ### O que são simulações computacionais?
 
--   Simulações computacionais consistem na geração de dados artificiais baseados em regras matemáticas e estatísticas, permitindo testar hipóteses, validar métodos e explorar cenários complexos sem necessidade de dados reais.[@hinsen2011]
-
--   A simulação é frequentemente usada em estatística para avaliar o desempenho de testes, estimadores e modelos sob diferentes condições.[@REF]
+-   Simulações computacionais consistem na geração de dados artificiais a partir de modelos matemáticos ou probabilísticos, permitindo testar hipóteses, validar métodos e explorar cenários complexos sem necessidade de dados reais.[@hinsen2011]
 
 <br>
 
-### Por que usar simulações?
+### Por que estudos de simulação devem ser tratados como experimentos científicos?
 
--   Testar o comportamento de métodos estatísticos sob diferentes premissas (ex: normalidade, homocedasticidade, tamanho amostral).[@REF]
+-   Simulações são experimentos empíricos, ainda que realizados em ambiente computacional.[@morris2019]
 
--   Avaliar a robustez de algoritmos computacionais.[@REF]
+-   Devem seguir princípios de planejamento, incluindo definição clara de objetivos, delineamento de cenários e análise adequada dos resultados.[@morris2019; @chipman2022]
 
--   Reproduzir processos naturais ou sociais para compreensão teórica.[@REF]
-
-<br>
-
-### Quais são as melhores práticas em simulações computacionais?
-
--   Defina claramente o objetivo da simulação e as hipóteses a serem testadas, incluindo quais aspectos do fenômeno ou do método você pretende avaliar.[@Eglen2017]
-
--   Use uma semente para o gerador de números aleatórios com set.seed() para garantir a reprodutibilidade dos resultados.[@REF]
-
--   Documente detalhadamente o processo de simulação, incluindo os parâmetros utilizados, a lógica do algoritmo e as suposições feitas.[@trisovic2022a]
-
--   Realize múltiplas simulações (ex.: 1000 ou mais) para obter estimativas estáveis e resultados mais robustos e confiáveis.[@REF]
-
--   Analise os resultados de forma crítica, considerando a variabilidade, as limitações do modelo e possíveis vieses do processo de simulação.[@REF]
-
--   Use funções vetorizadas para otimizar o desempenho e reduzir o tempo de execução da simulação.[@REF]
+-   Falhas de planejamento ou de relatório podem levar a interpretações equivocadas do desempenho de métodos estatísticos.[@morris2019]
 
 <br>
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *base*[@base] fornece a função [*set.seed*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Random) para especificar uma semente e garantir a reprodutibilidade de computações que envolvem números aleatórios.
-:::
+### O que são estudos de simulação estatística?
+
+-   Estudos de simulação estatística são experimentos computacionais nos quais dados artificiais são gerados a partir de um mecanismo probabilístico conhecido.[@boulesteix2020]
+
+-   Diferentemente da análise de dados reais, nas simulações os valores verdadeiros dos parâmetros são definidos pelo pesquisador, permitindo avaliar diretamente se um método estatístico recupera corretamente esses valores.[@boulesteix2020]
+
+-   Estudos de simulação são amplamente utilizados para investigar o comportamento de métodos estatísticos em diferentes cenários e condições de dados.[@boulesteix2020]
 
 <br>
 
-## Características
+### Qual é o papel dos estudos de simulação em pesquisa científica?
+
+-   Em muitos problemas estatísticos existem vários métodos possíveis para análise de dados. O desempenho desses métodos depende de suposições que nem sempre são satisfeitas em dados reais, como normalidade das variáveis, ausência de erros de medição ou independência das observações.[@boulesteix2020]
+
+-   Estudos de simulação permitem avaliar como os métodos se comportam quando essas suposições são atendidas ou violadas.[@boulesteix2020]
 
 <br>
 
-### Quais são as características de estudos de simulação computacional?
+### Por que não avaliar métodos estatísticos apenas com dados reais?
 
--   .[@REF]
+-   Em dados reais, o valor verdadeiro dos parâmetros populacionais geralmente é desconhecido.[@boulesteix2020]
+
+-   Portanto, não é possível saber se um método estatístico estimou corretamente um efeito ou se um teste rejeitou corretamente uma hipótese.[@boulesteix2020]
+
+-   Em simulações, o valor verdadeiro é definido pelo pesquisador, permitindo comparar diretamente o resultado do método com a verdade conhecida.[@boulesteix2020]
+
+<br>
+
+### Quais são as principais vantagens de estudos de simulação?
+
+-   Permitem avaliar métodos estatísticos quando a verdade é conhecida.[@boulesteix2020]
+
+-   Possibilitam testar diferentes cenários de dados, incluindo situações raras ou difíceis de observar empiricamente.[@boulesteix2020]
+
+-   Permitem investigar sistematicamente o impacto de fatores como tamanho da amostra, distribuição dos dados ou presença de erros de medição.[@boulesteix2020]
+
+<br>
+
+### Quais são as limitações de estudos de simulação?
+
+-   Os cenários simulados podem ser simplificações da realidade.[@boulesteix2020]
+
+-   Resultados podem depender das suposições adotadas no mecanismo gerador de dados.[@boulesteix2020]
+
+-   Estudos de simulação complexos podem demandar grande poder computacional.[@boulesteix2020]
+
+-   Existe risco de interpretação inadequada se os cenários não forem bem escolhidos ou relatados.[@boulesteix2020]
 
 <br>
 
@@ -68,32 +83,67 @@ O pacote *base*[@base] fornece a função [*set.seed*](https://www.rdocumentatio
 
 <br>
 
-### Simulações computacionais dependem da distribuição Normal?
+### Quais são os elementos fundamentais de um estudo de simulação?
 
-- Não. Simulações computacionais não dependem da distribuição Normal. 
-  Qualquer distribuição de probabilidade pode ser usada para gerar dados artificiais, desde que represente adequadamente o mecanismo gerador do fenômeno em estudo.[@REF]
+-   Objetivo da simulação: Definir o que se pretende investigar, como avaliar um método ou comparar diferentes abordagens.[@morris2019; @boulesteix2020]
 
-- A escolha da distribuição depende da natureza da variável (contínua ou discreta), do domínio dos valores possíveis e da estrutura probabilística do processo observado.[@REF]
+-   Mecanismo gerador de dados: Especificar como os dados simulados serão gerados, incluindo distribuição, parâmetros e estrutura das variáveis.[@morris2019; @boulesteix2020]
 
-- Distribuições como Binomial, Poisson e Exponencial são frequentemente utilizadas em simulações para representar proporções, contagens de eventos e tempos até a ocorrência de eventos, respectivamente.[@REF]
+-   Métodos de análise: Aplicar aos dados simulados os métodos estatísticos que se deseja avaliar ou comparar.[@morris2019; @boulesteix2020]
 
-- Simulações baseadas em diferentes distribuições permitem avaliar o desempenho de métodos estatísticos e algoritmos inferenciais sob condições realistas e variadas, incluindo assimetria, discretação e presença de valores extremos.[@REF]
+-   Medidas de desempenho: Avaliar os métodos usando critérios como viés, erro tipo I, poder estatístico ou cobertura de intervalos de confiança.[@morris2019; @boulesteix2020]
 
-<br>
-
-### Como escolher a distribuição adequada em um estudo de simulação?
-
-- A escolha da distribuição deve ser guiada pelo mecanismo gerador dos dados do fenômeno de interesse, e não por conveniência matemática.[@REF]
-
-- Aspectos como o tipo da variável, assimetria, limites naturais e frequência de eventos devem ser considerados na especificação da distribuição.[@REF]
-
-- Em estudos de simulação, é comum avaliar múltiplas distribuições para investigar a sensibilidade dos resultados às suposições do modelo.[@Eglen2017]
+-   Número de repetições: Repetir a simulação muitas vezes para reduzir o efeito da variabilidade aleatória e obter estimativas mais estáveis.[@morris2019; @boulesteix2020]
 
 <br>
 
-### Como simular dados de diferentes distribuições?
+### O que é um cenário de simulação?
 
-- Use funções específicas para cada distribuição, disponíveis nas bibliotecas estatísticas da linguagem utilizada.[@REF]
+-   Um cenário de simulação corresponde a uma combinação específica de parâmetros utilizados no mecanismo gerador de dados.[@boulesteix2020]
+
+-   Cenários podem variar em tamanho da amostra, distribuição das variáveis, intensidade do efeito ou presença de erro de medição.[@boulesteix2020]
+
+-   Avaliar múltiplos cenários permite investigar como o desempenho de um método estatístico muda em diferentes condições de dados.[@boulesteix2020]
+
+-   Em muitos estudos, diferentes cenários correspondem a combinações fatoriais de parâmetros, permitindo tratar o estudo de simulação como um experimento planejado.[@chipman2022]
+
+<br>
+
+### Quais são os principais elementos para avaliar a qualidade de um modelo de simulação?
+
+-   Verificação: processo de confirmar que o modelo computacional implementa corretamente o modelo matemático e seus algoritmos.[@erdemir2020]
+
+-   Validação: avaliação de quão bem o modelo representa o sistema real dentro do contexto para o qual foi desenvolvido.[@erdemir2020]
+
+-   Quantificação da incerteza: análise da variabilidade e das incertezas presentes nos dados, parâmetros ou estruturas do modelo.[@erdemir2020]
+
+-   Análise de sensibilidade: investigação de como mudanças nos parâmetros de entrada afetam os resultados da simulação.[@erdemir2020]
+
+<br>
+
+### Por que é necessário repetir muitas simulações?
+
+-   Mesmo em simulações, os resultados variam devido à variabilidade aleatória das amostras geradas.[@boulesteix2020]
+
+-   Por isso, é necessário repetir o processo de geração de dados e análise muitas vezes.[@boulesteix2020]
+
+-   A média dos resultados obtidos ao longo das repetições fornece uma avaliação mais estável do desempenho do método estatístico.[@boulesteix2020]
+
+<br>
+
+### Quais boas práticas devem ser seguidas em estudos de modelagem e simulação?
+
+-   Defina claramente o objetivo da simulação e as hipóteses a serem testadas, incluindo quais aspectos do fenômeno ou do método você pretende avaliar.[@Eglen2017]
+
+-   Documente detalhadamente o processo de simulação, incluindo os parâmetros utilizados, a lógica do algoritmo e as suposições feitas.[@trisovic2022a]
+
+-   Compartilhar dados, modelos e códigos sempre que possível para facilitar a reprodutibilidade científica.[@erdemir2020]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *base*[@base] fornece a função [*set.seed*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Random) para especificar uma semente e garantir a reprodutibilidade de computações que envolvem números aleatórios.
+:::
 
 <br>
 
@@ -154,13 +204,15 @@ ggplot2::ggplot(sim_data, ggplot2::aes(x = Valor)) +
 
 <br>
 
-- Independentemente da distribuição utilizada, o procedimento de simulação segue os mesmos princípios computacionais, diferindo apenas na função geradora dos números aleatórios.[@REF]
+## Método de Monte Carlo
 
 <br>
 
 ### O que é o método de Monte Carlo?
 
--   .[@metropolis1949b]
+-   O método de Monte Carlo consiste em utilizar geração repetida de números aleatórios para estimar propriedades de sistemas matemáticos ou estatísticos complexos.[@metropolis1949b]
+
+-   A ideia central é aproximar resultados teóricos por meio da simulação de muitas amostras aleatórias.[@metropolis1949b]
 
 -   No método Markov Chain Monte Carlo (MCMC), o modelo de Markov é usado para gerar amostras de distribuições complexas a partir da simulação de cadeias com distribuição estacionária prescrita.[@häggström2007]
 
@@ -285,7 +337,105 @@ O pacote *faux*[@faux] fornece a função [*sim_design*](https://www.rdocumentat
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *InteractionPoweR*[@InteractionPoweR] fornece a função [*generate_interaction*](https://www.rdocumentation.org/packages/InteractionPoweR/versions/0.2.1/topics/generate_interaction) para simular bancos de dads com efeitos de interação.
+O pacote *InteractionPoweR*[@InteractionPoweR] fornece a função [*generate_interaction*](https://www.rdocumentation.org/packages/InteractionPoweR/versions/0.2.1/topics/generate_interaction) para simular bancos de dados com efeitos de interação.
+:::
+
+<br>
+
+### Como escolher a distribuição adequada em um estudo de simulação?
+
+-   Em estudos de simulação, é comum avaliar múltiplas distribuições para investigar a sensibilidade dos resultados às suposições do modelo.[@Eglen2017]
+
+<br>
+
+## Avaliação de métodos estatísticos em simulações
+
+<br>
+
+### Quais critérios são usados para avaliar métodos estatísticos em simulações?
+
+-   Erro tipo I: probabilidade de rejeitar uma hipótese nula verdadeira.[@boulesteix2020]
+
+-   Poder estatístico: probabilidade de detectar um efeito quando ele realmente existe.[@boulesteix2020]
+
+-   Viés das estimativas: diferença entre o valor estimado e o valor verdadeiro do parâmetro.[@boulesteix2020]
+
+-   Cobertura de intervalos de confiança: proporção de intervalos que contêm o valor verdadeiro do parâmetro.[@boulesteix2020]
+
+-   Erro de predição: diferença entre valores previstos e valores observados em modelos preditivos.[@boulesteix2020]
+
+-   Estabilidade: grau de consistência do desempenho do método quando diferentes amostras são geradas sob o mesmo cenário de simulação.[@boulesteix2020]
+
+-   Custo computacional: quantidade de recursos computacionais necessários para executar o método, como tempo de processamento ou uso de memória.[@boulesteix2020]
+
+-   Sucesso da computação: proporção de execuções nas quais o método converge ou produz resultados válidos sem falhas numéricas ou problemas de otimização.[@boulesteix2020]
+
+<br>
+
+### O que é o erro padrão de Monte Carlo?
+
+<br>
+
+-   Em estudos de simulação, as estimativas de desempenho de um método estatístico (por exemplo, viés, poder estatístico ou erro tipo I) são calculadas a partir de um número finito de repetições da simulação.[@morris2019]
+
+-   Como cada repetição utiliza uma amostra aleatória diferente, essas estimativas também apresentam variabilidade aleatória.[@morris2019]
+
+-   O erro padrão de Monte Carlo (Monte Carlo *standard error*, MCSE) quantifica essa variabilidade e indica o grau de incerteza associado às estimativas obtidas na simulação.[@morris2019]
+
+-   O MCSE mede a precisão com que uma medida de desempenho foi estimada a partir do número de repetições realizadas.[@morris2019]
+
+-   Gráficos como *zipper (zip) plots* podem ser utilizados para avaliar visualmente a cobertura de intervalos de confiança em estudos de simulação.[@morris2019; @white2023]
+
+<br>
+
+```{r zipper-zip-plot, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Cobertura de Intervalos de Confiança em um estudo de simulação.", out.width = "100%"}
+# reptodutibilidade
+set.seed(123)
+
+# simulação de dados
+nsim <- 1000
+theta <- 0
+
+sim_data <- data.frame(
+  x        = 1:nsim,
+  estimate = rnorm(nsim, mean = theta, sd = 0.3),
+  se       = 0.3
+)
+
+s <- rsimsum::simsum(
+  data = sim_data,
+  estvarname = "estimate",
+  se = "se",
+  true = theta,
+  x = TRUE
+)
+
+p <- ggplot2::autoplot(s, type = "zip",
+  zip_ci_colours = c("black")
+)
+
+p <- p +
+  ggplot2::labs(
+    x = "Simulações ordenadas",
+    y = "Valor z padronizado"
+  ) +
+  ggplot2::scale_color_discrete(
+    labels = c("intervalo não cobre θ", "intervalo cobre θ")
+  ) +
+  ggplot2::theme(
+    axis.line.x = ggplot2::element_line(color = "black"),
+    panel.background = ggplot2::element_blank(),
+    plot.background  = ggplot2::element_blank(),
+    panel.grid       = ggplot2::element_blank()
+  )
+
+print(p)
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *rsimsum*[@rsimsum] fornece a função [*simsum*](https://www.rdocumentation.org/packages/rsimsum/versions/0.13.0/topics/simsum) para computar o desempenho de estudos de simulação.
 :::
 
 <br>
