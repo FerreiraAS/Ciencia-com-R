@@ -65,6 +65,9 @@ if (!sjmisc::is_empty(my_works)) {
   # add ISSN by match put_code
   my_dois_works$ISSN <- my_dois_works_issn$ISSN[match(my_dois_works$put_code,
                                  my_dois_works_issn$put_code)]
+  
+  # sort by year
+  my_dois_works <- my_dois_works[order(my_dois_works$publication_date_year_value, decreasing = TRUE),]
 }
 ```
 
