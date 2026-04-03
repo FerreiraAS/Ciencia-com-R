@@ -453,6 +453,139 @@ allocation_plot(n_left = 10)
 
 <br>
 
+## Hierarquia da evidência científica
+
+<br>
+
+### Quais são os modelos de hierarquia da evidência científica?
+
+-   O modelo “4S” organiza as fontes de evidência em uma hierarquia de quatro níveis: *Studies* (estudos), *Syntheses* (sínteses), *Synopses* (sinopses) e *Systems* (sistemas).[@haynes2001]
+
+-   O modelo “5S” representa uma evolução dessa organização, estruturando a evidência em cinco níveis hierárquicos: *Studies* (estudos), *Syntheses* (sínteses), *Synopses* (sinopses), *Summaries* (sumários) e *Systems* (sistemas).[@Haynes2006]
+
+-   O modelo “6S” constitui um refinamento do modelo “5S”, organizando as fontes de evidência em seis níveis hierárquicos, com base no grau de pré-avaliação e aplicabilidade clínica: *Studies* (estudos), *Synopses of Studies* (sinopses de estudos), *Syntheses* (sínteses), *Synopses of Syntheses* (sinopses de revisões), *Summaries* (sumários — diretrizes e textos clínicos) e *Systems* (sistemas de decisão clínica).[@Dicenso2009]
+
+-   Recomenda-se iniciar a busca pela evidência no nível mais alto disponível. Na ausência de informações adequadas, deve-se prosseguir progressivamente para níveis inferiores da hierarquia.[@haynes2001]
+
+-   À medida que se avança na hierarquia, diminui o esforço necessário para interpretar a evidência, uma vez que os níveis superiores já apresentam informações previamente avaliadas e sintetizadas.[@shaneyfelt2016]
+
+-   No nível basal da pirâmide (*Studies*), existe ainda uma hierarquia interna entre os diferentes desenhos de estudo, variando desde estudos experimentais iniciais até ensaios clínicos randomizados e revisões sistemáticas.[@shaneyfelt2016]
+
+<br>
+
+### Quais são as limitações da hierarquia da evidência científica?
+
+- O modelo tradicional da pirâmide da evidência tem sido progressivamente questionado diante das transformações tecnológicas recentes, especialmente com a incorporação da inteligência artificial na pesquisa clínica.[@bellini2023]
+
+- A hierarquia tradicional tende a supervalorizar estudos experimentais altamente controlados, assumindo que maior validade interna implica automaticamente maior aplicabilidade clínica. Estudos conduzidos em condições ideais podem apresentar baixa validade externa, limitando sua generalização para contextos reais.[@Tomlin2011]
+
+- A avaliação de estudos deve considerar separadamente a validade interna (capacidade de estabelecer relações causais sob controle experimental) e a validade externa (grau de generalização dos resultados para contextos reais).[@Tomlin2011]
+
+- Em estudos qualitativos, a avaliação da qualidade metodológica não se baseia nos conceitos tradicionais de validade interna e externa, mas sim em critérios como autenticidade e transferibilidade, que refletem a fidelidade da descrição da experiência e sua aplicabilidade teórica a outros contextos.[@Tomlin2011]
+
+- A posição da meta-análise no topo da hierarquia da evidência não é absoluta. Embora integre resultados de ensaios clínicos randomizados, sua validade depende diretamente da qualidade metodológica dos estudos incluídos, podendo reproduzir ou até amplificar vieses presentes nas evidências primárias.[@Berlin2014]
+
+- Embora útil como ferramenta de organização e tomada de decisão, a hierarquia da evidência deve ser interpretada como um guia, e não como uma regra absoluta, uma vez que a qualidade metodológica pode variar dentro de cada nível.[@shaneyfelt2016]
+
+- Os níveis superiores da pirâmide dependem diretamente da qualidade das evidências disponíveis nos níveis inferiores, de modo que limitações nos estudos primários podem impactar toda a cadeia de síntese do conhecimento.[@shaneyfelt2016]
+
+- Existe um intervalo temporal entre a produção de novas evidências e sua incorporação nos níveis superiores da hierarquia, o que pode limitar a atualidade de algumas fontes secundárias.[@shaneyfelt2016]
+
+- Evidências pertencentes a um mesmo nível hierárquico podem apresentar qualidade metodológica variável, de modo que a classificação por tipo de estudo não garante, por si só, maior validade científica.[@shaneyfelt2016]
+
+- A avaliação crítica da evidência deve considerar múltiplas dimensões, evitando uma interpretação rígida da hierarquia e reforçando a necessidade de julgamento clínico e metodológico na tomada de decisão.[@murad2016]
+
+- Ensaios clínicos randomizados iniciam como evidência de alta qualidade, mas podem ser rebaixados dependendo de limitações metodológicas, enquanto estudos observacionais podem ser elevados de nível quando apresentam efeitos consistentes, fortes e biologicamente plausíveis.[@murad2016]
+
+- Embora a hierarquia tradicional da evidência posicione ensaios clínicos randomizados e revisões sistemáticas no topo, estudos mais recentes demonstram que essa classificação, isoladamente, pode ser insuficiente para determinar a qualidade real da evidência.[@murad2016]
+
+<br>
+
+```{r piramide, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Hierarquia da evidência científica: modelo 6S"}
+library(dplyr)
+
+# Dados
+levels <- data.frame(
+  level = factor(c(
+    "Estudos",
+    "Sinopses de estudos",
+    "Sínteses",
+    "Sinopses de sínteses",
+    "Sumários",
+    "Sistemas"
+  ), levels = c(
+    "Estudos",
+    "Sinopses de estudos",
+    "Sínteses",
+    "Sinopses de sínteses",
+    "Sumários",
+    "Sistemas"
+  )),
+  width = c(6, 5, 4, 3, 2, 1)
+)
+
+# Coordenadas
+pyramid_data <- levels %>%
+  dplyr::mutate(
+    ymin = as.numeric(level) - 1,
+    ymax = as.numeric(level),
+    ymid = (ymin + ymax) / 2
+  )
+
+# Polígonos
+poly_data <- do.call(rbind, lapply(1:nrow(pyramid_data), function(i) {
+  
+  base_width <- levels$width[i]
+  top_width  <- if (i < nrow(levels)) levels$width[i + 1] else 0
+  
+  data.frame(
+    x = c(
+      -base_width/2,
+       base_width/2,
+       top_width/2,
+      -top_width/2
+    ),
+    y = c(
+      pyramid_data$ymin[i],
+      pyramid_data$ymin[i],
+      pyramid_data$ymax[i],
+      pyramid_data$ymax[i]
+    ),
+    level = levels$level[i]
+  )
+}))
+
+# Paleta cinza claro (base → topo)
+grey_palette <- c(
+  "Estudos" = "#BDBDBD",
+  "Sinopses de estudos" = "#C9C9C9",
+  "Sínteses" = "#D6D6D6",
+  "Sinopses de sínteses" = "#E2E2E2",
+  "Sumários" = "#EEEEEE",
+  "Sistemas" = "#EDEDED"
+)
+
+# Plot
+ggplot2::ggplot(poly_data, ggplot2::aes(x = x, y = y, group = level, fill = level)) +
+  ggplot2::geom_polygon(color = "black", linewidth = 0.4) +
+  ggplot2::geom_text(
+    data = pyramid_data,
+    ggplot2::aes(x = 0, y = ymid, label = level),
+    size = 4,
+    fontface = "bold"
+  ) +
+  ggplot2::scale_fill_manual(values = grey_palette) +
+  ggplot2::coord_equal() +
+  ggplot2::theme_void() +
+  ggplot2::theme(
+    legend.position = "none",
+    plot.title = ggplot2::element_text(hjust = 0.5, face = "bold", size = 14),
+    plot.subtitle = ggplot2::element_text(hjust = 0.5, size = 10)
+  )
+```
+
+<br>
+
 ```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
 cat(readLines("citation.html"), sep = "\n")
 ```
