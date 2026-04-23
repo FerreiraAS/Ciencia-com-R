@@ -118,253 +118,9 @@
 
 <br>
 
-### O que reportar após um teste de hipótese?
-
--   P-valores, como estimativa da significância estatística.[@Sullivan2012]
-
--   Tamanho do efeito, como estimativa de significância substantiva.[@Sullivan2012]
-
-<br>
-
-## Intervalos de confiança e raciocínio de longo prazo
-
-<br>
-
-### O que é um intervalo de confiança?
-
--   Um intervalo de confiança é um procedimento inferencial utilizado para estimar um parâmetro populacional desconhecido a partir de dados amostrais, levando em conta a variabilidade inerente ao processo de amostragem.[@neyman1937]
-
--   Diferentemente de uma estatística descritiva, o intervalo de confiança não é uma propriedade fixa do parâmetro, mas uma propriedade do procedimento estatístico utilizado para estimá-lo.[@goodman2016]
-
--   O parâmetro populacional é considerado fixo (embora desconhecido), enquanto o intervalo de confiança é uma quantidade aleatória, pois depende da amostra observada.[@REF]
-
--   Intervalo de confiança para variância conhecida \@ref(eq:ic-known) e desconhecida \@ref(eq:ic-unknown) capturam a média correspondente ao nível de significância $\alpha$ pré-estabelecido [@kanji2006; @Cumming2007; @krzywinski2013; @Ali2016].
-
-<br>
-
-\begin{equation}
-(\#eq:ic-known)
-IC = \bar{x} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
-\end{equation}
-
-<br>
-
-\begin{equation}
-(\#eq:ic-unknown)
-IC = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}
-\end{equation}
-
-<br>
-
-### Intervalos de confiança e a lógica frequentista
-
--   No paradigma frequentista, a probabilidade é interpretada como uma frequência relativa observável no longo prazo, associada a um processo repetível.[@neyman1937]
-
--   Um intervalo de confiança de nível $(1-\alpha)$ é construído de modo que, se o mesmo procedimento de amostragem e análise fosse repetido indefinidamente sob as mesmas condições, aproximadamente $(1-\alpha)\times100\%$ dos intervalos assim gerados conteriam o verdadeiro valor do parâmetro populacional.[@goodman2016]
-
--   Portanto, a probabilidade associada ao intervalo de confiança refere-se ao desempenho do procedimento no longo prazo, e não à probabilidade de o parâmetro estar contido em um intervalo específico observado.
-
-<br>
-
-```{r intervalo-confianca-long-run, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Simulação ilustrativa de intervalos de confiança (IC) em 100 experimentos independentes, cada um com 1.000 observações amostradas de uma população normal padrão (média = 0, desvio-padrão = 1). Os ICs são construídos no nível de 95\\%. O gráfico superior mostra os ICs individuais para cada experimento, indicando se o IC cobre ou não a média verdadeira ($\\mu = 0$). O gráfico inferior apresenta a distribuição das médias amostrais obtidas nos experimentos, juntamente com o IC teórico para a média populacional. Observe que aproximadamente 95\\% dos ICs individuais cobrem a média verdadeira, ilustrando o conceito de cobertura no longo prazo associado aos intervalos de confiança."}
-# reprodutibilidade
-set.seed(123)
-
-# Parâmetros do mundo real
-mu_true <- 0
-sigma  <- 1
-n      <- 1000
-alpha  <- 0.05
-
-# Número de experimentos
-n_exp <- 100
-
-# Simulação
-sim_results <- lapply(1:n_exp, function(i) {
-  x <- rnorm(n, mean = mu_true, sd = sigma)
-  xbar <- mean(x)
-  se   <- sd(x) / sqrt(n)
-  z    <- qnorm(1 - alpha / 2)
-  tibble::tibble(
-    experimento = i,
-    Média = xbar,
-    ic_inf = xbar - z * se,
-    ic_sup = xbar + z * se,
-    cobre_mu = (xbar - z * se <= mu_true) &
-               (xbar + z * se >= mu_true)
-  )
-})
-
-df <- dplyr::bind_rows(sim_results)
-x_limits <- range(c(df$ic_inf, df$ic_sup))
-z <- qnorm(1 - alpha / 2)
-se_mean <- sigma / sqrt(n)
-ic_mu_inf <- mu_true - z * se_mean
-ic_mu_sup <- mu_true + z * se_mean
-df_ic <- data.frame(
-  x = c(ic_mu_inf, ic_mu_sup),
-  tipo = "IC 95%"
-)
-
-# Gráfico 1: Intervalos de Confiança
-p_ic <- ggplot2::ggplot(df, ggplot2::aes(y = experimento, x = Média)) +
-  ggplot2::geom_errorbarh(
-    ggplot2::aes(xmin = ic_inf, xmax = ic_sup, color = cobre_mu),
-    width = 0.3,
-    linewidth = 0.5
-  ) +
-  ggplot2::geom_point(ggplot2::aes(color = cobre_mu), size = 2) +
-  ggplot2::geom_vline(
-    xintercept = mu_true,
-    linetype = "dashed",
-    linewidth = 0.5
-  ) +
-  ggplot2::scale_color_manual(
-    values = c("TRUE" = "blue", "FALSE" = "red"),
-    labels = c("TRUE" = "IC cobre μ", "FALSE" = "IC não cobre μ"),
-    name = NULL
-  ) +
-  ggplot2::labs(
-    x = "Estimativa da média",
-    y = "Experimento",
-    title = "Intervalos de Confiança (95%) em Experimentos Independentes"
-  ) +
-  ggplot2::coord_cartesian(xlim = x_limits) +
-  ggplot2::theme_minimal(base_size = 13) +
-  ggplot2::theme(
-    axis.text.x = ggplot2::element_blank(),
-    legend.position = "right"
-  ) +
-  ggplot2::theme(
-    panel.grid = ggplot2::element_blank(),
-    axis.line  = ggplot2::element_line(
-      linewidth = 0.6,
-      colour = "black"
-    )
-  )
-
-# Gráfico 2: Distribuição das médias amostrais
-p_dist <- ggplot2::ggplot(df, ggplot2::aes(x = Média)) +
-  ggplot2::geom_density(
-    ggplot2::aes(fill = "Médias amostrais"),
-    alpha = 0.6,
-    linewidth = 1
-  ) +
-  ggplot2::geom_vline(
-    ggplot2::aes(xintercept = mu_true,
-                 linetype = "Média verdadeira (μ)"),
-    linewidth = 1
-  ) +
-  ggplot2::geom_vline(
-    data = df_ic,
-    ggplot2::aes(xintercept = x,
-                 linetype = tipo),
-    linewidth = 0.8
-  ) +
-  ggplot2::scale_fill_manual(
-    name = NULL,
-    values = c("Médias amostrais" = "grey70")
-  ) +
-  ggplot2::scale_linetype_manual(
-    name = NULL,
-    values = c(
-      "Média verdadeira (μ)" = "dashed",
-      "IC 95%"               = "dotted"
-    )
-  ) +
-  ggplot2::labs(
-    y = "Densidade",
-    title = "Distribuição das Médias Amostrais"
-  ) +
-  ggplot2::coord_cartesian(xlim = x_limits) +
-  ggplot2::theme_minimal(base_size = 13) +
-  ggplot2::theme(
-    panel.grid = ggplot2::element_blank(),
-    axis.line  = ggplot2::element_line(
-      linewidth = 0.6,
-      colour = "black"
-    )
-  )
-
-# Combinação dos gráficos
-library(patchwork)
-p_ic / p_dist+
-  patchwork::plot_layout(heights = c(5, 1))
-```
-
-<br>
-
-### O que um intervalo de confiança não representa
-
--   Um intervalo de confiança não deve ser interpretado como a probabilidade de que o parâmetro esteja contido naquele intervalo específico.[@greenland2016]
-
--   Após os dados terem sido observados e o intervalo calculado, o parâmetro populacional ou está dentro do intervalo ou não está; não há incerteza probabilística sobre isso no sentido frequentista.[@greenland2016]
-
--   A incerteza expressa pelo intervalo de confiança refere-se à variabilidade do processo inferencial, e não a uma distribuição de probabilidade do parâmetro.[@greenland2016]
-
-<br>
-
-### Relação entre intervalos de confiança e testes de hipóteses
-
--   Intervalos de confiança e testes de hipótese frequentistas são derivados do mesmo modelo probabilístico subjacente e utilizam as mesmas suposições estatísticas.[@cumming2005]
-
--   Em testes bicaudais, qualquer valor hipotético do parâmetro que esteja fora do intervalo de confiança de nível $(1-\alpha)$ corresponde a uma hipótese nula que seria rejeitada ao nível de significância $\alpha$.[@cumming2005]
-
--   De forma análoga, valores do parâmetro que estejam dentro do intervalo de confiança correspondem a hipóteses nulas para as quais não haveria evidência suficiente para rejeição ao nível $\alpha$.[@cumming2005]
-
--   Apesar dessa equivalência formal, intervalos de confiança e testes de hipótese respondem a perguntas distintas: testes enfatizam decisões dicotômicas, enquanto intervalos de confiança enfatizam estimação e incerteza.[@cumming2005]
-
-<br>
-
-### Por que intervalos de confiança são centrais na inferência científica
-
--   Intervalos de confiança permitem avaliar simultaneamente a magnitude do efeito e a incerteza associada à sua estimativa, na mesma unidade de medida da variável de interesse.[@cumming2005]
-
--   Essa abordagem favorece interpretações substantivas e científicas dos resultados, em oposição a decisões puramente dicotômicas baseadas em pontos de corte arbitrários.[@cumming2005]
-
--   Quando corretamente interpretados, intervalos de confiança promovem uma comunicação mais informativa da evidência científica e reduzem interpretações equivocadas associadas ao uso exclusivo de P-valores.[@greenland2016]
-
-<br>
-
-## Comparações múltiplas
-
-<br>
-
-### O que é uma família de hipóteses?
-
--   Família de hipóteses é um conjunto de comparações/inferências que, por desenho ou análise, devem ser consideradas juntas para controle do erro tipo I global (ex.: todas as comparações de um desfecho primário, todos os subgrupos pré-especificados, todos os desfechos coprimários).[@REF]
-
--   O controle do *family-wise error rate* (FWER) ou do *false discovery rate* (FDR) deve considerar a família pertinente, não comparações isoladas.[@REF]
-
-<br>
-
-### O que são testes *ad hoc* e *post hoc*?
-
--   *Ad hoc*: análises/decisões não planejadas a priori, motivadas por inspeção dos dados. Úteis para gerar hipóteses, não para confirmá-las.[@REF]
-
--   *Post hoc*: procedimentos de comparações múltiplas aplicados após um teste global ter indicado efeito significativo. Visam controlar o erro tipo I em múltiplas comparações.[@REF]
-
-<br>
-
-### Como ajustar a análise inferencial para hipóteses múltiplas?
-
--   Defina a família (o que entra no ajuste) e priorize desfechos (primário, coprimários, secundários).[@REF]
-
--   Aplique métodos de controle FWER (Bonferroni, Holm, Hochberg, Dunnett para múltiplos vs. controle) ou controle FDR (Benjamini–Hochberg) conforme o objetivo (confirmação vs. exploração).[@REF]
-
--   Em planos confirmatórios, use hierarquização/gatekeeping: testa-se em sequência; a alocação de $\alpha$ passa adiante apenas se houver significância no nível anterior.[@REF]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats] fornece a função [*p.adjust*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/p.adjust) para ajustar o P-valor utilizando diversos métodos.
-:::
-
-<br>
-
 ### O que são testes unicaudais e bicaudais?
 
--   Teste unicaudal procura evidência em uma direção específica (ex.: “maior que 0”). Toda a região crítica está numa só cauda; tem maior poder para aquela direção, mas não detecta sinal oposto.[@REF]
+- Teste unicaudal avalia evidência em apenas uma direção previamente especificada (ex.: “maior que 0” ou “menor que 0”). Concentra toda a região crítica na mesma cauda da distribuição (o nível de significância $\alpha$ é alocado integralmente a essa cauda), aumentando o poder estatístico nessa direção, mas sem capacidade de detectar efeitos no sentido oposto.[@REF]
 
 <br>
 
@@ -654,6 +410,250 @@ ggplot2::annotate(
     fill = ggplot2::guide_legend(order = 3, override.aes = list(alpha = 0.3))
   )
 ```
+
+<br>
+
+### O que reportar após um teste de hipótese?
+
+-   P-valores, como estimativa da significância estatística.[@Sullivan2012]
+
+-   Tamanho do efeito, como estimativa de significância substantiva.[@Sullivan2012]
+
+<br>
+
+## Intervalos de confiança e raciocínio de longo prazo
+
+<br>
+
+### O que é um intervalo de confiança?
+
+-   Um intervalo de confiança é um procedimento inferencial utilizado para estimar um parâmetro populacional desconhecido a partir de dados amostrais, levando em conta a variabilidade inerente ao processo de amostragem.[@neyman1937]
+
+-   Diferentemente de uma estatística descritiva, o intervalo de confiança não é uma propriedade fixa do parâmetro, mas uma propriedade do procedimento estatístico utilizado para estimá-lo.[@goodman2016]
+
+-   O parâmetro populacional é considerado fixo (embora desconhecido), enquanto o intervalo de confiança é uma quantidade aleatória, pois depende da amostra observada.[@REF]
+
+-   Intervalo de confiança para variância conhecida \@ref(eq:ic-known) e desconhecida \@ref(eq:ic-unknown) capturam a média correspondente ao nível de significância $\alpha$ pré-estabelecido [@kanji2006; @Cumming2007; @krzywinski2013; @Ali2016].
+
+<br>
+
+\begin{equation}
+(\#eq:ic-known)
+IC = \bar{x} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:ic-unknown)
+IC = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}
+\end{equation}
+
+<br>
+
+### Intervalos de confiança e a lógica frequentista
+
+-   No paradigma frequentista, a probabilidade é interpretada como uma frequência relativa observável no longo prazo, associada a um processo repetível.[@neyman1937]
+
+-   Um intervalo de confiança de nível $(1-\alpha)$ é construído de modo que, se o mesmo procedimento de amostragem e análise fosse repetido indefinidamente sob as mesmas condições, aproximadamente $(1-\alpha)\times100\%$ dos intervalos assim gerados conteriam o verdadeiro valor do parâmetro populacional.[@goodman2016]
+
+-   Portanto, a probabilidade associada ao intervalo de confiança refere-se ao desempenho do procedimento no longo prazo, e não à probabilidade de o parâmetro estar contido em um intervalo específico observado.
+
+<br>
+
+```{r intervalo-confianca-long-run, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Simulação ilustrativa de intervalos de confiança (IC) em 100 experimentos independentes, cada um com 1.000 observações amostradas de uma população normal padrão (média = 0, desvio-padrão = 1). Os ICs são construídos no nível de 95\\%. O gráfico superior mostra os ICs individuais para cada experimento, indicando se o IC cobre ou não a média verdadeira ($\\mu = 0$). O gráfico inferior apresenta a distribuição das médias amostrais obtidas nos experimentos, juntamente com o IC teórico para a média populacional. Observe que aproximadamente 95\\% dos ICs individuais cobrem a média verdadeira, ilustrando o conceito de cobertura no longo prazo associado aos intervalos de confiança."}
+# reprodutibilidade
+set.seed(123)
+
+# Parâmetros do mundo real
+mu_true <- 0
+sigma  <- 1
+n      <- 1000
+alpha  <- 0.05
+
+# Número de experimentos
+n_exp <- 100
+
+# Simulação
+sim_results <- lapply(1:n_exp, function(i) {
+  x <- rnorm(n, mean = mu_true, sd = sigma)
+  xbar <- mean(x)
+  se   <- sd(x) / sqrt(n)
+  z    <- qnorm(1 - alpha / 2)
+  tibble::tibble(
+    experimento = i,
+    Média = xbar,
+    ic_inf = xbar - z * se,
+    ic_sup = xbar + z * se,
+    cobre_mu = (xbar - z * se <= mu_true) &
+               (xbar + z * se >= mu_true)
+  )
+})
+
+df <- dplyr::bind_rows(sim_results)
+x_limits <- range(c(df$ic_inf, df$ic_sup))
+z <- qnorm(1 - alpha / 2)
+se_mean <- sigma / sqrt(n)
+ic_mu_inf <- mu_true - z * se_mean
+ic_mu_sup <- mu_true + z * se_mean
+df_ic <- data.frame(
+  x = c(ic_mu_inf, ic_mu_sup),
+  tipo = "IC 95%"
+)
+
+# Gráfico 1: Intervalos de Confiança
+p_ic <- ggplot2::ggplot(df, ggplot2::aes(y = experimento, x = Média)) +
+  ggplot2::geom_errorbarh(
+    ggplot2::aes(xmin = ic_inf, xmax = ic_sup, color = cobre_mu),
+    width = 0.3,
+    linewidth = 0.5
+  ) +
+  ggplot2::geom_point(ggplot2::aes(color = cobre_mu), size = 2) +
+  ggplot2::geom_vline(
+    xintercept = mu_true,
+    linetype = "dashed",
+    linewidth = 0.5
+  ) +
+  ggplot2::scale_color_manual(
+    values = c("TRUE" = "blue", "FALSE" = "red"),
+    labels = c("TRUE" = "IC cobre μ", "FALSE" = "IC não cobre μ"),
+    name = NULL
+  ) +
+  ggplot2::labs(
+    x = "Estimativa da média",
+    y = "Experimento",
+    title = "Intervalos de Confiança (95%) em Experimentos Independentes"
+  ) +
+  ggplot2::coord_cartesian(xlim = x_limits) +
+  ggplot2::theme_minimal(base_size = 13) +
+  ggplot2::theme(
+    axis.text.x = ggplot2::element_blank(),
+    legend.position = "right"
+  ) +
+  ggplot2::theme(
+    panel.grid = ggplot2::element_blank(),
+    axis.line  = ggplot2::element_line(
+      linewidth = 0.6,
+      colour = "black"
+    )
+  )
+
+# Gráfico 2: Distribuição das médias amostrais
+p_dist <- ggplot2::ggplot(df, ggplot2::aes(x = Média)) +
+  ggplot2::geom_density(
+    ggplot2::aes(fill = "Médias amostrais"),
+    alpha = 0.6,
+    linewidth = 1
+  ) +
+  ggplot2::geom_vline(
+    ggplot2::aes(xintercept = mu_true,
+                 linetype = "Média verdadeira (μ)"),
+    linewidth = 1
+  ) +
+  ggplot2::geom_vline(
+    data = df_ic,
+    ggplot2::aes(xintercept = x,
+                 linetype = tipo),
+    linewidth = 0.8
+  ) +
+  ggplot2::scale_fill_manual(
+    name = NULL,
+    values = c("Médias amostrais" = "grey70")
+  ) +
+  ggplot2::scale_linetype_manual(
+    name = NULL,
+    values = c(
+      "Média verdadeira (μ)" = "dashed",
+      "IC 95%"               = "dotted"
+    )
+  ) +
+  ggplot2::labs(
+    y = "Densidade",
+    title = "Distribuição das Médias Amostrais"
+  ) +
+  ggplot2::coord_cartesian(xlim = x_limits) +
+  ggplot2::theme_minimal(base_size = 13) +
+  ggplot2::theme(
+    panel.grid = ggplot2::element_blank(),
+    axis.line  = ggplot2::element_line(
+      linewidth = 0.6,
+      colour = "black"
+    )
+  )
+
+# Combinação dos gráficos
+library(patchwork)
+p_ic / p_dist+
+  patchwork::plot_layout(heights = c(5, 1))
+```
+
+<br>
+
+### O que um intervalo de confiança não representa
+
+-   Um intervalo de confiança não deve ser interpretado como a probabilidade de que o parâmetro esteja contido naquele intervalo específico.[@greenland2016]
+
+-   Após os dados terem sido observados e o intervalo calculado, o parâmetro populacional ou está dentro do intervalo ou não está; não há incerteza probabilística sobre isso no sentido frequentista.[@greenland2016]
+
+-   A incerteza expressa pelo intervalo de confiança refere-se à variabilidade do processo inferencial, e não a uma distribuição de probabilidade do parâmetro.[@greenland2016]
+
+<br>
+
+### Relação entre intervalos de confiança e testes de hipóteses
+
+-   Intervalos de confiança e testes de hipótese frequentistas são derivados do mesmo modelo probabilístico subjacente e utilizam as mesmas suposições estatísticas.[@cumming2005]
+
+-   Em testes bicaudais, qualquer valor hipotético do parâmetro que esteja fora do intervalo de confiança de nível $(1-\alpha)$ corresponde a uma hipótese nula que seria rejeitada ao nível de significância $\alpha$.[@cumming2005]
+
+-   De forma análoga, valores do parâmetro que estejam dentro do intervalo de confiança correspondem a hipóteses nulas para as quais não haveria evidência suficiente para rejeição ao nível $\alpha$.[@cumming2005]
+
+-   Apesar dessa equivalência formal, intervalos de confiança e testes de hipótese respondem a perguntas distintas: testes enfatizam decisões dicotômicas, enquanto intervalos de confiança enfatizam estimação e incerteza.[@cumming2005]
+
+<br>
+
+### Por que intervalos de confiança são centrais na inferência científica
+
+-   Intervalos de confiança permitem avaliar simultaneamente a magnitude do efeito e a incerteza associada à sua estimativa, na mesma unidade de medida da variável de interesse.[@cumming2005]
+
+-   Essa abordagem favorece interpretações substantivas e científicas dos resultados, em oposição a decisões puramente dicotômicas baseadas em pontos de corte arbitrários.[@cumming2005]
+
+-   Quando corretamente interpretados, intervalos de confiança promovem uma comunicação mais informativa da evidência científica e reduzem interpretações equivocadas associadas ao uso exclusivo de P-valores.[@greenland2016]
+
+<br>
+
+## Comparações múltiplas
+
+<br>
+
+### O que é uma família de hipóteses?
+
+-   Família de hipóteses é um conjunto de comparações/inferências que, por desenho ou análise, devem ser consideradas juntas para controle do erro tipo I global (ex.: todas as comparações de um desfecho primário, todos os subgrupos pré-especificados, todos os desfechos coprimários).[@REF]
+
+-   O controle do *family-wise error rate* (FWER) ou do *false discovery rate* (FDR) deve considerar a família pertinente, não comparações isoladas.[@REF]
+
+<br>
+
+### O que são testes *ad hoc* e *post hoc*?
+
+-   *Ad hoc*: análises/decisões não planejadas a priori, motivadas por inspeção dos dados. Úteis para gerar hipóteses, não para confirmá-las.[@REF]
+
+-   *Post hoc*: procedimentos de comparações múltiplas aplicados após um teste global ter indicado efeito significativo. Visam controlar o erro tipo I em múltiplas comparações.[@REF]
+
+<br>
+
+### Como ajustar a análise inferencial para hipóteses múltiplas?
+
+- Defina previamente a família de hipóteses (ou seja, quais testes fazem parte do mesmo ajuste) e estabeleça a hierarquia dos desfechos (primários e secundários).
+
+- Selecione o método de ajuste de acordo com o objetivo da análise: controle da taxa de erro familiar (FWER), com procedimentos como Bonferroni, Holm, Hochberg ou Dunnett (quando há comparações múltiplas contra um controle); ou controle da taxa de descobertas falsas (FDR), como no método de Benjamini–Hochberg, mais adequado em contextos exploratórios.
+
+- Em análises confirmatórias, utilize estratégias de hierarquização (gatekeeping): os testes são realizados em sequência, e o nível de significância ($\alpha$) só é “transferido” para as hipóteses subsequentes caso haja significância na etapa anterior.
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função [*p.adjust*](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/p.adjust) para ajustar o P-valor utilizando diversos métodos.
+:::
 
 <br>
 

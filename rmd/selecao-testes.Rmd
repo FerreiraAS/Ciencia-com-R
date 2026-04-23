@@ -695,7 +695,7 @@ if (knitr::is_html_output()) {
     align = c("l"),
     format = "html",
     escape = TRUE,
-    caption = 
+    caption = knitr::opts_current$get("tab.cap")
   ) %>%
     kableExtra::kable_styling(
       bootstrap_options = c("basic", "hover", "condensed", "responsive"),

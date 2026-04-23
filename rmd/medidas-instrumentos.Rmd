@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Medidas e instrumentos** {#medidas-instrumentos}
 
 <br>
@@ -16,11 +15,27 @@
 
 ### O que são escalas?
 
--   Uma escala de medição grosseira representa um construto de natureza contínua medido por itens tais que diferentes pontuações são agrupadas na mesma categoria no ato da coleta de dados.[@aguinis2008]
+- Uma escala de medição grosseira representa um construto de natureza contínua medido por itens tais que diferentes pontuações são agrupadas na mesma categoria no ato da coleta de dados.[@aguinis2008]
 
--   Em escalas grosseiras, erros são introduzidos porque as variações contínunas do constructo são colapsadas em uma mesma categorias ou separadas entre categorias próximas.[@aguinis2008]
+- Em escalas grosseiras, erros são introduzidos porque as variações contínunas do constructo são colapsadas em uma mesma categorias ou separadas entre categorias próximas.[@aguinis2008]
 
--   Escalas tipo Likert com 5 categorias tipo "discordo totalmente", "discordo parcialmente", "nem concordo nem discordo", "concordo parcialmente", e "concordo totalmente" são escalas grosseira porque as diferenças entre as categorias não são iguais. Por exemplo, a diferença entre "discordo totalmente" e "discordo parcialmente" não é a mesma que a diferença entre "concordo parcialmente" e "concordo totalmente".[@aguinis2008]
+<br>
+
+### O que são escalas tipo Likert?
+
+- Escalas tipo Likert são instrumentos de medida compostos por itens que capturam o grau de concordância ou discordância do respondente em relação a uma afirmação.[@norman2010a]
+
+- Cada item apresenta um conjunto ordenado de categorias de resposta, tipicamente com 5 ou 7 pontos, variando de extremos como “discordo totalmente” a “concordo totalmente”. Cada resposta é associada a um valor numérico (por exemplo, 1 a 5), permitindo a quantificação das respostas.[@norman2010a]
+
+- Escalas tipo Likert com 5 categorias tipo "discordo totalmente", "discordo parcialmente", "nem concordo nem discordo", "concordo parcialmente", e "concordo totalmente" são escalas grosseira porque as diferenças entre as categorias não são iguais. Por exemplo, a diferença entre "discordo totalmente" e "discordo parcialmente" não é a mesma que a diferença entre "concordo parcialmente" e "concordo totalmente".[@aguinis2008]
+
+- Do ponto de vista teórico, as escalas Likert são classificadas como ordinais, pois indicam uma ordem entre as categorias, mas não garantem que as distâncias entre elas sejam iguais.[@norman2010a]
+
+- Apesar dessa limitação formal, é prática comum combinar múltiplos itens Likert (por soma ou média) para representar um construto latente (como satisfação, atitude ou qualidade de vida).[@norman2010a]
+
+- Quando agregadas dessa forma, essas escalas tendem a apresentar comportamento próximo ao de variáveis contínuas, o que permite o uso de métodos estatísticos paramétricos em muitos contextos aplicados.[@norman2010a]
+
+- Evidências empíricas indicam que análises baseadas em médias, como testes t, ANOVA e regressão, são robustas mesmo quando aplicadas a dados de escalas Likert, especialmente em amostras moderadas ou grandes.[@norman2010a]
 
 <br>
 
@@ -156,7 +171,7 @@ O pacote *ggstats*[@ggstats] fornece a função [*gglikert*](https://www.rdocume
 
 <br>
 
--   O erro em escalas grosseiras é considerado sistemático mas não pode ser corrigido em nível da unidade de análise.[@aguinis2008]
+- O erro em escalas grosseiras é considerado sistemático mas não pode ser corrigido em nível da unidade de análise.[@aguinis2008]
 
 <br>
 
@@ -166,27 +181,27 @@ O pacote *ggstats*[@ggstats] fornece a função [*gglikert*](https://www.rdocume
 
 ### O que é medição?
 
--   Processo empírico, realizado por meio de um instrumento, que estabelece uma correspondência rigorosa e objetiva entre uma observação e uma categoria em um modelo da observação.[@ferris2004]
+- Processo empírico, realizado por meio de um instrumento, que estabelece uma correspondência rigorosa e objetiva entre uma observação e uma categoria em um modelo da observação.[@ferris2004]
 
--   Esse processo tem como objetivo distinguir de maneira substantiva a manifestação observada de outras possíveis manifestações que também possam ser diferenciadas.[@ferris2004]
+- Esse processo tem como objetivo distinguir de maneira substantiva a manifestação observada de outras possíveis manifestações que também possam ser diferenciadas.[@ferris2004]
 
 <br>
 
 ### O que são medidas diretas?
 
--   .[@REF]
+- .[@REF]
 
 <br>
 
 ### O que são medidas derivadas?
 
--   .[@REF]
+- .[@REF]
 
 <br>
 
 ### O que são medidas por teoria?
 
--   .[@REF]
+- .[@REF]
 
 <br>
 
@@ -242,11 +257,11 @@ knitr::kable(
   kableExtra::row_spec(k1, background = "#E6E6E6", bold = TRUE)
 ```
 
--   A medida única da pressão arterial sistólica no braço esquerdo resulta em um valor pontual.[@REF]
+- A medida única da pressão arterial sistólica no braço esquerdo resulta em um valor pontual.[@REF]
 
--   Medidas únicas obtidas de diferentes unidades de análise podem ser consideradas independentes se observadas outras condições na coleta de dados.[@REF]
+- Medidas únicas obtidas de diferentes unidades de análise podem ser consideradas independentes se observadas outras condições na coleta de dados.[@REF]
 
--   O valor pontual será considerado representativo da variável para a unidade de análise (ex.: **`r VAR.1[k1]` mmHg** para o participante **\#`r k1`**).
+- O valor pontual será considerado representativo da variável para a unidade de análise (ex.: **`r VAR.1[k1]` mmHg** para o participante **\#`r k1`**).
 
 <br>
 
@@ -315,9 +330,9 @@ knitr::kable(
   kableExtra::row_spec(k2, background = "#E6E6E6", bold = TRUE)
 ```
 
--   As medidas repetidas podem ser tabuladas separadamente, por exemplo para análise da confiabilidade de obtenção dessa medida.[@REF]
+- As medidas repetidas podem ser tabuladas separadamente, por exemplo para análise da confiabilidade de obtenção dessa medida.[@REF]
 
--   A medida repetida da pressão arterial no braço esquerdo resulta em um conjunto de valores pontuais (ex.: **`r VAR.1[k2]` mmHg**, **`r VAR.2[k2]` mmHg** e **`r VAR.3[k2]` mmHg** para o participante **\#`r k2`**).
+- A medida repetida da pressão arterial no braço esquerdo resulta em um conjunto de valores pontuais (ex.: **`r VAR.1[k2]` mmHg**, **`r VAR.2[k2]` mmHg** e **`r VAR.3[k2]` mmHg** para o participante **\#`r k2`**).
 
 <br>
 
@@ -385,11 +400,11 @@ knitr::kable(
 
 <br>
 
--   As medidas repetidas podem ser agregadas por algum parâmetro --- ex.: média, mediana, máximo, mínimo, entre outros ---, observando-se a relevância biológica, clínica e/ou metodológica desta escolha.[@REF]
+- As medidas repetidas podem ser agregadas por algum parâmetro --- ex.: média, mediana, máximo, mínimo, entre outros ---, observando-se a relevância biológica, clínica e/ou metodológica desta escolha.[@REF]
 
--   Medidas agregadas obtidas de diferentes unidades de análise podem ser consideradas independentes se observadas outras condições na coleta de dados.[@REF]
+- Medidas agregadas obtidas de diferentes unidades de análise podem ser consideradas independentes se observadas outras condições na coleta de dados.[@REF]
 
--   O valor agregado será considerado representativo da variável para a unidade de análise (ex.: média = **`r round(VAR.aggr[k2], digits = 0)` mmHg** para o participante **\#`r k2`**).
+- O valor agregado será considerado representativo da variável para a unidade de análise (ex.: média = **`r round(VAR.aggr[k2], digits = 0)` mmHg** para o participante **\#`r k2`**).
 
 <br>
 
@@ -499,9 +514,9 @@ knitr::kable(
   kableExtra::row_spec(1:3, background = "#E6E6E6", bold = TRUE)
 ```
 
--   Medidas seriadas são possivelmente relacionadas e, portanto, dependentes na mesma unidade de análise.[@REF]
+- Medidas seriadas são possivelmente relacionadas e, portanto, dependentes na mesma unidade de análise.[@REF]
 
--   Por exemplo, a medida seriada da pressão arterial no braço esquerdo, em intervalos tipicamente regulares (ex.: **`r table.4[1,3]` mmHg**, **`r table.4[2,3]` mmHg** e **`r table.4[3,3]` mmHg** em **`r 1` min**, **`r 2` min** e **`r 3` min**, respectivamente, para o participante **#1**).
+- Por exemplo, a medida seriada da pressão arterial no braço esquerdo, em intervalos tipicamente regulares (ex.: **`r table.4[1,3]` mmHg**, **`r table.4[2,3]` mmHg** e **`r table.4[3,3]` mmHg** em **`r 1` min**, **`r 2` min** e **`r 3` min**, respectivamente, para o participante **#1**).
 
 <br>
 
@@ -604,7 +619,7 @@ knitr::kable(
 
 <br>
 
--   Medidas seriadas também agregadas por parâmetros --- ex.: máximo, mínimo, amplitude --- são consideradas representativas da variação temporal ou de uma característica de interesse (ex.: amplitude = **`r table.5[1,2]` mmHg** para o participante **#1**).
+- Medidas seriadas também agregadas por parâmetros --- ex.: máximo, mínimo, amplitude --- são consideradas representativas da variação temporal ou de uma característica de interesse (ex.: amplitude = **`r table.5[1,2]` mmHg** para o participante **#1**).
 
 <br>
 
@@ -677,9 +692,9 @@ knitr::kable(
   kableExtra::row_spec(k4, background = "#E6E6E6", bold = TRUE)
 ```
 
--   Medidas múltiplas também são possivelmente relacionadas e, portanto, são dependentes na mesma unidade de análise. Medidas múltiplas podem ser obtidas de modo repetido para análise agregada ou seriada.[@REF]
+- Medidas múltiplas também são possivelmente relacionadas e, portanto, são dependentes na mesma unidade de análise. Medidas múltiplas podem ser obtidas de modo repetido para análise agregada ou seriada.[@REF]
 
--   A medida de pressão arterial bilateral resulta em um conjunto de valores pontuais (ex.: braço esquerdo = **`r round(VAR.1[k4], digits = 0)` mmHg**, braço direito = **`r round(VAR.2[k4], digits = 0)` mmHg** para o participante **\#`r k4`**). Neste caso, ambos os valores pontuais são considerados representativos daquela unidade de análise.
+- A medida de pressão arterial bilateral resulta em um conjunto de valores pontuais (ex.: braço esquerdo = **`r round(VAR.1[k4], digits = 0)` mmHg**, braço direito = **`r round(VAR.2[k4], digits = 0)` mmHg** para o participante **\#`r k4`**). Neste caso, ambos os valores pontuais são considerados representativos daquela unidade de análise.
 
 <br>
 
@@ -695,11 +710,11 @@ O pacote *stats*[@stats] fornece a função [*aggregate*](https://www.rdocumenta
 
 ### O que são erros de medida?
 
--   A natureza dos erros de medida são em geral atribuídos aos (1) instrumentos utilizados e variações no protocolo, na medida em que o seu tamanho médio pode ser reduzido por modificações e melhorias nesses instrumentos; e (2) variações genuínas medida em de curto prazo.[@healy1978]
+- A natureza dos erros de medida são em geral atribuídos aos (1) instrumentos utilizados e variações no protocolo, na medida em que o seu tamanho médio pode ser reduzido por modificações e melhorias nesses instrumentos; e (2) variações genuínas medida em de curto prazo.[@healy1978]
 
 - Estimativa pontual (um número exato) é um evento de probabilidade 0 sob um modelo contínuo.[@REF]
 
-- Precisão como faixa $±\epsilon$ tem probabilidade > 0, mensurável e dependente de $\sigma$.[@REF]
+- Precisão como faixa $±\epsilon$ tem probabilidade \> 0, mensurável e dependente de $\sigma$.[@REF]
 
 - Isso motiva trabalhar com intervalos (faixas) em vez de pontos.[@REF]
 
@@ -811,11 +826,11 @@ g1 + g_mid + g2
 
 ### Quais fontes de variabilidade são comumente investigadas?
 
--   Intra/Entre participantes (isto é, unidades de análise).[@altman1983]
+- Intra/Entre participantes (isto é, unidades de análise).[@altman1983]
 
--   Intra/Entre repetições.[@altman1983]
+- Intra/Entre repetições.[@altman1983]
 
--   Intra/Entre observadores.[@altman1983]
+- Intra/Entre observadores.[@altman1983]
 
 <br>
 
@@ -825,7 +840,7 @@ g1 + g_mid + g2
 
 ### O que são instrumentos?
 
--   .[@REF]
+- .[@REF]
 
 <br>
 
@@ -835,19 +850,19 @@ g1 + g_mid + g2
 
 ### O que é acurácia?
 
--   Acurácia expressa a proximidade de concordância entre uma mensuração e o valor real.[@menditto2006]
+- Acurácia expressa a proximidade de concordância entre uma mensuração e o valor real.[@menditto2006]
 
--   Acurária está para medidas como validade está para instrumentos de medida.[@REF]
+- Acurária está para medidas como validade está para instrumentos de medida.[@REF]
 
 <br>
 
 ### O que é precisão?
 
--   Precisão se refere à proximidade de concordância entre resultados de testes independentes obtidos nas mesmas condições de teste.[@menditto2006]
+- Precisão se refere à proximidade de concordância entre resultados de testes independentes obtidos nas mesmas condições de teste.[@menditto2006]
 
--   Precisão é um índice de quão próximo os resultados podem ser repetidos entre mensurações repetidas.[@Streiner2006]
+- Precisão é um índice de quão próximo os resultados podem ser repetidos entre mensurações repetidas.[@Streiner2006]
 
--   Precisão está para medidas como confiabilidade está para instrumentos de medida.[@REF]
+- Precisão está para medidas como confiabilidade está para instrumentos de medida.[@REF]
 
 <br>
 
@@ -896,7 +911,7 @@ gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 2)
 
 ### Qual é a relação entre viés e variabilidade?
 
--   .[@REF]
+- .[@REF]
 
 <br>
 
