@@ -1,3 +1,10 @@
+---
+
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
 ```{=openxml}
 <w:p>
   <w:r>
@@ -5,7 +12,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Modelagem temporal** {#modelagem-temporal}
 
 <br>
@@ -16,7 +22,159 @@
 
 ### O que são modelos temporais?
 
--   .[@REF]
+- Modelos temporais são estruturas matemáticas que descrevem a evolução de um fenômeno ao longo do tempo, incorporando dependência entre observações sucessivas.[@REF]
+
+<br>
+
+### Por que modelos temporais são importantes?
+
+- Muitos fenômenos reais apresentam dependência temporal, como autocorrelação e tendência, que não podem ser capturados por modelos independentes.[@REF]
+
+- Ignorar a estrutura temporal pode levar a inferências incorretas e previsões imprecisas.[@REF]
+
+<br>
+
+## Estrutura temporal dos dados
+
+<br>
+
+### O que é dependência temporal?
+
+- Dependência temporal ocorre quando o valor de uma observação depende de valores anteriores da série.[@REF]
+
+- Essa dependência pode ser linear (autocorrelação) ou não linear (dinâmicas complexas).[@theiler1992]
+
+<br>
+
+### O que é autocorrelação?
+
+- Autocorrelação é a correlação entre valores da série em diferentes instantes de tempo.[@REF] Ela é uma das principais características exploradas em modelos temporais lineares.[@theiler1992]
+
+<br>
+
+## Modelos lineares e não lineares
+
+<br>
+
+### O que são modelos temporais lineares?
+
+- Modelos lineares assumem que a dinâmica da série pode ser descrita por combinações lineares de valores passados e ruído aleatório.[@theiler1992]
+
+<br>
+
+### O que são modelos temporais não lineares?
+
+- Modelos não lineares capturam relações mais complexas, nas quais a resposta não é proporcional às entradas.[@REF]
+
+- Esses modelos são necessários para descrever fenômenos como caos determinístico e sistemas dinâmicos complexos.[@theiler1992]
+
+<br>
+
+### Por que distinguir linearidade de não linearidade é difícil?
+
+- Séries temporais reais frequentemente combinam múltiplas fontes de variação: ruído, dependência linear e dinâmica não linear.[@theiler1992]
+
+- Métodos tradicionais podem interpretar incorretamente ruído como comportamento caótico.[@theiler1992]
+
+<br>
+
+## Testes de não linearidade
+
+<br>
+
+### Como testar não linearidade em séries temporais?
+
+- Uma abordagem é formular uma hipótese nula de que a série é gerada por um processo linear e testar essa hipótese estatisticamente.[@theiler1992]
+
+<br>
+
+### O que é o método de dados substitutos?
+
+- O método de dados substitutos consiste em gerar séries simuladas que preservam propriedades básicas da série original, mas seguem um modelo linear.[@theiler1992]
+
+- A série original é comparada com essas simulações para verificar diferenças significativas.[@theiler1992]
+
+<br>
+
+### Como funciona o método de dados substitutos?
+
+- Define-se uma hipótese nula (ex.: processo linear); Geram-se múltiplas séries substitutas compatíveis com essa hipótese; Calcula-se uma estatística para a série original e para as substitutas; Diferenças significativas indicam rejeição da hipótese nula.[@theiler1992]
+
+<br>
+
+### O que é significância nesse contexto?
+
+- A significância mede o quão distante a estatística da série original está da distribuição obtida com os dados substitutos.[@theiler1992]
+
+- Valores altos indicam evidência de estrutura não linear.[@theiler1992]
+
+<br>
+
+## Hipóteses em modelos temporais
+
+<br>
+
+### O que é uma hipótese nula em séries temporais?
+
+- É uma suposição sobre o processo gerador dos dados que se deseja testar, geralmente assumindo linearidade.[@theiler1992]
+
+<br>
+
+### Quais hipóteses nulas podem ser usadas?
+
+- Ruído independente (IID).[@theiler1992]
+
+- Processos lineares com autocorrelação.[@theiler1992]
+
+- Transformações não lineares de processos lineares.[@theiler1992]
+
+<br>
+
+## Estatísticas em séries temporais
+
+<br>
+
+### O que são estatísticas discriminantes?
+
+- São medidas usadas para diferenciar a série original das séries substitutas.[@theiler1992]
+
+<br>
+
+### Quais estatísticas podem ser usadas?
+
+- Dimensão de correlação.[@theiler1992]
+
+- Erro de previsão.[@theiler1992]
+
+- Medidas de dependência temporal.[@theiler1992]
+
+<br>
+
+## Limitações dos modelos temporais
+
+<br>
+
+### Quais são as limitações dos modelos temporais?
+
+- Dados podem ser curtos ou ruidosos, dificultando inferência confiável.[@theiler1992]
+
+- Modelos incorretos podem levar a interpretações equivocadas (ex.: falso caos).[@theiler1992]
+
+- A escolha da estrutura do modelo depende de suposições que nem sempre são verificáveis.[@theiler1992]
+
+<br>
+
+## Validação de modelos temporais
+
+<br>
+
+### Como validar modelos temporais?
+
+- Comparando previsões com dados observados.[@theiler1992]
+
+- Testando hipóteses sobre a estrutura da série (ex.: linearidade).[@theiler1992]
+
+- Utilizando simulações e métodos de reamostragem, como dados substitutos.[@theiler1992]
 
 <br>
 
