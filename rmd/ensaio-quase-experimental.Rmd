@@ -1,8 +1,8 @@
 ```{=openxml}
 <w:p>
-  <w:r>
-    <w:br w:type="page"/>
-  </w:r>
+<w:r>
+<w:br w:type="page"/>
+</w:r>
 </w:p>
 ```
 
@@ -16,7 +16,322 @@
 
 ### Quais são as características de ensaios quase-experimentais?
 
--   .[@REF]
+- Ensaios quase-experimentais são delineamentos utilizados para avaliar o efeito de intervenções quando a randomização não é possível, prática ou ética.[@lopezbernal2016a]
+
+- Esses delineamentos buscam estimar efeitos causais por meio da comparação entre períodos, grupos ou tendências temporais, utilizando estratégias analíticas para aproximar um cenário contrafactual.[@lopezbernal2016a]
+
+- Em estudos quase-experimentais, a intervenção geralmente ocorre em condições do mundo real, frequentemente envolvendo políticas públicas, programas populacionais ou mudanças organizacionais.[@lopezbernal2016a]
+
+- A validade causal em estudos quase-experimentais depende fortemente da qualidade do delineamento, da disponibilidade de dados longitudinais e do controle adequado de fatores confundidores.[@lopezbernal2016a]
+
+- Séries temporais interrompidas (interrupted time series, ITS) representam um dos delineamentos quase-experimentais mais robustos para avaliação de intervenções implementadas em um momento claramente definido no tempo.[@lopezbernal2016a]
+
+<br>
+
+## Séries temporais interrompidas
+
+<br>
+
+### O que são séries temporais interrompidas?
+
+- Séries temporais interrompidas (interrupted time series, ITS) utilizam observações repetidas de um desfecho ao longo do tempo para estimar tendências anteriores à intervenção e compará-las ao comportamento observado após sua implementação.[@lopezbernal2016a]
+
+- Nesse delineamento, a tendência observada antes da intervenção é utilizada para construir um cenário contrafactual, representando a evolução esperada do desfecho caso a intervenção não tivesse ocorrido.[@lopezbernal2016a]
+
+- A comparação entre a tendência observada após a intervenção e o cenário contrafactual permite avaliar possíveis mudanças atribuíveis à intervenção.[@lopezbernal2016a]
+
+- Estudos de séries temporais interrompidas são particularmente úteis para avaliação de políticas públicas, legislações, campanhas populacionais e intervenções implementadas em larga escala.[@lopezbernal2016a]
+
+<br>
+
+```{r its, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = " Exemplo de análise de série temporal interrompida utilizando regressão segmentada. A linha azul representa os valores preditos pelo modelo, enquanto a linha tracejada representa o cenário contrafactual. A linha pontilhada indica o momento da intervenção."}
+library(lubridate)
+
+# Simulated dataset
+set.seed(123)
+
+# Monthly observations
+n <- 72
+
+# Intervention at month 37
+intervention_time <- 37
+
+# Time variable
+time <- 1:n
+
+# Intervention indicator
+intervention <- ifelse(time >= intervention_time, 1, 0)
+
+# Time after intervention
+time_after <- ifelse(time >= intervention_time,
+                     time - intervention_time + 1,
+                     0)
+
+# Generate outcome
+# Baseline level
+beta0 <- 100
+
+# Pre-intervention trend
+beta1 <- 0.5
+
+# Immediate level change
+beta2 <- -12
+
+# Post-intervention slope change
+beta3 <- -0.8
+
+# Seasonal component
+seasonality <- 8 * sin(2 * pi * time / 12)
+
+# Random noise
+error <- rnorm(n, mean = 0, sd = 4)
+
+# Outcome
+y <- beta0 +
+  beta1 * time +
+  beta2 * intervention +
+  beta3 * time_after +
+  seasonality +
+  error
+
+# Build dataframe
+data_its <- tibble::tibble(
+  month = seq.Date(
+    from = as.Date("2018-01-01"),
+    by = "month",
+    length.out = n
+  ),
+  time,
+  intervention,
+  time_after,
+  y
+)
+
+# Segmented regression model
+model_its <- lm(
+  y ~ time + intervention + time_after,
+  data = data_its
+)
+
+# Predicted values
+data_its <- data_its %>%
+  dplyr::mutate(
+    predicted = predict(model_its)
+  )
+
+# Counterfactual trend
+counterfactual <- tibble::tibble(
+  time = time,
+  month = data_its$month
+)
+
+counterfactual <- counterfactual %>%
+  dplyr::mutate(
+    counterfactual =
+      coef(model_its)[1] +
+      coef(model_its)[2] * time
+  )
+
+# Plot
+ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
+  ggplot2::geom_line(size = 0.8) +
+  ggplot2::geom_line(
+    ggplot2::aes(y = predicted),
+    color = "blue",
+    linewidth = 1.2
+  ) +
+  ggplot2::geom_line(
+    data = counterfactual,
+    ggplot2::aes(y = counterfactual),
+    linetype = "dashed",
+    linewidth = 1
+  ) +
+  ggplot2::geom_vline(
+    xintercept = data_its$month[intervention_time],
+    linetype = "dotted",
+    linewidth = 1
+  ) +
+  ggplot2::labs(
+    title = "Série Temporal Interrompida",
+    subtitle = "Regressão segmentada com tendência contrafactual",
+    x = "Time",
+    y = "Outcome"
+  ) +
+  ggplot2::theme_minimal(base_size = 14)
+```
+
+<br>
+
+### Quando utilizar séries temporais interrompidas?
+
+- Séries temporais interrompidas são apropriadas quando a intervenção ocorre em um momento claramente identificável e existem observações repetidas antes e depois da implementação.[@lopezbernal2016a]
+
+- O delineamento é especialmente útil quando ensaios experimentais aleatorizados não são possíveis, como em avaliações retrospectivas de políticas públicas ou intervenções implementadas para toda a população.[@lopezbernal2016a]
+
+- Desfechos com resposta relativamente rápida à intervenção são mais adequados para ITS, pois facilitam a identificação temporal do efeito.[@lopezbernal2016a]
+
+- A utilização de dados rotineiros longitudinais favorece a aplicação do delineamento, especialmente quando há número suficiente de observações antes e depois da intervenção.[@lopezbernal2016a]
+
+<br>
+
+### O que é o modelo contrafactual em séries temporais interrompidas?
+
+- O cenário contrafactual corresponde à trajetória esperada do desfecho caso a intervenção não tivesse ocorrido.[@lopezbernal2016a]
+
+- Em ITS, o contrafactual é geralmente estimado a partir da tendência observada no período pré-intervenção.[@lopezbernal2016a]
+
+- A inferência sobre o efeito da intervenção é baseada na diferença entre os valores observados após a intervenção e os valores esperados segundo o cenário contrafactual.[@lopezbernal2016a]
+
+- A especificação inadequada do modelo contrafactual pode levar à interpretação incorreta do efeito da intervenção.[@lopezbernal2016a]
+
+<br>
+
+### O que é regressão segmentada em séries temporais interrompidas?
+
+- A regressão segmentada é uma abordagem frequentemente utilizada para análise de séries temporais interrompidas, permitindo estimar alterações no nível e/ou na tendência do desfecho após a intervenção.[@lopezbernal2016a]
+
+- Em modelos ITS \@ref(eq:its1), o coeficiente associado ao tempo representa a tendência pré-intervenção, enquanto os coeficientes relacionados à intervenção representam mudanças imediatas de nível e alterações na inclinação da tendência temporal.[@lopezbernal2016a]
+
+<br>
+
+\begin{equation}
+(\#eq:its1)
+Y_t = \beta_0 + \beta_1 T + \beta_2 X_t + \beta_3 T X_t
+\end{equation}
+
+<br>
+
+- Nesse modelo, $\beta_0$ representa o nível inicial do desfecho, $\beta_1$ representa a tendência temporal pré-intervenção, $\beta_2$ representa a mudança imediata após a intervenção e $\beta_3$ representa a mudança na inclinação da tendência após a intervenção.[@lopezbernal2016a]
+
+- O termo de interação $TX_t$ representa a alteração da inclinação da tendência temporal após a intervenção.[@lopezbernal2016a]
+
+- Diferentes modelos de impacto podem ser especificados, incluindo mudanças abruptas de nível, mudanças graduais de tendência, efeitos temporários ou efeitos com período de latência.[@lopezbernal2016a]
+
+- Modelos ITS podem ser implementados utilizando regressão linear, Poisson, logística ou modelos multinível, dependendo da natureza do desfecho e da estrutura dos dados.[@kontopantelis2015]
+
+<br>
+
+### O que representam mudanças de nível e inclinação em séries temporais interrompidas?
+
+- Mudança de nível representa uma alteração imediata no desfecho após a intervenção.[@lopezbernal2016a]
+
+- Mudança de inclinação representa uma alteração gradual na tendência temporal após a intervenção.[@lopezbernal2016a]
+
+- Intervenções podem produzir apenas mudança de nível, apenas mudança de inclinação ou ambas simultaneamente.[@lopezbernal2016a]
+
+- A interpretação do efeito depende do modelo de impacto especificado para a intervenção.[@lopezbernal2016a]
+
+<br>
+
+### Por que especificar o modelo de impacto a priori?
+
+- A especificação do modelo de impacto antes da análise reduz o risco de interpretações espúrias baseadas em flutuações aleatórias dos dados.[@lopezbernal2016a]
+
+- A escolha do modelo de impacto deve considerar o conhecimento prévio sobre o mecanismo da intervenção e o tempo esperado para manifestação do efeito.[@lopezbernal2016a]
+
+- A seleção do modelo baseada apenas na inspeção visual dos resultados aumenta a probabilidade de conclusões artefatuais sobre o efeito da intervenção.[@lopezbernal2016a]
+
+<br>
+
+## Séries temporais interrompidas controladas
+
+<br>
+
+### O que são séries temporais interrompidas controladas?
+
+- Séries temporais interrompidas controladas incluem um grupo ou desfecho controle não exposto à intervenção para reduzir o impacto de confundidores variantes no tempo.[@lopezbernal2016a; @kontopantelis2015]
+
+- A inclusão de controles fortalece a inferência causal ao permitir distinguir mudanças atribuíveis à intervenção de tendências temporais externas.[@lopezbernal2016a]
+
+- Grupos controle devem apresentar comportamento temporal semelhante ao grupo exposto antes da intervenção.[@kontopantelis2015]
+
+- Desfechos controle podem ser utilizados quando não existe um grupo populacional comparável disponível.[@lopezbernal2016a]
+
+<br>
+
+## Interação e heterogeneidade de efeito
+
+<br>
+
+### Como avaliar heterogeneidade de efeito em séries temporais interrompidas?
+
+- Termos de interação podem ser incorporados aos modelos ITS para avaliar se o efeito da intervenção varia entre subgrupos populacionais.[@kontopantelis2015]
+
+- Interações entre variáveis de interesse e os componentes da ITS permitem investigar diferenças no nível basal, na mudança imediata e na alteração da tendência temporal.[@kontopantelis2015]
+
+- Características individuais, institucionais ou regionais podem modificar o efeito observado da intervenção.[@kontopantelis2015]
+
+- Modelos estratificados e análises multinível podem ser utilizados para lidar com heterogeneidade entre unidades observacionais.[@kontopantelis2015]
+
+<br>
+
+## Pressupostos do delineamento
+
+<br>
+
+### Quais são os principais pressupostos de séries temporais interrompidas?
+
+- O delineamento assume que a tendência observada antes da intervenção continuaria inalterada na ausência da intervenção.[@kontopantelis2015]
+
+- O modelo assume ausência de eventos externos que modifiquem sistematicamente a tendência temporal durante o período pós-intervenção.[@kontopantelis2015]
+
+- A linearidade das tendências temporais deve ser avaliada antes da modelagem, especialmente em análises de regressão segmentada.[@kontopantelis2015]
+
+- A presença de mudanças graduais na população ao longo do tempo pode introduzir viés quando não adequadamente controlada.[@kontopantelis2015]
+
+<br>
+
+## Limitações dos modelos simples
+
+<br>
+
+### Quais são as limitações de modelos ITS simples?
+
+- Modelos ITS básicos frequentemente assumem tendências lineares pré-intervenção.[@kontopantelis2015]
+
+- Modelos simples podem não controlar adequadamente mudanças nas características da população ao longo do tempo.[@kontopantelis2015]
+
+- A ausência de grupos ou desfechos controle dificulta a distinção entre efeitos da intervenção e eventos externos concorrentes.[@kontopantelis2015]
+
+- A utilização de poucos pontos temporais antes da intervenção pode dificultar a avaliação da linearidade da tendência pré-intervenção.[@kontopantelis2015]
+
+<br>
+
+## Vieses e ameaças à validade
+
+<br>
+
+### Quais são as principais ameaças à validade em séries temporais interrompidas?
+
+- Estudos ITS podem ser afetados por confundidores variantes no tempo, especialmente fatores que modificam simultaneamente o desfecho e o período pós-intervenção.[@lopezbernal2016a]
+
+- Eventos concorrentes à intervenção podem dificultar a atribuição causal do efeito observado.[@lopezbernal2016a]
+
+- Mudanças nos sistemas de registro ou coleta de dados ao longo do tempo podem introduzir viés na estimativa do efeito.[@lopezbernal2016a]
+
+- A ausência de controle adequado para tendências temporais e sazonalidade pode produzir estimativas incorretas da associação entre intervenção e desfecho.[@lopezbernal2016a]
+
+<br>
+
+### O que é autocorrelação em séries temporais interrompidas?
+
+- Autocorrelação ocorre quando observações consecutivas da série temporal são mais semelhantes entre si do que observações mais distantes no tempo.[@lopezbernal2016a]
+
+- A presença de autocorrelação viola a suposição de independência das observações em modelos de regressão convencionais.[@lopezbernal2016a]
+
+- A autocorrelação residual deve ser investigada por meio de análise gráfica dos resíduos e funções de autocorrelação parcial.[@lopezbernal2016a]
+
+- Métodos como regressão de Prais-Winsten e modelos ARIMA podem ser utilizados para ajustar autocorrelação residual em séries temporais.[@lopezbernal2016a]
+
+<br>
+
+### Como controlar sazonalidade em séries temporais interrompidas?
+
+- Muitos desfechos apresentam padrões sazonais que podem influenciar a tendência temporal observada.[@lopezbernal2016a]
+
+- A sazonalidade pode ser controlada utilizando estratificação temporal, funções seno-cosseno (Fourier terms) ou splines.[@lopezbernal2016a]
+
+- O controle da sazonalidade reduz o risco de confundimento temporal e melhora a validade das estimativas do efeito da intervenção.[@lopezbernal2016a]
 
 <br>
 
@@ -26,9 +341,9 @@
 
 ### Quais são as diretrizes para redação de ensaios quase-experimentais?
 
--   Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
+- Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
 
--   *Guidelines for reporting non-randomised studies*:[@reeves2004] https://www.equator-network.org/reporting-guidelines/guidelines-for-reporting-non-randomised-studies/
+- *Guidelines for reporting non-randomised studies*:[@reeves2004] <https://www.equator-network.org/reporting-guidelines/guidelines-for-reporting-non-randomised-studies/>
 
 <br>
 

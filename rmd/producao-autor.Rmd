@@ -144,6 +144,28 @@ cat(paste0(citations, collapse = "\n\n"))
 
 <br>
 
+## Livros {.unnumbered}
+
+<br>
+
+```{r book, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "book"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
+
+cat(paste0(citations, collapse = "\n\n"))
+```
+
+<br>
+
 ## Livros editorados {.unnumbered}
 
 <br>
@@ -188,31 +210,6 @@ cat(paste0(citations, collapse = "\n\n"))
 
 <br>
 
-## Aulas {.unnumbered}
-
-<br>
-
-```{r lecture-speech, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
-citations <- tryCatch(
-  rcrossref::cr_cn(
-    dois = my_dois_works$external_id_value[
-      my_dois_works$type == "lecture-speech"
-    ],
-    format = "text",
-    style = "american-medical-association-10th-edition",
-    locale = "pt-BR"
-  ),
-  error = function(e) character(0)
-)
-
-# paste number (e.g., 1.) before each citation
-citations <- paste0(seq_along(citations), ". ", citations)
-
-cat(paste0(citations, collapse = "\n\n"))
-```
-
-<br>
-
 ## Programas de computador {.unnumbered}
 
 <br>
@@ -247,6 +244,56 @@ citations <- tryCatch(
   rcrossref::cr_cn(
     dois = my_dois_works$external_id_value[
       my_dois_works$type == "data-set"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
+
+# paste number (e.g., 1.) before each citation
+citations <- paste0(seq_along(citations), ". ", citations)
+
+cat(paste0(citations, collapse = "\n\n"))
+```
+
+<br>
+
+## Aulas {.unnumbered}
+
+<br>
+
+```{r lecture-speech, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "lecture-speech"
+    ],
+    format = "text",
+    style = "american-medical-association-10th-edition",
+    locale = "pt-BR"
+  ),
+  error = function(e) character(0)
+)
+
+# paste number (e.g., 1.) before each citation
+citations <- paste0(seq_along(citations), ". ", citations)
+
+cat(paste0(citations, collapse = "\n\n"))
+```
+
+<br>
+
+## Palestras {.unnumbered}
+
+<br>
+
+```{r public-speech, echo = FALSE, warning = FALSE, message = FALSE, results = "asis", cache = TRUE, cache.path = "cache/", eval = curl::has_internet()}
+citations <- tryCatch(
+  rcrossref::cr_cn(
+    dois = my_dois_works$external_id_value[
+      my_dois_works$type == "public-speech"
     ],
     format = "text",
     style = "american-medical-association-10th-edition",
