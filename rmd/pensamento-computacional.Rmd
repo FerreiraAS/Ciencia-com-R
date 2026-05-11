@@ -29,21 +29,13 @@
 
 ### O que é R Markdown?
 
-- R Markdown[@R-rmarkdown] é uma ferramenta que permite a integração de texto, código e saída em um único documento.[@REF]
+- O R Markdown[@R-rmarkdown] foi projetado especificamente para relatórios dinâmicos onde a análise é realizada em R e oferece uma flexibilidade incrível por meio de uma linguagem de marcação.[@mair2016]
 
-- O R Markdown é uma extensão do Markdown, que é uma linguagem de marcação simples e fácil de aprender, que é usada para formatar texto.[@REF]
+- O trabalho com R Markdown[@R-rmarkdown] permite um fluxo de dados transparente, desde o conjunto de dados coletados até o manuscrito finalizado.[@holmes2021]
 
-- O R Markdown permite a inclusão de blocos de código R, Python, SQL, C++, entre outros, e a saída desses blocos de código é incorporada ao documento final.[@REF]
+- Todos os aspectos do fluxo de dados podem ser incorporados em blocos de R script (*chunk*), exibindo tanto o R script quando o respectivo texto, tabelas e figuras formatadas no estilo científico de interesse.[@holmes2021]
 
-- O R Markdown é uma ferramenta poderosa para a criação de relatórios dinâmicos, que podem ser facilmente atualizados com novos dados ou análises.[@REF]
-
-- O R Markdown é amplamente utilizado na comunidade científica para a criação de relatórios de pesquisa, artigos científicos, apresentações, livros, entre outros.[@REF]
-
-- O trabalho com RMarkdown[@R-rmarkdown] permite um fluxo de dados totalmente transparente, desde o conjunto de dados coletados até o manuscrito finalizado. Todos os aspectos do fluxo de dados podem ser incorporados em blocos de R script (*chunk*), exibindo tanto o R script quando o respectivo texto, tabelas e figuras formatadas no estilo científico de interesse.[@holmes2021]
-
-- O RMarkdown[@R-rmarkdown] foi projetado especificamente para relatórios dinâmicos onde a análise é realizada em R e oferece uma flexibilidade incrível por meio de uma linguagem de marcação.[@mair2016]
-
-- O uso combinado de R Markdown com sistemas de controle de versão e publicação automática permite a criação de fluxos completos de ciência reproduzível, integrando código, resultados, histórico de modificações e documentação em um único ambiente computacional.[@blischak2019]
+- O uso combinado de R Markdown[@R-rmarkdown] com sistemas de controle de versão e publicação automática permite a criação de fluxos completos de ciência reproduzível, integrando código, resultados, histórico de modificações e documentação em um único ambiente computacional.[@blischak2019]
 
 <br>
 
@@ -142,7 +134,7 @@ knitr::include_graphics(png_file)
 
 <br>
 
-- As principais características do RStudio incluem um ambiente de edição com abas para acesso rápido a arquivos, comandos e resultados; histórico de comandos previamente utilizados; ferramentas para visualização de bancos de dados e elaboração de scripts e gráficos e tabelas.[@racine2011; @introduc2020]
+- RStudio apresenta um ambiente de edição com abas para acesso rápido a arquivos, comandos e resultados; histórico de comandos previamente utilizados; ferramentas para visualização de bancos de dados e elaboração de scripts e gráficos e tabelas.[@racine2011; @introduc2020]
 
 - RStudio está disponível gratuitamente em [Posit](https://posit.co/download/rstudio-desktop/).
 
@@ -193,17 +185,23 @@ vetor <- c(1, 2, 3, 4, 5) # Cria um vetor com os valores de 1 a 5
 print(vetor) # Exibe o vetor na saída padrão
 
 # Esta é uma matrix
-matriz <- matrix(1:9, nrow=3, ncol=3) # Cria uma matriz 3x3 com os valores de 1 a 9
+matriz <- matrix(1:9, nrow = 3, ncol = 3) # Cria uma matriz 3x3 com os valores de 1 a 9
 # Exibe a matriz
 print(matriz) # Exibe a matriz na saída padrão
 
 # Esta é uma lista
-lista <- list(nome="João", idade=30, altura=1.75) # Cria uma lista com nome, idade e altura
+lista <- list(nome = "João",
+              idade = 30,
+              altura = 1.75) # Cria uma lista com nome, idade e altura
 # Exibe a lista
 print(lista) # Exibe a lista na saída padrão
 
 # Este é um dataframe
-dataframe <- data.frame(nome=c("João", "Maria", "José"), idade=c(30, 25, 40), altura=c(1.75, 1.60, 1.80)) # Cria um dataframe com nome, idade e altura
+dataframe <- data.frame(
+  nome = c("João", "Maria", "José"),
+  idade = c(30, 25, 40),
+  altura = c(1.75, 1.60, 1.80)
+) # Cria um dataframe com nome, idade e altura
 # Exibe o dataframe
 print(dataframe) # Exibe o dataframe na saída padrão
 
@@ -338,7 +336,7 @@ O pacote *roxygen2*[@roxygen2] fornece a função [*roxygenize*](https://cran.r-
 
 ### O que são manuscritos reproduzíveis?
 
-- Manuscritos reproduzíveis --- manuscritos executáveis ou relatórios dinâmicos --- permitem a produção de um manuscrito completo a partir da integração do banco de dados da(s) amostra(s), do(s) script(s) de análise estatística (incluindo comentários para sua interpretação), dos pacotes ou bibliotecas utilizados, das fontes e referências bibliográficas citadas, além dos demais elementos textuais (tabelas, gráficos) - todos gerados dinamicamente.[@hinsen2011]
+- Manuscritos reproduzíveis permitem a produção de um manuscrito completo a partir da integração do banco de dados da(s) amostra(s), do(s) script(s) de análise estatística (incluindo comentários para sua interpretação), dos pacotes ou bibliotecas utilizados, das fontes e referências bibliográficas citadas, além dos demais elementos textuais (tabelas, gráficos).[@hinsen2011]
 
 <br>
 
@@ -402,7 +400,7 @@ O pacote *bookdown*[@bookdown] fornece as funções [*gitbook*](https://www.rdoc
 
 ### O que são websites reproduzíveis para projetos científicos?
 
-- Projetos científicos reproduzíveis podem ser disponibilizados em websites navegáveis contendo resultados, figuras, scripts e histórico de versões, permitindo maior transparência e colaboração científica.[@blischak2019]
+- Projetos científicos reproduzíveis podem ser disponibilizados em websites navegáveis contendo resultados, figuras, scripts e histórico de versões.[@blischak2019]
 
 - O uso de websites estáticos facilita o compartilhamento de análises com colaboradores e leitores sem necessidade de acesso direto ao ambiente computacional original.[@blischak2019]
 
@@ -430,27 +428,27 @@ O pacote *bookdown*[@bookdown] fornece as funções [*gitbook*](https://www.rdoc
 
 ### Quais são as boas práticas para desenvolver aplicativos Shiny reproduzíveis?
 
-- O desenvolvimento de aplicativos Shiny deve seguir princípios de reprodutibilidade científica, garantindo que os dados, o código e o ambiente computacional possam ser compreendidos e reutilizados por outros pesquisadores.[@brun2025]
+- Aplicativos Shiny devem seguir princípios de reprodutibilidade científica, permitindo reutilização de dados, código e ambiente computacional.[@brun2025]
 
-- O primeiro passo é utilizar recursos de treinamento e documentação, como tutoriais, exemplos e guias especializados, que ajudam a compreender conceitos fundamentais do ambiente Shiny, especialmente o mecanismo de reatividade.[@brun2025]
+- Tutoriais, exemplos e guias especializados auxiliam na compreensão do Shiny, especialmente do sistema de reatividade.[@brun2025]
 
-- Recomenda-se configurar corretamente o ambiente computacional, mantendo o R e os pacotes atualizados e utilizando ferramentas para registrar as dependências do projeto e garantir a portabilidade do aplicativo.[@brun2025]
+- O ambiente computacional deve ser configurado com R e pacotes atualizados, registrando dependências para garantir portabilidade.[@brun2025]
 
-- O uso de controle de versão facilita o acompanhamento das mudanças no código e permite que outros pesquisadores reproduzam o ambiente computacional do projeto.[@brun2025]
+- O controle de versão facilita o rastreamento de alterações e a reprodução do ambiente computacional.[@brun2025]
 
-- O desenvolvimento do aplicativo deve ocorrer de forma incremental, com documentação contínua do código e testes frequentes para facilitar a identificação de erros durante o processo de construção do aplicativo.[@brun2025]
+- O desenvolvimento deve ser incremental, com documentação contínua e testes frequentes.[@brun2025]
 
-- É recomendável estruturar o aplicativo de forma modular, separando os componentes da interface do usuário (UI), da lógica do servidor (server) e das funções auxiliares em arquivos distintos.[@brun2025]
+- Recomenda-se estruturar o aplicativo de forma modular, separando interface de usuário, servidor e funções auxiliares.[@brun2025]
 
-- Para melhorar o desempenho do aplicativo, os dados podem ser pré-processados e armazenados em cache, evitando que etapas de processamento sejam executadas repetidamente a cada execução do aplicativo.[@brun2025]
+- O desempenho pode ser melhorado com pré-processamento e armazenamento em cache dos dados.[@brun2025]
 
-- Sempre que possível, os dados utilizados no aplicativo devem ser disponibilizados diretamente aos usuários, preferencialmente por meio de repositórios de dados com identificadores persistentes (DOI).[@brun2025]
+- Sempre que possível, os dados devem ser disponibilizados em repositórios com DOI.[@brun2025]
 
-- O código e os dados devem incluir licenças apropriadas, como licenças de código aberto para o software e licenças Creative Commons para os dados, garantindo transparência e reutilização responsável.[@brun2025]
+- Código e dados devem incluir licenças apropriadas para garantir transparência e reutilização.[@brun2025]
 
-- Recomenda-se tornar o código e os dados citáveis, incluindo instruções de citação no arquivo README ou por meio de arquivos específicos de citação em repositórios científicos.[@brun2025]
+- Recomenda-se tornar código e dados citáveis por meio de instruções no README ou arquivos de citação.[@brun2025]
 
-- Os aplicativos podem ser disponibilizados publicamente em serviços de hospedagem ou repositórios científicos, permitindo que usuários executem o aplicativo online ou localmente, ampliando o acesso às análises e visualizações de dados.[@brun2025]
+- Os aplicativos podem ser publicados em serviços de hospedagem ou repositórios científicos para ampliar o acesso.[@brun2025]
 
 <br>
 
@@ -478,7 +476,9 @@ O pacote *bookdown*[@bookdown] fornece as funções [*gitbook*](https://www.rdoc
 
 - Inclua a versão dos pacotes usados no seu script por meio de um script inicial para instalação de pacotes (ex.: 'instalar.R').[@trisovic2022]
 
-- Documente em um arquivo README os arquivos disponíveis e os pré-requisitos necessários para executar o código (ex.: pacotes e respectivas versões). Uma lista de configurações (hardware e software) que foram usadas para rodar o código pode ajudar na reprodução dos resultados.[@hofner2015]
+- Documente em um arquivo README os arquivos disponíveis e os pré-requisitos necessários para executar o código (ex.: pacotes e respectivas versões).[@hofner2015]
+
+- Liste as configurações (hardware e software) que foram usadas para rodar o código para ajudar na reprodução dos resultados.[@hofner2015]
 
 - Use endereços de arquivos relativos.[@trisovic2022]
 

@@ -245,7 +245,7 @@ P(E) = \frac{\text{número de desfechos em } E}{\text{número de desfechos em } 
 
 ### Quais são os axiomas da probabilidade?
 
--   A probabilidade de um evento é um número real que satisfaz os seguintes axiomas descritos por Andrei Nikolaevich Kolmogorov em 1950[@Viti2015; @grami2023]
+-   A probabilidade de um evento é um número real que satisfaz os axiomas descritos por Andrei Nikolaevich Kolmogorov em 1950.[@Viti2015; @grami2023]
 
 -   Axioma I. Probabilidades de um evento $E$ são números não-negativos: $P(E) \geq 0$.[@Viti2015; @grami2023]
 
@@ -330,7 +330,9 @@ grid::popViewport()
 
 <br>
 
--   Em experimentos independentes, o desfecho de uma tentativa é independente dos desfechos de outras tentativas, passadas e/ou futuras. Uma tentativa em um experimento aleatório é independente se a probabilidade de cada desfecho possível não mudar de tentativa para tentativa.[@grami2023]
+-   Em experimentos independentes, o desfecho de uma tentativa é independente dos desfechos de outras tentativas, passadas e/ou futuras.[@grami2023]
+
+- Uma tentativa em um experimento aleatório é independente se a probabilidade de cada desfecho possível não mudar de tentativa para tentativa.[@grami2023]
 
 <br>
 
@@ -409,7 +411,7 @@ gridExtra::grid.arrange(evento, p1, evento, p3, evento, p10, nrow = 3)
 
 ### O que é a lei dos números anômalos?
 
--   A lei dos números anômalos --- lei de Benford --- é uma distribuição de probabilidade que descreve a frequência de ocorrência dos dígitos significativos em muitos conjuntos de dados do mundo real, sendo mais evidente na distribuição do primeiro dígito \@ref(eq:benford).[@Benford1938]
+-   A lei dos números anômalos é uma distribuição de probabilidade que descreve a frequência de ocorrência dos dígitos significativos em muitos conjuntos de dados do mundo real, sendo mais evidente na distribuição do primeiro dígito \@ref(eq:benford).[@Benford1938]
 
 <br>
 
@@ -420,7 +422,7 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 
 <br>
 
--   A lei tende a ocorrer quando os dados abrangem várias ordens de magnitude, não há limites artificiais, os dados são heterogêneos e os processos são multiplicativos.[@Benford1938]
+-   A lei de Benford tende a ocorrer quando os dados abrangem várias ordens de magnitude, não há limites artificiais, os dados são heterogêneos e os processos são multiplicativos.[@Benford1938]
 
 -   A lei de Benford surge naturalmente quando dados provêm de uma mistura aleatória de diferentes distribuições.[@hill1995]
 
@@ -428,7 +430,7 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 
 -   Essa propriedade implica que a distribuição permanece a mesma independentemente das unidades utilizadas (por exemplo, quilômetros ou milhas, dólares ou euros).[@hill1995]
 
--   A lei não se aplica a todos os conjuntos de dados, sendo menos adequada quando os valores possuem intervalos restritos ou limites artificiais.[@hill1995]
+-   A lei de Benford não se aplica a todos os conjuntos de dados, sendo menos adequada quando os valores possuem intervalos restritos ou limites artificiais.[@hill1995]
 
 <br>
 
@@ -541,7 +543,7 @@ ggplot(dados, aes(x = digito)) +
 
 ### O que é teorema central do limite?
 
--   O teorema central do limite \@ref(eq:central-limit-theorem) afirma que, para uma amostra aleatória de tamanho $n$ de uma população com valor esperado igual à média $E[\bar{X_{i}}] = \mu$ e variância $Var[\bar{X_{i}}]$ igual a $\sigma^{2}$, a distribuição amostral da média de uma variável $\bar{X}$ se aproxima de uma distribuição normal $N$ com média $\mu$ e variância $\sigma^{2}/n$ à medida que $n$ aumenta ($n \to \infty$):[@kwak2017]
+-   Para uma amostra aleatória de tamanho $n$ de uma população com valor esperado igual à média $E[\bar{X_{i}}] = \mu$ e variância $Var[\bar{X_{i}}]$ igual a $\sigma^{2}$, a distribuição amostral da média de uma variável $\bar{X}$ se aproxima de uma distribuição normal $N$ com média $\mu$ e variância $\sigma^{2}/n$ à medida que $n$ aumenta ($n \to \infty$) \@ref(eq:central-limit-theorem):[@kwak2017]
 
 <br>
 
@@ -1012,13 +1014,11 @@ gridExtra::grid.arrange(histograma_pop,
 
 ### Quais as condições de validade do teorema central do limite?
 
--   As condições de validade do teorema central do limite são:[@kwak2017]
+-   As variáveis aleatórias devem ser independentes e identicamente distribuídas (*independent and identically distributed* ou i.i.d.).[@kwak2017]
 
-    -   As variáveis aleatórias devem ser independentes e identicamente distribuídas (*independent and identically distributed* ou i.i.d.);
+-   As variáveis aleatórias devem ter média $\mu$ e variância $\sigma^{2}$ finitas.[@kwak2017]
 
-    -   As variáveis aleatórias devem ter média $\mu$ e variância $\sigma^{2}$ finitas;
-
-    -   O tamanho da amostra deve ser suficientemente grande (geralmente, $n \geq 30$).
+-   O tamanho da amostra deve ser suficientemente grande (geralmente, $n \geq 30$).[@kwak2017]
 
 <br>
 
@@ -1034,7 +1034,7 @@ gridExtra::grid.arrange(histograma_pop,
 
 -   O teorema central do limite implica que os métodos estatísticos que se aplicam a distribuições normais podem ser aplicados a outras distribuições quando suas suposições são satisfeitas.[@kwak2017]
 
--   Como o teorema central do limite determina a distribuição amostral $Z$ \@ref(eq:central-limit-theorem-z) das médias com tamanho amostral suficientemente grande, a média pode ser padronizada para uma distribuição normal com média 0 e variância 1, $N(0,1)$:[@kwak2017]
+-   Como o teorema central do limite determina a distribuição amostral $Z$ \@ref(eq:central-limit-theorem-z) das médias com tamanho amostral suficientemente grande, a média pode ser padronizada para uma distribuição normal com média 0 e variância 1, $N(0,1)$.[@kwak2017]
 
 <br>
 
@@ -1045,7 +1045,7 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}
 
 <br>
 
--   Para amostras com $n \geq 30$, a distribuição amostral Student-*t* se aproxima da distribuição normal padrão $Z$ e, portanto, as suposições sobre a distribuição populacional não são mais necessárias de acordo com o teorema central do limite. Neste cenário, a suposição de distribuição normal pode ser usada para a distribuição de probabilidade.[@kwak2017]
+-   Para amostras com $n \geq 30$, a distribuição amostral Student-*t* se aproxima da distribuição normal padrão $Z$ e, portanto, as suposições sobre a distribuição populacional não são mais necessárias de acordo com o teorema central do limite. A suposição de distribuição normal pode ser usada para a distribuição de probabilidade.[@kwak2017]
 
 <br>
 
@@ -1055,7 +1055,11 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}
 
 ### O que é regressão para a média?
 
--   Regressão para a média[@galton1886] é um fenômeno estatístico que ocorre quando uma variável aleatória $X$ é medida na mesma unidade de análise em dois ou mais momentos diferentes, $X_{1}$, $X_{2}$, ..., $X_{t}$ e $X_{t}$ é mais próximo da média populacional do que $X_{1}$, ou seja, $E(X_{t})$ é mais próxima de $E(X)$ do que $E(X_{1})$ é de $E(X)$.[@barnett2004]
+-   Regressão para a média[@galton1886] é um fenômeno estatístico que ocorre quando uma variável $X$ medida na mesma unidade de análise em dois ou mais momentos diferentes, $X_{1}$, $X_{2}$, ..., $X_{t}$ e $X_{t}$ é mais próxima da média populacional do que $X_{1}$, ou seja, $E(X_{t})$ é mais próxima de $E(X)$ do que $E(X_{1})$ é de $E(X)$.[@barnett2004]
+
+- Regressão para a média[@galton1886] é um fenômeno estatístico que ocorre quando uma variável $X$ é medida na mesma unidade de análise em dois ou mais momentos diferentes, $X_{1}$, $X_{2}$, ..., $X_{t}$, e $X_{t}$ tende a apresentar valores mais próximos da média populacional do que $X_{1}$.[@barnett2004]
+
+- Assim, $E(X_{t})$ tende a estar mais próxima de $E(X)$ do que $E(X_{1})$.[@barnett2004]
 
 -   O valor real --- sem erros aleatório ou sistemático --- em geral não é conhecido, mas pode ser estimado pela média de várias observações.[@barnett2004]
 
