@@ -5,6 +5,7 @@
   </w:r>
 </w:p>
 ```
+
 # **Regressão** {#regressao}
 
 <br>
@@ -100,6 +101,227 @@ Y_2 &= \beta_{02} + \beta_{21} X_1 + \beta_{22} X_2 + \dots + \beta_{2n} X_n + \
 &\vdots \\
 Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \epsilon_m
 \end{align}
+
+<br>
+
+### O que são análises de regressão segmentada?
+
+- A regressão segmentada é uma abordagem frequentemente utilizada para análise de séries temporais interrompidas, permitindo estimar alterações no nível e/ou na tendência do desfecho após a intervenção.[@lopezbernal2016a]
+
+- Modelos de regressão segmentada podem ser implementados utilizando regressão linear, Poisson, logística ou modelos multinível, dependendo da natureza do desfecho e da estrutura dos dados.[@kontopantelis2015]
+
+- Diferentes modelos de impacto podem ser especificados, incluindo mudanças abruptas de nível, mudanças graduais de tendência, efeitos temporários ou efeitos com período de latência.[@lopezbernal2016a]
+
+- Entre os modelos mais utilizados, destacam-se os modelos com mudança imediata de nível, mudança de tendência e mudança simultânea de nível e tendência.[@lopezbernal2016a]
+
+- Modelo com mudança imediata de nível \@ref(eq:its1), utilizado quando se espera um efeito abrupto após a intervenção, sem alteração na tendência temporal.
+
+<br>
+
+\begin{equation}
+(\#eq:its1)
+Y_t = \beta_0 + \beta_1 T + \beta_2 X_t
+\end{equation}
+
+<br>
+
+- Modelo com mudança de tendência \@ref(eq:its2), utilizado quando a intervenção altera gradualmente a inclinação da série temporal, sem mudança imediata no nível.
+
+<br>
+
+\begin{equation}
+(\#eq:its2)
+Y_t = \beta_0 + \beta_1 T + \beta_3 TX_t
+\end{equation}
+
+<br>
+
+- Modelo com mudança simultânea de nível e tendência \@ref(eq:its3), considerado o modelo ITS mais completo e frequentemente utilizado, permitindo estimar alterações imediatas e graduais após a intervenção.[@lopezbernal2016a]
+
+<br>
+
+\begin{equation}
+(\#eq:its3)
+Y_t = \beta_0 + \beta_1 T + \beta_2 X_t + \beta_3 TX_t
+\end{equation}
+
+<br>
+
+- A variável $T$ representa o tempo transcorrido desde o início do estudo, sendo expressa na unidade correspondente à frequência das observações, como meses ou anos.[@lopezbernal2016a]
+
+- A variável $X_t$ representa uma variável indicadora (dummy) da intervenção, codificada como 0 no período pré-intervenção e 1 no período pós-intervenção.[@lopezbernal2016a]
+
+- A variável $Y_t$ representa o valor do desfecho observado no tempo $t$.[@lopezbernal2016a]
+O coeficiente $\beta_0$ representa o nível inicial do desfecho no tempo $T = 0$.[@lopezbernal2016a]
+
+- O coeficiente $\beta_1$ representa a tendência temporal pré-intervenção, indicando a variação esperada do desfecho ao longo do tempo antes da implementação da intervenção.[@lopezbernal2016a]
+
+- O coeficiente $\beta_2$ representa a mudança imediata no nível do desfecho após a intervenção.[@lopezbernal2016a]
+
+- O coeficiente $\beta_3$ representa a mudança na inclinação da tendência temporal após a intervenção.[@lopezbernal2016a]
+
+- O termo de interação $TX_t$ representa a alteração da inclinação da tendência temporal após a intervenção.[@lopezbernal2016a]
+
+<br>
+
+```{r regressao-segmentada, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Modelos de regressão segmentada."}
+library(patchwork)
+
+# reproducibilidade
+set.seed(123)
+
+# Configurações gerais
+n <- 60
+intervention_time <- 31
+time <- 1:n
+
+# Variável de intervenção
+Xt <- ifelse(time >= intervention_time, 1, 0)
+
+# Tempo após intervenção
+time_after <- ifelse(time >= intervention_time,
+                     time - intervention_time + 1,
+                     0)
+
+# Modelo 1
+# Mudança imediata de nível
+beta0_1 <- 100
+beta1_1 <- 0.5
+beta2_1 <- -15
+
+trend1 <- beta0_1 +
+  beta1_1 * time +
+  beta2_1 * Xt
+
+y1 <- trend1 + rnorm(n, 0, 2)
+
+data1 <- data.frame(
+  time = time,
+  y = y1,
+  trend = trend1,
+  model = "Mudança imediata de nível",
+  period = ifelse(time < intervention_time,
+                  "Pré",
+                  "Pós")
+)
+
+# Modelo 2
+# Mudança de tendência
+beta0_2 <- 100
+beta1_2 <- 0.5
+beta3_2 <- -1.0
+
+trend2 <- beta0_2 +
+  beta1_2 * time +
+  beta3_2 * time_after
+
+y2 <- trend2 + rnorm(n, 0, 2)
+
+data2 <- data.frame(
+  time = time,
+  y = y2,
+  trend = trend2,
+  model = "Mudança de tendência",
+  period = ifelse(time < intervention_time,
+                  "Pré",
+                  "Pós")
+)
+
+# Modelo 3
+# Mudança de nível e tendência
+beta0_3 <- 100
+beta1_3 <- 0.5
+beta2_3 <- -12
+beta3_3 <- -0.8
+
+trend3 <- beta0_3 +
+  beta1_3 * time +
+  beta2_3 * Xt +
+  beta3_3 * time_after
+
+y3 <- trend3 + rnorm(n, 0, 2)
+
+data3 <- data.frame(
+  time = time,
+  y = y3,
+  trend = trend3,
+  model = "Mudança de nível e tendência",
+  period = ifelse(time < intervention_time,
+                  "Pré",
+                  "Pós")
+)
+
+# Função para criar gráficos
+plot_its <- function(data){
+  ggplot2::ggplot(data, ggplot2::aes(x = time, y = y)) +
+    # Série observada
+    ggplot2::geom_line(
+      color = "grey40",
+      alpha = 0.5
+    ) +
+    ggplot2::geom_point(
+      size = 1.5,
+      alpha = 0.7,
+      color = "grey40"
+    ) +
+    # Linha da intervenção
+    ggplot2::geom_vline(
+      xintercept = intervention_time,
+      linetype = "dashed",
+      color = "grey40"
+    ) +
+    # Tendência pré-intervenção
+    ggplot2::geom_line(
+      data = subset(data, period == "Pré"),
+      ggplot2::aes(y = trend),
+      linewidth = 1.3,
+      color = "grey20"
+    ) +
+    # Tendência pós-intervenção
+    ggplot2::geom_line(
+      data = subset(data, period == "Pós"),
+      aes(y = trend),
+      linewidth = 1.3,
+      color = "grey20"
+    ) +
+    ggplot2::labs(
+      x = "Tempo",
+      y = "Desfecho",
+      title = unique(data$model)
+    ) +
+    ggplot2::theme_classic(base_size = 13) +
+    ggplot2::theme(
+      panel.grid = ggplot2::element_blank(),
+      axis.line = ggplot2::element_line(
+        color = "grey30",
+        linewidth = 0.7
+      ),
+      axis.ticks = ggplot2::element_line(
+        color = "grey30"
+      ),
+      axis.text = ggplot2::element_text(
+        color = "grey20"
+      ),
+      axis.title = ggplot2::element_text(
+        color = "grey20"
+      ),
+      plot.title = ggplot2::element_text(
+        color = "grey20",
+        face = "bold"
+      )
+    )
+}
+
+# Criar painéis
+p1 <- plot_its(data1)
+p2 <- plot_its(data2)
+p3 <- plot_its(data3)
+
+# Combinar verticalmente
+final_plot <- p1 / p2 / p3
+
+final_plot
+```
 
 <br>
 

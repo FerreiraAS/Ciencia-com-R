@@ -1,8 +1,8 @@
 ```{=openxml}
 <w:p>
-<w:r>
-<w:br w:type="page"/>
-</w:r>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
 </w:p>
 ```
 
@@ -44,7 +44,159 @@
 
 <br>
 
-```{r its, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = " Exemplo de análise de série temporal interrompida utilizando regressão segmentada. A linha azul representa os valores preditos pelo modelo, enquanto a linha tracejada representa o cenário contrafactual. A linha pontilhada indica o momento da intervenção."}
+```{r its-table, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+library(lubridate)
+
+# Simulated dataset
+set.seed(123)
+
+# Monthly observations
+n <- 72
+
+# Intervention at month 37
+intervention_time <- 37
+
+# Time variable
+time <- 1:n
+
+# Intervention indicator
+intervention <- ifelse(time >= intervention_time, 1, 0)
+
+# Time after intervention
+time_after <- ifelse(time >= intervention_time,
+                     time - intervention_time + 1,
+                     0)
+
+# Generate outcome
+# Baseline level
+beta0 <- 100
+
+# Pre-intervention trend
+beta1 <- 0.5
+
+# Immediate level change
+beta2 <- -12
+
+# Post-intervention slope change
+beta3 <- -0.8
+
+# Seasonal component
+seasonality <- 8 * sin(2 * pi * time / 12)
+
+# Random noise
+error <- rnorm(n, mean = 0, sd = 4)
+
+# Outcome
+y <- beta0 +
+  beta1 * time +
+  beta2 * intervention +
+  beta3 * time_after +
+  seasonality +
+  error
+
+# Build dataframe
+data_its <- tibble::tibble(
+  month = seq.Date(
+    from = as.Date("2018-01-01"),
+    by = "month",
+    length.out = n
+  ),
+  time,
+  intervention,
+  time_after,
+  y
+)
+
+# Segmented regression model
+model_its <- lm(
+  y ~ time + intervention + time_after,
+  data = data_its
+)
+
+# Predicted values
+data_its <- data_its %>%
+  dplyr::mutate(
+    predicted = predict(model_its)
+  )
+
+# Mostrar primeiras e últimas linhas da base
+# Mostrar primeiras e últimas linhas da base
+preview_data <- dplyr::bind_rows(
+  head(data_its, 5) %>%
+    dplyr::select(
+      month,
+      time,
+      intervention,
+      time_after,
+      y
+    ) %>%
+    dplyr::mutate(dplyr::across(everything(), as.character)),
+
+  tibble::tibble(
+    month = "...",
+    time = "...",
+    intervention = "...",
+    time_after = "...",
+    y = "..."
+  ),
+
+  tail(data_its, 5) %>%
+    dplyr::select(
+      month,
+      time,
+      intervention,
+      time_after,
+      y
+    ) %>%
+    dplyr::mutate(dplyr::across(everything(), as.character))
+)
+
+# exibe a tabela de dados
+knitr::kable(
+  preview_data,
+  col.names = c(
+    "Month",
+    "Time",
+    "Intervention",
+    "Time After",
+    "Outcome"
+  ),
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE,
+  caption = "Exemplo de base de dados simulada para análise de série temporal interrompida. A tabela apresenta as primeiras e últimas linhas da base, com um resumo do período intermediário indicado por reticências."
+) %>%
+  kableExtra::kable_styling(
+    full_width = FALSE,
+    position = "center",
+    latex_options = c("hold_position"),
+    bootstrap_options = c(
+      "striped",
+      "hover",
+      "condensed",
+      "responsive"
+    )
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE
+  ) %>%
+  kableExtra::row_spec(
+    6,
+    italic = TRUE,
+    color = "gray"
+  ) %>%
+  kableExtra::column_spec(
+    1,
+    bold = TRUE
+  )
+```
+
+```{r its-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = " Exemplo de análise de série temporal interrompida utilizando regressão segmentada. A linha azul representa os valores preditos pelo modelo, enquanto a linha tracejada representa o cenário contrafactual. A linha pontilhada indica o momento da intervenção."}
+library(dplyr)
 library(lubridate)
 
 # Simulated dataset
@@ -183,31 +335,6 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 - A inferência sobre o efeito da intervenção é baseada na diferença entre os valores observados após a intervenção e os valores esperados segundo o cenário contrafactual.[@lopezbernal2016a]
 
 - A especificação inadequada do modelo contrafactual pode levar à interpretação incorreta do efeito da intervenção.[@lopezbernal2016a]
-
-<br>
-
-### O que é regressão segmentada em séries temporais interrompidas?
-
-- A regressão segmentada é uma abordagem frequentemente utilizada para análise de séries temporais interrompidas, permitindo estimar alterações no nível e/ou na tendência do desfecho após a intervenção.[@lopezbernal2016a]
-
-- Em modelos ITS \@ref(eq:its1), o coeficiente associado ao tempo representa a tendência pré-intervenção, enquanto os coeficientes relacionados à intervenção representam mudanças imediatas de nível e alterações na inclinação da tendência temporal.[@lopezbernal2016a]
-
-<br>
-
-\begin{equation}
-(\#eq:its1)
-Y_t = \beta_0 + \beta_1 T + \beta_2 X_t + \beta_3 T X_t
-\end{equation}
-
-<br>
-
-- Nesse modelo, $\beta_0$ representa o nível inicial do desfecho, $\beta_1$ representa a tendência temporal pré-intervenção, $\beta_2$ representa a mudança imediata após a intervenção e $\beta_3$ representa a mudança na inclinação da tendência após a intervenção.[@lopezbernal2016a]
-
-- O termo de interação $TX_t$ representa a alteração da inclinação da tendência temporal após a intervenção.[@lopezbernal2016a]
-
-- Diferentes modelos de impacto podem ser especificados, incluindo mudanças abruptas de nível, mudanças graduais de tendência, efeitos temporários ou efeitos com período de latência.[@lopezbernal2016a]
-
-- Modelos ITS podem ser implementados utilizando regressão linear, Poisson, logística ou modelos multinível, dependendo da natureza do desfecho e da estrutura dos dados.[@kontopantelis2015]
 
 <br>
 

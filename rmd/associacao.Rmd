@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Associação** {#associacao}
 
 <br>
@@ -122,7 +121,7 @@ tbl_no_yates
 
 <br>
 
-## Teste exato de Fisher[@McHugh2013; @Kim2017a]
+## Teste exato (condicional) de Fisher[@McHugh2013; @Kim2017a]
 
 <br>
 
@@ -173,6 +172,138 @@ tbl_fisher <-
   )
 
 tbl_fisher
+```
+
+<br>
+
+## Teste exato (incondicional) de Barnard[@barnard1947a]
+
+<br>
+
+```{r barnard, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(1234)
+
+# Dados simulados
+n <- 100L
+
+trial <-
+  tibble::tibble(
+    Tratamento = factor(
+      sample(
+        c("A", "B"),
+        size = n,
+        replace = TRUE,
+        prob = c(0.5, 0.5)
+      ),
+      levels = c("A", "B")
+    )
+  ) %>%
+  dplyr::mutate(
+    p_resp = dplyr::if_else(
+      Tratamento == "A",
+      0.7,
+      0.4
+    ),
+
+    y = rbinom(
+      n = n,
+      size = 1,
+      prob = p_resp
+    ),
+
+    Resposta = factor(
+      dplyr::if_else(
+        y == 1,
+        "Respondeu",
+        "Não respondeu"
+      ),
+      levels = c(
+        "Respondeu",
+        "Não respondeu"
+      )
+    )
+  ) %>%
+  dplyr::select(
+    Tratamento,
+    Resposta
+  )
+
+# Tabela 2x2
+tab <- table(
+  trial$Tratamento,
+  trial$Resposta
+)
+
+# Teste Exato de Barnard
+barnard_res <-
+  Barnard::barnard.test(
+    n1 = tab[1, 1],
+    n2 = tab[1, 2],
+    n3 = tab[2, 1],
+    n4 = tab[2, 2]
+  )
+
+# p-valor escalar
+barnard_p <-
+  as.numeric(
+    barnard_res$p.value[1]
+  )
+
+# Tamanho do efeito
+cramer_v <-
+  rstatix::cramer_v(
+    trial$Tratamento,
+    trial$Resposta
+  )
+
+# gtsummary table
+tbl_barnard <-
+  trial %>%
+  gtsummary::tbl_cross(
+    row = Tratamento,
+    col = Resposta,
+    statistic = "{n} ({p}%)",
+    digits = 0,
+    percent = "cell",
+    margin = c("row", "column"),
+    missing = "no",
+    margin_text = "Total"
+  ) %>%
+
+  # adicionar coluna manualmente
+  gtsummary::modify_table_body(
+    ~ .x %>%
+      dplyr::mutate(
+        p.value = dplyr::case_when(
+          row_type == "label" ~
+            gtsummary::style_pvalue(
+              barnard_p,
+              digits = 3
+            ),
+          TRUE ~ ""
+        )
+      )
+  ) %>%
+  gtsummary::modify_header(
+    p.value ~ "**P-valor**"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption(
+    "**Teste Exato de Barnard**"
+  ) %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    source_note =
+      paste0(
+        "Tamanho do efeito (Cramér's V): ",
+        round(cramer_v, 3)
+      )
+  )
+
+tbl_barnard
 ```
 
 <br>
