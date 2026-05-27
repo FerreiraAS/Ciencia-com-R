@@ -29,6 +29,8 @@
 <br>
 
 ```{r abelson, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.cap='Simulação do paradoxo de Abelson. Mesmo com uma diferença pequena de habilidade entre dois jogadores (A e B), o jogador B tende a vencer a maioria das tentativas devido ao alto ruído por tentativa. No entanto, a análise por tentativa mostra um baixo valor de $R^2$, indicando que a habilidade explica pouco da variação no desempenho observado. Isso ilustra como um fator causal pode ser importante na prática, mesmo quando a variância explicada é baixa.'}
+library("broom.helpers")
+
 # reprodutibilidade
 set.seed(123)
 

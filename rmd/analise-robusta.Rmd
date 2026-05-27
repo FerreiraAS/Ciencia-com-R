@@ -5,6 +5,7 @@
   </w:r>
 </w:p>
 ```
+
 # **Análise robusta** {#analise-robusta}
 
 <br>
@@ -15,33 +16,33 @@
 
 ### O que é análise robusta?
 
--   Análise robusta é uma abordagem estatística que busca fornecer resultados confiáveis mesmo quando as suposições clássicas dos modelos estatísticos são violadas.[@WRS2]
+- Análise robusta é uma abordagem estatística que busca fornecer resultados confiáveis mesmo quando as suposições clássicas dos modelos estatísticos são violadas.[@WRS2]
 
 <br>
 
 ### Por que usar análise robusta?
 
--   Métodos clássicos como ANOVA e regressão por mínimos quadrados assumem normalidade e homocedasticidade — suposições frequentemente violadas na prática. Violações dessas suposições podem comprometer os resultados, reduzindo o poder estatístico, distorcendo os intervalos de confiança e obscurecendo as reais diferenças entre grupos.[@WRS2]
+- Métodos clássicos como ANOVA e regressão por mínimos quadrados assumem normalidade e homocedasticidade — suposições frequentemente violadas na prática. Violações dessas suposições podem comprometer os resultados, reduzindo o poder estatístico, distorcendo os intervalos de confiança e obscurecendo as reais diferenças entre grupos.[@WRS2]
 
--   Testar previamente as suposições não é suficiente: testes de homocedasticidade têm baixo poder e não garantem segurança analítica.[@WRS2]
+- Testar previamente as suposições não é suficiente: testes de homocedasticidade têm baixo poder e não garantem segurança analítica.[@WRS2]
 
--   Métodos estatísticos robustos oferecem uma solução mais segura e eficaz, lidando melhor com dados não ideais.[@WRS2]
+- Métodos estatísticos robustos oferecem uma solução mais segura e eficaz, lidando melhor com dados não ideais.[@WRS2]
 
 <br>
 
 ### Quando usar análise robusta?
 
--   Em alguns casos, os métodos robustos confirmam os resultados clássicos; em outros, revelam interpretações completamente diferentes. A única forma de saber o impacto real dos métodos robustos é usá-los e comparar com os métodos tradicionais.[@WRS2]
+- Em alguns casos, os métodos robustos confirmam os resultados clássicos; em outros, revelam interpretações completamente diferentes. A única forma de saber o impacto real dos métodos robustos é usá-los e comparar com os métodos tradicionais.[@WRS2]
 
--   Mínimos e máximos são parâmetros descritivos, mas em certas condições podem se tornar discrepantes ou influentes, distorcendo análises. Nesses casos, a análise robusta oferece alternativas mais seguras.[@REF]
+- Mínimos e máximos são parâmetros descritivos, mas em certas condições podem se tornar discrepantes ou influentes, distorcendo análises. Nesses casos, a análise robusta oferece alternativas mais seguras.[@REF]
 
 <br>
 
 ### Por que métodos robustos são preferíveis?
 
--   Métodos robustos têm a vantagem de resistir à influência de valores extremos, fornecendo medidas de posição e dispersão mais estáveis.[@daszykowski2007]
+- Métodos robustos têm a vantagem de resistir à influência de valores extremos, fornecendo medidas de posição e dispersão mais estáveis.[@daszykowski2007]
 
--   Estimadores robustos oferecem maior segurança na presença de até 50% de contaminação nos dados, o que representa um ganho significativo em relação aos métodos clássicos.[@daszykowski2007]
+- Estimadores robustos oferecem maior segurança na presença de até 50% de contaminação nos dados, o que representa um ganho significativo em relação aos métodos clássicos.[@daszykowski2007]
 
 <br>
 
@@ -51,15 +52,15 @@
 
 ### O que são valores discrepantes (*outliers*)?
 
--   Em termos gerais, um valor discrepante --- "fora da curva" ou *outlier* --- é uma observação que possui um valor relativamente grande ou pequeno em comparação com a maioria das observações.[@zuur2009; @leys2019]
+- Em termos gerais, um valor discrepante --- "fora da curva" ou *outlier* --- é uma observação que possui um valor relativamente grande ou pequeno em comparação com a maioria das observações.[@zuur2009; @leys2019]
 
--   Um valor discrepante é uma observação incomum que exerce influência indevida em uma análise.[@zuur2009]
+- Um valor discrepante é uma observação incomum que exerce influência indevida em uma análise.[@zuur2009]
 
--   Valores discrepantes são dados com valores altos de resíduos.[@leys2019]
+- Valores discrepantes são dados com valores altos de resíduos.[@leys2019]
 
--   Nem todo valor extremo é um valor discrepante, e nem todo valor discrepante será influente.[@REF]
+- Nem todo valor extremo é um valor discrepante, e nem todo valor discrepante será influente.[@REF]
 
--   Alguns valores discrepantes são apenas pontos incomuns, outros de fato mudam os resultados e por isso são chamados de influentes.[@REF]
+- Alguns valores discrepantes são apenas pontos incomuns, outros de fato mudam os resultados e por isso são chamados de influentes.[@REF]
 
 <br>
 
@@ -128,91 +129,91 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 ### Quais são os tipos de valores discrepantes?
 
--   Valores discrepantes podem ser categorizados em três subtipos: *outliers* de erro, *outliers* interessantes e *outliers* aleatórios.[@leys2019]
+- Valores discrepantes podem ser categorizados em três subtipos: *outliers* de erro, *outliers* interessantes e *outliers* aleatórios.[@leys2019]
 
--   Os valores discrepantes de erro são observações claramente não legítimas, distantes de outros dados devido a imprecisões por erro de mensuração e/ou codificação.[@leys2019]
+- Os valores discrepantes de erro são observações claramente não legítimas, distantes de outros dados devido a imprecisões por erro de mensuração e/ou codificação.[@leys2019]
 
--   Os valores discrepantes interessantes não são claramente erros, mas podem refletir um processo/mecanismo potencialmente interessante para futuras pesquisas.[@leys2019]
+- Os valores discrepantes interessantes não são claramente erros, mas podem refletir um processo/mecanismo potencialmente interessante para futuras pesquisas.[@leys2019]
 
--   Os valores discrepantes aleatórios são observações que resultam por acaso, sem qualquer padrão ou tendência conhecida.[@leys2019]
+- Os valores discrepantes aleatórios são observações que resultam por acaso, sem qualquer padrão ou tendência conhecida.[@leys2019]
 
--   Valores discrepantes podem ser univariados ou multivariados.[@leys2019]
+- Valores discrepantes podem ser univariados ou multivariados.[@leys2019]
 
 <br>
 
 ### Por que é importante avaliar valores discrepantes?
 
--   Excluir o valor discrepante implica em reduzir inadequadamente a variância, ao remover um valor que de fato pertence à distribuição considerada.[@leys2019]
+- Excluir o valor discrepante implica em reduzir inadequadamente a variância, ao remover um valor que de fato pertence à distribuição considerada.[@leys2019]
 
--   Manter os dados inalterados (mantendo o valor discrepante) implica em aumentar inadequadamente a variância, pois a observação não pertence à distribuição que fundamenta o experimento.[@leys2019]
+- Manter os dados inalterados (mantendo o valor discrepante) implica em aumentar inadequadamente a variância, pois a observação não pertence à distribuição que fundamenta o experimento.[@leys2019]
 
--   Em ambos os casos, uma decisão errada pode influenciar o erro do tipo I ($\alpha$ — rejeitar uma hipótese verdadeira) ou o erro do tipo II ($\beta$ — não rejeitar uma hipótese falsa).[@leys2019]
+- Em ambos os casos, uma decisão errada pode influenciar o erro do tipo I ($\alpha$ — rejeitar uma hipótese verdadeira) ou o erro do tipo II ($\beta$ — não rejeitar uma hipótese falsa).[@leys2019]
 
 <br>
 
 ### Como detectar valores discrepantes?
 
--   Na maioria das vezes, não há como saber de qual distribuição uma observação provém. Por isso, não é possível ter certeza se um valor é legítimo ou não dentro do contexto do experimento.[@leys2019]
+- Na maioria das vezes, não há como saber de qual distribuição uma observação provém. Por isso, não é possível ter certeza se um valor é legítimo ou não dentro do contexto do experimento.[@leys2019]
 
--   Recomenda-se seguir um procedimento em duas etapas: detectar possíveis candidatos a *outliers* usando ferramentas quantitativas; e gerenciar os outliers, decidindo manter, remover ou recodificar os valores, com base em informações qualitativas.[@leys2019]
+- Recomenda-se seguir um procedimento em duas etapas: detectar possíveis candidatos a *outliers* usando ferramentas quantitativas; e gerenciar os outliers, decidindo manter, remover ou recodificar os valores, com base em informações qualitativas.[@leys2019]
 
--   A detecção de outliers deve ser aplicada apenas uma vez no conjunto de dados; um erro comum é identificar e tratar os outliers (como remover ou recodificar) e, em seguida, reaplicar o procedimento no conjunto de dados já modificado.[@leys2019]
+- A detecção de outliers deve ser aplicada apenas uma vez no conjunto de dados; um erro comum é identificar e tratar os outliers (como remover ou recodificar) e, em seguida, reaplicar o procedimento no conjunto de dados já modificado.[@leys2019]
 
--   A detecção ou o tratamento dos *outliers* não deve ser realizada após a análise dos resultados, pois isso introduz viés nos resultados.[@leys2019]
+- A detecção ou o tratamento dos *outliers* não deve ser realizada após a análise dos resultados, pois isso introduz viés nos resultados.[@leys2019]
 
 <br>
 
 ### Quais são os métodos para detectar valores discrepantes?
 
--   Valores univariados são comumente considerados *outliers* quando são mais extremos do que a média ± (desvio padrão × constante), podenso essa constante ser 3 (99,7% das observações estão dentro de 3 desvios-padrão da média) ou 3,29 (99,9% estão dentro de 3,29 desvios-padrão).[@leys2019]
+- Valores univariados são comumente considerados *outliers* quando são mais extremos do que a média ± (desvio padrão × constante), podenso essa constante ser 3 (99,7% das observações estão dentro de 3 desvios-padrão da média) ou 3,29 (99,9% estão dentro de 3,29 desvios-padrão).[@leys2019]
 
--   Para detectar *outliers* univariados, recomenda-se o uso da Mediana da Desviação Absoluta (*Median Absolute Deviation*, MAD), calculado a partir de um intervalo em torno da mediana, multiplicado por uma constante (valor padrão: 1,4826).[@leys2013; @leys2019]
+- Para detectar *outliers* univariados, recomenda-se o uso da Mediana da Desviação Absoluta (*Median Absolute Deviation*, MAD), calculado a partir de um intervalo em torno da mediana, multiplicado por uma constante (valor padrão: 1,4826).[@leys2013; @leys2019]
 
--   Para detectar *outliers* multivariados, comumente utiliza-se a distância de Mahalanobis, que identifica valores muito distantes do centróide formado pela maioria dos dados (por exemplo, 99%).[@leys2019]
+- Para detectar *outliers* multivariados, comumente utiliza-se a distância de Mahalanobis, que identifica valores muito distantes do centróide formado pela maioria dos dados (por exemplo, 99%).[@leys2019]
 
--   Para detectar *outliers* multivariados, recomenda-se o Determinante de Mínima Covariância (*Minimum Covariance Determinant*, MCD), pois possui o maior ponto de quebra possível e utiliza a mediana, que é o indicador mais robusto em presença de *outliers*.[@leys2018; @leys2019]
+- Para detectar *outliers* multivariados, recomenda-se o Determinante de Mínima Covariância (*Minimum Covariance Determinant*, MCD), pois possui o maior ponto de quebra possível e utiliza a mediana, que é o indicador mais robusto em presença de *outliers*.[@leys2018; @leys2019]
 
 <br>
 
 ### Quais testes são apropriados para detectar valores discrepantes?
 
--   A escolha do método de detecção depende da natureza do outlier, se univariado ou multivariado.[@daszykowski2007]
+- A escolha do método de detecção depende da natureza do outlier, se univariado ou multivariado.[@daszykowski2007]
 
--   Para valores univariados, podem ser usados box-plots (com pontos além de 1,5 vezes o intervalo interquartílico), z-scores clássicos ($|z| > 2.5$ ou $|z| > 3$) ou z-scores robustos, que substituem média por mediana e desvio-padrão por estimadores robustos.[@daszykowski2007]
+- Para valores univariados, podem ser usados box-plots (com pontos além de 1,5 vezes o intervalo interquartílico), z-scores clássicos ($|z| > 2.5$ ou $|z| > 3$) ou z-scores robustos, que substituem média por mediana e desvio-padrão por estimadores robustos.[@daszykowski2007]
 
--   Para valores multivariados, recomenda-se a distância de Mahalanobis para medir o afastamento em relação ao centróide, com ajustes robustos de covariância como MCD (*Minimum Covariance Determinant*) ou MVE (*Minimum Volume Ellipsoid*).[@daszykowski2007]
+- Para valores multivariados, recomenda-se a distância de Mahalanobis para medir o afastamento em relação ao centróide, com ajustes robustos de covariância como MCD (*Minimum Covariance Determinant*) ou MVE (*Minimum Volume Ellipsoid*).[@daszykowski2007]
 
--   Técnicas baseadas em PCA robusta (ROBPCA, PP-PCA, SPCA, EPCA) também podem ser aplicadas para reduzir dimensionalidade e expor *outliers* mascarados.[@daszykowski2007]
+- Técnicas baseadas em PCA robusta (ROBPCA, PP-PCA, SPCA, EPCA) também podem ser aplicadas para reduzir dimensionalidade e expor *outliers* mascarados.[@daszykowski2007]
 
--   Métodos de *trimming* multivariado (MVT) podem iterativamente remover observações mais distantes, mas apresentam limitações em alta dimensionalidade.[@daszykowski2007]
+- Métodos de *trimming* multivariado (MVT) podem iterativamente remover observações mais distantes, mas apresentam limitações em alta dimensionalidade.[@daszykowski2007]
 
--   Estimadores com alto ponto de quebra, como o MCD, permitem detectar até 50% de *outliers* antes de comprometer a análise.[@daszykowski2007]
+- Estimadores com alto ponto de quebra, como o MCD, permitem detectar até 50% de *outliers* antes de comprometer a análise.[@daszykowski2007]
 
 <br>
 
 ### Como manejar os valores discrepantes?
 
--   Manter *outliers* pode ser uma boa decisão se a maioria desses valores realmente pertence à distribuição de interesse. Manter *outliers* que pertencem a uma distribuição alternativa pode ser problemático, pois um teste pode se tornar significativo apenas por causa de um ou poucos *outliers.*[@leys2019]
+- Manter *outliers* pode ser uma boa decisão se a maioria desses valores realmente pertence à distribuição de interesse. Manter *outliers* que pertencem a uma distribuição alternativa pode ser problemático, pois um teste pode se tornar significativo apenas por causa de um ou poucos *outliers.*[@leys2019]
 
--   Remover *outliers* pode ser eficaz quando eles distorcem a estimativa dos parâmetros da distribuição. Remover *outliers* que pertencem legitimamente à distribuição pode reduzir artificialmente a estimativa do erro.[@leys2019]
+- Remover *outliers* pode ser eficaz quando eles distorcem a estimativa dos parâmetros da distribuição. Remover *outliers* que pertencem legitimamente à distribuição pode reduzir artificialmente a estimativa do erro.[@leys2019]
 
--   Remover *outliers* leva à perda de observações, especialmente em conjuntos de dados com muitas variáveis, quando outliers univariados são excluídos em cada variável.[@leys2019]
+- Remover *outliers* leva à perda de observações, especialmente em conjuntos de dados com muitas variáveis, quando outliers univariados são excluídos em cada variável.[@leys2019]
 
--   Recodificar *outliers* evita a perda de uma grande quantidade de dados, mas deve ser baseada em argumentos razoáveis e convincentes.[@leys2019]
+- Recodificar *outliers* evita a perda de uma grande quantidade de dados, mas deve ser baseada em argumentos razoáveis e convincentes.[@leys2019]
 
--   Erros de observação e de medição são uma justificativa válida para descartar observações discrepantes.[@zuur2009]
+- Erros de observação e de medição são uma justificativa válida para descartar observações discrepantes.[@zuur2009]
 
 <br>
 
 ### Como conduzir análises com valores discrepantes?
 
--   É importante reportar se existem valores discrepantes e como foram tratados.[@zuur2009]
+- É importante reportar se existem valores discrepantes e como foram tratados.[@zuur2009]
 
--   Valores discrepantes na variável de desfecho podem exigir uma abordagem mais refinada, especialmente quando representam uma variação real na variável que está sendo medida.[@zuur2009]
+- Valores discrepantes na variável de desfecho podem exigir uma abordagem mais refinada, especialmente quando representam uma variação real na variável que está sendo medida.[@zuur2009]
 
--   Valores discrepantes em uma (co)variável podem surgir devido a um projeto experimental inadequado; nesse caso, abandonar a observação ou transformar a covariável são opções adequadas.[@zuur2009]
+- Valores discrepantes em uma (co)variável podem surgir devido a um projeto experimental inadequado; nesse caso, abandonar a observação ou transformar a covariável são opções adequadas.[@zuur2009]
 
--   Valores discrepantes podem ser recodificados usando a Winsorização,[@Tukey1963] que transforma os *outliers* em valores de percentis específicos (como o 5º e o 95º).[@leys2019]
+- Valores discrepantes podem ser recodificados usando a Winsorização,[@Tukey1963] que transforma os *outliers* em valores de percentis específicos (como o 5º e o 95º).[@leys2019]
 
 <br>
 
@@ -230,9 +231,9 @@ O pacote *outliers*[@outliers] fornece a função [*rm.outlier*](https://www.rdo
 
 ### Como lidar com *outliers* na análise exploratória de dados?
 
--   Após a detecção, três estratégias principais podem ser adotadas: (1) manter os outliers, (2) removê-los ou (3) recodificá-los (por exemplo, com Winsorização). A escolha deve ser justificada com base no contexto teórico e nas características do banco de dados. Idealmente, erros devem ser corrigidos ou removidos, enquanto outliers interessantes podem gerar novas hipóteses de pesquisa.[@leys2019]
+- Após a detecção, três estratégias principais podem ser adotadas: (1) manter os outliers, (2) removê-los ou (3) recodificá-los (por exemplo, com Winsorização). A escolha deve ser justificada com base no contexto teórico e nas características do banco de dados. Idealmente, erros devem ser corrigidos ou removidos, enquanto outliers interessantes podem gerar novas hipóteses de pesquisa.[@leys2019]
 
--   A decisão sobre como lidar com outliers deve ser definida *a priori* e preferencialmente registrada em plataformas de pré-registro. Essa prática aumenta a transparência, reduz a flexibilidade analítica e evita inflar taxas de erro tipo I.[@leys2019]
+- A decisão sobre como lidar com outliers deve ser definida *a priori* e preferencialmente registrada em plataformas de pré-registro. Essa prática aumenta a transparência, reduz a flexibilidade analítica e evita inflar taxas de erro tipo I.[@leys2019]
 
 <br>
 
@@ -242,7 +243,7 @@ O pacote *outliers*[@outliers] fornece a função [*rm.outlier*](https://www.rdo
 
 ### O que são valores influentes?
 
--   Valores influentes são observações que, se removidas, causariam uma mudança significativa nos resultados da análise estatística.[@REF]
+- Valores influentes são observações que, se removidas, causariam uma mudança significativa nos resultados da análise estatística.[@REF]
 
 <br>
 
@@ -311,19 +312,19 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 ### O que é função de influência?
 
--   A função de influência mede a sensibilidade de um estimador a pequenas contaminações nos dados. Um estimador é considerado robusto se sua função de influência for limitada, indicando que valores extremos não exercem impacto desproporcional.[@loh2025]
+- A função de influência mede a sensibilidade de um estimador a pequenas contaminações nos dados. Um estimador é considerado robusto se sua função de influência for limitada, indicando que valores extremos não exercem impacto desproporcional.[@loh2025]
 
 <br>
 
 ### O que é ponto de quebra?
 
--   O ponto de quebra representa a fração mínima de observações contaminadas necessária para distorcer um estimador até o infinito. Por exemplo, a média tem ponto de quebra 0, enquanto a mediana atinge o ponto de quebra máximo (50%).[@loh2025]
+- O ponto de quebra representa a fração mínima de observações contaminadas necessária para distorcer um estimador até o infinito. Por exemplo, a média tem ponto de quebra 0, enquanto a mediana atinge o ponto de quebra máximo (50%).[@loh2025]
 
 <br>
 
 ### Como detectar valores influentes?
 
--   A alavancagem (*leverage*) mede o quão distante uma observação está dos valores médios das variáveis independentes. Observações com alta alavancagem têm o potencial de influenciar significativamente a linha de regressão.[@REF]
+- A alavancagem (*leverage*) mede o quão distante uma observação está dos valores médios das variáveis independentes. Observações com alta alavancagem têm o potencial de influenciar significativamente a linha de regressão.[@REF]
 
 <br>
 
@@ -446,7 +447,7 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = leverage, y = resid_std)) +
 
 ### O que é Winsorização?
 
--   Winsorização é uma técnica que substitui os valores extremos (*outliers*) por valores menos extremos, preservando a estrutura dos dados. Isso é feito definindo limites superior e inferior e substituindo os valores que ultrapassam esses limites pelos próprios limites.[@WRS2]
+- Winsorização é uma técnica que substitui os valores extremos (*outliers*) por valores menos extremos, preservando a estrutura dos dados. Isso é feito definindo limites superior e inferior e substituindo os valores que ultrapassam esses limites pelos próprios limites.[@WRS2]
 
 <br>
 
@@ -480,11 +481,11 @@ ggplot2::ggplot(df, ggplot2::aes(x = grupo, y = valor, fill = grupo)) +
 
 ### Quais são as alternativas à Winsorização?
 
--   Podar (*trimming*): remove diretamente uma fração fixa das observações mais extremas.[@REF]
+- Podar (*trimming*): remove diretamente uma fração fixa das observações mais extremas.[@REF]
 
--   Estimadores robustos: resistem à influência de outliers sem transformar os dados.[@REF]
+- Estimadores robustos: resistem à influência de outliers sem transformar os dados.[@REF]
 
--   Transformações de variáveis: reduzem a assimetria e impacto de valores extremos, mas mudam a escala interpretativa.[@REF]
+- Transformações de variáveis: reduzem a assimetria e impacto de valores extremos, mas mudam a escala interpretativa.[@REF]
 
 <br>
 
