@@ -131,67 +131,257 @@ graphics::par(op)
 
 <br>
 
-```{r rede-neural, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação esquemática de uma rede neural simples com camada de entrada e saída."}
-## ===== configuração geral =====
-graphics::par(mar = c(0,0,0,0))
-diagram::openplotmat()  # sem título
+```{r rede-neural, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Esquema de diferentes arquiteturas de redes neurais artificiais.", fig.width=15, fig.height=10, out.width="100%"}
+# CARREGAR PACOTES
+library(patchwork)
 
-# raios / estética
-r_node  <- 0.045   # raio dos neurônios
-lwd_ar  <- 1.4     # espessura das arestas
-arr_len <- 0.25    # tamanho da seta
+# FUNÇÕES AUXILIARES
 
-# posições (somente entrada e saída)
-x_in  <- 0.15
-x_out <- 0.85
-
-y_in  <- c(0.65, 0.50, 0.35)  # 3 entradas
-y_out <- 0.50                 # 1 saída
-
-# pontos (x,y)
-pos_in  <- cbind(rep(x_in,  length(y_in)),  y_in)
-pos_out <- cbind(x_out, y_out)
-
-## ===== helper: encurtar setas =====
-encurta <- function(p1, p2, dist) {
-  v <- p2 - p1
-  v <- v / sqrt(sum(v^2))
-  p2 - v * dist
-}
-
-## ===== desenhar nós =====
-# entradas
-for (i in seq_len(nrow(pos_in))) {
-  diagram::textellipse(
-    pos_in[i,], r_node, r_node,
-    lab = paste0("x", i),
-    box.col = "lightblue"
+# Criar camada de nós
+create_layer <- function(n, x, type = "hidden") {
+  # posições Y centralizadas
+  y_positions <- seq(
+    from = (n - 1) / 2,
+    to   = -(n - 1) / 2,
+    length.out = n
+  )
+  data.frame(
+    id = paste0(type, "_", x, "_", seq_len(n)),
+    x = x,
+    y = y_positions,
+    type = type,
+    stringsAsFactors = FALSE
   )
 }
 
-# saída
-diagram::textellipse(
-  pos_out, r_node, r_node,
-  lab = "y",
-  box.col = "salmon"
+# Conectar duas camadas completamente
+connect_layers <- function(layer1, layer2) {
+  expand.grid(
+    from = layer1$id,
+    to = layer2$id,
+    stringsAsFactors = FALSE
+  )
+}
+
+# Plot principal
+plot_network <- function(layers, edges, title = "") {
+  nodes <- do.call(rbind, layers)
+  graph <- igraph::graph_from_data_frame(
+    d = edges,
+    vertices = nodes,
+    directed = TRUE
+  )
+  ggraph::ggraph(
+    graph,
+    layout = "manual",
+    x = nodes$x,
+    y = nodes$y
+  ) +
+    # EDGES
+    ggraph::geom_edge_link(
+      color = "gray40",
+      alpha = 0.7,
+      width = 0.5
+    ) +
+    # NODES
+    ggraph::geom_node_point(
+      ggplot2::aes(fill = type),
+      shape = 21,
+      color = "black",
+      stroke = 1.2,
+      size = 8
+    ) +
+    ggplot2::scale_fill_manual(
+      name = "Tipo de camada",
+      values = c(
+        input = "#FFD700",
+        hidden = "#00C9A7",
+        output = "#FF4D94",
+        recurrent = "#3399FF",
+        memory = "#AA66FF"
+      ),
+      labels = c(
+        input = "Entrada",
+        hidden = "Oculta",
+        output = "Saída",
+        recurrent = "Recorrente",
+        memory = "Memória"
+      )
+    ) + 
+    ggplot2::ggtitle(title) +
+    ggplot2::theme_void() +
+    ggplot2::theme(
+      plot.title = ggplot2::element_text(
+        hjust = 0.5,
+        face = "bold",
+        size = 13
+      ),
+      legend.position = "bottom"
+    )
+}
+
+# 1. PERCEPTRON
+input_p <- create_layer(3, 1, "input")
+output_p <- create_layer(1, 2, "output")
+
+edges_p <- connect_layers(input_p, output_p)
+
+p1 <- plot_network(
+  list(input_p, output_p),
+  edges_p,
+  "Perceptron"
 )
 
-## ===== conectar entrada -> saída =====
-for (i in seq_len(nrow(pos_in))) {
-  from <- encurta(pos_out, pos_in[i,], r_node)
-  to   <- encurta(pos_in[i,], pos_out, r_node)
-  diagram::straightarrow(
-    from = from,
-    to   = to,
-    arr.pos = 0.9,
-    arr.length = arr_len,
-    lwd = lwd_ar
-  )
-}
+# 2. FEED FORWARD NETWORK
+input_ff <- create_layer(3, 1, "input")
+hidden_ff <- create_layer(4, 2, "hidden")
+output_ff <- create_layer(2, 3, "output")
 
-## ===== rótulos das camadas =====
-graphics::text(x_in,  0.85, "Entradas", cex = 0.9)
-graphics::text(x_out, 0.85, "Saída",    cex = 0.9)
+edges_ff <- rbind(
+  connect_layers(input_ff, hidden_ff),
+  connect_layers(hidden_ff, output_ff)
+)
+
+p2 <- plot_network(
+  list(input_ff, hidden_ff, output_ff),
+  edges_ff,
+  "RN Feed Forward"
+)
+
+# 3. RECURRENT NEURAL NETWORK
+input_rnn <- create_layer(3, 1, "input")
+hidden_rnn <- create_layer(4, 2, "recurrent")
+output_rnn <- create_layer(2, 3, "output")
+
+edges_rnn <- rbind(
+  connect_layers(input_rnn, hidden_rnn),
+  connect_layers(hidden_rnn, output_rnn)
+)
+
+# conexões recorrentes
+recurrent_edges <- data.frame(
+  from = hidden_rnn$id,
+  to = hidden_rnn$id
+)
+
+edges_rnn <- rbind(edges_rnn, recurrent_edges)
+
+p3 <- plot_network(
+  list(input_rnn, hidden_rnn, output_rnn),
+  edges_rnn,
+  "RN Recorrente"
+)
+
+# 4. DEEP NEURAL NETWORK
+input_dnn <- create_layer(4, 1, "input")
+
+h1_dnn <- create_layer(5, 2, "hidden")
+h2_dnn <- create_layer(5, 3, "hidden")
+h3_dnn <- create_layer(5, 4, "hidden")
+
+output_dnn <- create_layer(2, 5, "output")
+
+edges_dnn <- rbind(
+  connect_layers(input_dnn, h1_dnn),
+  connect_layers(h1_dnn, h2_dnn),
+  connect_layers(h2_dnn, h3_dnn),
+  connect_layers(h3_dnn, output_dnn)
+)
+
+p4 <- plot_network(
+  list(
+    input_dnn,
+    h1_dnn,
+    h2_dnn,
+    h3_dnn,
+    output_dnn
+  ),
+  edges_dnn,
+  "RN Profunda"
+)
+
+# 5. AUTOENCODER
+input_ae <- create_layer(5, 1, "input")
+enc1_ae <- create_layer(4, 2, "hidden")
+bottleneck_ae <- create_layer(2, 3, "memory")
+dec1_ae <- create_layer(4, 4, "hidden")
+output_ae <- create_layer(5, 5, "output")
+
+edges_ae <- rbind(
+  connect_layers(input_ae, enc1_ae),
+  connect_layers(enc1_ae, bottleneck_ae),
+  connect_layers(bottleneck_ae, dec1_ae),
+  connect_layers(dec1_ae, output_ae)
+)
+
+p5 <- plot_network(
+  list(
+    input_ae,
+    enc1_ae,
+    bottleneck_ae,
+    dec1_ae,
+    output_ae
+  ),
+  edges_ae,
+  "Autoencoder"
+)
+
+# 6. CNN STYLE NETWORK
+input_cnn <- create_layer(6, 1, "input")
+conv1_cnn <- create_layer(5, 2, "hidden")
+conv2_cnn <- create_layer(4, 3, "hidden")
+dense_cnn <- create_layer(3, 4, "hidden")
+output_cnn <- create_layer(2, 5, "output")
+edges_cnn <- rbind(
+  connect_layers(input_cnn, conv1_cnn),
+  connect_layers(conv1_cnn, conv2_cnn),
+  connect_layers(conv2_cnn, dense_cnn),
+  connect_layers(dense_cnn, output_cnn)
+)
+
+p6 <- plot_network(
+  list(
+    input_cnn,
+    conv1_cnn,
+    conv2_cnn,
+    dense_cnn,
+    output_cnn
+  ),
+  edges_cnn,
+  "RN Convolucional"
+)
+
+# EXTRAIR LEGENDA
+legend <- cowplot::get_legend(p5)
+
+# REMOVER LEGENDAS
+p1 <- p1 + theme(legend.position = "none")
+p2 <- p2 + theme(legend.position = "none")
+p3 <- p3 + theme(legend.position = "none")
+p4 <- p4 + theme(legend.position = "none")
+p5 <- p5 + theme(legend.position = "none")
+p6 <- p6 + theme(legend.position = "none")
+
+# GRID PRINCIPAL EXPLÍCITO
+main_panel <- patchwork::wrap_plots(
+  p1, p2, p3,
+  p4, p5, p6,
+  ncol = 3
+)
+
+# LEGENDA COMO PAINEL
+legend_panel <- patchwork::wrap_elements(legend)
+
+# FIGURA FINAL
+final_plot <- patchwork::wrap_plots(
+  main_panel,
+  legend_panel,
+  ncol = 1,
+  heights = c(12, 1)
+)
+
+# MOSTRAR
+print(final_plot)
 ```
 
 <br>

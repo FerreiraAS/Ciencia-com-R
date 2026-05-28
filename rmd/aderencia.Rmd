@@ -1,0 +1,269 @@
+```{=openxml}
+<w:p>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
+</w:p>
+```
+
+# **Aderência** {#aderencia}
+
+<br>
+
+## Teste de Kolmogorov-Smirnov ($D$) \@ref(eq:ks).[@KolmogorovSmirnov1933]
+
+<br>
+
+\begin{equation}
+(\#eq:ks)
+D = \sup_x |F_n(x) - F(x)|
+\end{equation}
+
+<br>
+
+```{r ks, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library("dplyr")
+
+# Reprodutibilidade
+base::set.seed(1234)
+
+# Dados simulados
+x <- stats::rnorm(100, mean = 50, sd = 10)
+
+# Teste KS
+ks_res <- stats::ks.test(
+  x = x,
+  y = "pnorm",
+  mean = base::mean(x),
+  sd = stats::sd(x)
+)
+
+# Tabela
+tibble::tibble(
+  Estatística = unname(ks_res$statistic),
+  `P-valor`   = ks_res$p.value
+) %>%
+knitr::kable(
+  digits = 4,
+  caption = "Teste de Kolmogorov-Smirnov"
+)
+```
+
+<br>
+
+## Teste de Anderson-Darling ($A^2$) \@ref(eq:ad).[@anderson1952]
+
+<br>
+
+\begin{equation}
+(\#eq:ad)
+A^2 =
+-n -
+\dfrac{1}{n}
+\sum_{i=1}^{n}
+(2i-1)
+\left[
+\ln\left(F(X_i)\right)
++
+\ln\left(1 - F(X_{n+1-i})\right)
+\right]
+\end{equation}
+
+<br>
+
+```{r ad, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library("dplyr")
+
+# Reprodutibilidade
+base::set.seed(1234)
+
+# Dados simulados
+x <- stats::rnorm(100, mean = 50, sd = 10)
+
+# Teste Anderson-Darling
+ad_res <- nortest::ad.test(x)
+
+# Tabela
+tibble::tibble(
+  Estatística = unname(ad_res$statistic),
+  `P-valor`   = ad_res$p.value
+) %>%
+knitr::kable(
+  digits = 4,
+  caption = "Teste de Anderson-Darling"
+)
+```
+
+<br>
+
+## Teste de Cramér-von Mises ($W^2$) \@ref(eq:cvm).[@cramér1928]
+
+<br>
+
+\begin{equation}
+(\#eq:cvm)
+W^2 =
+\dfrac{1}{12n}
++
+\sum_{i=1}^{n}
+\left(
+F(X_i)
+-
+\dfrac{2i-1}{2n}
+\right)^2
+\end{equation}
+
+<br>
+
+```{r cvm, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library("dplyr")
+
+# Reprodutibilidade
+base::set.seed(1234)
+
+# Dados simulados
+x <- stats::rnorm(100, mean = 50, sd = 10)
+
+# Teste Cramér-von Mises
+cvm_res <- nortest::cvm.test(x)
+
+# Tabela
+tibble::tibble(
+  Estatística = unname(cvm_res$statistic),
+  `P-valor`   = cvm_res$p.value
+) %>%
+knitr::kable(
+  digits = 4,
+  caption = "Teste de Cramér-von Mises"
+)
+```
+
+<br>
+
+## Teste de Shapiro-Wilk ($W$) \@ref(eq:shapiro).[@shapiro1965]
+
+<br>
+
+\begin{equation}
+(\#eq:shapiro)
+W =
+\dfrac{
+\left(
+\sum_{i=1}^{n}
+a_i x_{(i)}
+\right)^2
+}{
+\sum_{i=1}^{n}
+(x_i - \bar{x})^2
+}
+\end{equation}
+
+<br>
+
+```{r shapiro, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library("dplyr")
+
+# Reprodutibilidade
+base::set.seed(1234)
+
+# Dados simulados
+x <- stats::rnorm(100, mean = 50, sd = 10)
+
+# Teste de Shapiro-Wilk
+shapiro_res <- stats::shapiro.test(x)
+
+# Tabela
+tibble::tibble(
+  Estatística = unname(shapiro_res$statistic),
+  `P-valor`   = shapiro_res$p.value
+) %>%
+knitr::kable(
+  digits = 4,
+  caption = "Teste de Shapiro-Wilk"
+)
+```
+
+<br>
+
+## Teste de Lilliefors ($D$) \@ref(eq:lilliefors).[@lilliefors1967]
+
+<br>
+
+\begin{equation}
+(\#eq:lilliefors)
+D = \sup_x |F_n(x) - F(x)|
+\end{equation}
+
+<br>
+
+```{r lilliefors, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library("dplyr")
+
+# Reprodutibilidade
+base::set.seed(1234)
+
+# Dados simulados
+x <- stats::rnorm(100, mean = 50, sd = 10)
+
+# Teste de Lilliefors
+lillie_res <- nortest::lillie.test(x)
+
+# Tabela
+tibble::tibble(
+  Estatística = unname(lillie_res$statistic),
+  `P-valor`   = lillie_res$p.value
+) %>%
+knitr::kable(
+  digits = 4,
+  caption = "Teste de Lilliefors"
+)
+```
+
+<br>
+
+## Teste de Jarque-Bera ($JB$) \@ref(eq:jarquebera).[@jarque1980]
+
+<br>
+
+\begin{equation}
+(\#eq:jarquebera)
+JB =
+\dfrac{n}{6}
+\left(
+S^2 +
+\dfrac{(K-3)^2}{4}
+\right)
+\end{equation}
+
+<br>
+
+```{r jarquebera, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library("dplyr")
+
+# Reprodutibilidade
+base::set.seed(1234)
+
+# Dados simulados
+x <- stats::rnorm(100, mean = 50, sd = 10)
+
+# Teste de Jarque-Bera
+jb_res <- tseries::jarque.bera.test(x)
+
+# Tabela
+tibble::tibble(
+  Estatística = unname(jb_res$statistic),
+  `P-valor`   = jb_res$p.value
+) %>%
+knitr::kable(
+  digits = 4,
+  caption = "Teste de Jarque-Bera"
+)
+```
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>

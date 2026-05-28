@@ -692,6 +692,93 @@ ggplot2::ggplot(dfp, ggplot2::aes(time, id, fill = value)) +
 
 <br>
 
+-   Gráfico nadador: .[@REF]
+
+<br>
+
+```{r}
+# reprodutibilidade
+set.seed(123)
+
+# 1. Criando dados simulados
+n_patients <- 25
+
+df <- data.frame(
+  patient = paste0("P", sprintf("%02d", 1:n_patients)),
+  # início do acompanhamento
+  start_day = sample(0:40, n_patients, replace = TRUE),
+  # duração total
+  duration = sample(20:140, n_patients, replace = TRUE),
+  # evento intermediário
+  event_day = sample(10:120, n_patients, replace = TRUE),
+  # paciente ainda em seguimento?
+  ongoing = sample(c(TRUE, FALSE), n_patients, replace = TRUE)
+)
+
+# fim do acompanhamento
+df$end_day <- df$start_day + df$duration
+
+# ajustar evento para ficar dentro da linha
+df$event_day <- pmin(
+  df$start_day + df$event_day,
+  df$end_day - 5
+)
+
+# ordenar pacientes pela duração
+df <- df %>%
+  dplyr::arrange(desc(duration)) %>%
+  dplyr::mutate(patient = factor(patient, levels = patient))
+
+# 2. Construção do Swimmer Plot
+p <- ggplot2::ggplot(df) +
+  # linha principal de cada paciente
+  ggplot2::geom_segment(
+    ggplot2::aes(
+      x = start_day,
+      xend = end_day,
+      y = patient,
+      yend = patient
+    ),
+    linewidth = 1
+  ) +
+  # ponto do evento clínico
+  ggplot2::geom_point(
+    ggplot2::aes(
+      x = event_day,
+      y = patient
+    ),
+    shape = 18,
+    size = 3
+  ) +
+  # seta para pacientes ainda em seguimento
+  ggplot2::geom_segment(
+    data = subset(df, ongoing == TRUE),
+    ggplot2::aes(
+      x = end_day - 5,
+      xend = end_day,
+      y = patient,
+      yend = patient
+    ),
+    arrow = ggplot2::arrow(length = unit(0.15, "cm")),
+    linewidth = 1
+  ) +
+  # tema
+  ggplot2::theme_bw(base_size = 12) +
+  ggplot2::labs(
+    x = "Dias após início do tratamento",
+    y = "Paciente"
+  ) +
+  ggplot2::theme(
+    panel.grid.major.y = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank()
+  )
+
+# 3. Exibir gráfico
+print(p)
+```
+
+<br>
+
 ### Quais são os tipos de gráficos para séries temporais?
 
 -   Gráfico de linhas: Mostra a evolução de uma variável ao longo do tempo, com pontos conectados por linhas.[@REF]
