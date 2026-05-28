@@ -38,15 +38,41 @@ ks_res <- stats::ks.test(
   sd = stats::sd(x)
 )
 
-# Tabela
-tibble::tibble(
+# Tabela formatada
+dados <- tibble::tibble(
   Estatística = unname(ks_res$statistic),
   `P-valor`   = ks_res$p.value
-) %>%
-knitr::kable(
-  digits = 4,
-  caption = "Teste de Kolmogorov-Smirnov"
 )
+
+knitr::kable(
+  dados,
+  digits = 4,
+  caption = "Teste de Kolmogorov-Smirnov",
+  align = c("c", "c"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::column_spec(
+    1,
+    bold = TRUE
+  ) %>%
+  kableExtra::row_spec(
+    nrow(dados),
+    extra_css = "border-bottom: 1px solid"
+  )
 ```
 
 <br>
@@ -83,15 +109,41 @@ x <- stats::rnorm(100, mean = 50, sd = 10)
 # Teste Anderson-Darling
 ad_res <- nortest::ad.test(x)
 
-# Tabela
-tibble::tibble(
+# Tabela formatada
+dados <- tibble::tibble(
   Estatística = unname(ad_res$statistic),
   `P-valor`   = ad_res$p.value
-) %>%
-knitr::kable(
-  digits = 4,
-  caption = "Teste de Anderson-Darling"
 )
+
+knitr::kable(
+  dados,
+  digits = 4,
+  caption = "Teste de Anderson-Darling",
+  align = c("c", "c"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::column_spec(
+    1,
+    bold = TRUE
+  ) %>%
+  kableExtra::row_spec(
+    nrow(dados),
+    extra_css = "border-bottom: 1px solid"
+  )
 ```
 
 <br>
@@ -128,14 +180,54 @@ x <- stats::rnorm(100, mean = 50, sd = 10)
 cvm_res <- nortest::cvm.test(x)
 
 # Tabela
-tibble::tibble(
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+# Reprodutibilidade
+set.seed(1234)
+
+# Dados simulados
+x <- rnorm(100, mean = 50, sd = 10)
+
+# Teste Cramér-von Mises
+cvm_res <- nortest::cvm.test(x)
+
+# Tabela formatada
+dados <- tibble::tibble(
   Estatística = unname(cvm_res$statistic),
   `P-valor`   = cvm_res$p.value
-) %>%
-knitr::kable(
-  digits = 4,
-  caption = "Teste de Cramér-von Mises"
 )
+
+knitr::kable(
+  dados,
+  digits = 4,
+  caption = "Teste de Cramér-von Mises",
+  align = c("c", "c"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::column_spec(
+    1,
+    bold = TRUE
+  ) %>%
+  kableExtra::row_spec(
+    nrow(dados),
+    extra_css = "border-bottom: 1px solid"
+  )
 ```
 
 <br>
@@ -172,15 +264,41 @@ x <- stats::rnorm(100, mean = 50, sd = 10)
 # Teste de Shapiro-Wilk
 shapiro_res <- stats::shapiro.test(x)
 
-# Tabela
-tibble::tibble(
+# Tabela formatada
+dados <- tibble::tibble(
   Estatística = unname(shapiro_res$statistic),
   `P-valor`   = shapiro_res$p.value
-) %>%
-knitr::kable(
-  digits = 4,
-  caption = "Teste de Shapiro-Wilk"
 )
+
+knitr::kable(
+  dados,
+  digits = 4,
+  caption = "Teste de Shapiro-Wilk",
+  align = c("c", "c"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::column_spec(
+    1,
+    bold = TRUE
+  ) %>%
+  kableExtra::row_spec(
+    nrow(dados),
+    extra_css = "border-bottom: 1px solid"
+  )
 ```
 
 <br>
@@ -208,15 +326,41 @@ x <- stats::rnorm(100, mean = 50, sd = 10)
 # Teste de Lilliefors
 lillie_res <- nortest::lillie.test(x)
 
-# Tabela
-tibble::tibble(
+# Tabela formatada
+dados <- tibble::tibble(
   Estatística = unname(lillie_res$statistic),
   `P-valor`   = lillie_res$p.value
-) %>%
-knitr::kable(
-  digits = 4,
-  caption = "Teste de Lilliefors"
 )
+
+knitr::kable(
+  dados,
+  digits = 4,
+  caption = "Teste de Lilliefors",
+  align = c("c", "c"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::column_spec(
+    1,
+    bold = TRUE
+  ) %>%
+  kableExtra::row_spec(
+    nrow(dados),
+    extra_css = "border-bottom: 1px solid"
+  )
 ```
 
 <br>
@@ -249,15 +393,41 @@ x <- stats::rnorm(100, mean = 50, sd = 10)
 # Teste de Jarque-Bera
 jb_res <- tseries::jarque.bera.test(x)
 
-# Tabela
-tibble::tibble(
+# Tabela formatada
+dados <- tibble::tibble(
   Estatística = unname(jb_res$statistic),
   `P-valor`   = jb_res$p.value
-) %>%
-knitr::kable(
-  digits = 4,
-  caption = "Teste de Jarque-Bera"
 )
+
+knitr::kable(
+  dados,
+  digits = 4,
+  caption = "Teste de Jarque-Bera",
+  align = c("c", "c"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::column_spec(
+    1,
+    bold = TRUE
+  ) %>%
+  kableExtra::row_spec(
+    nrow(dados),
+    extra_css = "border-bottom: 1px solid"
+  )
 ```
 
 <br>
