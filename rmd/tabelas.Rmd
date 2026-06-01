@@ -110,14 +110,6 @@ O pacote *rempsyc*[@rempsyc] fornece a função [*nice_table*](https://search.r-
 
 <br>
 
-### O que é a falácia da 'Tabela 1'?
-
--   Falácia da Tabela 1 ocorre pela interpretação errônea dos P-valores na comparação entre grupos, na linha de base, de um ensaio clínico aleatorizado.[@pijls2022]
-
--   Não interprete P da linha de base em ensaios clínicos como “desequilíbrio” (falácia da Tabela 1). Mantenha P-valor apenas como descritivo (ou omita), enfatizando desenho e aleatorização.[@Weissgerber2019]
-
-<br>
-
 ### Como construir a 'Tabela 1'?
 
 -   A Tabela 1 geralmente é utilizada para descrever as características da amostra estudada, possibilitando a análise de ameaças à validade interna e/ou externa ao estudo.[@greenhalgh1997; @Hayes-Larson2019]
@@ -169,6 +161,14 @@ tbl1
 
 <br>
 
+### O que é a falácia da 'Tabela 1'?
+
+-   Falácia da Tabela 1 ocorre pela interpretação errônea dos P-valores na comparação entre grupos, na linha de base, de um ensaio clínico aleatorizado.[@pijls2022]
+
+-   Não interprete P da linha de base em ensaios clínicos como “desequilíbrio” (falácia da Tabela 1). Mantenha P-valor apenas como descritivo (ou omita), enfatizando desenho e aleatorização.[@Weissgerber2019]
+
+<br>
+
 ## Tabela 2
 
 <br>
@@ -176,66 +176,6 @@ tbl1
 ### Qual a utilidade da 'Tabela 2'?
 
 -   A Tabela 2 mostra associações ajustadas multivariadas com o resultado para variáveis resumidas na Tabela 1.[@Westreich2013]
-
-<br>
-
-### O que é a falácia da 'Tabela 2'?
-
--   A Tabela 2 pode induzir ao erro de interpretação pelas estimativas de efeitos para covariáveis do modelo também serem utilizados para controlar a confusão da exposição.[@Westreich2013; @bandoli2018]
-
--   Ao apresentar estimativas de efeito ajustadas para covariáveis juntamente com a estimativa de efeito ajustada para a exposição primária, a Tabela 2 sugere implicitamente que todas estas estimativas podem ser interpretadas de forma semelhante, se não de forma idêntica, como estimativa do efeito total.[@Westreich2013; @bandoli2018]
-
--   A falácia da Tabela 2 pode ser evitada limitando-se a tabela a estimativas das medidas primárias do efeito de exposição nos diferentes modelos, com as covariáveis secundárias de "ajuste" relatadas em uma nota de rodapé, juntamente com a forma como foram categorizadas ou modeladas.[@Westreich2013]
-
-<br>
-
-```{r falacia-tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo clássico suscetível à Falácia da Tabela 2. A Tabela apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis)e a OR ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
-library(dplyr)
-
-# Reprodutibilidade
-set.seed(123)
-
-# Exemplo simulado
-dados <- tibble::tibble(
-  Grupo = sample(c("Controle", "Intervenção"), 200, TRUE),
-  Sexo  = sample(c("F", "M"), 200, TRUE),
-  Idade = round(rnorm(200, 60, 12), 1),
-  IMC   = round(rnorm(200, 27, 4), 1)
-) %>%
-  dplyr::mutate(
-    # garantir referências "Controle" e "M"
-    Grupo = factor(Grupo, levels = c("Controle", "Intervenção")),
-    Sexo  = factor(Sexo,  levels = c("M", "F"))
-  )
-
-# Modelos: cru vs ajustado
-mod_cru <- glm(I(Sexo == "F") ~ Grupo,
-               data = dados, family = binomial)
-
-mod_aj  <- glm(I(Sexo == "F") ~ Grupo + Idade + IMC,
-               data = dados, family = binomial)
-
-# Tabelas com gtsummary
-gtsummary::theme_gtsummary_language("pt")
-
-tab_cru <- gtsummary::tbl_regression(
-  mod_cru, exponentiate = TRUE
-) %>%
-  gtsummary::modify_caption("Tabela 2a. OR bruto (modelo sem covariáveis).")
-
-tab_aj <- gtsummary::tbl_regression(
-  mod_aj, exponentiate = TRUE
-) %>%
-  gtsummary::modify_caption("Tabela 2b. OR ajustado (inclui covariáveis).")
-
-tab_falacia <- gtsummary::tbl_merge(
-  list(tab_cru, tab_aj),
-  tab_spanner = c("Sem ajuste", "Ajustado")
-) %>%
-  gtsummary::modify_caption("Exemplo clássico de apresentação suscetível à Falácia da 'Tabela 2'.")
-
-tab_falacia
-```
 
 <br>
 
@@ -305,6 +245,66 @@ O pacote *table1*[@table1] fornece a função [*table1*](https://search.r-projec
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://search.r-project.org/CRAN/refmans/gtsummary/html/tbl_summary.html) para construção da 'Tabela 1' com dados descritivos.
 :::
+
+<br>
+
+### O que é a falácia da 'Tabela 2'?
+
+-   A Tabela 2 pode induzir ao erro de interpretação pelas estimativas de efeitos para covariáveis do modelo também serem utilizados para controlar a confusão da exposição.[@Westreich2013; @bandoli2018]
+
+-   Ao apresentar estimativas de efeito ajustadas para covariáveis juntamente com a estimativa de efeito ajustada para a exposição primária, a Tabela 2 sugere implicitamente que todas estas estimativas podem ser interpretadas de forma semelhante, se não de forma idêntica, como estimativa do efeito total.[@Westreich2013; @bandoli2018]
+
+-   A falácia da Tabela 2 pode ser evitada limitando-se a tabela a estimativas das medidas primárias do efeito de exposição nos diferentes modelos, com as covariáveis secundárias de "ajuste" relatadas em uma nota de rodapé, juntamente com a forma como foram categorizadas ou modeladas.[@Westreich2013]
+
+<br>
+
+```{r falacia-tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo clássico suscetível à Falácia da Tabela 2. A Tabela apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis)e a OR ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(123)
+
+# Exemplo simulado
+dados <- tibble::tibble(
+  Grupo = sample(c("Controle", "Intervenção"), 200, TRUE),
+  Sexo  = sample(c("F", "M"), 200, TRUE),
+  Idade = round(rnorm(200, 60, 12), 1),
+  IMC   = round(rnorm(200, 27, 4), 1)
+) %>%
+  dplyr::mutate(
+    # garantir referências "Controle" e "M"
+    Grupo = factor(Grupo, levels = c("Controle", "Intervenção")),
+    Sexo  = factor(Sexo,  levels = c("M", "F"))
+  )
+
+# Modelos: cru vs ajustado
+mod_cru <- glm(I(Sexo == "F") ~ Grupo,
+               data = dados, family = binomial)
+
+mod_aj  <- glm(I(Sexo == "F") ~ Grupo + Idade + IMC,
+               data = dados, family = binomial)
+
+# Tabelas com gtsummary
+gtsummary::theme_gtsummary_language("pt")
+
+tab_cru <- gtsummary::tbl_regression(
+  mod_cru, exponentiate = TRUE
+) %>%
+  gtsummary::modify_caption("Tabela 2a. OR bruto (modelo sem covariáveis).")
+
+tab_aj <- gtsummary::tbl_regression(
+  mod_aj, exponentiate = TRUE
+) %>%
+  gtsummary::modify_caption("Tabela 2b. OR ajustado (inclui covariáveis).")
+
+tab_falacia <- gtsummary::tbl_merge(
+  list(tab_cru, tab_aj),
+  tab_spanner = c("Sem ajuste", "Ajustado")
+) %>%
+  gtsummary::modify_caption("Exemplo clássico de apresentação suscetível à Falácia da 'Tabela 2'.")
+
+tab_falacia
+```
 
 <br>
 
