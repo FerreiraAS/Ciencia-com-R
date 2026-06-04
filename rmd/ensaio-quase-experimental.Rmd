@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Ensaios quase-experimentais** {#ensaio-quase-experimental}
 
 <br>
@@ -314,6 +313,18 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 
 <br>
 
+### O que são séries temporais interrompidas controladas?
+
+- Séries temporais interrompidas controladas incluem um grupo ou desfecho controle não exposto à intervenção para reduzir o impacto de confundidores variantes no tempo.[@lopezbernal2016a; @kontopantelis2015]
+
+- A inclusão de controles fortalece a inferência causal ao permitir distinguir mudanças atribuíveis à intervenção de tendências temporais externas.[@lopezbernal2016a]
+
+- Grupos controle devem apresentar comportamento temporal semelhante ao grupo exposto antes da intervenção.[@kontopantelis2015]
+
+- Desfechos controle podem ser utilizados quando não existe um grupo populacional comparável disponível.[@lopezbernal2016a]
+
+<br>
+
 ### Quando utilizar séries temporais interrompidas?
 
 - Séries temporais interrompidas são apropriadas quando a intervenção ocorre em um momento claramente identificável e existem observações repetidas antes e depois da implementação.[@lopezbernal2016a]
@@ -360,26 +371,6 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 
 <br>
 
-## Séries temporais interrompidas controladas
-
-<br>
-
-### O que são séries temporais interrompidas controladas?
-
-- Séries temporais interrompidas controladas incluem um grupo ou desfecho controle não exposto à intervenção para reduzir o impacto de confundidores variantes no tempo.[@lopezbernal2016a; @kontopantelis2015]
-
-- A inclusão de controles fortalece a inferência causal ao permitir distinguir mudanças atribuíveis à intervenção de tendências temporais externas.[@lopezbernal2016a]
-
-- Grupos controle devem apresentar comportamento temporal semelhante ao grupo exposto antes da intervenção.[@kontopantelis2015]
-
-- Desfechos controle podem ser utilizados quando não existe um grupo populacional comparável disponível.[@lopezbernal2016a]
-
-<br>
-
-## Interação e heterogeneidade de efeito
-
-<br>
-
 ### Como avaliar heterogeneidade de efeito em séries temporais interrompidas?
 
 - Termos de interação podem ser incorporados aos modelos ITS para avaliar se o efeito da intervenção varia entre subgrupos populacionais.[@kontopantelis2015]
@@ -389,10 +380,6 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 - Características individuais, institucionais ou regionais podem modificar o efeito observado da intervenção.[@kontopantelis2015]
 
 - Modelos estratificados e análises multinível podem ser utilizados para lidar com heterogeneidade entre unidades observacionais.[@kontopantelis2015]
-
-<br>
-
-## Pressupostos do delineamento
 
 <br>
 
@@ -408,10 +395,6 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 
 <br>
 
-## Limitações dos modelos simples
-
-<br>
-
 ### Quais são as limitações de modelos ITS simples?
 
 - Modelos ITS básicos frequentemente assumem tendências lineares pré-intervenção.[@kontopantelis2015]
@@ -421,10 +404,6 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 - A ausência de grupos ou desfechos controle dificulta a distinção entre efeitos da intervenção e eventos externos concorrentes.[@kontopantelis2015]
 
 - A utilização de poucos pontos temporais antes da intervenção pode dificultar a avaliação da linearidade da tendência pré-intervenção.[@kontopantelis2015]
-
-<br>
-
-## Vieses e ameaças à validade
 
 <br>
 
@@ -459,6 +438,148 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 - A sazonalidade pode ser controlada utilizando estratificação temporal, funções seno-cosseno (Fourier terms) ou splines.[@lopezbernal2016a]
 
 - O controle da sazonalidade reduz o risco de confundimento temporal e melhora a validade das estimativas do efeito da intervenção.[@lopezbernal2016a]
+
+<br>
+
+## Emulação de ensaio-alvo
+
+<br>
+
+### O que é uma emulação de ensaio-alvo?
+
+- Emulação de ensaio-alvo (*Target Trial Emulation*, TTE) procura reproduzir, dentro de uma base de dados observacional, a estrutura de um ensaio clínico randomizado hipotético capaz de responder à pergunta científica de interesse.[@andrade2025]
+
+- O ensaio clínico hipotético que serviria como padrão ideal para responder à pergunta é denominado ensaio-alvo (*target trial*).[@andrade2025]
+
+- A abordagem utiliza dados observacionais já existentes, como registros clínicos, bases administrativas, bancos de seguros de saúde ou registros nacionais, para reproduzir o protocolo desse ensaio-alvo da forma mais fiel possível.[@andrade2025]
+
+- O objetivo da TTE é reduzir vieses comuns em análises observacionais e aproximar a interpretação dos resultados daquela obtida em ensaios clínicos randomizados.[@andrade2025]
+
+<br>
+
+### Por que utilizar *Target Trial Emulation*?
+
+- Muitas perguntas clínicas não podem ser respondidas por ensaios clínicos randomizados devido a limitações éticas, financeiras ou logísticas.[@andrade2025]
+
+- A TTE permite investigar efeitos de exposições, tratamentos ou políticas de saúde utilizando dados já disponíveis na prática clínica.[@andrade2025]
+
+- A explicitação prévia do protocolo do ensaio-alvo melhora a transparência metodológica e reduz ambiguidades na definição da pergunta causal.[@andrade2025]
+
+- A abordagem favorece maior clareza sobre quais pacientes, intervenções, desfechos e períodos de seguimento estão sendo efetivamente estudados.[@andrade2025]
+
+<br>
+
+### Quais elementos devem ser definidos em um *Target Trial*?
+
+- Critérios de elegibilidade dos participantes.[@andrade2025]
+
+- Estratégias de intervenção comparadas.[@andrade2025]
+
+- Forma de alocação aos grupos.[@andrade2025]
+
+- Definição do tempo zero.[@andrade2025]
+
+- Duração e regras de seguimento.[@andrade2025]
+
+- Desfechos primários e secundários.[@andrade2025]
+
+- Plano de análise estatística.[@andrade2025]
+
+<br>
+
+### O que é o tempo zero?
+
+- O tempo zero corresponde ao momento em que a elegibilidade é confirmada, a exposição ou intervenção é definida e o acompanhamento dos participantes se inicia.[@andrade2025]
+
+- A correta definição do tempo zero é fundamental para evitar vieses relacionados à temporalidade da exposição e do desfecho.[@andrade2025]
+
+- Em TTE, o tempo zero deve ser equivalente ao que seria utilizado no ensaio clínico que está sendo emulado.[@andrade2025]
+
+- O tempo zero merece atenção especial, pois corresponde simultaneamente ao momento de elegibilidade, definição da exposição e início do seguimento.[@andrade2025]
+
+<br>
+
+### O que é viés do usuário prevalente?
+
+- O viés do usuário prevalente ocorre quando participantes já em tratamento são incluídos no estudo após o início da exposição.[@andrade2025]
+
+- Nessa situação, indivíduos suscetíveis a eventos adversos podem ter abandonado o tratamento anteriormente, permanecendo apenas aqueles que o toleraram bem.[@andrade2025]
+
+- Como consequência, o risco associado ao tratamento pode ser subestimado.[@andrade2025]
+
+- A TTE procura evitar esse viés ao priorizar usuários incidentes, isto é, participantes observados desde o início da exposição.[@andrade2025]
+
+<br>
+
+### O que é viés de tempo imortal?
+
+- O viés de tempo imortal ocorre quando existe um período durante o qual o participante não poderia apresentar o desfecho e ainda assim permanecer elegível para determinado grupo de exposição.[@andrade2025]
+
+- Esse período artificialmente protegido pode produzir estimativas enviesadas do efeito da intervenção.[@andrade2025]
+
+- A sincronização adequada do tempo zero entre os grupos comparados constitui uma das principais estratégias para evitar esse viés.[@andrade2025]
+
+<br>
+
+### Como a randomização é emulada em uma TTE?
+
+- Em TTE, essa randomização não existe, pois a exposição já ocorreu na prática clínica.[@andrade2025]
+
+- Para aproximar o equilíbrio entre os grupos, são utilizadas técnicas de ajuste para confundidores medidos, incluindo modelos multivariados, escores de propensão e ponderação por probabilidade inversa.[@andrade2025]
+
+- O ajuste reduz, mas não elimina completamente, o risco de confundimento.[@andrade2025]
+
+<br>
+
+### Quais são as vantagens da emulação de ensaio-alvo?
+
+- Redução de vieses comuns em estudos observacionais.[@andrade2025]
+
+- Maior clareza na definição da pergunta causal.[@andrade2025]
+
+- Melhor alinhamento entre delineamento, análise e interpretação dos resultados.[@andrade2025]
+
+- Possibilidade de investigar questões inviáveis em ensaios clínicos randomizados.[@andrade2025]
+
+- Utilização de grandes bases de dados do mundo real.[@andrade2025]
+
+<br>
+
+### Quais são as limitações da emulação de ensaio-alvo?
+
+- A randomização não é realmente realizada.[@andrade2025]
+
+- Confundidores não mensurados ou desconhecidos podem influenciar os resultados.[@andrade2025]
+
+- A qualidade da inferência depende da qualidade dos dados observacionais disponíveis.[@andrade2025]
+
+- Informações sobre exposição, desfechos e covariáveis podem apresentar erros ou imprecisões.[@andrade2025]
+
+- Viés residual pode permanecer mesmo após ajustes estatísticos.[@andrade2025]
+
+- A TTE não substitui ensaios clínicos randomizados quando estes são viáveis.[@andrade2025]
+
+<br>
+
+### Quando utilizar a emulação de ensaio-alvo?
+
+- Quando existe uma pergunta causal claramente definida.[@andrade2025]
+
+- Quando um ensaio clínico randomizado é inviável ou antiético.[@andrade2025]
+
+- Quando há disponibilidade de dados observacionais longitudinais de qualidade.[@andrade2025]
+
+- Quando é possível especificar previamente os componentes do ensaio-alvo que se deseja emular.[@andrade2025]
+
+<br>
+
+### A emulação de ensaio-alvo permite inferência causal?
+
+- A emulação melhora substancialmente a validade de análises observacionais quando comparada a abordagens tradicionais.[@andrade2025]
+
+- Entretanto, a ausência de randomização verdadeira impede a eliminação completa do confundimento.[@andrade2025]
+
+- Os resultados de TTE devem ser interpretados como evidências observacionais robustas que fortalecem a inferência causal, mas não possuem o mesmo grau de proteção contra confundimento oferecido pelos ensaios clínicos randomizados.[@andrade2025]
 
 <br>
 

@@ -10,11 +10,117 @@
 
 <br>
 
-## Teste de Kolmogorov-Smirnov ($D$)
+## Histograma com curva normal
 
 <br>
 
-```{r ks, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+```{r histograma, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# reprodutibilidade
+set.seed(1234)
+x <- rnorm(100, mean = 50, sd = 10)
+
+ggplot2::ggplot(data.frame(x), ggplot2::aes(x)) +
+  ggplot2::geom_histogram(
+    ggplot2::aes(y = ggplot2::after_stat(density)),
+    bins = 12,
+    color = "black",
+    fill = "lightblue"
+  ) +
+  ggplot2::stat_function(
+    fun = dnorm,
+    args = list(
+      mean = mean(x),
+      sd = sd(x)
+    ),
+    linewidth = 1
+  ) +
+  ggplot2::labs(
+    title = "Histograma com Curva Normal",
+    x = "Valores",
+    y = "Densidade"
+  ) +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+## Densidade Observada vs Normal
+
+<br>
+
+```{r densidade, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# reprodutibilidade
+set.seed(1234)
+x <- rnorm(100, mean = 50, sd = 10)
+
+ggplot2::ggplot(data.frame(x), ggplot2::aes(x)) +
+  ggplot2::geom_density(linewidth = 1) +
+  ggplot2::stat_function(
+    fun = dnorm,
+    args = list(
+      mean = mean(x),
+      sd = sd(x)
+    ),
+    linetype = "dashed",
+    linewidth = 1
+  ) +
+  ggplot2::labs(
+    title = "Densidade Observada vs Distribuição Normal",
+    x = "Valores",
+    y = "Densidade"
+  ) +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+## Q-Q Plot
+
+<br>
+
+```{r qqplot, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# reprodutibilidade
+set.seed(1234)
+x <- rnorm(100, mean = 50, sd = 10)
+
+ggplot2::ggplot(data.frame(x), ggplot2::aes(sample = x)) +
+  ggplot2::stat_qq(size = 2) +
+  ggplot2::stat_qq_line(linewidth = 1) +
+  ggplot2::labs(
+    title = "Q-Q Plot",
+    x = "Quantis Teóricos",
+    y = "Quantis Observados"
+  ) +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+## Boxplot
+
+<br>
+
+```{r boxplot, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# reprodutibilidade
+set.seed(1234)
+x <- rnorm(100, mean = 50, sd = 10)
+
+ggplot2::ggplot(data.frame(x), ggplot2::aes(y = x)) +
+  ggplot2::geom_boxplot(fill = "lightblue") +
+  ggplot2::labs(
+    title = "Boxplot",
+    y = "Valores"
+  ) +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+## Teste de Shapiro-Wilk ($W$)
+
+<br>
+
+```{r shapiro, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 library("dplyr")
 
 # Reprodutibilidade
@@ -23,24 +129,26 @@ base::set.seed(1234)
 # Dados simulados
 x <- stats::rnorm(100, mean = 50, sd = 10)
 
-# Teste KS
-ks_res <- stats::ks.test(
-  x = x,
-  y = "pnorm",
-  mean = base::mean(x),
-  sd = stats::sd(x)
-)
+# Teste de Shapiro-Wilk
+shapiro_res <- stats::shapiro.test(x)
 
 # Tabela formatada
+decisao <- ifelse(
+  shapiro_res$p.value > 0.05,
+  "Não rejeita normalidade",
+  "Rejeita normalidade"
+)
+
 dados <- tibble::tibble(
-  Estatística = unname(ks_res$statistic),
-  `P-valor`   = ks_res$p.value
+  Estatística = unname(shapiro_res$statistic),
+  `P-valor`   = shapiro_res$p.value,
+  Decisão     = decisao
 )
 
 knitr::kable(
   dados,
   digits = 4,
-  caption = "Teste de Kolmogorov-Smirnov",
+  caption = "Teste de Shapiro-Wilk",
   align = c("c", "c"),
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
@@ -87,9 +195,16 @@ x <- stats::rnorm(100, mean = 50, sd = 10)
 ad_res <- nortest::ad.test(x)
 
 # Tabela formatada
+decisao <- ifelse(
+  ad_res$p.value > 0.05,
+  "Não rejeita normalidade",
+  "Rejeita normalidade"
+)
+
 dados <- tibble::tibble(
   Estatística = unname(ad_res$statistic),
-  `P-valor`   = ad_res$p.value
+  `P-valor`   = ad_res$p.value,
+  Decisão     = decisao
 )
 
 knitr::kable(
@@ -130,22 +245,6 @@ knitr::kable(
 <br>
 
 ```{r cvm, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
-library("dplyr")
-
-# Reprodutibilidade
-base::set.seed(1234)
-
-# Dados simulados
-x <- stats::rnorm(100, mean = 50, sd = 10)
-
-# Teste Cramér-von Mises
-cvm_res <- nortest::cvm.test(x)
-
-# Tabela
-library(dplyr)
-library(knitr)
-library(kableExtra)
-
 # Reprodutibilidade
 set.seed(1234)
 
@@ -156,70 +255,22 @@ x <- rnorm(100, mean = 50, sd = 10)
 cvm_res <- nortest::cvm.test(x)
 
 # Tabela formatada
+decisao <- ifelse(
+  cvm_res$p.value > 0.05,
+  "Não rejeita normalidade",
+  "Rejeita normalidade"
+)
+
 dados <- tibble::tibble(
   Estatística = unname(cvm_res$statistic),
-  `P-valor`   = cvm_res$p.value
+  `P-valor`   = cvm_res$p.value,
+  Decisão     = decisao
 )
 
 knitr::kable(
   dados,
   digits = 4,
   caption = "Teste de Cramér-von Mises",
-  align = c("c", "c"),
-  format = ifelse(knitr::is_html_output(), "html", "latex"),
-  booktabs = TRUE,
-  linesep = "",
-  escape = FALSE
-) %>%
-  kableExtra::kable_styling(
-    latex_options = c("basic"),
-    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
-    full_width = TRUE,
-    position = "center"
-  ) %>%
-  kableExtra::row_spec(
-    0,
-    bold = TRUE,
-    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
-  ) %>%
-  kableExtra::column_spec(
-    1,
-    bold = TRUE
-  ) %>%
-  kableExtra::row_spec(
-    nrow(dados),
-    extra_css = "border-bottom: 1px solid"
-  )
-```
-
-<br>
-
-## Teste de Shapiro-Wilk ($W$)
-
-<br>
-
-```{r shapiro, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
-library("dplyr")
-
-# Reprodutibilidade
-base::set.seed(1234)
-
-# Dados simulados
-x <- stats::rnorm(100, mean = 50, sd = 10)
-
-# Teste de Shapiro-Wilk
-shapiro_res <- stats::shapiro.test(x)
-
-# Tabela formatada
-dados <- tibble::tibble(
-  Estatística = unname(shapiro_res$statistic),
-  `P-valor`   = shapiro_res$p.value
-)
-
-knitr::kable(
-  dados,
-  digits = 4,
-  caption = "Teste de Shapiro-Wilk",
   align = c("c", "c"),
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
@@ -266,9 +317,16 @@ x <- stats::rnorm(100, mean = 50, sd = 10)
 lillie_res <- nortest::lillie.test(x)
 
 # Tabela formatada
+decisao <- ifelse(
+  lillie_res$p.value > 0.05,
+  "Não rejeita normalidade",
+  "Rejeita normalidade"
+)
+
 dados <- tibble::tibble(
   Estatística = unname(lillie_res$statistic),
-  `P-valor`   = lillie_res$p.value
+  `P-valor`   = lillie_res$p.value,
+  Decisão     = decisao
 )
 
 knitr::kable(
@@ -321,15 +379,89 @@ x <- stats::rnorm(100, mean = 50, sd = 10)
 jb_res <- tseries::jarque.bera.test(x)
 
 # Tabela formatada
+decisao <- ifelse(
+  jb_res$p.value > 0.05,
+  "Não rejeita normalidade",
+  "Rejeita normalidade"
+)
+
 dados <- tibble::tibble(
   Estatística = unname(jb_res$statistic),
-  `P-valor`   = jb_res$p.value
+  `P-valor`   = jb_res$p.value,
+  Decisão     = decisao
 )
 
 knitr::kable(
   dados,
   digits = 4,
   caption = "Teste de Jarque-Bera",
+  align = c("c", "c"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::column_spec(
+    1,
+    bold = TRUE
+  ) %>%
+  kableExtra::row_spec(
+    nrow(dados),
+    extra_css = "border-bottom: 1px solid"
+  )
+```
+
+<br>
+
+## Teste de Kolmogorov-Smirnov ($D$)
+
+<br>
+
+```{r ks, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library("dplyr")
+
+# Reprodutibilidade
+base::set.seed(1234)
+
+# Dados simulados
+x <- stats::rnorm(100, mean = 50, sd = 10)
+
+# Teste KS
+ks_res <- stats::ks.test(
+  x = x,
+  y = "pnorm",
+  mean = base::mean(x),
+  sd = stats::sd(x)
+)
+
+# Tabela formatada
+decisao <- ifelse(
+  ks_res$p.value > 0.05,
+  "Não rejeita normalidade",
+  "Rejeita normalidade"
+)
+
+dados <- tibble::tibble(
+  Estatística = unname(ks_res$statistic),
+  `P-valor`   = ks_res$p.value,
+  Decisão     = decisao
+)
+
+knitr::kable(
+  dados,
+  digits = 4,
+  caption = "Teste de Kolmogorov-Smirnov",
   align = c("c", "c"),
   format = ifelse(knitr::is_html_output(), "html", "latex"),
   booktabs = TRUE,
