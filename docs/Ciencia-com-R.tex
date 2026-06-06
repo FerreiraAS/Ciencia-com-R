@@ -870,7 +870,7 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 \begin{itemize}
 \tightlist
 \item
-  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.48 e variância \(\sigma^{2}\) = 0.252. A distribuição amostral da média de 100 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.48 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
+  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.5 e variância \(\sigma^{2}\) = 0.253. A distribuição amostral da média de 100 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.5 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
 \end{itemize}
 
 \begin{figure}
@@ -920,7 +920,7 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}
 \begin{itemize}
 \tightlist
 \item
-  Para amostras com \(n \geq 30\), a distribuição amostral Student-\emph{t} se aproxima da distribuição normal padrão \(Z\) e, portanto, as suposições sobre a distribuição populacional não são mais necessárias de acordo com o teorema central do limite. A suposição de distribuição normal pode ser usada para a distribuição de probabilidade.\textsuperscript{\citeproc{ref-kwak2017}{10}}
+  Para amostras com \(n \geq 30\), a distribuição amostral Student-\emph{t} se aproxima da distribuição normal padrão \(Z\) e as suposições sobre a distribuição populacional não são mais necessárias, podendo ser usada a suposição de distribuição normalpara a distribuição de probabilidade.\textsuperscript{\citeproc{ref-kwak2017}{10}}
 \end{itemize}
 
 \section{Regressão para a média}\label{regressuxe3o-para-a-muxe9dia}
@@ -1084,7 +1084,7 @@ O pacote \emph{regtomean}\textsuperscript{\citeproc{ref-regtomean}{14}} fornece 
 \caption{Representação esquemática da amostragem: seleção de uma população para a amostra.}\label{fig:populacao-amostra}
 \end{figure}
 
-\subsection{Quais métodos de amostragem são usados para obter uma amostra da população?}\label{quais-muxe9todos-de-amostragem-suxe3o-usados-para-obter-uma-amostra-da-populauxe7uxe3o}
+\subsection{Quais métodos de amostragem da população são usados?}\label{quais-muxe9todos-de-amostragem-da-populauxe7uxe3o-suxe3o-usados}
 
 \begin{itemize}
 \item
@@ -1098,9 +1098,10 @@ O pacote \emph{regtomean}\textsuperscript{\citeproc{ref-regtomean}{14}} fornece 
 \subsection{O que é erro de amostragem?}\label{o-que-uxe9-erro-de-amostragem}
 
 \begin{itemize}
-\tightlist
 \item
-  Erro de amostragem é a variação natural entre os resultados obtidos a partir de uma amostra e os resultados que seriam obtidos caso toda a população fosse examinada. Reflete o grau de incerteza inerente à generalização de uma amostra para a população.\textsuperscript{\citeproc{ref-martinez-mesa2016}{18}}
+  Erro de amostragem é a variação natural entre os resultados obtidos a partir de uma amostra e os resultados que seriam obtidos caso toda a população fosse examinada.\textsuperscript{\citeproc{ref-martinez-mesa2016}{18}}
+\item
+  Erro de amostragem reflete o grau de incerteza inerente à generalização de uma amostra para a população.\textsuperscript{\citeproc{ref-martinez-mesa2016}{18}}
 \end{itemize}
 
 \begin{figure}
@@ -1142,12 +1143,13 @@ O pacote \emph{regtomean}\textsuperscript{\citeproc{ref-regtomean}{14}} fornece 
   Procedimentos de reamostragem permitem estimar o erro-padrão e intervalos de confiança sem a necessidade de tais suposições, sendo, portanto, um conjunto de procedimentos não-paramétricos.\textsuperscript{\citeproc{ref-Bland2015}{19}}
 \end{itemize}
 
-\subsection{Quais procedimentos de reamostragem podem ser realizados?}\label{quais-procedimentos-de-reamostragem-podem-ser-realizados}
+\subsection{Quais métodos de reamostragem podem ser realizados?}\label{quais-muxe9todos-de-reamostragem-podem-ser-realizados}
 
 \begin{itemize}
-\tightlist
 \item
-  \emph{Bootstrap}: Cada iteração cria uma nova amostra do mesmo tamanho da original a partir de seleções aleatórias das observações reais. Algumas observações podem aparecer mais de uma vez, enquanto outras podem não ser selecionadas.\textsuperscript{\citeproc{ref-Bland2015}{19}}
+  \emph{Bootstrap}: Cada iteração cria uma nova amostra do mesmo tamanho da original a partir de seleções aleatórias das observações reais.\textsuperscript{\citeproc{ref-Bland2015}{19}}
+\item
+  Com \emph{bootstrap}, algumas observações podem aparecer mais de uma vez, enquanto outras podem não ser selecionadas.\textsuperscript{\citeproc{ref-Bland2015}{19}}
 \end{itemize}
 
 \begin{figure}
@@ -1753,7 +1755,7 @@ O pacote \emph{lintr}\textsuperscript{\citeproc{ref-lintr}{53}} fornece a funç�
 \item
   Os pacotes ficam armazenados no \emph{Comprehensive R Archive Network} (CRAN) e podem ser instalados diretamente no RStudio.\textsuperscript{\citeproc{ref-introduc2020}{38},\citeproc{ref-CRAN}{39}}
 \item
-  Na mais recente atualização deste livro, o {[}\emph{Comprehensive R Archive Network} (CRAN) possui 452827 pacotes disponíveis.\textsuperscript{\citeproc{ref-introduc2020}{38},\citeproc{ref-CRAN}{39}}
+  Na mais recente atualização deste livro, o {[}\emph{Comprehensive R Archive Network} (CRAN) possui 452979 pacotes disponíveis.\textsuperscript{\citeproc{ref-introduc2020}{38},\citeproc{ref-CRAN}{39}}
 \item
   Os pacotes disponíveis podem ser encontrados em \emph{R PACKAGES DOCUMENTATION}.\textsuperscript{\citeproc{ref-R_Packages}{54}}
 \end{itemize}
@@ -1795,16 +1797,16 @@ O pacote \emph{roxygen2}\textsuperscript{\citeproc{ref-roxygen2}{56}} fornece a 
 \begin{itemize}
 \tightlist
 \item
-  Manuscritos reproduzíveis permitem a produção de um manuscrito completo a partir da integração do banco de dados da(s) amostra(s), do(s) script(s) de análise estatística (incluindo comentários para sua interpretação), dos pacotes ou bibliotecas utilizados, das fontes e referências bibliográficas citadas, além dos demais elementos textuais (tabelas, gráficos).\textsuperscript{\citeproc{ref-hinsen2011}{33}}
+  Manuscritos reproduzíveis permitem a produção de um manuscrito completo a partir da integração do banco de dados da(s) amostra(s), do(s) script(s) de análise estatística, dos pacotes ou bibliotecas utilizados, das fontes e referências bibliográficas, além das tabelas e gráficos.\textsuperscript{\citeproc{ref-hinsen2011}{33}}
 \end{itemize}
 
 \subsection{Por que usar manuscritos reproduzíveis?}\label{por-que-usar-manuscritos-reproduzuxedveis}
 
 \begin{itemize}
 \item
-  No processo tradicional de redação científica há muitas etapas de copiar e colar não reproduzíveis envolvidas. Documentos dinâmicos combinam uma ferramenta de processamento de texto com o R script que produz o texto/tabela/figura a ser incorporado no manuscrito.\textsuperscript{\citeproc{ref-mair2016}{32}}
+  Documentos dinâmicos combinam uma ferramenta de processamento de texto com o R script que produz o texto/tabela/figura a ser incorporado no manuscrito.\textsuperscript{\citeproc{ref-mair2016}{32}}
 \item
-  Ao trabalhar com relatórios dinâmicos, é possível extrair o mesmo script usado para análise estatística. Os documentos podem ser compilados em vários formatos de saída e salvos como DOCX, PPTX e PDF.\textsuperscript{\citeproc{ref-mair2016}{32}}
+  Com relatórios dinâmicos, é possível extrair o mesmo script usado para análise estatística. Os documentos podem ser compilados em vários formatos de saída e salvos como DOCX, PPTX e PDF.\textsuperscript{\citeproc{ref-mair2016}{32}}
 \item
   Muitos erros de análise poderiam ser evitados com a adoção de melhores práticas de programação em manuscritos reproduzíveis.\textsuperscript{\citeproc{ref-trisovic2022}{57}}
 \end{itemize}
@@ -1877,7 +1879,7 @@ O pacote \emph{bookdown}\textsuperscript{\citeproc{ref-bookdown}{59}} fornece as
   Um aplicativo Shiny pode ser executado localmente no RStudio, hospedado em servidores Shiny ou disponibilizado na internet por serviços de hospedagem especializados, permitindo acesso a usuários sem conhecimento de programação.\textsuperscript{\citeproc{ref-brun2025}{62}}
 \end{itemize}
 
-\subsection{Quais são as boas práticas para desenvolver aplicativos Shiny reproduzíveis?}\label{quais-suxe3o-as-boas-pruxe1ticas-para-desenvolver-aplicativos-shiny-reproduzuxedveis}
+\subsection{Quais são as boas práticas para desenvolver Shiny apps?}\label{quais-suxe3o-as-boas-pruxe1ticas-para-desenvolver-shiny-apps}
 
 \begin{itemize}
 \item
@@ -2020,13 +2022,13 @@ O pacote \emph{workflowr}\textsuperscript{\citeproc{ref-workflowr}{67}} fornece 
 
 \begin{itemize}
 \item
-  Letramento em informação: Capacidade de reconhecer quando a informação é necessária e de localizá-la, avaliá-la criticamente (qualidade, validade, relevância, completude, imparcialidade) e usá-la de forma eficaz e ética. Abrange qualquer tipo de informação, em texto ou números.\textsuperscript{\citeproc{ref-shields2005}{68}}
+  Letramento estatístico é a competência para compreender, interpretar e avaliar informações baseadas em dados, integrando conhecimentos técnicos e contextuais com postura crítica, crenças e atitudes que sustentem o uso ético e fundamentado da estatística.\textsuperscript{\citeproc{ref-gal2002a}{68}--\citeproc{ref-hidayati2020}{70}}
 \item
-  Letramento em dados: Competência técnica para acessar, manipular, resumir e apresentar dados, utilizando ferramentas e métodos (SQL, planilhas, softwares estatísticos), com foco na preparação e organização de conjuntos de dados para análise e comunicação.\textsuperscript{\citeproc{ref-shields2005}{68}}
+  Letramento estatístico é parte essencial do letramento informacional (fornece a capacidade de reconhecer, acessar e avaliar informações) e do letramento em dados (envolve acessar, manipular e apresentar dados de forma adequada).\textsuperscript{\citeproc{ref-shields2005}{71}}
 \item
-  Letramento estatístico é a competência para compreender, interpretar e avaliar informações baseadas em dados, integrando conhecimentos técnicos (linguagem, estatística, matemática) e contextuais com postura crítica, crenças e atitudes que sustentem o uso ético e fundamentado da estatística.\textsuperscript{\citeproc{ref-gal2002a}{69}--\citeproc{ref-hidayati2020}{71}}
+  Letramento em informação: Capacidade de reconhecer quando a informação é necessária e de localizá-la, avaliá-la criticamente (qualidade, validade, relevância, completude, imparcialidade) e usá-la de forma eficaz e ética.\textsuperscript{\citeproc{ref-shields2005}{71}}
 \item
-  Letramento estatístico é parte essencial do letramento informacional (fornece a capacidade de reconhecer, acessar e avaliar informações) e do letramento em dados (envolve acessar, manipular e apresentar dados de forma adequada).\textsuperscript{\citeproc{ref-shields2005}{68}}
+  Letramento em dados: Competência técnica para acessar, manipular, resumir e apresentar dados, utilizando ferramentas e métodos, com foco na preparação e organização de conjuntos de dados para análise e comunicação.\textsuperscript{\citeproc{ref-shields2005}{71}}
 \end{itemize}
 
 \subsection{Por que o letramento estatístico é importante?}\label{por-que-o-letramento-estatuxedstico-uxe9-importante}
@@ -2042,84 +2044,78 @@ O pacote \emph{workflowr}\textsuperscript{\citeproc{ref-workflowr}{67}} fornece 
 
 \begin{itemize}
 \item
-  Escolha do indicador: usar média ou mediana pode levar a conclusões muito diferentes sobre o mesmo fenômeno (por exemplo, renda média vs.~mediana antes e depois de impostos).\textsuperscript{\citeproc{ref-shields2005}{68}}
+  Escolha do indicador: usar média ou mediana pode levar a conclusões muito diferentes sobre o mesmo fenômeno (por exemplo, renda média vs.~mediana antes e depois de impostos).\textsuperscript{\citeproc{ref-shields2005}{71}}
 \item
-  Confusão entre taxas e contagens: comparar números absolutos sem considerar proporções populacionais pode distorcer a realidade.\textsuperscript{\citeproc{ref-shields2005}{68}}
+  Confusão entre taxas e contagens: comparar números absolutos sem considerar proporções populacionais pode distorcer a realidade.\textsuperscript{\citeproc{ref-shields2005}{71}}
 \item
-  Fatores de confusão: diferenças observadas podem ser explicadas por variáveis não consideradas, como idade média da população ao comparar taxas de mortalidade.\textsuperscript{\citeproc{ref-shields2005}{68}}
+  Fatores de confusão: diferenças observadas podem ser explicadas por variáveis não consideradas, como idade média da população ao comparar taxas de mortalidade.\textsuperscript{\citeproc{ref-shields2005}{71}}
 \end{itemize}
 
 \section{Elementos centrais do letramento estatístico}\label{elementos-centrais-do-letramento-estatuxedstico}
 
-\subsection{Quais são os elementos de conhecimento que sustentam o letramento estatístico?}\label{quais-suxe3o-os-elementos-de-conhecimento-que-sustentam-o-letramento-estatuxedstico}
+\subsection{Quais elementos sustentam o letramento estatístico?}\label{quais-elementos-sustentam-o-letramento-estatuxedstico}
 
 \begin{itemize}
-\tightlist
 \item
-  O modelo de letramento estatístico é composto por cinco elementos de conhecimento e dois elementos disposicionais.\textsuperscript{\citeproc{ref-gal2002a}{69}--\citeproc{ref-hidayati2020}{71}}
+  O modelo de letramento estatístico é composto por cinco elementos de conhecimento e dois elementos disposicionais.\textsuperscript{\citeproc{ref-gal2002a}{68}--\citeproc{ref-hidayati2020}{70}}
+\item
+  Competências de letramento: incluindo leitura de textos, gráficos e tabelas.\textsuperscript{\citeproc{ref-gal2002a}{68}}
+\item
+  Conhecimento estatístico básico: incluindo conceitos, métodos, interpretação de dados e probabilidade.\textsuperscript{\citeproc{ref-gal2002a}{68}}
+\item
+  Conhecimento matemático: sobre percentagens, médias e raciocínio numérico.\textsuperscript{\citeproc{ref-gal2002a}{68}}
+\item
+  Conhecimento de contexto/mundo: com entendimento do cenário e origem dos dados.\textsuperscript{\citeproc{ref-gal2002a}{68}}
+\item
+  Questões críticas: lista de \emph{worry questions} para avaliar a validade da informação.\textsuperscript{\citeproc{ref-gal2002a}{68}}
 \end{itemize}
 
-\subsection{Quais são os cinco elementos de conhecimento que sustentam o letramento estatístico?}\label{quais-suxe3o-os-cinco-elementos-de-conhecimento-que-sustentam-o-letramento-estatuxedstico}
+\subsection{Quais são os elementos que facilitam a ação estatisticamente letrada?}\label{quais-suxe3o-os-elementos-que-facilitam-a-auxe7uxe3o-estatisticamente-letrada}
 
 \begin{itemize}
 \item
-  Competências de letramento, incluindo leitura de textos, gráficos e tabelas.\textsuperscript{\citeproc{ref-gal2002a}{69}}
+  Postura crítica: propensão para questionar e analisar mensagens quantitativas.\textsuperscript{\citeproc{ref-gal2002a}{68}}
 \item
-  Conhecimento estatístico básico, incluindo conceitos, métodos, interpretação de dados e probabilidade.\textsuperscript{\citeproc{ref-gal2002a}{69}}
-\item
-  Conhecimento matemático sobre percentagens, médias e raciocínio numérico.\textsuperscript{\citeproc{ref-gal2002a}{69}}
-\item
-  Conhecimento de contexto/mundo, com entendimento do cenário e origem dos dados.\textsuperscript{\citeproc{ref-gal2002a}{69}}
-\item
-  Questões críticas (lista de \emph{worry questions} para avaliar a validade da informação.\textsuperscript{\citeproc{ref-gal2002a}{69}}
+  Crenças e atitudes: visão positiva sobre a capacidade de pensar estatisticamente; valorização de dados bem produzidos.\textsuperscript{\citeproc{ref-gal2002a}{68}}
 \end{itemize}
 
-\subsection{Quais são os dois elementos de disposição que facilitam a ação estatisticamente letrada?}\label{quais-suxe3o-os-dois-elementos-de-disposiuxe7uxe3o-que-facilitam-a-auxe7uxe3o-estatisticamente-letrada}
+\subsection{Quais são as perguntas críticas na interpretação estatística?}\label{quais-suxe3o-as-perguntas-cruxedticas-na-interpretauxe7uxe3o-estatuxedstica}
 
 \begin{itemize}
 \item
-  Postura crítica: propensão para questionar e analisar mensagens quantitativas.\textsuperscript{\citeproc{ref-gal2002a}{69}}
+  De onde vêm os dados? Que tipo de estudo foi feito?\textsuperscript{\citeproc{ref-gal2002a}{68}}
 \item
-  Crenças e atitudes: visão positiva sobre a capacidade de pensar estatisticamente; valorização de dados bem produzidos.\textsuperscript{\citeproc{ref-gal2002a}{69}}
-\end{itemize}
-
-\subsection{Que tipo de perguntas críticas devemos fazer ao interpretar informação estatística?}\label{que-tipo-de-perguntas-cruxedticas-devemos-fazer-ao-interpretar-informauxe7uxe3o-estatuxedstica}
-
-\begin{itemize}
+  A amostra é representativa e suficientemente grande?\textsuperscript{\citeproc{ref-gal2002a}{68}}
 \item
-  De onde vêm os dados? Que tipo de estudo foi feito?\textsuperscript{\citeproc{ref-gal2002a}{69}}
+  Os instrumentos de medição são confiáveis?\textsuperscript{\citeproc{ref-gal2002a}{68}}
 \item
-  A amostra é representativa e suficientemente grande?\textsuperscript{\citeproc{ref-gal2002a}{69}}
+  As estatísticas e gráficos são apropriados e não distorcem?\textsuperscript{\citeproc{ref-gal2002a}{68}}
 \item
-  Os instrumentos de medição são confiáveis?\textsuperscript{\citeproc{ref-gal2002a}{69}}
+  Há relação causal ou apenas correlação? Há informação em falta?\textsuperscript{\citeproc{ref-gal2002a}{68}}
 \item
-  As estatísticas e gráficos são apropriados e não distorcem?\textsuperscript{\citeproc{ref-gal2002a}{69}}
-\item
-  Há relação causal ou apenas correlação? Há informação em falta?\textsuperscript{\citeproc{ref-gal2002a}{69}}
-\item
-  Existem interpretações alternativas plausíveis?\textsuperscript{\citeproc{ref-gal2002a}{69}}
+  Existem interpretações alternativas plausíveis?\textsuperscript{\citeproc{ref-gal2002a}{68}}
 \end{itemize}
 
 \section{Hierarquia de letramento estatístico}\label{hierarquia-de-letramento-estatuxedstico}
 
-\subsection{Quais são os níveis da hierarquia de letramento estatístico?}\label{quais-suxe3o-os-nuxedveis-da-hierarquia-de-letramento-estatuxedstico}
+\subsection{Quais são os níveis de letramento estatístico?}\label{quais-suxe3o-os-nuxedveis-de-letramento-estatuxedstico}
 
 \begin{itemize}
 \item
-  Nível 6 -- Crítico Matemático: É o nível mais alto. A pessoa questiona e analisa as informações de forma profunda, usando cálculos e raciocínio proporcional (como comparar porcentagens e proporções). Reconhece que previsões sempre envolvem algum grau de incerteza e percebe detalhes sutis na forma como os dados são apresentados.\textsuperscript{\citeproc{ref-callingham2017}{73}}
+  Nível 1 Idiossincrático: Responde de forma muito pessoal ou confusa, usando termos de maneira incorreta ou limitada. Realiza apenas contagens diretas e leituras simples de dados.\textsuperscript{\citeproc{ref-callingham2017}{73}}
 \item
-  Nível 5 -- Crítico: Também envolve uma postura questionadora, mas sem exigir cálculos complexos de proporção. Usa corretamente a linguagem estatística, entende o significado de termos ligados à probabilidade e percebe que os resultados podem variar.\textsuperscript{\citeproc{ref-callingham2017}{73}}
+  Nível 2 Informal: A interpretação é mais baseada no senso comum do que em conceitos estatísticos. Utiliza apenas alguns termos corretos e consegue fazer cálculos muito simples com tabelas, gráficos ou situações de probabilidade.\textsuperscript{\citeproc{ref-callingham2017}{73}}
 \item
-  Nível 4 -- Consistente, mas Não Crítico: Consegue interpretar dados e usar termos estatísticos corretamente, mas não chega a questionar a forma como as informações são apresentadas. Reconhece a variação apenas em situações que envolvem sorte ou acaso, e sabe lidar com conceitos como média, probabilidades simples e leitura de gráficos.\textsuperscript{\citeproc{ref-callingham2017}{73}}
+  Nível 3 Inconsistente: Analisa partes do problema, mas de forma irregular. Pode identificar conclusões corretas, mas sem explicá-las. Usa ideias estatísticas de maneira mais descritiva do que numérica.\textsuperscript{\citeproc{ref-callingham2017}{73}}
 \item
-  Nível 3 -- Inconsistente: Analisa partes do problema, mas de forma irregular. Pode identificar conclusões corretas, mas sem explicá-las. Usa ideias estatísticas de maneira mais descritiva do que numérica.\textsuperscript{\citeproc{ref-callingham2017}{73}}
+  Nível 4 Consistente: Consegue interpretar dados e usar termos estatísticos corretamente, sem questionar a forma como as informações são apresentadas. Reconhece a variação apenas em situações que envolvem sorte ou acaso, e sabe lidar com conceitos como média, probabilidades simples e leitura de gráficos.\textsuperscript{\citeproc{ref-callingham2017}{73}}
 \item
-  Nível 2 -- Informal: A interpretação é mais baseada no senso comum do que em conceitos estatísticos. Utiliza apenas alguns termos corretos e consegue fazer cálculos muito simples com tabelas, gráficos ou situações de probabilidade.\textsuperscript{\citeproc{ref-callingham2017}{73}}
+  Nível 5 Crítico: Também envolve uma postura questionadora, mas sem exigir cálculos complexos de proporção. Usa corretamente a linguagem estatística, entende o significado de termos ligados à probabilidade e percebe que os resultados podem variar.\textsuperscript{\citeproc{ref-callingham2017}{73}}
 \item
-  Nível 1 -- Idiossincrático: Responde de forma muito pessoal ou confusa, usando termos de maneira incorreta ou limitada. Realiza apenas contagens diretas e leituras simples de dados.\textsuperscript{\citeproc{ref-callingham2017}{73}}
+  Nível 6 Crítico Matemático: A pessoa questiona e analisa as informações de forma profunda, usando cálculos e raciocínio proporcional, e reconhece que previsões sempre envolvem algum grau de incerteza e percebe detalhes sutis na forma como os dados são apresentados.\textsuperscript{\citeproc{ref-callingham2017}{73}}
 \end{itemize}
 
-\subsection{Quais são os componentes centrais do letramento estatístico com literacia de dados?}\label{quais-suxe3o-os-componentes-centrais-do-letramento-estatuxedstico-com-literacia-de-dados}
+\subsection{Quais são os componentes centrais do letramento estatístico?}\label{quais-suxe3o-os-componentes-centrais-do-letramento-estatuxedstico}
 
 \begin{itemize}
 \item
@@ -2237,7 +2233,7 @@ O pacote \emph{workflowr}\textsuperscript{\citeproc{ref-workflowr}{67}} fornece 
 
 \chapter{\texorpdfstring{\textbf{Falácias estatísticas}}{Falácias estatísticas}}\label{falacias-estatisticas}
 
-\section{Falácias estatísticas}\label{faluxe1cias-estatuxedsticas}
+\section{Contexto}\label{contexto}
 
 \subsection{O que são falácias estatísticas?}\label{o-que-suxe3o-faluxe1cias-estatuxedsticas}
 
@@ -2269,7 +2265,7 @@ O pacote \emph{workflowr}\textsuperscript{\citeproc{ref-workflowr}{67}} fornece 
   Desenvolver pensamento crítico diante dos números é uma das habilidades mais importantes da alfabetização científica moderna.\textsuperscript{\citeproc{ref-indrayan2018}{86}}
 \end{itemize}
 
-\section{Falácias estatísticas}\label{faluxe1cias-estatuxedsticas-1}
+\section{Falácias estatísticas}\label{faluxe1cias-estatuxedsticas}
 
 \subsection{O que é a falácia do jogador?}\label{o-que-uxe9-a-faluxe1cia-do-jogador}
 
@@ -2293,15 +2289,17 @@ O pacote \emph{workflowr}\textsuperscript{\citeproc{ref-workflowr}{67}} fornece 
   No entanto, cada lançamento da moeda é independente e não afeta o resultado do próximo lançamento.\textsuperscript{\citeproc{ref-polin2023}{87}}
 \end{itemize}
 
-\subsection{O que é a falácia correlação ≠ causalidade?}\label{o-que-uxe9-a-faluxe1cia-correlauxe7uxe3o-causalidade}
+\subsection{\texorpdfstring{O que é a falácia correlação \(neq\) causalidade?}{O que é a falácia correlação neq causalidade?}}\label{o-que-uxe9-a-faluxe1cia-correlauxe7uxe3o-neq-causalidade}
 
 \begin{itemize}
 \item
   Uma das falácias estatísticas mais comuns é assumir que duas variáveis estão relacionadas por causa e efeito apenas porque aparecem associadas nos dados.\textsuperscript{\citeproc{ref-indrayan2018}{86}}
 \item
-  Por exemplo, imagine que uma cidade apresente simultaneamente aumento no consumo de sorvetes e aumento nos casos de afogamento. Isso não significa que sorvetes causam afogamentos. Na verdade, ambos podem ser consequência de uma terceira variável: dias mais quentes.\textsuperscript{\citeproc{ref-indrayan2018}{86}}
+  Por exemplo, imagine que uma cidade apresente simultaneamente aumento no consumo de sorvetes e aumento nos casos de afogamento. Isso não significa que sorvetes causam afogamentos. Ambos podem ser consequência de uma terceira variável: dias mais quentes.\textsuperscript{\citeproc{ref-indrayan2018}{86}}
 \item
-  A existência de uma correlação não prova causalidade. Para estabelecer uma relação de causa e efeito, são necessários estudos adequados e evidências adicionais.\textsuperscript{\citeproc{ref-indrayan2018}{86}}
+  A existência de uma correlação não prova causalidade.\textsuperscript{\citeproc{ref-indrayan2018}{86}}
+\item
+  Para estabelecer uma relação de causa e efeito, são necessários estudos adequados e evidências adicionais.\textsuperscript{\citeproc{ref-indrayan2018}{86}}
 \end{itemize}
 
 \subsection{O que é a falácia dos dados agregados?}\label{o-que-uxe9-a-faluxe1cia-dos-dados-agregados}
@@ -2486,7 +2484,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
 \item
   Para decisão do paradoxo de Simpson pode-se utilizar o conceito de `back-door', o qual considera os `caminhos' (isto é, associações) no gráfico acíclio direcionado e assegura que todos as associações espúrias do tratamento \(X\) para o desfecho \(Y\) nesse diagrama causal sejam interceptados pela variável \(Z\).\textsuperscript{\citeproc{ref-pearl2014}{100}}
 \item
-  Dependendo do contexto em que os dados foram obtidos --- delineamento do estudo, escolha dos instrumentos e dos tipos de variáveis --- a melhor escolha para a análise pode variar entre a análise da população agregada ou da subpopulação desagregada.\textsuperscript{\citeproc{ref-pearl2014}{100}}
+  Dependendo do contexto em que os dados foram obtidos (delineamento do estudo, escolha dos instrumentos e dos tipos de variáveis) a melhor escolha para a análise pode variar entre a análise da população agregada ou da subpopulação desagregada.\textsuperscript{\citeproc{ref-pearl2014}{100}}
 \item
   É possível que em alguns contextos nem a análise agregada ou a desagregada podem oferecer a resposta correta, sendo necessário o uso de outras (mais) covariáveis.\textsuperscript{\citeproc{ref-pearl2014}{100}}
 \end{itemize}
@@ -2497,7 +2495,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
 
 }
 
-\caption{Paradoxo de Simpson representado com dados simulados. Os pontos no gráfico representam observações individuais e as linhas de tendência representam as regressões lineares ajustadas para os dados desagregados da população e agregados por subpopulação.}\label{fig:simpson}
+\caption{Os pontos representam observações individuais e as linhas de tendência representam as regressões lineares ajustadas para os dados desagregados da população e agregados por subpopulação.}\label{fig:simpson}
 \end{figure}
 
 \subsection{O que é o paradoxo de James-Stein?}\label{o-que-uxe9-o-paradoxo-de-james-stein}
@@ -2616,7 +2614,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
 
 \chapter{\texorpdfstring{\textbf{Práticas questionáveis em pesquisa}}{Práticas questionáveis em pesquisa}}\label{praticas-questionaveis}
 
-\section{Práticas Questionáveis em Pesquisa}\label{pruxe1ticas-questionuxe1veis-em-pesquisa}
+\section{Práticas Questionáveis}\label{pruxe1ticas-questionuxe1veis}
 
 \subsection{O que são práticas questionáveis em pesquisa?}\label{o-que-suxe3o-pruxe1ticas-questionuxe1veis-em-pesquisa}
 
@@ -2689,7 +2687,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
 \end{tabu}
 \end{table}
 
-\subsection{Quais práticas questionáveis podem ocorrer durante o planejamento do estudo?}\label{quais-pruxe1ticas-questionuxe1veis-podem-ocorrer-durante-o-planejamento-do-estudo}
+\subsection{Práticas questionáveis ocorrem no planejamento do estudo?}\label{pruxe1ticas-questionuxe1veis-ocorrem-no-planejamento-do-estudo}
 
 \begin{itemize}
 \item
@@ -2698,7 +2696,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
   \emph{Storytelling} é a prática de criar narrativas convincentes para justificar os resultados, mesmo que não sejam suportados pelos dados.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
 \end{itemize}
 
-\subsection{Quais práticas questionáveis podem ocorrer durante a coleta de dados?}\label{quais-pruxe1ticas-questionuxe1veis-podem-ocorrer-durante-a-coleta-de-dados}
+\subsection{Práticas questionáveis ocorrem na coleta de dados?}\label{pruxe1ticas-questionuxe1veis-ocorrem-na-coleta-de-dados}
 
 \begin{itemize}
 \item
@@ -2707,7 +2705,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
   \emph{Data fabrication} é a prática de inventar dados ou resultados que nunca foram coletados.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
 \end{itemize}
 
-\subsection{Quais práticas questionáveis podem ocorrer durante a análise dos dados?}\label{quais-pruxe1ticas-questionuxe1veis-podem-ocorrer-durante-a-anuxe1lise-dos-dados}
+\subsection{Práticas questionáveis ocorrem na análise dos dados?}\label{pruxe1ticas-questionuxe1veis-ocorrem-na-anuxe1lise-dos-dados}
 
 \begin{itemize}
 \item
@@ -2726,7 +2724,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
   \emph{Selective reporting} é a prática de relatar apenas os resultados que suportam uma hipótese específica, ignorando aqueles que não a apoiam, o que pode levar a conclusões enganosas e enviesadas.\textsuperscript{\citeproc{ref-hutton2000}{116}}
 \end{itemize}
 
-\subsection{Quais práticas questionáveis podem ocorrer durante a apresentação dos resultados?}\label{quais-pruxe1ticas-questionuxe1veis-podem-ocorrer-durante-a-apresentauxe7uxe3o-dos-resultados}
+\subsection{Práticas questionáveis ocorrem durante na apresentação dos resultados?}\label{pruxe1ticas-questionuxe1veis-ocorrem-durante-na-apresentauxe7uxe3o-dos-resultados}
 
 \begin{itemize}
 \item
@@ -2739,19 +2737,25 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
   \emph{Data distortion} é a prática de modificar ou omitir informações nos dados para induzir interpretações específicas.\textsuperscript{\citeproc{ref-krok2021}{119}}
 \end{itemize}
 
-\subsection{Quais práticas questionáveis podem ocorrer durante a publicação e revisão por pares?}\label{quais-pruxe1ticas-questionuxe1veis-podem-ocorrer-durante-a-publicauxe7uxe3o-e-revisuxe3o-por-pares}
+\subsection{Práticas questionáveis ocorrem durante na revisão por pares?}\label{pruxe1ticas-questionuxe1veis-ocorrem-durante-na-revisuxe3o-por-pares}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Fake peer review} refere-se à prática de criar revisões por pares falsas ou fraudulentas para apoiar a publicação de um estudo, o que compromete a integridade do processo de revisão por pares e pode levar a conclusões enganosas.\textsuperscript{\citeproc{ref-haug2015}{120}}
+\end{itemize}
+
+\subsection{Práticas questionáveis ocorrem durante na publicação?}\label{pruxe1ticas-questionuxe1veis-ocorrem-durante-na-publicauxe7uxe3o}
 
 \begin{itemize}
 \item
-  \emph{Honorary authorship} refere-se à inclusão de autores que não contribuíram significativamente para o estudo, o que pode distorcer a atribuição de crédito e responsabilidade.\textsuperscript{\citeproc{ref-picano2024}{120}}
+  \emph{Honorary authorship} refere-se à inclusão de autores que não contribuíram significativamente para o estudo, o que pode distorcer a atribuição de crédito e responsabilidade.\textsuperscript{\citeproc{ref-picano2024}{121}}
 \item
-  \emph{Ghost authorship} é a prática de não reconhecer autores que contribuíram significativamente para o estudo, o que pode distorcer a atribuição de crédito e responsabilidade.\textsuperscript{\citeproc{ref-picano2024}{120}}
+  \emph{Ghost authorship} é a prática de não reconhecer autores que contribuíram significativamente para o estudo, o que pode distorcer a atribuição de crédito e responsabilidade.\textsuperscript{\citeproc{ref-picano2024}{121}}
 \item
-  \emph{Gold authorship} é a prática de atribuir autoria em troca de prestígio, recursos ou favorecimento político, independentemente da contribuição acadêmica.\textsuperscript{\citeproc{ref-picano2024}{120}}
+  \emph{Gold authorship} é a prática de atribuir autoria em troca de prestígio, recursos ou favorecimento político, independentemente da contribuição acadêmica.\textsuperscript{\citeproc{ref-picano2024}{121}}
 \item
-  \emph{Fake authorship} refere-se à inclusão de autores fictícios ou inexistentes em uma publicação.\textsuperscript{\citeproc{ref-picano2024}{120}}
-\item
-  \emph{Fake peer review} refere-se à prática de criar revisões por pares falsas ou fraudulentas para apoiar a publicação de um estudo, o que compromete a integridade do processo de revisão por pares e pode levar a conclusões enganosas.\textsuperscript{\citeproc{ref-haug2015}{121}}
+  \emph{Fake authorship} refere-se à inclusão de autores fictícios ou inexistentes em uma publicação.\textsuperscript{\citeproc{ref-picano2024}{121}}
 \item
   \emph{File drawer problem} refere-se à tendência de não publicar estudos com resultados negativos ou não significativos, o que pode levar a uma visão distorcida da literatura científica e dificultar a replicação de estudos.\textsuperscript{\citeproc{ref-rosenthal1979}{122},\citeproc{ref-wagner2021}{123}}
 \item
@@ -2775,6 +2779,8 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
 \end{itemize}
 
 \section{Reações éticas e institucionais práticas questionáveis em pesquisa}\label{reauxe7uxf5es-uxe9ticas-e-institucionais-pruxe1ticas-questionuxe1veis-em-pesquisa}
+
+\subsection{Quais são as reações a práticas questionáveis em pesquisa?}\label{quais-suxe3o-as-reauxe7uxf5es-a-pruxe1ticas-questionuxe1veis-em-pesquisa}
 
 \begin{itemize}
 \item
@@ -3142,7 +3148,7 @@ O pacote \emph{questionr}\textsuperscript{\citeproc{ref-questionr}{151}} fornece
   Geralmente são representadas por ``1'' (presente, sucesso) e ``0'' (ausente, falha).\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
 \end{itemize}
 
-\subsection{Quais argumentos são usados para defender a categorização ou dicotomização de variáveis contínuas?}\label{quais-argumentos-suxe3o-usados-para-defender-a-categorizauxe7uxe3o-ou-dicotomizauxe7uxe3o-de-variuxe1veis-contuxednuas}
+\subsection{Quais argumentos defendem a dicotomização de variáveis contínuas?}\label{quais-argumentos-defendem-a-dicotomizauxe7uxe3o-de-variuxe1veis-contuxednuas}
 
 \begin{itemize}
 \item
@@ -3157,7 +3163,7 @@ O pacote \emph{questionr}\textsuperscript{\citeproc{ref-questionr}{151}} fornece
   A confiabilidade da(s) variável(eis) medida(s) é baixa e, portanto, categorizar os participantes resultaria em uma medida mais confiável.\textsuperscript{\citeproc{ref-MacCallum2002}{145}}
 \end{itemize}
 
-\subsection{Por que não é recomendado dicotomizar variáveis contínuas?}\label{por-que-nuxe3o-uxe9-recomendado-dicotomizar-variuxe1veis-contuxednuas}
+\subsection{Por que a dicotomização não é recomendada?}\label{por-que-a-dicotomizauxe7uxe3o-nuxe3o-uxe9-recomendada}
 
 \begin{itemize}
 \item
@@ -3495,17 +3501,19 @@ O pacote \emph{Hmisc}\textsuperscript{\citeproc{ref-Hmisc}{165}} fornece a funç
 \item
   Escalas tipo Likert são instrumentos de medida compostos por itens que capturam o grau de concordância ou discordância do respondente em relação a uma afirmação.\textsuperscript{\citeproc{ref-norman2010a}{167}}
 \item
-  Cada item apresenta um conjunto ordenado de categorias de resposta, tipicamente com 5 ou 7 pontos, variando de extremos como ``discordo totalmente'' a ``concordo totalmente''. Cada resposta é associada a um valor numérico (por exemplo, 1 a 5), permitindo a quantificação das respostas.\textsuperscript{\citeproc{ref-norman2010a}{167}}
+  Cada item apresenta um conjunto ordenado de categorias de resposta, tipicamente com com 5 categorias tipo ``discordo totalmente'', ``discordo parcialmente'', ``nem concordo nem discordo'', ``concordo parcialmente'', e ``concordo totalmente''.\textsuperscript{\citeproc{ref-norman2010a}{167}}
 \item
-  Escalas tipo Likert com 5 categorias tipo ``discordo totalmente'', ``discordo parcialmente'', ``nem concordo nem discordo'', ``concordo parcialmente'', e ``concordo totalmente'' são escalas grosseira porque as diferenças entre as categorias não são iguais. Por exemplo, a diferença entre ``discordo totalmente'' e ``discordo parcialmente'' não é a mesma que a diferença entre ``concordo parcialmente'' e ``concordo totalmente''.\textsuperscript{\citeproc{ref-aguinis2008}{152}}
+  Escalas tipo Likert são escalas grosseira porque as diferenças entre as categorias não são iguais. Por exemplo, a diferença entre ``discordo totalmente'' e ``discordo parcialmente'' não é a mesma que a diferença entre ``concordo parcialmente'' e ``concordo totalmente''.\textsuperscript{\citeproc{ref-aguinis2008}{152}}
 \item
-  Do ponto de vista teórico, as escalas Likert são classificadas como ordinais, pois indicam uma ordem entre as categorias, mas não garantem que as distâncias entre elas sejam iguais.\textsuperscript{\citeproc{ref-norman2010a}{167}}
+  Na escala tipo Likert, cada resposta é associada a um valor numérico (por exemplo, 1 a 5), permitindo a quantificação das respostas.\textsuperscript{\citeproc{ref-norman2010a}{167}}
+\item
+  Do ponto de vista teórico, as escalas tipo Likert são classificadas como ordinais, pois indicam uma ordem entre as categorias, mas não garantem que as distâncias entre elas sejam iguais.\textsuperscript{\citeproc{ref-norman2010a}{167}}
 \item
   Apesar dessa limitação formal, é prática comum combinar múltiplos itens Likert (por soma ou média) para representar um construto latente (como satisfação, atitude ou qualidade de vida).\textsuperscript{\citeproc{ref-norman2010a}{167}}
 \item
   Quando agregadas dessa forma, essas escalas tendem a apresentar comportamento próximo ao de variáveis contínuas, o que permite o uso de métodos estatísticos paramétricos em muitos contextos aplicados.\textsuperscript{\citeproc{ref-norman2010a}{167}}
 \item
-  Evidências empíricas indicam que análises baseadas em médias, como testes t, ANOVA e regressão, são robustas mesmo quando aplicadas a dados de escalas Likert, especialmente em amostras moderadas ou grandes.\textsuperscript{\citeproc{ref-norman2010a}{167}}
+  Análises baseadas em médias, como testes t, ANOVA e regressão, são robustas mesmo quando aplicadas a dados de escalas Likert, especialmente em amostras moderadas ou grandes.\textsuperscript{\citeproc{ref-norman2010a}{167}}
 \end{itemize}
 
 \begin{figure}
@@ -3907,9 +3915,10 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \end{table}
 
 \begin{itemize}
-\tightlist
 \item
-  Tipicamente, cada linha representa um participante e cada coluna representa uma variável ou fator do estudo. Estudos com medidas repetidas dos participantes podem conter múltiplas linhas para o mesmo participante (repetindo os dados na mesma coluna, conhecido como \emph{formato curto}) ou só uma linha para o participante (repetindo os dados em colunas separadas, conhecido como \emph{formato longo} ).\textsuperscript{\citeproc{ref-Juluru2015}{178}}
+  Cada linha representa um participante e cada coluna representa uma variável ou fator do estudo.\textsuperscript{\citeproc{ref-Juluru2015}{178}}
+\item
+  Estudos com medidas repetidas dos participantes podem conter múltiplas linhas para o mesmo participante (repetindo os dados na mesma coluna, conhecido como \emph{formato curto}) ou só uma linha para o participante (repetindo os dados em colunas separadas, conhecido como \emph{formato longo}).\textsuperscript{\citeproc{ref-Juluru2015}{178}}
 \end{itemize}
 
 \begin{table}
@@ -4002,16 +4011,16 @@ O pacote \emph{data.table}\textsuperscript{\citeproc{ref-data.table}{179}} forne
 \toprule
 \textbf{ID} & \textbf{Data.Coleta} & \textbf{Estado.Civil} & \textbf{Numero.Filhos}\\
 \midrule
-\cellcolor{gray!10}{1} & \cellcolor{gray!10}{05-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
-2 & 06-06-2026 & casado & 1\\
-\cellcolor{gray!10}{3} & \cellcolor{gray!10}{07-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
-4 & 08-06-2026 & solteiro & NA\\
-\cellcolor{gray!10}{5} & \cellcolor{gray!10}{09-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
-6 & 10-06-2026 & solteiro & 0\\
-\cellcolor{gray!10}{7} & \cellcolor{gray!10}{11-06-2026} & \cellcolor{gray!10}{solteiro} & \cellcolor{gray!10}{NA}\\
-8 & 12-06-2026 & solteiro & NA\\
-\cellcolor{gray!10}{9} & \cellcolor{gray!10}{13-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
-10 & 14-06-2026 & solteiro & NA\\
+\cellcolor{gray!10}{1} & \cellcolor{gray!10}{06-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
+2 & 07-06-2026 & casado & 1\\
+\cellcolor{gray!10}{3} & \cellcolor{gray!10}{08-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
+4 & 09-06-2026 & solteiro & NA\\
+\cellcolor{gray!10}{5} & \cellcolor{gray!10}{10-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
+6 & 11-06-2026 & solteiro & 0\\
+\cellcolor{gray!10}{7} & \cellcolor{gray!10}{12-06-2026} & \cellcolor{gray!10}{solteiro} & \cellcolor{gray!10}{NA}\\
+8 & 13-06-2026 & solteiro & NA\\
+\cellcolor{gray!10}{9} & \cellcolor{gray!10}{14-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
+10 & 15-06-2026 & solteiro & NA\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -4024,16 +4033,16 @@ O pacote \emph{data.table}\textsuperscript{\citeproc{ref-data.table}{179}} forne
 \toprule
 \textbf{ID} & \textbf{Data de Coleta} & \textbf{Estado Civil} & \textbf{Número de Filhos}\\
 \midrule
-\cellcolor{gray!10}{1} & \cellcolor{gray!10}{05-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
-2 & 06-06-2026 & Casado & 1\\
-\cellcolor{gray!10}{3} & \cellcolor{gray!10}{07-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NaN}\\
-4 & 08-06-2026 & Solteiro & N/A\\
-\cellcolor{gray!10}{5} & \cellcolor{gray!10}{09-06-2026} & \cellcolor{gray!10}{Casado} & \cellcolor{gray!10}{N.A.}\\
-6 & 10-06-2026 & solteiro & 0\\
-\cellcolor{gray!10}{7} & \cellcolor{gray!10}{11-06-2026} & \cellcolor{gray!10}{solteiro} & \cellcolor{gray!10}{}\\
-8 & 12-06-2026 & Solteiro & na\\
-\cellcolor{gray!10}{9} & \cellcolor{gray!10}{13-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{n.a.}\\
-10 & 14-06-2026 & Solteiro & 999\\
+\cellcolor{gray!10}{1} & \cellcolor{gray!10}{06-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
+2 & 07-06-2026 & Casado & 1\\
+\cellcolor{gray!10}{3} & \cellcolor{gray!10}{08-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NaN}\\
+4 & 09-06-2026 & Solteiro & N/A\\
+\cellcolor{gray!10}{5} & \cellcolor{gray!10}{10-06-2026} & \cellcolor{gray!10}{Casado} & \cellcolor{gray!10}{N.A.}\\
+6 & 11-06-2026 & solteiro & 0\\
+\cellcolor{gray!10}{7} & \cellcolor{gray!10}{12-06-2026} & \cellcolor{gray!10}{solteiro} & \cellcolor{gray!10}{}\\
+8 & 13-06-2026 & Solteiro & na\\
+\cellcolor{gray!10}{9} & \cellcolor{gray!10}{14-06-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{n.a.}\\
+10 & 15-06-2026 & Solteiro & 999\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -4214,19 +4223,19 @@ O pacote \emph{naniar}\textsuperscript{\citeproc{ref-naniar}{186}} fornece a fun
 
 \section{Estratégias para lidar com dados perdidos}\label{estratuxe9gias-para-lidar-com-dados-perdidos}
 
-\subsection{Que estratégias podem ser utilizadas na coleta de dados quando há expectativa de perda amostral?}\label{que-estratuxe9gias-podem-ser-utilizadas-na-coleta-de-dados-quando-huxe1-expectativa-de-perda-amostral}
+\subsection{Que estratégias utilizar na coleta quando há expectativa de perda?}\label{que-estratuxe9gias-utilizar-na-coleta-quando-huxe1-expectativa-de-perda}
 
 \begin{itemize}
 \tightlist
 \item
-  Na expectativa de ocorrência de perda amostral, com consequente ocorrência de dados perdidos, recomenda-se ampliar o tamanho da amostra com um percentual correspondente a tal estimativa (ex.: 10\%), embora ainda não corrija potenciais vieses pela perda.\textsuperscript{\citeproc{ref-Altman2007}{181}}
+  Recomenda-se ampliar o tamanho da amostra com um percentual correspondente a tal estimativa (ex.: 10\%), embora ainda não corrija potenciais vieses pela perda.\textsuperscript{\citeproc{ref-Altman2007}{181}}
 \end{itemize}
 
-\subsection{Que estratégias podem ser utilizadas na análise quando há dados perdidos?}\label{que-estratuxe9gias-podem-ser-utilizadas-na-anuxe1lise-quando-huxe1-dados-perdidos}
+\subsection{Que estratégias utilizar na análise quando há dados perdidos?}\label{que-estratuxe9gias-utilizar-na-anuxe1lise-quando-huxe1-dados-perdidos}
 
 \begin{itemize}
 \item
-  Na ocorrência de dados perdidos, a análise mais comum compreende apenas os `casos completos', com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).\textsuperscript{\citeproc{ref-Altman2007}{181}}
+  A análise mais comum compreende apenas os `casos completos', com exclusão de participantes com algum dado perdido nas variáveis do estudo. Em casos de grande quantidade de dados perdidos, pode-se perder muito poder estatístico (erro tipo II elevado).\textsuperscript{\citeproc{ref-Altman2007}{181}}
 \item
   A análise de dados completos é válida quando pode-se argumentar que a probabilidade de o participante ter dados completos depende apenas das covariáveis e não dos desfechos.\textsuperscript{\citeproc{ref-carpenter2021}{183}}
 \item
@@ -4243,12 +4252,12 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{158}} fornece a funç
 
 \end{infobox}
 
-\subsection{Que estratégias podem ser utilizadas na redação de estudos em que há dados perdidos?}\label{que-estratuxe9gias-podem-ser-utilizadas-na-redauxe7uxe3o-de-estudos-em-que-huxe1-dados-perdidos}
+\subsection{Que estratégias utilizar na redação de estudos em que há dados perdidos?}\label{que-estratuxe9gias-utilizar-na-redauxe7uxe3o-de-estudos-em-que-huxe1-dados-perdidos}
 
 \begin{itemize}
 \tightlist
 \item
-  Informar: o número de participantes com dados perdidos; diferenças nas taxas de dados perdidos entre os braços do estudo; os motivos dos dados perdidos; quaisquer diferenças entre os participantes com e sem dados perdidos; o padrão de perda; os métodos para tratamento de dados perdidos das variáveis em análise; os resultados de análises de sensibilidade; as implicações dos dados perdidos na interpretação do resultados.\textsuperscript{\citeproc{ref-Akl2015}{187}}
+  Informar: número de participantes com dados perdidos poe variável; diferenças nas taxas de dados perdidos entre os braços do estudo; motivos dos dados perdidos; diferenças entre os participantes com e sem dados perdidos; padrão de perda; métodos para tratamento de dados perdidos; resultados de análises de sensibilidade; implicações na interpretação do resultados.\textsuperscript{\citeproc{ref-Akl2015}{187}}
 \end{itemize}
 
 \section{Dados imputados}\label{dados-imputados}
@@ -4379,11 +4388,11 @@ Os pacotes \emph{mice}\textsuperscript{\citeproc{ref-mice}{189}} e \emph{miceadd
 \item
   Polígonos de frequência são gráficos de linhas que conectam os pontos médios de cada barra do histograma. Eles são úteis para comparar duas ou mais distribuições de frequência.\textsuperscript{\citeproc{ref-s2011}{194}}
 \item
-  Gráficos de barra verticais ou horizontais representam a distribuição de frequências de uma variável categórica. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do gráfico de barras é igual ao número total de observações.\textsuperscript{\citeproc{ref-s2011}{194}}
+  Gráficos de barra verticais ou horizontais representam a distribuição de frequências de uma variável categórica. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe.\textsuperscript{\citeproc{ref-s2011}{194}}
 \item
   Histogramas representam a distribuição de frequências de uma variável contínua. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do histograma é igual ao número total de observações.\textsuperscript{\citeproc{ref-s2011}{194}}
 \item
-  \emph{Boxplots} representam a distribuição de frequências de uma variável contínua. A linha central divide os dados em duas partes iguais (mediana ou Q2). A caixa inferior representa o primeiro quartil (Q1) e a caixa superior representa o terceiro quartil (Q3). As linhas geralmente se estendem até 1,5 vezes o intervalo interquartil (IQR). Observações além desse limite são representadas como valores atípicos (representados por pontos individuais).\textsuperscript{\citeproc{ref-s2011}{194}}
+  \emph{Boxplots} representam a distribuição de frequências de uma variável contínua. A linha central divide os dados em duas partes iguais (mediana ou Q2). A caixa inferior representa o primeiro quartil (Q1) e a caixa superior representa o terceiro quartil (Q3). As linhas se estendem até 1,5 vezes o intervalo interquartil (IQR). Observações além desse limite são representadas como valores atípicos (pontos individuais).\textsuperscript{\citeproc{ref-s2011}{194}}
 \end{itemize}
 
 \begin{infobox}{images/Rlogo}
@@ -5247,7 +5256,7 @@ Qn = 2.2219 \cdot \text{first quartile}(|x_i - x_j|; i < j)
 \item
   Desidentificação por generalização/supressão não garante proteção adequada em dados de alta dimensionalidade.\textsuperscript{\citeproc{ref-gadotti2024}{213}}
 \item
-  Diante dessas limitações, a geração de dados sintéticos surge como uma estratégia alternativa de redução de risco, embora também sujeita a desafios técnicos e regulatórios.\textsuperscript{\citeproc{ref-giuffruxe82023}{215}}
+  Diante dessas limitações, a geração de dados sintéticos surge como uma estratégia alternativa de redução de risco, embora também sujeita a desafios técnicos e regulatórios.\textsuperscript{\citeproc{ref-giuffre2023}{215}}
 \end{itemize}
 
 \subsection{Qual é o equilíbrio entre privacidade e utilidade?}\label{qual-uxe9-o-equiluxedbrio-entre-privacidade-e-utilidade}
@@ -5296,7 +5305,7 @@ O pacote \emph{sdcMicro}\textsuperscript{\citeproc{ref-sdcMicro}{220}} fornece f
 \item
   Embora dados sintéticos possam reduzir riscos de reidentificação, eles não são automaticamente seguros, pois modelos geradores podem memorizar registros individuais, tornando possíveis ataques de inferência ou reconstrução.\textsuperscript{\citeproc{ref-gadotti2024}{213}}
 \item
-  Dados sintéticos têm aplicações promissoras em políticas públicas, modelos preditivos e tecnologia de digital twins na saúde, embora apresentem desafios relacionados a viés, qualidade e governança regulatória.\textsuperscript{\citeproc{ref-giuffruxe82023}{215}}
+  Dados sintéticos têm aplicações promissoras em políticas públicas, modelos preditivos e tecnologia de digital twins na saúde, embora apresentem desafios relacionados a viés, qualidade e governança regulatória.\textsuperscript{\citeproc{ref-giuffre2023}{215}}
 \item
   Dados sintéticos mantêm similaridade estatística e distributiva com os dados originais, sem diferenças significativas nas comparações por testes de hipótese nula.\textsuperscript{\citeproc{ref-naughton2023}{221}}
 \item
@@ -5313,7 +5322,7 @@ O pacote \emph{synthpop}\textsuperscript{\citeproc{ref-synthpop}{222}} fornece a
 \begin{itemize}
 \tightlist
 \item
-  Dados sintéticos podem alimentar modelos de \emph{digital twins}, réplicas virtuais de sistemas hospitalares ou de pacientes, permitindo simular cenários clínicos, testar intervenções e otimizar decisões terapêuticas sem expor dados individuais reais.\textsuperscript{\citeproc{ref-giuffruxe82023}{215}}
+  Dados sintéticos podem alimentar modelos de \emph{digital twins}, réplicas virtuais de sistemas hospitalares ou de pacientes, permitindo simular cenários clínicos, testar intervenções e otimizar decisões terapêuticas sem expor dados individuais reais.\textsuperscript{\citeproc{ref-giuffre2023}{215}}
 \end{itemize}
 
 \cftaddtitleline{toc}{chapter}{\rule{\textwidth}{0.4pt}}{}
@@ -5411,9 +5420,12 @@ O pacote \emph{base}\textsuperscript{\citeproc{ref-base}{64}} fornece a função
 \subsection{Quais são os objetivos centrais da análise exploratória de dados?}\label{quais-suxe3o-os-objetivos-centrais-da-anuxe1lise-exploratuxf3ria-de-dados}
 
 \begin{itemize}
-\tightlist
 \item
-  A análise exploratória de dados (EDA) tem dois objetivos principais: (a) descrição dos dados e (b) formulação de modelos. A descrição envolve resumir os dados e destacar características essenciais, enquanto a formulação de modelos auxilia na geração de hipóteses e na escolha de procedimentos estatísticos adequados.\textsuperscript{\citeproc{ref-chatfield1986}{223}}
+  A análise exploratória de dados (EDA) tem dois objetivos principais: (a) descrição dos dados e (b) formulação de modelos.\textsuperscript{\citeproc{ref-chatfield1986}{223}}
+\item
+  A descrição envolve resumir os dados e destacar características essenciais.\textsuperscript{\citeproc{ref-chatfield1986}{223}}
+\item
+  A formulação de modelos auxilia na geração de hipóteses e na escolha de procedimentos estatísticos adequados.\textsuperscript{\citeproc{ref-chatfield1986}{223}}
 \end{itemize}
 
 \subsection{Por que conduzir a análise exploratória de dados?}\label{por-que-conduzir-a-anuxe1lise-exploratuxf3ria-de-dados}
@@ -5717,7 +5729,7 @@ O pacote \emph{esquisse}\textsuperscript{\citeproc{ref-esquisse}{239}} fornece a
 \item
   Para tamanhos de efeito: use 2--3 dígitos significativos.\textsuperscript{\citeproc{ref-Weissgerber2019}{243}}
 \item
-  Para medidas de variabilidade (desvio-padrão/erro-padrão/intervalo de confian';cça): use 1--2 dígitos significativos.\textsuperscript{\citeproc{ref-Weissgerber2019}{243}}
+  Para medidas de variabilidade: use 1--2 dígitos significativos.\textsuperscript{\citeproc{ref-Weissgerber2019}{243}}
 \end{itemize}
 
 \subsection{O que são dígitos significativos?}\label{o-que-suxe3o-duxedgitos-significativos}
@@ -5803,7 +5815,9 @@ O pacote \emph{esquisse}\textsuperscript{\citeproc{ref-esquisse}{239}} fornece a
 
 \begin{itemize}
 \item
-  Métodos clássicos como ANOVA e regressão por mínimos quadrados assumem normalidade e homocedasticidade --- suposições frequentemente violadas na prática. Violações dessas suposições podem comprometer os resultados, reduzindo o poder estatístico, distorcendo os intervalos de confiança e obscurecendo as reais diferenças entre grupos.\textsuperscript{\citeproc{ref-WRS2}{244}}
+  Métodos clássicos como ANOVA e regressão por mínimos quadrados assumem normalidade e homocedasticidade --- suposições frequentemente violadas na prática.\textsuperscript{\citeproc{ref-WRS2}{244}}
+\item
+  Violações de suposições podem comprometer os resultados, reduzindo o poder estatístico, distorcendo os intervalos de confiança e obscurecendo as reais diferenças entre grupos.\textsuperscript{\citeproc{ref-WRS2}{244}}
 \item
   Testar previamente as suposições não é suficiente: testes de homocedasticidade têm baixo poder e não garantem segurança analítica.\textsuperscript{\citeproc{ref-WRS2}{244}}
 \item
@@ -5814,9 +5828,9 @@ O pacote \emph{esquisse}\textsuperscript{\citeproc{ref-esquisse}{239}} fornece a
 
 \begin{itemize}
 \item
-  Em alguns casos, os métodos robustos confirmam os resultados clássicos; em outros, revelam interpretações completamente diferentes. A única forma de saber o impacto real dos métodos robustos é usá-los e comparar com os métodos tradicionais.\textsuperscript{\citeproc{ref-WRS2}{244}}
+  Em alguns casos, os métodos robustos confirmam os resultados clássicos; em outros, revelam interpretações completamente diferentes.\textsuperscript{\citeproc{ref-WRS2}{244}}
 \item
-  Mínimos e máximos são parâmetros descritivos, mas em certas condições podem se tornar discrepantes ou influentes, distorcendo análises. Nesses casos, a análise robusta oferece alternativas mais seguras.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
+  A forma de saber o impacto real dos métodos robustos é usá-los e comparar com os métodos tradicionais.\textsuperscript{\citeproc{ref-WRS2}{244}}
 \end{itemize}
 
 \subsection{Por que métodos robustos são preferíveis?}\label{por-que-muxe9todos-robustos-suxe3o-preferuxedveis}
@@ -18510,21 +18524,21 @@ O pacote \emph{PRISMA2020}\textsuperscript{\citeproc{ref-PRISMA2020}{538}} forne
 \CSLLeftMargin{67. }%
 \CSLRightInline{Blischak JD, Carbonetto P, Stephens M. \emph{Creating and sharing reproducible research code the workflowr way {[}version 1; peer review: 3 approved{]}}. V 8.; 2019. doi:\href{https://doi.org/10.12688/f1000research.20843.1}{10.12688/f1000research.20843.1}}
 
-\bibitem[\citeproctext]{ref-shields2005}
-\CSLLeftMargin{68. }%
-\CSLRightInline{Shields M. Information Literacy, Statistical Literacy, Data Literacy. \emph{IASSIST Quarterly}. 2005;28(2):6. doi:\href{https://doi.org/10.29173/iq790}{10.29173/iq790}}
-
 \bibitem[\citeproctext]{ref-gal2002a}
-\CSLLeftMargin{69. }%
+\CSLLeftMargin{68. }%
 \CSLRightInline{Gal I. Adults' Statistical Literacy: Meanings, Components, Responsibilities. \emph{International Statistical Review}. 2002;70(1):1--25. doi:\href{https://doi.org/10.1111/j.1751-5823.2002.tb00336.x}{10.1111/j.1751-5823.2002.tb00336.x}}
 
 \bibitem[\citeproctext]{ref-sharma2017}
-\CSLLeftMargin{70. }%
+\CSLLeftMargin{69. }%
 \CSLRightInline{Sharma S. Definitions and models of statistical literacy: a literature review. \emph{Open Review of Educational Research}. 2017;4(1):118--133. doi:\href{https://doi.org/10.1080/23265507.2017.1354313}{10.1080/23265507.2017.1354313}}
 
 \bibitem[\citeproctext]{ref-hidayati2020}
-\CSLLeftMargin{71. }%
+\CSLLeftMargin{70. }%
 \CSLRightInline{Hidayati NA, Waluya SB, Rochmad, Wardono. Statistics literacy: what, why and how? \emph{Journal of Physics: Conference Series}. 2020;1613(1):012080. doi:\href{https://doi.org/10.1088/1742-6596/1613/1/012080}{10.1088/1742-6596/1613/1/012080}}
+
+\bibitem[\citeproctext]{ref-shields2005}
+\CSLLeftMargin{71. }%
+\CSLRightInline{Shields M. Information Literacy, Statistical Literacy, Data Literacy. \emph{IASSIST Quarterly}. 2005;28(2):6. doi:\href{https://doi.org/10.29173/iq790}{10.29173/iq790}}
 
 \bibitem[\citeproctext]{ref-gould2017}
 \CSLLeftMargin{72. }%
@@ -18718,13 +18732,13 @@ O pacote \emph{PRISMA2020}\textsuperscript{\citeproc{ref-PRISMA2020}{538}} forne
 \CSLLeftMargin{119. }%
 \CSLRightInline{Krok E. Visualization on charts {\textendash} manipulations and distortions. \emph{Procedia Computer Science}. 2021;192:3932--3944. doi:\href{https://doi.org/10.1016/j.procs.2021.09.168}{10.1016/j.procs.2021.09.168}}
 
-\bibitem[\citeproctext]{ref-picano2024}
-\CSLLeftMargin{120. }%
-\CSLRightInline{Picano E. Who is the author: genuine, honorary, ghost, gold, and fake authors? \emph{Exploration of Cardiology}. 2024;2(3):88--96. doi:\href{https://doi.org/10.37349/ec.2024.00024}{10.37349/ec.2024.00024}}
-
 \bibitem[\citeproctext]{ref-haug2015}
-\CSLLeftMargin{121. }%
+\CSLLeftMargin{120. }%
 \CSLRightInline{Haug CJ. Peer-Review Fraud {\textemdash} Hacking the Scientific Publication Process. \emph{New England Journal of Medicine}. 2015;373(25):2393--2395. doi:\href{https://doi.org/10.1056/nejmp1512330}{10.1056/nejmp1512330}}
+
+\bibitem[\citeproctext]{ref-picano2024}
+\CSLLeftMargin{121. }%
+\CSLRightInline{Picano E. Who is the author: genuine, honorary, ghost, gold, and fake authors? \emph{Exploration of Cardiology}. 2024;2(3):88--96. doi:\href{https://doi.org/10.37349/ec.2024.00024}{10.37349/ec.2024.00024}}
 
 \bibitem[\citeproctext]{ref-rosenthal1979}
 \CSLLeftMargin{122. }%
@@ -19098,7 +19112,7 @@ O pacote \emph{PRISMA2020}\textsuperscript{\citeproc{ref-PRISMA2020}{538}} forne
 \CSLLeftMargin{214. }%
 \CSLRightInline{Templ M, Kowarik A, Meindl B. Statistical Disclosure Control for Micro-Data Using the{\emph{R}}Package{\textbf{sdcMicro}}. \emph{Journal of Statistical Software}. 2015;67(4). doi:\href{https://doi.org/10.18637/jss.v067.i04}{10.18637/jss.v067.i04}}
 
-\bibitem[\citeproctext]{ref-giuffruxe82023}
+\bibitem[\citeproctext]{ref-giuffre2023}
 \CSLLeftMargin{215. }%
 \CSLRightInline{Giuffrè M, Shung DL. Harnessing the power of synthetic data in healthcare: innovation, application, and privacy. \emph{npj Digital Medicine}. 2023;6(1). doi:\href{https://doi.org/10.1038/s41746-023-00927-3}{10.1038/s41746-023-00927-3}}
 
