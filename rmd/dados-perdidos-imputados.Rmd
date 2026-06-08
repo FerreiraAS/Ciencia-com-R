@@ -247,9 +247,21 @@ O pacote *stats*[@stats] fornece a função [*complete.cases*](https://www.rdocu
 
 <br>
 
-### Que estratégias utilizar na redação de estudos em que há dados perdidos?
+### O que reportar em estudos com dados perdidos?
 
--   Informar: número de participantes com dados perdidos poe variável; diferenças nas taxas de dados perdidos entre os braços do estudo; motivos dos dados perdidos; diferenças entre os participantes com e sem dados perdidos; padrão de perda; métodos para tratamento de dados perdidos; resultados de análises de sensibilidade; implicações na interpretação do resultados.[@Akl2015]
+- Métodos para tratamento de dados perdidos.[@Akl2015]
+
+- Número de participantes com dados perdidos por variável.[@Akl2015]
+
+- Motivos dos dados perdidos.[@Akl2015]
+
+- Padrão de perda.[@Akl2015]
+
+- Diferenças entre os participantes com e sem dados perdidos.[@Akl2015]
+
+- Resultados de análises de sensibilidade.[@Akl2015]
+
+- Implicações na interpretação do resultados.[@Akl2015]
 
 <br>
 
@@ -265,17 +277,17 @@ O pacote *stats*[@stats] fornece a função [*complete.cases*](https://www.rdocu
 
 ### Quando a imputação de dados é indicada?
 
--   A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares --- preditoras do desfecho e não dos dados perdidos --- estão disponíveis.[@carpenter2021]
+-   A análise com imputação de dados pode ser útil quando pode-se argumentar que os dados foram perdidos ao acaso (MAR); quando o desfecho foi observado e os dados perdidos estão nas covariáveis; e variáveis auxiliares (preditoras do desfecho e não dos dados perdidos) estão disponíveis.[@carpenter2021]
 
--   Na ocorrência de dados perdidos, a imputação de dados (substituição por dados simulados plausíveis preditos pelos dados presentes) pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.[@Altman2007]
+-   Na ocorrência de dados perdidos, a imputação de dados pode ser uma alternativa para manter o erro tipo II estipulado no plano de análise.[@Altman2007]
 
 <br>
 
 ### Quais são os métodos de imputação de dados?
 
--   Modelos lineares e logísticos podem ser utilizados para imputar dados perdidos em variáveis contínuas e dicotômicas, respectivamente.[@austin2023]
+- Imputação multivariada por equações encadeadas (*Multivariate Imputation by Chained Equations*, MICE)[@mice]
 
--   Os métodos de imputação de dados mais robustos incluem a imputação multivariada por equações encadeadas (*multivariate imputation by chained equations*, MICE)[@mice] e a correspondência média preditiva (*predictive mean matching*, PMM).[@rubin1986; @little1988a]
+- Correspondência média preditiva (*Predictive Mean Matching*, PMM).[@rubin1986; @little1988a]
 
 <br>
 
@@ -362,14 +374,14 @@ label_fun <- function(meth) {
   }
 }
 
-df$Painel <- factor(df$Método,
+df$Painel_label <- factor(df$Método,
                     levels = c("Original",
                                "Imputação: Média",
                                "Imputação: Mediana",
                                "Imputação: Moda",
                                "Imputação: PMM (MICE)"))
 
-df$Painel_label <- sapply(as.character(df$Painel), label_fun)
+# df$Painel_label <- sapply(as.character(df$Painel), label_fun)
 
 # 9. Plot final com 5 painéis verticais
 ggplot2::ggplot(df, ggplot2::aes(x = Valor)) +
@@ -380,7 +392,7 @@ ggplot2::ggplot(df, ggplot2::aes(x = Valor)) +
                ggplot2::aes(x = Valor),
                color = "red", size = 1, linetype = "dashed") +
   ggplot2::facet_wrap(~ Painel_label, ncol = 1, scales = "free_y") +
-  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::theme_minimal(base_size = 12) +
   ggplot2::labs(
     x = "Valor",
     y = "Densidade"

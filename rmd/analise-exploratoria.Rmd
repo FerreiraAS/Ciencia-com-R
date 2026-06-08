@@ -84,8 +84,6 @@ O pacote *radiant*[@radiant] fornece a função [*radiant*](https://www.rdocumen
 
 - O Quarteto de Anscombe é um conjunto de quatro bancos de dados bivariados criado por Francis Anscombe em 1973 para demonstrar a importância da visualização gráfica na análise estatística.[@anscombe1973]
 
-- Embora os quatro conjuntos apresentem estatísticas descritivas e modelos de regressão praticamente idênticos, seus gráficos de dispersão revelam relações completamente diferentes entre as variáveis.[@anscombe1973]
-
 - O conjunto de dados mostra que medidas numéricas isoladas podem ocultar padrões relevantes, outliers e estruturas não lineares.[@anscombe1973]
 
 <br>
@@ -115,6 +113,10 @@ knitr::kable(
   kableExtra::column_spec(1, bold = TRUE) %>%
   kableExtra::row_spec(dim(anscombe.dt)[1], extra_css = "border-bottom: 1px solid")
 ```
+
+<br>
+
+- Embora os quatro conjuntos apresentem estatísticas descritivas e modelos de regressão praticamente idênticos, seus gráficos de dispersão revelam relações completamente diferentes entre as variáveis.[@anscombe1973]
 
 <br>
 
@@ -246,7 +248,11 @@ O pacote *anscombiser*[@anscombiser] fornece a função [*anscombise*](https://w
 
 ### Quais são os principais elementos que compõem a análise exploratória de dados?
 
-- Verificação da qualidade dos dados (erros, ausências, *outliers*), o cálculo de estatísticas descritivas (média, desvio-padrão, intervalos, correlações) e o uso de representações gráficas como histogramas, diagramas de dispersão, *boxplots* e gráficos de séries temporais.[@chatfield1986]
+- Verificação da qualidade dos dados (erros, ausências, *outliers*).[@chatfield1986]
+
+- Representações gráficas como histogramas, diagramas de dispersão, *boxplots* e gráficos de séries temporais.[@chatfield1986]
+
+- Cálculo de estatísticas descritivas (média, desvio-padrão, intervalos, correlações).[@chatfield1986]
 
 - Técnicas multivariadas exploratórias, como análise de componentes principais e análise de clusters, podem revelar padrões em dados complexos.[@chatfield1986]
 
@@ -256,11 +262,7 @@ O pacote *anscombiser*[@anscombiser] fornece a função [*anscombise*](https://w
 
 - Cada combinação de problema de pesquisa e delineamento de estudo pode demandar um plano de análise exploratório distinto.[@zuur2009]
 
-- Verifique a existência e/ou influência de valores discrepantes ("fora da curva" ou *outliers*):[@chatfield1986; @Ferketich1986; @zuur2009]
-
-  - Boxplots
-
-  - Gráficos quantil-quantil (Q-Q)
+- Verifique a existência e/ou influência de valores discrepantes ("fora da curva" ou *outliers*) com boxplots e gráficos quantil-quantil (Q-Q).[@chatfield1986; @Ferketich1986; @zuur2009]
 
 - A análise exploratória valoriza o uso de gráficos interativos e técnicas de *brushing* e *linking*, que permitem explorar padrões ocultos, relacionar múltiplas variáveis e destacar subconjuntos de observações.[@behrens1997]
 

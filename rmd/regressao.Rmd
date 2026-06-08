@@ -280,7 +280,7 @@ plot_its <- function(data){
     # Tendência pós-intervenção
     ggplot2::geom_line(
       data = subset(data, period == "Pós"),
-      aes(y = trend),
+      ggplot2::aes(y = trend),
       linewidth = 1.3,
       color = "grey20"
     ) +

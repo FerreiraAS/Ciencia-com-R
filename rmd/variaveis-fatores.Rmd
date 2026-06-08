@@ -29,41 +29,11 @@ output:
 
 ### Como são classificadas as variáveis?
 
--   Quanto à informação:[@Ali2016; @vetter2017; @Dettori2018; @kaliyadan2019]
+-   Quanto à informação: quantitativa e qualitativa.[@Ali2016; @vetter2017; @Dettori2018; @kaliyadan2019]
 
-    -   Quantitativa
+-   Quanto ao conteúdo: contínua (intervalo ou discreta) ou categórica (ordinal ou nominal).[@barkan2015; @Ali2016; @vetter2017; @Dettori2018; @kaliyadan2019]
 
-    -   Qualitativa
-
--   Quanto ao conteúdo:[@barkan2015; @Ali2016; @vetter2017; @Dettori2018; @kaliyadan2019]
-
-    -   Contínua: representam ordem e magnitude entre valores.
-
-        -   Discreta (valores inteiros ou contáveis) vs. Contínua (valores em escala contínua).
-
-        -   Intervalo (valor '0' é arbitrário) vs. Razão (valor '0' verdadeiro).
-
-    -   Categórica ordinal (numérica ou nominal): representam ordem, mas não magnitude entre valores.
-
-    -   Categórica nominal (multinominal ou dicotômica): não representam ordem ou magnitude, apenas categorias.
-
--   Quanto à interpretação:[@Ali2016; @vetter2017; @Dettori2018; @kaliyadan2019]
-
-    - Dependente (desfecho)
-
-    - Independente (preditora, covariável, confundidora, controle)
-
-    - Mediadora (interação)
-
-    - Moderadora
-
-    - Modificadora
-
-    - Auxiliar
-
-    - Indicadora
-    
-    - Latente
+-   Quanto à interpretação: dependente (desfecho); independente (preditora, covariável, confundidora, controle); moderadora (interação); mediadora; auxiliar; indicadora; latente.[@Ali2016; @vetter2017; @Dettori2018; @kaliyadan2019]
 
 <br>
 
@@ -107,9 +77,9 @@ O pacote *base*[@base] fornece as funções [*as.Date*](https://www.rdocumentati
 
 ### Por que transformar variáveis?
 
--   Muitos procedimentos estatísticos supõem que as variáveis --- ou seus termos de erro, mais especificamente --- são normalmente distribuídas. A violação dessa suposição pode aumentar suas chances de cometer um erro do tipo I ou II.[@osborne2010]
+-   Muitos procedimentos estatísticos supõem que as variáveis (ou seus termos de erro, mais especificamente) são normalmente distribuídas. A violação dessa suposição pode aumentar suas chances de cometer um erro do tipo I ou II.[@osborne2010]
 
--   Mesmo quando se está usando análises consideradas robustas para violações dessas suposições ou testes não paramétricos (que não assumem explicitamente termos de erro normalmente distribuídos), atender a essas questões pode melhorar os resultados das análises (por exemplo, Zimmerman, 1995).[@osborne2010]
+-   Mesmo quando se está usando análises consideradas robustas para violações dessas suposições ou testes não paramétricos (que não assumem explicitamente termos de erro normalmente distribuídos), atender a essas questões pode melhorar os resultados das análises.[@osborne2010]
 
 <br>
 
@@ -157,7 +127,6 @@ g_base <- ggplot2::ggplot(df, ggplot2::aes(x = valor)) +
 # Gráficos das transformações
 g1 <- g_base +
   ggplot2::facet_wrap(~ transform, scales = "free") +
-  ggplot2::labs(title = "Transformações (Raiz, Log, Log10, Inversa)") +
   ggplot2::facet_wrap(~ transform, scales = "free", nrow = 1) +
   ggplot2::theme(axis.title.y = ggplot2::element_blank())
 
@@ -219,7 +188,6 @@ g_base <- ggplot2::ggplot(df, ggplot2::aes(x = valor)) +
 # Painel com as transformações por reflexão
 g_reflect <- g_base +
   ggplot2::facet_wrap(~ transform, scales = "free", nrow = 1) +
-  ggplot2::labs(title = "Transformações para assimetria à esquerda (via reflexão)") +
   ggplot2::theme(axis.title.y = ggplot2::element_blank())
 
 print(g_reflect)

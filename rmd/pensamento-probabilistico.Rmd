@@ -466,19 +466,23 @@ dados <- data.frame(
 )
 
 # gráfico comparando distribuição observada e teórica
-library(ggplot2)
+library()
 
-ggplot(dados, aes(x = digito)) +
-  geom_col(aes(y = observado), fill = "grey70", color = "black") +
-  geom_point(aes(y = benford), size = 3) +
-  geom_line(aes(y = benford, group = 1), linewidth = 0.8) +
-  labs(
+ggplot2::ggplot(dados, ggplot2::aes(x = digito)) +
+  ggplot2::geom_col(ggplot2::aes(y = observado), fill = "grey70", color = "black") +
+  ggplot2::geom_point(ggplot2::aes(y = benford), size = 3) +
+  ggplot2::geom_line(ggplot2::aes(y = benford, group = 1), linewidth = 0.8) +
+  ggplot2::labs(
     x = "Primeiro dígito",
-    y = "Probabilidade",
-    title = "Distribuição do primeiro dígito e Lei de Benford",
-    subtitle = "Barras: frequência simulada | Linha: distribuição teórica"
+    y = "Probabilidade"
   ) +
-  theme_bw()
+  ggplot2::theme_bw() +
+  # legend
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(hjust = 0.5),
+    axis.title = ggplot2::element_text(size = 18),
+    axis.text = ggplot2::element_text(size = 14)
+  )
 ```
 
 <br>
@@ -1045,7 +1049,7 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}
 
 <br>
 
--   Para amostras com $n \geq 30$, a distribuição amostral Student-*t* se aproxima da distribuição normal padrão $Z$ e as suposições sobre a distribuição populacional não são mais necessárias, podendo ser usada a suposição de distribuição normalpara a distribuição de probabilidade.[@kwak2017]
+-   Para amostras com $n \geq 30$, a distribuição amostral Student-*t* se aproxima da distribuição normal padrão $Z$ e as suposições sobre a distribuição populacional não são mais necessárias, podendo ser usada a suposição de distribuição normal.[@kwak2017]
 
 <br>
 

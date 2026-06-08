@@ -179,7 +179,7 @@ library(patchwork)
 
 <br>
 
--   A largura das classes pode ser determinada dividindo o intervalo total de observações pelo número de classes. Recomenda-se larguras iguais, mas larguras desiguais podem ser usadas quando existirem grandes lacunas nos dados ou em contextos específicos. Os intervalos devem ser mutuamente exclusivos e não sobrepostos, evitando intervalos abertos (ex.: \<5, \>10).[@s2011]
+-   A largura das classes pode ser determinada dividindo o intervalo total de observações pelo número de classes. Larguras desiguais podem ser usadas quando existirem grandes lacunas nos dados ou em contextos específicos. Os intervalos devem ser mutuamente exclusivos e não sobrepostos (ex.: \<5, \>10).[@s2011]
 
 -   Polígonos de frequência são gráficos de linhas que conectam os pontos médios de cada barra do histograma. Eles são úteis para comparar duas ou mais distribuições de frequência.[@s2011]
 
@@ -187,7 +187,7 @@ library(patchwork)
 
 -   Histogramas representam a distribuição de frequências de uma variável contínua. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do histograma é igual ao número total de observações.[@s2011]
 
-- *Boxplots* representam a distribuição de frequências de uma variável contínua. A linha central divide os dados em duas partes iguais (mediana ou Q2). A caixa inferior representa o primeiro quartil (Q1) e a caixa superior representa o terceiro quartil (Q3). As linhas se estendem até 1,5 vezes o intervalo interquartil (IQR). Observações além desse limite são representadas como valores atípicos (pontos individuais).[@s2011]
+- *Boxplots* representam a distribuição de frequências de uma variável contínua. A linha central divide os dados em duas partes iguais (mediana, Q2). A caixa inferior representa o primeiro quartil (Q1) e a caixa superior o terceiro quartil (Q3). As linhas se estendem até 1,5 vezes o intervalo interquartil (IQR). Observações além desse limite são representadas como valores atípicos (pontos).[@s2011]
 
 <br>
 
@@ -1063,7 +1063,6 @@ p <- ggplot2::ggplot(dados_todos, ggplot2::aes(x = valor, y = grupo)) +
     alpha = 0.7
   ) +
   ggplot2::labs(
-    title = "Distribuições Unimodal, Bimodal e Multimodal",
     x = "Valor", y = NULL
   ) +
   ggplot2::theme_minimal() +

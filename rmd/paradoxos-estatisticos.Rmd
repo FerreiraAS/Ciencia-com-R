@@ -282,13 +282,13 @@ cowplot::plot_grid(
 
 ### O que é o paradoxo de James-Stein?
 
--   O paradoxo de James-Stein mostra que, ao estimar simultaneamente 3 ou mais médias de variáveis normais independentes (com perda quadrática), o estimador “óbvio” $X_i$ --- que é ótimo para cada média isoladamente --- deixa de ser ótimo no conjunto, existindo estimadores que têm erro médio total menor.[@stein1956;@james_estimation_1961]
+-   O paradoxo mostra que, ao estimar simultaneamente 3 ou mais médias de variáveis normais independentes (com perda quadrática), o estimador “óbvio” $X_i$ (que é ótimo para cada média isoladamente) deixa de ser ótimo no conjunto, existindo estimadores que têm erro médio total menor.[@stein1956;@james_estimation_1961]
 
 -   O resultado é paradoxal porque essa melhoria exige “misturar” as estimativas entre si (como no estimador de James–Stein), introduzindo um viés controlado que reduz o erro global, algo impossível quando $n \leq 2$.[@stein1956;@james_estimation_1961]
 
 <br>
 
-```{r james-stein, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.cap='Simulação do paradoxo de Stein. Comparação do erro médio quadrático entre o estimador clássico (média amostral) e o estimador de James-Stein para diferentes números de médias sendo estimadas simultaneamente. Estimadores aparentemente piores localmente podem ser melhores globalmente quando o objetivo é reduzir o erro total.', fig.width=15, fig.height=4, dpi=300, out.width="100%"}
+```{r james-stein, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.cap='Simulação do paradoxo de Stein. Comparação do erro médio quadrático entre o estimador clássico (média amostral) e o estimador de James-Stein para diferentes números de médias (n=2 e n=5). Estimadores aparentemente piores localmente podem ser melhores globalmente quando o objetivo é reduzir o erro total.', fig.width=15, fig.height=4, dpi=300, out.width="100%"}
 # Reprodutibilidade
 set.seed(123)
 
@@ -330,8 +330,6 @@ ggplot2::ggplot(df, ggplot2::aes(x = Erro, fill = Estimador)) +
   ggplot2::geom_density(alpha = 0.5) +
   ggplot2::facet_wrap(~ Dimensao, scales = "free_x") +
   ggplot2::labs(
-    title = "Paradoxo de Stein",
-    subtitle = "n = 2 (sem paradoxo) vs n = 5 (com paradoxo)",
     x = "Erro quadrático total",
     y = "Densidade",
     fill = NULL
