@@ -15,7 +15,9 @@
 
 ### O que é aprendizado de máquina?
 
-- Treinar um modelo significa resolver um problema matemático no qual um conjunto de observações (dados) é usado para ajustar um modelo. Esse modelo busca capturar tendências gerais dos dados, ignorando particularidades excessivas para evitar sobreajuste (*overfitting*).[@burger2026]
+- Treinar um modelo significa resolver um problema matemático no qual um conjunto de observações (dados) é usado para ajustar um modelo.[@burger2026]
+
+- Modelos de aprendizado de máquina buscam capturar tendências gerais dos dados, ignorando particularidades excessivas para evitar sobreajuste (*overfitting*).[@burger2026]
 
 - O processo deriva do conceito estatístico de regressão e corresponde, em essência, à solução de um problema em que há mais restrições do que graus de liberdade.[@burger2026]
 
@@ -231,7 +233,7 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 <br>
 
-### Qual é o fluxo recomendado para descoberta científica usando aprendizado de máquina?
+### Qual é o fluxo para descoberta científica usando aprendizado de máquina?
 
 - Formulação de uma pergunta científica validável.[@chang2026]
 
@@ -247,7 +249,7 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 <br>
 
-### Qual é o fluxo típico de desenvolvimento de modelos de aprendizado de máquina?
+### Qual é o fluxo de desenvolvimento de modelos de aprendizado de máquina?
 
 - Preparação e limpeza dos dados.[@sidey-gibbons2019]
 
@@ -265,7 +267,7 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 ### O que são conjuntos de treinamento, validação e teste?
 
-- O desenvolvimento de modelos de aprendizado de máquina geralmente envolve a divisão do conjunto de dados em subconjuntos de treinamento e validação, permitindo avaliar o desempenho do modelo em dados não utilizados durante o ajuste dos parâmetros.[@sidey-gibbons2019]
+- Conjunto de treinamento e validação são subdivisões dos dados, permitindo avaliar o desempenho do modelo em dados não utilizados durante o ajuste dos parâmetros.[@sidey-gibbons2019]
 
 - Conjunto de treinamento: usado para ajustar os parâmetros do modelo.[@sidey-gibbons2019]
 
@@ -480,9 +482,11 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-### O que é *K-nearest neighbours*?
+### O que é *k-nearest neighbours*?
 
-- O algoritmo k-nearest neighbors (kNN) classifica novos pontos com base na maioria de votos entre os $k$ vizinhos mais próximos. Diferentemente da SVM linear, não assume fronteira paramétrica específica, sendo considerado método não paramétrico.[@bzdok2018]
+- O algoritmo *k-nearest neighbors* (kNN) classifica novos pontos com base na maioria de votos entre os $k$ vizinhos mais próximos.[@bzdok2018]
+
+- O knn não assume fronteira paramétrica específica, sendo considerado método não paramétrico.[@bzdok2018]
 
 - O valor de $k$ atua como parâmetro de regularização: valores pequenos produzem fronteiras altamente flexíveis (alta variância), enquanto valores maiores produzem fronteiras mais suaves (maior viés).[@bzdok2018]
 
@@ -749,7 +753,7 @@ Em muitos conjuntos de dados reais, o ponto de “cotovelo” não é claramente
 
 ### O que é análise de componentes principais?
 
-- A análise de componentes principais (*Principal Component Analysis*, PCA) é uma técnica estatística amplamente utilizada para redução de dimensionalidade, para representar dados de alta dimensão por um conjunto menor de variáveis, preservando o máximo possível da variabilidade original.[@dyer2023]
+- A análise de componentes principais é uma técnica estatística amplamente utilizada para redução de dimensionalidade, para representar dados de alta dimensão por um conjunto menor de variáveis, preservando o máximo possível da variabilidade original.[@dyer2023]
 
 - O primeiro componente principal é definido como a direção, de comprimento unitário, que maximiza a variância dos dados projetados. Ele corresponde ao eixo ao longo do qual os dados apresentam a maior dispersão, concentrando a maior quantidade de informação estatística disponível.[@dyer2023]
 
@@ -757,9 +761,11 @@ Em muitos conjuntos de dados reais, o ponto de “cotovelo” não é claramente
 
 - Esse procedimento é repetido para os componentes subsequentes, de forma que cada componente principal seja ortogonal aos anteriores e capture a maior variância possível ainda não explicada, resultando em uma ordenação natural dos componentes por importância.[@dyer2023]
 
-- Ao final do processo, a PCA produz uma base ortogonal que impõe uma geometria específica à representação dos dados, restringindo a forma como os dados podem ser reconstruídos a partir dos componentes principais.[@dyer2023]
+- A análise de componentes principais produz uma base ortogonal que impõe uma geometria específica à representação dos dados, restringindo a forma como os dados podem ser reconstruídos a partir dos componentes principais.[@dyer2023]
 
-- Embora os componentes principais descrevam de maneira eficiente a variabilidade dos dados, eles nem sempre correspondem aos fatores geradores subjacentes do fenômeno estudado. A PCA pode ainda introduzir padrões artificiais, criando uma aparência de estrutura que não reflete necessariamente os processos reais de geração dos dados.[@dyer2023]
+- Embora os componentes principais descrevam de maneira eficiente a variabilidade dos dados, eles nem sempre correspondem aos fatores geradores subjacentes do fenômeno estudado.[@dyer2023]
+
+- A análise de componentes principais pode ainda introduzir padrões artificiais, criando uma aparência de estrutura que não reflete necessariamente os processos reais de geração dos dados.[@dyer2023]
 
 <br>
 
@@ -1093,15 +1099,21 @@ gridExtra::grid.arrange(
 
 ### Quais métricas são indicadas para avaliar modelos preditivos?
 
-- A área sob a curva ROC (AUROC) como medida de discriminação, um gráfico de calibração para avaliar a concordância entre probabilidades estimadas e proporções observadas, uma medida de utilidade clínica como o *net benefit* por meio de *decision curve analysis*, e um gráfico que mostre a distribuição das probabilidades preditas por categoria de desfecho.[@vancalster2025; @assel2025]
+- A área sob a curva ROC (AUROC) como medida de discriminação.[@vancalster2025; @assel2025]
+
+- Um gráfico de calibração para avaliar a concordância entre probabilidades estimadas e proporções observadas.[@vancalster2025; @assel2025]
+
+- Uma medida de utilidade clínica como o *net benefit* por meio de *decision curve analysis*.[@vancalster2025; @assel2025]
+
+- Um gráfico que mostre a distribuição das probabilidades preditas por categoria de desfecho.[@vancalster2025; @assel2025]
 
 <br>
 
-### Quais métricas são consideradas inadequadas ou problemáticas?
+### Quais métricas são consideradas inadequadas?
 
 - Todas as métricas puramente baseadas em classificação dependente de limiar são consideradas impróprias para limiares clinicamente relevantes, exceto quando o limiar é 0,5 ou igual à prevalência verdadeira.[@vancalster2025]
 
-- Métricas derivadas da matriz de confusão não devem ser usadas isoladamente como critério principal de avaliação, pois dependem fortemente da escolha do limiar e não refletem diretamente a utilidade clínica, especialmente em contextos clínicos ou em dados desbalanceados.[@vancalster2025]
+- Métricas derivadas da matriz de confusão não devem ser usadas isoladamente como critério principal de avaliação, pois dependem da escolha do limiar e não refletem diretamente a utilidade, especialmente em cenários com dados desbalanceados.[@vancalster2025]
 
 - O F-score $F_{\beta}$ pode produzir classificações de modelos inconsistentes com a utilidade clínica, favorecendo modelos menos úteis em cenários reais de decisão médica.[@assel2025]
 
@@ -1115,9 +1127,11 @@ gridExtra::grid.arrange(
 
 <br>
 
-### Por que é importante avaliar o desempenho de um modelo de classificação?
+### Por que é importante avaliar o desempenho de classificação?
 
-- Para evitar estimativas otimistas de desempenho, modelos devem ser avaliados em dados que não foram utilizados durante o treinamento. Essa separação entre dados de treinamento e validação permite estimar a capacidade de generalização do algoritmo em novos dados.[@sidey-gibbons2019]
+- Para evitar estimativas otimistas de desempenho, modelos devem ser avaliados em dados que não foram utilizados durante o treinamento.[@sidey-gibbons2019]
+
+- Essa separação entre dados de treinamento e validação permite estimar a capacidade de generalização do algoritmo em novos dados.[@sidey-gibbons2019]
 
 <br>
 

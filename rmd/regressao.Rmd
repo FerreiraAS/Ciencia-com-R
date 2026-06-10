@@ -16,9 +16,11 @@
 
 ### O que é regressão?
 
--   Regressão refere-se a uma equação matemática que permite que uma ou mais variável(is) de desfecho (dependentes) seja(m) prevista(s) a partir de uma ou mais variável(is) independente(s). A regressão implica em uma direção de efeito, mas não garante causalidade.[@greenhalgh1997a]
+-   Regressão refere-se a uma equação matemática que permite que uma ou mais variável(is) de desfecho (dependentes) seja(m) prevista(s) a partir de uma ou mais variável(is) independente(s).[@greenhalgh1997a]
 
 -   Para estimar os efeitos imparciais de um fator de exposição primária sobre uma variável de desfecho, frequentemente constroem-se modelos estatísticos de regressão.[@bandoli2018]
+
+- A regressão implica em uma direção de efeito, mas não garante causalidade.[@greenhalgh1997a]
 
 <br>
 
@@ -832,13 +834,21 @@ O pacote *GGally*[@GGally] fornece a função [*ggally_cor*](https://www.rdocume
 
 -   Verifique a existência de multicolinearidade entre as variáveis candidatas.[@Sun1996]
 
--   O Coeficiente de determinação ($R^2$) é uma medida de quão bem as variáveis independentes explicam a variabilidade da variável dependente. Valores próximos a 1 indicam que as variáveis independentes estão fortemente correlacionadas entre si, o que pode indicar multicolinearidade.[@Kim2019]
+-   O Coeficiente de determinação ($R^2$) é uma medida de quão bem as variáveis independentes explicam a variabilidade da variável dependente.[@Kim2019]
 
--   O Fator de Inflação da Variância (*variance inflation factor*, VIF) é uma medida que quantifica o quanto a variância de um coeficiente de regressão é inflacionada devido à multicolinearidade. Valores de VIF maiores que 10 são frequentemente considerados indicativos de multicolinearidade significativa.[@Kim2019]
+- Valores $R^2$ próximos a 1 indicam que as variáveis independentes estão fortemente correlacionadas entre si, o que pode indicar multicolinearidade.[@Kim2019]
 
--   O recíproco da VIF é chamado de Tolerância, que mede a proporção da variância de uma variável independente que não é explicada pelas outras variáveis independentes. Valores baixos de Tolerância (geralmente abaixo de 0.1) indicam multicolinearidade.[@Kim2019]
+-   O Fator de Inflação da Variância (*variance inflation factor*, VIF) é uma medida que quantifica o quanto a variância de um coeficiente de regressão é inflacionada devido à multicolinearidade.[@Kim2019]
 
--   O número de condições (*Condition Number*) é uma medida que avalia a estabilidade numérica de um modelo de regressão. Valores altos (entre 10 de 30) indicam multicolinearidade, e valores maiores que 30 indicam forte multicolinearidade.[@Kim2019]
+- Valores de VIF maiores que 10 são frequentemente considerados indicativos de multicolinearidade significativa.[@Kim2019]
+
+-   O recíproco da VIF é chamado de Tolerância, que mede a proporção da variância de uma variável independente que não é explicada pelas outras variáveis independentes.[@Kim2019]
+
+- Valores baixos de Tolerância (geralmente abaixo de 0.1) indicam multicolinearidade.[@Kim2019]
+
+-   O número de condições (*Condition Number*) é uma medida que avalia a estabilidade numérica de um modelo de regressão.[@Kim2019]
+
+- Valores altos de número de condições (entre 10 de 30) indicam multicolinearidade, e valores maiores que 30 indicam forte multicolinearidade.[@Kim2019]
 
 <br>
 
@@ -911,7 +921,9 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 ### Correlação bivariada pode ser usada para seleção de variáveis em modelos de regressão multivariável?
 
--   Seleção bivariada de variáveis --- isto é, aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável --- é um dos erros mais comuns na literatura.[@Dales1978; @Sun1996; @heinze2016]
+-   Seleção bivariada de variáveis consiste na aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável.[@Dales1978; @Sun1996; @heinze2016]
+
+- Seleção bivariada de variáveis é um dos erros mais comuns na literatura.[@Dales1978; @Sun1996; @heinze2016]
 
 -   A seleção bivariada de variáveis torna o modelo mais suscetível a otimismo no ajuste se as variáveis de confundimento não são adequadamente controladas.[@Dales1978; @Sun1996]
 
@@ -919,13 +931,15 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 ### Variáveis sem significância estatística devem ser excluídas do modelo final?
 
--   Eliminar uma variável de um modelo significa anular o seu coeficiente de regressão ($\beta = 0$), mesmo que o valor estimado pelos dados seja outro. Desta forma, os resultados se afastam de uma solução de máxima verossimilhança (que tem fundamento teórico) e o modelo resultante é intencionalmente subótimo.[@heinze2016]
+-   Eliminar uma variável de um modelo significa anular o seu coeficiente de regressão ($\beta = 0$), mesmo que o valor estimado pelos dados seja outro.[@heinze2016]
+
+- Desta forma, os resultados se afastam de uma solução de máxima verossimilhança (que tem fundamento teórico) e o modelo resultante é intencionalmente subótimo.[@heinze2016]
 
 -   Os coeficientes de regressão geralmente dependem do conjunto de variáveis do modelo e, portanto, podem mudam de valor ("mudança na estimativa" positiva ou negativa) se uma (ou mais) variável(is) for(em) eliminada(s) do modelo.[@heinze2016]
 
 <br>
 
-### Por que métodos de regressão gradual não são recomendados para seleção de variáveis em modelos de regressão multivariável?
+### Por que métodos de regressão gradual não são recomendados para seleção de variáveis?
 
 -   Métodos diferentes de regressão gradual podem produzir diferentes seleções de variáveis de um mesmo banco de dados.[@Healy1995]
 
@@ -935,7 +949,7 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 <br>
 
-### O que pode ser feito para reduzir o número de variáveis candidatas em modelos de regressão multivariável?
+### O que pode ser feito para reduzir o número de variáveis candidatas?
 
 -   Em caso de uma proporção baixa entre o número de participantes e de variáveis, use o conhecimento prévio da literatura para selecionar um pequeno conjunto de variáveis candidatas.[@Sun1996]
 
@@ -1024,9 +1038,9 @@ BIC = n \cdot \log\left(\frac{RSS}{n}\right) + k \cdot \log(n) + n + n \cdot \lo
 
 ### Quais algoritmos podem ser usados para seleção automática?
 
--   Seleção progressiva (*forward selection*): começa com o modelo nulo e adiciona, a cada iteração, a variável que mais melhora o critério escolhido. O processo para quando nenhuma nova variável melhora o modelo.[@lindsey2011]
+-   Seleção progressiva: começa com o modelo nulo e adiciona, a cada iteração, a variável que mais melhora o critério escolhido. O processo para quando nenhuma nova variável melhora o modelo.[@lindsey2011]
 
--   Eliminação retrógrada (*backward elimination*): parte do modelo completo e remove, a cada iteração, a variável cuja exclusão mais melhora o critério. O processo para quando nenhuma remoção melhora o ajuste.[@lindsey2011]
+-   Eliminação retrógrada: parte do modelo completo e remove, a cada iteração, a variável cuja exclusão mais melhora o critério. O processo para quando nenhuma remoção melhora o ajuste.[@lindsey2011]
 
 -   *Leaps-and-bounds*: método exato que examina apenas uma fração dos $2^m$ modelos possíveis, determinando os melhores subconjuntos para cada tamanho de preditor (usando os critérios AIC, BIC, AICc, R² ajustado e Cp).[@lindsey2011]
 

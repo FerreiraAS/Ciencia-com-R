@@ -14,12 +14,6 @@
 
 <br>
 
-### O que são modelos?
-
--   Modelos são representações simplificadas de um sistema real, usados para entender, prever ou controlar fenômenos complexos.[@REF]
-
-<br>
-
 ### O que é modelagem?
 
 -   Modelagem é o processo de usar dados para selecionar um modelo matemático explícito que represente o processo gerador dos dados.[@Greenland1989]
@@ -42,7 +36,7 @@ O pacote *equatiomatic*[@equatiomatic] fornece a função [*extract_eq*](https:/
 
 ### O que diferencia modelos clássicos e modernos em predição?
 
--   Modelos clássicos, como a regressão logística e as árvores de decisão, contrastam com os modelos modernos, como máquinas de vetor de suporte, redes neurais e *random forests* , principalmente pela maior flexibilidade e capacidade destes últimos de capturar não linearidades e interações.[@vanderploeg2014]
+-   Modelos clássicos, como a regressão logística e as árvores de decisão, contrastam com os modelos modernos, como máquinas de vetor de suporte, redes neurais e *random forests*, principalmente pela maior flexibilidade e capacidade destes últimos de capturar não linearidades e interações.[@vanderploeg2014]
 
 <br>
 
@@ -212,7 +206,7 @@ O pacote *markovchain*[@markovchain] fornece a função [*markovchainFit*](https
 
 <br>
 
-```{r modelo-efeitos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Efeitos fixos, aleatórios e mistos em dados simulados com paradoxo de Simpson. As linhas vermelhas representam os efeitos dentro dos grupos, enquanto as linhas cinza e preta representam os efeitos globais (naive e fixo, respectivamente). O modelo misto (linhas coloridas) captura os efeitos dentro dos grupos sem extrapolar além dos dados observados."}
+```{r modelo-efeitos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Efeitos fixos, aleatórios e mistos em dados simulados com paradoxo de Simpson. As linhas vermelhas representam os efeitos dentro dos grupos, enquanto as linhas cinza e preta representam os efeitos globais. O modelo misto (linhas coloridas) captura os efeitos dentro dos grupos."}
 # reprodutibilidade
 set.seed(123)
 
@@ -359,7 +353,7 @@ ggplot2::ggplot(data, ggplot2::aes(x, y)) +
 
 ### O que é efeito de interação?
 
--   A interação - representada pelo símbolo \* - é o termo estatístico empregado para representar a heterogeneidade de um determinado efeito.[@Altman1996]
+-   A interação (representada pelo símbolo \*) é o termo estatístico empregado para representar a heterogeneidade de um determinado efeito.[@Altman1996]
 
 -   .[@Bours2023]
 
@@ -761,7 +755,7 @@ O pacote *correctR*[@correctR] fornece funções para comparar o desempenho e a 
 
 ### Como avaliar a qualidade de ajuste de um modelo?
 
--   Coeficiente de determinação ($R^2$) \@ref(eq:r2) e $R^2$ ajustado \@ref(eq:r2adj): Medem a proporção da variabilidade dos dados explicada pelo modelo. O $R^2$ ajustado penaliza a inclusão de variáveis irrelevantes.[@REF]
+-   Coeficiente de determinação ($R^2$) \@ref(eq:r2) e $R^2$ ajustado \@ref(eq:r2adj): Medem a proporção da variabilidade dos dados explicada pelo modelo. O $R^2$ ajustado penaliza a inclusão de variáveis irrelevantes.[@Kim2019]
 
 <br>
 
