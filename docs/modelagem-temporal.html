@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 39 Modelagem temporal | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas à análise estatística de dados, revisitando os principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 39 Modelagem temporal | Ciência com R" />
   <meta property="og:type" content="book" />
@@ -2434,14 +2434,14 @@ div.csl-indent {
 <h3><span class="header-section-number">39.2.1</span> O que é dependência temporal?<a href="modelagem-temporal.html#o-que-%C3%A9-depend%C3%AAncia-temporal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Dependência temporal ocorre quando o valor de uma observação depende de valores anteriores da série.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Essa dependência pode ser linear (autocorrelação) ou não linear (dinâmicas complexas).<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
+<li><p>Essa dependência pode ser linear (autocorrelação) ou não linear (dinâmicas complexas).<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-é-autocorrelação" class="section level3 hasAnchor" number="39.2.2">
 <h3><span class="header-section-number">39.2.2</span> O que é autocorrelação?<a href="modelagem-temporal.html#o-que-%C3%A9-autocorrela%C3%A7%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Autocorrelação é a correlação entre valores da série em diferentes instantes de tempo.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span> Ela é uma das principais características exploradas em modelos temporais lineares.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></li>
+<li>Autocorrelação é a correlação entre valores da série em diferentes instantes de tempo.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span> Ela é uma das principais características exploradas em modelos temporais lineares.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
@@ -2452,7 +2452,7 @@ div.csl-indent {
 <div id="o-que-são-modelos-temporais-lineares" class="section level3 hasAnchor" number="39.3.1">
 <h3><span class="header-section-number">39.3.1</span> O que são modelos temporais lineares?<a href="modelagem-temporal.html#o-que-s%C3%A3o-modelos-temporais-lineares" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Modelos lineares assumem que a dinâmica da série pode ser descrita por combinações lineares de valores passados e ruído aleatório.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></li>
+<li>Modelos lineares assumem que a dinâmica da série pode ser descrita por combinações lineares de valores passados e ruído aleatório.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
@@ -2460,15 +2460,15 @@ div.csl-indent {
 <h3><span class="header-section-number">39.3.2</span> O que são modelos temporais não lineares?<a href="modelagem-temporal.html#o-que-s%C3%A3o-modelos-temporais-n%C3%A3o-lineares" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Modelos não lineares capturam relações mais complexas, nas quais a resposta não é proporcional às entradas.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Esses modelos são necessários para descrever fenômenos como caos determinístico e sistemas dinâmicos complexos.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
+<li><p>Esses modelos são necessários para descrever fenômenos como caos determinístico e sistemas dinâmicos complexos.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="por-que-distinguir-linearidade-de-não-linearidade-é-difícil" class="section level3 hasAnchor" number="39.3.3">
 <h3><span class="header-section-number">39.3.3</span> Por que distinguir linearidade de não linearidade é difícil?<a href="modelagem-temporal.html#por-que-distinguir-linearidade-de-n%C3%A3o-linearidade-%C3%A9-dif%C3%ADcil" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Séries temporais reais frequentemente combinam múltiplas fontes de variação: ruído, dependência linear e dinâmica não linear.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>Métodos tradicionais podem interpretar incorretamente ruído como comportamento caótico.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
+<li><p>Séries temporais reais frequentemente combinam múltiplas fontes de variação: ruído, dependência linear e dinâmica não linear.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>Métodos tradicionais podem interpretar incorretamente ruído como comportamento caótico.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -2479,30 +2479,30 @@ div.csl-indent {
 <div id="como-testar-não-linearidade-em-séries-temporais" class="section level3 hasAnchor" number="39.4.1">
 <h3><span class="header-section-number">39.4.1</span> Como testar não linearidade em séries temporais?<a href="modelagem-temporal.html#como-testar-n%C3%A3o-linearidade-em-s%C3%A9ries-temporais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Uma abordagem é formular uma hipótese nula de que a série é gerada por um processo linear e testar essa hipótese estatisticamente.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></li>
+<li>Uma abordagem é formular uma hipótese nula de que a série é gerada por um processo linear e testar essa hipótese estatisticamente.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-é-o-método-de-dados-substitutos" class="section level3 hasAnchor" number="39.4.2">
 <h3><span class="header-section-number">39.4.2</span> O que é o método de dados substitutos?<a href="modelagem-temporal.html#o-que-%C3%A9-o-m%C3%A9todo-de-dados-substitutos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>O método de dados substitutos consiste em gerar séries simuladas que preservam propriedades básicas da série original, mas seguem um modelo linear.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>A série original é comparada com essas simulações para verificar diferenças significativas.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
+<li><p>O método de dados substitutos consiste em gerar séries simuladas que preservam propriedades básicas da série original, mas seguem um modelo linear.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>A série original é comparada com essas simulações para verificar diferenças significativas.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="como-funciona-o-método-de-dados-substitutos" class="section level3 hasAnchor" number="39.4.3">
 <h3><span class="header-section-number">39.4.3</span> Como funciona o método de dados substitutos?<a href="modelagem-temporal.html#como-funciona-o-m%C3%A9todo-de-dados-substitutos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Define-se uma hipótese nula (ex.: processo linear); Geram-se múltiplas séries substitutas compatíveis com essa hipótese; Calcula-se uma estatística para a série original e para as substitutas; Diferenças significativas indicam rejeição da hipótese nula.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></li>
+<li>Define-se uma hipótese nula (ex.: processo linear); Geram-se múltiplas séries substitutas compatíveis com essa hipótese; Calcula-se uma estatística para a série original e para as substitutas; Diferenças significativas indicam rejeição da hipótese nula.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="o-que-é-significância-nesse-contexto" class="section level3 hasAnchor" number="39.4.4">
 <h3><span class="header-section-number">39.4.4</span> O que é significância nesse contexto?<a href="modelagem-temporal.html#o-que-%C3%A9-signific%C3%A2ncia-nesse-contexto" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>A significância mede o quão distante a estatística da série original está da distribuição obtida com os dados substitutos.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>Valores altos indicam evidência de estrutura não linear.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
+<li><p>A significância mede o quão distante a estatística da série original está da distribuição obtida com os dados substitutos.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>Valores altos indicam evidência de estrutura não linear.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -2513,16 +2513,16 @@ div.csl-indent {
 <div id="o-que-é-uma-hipótese-nula-em-séries-temporais" class="section level3 hasAnchor" number="39.5.1">
 <h3><span class="header-section-number">39.5.1</span> O que é uma hipótese nula em séries temporais?<a href="modelagem-temporal.html#o-que-%C3%A9-uma-hip%C3%B3tese-nula-em-s%C3%A9ries-temporais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>É uma suposição sobre o processo gerador dos dados que se deseja testar, geralmente assumindo linearidade.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></li>
+<li>É uma suposição sobre o processo gerador dos dados que se deseja testar, geralmente assumindo linearidade.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quais-hipóteses-nulas-podem-ser-usadas" class="section level3 hasAnchor" number="39.5.2">
 <h3><span class="header-section-number">39.5.2</span> Quais hipóteses nulas podem ser usadas?<a href="modelagem-temporal.html#quais-hip%C3%B3teses-nulas-podem-ser-usadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Ruído independente (IID).<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>Processos lineares com autocorrelação.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>Transformações não lineares de processos lineares.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
+<li><p>Ruído independente (IID).<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>Processos lineares com autocorrelação.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>Transformações não lineares de processos lineares.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -2533,16 +2533,16 @@ div.csl-indent {
 <div id="o-que-são-estatísticas-discriminantes" class="section level3 hasAnchor" number="39.6.1">
 <h3><span class="header-section-number">39.6.1</span> O que são estatísticas discriminantes?<a href="modelagem-temporal.html#o-que-s%C3%A3o-estat%C3%ADsticas-discriminantes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>São medidas usadas para diferenciar a série original das séries substitutas.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></li>
+<li>São medidas usadas para diferenciar a série original das séries substitutas.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quais-estatísticas-podem-ser-usadas" class="section level3 hasAnchor" number="39.6.2">
 <h3><span class="header-section-number">39.6.2</span> Quais estatísticas podem ser usadas?<a href="modelagem-temporal.html#quais-estat%C3%ADsticas-podem-ser-usadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Dimensão de correlação.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>Erro de previsão.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>Medidas de dependência temporal.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
+<li><p>Dimensão de correlação.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>Erro de previsão.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>Medidas de dependência temporal.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -2553,9 +2553,9 @@ div.csl-indent {
 <div id="quais-são-as-limitações-dos-modelos-temporais" class="section level3 hasAnchor" number="39.7.1">
 <h3><span class="header-section-number">39.7.1</span> Quais são as limitações dos modelos temporais?<a href="modelagem-temporal.html#quais-s%C3%A3o-as-limita%C3%A7%C3%B5es-dos-modelos-temporais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Dados podem ser curtos ou ruidosos, dificultando inferência confiável.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>Modelos incorretos podem levar a interpretações equivocadas (ex.: falso caos).<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>A escolha da estrutura do modelo depende de suposições que nem sempre são verificáveis.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
+<li><p>Dados podem ser curtos ou ruidosos, dificultando inferência confiável.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>Modelos incorretos podem levar a interpretações equivocadas (ex.: falso caos).<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>A escolha da estrutura do modelo depende de suposições que nem sempre são verificáveis.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -2566,13 +2566,13 @@ div.csl-indent {
 <div id="como-validar-modelos-temporais" class="section level3 hasAnchor" number="39.8.1">
 <h3><span class="header-section-number">39.8.1</span> Como validar modelos temporais?<a href="modelagem-temporal.html#como-validar-modelos-temporais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Comparando previsões com dados observados.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>Testando hipóteses sobre a estrutura da série (ex.: linearidade).<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
-<li><p>Utilizando simulações e métodos de reamostragem, como dados substitutos.<span class="citation"><sup><a href="#ref-theiler1992">346</a></sup></span></p></li>
+<li><p>Comparando previsões com dados observados.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>Testando hipóteses sobre a estrutura da série (ex.: linearidade).<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
+<li><p>Utilizando simulações e métodos de reamostragem, como dados substitutos.<span class="citation"><sup><a href="#ref-theiler1992">347</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>UComp</em><span class="citation"><sup><a href="#ref-UComp">347</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/UComp/versions/5.1.5/topics/UCsetup"><em>UCsetup</em></a> para preparar modelos temporais gerais univariados.</p>
+<p>O pacote <em>UComp</em><span class="citation"><sup><a href="#ref-UComp">348</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/UComp/versions/5.1.5/topics/UCsetup"><em>UCsetup</em></a> para preparar modelos temporais gerais univariados.</p>
 </div>
 <p><br></p>
 <style>
@@ -2608,10 +2608,10 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
 <h3><strong>Referências</strong><a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-theiler1992" class="csl-entry">
-<div class="csl-left-margin">346. </div><div class="csl-right-inline">Theiler J, Eubank S, Longtin A, Galdrikian B, Doyne Farmer J. Testing for nonlinearity in time series: the method of surrogate data. <em>Physica D: Nonlinear Phenomena</em>. 1992;58(1-4):77–94. doi:<a href="https://doi.org/10.1016/0167-2789(92)90102-s">10.1016/0167-2789(92)90102-s</a></div>
+<div class="csl-left-margin">347. </div><div class="csl-right-inline">Theiler J, Eubank S, Longtin A, Galdrikian B, Doyne Farmer J. Testing for nonlinearity in time series: the method of surrogate data. <em>Physica D: Nonlinear Phenomena</em>. 1992;58(1-4):77–94. doi:<a href="https://doi.org/10.1016/0167-2789(92)90102-s">10.1016/0167-2789(92)90102-s</a></div>
 </div>
 <div id="ref-UComp" class="csl-entry">
-<div class="csl-left-margin">347. </div><div class="csl-right-inline">Diego J. Pedregal. <em>UComp: Automatic Univariate Time Series Modelling of many Kinds</em>.; 2025. doi:<a href="https://doi.org/10.32614/CRAN.package.UComp">10.32614/CRAN.package.UComp</a></div>
+<div class="csl-left-margin">348. </div><div class="csl-right-inline">Diego J. Pedregal. <em>UComp: Automatic Univariate Time Series Modelling of many Kinds</em>.; 2025. doi:<a href="https://doi.org/10.32614/CRAN.package.UComp">10.32614/CRAN.package.UComp</a></div>
 </div>
 </div>
             </section>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 28 Análise causal | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas à análise estatística de dados, revisitando os principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 28 Análise causal | Ciência com R" />
   <meta property="og:type" content="book" />
@@ -2686,19 +2686,19 @@ div.csl-indent {
 <div id="o-que-são-dags" class="section level3 hasAnchor" number="28.11.1">
 <h3><span class="header-section-number">28.11.1</span> O que são DAGs?<a href="analise-causal.html#o-que-s%C3%A3o-dags" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>DAGs são representações gráficas de relações causais entre variáveis, usando nós (variáveis) e arestas direcionadas (relações causais).<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>DAGs ajudam a identificar confundidores, mediadores e colisores, orientando a seleção de variáveis para ajuste em análises estatísticas.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>DAGs são acíclicos, ou seja, não permitem ciclos ou loops, refletindo a natureza unidirecional das relações causais.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
+<li><p>DAGs são representações gráficas de relações causais entre variáveis, usando nós (variáveis) e arestas direcionadas (relações causais).<span class="citation"><sup><a href="#ref-tennant2020">300</a></sup></span></p></li>
+<li><p>DAGs ajudam a identificar confundidores, mediadores e colisores, orientando a seleção de variáveis para ajuste em análises estatísticas.<span class="citation"><sup><a href="#ref-tennant2020">300</a></sup></span></p></li>
+<li><p>DAGs são acíclicos, ou seja, não permitem ciclos ou loops, refletindo a natureza unidirecional das relações causais.<span class="citation"><sup><a href="#ref-tennant2020">300</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
 <div id="quais-são-os-padrões-causais-básicos" class="section level3 hasAnchor" number="28.11.2">
 <h3><span class="header-section-number">28.11.2</span> Quais são os padrões causais básicos?<a href="analise-causal.html#quais-s%C3%A3o-os-padr%C3%B5es-causais-b%C3%A1sicos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Independência: duas variáveis não têm relação causal direta ou indireta.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Cadeia: uma variável causa outra, que por sua vez causa uma terceira (X → M → Y).<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Garfo: uma variável causa duas outras (X ← Z → Y), onde Z é um confundidor.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Colisor: duas variáveis causam uma terceira (X → Z ← Y), onde Z é um colisor.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
+<li><p>Independência: duas variáveis não têm relação causal direta ou indireta.<span class="citation"><sup><a href="#ref-tennant2020">300</a></sup></span></p></li>
+<li><p>Cadeia: uma variável causa outra, que por sua vez causa uma terceira (X → M → Y).<span class="citation"><sup><a href="#ref-tennant2020">300</a></sup></span></p></li>
+<li><p>Garfo: uma variável causa duas outras (X ← Z → Y), onde Z é um confundidor.<span class="citation"><sup><a href="#ref-tennant2020">300</a></sup></span></p></li>
+<li><p>Colisor: duas variáveis causam uma terceira (X → Z ← Y), onde Z é um colisor.<span class="citation"><sup><a href="#ref-tennant2020">300</a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dag"></span>
@@ -2729,11 +2729,11 @@ Figura 28.1: Padrões causais básicos: independência, cadeia, garfo e colisor.
 </ul>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>dagitty</em><span class="citation"><sup><a href="#ref-dagitty">300</a></sup></span> fornece a função <a href="https://cran.r-project.org/web/packages/dagitty/index.html"><em>dagitty</em></a> para criar um objeto grafo a partir de uma descrição textual.</p>
+<p>O pacote <em>dagitty</em><span class="citation"><sup><a href="#ref-dagitty">301</a></sup></span> fornece a função <a href="https://cran.r-project.org/web/packages/dagitty/index.html"><em>dagitty</em></a> para criar um objeto grafo a partir de uma descrição textual.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>ggdag</em><span class="citation"><sup><a href="#ref-ggdag">301</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/ggdag/versions/0.2.10/topics/ggdag"><em>ggdag</em></a> para criar figuras de grafos.</p>
+<p>O pacote <em>ggdag</em><span class="citation"><sup><a href="#ref-ggdag">302</a></sup></span> fornece a função <a href="https://www.rdocumentation.org/packages/ggdag/versions/0.2.10/topics/ggdag"><em>ggdag</em></a> para criar figuras de grafos.</p>
 </div>
 <p><br></p>
 <div class="infobox Rlogo">
@@ -2799,11 +2799,14 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
 <div id="ref-shimonovich2020" class="csl-entry">
 <div class="csl-left-margin">299. </div><div class="csl-right-inline">Shimonovich M, Pearce A, Thomson H, Keyes K, Katikireddi SV. Assessing causality in epidemiology: revisiting Bradford Hill to incorporate developments in causal thinking. <em>European Journal of Epidemiology</em>. 2020;36(9):873–887. doi:<a href="https://doi.org/10.1007/s10654-020-00703-7">10.1007/s10654-020-00703-7</a></div>
 </div>
+<div id="ref-tennant2020" class="csl-entry">
+<div class="csl-left-margin">300. </div><div class="csl-right-inline">Tennant PWG, Murray EJ, Arnold KF, et al. Use of directed acyclic graphs (DAGs) to identify confounders in applied health research: review and recommendations. <em>International Journal of Epidemiology</em>. 2020;50(2):620–632. doi:<a href="https://doi.org/10.1093/ije/dyaa213">10.1093/ije/dyaa213</a></div>
+</div>
 <div id="ref-dagitty" class="csl-entry">
-<div class="csl-left-margin">300. </div><div class="csl-right-inline">Textor J, Zander B van der, Gilthorpe MS, Liskiewicz M, Ellison GT. Robust causal inference using directed acyclic graphs: the R package <span></span>dagitty<span></span>. <em>International Journal of Epidemiology</em>. 2016;45:1887–1894. doi:<a href="https://doi.org/10.1093/ije/dyw341">10.1093/ije/dyw341</a></div>
+<div class="csl-left-margin">301. </div><div class="csl-right-inline">Textor J, Zander B van der, Gilthorpe MS, Liskiewicz M, Ellison GT. Robust causal inference using directed acyclic graphs: the R package <span></span>dagitty<span></span>. <em>International Journal of Epidemiology</em>. 2016;45:1887–1894. doi:<a href="https://doi.org/10.1093/ije/dyw341">10.1093/ije/dyw341</a></div>
 </div>
 <div id="ref-ggdag" class="csl-entry">
-<div class="csl-left-margin">301. </div><div class="csl-right-inline">Barrett M. <em>ggdag: Analyze and Create Elegant Directed Acyclic Graphs</em>.; 2024. <a href="https://CRAN.R-project.org/package=ggdag">https://CRAN.R-project.org/package=ggdag.</a></div>
+<div class="csl-left-margin">302. </div><div class="csl-right-inline">Barrett M. <em>ggdag: Analyze and Create Elegant Directed Acyclic Graphs</em>.; 2024. <a href="https://CRAN.R-project.org/package=ggdag">https://CRAN.R-project.org/package=ggdag.</a></div>
 </div>
 </div>
             </section>
