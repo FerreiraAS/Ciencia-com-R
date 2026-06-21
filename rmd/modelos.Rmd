@@ -755,7 +755,7 @@ O pacote *correctR*[@correctR] fornece funções para comparar o desempenho e a 
 
 ### Como avaliar a qualidade de ajuste de um modelo?
 
--   Coeficiente de determinação ($R^2$) \@ref(eq:r2) e $R^2$ ajustado \@ref(eq:r2adj): Medem a proporção da variabilidade dos dados explicada pelo modelo. O $R^2$ ajustado penaliza a inclusão de variáveis irrelevantes.[@Kim2019]
+-   Coeficiente de determinação ($R^2$) \@ref(eq:r2) e $RR^2_{ajustado}$ \@ref(eq:r2adj): Medem a proporção da variabilidade dos dados explicada pelo modelo. O $R^2$ ajustado penaliza a inclusão de variáveis irrelevantes.[@Kim2019]
 
 <br>
 
@@ -920,7 +920,7 @@ resultado_df$Métrica <- dplyr::recode(
   AICc = "AIC corrigido",
   BIC = "BIC",
   R2 = "$R^2$",
-  R2_adjusted = "$R^2$ ajustado",
+  R2_adjusted = "$R^2_{ajustado}$",
   RMSE = "Erro quadrático médio (RMSE)",
   Sigma = "Desvio residual (sigma)"
 )

@@ -239,7 +239,7 @@ P(E) = \frac{\text{número de desfechos em } E}{\text{número de desfechos em } 
 
 -   Um evento $E$ impossível não contém um desfecho e, portanto, nunca ocorre: $P(E)=0$.[@Viti2015; @grami2023]
 
--   Um evento $E$ é certo consiste em qualquer um dos desfechos possíveis e, portanto, sempre ocorre: $P(E)=1$.[@grami2023]
+-   Um evento $E$ certo consiste em qualquer um dos desfechos possíveis e, portanto, sempre ocorre: $P(E)=1$.[@grami2023]
 
 <br>
 
@@ -271,7 +271,7 @@ P(E) = \frac{\text{número de desfechos em } E}{\text{número de desfechos em } 
 
 ### O que é independência em estatística?
 
--   Em experimentos aleatórios, é comum assumir que os eventos de tentativas separadas são independentes devido a independência física de eventos e experimentos.[@grami2023]
+-   Em experimentos aleatórios, é comum assumir que os eventos de tentativas separadas são independentes devido à independência física de eventos e experimentos.[@grami2023]
 
 -   Se a ocorrência do evento $E_{1}$ não tiver efeito na ocorrência do evento $E_{2}$, os eventos $E_{1}$ e $E_{2}$ são considerados estatisticamente independentes.[@grami2023]
 
@@ -700,7 +700,7 @@ histograma_reamostra <- reamostra %>%
   )
 ```
 
--   No exemplo abaixo, uma variável aleatória numérica com distribuição uniforme no espaço amostral $S=[18;65]$ tem média $\mu$ = `r round(mean(população$Variável), digits = 3)` e variância $\sigma^{2}$ = `r round(var(população$Variável), digits = 3)`. A distribuição amostral da média de `r B` amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média $\mu$ = `r round(mean(reamostra[, 4]), digits = 3)` e variância $\sigma^{2}$ = `r round(var(reamostra[, 4]), digits = 3)`, independentemente da distribuição da população:
+-   Uma variável aleatória numérica com distribuição uniforme no espaço amostral $S=[18;65]$ tem média $\mu$ = `r round(mean(população$Variável), digits = 3)` e variância $\sigma^{2}$ = `r round(var(população$Variável), digits = 3)`. A distribuição amostral da média de `r B` amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média $\mu$ = `r round(mean(reamostra[, 4]), digits = 3)` e variância $\sigma^{2}$ = `r round(var(reamostra[, 4]), digits = 3)`, independentemente da distribuição da população:
 
 <br>
 
@@ -1028,7 +1028,7 @@ gridExtra::grid.arrange(histograma_pop,
 
 ### Qual a relação entre a lei dos grandes números e o teorema central do limite?
 
--   A lei dos grandes números é um precursor do teorema central do limite, pois estabelece que a média da amostra se torna cada vez mais próxima da média populacional (isto é, mais representativa) à medida que o tamanho da amostra aumenta, e o teorema central do limite demonstra que o a distribuição da soma das variáveis aleatórias se aproxima de uma distribuição normal também à medida que o tamanho da amostra aumenta.[@REF]
+-   A lei dos grandes números é um precursor do teorema central do limite, pois estabelece que a média da amostra se torna cada vez mais próxima da média populacional (isto é, mais representativa) à medida que o tamanho da amostra aumenta, e o teorema central do limite demonstra que a distribuição da soma das variáveis aleatórias se aproxima de uma distribuição normal também à medida que o tamanho da amostra aumenta.[@REF]
 
 <br>
 
@@ -1065,7 +1065,7 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}
 
 - Assim, $E(X_{t})$ tende a estar mais próxima de $E(X)$ do que $E(X_{1})$.[@barnett2004]
 
--   O valor real --- sem erros aleatório ou sistemático --- em geral não é conhecido, mas pode ser estimado pela média de várias observações.[@barnett2004]
+-   O valor real --- sem erros aleatórios ou sistemáticos --- em geral não é conhecido, mas pode ser estimado pela média de várias observações.[@barnett2004]
 
 -   Regressão para a média pode ocorrer em qualquer pesquisa cujo delineamento envolva medidas repetidas.[@senn2011]
 
@@ -1085,7 +1085,7 @@ dado1 <- round(sample(amostra$Variável, 1), digits = 0)
 dado2 <- round(sample(amostra$Variável, 1), digits = 0)
 ```
 
--   No exemplo abaixo, a 2a medida (dado 2 = `r dado2`) é mais próxima da média (valor real = `r round(mean(amostra$Variável), 1)`) do que a 1a medida (dado 1 = `r dado1`):
+-   A 2a medida (dado 2 = `r dado2`) é mais próxima da média (valor real = `r round(mean(amostra$Variável), 1)`) do que a 1a medida (dado 1 = `r dado1`):
 
 <br>
 
@@ -1182,7 +1182,7 @@ O pacote *regtomean*[@regtomean] fornece as funções [*cordata*](https://www.rd
 
 -   Aloque os participantes de modo aleatório nos grupos de tratamento e controle para reduzir o fenômeno de regressão para a média.[@barnett2004]
 
--   Selecione participantes com base em medidas repetidas ao invés de medidas únicas.[@barnett2004]
+-   Selecione participantes com base em medidas repetidas em vez de medidas únicas.[@barnett2004]
 
 <br>
 

@@ -199,7 +199,7 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 - Aprendizado não supervisionado é um paradigma em que o modelo tenta identificar padrões ou estruturas ocultas nos dados sem rótulos ou desfechos pré-definidos.[@chang2026]
 
-- Diferentemente do aprendizado supervisionado, que busca prever um desfecho conhecido, o aprendizado não supervisionado é frequentemente utilizado para gerar descobertas orientadas por dados (data-driven discovery).[@chang2026]
+- Diferentemente do aprendizado supervisionado, que busca prever um desfecho conhecido, o aprendizado não supervisionado é frequentemente utilizado para gerar descobertas orientadas por dados.[@chang2026]
 
 - Esses métodos permitem identificar estruturas, agrupamentos, relações multivariadas e padrões latentes que não haviam sido previamente formulados como hipóteses.[@chang2026]
 
@@ -291,7 +291,7 @@ O pacote *fastml*[@fastml] fornece a função [*train_models*](https://cran.r-pr
 
 ### Quais são os principais algoritmos de aprendizado de máquina?
 
-- Modelos de regressão não penalizados, modelos de regressão penalizados, modelos baseados em árvores, modelos baseados em vizinhos, redes neurais, máquinas de vetores de suporte, Naive Bayes e ensembles do tipo Superlearner.[@andaurnavarro2023]
+- Modelos de regressão não penalizados, modelos de regressão penalizados, modelos baseados em árvores, modelos baseados em vizinhos, redes neurais, máquinas de vetores de suporte, Naive Bayes e *ensembles* do tipo *superlearner*.[@andaurnavarro2023]
 
 - Do ponto de vista matemático, redes neurais não contradizem a estatística clássica; elas a estendem, substituindo modelos explícitos por representações aprendidas.[@REF]
 
@@ -442,7 +442,7 @@ model <- glm(Y ~ X, data = data, family = binomial)
 ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_point() +
   ggplot2::geom_smooth(method = "glm", method.args = list(family = "binomial"), color = "blue") +
-  ggplot2::labs(title = "Regressão logística",
+  ggplot2::labs(
        x = "Variável Independente (X)",
        y = "Probabilidade de Sucesso (Y)") +
   ggplot2::theme_minimal()
@@ -486,7 +486,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 - O algoritmo *k-nearest neighbors* (kNN) classifica novos pontos com base na maioria de votos entre os $k$ vizinhos mais próximos.[@bzdok2018]
 
-- O knn não assume fronteira paramétrica específica, sendo considerado método não paramétrico.[@bzdok2018]
+- O kNN não assume fronteira paramétrica específica, sendo considerado método não paramétrico.[@bzdok2018]
 
 - O valor de $k$ atua como parâmetro de regularização: valores pequenos produzem fronteiras altamente flexíveis (alta variância), enquanto valores maiores produzem fronteiras mais suaves (maior viés).[@bzdok2018]
 
@@ -506,7 +506,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-```{r arvore-decisao, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de árvore de decisão para predizer depressão a partir de idade, tabagismo e sintomas."}
+```{r arvore-decisao, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Árvore de decisão para predizer depressão a partir de idade, tabagismo e sintomas."}
 # Dados simulados
 set.seed(123)
 
@@ -953,7 +953,7 @@ d(x, y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{\frac{1}{p}}
 
 <br>
 
-- Distância Chebyshev \@ref(eq:chebyshev): máximum das diferenças absolutas entre as coordenadas dos pontos, representando a distância em um espaço onde o movimento é permitido em todas as direções.[@REF]
+- Distância Chebyshev \@ref(eq:chebyshev): máximo das diferenças absolutas entre as coordenadas dos pontos, representando a distância em um espaço onde o movimento é permitido em todas as direções.[@REF]
 
 <br>
 
@@ -975,7 +975,7 @@ d(x, y) = \max_{i} |x_i - y_i|
 
 <br>
 
-- Distância de Hamming \@ref(eq:hamming): número de posições em que os símbolos correspondentes de duas sequências de igual comprimento são diferentes, frequentemente usada para medir a diferença entre strings ou códigos binários.[@REF]
+- Distância de Hamming \@ref(eq:hamming): número de posições em que os símbolos correspondentes de duas sequências de igual comprimento são diferentes, frequentemente usada para medir a diferença entre *strings* ou códigos binários.[@REF]
 
 <br>
 
@@ -1320,13 +1320,13 @@ F1 = 2 \times \dfrac{PRE \times REV}{PRE + REV}
 
 <br>
 
-### O que é desbalanceamento de classes (*class imbalance*)?
+### O que é desbalanceamento de classes?
 
 - Ocorre quando as classes do desfecho (por exemplo, presença vs. ausência de um evento) não estão igualmente representadas nos dados de treinamento.[@REF]
 
 <br>
 
-### Por que o desbalanceamento é um problema?
+### Por que o desbalanceamento de classes é um problema?
 
 - Modelos podem aprender a priorizar a classe mais frequente, obtendo alta acurácia global, mas baixo desempenho para a classe minoritária.[@REF]
 
@@ -1334,7 +1334,7 @@ F1 = 2 \times \dfrac{PRE \times REV}{PRE + REV}
 
 <br>
 
-### Quais são as abordagens mais comuns para lidar com desbalanceamento de classes?
+### Como lidar com desbalanceamento de classes?
 
 - Reamostragem aleatória: superamostragem da classe minoritária; subamostragem da classe majoritária).[@REF]
 
@@ -1344,7 +1344,7 @@ F1 = 2 \times \dfrac{PRE \times REV}{PRE + REV}
 
 <br>
 
-### Qual é o impacto do desbalanceamento de classes na calibração de modelos?
+### O desbalanceamento de classes afeta a calibração de modelos?
 
 - Corrigir o desbalanceamento de classes nem sempre melhora a calibração e, em alguns casos, pode piorá-la.[@carriero2025]
 

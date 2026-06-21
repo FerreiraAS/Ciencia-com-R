@@ -48,7 +48,7 @@
 
 -   Variabilidade da(s) variável(eis) coletada(s).[@rodríguezdeláguila2014]
 
--   Lateralidade do teste de hipótese (uni- ou bicaudais).[@rodríguezdeláguila2014]
+-   Lateralidade do teste de hipótese (unicaudais ou bicaudais).[@rodríguezdeláguila2014]
 
 -   Perdas de dados durante a coleta e/ou acompanhamento dos participantes do estudo.[@rodríguezdeláguila2014]
 
@@ -107,7 +107,7 @@ grid_q <- expand.grid(
   n = seq(10, 200, by = 2),
   d = c(0.3, 0.5, 0.8),     # efeitos pequeno, médio, grande (Cohen)
   alpha = c(0.05, 0.01),
-  design = c("t_indep", "t_dep") # 2 amostras indep. vs pareado (aprox com testes diferentes)
+  design = c("t_indep", "t_dep") # 2 amostras indep. versus pareado (aprox com testes diferentes)
 )
 
 # Função segura para calcular poder com pwr
@@ -157,7 +157,7 @@ simulate_saturation <- function(n_interviews = 60, base_prob = 0.25, decay = 0.0
   data.frame(k = 1:n_interviews, new_theme, cum_themes, p_new)
 }
 
-# Dois cenários: homogêneo (satura rápido) vs heterogêneo (satura devagar)
+# Dois cenários: homogêneo (satura rápido) versus heterogêneo (satura devagar)
 sat_hom <- simulate_saturation(n_interviews = 60, base_prob = 0.35, decay = 0.09, seed = 42)
 sat_het <- simulate_saturation(n_interviews = 60, base_prob = 0.30, decay = 0.04, seed = 99)
 
@@ -228,7 +228,7 @@ plt_sat
 
 - *Data hungry* descreve a necessidade de um modelo contar com muitos eventos por variável (EPV) para alcançar estabilidade estatística.
 
-- Enquanto a regressão logística (LR) atinge desempenho estável com cerca de 20–50 EPV, modelos como random forest (RF), redes neurais (NN) e máquinas de vetor de suporte (SVM) podem demandar >200 EPV para reduzir o otimismo e estabilizar a AUC.
+- Enquanto a regressão logística atinge desempenho estável com cerca de 20–50 EPV, modelos como *random forests*, redes neurais e máquinas de vetor de suporte podem demandar >200 EPV para reduzir o otimismo e estabilizar o desempenho.
 
 <br>
 

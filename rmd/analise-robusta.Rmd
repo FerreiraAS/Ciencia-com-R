@@ -22,11 +22,11 @@
 
 ### Por que usar análise robusta?
 
-- Métodos clássicos como ANOVA e regressão por mínimos quadrados assumem normalidade e homocedasticidade — suposições frequentemente violadas na prática.[@WRS2]
+- Métodos clássicos como ANOVA e regressão por mínimos quadrados assumem normalidade e homoscedasticidade  — suposições frequentemente violadas na prática.[@WRS2]
 
 - Violações de suposições podem comprometer os resultados, reduzindo o poder estatístico, distorcendo os intervalos de confiança e obscurecendo as reais diferenças entre grupos.[@WRS2]
 
-- Testar previamente as suposições não é suficiente: testes de homocedasticidade têm baixo poder e não garantem segurança analítica.[@WRS2]
+- Testar previamente as suposições não é suficiente: testes de homoscedasticidade  têm baixo poder e não garantem segurança analítica.[@WRS2]
 
 - Métodos estatísticos robustos oferecem uma solução mais segura e eficaz, lidando melhor com dados não ideais.[@WRS2]
 
@@ -169,11 +169,11 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 - Valores univariados são comumente considerados *outliers* quando são mais extremos do que a média ± (desvio padrão × constante), ex.: 3 (99,7% de cobertura) ou 3,29 (99,9% de cobertura).[@leys2019]
 
-- Para detectar *outliers* univariados, recomenda-se o uso da Mediana da Desviação Absoluta (*Median Absolute Deviation*, MAD), mais extremos que mediana ± uma constante (valor padrão: 1,4826).[@leys2013; @leys2019]
+- Para detectar *outliers* univariados, recomenda-se o uso do Desvio Absoluto Mediano (*Median Absolute Deviation*, MAD), mais extremos que mediana ± uma constante (valor padrão: 1,4826).[@leys2013; @leys2019]
 
 - Para detectar *outliers* multivariados, recomenda-se o Determinante de Mínima Covariância (*Minimum Covariance Determinant*, MCD), pois possui ponto de quebra máximo e utiliza a mediana.[@leys2018; @leys2019]
 
-- Para detectar *outliers* multivariados, comumente utiliza-se a distância de Mahalanobis, que identifica valores muito distantes do centróide formado pela maioria dos dados (por exemplo, 99%).[@leys2019]
+- Para detectar *outliers* multivariados, comumente utiliza-se a distância de Mahalanobis, que identifica valores muito distantes do centroide formado pela maioria dos dados (por exemplo, 99%).[@leys2019]
 
 <br>
 
@@ -181,9 +181,9 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 - A escolha do método de detecção depende da natureza do outlier, se univariado ou multivariado.[@daszykowski2007]
 
-- Para valores univariados, podem ser usados box-plots (com pontos além de 1,5 vezes o intervalo interquartílico), z-scores clássicos ($|z| > 2.5$ ou $|z| > 3$) ou z-scores robustos, que substituem média por mediana e desvio-padrão por estimadores robustos.[@daszykowski2007]
+- Para valores univariados, podem ser usados boxplots (com pontos além de 1,5 vezes o intervalo interquartílico), z-scores clássicos ($|z| > 2.5$ ou $|z| > 3$) ou z-scores robustos, que substituem média por mediana e desvio-padrão por estimadores robustos.[@daszykowski2007]
 
-- Para valores multivariados, recomenda-se a distância de Mahalanobis para medir o afastamento em relação ao centróide, com ajustes robustos de covariância como MCD (*Minimum Covariance Determinant*) ou MVE (*Minimum Volume Ellipsoid*).[@daszykowski2007]
+- Para valores multivariados, recomenda-se a distância de Mahalanobis para medir o afastamento em relação ao centroide, com ajustes robustos de covariância como MCD (*Minimum Covariance Determinant*) ou MVE (*Minimum Volume Ellipsoid*).[@daszykowski2007]
 
 - Técnicas baseadas em análise de componentes principais (PCA) robusta também podem ser aplicadas para reduzir dimensionalidade e expor *outliers* mascarados.[@daszykowski2007]
 
@@ -336,7 +336,7 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-```{r regressao-linear-influentes, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Alavancagem vs Resíduos Padronizados com distância de Cook para análise da influência de pontos."}
+```{r regressao-linear-influentes, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Alavancagem versus Resíduos Padronizados com distância de Cook para análise da influência de pontos."}
 # Reprodutibilidade
 set.seed(123)
 
@@ -436,7 +436,7 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = leverage, y = resid_std)) +
   ggplot2::scale_linetype_manual(values = c("0.5" = "longdash", "1" = "solid"),
                                  name = "Curvas de Cook") +
   ggplot2::labs(
-    title = "Alavancagem vs Resíduos Padronizados",
+    title = "Alavancagem versus Resíduos Padronizados",
     x = "Alavancagem (leverage)",
     y = "Resíduo Padronizado",
     color = "Classificação"
@@ -457,7 +457,7 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = leverage, y = resid_std)) +
 
 - Winsorização é uma técnica que substitui os valores extremos (*outliers*) por valores menos extremos, preservando a estrutura dos dados.[@WRS2]
 
-- Wisorização é feita definindo limites superior e inferior e substituindo os valores que ultrapassam esses limites pelos próprios limites.[@WRS2]
+- Winsorização é feita definindo limites superior e inferior e substituindo os valores que ultrapassam esses limites pelos próprios limites.[@WRS2]
 
 <br>
 

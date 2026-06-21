@@ -50,7 +50,10 @@ trial_t <-
   gtsummary::modify_footnote(
     update = p.value ~ "Teste t de Student (variâncias iguais)"
   ) %>%
-  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::modify_header(
+    label = "**Desfecho**",
+    p.value = "**P-valor**"
+  ) %>%
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste t de Student") %>%
   gtsummary::as_gt() %>%
@@ -111,7 +114,10 @@ trial_t <-
   gtsummary::modify_footnote(
     update = p.value ~ "Teste t de Student (pareado)"
   ) %>%
-  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::modify_header(
+    label = "**Desfecho**",
+    p.value = "**P-valor**"
+  ) %>%
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste t de Student pareado") %>%
   gtsummary::as_gt() %>%
@@ -170,7 +176,10 @@ trial_t <-
   gtsummary::modify_footnote(
     update = p.value ~ "Teste t de Welch (variâncias desiguais)"
   ) %>%
-  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::modify_header(
+    label = "**Desfecho**",
+    p.value = "**P-valor**"
+  ) %>%
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste t de Welch") %>%
   gtsummary::as_gt() %>%
@@ -235,7 +244,10 @@ tbl_mw <-
   gtsummary::modify_footnote(
     update = p.value ~ "Teste de Mann–Whitney (Wilcoxon rank-sum, amostras independentes)"
   ) %>%
-  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::modify_header(
+    label = "**Desfecho**",
+    p.value = "**P-valor**"
+  ) %>%
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste de Mann–Whitney (Wilcoxon rank-sum)") %>%
   gtsummary::as_gt() %>%
@@ -302,7 +314,10 @@ tbl_wilcox <-
   gtsummary::modify_footnote(
     update = p.value ~ "Teste de Wilcoxon pareado (signed-rank, amostras dependentes)"
   ) %>%
-  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::modify_header(
+    label = "**Desfecho**",
+    p.value = "**P-valor**"
+  ) %>%
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste de Wilcoxon pareado (signed-rank)") %>%
   gtsummary::as_gt() %>%
@@ -366,7 +381,10 @@ tbl_anova <-
   gtsummary::modify_footnote(
     update = p.value ~ "ANOVA de um fator (variâncias iguais)"
   ) %>%
-  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::modify_header(
+    label = "**Desfecho**",
+    p.value = "**P-valor**"
+  ) %>%
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Análise de variância de um fator") %>%
   gtsummary::as_gt() %>%
@@ -486,7 +504,10 @@ tbl_welch <-
   gtsummary::modify_footnote(
     update = p.value ~ "ANOVA de Welch (variâncias desiguais)"
   ) %>%
-  gtsummary::modify_header(p.value = "**P-valor (Welch)**") %>%
+  gtsummary::modify_header(
+    label = "**Desfecho**",
+    p.value = "**P-valor**"
+  ) %>%
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Análise de variância de Welch") %>%
   gtsummary::as_gt() %>%
@@ -577,7 +598,10 @@ tbl_kw <-
   gtsummary::modify_footnote(
     update = p.value ~ "Teste de Kruskal–Wallis (amostras independentes, variáveis assimétricas)"
   ) %>%
-  gtsummary::modify_header(p.value = "**P-valor**") %>%
+  gtsummary::modify_header(
+    label = "**Desfecho**",
+    p.value = "**P-valor**"
+  ) %>%
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste de Kruskal–Wallis") %>%
   gtsummary::as_gt() %>%

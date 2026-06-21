@@ -31,7 +31,7 @@ O pacote *AssumpSure*[@AssumpSure] fornece um Shiny App para validação de supo
 
 - Forma da distribuição dos erros ou resíduos (normalidade, assimetria, caudas).[@REF]
 
-- Homocedasticidade (igualdade de variâncias condicionais).[@REF]
+- homoscedasticidade  (igualdade de variâncias condicionais).[@REF]
 
 <br>
 
@@ -73,7 +73,7 @@ O pacote *AssumpSure*[@AssumpSure] fornece um Shiny App para validação de supo
 
 - Normalidade dos erros ou da estatística de teste.[@REF]
 
-- Homocedasticidade.[@REF]
+- homoscedasticidade .[@REF]
 
 - Independência das observações.[@REF]
 
@@ -125,21 +125,21 @@ O pacote *AssumpSure*[@AssumpSure] fornece um Shiny App para validação de supo
 
 ### O que fazer quando as suposições causais falham?
 
-- Clarificar o alvo causal: redefinir a população, o tratamento ou o efeito de interesse.[REF]
+- Clarificar o alvo causal: redefinir a população, o tratamento ou o efeito de interesse.[@REF]
 
-- Análise de sensibilidade: avaliar quanto confundimento não medido seria necessário para invalidar as conclusões.[REF]
+- Análise de sensibilidade: avaliar quanto confundimento não medido seria necessário para invalidar as conclusões.[@REF]
 
-- Restringir o suporte: limitar a análise a regiões com positividade plausível (suporte comum).[REF]
+- Restringir o suporte: limitar a análise a regiões com positividade plausível (suporte comum).[@REF]
 
-- Estratificação ou ajuste enriquecido: incluir covariáveis adicionais relevantes, quando disponíveis.[REF]
+- Estratificação ou ajuste enriquecido: incluir covariáveis adicionais relevantes, quando disponíveis.[@REF]
 
-- Modelagem causal explícita: usar DAGs para tornar suposições transparentes e discutíveis.[REF]
+- Modelagem causal explícita: usar diagramas acíclicos direcionados para tornar suposições transparentes e discutíveis.[@REF]
 
-- Estimativas parciais ou locais: reportar efeitos condicionais ou locais quando o efeito médio não é identificável.[REF]
+- Estimativas parciais ou locais: reportar efeitos condicionais ou locais quando o efeito médio não é identificável.[@REF]
 
-- Conclusões mais fracas: interpretar resultados como associações ajustadas, não como efeitos causais.[REF]
+- Conclusões mais fracas: interpretar resultados como associações ajustadas, não como efeitos causais.[@REF]
 
-- Relato explícito das falhas: documentar quais suposições não são plausíveis e por quê.[REF]
+- Relato explícito das falhas: documentar quais suposições não são plausíveis e por quê.[@REF]
 
 <br>
 
@@ -155,7 +155,7 @@ O pacote *performance*[@performance] fornece a função [*check_model*](https://
 
 <br>
 
-```{r suposicoes, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Diagnóstico de regressão para avaliar suposições do modelo: linearidade, normalidade dos resíduos, homocedasticidade e alavancagem."}
+```{r suposicoes, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Diagnóstico de regressão para avaliar suposições do modelo: linearidade, normalidade dos resíduos, homoscedasticidade  e alavancagem."}
 library(dplyr)
 
 # Definir semente
@@ -185,11 +185,11 @@ dados_diag <- dados %>%
     Alavancagem = stats::hatvalues(modelo)
   )
 
-# Gráfico 1: Resíduos vs Ajustados
+# Gráfico 1: Resíduos versus Ajustados
 g1 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = Ajustado, y = Resíduo)) +
   ggplot2::geom_point(color = "blue") +
   ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
-  ggplot2::labs(title = "Resíduos vs Ajustados", subtitle = "--- Resíduo = 0",
+  ggplot2::labs(title = "Resíduos versus Ajustados", subtitle = "--- Resíduo = 0",
                 x = "Valores Ajustados", y = "Resíduos") +
   ggplot2::theme_minimal()
 
@@ -217,13 +217,13 @@ g4 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = seq_along(Cook), y = Cook)) +
                 x = "Observação", y = "Distância") +
   ggplot2::theme_minimal()
 
-# Gráfico 5: Observado vs Ajustado
+# Gráfico 5: Observado versus Ajustado
 lim <- range(c(dados_diag$y, dados_diag$Ajustado))
 g5 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = y, y = Ajustado)) +
   ggplot2::geom_point(color = "darkblue") +
   ggplot2::geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "black") +
   ggplot2::coord_cartesian(xlim = lim, ylim = lim) +
-  ggplot2::labs(title = "Observado vs Ajustado", subtitle = "--- y = x",
+  ggplot2::labs(title = "Observado versus Ajustado", subtitle = "--- y = x",
                 x = "Valores Observados", y = "Valores Ajustados") +
   ggplot2::theme_minimal()
 
@@ -289,7 +289,7 @@ plot_acf <- function(x, titulo = "ACF", lag.max = 40) {
     ggplot2::theme_minimal(base_size = 12)
 }
 
-# Dados: fraca vs forte ACF
+# Dados: fraca versus forte ACF
 set.seed(123)
 n <- 250
 serie_fraca <- sim_ar1(n, phi = 0.10, sd = 1.0)  # fraca autocorrelação

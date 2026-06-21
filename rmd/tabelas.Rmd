@@ -185,7 +185,7 @@ tbl1
 
 <br>
 
-```{r tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo clássico suscetível à Falácia da Tabela 2. A Tabela 2 apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis) e ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
+```{r tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Tabela suscetível à Falácia da Tabela 2. A tabela apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis) e ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
 library(dplyr)
 
 # Reprodutibilidade
@@ -204,7 +204,7 @@ dados <- tibble::tibble(
     Sexo  = factor(Sexo, levels = c("M", "F"))
   )
 
-# Modelos: cru vs ajustado
+# Modelos: cru versus ajustado
 mod_cru <- glm(I(Sexo == "F") ~ Grupo, data = dados, family = binomial)
 
 mod_aj  <- glm(I(Sexo == "F") ~ Grupo + Idade + IMC,
@@ -258,7 +258,7 @@ O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_summary*](https://sear
 
 <br>
 
-```{r falacia-tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo clássico suscetível à Falácia da Tabela 2. A Tabela apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis)e a OR ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
+```{r falacia-tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Tabela suscetível à falácia da Tabela 2. A tabela apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis)e a OR ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
 library(dplyr)
 
 # Reprodutibilidade
@@ -277,7 +277,7 @@ dados <- tibble::tibble(
     Sexo  = factor(Sexo,  levels = c("M", "F"))
   )
 
-# Modelos: cru vs ajustado
+# Modelos: cru versus ajustado
 mod_cru <- glm(I(Sexo == "F") ~ Grupo,
                data = dados, family = binomial)
 
@@ -301,7 +301,7 @@ tab_falacia <- gtsummary::tbl_merge(
   list(tab_cru, tab_aj),
   tab_spanner = c("Sem ajuste", "Ajustado")
 ) %>%
-  gtsummary::modify_caption("Exemplo clássico de apresentação suscetível à Falácia da 'Tabela 2'.")
+  gtsummary::modify_caption("Tabela suscetível à Falácia da 'Tabela 2'.")
 
 tab_falacia
 ```

@@ -6,17 +6,81 @@
 </w:p>
 ```
 
-# **Inteligência artificial generativa** {#inteligencia-artificial-generativa}
+# **Inteligência artificial** {#inteligencia-artificial}
+
+<br>
+
+## Inteligência artificial
+
+<br>
+
+### O que é inteligência artificial?
+
+-   .[@REF]
+
+<br>
+
+## Inteligência artificial explicável (*eXplainable Artificial Intelligence, XAI)*
+
+<br>
+
+### Quais princípios são utilizados para descrever explicabilidade de IA?
+
+- Explicabilidade: capacidade de revelar e resumir, em termos compreensíveis, os motivos por trás das decisões de um modelo, incluindo métodos post-hoc que explicam resultados após a predição.[@ali2023]
+
+- Interpretabilidade: capacidade de compreender o funcionamento interno do modelo a partir de suas próprias estruturas, por meio de técnicas intrínsecas que tornam o processo decisório inteligível.[@ali2023]
+
+- Transparência: geração de explicações claras e legíveis por humanos sobre as decisões do modelo, essencial para avaliar sua qualidade e resistir a usos adversariais.[@ali2023]
+
+- Equidade: capacidade do modelo de tomar decisões imparciais, sem favorecer ou discriminar grupos, mitigando vieses associados a características sociais, econômicas ou demográficas.[@ali2023]
+
+- Robustez: capacidade do modelo de manter desempenho estável diante de incertezas ou pequenas perturbações nos dados de entrada, incluindo ataques adversariais.[@ali2023]
+
+- Satisfação: grau em que técnicas de explicabilidade aumentam a utilidade, a usabilidade e a aceitação do sistema baseado em aprendizado de máquina.[@ali2023]
+
+- Estabilidade: capacidade de produzir explicações consistentes para entradas semelhantes, evitando variações arbitrárias nas interpretações.[@ali2023]
+
+- Responsabilidade: alinhamento do modelo a valores sociais, éticos e morais, sustentado por transparência, responsabilização, equidade e ética, como base para uma IA responsável.[@ali2023]
+
+<br>
+
+### Por que explicar modelos de IA?
+
+- Para tornar as decisões defensáveis: compreender como e por que um modelo chega a determinado resultado é essencial para avaliar a legitimidade de suas decisões e sustentar seu uso em contextos críticos.[@adadi2018; @vilone2021]
+
+- Para tornar o sistema governável: explicações permitem enxergar o funcionamento interno do modelo, facilitando sua supervisão, auditoria, correção de erros e detecção de vieses ou fragilidades.[@adadi2018; @vilone2021]
+
+- Para aperfeiçoar o desempenho: ao revelar como o modelo utiliza informações, as explicações orientam ajustes que aumentam sua precisão, eficiência e robustez.[@adadi2018; @vilone2021]
+
+- Para ampliar o conhecimento: modelos explicáveis não apenas produzem previsões, mas também ajudam a identificar padrões, relações e hipóteses novas, contribuindo para a geração de conhecimento científico.[@adadi2018; @vilone2021]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *keras*[@keras](https://cran.r-project.org/web/packages/keras/index.html) possuu funções para criar, treinar e avaliar modelos de redes neurais.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *tensorflow*[@tensorflow](https://cran.r-project.org/web/packages/tensorflow/index.html) fornece uma interface para o TensorFlow, uma biblioteca de código aberto amplamente utilizada para aprendizado de máquina e redes neurais.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *torch*[@torch](https://cran.r-project.org/web/packages/torch/index.html) permite criar e treinar redes neurais com alto desempenho.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *reticulate*[@reticulate](https://cran.r-project.org/web/packages/reticulate/index.html) integra R e Python em um mesmo ambiente de trabalho, permitindo chamar funções Python a partir de R e facilitar o uso de bibliotecas de IA disponíveis nesse ecossistema.
+:::
 
 <br>
 
 ## Inteligência artificial generativa
-
-<br>
-
-### O que é inteligência artificial generativa?
-
--   .[@REF]
 
 <br>
 
@@ -145,73 +209,13 @@ gridExtra::grid.arrange(g_seq, g_att, g_pred, ncol = 1, heights = c(0.5, 1.0, 1.
 
 <br>
 
-## Inteligência artificial explicável (*eXplainable Artificial Intelligence, XAI)*
-
-<br>
-
-### Quais princípios são utilizados para descrever explicabilidade de IA?
-
-- Explicabilidade: capacidade de revelar e resumir, em termos compreensíveis, os motivos por trás das decisões de um modelo, incluindo métodos post-hoc que explicam resultados após a predição.[@ali2023]
-
-- Interpretabilidade: capacidade de compreender o funcionamento interno do modelo a partir de suas próprias estruturas, por meio de técnicas intrínsecas que tornam o processo decisório inteligível.[@ali2023]
-
-- Transparência: geração de explicações claras e legíveis por humanos sobre as decisões do modelo, essencial para avaliar sua qualidade e resistir a usos adversariais.[@ali2023]
-
-- Equidade: capacidade do modelo de tomar decisões imparciais, sem favorecer ou discriminar grupos, mitigando vieses associados a características sociais, econômicas ou demográficas.[@ali2023]
-
-- Robustez: capacidade do modelo de manter desempenho estável diante de incertezas ou pequenas perturbações nos dados de entrada, incluindo ataques adversariais.[@ali2023]
-
-- Satisfação: grau em que técnicas de explicabilidade aumentam a utilidade, a usabilidade e a aceitação do sistema baseado em aprendizado de máquina.[@ali2023]
-
-- Estabilidade: capacidade de produzir explicações consistentes para entradas semelhantes, evitando variações arbitrárias nas interpretações.[@ali2023]
-
-- Responsabilidade: alinhamento do modelo a valores sociais, éticos e morais, sustentado por transparência, responsabilização, equidade e ética, como base para uma IA responsável.[@ali2023]
-
-<br>
-
-### Por que explicar modelos de IA?
-
-- Para tornar as decisões defensáveis: compreender como e por que um modelo chega a determinado resultado é essencial para avaliar a legitimidade de suas decisões e sustentar seu uso em contextos críticos.[@adadi2018; @vilone2021]
-
-- Para tornar o sistema governável: explicações permitem enxergar o funcionamento interno do modelo, facilitando sua supervisão, auditoria, correção de erros e detecção de vieses ou fragilidades.[@adadi2018; @vilone2021]
-
-- Para aperfeiçoar o desempenho: ao revelar como o modelo utiliza informações, as explicações orientam ajustes que aumentam sua precisão, eficiência e robustez.[@adadi2018; @vilone2021]
-
-- Para ampliar o conhecimento: modelos explicáveis não apenas produzem previsões, mas também ajudam a identificar padrões, relações e hipóteses novas, contribuindo para a geração de conhecimento científico.[@adadi2018; @vilone2021]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *keras*[@keras](https://cran.r-project.org/web/packages/keras/index.html) possuu funções para criar, treinar e avaliar modelos de redes neurais.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *tensorflow*[@tensorflow](https://cran.r-project.org/web/packages/tensorflow/index.html) fornece uma interface para o TensorFlow, uma biblioteca de código aberto amplamente utilizada para aprendizado de máquina e redes neurais.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *torch*[@torch](https://cran.r-project.org/web/packages/torch/index.html) permite criar e treinar redes neurais com alto desempenho.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *reticulate*[@reticulate](https://cran.r-project.org/web/packages/reticulate/index.html) integra R e Python em um mesmo ambiente de trabalho, permitindo chamar funções Python a partir de R e facilitar o uso de bibliotecas de IA disponíveis nesse ecossistema.
-:::
-
-<br>
-
 ## Limitações fundamentais de modelos generativos
 
 <br>
 
-### O que são alucinações em IA generativa?
+### O que são alucinações em modelos generativos?
 
-- Alucinações em IA generativa ocorrem quando um modelo produz saídas linguisticamente plausíveis, porém factualmente incorretas, inexistentes ou não verificáveis, sem que haja erro numérico ou falha no processo de treinamento.[@REF]
+- Alucinações ocorrem quando um modelo produz saídas linguisticamente plausíveis, porém factualmente incorretas, inexistentes ou não verificáveis, sem que haja erro numérico ou falha no processo de treinamento.[@REF]
 
 <br>
 
@@ -238,7 +242,7 @@ p_pipeline <- ggplot2::ggplot(df_pipe, ggplot2::aes(x, y, label = etapa)) +
   ggplot2::geom_text(size = 3.5) +
   ggplot2::geom_segment(ggplot2::aes(x = x + 0.45, xend = x + 0.55,
                    y = y, yend = y),
-               arrow = ggplot2::arrow(length = unit(0.15, "cm")),
+               arrow = ggplot2::arrow(length = grid::unit(0.15, "cm")),
                linewidth = 0.6) +
   ggplot2::labs(title = "A) Funcionamento conceitual de um LLM") +
   ggplot2::theme_void() +

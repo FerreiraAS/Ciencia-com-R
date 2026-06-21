@@ -147,7 +147,7 @@ O pacote *stats*[@stats] fornece a função [*model.matrix*](https://www.rdocume
 
 <br>
 
-```{r rede-exemplo, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de grafo de rede com nodos e arestas ponderadas."}
+```{r rede-exemplo, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Grafo de rede com nodos e arestas ponderadas."}
 # Definir arestas com peso e sinal
 edges <- data.frame(
   from   = c("A", "A", "B", "C", "D"),
@@ -189,10 +189,10 @@ legend(
   inset = 0.02,
   title = "Legend",
   legend = c(
-    "Node (variable)",
-    "Positive edge",
-    "Negative edge",
-    "Edge width ∝ |weight|"
+    "Nós (variáveis)",
+    "Arestas (positiva)",
+    "Arestas (negativa)",
+    "Espessura da aresta (força)"
   ),
   pch = c(21, NA, NA, NA),
   pt.bg = c("grey85", NA, NA, NA),
@@ -248,7 +248,7 @@ legend(
 
 -   Em conjuntos de dados com muitas variáveis, redes podem se tornar densas e difíceis de interpretar.[@leme2020]
 
-- Para contornar esse problema, utiliza-se penalização estatística, como o método LASSO (Least Absolute Shrinkage and Selection Operator), que elimina associações fracas, resultando em redes mais parcimoniosas e interpretáveis.[@leme2020]
+- Para contornar esse problema, utiliza-se penalização estatística, como o método *Least Absolute Shrinkage and Selection Operator* (LASSO), que elimina associações fracas, resultando em redes mais parcimoniosas e interpretáveis.[@leme2020]
 
 <br>
 
@@ -272,7 +272,7 @@ legend(
 
 <br>
 
-```{r rede-metricas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de grafo de rede com tamanho dos nodos proporcional à força."}
+```{r rede-metricas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Grafo de rede com tamanho dos nodos proporcional à força."}
 edges <- data.frame(
   from = c("A", "A", "B", "C", "D"),
   to   = c("B", "C", "C", "D", "A"),

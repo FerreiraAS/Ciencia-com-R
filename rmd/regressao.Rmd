@@ -151,7 +151,7 @@ Y_t = \beta_0 + \beta_1 T + \beta_2 X_t + \beta_3 TX_t
 
 - A variável $T$ representa o tempo transcorrido desde o início do estudo, sendo expressa na unidade correspondente à frequência das observações, como meses ou anos.[@lopezbernal2016a]
 
-- A variável $X_t$ representa uma variável indicadora (dummy) da intervenção, codificada como 0 no período pré-intervenção e 1 no período pós-intervenção.[@lopezbernal2016a]
+- A variável $X_t$ representa uma variável indicadora (*dummy*) da intervenção, codificada como 0 no período pré-intervenção e 1 no período pós-intervenção.[@lopezbernal2016a]
 
 - A variável $Y_t$ representa o valor do desfecho observado no tempo $t$.[@lopezbernal2016a]
 O coeficiente $\beta_0$ representa o nível inicial do desfecho no tempo $T = 0$.[@lopezbernal2016a]
@@ -344,7 +344,7 @@ Y = \beta_0 + \sum_{i=1}^{n} \beta_i X_i + \epsilon
 
 <br>
 
--   Assumem erros independentes, de média zero e variância constante (homocedasticidade).[@REF]
+-   Assumem erros independentes, de média zero e variância constante (homoscedasticidade ).[@REF]
 
 -   A normalidade dos resíduos é uma hipótese comum para inferência estatística, mas não obrigatória para estimação dos coeficientes.[@REF]
 
@@ -370,7 +370,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
                        color = "blue",
                        fill = "grey70",
                        se = TRUE) +
-  ggplot2::labs(title = "Regressão linear", 
+  ggplot2::labs(
                 x = "Variável Independente (X)", 
                 y = "Variável Dependente (Y)") +
   ggplot2::theme_minimal()
@@ -407,7 +407,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
                        color = "blue",
                        fill = "grey70",
                        se = TRUE) +
-  ggplot2::labs(title = "Regressão polinomial",
+  ggplot2::labs(
                 x = "Variável Independente (X)",
                 y = "Variável Dependente (Y)") +
   ggplot2::theme_minimal()
@@ -447,7 +447,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
                        color = "blue",
                        fill = "grey70",
                        se = TRUE) +
-  ggplot2::labs(title = "Regressão não-linear", 
+  ggplot2::labs(
                 x = "Variável Independente (X)", 
                 y = "Variável Dependente (Y)") +
   ggplot2::theme_minimal()
@@ -506,7 +506,7 @@ model <- glm(Y ~ X, data = data, family = binomial)
 ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_point() +
   ggplot2::geom_smooth(method = "glm", method.args = list(family = "binomial"), color = "blue") +
-  ggplot2::labs(title = "Regressão logística",
+  ggplot2::labs(
        x = "Variável Independente (X)",
        y = "Probabilidade de Sucesso (Y)") +
   ggplot2::theme_minimal()
@@ -571,7 +571,7 @@ pred_long <- dplyr::bind_cols(grid, pred_probs) %>%
 
 # 4) Gráficos
 
-# (A) Dispersão: X vs Categoria observada (jitter no eixo Y)
+# (A) Dispersão: X versus Categoria observada (jitter no eixo Y)
 p_obs <- ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y, color = Y)) +
   ggplot2::geom_jitter(height = 0.08, width = 0, alpha = 0.7, size = 2) +
   ggplot2::labs(title = "Observações",
@@ -668,7 +668,6 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
     linewidth = 1
   ) +
   ggplot2::labs(
-    title = "Regressão de Poisson (link log)",
     x = "Variável Independente (X)",
     y = "Contagem esperada (E[Y|X])"
   ) +
@@ -748,7 +747,7 @@ data$Y_pred <- as.numeric(predicted_Y)
 ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
   ggplot2::geom_point(color = "gray40") +
   ggplot2::geom_line(ggplot2::aes(y = Y_pred), color = "blue", size = 1) +
-  ggplot2::labs(title = "Regressão Ridge",
+  ggplot2::labs(
        x = "Variável Independente (X)",
        y = "Variável Dependente (Y)") +
   ggplot2::theme_minimal()
@@ -758,7 +757,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são modelos de regressão LASSO?
 
--   Regressão LASSO (*Least Absolute Shrinkage and Selection Operator*) utiliza penalização L1, que pode zerar coeficientes.[@REF]
+-   Regressão *Least Absolute Shrinkage and Selection Operator* (LASSO) utiliza penalização L1, que pode zerar coeficientes.[@REF]
 
 -   Além de reduzir *overfitting*, também realiza seleção automática de variáveis.[@REF]
 

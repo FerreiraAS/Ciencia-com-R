@@ -42,7 +42,7 @@
 
 <br>
 
-```{r instrumento-likert, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de instrumento com 3 itens tipo Likert com 5 categorias cada."}
+```{r instrumento-likert, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Instrumento com 3 itens tipo Likert com 5 categorias cada."}
 # Reprodutibilidade
 set.seed(1234)
 
@@ -789,7 +789,7 @@ g_mid <- ggplot2::ggplot(df_dens, ggplot2::aes(x = x, y = y)) +
     x = "Medida observada X", y = "Densidade"
   )
 
-# (c) Curva P(|X-θ| \leq ε) vs ε: analítica x empírica
+# (c) Curva P(|X-θ| \leq ε) versus ε: analítica x empírica
 df_eps <- data.frame(
   epsilon = rep(faixa_eps, 2),
   prob    = c(prob_analitica, prob_empirica),

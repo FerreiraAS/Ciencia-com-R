@@ -15,7 +15,7 @@
 
 ### Quais são as características de ensaios quase-experimentais?
 
-- Ensaios quase-experimentais são delineamentos utilizados para avaliar o efeito de intervenções quando a randomização não é possível, prática ou ética.[@lopezbernal2016a]
+- Ensaios quase-experimentais são delineamentos utilizados para avaliar o efeito de intervenções quando a aleatorização não é possível, prática ou ética.[@lopezbernal2016a]
 
 - Esses delineamentos buscam estimar efeitos causais por meio da comparação entre períodos, grupos ou tendências temporais, utilizando estratégias analíticas para aproximar um cenário contrafactual.[@lopezbernal2016a]
 
@@ -166,7 +166,7 @@ knitr::kable(
   booktabs = TRUE,
   linesep = "",
   escape = FALSE,
-  caption = "Exemplo de base de dados simulada para análise de série temporal interrompida. A tabela apresenta as primeiras e últimas linhas da base, com um resumo do período intermediário indicado por reticências."
+  caption = "Base de dados simulada para análise de série temporal interrompida. A tabela apresenta as primeiras e últimas linhas da base, com um resumo do período intermediário indicado por reticências."
 ) %>%
   kableExtra::kable_styling(
     full_width = FALSE,
@@ -194,7 +194,7 @@ knitr::kable(
   )
 ```
 
-```{r its-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = " Exemplo de análise de série temporal interrompida utilizando regressão segmentada. A linha azul representa os valores preditos pelo modelo, enquanto a linha tracejada representa o cenário contrafactual. A linha pontilhada indica o momento da intervenção."}
+```{r its-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Análise de série temporal interrompida utilizando regressão segmentada. A linha azul representa os valores preditos pelo modelo, enquanto a linha tracejada representa o cenário contrafactual. A linha pontilhada indica o momento da intervenção."}
 library(dplyr)
 library(lubridate)
 
@@ -543,9 +543,9 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 
 <br>
 
-### Como a randomização é emulada em uma TTE?
+### Como a aleatorização é emulada em uma TTE?
 
-- Em TTE, essa randomização não existe, pois a exposição já ocorreu na prática clínica.[@andrade2025]
+- Em TTE, essa aleatorização não existe, pois a exposição já ocorreu na prática clínica.[@andrade2025]
 
 - Para aproximar o equilíbrio entre os grupos, são utilizadas técnicas de ajuste para confundidores medidos, incluindo modelos multivariados, escores de propensão e ponderação por probabilidade inversa.[@andrade2025]
 
@@ -569,7 +569,7 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 
 ### Quais são as limitações da emulação de ensaio-alvo?
 
-- A randomização não é realmente realizada.[@andrade2025]
+- A aleatorização não é realmente realizada.[@andrade2025]
 
 - Confundidores não mensurados ou desconhecidos podem influenciar os resultados.[@andrade2025]
 
@@ -599,7 +599,7 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 
 - A emulação melhora substancialmente a validade de análises observacionais quando comparada a abordagens tradicionais.[@andrade2025]
 
-- Entretanto, a ausência de randomização verdadeira impede a eliminação completa do confundimento.[@andrade2025]
+- Entretanto, a ausência de aleatorização verdadeira impede a eliminação completa do confundimento.[@andrade2025]
 
 - Os resultados de TTE devem ser interpretados como evidências observacionais robustas que fortalecem a inferência causal, mas não possuem o mesmo grau de proteção contra confundimento oferecido pelos ensaios clínicos randomizados.[@andrade2025]
 

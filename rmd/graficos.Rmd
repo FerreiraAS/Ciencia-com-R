@@ -5,6 +5,7 @@
   </w:r>
 </w:p>
 ```
+
 # **Gráficos** {#graficos}
 
 <br>
@@ -23,7 +24,7 @@
 
 <br>
 
-```{r viz-geom-mostrar-dados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Exemplo de gráfico que mostra os dados brutos junto com um resumo estatístico (média e dispersão)."}
+```{r viz-geom-mostrar-dados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico que mostra os dados brutos junto com um resumo estatístico (média e dispersão)."}
 # Reprodutibilidade
 set.seed(1)
 
@@ -37,8 +38,7 @@ ggplot2::ggplot(df, ggplot2::aes(grupo, y, fill = grupo)) +
   ggplot2::geom_violin(alpha=.3, color=NA, trim=FALSE) +
   ggplot2::geom_boxplot(width=.15, outlier.shape = NA) +
   ggplot2::geom_jitter(width=.08, alpha=.6, size=1.6) +
-  ggplot2::labs(x=NULL, y="Desfecho (unid.)",
-                title="Mostrar dados + resumo > apenas médias") +
+  ggplot2::labs(x=NULL, y="Desfecho") +
   ggplot2::theme_minimal() +
   ggplot2::guides(fill="none")
 ```
@@ -142,7 +142,7 @@ C1 <- c(rnorm(n1/2, 4.5, .5), rnorm(n1/2, 6, .5)); C2 <- rnorm(n2, 5.5, .8)
 
 make_df <- function(x,y,lab) tibble::tibble(value=c(x,y), group=rep(c("G1","G2"), c(length(x),length(y))), scen=lab)
 df <- dplyr::bind_rows(
-  make_df(A1,A2,"A: Normal vs Normal"),
+  make_df(A1,A2,"A: Normal versus Normal"),
   make_df(B1,B2,"B: Outlier"),
   make_df(C1,C2,"C: Bimodal")
 )
@@ -208,8 +208,7 @@ dados_barras <- dados %>%
 
 ggplot2::ggplot(dados_barras, ggplot2::aes(x = Categoria, y = Total, fill = Categoria)) +
   ggplot2::geom_bar(stat = "identity") +
-  ggplot2::labs(title = "Gráfico de Barras Simples",
-       x = "Categoria", y = "Frequência Total") +
+  ggplot2::labs(x = "Categoria", y = "Frequência Total") +
   ggplot2::theme_minimal()
 ```
 
@@ -234,8 +233,7 @@ dados_barras <- dados %>%
 
 ggplot2::ggplot(dados, ggplot2::aes(x = Grupo, y = Contagem, fill = Categoria)) +
   ggplot2::geom_bar(stat = "identity") +
-  ggplot2::labs(title = "Gráfico de Barras Empilhadas",
-       x = "Grupo", y = "Contagem") +
+  ggplot2::labs(x = "Grupo", y = "Contagem") +
   ggplot2::theme_minimal()
 ```
 
@@ -307,15 +305,14 @@ library(patchwork)
 
 <br>
 
-```{r graficos-var-numericas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Histograma da variável 'valor'."}
+```{r graficos-var-numericas, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Histograma."}
 # Simular dados
 dados <- data.frame(valor = stats::rnorm(1000, mean = 50, sd = 10))
 
 # Histograma
 ggplot2::ggplot(dados, ggplot2::aes(x = valor)) +
   ggplot2::geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
-  ggplot2::labs(title = "Histograma da variável 'valor'",
-                x = "Valor", y = "Frequência") +
+  ggplot2::labs(x = "Valor", y = "Frequência") +
   ggplot2::theme_minimal()
 ```
 
@@ -325,15 +322,14 @@ ggplot2::ggplot(dados, ggplot2::aes(x = valor)) +
 
 <br>
 
-```{r grafico-densidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Gráfico de densidade da variável 'valor'.", fig.width=15, fig.height=8, out.width="100%"}
+```{r grafico-densidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Gráfico de densidade", fig.width=15, fig.height=8, out.width="100%"}
 # Simular dados
 dados <- data.frame(valor = stats::rnorm(1000, mean = 0, sd = 1))
 
 # Gráfico de densidade
 ggplot2::ggplot(dados, ggplot2::aes(x = valor)) +
   ggplot2::geom_density(fill = "lightblue", alpha = 0.6) +
-  ggplot2::labs(title = "Gráfico de Densidade da variável 'valor'",
-                x = "Valor", y = "Densidade") +
+  ggplot2::labs(x = "Valor", y = "Densidade") +
   ggplot2::theme_minimal()
 ```
 
@@ -354,8 +350,7 @@ dados <- data.frame(
 # Boxplot
 ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, fill = grupo)) +
   ggplot2::geom_boxplot() +
-  ggplot2::labs(title = "Boxplot por grupo",
-                x = "Grupo", y = "Medida") +
+  ggplot2::labs(x = "Grupo", y = "Medida") +
   ggplot2::theme_minimal()
 ```
 
@@ -377,8 +372,7 @@ dados <- data.frame(
 ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, fill = grupo)) +
   ggplot2::geom_violin(trim = FALSE, alpha = 0.6) +
   ggplot2::geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA) +
-  ggplot2::labs(title = "Violin Plot por Grupo",
-                x = "Grupo", y = "Medida") +
+  ggplot2::labs(x = "Grupo", y = "Medida") +
   ggplot2::theme_minimal()
 ```
 
@@ -388,7 +382,7 @@ ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, fill = grupo)) +
 
 <br>
 
-```{r grafico-pontos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de pontos da variável 'valor'."}
+```{r grafico-pontos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de pontos."}
 # Simular dados
 set.seed(123)
 dados <- data.frame(
@@ -400,8 +394,7 @@ dados <- data.frame(
 # Dot plot
 ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, color = grupo)) +
   ggplot2::geom_dotplot(binaxis = "y", stackdir = "center", dotsize = 0.7) +
-  ggplot2::labs(title = "Dot Plot por Grupo",
-                x = "Grupo", y = "Medida") +
+  ggplot2::labs(x = "Grupo", y = "Medida") +
   ggplot2::theme_minimal()
 ```
 
@@ -423,8 +416,7 @@ dados <- data.frame(
 # Gráfico de dispersão
 ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y)) +
   ggplot2::geom_point(color = "darkblue", alpha = 0.7) +
-  ggplot2::labs(title = "Gráfico de Dispersão",
-                x = "Variável X", y = "Variável Y") +
+  ggplot2::labs(x = "Variável X", y = "Variável Y") +
   ggplot2::theme_minimal()
 ```
 
@@ -445,8 +437,7 @@ dados <- data.frame(
 # Gráfico de bolhas
 ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y, size = z)) +
   ggplot2::geom_point(alpha = 0.6, color = "purple") +
-  ggplot2::labs(title = "Gráfico de Bolhas",
-                x = "Eixo X", y = "Eixo Y", size = "Variável Z") +
+  ggplot2::labs(x = "Eixo X", y = "Eixo Y", size = "Variável Z") +
   ggplot2::theme_minimal()
 ```
 
@@ -754,7 +745,7 @@ p <- ggplot2::ggplot(df) +
       y = patient,
       yend = patient
     ),
-    arrow = ggplot2::arrow(length = unit(0.15, "cm")),
+    arrow = ggplot2::arrow(length = grid::unit(0.15, "cm")),
     linewidth = 1
   ) +
   # tema
@@ -791,8 +782,7 @@ dados <- data.frame(data = tempo, valor = medida)
 ggplot2::ggplot(dados, ggplot2::aes(x = data, y = valor)) +
   ggplot2::geom_line(color = "darkgreen") +
   ggplot2::geom_point(color = "black", size = 1.5) +
-  ggplot2::labs(title = "Série Temporal Simulada",
-                x = "Data", y = "Valor") +
+  ggplot2::labs(x = "Data", y = "Valor") +
   ggplot2::theme_minimal()
 ```
 
@@ -858,8 +848,6 @@ p_waterfall <- ggplot2::ggplot(waterfall_data,
   ggplot2::geom_bar(stat = "identity", fill = "steelblue") +
   ggplot2::geom_hline(yintercept = -30, linetype = "dashed", color = "red") +
   ggplot2::labs(
-    title = "Waterfall Plot",
-    subtitle = "Melhor variação percentual em relação ao baseline",
     x = "Paciente (ordenado)",
     y = "% de mudança (melhor resposta)"
   ) +
@@ -924,10 +912,8 @@ p_spider <- ggplot2::ggplot(data_long,
   ggplot2::geom_line(alpha = 0.5) +
   ggplot2::geom_hline(yintercept = -30, linetype = "dashed", color = "red") +
   ggplot2::labs(
-    title = "Spider Plot",
-    subtitle = "Variação percentual do SLD ao longo do tempo",
     x = "Semana",
-    y = "% de mudança vs baseline"
+    y = "% de mudança versus baseline"
   ) +
   ggplot2::theme_minimal()
 
@@ -953,8 +939,7 @@ dados <- data.frame(x = x, y = y)
 ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y)) +
   ggplot2::geom_point(color = "darkblue", alpha = 0.6) +
   ggplot2::geom_smooth(method = "lm", color = "red", se = FALSE) +
-  ggplot2::labs(title = "Correlação entre Variáveis",
-                x = "Variável X", y = "Variável Y") +
+  ggplot2::labs(x = "Variável X", y = "Variável Y") +
   ggplot2::theme_minimal()
 ```
 
@@ -1005,7 +990,7 @@ ggplot2::ggplot(dados_long, ggplot2::aes(x = `Variável 1`, y = `Variável 2`, f
   ggplot2::geom_tile(color = "white") +
   ggplot2::scale_fill_gradient2(low = "blue", high = "red", mid = "white",
                                 midpoint = 0, limit = c(-1, 1), name = "Correlação") +
-  ggplot2::labs(title = "Mapa de Calor da Correlação entre Variáveis") +
+  ggplot2::labs(x = "Variável 1", y = "Variável 2") +
   ggplot2::theme_minimal()
 ```
 
@@ -1030,8 +1015,8 @@ rownames(dados) <- c("Max", "Min", "A", "B", "C")
 fmsb::radarchart(dados,
                  axistype = 1,
                  pcol = c("red", "blue", "green"),
-                 plty = 1,
-                 title = "Gráfico de Radar - Perfis Simulados")
+                 plty = 1
+                 )
 ```
 
 <br>

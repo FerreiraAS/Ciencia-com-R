@@ -16,7 +16,7 @@
 
 ### O que são neurônios artificiais?
 
--   Neuronios artificiais (ou perceptrons) são modelos matemáticos que imitam o funcionamento dos neurônios biológicos, recebendo entradas, aplicando pesos e uma função de ativação para produzir uma saída.[@mcculloch1943; @rosenblatt1958; @rosenblatt1960]
+-   Neurônios artificiais (ou perceptrons) são modelos matemáticos que imitam o funcionamento dos neurônios biológicos, recebendo entradas, aplicando pesos e uma função de ativação para produzir uma saída.[@mcculloch1943; @rosenblatt1958; @rosenblatt1960]
 
 -   A equação geral de um neurônio artificial é dada por \@ref(eq:neuronio), onde $x_i$ são as entradas, $w_i$ os pesos, $b$ o viés e $\phi$ a função de ativação:
 
@@ -423,7 +423,7 @@ O pacote *neuralnet*[@neuralnet] fornece a função [*neuralnet*](https://www.rd
 
 <br>
 
-- Ao manter gradientes constantes na região positiva, a ReLU favorece estabilidade numérica e eficiência computacional em redes multicamadas.[@REF
+- Ao manter gradientes constantes na região positiva, a ReLU favorece estabilidade numérica e eficiência computacional em redes multicamadas.[@REF]
 
 - Diferentemente das funções sigmoide e tangente hiperbólica, a ReLU preserva gradientes úteis em regiões amplas do espaço de entrada.[@REF]
 
@@ -494,7 +494,7 @@ gridExtra::grid.arrange(p1, p2, p3, ncol=3)
 
 ### Quais são as funções de perda mais comuns?
 
-- Erro quadrático médio (Mean Squared Error, MSE \@ref(eq:loss-mse)): Essa função penaliza erros grandes de forma mais severa, sendo adequada quando desvios elevados são indesejáveis e a média do erro quadrático é uma medida relevante de desempenho.[@REF]
+- Erro quadrático médio (*Mean Squared Error*, MSE \@ref(eq:loss-mse)): Essa função penaliza erros grandes de forma mais severa, sendo adequada quando desvios elevados são indesejáveis e a média do erro quadrático é uma medida relevante de desempenho.[@REF]
 
 <br>
 
@@ -506,7 +506,7 @@ gridExtra::grid.arrange(p1, p2, p3, ncol=3)
 
 <br>
 
-- Erro absoluto médio (Mean Absolute Error, MAE\@ref(eq:loss-mae)): Essa função atribui peso linear aos erros, tornando-se mais robusta a valores extremos quando comparada ao erro quadrático médio.[@REF]
+- Erro absoluto médio (*Mean Absolute Error*, MAE \@ref(eq:loss-mae)): Essa função atribui peso linear aos erros, tornando-se mais robusta a valores extremos quando comparada ao erro quadrático médio.[@REF]
 
 <br>
 
@@ -518,7 +518,7 @@ gridExtra::grid.arrange(p1, p2, p3, ncol=3)
 
 <br>
 
-- Erro quadrático médio logarítmico (Mean Squared Logarithmic Error, MSLE \@ref(eq:loss-msle)): Essa função enfatiza erros relativos, sendo particularmente útil quando diferenças proporcionais são mais relevantes do que diferenças absolutas.[@REF]
+- Erro quadrático médio logarítmico (*Mean Squared Logarithmic Error*, MSLE \@ref(eq:loss-msle)): Essa função enfatiza erros relativos, sendo particularmente útil quando diferenças proporcionais são mais relevantes do que diferenças absolutas.[@REF]
 
 <br>
 
@@ -531,7 +531,7 @@ gridExtra::grid.arrange(p1, p2, p3, ncol=3)
 
 <br>
 
-- Entropia cruzada binária (Binary Cross-Entropy, BCE \@ref(eq:loss-bce)): Essa função mede a discrepância entre probabilidades previstas e observadas, sendo o critério padrão em problemas de classificação binária probabilística.
+- Entropia cruzada binária (*Binary Cross-Entropy*, BCE \@ref(eq:loss-bce)): Essa função mede a discrepância entre probabilidades previstas e observadas, sendo o critério padrão em problemas de classificação binária probabilística.
 
 <br>
 
@@ -546,7 +546,7 @@ y_i \log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)
 
 <br>
 
-- Entropia cruzada categórica (Categorical Cross-Entropy \@ref(eq:loss-cce)): Essa função generaliza a entropia cruzada para múltiplas classes, penalizando previsões probabilísticas inconsistentes com a classe verdadeira.[@REF]
+- Entropia cruzada categórica (*Categorical Cross-Entropy*, CCE \@ref(eq:loss-cce)): Essa função generaliza a entropia cruzada para múltiplas classes, penalizando previsões probabilísticas inconsistentes com a classe verdadeira.[@REF]
 
 <br>
 
@@ -574,7 +574,7 @@ y_i \log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)
 
 <br>
 
-- Função hinge (*Support Vector Machines* \@ref(eq:loss-hinge)): Essa função busca maximizar a margem entre classes, penalizando classificações incorretas ou pouco confiantes em relação à fronteira de decisão.
+- Função hinge (*Support Vector Machines*, SVM \@ref(eq:loss-hinge)): Essa função busca maximizar a margem entre classes, penalizando classificações incorretas ou pouco confiantes em relação à fronteira de decisão.
 
 <br>
 
@@ -597,7 +597,13 @@ y_i \log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)
 
 <br>
 
-### O que são os pesos em uma rede neural e por que eles são tratados como parâmetros do modelo?
+### O que são os pesos em uma rede neural?
+
+- .[@REF]
+
+<br>
+
+#### Por que pesos são tratados como parâmetros do modelo?
 
 - .[@REF]
 
@@ -609,7 +615,7 @@ y_i \log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)
 
 <br>
 
-### Qual é o objetivo formal do treinamento em termos de minimização da função de perda?
+### Qual é o objetivo do treinamento em termos de minimização da função de perda?
 
 - .[@REF]
 
@@ -639,7 +645,7 @@ y_i \log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)
 
 <br>
 
-### Por que o uso de todo o conjunto de dados em cada atualização pode ser computacionalmente inviável?
+### Por que o uso do conjunto de dados pode ser computacionalmente inviável?
 
 - .[@REF]
 
@@ -675,7 +681,13 @@ y_i \log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)
 
 <br>
 
-### Como o número de épocas influencia a convergência do modelo e o risco de *overfitting*?
+### Como o número de épocas influencia a convergência do modelo?
+
+- .[@REF]
+
+<br>
+
+### Como o número de épocas influencia ao risco de *overfitting*?
 
 - .[@REF]
 
@@ -687,11 +699,13 @@ y_i \log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)
 
 ### O que é espaço de decisão?
 
--   O espaço de decisão é a região do espaço de entrada onde o modelo classifica as entradas em diferentes categorias. Ele é definido pelas fronteiras de decisão aprendidas pelo modelo durante o treinamento.[@REF]
+-   O espaço de decisão é a região do espaço de entrada onde o modelo classifica as entradas em diferentes categorias.[@REF]
+
+- O espaço de decisão é definido pelas fronteiras de decisão aprendidas pelo modelo durante o treinamento.[@REF]
 
 <br>
 
-### Como ele é visualizado?
+### Como o espaço de decisão é visualizado?
 
 -   O espaço de decisão pode ser visualizado graficamente, especialmente em problemas de classificação binária ou multiclasse, onde as regiões correspondem às classes previstas pelo modelo.[@REF]
 
@@ -849,7 +863,9 @@ gridExtra::grid.arrange(p_glm, p_mlp, ncol = 2)
 
 ### O que são redes neurais multicamadas?
 
-- Redes neurais multicamadas são redes neurais artificiais que contêm uma ou mais camadas escondidas entre a camada de entrada e a camada de saída, permitindo a composição sucessiva de transformações não lineares e, consequentemente, maior capacidade de representação de funções complexas.[@REF]
+- Redes neurais multicamadas são redes neurais artificiais que contêm uma ou mais camadas escondidas entre a camada de entrada e a camada de saída.[@REF]
+
+- Redes neurais multicamadas permitem a composição sucessiva de transformações não lineares e, consequentemente, maior capacidade de representação de funções complexas.[@REF]
 
 - Essa estrutura amplia o espaço de decisão do modelo sem exigir especificação explícita de interações ou transformações entre variáveis.[@REF]
 
