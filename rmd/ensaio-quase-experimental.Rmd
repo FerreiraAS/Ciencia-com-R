@@ -23,8 +23,6 @@
 
 - A validade causal em estudos quase-experimentais depende fortemente da qualidade do delineamento, da disponibilidade de dados longitudinais e do controle adequado de fatores confundidores.[@lopezbernal2016a]
 
-- Séries temporais interrompidas (interrupted time series, ITS) representam um dos delineamentos quase-experimentais mais robustos para avaliação de intervenções implementadas em um momento claramente definido no tempo.[@lopezbernal2016a]
-
 <br>
 
 ## Séries temporais interrompidas
@@ -33,7 +31,9 @@
 
 ### O que são séries temporais interrompidas?
 
-- Séries temporais interrompidas (interrupted time series, ITS) utilizam observações repetidas de um desfecho ao longo do tempo para estimar tendências anteriores à intervenção e compará-las ao comportamento observado após sua implementação.[@lopezbernal2016a]
+- Séries temporais interrompidas (*interrupted time series*, ITS) representam um dos delineamentos quase-experimentais mais robustos para avaliação de intervenções implementadas em um momento claramente definido no tempo.[@lopezbernal2016a]
+
+- Séries temporais interrompidas utilizam observações repetidas de um desfecho ao longo do tempo para estimar tendências anteriores à intervenção e compará-las ao comportamento observado após sua implementação.[@lopezbernal2016a]
 
 - Nesse delineamento, a tendência observada antes da intervenção é utilizada para construir um cenário contrafactual, representando a evolução esperada do desfecho caso a intervenção não tivesse ocorrido.[@lopezbernal2016a]
 
@@ -334,6 +334,28 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 - Desfechos com resposta relativamente rápida à intervenção são mais adequados para ITS, pois facilitam a identificação temporal do efeito.[@lopezbernal2016a]
 
 - A utilização de dados rotineiros longitudinais favorece a aplicação do delineamento, especialmente quando há número suficiente de observações antes e depois da intervenção.[@lopezbernal2016a]
+
+<br>
+
+### Como selecionar o modelo em séries temporais interrompidas?
+
+- A seleção do modelo é uma etapa central em estudos de séries temporais interrompidas, pois o efeito estimado depende da forma como o contrafactual e o impacto da intervenção são especificados.[@lopezbernal2018]
+
+- O contrafactual deve representar a trajetória esperada do desfecho caso a intervenção não tivesse ocorrido, sendo geralmente construído pela extrapolação da tendência pré-intervenção.[@lopezbernal2018]
+
+- A definição inadequada do contrafactual pode levar à superestimação ou subestimação do efeito da intervenção.[@lopezbernal2018]
+
+- A escolha do período pré-intervenção deve considerar qualidade dos dados, mudanças nos sistemas de registro, intervenções anteriores e eventos externos capazes de alterar a tendência do desfecho.[@lopezbernal2018]
+
+- O modelo de impacto deve ser definido a priori, com base no conhecimento substantivo sobre a intervenção e o desfecho, evitando a escolha retrospectiva do modelo que melhor se ajusta aos dados.[@lopezbernal2018]
+
+- O impacto da intervenção pode ser abrupto, gradual, imediato, tardio, transitório ou sujeito a enfraquecimento ao longo do tempo.[@lopezbernal2018]
+
+- Quando há incerteza sobre a especificação do modelo, análises de sensibilidade previamente definidas podem ser utilizadas para avaliar a robustez dos resultados.[@lopezbernal2018]
+
+- Modelos muito flexíveis ou escolhidos de forma puramente orientada pelos dados aumentam o risco de identificar efeitos espúrios atribuídos à intervenção.[@lopezbernal2018]
+
+- Os estudos devem relatar de forma transparente as decisões de modelagem, justificando o período analisado, a forma da tendência, os confundidores variantes no tempo, a sazonalidade e o modelo de impacto escolhido.[@lopezbernal2018]
 
 <br>
 

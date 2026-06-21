@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Análise preditiva** {#analise-preditiva}
 
 <br>
@@ -14,9 +13,83 @@
 
 <br>
 
-### O que são predições?
+### O que são modelos preditivos clínicos?
 
--   .[@REF]
+- Modelos preditivos clínicos combinam características do paciente, sinais, sintomas, exames ou outros preditores para estimar a probabilidade de um desfecho diagnóstico ou prognóstico.[@vansmeden2021]
+
+- Modelos diagnósticos estimam a probabilidade de uma condição já estar presente no momento da avaliação, enquanto modelos prognósticos estimam a probabilidade de um evento ocorrer no futuro, dentro de um horizonte de tempo definido.[@vansmeden2021]
+
+<br>
+
+### Qual é a diferença entre predição diagnóstica e prognóstica?
+
+- Na predição diagnóstica, o desfecho de interesse corresponde ao estado atual do paciente, como a presença ou ausência de uma doença no momento da avaliação.[@vansmeden2021]
+
+- Na predição prognóstica, o desfecho ainda não ocorreu: o modelo estima o risco de um evento futuro, como morte, recaída, internação, complicação ou resposta terapêutica em determinado período.[@vansmeden2021]
+
+- Em modelos prognósticos, é fundamental definir claramente o horizonte de predição, pois prever risco em 30 dias, 1 ano ou 5 anos pode gerar interpretações clínicas muito diferentes.[@vansmeden2021]
+
+<br>
+
+### Como avaliar o desempenho de um modelo preditivo?
+
+- O desempenho de um modelo preditivo costuma ser avaliado principalmente por discriminação e calibração.[@vansmeden2021; @vancalster2026]
+
+- Discriminação é a capacidade do modelo de diferenciar indivíduos que terão o evento daqueles que não terão, geralmente medida pelo índice C ou pela AUC.[@vansmeden2021; @vancalster2026]
+
+- Calibração é o grau de concordância entre os riscos preditos pelo modelo e as proporções observadas de eventos. Um modelo bem calibrado, por exemplo, deve apresentar aproximadamente 20 eventos em cada 100 pessoas às quais atribuiu risco de 20%.[@vansmeden2021; @vancalster2026]
+
+- A calibração é especialmente importante quando o modelo será usado para definir limiares de decisão clínica, como indicar ou não uma intervenção, exame ou tratamento.[@vansmeden2021]
+
+<br>
+
+### O que é validação de um modelo preditivo?
+
+- Validação interna avalia se o modelo mantém desempenho adequado dentro da mesma população usada em seu desenvolvimento, geralmente por bootstrap, validação cruzada ou divisão treino-teste.[@vancalster2023]
+
+- Validação externa avalia o desempenho do modelo em novos pacientes, coletados em outro período, outro centro, outra região ou outro sistema de saúde.[@vancalster2023]
+
+- A validação interna está mais relacionada ao risco de sobreajuste, enquanto a validação externa está relacionada à transportabilidade do modelo para novos contextos clínicos.[@vancalster2023]
+
+<br>
+
+### Um modelo pode ser considerado definitivamente validado?
+
+- Segundo Van Calster et al., não existe um modelo preditivo “validado” de forma definitiva, pois populações, práticas clínicas, medidas, equipamentos e padrões de cuidado variam entre locais e ao longo do tempo.[@vancalster2023]
+
+- Uma única validação externa representa apenas um retrato do desempenho do modelo em determinado cenário, com determinada população, em determinado momento.[@vancalster2023]
+
+- É mais adequado dizer que um modelo apresentou bom desempenho em uma validação específica do que afirmar que ele está universalmente validado.[@vancalster2023]
+
+<br>
+
+### Por que a transportabilidade é um problema?
+
+- A transportabilidade de um modelo pode ser afetada por diferenças entre populações, como idade, gravidade da doença, prevalência do desfecho, critérios de inclusão e contexto assistencial.[@vancalster2023; @vancalster2026]
+
+- Também pode ser afetada por diferenças na forma de medir preditores e desfechos, como exames laboratoriais, métodos de imagem, julgamento clínico, protocolos locais e disponibilidade de recursos.[@vancalster2023; @vancalster2026]
+
+- Mesmo quando a discriminação permanece aparentemente estável, a calibração pode se deteriorar com o tempo, fenômeno conhecido como drift de calibração.[@vancalster2023; @vancalster2026]
+
+<br>
+
+### Quais são os principais riscos metodológicos em modelos preditivos?
+
+- Entre os problemas comuns estão amostras pequenas, dados não representativos, ausência de validação externa, relato incompleto, seleção excessivamente orientada pelos dados, dicotomização de variáveis contínuas e tratamento inadequado de dados ausentes.[@vansmeden2021]
+
+- O desenvolvimento de novos modelos deve ser evitado quando já existem modelos relevantes para o mesmo desfecho e população, pois muitas vezes é mais útil validar, atualizar, ampliar ou estudar o impacto de modelos existentes.[@vansmeden2021]
+
+<br>
+
+### Como melhorar o uso de modelos preditivos?
+
+- Estudos multicêntricos ajudam a avaliar a heterogeneidade de desempenho entre locais, populações e sistemas de saúde.[@vancalster2023]
+
+- Modelos promissores devem ser submetidos a validações externas repetidas, bem relatadas e em diferentes contextos clínicos.[@vancalster2023]
+
+- Antes da implementação local, recomenda-se validação no próprio serviço, com atenção especial à calibração.[@vancalster2023]
+
+- Após a implementação, o desempenho deve ser monitorado ao longo do tempo, com possibilidade de recalibração ou atualização quando o modelo deixar de refletir a realidade clínica atual.[@vancalster2023; @vancalster2026]
 
 <br>
 
@@ -35,7 +108,8 @@ O pacote *ggeffects*[@ggeffects] fornece a função [*test_response*](https://ww
 ### Como árvores de decisão são usadas para predição?
 
 - Utilizam padrões históricos para prever resultados futuros em novos registros.[@Song2015]
-Identificam combinações de fatores que elevam ou reduzem o risco de um evento clínico.[@Song2015]
+
+- Identificam combinações de fatores que elevam ou reduzem o risco de um evento clínico.[@Song2015]
 
 - Podem ser aplicadas em diagnósticos médicos para prever subtipos de condições ou diferentes respostas terapêuticas.[@Song2015]
 
@@ -55,21 +129,31 @@ Identificam combinações de fatores que elevam ou reduzem o risco de um evento 
 
 <br>
 
+### Por que o desempenho estatístico não basta?
+
+- Um modelo pode apresentar boa discriminação e calibração, mas ainda assim não melhorar decisões clínicas se suas predições não forem usadas de modo adequado.[@vansmeden2021; @vancalster2026]
+
+- Por isso, além de avaliar desempenho estatístico, é necessário avaliar a utilidade clínica do modelo, isto é, se ele ajuda a escolher melhor entre intervir, investigar, acompanhar ou não tratar.[@vansmeden2021; @vancalster2026]
+
+- A análise de curva de decisão contribui justamente para essa etapa, pois compara o benefício líquido do modelo com estratégias simples, como “tratar todos” ou “tratar ninguém”.[@vickers2019]
+
+<br>
+
 ## Análise de curva de decisão
 
 <br>
 
 ### O que é a análise de curva de decisão?
 
--   Análise de curva de decisão é um método para avaliar a utilidade clínica de modelos preditivos em comparação às estratégias padrão “tratar todos” ou “tratar ninguém”.[@hozo2023]
+- Análise de curva de decisão é um método para avaliar a utilidade clínica de modelos preditivos em comparação às estratégias padrão “tratar todos” ou “tratar ninguém”.[@hozo2023]
 
 <br>
 
 ### O que significam os eixos da curva de decisão?
 
--   O eixo vertical mostra o benefício líquido, ganho obtido ao usar o modelo em relação às estratégias de referência. O eixo horizontal mostra a preferência, que corresponde ao limiar de decisão: a probabilidade mínima de evento a partir da qual se recomenda intervir.[@vickers2019]
+- O eixo vertical mostra o benefício líquido, ganho obtido ao usar o modelo em relação às estratégias de referência. O eixo horizontal mostra a preferência, que corresponde ao limiar de decisão: a probabilidade mínima de evento a partir da qual se recomenda intervir.[@vickers2019]
 
--   O limiar reflete o equilíbrio entre o risco de perder casos da doença e o risco de intervenções desnecessárias.[@vickers2019]
+- O limiar reflete o equilíbrio entre o risco de perder casos da doença e o risco de intervenções desnecessárias.[@vickers2019]
 
 <br>
 
@@ -103,13 +187,13 @@ Identificam combinações de fatores que elevam ou reduzem o risco de um evento 
 
 ### A análise de curva de decisão pode ser conduzida sem dados individuais de pacientes?
 
--   Em modelos bem calibrados e com tamanho amostral adequado, a análise de curva de decisão pode ser realizada utilizando apenas estimativas sumárias (média e desvio-padrão).[@hozo2023]
+- Em modelos bem calibrados e com tamanho amostral adequado, a análise de curva de decisão pode ser realizada utilizando apenas estimativas sumárias (média e desvio-padrão).[@hozo2023]
 
 <br>
 
 ### Como funciona o cálculo do benefício líquido?
 
--   O benefício líquido é estimado contrastando verdadeiros positivos e falsos positivos em diferentes limiares de decisão.[@hozo2023]
+- O benefício líquido é estimado contrastando verdadeiros positivos e falsos positivos em diferentes limiares de decisão.[@hozo2023]
 
 <br>
 

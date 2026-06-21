@@ -431,30 +431,6 @@ print(p)
 
 <br>
 
-### Quais são as regras básicas para análise causal?
-
-- Variáveis causalmente independentes tendem a não ser correlacionadas, exceto na presença de confundimento ou viés de seleção.[@REF]
-
-- Influência causal pode criar correlação estatística, mas correlação não é condição necessária nem suficiente para causalidade.[@REF]
-
-- Confundimento cria correlação espúria entre exposição e desfecho, mesmo na ausência de efeito causal direto.[@REF]
-
-- Aleatorização protege a variável de exposição contra influência causal de fatores antecedentes, reduzindo confundimento pré-exposição.[@REF]
-
-<br>
-
-### Quais são as regras básicas para ajuste?
-
-- Controlar por um confundidor bloqueia caminhos causais espúrios e reduz viés na estimativa do efeito causal.[@REF]
-
-- Controlar por um mediador bloqueia parte ou todo o efeito causal total, sendo inadequado quando o objetivo é estimar o efeito total da exposição.[@REF]
-
-- Controlar por um colisor cria correlação espúria entre as variáveis que o causam, introduzindo viés mesmo quando não havia associação prévia.[@REF]
-
-- Controlar por uma variável descendente de um colisor pode reabrir parcialmente caminhos espúrios, produzindo viés de seleção.[@REF]
-
-<br>
-
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *dagitty*[@dagitty] fornece a função [*dagitty*](https://cran.r-project.org/web/packages/dagitty/index.html) para criar um objeto grafo a partir de uma descrição textual.
 :::
