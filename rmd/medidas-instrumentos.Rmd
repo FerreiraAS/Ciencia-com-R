@@ -20,6 +20,8 @@
 
 - Em escalas grosseiras, erros são introduzidos porque as variações contínunas do constructo são colapsadas em uma mesma categorias ou separadas entre categorias próximas.[@aguinis2008]
 
+- O erro em escalas grosseiras é considerado sistemático mas não pode ser corrigido em nível da unidade de análise.[@aguinis2008]
+
 <br>
 
 ### O que são escalas tipo Likert?
@@ -28,9 +30,49 @@
 
 - Cada item apresenta um conjunto ordenado de categorias de resposta, tipicamente com com 5 categorias tipo "discordo totalmente", "discordo parcialmente", "nem concordo nem discordo", "concordo parcialmente", e "concordo totalmente".[@norman2010a]
 
-- Escalas tipo Likert são escalas grosseira porque as diferenças entre as categorias não são iguais. Por exemplo, a diferença entre "discordo totalmente" e "discordo parcialmente" não é a mesma que a diferença entre "concordo parcialmente" e "concordo totalmente".[@aguinis2008]
-
 - Na escala tipo Likert, cada resposta é associada a um valor numérico (por exemplo, 1 a 5), permitindo a quantificação das respostas.[@norman2010a]
+
+<br>
+
+```{r instrumento-likert, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Instrumento com itens tipo Likert."}
+library(dplyr)
+
+# Instrumento simulado
+instrumento <- data.frame(
+  Item = c("Item 1", "Item 2", "Item 3"),
+  Afirmação = c(
+    "Estou satisfeito com o serviço recebido.",
+    "O atendimento foi claro e adequado.",
+    "Eu recomendaria este serviço a outras pessoas."
+  ),
+  Categorias = rep(
+    "1 = Discordo totalmente\n2 = Discordo parcialmente\n3 = Nem concordo nem discordo\n4 = Concordo parcialmente\n5 = Concordo totalmente",
+    3
+  )
+)
+
+knitr::kable(
+  instrumento,
+  align = c("l", "l", "l"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  caption = "Instrumento simulado com 3 itens tipo Likert e 5 categorias de resposta."
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = TRUE,
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE)%>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(base::dim(instrumento)[1], extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+- Escalas tipo Likert são escalas grosseira porque as diferenças entre as categorias não são iguais. Por exemplo, a diferença entre "discordo totalmente" e "discordo parcialmente" não é a mesma que a diferença entre "concordo parcialmente" e "concordo totalmente".[@aguinis2008]
 
 - Do ponto de vista teórico, as escalas tipo Likert são classificadas como ordinais, pois indicam uma ordem entre as categorias, mas não garantem que as distâncias entre elas sejam iguais.[@norman2010a]
 
@@ -38,11 +80,11 @@
 
 - Quando agregadas dessa forma, essas escalas tendem a apresentar comportamento próximo ao de variáveis contínuas, o que permite o uso de métodos estatísticos paramétricos em muitos contextos aplicados.[@norman2010a]
 
-- Análises baseadas em médias, como testes t, ANOVA e regressão, são robustas mesmo quando aplicadas a dados de escalas Likert, especialmente em amostras moderadas ou grandes.[@norman2010a]
+- Análises baseadas em médias, como testes $t$, ANOVA e regressão, são robustas mesmo quando aplicadas a dados de escalas Likert, especialmente em amostras moderadas ou grandes.[@norman2010a]
 
 <br>
 
-```{r instrumento-likert, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Instrumento com 3 itens tipo Likert com 5 categorias cada."}
+```{r likert-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de distribuição das respostas de N aplicações simuladas de um instrumento com 3 itens tipo Likert."}
 # Reprodutibilidade
 set.seed(1234)
 
@@ -171,10 +213,6 @@ O pacote *likert*[@likert] fornece a função [*likert*](https://www.rdocumentat
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *ggstats*[@ggstats] fornece a função [*gglikert*](https://www.rdocumentation.org/packages/ggstats/versions/0.10.0/topics/gglikert) para gerar um gráfico em escalas tipo Likert.
 :::
-
-<br>
-
-- O erro em escalas grosseiras é considerado sistemático mas não pode ser corrigido em nível da unidade de análise.[@aguinis2008]
 
 <br>
 

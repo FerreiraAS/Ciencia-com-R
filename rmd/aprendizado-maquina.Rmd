@@ -492,6 +492,95 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
+```{r knn, echo=FALSE, warning=FALSE, message=FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Classificação usando o algoritmo KNN.", fig.width=8, fig.height=6, out.width="100%"}
+# reproduzibilidade
+set.seed(123)
+
+# Dados simulados com duas classes
+df_knn <- data.frame(
+  x = c(rnorm(70, 0, 0.8), rnorm(70, 3, 0.8)),
+  y = c(rnorm(70, 0, 0.8), rnorm(70, 3, 0.8)),
+  classe = factor(c(rep("Classe A", 70), rep("Classe B", 70)))
+)
+
+# Novo ponto a ser classificado
+novo_ponto <- data.frame(
+  x = 1.6,
+  y = 1.7
+)
+
+# Número de vizinhos
+k <- 7
+
+# Calcular distância euclidiana até o novo ponto
+df_knn$distancia <- sqrt(
+  (df_knn$x - novo_ponto$x)^2 +
+  (df_knn$y - novo_ponto$y)^2
+)
+
+# Selecionar os k vizinhos mais próximos
+vizinhos <- df_knn |>
+  dplyr::arrange(distancia) |>
+  dplyr::slice(1:k)
+
+# Classe prevista por maioria de votos
+classe_prevista <- vizinhos |>
+  dplyr::count(classe) |>
+  dplyr::arrange(dplyr::desc(n)) |>
+  dplyr::slice(1) |>
+  dplyr::pull(classe)
+
+novo_ponto$classe_prevista <- classe_prevista
+
+# Raio até o k-ésimo vizinho
+raio_k <- max(vizinhos$distancia)
+
+# Gráfico
+ggplot2::ggplot(df_knn, ggplot2::aes(x = x, y = y, color = classe)) +
+  ggplot2::geom_point(size = 2.5, alpha = 0.65) +
+  ggforce::geom_circle(
+    data = novo_ponto,
+    ggplot2::aes(x0 = x, y0 = y, r = raio_k),
+    inherit.aes = FALSE,
+    linetype = "dashed",
+    color = "black"
+  ) +
+  ggplot2::geom_point(
+    data = vizinhos,
+    ggplot2::aes(x = x, y = y),
+    shape = 21,
+    fill = "white",
+    color = "black",
+    size = 4,
+    stroke = 1.2,
+    inherit.aes = FALSE
+  ) +
+  ggplot2::geom_point(
+    data = novo_ponto,
+    ggplot2::aes(x = x, y = y),
+    shape = 8,
+    color = "black",
+    size = 6,
+    inherit.aes = FALSE
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = novo_ponto$x,
+    y = novo_ponto$y + 0.45,
+    label = paste0("Novo ponto\nClasse prevista: ", classe_prevista),
+    size = 3.8
+  ) +
+  ggplot2::coord_equal() +
+  ggplot2::labs(
+    x = "Variável 1",
+    y = "Variável 2",
+    color = "Classe observada"
+  ) +
+  ggplot2::theme_minimal(base_size = 12)
+```
+
+<br>
+
 ## Árvores de decisão
 
 <br>
@@ -710,6 +799,56 @@ O pacote *mlr3*[\@mlr3](https://cran.r-project.org/web/packages/mlr3/index.html)
 - O método pode ser interpretado como um problema de quantização de dados, no qual se busca representar um conjunto de $N$ observações em um espaço vetorial $d$ d-dimensional por meio de $k$ centros ou centroides.[@schubert2023]
 
 - O objetivo do algoritmo é minimizar a soma dos quadrados das distâncias entre cada ponto e o centroide do cluster ao qual pertence, conhecida como *within-cluster sum of squares* ($WCSS$) ou *sum of squared errors* ($SSE$).[@schubert2023]
+
+<br>
+
+```{r k-means, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Aplicação do algoritmo k-means para identificar grupos em um conjunto de dados bidimensional.", fig.width=8, fig.height=6, out.width="100%"}
+# Reprodutibilidade
+set.seed(123)
+
+# Dados simulados com três grupos
+df_kmeans <- data.frame(
+  x = c(rnorm(80, 0, 0.6), rnorm(80, 3, 0.6), rnorm(80, 1.5, 0.6)),
+  y = c(rnorm(80, 0, 0.6), rnorm(80, 3, 0.6), rnorm(80, 4, 0.6))
+)
+
+# Ajuste do k-means
+km <- stats::kmeans(df_kmeans, centers = 3, nstart = 25)
+
+df_kmeans$cluster <- factor(km$cluster)
+
+centroides <- as.data.frame(km$centers)
+centroides$cluster <- factor(1:3)
+
+# Gráfico
+ggplot2::ggplot(df_kmeans, ggplot2::aes(x = x, y = y, color = cluster)) +
+  ggplot2::geom_point(size = 2.5, alpha = 0.75) +
+  ggplot2::geom_point(
+    data = centroides,
+    ggplot2::aes(x = x, y = y),
+    color = "black",
+    fill = "white",
+    shape = 21,
+    size = 6,
+    stroke = 1.5,
+    inherit.aes = FALSE
+  ) +
+  ggplot2::geom_text(
+    data = centroides,
+    ggplot2::aes(x = x, y = y, label = "Centroide"),
+    vjust = -1.2,
+    size = 3.5,
+    color = "black",
+    inherit.aes = FALSE
+  ) +
+  ggplot2::coord_equal() +
+  ggplot2::labs(
+    x = "Variável 1",
+    y = "Variável 2",
+    color = "Cluster"
+  ) +
+  ggplot2::theme_minimal(base_size = 12)
+```
 
 <br>
 

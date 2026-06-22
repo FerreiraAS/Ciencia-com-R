@@ -10,7 +10,297 @@
 
 <br>
 
-## Tendência central e dispersão
+## Média e desvio-padrão
+
+<br>
+
+```{r media-dp, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 120L
+
+dados <-
+  tibble::tibble(
+    Idade = round(rnorm(n, mean = 52, sd = 12)),
+    Peso = round(rnorm(n, mean = 72, sd = 14), 1),
+    Altura = round(rnorm(n, mean = 1.68, sd = 0.09), 2),
+    IMC = Peso / (Altura^2)
+  )
+
+tbl_desc_geral <-
+  dados %>%
+  gtsummary::tbl_summary(
+    statistic = list(
+      gtsummary::all_continuous() ~ "{mean} ({sd})"
+    ),
+    digits = list(
+      gtsummary::all_continuous() ~ 2
+    ),
+    label = list(
+      Idade ~ "Idade, anos",
+      Peso ~ "Peso, kg",
+      Altura ~ "Altura, m",
+      IMC ~ "Índice de massa corporal"
+    )
+  ) %>%
+  gtsummary::add_n(
+    statistic = "{N_nonmiss}",
+    col_label = "**N válido**"
+  ) %>%
+  gtsummary::modify_header(
+    label = "**Variável**",
+    stat_0 = "**Média (DP)**"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Descrição geral: tendência central e dispersão") %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    "DP = desvio-padrão."
+  )
+
+tbl_desc_geral
+```
+
+<br>
+
+## Mediana e intervalo interquartil
+
+<br>
+
+```{r mediana-iqr, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 120L
+
+dados_assimetricos <-
+  tibble::tibble(
+    Tempo_internacao = round(rlnorm(n, meanlog = 2.1, sdlog = 0.55), 1),
+    Gasto = round(rlnorm(n, meanlog = 8.2, sdlog = 0.65), 2),
+    Marcador = round(rlnorm(n, meanlog = 3.4, sdlog = 0.50), 2)
+  )
+
+tbl_desc_mediana <-
+  dados_assimetricos %>%
+  gtsummary::tbl_summary(
+    statistic = list(
+      gtsummary::all_continuous() ~ "{median} [{p25}, {p75}]"
+    ),
+    digits = list(
+      gtsummary::all_continuous() ~ 2
+    ),
+    label = list(
+      Tempo_internacao ~ "Tempo de internação, dias",
+      Gasto ~ "Gasto total",
+      Marcador ~ "Marcador laboratorial"
+    )
+  ) %>%
+  gtsummary::add_n(
+    statistic = "{N_nonmiss}",
+    col_label = "**N válido**"
+  ) %>%
+  gtsummary::modify_header(
+    label = "**Variável**",
+    stat_0 = "**Mediana [Q1, Q3]**"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Descrição de variáveis assimétricas") %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    "Q1 = primeiro quartil; Q3 = terceiro quartil."
+  )
+
+tbl_desc_mediana
+```
+
+<br>
+
+## Variáveis categóricas
+
+<br>
+
+```{r frequencia, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 150L
+
+dados_cat <-
+  tibble::tibble(
+    Sexo = factor(
+      sample(c("Feminino", "Masculino"), n, replace = TRUE, prob = c(0.58, 0.42))
+    ),
+    Escolaridade = factor(
+      sample(
+        c("Fundamental", "Médio", "Superior"),
+        n,
+        replace = TRUE,
+        prob = c(0.25, 0.45, 0.30)
+      ),
+      levels = c("Fundamental", "Médio", "Superior")
+    ),
+    Hipertensao = factor(
+      sample(c("Não", "Sim"), n, replace = TRUE, prob = c(0.65, 0.35)),
+      levels = c("Não", "Sim")
+    )
+  )
+
+tbl_cat <-
+  dados_cat %>%
+  gtsummary::tbl_summary(
+    statistic = list(
+      gtsummary::all_categorical() ~ "{n} ({p}%)"
+    ),
+    digits = list(
+      gtsummary::all_categorical() ~ c(0, 1)
+    ),
+    label = list(
+      Sexo ~ "Sexo",
+      Escolaridade ~ "Escolaridade",
+      Hipertensao ~ "Hipertensão arterial"
+    )
+  ) %>%
+  gtsummary::add_n(
+    statistic = "{N_nonmiss}",
+    col_label = "**N válido**"
+  ) %>%
+  gtsummary::modify_header(
+    label = "**Variável**",
+    stat_0 = "**n (%)**"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Descrição de variáveis categóricas") %>%
+  gtsummary::as_gt()
+
+tbl_cat
+```
+
+<br>
+
+## Descrição por grupos
+
+<br>
+
+```{r descricao-grupos, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 180L
+
+dados_grupo <-
+  tibble::tibble(
+    Grupo = factor(
+      sample(c("Controle", "Intervenção"), n, replace = TRUE),
+      levels = c("Controle", "Intervenção")
+    ),
+    Idade = round(rnorm(n, mean = 55, sd = 11)),
+    IMC = round(rnorm(n, mean = 27, sd = 4.5), 1),
+    Sexo = factor(
+      sample(c("Feminino", "Masculino"), n, replace = TRUE)
+    ),
+    Diabetes = factor(
+      sample(c("Não", "Sim"), n, replace = TRUE, prob = c(0.72, 0.28)),
+      levels = c("Não", "Sim")
+    )
+  )
+
+tbl_grupo <-
+  dados_grupo %>%
+  gtsummary::tbl_summary(
+    by = Grupo,
+    statistic = list(
+      gtsummary::all_continuous() ~ "{mean} ({sd})",
+      gtsummary::all_categorical() ~ "{n} ({p}%)"
+    ),
+    digits = list(
+      gtsummary::all_continuous() ~ 2,
+      gtsummary::all_categorical() ~ c(0, 1)
+    ),
+    label = list(
+      Idade ~ "Idade, anos",
+      IMC ~ "Índice de massa corporal",
+      Sexo ~ "Sexo",
+      Diabetes ~ "Diabetes mellitus"
+    )
+  ) %>%
+  gtsummary::add_overall(
+    last = TRUE,
+    col_label = "**Total**  \nN = {style_number(N)}"
+  ) %>%
+  gtsummary::modify_header(
+    label = "**Variável**"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Descrição das características segundo grupo") %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    "Variáveis contínuas descritas como média (DP); variáveis categóricas descritas como n (%)."
+  )
+
+tbl_grupo
+```
+
+<br>
+
+## Dados ausentes
+
+<br>
+
+```{r dados-ausentes, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 120L
+
+dados_missing <-
+  tibble::tibble(
+    Idade = round(rnorm(n, mean = 50, sd = 10)),
+    Peso = round(rnorm(n, mean = 70, sd = 13), 1),
+    Sexo = factor(sample(c("Feminino", "Masculino"), n, replace = TRUE)),
+    Pressao_sistolica = round(rnorm(n, mean = 125, sd = 18))
+  )
+
+dados_missing$Peso[sample(1:n, 12)] <- NA
+dados_missing$Pressao_sistolica[sample(1:n, 8)] <- NA
+dados_missing$Sexo[sample(1:n, 5)] <- NA
+
+tbl_missing <-
+  dados_missing %>%
+  gtsummary::tbl_summary(
+    missing = "ifany",
+    missing_text = "Ausente",
+    statistic = list(
+      gtsummary::all_continuous() ~ "{mean} ({sd})",
+      gtsummary::all_categorical() ~ "{n} ({p}%)"
+    ),
+    digits = list(
+      gtsummary::all_continuous() ~ 2,
+      gtsummary::all_categorical() ~ c(0, 1)
+    ),
+    label = list(
+      Idade ~ "Idade, anos",
+      Peso ~ "Peso, kg",
+      Sexo ~ "Sexo",
+      Pressao_sistolica ~ "Pressão sistólica, mmHg"
+    )
+  ) %>%
+  gtsummary::add_n(
+    statistic = "{N_nonmiss}",
+    col_label = "**N válido**"
+  ) %>%
+  gtsummary::modify_header(
+    label = "**Variável**"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption("Descrição com apresentação dos dados ausentes") %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    "A linha 'Ausente' indica valores não observados para cada variável."
+  )
+
+tbl_missing
+```
 
 <br>
 

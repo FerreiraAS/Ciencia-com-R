@@ -434,7 +434,59 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 
 <br>
 
-```{r lei-benford-simulacao, echo=FALSE, warning=FALSE, message=FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Simulação de números distribuídos log-uniformemente e comparação da frequência do primeiro dígito com a distribuição teórica da lei de Benford.", fig.width=15, fig.height=8, dpi=300, out.width="100%"}
+```{r lei-benford-tabela, echo=FALSE, warning=FALSE, message=FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Simulação de números distribuídos log-uniformemente e comparação da frequência do primeiro dígito com a distribuição teórica da lei de Benford.", fig.width=15, fig.height=4, dpi=300, out.width="100%"}
+# reprodutibilidade
+set.seed(1234)
+
+# número de observações
+N <- 10000
+
+# gera números distribuídos log-uniformemente (várias ordens de magnitude)
+x <- 10^(runif(N, min = 0, max = 6))
+
+# função para extrair o primeiro dígito
+primeiro_digito <- function(x){
+  as.numeric(substr(x, 1, 1))
+}
+
+# obtém primeiros dígitos
+digitos <- primeiro_digito(x)
+
+# frequência observada
+obs <- prop.table(table(digitos))
+
+# probabilidade teórica de Benford
+d <- 1:9
+benford <- log10(1 + 1/d)
+
+dados <- data.frame(
+  digito = factor(d),
+  observado = as.numeric(obs),
+  benford = benford
+)
+
+amostra <- head(round(x), 15)
+
+tabela_exemplo <-
+  tibble::tibble(
+    Número = paste0(
+      "**", substr(amostra, 1, 1), "**",
+      substr(amostra, 2, nchar(amostra))
+    ),
+    `Primeiro dígito` = substr(amostra, 1, 1)
+  )
+
+gt::gt(tabela_exemplo) |>
+  gt::fmt_markdown(columns = Número) |>
+  gt::cols_align(
+    align = "center",
+    columns = everything()
+  )
+```
+
+<br>
+
+```{r lei-benford-grafico, echo=FALSE, warning=FALSE, message=FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Simulação de números distribuídos log-uniformemente e comparação da frequência do primeiro dígito com a distribuição teórica da lei de Benford.", fig.width=15, fig.height=8, dpi=300, out.width="100%"}
 # reprodutibilidade
 set.seed(1234)
 

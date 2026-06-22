@@ -551,12 +551,6 @@ p <- plotly::plot_ly(
   bundlecolors = TRUE           # agrupa as cores de caminhos semelhantes
 ) %>%
   plotly::layout(
-    title = list(
-      text = paste0(
-        "Parallel Categories • parcats (plotly)\n",
-        "<sub>Easily visualize flows in categorical data — ideal for longitudinal data, surveys, multi-stage classification, transitions</sub>"
-      )
-    ),
     margin = list(l = 40, r = 40, t = 80, b = 40)
   )
 
@@ -1103,7 +1097,7 @@ O pacote *tiff*[@tiff] fornece a função [*writeTIFF*](https://www.rdocumentati
 
 <br>
 
-### Quais são os elementos de um bom fluxograma?
+### Quais são os elementos de um fluxograma?
 
 - Fluxogramas podem incluir elementos textuais e gráficos.[@kimber2018]
 
@@ -1131,7 +1125,7 @@ O pacote *tiff*[@tiff] fornece a função [*writeTIFF*](https://www.rdocumentati
 
 <br>
 
-### Quais são os princípios de um bom fluxograma?
+### Quais são os princípios de um fluxograma?
 
 - O fluxo de leitura deve seguir uma direção intuitiva, preferencialmente de cima para baixo ou da esquerda para a direita.[@kimber2018]
 
@@ -1142,6 +1136,108 @@ O pacote *tiff*[@tiff] fornece a função [*writeTIFF*](https://www.rdocumentati
 - Um fluxograma deve conter apenas as informações essenciais, evitando excesso de detalhes que possam prejudicar a compreensão.[@kimber2018]
 
 - Títulos, legendas e rótulos explicativos ajudam o leitor a compreender rapidamente o significado da figura.[@kimber2018]
+
+<br>
+
+```{r fluxograma-prisma, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Fluxograma baseado no *Preferred Reporting Items for Systematic reviews and Meta-Analyses* (PRISMA)."}
+# Load the package template
+csvFile <- system.file("extdata", "PRISMA.csv", package = "PRISMA2020")
+prisma_raw <- read.csv(csvFile, stringsAsFactors = FALSE)
+# save file
+write.csv(prisma_raw, "PRISMA_template.csv", row.names = FALSE)
+
+# simulate dataframe for manual editing
+prisma_manual <- list()
+
+prisma_manual$previous_studies <- 0
+prisma_manual$previous_reports <- 0
+
+prisma_manual$database_results <- 0
+prisma_manual$database_specific_results <- "PubMed, xxx; Scopus, xxx; Web of Science, xxx"
+
+prisma_manual$register_results <- 0
+prisma_manual$register_specific_results <- "ClinicalTrials.gov, xxx; ICTRP, xxx"
+
+prisma_manual$website_results <- 0
+prisma_manual$organisation_results <- 0
+prisma_manual$citations_results <- 0
+
+prisma_manual$duplicates <- 0
+prisma_manual$excluded_automatic <- 0
+prisma_manual$excluded_other <- 0
+
+prisma_manual$records_screened <- 0
+prisma_manual$records_excluded <- 0
+
+prisma_manual$dbr_sought_reports <- 0
+prisma_manual$dbr_notretrieved_reports <- 0
+
+prisma_manual$other_sought_reports <- 0
+prisma_manual$other_notretrieved_reports <- 0
+
+prisma_manual$dbr_assessed <- 0
+prisma_manual$dbr_excluded <- "Reason1, xxx; Reason2, xxx; Reason3, xxx"
+
+prisma_manual$other_assessed <- 0
+prisma_manual$other_excluded <- "Reason1, xxx; Reason2, xxx; Reason3, xxx"
+
+prisma_manual$new_studies <- 0
+prisma_manual$new_reports <- 0
+
+prisma_manual$total_studies <- 0
+prisma_manual$total_reports <- 0
+
+# populate PRISMA dataset
+prisma_raw$n[prisma_raw$data == "previous_studies"] <- prisma_manual$previous_studies
+prisma_raw$n[prisma_raw$data == "previous_reports"] <- prisma_manual$previous_reports
+
+prisma_raw$n[prisma_raw$data == "database_results"] <- prisma_manual$database_results
+prisma_raw$n[prisma_raw$data == "database_specific_results"] <- prisma_manual$database_specific_results
+
+prisma_raw$n[prisma_raw$data == "register_results"] <- prisma_manual$register_results
+prisma_raw$n[prisma_raw$data == "register_specific_results"] <- prisma_manual$register_specific_results
+
+prisma_raw$n[prisma_raw$data == "website_results"] <- prisma_manual$website_results
+prisma_raw$n[prisma_raw$data == "organisation_results"] <- prisma_manual$organisation_results
+prisma_raw$n[prisma_raw$data == "citations_results"] <- prisma_manual$citations_results
+
+prisma_raw$n[prisma_raw$data == "duplicates"] <- prisma_manual$duplicates
+prisma_raw$n[prisma_raw$data == "excluded_automatic"] <- prisma_manual$excluded_automatic
+prisma_raw$n[prisma_raw$data == "excluded_other"] <- prisma_manual$excluded_other
+
+prisma_raw$n[prisma_raw$data == "records_screened"] <- prisma_manual$records_screened
+prisma_raw$n[prisma_raw$data == "records_excluded"] <- prisma_manual$records_excluded
+
+prisma_raw$n[prisma_raw$data == "dbr_sought_reports"] <- prisma_manual$dbr_sought_reports
+prisma_raw$n[prisma_raw$data == "dbr_notretrieved_reports"] <- prisma_manual$dbr_notretrieved_reports
+
+prisma_raw$n[prisma_raw$data == "other_sought_reports"] <- prisma_manual$other_sought_reports
+prisma_raw$n[prisma_raw$data == "other_notretrieved_reports"] <- prisma_manual$other_notretrieved_reports
+
+prisma_raw$n[prisma_raw$data == "dbr_assessed"] <- prisma_manual$dbr_assessed
+prisma_raw$n[prisma_raw$data == "dbr_excluded"] <- prisma_manual$dbr_excluded
+
+prisma_raw$n[prisma_raw$data == "other_assessed"] <- prisma_manual$other_assessed
+prisma_raw$n[prisma_raw$data == "other_excluded"] <- prisma_manual$other_excluded
+
+prisma_raw$n[prisma_raw$data == "new_studies"] <- prisma_manual$new_studies
+prisma_raw$n[prisma_raw$data == "new_reports"] <- prisma_manual$new_reports
+
+prisma_raw$n[prisma_raw$data == "total_studies"] <- prisma_manual$total_studies
+prisma_raw$n[prisma_raw$data == "total_reports"] <- prisma_manual$total_reports
+
+data <- PRISMA2020::PRISMA_data(prisma_raw)
+
+plot <- PRISMA2020::PRISMA_flowdiagram(
+  data,
+  fontsize = 12,
+  interactive = TRUE,
+  previous = FALSE,
+  other = TRUE
+)
+
+plot
+```
 
 <br>
 
