@@ -1,0 +1,1834 @@
+```{=openxml}
+<w:p>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
+</w:p>
+```
+
+# **Modelos de regressão** {#modelos-regressao}
+
+<br>
+
+## Modelos e regressão
+
+<br>
+
+### O que é modelagem?
+
+-   Modelagem é o processo de usar dados para selecionar um modelo matemático explícito que represente o processo gerador dos dados.[@Greenland1989]
+
+<br>
+
+### O que é regressão?
+
+-   Regressão refere-se a uma equação matemática que permite que uma ou mais variável(is) de desfecho (dependentes) seja(m) prevista(s) a partir de uma ou mais variável(is) independente(s).[@greenhalgh1997a]
+
+-   Para estimar os efeitos imparciais de um fator de exposição primária sobre uma variável de desfecho, frequentemente constroem-se modelos estatísticos de regressão.[@bandoli2018]
+
+- A regressão implica em uma direção de efeito, mas não garante causalidade.[@greenhalgh1997a]
+
+<br>
+
+### Por que a escolha do modelo de regressão é complexa?
+
+-   Há inúmeras combinações possíveis de variáveis, formas funcionais (lineares, quadráticas, transformações), interações e formas do desfecho, o que torna o espaço de possibilidades muito amplo.[@Greenland1989]
+
+-   Todos os modelos são errados, mas alguns são úteis.[@box1976]
+
+<br>
+
+### O que diferencia modelos clássicos e modernos em predição?
+
+-   Modelos clássicos, como a regressão logística e as árvores de decisão, contrastam com os modelos modernos, como máquinas de vetor de suporte, redes neurais e *random forests*, principalmente pela maior flexibilidade e capacidade destes últimos de capturar não linearidades e interações.[@vanderploeg2014]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *modelsummary*[@modelsummary] fornece as funções [*modelsummary*](https://www.rdocumentation.org/packages/modelsummary/versions/1.4.1/topics/modelsummary) e [*modelplot*](https://www.rdocumentation.org/packages/modelsummary/versions/1.4.1/topics/modelplot) para gerar tabelas e gráficos de coeficientes de regressão.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *gtsummary*[@gtsummary] fornece a função [*tbl_regression*](https://www.rdocumentation.org/packages/gtsummary/versions/1.6.3/topics/tbl_regression) para construção da 'Tabela 2' com dados do modelo de regressão.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *equatiomatic*[@equatiomatic] fornece a função [*extract_eq*](https://www.rdocumentation.org/packages/equatiomatic/versions/0.3.1/topics/extract_eq) para extrair a equação dos modelos em formato LaTeX para visualização.
+:::
+
+<br>
+
+## Preditores e desfechos
+
+<br>
+
+### O que são desfechos de um modelo?
+
+-   .[@REF]
+
+<br>
+
+### O que são preditores de um modelo?
+
+-   .[@REF]
+
+<br>
+
+### Como selecionar preditores para um modelo?
+
+-   .[@REF]
+
+<br>
+
+## Estruturas de análise de regressão
+
+<br>
+
+### O que são análises de regressão simples?
+
+-   A análise de regressão simples consiste em modelos estatísticos com uma variável dependente (desfecho) e uma variável independente (preditor).[@Hidalgo2013]
+
+-   A equação de regressão simples é expressa como \@ref(eq:regressao-simples), onde $Y$ é a variável dependente, $X$ é a variável independente, $\beta_0$ é o intercepto (constante), $\beta_1$ é o coeficiente de regressão da variável independente e $\epsilon$ representa o erro aleatório do modelo.[@Hidalgo2013]
+
+<br>
+
+\begin{equation}
+(\#eq:regressao-simples)
+Y = \beta_0 + \beta_1 X + \epsilon
+\end{equation}
+
+<br>
+
+### O que são análises de regressão multivariável?
+
+-   A análise multivariável (ou múltiplo) consiste em modelos estatísticos com uma variável dependente (desfecho) e duas ou mais variáveis independentes.[@Hidalgo2013]
+
+-   A equação de regressão multivariável é expressa como \@ref(eq:regressao-multivariavel), onde $Y$ é a variável dependente, $X_1, X_2, ..., X_n$ são as variáveis independentes, $\beta_0$ é o intercepto (constante), $\beta_1, \beta_2, ..., \beta_n$ são os coeficientes de regressão das variáveis independentes e $\epsilon$ representa o erro aleatório do modelo.[@Hidalgo2013]
+
+<br>
+
+\begin{equation}
+(\#eq:regressao-multivariavel)
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n + \epsilon
+\end{equation}
+
+<br>
+
+### O que são análises de regressão multivariada?
+
+-   A análise multivariada consiste em modelos estatísticos com duas ou mais variáveis dependente (desfechos) e duas ou mais variáveis independentes.[@Hidalgo2013]
+
+-   A equação de regressão multivariada é expressa como \@ref(eq:regressao-multivariada), onde $Y_1, Y_2, ..., Y_m$ são as variáveis dependentes, $X_1, X_2, ..., X_n$ são as variáveis independentes, $\beta_{0j}$ é o intercepto (constante) da variável dependente $Y_j$, $\beta_{ij}$ são os coeficientes de regressão das variáveis independentes para a variável dependente $Y_j$ e $\epsilon_j$ representa o erro aleatório do modelo para a variável dependente $Y_j$.[@Hidalgo2013]
+
+<br>
+
+\begin{align}
+(\#eq:regressao-multivariada)
+Y_1 &= \beta_{01} + \beta_{11} X_1 + \beta_{12} X_2 + \dots + \beta_{1n} X_n + \epsilon_1 \\
+Y_2 &= \beta_{02} + \beta_{21} X_1 + \beta_{22} X_2 + \dots + \beta_{2n} X_n + \epsilon_2 \\
+&\vdots \\
+Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \epsilon_m
+\end{align}
+
+<br>
+
+### O que são análises de regressão segmentada?
+
+- A regressão segmentada é uma abordagem frequentemente utilizada para análise de séries temporais interrompidas, permitindo estimar alterações no nível e/ou na tendência do desfecho após a intervenção.[@lopezbernal2016a]
+
+- Modelos de regressão segmentada podem ser implementados utilizando regressão linear, Poisson, logística ou modelos multinível, dependendo da natureza do desfecho e da estrutura dos dados.[@kontopantelis2015]
+
+- Diferentes modelos de impacto podem ser especificados, incluindo mudanças abruptas de nível, mudanças graduais de tendência, efeitos temporários ou efeitos com período de latência.[@lopezbernal2016a]
+
+- Entre os modelos mais utilizados, destacam-se os modelos com mudança imediata de nível, mudança de tendência e mudança simultânea de nível e tendência.[@lopezbernal2016a]
+
+- Modelo com mudança imediata de nível \@ref(eq:its1), utilizado quando se espera um efeito abrupto após a intervenção, sem alteração na tendência temporal.
+
+<br>
+
+\begin{equation}
+(\#eq:its1)
+Y_t = \beta_0 + \beta_1 T + \beta_2 X_t
+\end{equation}
+
+<br>
+
+- Modelo com mudança de tendência \@ref(eq:its2), utilizado quando a intervenção altera gradualmente a inclinação da série temporal, sem mudança imediata no nível.
+
+<br>
+
+\begin{equation}
+(\#eq:its2)
+Y_t = \beta_0 + \beta_1 T + \beta_3 TX_t
+\end{equation}
+
+<br>
+
+- Modelo com mudança simultânea de nível e tendência \@ref(eq:its3), considerado o modelo ITS mais completo e frequentemente utilizado, permitindo estimar alterações imediatas e graduais após a intervenção.[@lopezbernal2016a]
+
+<br>
+
+\begin{equation}
+(\#eq:its3)
+Y_t = \beta_0 + \beta_1 T + \beta_2 X_t + \beta_3 TX_t
+\end{equation}
+
+<br>
+
+- A variável $T$ representa o tempo transcorrido desde o início do estudo, sendo expressa na unidade correspondente à frequência das observações, como meses ou anos.[@lopezbernal2016a]
+
+- A variável $X_t$ representa uma variável indicadora (*dummy*) da intervenção, codificada como 0 no período pré-intervenção e 1 no período pós-intervenção.[@lopezbernal2016a]
+
+- A variável $Y_t$ representa o valor do desfecho observado no tempo $t$.[@lopezbernal2016a]
+O coeficiente $\beta_0$ representa o nível inicial do desfecho no tempo $T = 0$.[@lopezbernal2016a]
+
+- O coeficiente $\beta_1$ representa a tendência temporal pré-intervenção, indicando a variação esperada do desfecho ao longo do tempo antes da implementação da intervenção.[@lopezbernal2016a]
+
+- O coeficiente $\beta_2$ representa a mudança imediata no nível do desfecho após a intervenção.[@lopezbernal2016a]
+
+- O coeficiente $\beta_3$ representa a mudança na inclinação da tendência temporal após a intervenção.[@lopezbernal2016a]
+
+- O termo de interação $TX_t$ representa a alteração da inclinação da tendência temporal após a intervenção.[@lopezbernal2016a]
+
+<br>
+
+```{r regressao-segmentada, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Modelos de regressão segmentada."}
+library(patchwork)
+
+# reproducibilidade
+set.seed(123)
+
+# Configurações gerais
+n <- 60
+intervention_time <- 31
+time <- 1:n
+
+# Variável de intervenção
+Xt <- ifelse(time >= intervention_time, 1, 0)
+
+# Tempo após intervenção
+time_after <- ifelse(time >= intervention_time,
+                     time - intervention_time + 1,
+                     0)
+
+# Modelo 1
+# Mudança imediata de nível
+beta0_1 <- 100
+beta1_1 <- 0.5
+beta2_1 <- -15
+
+trend1 <- beta0_1 +
+  beta1_1 * time +
+  beta2_1 * Xt
+
+y1 <- trend1 + rnorm(n, 0, 2)
+
+data1 <- data.frame(
+  time = time,
+  y = y1,
+  trend = trend1,
+  model = "Mudança imediata de nível",
+  period = ifelse(time < intervention_time,
+                  "Pré",
+                  "Pós")
+)
+
+# Modelo 2
+# Mudança de tendência
+beta0_2 <- 100
+beta1_2 <- 0.5
+beta3_2 <- -1.0
+
+trend2 <- beta0_2 +
+  beta1_2 * time +
+  beta3_2 * time_after
+
+y2 <- trend2 + rnorm(n, 0, 2)
+
+data2 <- data.frame(
+  time = time,
+  y = y2,
+  trend = trend2,
+  model = "Mudança de tendência",
+  period = ifelse(time < intervention_time,
+                  "Pré",
+                  "Pós")
+)
+
+# Modelo 3
+# Mudança de nível e tendência
+beta0_3 <- 100
+beta1_3 <- 0.5
+beta2_3 <- -12
+beta3_3 <- -0.8
+
+trend3 <- beta0_3 +
+  beta1_3 * time +
+  beta2_3 * Xt +
+  beta3_3 * time_after
+
+y3 <- trend3 + rnorm(n, 0, 2)
+
+data3 <- data.frame(
+  time = time,
+  y = y3,
+  trend = trend3,
+  model = "Mudança de nível e tendência",
+  period = ifelse(time < intervention_time,
+                  "Pré",
+                  "Pós")
+)
+
+# Função para criar gráficos
+plot_its <- function(data){
+  ggplot2::ggplot(data, ggplot2::aes(x = time, y = y)) +
+    # Série observada
+    ggplot2::geom_line(
+      color = "grey40",
+      alpha = 0.5
+    ) +
+    ggplot2::geom_point(
+      size = 1.5,
+      alpha = 0.7,
+      color = "grey40"
+    ) +
+    # Linha da intervenção
+    ggplot2::geom_vline(
+      xintercept = intervention_time,
+      linetype = "dashed",
+      color = "grey40"
+    ) +
+    # Tendência pré-intervenção
+    ggplot2::geom_line(
+      data = subset(data, period == "Pré"),
+      ggplot2::aes(y = trend),
+      linewidth = 1.3,
+      color = "grey20"
+    ) +
+    # Tendência pós-intervenção
+    ggplot2::geom_line(
+      data = subset(data, period == "Pós"),
+      ggplot2::aes(y = trend),
+      linewidth = 1.3,
+      color = "grey20"
+    ) +
+    ggplot2::labs(
+      x = "Tempo",
+      y = "Desfecho",
+      title = unique(data$model)
+    ) +
+    ggplot2::theme_classic(base_size = 13) +
+    ggplot2::theme(
+      panel.grid = ggplot2::element_blank(),
+      axis.line = ggplot2::element_line(
+        color = "grey30",
+        linewidth = 0.7
+      ),
+      axis.ticks = ggplot2::element_line(
+        color = "grey30"
+      ),
+      axis.text = ggplot2::element_text(
+        color = "grey20"
+      ),
+      axis.title = ggplot2::element_text(
+        color = "grey20"
+      ),
+      plot.title = ggplot2::element_text(
+        color = "grey20",
+        face = "bold"
+      )
+    )
+}
+
+# Criar painéis
+p1 <- plot_its(data1)
+p2 <- plot_its(data2)
+p3 <- plot_its(data3)
+
+# Combinar verticalmente
+final_plot <- p1 / p2 / p3
+
+final_plot
+```
+
+<br>
+
+## Tipos e famílias de regressão
+
+<br>
+
+### O que são modelos de regressão linear?
+
+-   Modelos lineares \@ref(eq:regressao-linear) descrevem uma relação linear nos parâmetros entre um desfecho contínuo $Y$ e um ou mais preditores $X$.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:regressao-linear)
+Y = \beta_0 + \sum_{i=1}^{n} \beta_i X_i + \epsilon
+\end{equation}
+
+<br>
+
+-   Assumem erros independentes, de média zero e variância constante (homoscedasticidade).[@REF]
+
+-   A normalidade dos resíduos é uma hipótese comum para inferência estatística, mas não obrigatória para estimação dos coeficientes.[@REF]
+
+<br>
+
+```{r regressao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão linear."}
+# simulate X
+set.seed(123)
+X <- rnorm(100, mean = 50, sd = 10)
+
+# simulate Y based on X
+Y <- 5 + 2 * X + rnorm(100, mean = 0, sd = 30)
+
+# create a dataframe
+data <- data.frame(X, Y)
+
+# create the regression model
+model <- lm(Y ~ X, data = data)
+
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(method = "lm",
+                       color = "blue",
+                       fill = "grey70",
+                       se = TRUE) +
+  ggplot2::labs(
+                x = "Variável Independente (X)", 
+                y = "Variável Dependente (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### O que são modelos de regressão polinomial?
+
+-   São extensões da regressão linear em que se incluem termos elevados a potências das variáveis independentes (ex.: $X^2$, $X^3$), permitindo capturar relações curvas.[@REF]
+
+-   Modelos de regressão polinomial continuam sendo lineares nos parâmetros, por isso ainda se enquadram como um caso particular da regressão linear.[@REF]
+
+<br>
+
+```{r regressao-polinomial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão polinomial."}
+# simulate X
+set.seed(123)
+X <- seq(-10, 10, length.out = 100)
+
+# simulate Y based on a polynomial function of X
+Y <- 5 + 2 * X^3 - 0.1 * X^2 + rnorm(100, mean = 0, sd = 30)
+
+# create a dataframe
+data <- data.frame(X, Y)
+
+# create the regression model
+model <- lm(Y ~ poly(X, 3), data = data)
+
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(method = "lm",
+                       formula = y ~ poly(x, 3),
+                       color = "blue",
+                       fill = "grey70",
+                       se = TRUE) +
+  ggplot2::labs(
+                x = "Variável Independente (X)",
+                y = "Variável Dependente (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### O que são modelos de regressão não-linear?
+
+-   São modelos em que a relação entre os parâmetros e a variável resposta não é linear.
+
+-   Podem assumir formas funcionais mais complexas (ex.: exponencial, logarítmica, logística).[@REF]
+
+-   Importante diferenciar "não-linear na variável" (ex.: polinomial) de "não-linear no parâmetro" (ex.: modelos logísticos de crescimento).[@REF]
+
+<br>
+
+```{r regressao-nao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão não-linear."}
+# simulate X
+set.seed(123)
+X <- seq(-10, 10, length.out = 100)
+
+# simulate Y based on a non-linear function of X
+Y <- 5 + 2 * X^2 + rnorm(100, mean = 0, sd = 30)
+
+# create a dataframe
+data <- data.frame(X, Y)
+
+# create the regression model
+model <- lm(Y ~ poly(X, 2), data = data)
+
+# plot the regression line
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(method = "lm",
+                       formula = y ~ poly(x, 2),
+                       color = "blue",
+                       fill = "grey70",
+                       se = TRUE) +
+  ggplot2::labs(
+                x = "Variável Independente (X)", 
+                y = "Variável Dependente (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### O que são modelos de regressão logística?
+
+-   Modelos logísticos são casos de regressão linear generalizada em que a resposta $Y$ é binária.[@fernandes2020]
+
+-   A equação \@ref(eq:regressao-logistica) modela a razão de chances (*odds*) em função dos preditores.[@fernandes2020]
+
+<br>
+
+\begin{equation}
+(\#eq:regressao-logistica)
+\log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X + ... + \beta_n X_n
+\end{equation}
+
+<br>
+
+-   A ligação (*link*) usada é o logit \@ref(eq:link-logit).[@fernandes2020]
+
+<br>
+
+\begin{equation}
+(\#eq:link-logit)
+g(p) = \log\left(\frac{p}{1-p}\right)
+\end{equation}
+
+<br>
+
+- A interpretação dos coeficientes $\beta_i$ pode ser feita em termos de razões de chances (*odds ratios*, $OR$), por exponenciação dos coeficientes: $OR_i = e^{\beta_i}$, o que representa o fator multiplicativo na $OR$ do desfecho para cada aumento de uma unidade em $X_i$ (mantendo os demais preditores constantes).[@fernandes2020]
+
+- A intepretação pode ser feita por estimativa da variação percentual na chance ($OR$) de ocorrência de $Y$, calculando $(e^b - 1) \times 100$, de modo que um aumento de 1 unidade em $X$ está associado a um aumento de $(e^b - 1) \times 100\%$ na chance de $Y$ ocorrer (mantidos os demais preditores constantes).
+
+<br>
+
+```{r regr-regressao-logistica, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão logística."}
+# simulate X
+set.seed(123)
+X <- rnorm(100, mean = 50, sd = 10)
+
+# simulate a binary outcome Y based on X
+prob <- 1 / (1 + exp(-( -5 + 0.1 * X)))  # logistic function
+Y <- rbinom(100, size = 1, prob = prob) # sample Y ~ Bernoulli(prob)
+
+# create a dataframe
+data <- data.frame(X, Y)
+
+# create the logistic regression model
+model <- glm(Y ~ X, data = data, family = binomial)
+
+# plot the regression line
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(method = "glm", method.args = list(family = "binomial"), color = "blue") +
+  ggplot2::labs(
+       x = "Variável Independente (X)",
+       y = "Probabilidade de Sucesso (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### O que são modelos de regressão multinomial?
+
+-   Modelos de regressão multinomial são usados quando a variável resposta é categórica com mais de dois níveis não ordenados.[@REF]
+
+-   Estendem a regressão logística binária, modelando as razões de chances (*odds ratios*) de cada categoria em relação a uma categoria de referência.[@REF]
+
+<br>
+
+```{r regressao-multinomial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão multinomial"}
+library(dplyr)
+library(tidyr)
+
+# Reprodutibilidade
+set.seed(123)
+
+# 1) Simular X e Y (categorias A/B/C) via softmax
+n <- 200
+X <- rnorm(n, mean = 50, sd = 10)
+
+# Defina preditores lineares por categoria (um "modelo verdadeiro" para simulação)
+# A será a categoria de referência implícita no cálculo de probabilidades
+eta_A <- 0
+eta_B <- -2 + 0.05*X   # prob de B cresce com X
+eta_C <-  2 - 0.08*X   # prob de C decresce com X
+
+# Softmax para probabilidades
+expA <- exp(eta_A)
+expB <- exp(eta_B)
+expC <- exp(eta_C)
+den  <- expA + expB + expC
+pA <- expA / den
+pB <- expB / den
+pC <- expC / den
+
+# Amostrar categoria observada
+Y_cat <- sapply(seq_len(n), function(i) {
+  sample(c("A","B","C"), size = 1, prob = c(pA[i], pB[i], pC[i]))
+})
+Y_cat <- factor(Y_cat, levels = c("A","B","C"))
+
+# Data frame
+data <- data.frame(X = X, Y = Y_cat)
+
+# 2) Ajustar regressão multinomial
+# Por padrão, nnet::multinom usa a 1ª categoria (A) como referência
+model <- nnet::multinom(Y ~ X, data = data, trace = FALSE)
+
+# 3) Prever probabilidades ao longo de X para plotar as curvas
+grid <- data.frame(X = seq(min(data$X), max(data$X), length.out = 200))
+pred_probs <- predict(model, newdata = grid, type = "probs") %>% as.data.frame()
+colnames(pred_probs) <- levels(data$Y)  # garantir nomes A, B, C
+pred_long <- dplyr::bind_cols(grid, pred_probs) %>%
+  tidyr::pivot_longer(cols = c("A","B","C"),
+               names_to = "categoria", values_to = "prob")
+
+# 4) Gráficos
+
+# (A) Dispersão: X versus Categoria observada (jitter no eixo Y)
+p_obs <- ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y, color = Y)) +
+  ggplot2::geom_jitter(height = 0.08, width = 0, alpha = 0.7, size = 2) +
+  ggplot2::labs(title = "Observações",
+       x = "Variável Independente (X)",
+       y = "Categoria observada") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "none")
+
+# (B) Curvas de probabilidade prevista por X
+p_prob <- ggplot2::ggplot(pred_long, ggplot2::aes(x = X, y = prob, color = categoria)) +
+  ggplot2::geom_line(linewidth = 1.2) +
+  ggplot2::labs(title = "Regressão Multinomial: Probabilidades preditas",
+       x = "Variável Independente (X)",
+       y = "Probabilidade") +
+  ggplot2::theme_minimal() +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(accuracy = 1))
+
+print(p_prob)
+```
+
+<br>
+
+### O que são modelos de regressão ordinal?
+
+-   Modelos de regressão ordinal são usados quando a variável resposta é categórica com mais de dois níveis ordenados.[@REF]
+
+-   Modelam a probabilidade acumulada de estar em ou abaixo de cada categoria, usando uma função de ligação logit, probit ou log-log.[@REF]
+
+-   Assumem a proporcionalidade dos coeficientes entre as categorias (*proportional odds*).[@REF]
+
+<br>
+
+### O que são modelos de regressão de Poisson?
+
+-   Modelos de regressão de Poisson são usados quando a variável resposta é uma contagem de eventos não negativos.[@REF]
+
+-   Assumem que $Y \sim Poisson(\mu)$, com $\mu = E[Y|X]$ relacionado aos preditores via função de ligação log.[@REF]
+
+-   A sobre-dispersão (variância maior que a média) pode exigir modelos alternativos como a regressão binomial negativa.[@REF]
+
+<br>
+
+```{r regressao-poisson, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão de Poisson."}
+# Reprodutibilidade
+set.seed(123)
+
+# Simulação de dados
+X <- rnorm(100, mean = 50, sd = 10)
+beta0 <- -2.5
+beta1 <- 0.05
+mu <- exp(beta0 + beta1 * X)
+Y <- rpois(100, lambda = mu)
+
+data <- data.frame(X = X, Y = Y)
+mod_pois <- glm(Y ~ X, data = data, family = poisson(link = "log"))
+
+# Diagnóstico rápido de sobredispersão
+phi <- sum(residuals(mod_pois, type = "pearson")^2) / mod_pois$df.residual
+
+# Predições no grid
+x_grid <- seq(min(data$X), max(data$X), length.out = 200)
+pred <- predict(mod_pois,
+                newdata = data.frame(X = x_grid),
+                type = "link", se.fit = TRUE)
+
+link_fit <- pred$fit
+link_se  <- pred$se.fit
+link_lwr <- link_fit - 1.96 * link_se
+link_upr <- link_fit + 1.96 * link_se
+
+mu_hat <- exp(link_fit)
+mu_lwr <- exp(link_lwr)
+mu_upr <- exp(link_upr)
+
+plot_df <- data.frame(
+  X = x_grid,
+  mu_hat = mu_hat,
+  mu_lwr = mu_lwr,
+  mu_upr = mu_upr
+)
+
+# Plot
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_jitter(width = 0, height = 0.1, alpha = 0.6) +
+  ggplot2::geom_ribbon(
+    data = plot_df,
+    ggplot2::aes(x = X, ymin = mu_lwr, ymax = mu_upr),
+    inherit.aes = FALSE,
+    alpha = 0.2
+  ) +
+  ggplot2::geom_line(
+    data = plot_df,
+    ggplot2::aes(x = X, y = mu_hat),
+    linewidth = 1
+  ) +
+  ggplot2::labs(
+    x = "Variável Independente (X)",
+    y = "Contagem esperada (E[Y|X])"
+  ) +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### O que são modelos de regressão binomial negativa?
+
+-   Modelos de regressão binomial negativa são usados para contagens superdispersas, onde a variância excede a média.[@REF]
+
+-   Introduzem um parâmetro de dispersão adicional para modelar a variabilidade extra.[@REF]
+
+-   A função de ligação log é comumente usada, semelhante à regressão de Poisson.[@REF]
+
+<br>
+
+### O que são modelos de regressão Gama?
+
+-   Modelos de regressão Gama são usados para variáveis resposta contínuas e positivas, frequentemente com distribuição assimétrica.[@REF]
+
+-   A função de ligação log é comumente usada para garantir predições positivas.[@REF]
+
+<br>
+
+### O que são modelos de regressão com efeitos mistos?
+
+-   Modelos de efeitos mistos incorporam efeitos fixos (coeficientes comuns a todos os indivíduos) e efeitos aleatórios (variações específicas de grupos ou indivíduos).[@REF]
+
+-   Usados para dados hierárquicos ou longitudinais, onde observações estão agrupadas.[@REF]
+
+-   Permitem modelar correlações intra-grupo e variabilidade entre grupos.[@REF]
+
+<br>
+
+### O que são modelos de regressão com efeitos mistos generalizados?
+
+-   Modelos de efeitos mistos generalizados (GLMM) estendem os modelos de efeitos mistos para variáveis resposta que seguem distribuições da família exponencial (ex.: binomial, Poisson).[@REF]
+
+-   Combinam a flexibilidade dos modelos lineares generalizados com a capacidade de modelar correlações e variabilidade entre grupos.[@REF]
+
+-   Usados para dados hierárquicos ou longitudinais com desfechos não normais.[@REF]
+
+<br>
+
+### O que são modelos de regressão ridge?
+
+-   Regressão ridge é um modelo linear regularizado que adiciona uma penalização L2 à soma dos quadrados dos coeficientes.[@REF]
+
+-   Ajuda a reduzir multicolinearidade e overfitting, encolhendo os coeficientes em direção a zero, mas nunca os tornando exatamente nulos.[@REF]
+
+-   O hiperparâmetro de regularização é $\lambda$, controlando a intensidade da penalização. Valores maiores de $\lambda$ resultam em maior encolhimento dos coeficientes.[@REF]
+
+<br>
+
+```{r regressao-ridge, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão ridge."}
+# simulate X
+set.seed(123)
+X <- seq(-10, 10, length.out = 100)
+Y <- 5 + 2 * X + rnorm(100, mean = 0, sd = 5)
+data <- data.frame(X, Y)
+
+# criar matriz de preditores com intercepto
+X_matrix <- model.matrix(~ X, data = data)
+
+# ajustar modelo de regressão ridge
+model <- glmnet::glmnet(X_matrix, data$Y, alpha = 0)
+
+# predições (usando lambda padrão)
+predicted_Y <- predict(model, newx = X_matrix, s = 0.01)
+
+# adicionar ao dataframe
+data$Y_pred <- as.numeric(predicted_Y)
+
+# plotar com ggplot
+ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
+  ggplot2::geom_point(color = "gray40") +
+  ggplot2::geom_line(ggplot2::aes(y = Y_pred), color = "blue", size = 1) +
+  ggplot2::labs(
+       x = "Variável Independente (X)",
+       y = "Variável Dependente (Y)") +
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+### O que são modelos de regressão LASSO?
+
+-   Regressão *Least Absolute Shrinkage and Selection Operator* (LASSO) utiliza penalização L1, que pode zerar coeficientes.[@REF]
+
+-   Além de reduzir *overfitting*, também realiza seleção automática de variáveis.[@REF]
+
+-   Enquanto a regressão ridge mantém todos os preditores, a LASSO pode excluir variáveis irrelevantes.[@REF]
+
+<br>
+
+## Efeitos de modelos de regressão
+
+<br>
+
+### O que é efeito fixo?
+
+- Efeito fixo é a relação média entre variáveis assumida como igual para todos os grupos ou indivíduos, representando o comportamento populacional esperado.[@REF]
+
+- Ele descreve tendências sistemáticas e reproduzíveis que não dependem de pertencer a um grupo específico.[@REF]
+
+- Em modelos estatísticos, corresponde aos parâmetros estimados globalmente a partir de todos os dados.[@REF]
+
+<br>
+
+### O que é efeito aleatório?
+
+- Efeito aleatório representa desvios específicos de grupos ou unidades em relação ao efeito fixo.[@REF]
+
+- Ele modela a variabilidade entre grupos, assumindo que esses desvios são amostras de uma distribuição comum.[@REF]
+
+- Não busca estimar cada grupo isoladamente, mas sim quantificar a variabilidade entre eles.[@REF]
+
+<br>
+
+### O que é efeito misto?
+
+- Um modelo de efeitos mistos combina efeitos fixos e aleatórios em uma única estrutura estatística.[@REF]
+
+- Ele permite estimar tendências globais ao mesmo tempo em que ajusta variações específicas por grupo.[@REF]
+
+- Essa combinação possibilita inferência correta mesmo na presença de heterogeneidade, evitando armadilhas como o Paradoxo de Simpson.[@REF]
+
+<br>
+
+```{r modelo-efeitos, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Efeitos fixos, aleatórios e mistos em dados simulados com paradoxo de Simpson. As linhas vermelhas representam os efeitos dentro dos grupos, enquanto as linhas cinza e preta representam os efeitos globais. O modelo misto (linhas coloridas) captura os efeitos dentro dos grupos."}
+# reprodutibilidade
+set.seed(123)
+
+# 1. Simulate grouped data
+n_groups <- 6
+n_per_group <- 50
+
+group_intercepts <- seq(0, 10, length.out = n_groups)
+group_slopes <- rep(0.8, n_groups)   # positive within-group effect
+
+data_list <- lapply(1:n_groups, function(g) {
+  x <- rnorm(n_per_group, mean = g * 1.5, sd = 0.7)
+  y <- group_intercepts[g] + group_slopes[g] * x + rnorm(n_per_group, sd = 1)
+  data.frame(
+    group = factor(g),
+    x = x,
+    y = y
+  )
+})
+
+data <- do.call(rbind, data_list)
+
+# 2. Fit models
+
+# Naive pooled linear model
+naive_lm <- lm(y ~ x, data = data)
+
+# Fixed effect (population-level)
+fixed_lm <- lm(y ~ x, data = data)
+
+# Mixed effects model
+mixed_lmm <- lme4::lmer(y ~ x + (x | group), data = data)
+
+# 3. Prediction grids
+
+# Global x grid (for naive & fixed)
+x_grid <- seq(min(data$x), max(data$x), length.out = 200)
+
+pred_naive <- data.frame(
+  x = x_grid,
+  y = predict(naive_lm, newdata = data.frame(x = x_grid))
+)
+
+pred_fixed <- data.frame(
+  x = x_grid,
+  y = predict(fixed_lm, newdata = data.frame(x = x_grid))
+)
+
+# Group-specific x grids (no extrapolation)
+pred_mixed <- data %>%
+  dplyr::group_by(group) %>%
+  dplyr::summarise(
+    x_min = min(x),
+    x_max = max(x),
+    .groups = "drop"
+  ) %>%
+  dplyr::rowwise() %>%
+  dplyr::do({
+    g <- .$group
+    x_seq <- seq(.$x_min, .$x_max, length.out = 100)
+    data.frame(
+      group = g,
+      x = x_seq,
+      y = predict(
+        mixed_lmm,
+        newdata = data.frame(x = x_seq, group = g)
+      )
+    )
+  })
+
+# 4. Plot
+
+ggplot2::ggplot(data, ggplot2::aes(x, y)) +
+  # Raw data (colored by group)
+  ggplot2::geom_point(ggplot2::aes(color = group), alpha = 0.55) +
+  # Group linear models (within-group trends)
+  ggplot2::geom_smooth(
+    ggplot2::aes(group = group, linetype = "Group linear model"),
+    method = "lm",
+    se = FALSE,
+    color = "red",
+    linewidth = 0.9,
+    fullrange = FALSE
+  ) +
+  # Naive pooled model
+  ggplot2::geom_line(
+    data = pred_naive,
+    ggplot2::aes(x, y, linetype = "Naive linear model (all data)"),
+    color = "gray40",
+    linewidth = 1.2
+  ) +
+  # Fixed effect
+  ggplot2::geom_line(
+    data = pred_fixed,
+    ggplot2::aes(x, y, linetype = "Fixed effect"),
+    color = "black",
+    linewidth = 1.2
+  ) +
+  # Random effects (mixed model predictions)
+  ggplot2::geom_line(
+    data = pred_mixed,
+    ggplot2::aes(x, y, group = group, color = group, linetype = "Random effect"),
+    linewidth = 1
+  ) +
+  # Legend control
+  ggplot2::scale_linetype_manual(
+    name = "Model component",
+    values = c(
+      "Fixed effect" = "solid",
+      "Group linear model" = "dashed",
+      "Naive linear model (all data)" = "solid",
+      "Random effect" = "solid"
+    )
+  ) +
+  ggplot2::labs(
+    title = "Simpson’s Paradox and Mixed Effects Models",
+    subtitle = "Within-group trends, pooled inference, and partial pooling",
+    x = "X",
+    y = "Y",
+    color = "Group"
+  ) +
+  ggplot2::theme_minimal(base_size = 13) +
+  ggplot2::theme(
+    legend.position = "right",
+    legend.title = ggplot2::element_text(face = "bold")
+  )
+```
+
+<br>
+
+### O que é efeito principal?
+
+-   .[@Bours2023]
+
+<br>
+
+### O que é efeito de interação?
+
+-   A interação (representada pelo símbolo \*) é o termo estatístico empregado para representar a heterogeneidade de um determinado efeito.[@Altman1996]
+
+-   .[@Bours2023]
+
+```{r efeito-interacao-direta, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Análise de efeito de interação (direta) entre grupos e tempo. Retas paralelas sugerem ausência de efeito de interação."}
+# Simulate data
+set.seed(123)  # For reproducibility
+n <- 5  # Number of observations
+
+# Create a dataframe with two time points and different offsets
+data <- data.frame(
+  group = rep(c("A", "B", "B'"), each = n * 2),
+  time = rep(c(1, 2), each = n),
+  response = c(
+    5 + rnorm(n, mean = 0, sd = 1),
+    # Group A at time 1
+    15 + rnorm(n, mean = 0, sd = 1),
+    # Group A at time 2
+    10 + rnorm(n, mean = 0, sd = 1),
+    # Group B' at time 1
+    20 + rnorm(n, mean = 0, sd = 1),
+    # Group B' at time 2
+    rnorm(n, mean = 0, sd = 1),
+    # Group B at time 1
+    rnorm(n, mean = 0, sd = 1)   # Group B at time 2
+  )
+)
+
+# add offset to group B at 2
+data$response[data$group == "B'" &
+                data$time == 1] <- data$response[data$group == "B" &
+                                                   data$time == 1]
+data$response[data$group == "B'" &
+                data$time == 2] <- data$response[data$group == "B" &
+                                                   data$time == 2] + 5
+
+# Calculate means for plotting
+means <- aggregate(response ~ group + time, data, mean)
+
+# Create the plot
+ggplot2::ggplot(means,
+                ggplot2::aes(
+                  x = time,
+                  y = response,
+                  color = group,
+                  group = group
+                )) +
+  ggplot2::geom_line(size = 1) +               # Draw lines for means
+  ggplot2::geom_point(size = 3) +              # Add points for means
+  ggplot2::labs(title = "", x = "Tempo", y = "Resposta") +
+  ggplot2::theme_minimal() +
+  ggplot2::scale_color_manual(values = c("black", "gray", "black")) +  # Custom colors
+  ggplot2::theme(legend.title = ggplot2::element_blank()) +
+  # minumum theme
+  ggplot2::theme(
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.background = ggplot2::element_blank(),
+    axis.line = ggplot2::element_line(colour = "black")
+  ) +
+  # move legent to the top left corner
+  ggplot2::theme(legend.position = c(0, 1),
+                 legend.justification = c(0, 1)) +
+  # annotate plot with "Efeito esperado sem interação"
+  ggplot2::annotate(
+    "text",
+    x = 2,
+    y = mean(data$response[data$group == "B" &
+                             data$time == 2]),
+    label = "Sem efeito de \n interação",
+    size = 3,
+    color = "gray",
+    hjust = -0.1,
+    vjust = 0.5
+  ) +
+  # annotate plot with "Efeito esperado com interação"
+  ggplot2::annotate(
+    "text",
+    x = 2,
+    y = mean(data$response[data$group == "B'" &
+                             data$time == 2]),
+    label = "Com efeito de \n interação",
+    size = 3,
+    color = "black",
+    hjust = -0.1,
+    vjust = 0.5
+  ) +
+  # draw dashed arrow of effect from B' to B at time 2
+  ggplot2::geom_segment(
+    ggplot2::aes(
+      x = 2,
+      xend = 2,
+      y = mean(data$response[data$group == "B'" &
+                               data$time == 2]),
+      yend = mean(data$response[data$group == "B" &
+                                  data$time == 2])
+    ),
+    arrow = ggplot2::arrow(
+      type = "open",
+      length = grid::unit(0.1, "inches"),
+      ends = "both",
+      angle = 20
+    ),
+    color = "black",
+    linetype = "dashed"
+  ) +
+  # annotate plot with "Efeito de interação"
+  ggplot2::annotate(
+    "text",
+    x = 2,
+    y = mean(data$response[data$group != "A" &
+                             data$time == 2]),
+    label = "Tamanho de efeito \n estimado",
+    size = 3,
+    color = "black",
+    hjust = -0.1,
+    vjust = 0.5
+  ) +
+  # augment x axis margins to make room for annotations
+  ggplot2::scale_x_continuous(
+    breaks = c(1, 2),
+    labels = c("Antes", "Depois"),
+    expand = c(0.3, 0.3)
+  )
+```
+
+<br>
+
+```{r efeito-interacao-inversa, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Análise de efeito de interação (inversa) entre grupos e tempo. Retas paralelas sugerem ausência de efeito de interação."}
+# Simulate data
+set.seed(123)  # For reproducibility
+n <- 5  # Number of observations
+
+# Create a dataframe with two time points and different offsets
+data <- data.frame(
+  group = rep(c("A", "B", "B'"), each = n * 2),
+  time = rep(c(1, 2), each = n),
+  response = c(
+    5 + rnorm(n, mean = 0, sd = 1),
+    # Group A at time 1
+    15 + rnorm(n, mean = 0, sd = 1),
+    # Group A at time 2
+    10 + rnorm(n, mean = 0, sd = 1),
+    # Group B' at time 1
+    20 + rnorm(n, mean = 0, sd = 1),
+    # Group B' at time 2
+    rnorm(n, mean = 0, sd = 1),
+    # Group B at time 1
+    rnorm(n, mean = 0, sd = 1)   # Group B at time 2
+  )
+)
+
+# add offset to group B at 2
+data$response[data$group == "B'" &
+                data$time == 1] <- data$response[data$group == "B" &
+                                                   data$time == 1]
+data$response[data$group == "B'" &
+                data$time == 2] <- data$response[data$group == "B" &
+                                                   data$time == 2] - 5
+
+# Calculate means for plotting
+means <- aggregate(response ~ group + time, data, mean)
+
+# Create the plot
+ggplot2::ggplot(means,
+                ggplot2::aes(
+                  x = time,
+                  y = response,
+                  color = group,
+                  group = group
+                )) +
+  ggplot2::geom_line(size = 1) +               # Draw lines for means
+  ggplot2::geom_point(size = 3) +              # Add points for means
+  ggplot2::labs(title = "", x = "Tempo", y = "Resposta") +
+  ggplot2::theme_minimal() +
+  ggplot2::scale_color_manual(values = c("black", "gray", "black")) +  # Custom colors
+  ggplot2::theme(legend.title = ggplot2::element_blank()) +
+  # minumum theme
+  ggplot2::theme(
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.background = ggplot2::element_blank(),
+    axis.line = ggplot2::element_line(colour = "black")
+  ) +
+  # move legent to the top left corner
+  ggplot2::theme(legend.position = c(0, 1),
+                 legend.justification = c(0, 1)) +
+  # annotate plot with "Efeito esperado sem interação"
+  ggplot2::annotate(
+    "text",
+    x = 2,
+    y = mean(data$response[data$group == "B" &
+                             data$time == 2]),
+    label = "Sem efeito de \n interação",
+    size = 3,
+    color = "gray",
+    hjust = -0.1,
+    vjust = 0.5
+  ) +
+  # annotate plot with "Efeito esperado com interação"
+  ggplot2::annotate(
+    "text",
+    x = 2,
+    y = mean(data$response[data$group == "B'" &
+                             data$time == 2]),
+    label = "Com efeito de \n interação",
+    size = 3,
+    color = "black",
+    hjust = -0.1,
+    vjust = 0.5
+  ) +
+  # draw dashed arrow of effect from B' to B at time 2
+  ggplot2::geom_segment(
+    ggplot2::aes(
+      x = 2,
+      xend = 2,
+      y = mean(data$response[data$group == "B'" &
+                               data$time == 2]),
+      yend = mean(data$response[data$group == "B" &
+                                  data$time == 2])
+    ),
+    arrow = ggplot2::arrow(
+      type = "open",
+      length = grid::unit(0.1, "inches"),
+      ends = "both",
+      angle = 20
+    ),
+    color = "black",
+    linetype = "dashed"
+  ) +
+  # annotate plot with "Efeito de interação"
+  ggplot2::annotate(
+    "text",
+    x = 2,
+    y = mean(data$response[data$group != "A" &
+                             data$time == 2]),
+    label = "Tamanho de efeito \n estimado",
+    size = 3,
+    color = "black",
+    hjust = -0.1,
+    vjust = 0.5
+  ) +
+  # augment x axis margins to make room for annotations
+  ggplot2::scale_x_continuous(
+    breaks = c(1, 2),
+    labels = c("Antes", "Depois"),
+    expand = c(0.3, 0.3)
+  )
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *nlme*[@nlme] fornece a função [*nlme*](https://www.rdocumentation.org/packages/nlme/versions/3.1-163/topics/nlme) para ajustar um modelo de regressão misto não linear.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *mmrm*[@mmrm] fornece a função [*mmrm*](https://rdrr.io/cran/mmrm/man/mmrm.html) para ajuste de um modelo de regressão misto linear.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *emmeans*[@emmeans] fornece a função [*emmeans*](https://www.rdocumentation.org/packages/emmeans/versions/1.8.7/topics/emmeans) para calcular as médias marginais dos fatores e suas combinações de um modelo de regressão misto linear.
+:::
+
+<br>
+
+### O que é efeito de mediação?
+
+-   .[@Baron1986]
+
+-   .[@Bours2023]
+
+<br>
+
+### O que é efeito de modificação?
+
+-   .[@Bours2023]
+
+<br>
+
+## Preparação de variáveis
+
+<br>
+
+### Como preparar as variáveis categóricas para análise de regressão?
+
+-   Variáveis fictícias (*dummy*) compreendem variáveis criadas para introduzir, nos modelos de regressão, informações contidas em outras variáveis que não podem ser medidas em escala numérica.[@suits1957]
+
+-   Variáveis categóricas nominais, com 2 ou mais níveis, devem ser subdivididas em variáveis fictícias dicotômicas para ser usada em modelos de regressão.[@Healy1995]
+
+-   Cada nível da variável categórica nominal será convertido em uma nova variável fictícias dicotômica, tal que a nova variável dicotômica assume valor 1 para a presença do nível correspondente e 0 em qualquer outro caso.[@Healy1995]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *fastDummies*[@fastDummies] fornece a função [*dummy_cols*](https://www.rdocumentation.org/packages/fastDummies/versions/1.7.3/topics/dummy_columns) para preparar as variáveis categóricas fictícias para análise de regressão.
+:::
+
+<br>
+
+### Por que é comum escolher a categoria mais frequente como referência em modelos epidemiológicos?
+
+-   Maior estabilidade estatística: a categoria mais frequente costuma gerar estimativas mais estáveis, com menor erro padrão nos coeficientes das demais categorias.[@REF]
+
+-   A escolha da referência não altera o ajuste nem o valor predito pelo modelo — apenas muda o ponto de comparação.[@REF]
+
+<br>
+
+## Colinearidade
+
+<br>
+
+### O que é colinearidade?
+
+-   Colinearidade representa a correlação entre duas variáveis.[@Kim2019]
+
+-   Colinearidade exata indica uma relação linear perfeita entre duas variáveis.[@Kim2019]
+
+<br>
+
+### Como identificar colinearidade na matriz de correlação?
+
+-   A colinearidade pode ser identificada na matriz de correlação por meio da análise dos coeficientes de correlação entre as variáveis.[@Kim2019]
+
+-   Valores de correlação próximos de $1$ ou $-1$ indicam colinearidade entre as variáveis.[@Kim2019]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *GGally*[@GGally] fornece a função [*ggally_cor*](https://www.rdocumentation.org/packages/GGally/versions/2.2.1/topics/ggally_cor) para estimar a correlação bivariada e exibir o coeficiente de correlação e o P-valor na matriz de correlação.[@GGally]
+:::
+
+<br>
+
+## Multicolinearidade
+
+<br>
+
+### O que é multicolinearidade?
+
+-   Multicolinearidade representa a intercorrelação entre as variáveis independentes (explanatórias) de um modelo.[@Kim2019]
+
+<br>
+
+### Como diagnosticar multicolinearidade de forma quantitativa?
+
+-   Verifique a existência de multicolinearidade entre as variáveis candidatas.[@Sun1996]
+
+-   O Coeficiente de determinação ($R^2$) é uma medida de quão bem as variáveis independentes explicam a variabilidade da variável dependente.[@Kim2019]
+
+- Valores $R^2$ próximos a 1 indicam que as variáveis independentes estão fortemente correlacionadas entre si, o que pode indicar multicolinearidade.[@Kim2019]
+
+-   O Fator de Inflação da Variância (*variance inflation factor*, VIF) é uma medida que quantifica o quanto a variância de um coeficiente de regressão é inflacionada devido à multicolinearidade.[@Kim2019]
+
+- Valores de VIF maiores que 10 são frequentemente considerados indicativos de multicolinearidade significativa.[@Kim2019]
+
+-   O recíproco da VIF é chamado de Tolerância, que mede a proporção da variância de uma variável independente que não é explicada pelas outras variáveis independentes.[@Kim2019]
+
+- Valores baixos de Tolerância (geralmente abaixo de 0.1) indicam multicolinearidade.[@Kim2019]
+
+-   O número de condições (*Condition Number*) é uma medida que avalia a estabilidade numérica de um modelo de regressão.[@Kim2019]
+
+- Valores altos de número de condições (entre 10 de 30) indicam multicolinearidade, e valores maiores que 30 indicam forte multicolinearidade.[@Kim2019]
+
+<br>
+
+```{r multicolinearidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Multicolinearidade entre variáveis candidatas em modelos de regressão multivariável."}
+# Set the seed for reproducibility
+set.seed(123)
+
+# Generate an independent variable
+X1 <- rnorm(100, mean = 50, sd = 10)
+
+# Generate a second variable that is highly correlated with X1
+X2 <- 0.8 * X1 + rnorm(100, mean = 0, sd = 5)
+
+# Generate a third variable that is not correlated with X1 or X2
+X3 <- rnorm(100, mean = 30, sd = 5)
+
+# Combine the variables into a dataframe
+data <- data.frame(X1, X2, X3)
+
+# Create the customized grid plot
+GGally::ggpairs(
+  data, 
+  lower = list(continuous = GGally::wrap("smooth", method = "lm")),
+  diag = list(continuous = "densityDiag"),
+  upper = list(continuous = "cor")
+) +
+  ggplot2::theme(
+    panel.background = ggplot2::element_blank(),
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    axis.line = ggplot2::element_line(color = "black")
+  )
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *GGally*[@GGally] fornece a função [*ggpairs*](https://www.rdocumentation.org/packages/GGally/versions/2.2.1/topics/ggpairs) para criar uma matriz gráfica de correlações bivariadas.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/packages/car/versions/3.1-3/topics/vif) para calcular o fator de inflação da variância (VIF).
+:::
+
+<br>
+
+### O que fazer em caso de multicolinearidade elevada?
+
+-   Verifique a transformação (codificação) de variáveis numéricas em categóricas.[@Kim2019]
+
+-   Aumente o tamanho da amostra, se possível, para reduzir a multicolinearidade.[@Kim2019]
+
+-   Combine níveis de variáveis categóricas com baixa frequência de ocorrência.[@Kim2019]
+
+-   Combine variáveis numéricas altamente correlacionadas em uma única variável composta, como a média ou soma das variáveis.[@Kim2019]
+
+-   Considere a exclusão de variáveis altamente correlacionadas do modelo, especialmente se elas não forem essenciais para a análise.[@Kim2019]
+
+-   Use técnicas de seleção de variáveis, como seleção passo a passo, para identificar e remover variáveis redundantes.[@Kim2019]
+
+-   Use técnicas de regularização, como regressão ridge ou LASSO, que podem lidar com multicolinearidade ao penalizar coeficientes de regressão.[@Kim2019]
+
+<br>
+
+## Redução de dimensionalidade
+
+<br>
+
+### Correlação bivariada pode ser usada para seleção de variáveis em modelos de regressão multivariável?
+
+-   Seleção bivariada de variáveis consiste na aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável.[@Dales1978; @Sun1996; @heinze2016]
+
+- Seleção bivariada de variáveis é um dos erros mais comuns na literatura.[@Dales1978; @Sun1996; @heinze2016]
+
+-   A seleção bivariada de variáveis torna o modelo mais suscetível a otimismo no ajuste se as variáveis de confundimento não são adequadamente controladas.[@Dales1978; @Sun1996]
+
+<br>
+
+### Variáveis sem significância estatística devem ser excluídas do modelo final?
+
+-   Eliminar uma variável de um modelo significa anular o seu coeficiente de regressão ($\beta = 0$), mesmo que o valor estimado pelos dados seja outro.[@heinze2016]
+
+- Desta forma, os resultados se afastam de uma solução de máxima verossimilhança (que tem fundamento teórico) e o modelo resultante é intencionalmente subótimo.[@heinze2016]
+
+-   Os coeficientes de regressão geralmente dependem do conjunto de variáveis do modelo e, portanto, podem mudam de valor ("mudança na estimativa" positiva ou negativa) se uma (ou mais) variável(is) for(em) eliminada(s) do modelo.[@heinze2016]
+
+<br>
+
+### Por que métodos de regressão gradual não são recomendados para seleção de variáveis?
+
+-   Métodos diferentes de regressão gradual podem produzir diferentes seleções de variáveis de um mesmo banco de dados.[@Healy1995]
+
+-   Nenhum método de regressão gradual garante a seleção ótima de variáveis de um banco de dados.[@Healy1995]
+
+-   As regras de término da regressão baseadas em P-valor tendem a ser arbitrárias.[@Healy1995]
+
+<br>
+
+### O que pode ser feito para reduzir o número de variáveis candidatas?
+
+-   Em caso de uma proporção baixa entre o número de participantes e de variáveis, use o conhecimento prévio da literatura para selecionar um pequeno conjunto de variáveis candidatas.[@Sun1996]
+
+-   Colapse categorias com contagem nula (células com valor igual a 0) de variáveis candidatas.[@Sun1996]
+
+-   Use simulações de dados para identificar qual(is) variável(is) está(ão) causando problemas de convergência do ajuste do modelo.[@Sun1996]
+
+-   A eliminação retroativa tem sido recomendada como a abordagem de regressão gradual mais confiável entre aquelas que podem ser facilmente alcançadas com programas de computador.[@heinze2016]
+
+<br>
+
+### Quando devemos forçar uma variável no modelo?
+
+-   Sempre que houver base teórica ou evidência prévia forte, ou se for a variável de exposição principal.[@Greenland1989]
+
+<br>
+
+## Seleção de variáveis em regressão
+
+<br>
+
+### O que é seleção de variáveis em regressão?
+
+-   Seleção de variáveis em regressão consiste em identificar, dentre um conjunto de preditores disponíveis, quais devem ser incluídos no modelo para otimizar o equilíbrio entre ajuste e parcimônia.[@lindsey2011]
+
+<br>
+
+### Quais são os principais critérios de informação usados na seleção de variáveis?
+
+-   Critérios de informação avaliam o ajuste do modelo penalizando a complexidade (número de preditores), ajudando a evitar *overfitting*.[@lindsey2011]
+
+-   $R^2_{adj}$ \@ref(eq:R2-ajustado) penaliza o $R^2$ pelo número de preditores, reduzindo o viés em modelos com muitas variáveis, onde $n$ é o tamanho amostral, $k$ o número de preditores, $RSS$ a soma dos quadrados dos resíduos e $SST$ a soma total dos quadrados.
+
+<br>
+
+\begin{equation}
+(\#eq:R2-ajustado)
+R^2_{adj} = 1 - \frac{(n-1)}{(n - k - 1)} \cdot \frac{RSS}{SST}
+\end{equation}
+
+<br>
+
+-   $AIC$ (Akaike Information Criterion) \@ref(eq:AIC) mede o equilíbrio entre ajuste e complexidade:
+
+<br>
+
+\begin{equation}
+(\#eq:AIC)
+AIC = n \cdot \log\left(\frac{RSS}{n}\right) + 2k + n + n \cdot \log(2\pi)
+\end{equation}
+
+<br>
+
+-   $AICc$ \@ref(eq:AICc) é uma versão corrigida do AIC, preferida para amostras pequenas:
+
+<br>
+
+\begin{equation}
+(\#eq:AICc)
+AIC_c = AIC + \frac{2(k+2)(k+3)}{n - (k + 2) - 1}
+\end{equation}
+
+<br>
+
+-   $C_p$ de Mallows compara o erro do modelo reduzido com o modelo completo, idealmente satisfazendo $C_p \approx p$, onde $m$ é o número total de preditores disponíveis, $p$ o número de parâmetros (incluindo o intercepto), e $RSS_{FULL}$ o erro quadrático residual do modelo completo:
+
+<br>
+
+\begin{equation}
+(\#eq:Cp)
+C_p = (n - m - 1)\frac{RSS}{RSS_{FULL}} - (n - 2p)
+\end{equation}
+
+<br>
+
+-   $BIC$ (Bayesian Information Criterion) \@ref(eq:BIC) penaliza fortemente modelos complexos:
+
+<br>
+
+\begin{equation}
+(\#eq:BIC)
+BIC = n \cdot \log\left(\frac{RSS}{n}\right) + k \cdot \log(n) + n + n \cdot \log(2\pi)
+\end{equation}
+
+<br>
+
+### Quais algoritmos podem ser usados para seleção automática?
+
+-   Seleção progressiva: começa com o modelo nulo e adiciona, a cada iteração, a variável que mais melhora o critério escolhido. O processo para quando nenhuma nova variável melhora o modelo.[@lindsey2011]
+
+-   Eliminação retrógrada: parte do modelo completo e remove, a cada iteração, a variável cuja exclusão mais melhora o critério. O processo para quando nenhuma remoção melhora o ajuste.[@lindsey2011]
+
+-   *Leaps-and-bounds*: método exato que examina apenas uma fração dos $2^m$ modelos possíveis, determinando os melhores subconjuntos para cada tamanho de preditor (usando os critérios AIC, BIC, AICc, R² ajustado e Cp).[@lindsey2011]
+
+-   Esses métodos podem divergir em presença de alta multicolinearidade ou amostras pequenas, e devem ser acompanhados de diagnóstico de resíduos e validação cruzada.[@lindsey2011]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *leaps*[@leaps] fornece a função [*regsubsets*](https://www.rdocumentation.org/packages/leaps/versions/3.1/topics/regsubsets) para realizar os métodos de seleção de variáveis.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *olsrr*[@olsrr] fornece a função [*ols_step_all_possible*](https://www.rdocumentation.org/packages/olsrr/versions/0.6.0/topics/ols_step_all_possible) para testar todos os subconjuntos de potenciais preditores de uma regressão.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *olsrr*[@olsrr] fornece a função [*ols_step_best_subset*](https://www.rdocumentation.org/packages/olsrr/versions/0.6.0/topics/ols_step_best_subset) para selecionar o melhor de todos os subconjuntos de potenciais preditores de uma regressão, de acordo com critérios objetivos.
+:::
+
+<br>
+
+## Desempenho e estabilidade de modelos
+
+<br>
+
+### Como avaliar o desempenho dos modelos?
+
+- Pela área sob a curva ROC em conjunto com o otimismo (diferença entre AUC aparente e validada).[@vanderploeg2014]
+
+- O desempenho melhora com maior tamanho amostral, mas de forma desigual entre técnicas.[@vanderploeg2014]
+
+<br>
+
+### Qual modelo alcança estabilidade mais rapidamente?
+
+- Regressão logística é o mais estável e menos *data hungry*.[@vanderploeg2014]
+
+- Árvore de decisão para classificação e regressão estabiliza rápido, mas em nível de desempenho baixo.[@vanderploeg2014]
+
+- Máquina de vetores de suporte, redes neurais e *random forests* apresentam instabilidade mesmo em amostras muito grandes.[@vanderploeg2014]
+
+<br>
+
+## Comparação de modelos
+
+<br>
+
+### Como comparar modelos estatísticos?
+
+-   .[@REF]
+
+<br>
+
+### Como comparar modelos de aprendizagem de máquina?
+
+-   .[@REF]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *correctR*[@correctR] fornece funções para comparar o desempenho e a qualidade do ajuste de diversos modelos de aprendizagem de máquina em amostras correlacionadas.
+:::
+
+<br>
+
+## Avaliação de modelos
+
+<br>
+
+### Como avaliar a qualidade de ajuste de um modelo?
+
+-   Coeficiente de determinação ($R^2$) \@ref(eq:r2) e $R^2_{ajustado}$ \@ref(eq:r2adj): Medem a proporção da variabilidade dos dados explicada pelo modelo. O $R^2$ ajustado penaliza a inclusão de variáveis irrelevantes.[@Kim2019]
+
+<br>
+
+\begin{equation}
+(\#eq:r2)
+R^2 = 1 - \frac{SS_{res}}{SS_{tot}}
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:r2adj)
+R^2_{ajustado} = 1 - (1 - R^2)\frac{n - 1}{n - p - 1}
+\end{equation}
+
+<br>
+
+```{r r2-ajuste, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Exemplos de ajuste de modelos de regressão linear simples ($y \\sim x$) com diferentes níveis de ruído ($R^2$). Cada painel mostra a reta ajustada (cinza) e os valores observados (pontos). Os valores anotados indicam o coeficiente angular simulado ($\\beta$), o coeficiente angular estimado ($\\hat{\\beta}$) e o $R^2$ observado.", fig.width=8, fig.height=8, dpi=300, out.width="100%"}
+# Reprodutibilidade
+base::set.seed(123)
+
+# Parâmetros
+n          <- 150
+beta_true  <- 1.0                  # Inclinação verdadeira (simulada)
+r2_targets <- c(0.85, 0.50, 0.15)  # Níveis com ruído
+
+# Gera x comum e sinal verdadeiro (sem intercepto)
+x   <- stats::rnorm(n, mean = 0, sd = 1)
+y_s <- beta_true * x
+var_signal <- stats::var(y_s)
+
+# Função para adicionar ruído baseado no R² alvo (usa variância amostral do sinal)
+build_df <- function(R2_target) {
+  se <- sqrt((1 - R2_target) / R2_target * var_signal)
+  y  <- y_s + stats::rnorm(n, mean = 0, sd = se)
+  data.frame(x = x, y = y, grupo = sprintf("ruido_%.2f", R2_target), alvo = R2_target)
+}
+
+# Data frames com ruído
+dfs_ruido <- lapply(r2_targets, build_df)
+df_ruido  <- base::do.call(base::rbind, dfs_ruido)
+
+# Data frame perfeito (sem ruído)
+df_perfeito <- data.frame(x = x, y = y_s, grupo = "perfeito", alvo = 1.00)
+
+# Combina e define ordem dos painéis (perfeito primeiro)
+layout_df <- base::rbind(df_perfeito, df_ruido)
+layout_df$grupo <- factor(layout_df$grupo, levels = c("perfeito", sprintf("ruido_%.2f", r2_targets)))
+
+# Ajusta lm(y ~ x) por grupo para anotar β̂ e R² observado
+obs <- do.call(rbind, lapply(split(layout_df, layout_df$grupo), function(dd) {
+  fit <- stats::lm(y ~ x, data = dd)
+  R2  <- summary(fit)$r.squared
+  data.frame(
+    grupo    = dd$grupo[1],
+    beta_hat = unname(coef(fit)[["x"]]),
+    R2_obs   = R2
+  )
+}))
+
+# Rótulos dos painéis: β simulado | β̂ | R²
+make_label <- function(g, b_true, b_hat, r2) {
+  titulo <- if (g == "perfeito") "Perfeita (sem ruído)" else "Com ruído"
+  sprintf("%s\nβ simulado = %.2f | β̂ = %.2f | R² = %.2f",
+          titulo, b_true, b_hat, r2)
+}
+
+obs$label <- mapply(make_label, as.character(obs$grupo),
+                    MoreArgs = list(b_true = beta_true),
+                    b_hat = obs$beta_hat, r2 = obs$R2_obs)
+
+# Junta o rótulo ao DF para facetar
+layout_df <- merge(layout_df, obs[, c("grupo","label")], by = "grupo", all.x = TRUE)
+
+# reorder by R2
+layout_df$label <- factor(layout_df$label, levels = obs$label[order(-obs$R2_obs)])
+
+# Plot (monocromático e em 2x2)
+ggplot2::ggplot(layout_df, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(alpha = 0.7, color = "black") +
+  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "black") +
+  ggplot2::facet_wrap(~ label, ncol = 2) +
+  ggplot2::labs(x = "X", y = "Y") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    axis.line        = ggplot2::element_line(color = "black"),
+    aspect.ratio     = 1,
+    panel.spacing    = grid::unit(0.6, "lines"),
+    strip.text       = ggplot2::element_text(face = "bold"),
+    plot.margin      = ggplot2::margin(10, 5, 10, 5)
+  )
+```
+
+<br>
+
+-   Erro quadrático médio ($RMSE$) \@ref(eq:rmse): Mede a média dos erros ao quadrado entre os valores observados e os valores previstos pelo modelo, onde $y_i$ são os valores observados, $\hat{y}_i$ são os valores previstos pelo modelo, e $n$ é o número de observações. Valores menores indicam melhor ajuste.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:rmse)
+RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+\end{equation}
+
+<br>
+
+-   Critério de Informação Akaike ($AIC$) \@ref(eq:aic) e Critério de Informação Bayesiano ($BIC$) \@ref(eq:bic): Avaliam o ajuste do modelo penalizando a complexidade (número de parâmetros), onde $k$ é o número de parâmetros do modelo, $L$ é a verossimilhança máxima do modelo, e $n$ é o tamanho da amostra. Modelos com menor AIC ou BIC são preferíveis.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:aic)
+AIC = 2k - 2\ln(L)
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:bic)
+BIC = \ln(n)k - 2\ln(L)
+\end{equation}
+
+<br>
+
+-   Desvio residual ($\sigma$): Mede a variabilidade dos resíduos do modelo. Valores menores indicam melhor ajuste.[@REF]
+
+<br>
+
+```{r metricas-ajuste, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, results = "asis"}
+# Reprodutibilidade
+set.seed(123)
+
+# Modelo
+dados <- data.frame(x = rnorm(100, 5, 2),
+                    y = 3 + 1.5 * rnorm(100, 5, 2) + rnorm(100))
+modelo <- lm(y ~ x, data = dados)
+
+# Resultado
+resultado <- performance::model_performance(modelo)
+
+# Reestruturando para exibir como "Métrica | Valor"
+resultado_df <- as.data.frame(t(resultado)) # transpor para linhas
+resultado_df$Métrica <- rownames(resultado_df)
+colnames(resultado_df)[1] <- "Valor"
+rownames(resultado_df) <- NULL
+resultado_df <- resultado_df[, c("Métrica", "Valor")]
+
+# Formatando os valores numéricos
+resultado_df$Valor <- formatC(
+  resultado_df$Valor,
+  format = "f",
+  digits = 3,
+  big.mark = ",",
+  decimal.mark = "."
+)
+
+resultado_df$Métrica <- dplyr::recode(
+  resultado_df$Métrica,
+  AIC = "AIC",
+  AICc = "AIC corrigido",
+  BIC = "BIC",
+  R2 = "$R^2$",
+  R2_adjusted = "$R^2_{ajustado}$",
+  RMSE = "Erro quadrático médio (RMSE)",
+  Sigma = "Desvio residual (sigma)"
+)
+
+# Exibindo com estilo avançado
+knitr::kable(
+  resultado_df,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE,
+  caption = "Métricas de desempenho do modelo de regressão linear."
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(nrow(resultado_df), extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *performance*[@performance] fornece a função [*model_performance*](https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/model_performance) para calcular as métricas de ajuste da regressão adequadas ao modelo pré-especificado.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *performance*[@performance] fornece a função [*compare_performance*](https://www.rdocumentation.org/packages/performance/versions/0.10.4/topics/compare_performance) para comparar o desempenho e a qualidade do ajuste de diversos modelos de regressão pré-especificados.
+:::
+
+<br>
+
+## Validação de modelos
+
+<br>
+
+### Como validar modelos estatísticos?
+
+-   .[@REF]
+
+<br>
+
+## Calibração de modelos
+
+<br>
+
+### Como calibrar modelos estatísticos?
+
+-   .[@REF]
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>
