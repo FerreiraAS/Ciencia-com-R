@@ -73,7 +73,7 @@ O pacote *infer*[@infer] fornece a função [*calculate*](https://www.rdocumenta
 
 - Definir claramente os problemas e os objetivos da pesquisa são o ponto de partida de todos os estudos científicos.[@van2022a]
 
-- Além do papel técnico, os testes de hipótese carregam uma dimensão interpretativa que molda como os pesquisadores comunicam descobertas.[@uyguntunç2023]
+- Além do papel técnico, os testes de hipótese carregam uma dimensão interpretativa que molda como os pesquisadores comunicam descobertas.[@uyguntunc2023]
 
 <br>
 
@@ -139,7 +139,7 @@ O pacote *infer*[@infer] fornece a função [*calculate*](https://www.rdocumenta
 
 <br>
 
-```{r tipos-testes-hipoteses, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de diferentes tipos de teste de hipóteses: superioridade, equivalência (TOST) e não-inferioridade. As áreas coloridas indicam as regiões de decisão para cada teste, enquanto as linhas verticais representam os limites críticos (efeito nulo, SESOI/margem de equivalência e margem de não-inferioridade)."}
+```{r tipos-testes-hipoteses, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Representação gráfica de diferentes tipos de teste de hipóteses: superioridade, equivalência (TOST) e não-inferioridade. As áreas coloridas indicam as regiões de decisão para cada teste, enquanto as linhas verticais representam os limites críticos."}
 # Parâmetros
 delta <- 0.8      # SESOI / margem de equivalência
 delta_NI <- -0.8  # margem de não-inferioridade
@@ -587,7 +587,7 @@ IC = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}
 
 <br>
 
-### Intervalos de confiança e a lógica frequentista
+### O que é raciocínio de longo prazo?
 
 - No paradigma frequentista, a probabilidade é interpretada como uma frequência relativa observável no longo prazo, associada a um processo repetível.[@neyman1937]
 
@@ -723,7 +723,7 @@ p_ic / p_dist+
 
 <br>
 
-### O que um intervalo de confiança não representa
+### O que um intervalo de confiança não representa?
 
 - Um intervalo de confiança não deve ser interpretado como a probabilidade de que o parâmetro esteja contido naquele intervalo específico.[@greenland2016]
 
@@ -733,7 +733,7 @@ p_ic / p_dist+
 
 <br>
 
-### Relação entre intervalos de confiança e testes de hipóteses
+### Qual a relação entre intervalos de confiança e testes de hipóteses?
 
 - Intervalos de confiança e testes de hipótese frequentistas são derivados do mesmo modelo probabilístico subjacente e utilizam as mesmas suposições estatísticas.[@cumming2005]
 
@@ -745,7 +745,7 @@ p_ic / p_dist+
 
 <br>
 
-### Por que intervalos de confiança são centrais na inferência científica
+### Por que intervalos de confiança são centrais na inferência científica?
 
 - Intervalos de confiança permitem avaliar simultaneamente a magnitude do efeito e a incerteza associada à sua estimativa, na mesma unidade de medida da variável de interesse.[@cumming2005]
 
@@ -825,7 +825,7 @@ O pacote *stats*[@stats] fornece a função [*p.adjust*](https://www.rdocumentat
 
 <br>
 
-### O que são resultados "positivos" e "negativos" (inconclusivos) em teste de hipótese?
+### O que são resultados "positivos" e "negativos" em teste de hipótese?
 
 - Resultados "positivos" compreendem um P-valor dentro da zona crítica estatisticamente significativa (ex.: $P<0,05$ ou outro ponto de corte).[@greenhalgh1997a]
 
@@ -833,7 +833,7 @@ O pacote *stats*[@stats] fornece a função [*p.adjust*](https://www.rdocumentat
 
 - Resultados "negativos" ou inconclusivos compreendem um P-valor fora da zona crítica estatisticamente significativa (ex.: $P \geq 0,05$ ou outro ponto de corte).[@greenhalgh1997a]
 
-- Resultados "negativos" sugerem que os autores não rejeitem a hipótese nula ($H_{0}$) porque o efeito observado é nulo (logo, "negativo"), ou porque o estudo não possui poder suficiente para detectá-lo, não permitindo afirmar a hipótese científica (logo, inconclusivo).[@greenhalgh1997a]
+- Resultados "negativos" sugerem que os autores não rejeitem a hipótese nula ($H_{0}$) porque o efeito observado é nulo (negativo) ou o estudo não possui poder suficiente para detectá-lo, não permitindo afirmar a hipótese científica (inconclusivo).[@greenhalgh1997a]
 
 <br>
 
@@ -853,9 +853,9 @@ O pacote *stats*[@stats] fornece a função [*p.adjust*](https://www.rdocumentat
 
 - Geralmente é razoável aceitar uma nova conclusão apenas quando há dados a seu favor ('resultados positivos'). Também é razoável questionar se apenas a ausência de dados a seu favor ("resultados negativos") justifica suficientemente a rejeição de tal conclusão.[@altman1995]
 
-- Testes de hipótese tendem a reduzir a incerteza científica a decisões docotômicas.[@uyguntunç2023]
+- Testes de hipótese tendem a reduzir a incerteza científica a decisões docotômicas.[@uyguntunc2023]
 
-- Essa simplificação possui implicações epistemológicas importantes: os testes de hipótese produzem não apenas juízos empíricos, mas também atos pragmáticos que comunicam graus de confiança e orientam ações.[@uyguntunç2023]
+- Essa simplificação possui implicações epistemológicas importantes: os testes de hipótese produzem não apenas juízos empíricos, mas também atos pragmáticos que comunicam graus de confiança e orientam ações.[@uyguntunc2023]
 
 <br>
 

@@ -48,6 +48,12 @@ texto <- paste0('
   Tome decisões informadas, evite armadilhas e destaque-se em sua pesquisa científica com \"Ciência com R\". Os insights profundos do Dr. Arthur de Sá Ferreira permitirão que você transforme seus dados em descobertas significativas, colocando você no caminho da excelência em pesquisa.
 ')
 
+barcode <- jpeg::readJPEG("images/978-65-02-18894-1.jpeg")
+barcode_grob <- grid::rasterGrob(
+  barcode,
+  interpolate = TRUE
+)
+
 # save PNG
 grDevices::png(
   file = "images/Cover_4.png",
@@ -70,8 +76,7 @@ df <- data.frame(
 
 ggplot2::ggplot(df) +
   ggplot2::aes(
-    x,
-    y,
+    x, y,
     label = label,
     color = color,
     fill = fill,
@@ -79,14 +84,37 @@ ggplot2::ggplot(df) +
     vjust = vjust,
     orientation = orientation
   ) +
-  ggtext::geom_textbox(width = grid::unit(0.93, "npc"),
-                       box.colour = "black") +
-  ggplot2::scale_discrete_identity(aesthetics = c("color", "fill", "orientation")) +
-  ggplot2::xlim(0, 8.27) + ggplot2::ylim(0, 11.69) +
+  ggtext::geom_textbox(
+    width = grid::unit(0.93, "npc"),
+    box.colour = "black"
+  ) +
+  ggplot2::annotation_custom(
+    grob = barcode_grob,
+    xmin = 5.25,
+    xmax = 7.75,
+    ymin = 0.45,
+    ymax = 1.75
+  ) +
+  ggplot2::annotate(
+    "text",
+    x = 6.5,
+    y = 0.25,
+    label = "ISBN 978-65-02-18894-1",
+    color = "white",
+    size = 3
+  ) +
+  ggplot2::scale_discrete_identity(
+    aesthetics = c("color", "fill", "orientation")
+  ) +
+  ggplot2::xlim(0, 8.27) +
+  ggplot2::ylim(0, 11.69) +
   ggplot2::theme_void() +
   ggplot2::theme(
     legend.position = "none",
-    panel.background = ggplot2::element_rect(fill = 'black', colour = 'black')
+    panel.background = ggplot2::element_rect(
+      fill = "black",
+      colour = "black"
+    )
   )
 
 grDevices::dev.off()

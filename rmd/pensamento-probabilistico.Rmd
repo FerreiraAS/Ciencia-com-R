@@ -434,7 +434,7 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 
 <br>
 
-```{r lei-benford-tabela, echo=FALSE, warning=FALSE, message=FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Simulação de números distribuídos log-uniformemente e comparação da frequência do primeiro dígito com a distribuição teórica da lei de Benford.", fig.width=15, fig.height=4, dpi=300, out.width="100%"}
+```{r lei-benford-tabela, echo=FALSE, warning=FALSE, message=FALSE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.width=15, fig.height=4, dpi=300, out.width="100%"}
 # reprodutibilidade
 set.seed(1234)
 
@@ -467,20 +467,49 @@ dados <- data.frame(
 
 amostra <- head(round(x), 15)
 
+if(knitr::is_html_output()){
 tabela_exemplo <-
   tibble::tibble(
     Número = paste0(
-      "**", substr(amostra, 1, 1), "**",
+      "<b>", substr(amostra, 1, 1), "</b>",
       substr(amostra, 2, nchar(amostra))
     ),
     `Primeiro dígito` = substr(amostra, 1, 1)
   )
+} else {
+tabela_exemplo <-
+  tibble::tibble(
+    Número = paste0(
+      "\\textbf{", substr(amostra, 1, 1), "}",
+      substr(amostra, 2, nchar(amostra))
+    ),
+    `Primeiro dígito` = substr(amostra, 1, 1)
+  )
+}
 
-gt::gt(tabela_exemplo) |>
-  gt::fmt_markdown(columns = Número) |>
-  gt::cols_align(
-    align = "center",
-    columns = everything()
+knitr::kable(
+  tabela_exemplo,
+  caption = "Simulação de números distribuídos log-uniformemente e comparação da frequência do primeiro dígito com a distribuição teórica da lei de Benford.",
+  align = c("r", "r"),
+  col.names = c("Número", "Primeiro dígito"),
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options     = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width        = ifelse(knitr::is_html_output(), TRUE, TRUE),
+    position          = "center"
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE,
+    extra_css = "border-top: 1px solid; border-bottom: 1px solid"
+  ) %>%
+  kableExtra::row_spec(
+    nrow(tabela_exemplo),
+    extra_css = "border-bottom: 1px solid"
   )
 ```
 
