@@ -83,51 +83,51 @@
 
 <br>
 
-### Qual é o papel das simulações em todo o fluxo de trabalho estatístico?
+### Qual é o papel das simulações no fluxo de trabalho estatístico?
 
-- Tradicionalmente, estudos de simulação foram utilizados para avaliar o desempenho de métodos estatísticos, comparando estimadores, testes de hipótese ou modelos preditivos em cenários controlados.[@bürkner2026]
+- Estudos de simulação são utilizados para avaliar o desempenho de métodos estatísticos, comparando estimadores, testes de hipótese ou modelos preditivos em cenários controlados.[@burkner2026]
 
-- Atualmente, as simulações desempenham um papel muito mais amplo, participando de praticamente todas as etapas do fluxo de trabalho estatístico, desde a especificação do modelo até a interpretação dos resultados.[@bürkner2026]
+- As simulações desempenham um papel amplo, participando de praticamente todas as etapas do fluxo de trabalho estatístico, desde a especificação do modelo até a interpretação dos resultados.[@burkner2026]
 
-- Em uma perspectiva moderna, as simulações podem ser utilizadas em quatro grandes etapas: especificação do modelo; verificação do modelo; inferência estatística; e checagem e validação do modelo.[@bürkner2026]
+- Em uma perspectiva moderna, as simulações podem ser utilizadas em quatro grandes etapas: especificação do modelo; verificação do modelo; inferência estatística; e checagem e validação do modelo.[@burkner2026]
 
 <br>
 
 ### Como as simulações auxiliam na especificação de modelos?
 
-- Simulações podem ser usadas para verificar se um modelo produz dados plausíveis antes mesmo da coleta ou análise dos dados reais.[@bürkner2026]
+- Simulações podem ser usadas para verificar se um modelo produz dados plausíveis antes mesmo da coleta ou análise dos dados reais.[@burkner2026]
 
-- Essa estratégia é conhecida em contextos bayesianos como prior predictive checking, na qual dados são simulados a partir do modelo proposto para avaliar se os resultados gerados são compatíveis com o conhecimento prévio disponível.[@bürkner2026]
+- Essa estratégia é conhecida em contextos bayesianos como prior predictive checking, na qual dados são simulados a partir do modelo proposto para avaliar se os resultados gerados são compatíveis com o conhecimento prévio disponível.[@burkner2026]
 
-- Dessa forma, simulações ajudam a identificar especificações inadequadas ainda nas fases iniciais do desenvolvimento do modelo.[@bürkner2026]
+- Dessa forma, simulações ajudam a identificar especificações inadequadas ainda nas fases iniciais do desenvolvimento do modelo.[@burkner2026]
 
 <br>
 
 ### Como as simulações contribuem para a verificação de modelos?
 
-- Antes de aplicar um método a dados reais, é importante verificar se ele funciona corretamente quando suas suposições são satisfeitas.[@bürkner2026]
+- Antes de aplicar um método a dados reais, é importante verificar se ele funciona corretamente quando suas suposições são satisfeitas.[@burkner2026]
 
-- Em muitos casos, a única forma prática de avaliar propriedades como viés, cobertura de intervalos de confiança ou calibração de incerteza é por meio de simulações.[@bürkner2026]
+- Em muitos casos, a única forma prática de avaliar propriedades como viés, cobertura de intervalos de confiança ou calibração de incerteza é por meio de simulações.[@burkner2026]
 
-- Técnicas modernas, como *Simulation-Based Calibration* (SBC), utilizam simulações repetidas para verificar se distribuições posteriores e estimativas probabilísticas estão corretamente calibradas.[@bürkner2026]
+- Técnicas modernas, como *Simulation-Based Calibration* (SBC), utilizam simulações repetidas para verificar se distribuições posteriores e estimativas probabilísticas estão corretamente calibradas.[@burkner2026]
 
 <br>
 
 ### Como as simulações podem ser utilizadas diretamente para inferência?
 
-- Em alguns problemas, o cálculo analítico da distribuição de interesse é impossível ou extremamente difícil.[@bürkner2026]
+- Em alguns problemas, o cálculo analítico da distribuição de interesse é impossível ou extremamente difícil.[@burkner2026]
 
-- Nesses casos, simulações podem ser utilizadas diretamente para realizar inferência estatística, estimar parâmetros ou conduzir testes de hipótese.[@bürkner2026]
+- Nesses casos, simulações podem ser utilizadas diretamente para realizar inferência estatística, estimar parâmetros ou conduzir testes de hipótese.[@burkner2026]
 
-- Métodos como Monte Carlo, Markov Chain Monte Carlo (MCMC) e *Approximate Bayesian Computation* (ABC) são exemplos de abordagens que utilizam simulações para aproximar distribuições probabilísticas complexas.[@bürkner2026]
+- Métodos como Monte Carlo, Markov Chain Monte Carlo (MCMC) e *Approximate Bayesian Computation* (ABC) são exemplos de abordagens que utilizam simulações para aproximar distribuições probabilísticas complexas.[@burkner2026]
 
 <br>
 
 ### Como as simulações auxiliam na validação de modelos?
 
-- Após o ajuste de um modelo, simulações podem ser utilizadas para gerar novos conjuntos de dados a partir dos parâmetros estimados.[@bürkner2026]
+- Após o ajuste de um modelo, simulações podem ser utilizadas para gerar novos conjuntos de dados a partir dos parâmetros estimados.[@burkner2026]
 
-- Esses dados simulados podem ser comparados aos dados observados para verificar se o modelo reproduz adequadamente os padrões presentes na realidade para avaliar a adequação do modelo aos dados.[@bürkner2026]
+- Esses dados simulados podem ser comparados aos dados observados para verificar se o modelo reproduz adequadamente os padrões presentes na realidade para avaliar a adequação do modelo aos dados.[@burkner2026]
 
 <br>
 
@@ -266,7 +266,7 @@ ggplot2::ggplot(sim_data, ggplot2::aes(x = Valor)) +
 
 - A ideia central é aproximar resultados teóricos por meio da simulação de muitas amostras aleatórias.[@metropolis1949b]
 
-- No método Markov Chain Monte Carlo (MCMC), o modelo de Markov é usado para gerar amostras de distribuições complexas a partir da simulação de cadeias com distribuição estacionária prescrita.[@häggström2007]
+- No método Markov Chain Monte Carlo (MCMC), o modelo de Markov é usado para gerar amostras de distribuições complexas a partir da simulação de cadeias com distribuição estacionária prescrita.[@haggstrom2007]
 
 <br>
 
@@ -500,7 +500,7 @@ O pacote *rsimsum*[@rsimsum] fornece a função [*simsum*](https://www.rdocument
 
 - Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
 
-- *Strengthening the reporting of empirical simulation studies: Introducing the STRESS guidelines*:[@monks2018] <https://www.equator-network.org/reporting-guidelines/strengthening-the-reporting-of-empirical-simulation-studies-introducing-the-stress-guidelines/>
+- *Strengthening the reporting of empirical simulation studies: Introducing the STRESS guidelines*.[@monks2018]
 
 <br>
 

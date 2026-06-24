@@ -194,7 +194,7 @@ knitr::kable(
   )
 ```
 
-```{r its-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Análise de série temporal interrompida utilizando regressão segmentada. A linha azul representa os valores preditos pelo modelo, enquanto a linha tracejada representa o cenário contrafactual. A linha pontilhada indica o momento da intervenção."}
+```{r its-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Análise de série temporal interrompida utilizando regressão segmentada. Linha azul: valores preditos pelo modelo. Linha tracejada: cenário contrafactual. Linha pontilhada: momento da intervenção."}
 library(dplyr)
 library(lubridate)
 
@@ -303,8 +303,6 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
     linewidth = 1
   ) +
   ggplot2::labs(
-    title = "Série Temporal Interrompida",
-    subtitle = "Regressão segmentada com tendência contrafactual",
     x = "Time",
     y = "Outcome"
   ) +
@@ -471,7 +469,7 @@ ggplot2::ggplot(data_its, ggplot2::aes(x = month, y = y)) +
 
 - Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
 
-- *Guidelines for reporting non-randomised studies*:[@reeves2004] <https://www.equator-network.org/reporting-guidelines/guidelines-for-reporting-non-randomised-studies/>
+- *Guidelines for reporting non-randomised studies*.[@reeves2004]
 
 <br>
 
