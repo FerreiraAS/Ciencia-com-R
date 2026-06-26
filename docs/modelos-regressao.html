@@ -1374,8 +1374,10 @@ div.csl-indent {
 <li class="chapter" data-level="43.4.9" data-path="modelos-regressao.html"><a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-gama"><i class="fa fa-check"></i><b>43.4.9</b> O que são modelos de regressão Gama?</a></li>
 <li class="chapter" data-level="43.4.10" data-path="modelos-regressao.html"><a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-com-efeitos-mistos"><i class="fa fa-check"></i><b>43.4.10</b> O que são modelos de regressão com efeitos mistos?</a></li>
 <li class="chapter" data-level="43.4.11" data-path="modelos-regressao.html"><a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-com-efeitos-mistos-generalizados"><i class="fa fa-check"></i><b>43.4.11</b> O que são modelos de regressão com efeitos mistos generalizados?</a></li>
-<li class="chapter" data-level="43.4.12" data-path="modelos-regressao.html"><a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-ridge"><i class="fa fa-check"></i><b>43.4.12</b> O que são modelos de regressão ridge?</a></li>
-<li class="chapter" data-level="43.4.13" data-path="modelos-regressao.html"><a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-lasso"><i class="fa fa-check"></i><b>43.4.13</b> O que são modelos de regressão LASSO?</a></li>
+<li class="chapter" data-level="43.4.12" data-path="modelos-regressao.html"><a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-por-m%C3%ADnimos-quadrados-ordin%C3%A1rios"><i class="fa fa-check"></i><b>43.4.12</b> O que são modelos de regressão por mínimos quadrados ordinários?</a></li>
+<li class="chapter" data-level="43.4.13" data-path="modelos-regressao.html"><a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-ridge"><i class="fa fa-check"></i><b>43.4.13</b> O que são modelos de regressão Ridge?</a></li>
+<li class="chapter" data-level="43.4.14" data-path="modelos-regressao.html"><a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-lasso"><i class="fa fa-check"></i><b>43.4.14</b> O que são modelos de regressão LASSO?</a></li>
+<li class="chapter" data-level="43.4.15" data-path="modelos-regressao.html"><a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-elastic-net"><i class="fa fa-check"></i><b>43.4.15</b> O que são modelos de regressão <em>elastic net</em>?</a></li>
 </ul></li>
 <li class="chapter" data-level="43.5" data-path="modelos-regressao.html"><a href="modelos-regressao.html#efeitos-de-modelos-de-regress%C3%A3o"><i class="fa fa-check"></i><b>43.5</b> Efeitos de modelos de regressão</a>
 <ul>
@@ -2752,29 +2754,116 @@ Figura 43.7: Regressão de Poisson.
 </ul>
 <p><br></p>
 </div>
-<div id="o-que-são-modelos-de-regressão-ridge" class="section level3 hasAnchor" number="43.4.12">
-<h3><span class="header-section-number">43.4.12</span> O que são modelos de regressão ridge?<a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-ridge" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-são-modelos-de-regressão-por-mínimos-quadrados-ordinários" class="section level3 hasAnchor" number="43.4.12">
+<h3><span class="header-section-number">43.4.12</span> O que são modelos de regressão por mínimos quadrados ordinários?<a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-por-m%C3%ADnimos-quadrados-ordin%C3%A1rios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Regressão ridge é um modelo linear regularizado que adiciona uma penalização L2 à soma dos quadrados dos coeficientes.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
+<li>A regressão por mínimos quadrados ordinários (OLS) <a href="modelos-regressao.html#eq:ols">(43.10)</a> estima os coeficientes <span class="math inline">\(\hat{\boldsymbol{\beta}}^{OLS}\)</span> minimizando a soma dos quadrados dos resíduos, ou seja, a diferença entre os valores observados <span class="math inline">\(y_i\)</span> e os valores preditos pelo modelo linear <span class="math inline">\(X\hat{\boldsymbol{\beta}}\)</span>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+</ul>
+<p><br></p>
+<p><span class="math display" id="eq:ols">\[\begin{equation}
+\tag{43.10}
+\hat{\boldsymbol{\beta}}^{OLS}
+=
+\arg\min_{\boldsymbol{\beta}}
+\left\{
+\sum_{i=1}^{n}
+\left(
+y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j
+\right)^2
+\right\}
+\end{equation}\]</span></p>
+<p><br></p>
+</div>
+<div id="o-que-são-modelos-de-regressão-ridge" class="section level3 hasAnchor" number="43.4.13">
+<h3><span class="header-section-number">43.4.13</span> O que são modelos de regressão Ridge?<a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-ridge" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Regressão Ridge <a href="modelos-regressao.html#eq:ridge">(43.11)</a> é um modelo linear regularizado que adiciona uma penalização L2 à soma dos quadrados dos coeficientes.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+</ul>
+<p><br></p>
+<p><span class="math display" id="eq:ridge">\[\begin{equation}
+\tag{43.11}
+\hat{\boldsymbol{\beta}}^{ridge}
+=
+\arg\min_{\boldsymbol{\beta}}
+\left\{
+\sum_{i=1}^{n}
+\left(
+y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j
+\right)^2
++
+\lambda
+\sum_{j=1}^{p}\beta_j^2
+\right\}
+\end{equation}\]</span></p>
+<p><br></p>
+<ul>
 <li><p>Ajuda a reduzir multicolinearidade e overfitting, encolhendo os coeficientes em direção a zero, mas nunca os tornando exatamente nulos.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
 <li><p>O hiperparâmetro de regularização é <span class="math inline">\(\lambda\)</span>, controlando a intensidade da penalização. Valores maiores de <span class="math inline">\(\lambda\)</span> resultam em maior encolhimento dos coeficientes.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
 </ul>
 <p><br></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:regressao-ridge"></span>
-<img src="Ciencia-com-R_files/figure-html/regressao-ridge-1.png" alt="Regressão ridge." width="672" />
+<img src="Ciencia-com-R_files/figure-html/regressao-ridge-1.png" alt="Regressão Ridge." width="672" />
 <p class="caption">
-Figura 43.8: Regressão ridge.
+Figura 43.8: Regressão Ridge.
 </p>
 </div>
 <p><br></p>
 </div>
-<div id="o-que-são-modelos-de-regressão-lasso" class="section level3 hasAnchor" number="43.4.13">
-<h3><span class="header-section-number">43.4.13</span> O que são modelos de regressão LASSO?<a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-lasso" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-são-modelos-de-regressão-lasso" class="section level3 hasAnchor" number="43.4.14">
+<h3><span class="header-section-number">43.4.14</span> O que são modelos de regressão LASSO?<a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-lasso" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Regressão <em>Least Absolute Shrinkage and Selection Operator</em> (LASSO) utiliza penalização L1, que pode zerar coeficientes.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Além de reduzir <em>overfitting</em>, também realiza seleção automática de variáveis.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Enquanto a regressão ridge mantém todos os preditores, a LASSO pode excluir variáveis irrelevantes.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
+<li>Regressão <em>Least Absolute Shrinkage and Selection Operator</em> (LASSO) <a href="modelos-regressao.html#eq:lasso">(43.12)</a> utiliza penalização L1, que pode zerar coeficientes.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
+<p><br></p>
+<p><span class="math display" id="eq:lasso">\[\begin{equation}
+\tag{43.12}
+\hat{\boldsymbol{\beta}}^{lasso}
+=
+\arg\min_{\boldsymbol{\beta}}
+\left\{
+\sum_{i=1}^{n}
+\left(
+y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j
+\right)^2
++
+\lambda
+\sum_{j=1}^{p}
+\left|\beta_j\right|
+\right\}
+\end{equation}\]</span></p>
+<p><br></p>
+<ul>
+<li><p>Além de reduzir <em>overfitting</em>, também realiza seleção automática de variáveis.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
+<li><p>Enquanto a regressão Ridge mantém todos os preditores, a LASSO pode excluir variáveis irrelevantes.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="o-que-são-modelos-de-regressão-elastic-net" class="section level3 hasAnchor" number="43.4.15">
+<h3><span class="header-section-number">43.4.15</span> O que são modelos de regressão <em>elastic net</em>?<a href="modelos-regressao.html#o-que-s%C3%A3o-modelos-de-regress%C3%A3o-elastic-net" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Regressão <em>elastic net</em> <a href="modelos-regressao.html#eq:elastic-net">(43.13)</a> combina penalizações L1 (LASSO) e L2 (Ridge), controladas por um parâmetro <span class="math inline">\(\alpha\)</span>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+</ul>
+<p><br></p>
+<p><span class="math display" id="eq:elastic-net">\[\begin{equation}
+\tag{43.13}
+\hat{\boldsymbol{\beta}}^{enet}
+=
+\arg\min_{\boldsymbol{\beta}}
+\left\{
+\sum_{i=1}^{n}
+\left(
+y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j
+\right)^2
++
+\lambda
+\sum_{j=1}^{p}
+\left[
+(1-\alpha)\beta_j^2
++
+\alpha\left|\beta_j\right|
+\right]
+\right\}
+\end{equation}\]</span></p>
 <p><br></p>
 </div>
 </div>
@@ -2969,7 +3058,7 @@ Figura 43.12: Multicolinearidade entre variáveis candidatas em modelos de regre
 <li><p>Combine variáveis numéricas altamente correlacionadas em uma única variável composta, como a média ou soma das variáveis.<span class="citation"><sup><a href="#ref-Kim2019">390</a></sup></span></p></li>
 <li><p>Considere a exclusão de variáveis altamente correlacionadas do modelo, especialmente se elas não forem essenciais para a análise.<span class="citation"><sup><a href="#ref-Kim2019">390</a></sup></span></p></li>
 <li><p>Use técnicas de seleção de variáveis, como seleção passo a passo, para identificar e remover variáveis redundantes.<span class="citation"><sup><a href="#ref-Kim2019">390</a></sup></span></p></li>
-<li><p>Use técnicas de regularização, como regressão ridge ou LASSO, que podem lidar com multicolinearidade ao penalizar coeficientes de regressão.<span class="citation"><sup><a href="#ref-Kim2019">390</a></sup></span></p></li>
+<li><p>Use técnicas de regularização, como regressão Ridge ou LASSO, que podem lidar com multicolinearidade ao penalizar coeficientes de regressão.<span class="citation"><sup><a href="#ref-Kim2019">390</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
@@ -3036,29 +3125,29 @@ Figura 43.12: Multicolinearidade entre variáveis candidatas em modelos de regre
 <h3><span class="header-section-number">43.10.2</span> Quais são os principais critérios de informação usados na seleção de variáveis?<a href="modelos-regressao.html#quais-s%C3%A3o-os-principais-crit%C3%A9rios-de-informa%C3%A7%C3%A3o-usados-na-sele%C3%A7%C3%A3o-de-vari%C3%A1veis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Critérios de informação avaliam o ajuste do modelo penalizando a complexidade (número de preditores), ajudando a evitar <em>overfitting</em>.<span class="citation"><sup><a href="#ref-lindsey2011">395</a></sup></span></p></li>
-<li><p><span class="math inline">\(R^2_{adj}\)</span> <a href="modelos-regressao.html#eq:R2-ajustado">(43.10)</a> penaliza o <span class="math inline">\(R^2\)</span> pelo número de preditores, reduzindo o viés em modelos com muitas variáveis, onde <span class="math inline">\(n\)</span> é o tamanho amostral, <span class="math inline">\(k\)</span> o número de preditores, <span class="math inline">\(RSS\)</span> a soma dos quadrados dos resíduos e <span class="math inline">\(SST\)</span> a soma total dos quadrados.</p></li>
+<li><p><span class="math inline">\(R^2_{adj}\)</span> <a href="modelos-regressao.html#eq:R2-ajustado">(43.14)</a> penaliza o <span class="math inline">\(R^2\)</span> pelo número de preditores, reduzindo o viés em modelos com muitas variáveis, onde <span class="math inline">\(n\)</span> é o tamanho amostral, <span class="math inline">\(k\)</span> o número de preditores, <span class="math inline">\(RSS\)</span> a soma dos quadrados dos resíduos e <span class="math inline">\(SST\)</span> a soma total dos quadrados.</p></li>
 </ul>
 <p><br></p>
 <p><span class="math display" id="eq:R2-ajustado">\[\begin{equation}
-\tag{43.10}
+\tag{43.14}
 R^2_{adj} = 1 - \frac{(n-1)}{(n - k - 1)} \cdot \frac{RSS}{SST}
 \end{equation}\]</span></p>
 <p><br></p>
 <ul>
-<li><span class="math inline">\(AIC\)</span> (Akaike Information Criterion) <a href="modelos-regressao.html#eq:AIC">(43.11)</a> mede o equilíbrio entre ajuste e complexidade:</li>
+<li><span class="math inline">\(AIC\)</span> (Akaike Information Criterion) <a href="modelos-regressao.html#eq:AIC">(43.15)</a> mede o equilíbrio entre ajuste e complexidade:</li>
 </ul>
 <p><br></p>
 <p><span class="math display" id="eq:AIC">\[\begin{equation}
-\tag{43.11}
+\tag{43.15}
 AIC = n \cdot \log\left(\frac{RSS}{n}\right) + 2k + n + n \cdot \log(2\pi)
 \end{equation}\]</span></p>
 <p><br></p>
 <ul>
-<li><span class="math inline">\(AICc\)</span> <a href="modelos-regressao.html#eq:AICc">(43.12)</a> é uma versão corrigida do AIC, preferida para amostras pequenas:</li>
+<li><span class="math inline">\(AICc\)</span> <a href="modelos-regressao.html#eq:AICc">(43.16)</a> é uma versão corrigida do AIC, preferida para amostras pequenas:</li>
 </ul>
 <p><br></p>
 <p><span class="math display" id="eq:AICc">\[\begin{equation}
-\tag{43.12}
+\tag{43.16}
 AIC_c = AIC + \frac{2(k+2)(k+3)}{n - (k + 2) - 1}
 \end{equation}\]</span></p>
 <p><br></p>
@@ -3067,16 +3156,16 @@ AIC_c = AIC + \frac{2(k+2)(k+3)}{n - (k + 2) - 1}
 </ul>
 <p><br></p>
 <p><span class="math display" id="eq:Cp">\[\begin{equation}
-\tag{43.13}
+\tag{43.17}
 C_p = (n - m - 1)\frac{RSS}{RSS_{FULL}} - (n - 2p)
 \end{equation}\]</span></p>
 <p><br></p>
 <ul>
-<li><span class="math inline">\(BIC\)</span> (Bayesian Information Criterion) <a href="modelos-regressao.html#eq:BIC">(43.14)</a> penaliza fortemente modelos complexos:</li>
+<li><span class="math inline">\(BIC\)</span> (Bayesian Information Criterion) <a href="modelos-regressao.html#eq:BIC">(43.18)</a> penaliza fortemente modelos complexos:</li>
 </ul>
 <p><br></p>
 <p><span class="math display" id="eq:BIC">\[\begin{equation}
-\tag{43.14}
+\tag{43.18}
 BIC = n \cdot \log\left(\frac{RSS}{n}\right) + k \cdot \log(n) + n + n \cdot \log(2\pi)
 \end{equation}\]</span></p>
 <p><br></p>
@@ -3153,16 +3242,16 @@ BIC = n \cdot \log\left(\frac{RSS}{n}\right) + k \cdot \log(n) + n + n \cdot \lo
 <div id="como-avaliar-a-qualidade-de-ajuste-de-um-modelo" class="section level3 hasAnchor" number="43.13.1">
 <h3><span class="header-section-number">43.13.1</span> Como avaliar a qualidade de ajuste de um modelo?<a href="modelos-regressao.html#como-avaliar-a-qualidade-de-ajuste-de-um-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Coeficiente de determinação (<span class="math inline">\(R^2\)</span>) <a href="modelos-regressao.html#eq:r2">(43.15)</a> e <span class="math inline">\(R^2_{ajustado}\)</span> <a href="modelos-regressao.html#eq:r2adj">(43.16)</a>: Medem a proporção da variabilidade dos dados explicada pelo modelo. O <span class="math inline">\(R^2\)</span> ajustado penaliza a inclusão de variáveis irrelevantes.<span class="citation"><sup><a href="#ref-Kim2019">390</a></sup></span></li>
+<li>Coeficiente de determinação (<span class="math inline">\(R^2\)</span>) <a href="modelos-regressao.html#eq:r2">(43.19)</a> e <span class="math inline">\(R^2_{ajustado}\)</span> <a href="modelos-regressao.html#eq:r2adj">(43.20)</a>: Medem a proporção da variabilidade dos dados explicada pelo modelo. O <span class="math inline">\(R^2\)</span> ajustado penaliza a inclusão de variáveis irrelevantes.<span class="citation"><sup><a href="#ref-Kim2019">390</a></sup></span></li>
 </ul>
 <p><br></p>
 <p><span class="math display" id="eq:r2">\[\begin{equation}
-\tag{43.15}
+\tag{43.19}
 R^2 = 1 - \frac{SS_{res}}{SS_{tot}}
 \end{equation}\]</span></p>
 <p><br></p>
 <p><span class="math display" id="eq:r2adj">\[\begin{equation}
-\tag{43.16}
+\tag{43.20}
 R^2_{ajustado} = 1 - (1 - R^2)\frac{n - 1}{n - p - 1}
 \end{equation}\]</span></p>
 <p><br></p>
@@ -3174,25 +3263,25 @@ Figura 43.13: Exemplos de ajuste de modelos de regressão linear simples (<span 
 </div>
 <p><br></p>
 <ul>
-<li>Erro quadrático médio (<span class="math inline">\(RMSE\)</span>) <a href="modelos-regressao.html#eq:rmse">(43.17)</a>: Mede a média dos erros ao quadrado entre os valores observados e os valores previstos pelo modelo, onde <span class="math inline">\(y_i\)</span> são os valores observados, <span class="math inline">\(\hat{y}_i\)</span> são os valores previstos pelo modelo, e <span class="math inline">\(n\)</span> é o número de observações. Valores menores indicam melhor ajuste.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+<li>Erro quadrático médio (<span class="math inline">\(RMSE\)</span>) <a href="modelos-regressao.html#eq:rmse">(43.21)</a>: Mede a média dos erros ao quadrado entre os valores observados e os valores previstos pelo modelo, onde <span class="math inline">\(y_i\)</span> são os valores observados, <span class="math inline">\(\hat{y}_i\)</span> são os valores previstos pelo modelo, e <span class="math inline">\(n\)</span> é o número de observações. Valores menores indicam melhor ajuste.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
 <p><br></p>
 <p><span class="math display" id="eq:rmse">\[\begin{equation}
-\tag{43.17}
+\tag{43.21}
 RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
 \end{equation}\]</span></p>
 <p><br></p>
 <ul>
-<li>Critério de Informação Akaike (<span class="math inline">\(AIC\)</span>) <a href="modelos-regressao.html#eq:aic">(43.18)</a> e Critério de Informação Bayesiano (<span class="math inline">\(BIC\)</span>) <a href="modelos-regressao.html#eq:bic">(43.19)</a>: Avaliam o ajuste do modelo penalizando a complexidade (número de parâmetros), onde <span class="math inline">\(k\)</span> é o número de parâmetros do modelo, <span class="math inline">\(L\)</span> é a verossimilhança máxima do modelo, e <span class="math inline">\(n\)</span> é o tamanho da amostra. Modelos com menor AIC ou BIC são preferíveis.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+<li>Critério de Informação Akaike (<span class="math inline">\(AIC\)</span>) <a href="modelos-regressao.html#eq:aic">(43.22)</a> e Critério de Informação Bayesiano (<span class="math inline">\(BIC\)</span>) <a href="modelos-regressao.html#eq:bic">(43.23)</a>: Avaliam o ajuste do modelo penalizando a complexidade (número de parâmetros), onde <span class="math inline">\(k\)</span> é o número de parâmetros do modelo, <span class="math inline">\(L\)</span> é a verossimilhança máxima do modelo, e <span class="math inline">\(n\)</span> é o tamanho da amostra. Modelos com menor AIC ou BIC são preferíveis.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
 </ul>
 <p><br></p>
 <p><span class="math display" id="eq:aic">\[\begin{equation}
-\tag{43.18}
+\tag{43.22}
 AIC = 2k - 2\ln(L)
 \end{equation}\]</span></p>
 <p><br></p>
 <p><span class="math display" id="eq:bic">\[\begin{equation}
-\tag{43.19}
+\tag{43.23}
 BIC = \ln(n)k - 2\ln(L)
 \end{equation}\]</span></p>
 <p><br></p>

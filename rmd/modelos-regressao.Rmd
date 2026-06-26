@@ -744,9 +744,50 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-### O que são modelos de regressão ridge?
+### O que são modelos de regressão por mínimos quadrados ordinários?
 
--   Regressão ridge é um modelo linear regularizado que adiciona uma penalização L2 à soma dos quadrados dos coeficientes.[@REF]
+-  A regressão por mínimos quadrados ordinários (OLS) \@ref(eq:ols) estima os coeficientes $\hat{\boldsymbol{\beta}}^{OLS}$ minimizando a soma dos quadrados dos resíduos, ou seja, a diferença entre os valores observados $y_i$ e os valores preditos pelo modelo linear $X\hat{\boldsymbol{\beta}}$.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:ols)
+\hat{\boldsymbol{\beta}}^{OLS}
+=
+\arg\min_{\boldsymbol{\beta}}
+\left\{
+\sum_{i=1}^{n}
+\left(
+y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j
+\right)^2
+\right\}
+\end{equation}
+
+<br>
+
+### O que são modelos de regressão Ridge?
+
+-   Regressão Ridge \@ref(eq:ridge) é um modelo linear regularizado que adiciona uma penalização L2 à soma dos quadrados dos coeficientes.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:ridge)
+\hat{\boldsymbol{\beta}}^{ridge}
+=
+\arg\min_{\boldsymbol{\beta}}
+\left\{
+\sum_{i=1}^{n}
+\left(
+y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j
+\right)^2
++
+\lambda
+\sum_{j=1}^{p}\beta_j^2
+\right\}
+\end{equation}
+
+<br>
 
 -   Ajuda a reduzir multicolinearidade e overfitting, encolhendo os coeficientes em direção a zero, mas nunca os tornando exatamente nulos.[@REF]
 
@@ -754,7 +795,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-```{r regressao-ridge, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão ridge."}
+```{r regressao-ridge, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Regressão Ridge."}
 # simulate X
 set.seed(123)
 X <- seq(-10, 10, length.out = 100)
@@ -787,11 +828,61 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 ### O que são modelos de regressão LASSO?
 
--   Regressão *Least Absolute Shrinkage and Selection Operator* (LASSO) utiliza penalização L1, que pode zerar coeficientes.[@REF]
+-   Regressão *Least Absolute Shrinkage and Selection Operator* (LASSO) \@ref(eq:lasso) utiliza penalização L1, que pode zerar coeficientes.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:lasso)
+\hat{\boldsymbol{\beta}}^{lasso}
+=
+\arg\min_{\boldsymbol{\beta}}
+\left\{
+\sum_{i=1}^{n}
+\left(
+y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j
+\right)^2
++
+\lambda
+\sum_{j=1}^{p}
+\left|\beta_j\right|
+\right\}
+\end{equation}
+
+<br>
 
 -   Além de reduzir *overfitting*, também realiza seleção automática de variáveis.[@REF]
 
--   Enquanto a regressão ridge mantém todos os preditores, a LASSO pode excluir variáveis irrelevantes.[@REF]
+-   Enquanto a regressão Ridge mantém todos os preditores, a LASSO pode excluir variáveis irrelevantes.[@REF]
+
+<br>
+
+### O que são modelos de regressão *elastic net*?
+
+-  Regressão *elastic net* \@ref(eq:elastic-net) combina penalizações L1 (LASSO) e L2 (Ridge), controladas por um parâmetro $\alpha$.[@REF]
+
+<br>
+
+\begin{equation}
+(\#eq:elastic-net)
+\hat{\boldsymbol{\beta}}^{enet}
+=
+\arg\min_{\boldsymbol{\beta}}
+\left\{
+\sum_{i=1}^{n}
+\left(
+y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j
+\right)^2
++
+\lambda
+\sum_{j=1}^{p}
+\left[
+(1-\alpha)\beta_j^2
++
+\alpha\left|\beta_j\right|
+\right]
+\right\}
+\end{equation}
 
 <br>
 
@@ -1397,7 +1488,7 @@ O pacote *car*[@car] fornece a função [*vif*](https://www.rdocumentation.org/p
 
 -   Use técnicas de seleção de variáveis, como seleção passo a passo, para identificar e remover variáveis redundantes.[@Kim2019]
 
--   Use técnicas de regularização, como regressão ridge ou LASSO, que podem lidar com multicolinearidade ao penalizar coeficientes de regressão.[@Kim2019]
+-   Use técnicas de regularização, como regressão Ridge ou LASSO, que podem lidar com multicolinearidade ao penalizar coeficientes de regressão.[@Kim2019]
 
 <br>
 
