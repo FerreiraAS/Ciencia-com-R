@@ -35,9 +35,7 @@ dados_linear <-
       ifelse(tratamento == "Intervenção", 5, 0) +
       rnorm(n, mean = 0, sd = 8)
   )
-```
 
-```{r regressao-linear-gtsummary, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 modelo_linear <- lm(
   desfecho ~ idade + sexo + tratamento,
   data = dados_linear
@@ -347,6 +345,27 @@ tbl_misto
 <br>
 
 ```{r comparacao-modelos-regressao-gtsummary, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 150
+
+dados_linear <-
+  tibble::tibble(
+    idade = rnorm(n, mean = 55, sd = 12),
+    sexo = factor(sample(c("Feminino", "Masculino"), n, replace = TRUE)),
+    tratamento = factor(sample(c("Controle", "Intervenção"), n, replace = TRUE))
+  ) %>%
+  dplyr::mutate(
+    desfecho = 40 +
+      0.35 * idade +
+      ifelse(sexo == "Masculino", 3, 0) +
+      ifelse(tratamento == "Intervenção", 5, 0) +
+      rnorm(n, mean = 0, sd = 8)
+  )
+
 modelo_1 <- lm(
   desfecho ~ idade,
   data = dados_linear
