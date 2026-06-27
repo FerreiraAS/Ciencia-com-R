@@ -78,11 +78,13 @@
 
 ### Que modelos podem ser utilizados para comparações?
 
--   As abordagens compreendem a comparação da variável de desfecho medida entre os momentos antes e depois ou da sua mudança (pré - pós) entre os momentos.[@Vickers2001a]
+- As abordagens mais utilizadas consistem em comparar o desfecho medido após a intervenção ou a mudança do desfecho entre os momentos pré e pós-intervenção ($\Delta$) entre os grupos.[@Vickers2001a]
 
--   Se a média da variável é igual entre grupos no início do acompanhamento, ambas abordagens estimam o mesmo efeito. Caso contrário, o efeito será influenciado pela correlação entre as medidas antes e depois. A análise da mudança não controla para desbalanços no início do estudo. [@Vickers2001a]
+- Quando as médias da variável de desfecho são equivalentes entre os grupos no início do estudo, ambas as abordagens estimam, em média, o mesmo efeito de tratamento.[@Vickers2001a]
 
--   A abordagem mais recomendada é a análise de covariância (ANCOVA) \@ref(eq:ancova1), pois ajusta os valores pós-intervenção ($Y_{ij}$) aos valores pré-intervenção ($X_{ij}$) para cada participante ($i$) de cada grupo {$Z_{ij}$}, e portanto não é afetada pelas diferenças entre grupos no início do estudo.[@Vickers2001a; @barnett2004]
+- Na presença de diferenças basais, as estimativas passam a depender da correlação entre as medidas pré e pós-intervenção, então a análise baseada na mudança não controla adequadamente os desbalanços iniciais.[@Vickers2001a]
+
+- A abordagem mais recomendada é a análise de covariância (ANCOVA) @ref(eq:ancova1), que utiliza o desfecho pós-intervenção ($Y_{ij}$) como variável resposta e ajusta a comparação entre os grupos pelos valores basais ($X_{ij}$) de cada participante ($i$).[@Vickers2001a; @barnett2004]
 
 <br>
 
@@ -93,24 +95,26 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 <br>
 
--   A ANCOVA modelando seja a mudança (pré - pós: $\Delta = X_{ij} - Y_{ij}$) quando o desfecho no pós-tratamento parece ser o método mais efetivo considerando-se o viés de estimação dos parâmetros, a precisão das estimativas, a cobertura nominal (isto é, intervalo de confiança) e o poder do teste.[@OConnell2017]
+- A ANCOVA aplicada ao desfecho pós-intervenção apresenta menor viés na estimação dos parâmetros, maior precisão das estimativas, melhor cobertura nominal dos intervalos de confiança e maior poder estatístico do que a análise baseada no escore de mudança ou outros métodos de comparação entre grupos.[@OConnell2017]
 
--   Quando a ANCOVA \@ref(eq:ancova2) é utilizada com a mudança (pré - pós) com variável de desfecho ($Y_{ij}$), o coeficiente de regressão $\beta_1$ é diminuído em 1 unidade.[@laird1983; @barnett2004]
+- Alternativamente, pode-se modelar o escore de mudança ($\Delta = Y_{ij} - X_{ij}$) como variável de desfecho, cujomodelo é equivalente a uma regressão linear do escore de mudança sobre o grupo de tratamento @ref(eq:ancova2).[@laird1983; @barnett2004]
 
 <br>
 
 \begin{equation}
 (\#eq:ancova2)
-(X_{ij} - Y_{ij}) = \beta_0 + \beta_1 Z_j + \epsilon_{ij}
+(Y_{ij} - X_{ij}) = \beta_0 + \beta_1 Z_j + \epsilon_{ij}
 \end{equation}
 
 <br>
 
--   Análise de variância (ANOVA) e modelos lineares mistos (MLM) são outras opções de métodos, embora apresentem maior variância, menor poder, e cobertura nominal comparados à ANCOVA.[@OConnell2017]
+- Embora a análise do escore de mudança seja simples de interpretar, ela tende a apresentar menor precisão e menor poder estatístico do que a ANCOVA quando existe correlação entre as medidas pré e pós-intervenção.[@Vickers2001a; @OConnell2017]
 
--   Em desenhos com múltiplas medições por participante, modelos lineares mistos (efeitos aleatórios para indivíduo e, se pertinente, para centro) permitem lidar com correlação intraindivíduo e dados ausentes sob MAR, oferecendo estimativas válidas do efeito de tratamento no tempo.[@Cnaan1997]
+- A análise de variância (ANOVA) e os modelos lineares mistos (MLM) constituem alternativas para situações específicas. Em estudos com apenas uma medida pós-intervenção, a ANOVA costuma ser menos eficiente que a ANCOVA por não ajustar os valores basais.[@OConnell2017]
 
--   Para dados longitudinais com desfechos contínuos, estratégias de modelo de efeitos mistos com medidas repetidas evitam a imputação explícita e, sob suposições de MAR, tendem a melhor cobertura e controle de erro tipo I do que abordagens tipo "última observação transportada".[@mallinckrodt2008]
+- Em estudos com múltiplas medições por participante, os modelos lineares mistos, incluindo efeitos aleatórios para o indivíduo e, quando pertinente, para o centro de pesquisa, permitem modelar a correlação intraindivíduo e lidar com dados ausentes sob o pressuposto de ausência ao acaso (MAR).[@Cnaan1997]
+
+- Para desfechos contínuos longitudinais, os modelos lineares mistos para medidas repetidas (MMRM) dispensam imputação explícita dos dados ausentes e, sob o pressuposto de MAR, tendem a apresentar cobertura dos intervalos de confiança e controle do erro do tipo I satisfatórios.[@mallinckrodt2008]
 
 <br>
 
@@ -130,9 +134,9 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 <br>
 
-### O que é comparação entre grupos na linha de base em ensaios experimentais aleatorizados?
+### O que é comparação entre grupos na linha de base?
 
--   A comparação se refere ao teste de hipótese nula de não haver diferença ('balanço' ou 'equilíbrio') entre grupos de tratamento nas (co)variáveis na linha de base, geralmente apresentadas apenas de modo descritivo na 'Tabela 1'.[@Stang2018]
+-   A comparação refere-se ao teste de hipótese nula de não haver diferença ('balanço' ou 'equilíbrio') entre grupos de tratamento nas (co)variáveis na linha de base.[@Stang2018]
 
 -   A interpretação isolada do P-valor da comparação entre grupos na linha de base não permite identificar as razões para eventuais diferenças.[@Stang2018]
 
@@ -150,39 +154,45 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 <br>
 
-### Para quê comparar grupos na linha de base em ensaios experimentais aleatorizados?
+### Para quê comparar grupos na linha de base?
 
 -   Os P-valores estão relacionados à aleatorização dos participantes em grupos.[@Bolzern2019]
 
--   Em ensaios experimentais aleatorizados, a comparação de (co)variáveis na linha de base é usada para avaliar se aleatorização foi 'bem sucedida'.[@Bolzern2019]
+-   A comparação de (co)variáveis na linha de base é usada para avaliar se aleatorização foi 'bem sucedida'.[@Bolzern2019]
 
 <br>
 
-### Quais cenários permitem a comparação entre grupos na linha de base em ensaios experimentais aleatorizados?
+### Quais são as limitações da comparação entre grupos na linha de base?
 
 -   Em ensaios experimentais aleatorizados agregados, os P-valores possuem interpretação diferente de estudos aleatorizados individualmente.[@Bolzern2019]
 
--   Em ensaios experimentais com agrupamento, nos quais o recrutamento ocorreu após a aleatorização, os P-valores já não estão inteiramente relacionados ao processo de aleatorização, mas sim ao método de recrutamento, o que pode resultar na comparação de amostras não aleatórias.[@Bolzern2019]
+- Em ensaios experimentais com agrupamento e recrutamento após a aleatorização, os P-valores podem refletir o método de recrutamento, em vez da aleatorização, levando à comparação de amostras não aleatórias.[@Bolzern2019]
 
 <br>
 
-### Por que não se deve comparar grupos na linha de base em ensaios experimentais aleatorizados?
+### Por que não se deve comparar grupos na linha de base?
 
--   Se a aleatorização tiver sido conduzida de forma adequada, a hipótese nula de que ambos os grupos provêm da mesma população é, por definição, verdadeira; assim, seria esperado que cerca de 5% dessas comparações apresentassem significância estatística ao nível de 5%.[@lavori1983; @altman1985; @altman1990]
+- Se a aleatorização foi conduzida adequadamente, a hipótese nula de que ambos os grupos provêm da mesma população é, por definição, verdadeira.[@lavori1983; @altman1985; @altman1990]
 
--   Esses testes avaliam indiretamente a adequação do processo de aleatorização, e não se os dois grupos possuem características semelhantes.[@lavori1983; @altman1985; @altman1990]
+- Espera-se que cerca de 5% das comparações apresentem significância estatística ao nível de 5%, apenas por acaso.[@lavori1983; @altman1985; @altman1990]
 
--   Testes de hipóteses não são uma forma válida de avaliar a similaridade. Essa avaliação deve basear-se na consideração do força prognóstica das variáveis e a magnitude do desequilíbrio.[@lavori1983; @altman1985; @altman1990]
+- Esses testes avaliam indiretamente a adequação da aleatorização. Eles não verificam se os grupos possuem características semelhantes.[@lavori1983; @altman1985; @altman1990]
 
--   A interpretação errônea dos P-valores na comparação entre grupos, na linha de base, de um ensaio clínico aleatorizado constitui a 'falácia da Tabela 1'.[@pijls2022]
+- Testes de hipóteses não são uma forma válida de avaliar a similaridade entre grupos.[@lavori1983; @altman1985; @altman1990]
 
--   Quando a aleatorização é bem-sucedida, a hipótese nula de diferença entre grupos na linha de base é verdadeira.[@roberts1999]
+- Essa avaliação deve considerar a importância prognóstica das variáveis e a magnitude dos desequilíbrios observados.[@lavori1983; @altman1985; @altman1990]
 
--   Testes de significância estatística na linha de base avaliam a probabilidade de que as diferenças observadas possam ter ocorrido por acaso; no entanto, já sabemos --- pelo delineamento do experimento --- que quaisquer diferenças são causadas pelo acaso.[@gruijters2020]
+- A interpretação equivocada dos P-valores nas comparações da linha de base é conhecida como falácia da Tabela 1.[@pijls2022]
+
+- Quando a aleatorização é bem-sucedida, a hipótese nula de ausência de diferenças entre os grupos na linha de base é verdadeira.[@roberts1999]
+
+- Os testes de significância avaliam se as diferenças observadas podem ser atribuídas ao acaso.[@gruijters2020]
+
+- Em um ensaio clínico aleatorizado, sabe-se pelo próprio delineamento que as diferenças na linha de base são decorrentes do acaso.[@gruijters2020]
 
 <br>
 
-### Quais estratégias podem ser adotadas para substituir a comparação entre grupos na linha de base em ensaios experimentais aleatorizados?
+### Como lidar com potenciais diferenças entre grupos de tratamento nas (co)variáveis na linha de base?
 
 -   Na fase de projeto: identifique as variáveis prognósticas do desfecho de acordo com a literatura.[@roberts1999]
 
@@ -194,9 +204,11 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 <br>
 
-### Por que não se deve comparar intragrupos (pré - pós) em ensaios experimentais aleatorizados?
+### Por que não se deve comparar intragrupos (pré - pós)??
 
--   Testar por mudanças a partir da linha de base separadamente em cada grupos aleatorizados não permite concluir sobre diferenças entre grupos; não se pode fazer inferências a partir da comparação de P-valores.[@bland2011]
+- Testar separadamente as mudanças em relação à linha de base (pré-pós) dentro de cada grupo aleatorizado não permite concluir se existe diferença entre os grupos.[@bland2011]
+
+- Comparar os P-valores obtidos em cada grupo não é uma forma válida de inferir diferenças entre os tratamentos.[@bland2011]
 
 <br>
 
@@ -204,7 +216,7 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 <br>
 
-### O que é comparação entre grupos em ensaios experimentais aleatorizados?
+### O que é comparação entre grupos??
 
 -   A comparação se refere ao teste de hipótese nula de não haver diferença ('alteração' ou 'mudança') pós-tratamento entre grupos de tratamento.[@bland2011]
 
@@ -216,7 +228,7 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 <br>
 
-### Qual é a comparação entre grupos mais adequada em ensaios experimentais aleatorizados?
+### Qual é a comparação entre grupos mais adequada?
 
 -   Análise de covariância (ANCOVA) que analisa o pós-tratamento com a linha de base como covariável é a opção que possui maior poder estatístico.[@vickers2001b]
 
@@ -230,25 +242,30 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 <br>
 
-### O que é comparação de subgrupos em ensaios experimentais aleatorizados?
+### O que é comparação de subgrupos?
 
 -   Análises de subgrupos podem ser realizadas para avaliar se as diferenças no resultado do tratamento (ou a falta delas) dependem de algumas características na linha de base dos pacientes.[@Assmann2000]
 
 <br>
 
-### Como realizar a comparação de subgrupos em ensaios experimentais aleatorizados?
+### Como realizar a comparação de subgrupos?
 
--   Testes estatísticos de interação (que avaliam se um efeito de tratamento difere entre subgrupos) devem ser usados, e não apenas a inspeção dos P-valores do subgrupo. Somente se o teste de interação estatística apoiar um efeito de subgrupo as conclusões poderão ser influenciadas.[@Assmann2000; @Brookes2004]
+-   Testes estatísticos de interação (que avaliam se um efeito de tratamento difere entre subgrupos) devem ser usados, e não apenas a inspeção dos P-valores do subgrupo.[@Assmann2000; @Brookes2004]
+
+- Somente se o teste de interação estatística apoiar um efeito de subgrupo as conclusões poderão ser influenciadas.[@Assmann2000; @Brookes2004]
 
 <br>
 
-### Como interpretar a comparação de subgrupos em ensaios experimentais aleatorizados?
+### Como interpretar a comparação de subgrupos?
 
--   Análises de subgrupos devem ser consideradas de natureza exploratória e raramente elas afetam as conclusões obtidas a partir do estudo.[@Assmann2000; @Brookes2004]
+- As análises de subgrupos devem ser consideradas exploratórias. Raramente modificam as conclusões principais do estudo.[@Assmann2000; @Brookes2004]
 
--   A credibilidade das análises de subgrupos é melhor se restrita ao desfecho primário e a alguns subgrupos predefinidos e baseadas em hipóteses biologicamente plausíveis.[@Assmann2000]
+- Sua credibilidade é maior quando se restringem ao desfecho primário e a um número reduzido de subgrupos predefinidos.[@Assmann2000]
 
--   Deve-se verificar se o estudo possui poder estatístico suficiente para detectar tamanhos de efeitos realistas em subgrupos e interpretar com cautela uma diferença de tratamento em um subgrupo quando a comparação global do tratamento não é significativa.[@Assmann2000]
+- Também devem ser fundamentadas em hipóteses biologicamente plausíveis.[@Assmann2000]
+É importante verificar se o estudo possui poder estatístico suficiente para detectar efeitos realistas nos subgrupos.[@Assmann2000]
+
+- Diferenças observadas em um subgrupo devem ser interpretadas com cautela quando o efeito global do tratamento não é estatisticamente significativo.[@Assmann2000]
 
 <br>
 
@@ -258,7 +275,7 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 ### Por que analisar o efeito de interação?
 
--   Em ensaios experimentais aleatorizados, o principal problema de pesquisa é se há uma diferença pré - pós maior em um grupo do que em outro(s).[@bland2011]
+-  O principal problema de pesquisa é se há uma diferença pré - pós maior em um grupo do que em outro(s).[@bland2011]
 
 -   A comparação de subgrupos por meio de testes de significância de hipótese nula separados é enganosa por não testar (comparar) diretamente os tamanhos dos efeitos dos tratamentos.[@Matthews1996]
 
@@ -310,17 +327,19 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 ### Como lidar com os dados perdidos em desfechos?
 
--   Em dados longitudinais com um pequeno número de 'ondas' (medidas repetidas) e poucas variáveis, para análise com modelos de regressão univariados, a imputação paramétrica via especificação condicional completa - também conhecido como imputação multivariada por equações encadeadas (*multivariate imputation by chained equations*, MICE) --- é eficiente do ponto de vista computacional e possui acurácia e precisão para estimação de parâmetros.[@Cao2022; @Heymans2022]
+- Em dados longitudinais com poucas medidas repetidas e um número reduzido de variáveis, a imputação multivariada por equações encadeadas (*multivariate imputation by chained equations*, MICE) é uma abordagem adequada.[@Cao2022; @Heymans2022]
 
--   Para dados perdidos em desfechos dicotômicos, o desempenho dos métodos de imputação multivariada por equações encadeadas (*multivariate imputation by chained equations*, MICE)[@mice] e por correspondência média preditiva (*predictive mean matching*, PMM)[@rubin1986; @little1988a] é similar.[@austin2023]
+- Além de ser computacionalmente eficiente, a MICE produz estimativas acuradas e precisas dos parâmetros.[@Cao2022; @Heymans2022]
+
+- Para dados perdidos em desfechos dicotômicos, a imputação por equações encadeadas (MICE)[@mice] e a correspondência média preditiva (predictive mean matching, PMM)[@rubin1986; @little1988a] apresentam desempenho semelhante.[@austin2023]
 
 <br>
 
 ### Como lidar com os dados perdidos em covariáveis?
 
--   Imputação de dados perdidos de uma covariável pela média dos dados do respectivo grupo permite estimativas não enviesadas dos efeitos do tratamento, preserva o erro tipo I e aumenta o poder estatístico comparado à análise de dados completos.[@Kahan2014]
+- A imputação de valores ausentes de uma covariável pela média do respectivo grupo produz estimativas não enviesadas do efeito do tratamento.[@Kahan2014]
 
--   Para desfechos ausentes, recomenda-se evitar transportar a última observação e, quando aplicável, preferir modelos lineares mistos ou imputação múltipla consistentes com o estimando de interesse.[@mallinckrodt2008]
+- Essa estratégia preserva o erro do tipo I e aumenta o poder estatístico em comparação com a análise de casos completos.[@Kahan2014]
 
 <br>
 

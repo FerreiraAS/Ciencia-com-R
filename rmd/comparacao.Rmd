@@ -420,7 +420,7 @@ tukey_tbl <-
 
 tukey_tbl %>%
   gt::gt() %>%
-  gt::tab_header(title = "Post hoc de Tukey") %>%
+  gt::tab_caption("Post hoc de Tukey") %>%
   gt::cols_label(
     Comparação = "Comparação",
     diff       = "Diferença de médias",
@@ -532,7 +532,7 @@ gh <- rstatix::games_howell_test(trial_welch, Desfecho ~ Grupo) %>%
 gh %>%
   dplyr::select(group1, group2, estimate, conf.low, conf.high, p_fmt) %>%
   gt::gt() %>%
-  gt::tab_header(title = "Post hoc de Games-Howell") %>%
+  gt::tab_caption("Post hoc de Games-Howell") %>%
   gt::cols_label(
     group1 = "Grupo 1",
     group2 = "Grupo 2",
@@ -634,7 +634,7 @@ posthoc_dunn <-
 posthoc_dunn %>%
   dplyr::select(group1, group2, statistic, p, p.adj) %>%
   gt::gt() %>%
-  gt::tab_header(title = "Post hoc de Dunn (Bonferroni)") %>%
+  gt::tab_caption("Post hoc de Dunn (Bonferroni)") %>%
   gt::cols_label(
     group1        = "Grupo 1",
     group2        = "Grupo 2",

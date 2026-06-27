@@ -229,11 +229,17 @@ O pacote *metafor*[@metafor] fornece a função [*conv.fivenum*](https://cran.r-
 
 ### Como avaliar a variação do tamanho do efeito?
 
--   O intervalo de predição contém informação sobre a variação do tamanho do efeito.[@Borenstein2022]
+- O intervalo de predição descreve a variação esperada do tamanho do efeito entre diferentes populações.[@Borenstein2022]
 
--   Se o intervalo de predição não contém a hipótese nula ($H_{0}$), podemos concluir que (a) o tratamento funciona igualmente bem em todas as populações, ou que ele funciona melhor em algumas populações do que em outras.[@Borenstein2022]
+- Se o intervalo de predição não inclui a hipótese nula ($H_{0}$), espera-se que o tratamento apresente efeito na mesma direção em novas populações.[@Borenstein2022]
 
--   Se o intervalo de predição contém a hipótese nula ($H_{0}$), podemos concluir que o tratamento pode ser benéfico em algumas populações, mas prejudicial em outras, de modo que a estimativa pontual (geralmente a média) torna-se amplamente irrelevante. Nesse caso, é recomendado investigar em que populações o tratamento seria benéfico e em quais causaria danos.[@Borenstein2022]
+- O tamanho desse efeito pode variar entre as populações, mesmo quando a hipótese nula não é incluída no intervalo de predição.[@Borenstein2022]
+
+- Se o intervalo de predição inclui a hipótese nula ($H_{0}$), o tratamento pode ser benéfico em algumas populações e ineficaz ou prejudicial em outras.[@Borenstein2022]
+
+- Nessa situação, a estimativa pontual global torna-se menos informativa para a tomada de decisão.[@Borenstein2022]
+
+- Recomenda-se investigar quais características das populações explicam essa variação do efeito do tratamento.[@Borenstein2022]
 
 <br>
 
@@ -276,7 +282,7 @@ O pacote *psychmeta*[@psychmeta] fornece a função [*ma_r*](https://www.rdocume
 
 <br>
 
-### O que é um *forest plot*?
+### O que é *forest plot*?
 
 -   Um *forest plot* é uma representação gráfica dos achados de uma meta-análise. Ele resume os resultados de estudos individuais e apresenta uma estimativa combinada do efeito, permitindo interpretação visual da magnitude, direção e significância estatística dos resultados.[@dettori2021]
 
@@ -562,7 +568,7 @@ par(op)
 
 <br>
 
-### O que um gráfico de cruzes (*crosshair*)?
+### O que é *crosshair*?
 
 -   .[@phillips2010]
 
@@ -679,9 +685,11 @@ O pacote *mada*[@mada] fornece a função [*crosshair*](https://www.rdocumentati
 
 <br>
 
-### O que é um gráfico de funil (*funnel plot*)?
+### O que é *funnel plot*?
 
--   É um gráfico de dispersão que relaciona a estimativa de efeito de cada estudo com uma medida de seu tamanho ou precisão (por exemplo, erro-padrão no eixo vertical, em escala invertida). Em condições ideais (ausência de viés e heterogeneidade), os estudos se distribuem de forma simétrica, formando um “funil invertido”.[@sterne2011]
+-   É um gráfico de dispersão que relaciona a estimativa de efeito de cada estudo com uma medida de seu tamanho ou precisão (por exemplo, erro-padrão no eixo vertical, em escala invertida).[@sterne2011]
+
+- Em condições ideais (ausência de viés e heterogeneidade), os estudos se distribuem de forma simétrica, formando um “funil invertido”.[@sterne2011]
 
 <br>
 

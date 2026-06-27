@@ -35,7 +35,9 @@ dados_linear <-
       ifelse(tratamento == "Intervenção", 5, 0) +
       rnorm(n, mean = 0, sd = 8)
   )
+```
 
+```{r regressao-linear-gtsummary, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
 modelo_linear <- lm(
   desfecho ~ idade + sexo + tratamento,
   data = dados_linear
@@ -355,19 +357,13 @@ modelo_2 <- lm(
   data = dados_linear
 )
 
-modelo_3 <- lm(
-  desfecho ~ idade + sexo + tratamento,
-  data = dados_linear
-)
-
 tbl_comparacao <-
   gtsummary::tbl_merge(
     tbls = list(
       gtsummary::tbl_regression(modelo_1),
-      gtsummary::tbl_regression(modelo_2),
-      gtsummary::tbl_regression(modelo_3)
+      gtsummary::tbl_regression(modelo_2)
     ),
-    tab_spanner = c("**Modelo 1**", "**Modelo 2**", "**Modelo 3**")
+    tab_spanner = c("**Modelo 1**", "**Modelo 2**")
   ) %>%
   gtsummary::modify_caption("Comparação de modelos de regressão linear") %>%
   gtsummary::modify_header(
@@ -377,8 +373,7 @@ tbl_comparacao <-
   gt::tab_source_note(
     paste0(
       "AIC: Modelo 1 = ", round(AIC(modelo_1), 1),
-      "; Modelo 2 = ", round(AIC(modelo_2), 1),
-      "; Modelo 3 = ", round(AIC(modelo_3), 1), "."
+      "; Modelo 2 = ", round(AIC(modelo_2), 1), "."
     )
   )
 
