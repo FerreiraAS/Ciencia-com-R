@@ -65,7 +65,7 @@ bib <- RefManageR::ReadBib(file.path("./bib", "references.bib"))
 
 # save all posts
 source(file.path("R", "savePost.R"), local = knitr::knit_global())
-for (i in 1:nrow(df)) {
+for (i in 2269:nrow(df)) {
   # progress bar
   cat(paste0(round(i / nrow(df) * 100), '% completed'))
   SavePost_df(entry = df[i, ], bib = bib)
