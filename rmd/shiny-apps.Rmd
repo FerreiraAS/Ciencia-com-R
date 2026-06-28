@@ -46,7 +46,7 @@ screenshot <- function(b, img_path,
   
   magick::image_read(img_path) %>%
     magick::image_shadow() %>%
-    magick::image_write(img_path, quality = 100)
+    magick::image_write(img_path, quality = 100, format = "png")
 }
 
 # get URL screenshot

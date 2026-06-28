@@ -123,7 +123,7 @@ jpeg_file <- file.path(out_path, file.name)
 
 png_file <- sub("\\.jpeg$", ".png", jpeg_file)
 magick::image_read(jpeg_file) %>%
-  magick::image_write(path = png_file, format = "png")
+  magick::image_write(path = png_file, quality = 100, format = "png")
 
 # delete JPEG
 invisible(file.remove(jpeg_file, showWarnings = FALSE))

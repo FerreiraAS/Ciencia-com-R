@@ -1139,6 +1139,8 @@ O pacote *tiff*[@tiff] fornece a função `writeTIFF` para exportar gráficos em
 
 <br>
 
+\blandscape
+
 ```{r fluxograma-prisma, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Fluxograma baseado no *Preferred Reporting Items for Systematic reviews and Meta-Analyses* (PRISMA)."}
 # Load the package template
 csvFile <- system.file("extdata", "PRISMA.csv", package = "PRISMA2020")
@@ -1234,8 +1236,176 @@ plot <- PRISMA2020::PRISMA_flowdiagram(
   other = TRUE
 )
 
-plot
+file.name <- "fluxograma-prisma.png"
+
+pandoc_to <- knitr::pandoc_to()
+
+# Decide output directory
+out_path <- switch(
+  pandoc_to,
+  "latex"  = latex.path,
+  "beamer" = latex.path,
+  "pdf"    = latex.path,
+  "epub"   = html.path,
+  "html"   = html.path,
+  "html4"  = html.path,
+  "html5"  = html.path,
+  "docx"   = html.path,
+  "pptx"   = html.path,
+  html.path
+)
+
+html_file <- tempfile(fileext = ".html")
+png_file  <- file.path(out_path, "fluxograma-prisma.png")
+
+htmlwidgets::saveWidget(plot, html_file, selfcontained = TRUE)
+
+webshot2::webshot(
+  html_file,
+  png_file
+)
+
+# delete HTML file after conversion to PNG
+invisible(file.remove(html_file, showWarnings = FALSE))
+
+# knitr::include_graphics(png_file)
 ```
+
+<br>
+
+```{r fluxograma-consort, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Fluxograma baseado no *Consolidated Standards of Reporting Trials* (CONSORT)."}
+# Reprodutibilidade
+set.seed(123)
+
+# simulação
+N <- 240
+
+dados <- data.frame(
+  trialno = 1:N,
+  exclusion = NA_character_,
+  arm = NA_character_,
+  arm3 = NA_character_,
+  subjid_notdosed = NA_character_,
+  followup = NA_character_,
+  lost_followup = NA_character_,
+  assessed = NA_character_,
+  no_value = NA_character_,
+  mitt = NA_character_,
+  stringsAsFactors = FALSE
+)
+
+## Screening
+exc <- sample(1:N, 40)
+
+dados$exclusion[exc] <-
+  sample(c(
+    "Não atende critérios",
+    "Recusou participar",
+    "Outros"
+  ),
+  length(exc),
+  replace = TRUE)
+
+## Randomização
+
+inc <- which(is.na(dados$exclusion))
+
+dados$arm[inc] <-
+  sample(
+    c("Controle", "Intervenção"),
+    length(inc),
+    replace = TRUE
+  )
+
+## Participantes tratados
+
+nao_tratados <- sample(inc, 12)
+
+dados$arm3[inc] <- dados$arm[inc]
+
+dados$subjid_notdosed[nao_tratados] <-
+  sample(c(
+    "Retirou consentimento",
+    "Evento adverso",
+    "Erro administrativo"
+  ),
+  length(nao_tratados),
+  replace = TRUE)
+
+## Seguimento
+
+tratados <- setdiff(inc, nao_tratados)
+
+dados$followup[tratados] <- "Seguimento completo"
+
+perdidos <- sample(tratados, 10)
+
+dados$lost_followup[perdidos] <-
+  sample(c(
+    "Perda de contato",
+    "Mudança de cidade",
+    "Desistência"
+  ),
+  length(perdidos),
+  replace = TRUE)
+
+## Avaliação do desfecho
+
+avaliados <- setdiff(tratados, perdidos)
+
+dados$assessed[avaliados] <- "Avaliado"
+
+nao_avaliados <- sample(avaliados, 8)
+
+dados$no_value[nao_avaliados] <-
+  sample(c(
+    "Exame ausente",
+    "Dados incompletos"
+  ),
+  length(nao_avaliados),
+  replace = TRUE)
+
+## mITT
+
+incluidos <- setdiff(avaliados, nao_avaliados)
+
+dados$mitt[incluidos] <- "Incluído"
+
+## Fluxograma
+
+p <- consort::consort_plot(
+  data = dados,
+  orders = list(
+    c(trialno = "População"),
+    c(exclusion = "Excluídos"),
+    c(arm = "Randomizados"),
+    c(
+      arm3 = "",
+      subjid_notdosed = "Não tratados"
+    ),
+    c(
+      followup = "Seguimento",
+      lost_followup = "Perdas"
+    ),
+    c(assessed = "Avaliados"),
+    c(no_value = "Não avaliados"),
+    c(mitt = "Incluídos na análise")
+  ),
+  side_box = c("exclusion", "no_value"),
+  allocation = c("arm", "arm3"),
+  labels = c(
+    "1" = "Elegibilidade",
+    "2" = "Randomização",
+    "5" = "Seguimento",
+    "7" = "Análise"
+  ),
+  cex = 0.5
+)
+
+plot(p)
+```
+
+\elandscape
 
 <br>
 
