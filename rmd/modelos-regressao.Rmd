@@ -724,27 +724,11 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-### O que são modelos de regressão com efeitos mistos?
-
--   Modelos de efeitos mistos incorporam efeitos fixos (coeficientes comuns a todos os indivíduos) e efeitos aleatórios (variações específicas de grupos ou indivíduos).[@REF]
-
--   Usados para dados hierárquicos ou longitudinais, onde observações estão agrupadas.[@REF]
-
--   Permitem modelar correlações intra-grupo e variabilidade entre grupos.[@REF]
+## Quais são os principais métodos de estimação em regressão linear?
 
 <br>
 
-### O que são modelos de regressão com efeitos mistos generalizados?
-
--   Modelos de efeitos mistos generalizados (GLMM) estendem os modelos de efeitos mistos para variáveis resposta que seguem distribuições da família exponencial (ex.: binomial, Poisson).[@REF]
-
--   Combinam a flexibilidade dos modelos lineares generalizados com a capacidade de modelar correlações e variabilidade entre grupos.[@REF]
-
--   Usados para dados hierárquicos ou longitudinais com desfechos não normais.[@REF]
-
-<br>
-
-### O que são modelos de regressão por mínimos quadrados ordinários?
+### O que é a regressão por mínimos quadrados ordinários (OLS)?
 
 -  A regressão por mínimos quadrados ordinários (OLS) \@ref(eq:ols) estima os coeficientes $\hat{\boldsymbol{\beta}}^{OLS}$ minimizando a soma dos quadrados dos resíduos, ou seja, a diferença entre os valores observados $y_i$ e os valores preditos pelo modelo linear $X\hat{\boldsymbol{\beta}}$.[@REF]
 
@@ -765,7 +749,134 @@ y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j
 
 <br>
 
-### O que são modelos de regressão Ridge?
+### Por que utilizar modelos de regressão regularizados?
+
+- A regressão por mínimos quadrados ordinários pode apresentar elevada variância quando há multicolinearidade, muitos preditores ou risco de overfitting.[@REF]
+
+- Modelos regularizados introduzem uma penalização sobre os coeficientes, aceitando um pequeno aumento no viés em troca de uma redução da variância e, frequentemente, de melhor capacidade de generalização.[@REF]
+
+- Os principais modelos regularizados são Ridge, *Least Absolute Shrinkage and Selection Operator* (LASSO) e *elastic net*.[@REF]
+
+<br>
+
+```{r regr-vies-variancia, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Trade-off entre viés e variância."}
+# Simulação de Viés (Bias) e Variância
+
+# repdotutibilidade
+set.seed(1234)
+
+# Dados verdadeiros
+n <- 60
+valor_verdadeiro <- seq(-2, 17, length.out = n)
+
+# Função para gerar um cenário
+gera_cenario <- function(vies = 0,
+                         desvio = 0.3,
+                         titulo = "") {
+  valor_previsto <- valor_verdadeiro +
+    vies +
+    rnorm(n, mean = 0, sd = desvio)
+
+  erro <- valor_previsto - valor_verdadeiro
+
+  erro_medio <- mean(erro)
+  variancia <- var(erro)
+
+  dados <- data.frame(
+    verdadeiro = valor_verdadeiro,
+    previsto = valor_previsto
+  )
+
+  ggplot2::ggplot(
+    dados,
+    ggplot2::aes(
+      x = verdadeiro,
+      y = previsto
+    )
+  ) +
+    ggplot2::geom_segment(
+      ggplot2::aes(
+        xend = verdadeiro,
+        yend = verdadeiro
+      ),
+      colour = "gray75",
+      linewidth = 0.4
+    ) +
+    ggplot2::geom_abline(
+      intercept = 0,
+      slope = 1,
+      colour = "#1f77b4",
+      linewidth = 1.2
+    ) +
+    ggplot2::geom_abline(
+      intercept = erro_medio,
+      slope = 1,
+      colour = "#ff7f0e",
+      linetype = 2,
+      linewidth = 1
+    ) +
+    ggplot2::geom_point(
+      size = 2.6,
+      colour = "#1f77b4"
+    ) +
+    ggplot2::annotate(
+      "text",
+      x = -1.8,
+      y = 17.2,
+      hjust = 0,
+      size = 4.2,
+      label = paste0(
+        "Pontos: ", n,
+        "\nErro médio = ", sprintf("%.2f", erro_medio),
+        "\nVariância = ", sprintf("%.2f", variancia)
+      )
+    ) +
+    ggplot2::labs(
+      title = titulo,
+      x = "Valor verdadeiro",
+      y = "Valor previsto"
+    ) +
+    ggplot2::coord_cartesian(
+      xlim = c(-2, 17.5),
+      ylim = c(-2, 18)
+    ) +
+    ggplot2::theme_bw(base_size = 13)
+}
+
+# Quatro cenários
+
+grafico1 <- gera_cenario(
+  vies = 0,
+  desvio = 0.25,
+  titulo = "Baixo Viés / Baixa Variância"
+)
+
+grafico2 <- gera_cenario(
+  vies = 3,
+  desvio = 0.25,
+  titulo = "Alto Viés / Baixa Variância"
+)
+
+grafico3 <- gera_cenario(
+  vies = 0,
+  desvio = 2,
+  titulo = "Baixo Viés / Alta Variância"
+)
+
+grafico4 <- gera_cenario(
+  vies = 3,
+  desvio = 2,
+  titulo = "Alto Viés / Alta Variância"
+)
+
+# Figura final
+(grafico1 | grafico2) /
+(grafico3 | grafico4)
+```
+
+<br>
+
+### O que é a regressão Ridge?
 
 -   Regressão Ridge \@ref(eq:ridge) é um modelo linear regularizado que adiciona uma penalização L2 à soma dos quadrados dos coeficientes.[@REF]
 
@@ -826,7 +937,7 @@ ggplot2::ggplot(data, ggplot2::aes(x = X, y = Y)) +
 
 <br>
 
-### O que são modelos de regressão LASSO?
+### O que é a regressão LASSO?
 
 -   Regressão *Least Absolute Shrinkage and Selection Operator* (LASSO) \@ref(eq:lasso) utiliza penalização L1, que pode zerar coeficientes.[@REF]
 
@@ -857,7 +968,7 @@ y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j
 
 <br>
 
-### O que são modelos de regressão *elastic net*?
+### O que é a regressão *elastic net*?
 
 -  Regressão *elastic net* \@ref(eq:elastic-net) combina penalizações L1 (LASSO) e L2 (Ridge), controladas por um parâmetro $\alpha$.[@REF]
 
