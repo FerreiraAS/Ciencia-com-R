@@ -51,9 +51,9 @@ SavePost_df <- function(entry, bib) {
     
     tex <- readLines(file.path("tex", "post_figure.tex"))
     
-    tex <- gsub("CAPITULO", chapter, tex)
-    tex <- gsub("SECAO", section, tex)
-    tex <- gsub("FIGURA", graphic, tex)
+    tex <- gsub("CAPITULO", chapter, tex, fixed = TRUE)
+    tex <- gsub("SECAO", section, tex, fixed = TRUE)
+    tex <- gsub("FIGURA", graphic, tex, fixed = TRUE)
     tex <- gsub("LEGENDA", ifelse(is.na(caption), "", caption), tex)
     
     writeLines(tex, file.path("posts", "POST.tex"))
@@ -130,9 +130,9 @@ SavePost_df <- function(entry, bib) {
       perl = TRUE
     )
     
-    tex <- gsub("CAPITULO", chapter, tex)
-    tex <- gsub("SECAO", section, tex)
-    tex <- gsub("ICONE", infobox_icon, tex)
+    tex <- gsub("CAPITULO", chapter, tex, fixed = TRUE)
+    tex <- gsub("SECAO", section, tex, fixed = TRUE)
+    tex <- gsub("ICONE", infobox_icon, tex, fixed = TRUE)
     tex <- gsub("INFOBOX", infobox_text, tex, fixed = TRUE)
     
     writeLines(tex, file.path("posts", "POST.tex"))
@@ -263,11 +263,11 @@ SavePost_df <- function(entry, bib) {
   
   # ---------- TeX ----------
   tex <- readLines(file.path("tex", "POST.tex"))
-  tex <- gsub("CAPITULO", chapter, tex)
-  tex <- gsub("SECAO", section, tex)
-  tex <- gsub("QUESTAO", question, tex)
-  tex <- gsub("RESPOSTA", answer, tex)
-  tex <- gsub("CITACAO", citation_block, tex)
+  tex <- gsub("CAPITULO", chapter, tex, fixed = TRUE)
+  tex <- gsub("SECAO", section, tex, fixed = TRUE)
+  tex <- gsub("QUESTAO", question, tex, fixed = TRUE)
+  tex <- gsub("RESPOSTA", answer, tex, fixed = TRUE)
+  tex <- gsub("CITACAO", citation_block, tex, fixed = TRUE)
   
   writeLines(tex, file.path("posts", "POST.tex"))
   
