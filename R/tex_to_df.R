@@ -1,40 +1,38 @@
 normalize_titles <- function(x) {
-  gsub(
-    "\\\\emph\\{([^}]*)\\}",
-    "\\\\\\\\emph{\\1}",
-    x
-  )
+  gsub("\\\\emph\\{([^}]*)\\}", "\\\\\\\\emph{\\1}", x)
 }
 
 extract_latex_argument <- function(line, command) {
-  
   pattern <- paste0("\\\\", command, "\\{")
   start <- regexpr(pattern, line)
-  if (start == -1) return(NA_character_)
-  
+  if (start == -1)
+    return(NA_character_)
   pos <- start + attr(start, "match.length")
   depth <- 1
   chars <- strsplit(line, "")[[1]]
   out <- character()
-  
   while (pos <= length(chars) && depth > 0) {
     ch <- chars[pos]
-    if (ch == "{") depth <- depth + 1
-    if (ch == "}") depth <- depth - 1
-    if (depth > 0) out <- c(out, ch)
+    if (ch == "{")
+      depth <- depth + 1
+    if (ch == "}")
+      depth <- depth - 1
+    if (depth > 0)
+      out <- c(out, ch)
     pos <- pos + 1
   }
-  
   paste(out, collapse = "")
 }
 
 strip_outer_textbf <- function(text) {
-  if (is.na(text)) return(text)
-  
+  if (is.na(text))
+    return(text)
   m <- regexec("^\\\\textbf\\{(.*)\\}$", text)
   res <- regmatches(text, m)[[1]]
-  
-  if (length(res) > 1) res[2] else text
+  if (length(res) > 1)
+    res[2]
+  else
+    text
 }
 
 # Remove \texorpdfstring{A}{B} -> A
@@ -50,46 +48,63 @@ normalize_texorpdfstring <- function(text) {
 
 # Extrai o argumento de \includegraphics dentro de \centering
 detect_includegraphics <- function(line) {
-  stringr::str_detect(
-    line,
-    "\\\\centering[^\\n]*\\\\includegraphics"
-  )
+  stringr::str_detect(line, "\\\\centering[^\\n]*\\\\includegraphics")
 }
 
 extract_includegraphics <- function(tex_vec, i, max_lookahead = 3) {
-  
   # collapse current + next few lines
   end <- min(length(tex_vec), i + max_lookahead)
   block <- paste(tex_vec[i:end], collapse = " ")
-  
+  m <- regexec("\\\\includegraphics(?:\\[[^\\]]*\\])?\\{([^}]+)\\}",
+               block,
+               perl = TRUE)
+  res <- regmatches(block, m)[[1]]
+  if (length(res) >= 2)
+    res[2]
+  else
+    NA_character_
+}
+
+detect_infobox <- function(line) {
+  stringr::str_detect(line, "^\\\\begin\\{infobox\\}")
+}
+
+extract_infobox <- function(tex_vec, start_index) {
+  # argumento da infobox
+  first_line <- tex_vec[start_index]
   m <- regexec(
-    "\\\\includegraphics(?:\\[[^\\]]*\\])?\\{([^}]+)\\}",
-    block,
+    "^\\\\begin\\{infobox\\}\\{([^}]*)\\}",
+    first_line,
     perl = TRUE
   )
-  
-  res <- regmatches(block, m)[[1]]
-  
-  if (length(res) >= 2) res[2] else NA_character_
+  res <- regmatches(first_line, m)[[1]]
+  icon <- if (length(res) >= 2) res[2] else NA_character_
+  # conteúdo
+  content <- character()
+  j <- start_index + 1
+  while (j <= length(tex_vec) &&
+         !stringr::str_detect(tex_vec[j], "^\\\\end\\{infobox\\}")) {
+    content <- c(content, tex_vec[j])
+    j <- j + 1
+  }
+  list(
+    icon = icon,
+    text = paste(content, collapse = "\n"),
+    end  = j
+  )
 }
 
 # Extrai legenda associada a um includegraphics
 extract_caption <- function(tex_vec, start_index, max_lookahead = 5) {
-  
   end <- min(length(tex_vec), start_index + max_lookahead)
-  
   for (j in seq(start_index + 1, end)) {
     line <- tex_vec[j]
-    
     if (stringr::str_detect(line, "^\\\\caption\\{")) {
       return(extract_latex_argument(line, "caption"))
     }
-    
     # Stop early if another includegraphics or section starts
-    if (stringr::str_detect(
-      line,
-      "^\\\\(includegraphics|section|subsection|chapter)"
-    )) {
+    if (stringr::str_detect(line,
+                            "^\\\\(includegraphics|section|subsection|chapter)")) {
       break
     }
   }
@@ -98,21 +113,16 @@ extract_caption <- function(tex_vec, start_index, max_lookahead = 5) {
 }
 
 escape_markdown_math <- function(text) {
-  if (is.na(text)) return(text)
-  
+  if (is.na(text))
+    return(text)
   text <- gsub("\\\\", "\\\\\\\\", text)
   text <- gsub("\\$", "\\\\$", text)
-  
   text
 }
 
 # Extrai referências citadas no texto
 extract_references <- function(text) {
-  refs <- stringr::str_extract_all(
-    text,
-    "(?<=\\\\citeproc\\{)[^}]+"
-  )[[1]]
-  
+  refs <- stringr::str_extract_all(text, "(?<=\\\\citeproc\\{)[^}]+")[[1]]
   if (length(refs) == 0) {
     NA_character_
   } else {
@@ -123,31 +133,23 @@ extract_references <- function(text) {
 
 # Parser principal
 parse_tex_structure <- function(tex_vec) {
-  
   # Pré-normalizações críticas
   tex_vec <- normalize_texorpdfstring(tex_vec)
-  
   current_chapter    <- NA_character_
   current_section    <- NA_character_
   current_subsection <- NA_character_
-  
   rows <- list()
   i <- 1
-  
   while (i <= length(tex_vec)) {
     line <- tex_vec[i]
-    
     # ---- Chapter ----
     if (stringr::str_detect(line, "^\\\\chapter\\{")) {
       current_chapter <- extract_latex_argument(line, "chapter")
       current_chapter <- strip_outer_textbf(current_chapter)
       current_chapter <- normalize_titles(current_chapter)
-      
       current_section <- NA_character_
-      
       current_subsection <- NA_character_
     }
-    
     # ---- Section ----
     else if (stringr::str_detect(line, "^\\\\section\\{")) {
       current_section <- extract_latex_argument(line, "section")
@@ -155,75 +157,90 @@ parse_tex_structure <- function(tex_vec) {
       
       current_subsection <- NA_character_
     }
-    
     # ---- Subsection ----
     else if (stringr::str_detect(line, "^\\\\subsection\\{")) {
       current_subsection <- extract_latex_argument(line, "subsection")
       current_subsection <- normalize_titles(current_subsection)
     }
-    
     # ---- Item ----
     else if (stringr::str_detect(line, "^\\\\item")) {
-      
       # Texto na mesma linha do \item
-      item_text <- stringr::str_trim(
-        stringr::str_remove(line, "^\\\\item\\s*")
-      )
-      
+      item_text <- stringr::str_trim(stringr::str_remove(line, "^\\\\item\\s*"))
       # Look-ahead se o item estiver vazio
       if (item_text == "") {
         j <- i + 1
-        while (
-          j <= length(tex_vec) &&
-          (tex_vec[j] == "" || stringr::str_detect(tex_vec[j], "^\\\\"))
-        ) {
+        while (j <= length(tex_vec) &&
+               (tex_vec[j] == "" ||
+                stringr::str_detect(tex_vec[j], "^\\\\"))) {
           j <- j + 1
         }
-        
         if (j <= length(tex_vec)) {
           item_text <- stringr::str_trim(tex_vec[j])
           i <- j
         }
       }
-      
       rows[[length(rows) + 1]] <- tibble::tibble(
-        chapter    = current_chapter,
-        section    = current_section,
-        subsection = current_subsection,
-        item       = item_text,
-        graphic    = NA_character_,
-        caption    = NA_character_,
-        references = extract_references(item_text)
+        type          = "item",
+        chapter       = current_chapter,
+        section       = current_section,
+        subsection    = current_subsection,
+        item          = item_text,
+        graphic       = NA_character_,
+        caption       = NA_character_,
+        infobox_icon  = NA_character_,
+        infobox_text  = NA_character_,
+        references    = extract_references(item_text)
       )
-      
       i <- i + 1
       next
-    } 
+    }
     # ---- Includegraphics ----
     else if (detect_includegraphics(line)) {
-      
       graphic_path <- extract_includegraphics(tex_vec, i)
       
       caption <- extract_caption(tex_vec, i)
       caption_safe <- escape_markdown_math(caption)
+      rows[[length(rows) + 1]] <- tibble::tibble(
+        type          = "graphic",
+        chapter       = current_chapter,
+        section       = current_section,
+        subsection    = current_subsection,
+        item          = NA_character_,
+        graphic       = graphic_path,
+        caption       = caption_safe,
+        infobox_icon  = NA_character_,
+        infobox_text  = NA_character_,
+        references    = NA_character_
+      )
+      i <- i + 1
+      next
+    }
+    
+    # ---- Infobox ----
+    else if (detect_infobox(line)) {
       
+      box <- extract_infobox(tex_vec, i)
+      
+      print(dput(box$text))
       
       rows[[length(rows) + 1]] <- tibble::tibble(
-        chapter    = current_chapter,
-        section    = current_section,
-        subsection = current_subsection,
-        item       = NA_character_,
-        graphic    = graphic_path,
-        caption    = caption_safe,
-        references = NA_character_
+        type          = "infobox",
+        chapter       = current_chapter,
+        section       = current_section,
+        subsection    = current_subsection,
+        item          = NA_character_,
+        graphic       = NA_character_,
+        caption       = NA_character_,
+        infobox_icon  = box$icon,
+        infobox_text  = box$text,
+        references    = extract_references(box$text)
       )
       
-      i <- i + 1
+      i <- box$end + 1
       next
     }
     
     i <- i + 1
   }
-  
   dplyr::bind_rows(rows)
 }

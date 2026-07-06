@@ -62,29 +62,262 @@ O pacote *equatiomatic*[@equatiomatic] fornece a função `extract_eq` para extr
 
 <br>
 
-## Preditores e desfechos
-
-<br>
-
-### O que são desfechos de um modelo?
-
--   .[@REF]
-
-<br>
-
-### O que são preditores de um modelo?
-
--   .[@REF]
-
-<br>
-
-### Como selecionar preditores para um modelo?
-
--   .[@REF]
-
-<br>
-
 ## Estruturas de análise de regressão
+
+<br>
+
+### Quais são os tipos de regressão?
+
+-  A regressão pode ser classificada em univariada (simples), multivariável (múltipla) e multivariada, dependendo do número de variáveis dependentes e independentes envolvidas no modelo.[@Hidalgo2013]
+
+<br>
+
+```{r regressao-tipos, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Tipos de regressão: univariada (simples), multivariável (múltipla) e multivariada."}
+grid::grid.newpage()
+
+# Funções auxiliares
+caixa <- function(x, y, w, h, texto, fill = "white") {
+  grid::grid.roundrect(
+    x = x,
+    y = y,
+    width = w,
+    height = h,
+    r = grid::unit(0.02, "snpc"),
+    gp = grid::gpar(
+      fill = fill,
+      col = "black",
+      lwd = 1.2
+    )
+  )
+  grid::grid.text(
+    texto,
+    x = x,
+    y = y,
+    gp = grid::gpar(fontsize = 10, fontface = "bold")
+  )
+}
+
+elipse <- function(x,
+                   y,
+                   w,
+                   h,
+                   texto,
+                   fill = "grey95",
+                   border = "black") {
+  grid::grid.circle(
+    x = x,
+    y = y,
+    r = min(w, h) / 2,
+    gp = grid::gpar(fill = fill, col = border, lwd = 2)
+  )
+  grid::grid.text(
+    texto,
+    x = x,
+    y = y,
+    gp = grid::gpar(fontsize = 10, fontface = "bold")
+  )
+}
+
+seta <- function(x0, y0, x1, y1, col = "black") {
+  grid::grid.lines(
+    x = grid::unit(c(x0, x1), "npc"),
+    y = grid::unit(c(y0, y1), "npc"),
+    gp = grid::gpar(col = col, lwd = 2),
+    arrow = grid::arrow(length = grid::unit(0.18, "cm"))
+  )
+}
+
+rodape <- function(x, texto, col) {
+  grid::grid.roundrect(
+    x = x,
+    y = .08,
+    width = .22,
+    height = .06,
+    r = grid::unit(.01, "snpc"),
+    gp = grid::gpar(
+      fill = "grey95",
+      col = col,
+      lwd = 2
+    )
+  )
+  grid::grid.text(
+    texto,
+    x = x,
+    y = .08,
+    gp = grid::gpar(
+      fontsize = 10,
+      col = col
+    )
+  )
+}
+
+# Painéis
+painel <- function(x0, x1, border) {
+  grid::grid.roundrect(
+    x = (x0 + x1) / 2,
+    y = .50,
+    width = (x1 - x0),
+    height = .95,
+    r = grid::unit(.01, "snpc"),
+    gp = grid::gpar(
+      fill = "white",
+      col = border,
+      lwd = 2
+    )
+  )
+}
+
+painel(.02, .31, "black")
+painel(.35, .64, "black")
+painel(.68, .98, "black")
+
+# Títulos
+
+grid::grid.text(
+  "Univariado",
+  x = .165,
+  y = .94,
+  gp = grid::gpar(
+    fontsize = 10,
+    fontface = "bold",
+    col = "black"
+  )
+)
+
+grid::grid.text(
+  "Multivariável",
+  x = .495,
+  y = .94,
+  gp = grid::gpar(
+    fontsize = 10,
+    fontface = "bold",
+    col = "black"
+  )
+)
+
+grid::grid.text(
+  "Multivariado",
+  x = .83,
+  y = .94,
+  gp = grid::gpar(
+    fontsize = 10,
+    fontface = "bold",
+    col = "black"
+  )
+)
+
+# Subtítulos
+
+grid::grid.text(
+  "Uma variável resposta\nUm preditor",
+  x = .165,
+  y = .87,
+  gp = grid::gpar(fontsize = 10, col = "black")
+)
+
+grid::grid.text(
+  "Uma variável resposta\nMúltiplos preditores",
+  x = .495,
+  y = .87,
+  gp = grid::gpar(fontsize = 10, col = "black")
+)
+
+grid::grid.text(
+  "Múltiplas variáveis resposta\nmodeladas conjuntamente",
+  x = .83,
+  y = .87,
+  gp = grid::gpar(fontsize = 10, col = "black")
+)
+
+# UNIVARIADO
+caixa(.08, .45, .08, .08, expression(X[1]))
+elipse(.23, .45, .10, .10, expression(Y[1]))
+seta(.12, .45, .18, .45)
+
+# MULTIVARIÁVEL
+
+ys <- c(.60, .48, .36, .24)
+preditores <- c(expression(X[1]),
+                expression(X[2]),
+                expression(X[3]),
+                expression(X[4]))
+
+for (i in 1:4) {
+  caixa(.41, ys[i], .09, .07, preditores[i])
+  seta(.455, ys[i], .56, .45)
+}
+elipse(.60, .45, .11, .11, expression(Y[1]))
+
+# MULTIVARIADO
+
+for (i in 1:4) {
+  caixa(.74, ys[i], .09, .07, preditores[i])
+}
+
+yr <- c(.60, .45, .30)
+respostas  <- c(expression(Y[1]), expression(Y[2]), expression(Y[3]))
+
+for (i in 1:3) {
+  elipse(
+    .90,
+    yr[i],
+    .09,
+    .09,
+    respostas[i],
+    fill = "grey95",
+    border = "black"
+  )
+}
+
+# Ligações X -> Y
+
+for (i in 1:4) {
+  for (j in 1:3) {
+    seta(.785, ys[i], .855, yr[j], "black")
+  }
+}
+
+# Correlação entre respostas
+
+grid::grid.lines(
+  x = grid::unit(c(.90, .90), "npc"),
+  y = grid::unit(c(.56, .49), "npc"),
+  gp = grid::gpar(col = "black", lwd = 2),
+  arrow = grid::arrow(
+    ends = "both",
+    length = grid::unit(0.08, "cm")
+  )
+)
+
+grid::grid.lines(
+  x = grid::unit(c(.90, .90), "npc"),
+  y = grid::unit(c(.41, .34), "npc"),
+  gp = grid::gpar(col = "black", lwd = 2),
+  arrow = grid::arrow(
+    ends = "both",
+    length = grid::unit(0.08, "cm")
+  )
+)
+
+grid::grid.curve(
+  x1 = .94,
+  y1 = .60,
+  x2 = .94,
+  y2 = .30,
+  curvature = -0.4,
+  gp = grid::gpar(col = "black", lwd = 2),
+  arrow = grid::arrow(
+    ends = "both",
+    length = grid::unit(0.08, "cm")
+  )
+)
+
+# Rodapé
+
+rodape(.165, "1 X → 1 Y", "black")
+rodape(.495, "Vários X → 1 Y", "black")
+rodape(.83, "Vários X → Vários Y", "black")
+```
 
 <br>
 

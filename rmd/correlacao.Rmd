@@ -10,11 +10,11 @@
 
 <br>
 
-## Correlação de Pearson ($r$)
+## Gráfico de correlação
 
 <br>
 
-```{r correlacao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Diferentes forças e direção de correlação entre duas variáveis X e Y."}
+```{r correlacao-grafico, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Diferentes forças e direção de correlação entre duas variáveis X e Y."}
 # Generate data with given correlation
 generate_data <- function(n, rho) {
   Sigma <- base::matrix(c(1, rho, rho, 1), ncol = 2)
@@ -80,6 +80,130 @@ ggplot2::ggplot(layout_df, ggplot2::aes(x = x, y = y)) +
 
 <br>
 
+## Matriz de correlação
+
+<br>
+
+```{r correlacao-matrix, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 120L
+
+dados <-
+  tibble::tibble(
+    `Variável 1` = rnorm(n, mean = 50, sd = 10),
+    `Variável 2` = 40 + 0.6 * `Variável 1` + rnorm(n, sd = 8),
+    `Variável 3` = rnorm(n, mean = 1.70, sd = 0.08),
+    `Variável 4` = `Variável 2` / (`Variável 3`^2)
+  )
+
+mat <-
+  cor(
+    dados,
+    use = "pairwise.complete.obs"
+  )
+
+corrplot::corrplot(
+  mat,
+  method = "color",
+  type = "upper",
+  addCoef.col = "black",
+  number.digits = 2,
+  tl.col = "black",
+  tl.srt = 45,
+  diag = FALSE
+)
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função `cor` para calcular matrizes de correlação utilizando diferentes coeficientes, como Pearson, Spearman e Kendall.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *corrplot*[@corrplot] fornece a função `corrplot` para visualização da matriz de correlação.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *corrplot*[@corrplot] fornece a função `cor.mtest` para calcular os P-valores e intervalos de confiança da matriz de correlação.
+:::
+
+<br>
+
+## Correlação de Pearson ($r$)
+
+<br>
+
+```{r pearson, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 120L
+
+dados <-
+  tibble::tibble(
+    X = rnorm(n),
+    Y = 0.75 * X + rnorm(n, sd = 0.6)
+  )
+
+resultado <-
+  correlation::correlation(
+    dados,
+    method = "pearson"
+  )
+
+tbl_pearson <-
+  resultado %>%
+  dplyr::mutate(
+    `IC 95%` = sprintf("[%.3f, %.3f]", CI_low, CI_high),
+    p = dplyr::if_else(
+      p < 0.001,
+      "<0.001",
+      sprintf("%.3f", p)
+    )
+  ) %>%
+  dplyr::select(
+    Parameter1,
+    Parameter2,
+    r,
+    `IC 95%`,
+    p
+  ) %>%
+  dplyr::rename(
+    Variável_1 = Parameter1,
+    Variável_2 = Parameter2,
+    Correlação = r
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "r de Pearson",
+    `IC 95%` = "IC 95%",
+    p = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação de Pearson"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%."
+  )
+
+tbl_pearson
+```
+
+<br>
+
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *stats*[@stats] fornece a função `cor.test` para calcular o coeficiente de correlação de Pearson ($r$).
 :::
@@ -108,8 +232,68 @@ O pacote *psychmeta*[@psychmeta] fornece a função `correct_r` para calcular o 
 
 <br>
 
-```{r}
+```{r spearman, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
 
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 120L
+
+dados <-
+  tibble::tibble(
+    X = rlnorm(n, 2, 0.5),
+    Y = X^0.7 + rnorm(n, 0, 1)
+  )
+
+resultado <-
+  correlation::correlation(
+    dados,
+    method = "spearman"
+  )
+
+tbl_spearman <-
+  resultado %>%
+  dplyr::mutate(
+    `IC 95%` = sprintf("[%.3f, %.3f]", CI_low, CI_high),
+    p = dplyr::if_else(
+      p < 0.001,
+      "<0.001",
+      sprintf("%.3f", p)
+    )
+  ) %>%
+  dplyr::select(
+    Parameter1,
+    Parameter2,
+    rho,
+    `IC 95%`,
+    p
+  ) %>%
+  dplyr::rename(
+    Variável_1 = Parameter1,
+    Variável_2 = Parameter2,
+    Correlação = rho
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "ρ de Spearman",
+    `IC 95%` = "IC 95%",
+    p = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação de Spearman"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%."
+  )
+
+tbl_spearman
 ```
 
 <br>
@@ -130,8 +314,68 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
-```{r}
+```{r kendall, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
 
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 120L
+
+dados <-
+  tibble::tibble(
+    X = sample(1:10, n, replace = TRUE),
+    Y = sample(1:10, n, replace = TRUE)
+  )
+
+resultado <-
+  correlation::correlation(
+    dados,
+    method = "kendall"
+  )
+
+tbl_kendall <-
+  resultado %>%
+  dplyr::mutate(
+    `IC 95%` = sprintf("[%.3f, %.3f]", CI_low, CI_high),
+    p = dplyr::if_else(
+      p < 0.001,
+      "<0.001",
+      sprintf("%.3f", p)
+    )
+  ) %>%
+  dplyr::select(
+    Parameter1,
+    Parameter2,
+    tau,
+    `IC 95%`,
+    p
+  ) %>%
+  dplyr::rename(
+    Variável_1 = Parameter1,
+    Variável_2 = Parameter2,
+    Correlação = tau
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "τ de Kendall",
+    `IC 95%` = "IC 95%",
+    p = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação de Kendall"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%."
+  )
+
+tbl_kendall
 ```
 
 <br>
@@ -148,18 +392,144 @@ O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece 
 
 <br>
 
-## Correlação bisserial ($r_{s}$)
+## Correlação bisserial ($r_{b}$)
 
 <br>
 
-```{r}
+```{r biserial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
 
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 200L
+
+grupo <- sample(c(0, 1), n, replace = TRUE)
+
+escore <-
+  rnorm(
+    n,
+    mean = grupo * 0.8
+  )
+
+resultado <-
+ psych::biserial(
+    escore,
+    grupo
+  )
+
+tbl_biserial <-
+  tibble::tibble(
+    Variável_1 = "X",
+    Variável_2 = "Y",
+    Correlação = resultado,
+    `IC 95%` = "—",
+    `P-valor` = "—"
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "r bisserial",
+    `IC 95%` = "IC 95%",
+    `P-valor` = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação bisserial"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%. O pacote psych não fornece intervalo de confiança nem valor de p para a correlação bisserial."
+  )
+
+tbl_biserial
 ```
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psych*[@psych] fornece a função `tetrachoric` para calcular o coeficiente de correlação bisserial ($r_{s}$).
+O pacote *psych*[@psych] fornece a função `biserial` para calcular o coeficiente de correlação bisserial ($r_{b}$).
+:::
+
+<br>
+
+## Correlação ponto-bisserial ($r_{pb}$)
+
+<br>
+
+```{r point-biserial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 150L
+
+dados <-
+  tibble::tibble(
+    X = sample(c(0, 1), n, replace = TRUE),
+    Y = rnorm(
+      n,
+      mean = 70 + 8 * X,
+      sd = 10
+    )
+  )
+
+resultado <-
+  correlation::correlation(
+    dados,
+    method = "pearson"
+  )
+
+tbl_ponto_bisserial <-
+  resultado %>%
+  dplyr::mutate(
+    `IC 95%` = sprintf("[%.3f, %.3f]", CI_low, CI_high),
+    p = dplyr::if_else(
+      p < 0.001,
+      "<0.001",
+      sprintf("%.3f", p)
+    )
+  ) %>%
+  dplyr::select(
+    Parameter1,
+    Parameter2,
+    r,
+    `IC 95%`,
+    p
+  ) %>%
+  dplyr::rename(
+    Variável_1 = Parameter1,
+    Variável_2 = Parameter2,
+    Correlação = r
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "r ponto-bisserial",
+    `IC 95%` = "IC 95%",
+    p = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação ponto-bisserial"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%."
+  )
+
+tbl_ponto_bisserial
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece a função `correlation` para calcular o coeficiente de correlação ponto-bisserial ($r_{pb}$).
 :::
 
 <br>
@@ -168,8 +538,59 @@ O pacote *psych*[@psych] fornece a função `tetrachoric` para calcular o coefic
 
 <br>
 
-```{r}
+```{r tetrachoric, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
 
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 200L
+
+dados <-
+  tibble::tibble(
+    X = sample(c(0, 1), n, replace = TRUE),
+    Y = sample(c(0, 1), n, replace = TRUE)
+  )
+
+resultado <-
+  psych::tetrachoric(dados)
+
+tab <- table(dados$X, dados$Y)
+
+ic <- statpsych::ci.tetra(0.05, f00 = tab[1, 1], f01 = tab[1, 2], f10 = tab[2, 1], f11 = tab[2, 2])
+
+tbl_tetracoric <-
+  tibble::tibble(
+    Variável_1 = "X",
+    Variável_2 = "Y",
+    Correlação = resultado$rho[1, 2],
+    `IC 95%` = sprintf(
+      "[%.3f, %.3f]",
+      ic[3],
+      ic[4]
+    ),
+    `P-valor` = "—"
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "r tetracórico",
+    `IC 95%` = "IC 95%",
+    `P-valor` = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação tetracórica"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%. O valor de p não é fornecido para a correlação tetracórica."
+  )
+
+tbl_tetracoric
 ```
 
 <br>
@@ -180,18 +601,79 @@ O pacote *psych*[@psych] fornece a função `tetrachoric` para calcular o coefic
 
 <br>
 
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *statpsych*[@statpsych] fornece a função `ci.tetra` para calcular o intervalo de confiança do coeficiente de correlação tetracórica ($r_{tet}$).
+:::
+
+<br>
+
 ## Correlação policórica ($r_{pol}$)
 
 <br>
 
-```{r}
+```{r polychoric, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
 
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 200L
+
+dados <-
+  tibble::tibble(
+    X = ordered(
+      sample(
+        1:5,
+        n,
+        replace = TRUE
+      )
+    ),
+    Y = ordered(
+      sample(
+        1:5,
+        n,
+        replace = TRUE
+      )
+    )
+  )
+
+resultado <-
+  psych::polychoric(dados)
+
+tbl_policorica <-
+  tibble::tibble(
+    Variável_1 = "X",
+    Variável_2 = "Y",
+    Correlação = resultado$rho[1, 2],
+    `IC 95%` = "—",
+    `P-valor` = "—"
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "r policórico",
+    `IC 95%` = "IC 95%",
+    `P-valor` = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação policórica"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%. O pacote psych não fornece IC nem valor de p para a correlação policórica."
+  )
+
+tbl_policorica
 ```
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psych*[@psych] fornece a função `tetrachoric` para calcular o coeficiente de correlação policórica ($r_{pol}$).
+O pacote *psych*[@psych] fornece a função `polychoric` para calcular o coeficiente de correlação policórica ($r_{pol}$).
 :::
 
 <br>
@@ -200,67 +682,310 @@ O pacote *psych*[@psych] fornece a função `tetrachoric` para calcular o coefic
 
 <br>
 
-```{r}
+```{r polyserial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
 
-```
+# Reprodutibilidade
+set.seed(1234)
 
-<br>
+n <- 150L
 
-## Correlação de Cramér ($V$)
+dados <-
+  tibble::tibble(
+    X = ordered(
+      sample(
+        1:5,
+        n,
+        replace = TRUE
+      )
+    ),
+    Y = rnorm(n)
+  )
 
-<br>
+resultado <-
+  polycor::polyserial(
+    x = dados$Y,
+    y = dados$X
+  )
 
-```{r}
+tbl_polisserial <-
+  tibble::tibble(
+    Variável_1 = "Y",
+    Variável_2 = "X",
+    Correlação = resultado,
+    `IC 95%` = "—",
+    `P-valor` = "—"
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "r polisserial",
+    `IC 95%` = "IC 95%",
+    `P-valor` = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação polisserial"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%. O pacote polycor não fornece IC nem valor de p para a correlação polisserial."
+  )
 
-```
-
-<br>
-
-## Coeficiente de Phi ($\phi$)
-
-<br>
-
-```{r}
-
-```
-
-<br>
-
-## Coeficiente de Sheperd ($\phi$)
-
-<br>
-
-```{r}
-
+tbl_polisserial
 ```
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece a função `correlation` para calcular o coeficiente de correlação de Sheperd $\phi$.
+O pacote *polycor*[@polycor] fornece a função `polyserial` para calcular o coeficiente de correlação polisserial.
 :::
 
 <br>
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *corrplot*[@corrplot] fornece a função `corrplot` para visualização da matriz de correlação.
-:::
+## Coeficiente de Shepherd ($\pi$)
 
 <br>
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *corrplot*[@corrplot] fornece a função `cor.mtest` para calcular os P-valores e intervalos de confiança da matriz de correlação.
-:::
+```{r shepherd, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
 
-<br>
+n <- 150L
 
-## Correlação canônica 
+dados <-
+  tibble::tibble(
+    X = rnorm(n),
+    Y = X + rnorm(n)
+  )
 
-<br>
+resultado <-
+  correlation::correlation(
+    dados,
+    method = "shepherd"
+  )
 
-```{r}
+tbl_shepherd <-
+  resultado %>%
+  dplyr::mutate(
+    `IC 95%` = sprintf(
+      "[%.3f, %.3f]",
+      CI_low,
+      CI_high
+    ),
+    p = dplyr::if_else(
+      p < 0.001,
+      "<0.001",
+      sprintf("%.3f", p)
+    )
+  ) %>%
+  dplyr::select(
+    Parameter1,
+    Parameter2,
+    rho,
+    `IC 95%`,
+    p
+  ) %>%
+  dplyr::rename(
+    Variável_1 = Parameter1,
+    Variável_2 = Parameter2,
+    Correlação = rho
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "π de Shepherd",
+    `IC 95%` = "IC 95%",
+    p = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação de Shepherd"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%."
+  )
 
+tbl_shepherd
 ```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece a função `correlation` para calcular o coeficiente de correlação de Shepherd $\pi$.
+:::
+
+<br>
+
+## Correlação parcial
+
+<br>
+
+```{r partial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 150L
+
+Z <- rnorm(n)
+X <- 0.7 * Z + rnorm(n, sd = 0.6)
+Y <- 0.7 * Z + rnorm(n, sd = 0.6)
+
+dados <-
+  tibble::tibble(
+    X = X,
+    Y = Y,
+    Z = Z
+  )
+
+resultado <-
+  correlation::correlation(
+    dados,
+    partial = TRUE
+  )
+
+tbl_correlacao_parcial <-
+  resultado %>%
+  dplyr::mutate(
+    `IC 95%` = sprintf(
+      "[%.3f, %.3f]",
+      CI_low,
+      CI_high
+    ),
+    p = dplyr::if_else(
+      p < 0.001,
+      "<0.001",
+      sprintf("%.3f", p)
+    )
+  ) %>%
+  dplyr::select(
+    Parameter1,
+    Parameter2,
+    r,
+    `IC 95%`,
+    p
+  ) %>%
+  dplyr::rename(
+    Variável_1 = Parameter1,
+    Variável_2 = Parameter2,
+    Correlação = r
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "r parcial",
+    `IC 95%` = "IC 95%",
+    p = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação parcial"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%."
+  )
+
+tbl_correlacao_parcial
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] permite calcular correlações parciais por meio do argumento `partial = TRUE`.
+:::
+
+<br>
+
+## Correlação canônica
+
+<br>
+
+```{r canonical, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 120L
+
+X <-
+  tibble::tibble(
+    X1 = rnorm(n),
+    X2 = rnorm(n),
+    X3 = rnorm(n)
+  )
+
+Y <-
+  tibble::tibble(
+    Y1 = rnorm(n),
+    Y2 = rnorm(n)
+  )
+
+resultado <-
+  stats::cancor(
+    X,
+    Y
+  )
+
+teste <-
+  CCP::p.asym(
+    rho = resultado$cor,
+    N = n,
+    p = ncol(X),
+    q = ncol(Y),
+    tstat = "Wilks"
+  )
+
+tbl_canonica <-
+  tibble::tibble(
+    `Função canônica` = seq_along(resultado$cor),
+    Correlação = resultado$cor,
+    `P-valor` = dplyr::if_else(
+      teste$p.value < 0.001,
+      "<0.001",
+      sprintf("%.3f", teste$p.value)
+    )
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Correlação = "Correlação canônica"
+  ) %>%
+  gt::tab_caption(
+    "Correlações canônicas"
+  ) %>%
+  gt::tab_source_note(
+    "Os P-valores foram obtidos pelo teste Lambda de Wilks. A função stats::cancor() não fornece intervalos de confiança para as correlações canônicas."
+  )
+
+tbl_canonica
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função `cancor` para calcular a correlação canônica entre dois conjuntos de variáveis.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *CCP*[@CCP] fornece a função `p.asym` para realizar o teste de significância da correlação canônica.
+:::
 
 <br>
 

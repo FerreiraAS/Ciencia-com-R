@@ -12,13 +12,15 @@ df <- parse_tex_structure(tex_data)
 # CLEAN df
 df <- df |>
   dplyr::filter(
-    !is.na(graphic) |
-      (
-        !is.na(references) &
-          !grepl("REF", item) &
-          references != "REF" &
-          item != ".\\textsuperscript{\\citeproc{ref-REF}{\\textbf{REF?}}}"
-      )
+    type == "graphic" |
+    type == "infobox" |
+    (
+      type == "item" &
+      !is.na(references) &
+      !grepl("REF", item) &
+      references != "REF" &
+      item != ".\\textsuperscript{\\citeproc{ref-REF}{\\textbf{REF?}}}"
+    )
   )
 
 # BUILD CHAPTER INDEX (order = first appearance in df)

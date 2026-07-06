@@ -10,7 +10,7 @@
 
 <br>
 
-## Testes de Qui-quadrado ($\chi^2$)
+## Teste de Qui-quadrado ($\chi^2$)
 
 <br>
 
@@ -542,7 +542,177 @@ tbl_trend
 
 <br>
 
-## Razão de changes ($OR$) e risco relativo ($RR$)
+## Coeficiente de Phi ($\phi$)
+
+<br>
+
+```{r phi, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 150L
+
+dados <-
+  tibble::tibble(
+    X = sample(c(0, 1), n, replace = TRUE),
+    Y = sample(c(0, 1), n, replace = TRUE)
+  )
+
+resultado <- correlation::correlation(
+  dados,
+  method = "pearson"
+)
+
+tbl_phi <-
+  resultado %>%
+  dplyr::mutate(
+    `IC 95%` = sprintf("[%.3f, %.3f]", CI_low, CI_high),
+    p = dplyr::if_else(
+      p < 0.001,
+      "<0.001",
+      sprintf("%.3f", p)
+    )
+  ) %>%
+  dplyr::select(
+    Parameter1,
+    Parameter2,
+    r,
+    `IC 95%`,
+    p
+  ) %>%
+  dplyr::rename(
+    Variável_1 = Parameter1,
+    Variável_2 = Parameter2,
+    Correlação = r
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "φ",
+    `IC 95%` = "IC 95%",
+    p = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Correlação φ"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%."
+  )
+
+tbl_phi
+```
+
+<br>
+
+## Coeficiente de Cramér ($V$)
+
+<br>
+
+```{r cramers-v, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 150L
+
+Sexo <-
+  sample(
+    c("Feminino", "Masculino"),
+    n,
+    replace = TRUE
+  )
+
+Escolaridade <-
+  ifelse(
+    Sexo == "Feminino",
+    sample(
+      c("Fundamental", "Médio", "Superior"),
+      n,
+      replace = TRUE,
+      prob = c(0.20, 0.40, 0.40)
+    ),
+    sample(
+      c("Fundamental", "Médio", "Superior"),
+      n,
+      replace = TRUE,
+      prob = c(0.45, 0.35, 0.20)
+    )
+  ) |>
+  factor(
+    levels = c("Fundamental", "Médio", "Superior")
+  )
+
+dados <-
+  tibble::tibble(
+    Sexo = factor(Sexo),
+    Escolaridade = Escolaridade
+  )
+
+tab <-
+  table(
+    dados$Sexo,
+    dados$Escolaridade
+  )
+
+resultado <-
+  effectsize::cramers_v(tab)
+
+teste <-
+  chisq.test(tab)
+
+tbl_cramer <-
+  tibble::tibble(
+    Variável_1 = "X",
+    Variável_2 = "Y",
+    Correlação = resultado$Cramers_v,
+    `IC 95%` = sprintf(
+      "[%.3f, %.3f]",
+      resultado$CI_low,
+      resultado$CI_high
+    ),
+    `P-valor` = ifelse(
+      teste$p.value < 0.001,
+      "<0.001",
+      sprintf("%.3f", teste$p.value)
+    )
+  ) %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = Correlação,
+    decimals = 3
+  ) %>%
+  gt::cols_label(
+    Variável_1 = "Variável 1",
+    Variável_2 = "Variável 2",
+    Correlação = "V de Cramér",
+    `IC 95%` = "IC 95%",
+    `P-valor` = "P-valor"
+  ) %>%
+  gt::tab_caption(
+    "Coeficiente V de Cramér"
+  ) %>%
+  gt::tab_source_note(
+    "IC = intervalo de confiança de 95%. O P-valor foi obtido pelo teste do qui-quadrado de independência."
+  )
+
+tbl_cramer
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *effectsize*[@effectsize] fornece a função `cramers_v` para calcular o coeficiente V de Cramér.
+:::
+
+<br>
+
+## Razão de chances ($OR$) e risco relativo ($RR$)
 
 <br>
 

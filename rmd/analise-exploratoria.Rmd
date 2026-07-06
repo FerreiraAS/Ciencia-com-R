@@ -76,6 +76,100 @@ O pacote *radiant*[@radiant] fornece a função `radiant` para executar uma inte
 
 <br>
 
+## Ingredientes da análise exploratória de dados
+
+<br>
+
+### Quais são os principais elementos que compõem a análise exploratória de dados?
+
+- Verificação da qualidade dos dados (erros, ausências, *outliers*).[@chatfield1986]
+
+- Representações gráficas como histogramas, diagramas de dispersão, *boxplots* e gráficos de séries temporais.[@chatfield1986]
+
+- Cálculo de estatísticas descritivas (média, desvio-padrão, intervalos, correlações).[@chatfield1986]
+
+- Técnicas multivariadas exploratórias, como análise de componentes principais e análise de clusters, podem revelar padrões em dados complexos.[@chatfield1986]
+
+<br>
+
+### Quais etapas constituem a análise exploratória de dados?
+
+- Cada combinação de problema de pesquisa e delineamento de estudo pode demandar um plano de análise exploratório distinto.[@zuur2009]
+
+- Verifique a existência e/ou influência de valores discrepantes ("fora da curva" ou *outliers*) com boxplots e gráficos quantil-quantil (Q-Q).[@chatfield1986; @Ferketich1986; @zuur2009]
+
+- A análise exploratória valoriza o uso de gráficos interativos e técnicas de *brushing* e *linking*, que permitem explorar padrões ocultos, relacionar múltiplas variáveis e destacar subconjuntos de observações.[@behrens1997]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *ggplot2*[@ggplot2] fornece a função `geom_boxplot` para construção de gráficos *boxplot*.
+:::
+
+<br>
+
+- Verifique a homoscedasticidade  (homogeneidade da variância):[@zuur2009]
+
+  - Boxplots condicionais (por fator de análise)
+
+  - Análise dos resíduos do modelo de regressão
+
+  - Gráfico resíduos vs. valores ajustados
+
+<br>
+
+- Verifique a normalidade da distribuição dos dados:[@chatfield1986; @zuur2009]
+
+  - Histograma das variáveis (por fator de análise)
+
+  - Histograma dos resíduos da regressão
+
+<br>
+
+- Verifique a existência de grande quantidade de valores nulos (=0):[@zuur2009]
+
+  - Histograma das variáveis (por fator de análise)
+
+<br>
+
+- Verifique a existência de colinearidade entre variáveis independentes de um modelo de regressão:[@zuur2009]
+
+  - Fator de inflação de variância (*variance inflation factor*, VIF)
+
+  - Coeficiente de correlação de Pearson ($r$)
+
+  - Gráfico de dispersão entre variáveis
+
+<br>
+
+- Verifique possíveis relações entre as variáveis dependente(s) e independente(s) de um modelo de regressão:[@zuur2009]
+
+  - Gráfico de dispersão entre variáveis independente e dependente
+
+<br>
+
+- Verifique possíveis interações entre as variáveis dependente(s) de um modelo de regressão:[@zuur2009]
+
+  - Gráfico *coplot* de dispersão entre variáveis dependentes
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *ggcleveland*[@ggcleveland] fornece a função `gg_coplot` para construção de gráficos *boxplot* condicionais.
+:::
+
+<br>
+
+- Medidas como mediana, *trimean*, distância absoluta mediana e procedimentos de *winsorizing* ou *trimming* são preferidos, pois reduzem a influência de valores extremos e oferecem resumos mais fiéis.[@behrens1997]
+
+- A análise exploratória adota o esquema `dados = ajuste + resíduo`, no qual o analista ajusta modelos provisórios, examina resíduos e refina os modelos em ciclos sucessivos de aproximação.[@behrens1997]
+
+- Valores discrepantes (*outliers*) não devem ser ignorados; eles podem indicar erros de coleta ou fenômenos relevantes.[@behrens1997]
+
+- Transformar variáveis em novas formas (por exemplo, log ou inverso) pode revelar simetrias ocultas e tornar relações mais claras e lineares.[@behrens1997]
+
+<br>
+
 ## Quarteto de Anscombe
 
 <br>
@@ -239,100 +333,6 @@ ggplot2::ggplot(
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *anscombiser*[@anscombiser] fornece a função `anscombise` para gerar bancos de dados que compartilham os mesmos valores de parâmetros do Quarteto de Anscombe.
 :::
-
-<br>
-
-## Ingredientes da análise exploratória de dados
-
-<br>
-
-### Quais são os principais elementos que compõem a análise exploratória de dados?
-
-- Verificação da qualidade dos dados (erros, ausências, *outliers*).[@chatfield1986]
-
-- Representações gráficas como histogramas, diagramas de dispersão, *boxplots* e gráficos de séries temporais.[@chatfield1986]
-
-- Cálculo de estatísticas descritivas (média, desvio-padrão, intervalos, correlações).[@chatfield1986]
-
-- Técnicas multivariadas exploratórias, como análise de componentes principais e análise de clusters, podem revelar padrões em dados complexos.[@chatfield1986]
-
-<br>
-
-### Quais etapas constituem a análise exploratória de dados?
-
-- Cada combinação de problema de pesquisa e delineamento de estudo pode demandar um plano de análise exploratório distinto.[@zuur2009]
-
-- Verifique a existência e/ou influência de valores discrepantes ("fora da curva" ou *outliers*) com boxplots e gráficos quantil-quantil (Q-Q).[@chatfield1986; @Ferketich1986; @zuur2009]
-
-- A análise exploratória valoriza o uso de gráficos interativos e técnicas de *brushing* e *linking*, que permitem explorar padrões ocultos, relacionar múltiplas variáveis e destacar subconjuntos de observações.[@behrens1997]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *ggplot2*[@ggplot2] fornece a função `geom_boxplot` para construção de gráficos *boxplot*.
-:::
-
-<br>
-
-- Verifique a homoscedasticidade  (homogeneidade da variância):[@zuur2009]
-
-  - Boxplots condicionais (por fator de análise)
-
-  - Análise dos resíduos do modelo de regressão
-
-  - Gráfico resíduos vs. valores ajustados
-
-<br>
-
-- Verifique a normalidade da distribuição dos dados:[@chatfield1986; @zuur2009]
-
-  - Histograma das variáveis (por fator de análise)
-
-  - Histograma dos resíduos da regressão
-
-<br>
-
-- Verifique a existência de grande quantidade de valores nulos (=0):[@zuur2009]
-
-  - Histograma das variáveis (por fator de análise)
-
-<br>
-
-- Verifique a existência de colinearidade entre variáveis independentes de um modelo de regressão:[@zuur2009]
-
-  - Fator de inflação de variância (*variance inflation factor*, VIF)
-
-  - Coeficiente de correlação de Pearson ($r$)
-
-  - Gráfico de dispersão entre variáveis
-
-<br>
-
-- Verifique possíveis relações entre as variáveis dependente(s) e independente(s) de um modelo de regressão:[@zuur2009]
-
-  - Gráfico de dispersão entre variáveis independente e dependente
-
-<br>
-
-- Verifique possíveis interações entre as variáveis dependente(s) de um modelo de regressão:[@zuur2009]
-
-  - Gráfico *coplot* de dispersão entre variáveis dependentes
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *ggcleveland*[@ggcleveland] fornece a função `gg_coplot` para construção de gráficos *boxplot* condicionais.
-:::
-
-<br>
-
-- Medidas como mediana, *trimean*, distância absoluta mediana e procedimentos de *winsorizing* ou *trimming* são preferidos, pois reduzem a influência de valores extremos e oferecem resumos mais fiéis.[@behrens1997]
-
-- A análise exploratória adota o esquema `dados = ajuste + resíduo`, no qual o analista ajusta modelos provisórios, examina resíduos e refina os modelos em ciclos sucessivos de aproximação.[@behrens1997]
-
-- Valores discrepantes (*outliers*) não devem ser ignorados; eles podem indicar erros de coleta ou fenômenos relevantes.[@behrens1997]
-
-- Transformar variáveis em novas formas (por exemplo, log ou inverso) pode revelar simetrias ocultas e tornar relações mais claras e lineares.[@behrens1997]
 
 <br>
 

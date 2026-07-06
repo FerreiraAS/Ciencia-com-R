@@ -1,13 +1,15 @@
 SavePost_df <- function(entry, bib) {
   
   # ---------- Mapping from df ----------
-  chapter  <- entry$chapter
-  section  <- entry$section
-  question <- entry$subsection
-  answer   <- entry$item
-  graphic  <- entry$graphic
-  caption  <- entry$caption
-  key      <- entry$references
+  chapter      <- entry$chapter
+  section      <- entry$section
+  question     <- entry$subsection
+  answer       <- entry$item
+  graphic      <- entry$graphic
+  caption      <- entry$caption
+  infobox_icon <- entry$infobox_icon
+  infobox_text <- entry$infobox_text
+  key          <- entry$references
   
   num_dir <- function(id, label) {
     sprintf(
@@ -22,6 +24,10 @@ SavePost_df <- function(entry, bib) {
   subsection_dir <- num_dir(entry$subsection_id, question)
   
   is_graphic <- is.na(answer) && !is.na(graphic)
+  
+  is_infobox <- is.na(answer) &&
+    is.na(graphic) &&
+    !is.na(infobox_text)
   
   if (is_graphic) {
     
@@ -44,10 +50,90 @@ SavePost_df <- function(entry, bib) {
     fpath <- file.path(base, fname)
     
     tex <- readLines(file.path("tex", "post_figure.tex"))
+    
     tex <- gsub("CAPITULO", chapter, tex)
     tex <- gsub("SECAO", section, tex)
     tex <- gsub("FIGURA", graphic, tex)
     tex <- gsub("LEGENDA", ifelse(is.na(caption), "", caption), tex)
+    
+    writeLines(tex, file.path("posts", "POST.tex"))
+    
+    tools::texi2pdf("posts/POST.tex", clean = TRUE, quiet = TRUE)
+    
+    file.rename("POST.pdf", "posts/POST.pdf")
+    
+    img <- pdftools::pdf_render_page("posts/POST.pdf", dpi = 300)
+    png::writePNG(img, fpath)
+    
+    cover <- magick::image_read("images/livro.png") |>
+      magick::image_scale("250x250")
+    
+    final <- magick::image_composite(
+      magick::image_read(fpath),
+      cover,
+      offset = "+850+30"
+    )
+    
+    magick::image_write(final, fpath, density = 300)
+    
+    file.remove("posts/POST.pdf", "posts/POST.tex")
+    
+    return(invisible(NULL))
+  }
+  
+  if (is_infobox) {
+    base <- file.path(
+      getwd(),
+      "posts",
+      chapter_dir,
+      section_dir,
+      subsection_dir
+    )
+    
+    dir.create(base, recursive = TRUE, showWarnings = FALSE)
+    
+    n <- length(list.files(base,
+                           pattern = "\\.png$",
+                           recursive = TRUE))
+    
+    fname <- sprintf(
+      "%02d_%s.png",
+      n + 1,
+      gsub("\\s+", "_", question)
+    )
+    
+    fpath <- file.path(base, fname)
+    tex <- readLines(file.path("tex", "post_infobox.tex"))
+    
+    infobox_text <- gsub(
+      "\\\\citeproc\\{[^}]*\\}\\{[^}]*\\}",
+      "",
+      infobox_text
+    )
+    
+    infobox_text <- gsub(
+      "\\\\textsuperscript\\{[[:space:],]*\\}",
+      "",
+      infobox_text
+    )
+    
+    infobox_text <- gsub(
+      "\\\\eqref\\{[^}]+\\}",
+      "",
+      infobox_text
+    )
+    
+    infobox_text <- gsub(
+      "\\\\emph\\{([^}]*)\\}",
+      "\\\\emph{\\1}",
+      infobox_text,
+      perl = TRUE
+    )
+    
+    tex <- gsub("CAPITULO", chapter, tex)
+    tex <- gsub("SECAO", section, tex)
+    tex <- gsub("ICONE", infobox_icon, tex)
+    tex <- gsub("INFOBOX", infobox_text, tex, fixed = TRUE)
     
     writeLines(tex, file.path("posts", "POST.tex"))
     
