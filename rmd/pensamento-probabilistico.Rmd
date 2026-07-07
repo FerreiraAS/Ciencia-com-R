@@ -651,7 +651,7 @@ set.seed(1234)
 library(dplyr)
 
 # simula uma variável aleatória de uma população
-N <- 100
+N <- 100000
 população <- data.frame(ID = seq(start = 1, end = N, by = 1),
                         Variável = round(runif(N, min = 18, max = 65), digits = 0))
 
@@ -666,7 +666,6 @@ histograma_pop <-
     color = "black",
     alpha = 0.5
   ) +
-  ggplot2::geom_density() +
   ggplot2::labs(
     title = paste0(
       "População (N = ",
@@ -690,7 +689,7 @@ histograma_pop <-
     axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)
   )
 
-B <- 100
+B <- 5000
 # armazena as médias das amostras de tamanho B
 reamostra <- data.frame(
   res.5 = rep(NA, B),
@@ -763,15 +762,14 @@ histograma_reamostra <- reamostra %>%
   ggplot2::ggplot(ggplot2::aes(x = valor)) +
   ggplot2::geom_histogram(
     ggplot2::aes(y = ggplot2::after_stat(density)),
-    binwidth = 1,
+    binwidth = 0.1,
     boundary = 0,
     fill = "grey",
     color = "black",
     alpha = 0.5
   ) +
-  ggplot2::geom_density() +
   ggplot2::facet_wrap(~ reamostra, ncol = 2) +
-  ggplot2::labs(title = "Histogramas representando as médias \n de 100 amostras de tamanhos diferentes \n tomadas da população \n com reposição e igual probabilidade", x = "Variável", y = "Densidade") +
+  ggplot2::labs(title = "Histogramas representando as médias \n de amostras de tamanhos diferentes \n tomadas da população \n com reposição e igual probabilidade", x = "Variável", y = "Densidade") +
   ggplot2::theme_bw() +
   ggplot2::theme(
     plot.title = ggplot2::element_text(hjust = 0.5),
@@ -800,7 +798,7 @@ set.seed(1234)
 library(dplyr)
 
 # simula o lançamento de 1 dado B vezes
-N <- 100
+N <- 1000
 população <- data.frame(Variável = tidydice::roll_dice(times = N)$result)
 
 # histograma de densidade da lançamentos
@@ -814,7 +812,6 @@ histograma_pop <-
     color = "black",
     alpha = 0.5
   ) +
-  ggplot2::geom_density() +
   ggplot2::labs(
     title = paste0(
       "População (N = ",
@@ -838,7 +835,7 @@ histograma_pop <-
     axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)
   )
 
-B <- 100
+B <- 10000
 # armazena as médias das amostras de tamanho B
 reamostra <- data.frame(
   res.5 = rep(NA, B),
@@ -917,7 +914,6 @@ histograma_reamostra <- reamostra %>%
     color = "black",
     alpha = 0.5
   ) +
-  ggplot2::geom_density() +
   ggplot2::facet_wrap(~ reamostra, ncol = 2) +
   ggplot2::labs(title = "Histogramas representando as médias \n de 100 amostras de tamanhos diferentes \n tomadas da população \n com reposição e igual probabilidade", x = "Variável", y = "Densidade") +
   ggplot2::theme_bw() +
@@ -935,7 +931,7 @@ histograma_reamostra <- reamostra %>%
 
 <br>
 
-```{r teorema-central-limite-dado-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Esquerda: Histogramas de lançamento de 1 dado com distribuição uniforme (N = 100). Direita: Histogramas da média de 100 amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade.", fig.width=15, fig.height=8, dpi=300, out.width="100%"}
+```{r teorema-central-limite-dado-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Esquerda: Histogramas de lançamento de 1 dado com distribuição uniforme. Direita: Histogramas da média de amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade.", fig.width=15, fig.height=8, dpi=300, out.width="100%"}
 # exibe os histogramas
 gridExtra::grid.arrange(histograma_pop,
                         histograma_reamostra,
@@ -950,7 +946,7 @@ set.seed(1234)
 library(dplyr)
 
 # simula o lançamento de 1 moeda B vezes
-N <- 100
+N <- 10000
 população <- data.frame(Variável = tidydice::flip_coin(times = N)$result)
 
 # subtrai 1 para codificar (0,1)
@@ -961,13 +957,12 @@ histograma_pop <-
   ggplot2::ggplot(população, ggplot2::aes(x = Variável)) +
   ggplot2::geom_histogram(
     ggplot2::aes(y = ggplot2::after_stat(density)),
-    binwidth = 1,
+    binwidth = 0.5,
     boundary = 0,
     fill = "grey",
     color = "black",
     alpha = 0.5
   ) +
-  ggplot2::geom_density() +
   ggplot2::labs(
     title = paste0(
       "População (N = ", N, ")",
@@ -989,7 +984,7 @@ histograma_pop <-
     axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)
   )
 
-B <- 100
+B <- 10000
 # armazena as médias das amostras de tamanho B
 reamostra <- data.frame(
   res.5 = rep(NA, B),
@@ -1062,13 +1057,12 @@ histograma_reamostra <- reamostra %>%
   ggplot2::ggplot(ggplot2::aes(x = valor)) +
   ggplot2::geom_histogram(
     ggplot2::aes(y = ggplot2::after_stat(density)),
-    binwidth = 1,
+    binwidth = 0.1,
     boundary = 0,
     fill = "grey",
     color = "black",
     alpha = 0.5
   ) +
-  ggplot2::geom_density() +
   ggplot2::facet_wrap( ~ reamostra, ncol = 2) +
   ggplot2::labs(title = "Histogramas representando as médias \n de 100 amostras de tamanhos diferentes \n tomadas da população \n com reposição e igual probabilidade",
                 x = "Variável",
@@ -1088,7 +1082,7 @@ histograma_reamostra <- reamostra %>%
 
 <br>
 
-```{r teorema-central-limite-moeda-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Esquerda: Histogramas de lançamento de 1 moeda com distribuição uniforme (N = 100). Direita: Histogramas da média de 100 amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade.", fig.width=15, fig.height=8, dpi=300, out.width="100%"}
+```{r teorema-central-limite-moeda-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Esquerda: Histogramas de lançamento de 1 moeda com distribuição uniforme. Direita: Histogramas da média de amostras de tamanhos 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade.", fig.width=15, fig.height=8, dpi=300, out.width="100%"}
 # exibe os histogramas
 gridExtra::grid.arrange(histograma_pop,
                         histograma_reamostra,

@@ -29,6 +29,18 @@ SavePost_df <- function(entry, bib) {
     is.na(graphic) &&
     !is.na(infobox_text)
   
+  escape_tex <- function(x){
+    x <- gsub("\\\\","\\\\textbackslash{}",x)
+    x <- gsub("&","\\\\&",x,fixed=TRUE)
+    x <- gsub("%","\\\\%",x,fixed=TRUE)
+    x <- gsub("#","\\\\#",x,fixed=TRUE)
+    x <- gsub("\\$","\\\\$",x)
+    x <- gsub("_","\\\\_",x,fixed=TRUE)
+    x <- gsub("\\{","\\\\{",x)
+    x <- gsub("\\}","\\\\}",x)
+    x
+  }
+  
   if (is_graphic) {
     
     base <- file.path(
@@ -51,9 +63,9 @@ SavePost_df <- function(entry, bib) {
     
     tex <- readLines(file.path("tex", "post_figure.tex"))
     
-    tex <- gsub("CAPITULO", chapter, tex, fixed = TRUE)
-    tex <- gsub("SECAO", section, tex, fixed = TRUE)
-    tex <- gsub("FIGURA", graphic, tex, fixed = TRUE)
+    tex <- gsub("CAPITULO", chapter, tex)
+    tex <- gsub("SECAO", section, tex)
+    tex <- gsub("FIGURA", graphic, tex)
     tex <- gsub("LEGENDA", ifelse(is.na(caption), "", caption), tex)
     
     writeLines(tex, file.path("posts", "POST.tex"))
@@ -130,9 +142,9 @@ SavePost_df <- function(entry, bib) {
       perl = TRUE
     )
     
-    tex <- gsub("CAPITULO", chapter, tex, fixed = TRUE)
-    tex <- gsub("SECAO", section, tex, fixed = TRUE)
-    tex <- gsub("ICONE", infobox_icon, tex, fixed = TRUE)
+    tex <- gsub("CAPITULO", chapter, tex)
+    tex <- gsub("SECAO", section, tex)
+    tex <- gsub("ICONE", infobox_icon, tex)
     tex <- gsub("INFOBOX", infobox_text, tex, fixed = TRUE)
     
     writeLines(tex, file.path("posts", "POST.tex"))
@@ -158,12 +170,6 @@ SavePost_df <- function(entry, bib) {
     file.remove("posts/POST.pdf", "posts/POST.tex")
     
     return(invisible(NULL))
-  }
-  
-  escape_latex <- function(x) {
-    x <- gsub("\\\\", "\\\\textbackslash{}", x)
-    x <- gsub("([#$%&_{}])", "\\\\\\1", x)
-    x
   }
   
   # ---------- Executa bloco `r ----------
@@ -216,7 +222,6 @@ SavePost_df <- function(entry, bib) {
   # drop REF from vector
   refs <- refs[!grepl("REF", refs)]
   
-  
   citations <- c()
   for (k in refs) {
     src <- bib[k]
@@ -224,21 +229,30 @@ SavePost_df <- function(entry, bib) {
     cit <- format(src, style = "text")
     cit <- gsub("\\[\\d+\\]", "", cit)
     cit <- gsub("_", "", cit)
-    cit <- gsub("<.*?>", "", cit)
+    cit <- gsub(
+      "<(?:https?|ftp)://[^>]+>",
+      "",
+      cit,
+      perl = TRUE
+    )
     cit <- gsub("(\\s*\\.){2,}\\s*$", ".", cit)
-    cit <- escape_latex(cit)
+    cit <- gsub("\\\\textquoteleft", "“", cit)
+    cit <- gsub("\\\\textquoteright", "”", cit)
+    cit <- gsub("\\\\textemdash", "—", cit)
+    cit <- gsub("\\\\textendash", "–", cit)
+    cit <- gsub("\\s+", " ", cit)
+    cit <- trimws(cit)
+    cit <- escape_tex(cit)
     citations <- c(citations, cit)
   }
   
   citation_block <- if (length(citations) > 0) {
     paste0("[", seq_along(citations), "] ", citations,
-           collapse = "\\newline")
+           collapse = "\\\\newline")
   } else {
     ""
   }
-  # Escapa barras invertidas
-  citation_block <- gsub("\\\\", "\\\\\\\\", citation_block)
-  
+
   # ---------- Pastas ----------
   chapter_dir <- num_dir(entry$chapter_id, chapter)
   section_dir <- num_dir(entry$section_id, section)
@@ -263,11 +277,11 @@ SavePost_df <- function(entry, bib) {
   
   # ---------- TeX ----------
   tex <- readLines(file.path("tex", "POST.tex"))
-  tex <- gsub("CAPITULO", chapter, tex, fixed = TRUE)
-  tex <- gsub("SECAO", section, tex, fixed = TRUE)
-  tex <- gsub("QUESTAO", question, tex, fixed = TRUE)
-  tex <- gsub("RESPOSTA", answer, tex, fixed = TRUE)
-  tex <- gsub("CITACAO", citation_block, tex, fixed = TRUE)
+  tex <- gsub("CAPITULO", chapter, tex)
+  tex <- gsub("SECAO", section, tex)
+  tex <- gsub("QUESTAO", question, tex)
+  tex <- gsub("RESPOSTA", answer, tex)
+  tex <- gsub("CITACAO", citation_block, tex)
   
   writeLines(tex, file.path("posts", "POST.tex"))
   
