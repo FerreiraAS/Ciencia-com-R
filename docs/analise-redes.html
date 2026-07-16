@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 38 Inteligência artificial | Ciência com R</title>
+  <title>Capítulo 37 Análise de Redes | Ciência com R</title>
   <meta name="description" content="Este livro responde a diversas questões relacionadas à análise estatística de dados, revisitando os principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 38 Inteligência artificial | Ciência com R" />
+  <meta property="og:title" content="Capítulo 37 Análise de Redes | Ciência com R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
   <meta property="og:description" content="Este livro responde a diversas questões relacionadas à análise estatística de dados, revisitando os principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="github-repo" content="FerreiraAS/Ciencia-com-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 38 Inteligência artificial | Ciência com R" />
+  <meta name="twitter:title" content="Capítulo 37 Análise de Redes | Ciência com R" />
   
   <meta name="twitter:description" content="Este livro responde a diversas questões relacionadas à análise estatística de dados, revisitando os principais conceitos e sugerindo métodos computacionais para os mais diversos delineamentos de estudos científicos." />
   <meta name="twitter:image" content="https://ferreiraas.github.io/Ciencia-com-R/images/Cover_1.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="analise-redes.html"/>
-<link rel="next" href="aprendizado-maquina.html"/>
+<link rel="prev" href="representacoes.html"/>
+<link rel="next" href="inteligencia-artificial.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -75,12 +75,12 @@
 <link rel="icon" href="favicon_io/favicon-256x256.png" sizes="256x256" type="image/png">
 <link rel="icon" href="favicon_io/favicon-512x512.png" sizes="512x512" type="image/png">
 <link rel="shortcut icon" href="favicon_io/favicon.ico" type="image/x-icon">
-<meta property="og:title" content="Capítulo 38 Inteligência artificial | Ciência com R" />
+<meta property="og:title" content="Capítulo 37 Análise de Redes | Ciência com R" />
 <meta property="og:description" content="Perguntas e respostas para pesquisadores e analistas de dados" />
 <meta property="og:image" content="https://ferreiraas.github.io/Ciencia-com-R/favicon_io/android-chrome-512x512.png" />
 <meta property="og:url" content="https://ferreiraas.github.io/Ciencia-com-R/" />
 <meta property="og:type" content="book" />
-<meta property="og:site_name" content="Capítulo 38 Inteligência artificial | Ciência com R" />
+<meta property="og:site_name" content="Capítulo 37 Análise de Redes | Ciência com R" />
 <meta name="citation_doi" content="doi:10.5281/zenodo.8320232"/><meta name="Doi" content="doi:10.5281/zenodo.8320232"/>
 <meta name="DC.Identifier" content="doi:10.5281/zenodo.8320232"/>
 <meta name="DC.DOI" content="doi:10.5281/zenodo.8320232"/>
@@ -2434,152 +2434,460 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="inteligencia-artificial" class="section level1 hasAnchor" number="38">
-<h1><span class="header-section-number">Capítulo 38</span> <strong>Inteligência artificial</strong><a href="inteligencia-artificial.html#inteligencia-artificial" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="analise-redes" class="section level1 hasAnchor" number="37">
+<h1><span class="header-section-number">Capítulo 37</span> <strong>Análise de Redes</strong><a href="analise-redes.html#analise-redes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br></p>
-<div id="inteligência-artificial" class="section level2 hasAnchor" number="38.1">
-<h2><span class="header-section-number">38.1</span> Inteligência artificial<a href="inteligencia-artificial.html#intelig%C3%AAncia-artificial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="análise-de-redes" class="section level2 hasAnchor" number="37.1">
+<h2><span class="header-section-number">37.1</span> Análise de redes<a href="analise-redes.html#an%C3%A1lise-de-redes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-é-inteligência-artificial" class="section level3 hasAnchor" number="38.1.1">
-<h3><span class="header-section-number">38.1.1</span> O que é inteligência artificial?<a href="inteligencia-artificial.html#o-que-%C3%A9-intelig%C3%AAncia-artificial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="o-que-é-análise-de-rede" class="section level3 hasAnchor" number="37.1.1">
+<h3><span class="header-section-number">37.1.1</span> O que é análise de rede?<a href="analise-redes.html#o-que-%C3%A9-an%C3%A1lise-de-rede" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+<li><p>A análise de redes é uma abordagem estatística gráfica baseada na teoria dos grafos que permite representar, explorar e interpretar relações complexas entre múltiplas variáveis analisadas simultaneamente.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Nessa abordagem, as variáveis são representadas por nodos (ou nós) e as relações entre elas por arestas, formando uma estrutura relacional que evidencia padrões de associação, interdependência e organização do sistema estudado.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Diferentemente de métodos tradicionais, como análises univariadas ou modelos de regressão clássicos, a análise de redes não foca relações isoladas entre variáveis, mas sim o comportamento conjunto do sistema, permitindo observar fenômenos emergentes que não seriam detectáveis individualmente.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>A análise de redes representa uma mudança conceitual importante em relação às abordagens estatísticas tradicionais, ao enfatizar sistemas, interações e complexidade.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
-</div>
-<div id="inteligência-artificial-explicável-explainable-artificial-intelligence-xai" class="section level2 hasAnchor" number="38.2">
-<h2><span class="header-section-number">38.2</span> Inteligência artificial explicável (<em>eXplainable Artificial Intelligence, XAI)</em><a href="inteligencia-artificial.html#intelig%C3%AAncia-artificial-explic%C3%A1vel-explainable-artificial-intelligence-xai" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-é-inteligência-artificial-explicável" class="section level3 hasAnchor" number="38.2.1">
-<h3><span class="header-section-number">38.2.1</span> O que é inteligência artificial explicável?<a href="inteligencia-artificial.html#o-que-%C3%A9-intelig%C3%AAncia-artificial-explic%C3%A1vel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="por-que-a-análise-de-redes-é-útil-em-pesquisa-científica" class="section level3 hasAnchor" number="37.1.2">
+<h3><span class="header-section-number">37.1.2</span> Por que a análise de redes é útil em pesquisa científica?<a href="analise-redes.html#por-que-a-an%C3%A1lise-de-redes-%C3%A9-%C3%BAtil-em-pesquisa-cient%C3%ADfica" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Explicabilidade: capacidade de revelar e resumir, em termos compreensíveis, os motivos por trás das decisões de um modelo, incluindo métodos post-hoc que explicam resultados após a predição.<span class="citation"><sup><a href="#ref-ali2023">370</a></sup></span></p></li>
-<li><p>Interpretabilidade: capacidade de compreender o funcionamento interno do modelo a partir de suas próprias estruturas, por meio de técnicas intrínsecas que tornam o processo decisório inteligível.<span class="citation"><sup><a href="#ref-ali2023">370</a></sup></span></p></li>
-<li><p>Transparência: geração de explicações claras e legíveis por humanos sobre as decisões do modelo, essencial para avaliar sua qualidade e resistir a usos adversariais.<span class="citation"><sup><a href="#ref-ali2023">370</a></sup></span></p></li>
-<li><p>Equidade: capacidade do modelo de tomar decisões imparciais, sem favorecer ou discriminar grupos, mitigando vieses associados a características sociais, econômicas ou demográficas.<span class="citation"><sup><a href="#ref-ali2023">370</a></sup></span></p></li>
-<li><p>Robustez: capacidade do modelo de manter desempenho estável diante de incertezas ou pequenas perturbações nos dados de entrada, incluindo ataques adversariais.<span class="citation"><sup><a href="#ref-ali2023">370</a></sup></span></p></li>
-<li><p>Satisfação: grau em que técnicas de explicabilidade aumentam a utilidade, a usabilidade e a aceitação do sistema baseado em aprendizado de máquina.<span class="citation"><sup><a href="#ref-ali2023">370</a></sup></span></p></li>
-<li><p>Estabilidade: capacidade de produzir explicações consistentes para entradas semelhantes, evitando variações arbitrárias nas interpretações.<span class="citation"><sup><a href="#ref-ali2023">370</a></sup></span></p></li>
-<li><p>Responsabilidade: alinhamento do modelo a valores sociais, éticos e morais, sustentado por transparência, responsabilização, equidade e ética, como base para uma IA responsável.<span class="citation"><sup><a href="#ref-ali2023">370</a></sup></span></p></li>
+<li><p>Muitos fenômenos científicos, especialmente nas ciências da saúde, são multifatoriais, interdependentes e não lineares, envolvendo variáveis biológicas, comportamentais, psicológicas e sociais.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Análises univariadas tendem a simplificar esses fenômenos ao avaliar efeitos médios ou relações diretas entre pares de variáveis, o que pode ocultar padrões relevantes.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>A análise de redes permite: visualizar associações simultâneas entre diversas variáveis; identificar variáveis centrais em um sistema; detectar subestruturas densas ou agrupamentos de variáveis fortemente associadas; explorar potenciais mecanismos intermediários ou mediadores.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
 </ul>
 <p><br></p>
 </div>
-<div id="por-que-explicar-modelos-de-ia" class="section level3 hasAnchor" number="38.2.2">
-<h3><span class="header-section-number">38.2.2</span> Por que explicar modelos de IA?<a href="inteligencia-artificial.html#por-que-explicar-modelos-de-ia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-as-limitações-da-análise-de-redes" class="section level3 hasAnchor" number="37.1.3">
+<h3><span class="header-section-number">37.1.3</span> Quais são as limitações da análise de redes?<a href="analise-redes.html#quais-s%C3%A3o-as-limita%C3%A7%C3%B5es-da-an%C3%A1lise-de-redes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Apesar de seu potencial, a interpretação dos resultados deve ser cuidadosa, especialmente em estudos observacionais, evitando inferências causais indevidas.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p>
+<p><br></p>
+</div>
+</div>
+<div id="matriz-de-incidência" class="section level2 hasAnchor" number="37.2">
+<h2><span class="header-section-number">37.2</span> Matriz de incidência<a href="analise-redes.html#matriz-de-incid%C3%AAncia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-é-uma-matriz-de-incidência" class="section level3 hasAnchor" number="37.2.1">
+<h3><span class="header-section-number">37.2.1</span> O que é uma matriz de incidência?<a href="analise-redes.html#o-que-%C3%A9-uma-matriz-de-incid%C3%AAncia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Para tornar as decisões defensáveis: compreender como e por que um modelo chega a determinado resultado é essencial para avaliar a legitimidade de suas decisões e sustentar seu uso em contextos críticos.<span class="citation"><sup><a href="#ref-adadi2018">371</a>,<a href="#ref-vilone2021">372</a></sup></span></p></li>
-<li><p>Para tornar o sistema governável: explicações permitem enxergar o funcionamento interno do modelo, facilitando sua supervisão, auditoria, correção de erros e detecção de vieses ou fragilidades.<span class="citation"><sup><a href="#ref-adadi2018">371</a>,<a href="#ref-vilone2021">372</a></sup></span></p></li>
-<li><p>Para aperfeiçoar o desempenho: ao revelar como o modelo utiliza informações, as explicações orientam ajustes que aumentam sua precisão, eficiência e robustez.<span class="citation"><sup><a href="#ref-adadi2018">371</a>,<a href="#ref-vilone2021">372</a></sup></span></p></li>
-<li><p>Para ampliar o conhecimento: modelos explicáveis não apenas produzem previsões, mas também ajudam a identificar padrões, relações e hipóteses novas, contribuindo para a geração de conhecimento científico.<span class="citation"><sup><a href="#ref-adadi2018">371</a>,<a href="#ref-vilone2021">372</a></sup></span></p></li>
+<li><p>Uma matriz de incidência é uma representação tabular que descreve a relação entre dois conjuntos distintos de entidades, como nodos e arestas em uma rede.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Em uma matriz de incidência, as linhas representam um conjunto de entidades (nodos) e as colunas representam outro conjunto (arestas).<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>A presença ou ausência de uma relação entre as entidades é indicada por valores binários (0 ou 1) ou por pesos numéricos que refletem a intensidade da relação.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
 </ul>
+<p><br></p>
+<table class="table table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:categorico-tabela-bruta">Tabela 37.1: </span>Exemplo de dados categóricos para criação de matriz de incidência.
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+Sexo
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+Tabagismo
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+Atividade
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+F
+</td>
+<td style="text-align:center;">
+Sim
+</td>
+<td style="text-align:center;">
+Baixa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+M
+</td>
+<td style="text-align:center;">
+Não
+</td>
+<td style="text-align:center;">
+Alta
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+F
+</td>
+<td style="text-align:center;">
+Não
+</td>
+<td style="text-align:center;">
+Moderada
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+F
+</td>
+<td style="text-align:center;">
+Sim
+</td>
+<td style="text-align:center;">
+Baixa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;border-bottom: 1px solid">
+M
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+Não
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+Alta
+</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<table class="table table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:matriz-incidencia">Tabela 37.2: </span>Matriz de incidência criada a partir de dados categóricos.
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+SexoF
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+SexoM
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+TabagismoSim
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+AtividadeBaixa
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+AtividadeModerada
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;border-bottom: 1px solid">
+0
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+1
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+0
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+0
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+0
+</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 <div class="infobox Rlogo">
-<p>O pacote <em>keras</em><span class="citation"><sup><a href="#ref-keras">373</a></sup></span> possuu funções para criar, treinar e avaliar modelos de redes neurais.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>tensorflow</em><span class="citation"><sup><a href="#ref-tensorflow">374</a></sup></span> fornece uma interface para uma biblioteca de código aberto amplamente utilizada para aprendizado de máquina e redes neurais.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>torch</em> permite criar e treinar redes neurais com alto desempenho.</p>
-</div>
-<p><br></p>
-<div class="infobox Rlogo">
-<p>O pacote <em>reticulate</em><span class="citation"><sup><a href="#ref-reticulate">375</a></sup></span> integra R e Python em um mesmo ambiente de trabalho, permitindo chamar funções Python a partir de R e facilitar o uso de bibliotecas de IA disponíveis nesse ecossistema.</p>
+<p>O pacote <em>stats</em><span class="citation"><sup><a href="#ref-stats">161</a></sup></span> fornece a função <code>model.matrix</code> para criar uma matrix de incidência por expansão de variáveis indicadoras.</p>
 </div>
 <p><br></p>
 </div>
 </div>
-<div id="inteligência-artificial-generativa" class="section level2 hasAnchor" number="38.3">
-<h2><span class="header-section-number">38.3</span> Inteligência artificial generativa<a href="inteligencia-artificial.html#intelig%C3%AAncia-artificial-generativa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="elementos-da-rede" class="section level2 hasAnchor" number="37.3">
+<h2><span class="header-section-number">37.3</span> Elementos da rede<a href="analise-redes.html#elementos-da-rede" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><br></p>
-<div id="o-que-são-grandes-modelos-de-linguagem-large-language-models-llm" class="section level3 hasAnchor" number="38.3.1">
-<h3><span class="header-section-number">38.3.1</span> O que são grandes modelos de linguagem (<em>large language models</em>, LLM)?<a href="inteligencia-artificial.html#o-que-s%C3%A3o-grandes-modelos-de-linguagem-large-language-models-llm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quais-são-os-principais-elementos-de-uma-rede" class="section level3 hasAnchor" number="37.3.1">
+<h3><span class="header-section-number">37.3.1</span> Quais são os principais elementos de uma rede?<a href="analise-redes.html#quais-s%C3%A3o-os-principais-elementos-de-uma-rede" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+<li><p>Nodos (nós): representam as variáveis do estudo, como sintomas, doenças, características clínicas, sociais ou psicológicas.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Arestas: representam as relações entre os nodos. Podem indicar correlação, associação parcial, dependência condicional ou outro tipo de relação estatística.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Peso das arestas: em redes ponderadas, a espessura da aresta indica a magnitude da relação; relações mais fortes são representadas por conexões mais espessas.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Sinal das arestas: geralmente codificado por cores, indicando associações positivas ou negativas.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
 </ul>
 <p><br></p>
-</div>
-<div id="como-funcionam-modelos-os-grandes-modelos-de-linguagem" class="section level3 hasAnchor" number="38.3.2">
-<h3><span class="header-section-number">38.3.2</span> Como funcionam modelos os grandes modelos de linguagem?<a href="inteligencia-artificial.html#como-funcionam-modelos-os-grandes-modelos-de-linguagem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
-</ul>
-<p><br></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:llm"></span>
-<img src="Ciencia-com-R_files/figure-html/llm-1.png" alt="Representação esquemática de um modelo de linguagem grande (LLM)" width="100%" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rede-exemplo"></span>
+<img src="Ciencia-com-R_files/figure-html/rede-exemplo-1.png" alt="Grafo de rede com nodos e arestas ponderadas." width="672" />
 <p class="caption">
-Figura 38.1: Representação esquemática de um modelo de linguagem grande (LLM)
+Figura 37.1: Grafo de rede com nodos e arestas ponderadas.
 </p>
 </div>
 <p><br></p>
 </div>
-</div>
-<div id="limitações-fundamentais-de-modelos-generativos" class="section level2 hasAnchor" number="38.4">
-<h2><span class="header-section-number">38.4</span> Limitações fundamentais de modelos generativos<a href="inteligencia-artificial.html#limita%C3%A7%C3%B5es-fundamentais-de-modelos-generativos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><br></p>
-<div id="o-que-são-alucinações-em-modelos-generativos" class="section level3 hasAnchor" number="38.4.1">
-<h3><span class="header-section-number">38.4.1</span> O que são alucinações em modelos generativos?<a href="inteligencia-artificial.html#o-que-s%C3%A3o-alucina%C3%A7%C3%B5es-em-modelos-generativos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="como-as-redes-podem-ser-classificadas" class="section level3 hasAnchor" number="37.3.2">
+<h3><span class="header-section-number">37.3.2</span> Como as redes podem ser classificadas?<a href="analise-redes.html#como-as-redes-podem-ser-classificadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Alucinações ocorrem quando um modelo produz saídas linguisticamente plausíveis, porém factualmente incorretas, inexistentes ou não verificáveis, sem que haja erro numérico ou falha no processo de treinamento.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
+<li><p>Redes não ponderadas: indicam apenas a presença ou ausência de relação entre os nodos.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Redes ponderadas: representam também a intensidade da relação.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Redes direcionais: possuem setas nas arestas, indicando direção da relação (por exemplo, causalidade hipotética).<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Redes não direcionais: não assumem direção causal e são mais apropriadas para estudos observacionais e transversais.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Em pesquisas transversais, especialmente em saúde, redes não direcionais e ponderadas são geralmente preferidas, pois evitam inferências causais indevidas quando não há informação temporal adequada.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
 </ul>
 <p><br></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:alucinacoes"></span>
-<img src="Ciencia-com-R_files/figure-html/alucinacoes-1.png" alt="Funcionamento conceitual de modelos de linguagem e origem das alucinações. Painel A: Fluxo abstrato de um LLM até a predição do próximo token. Painel B: Escolha baseada em plausibilidade linguística. Painel C: Otimização probabilística pode gerar respostas fluentes, porém factualmente falsas." width="672" />
+</div>
+<div id="o-que-define-a-posição-dos-nodos-em-um-grafo-de-rede" class="section level3 hasAnchor" number="37.3.3">
+<h3><span class="header-section-number">37.3.3</span> O que define a posição dos nodos em um grafo de rede?<a href="analise-redes.html#o-que-define-a-posi%C3%A7%C3%A3o-dos-nodos-em-um-grafo-de-rede" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>A posição espacial dos nodos é determinada por algoritmos de disposição (layout), que organizam a rede de modo a facilitar a interpretação visual.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Um dos algoritmos mais utilizados é o Fruchterman–Reingold<span class="citation"><sup><a href="#ref-fruchterman1991">366</a></sup></span>, que simula forças de atração e repulsão entre os nodos, posicionando nodos mais fortemente associados mais próximos entre si.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="tipos-de-redes" class="section level2 hasAnchor" number="37.4">
+<h2><span class="header-section-number">37.4</span> Tipos de redes<a href="analise-redes.html#tipos-de-redes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="quais-são-os-principais-tipos-de-redes-estatísticas" class="section level3 hasAnchor" number="37.4.1">
+<h3><span class="header-section-number">37.4.1</span> Quais são os principais tipos de redes estatísticas?<a href="analise-redes.html#quais-s%C3%A3o-os-principais-tipos-de-redes-estat%C3%ADsticas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Redes de correlação: baseadas em matrizes de correlação simples; são fáceis de interpretar, mas podem conter associações espúrias.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Redes de correlação parcial: representam relações entre dois nodos controlando todas as demais variáveis do sistema, reduzindo associações indiretas.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Modelos gráficos gaussianos: uma forma específica de rede de correlação parcial, muito utilizada em psicometria e epidemiologia.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Modelos gráficos mistos: permitem a análise conjunta de variáveis contínuas, ordinais e dicotômicas, comuns em dados reais de saúde.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="como-reduzir-associações-espúrias-em-redes" class="section level3 hasAnchor" number="37.4.2">
+<h3><span class="header-section-number">37.4.2</span> Como reduzir associações espúrias em redes?<a href="analise-redes.html#como-reduzir-associa%C3%A7%C3%B5es-esp%C3%BArias-em-redes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Em conjuntos de dados com muitas variáveis, redes podem se tornar densas e difíceis de interpretar.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Para contornar esse problema, utiliza-se penalização estatística, como o método <em>Least Absolute Shrinkage and Selection Operator</em> (LASSO), que elimina associações fracas, resultando em redes mais parcimoniosas e interpretáveis.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="métricas-de-rede" class="section level2 hasAnchor" number="37.5">
+<h2><span class="header-section-number">37.5</span> Métricas de rede<a href="analise-redes.html#m%C3%A9tricas-de-rede" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+<div id="o-que-são-medidas-de-centralidade" class="section level3 hasAnchor" number="37.5.1">
+<h3><span class="header-section-number">37.5.1</span> O que são medidas de centralidade?<a href="analise-redes.html#o-que-s%C3%A3o-medidas-de-centralidade" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Medidas de centralidade quantificam a importância relativa de cada nodo no sistema.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Grau: número de conexões diretas de um nodo.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Força: soma dos pesos das conexões de um nodo, sendo uma das medidas mais utilizadas em redes ponderadas.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Intermediação: frequência com que um nodo atua como ponte entre outros nodos.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Proximidade: quão próximo um nodo está de todos os outros.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+<li><p>Agrupamento: tendência de um nodo formar grupos com seus vizinhos.<span class="citation"><sup><a href="#ref-leme2020">365</a></sup></span></p></li>
+</ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rede-metricas"></span>
+<img src="Ciencia-com-R_files/figure-html/rede-metricas-1.png" alt="Grafo de rede com tamanho dos nodos proporcional à força." width="672" />
 <p class="caption">
-Figura 38.2: Funcionamento conceitual de modelos de linguagem e origem das alucinações. Painel A: Fluxo abstrato de um LLM até a predição do próximo token. Painel B: Escolha baseada em plausibilidade linguística. Painel C: Otimização probabilística pode gerar respostas fluentes, porém factualmente falsas.
+Figura 37.2: Grafo de rede com tamanho dos nodos proporcional à força.
 </p>
 </div>
 <p><br></p>
-</div>
-<div id="por-que-modelos-generativos-alucinam" class="section level3 hasAnchor" number="38.4.2">
-<h3><span class="header-section-number">38.4.2</span> Por que modelos generativos alucinam?<a href="inteligencia-artificial.html#por-que-modelos-generativos-alucinam" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Modelos generativos são treinados para maximizar a probabilidade do próximo token dado um contexto, e não para verificar fatos ou manter correspondência com a realidade externa.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>O critério de otimização privilegia a verossimilhança estatística da linguagem, não a veracidade epistemológica do conteúdo.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
+<table class="table table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:rede-metricas-tabela">Tabela 37.3: </span>Tabela com principais métricas de centralidade dos nodos.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+Nó
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+Grau
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+Força
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+Intermediação
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+Proximidade
+</th>
+<th style="text-align:center;font-weight: bold;border-top: 1px solid; border-bottom: 1px solid">
+Agrupamento
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+A
+</td>
+<td style="text-align:center;">
+A
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+0.167
+</td>
+<td style="text-align:center;">
+1.00
+</td>
+<td style="text-align:center;">
+0.667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+B
+</td>
+<td style="text-align:center;">
+B
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+<td style="text-align:center;">
+0.75
+</td>
+<td style="text-align:center;">
+1.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+C
+</td>
+<td style="text-align:center;">
+C
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+0.167
+</td>
+<td style="text-align:center;">
+1.00
+</td>
+<td style="text-align:center;">
+0.667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-bottom: 1px solid">
+D
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+D
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+2
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+2
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+0.000
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+0.75
+</td>
+<td style="text-align:center;border-bottom: 1px solid">
+1.000
+</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>igraph</em><span class="citation"><sup><a href="#ref-igraph">367</a></sup></span> fornece a função <code>graph_from_incidence_matrix</code> para criar uma rede a partir de uma matriz de incidência.</p>
 </div>
-<div id="alucinações-indicam-erro-do-modelo" class="section level3 hasAnchor" number="38.4.3">
-<h3><span class="header-section-number">38.4.3</span> Alucinações indicam erro do modelo?<a href="inteligencia-artificial.html#alucina%C3%A7%C3%B5es-indicam-erro-do-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Alucinações não indicam que o modelo “aprendeu errado”, mas que ele aprendeu exatamente o que foi solicitado: produzir linguagem plausível, não conhecimento verdadeiro.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Do ponto de vista matemático, uma resposta alucinatória pode ser ótima segundo a função de perda, mesmo sendo incorreta no mundo real.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
 <p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>bootnet</em><span class="citation"><sup><a href="#ref-bootnet">368</a></sup></span> fornece a função <code>bootnet</code> para avaliação da estabilidade e precisão das redes por reamostragem.</p>
 </div>
-<div id="qual-a-diferença-entre-erro-estatístico-e-alucinação" class="section level3 hasAnchor" number="38.4.4">
-<h3><span class="header-section-number">38.4.4</span> Qual a diferença entre erro estatístico e alucinação?<a href="inteligencia-artificial.html#qual-a-diferen%C3%A7a-entre-erro-estat%C3%ADstico-e-alucina%C3%A7%C3%A3o" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Erros estatísticos decorrem de limitações de generalização, ruído nos dados ou inadequação do modelo ao problema.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Alucinações decorrem da ausência de mecanismos internos de checagem factual e constituem um fenômeno semântico e comunicacional, não um erro numérico.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
 <p><br></p>
+<div class="infobox Rlogo">
+<p>O pacote <em>mgm</em><span class="citation"><sup><a href="#ref-mgm">369</a></sup></span> fornece a função <code>mgm</code> para estimação de modelos gráficos mistos.</p>
 </div>
-<div id="quais-tipos-de-alucinação-são-mais-comuns" class="section level3 hasAnchor" number="38.4.5">
-<h3><span class="header-section-number">38.4.5</span> Quais tipos de alucinação são mais comuns?<a href="inteligencia-artificial.html#quais-tipos-de-alucina%C3%A7%C3%A3o-s%C3%A3o-mais-comuns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Alucinação factual: afirmação de fatos inexistentes ou incorretos.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Alucinação de fonte: citação de autores, artigos ou documentos inexistentes.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Alucinação causal: inferência de relações de causa e efeito sem fundamento empírico.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
-<p><br></p>
-</div>
-<div id="por-que-alucinações-são-um-problema-prático" class="section level3 hasAnchor" number="38.4.6">
-<h3><span class="header-section-number">38.4.6</span> Por que alucinações são um problema prático?<a href="inteligencia-artificial.html#por-que-alucina%C3%A7%C3%B5es-s%C3%A3o-um-problema-pr%C3%A1tico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Porque a fluência linguística do modelo pode induzir confiança indevida em informações erradas, especialmente em contextos científicos, clínicos, jurídicos e educacionais.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></li>
-</ul>
-<p><br></p>
-</div>
-<div id="é-possível-eliminar-completamente-as-alucinações" class="section level3 hasAnchor" number="38.4.7">
-<h3><span class="header-section-number">38.4.7</span> É possível eliminar completamente as alucinações?<a href="inteligencia-artificial.html#%C3%A9-poss%C3%ADvel-eliminar-completamente-as-alucina%C3%A7%C3%B5es" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Até o momento, não. Alucinações são uma consequência estrutural do paradigma generativo probabilístico e podem apenas ser mitigadas, não eliminadas.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-<li><p>Estratégias como <em>prompting</em> controlado, ajuste de temperatura, recuperação de informações externas e validação pós-geração reduzem sua frequência, mas não suprimem o fenômeno.<span class="citation"><sup><a href="#ref-REF"><strong>REF?</strong></a></sup></span></p></li>
-</ul>
 <p><br></p>
 <style>
   /*____Create and format infobox____*/
@@ -2613,23 +2921,23 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
 </div>
 <h3><strong>Referências</strong><a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-ali2023" class="csl-entry">
-<div class="csl-left-margin">370. </div><div class="csl-right-inline">Ali S, Abuhmed T, El-Sappagh S, et al. Explainable Artificial Intelligence (XAI): What we know and what is left to attain Trustworthy Artificial Intelligence. <em>Information Fusion</em>. 2023;99:101805. doi:<a href="https://doi.org/10.1016/j.inffus.2023.101805">10.1016/j.inffus.2023.101805</a></div>
+<div id="ref-stats" class="csl-entry">
+<div class="csl-left-margin">161. </div><div class="csl-right-inline">R Core Team. <em>R: A Language and Environment for Statistical Computing</em>.; 2025. <a href="https://www.R-project.org/">https://www.R-project.org/.</a></div>
 </div>
-<div id="ref-adadi2018" class="csl-entry">
-<div class="csl-left-margin">371. </div><div class="csl-right-inline">Adadi A, Berrada M. Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI). <em>IEEE Access</em>. 2018;6:52138–52160. doi:<a href="https://doi.org/10.1109/access.2018.2870052">10.1109/access.2018.2870052</a></div>
+<div id="ref-leme2020" class="csl-entry">
+<div class="csl-left-margin">365. </div><div class="csl-right-inline">Leme DE da C, Alves EV da C, Lemos V do CO, Fattori A. NETWORK ANALYSIS: A MULTIVARIATE STATISTICAL APPROACH FOR HEALTH SCIENCE RESEARCH. <em>Geriatrics, Gerontology and Aging</em>. 2020;14(1):43–51. doi:<a href="https://doi.org/10.5327/z2447-212320201900073">10.5327/z2447-212320201900073</a></div>
 </div>
-<div id="ref-vilone2021" class="csl-entry">
-<div class="csl-left-margin">372. </div><div class="csl-right-inline">Vilone G, Longo L. Notions of explainability and evaluation approaches for explainable artificial intelligence. <em>Information Fusion</em>. 2021;76:89–106. doi:<a href="https://doi.org/10.1016/j.inffus.2021.05.009">10.1016/j.inffus.2021.05.009</a></div>
+<div id="ref-fruchterman1991" class="csl-entry">
+<div class="csl-left-margin">366. </div><div class="csl-right-inline">Fruchterman TMJ, Reingold EM. Graph drawing by force<span>-</span>directed placement. <em>Software: Practice and Experience</em>. 1991;21(11):1129–1164. doi:<a href="https://doi.org/10.1002/spe.4380211102">10.1002/spe.4380211102</a></div>
 </div>
-<div id="ref-keras" class="csl-entry">
-<div class="csl-left-margin">373. </div><div class="csl-right-inline">Allaire J, Chollet F. <em>keras: R Interface to Keras</em>.; 2024. doi:<a href="https://doi.org/10.32614/CRAN.package.keras">10.32614/CRAN.package.keras</a></div>
+<div id="ref-igraph" class="csl-entry">
+<div class="csl-left-margin">367. </div><div class="csl-right-inline">Csárdi G, Nepusz T. <em>The igraph software package for complex network research</em>. V Complex Systems.; 2006:1695. <a href="https://igraph.org">https://igraph.org.</a></div>
 </div>
-<div id="ref-tensorflow" class="csl-entry">
-<div class="csl-left-margin">374. </div><div class="csl-right-inline">Allaire J, Tang Y. <em>tensorflow: R Interface to ’TensorFlow’</em>.; 2025. doi:<a href="https://doi.org/10.32614/CRAN.package.tensorflow">10.32614/CRAN.package.tensorflow</a></div>
+<div id="ref-bootnet" class="csl-entry">
+<div class="csl-left-margin">368. </div><div class="csl-right-inline">Epskamp S, Borsboom D, Fried EI. <em>Estimating Psychological Networks and their Accuracy: A Tutorial Paper</em>. V 50.; 2018.</div>
 </div>
-<div id="ref-reticulate" class="csl-entry">
-<div class="csl-left-margin">375. </div><div class="csl-right-inline">Ushey K, Allaire J, Tang Y. <em>reticulate: Interface to Python</em>.; 2025. doi:<a href="https://doi.org/10.32614/CRAN.package.reticulate">10.32614/CRAN.package.reticulate</a></div>
+<div id="ref-mgm" class="csl-entry">
+<div class="csl-left-margin">369. </div><div class="csl-right-inline">Haslbeck JMB, Waldorp LJ. <em><span></span>mgm<span></span>: Estimating Time-Varying Mixed Graphical Models in High-Dimensional Data</em>. V 93.; 2020. doi:<a href="https://doi.org/10.18637/jss.v093.i08">10.18637/jss.v093.i08</a></div>
 </div>
 </div>
             </section>
@@ -2637,8 +2945,8 @@ Ferreira, Arthur de Sá. Ciência com R: Perguntas e respostas para pesquisadore
           </div>
         </div>
       </div>
-<a href="analise-redes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="aprendizado-maquina.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="representacoes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="inteligencia-artificial.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
