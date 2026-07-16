@@ -115,8 +115,13 @@ extract_caption <- function(tex_vec, start_index, max_lookahead = 5) {
 escape_markdown_math <- function(text) {
   if (is.na(text))
     return(text)
+  # protege comandos LaTeX
+  text <- gsub("\\\\\\(", "\uE000", text)
+  text <- gsub("\\\\\\)", "\uE001", text)
   text <- gsub("\\\\", "\\\\\\\\", text)
-  text <- gsub("\\$", "\\\\$", text)
+  # restaura
+  text <- gsub("\uE000", "\\\\(", text, fixed = TRUE)
+  text <- gsub("\uE001", "\\\\)", text, fixed = TRUE)
   text
 }
 
@@ -153,6 +158,7 @@ parse_tex_structure <- function(tex_vec) {
     # ---- Section ----
     else if (stringr::str_detect(line, "^\\\\section\\{")) {
       current_section <- extract_latex_argument(line, "section")
+      current_section <- escape_markdown_math(current_section)
       current_section <- normalize_titles(current_section)
       
       current_subsection <- NA_character_
@@ -160,6 +166,7 @@ parse_tex_structure <- function(tex_vec) {
     # ---- Subsection ----
     else if (stringr::str_detect(line, "^\\\\subsection\\{")) {
       current_subsection <- extract_latex_argument(line, "subsection")
+      current_subsection <- escape_markdown_math(current_subsection)
       current_subsection <- normalize_titles(current_subsection)
     }
     # ---- Item ----

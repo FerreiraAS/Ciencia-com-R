@@ -260,7 +260,8 @@
 \usepackage{float}
 \usepackage{colortbl}
 \usepackage{pdflscape}
-\usepackage{tabu}
+\usepackage{tabularx}
+\usepackage{xltabular}
 \usepackage{threeparttable}
 \usepackage{threeparttablex}
 \usepackage[normalem]{ulem}
@@ -1175,7 +1176,7 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 \centering
 \caption{\label{tab:lei-benford-tabela}Simulação de números distribuídos log-uniformemente e comparação da frequência do primeiro dígito com a distribuição teórica da lei de Benford.}
 \centering
-\begin{tabu} to \linewidth {>{\raggedleft}X>{\raggedleft}X}
+\begin{tabularx}{\linewidth}{>{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X}
 \toprule
 \textbf{Número} & \textbf{Primeiro dígito}\\
 \midrule
@@ -1197,7 +1198,7 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 \textbf{3}47217 & 3\\
 \textbf{5}7 & 5\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{figure}
@@ -1317,7 +1318,7 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 \begin{itemize}
 \tightlist
 \item
-  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.502 e variância \(\sigma^{2}\) = 0.25. A distribuição amostral da média de 10000 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.502 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
+  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.496 e variância \(\sigma^{2}\) = 0.25. A distribuição amostral da média de 10000 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.496 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
 \end{itemize}
 
 \begin{figure}
@@ -1797,7 +1798,7 @@ O pacote \emph{regtomean}\textsuperscript{\citeproc{ref-regtomean}{33}} fornece 
 \item
   R é um programa de computador de código aberto com linguagem computacional direcionada para análise estatística.\textsuperscript{\citeproc{ref-ihaka1996}{46},\citeproc{ref-introduc2020}{47}}
 \item
-  R version 4.6.0 (2026-04-24) está disponível gratuitamente em \emph{Comprehensive R Archive Network} (CRAN).\textsuperscript{\citeproc{ref-CRAN}{48}}
+  R version 4.6.1 (2026-06-24) está disponível gratuitamente em \emph{Comprehensive R Archive Network} (CRAN).\textsuperscript{\citeproc{ref-CRAN}{48}}
 \end{itemize}
 
 \subsection{Por que usar R?}\label{por-que-usar-r}
@@ -2018,7 +2019,7 @@ O pacote \emph{lintr}\textsuperscript{\citeproc{ref-lintr}{62}} fornece a funç�
 \item
   Os pacotes ficam armazenados no \emph{Comprehensive R Archive Network} (CRAN) e podem ser instalados diretamente no RStudio.\textsuperscript{\citeproc{ref-introduc2020}{47},\citeproc{ref-CRAN}{48}}
 \item
-  Na mais recente atualização deste livro, o {[}\emph{Comprehensive R Archive Network} (CRAN) possui 459838 pacotes disponíveis.\textsuperscript{\citeproc{ref-introduc2020}{47},\citeproc{ref-CRAN}{48}}
+  Na mais recente atualização deste livro, o {[}\emph{Comprehensive R Archive Network} (CRAN) possui 460693 pacotes disponíveis.\textsuperscript{\citeproc{ref-introduc2020}{47},\citeproc{ref-CRAN}{48}}
 \item
   Os pacotes disponíveis podem ser encontrados em \emph{R PACKAGES DOCUMENTATION}.\textsuperscript{\citeproc{ref-R_Packages}{63}}
 \end{itemize}
@@ -2755,7 +2756,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
 \centering
 \caption{\label{tab:praticas-questionaveis}Classificação das práticas questionáveis em pesquisa segundo sua intencionalidade.}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Prática} & \textbf{Intencionalidade} & \textbf{Definição}\\
 \midrule
@@ -2785,7 +2786,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
 \cellcolor{lightgreen}{File drawer problem} & \cellcolor{lightgreen}{Não intencional} & \cellcolor{lightgreen}{Não publicar estudos com resultados negativos ou nulos}\\
 \cellcolor{lightgreen}{\cellcolor{gray!10}{Publication bias}} & \cellcolor{lightgreen}{\cellcolor{gray!10}{Não intencional}} & \cellcolor{lightgreen}{\cellcolor{gray!10}{Tendência geral das revistas em favorecer publicações com resultados positivos}}\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \subsection{Práticas questionáveis no planejamento do estudo?}\label{pruxe1ticas-questionuxe1veis-no-planejamento-do-estudo}
@@ -3291,7 +3292,7 @@ O pacote \emph{questionr}\textsuperscript{\citeproc{ref-questionr}{154}} fornece
 \centering
 \caption{\label{tab:variaveis-indicadoras}Tabela de variáveis indicadoras (*dummy variables*) criadas a partir de variáveis categóricas Sexo e Grupo.}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ID} & \textbf{Sexo} & \textbf{Grupo} & \textbf{Sexo\_Feminino} & \textbf{Grupo\_TratA} & \textbf{Grupo\_TratB}\\
 \midrule
@@ -3308,7 +3309,7 @@ O pacote \emph{questionr}\textsuperscript{\citeproc{ref-questionr}{154}} fornece
 \textbf{11} & Feminino & Controle & 0 & 0 & 0\\
 \textbf{12} & Feminino & Tratamento B & 0 & 0 & 1\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -3433,7 +3434,7 @@ O pacote \emph{base}\textsuperscript{\citeproc{ref-base}{75}} fornece as funçõ
 \centering
 \caption{\label{tab:instrumento-likert}Instrumento simulado com 3 itens tipo Likert e 5 categorias de resposta.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\raggedright}X>{\raggedright}X}
+\begin{tabularx}{\linewidth}{>{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
 \toprule
 \textbf{Item} & \textbf{Afirmação} & \textbf{Categorias}\\
 \midrule
@@ -3453,7 +3454,7 @@ Item 3 & Eu recomendaria este serviço a outras pessoas. & 1 = Discordo totalmen
 4 = Concordo parcialmente
 \textbf{5 = Concordo totalmente}\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{itemize}
@@ -3482,7 +3483,7 @@ Item 3 & Eu recomendaria este serviço a outras pessoas. & 1 = Discordo totalmen
 \centering
 \caption{\label{tab:likert-plot}Descrição dos itens tipo Likert do instrumento.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Itens} & \textbf{Discordância} & \textbf{Neutro} & \textbf{Concordância} & \textbf{Média} & \textbf{DP}\\
 \midrule
@@ -3490,7 +3491,7 @@ Item 3 & Eu recomendaria este serviço a outras pessoas. & 1 = Discordo totalmen
 \textbf{Item2} & 36 & 20 & 44 & 3.12 & 1.42\\
 \textbf{Item3} & 38 & 34 & 28 & 2.82 & 1.32\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -3553,7 +3554,7 @@ O pacote \emph{ggstats}\textsuperscript{\citeproc{ref-ggstats}{164}} fornece a f
 \centering
 \caption{\label{tab:medidas-unicas}Dados brutos com medidas únicas.}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Unidade de análise} & \textbf{Pressão arterial, braço esquerdo (mmHg)}\\
 \midrule
@@ -3568,7 +3569,7 @@ O pacote \emph{ggstats}\textsuperscript{\citeproc{ref-ggstats}{164}} fornece a f
 \cellcolor[HTML]{E6E6E6}{\textbf{\cellcolor{gray!10}{9}}} & \cellcolor[HTML]{E6E6E6}{\textbf{\cellcolor{gray!10}{120}}}\\
 10 & 112\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \subsection{O que são medidas repetidas?}\label{o-que-suxe3o-medidas-repetidas}
@@ -3584,7 +3585,7 @@ O pacote \emph{ggstats}\textsuperscript{\citeproc{ref-ggstats}{164}} fornece a f
 \centering
 \caption{\label{tab:medidas-repetidas-separadas}Dados brutos com medidas repetidas.}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Unidade de análise} & \textbf{Pressão arterial, braço esquerdo (mmHg) \#1} & \textbf{Pressão arterial, braço esquerdo (mmHg) \#2} & \textbf{Pressão arterial, braço esquerdo (mmHg) \#3}\\
 \midrule
@@ -3599,7 +3600,7 @@ O pacote \emph{ggstats}\textsuperscript{\citeproc{ref-ggstats}{164}} fornece a f
 \cellcolor{gray!10}{9} & \cellcolor{gray!10}{120} & \cellcolor{gray!10}{112} & \cellcolor{gray!10}{117}\\
 10 & 110 & 115 & 115\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{itemize}
@@ -3615,7 +3616,7 @@ O pacote \emph{ggstats}\textsuperscript{\citeproc{ref-ggstats}{164}} fornece a f
 \centering
 \caption{\label{tab:medidas-repetidas-agregadas}Dados brutos com medidas repetidas agregadas.}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Unidade de análise} & \textbf{Pressão arterial, braço esquerdo (mmHg) média}\\
 \midrule
@@ -3630,7 +3631,7 @@ O pacote \emph{ggstats}\textsuperscript{\citeproc{ref-ggstats}{164}} fornece a f
 \cellcolor{gray!10}{9} & \cellcolor{gray!10}{116}\\
 10 & 113\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -3651,7 +3652,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{161}} fornece a funç
 \centering
 \caption{\label{tab:medidas-seriadas-separadas}Dados brutos com medidas seriadas não agregadas.}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Unidade de análise} & \textbf{Tempo (min)} & \textbf{Pressão arterial, braço esquerdo (mmHg)}\\
 \midrule
@@ -3666,7 +3667,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{161}} fornece a funç
 \cellcolor{gray!10}{3} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{116}\\
 4 & 1 & 113\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{itemize}
@@ -3679,7 +3680,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{161}} fornece a funç
 \centering
 \caption{\label{tab:medidas-seriadas-agregadas}Dados brutos com medidas seriadas não agregadas.}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Unidade de análise} & \textbf{Pressão arterial, braço esquerdo (mmHg) amplitude}\\
 \midrule
@@ -3694,7 +3695,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{161}} fornece a funç
 \cellcolor{gray!10}{9} & \cellcolor{gray!10}{7}\\
 10 & 5\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -3967,7 +3968,7 @@ O pacote \emph{DataEditR}\textsuperscript{\citeproc{ref-DataEditR}{179}} fornece
 \centering
 \caption{\label{tab:tabela-0}Estrutura básica de uma tabela de dados.}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{V1} & \textbf{V2} & \textbf{V3} & \textbf{V4}\\
 \midrule
@@ -3977,7 +3978,7 @@ $x_{2,1}$ & $x_{2,2}$ & $x_{2,3}$ & $x_{2,4}$\\
 $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \textbf{\cellcolor{gray!10}{$x_{5,1}$}} & \textbf{\cellcolor{gray!10}{$x_{5,2}$}} & \textbf{\cellcolor{gray!10}{$x_{5,3}$}} & \textbf{\cellcolor{gray!10}{$x_{5,4}$}}\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{itemize}
@@ -3993,7 +3994,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \centering
 \caption{\label{tab:tabela-0-long}Formato longo para medidas repetidas (múltiplas linhas por sujeito; colunas = variáveis)}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Linha} & \textbf{Variavel} & \textbf{Valor}\\
 \midrule
@@ -4018,14 +4019,14 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 \cellcolor{gray!10}{5} & \cellcolor{gray!10}{V3} & \cellcolor{gray!10}{$x_{5,3}$}\\
 \textbf{5} & \textbf{V4} & \textbf{$x_{5,4}$}\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{table}
 \centering
 \caption{\label{tab:tabela-0-wide}Formato largo para medidas repetidas (1 variável; colunas = tempos)}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{id} & \textbf{T1} & \textbf{T2} & \textbf{T3} & \textbf{T4}\\
 \midrule
@@ -4035,7 +4036,7 @@ $x_{4,1}$ & $x_{4,2}$ & $x_{4,3}$ & $x_{4,4}$\\
 4 & $x_{4,T1}$ & $x_{4,T2}$ & $x_{4,T3}$ & $x_{4,T4}$\\
 \textbf{5} & \textbf{$x_{5,T1}$} & \textbf{$x_{5,T2}$} & \textbf{$x_{5,T3}$} & \textbf{$x_{5,T4}$}\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \subsection{O que usar para organizar tabelas para análise computadorizada?}\label{o-que-usar-para-organizar-tabelas-para-anuxe1lise-computadorizada}
@@ -4075,44 +4076,44 @@ O pacote \emph{data.table}\textsuperscript{\citeproc{ref-data.table}{182}} forne
 \centering
 \caption{\label{tab:tabela-recomendada}Formatação recomendada para tabela de dados.}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ID} & \textbf{Data.Coleta} & \textbf{Estado.Civil} & \textbf{Numero.Filhos}\\
 \midrule
-\cellcolor{gray!10}{1} & \cellcolor{gray!10}{08-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
-2 & 09-07-2026 & casado & 1\\
-\cellcolor{gray!10}{3} & \cellcolor{gray!10}{10-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
-4 & 11-07-2026 & solteiro & NA\\
-\cellcolor{gray!10}{5} & \cellcolor{gray!10}{12-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
-6 & 13-07-2026 & solteiro & 0\\
-\cellcolor{gray!10}{7} & \cellcolor{gray!10}{14-07-2026} & \cellcolor{gray!10}{solteiro} & \cellcolor{gray!10}{NA}\\
-8 & 15-07-2026 & solteiro & NA\\
-\cellcolor{gray!10}{9} & \cellcolor{gray!10}{16-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
-10 & 17-07-2026 & solteiro & NA\\
+\cellcolor{gray!10}{1} & \cellcolor{gray!10}{17-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
+2 & 18-07-2026 & casado & 1\\
+\cellcolor{gray!10}{3} & \cellcolor{gray!10}{19-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
+4 & 20-07-2026 & solteiro & NA\\
+\cellcolor{gray!10}{5} & \cellcolor{gray!10}{21-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
+6 & 22-07-2026 & solteiro & 0\\
+\cellcolor{gray!10}{7} & \cellcolor{gray!10}{23-07-2026} & \cellcolor{gray!10}{solteiro} & \cellcolor{gray!10}{NA}\\
+8 & 24-07-2026 & solteiro & NA\\
+\cellcolor{gray!10}{9} & \cellcolor{gray!10}{25-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
+10 & 26-07-2026 & solteiro & NA\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{table}
 \centering
 \caption{\label{tab:tabela-evite}Formatação não recomendada para tabela de dados.}
 \centering
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ID} & \textbf{Data de Coleta} & \textbf{Estado Civil} & \textbf{Número de Filhos}\\
 \midrule
-\cellcolor{gray!10}{1} & \cellcolor{gray!10}{08-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
-2 & 09-07-2026 & Casado & 1\\
-\cellcolor{gray!10}{3} & \cellcolor{gray!10}{10-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NaN}\\
-4 & 11-07-2026 & Solteiro & N/A\\
-\cellcolor{gray!10}{5} & \cellcolor{gray!10}{12-07-2026} & \cellcolor{gray!10}{Casado} & \cellcolor{gray!10}{N.A.}\\
-6 & 13-07-2026 & solteiro & 0\\
-\cellcolor{gray!10}{7} & \cellcolor{gray!10}{14-07-2026} & \cellcolor{gray!10}{solteiro} & \cellcolor{gray!10}{}\\
-8 & 15-07-2026 & Solteiro & na\\
-\cellcolor{gray!10}{9} & \cellcolor{gray!10}{16-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{n.a.}\\
-10 & 17-07-2026 & Solteiro & 999\\
+\cellcolor{gray!10}{1} & \cellcolor{gray!10}{17-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NA}\\
+2 & 18-07-2026 & Casado & 1\\
+\cellcolor{gray!10}{3} & \cellcolor{gray!10}{19-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{NaN}\\
+4 & 20-07-2026 & Solteiro & N/A\\
+\cellcolor{gray!10}{5} & \cellcolor{gray!10}{21-07-2026} & \cellcolor{gray!10}{Casado} & \cellcolor{gray!10}{N.A.}\\
+6 & 22-07-2026 & solteiro & 0\\
+\cellcolor{gray!10}{7} & \cellcolor{gray!10}{23-07-2026} & \cellcolor{gray!10}{solteiro} & \cellcolor{gray!10}{}\\
+8 & 24-07-2026 & Solteiro & na\\
+\cellcolor{gray!10}{9} & \cellcolor{gray!10}{25-07-2026} & \cellcolor{gray!10}{casado} & \cellcolor{gray!10}{n.a.}\\
+10 & 26-07-2026 & Solteiro & 999\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \chapter{\texorpdfstring{\textbf{Vinculação e pareamento de dados}}{Vinculação e pareamento de dados}}\label{vinculacao-pareamento}
@@ -4182,7 +4183,7 @@ O pacote \emph{data.table}\textsuperscript{\citeproc{ref-data.table}{182}} forne
 \centering
 \caption{\label{tab:dados-perdidos}Simulação de uma amostra (n=10) de um ensaio clínico aleatorizado (dados com perdas aleatórias).}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{id} & \textbf{Grupo} & \textbf{Idade} & \textbf{Sexo} & \textbf{Desfecho (pré)} & \textbf{Desfecho (pós)}\\
 \midrule
@@ -4197,7 +4198,7 @@ O pacote \emph{data.table}\textsuperscript{\citeproc{ref-data.table}{182}} forne
 \textbf{9} & Controle & 68 & F & 58.4 & 61.6\\
 \textbf{10} & Controle & 74 & M & 51.5 & 54.3\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -6845,7 +6846,7 @@ O pacote \emph{ggcleveland}\textsuperscript{\citeproc{ref-ggcleveland}{287}} for
 \centering
 \caption{\label{tab:anscombe-data}Quarteto de Anscombe.}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ID} & \textbf{x1} & \textbf{x2} & \textbf{x3} & \textbf{x4} & \textbf{y1} & \textbf{y2} & \textbf{y3} & \textbf{y4}\\
 \midrule
@@ -6861,7 +6862,7 @@ O pacote \emph{ggcleveland}\textsuperscript{\citeproc{ref-ggcleveland}{287}} for
 \textbf{10} & 7 & 7 & 7 & 8 & 4.82 & 7.26 & 6.42 & 7.91\\
 \textbf{11} & 5 & 5 & 5 & 8 & 5.68 & 4.74 & 5.73 & 6.89\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{itemize}
@@ -6874,7 +6875,7 @@ O pacote \emph{ggcleveland}\textsuperscript{\citeproc{ref-ggcleveland}{287}} for
 \centering
 \caption{\label{tab:anscombe-summary}Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{X1Y1} & \textbf{X2Y2} & \textbf{X3Y3} & \textbf{X4Y4}\\
 \midrule
@@ -6888,7 +6889,7 @@ O pacote \emph{ggcleveland}\textsuperscript{\citeproc{ref-ggcleveland}{287}} for
 \textbf{Coeficiente linear} & 3.00 & 3.00 & 3.00 & 3.00\\
 \textbf{Coeficiente de determinação} & 0.67 & 0.67 & 0.67 & 0.67\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{figure}
@@ -6998,7 +6999,7 @@ O pacote \emph{esquisse}\textsuperscript{\citeproc{ref-esquisse}{291}} fornece a
 \centering
 \caption{\label{tab:casas-decimais}Quantidade de casas decimais e dígitos significativos.}
 \centering
-\begin{tabu} to \linewidth {>{}r>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}r>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Valor} & \textbf{Casas Decimais} & \textbf{Dígitos Significativos}\\
 \midrule
@@ -7008,7 +7009,7 @@ O pacote \emph{esquisse}\textsuperscript{\citeproc{ref-esquisse}{291}} fornece a
 \textbf{123,456} & 3 & 3\\
 \textbf{7890,0000} & 4 & 4\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{itemize}
@@ -7021,7 +7022,7 @@ O pacote \emph{esquisse}\textsuperscript{\citeproc{ref-esquisse}{291}} fornece a
 \centering
 \caption{\label{tab:arredondamento}Valores originais, arredondamentos e erros de arredondamento por casas decimais.}
 \centering
-\begin{tabu} to \linewidth {>{}r>{\centering}X>{\centering}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\begin{tabularx}{\linewidth}{>{}r>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X}
 \toprule
 \textbf{Valor} & \textbf{Casas Decimais} & \textbf{Dígitos Significativos} & \textbf{2 Casas decimais [Margem de erro]} & \textbf{1 Casa decimal [Margem de erro]} & \textbf{Sem casa decimal [Margem de erro]}\\
 \midrule
@@ -7031,7 +7032,7 @@ O pacote \emph{esquisse}\textsuperscript{\citeproc{ref-esquisse}{291}} fornece a
 \textbf{123,456} & 3 & 3 & 123,46 [123,455, 123,465] & 123,5 [123,45, 123,55] & 123 [122,5, 123,5]\\
 \textbf{7890,0000} & 4 & 4 & 7890,00 [7889,995, 7890,005] & 7890,0 [7889,95, 7890,05] & 7890 [7889,5, 7890,5]\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{itemize}
@@ -7840,7 +7841,7 @@ O pacote \emph{performance}\textsuperscript{\citeproc{ref-performance}{317}} for
 \centering
 \caption{\label{tab:token-grams}Tokenização, remoção de stopwords e geração de n-gramas}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\raggedright}X}
+\begin{tabularx}{\linewidth}{>{}c>{\raggedright\arraybackslash}X}
 \toprule
 \textbf{Etapa} & \textbf{Resultado}\\
 \midrule
@@ -7850,7 +7851,7 @@ O pacote \emph{performance}\textsuperscript{\citeproc{ref-performance}{317}} for
 \textbf{Bigramas} & análise qualitativa; qualitativa utiliza; utiliza tokenização; tokenização de; de texto; texto NA\\
 \textbf{Trigramas} & análise qualitativa utiliza; qualitativa utiliza tokenização; utiliza tokenização de; tokenização de texto\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -8887,7 +8888,7 @@ BIC = \ln(n)k - 2\ln(L)
 \centering
 \caption{\label{tab:metricas-ajuste}Métricas de desempenho do modelo de regressão linear.}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X}
 \toprule
 \textbf{Métrica} & \textbf{Valor}\\
 \midrule
@@ -8899,7 +8900,7 @@ BIC = \ln(n)k - 2\ln(L)
 \textbf{Erro quadrático médio (RMSE)} & 3.053\\
 \textbf{Desvio residual (sigma)} & 3.084\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -9601,7 +9602,7 @@ O pacote \emph{markovchain}\textsuperscript{\citeproc{ref-markovchain}{364}} for
 \centering
 \caption{\label{tab:hot-encoding}Codificação one-hot, multi-hot e count encoding para representação de texto.}
 \centering
-\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Termo} & \textbf{avalia} & \textbf{cuidado} & \textbf{equipe} & \textbf{executa} & \textbf{final} & \textbf{planeja} & \textbf{projeto} & \textbf{revisa} & \textbf{tarefas}\\
 \midrule
@@ -9624,7 +9625,7 @@ final & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
 \bottomrule
 \multicolumn{10}{l}{\rule{0pt}{1em}\textit{Frase original:}}\\
 \multicolumn{10}{l}{\rule{0pt}{1em}A equipe planeja o projeto com cuidado, a equipe executa as tarefas do projeto, revisa as tarefas e avalia o projeto final.}\\
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \chapter{\texorpdfstring{\textbf{Inteligência artificial}}{Inteligência artificial}}\label{inteligencia-artificial}
@@ -9946,7 +9947,7 @@ O pacote \emph{fastml}\textsuperscript{\citeproc{ref-fastml}{372}} fornece a fun
   Do ponto de vista matemático, redes neurais não contradizem a estatística clássica; elas a estendem, substituindo modelos explícitos por representações aprendidas.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
 \end{itemize}
 
-\begin{tabu} to \linewidth {>{}l>{\raggedright}X>{\raggedright}X}
+\begin{tabularx}{\linewidth}{>{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
 \toprule
 \textbf{Modelos de regressão} & \textbf{Redes neurais artificiais} & \textbf{Papel conceitual}\\
 \midrule
@@ -9966,7 +9967,7 @@ O pacote \emph{fastml}\textsuperscript{\citeproc{ref-fastml}{372}} fornece a fun
 \textbf{Interações explícitas} & Interações aprendidas implicitamente & Modelagem de efeitos combinados\\
 \textbf{Modelo interpretável} & Modelo geralmente opaco & Trade-off entre interpretação e flexibilidade\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 
 \subsection{Por que estudos comparativos entre classificadores podem ser enganosos?}\label{por-que-estudos-comparativos-entre-classificadores-podem-ser-enganosos}
 
@@ -10473,7 +10474,7 @@ d(x, y) = \sum_{i=1}^{n} \mathbf{1}(x_i \neq y_i)
 \centering
 \caption{\label{tab:crosstable-2x2-aprendizado}Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{Classe predita correta} & \textbf{Classe predita incorreta} & \textbf{Total}\\
 \midrule
@@ -10481,7 +10482,7 @@ d(x, y) = \sum_{i=1}^{n} \mathbf{1}(x_i \neq y_i)
 \textbf{\textbf{Classe verdadeira incorreta}} & \textbf{$FN$} & \textbf{$VN$} & \textbf{$FN+VN$}\\
 \textbf{Total} & $VP+FN$ & $FP+VN$ & $N=VP+VN+FP+FN$\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \subsection{Quais métricas caracterizam o desempenho de um classificador?}\label{quais-muxe9tricas-caracterizam-o-desempenho-de-um-classificador}
@@ -11727,14 +11728,14 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{161}} fornece a funç
 \centering
 \caption{\label{tab:tabela-erros-I-II}Tabela de erros tipos I e II de inferência estatística.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{Hipótese nula $H_{0}$ é falsa} & \textbf{Hipótese nula $H_{0}$ é verdadeira}\\
 \midrule
 \textbf{Hipótese nula $H_{0}$ foi rejeitada} & Decisão correta & Decisão incorreta (erro tipo I)\\
 \textbf{Hipótese nula $H_{0}$ não foi rejeitada} & Decisão incorreta (erro tipo II) & Decisão correta\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{figure}
@@ -11776,14 +11777,14 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{161}} fornece a funç
 \centering
 \caption{\label{tab:grafico-erro-tipo-S}Tabela de erro tipo S de inferência estatística.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{Sinal positivo} & \textbf{Sinal negativo}\\
 \midrule
 \textbf{Sinal positivo} & Decisão correta & Decisão incorreta (erro tipo S)\\
 \textbf{Sinal negativo} & Decisão incorreta (erro tipo S) & Decisão correta\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{figure}
@@ -11805,14 +11806,14 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{161}} fornece a funç
 \centering
 \caption{\label{tab:tabela-erro-tipo-M}Tabela de erro tipo M de inferência estatística.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{Magnitude alta} & \textbf{Magnitude baixa}\\
 \midrule
 \textbf{Magnitude alta} & Decisão correta & Decisão incorreta (erro tipo M)\\
 \textbf{Magnitude baixa} & Decisão incorreta (erro tipo M) & Decisão correta\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{figure}
@@ -12255,7 +12256,7 @@ p_{\delta} = \frac{|\,I \cap H_0\,|}{|\,I\,|} \times \max\!\left\{ \frac{|\,I\,|
 \centering
 \caption{\label{tab:sgpv}Comparação entre p-valor (bicaudal, inferido do IC95\%) e SGPV ($p_{\delta}$) nos cenários simulados.}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Cenário} & \textbf{$a$} & \textbf{$b$} & \textbf{$H_0^{-}$} & \textbf{$H_0^{+}$} & \textbf{$\hat\theta$} & \textbf{$SE$} & \textbf{p-valor (bicaudal)} & \textbf{$p_{\delta}$} & \textbf{Conclusão (SGPV)}\\
 \midrule
@@ -12267,7 +12268,7 @@ p_{\delta} = \frac{|\,I \cap H_0\,|}{|\,I\,|} \times \max\!\left\{ \frac{|\,I\,|
 \textbf{6} & 0.150 & 0.550 & -0.100 & 0.100 & 0.350 & 0.1020 & 0.001 & 0.000 & Apoia alternativas (SGPV=0)\\
 \textbf{7} & -0.550 & -0.150 & -0.100 & 0.100 & -0.350 & 0.1020 & 0.001 & 0.000 & Apoia alternativas (SGPV=0)\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \subsection{Como interpretar o SGPV?}\label{como-interpretar-o-sgpv}
@@ -12573,13 +12574,13 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{432}} forne
 \centering
 \caption{\label{tab:shapiro}Teste de Shapiro-Wilk}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Estatística} & \textbf{P-valor} & \textbf{Decisão}\\
 \midrule
 \textbf{0.9659} & 0.0108 & Rejeita normalidade\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \section{\texorpdfstring{Teste de Anderson-Darling (\(A^2\))}{Teste de Anderson-Darling (A\^{}2)}}\label{teste-de-anderson-darling-a2}
@@ -12588,13 +12589,13 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{432}} forne
 \centering
 \caption{\label{tab:ad}Teste de Anderson-Darling}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Estatística} & \textbf{P-valor} & \textbf{Decisão}\\
 \midrule
 \textbf{1.2438} & 0.0029 & Rejeita normalidade\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \section{\texorpdfstring{Teste de Cramér-von Mises (\(W^2\))}{Teste de Cramér-von Mises (W\^{}2)}}\label{teste-de-cramuxe9r-von-mises-w2}
@@ -12603,13 +12604,13 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{432}} forne
 \centering
 \caption{\label{tab:cvm}Teste de Cramér-von Mises}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Estatística} & \textbf{P-valor} & \textbf{Decisão}\\
 \midrule
 \textbf{0.219} & 0.003 & Rejeita normalidade\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \section{\texorpdfstring{Teste de Lilliefors (\(D\))}{Teste de Lilliefors (D)}}\label{teste-de-lilliefors-d}
@@ -12618,13 +12619,13 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{432}} forne
 \centering
 \caption{\label{tab:lilliefors}Teste de Lilliefors}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Estatística} & \textbf{P-valor} & \textbf{Decisão}\\
 \midrule
 \textbf{0.1012} & 0.0133 & Rejeita normalidade\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \section{\texorpdfstring{Teste de Jarque-Bera (\(JB\))}{Teste de Jarque-Bera (JB)}}\label{teste-de-jarque-bera-jb}
@@ -12633,13 +12634,13 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{432}} forne
 \centering
 \caption{\label{tab:jarquebera}Teste de Jarque-Bera}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Estatística} & \textbf{P-valor} & \textbf{Decisão}\\
 \midrule
 \textbf{5.9288} & 0.0516 & Não rejeita normalidade\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \section{\texorpdfstring{Teste de Kolmogorov-Smirnov (\(D\))}{Teste de Kolmogorov-Smirnov (D)}}\label{teste-de-kolmogorov-smirnov-d}
@@ -12648,13 +12649,13 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{432}} forne
 \centering
 \caption{\label{tab:ks}Teste de Kolmogorov-Smirnov}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Estatística} & \textbf{P-valor} & \textbf{Decisão}\\
 \midrule
 \textbf{0.1012} & 0.257 & Não rejeita normalidade\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \chapter{\texorpdfstring{\textbf{Descrição}}{Descrição}}\label{descricao}
@@ -13801,7 +13802,7 @@ Apesar de seu potencial, a interpretação dos resultados deve ser cuidadosa, es
 \centering
 \caption{\label{tab:categorico-tabela-bruta}Exemplo de dados categóricos para criação de matriz de incidência.}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{Sexo} & \textbf{Tabagismo} & \textbf{Atividade}\\
 \midrule
@@ -13811,14 +13812,14 @@ Apesar de seu potencial, a interpretação dos resultados deve ser cuidadosa, es
 \textbf{F} & Sim & Baixa\\
 \textbf{M} & Não & Alta\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{table}
 \centering
 \caption{\label{tab:matriz-incidencia}Matriz de incidência criada a partir de dados categóricos.}
 \centering
-\begin{tabu} to \linewidth {>{}c>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}c>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{SexoF} & \textbf{SexoM} & \textbf{TabagismoSim} & \textbf{AtividadeBaixa} & \textbf{AtividadeModerada}\\
 \midrule
@@ -13828,7 +13829,7 @@ Apesar de seu potencial, a interpretação dos resultados deve ser cuidadosa, es
 \textbf{1} & 0 & 1 & 1 & 0\\
 \textbf{0} & 1 & 0 & 0 & 0\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -13940,7 +13941,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{161}} fornece a funç
 \centering
 \caption{\label{tab:rede-metricas-tabela}Tabela com principais métricas de centralidade dos nodos.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{Nó} & \textbf{Grau} & \textbf{Força} & \textbf{Intermediação} & \textbf{Proximidade} & \textbf{Agrupamento}\\
 \midrule
@@ -13949,7 +13950,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{161}} fornece a funç
 \textbf{C} & C & 3 & 3 & 0.167 & 1.00 & 0.667\\
 \textbf{D} & D & 2 & 2 & 0.000 & 0.75 & 1.000\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -15469,7 +15470,7 @@ O pacote \emph{surveysd}\textsuperscript{\citeproc{ref-surveysd}{489}} fornece a
 \textbf{2018-05-01} & 5 & 0 & 0 & 107.017150940644\\
 \textbf{\textcolor{gray}{\em{...}}} & \textcolor{gray}{\em{...}} & \textcolor{gray}{\em{...}} & \textcolor{gray}{\em{...}} & \textcolor{gray}{\em{...}}\\
 \textbf{2023-08-01} & 68 & 1 & 32 & 89.6838136766465\\
-\textbf{2023-09-01} & 69 & 1 & 33 & 91.7890698715189\\
+\textbf{2023-09-01} & 69 & 1 & 33 & 91.789069871519\\
 \textbf{2023-10-01} & 70 & 1 & 34 & 97.0721355122331\\
 \textbf{2023-11-01} & 71 & 1 & 35 & 89.5358753357739\\
 \textbf{2023-12-01} & 72 & 1 & 36 & 85.9633244974367\\
@@ -16452,7 +16453,7 @@ O pacote \emph{lattice}\textsuperscript{\citeproc{ref-lattice}{526}} fornece a f
 \centering
 \caption{\label{tab:crosstable-2x2}Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{Condição presente} & \textbf{Condição ausente} & \textbf{Total}\\
 \midrule
@@ -16460,7 +16461,7 @@ O pacote \emph{lattice}\textsuperscript{\citeproc{ref-lattice}{526}} fornece a f
 \textbf{\textbf{Teste negativo}} & \textbf{$FN$} & \textbf{$VN$} & \textbf{$FN+VN$}\\
 \textbf{Total} & $VP+FN$ & $FP+VN$ & $N=VP+VN+FP+FN$\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{itemize}
@@ -16596,7 +16597,7 @@ DOR = \dfrac{LR+}{LR-}
 \centering
 \caption{\label{tab:crosstable-prob}Probabilidades calculados a partir da tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{Condição presente} & \textbf{Condição ausente} & \textbf{Total} & \textbf{Probabilidades}\\
 \midrule
@@ -16605,7 +16606,7 @@ DOR = \dfrac{LR+}{LR-}
 \textbf{\textbf{Total}} & \textbf{$VP+FN$} & \textbf{$FP+VN$} & \textbf{$N=VP+VN+FP+FN$} & \textbf{}\\
 \textbf{Probabilidades} & $SEN = \frac{VP}{VP+FN}$ & $ESP = \frac{VN}{VN+FP}$ &  & $ACU = \frac{VP+VN}{VP+VN+FP+FN}$ \ $DOR = \frac{VP \cdot VN}{FP \cdot FN}$\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -16651,7 +16652,7 @@ O pacote \emph{caret}\textsuperscript{\citeproc{ref-caret}{381}} fornece a funç
 \centering
 \caption{\label{tab:crosstable-2x3}Tabela de confusão 3-vias (2×3) com totais: referência versus decisão (3WD).}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{POS (aceitar)} & \textbf{BND (deferir)} & \textbf{NEG (rejeitar)} & \textbf{Total}\\
 \midrule
@@ -16659,7 +16660,7 @@ O pacote \emph{caret}\textsuperscript{\citeproc{ref-caret}{381}} fornece a funç
 \textbf{\textbf{Condição ausente ($C^c$)}} & \textbf{$|POS\cap C^c|$} & \textbf{$|BND\cap C^c|$} & \textbf{$|NEG\cap C^c|$} & \textbf{$|POS\cap C^c|+|BND\cap C^c|+|NEG\cap C^c|$}\\
 \textbf{Total} & $|POS\cap C|+|POS\cap C^c|$ & $|BND\cap C|+|BND\cap C^c|$ & $|NEG\cap C|+|NEG\cap C^c|$ & $N$\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \subsection{Quais são as medidas básicas na 2×3?}\label{quais-suxe3o-as-medidas-buxe1sicas-na-23}
@@ -16939,7 +16940,7 @@ O pacote \emph{proc}\textsuperscript{\citeproc{ref-pROC}{537}} fornece a funçã
 \centering
 \caption{\label{tab:crosstable-kappa-2x2}Tabela de confusão 2x2 para análise de concordância de testes e variáveis dicotômicas.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{Teste positivo} & \textbf{Teste negativo} & \textbf{Total}\\
 \midrule
@@ -16947,7 +16948,7 @@ O pacote \emph{proc}\textsuperscript{\citeproc{ref-pROC}{537}} fornece a funçã
 \textbf{Teste negativo} & $c$ & $d$ & $h=c+d$\\
 \textbf{Total} & $e=a+c$ & $f=b+d$ & $N=a+b+c+d$\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -16983,7 +16984,7 @@ O pacote \emph{irr}\textsuperscript{\citeproc{ref-irr}{542}} fornece a função 
 \centering
 \caption{\label{tab:crosstable-kappa-3x3}Tabela de confusão 3x3 para análise de concordância de testes e variáveis dicotômicas.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{Grave} & \textbf{Moderado} & \textbf{Leve} & \textbf{Total}\\
 \midrule
@@ -16992,7 +16993,7 @@ O pacote \emph{irr}\textsuperscript{\citeproc{ref-irr}{542}} fornece a função 
 \textbf{Leve} & $g$ & $h$ & $i$ & $l=g+h+i$\\
 \textbf{Total} & $j=a+d+g$ & $k=b+e+h$ & $l=c+f+i$ & $N=a+b+c+d+e+f+g+h+i$\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \subsection{Quais métodos são adequados para análise de concordância de variáveis ordinais?}\label{quais-muxe9todos-suxe3o-adequados-para-anuxe1lise-de-concorduxe2ncia-de-variuxe1veis-ordinais}
@@ -17124,14 +17125,14 @@ O pacote \emph{irr}\textsuperscript{\citeproc{ref-irr}{542}} fornece a função 
 \centering
 \caption{\label{tab:crosstable-psicometria}Tabela de confusão sobre propriedades psicométricas de instrumentos.}
 \centering
-\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X}
+\begin{tabularx}{\linewidth}{>{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
 \toprule
 \textbf{ } & \textbf{Concordância alta} & \textbf{Concordância baixa}\\
 \midrule
 \textbf{Validade alta} & Adequado & Inadequado\\
 \textbf{Validade baixa} & Inadequado & Inadequado\\
 \bottomrule
-\end{tabu}
+\end{tabularx}
 \end{table}
 
 \begin{infobox}{images/Rlogo}
@@ -18300,6 +18301,8 @@ O pacote \emph{PRISMA2020}\textsuperscript{\citeproc{ref-PRISMA2020}{252}} forne
 \item
   Kong CYA, Amaravadi SK, Costa J, Ferreira AdS, Vigário PdS, Alaparthi GK. Effect of high-intensity interval training (HIIT) versus moderate-intensity continuous training (MICT) on insulin sensitivity in participants with type 2 diabetes mellitus (T2DM): A systematic review and meta-analysis of randomised controlled trials. , org. F1000Research. 2026;15:836. \url{doi:10.12688/f1000research.180073.1}
 \item
+  Albuquerque F, Ferreira AS, Lemos T. Posturographic assessment of shoulder complex stability in swimmers during Upper-Quarter Y Balance Test: cross-sectional study in young athletes, regarding handedness. , org. Muscles, Ligaments and Tendons Journal. 2026;16(2). \url{doi:10.32098/mltj_2026_7106}
+\item
   Albuquerque F, Sá Ferreira A, Lemos T. A dor e a incapacidade do ombro predizem melhor os resultados clínicos do que as medidas biomecânicas e funcionais em nadadores jovens: estudo de coorte prospetivo. , org. Revista Andaluza de Medicina del Deporte. 2026;18(4). \url{doi:10.33155/ramd.v18i4.1246}
 \item
   Ribeiro RdST, Anjos FVd, Jesus IRTd, Monteiro ER, Ferreira AdS. Immediate effects of self-massage compared to static stretching on neuromuscular and functional performance of physically active healthy adults: A crossover study. , org. Journal of Orthopaedic Reports. maio 2026:101049. \url{doi:10.1016/j.jorep.2026.101049}
@@ -18319,6 +18322,8 @@ O pacote \emph{PRISMA2020}\textsuperscript{\citeproc{ref-PRISMA2020}{252}} forne
   Ferreira AdS, Parisotto G. Insights from Ungureanu et~al.: interpreting AI-clinician disagreement in ECG diagnostics. , org. Acta Cardiologica. 2026;81(2):247--249. \url{doi:10.1080/00015385.2026.2630134}
 \item
   Ferreira AdS, dos Anjos FV. Applying Symmetry to Motor Control in Sports and Rehabilitation. , org. Symmetry. 2026;18(1):166. \url{doi:10.3390/sym18010166}
+\item
+  NULL
 \item
   Petrov I, Stoichev K, Aliman O, et al.~Effects of differing nutritional supplementation combined with high-intensity aerobic interval training on functional exercise capacity, cardiac function, and quality of life in patients with heart failure and reduced ejection fraction: a randomized trial. , org. American Journal of Physical Medicine \& Rehabilitation. dezembro 2025. \url{doi:10.1097/phm.0000000000002932}
 \item
