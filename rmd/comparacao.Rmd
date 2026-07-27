@@ -263,6 +263,141 @@ tbl_mw
 
 <br>
 
+## Teste de Brunner-Munzel
+
+<br>
+
+```{r brunner-munzel, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+base::set.seed(1234)
+
+# Simular dois grupos independentes com distribuições e variâncias diferentes
+n_A <- 45L
+n_B <- 75L
+
+trial_bm <-
+  tibble::tibble(
+    Tratamento = base::factor(
+      x = c(base::rep("A", n_A), base::rep("B", n_B)),
+      levels = c("A", "B")
+    )
+  ) %>%
+  dplyr::mutate(
+    Desfecho = dplyr::case_when(
+      Tratamento == "A" ~ stats::rlnorm(
+        n = dplyr::n(),
+        meanlog = 3.70,
+        sdlog = 0.65
+      ),
+      TRUE ~ stats::rlnorm(
+        n = dplyr::n(),
+        meanlog = 3.95,
+        sdlog = 0.35
+      )
+    )
+  )
+
+# Função personalizada para utilização no gtsummary::add_p()
+.brunner_munzel_p <- function(data, variable, by, ...) {
+  dados_teste <-
+    data %>%
+    dplyr::select(dplyr::all_of(c(by, variable))) %>%
+    stats::setNames(c("grupo", "valor")) %>%
+    dplyr::filter(
+      !base::is.na(grupo),
+      !base::is.na(valor)
+    ) %>%
+    dplyr::mutate(
+      grupo = base::droplevels(base::factor(grupo))
+    )
+
+  resultado <-
+    brunnermunzel::brunnermunzel.test(
+      valor ~ grupo,
+      data = dados_teste,
+      alternative = "two.sided"
+    )
+
+  tibble::tibble(
+    p.value = resultado$p.value
+  )
+}
+
+# Teste completo para obtenção da estatística e do tamanho de efeito
+bm_obj <-
+  brunnermunzel::brunnermunzel.test(
+    Desfecho ~ Tratamento,
+    data = trial_bm,
+    alternative = "two.sided",
+    est = "difference"
+  )
+
+# Extrair resultados
+bm_estimate <- base::unname(bm_obj$estimate)
+bm_ci_low   <- base::unname(bm_obj$conf.int[1])
+bm_ci_high  <- base::unname(bm_obj$conf.int[2])
+bm_stat     <- base::unname(bm_obj$statistic)
+bm_df       <- base::unname(bm_obj$parameter)
+
+# Tabela descritiva + p-valor
+tbl_bm <-
+  trial_bm %>%
+  gtsummary::tbl_summary(
+    by = Tratamento,
+    statistic = base::list(
+      Desfecho ~ "{median} [{p25}, {p75}]"
+    ),
+    digits = base::list(
+      Desfecho ~ 2
+    )
+  ) %>%
+  gtsummary::add_p(
+    test = base::list(
+      Desfecho ~ .brunner_munzel_p
+    ),
+    pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
+  ) %>%
+  gtsummary::modify_footnote(
+    update = p.value ~
+      "Teste de Brunner–Munzel, bilateral (amostras independentes)"
+  ) %>%
+  gtsummary::modify_header(
+    label = "",
+    p.value = "**P-valor**"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption(
+    "Teste de Brunner–Munzel"
+  ) %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    base::paste0(
+      "Estatística de Brunner–Munzel = ",
+      base::round(bm_stat, 3),
+      "; gl = ",
+      base::round(bm_df, 2),
+      "."
+    )
+  ) %>%
+  gt::tab_source_note(
+    base::paste0(
+      "Efeito probabilístico: P(A < B) − P(A > B) = ",
+      base::round(bm_estimate, 3),
+      " (IC95%: ",
+      base::round(bm_ci_low, 3),
+      " a ",
+      base::round(bm_ci_high, 3),
+      ")."
+    )
+  )
+
+tbl_bm
+```
+
+<br>
+
 ## Teste de Wilcoxon
 
 <br>

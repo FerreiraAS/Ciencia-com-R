@@ -38,7 +38,7 @@ trial <-
   ) %>%
   dplyr::select(Tratamento, Resposta)
 
-tbl_yates <-
+tbl_no_yates <-
   trial %>%
   gtsummary::tbl_cross(
     row = Tratamento,
@@ -63,7 +63,7 @@ tbl_yates <-
     paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
 
-tbl_yates
+tbl_no_yates
 ```
 
 <br>
@@ -92,7 +92,7 @@ trial <-
   ) %>%
   dplyr::select(Tratamento, Resposta)
 
-tbl_no_yates <-
+tbl_yates <-
   trial %>%
   gtsummary::tbl_cross(
     row = Tratamento,
@@ -117,7 +117,7 @@ tbl_no_yates <-
     paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
 
-tbl_no_yates
+tbl_yates
 ```
 
 <br>
@@ -177,13 +177,144 @@ tbl_fisher
 
 <br>
 
+## Teste de Fisher-Freeman-Halton (assintótico)
+
+<br>
+
+```{r fisher-freeman-halton, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+base::set.seed(1234)
+
+# Tabela de contingência 3 × 3
+# Algumas frequências são pequenas, tornando o exemplo adequado
+# para ilustrar uma extensão do teste de Fisher para tabelas r × c.
+tab_ffh <-
+  base::matrix(
+    data = c(
+      18,  7,  3,
+       9, 14,  6,
+       4,  8, 17
+    ),
+    nrow = 3L,
+    byrow = TRUE,
+    dimnames = base::list(
+      Tratamento = c("A", "B", "C"),
+      Resposta = c(
+        "Melhora",
+        "Sem alteração",
+        "Piora"
+      )
+    )
+  )
+
+# Teste de Fisher–Freeman–Halton assintótico
+ffh_res <-
+  contingencytables::FisherFreemanHalton_asymptotic_test_rxc(
+    tab_ffh
+  )
+
+# Extrair os resultados
+ffh_p  <- base::as.numeric(ffh_res$Pvalue)
+ffh_T  <- base::as.numeric(ffh_res$T)
+ffh_df <- base::as.numeric(ffh_res$df)
+
+# Formatação do p-valor
+ffh_p_txt <-
+  dplyr::case_when(
+    ffh_p < 0.001 ~ "<0.001",
+    TRUE ~ base::sprintf("%.3f", ffh_p)
+  )
+
+# Tamanho do efeito: V de Cramér
+ffh_cramer <-
+  effectsize::cramers_v(
+    tab_ffh,
+    ci = 0.95
+  )
+
+cramer_est  <- base::as.numeric(ffh_cramer$Cramers_v)
+cramer_low  <- base::as.numeric(ffh_cramer$CI_low)
+cramer_high <- base::as.numeric(ffh_cramer$CI_high)
+
+# Transformar a tabela agregada em dados individuais
+dados_ffh <-
+  base::as.data.frame.table(
+    tab_ffh,
+    responseName = "Frequencia"
+  ) %>%
+  tibble::as_tibble() %>%
+  tidyr::uncount(
+    weights = Frequencia
+  ) %>%
+  dplyr::mutate(
+    Tratamento = base::factor(
+      Tratamento,
+      levels = c("A", "B", "C")
+    ),
+    Resposta = base::factor(
+      Resposta,
+      levels = c(
+        "Melhora",
+        "Sem alteração",
+        "Piora"
+      )
+    )
+  )
+
+# Tabela de contingência
+tbl_ffh <-
+  dados_ffh %>%
+  gtsummary::tbl_cross(
+    row = Tratamento,
+    col = Resposta,
+    statistic = "{n} ({p}%)",
+    digits = 0,
+    percent = "row",
+    margin = c("row", "column"),
+    missing = "no",
+    margin_text = "Total"
+  ) %>%
+  gtsummary::bold_labels() %>%
+  gtsummary::modify_caption(
+    "Teste de Fisher–Freeman–Halton assintótico"
+  ) %>%
+  gtsummary::as_gt() %>%
+  gt::tab_source_note(
+    base::paste0(
+      "Fisher–Freeman–Halton: T = ",
+      base::round(ffh_T, 3),
+      "; gl = ",
+      ffh_df,
+      "; p = ",
+      ffh_p_txt,
+      "."
+    )
+  ) %>%
+  gt::tab_source_note(
+    base::paste0(
+      "Tamanho do efeito: V de Cramér = ",
+      base::round(cramer_est, 3),
+      " (IC95%: ",
+      base::round(cramer_low, 3),
+      " a ",
+      base::round(cramer_high, 3),
+      ")."
+    )
+  ) %>%
+  gt::tab_source_note(
+    "O procedimento empregado é a versão assintótica do teste de Fisher–Freeman–Halton para tabelas r × c."
+  )
+
+tbl_ffh
+```
+
+<br>
+
 ## Teste exato (incondicional) de Barnard
 
 <br>
 
 ```{r barnard, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
-library(dplyr)
-
 # Reprodutibilidade
 set.seed(1234)
 
@@ -347,7 +478,7 @@ tab_cross <-
     margin_text = "Total"
   ) %>%
   gtsummary::bold_labels() %>%
-  gtsummary::modify_caption("Teste de McNemar (sem corrreção de Yates)")
+  gtsummary::modify_caption("Teste de McNemar (sem correção de Yates)")
 
 # McNemar (p único para a tabela)
 tab_pp <- base::table(dados_mcnemar$Pre, dados_mcnemar$Pos)
@@ -368,9 +499,8 @@ tab_cross %>%
 <br>
 
 ```{r mcnemar-yates, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
-# McNemar (2x2 pareado) — exibir p no rodapé da tabela
-# ----------------------------------------------------
-base::set.seed(1234)
+# Reprodutibilidade
+set.seed(1234)
 
 # Simular dados binários pré/pós pareados
 n <- 100L
@@ -399,7 +529,7 @@ tab_cross <-
     margin_text = "Total"
   ) %>%
   gtsummary::bold_labels() %>%
-  gtsummary::modify_caption("Teste de McNemar (com corrreção de Yates)")
+  gtsummary::modify_caption("Teste de McNemar (com correção de Yates)")
 
 # McNemar (p único para a tabela)
 tab_pp <- base::table(dados_mcnemar$Pre, dados_mcnemar$Pos)
@@ -509,12 +639,22 @@ dados_trend_tbl <-
     values_to = "n"
   ) %>%
   dplyr::mutate(
-    Status = dplyr::recode(Status_raw,
-                           Sucessos = "Sucesso",
-                           Fracassos = "Fracasso"),
-    Status = factor(Status, levels = c("Sucesso","Fracasso"))
+    Status = dplyr::recode(
+      Status_raw,
+      Sucessos = "Sucesso",
+      Fracassos = "Fracasso"
+    ),
+    Status = base::factor(
+      Status,
+      levels = c("Sucesso", "Fracasso")
+    ),
+    Grupo = base::factor(
+      Grupo,
+      levels = c("Baixa", "Média", "Alta")
+    )
   ) %>%
-  dplyr::select(Grupo, Status, n)
+  dplyr::select(Grupo, Status, n) %>%
+  tidyr::uncount(weights = n)
 
 # Tabela cruzada com pesos
 tbl_trend <-
@@ -554,9 +694,13 @@ n <- 150L
 
 dados <-
   tibble::tibble(
-    X = sample(c(0, 1), n, replace = TRUE),
-    Y = sample(c(0, 1), n, replace = TRUE)
-  )
+    X = stats::rbinom(n, 1, 0.50)
+  ) %>%
+  dplyr::mutate(
+    prob_Y = dplyr::if_else(X == 1, 0.70, 0.35),
+    Y = stats::rbinom(n, 1, prob_Y)
+  ) %>%
+  dplyr::select(X, Y)
 
 resultado <- correlation::correlation(
   dados,
@@ -749,7 +893,7 @@ tbl_assoc <-
     test = "chisq.test",
     test.args = list(correct = FALSE)
   ) %>%
-  gtsummary::modify_caption("Medidas de associação (sem correção de Yates)") %>%
+  gtsummary::modify_caption("Medidas de associação; teste do qui-quadrado sem correção de Yates") %>%
   gtsummary::bold_labels()
 
 # ---- calcular OR e RR manualmente ----
@@ -813,7 +957,7 @@ tbl_assoc <-
     test = "chisq.test",
     test.args = list(correct = TRUE)
   ) %>%
-  gtsummary::modify_caption("Medidas de associação (com correção de Yates)") %>%
+  gtsummary::modify_caption("Medidas de associação; teste do qui-quadrado com correção de Yates") %>%
   gtsummary::bold_labels()
 
 # ---- calcular OR e RR manualmente ----
