@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Ensaios experimentais** {#ensaio-experimental}
 
 <br>
@@ -16,59 +15,59 @@
 
 ### Quais são as características de ensaios experimentais aleatorizados?
 
--   A característica essencial de um ensaio experimental aleatorizado é a comparação entre grupos.[@bland2011]
+- A característica essencial de um ensaio experimental aleatorizado é a comparação entre grupos.[@bland2011]
 
--   Quanto à unidade de alocação:[@Bruce2022]
+- Quanto à unidade de alocação:[@Bruce2022]
 
-    -   Individual
+  - Individual
 
-    -   Agrupado
+  - Agrupado
 
--   Quanto ao número de braços:[@Bruce2022]
+- Quanto ao número de braços:[@Bruce2022]
 
-    -   Múltiplos
+  - Múltiplos
 
--   Quanto ao número de centros:[@Bruce2022]
+- Quanto ao número de centros:[@Bruce2022]
 
-    -   Único
+  - Único
 
-    -   Múltiplos
+  - Múltiplos
 
--   Quanto ao cegamento:[@Bruce2022]
+- Quanto ao cegamento:[@Bruce2022]
 
-    -   Aberto
+  - Aberto
 
-    -   Simples-cego
+  - Simples-cego
 
-    -   Duplo-cego
+  - Duplo-cego
 
-    -   Triplo-cego
+  - Triplo-cego
 
-    -   Quádruplo-cego
+  - Quádruplo-cego
 
--   Quanto à alocação:[@Bruce2022]
+- Quanto à alocação:[@Bruce2022]
 
-    -   Sem sorteio
+  - Sem sorteio
 
-    -   Estratificada (centro apenas)
+  - Estratificada (centro apenas)
 
-    -   Estratificada
+  - Estratificada
 
-    -   Minimizada
+  - Minimizada
 
-    -   Estratificada e minimizada
+  - Estratificada e minimizada
 
 <br>
 
 ### Quais são as estratégias metodológicas para reduzir vieses?
 
--   Grupo controle: comparar a intervenção a um cuidado usual ou controle ativo ajuda a isolar o efeito específico do tratamento, reduzindo vieses de confusão e maturação.[@REF]
+- Grupo controle: comparar a intervenção a um cuidado usual ou controle ativo ajuda a isolar o efeito específico do tratamento, reduzindo vieses de confusão e maturação.[@REF]
 
--   Grupo placebo: prepara uma intervenção indistinguível da ativa para mitigar expectativas de participantes e profissionais, reduzindo viés de desempenho e detecção.[@REF]
+- Grupo placebo: prepara uma intervenção indistinguível da ativa para mitigar expectativas de participantes e profissionais, reduzindo viés de desempenho e detecção.[@REF]
 
--   Controle *sham*: em intervenções de procedimento (p.ex., cirúrgicas/fisioterapêuticas), um comparador que reproduz etapas não-específicas do procedimento controla efeitos placebo e da atenção.[@REF]
+- Controle *sham*: em intervenções de procedimento (p.ex., cirúrgicas/fisioterapêuticas), um comparador que reproduz etapas não-específicas do procedimento controla efeitos placebo e da atenção.[@REF]
 
--   Cegamento: mascarar participantes, profissionais, avaliadores e/ou analistas diminui vieses de desempenho e detecção; deve-se explicitar quem foi cegado e como a manutenção do cegamento foi assegurada.[@REF]
+- Cegamento: mascarar participantes, profissionais, avaliadores e/ou analistas diminui vieses de desempenho e detecção; deve-se explicitar quem foi cegado e como a manutenção do cegamento foi assegurada.[@REF]
 
 <br>
 
@@ -124,47 +123,53 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 ### O que são dados na linha de base?
 
--   Dados sociodemográficos, clínicos e funcionais são coletados na linha de base sobre cada participante no momento da aleatorização.[@Assmann2000]
+- Dados sociodemográficos, clínicos e funcionais são coletados na linha de base sobre cada participante no momento da aleatorização.[@Assmann2000]
 
--   Os dados de linha de base são usados para caracterizar os pacientes incluídos no estudo e para mostrar que os grupos de tratamento estão bem equilibrados.[@Assmann2000]
+- Os dados de linha de base são usados para caracterizar os pacientes incluídos no estudo e para mostrar que os grupos de tratamento estão bem equilibrados.[@Assmann2000]
 
--   Dados da linha de base podem ser utilizados para a aleatorização de modo a balancear ou estratificar os grupos considerando alguns fatores-chave.[@Assmann2000]
+- Dados da linha de base podem ser utilizados para a aleatorização de modo a balancear ou estratificar os grupos considerando alguns fatores-chave.[@Assmann2000]
 
--   Dados da linha de base podem ser utilizados como ajuste de covariável para análise do resultado por grupo de tratamento.[@Assmann2000]
+- Dados da linha de base podem ser utilizados como ajuste de covariável para análise do resultado por grupo de tratamento.[@Assmann2000]
 
 <br>
 
 ### O que é comparação entre grupos na linha de base?
 
--   A comparação refere-se ao teste de hipótese nula de não haver diferença ('balanço' ou 'equilíbrio') entre grupos de tratamento nas (co)variáveis na linha de base.[@Stang2018]
+- A comparação refere-se ao teste de hipótese nula de não haver diferença ('balanço' ou 'equilíbrio') entre grupos de tratamento nas (co)variáveis na linha de base.[@Stang2018]
 
--   A interpretação isolada do P-valor da comparação entre grupos na linha de base não permite identificar as razões para eventuais diferenças.[@Stang2018]
+- A interpretação isolada do P-valor da comparação entre grupos na linha de base não permite identificar as razões para eventuais diferenças.[@Stang2018]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *cobalt*[@cobalt] fornece a função `bal.tab` para gerar estatísticas de balanceamento de covariáveis em relação a uma variável de tratamento.
+:::
 
 <br>
 
 ### Quais são as razões para diferenças entre grupos de tratamento nas (co)variáveis na linha de base?
 
--   Acaso.[@Stang2018; @chen2020]
+- Acaso.[@Stang2018; @chen2020]
 
--   Viés.[@Stang2018; @chen2020]
+- Viés.[@Stang2018; @chen2020]
 
--   Tamanho da amostra.[@Stang2018; @chen2020]
+- Tamanho da amostra.[@Stang2018; @chen2020]
 
--   Má conduta científica.[@chen2020]
+- Má conduta científica.[@chen2020]
 
 <br>
 
 ### Para quê comparar grupos na linha de base?
 
--   Os P-valores estão relacionados à aleatorização dos participantes em grupos.[@Bolzern2019]
+- Os P-valores estão relacionados à aleatorização dos participantes em grupos.[@Bolzern2019]
 
--   A comparação de (co)variáveis na linha de base é usada para avaliar se aleatorização foi 'bem sucedida'.[@Bolzern2019]
+- A comparação de (co)variáveis na linha de base é usada para avaliar se aleatorização foi 'bem sucedida'.[@Bolzern2019]
 
 <br>
 
 ### Quais são as limitações da comparação entre grupos na linha de base?
 
--   Em ensaios experimentais aleatorizados agregados, os P-valores possuem interpretação diferente de estudos aleatorizados individualmente.[@Bolzern2019]
+- Em ensaios experimentais aleatorizados agregados, os P-valores possuem interpretação diferente de estudos aleatorizados individualmente.[@Bolzern2019]
 
 - Em ensaios experimentais com agrupamento e recrutamento após a aleatorização, os P-valores podem refletir o método de recrutamento, em vez da aleatorização, levando à comparação de amostras não aleatórias.[@Bolzern2019]
 
@@ -194,9 +199,9 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 ### Como lidar com potenciais diferenças entre grupos de tratamento nas (co)variáveis na linha de base?
 
--   Na fase de projeto: identifique as variáveis prognósticas do desfecho de acordo com a literatura.[@roberts1999]
+- Na fase de projeto: identifique as variáveis prognósticas do desfecho de acordo com a literatura.[@roberts1999]
 
--   Na fase de análise: inclua as variáveis prognósticas nos modelos para ajuste.[@roberts1999]
+- Na fase de análise: inclua as variáveis prognósticas nos modelos para ajuste.[@roberts1999]
 
 <br>
 
@@ -218,23 +223,23 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 ### O que é comparação entre grupos??
 
--   A comparação se refere ao teste de hipótese nula de não haver diferença ('alteração' ou 'mudança') pós-tratamento entre grupos de tratamento.[@bland2011]
+- A comparação se refere ao teste de hipótese nula de não haver diferença ('alteração' ou 'mudança') pós-tratamento entre grupos de tratamento.[@bland2011]
 
 <br>
 
 ### O que pode ser comparado entre grupos?
 
--   Valores pós-tratamento; mudança entre linha de base e pós-tratamento; mudança percentual da linha de base.[@vickers2001b]
+- Valores pós-tratamento; mudança entre linha de base e pós-tratamento; mudança percentual da linha de base.[@vickers2001b]
 
 <br>
 
 ### Qual é a comparação entre grupos mais adequada?
 
--   Análise de covariância (ANCOVA) que analisa o pós-tratamento com a linha de base como covariável é a opção que possui maior poder estatístico.[@vickers2001b]
+- Análise de covariância (ANCOVA) que analisa o pós-tratamento com a linha de base como covariável é a opção que possui maior poder estatístico.[@vickers2001b]
 
--   Mudança entre linha de base e pós-tratamento tem poder adequado apenas quando a correlação entre linha de base e pós-tratamento é alta.[@vickers2001b]
+- Mudança entre linha de base e pós-tratamento tem poder adequado apenas quando a correlação entre linha de base e pós-tratamento é alta.[@vickers2001b]
 
--   Mudança percentual da linha de base é a opção menos eficiente em termos de poder estatístico.[@vickers2001b]
+- Mudança percentual da linha de base é a opção menos eficiente em termos de poder estatístico.[@vickers2001b]
 
 <br>
 
@@ -244,13 +249,13 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 ### O que é comparação de subgrupos?
 
--   Análises de subgrupos podem ser realizadas para avaliar se as diferenças no resultado do tratamento (ou a falta delas) dependem de algumas características na linha de base dos pacientes.[@Assmann2000]
+- Análises de subgrupos podem ser realizadas para avaliar se as diferenças no resultado do tratamento (ou a falta delas) dependem de algumas características na linha de base dos pacientes.[@Assmann2000]
 
 <br>
 
 ### Como realizar a comparação de subgrupos?
 
--   Testes estatísticos de interação (que avaliam se um efeito de tratamento difere entre subgrupos) devem ser usados, e não apenas a inspeção dos P-valores do subgrupo.[@Assmann2000; @Brookes2004]
+- Testes estatísticos de interação (que avaliam se um efeito de tratamento difere entre subgrupos) devem ser usados, e não apenas a inspeção dos P-valores do subgrupo.[@Assmann2000; @Brookes2004]
 
 - Somente se o teste de interação estatística apoiar um efeito de subgrupo as conclusões poderão ser influenciadas.[@Assmann2000; @Brookes2004]
 
@@ -262,8 +267,7 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 - Sua credibilidade é maior quando se restringem ao desfecho primário e a um número reduzido de subgrupos predefinidos.[@Assmann2000]
 
-- Também devem ser fundamentadas em hipóteses biologicamente plausíveis.[@Assmann2000]
-É importante verificar se o estudo possui poder estatístico suficiente para detectar efeitos realistas nos subgrupos.[@Assmann2000]
+- Também devem ser fundamentadas em hipóteses biologicamente plausíveis.[@Assmann2000] É importante verificar se o estudo possui poder estatístico suficiente para detectar efeitos realistas nos subgrupos.[@Assmann2000]
 
 - Diferenças observadas em um subgrupo devem ser interpretadas com cautela quando o efeito global do tratamento não é estatisticamente significativo.[@Assmann2000]
 
@@ -275,21 +279,21 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 ### Por que analisar o efeito de interação?
 
--  O principal problema de pesquisa é se há uma diferença pré - pós maior em um grupo do que em outro(s).[@bland2011]
+- O principal problema de pesquisa é se há uma diferença pré - pós maior em um grupo do que em outro(s).[@bland2011]
 
--   A comparação de subgrupos por meio de testes de significância de hipótese nula separados é enganosa por não testar (comparar) diretamente os tamanhos dos efeitos dos tratamentos.[@Matthews1996]
+- A comparação de subgrupos por meio de testes de significância de hipótese nula separados é enganosa por não testar (comparar) diretamente os tamanhos dos efeitos dos tratamentos.[@Matthews1996]
 
--   Revisões recentes destacam que a interpretação de interações requer parcimônia (predefinição, plausibilidade biológica e controle do error-rate), e recomendam relatar estimativas e intervalos de confiança por subgrupo junto com o teste formal de interação.[@Bours2023]
+- Revisões recentes destacam que a interpretação de interações requer parcimônia (predefinição, plausibilidade biológica e controle do error-rate), e recomendam relatar estimativas e intervalos de confiança por subgrupo junto com o teste formal de interação.[@Bours2023]
 
 <br>
 
 ### Quando usar o termo de interação?
 
--   Análise de efeito de interação pode ser usada para testar se o efeito de um tratamento varia entre dois ou mais subgrupos de indivíduos, ou seja, se um efeito é modificado pelo(s) outros(s) efeito(s).[@Altman1996]
+- Análise de efeito de interação pode ser usada para testar se o efeito de um tratamento varia entre dois ou mais subgrupos de indivíduos, ou seja, se um efeito é modificado pelo(s) outros(s) efeito(s).[@Altman1996]
 
--   A interação entre duas (ou mais) variáveis pode ser utilizada para comparar efeitos do tratamento em subgrupos de ensaios experimentais.[@Altman2003]
+- A interação entre duas (ou mais) variáveis pode ser utilizada para comparar efeitos do tratamento em subgrupos de ensaios experimentais.[@Altman2003]
 
--   O poder estatístico para detectar efeitos de interação é limitado.[@Altman2003]
+- O poder estatístico para detectar efeitos de interação é limitado.[@Altman2003]
 
 <br>
 
@@ -299,25 +303,25 @@ Y_{ij} = \beta_0 + \beta_1 X_{ij} + \beta_2 Z_j + \epsilon_{ij}
 
 ### Quais variáveis devem ser utilizadas no ajuste de covariáveis?
 
--   A escolha das características de linha de base pelas quais uma análise é ajustada deve ser determinada pelo conhecimento prévio de uma possível influência no resultado, em vez da evidência de desequilíbrio entre os grupos de tratamento no estudo.[@roberts1999]
+- A escolha das características de linha de base pelas quais uma análise é ajustada deve ser determinada pelo conhecimento prévio de uma possível influência no resultado, em vez da evidência de desequilíbrio entre os grupos de tratamento no estudo.[@roberts1999]
 
 <br>
 
 ### Quais os benefícios do ajuste de covariáveis?
 
--   Ajustar por covariáveis ajuda a estimar os efeitos do tratamento para o indivíduo, assim como aumenta a eficiência dos testes para hipótese nula e a validade externa do estudo.[@Hauck1998]
+- Ajustar por covariáveis ajuda a estimar os efeitos do tratamento para o indivíduo, assim como aumenta a eficiência dos testes para hipótese nula e a validade externa do estudo.[@Hauck1998]
 
--   Incluir a variável de desfecho medida na linha de base como covariável --- independentemente de a análise ser realizada com a medida pós-tratamento da mesma variável ou a diferença para a linha de base --- pode aumentar o poder estatístico do estudo.[@Kahan2014]
+- Incluir a variável de desfecho medida na linha de base como covariável --- independentemente de a análise ser realizada com a medida pós-tratamento da mesma variável ou a diferença para a linha de base --- pode aumentar o poder estatístico do estudo.[@Kahan2014]
 
--   Incluir outras variáveis medidas na linha de base, com potencial para serem desbalanceadas entre grupos após a aleatorização, diminui a chance de afetar as estimativas de efeito dos tratamentos.[@Kahan2014]
+- Incluir outras variáveis medidas na linha de base, com potencial para serem desbalanceadas entre grupos após a aleatorização, diminui a chance de afetar as estimativas de efeito dos tratamentos.[@Kahan2014]
 
 <br>
 
 ### Quais os riscos do ajuste de covariáveis?
 
--   Incluir covariáveis que não são prognósticas do desfecho pode reduzir o poder estatístico do estudo.[@Kahan2014]
+- Incluir covariáveis que não são prognósticas do desfecho pode reduzir o poder estatístico do estudo.[@Kahan2014]
 
--   Incluir covariáveis com dados perdidos pode reduzir o tamanho amostral e consequentemente o poder estatístico do estudo (análise de casos completos) ou levar a desvios do plano de análise por exclusão de covariáveis prognósticas.[@Kahan2014]
+- Incluir covariáveis com dados perdidos pode reduzir o tamanho amostral e consequentemente o poder estatístico do estudo (análise de casos completos) ou levar a desvios do plano de análise por exclusão de covariáveis prognósticas.[@Kahan2014]
 
 <br>
 
@@ -355,9 +359,9 @@ Os pacotes *mice*[@mice] e *miceadds*[@miceadds] fornecem funções `mice` e `mi
 
 ### Quais são as diretrizes para redação de ensaios experimentais?
 
--   Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
+- Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
 
--   *CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials*.[@schulz2010]
+- *CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials*.[@schulz2010]
 
 <br>
 
