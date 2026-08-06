@@ -59,7 +59,7 @@ trial_t <-
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0(
-      "Tamanho do efeito (d de Cohen): ",
+      "Tamanho de efeito (d de Cohen): ",
       base::round(
         base::as.numeric(
           psych::cohen.d(Desfecho ~ Tratamento, data = trial)$cohen.d[2]
@@ -123,7 +123,7 @@ trial_t <-
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     paste0(
-      "Tamanho do efeito (d de Cohen pareado): ",
+      "Tamanho de efeito (d de Cohen pareado): ",
       round(
         effectsize::cohens_d(trial$Depois, trial$Antes, paired = TRUE)$Cohens_d,
         3
@@ -185,7 +185,7 @@ trial_t <-
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0(
-      "Tamanho do efeito (d de Cohen): ",
+      "Tamanho de efeito (d de Cohen): ",
       base::round(
         base::as.numeric(
           psych::cohen.d(Desfecho ~ Tratamento, data = trial)$cohen.d[2]
@@ -253,7 +253,7 @@ tbl_mw <-
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0(
-      "Tamanho do efeito (r): ",
+      "Tamanho de efeito (r): ",
       base::round(base::as.numeric(eff_ind$effsize), 3)
     )
   )
@@ -458,7 +458,7 @@ tbl_wilcox <-
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     paste0(
-      "Tamanho do efeito (r): ",
+      "Tamanho de efeito (r): ",
       round(as.numeric(eff_paired$effsize), 3)
     )
   )
@@ -524,7 +524,7 @@ tbl_anova <-
   gtsummary::modify_caption("Análise de variância de um fator") %>%
   gtsummary::as_gt() %>%
   gt::tab_source_note(
-    base::paste0("Tamanho do efeito (eta²): ", base::round(eta2, 3))
+    base::paste0("Tamanho de efeito (eta²): ", base::round(eta2, 3))
   )
 
 tbl_anova
@@ -647,7 +647,7 @@ tbl_welch <-
   gtsummary::modify_caption("Análise de variância de Welch") %>%
   gtsummary::as_gt() %>%
   gt::tab_source_note(
-    base::paste0("Tamanho do efeito (eta², via SS): ", base::round(eta2, 3))
+    base::paste0("Tamanho de efeito (eta², via SS): ", base::round(eta2, 3))
   )
 
 tbl_welch
@@ -742,7 +742,7 @@ tbl_kw <-
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     base::paste0(
-      "Tamanho do efeito: epsilon² = ", base::round(eps2, 3)
+      "Tamanho de efeito: epsilon² = ", base::round(eps2, 3)
     )
   )
 

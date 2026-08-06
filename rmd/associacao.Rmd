@@ -60,7 +60,7 @@ tbl_no_yates <-
   gtsummary::modify_caption("Teste Qui-quadrado (sem correção de Yates)") %>%
   gtsummary::as_gt() %>%
   gt::tab_source_note(
-    paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
+    paste0("Tamanho de efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
 
 tbl_no_yates
@@ -114,7 +114,7 @@ tbl_yates <-
   gtsummary::modify_caption("Teste Qui-quadrado (com correção de Yates)") %>%
   gtsummary::as_gt() %>%
   gt::tab_source_note(
-    paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
+    paste0("Tamanho de efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
 
 tbl_yates
@@ -169,7 +169,7 @@ tbl_fisher <-
   gtsummary::modify_caption("Teste exato de Fisher") %>%
   gtsummary::as_gt() %>%
   gt::tab_source_note(
-    paste0("Tamanho do efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
+    paste0("Tamanho de efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
 
 tbl_fisher
@@ -225,7 +225,7 @@ ffh_p_txt <-
     TRUE ~ base::sprintf("%.3f", ffh_p)
   )
 
-# Tamanho do efeito: V de Cramér
+# Tamanho de efeito: V de Cramér
 ffh_cramer <-
   effectsize::cramers_v(
     tab_ffh,
@@ -292,7 +292,7 @@ tbl_ffh <-
   ) %>%
   gt::tab_source_note(
     base::paste0(
-      "Tamanho do efeito: V de Cramér = ",
+      "Tamanho de efeito: V de Cramér = ",
       base::round(cramer_est, 3),
       " (IC95%: ",
       base::round(cramer_low, 3),
@@ -386,7 +386,7 @@ barnard_p <-
     barnard_res$p.value[1]
   )
 
-# Tamanho do efeito
+# Tamanho de efeito
 cramer_v <-
   rstatix::cramer_v(
     trial$Tratamento,
@@ -432,7 +432,7 @@ tbl_barnard <-
   gt::tab_source_note(
     source_note =
       paste0(
-        "Tamanho do efeito (Cramér's V): ",
+        "Tamanho de efeito (Cramér's V): ",
         round(cramer_v, 3)
       )
   )
