@@ -48,7 +48,7 @@ trial_t <-
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_footnote(
-    update = p.value ~ "Teste t de Student (variâncias iguais)"
+    p.value ~ "Teste t de Student (variâncias iguais)"
   ) %>%
   gtsummary::modify_header(
     label = "",
@@ -112,7 +112,7 @@ trial_t <-
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_footnote(
-    update = p.value ~ "Teste t de Student (pareado)"
+    p.value ~ "Teste t de Student (pareado)"
   ) %>%
   gtsummary::modify_header(
     label = "",
@@ -174,7 +174,7 @@ trial_t <-
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_footnote(
-    update = p.value ~ "Teste t de Welch (variâncias desiguais)"
+    p.value ~ "Teste t de Welch (variâncias desiguais)"
   ) %>%
   gtsummary::modify_header(
     label = "",
@@ -242,7 +242,7 @@ tbl_mw <-
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_footnote(
-    update = p.value ~ "Teste de Mann–Whitney (Wilcoxon rank-sum, amostras independentes)"
+    p.value ~ "Teste de Mann–Whitney (Wilcoxon rank-sum, amostras independentes)"
   ) %>%
   gtsummary::modify_header(
     label = "",
@@ -360,8 +360,7 @@ tbl_bm <-
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_footnote(
-    update = p.value ~
-      "Teste de Brunner–Munzel, bilateral (amostras independentes)"
+    p.value ~ "Teste de Brunner–Munzel, bilateral (amostras independentes)"
   ) %>%
   gtsummary::modify_header(
     label = "",
@@ -447,7 +446,7 @@ tbl_wilcox <-
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_footnote(
-    update = p.value ~ "Teste de Wilcoxon pareado (signed-rank, amostras dependentes)"
+    p.value ~ "Teste de Wilcoxon pareado (signed-rank, amostras dependentes)"
   ) %>%
   gtsummary::modify_header(
     label = "",
@@ -514,7 +513,7 @@ tbl_anova <-
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_footnote(
-    update = p.value ~ "ANOVA de um fator (variâncias iguais)"
+    p.value ~ "ANOVA de um fator (variâncias iguais)"
   ) %>%
   gtsummary::modify_header(
     label = "",
@@ -637,7 +636,7 @@ tbl_welch <-
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_footnote(
-    update = p.value ~ "ANOVA de Welch (variâncias desiguais)"
+    p.value ~ "ANOVA de Welch (variâncias desiguais)"
   ) %>%
   gtsummary::modify_header(
     label = "",
@@ -731,7 +730,7 @@ tbl_kw <-
     pvalue_fun = ~ gtsummary::style_pvalue(.x, digits = 3)
   ) %>%
   gtsummary::modify_footnote(
-    update = p.value ~ "Teste de Kruskal–Wallis (amostras independentes, variáveis assimétricas)"
+    p.value ~ "Teste de Kruskal–Wallis (amostras independentes, variáveis assimétricas)"
   ) %>%
   gtsummary::modify_header(
     label = "",
