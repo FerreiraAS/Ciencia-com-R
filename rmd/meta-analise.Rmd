@@ -15,11 +15,11 @@
 
 ### O que é meta-análise?
 
--   Meta-análise é um método estatístico que combina quantitativamente os resultados de múltiplos estudos independentes sobre uma mesma questão de pesquisa, aumentando o poder estatístico e a precisão das estimativas de efeito.[@borenstein2010]
+- Meta-análise é um método estatístico que combina quantitativamente os resultados de múltiplos estudos independentes sobre uma mesma questão de pesquisa, aumentando o poder estatístico e a precisão das estimativas de efeito.[@borenstein2010]
 
--   Meta-análise sintetiza evidências considerando o peso de cada estudo (geralmente inversamente proporcional à variância) e permite avaliar a consistência dos resultados, identificar fontes de heterogeneidade e estimar um efeito global.[@borenstein2010]
+- Meta-análise sintetiza evidências considerando o peso de cada estudo (geralmente inversamente proporcional à variância) e permite avaliar a consistência dos resultados, identificar fontes de heterogeneidade e estimar um efeito global.[@borenstein2010]
 
--   A meta-análise é frequentemente considerada uma das formas mais robustas de evidência científica, pois permite a combinação quantitativa de múltiplos estudos, aumentando a precisão das estimativas de efeito e sintetizando o conhecimento disponível sobre determinada intervenção.[@Berlin2014]
+- A meta-análise é frequentemente considerada uma das formas mais robustas de evidência científica, pois permite a combinação quantitativa de múltiplos estudos, aumentando a precisão das estimativas de efeito e sintetizando o conhecimento disponível sobre determinada intervenção.[@Berlin2014]
 
 - Por essas razões, a meta-análise deve ser interpretada com cautela, sendo considerada uma ferramenta poderosa de síntese, mas não uma garantia automática de evidência de alta qualidade.[@Berlin2014]
 
@@ -31,11 +31,11 @@
 
 ### Quais são os principais modelos de meta-análise?
 
--   Modelo de efeitos fixos: assume que todos os estudos avaliam o mesmo efeito verdadeiro, e a variação observada é apenas devido ao erro de amostragem. É adequado quando os estudos são homogêneos e as diferenças entre eles são pequenas.[@borenstein2010]
+- Modelo de efeitos fixos: assume que todos os estudos avaliam o mesmo efeito verdadeiro, e a variação observada é apenas devido ao erro de amostragem. É adequado quando os estudos são homogêneos e as diferenças entre eles são pequenas.[@borenstein2010]
 
--   Modelo de efeitos aleatórios: assume que os estudos avaliam efeitos verdadeiros diferentes, com uma distribuição normal. É mais apropriado quando há heterogeneidade entre os estudos, pois considera a variação entre eles além do erro de amostragem.[@borenstein2010]
+- Modelo de efeitos aleatórios: assume que os estudos avaliam efeitos verdadeiros diferentes, com uma distribuição normal. É mais apropriado quando há heterogeneidade entre os estudos, pois considera a variação entre eles além do erro de amostragem.[@borenstein2010]
 
--   Modelo de efeitos de rede: estende a meta-análise para comparar múltiplas intervenções simultaneamente, mesmo que não tenham sido comparadas diretamente em estudos. É útil para avaliar a eficácia relativa de várias intervenções.[@REF]
+- Modelo de efeitos de rede: estende a meta-análise para comparar múltiplas intervenções simultaneamente, mesmo que não tenham sido comparadas diretamente em estudos. É útil para avaliar a eficácia relativa de várias intervenções.[@REF]
 
 <br>
 
@@ -207,13 +207,13 @@ ggplot2::ggplot(curve_data,
 
 ### O que fazer quando os estudos apresentam resultados com diferentes parâmetros?
 
--   Quando os estudos reportam médias e desvios-padrão, os dados podem ser usados diretamente na metanálise.[@REF]
+- Quando os estudos reportam médias e desvios-padrão, os dados podem ser usados diretamente na metanálise.[@REF]
 
--   Quando apresentam mediana e intervalo interquartil (ou mínimo–máximo), existem métodos estatísticos para converter em média e DP.[@hozo2005]
+- Quando apresentam mediana e intervalo interquartil (ou mínimo–máximo), existem métodos estatísticos para converter em média e DP.[@hozo2005]
 
--   Hozo et al. (2005) propuseram fórmulas para estimar a média e o desvio-padrão a partir da mediana, amplitude e tamanho da amostra.[@hozo2005]
+- Hozo et al. (2005) propuseram fórmulas para estimar a média e o desvio-padrão a partir da mediana, amplitude e tamanho da amostra.[@hozo2005]
 
--   Wan et al. (2014) aperfeiçoaram essas estimativas, oferecendo métodos mais precisos para converter mediana e IQR em média e DP.[@wan2014]
+- Wan et al. (2014) aperfeiçoaram essas estimativas, oferecendo métodos mais precisos para converter mediana e IQR em média e DP.[@wan2014]
 
 <br>
 
@@ -245,7 +245,7 @@ O pacote *metafor*[@metafor] fornece a função `conv.fivenum` para converter m�
 
 ### Como avaliar a heterogeneidade entre os estudos?
 
--   A heterogeneidade --- variação não-aleatória --- no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo $I^{2}$ \@ref(eq:i-sqr).[@Rucker2008; @Borenstein2022]
+- A heterogeneidade --- variação não-aleatória --- no efeito do tratamento entre os estudos incluídos em uma meta-análise pode ser avaliada pelo $I^{2}$ \@ref(eq:i-sqr).[@Rucker2008; @Borenstein2022]
 
 <br>
 
@@ -256,13 +256,13 @@ I^{2} = \max \left( 0, \frac{Q - df}{Q} \right) \times 100\%
 
 <br>
 
--   $I^{2}$ representa qual proporção da variância observada reflete a variância nos efeitos verdadeiros em vez do erro de amostragem.[@Borenstein2022]
+- $I^{2}$ representa qual proporção da variância observada reflete a variância nos efeitos verdadeiros em vez do erro de amostragem.[@Borenstein2022]
 
--   $I^{2}$ mede a proporção da variância total que pode ser atribuída à heterogeneidade entre os estudos incluídos.[@Rucker2008]
+- $I^{2}$ mede a proporção da variância total que pode ser atribuída à heterogeneidade entre os estudos incluídos.[@Rucker2008]
 
--   $I^{2}$ não depende da quantidade de estudos incluídos na meta-análise. Entretanto, $I^{2}$ aumenta com a quantidade de participantes incluídos nos estudos meta-analisados.[@Rucker2008]
+- $I^{2}$ não depende da quantidade de estudos incluídos na meta-análise. Entretanto, $I^{2}$ aumenta com a quantidade de participantes incluídos nos estudos meta-analisados.[@Rucker2008]
 
--   A heterogeneidade entre estudos é explicada de modo mais confiável utilizando dados de pacientes individuais, uma vez que a direção verdadeira da modificação de efeito não pode ser observada a partir de dados agregados no estudo.[@degrooth2023]
+- A heterogeneidade entre estudos é explicada de modo mais confiável utilizando dados de pacientes individuais, uma vez que a direção verdadeira da modificação de efeito não pode ser observada a partir de dados agregados no estudo.[@degrooth2023]
 
 <br>
 
@@ -284,7 +284,7 @@ O pacote *psychmeta*[@psychmeta] fornece a função `ma_r` para meta-analisar co
 
 ### O que é *forest plot*?
 
--   Um *forest plot* é uma representação gráfica dos achados de uma meta-análise. Ele resume os resultados de estudos individuais e apresenta uma estimativa combinada do efeito, permitindo interpretação visual da magnitude, direção e significância estatística dos resultados.[@dettori2021]
+- Um *forest plot* é uma representação gráfica dos achados de uma meta-análise. Ele resume os resultados de estudos individuais e apresenta uma estimativa combinada do efeito, permitindo interpretação visual da magnitude, direção e significância estatística dos resultados.[@dettori2021]
 
 <br>
 
@@ -410,57 +410,57 @@ metafor::forest(
 
 ### Quais são as seis colunas básicas que um *forest plot* geralmente apresenta?
 
--   As seis colunas básicas incluem: estudos incluídos (e subgrupos, se analisados); dados do grupo de intervenção, dados do grupo controle; peso de cada estudo; medida numérica do efeito; representação gráfica do efeito.[@dettori2021]
+- As seis colunas básicas incluem: estudos incluídos (e subgrupos, se analisados); dados do grupo de intervenção, dados do grupo controle; peso de cada estudo; medida numérica do efeito; representação gráfica do efeito.[@dettori2021]
 
 <br>
 
 ### Como diferenciar um desfecho binário de um contínuo em um *forest plot*?
 
--   Em desfechos binários, são mostrados número de eventos e total da amostra, sendo o efeito medido por *risk ratio* ($RR$) ou *odds ratio* ($OR$).[@dettori2021]
+- Em desfechos binários, são mostrados número de eventos e total da amostra, sendo o efeito medido por *risk ratio* ($RR$) ou *odds ratio* ($OR$).[@dettori2021]
 
--   Em desfechos contínuos, apresentam-se médias, desvios-padrão e tamanhos amostrais, com o efeito medido pela diferença de médias.[@dettori2021]
+- Em desfechos contínuos, apresentam-se médias, desvios-padrão e tamanhos amostrais, com o efeito medido pela diferença de médias.[@dettori2021]
 
 <br>
 
 ### O que representa o ponto central da caixa e o tamanho desta no gráfico?
 
--   O ponto central indica a estimativa pontual do efeito (melhor estmativa para o efeito real).[@dettori2021]
+- O ponto central indica a estimativa pontual do efeito (melhor estmativa para o efeito real).[@dettori2021]
 
--   O tamanho da caixa é proporcional ao peso do estudo na meta-análise, geralmente maior para estudos com amostras maiores.[@dettori2021]
+- O tamanho da caixa é proporcional ao peso do estudo na meta-análise, geralmente maior para estudos com amostras maiores.[@dettori2021]
 
 <br>
 
 ### Qual é o significado da linha vertical do “nenhum efeito”?
 
--   É a linha de referência que indica efeito nulo.[@dettori2021]
+- É a linha de referência que indica efeito nulo.[@dettori2021]
 
--   Para desfechos binários, corresponde ao valor 1 ($RR$ ou $OR$ = 1).[@dettori2021]
+- Para desfechos binários, corresponde ao valor 1 ($RR$ ou $OR$ = 1).[@dettori2021]
 
--   Para desfechos contínuos, corresponde ao valor 0 (diferença de médias = 0).[@dettori2021]
+- Para desfechos contínuos, corresponde ao valor 0 (diferença de médias = 0).[@dettori2021]
 
--   Se o intervalo de confiança de um estudo ou do resultado combinado cruza essa linha, o resultado não é estatisticamente significativo.[@dettori2021]
+- Se o intervalo de confiança de um estudo ou do resultado combinado cruza essa linha, o resultado não é estatisticamente significativo.[@dettori2021]
 
 <br>
 
 ### Como interpretar o diamante na parte inferior do *forest plot*?
 
--   O diamante representa o efeito combinado dos estudos incluídos.[@dettori2021]
+- O diamante representa o efeito combinado dos estudos incluídos.[@dettori2021]
 
--   O ponto central do diamante é a estimativa global.[@dettori2021]
+- O ponto central do diamante é a estimativa global.[@dettori2021]
 
--   A largura do diamante representa o intervalo de confiança de 95% para o efeito combinado.[@dettori2021]
+- A largura do diamante representa o intervalo de confiança de 95% para o efeito combinado.[@dettori2021]
 
 <br>
 
 ### Como a heterogeneidade pode ser avaliada no *forest plot*?
 
--   A variabilidade nos resultados dos estudos incluídos é avaliada pela sobreposição dos intervalos de confiança dos estudos; pelo teste do qui-quadrado ($\chi^2$) e pelo valor de $I^{2}$.[@dettori2021]
+- A variabilidade nos resultados dos estudos incluídos é avaliada pela sobreposição dos intervalos de confiança dos estudos; pelo teste do qui-quadrado ($\chi^2$) e pelo valor de $I^{2}$.[@dettori2021]
 
 <br>
 
 ### Quais são as interpretações usuais para os valores de heterogeneidade?
 
--   $I^{2}$ de 0% a 40%: pode não ser importante; 30% a 60%: heterogeneidade moderada; 50% a 90%: heterogeneidade substancial; 75% a 100%: heterogeneidade considerável.[@dettori2021]
+- $I^{2}$ de 0% a 40%: pode não ser importante; 30% a 60%: heterogeneidade moderada; 50% a 90%: heterogeneidade substancial; 75% a 100%: heterogeneidade considerável.[@dettori2021]
 
 <br>
 
@@ -564,13 +564,93 @@ par(op)
 
 <br>
 
+## *Radial plot*
+
+<br>
+
+### O que é *radial plot*?
+
+- O gráfico radial ou de Galbraith é uma representação gráfica que permite avaliar a heterogeneidade entre estudos em uma meta-análise, mostrando diversas estimativas pontuais que possuem diferentes erros-padrão.[@galbraith1988]
+
+- o gráfico é produzido plotando o efeito padronizado (estimativa pontual dividida pelo erro-padrão) no eixo vertical e o inverso do erro-padrão no eixo horizontal.[@galbraith1988]
+
+- Pontos fora das linhas externas indicam estudos potencialmente discrepantes, que podem contribuir para a heterogeneidade.[@galbraith1988]
+
+<br>
+
+```{r ma-radial-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Radial plot (gráfico de Galbraith) de uma meta-análise com 15 ensaios clínicos simulados."}
+# Reprodutibilidade
+set.seed(123)
+
+# Simular dados de 15 ensaios clínicos (Tratamento vs. Controle)
+k   <- 15
+n_t <- sample(30:200, k, replace = TRUE)
+n_c <- sample(30:200, k, replace = TRUE)
+
+# Médias e desvios-padrão simulados
+mu_c <- rnorm(k, mean = 0.00, sd = 0.40)
+mu_t <- mu_c + rnorm(k, mean = 0.30, sd = 0.25)
+sd_c <- runif(k, min = 0.6, max = 1.4)
+sd_t <- runif(k, min = 0.6, max = 1.4)
+
+dat <- data.frame(
+  study_id = paste0("Trial_", seq_len(k)),
+  n_t = n_t,
+  n_c = n_c,
+  mean_t = mu_t,
+  mean_c = mu_c,
+  sd_t = sd_t,
+  sd_c = sd_c
+)
+
+# Calcular tamanho de efeito (Hedges g)
+es <- metafor::escalc(
+  measure = "SMD",
+  m1i = mean_t,
+  sd1i = sd_t,
+  n1i = n_t,
+  m2i = mean_c,
+  sd2i = sd_c,
+  n2i = n_c,
+  vtype = "UB",
+  data = dat
+)
+
+# Ajustar modelo de efeito fixo
+res_fe <- metafor::rma.uni(
+  yi = es$yi,
+  vi = es$vi,
+  method = "FE"
+)
+
+# Radial plot (Galbraith)
+metafor::radial(
+  res_fe,
+  slab = es$study_id,
+  main = "Radial plot (Galbraith)",
+  level = 95,
+  pch = 21,
+  bg = "steelblue4",
+  col = "gray20",
+  cex = 1.1
+)
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *metafor*[@metafor] fornece a função `radial` para criar um gráfico radial (ou de Galbraith) a partir de uma meta-análise.
+:::
+
+<br>
+
 ## *Crosshair*
 
 <br>
 
 ### O que é *crosshair*?
 
--   .[@phillips2010]
+- .[@phillips2010]
 
 <br>
 
@@ -687,7 +767,7 @@ O pacote *mada*[@mada] fornece a função `crosshair` para criar um gráfico *cr
 
 ### O que é *funnel plot*?
 
--   É um gráfico de dispersão que relaciona a estimativa de efeito de cada estudo com uma medida de seu tamanho ou precisão (por exemplo, erro-padrão no eixo vertical, em escala invertida).[@sterne2011]
+- É um gráfico de dispersão que relaciona a estimativa de efeito de cada estudo com uma medida de seu tamanho ou precisão (por exemplo, erro-padrão no eixo vertical, em escala invertida).[@sterne2011]
 
 - Em condições ideais (ausência de viés e heterogeneidade), os estudos se distribuem de forma simétrica, formando um “funil invertido”.[@sterne2011]
 
@@ -779,37 +859,37 @@ par(mfrow=c(1,1))
 
 ### O que é viés de publicação?
 
--   O viés de publicação ocorre quando estudos com resultados não significativos ou contrários à hipótese tendem a não ser publicados, afetando a estimativa final da meta-análise e podendo levar a conclusões incorretas.[@song2000]
+- O viés de publicação ocorre quando estudos com resultados não significativos ou contrários à hipótese tendem a não ser publicados, afetando a estimativa final da meta-análise e podendo levar a conclusões incorretas.[@song2000]
 
 <br>
 
 ### Quais métodos podem ser usados para identificar viés de publicação?
 
--   O método mais simples é o *funnel plot*, que representa a estimativa de efeito de cada estudo em função de sua precisão ($1/SE$).[@egger1997]
+- O método mais simples é o *funnel plot*, que representa a estimativa de efeito de cada estudo em função de sua precisão ($1/SE$).[@egger1997]
 
--   Na ausência de viés, espera-se uma distribuição simétrica (“forma de funil”). Assimetria pode indicar viés de publicação, heterogeneidade entre estudos ou efeitos de tamanho de estudo (*small-study effects*).[@egger1997]
+- Na ausência de viés, espera-se uma distribuição simétrica (“forma de funil”). Assimetria pode indicar viés de publicação, heterogeneidade entre estudos ou efeitos de tamanho de estudo (*small-study effects*).[@egger1997]
 
--   Para *odds ratios* ($OR$), a correlação entre $ln(OR)$ e seu erro padrão pode gerar assimetria mesmo sem viés, por isso recomenda-se, nesses casos, plotar em função do tamanho amostral.[@peters2006]
+- Para *odds ratios* ($OR$), a correlação entre $ln(OR)$ e seu erro padrão pode gerar assimetria mesmo sem viés, por isso recomenda-se, nesses casos, plotar em função do tamanho amostral.[@peters2006]
 
 <br>
 
 ### A assimetria do *funnel plot* indica sempre viés de publicação?
 
--   Viéses de relato (*reporting biases*), como viés de publicação, viés de linguagem ou de citação.[@sterne2011]
+- Viéses de relato (*reporting biases*), como viés de publicação, viés de linguagem ou de citação.[@sterne2011]
 
--   Diferenças metodológicas entre estudos pequenos e grandes.[@sterne2011]
+- Diferenças metodológicas entre estudos pequenos e grandes.[@sterne2011]
 
--   Heterogeneidade verdadeira (diferença real no efeito conforme o tamanho ou o contexto do estudo).[@sterne2011]
+- Heterogeneidade verdadeira (diferença real no efeito conforme o tamanho ou o contexto do estudo).[@sterne2011]
 
--   Artefatos estatísticos ou mero acaso.[@sterne2011]
+- Artefatos estatísticos ou mero acaso.[@sterne2011]
 
 <br>
 
 ### O que é *trim and fill*?
 
--   O método *trim and fill* “apara” os estudos que causam assimetria no funnel plot, estima o número de estudos possivelmente ausentes (não publicados) e “preenche” o gráfico com esses estudos simulados, recalculando o efeito combinado.[@duval2000]
+- O método *trim and fill* “apara” os estudos que causam assimetria no funnel plot, estima o número de estudos possivelmente ausentes (não publicados) e “preenche” o gráfico com esses estudos simulados, recalculando o efeito combinado.[@duval2000]
 
--   O método assume que a assimetria é causada unicamente por viés de publicação, podendo levar a conclusões equivocadas quando há outras causas, como heterogeneidade. [@duval2000]
+- O método assume que a assimetria é causada unicamente por viés de publicação, podendo levar a conclusões equivocadas quando há outras causas, como heterogeneidade. [@duval2000]
 
 <br>
 
@@ -819,45 +899,45 @@ par(mfrow=c(1,1))
 
 ### O que é o teste de Egger?
 
--   É um teste estatístico amplamente utilizado que avalia a relação entre o efeito padronizado ($efeito/SE$) e a precisão ($1/SE$).[@egger1997]
+- É um teste estatístico amplamente utilizado que avalia a relação entre o efeito padronizado ($efeito/SE$) e a precisão ($1/SE$).[@egger1997]
 
--   No entanto, para meta-análises com $OR$, apresenta taxas de erro tipo I excessivas, especialmente quando o efeito é grande ou há alta heterogeneidade.[@peters2006]
+- No entanto, para meta-análises com $OR$, apresenta taxas de erro tipo I excessivas, especialmente quando o efeito é grande ou há alta heterogeneidade.[@peters2006]
 
 <br>
 
 ### O que é o teste de Peters?
 
--   Uma regressão linear ponderada com $ln(OR)$ como variável dependente e o inverso do tamanho total da amostra como variável independente (modificação do teste de Macaskill).[@peters2006]
+- Uma regressão linear ponderada com $ln(OR)$ como variável dependente e o inverso do tamanho total da amostra como variável independente (modificação do teste de Macaskill).[@peters2006]
 
--   Essa abordagem reduz a correlação entre $ln(OR)$ e seu $SE$, resultando em taxas de erro tipo I mais adequadas (\~10%) independentemente do tamanho de efeito, número de estudos ou heterogeneidade.[@peters2006]
+- Essa abordagem reduz a correlação entre $ln(OR)$ e seu $SE$, resultando em taxas de erro tipo I mais adequadas (\~10%) independentemente do tamanho de efeito, número de estudos ou heterogeneidade.[@peters2006]
 
--   O teste de Peters é preferível ao teste de Egger quando o desfecho é expresso como OR, pois mantém taxas de erro tipo I adequadas e ainda apresenta poder comparável para detectar viés em condições de baixa heterogeneidade.[@peters2006]
+- O teste de Peters é preferível ao teste de Egger quando o desfecho é expresso como OR, pois mantém taxas de erro tipo I adequadas e ainda apresenta poder comparável para detectar viés em condições de baixa heterogeneidade.[@peters2006]
 
--   Em casos de alta heterogeneidade, o teste de Egger pode apresentar maior poder, mas sua alta taxa de falsos positivos compromete a interpretação.[@peters2006]
+- Em casos de alta heterogeneidade, o teste de Egger pode apresentar maior poder, mas sua alta taxa de falsos positivos compromete a interpretação.[@peters2006]
 
 <br>
 
 ### Quais são as recomendações para testar a assimetria?
 
--   Evitar testes quando há menos de 10 estudos, devido ao baixo poder estatístico.[@sterne2011]
+- Evitar testes quando há menos de 10 estudos, devido ao baixo poder estatístico.[@sterne2011]
 
--   Inspecionar visualmente o *funnel plot* junto com os resultados dos testes.[@sterne2011]
+- Inspecionar visualmente o *funnel plot* junto com os resultados dos testes.[@sterne2011]
 
--   Para desfechos contínuos (diferença de médias), o teste de Egger pode ser usado.[@sterne2011]
+- Para desfechos contínuos (diferença de médias), o teste de Egger pode ser usado.[@sterne2011]
 
--   Para desfechos dicotômicos expressos como *odds ratio* ($OR$) com baixa heterogeneidade ($\tau^2 < 0,1$), considerar os testes de Harbord, Peters ou Rücker.[@sterne2011]
+- Para desfechos dicotômicos expressos como *odds ratio* ($OR$) com baixa heterogeneidade ($\tau^2 < 0,1$), considerar os testes de Harbord, Peters ou Rücker.[@sterne2011]
 
--   Para desfechos dicotômicos expressos como *odds ratio*($OR$) com alta heterogeneidade ($\tau^2 > 0,1$), o teste de Rücker com transformação $arcsine$ é mais indicado.[@sterne2011]
+- Para desfechos dicotômicos expressos como *odds ratio*($OR$) com alta heterogeneidade ($\tau^2 > 0,1$), o teste de Rücker com transformação $arcsine$ é mais indicado.[@sterne2011]
 
 <br>
 
 ### Como interpretar os resultados de testes de viés de publicação?
 
--   Um resultado não significativo não garante ausência de viés.[@peters2006]
+- Um resultado não significativo não garante ausência de viés.[@peters2006]
 
--   Recomenda-se complementar com inspeção visual do *funnel plot* e considerar métodos adicionais como *trim and fill*.[@duval2000; @peters2006]
+- Recomenda-se complementar com inspeção visual do *funnel plot* e considerar métodos adicionais como *trim and fill*.[@duval2000; @peters2006]
 
--   Quando há suspeita de viés, discutir as implicações e interpretar o efeito combinado com cautela.[@peters2006]
+- Quando há suspeita de viés, discutir as implicações e interpretar o efeito combinado com cautela.[@peters2006]
 
 <br>
 
@@ -873,11 +953,11 @@ O pacote *psychmeta*[@psychmeta] fornece a função `plot_funnel` para criar fig
 
 ### Quais são as diretrizes para redação de meta-análises?
 
--   Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
+- Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
 
--   *The PRISMA 2020 statement: An updated guideline for reporting systematic reviews*.[@page2021]
+- *The PRISMA 2020 statement: An updated guideline for reporting systematic reviews*.[@page2021]
 
--   *Transparent reporting of multivariable prediction models for individual prognosis or diagnosis: checklist for systematic reviews and meta-analyses (TRIPOD-SRMA)*.[@snell2023]
+- *Transparent reporting of multivariable prediction models for individual prognosis or diagnosis: checklist for systematic reviews and meta-analyses (TRIPOD-SRMA)*.[@snell2023]
 
 <br>
 
