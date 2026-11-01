@@ -446,28 +446,6 @@ O pacote *questionr*[@questionr] fornece a função `irec` para executar uma int
 
 <br>
 
-### Por que a dicotomização não é recomendada?
-
--   Nenhum dos argumentos usados para defender a dicotomização de variáveis se sustenta sob uma análise técnica rigorosa.[@MacCallum2002]
-
--   Dicotomizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de dicotomizar, priorize as variáveis contínuas.[@Altman2006; @Royston2006; @Collins2016]
-
--   Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.[@Altman2006; @Royston2006; @Collins2016]
-
--   Dicotomização causa perda de informação e consequentemente perda de poder estatístico para detectar efeitos.[@MacCallum2002; @Altman2006]
-
--   Dicotomização também classifica indivíduos com valores próximos na variável contínua como indivíduos em pontos opostos e extremos, artificialmente sugerindo que são muito diferentes.[@Altman2006]
-
--   Dicotomização pode diminuir a variabilidade das variáveis.[@Altman2006]
-
--   Dicotomização pode ocultar não-linearidades presentes na variável contínua.[@MacCallum2002; @Altman2006]
-
--   A média ou a mediana, embora amplamente utilizadas, não são bons parâmetros para dicotomizar variáveis.[@Altman2006; @Fedorov2009]
-
--   Caso exista um ponto de corte ou limiar verdadeiro que discrimine dois grupos independentes, identificar tal ponto de corte ainda é um desafio.[@Prince2017]
-
-<br>
-
 ### Quais cenários legitimam a dicotomização das variáveis contínuas?
 
 -   Quando existem dados e/ou análises que suportem a existência --- não apenas a suposição ou teorização --- de categorias com um ponto de corte claro e com significado entre elas.[@MacCallum2002]
@@ -599,14 +577,6 @@ O pacote *stats*[@stats] fornece a função `model.matrix` para expandir variáv
 
 <br>
 
-### Por que não se usam $k$ variáveis indicadoras para $k$ níveis?
-
--   Utilizar $k$ variáveis indicadoras gera redundância perfeita entre as variáveis.[@REF]
-
--   Essa redundância causa problemas de identificabilidade nos modelos, fenômeno conhecido como *dummy trap*.[@REF]
-
-<br>
-
 ### Variáveis indicadoras são uma forma de dicotomização?
 
 -   Variáveis indicadoras são dicotômicas, mas não resultam da dicotomização de variáveis contínuas.[@REF]
@@ -633,7 +603,9 @@ O pacote *stats*[@stats] fornece a função `model.matrix` para expandir variáv
 
 -   Na modelagem, fator é sinônimo de variável preditora, em particular quando se refere à modelagem de efeitos fixos e aleatórios -- os fatores (variáveis) são fatores fixos ou fatores aleatórios.[@REF]
 
--   Fatores são variáveis controladas pelos pesquisadores em um experimento para determinar seu efeito na(s) variável(ies) de resposta. Um fator pode assumir apenas um pequeno número de valores, conhecidos como níveis. Os fatores podem ser uma variável categórica ou baseados em uma variável contínua, mas usam apenas um número limitado de valores escolhidos pelos experimentadores.[@REF]
+-   Fatores são variáveis controladas pelos pesquisadores em um experimento para determinar seu efeito na(s) variável(ies) de resposta.[@REF]
+
+- Os fatores podem ser uma variável categórica ou baseados em uma variável contínua, mas usam apenas um número limitado de valores escolhidos pelos experimentadores.[@REF]
 
 <br>
 
@@ -646,6 +618,8 @@ O pacote *base*[@base] fornece a função `as.factor` para converter uma variáv
 ### O que são níveis de um fator?
 
 -   Níveis de um fator são as possíveis categorias que descrevem um fator.[@REF]
+
+- Um fator pode assumir apenas um pequeno número de valores, conhecidos como níveis.[@REF]
 
 <br>
 

@@ -1,0 +1,217 @@
+```{=openxml}
+<w:p>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
+</w:p>
+```
+
+# **Práticas estatísticas zumbis** {#praticas-zumbis}
+
+<br>
+
+## Dicotomização de variáveis contínuas
+
+<br>
+
+### Por que a dicotomização não é recomendada?
+
+-   Nenhum dos argumentos usados para defender a dicotomização de variáveis se sustenta sob uma análise técnica rigorosa.[@MacCallum2002]
+
+-   Dicotomizar variáveis não é necessário para conduzir análises estatísticas. Ao invés de dicotomizar, priorize as variáveis contínuas.[@Altman2006; @Royston2006; @Collins2016]
+
+-   Em geral, não existe uma justificativa racional (plausibilidade biológica) para assumir que as categorias artificiais subjacentes existam.[@Altman2006; @Royston2006; @Collins2016]
+
+-   Dicotomização causa perda de informação e consequentemente perda de poder estatístico para detectar efeitos.[@MacCallum2002; @Altman2006]
+
+-   Dicotomização também classifica indivíduos com valores próximos na variável contínua como indivíduos em pontos opostos e extremos, artificialmente sugerindo que são muito diferentes.[@Altman2006]
+
+-   Dicotomização pode diminuir a variabilidade das variáveis.[@Altman2006]
+
+-   Dicotomização pode ocultar não-linearidades presentes na variável contínua.[@MacCallum2002; @Altman2006]
+
+-   A média ou a mediana, embora amplamente utilizadas, não são bons parâmetros para dicotomizar variáveis.[@Altman2006; @Fedorov2009]
+
+-   Caso exista um ponto de corte ou limiar verdadeiro que discrimine dois grupos independentes, identificar tal ponto de corte ainda é um desafio.[@Prince2017]
+
+<br>
+
+## Redução de dimensionalidade por análise de correlação
+
+<br>
+
+### A correlação bivariada pode orientar a seleção de variáveis?
+
+-   Seleção bivariada de variáveis consiste na aplicação de testes de correlação em pares de variáveis candidatas e variável de desfecho afim de selecionar quais serão incluídas no modelo multivariável.[@Dales1978; @Sun1996; @heinze2016]
+
+- Seleção bivariada de variáveis é um dos erros mais comuns na literatura.[@Dales1978; @Sun1996; @heinze2016]
+
+-   A seleção bivariada de variáveis torna o modelo mais suscetível a otimismo no ajuste se as variáveis de confundimento não são adequadamente controladas.[@Dales1978; @Sun1996]
+
+<br>
+
+### Variáveis sem significância estatística devem ser excluídas do modelo final?
+
+-   Eliminar uma variável de um modelo significa anular o seu coeficiente de regressão ($\beta = 0$), mesmo que o valor estimado pelos dados seja outro.[@heinze2016]
+
+- Desta forma, os resultados se afastam de uma solução de máxima verossimilhança (que tem fundamento teórico) e o modelo resultante é intencionalmente subótimo.[@heinze2016]
+
+-   Os coeficientes de regressão geralmente dependem do conjunto de variáveis do modelo e, portanto, podem mudam de valor ("mudança na estimativa" positiva ou negativa) se uma (ou mais) variável(is) for(em) eliminada(s) do modelo.[@heinze2016]
+
+<br>
+
+### Por que métodos de regressão gradual não são recomendados para seleção de variáveis?
+
+-   Métodos diferentes de regressão gradual podem produzir diferentes seleções de variáveis de um mesmo banco de dados.[@Healy1995]
+
+-   Nenhum método de regressão gradual garante a seleção ótima de variáveis de um banco de dados.[@Healy1995]
+
+-   As regras de término da regressão baseadas em P-valor tendem a ser arbitrárias.[@Healy1995]
+
+<br>
+
+## Falácia da 'Tabela 2'
+
+<br>
+
+### O que é a falácia da 'Tabela 2'?
+
+-   A Tabela 2 pode induzir ao erro de interpretação pelas estimativas de efeitos para covariáveis do modelo também serem utilizados para controlar a confusão da exposição.[@Westreich2013; @bandoli2018]
+
+-   Ao apresentar estimativas de efeito ajustadas para covariáveis juntamente com a estimativa de efeito ajustada para a exposição primária, a Tabela 2 sugere implicitamente que todas estas estimativas podem ser interpretadas de forma semelhante, se não de forma idêntica, como estimativa do efeito total.[@Westreich2013; @bandoli2018]
+
+-   A falácia da Tabela 2 pode ser evitada limitando-se a tabela a estimativas das medidas primárias do efeito de exposição nos diferentes modelos, com as covariáveis secundárias de "ajuste" relatadas em uma nota de rodapé, juntamente com a forma como foram categorizadas ou modeladas.[@Westreich2013]
+
+<br>
+
+```{r falacia-tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Tabela suscetível à falácia da Tabela 2. A tabela apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis)e a OR ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(123)
+
+# Exemplo simulado
+dados <- tibble::tibble(
+  Grupo = sample(c("Controle", "Intervenção"), 200, TRUE),
+  Sexo  = sample(c("F", "M"), 200, TRUE),
+  Idade = round(rnorm(200, 60, 12), 1),
+  IMC   = round(rnorm(200, 27, 4), 1)
+) %>%
+  dplyr::mutate(
+    # garantir referências "Controle" e "M"
+    Grupo = factor(Grupo, levels = c("Controle", "Intervenção")),
+    Sexo  = factor(Sexo,  levels = c("M", "F"))
+  )
+
+# Modelos: cru versus ajustado
+mod_cru <- glm(I(Sexo == "F") ~ Grupo,
+               data = dados, family = binomial)
+
+mod_aj  <- glm(I(Sexo == "F") ~ Grupo + Idade + IMC,
+               data = dados, family = binomial)
+
+# Tabelas com gtsummary
+gtsummary::theme_gtsummary_language("pt")
+
+tab_cru <- gtsummary::tbl_regression(
+  mod_cru, exponentiate = TRUE
+) %>%
+  gtsummary::modify_caption("Tabela 2a. OR bruto (modelo sem covariáveis).")
+
+tab_aj <- gtsummary::tbl_regression(
+  mod_aj, exponentiate = TRUE
+) %>%
+  gtsummary::modify_caption("Tabela 2b. OR ajustado (inclui covariáveis).")
+
+tab_falacia <- gtsummary::tbl_merge(
+  list(tab_cru, tab_aj),
+  tab_spanner = c("Sem ajuste", "Ajustado")
+) %>%
+  gtsummary::modify_caption("Tabela suscetível à Falácia da 'Tabela 2'.")
+
+tab_falacia
+```
+
+<br>
+
+## Comparação intragrupos em ensaios clínicos aleatorizados
+
+<br>
+
+### Por que não se deve comparar intragrupos?
+
+- Testar separadamente as mudanças em relação à linha de base (pré-pós) dentro de cada grupo aleatorizado não permite concluir se existe diferença entre os grupos.[@bland2011]
+
+- Comparar os P-valores obtidos em cada grupo não é uma forma válida de inferir diferenças entre os tratamentos.[@bland2011]
+
+<br>
+
+## Comparação entre grupos na linha de base em ensaios clínicos aleatorizados
+
+<br>
+
+### Por que não se deve comparar grupos na linha de base?
+
+- Se a aleatorização foi conduzida adequadamente, a hipótese nula de que ambos os grupos provêm da mesma população é, por definição, verdadeira.[@lavori1983; @altman1985; @altman1990]
+
+- Espera-se que cerca de 5% das comparações apresentem significância estatística ao nível de 5%, apenas por acaso.[@lavori1983; @altman1985; @altman1990]
+
+- Esses testes avaliam indiretamente a adequação da aleatorização. Eles não verificam se os grupos possuem características semelhantes.[@lavori1983; @altman1985; @altman1990]
+
+- Testes de hipóteses não são uma forma válida de avaliar a similaridade entre grupos.[@lavori1983; @altman1985; @altman1990]
+
+- Essa avaliação deve considerar a importância prognóstica das variáveis e a magnitude dos desequilíbrios observados.[@lavori1983; @altman1985; @altman1990]
+
+- A interpretação equivocada dos P-valores nas comparações da linha de base é conhecida como falácia da Tabela 1.[@pijls2022]
+
+- Quando a aleatorização é bem-sucedida, a hipótese nula de ausência de diferenças entre os grupos na linha de base é verdadeira.[@roberts1999]
+
+- Os testes de significância avaliam se as diferenças observadas podem ser atribuídas ao acaso.[@gruijters2020]
+
+- Em um ensaio clínico aleatorizado, sabe-se pelo próprio delineamento que as diferenças na linha de base são decorrentes do acaso.[@gruijters2020]
+
+<br>
+
+### O que é a falácia da 'Tabela 1'?
+
+-   Falácia da 'Tabela 1' ocorre pela interpretação errônea dos P-valores na comparação entre grupos, na linha de base, de um ensaio clínico aleatorizado.[@pijls2022]
+
+<br>
+
+## Comparação in mudanças em relação à linha de base em ensaios clínicos raleatorizados
+
+### Por que não se deve comparar mudanças em relação à linha de base?
+
+- Mudança percentual da linha de base é a opção menos eficiente em termos de poder estatístico.[@vickers2001b]
+
+<br>
+
+## Análise de poder estatístico *post hoc*
+
+<br>
+
+### Por que a análise de poder do teste *post hoc* é inadequada?
+
+-   Calcular poder após o teste não muda a interpretação.[@hoenig2001]
+
+-   A análise do poder é teoricamente incorreta, uma vez que a probabilidade calculada $1-\beta$ expressa a probabilidade de um evento futuro, o que não é mais relevante quando o evento de interesse já ocorreu.[@Cummings2003; @heckman2022]
+
+<br>
+
+## Interpretação de resultados não significativos
+
+<br>
+
+### Ausência de evidência ou evidência de ausência?
+
+- Em estudos (geralmente com amostras pequenas), resultados estatisticamente não significativos (com P-valores iguais ou maiores do limiar pré-estabelecido, $P \geq \alpha$) não devem ser interpretados como evidência de inexistência do efeito.[@altman1995]
+
+- Geralmente é razoável aceitar uma nova conclusão apenas quando há dados a seu favor ('resultados positivos'). Também é razoável questionar se apenas a ausência de dados a seu favor ("resultados negativos") justifica suficientemente a rejeição de tal conclusão.[@altman1995]
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>
