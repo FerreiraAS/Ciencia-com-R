@@ -5,7 +5,6 @@
   </w:r>
 </w:p>
 ```
-
 # **Distribuições e parâmetros** {#distribuicoes-parametros}
 
 <br>
@@ -64,17 +63,17 @@
 
 ### Como representar distribuições de probabilidade?
 
--   Tabelas de frequência, polígonos de frequência, gráficos de barras, histogramas e *boxplots* são formas de representar distribuições de probabilidade.[@s2011]
+- Tabelas de frequência, polígonos de frequência, gráficos de barras, histogramas e *boxplots* são formas de representar distribuições de probabilidade.[@s2011]
 
--   Tabelas de frequência mostram as categorias de medição e o número de observações em cada uma. É necessário conhecer o intervalo de valores (mínimo e máximo), que é dividido em intervalos arbitrários chamados "intervalos de classe".[@s2011]
+- Tabelas de frequência mostram as categorias de medição e o número de observações em cada uma. É necessário conhecer o intervalo de valores (mínimo e máximo), que é dividido em intervalos arbitrários chamados "intervalos de classe".[@s2011]
 
--   Se houver muitos intervalos, não haverá redução significativa na quantidade de dados, e pequenas variações serão perceptíveis. Se houver poucos intervalos, a forma da distribuição não poderá ser adequadamente determinada.[@s2011]
+- Se houver muitos intervalos, não haverá redução significativa na quantidade de dados, e pequenas variações serão perceptíveis. Se houver poucos intervalos, a forma da distribuição não poderá ser adequadamente determinada.[@s2011]
 
--   A quantidade de intervalos pode ser determinada pelo método de Sturges, que é dado pela fórmula $k = 1 + 3.322 \times \log_{10}(n)$, onde $k$ é o número de intervalos e $n$ é o número de observações.[@sturges1926]
+- A quantidade de intervalos pode ser determinada pelo método de Sturges, que é dado pela fórmula $k = 1 + 3.322 \times \log_{10}(n)$, onde $k$ é o número de intervalos e $n$ é o número de observações.[@sturges1926]
 
--   A quantidade de intervalos pode ser determinada pelo método de Scott, que é dado pela fórmula $h = 3.5 \times \text{sd}(x) \times n^{-1/3}$, onde $h$ é a largura do intervalo, $\text{sd}(x)$ é o desvio-padrão e $n$ é o número de observações.[@scott1979]
+- A quantidade de intervalos pode ser determinada pelo método de Scott, que é dado pela fórmula $h = 3.5 \times \text{sd}(x) \times n^{-1/3}$, onde $h$ é a largura do intervalo, $\text{sd}(x)$ é o desvio-padrão e $n$ é o número de observações.[@scott1979]
 
--   A quantidade de intervalos pode ser determinada pelo método de Freedman-Diaconis, que é dado pela fórmula $h = 2 \times \text{IQR}(x) \times n^{-1/3}$, onde $h$ é a largura do intervalo, $\text{IQR}(x)$ é o intervalo interquartil e $n$ é o número de observações.[@freedman1981]
+- A quantidade de intervalos pode ser determinada pelo método de Freedman-Diaconis, que é dado pela fórmula $h = 2 \times \text{IQR}(x) \times n^{-1/3}$, onde $h$ é a largura do intervalo, $\text{IQR}(x)$ é o intervalo interquartil e $n$ é o número de observações.[@freedman1981]
 
 <br>
 
@@ -179,13 +178,13 @@ library(patchwork)
 
 <br>
 
--   A largura das classes pode ser determinada dividindo o intervalo total de observações pelo número de classes. Larguras desiguais podem ser usadas quando existirem grandes lacunas nos dados ou em contextos específicos. Os intervalos devem ser mutuamente exclusivos e não sobrepostos (ex.: \<5, \>10).[@s2011]
+- A largura das classes pode ser determinada dividindo o intervalo total de observações pelo número de classes. Larguras desiguais podem ser usadas quando existirem grandes lacunas nos dados ou em contextos específicos. Os intervalos devem ser mutuamente exclusivos e não sobrepostos (ex.: \<5, \>10).[@s2011]
 
--   Polígonos de frequência são gráficos de linhas que conectam os pontos médios de cada barra do histograma. Eles são úteis para comparar duas ou mais distribuições de frequência.[@s2011]
+- Polígonos de frequência são gráficos de linhas que conectam os pontos médios de cada barra do histograma. Eles são úteis para comparar duas ou mais distribuições de frequência.[@s2011]
 
--   Gráficos de barra verticais ou horizontais representam a distribuição de frequências de uma variável categórica. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe.[@s2011]
+- Gráficos de barra verticais ou horizontais representam a distribuição de frequências de uma variável categórica. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe.[@s2011]
 
--   Histogramas representam a distribuição de frequências de uma variável contínua. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do histograma é igual ao número total de observações.[@s2011]
+- Histogramas representam a distribuição de frequências de uma variável contínua. A altura de cada barra é proporcional à frequência da classe. A largura da barra é igual à largura da classe. A área de cada barra é proporcional à frequência da classe. A área total do histograma é igual ao número total de observações.[@s2011]
 
 - *Boxplots* representam a distribuição de frequências de uma variável contínua. A linha central representa a mediana (Q2). A caixa inferior representa o primeiro quartil (Q1) e a caixa superior o terceiro quartil (Q3). Observações além de 1,5 vezes o intervalo interquartil (IQR) são representadas como valores atípicos.[@s2011]
 
@@ -205,7 +204,7 @@ O pacote *ggplot2*[@ggplot2] fornece a função `geom_freqpoly` para criar polí
 
 ### Quais características definem uma distribuição?
 
--   Uma distribuição pode ser definida por modelos matemáticos e caracterizada por parâmetros de tendência central, dispersão, simetria e curtose.[@REF]
+- Uma distribuição pode ser definida por modelos matemáticos e caracterizada por parâmetros de tendência central, dispersão, simetria e curtose.[@REF]
 
 <br>
 
@@ -251,23 +250,23 @@ O pacote *ggplot2*[@ggplot2] fornece a função `geom_freqpoly` para criar polí
 
 ### Quais são as distribuições mais comuns?
 
--   Distribuções discretas:
+- Distribuções discretas:
 
-    -   Bernoulli: resultado de um único teste com dois possíveis desfechos (sucesso ou fracasso).[@REF]
+  - Bernoulli: resultado de um único teste com dois possíveis desfechos (sucesso ou fracasso).[@REF]
 
-    -   Binomial: número de sucessos em *n* tentativas independentes. [@REF]
+  - Binomial: número de sucessos em *n* tentativas independentes. [@REF]
 
-    -   Geométrica: número de tentativas necessárias até a ocorrência do primeiro sucesso.[@REF]
+  - Geométrica: número de tentativas necessárias até a ocorrência do primeiro sucesso.[@REF]
 
-    -   Binomial negativa: número de testes até o *k*-ésimo sucesso.[@REF]
+  - Binomial negativa: número de testes até o *k*-ésimo sucesso.[@REF]
 
-    -   Hipergeométrica: número de indivíduos na amostra tomados sem reposição. [@REF]
+  - Hipergeométrica: número de indivíduos na amostra tomados sem reposição. [@REF]
 
-    -   Poisson: número de eventos em um intervalo de tempo fixo.[@REF]
+  - Poisson: número de eventos em um intervalo de tempo fixo.[@REF]
 
-    -   Uniforme: resultados (finitos) que são igualmente prováveis. [@REF]
+  - Uniforme: resultados (finitos) que são igualmente prováveis. [@REF]
 
-    -   Multinomial: resultados de múltiplos testes com mais de dois possíveis desfechos. [@REF]
+  - Multinomial: resultados de múltiplos testes com mais de dois possíveis desfechos. [@REF]
 
 <br>
 
@@ -356,33 +355,33 @@ gridExtra::grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, ncol = 4, nrow = 2)
 
 <br>
 
--   Distribuições contínuas:
+- Distribuições contínuas:
 
-    -   Uniforme: .[@REF]
+  - Uniforme: .[@REF]
 
-    -   Exponencial: .[@REF]
+  - Exponencial: .[@REF]
 
-    -   Normal: .[@REF]
+  - Normal: .[@REF]
 
-    -   Aproximação binomial: .[@REF]
+  - Aproximação binomial: .[@REF]
 
-    -   Aproximação Poisson: .[@REF]
+  - Aproximação Poisson: .[@REF]
 
-    -   t-Student: .[@REF]
+  - t-Student: .[@REF]
 
-    -   Qui-quadrado: .[@REF]
+  - Qui-quadrado: .[@REF]
 
-    -   Weibull: .[@REF]
+  - Weibull: .[@REF]
 
-    -   Gama: .[@REF]
+  - Gama: .[@REF]
 
-    -   Log-normal: .[@REF]
+  - Log-normal: .[@REF]
 
-    -   Beta: .[@REF]
+  - Beta: .[@REF]
 
-    -   Logística: .[@REF]
+  - Logística: .[@REF]
 
-    -   Pareto. [@REF]
+  - Pareto. [@REF]
 
 <br>
 
@@ -645,11 +644,11 @@ O pacote *ggfortify*[@ggfortify] fornece a função `ggdistribution` para criar 
 
 ### O que é a distribuição normal?
 
--   A distribuição normal (ou gaussiana) é uma distribuição com desvios simétricos positivos e negativos em torno de um valor central.[@Ali2016]
+- A distribuição normal (ou gaussiana) é uma distribuição com desvios simétricos positivos e negativos em torno de um valor central.[@Ali2016]
 
--   A relação entre média e desvio-padrão permite interpretar a dispersão dos dados em distribuições aproximadamente normais. A regra empírica estabelece que cerca de 68,2% dos valores situam-se no intervalo $\bar{x} \pm \sigma$, cerca de 95,4% no intervalo $\bar{x} \pm 2\sigma$.[@Ali2016; @darling2022]
+- A relação entre média e desvio-padrão permite interpretar a dispersão dos dados em distribuições aproximadamente normais. A regra empírica estabelece que cerca de 68,2% dos valores situam-se no intervalo $\bar{x} \pm \sigma$, cerca de 95,4% no intervalo $\bar{x} \pm 2\sigma$.[@Ali2016; @darling2022]
 
--   O desvio-padrão fornece uma medida direta da variabilidade dos dados em torno da média, permitindo avaliar quão dispersos ou concentrados estão os valores observados em uma amostra.[@darling2022]
+- O desvio-padrão fornece uma medida direta da variabilidade dos dados em torno da média, permitindo avaliar quão dispersos ou concentrados estão os valores observados em uma amostra.[@darling2022]
 
 <br>
 
@@ -691,17 +690,17 @@ ggpubr::ggarrange(
 
 ### Que métodos podem ser utilizados para identificar a normalidade da distribuição?
 
--   Histogramas.[@vetter2017]
+- Histogramas.[@vetter2017]
 
--   Gráficos Q-Q.[@vetter2017]
+- Gráficos Q-Q.[@vetter2017]
 
--   Testes de hipótese nula:[@vetter2017]
+- Testes de hipótese nula:[@vetter2017]
 
-    -   Kolmogorov-Smirnov
+  - Kolmogorov-Smirnov
 
-    -   Shapiro-Wilk
+  - Shapiro-Wilk
 
-    -   Anderson-Darling
+  - Anderson-Darling
 
 <br>
 
@@ -898,9 +897,9 @@ cowplot::plot_grid(p1, p_scatter_marginal, ncol = 2, align = "h")
 
 ### O que são distribuições multivariadas?
 
--   Distribuições multivariadas descrevem a probabilidade conjunta de duas ou mais variáveis aleatórias.[@REF]
+- Distribuições multivariadas descrevem a probabilidade conjunta de duas ou mais variáveis aleatórias.[@REF]
 
--   Exemplos de distribuições multivariadas incluem a distribuição normal multivariada, a distribuição t multivariada, a distribuição binomial multinomial e a distribuição de Dirichlet.[@REF]
+- Exemplos de distribuições multivariadas incluem a distribuição normal multivariada, a distribuição t multivariada, a distribuição binomial multinomial e a distribuição de Dirichlet.[@REF]
 
 <br>
 
@@ -910,9 +909,9 @@ cowplot::plot_grid(p1, p_scatter_marginal, ncol = 2, align = "h")
 
 ### O que são parâmetros?
 
--   Parâmetros são informações que definem um modelo teórico, como propriedades de uma coleção de indivíduos.[@Altman1999]
+- Parâmetros são informações que definem um modelo teórico, como propriedades de uma coleção de indivíduos.[@Altman1999]
 
--   Parâmetros definem características de uma população inteira, tipicamente não observados por ser inviável ter acesso a todos os indivíduos que constituem tal população.[@vetter2017]
+- Parâmetros definem características de uma população inteira, tipicamente não observados por ser inviável ter acesso a todos os indivíduos que constituem tal população.[@vetter2017]
 
 <br>
 
@@ -924,15 +923,15 @@ O pacote *base*[@base] fornece a função `summary` para calcular diversos parâ
 
 ### Que parâmetros podem ser estimados?
 
--   Parâmetros de tendência central.[@kanji2006; @Ali2016]
+- Parâmetros de tendência central.[@kanji2006; @Ali2016]
 
--   Parâmetros de dispersão.[@kanji2006; @Ali2016; @Curran-Everett2008]
+- Parâmetros de dispersão.[@kanji2006; @Ali2016; @Curran-Everett2008]
 
--   Parâmetros de proporção.[@Altman1994; @kanji2006; @Ali2016; @Altman1994]
+- Parâmetros de proporção.[@Altman1994; @kanji2006; @Ali2016; @Altman1994]
 
--   Parâmetros de distribuição.[@kanji2006]
+- Parâmetros de distribuição.[@kanji2006]
 
--   Parâmetros de extremos.[@Ali2016]
+- Parâmetros de extremos.[@Ali2016]
 
 <br>
 
@@ -942,13 +941,45 @@ O pacote *base*[@base] fornece a função `summary` para calcular diversos parâ
 
 <br>
 
+## Graus de liberdade
+
+<br>
+
+### O que são graus de liberdade?
+
+- Graus de liberdade ($gl$)) representam a diferença entre a quantidade de informações estatísticas distintas disponíveis nos dados e o número de parâmetros livres estimados pelo modelo.[@rigdon1994; @cortina2016]
+
+<br>
+
+### Por que os graus de liberdade representam a quantidade de informação independente disponível?
+
+- Porque cada parâmetro livre estimado utiliza parte da informação disponível, reduzindo a quantidade de informações independentes restantes para avaliar as restrições impostas pelo modelo.[@rigdon1994; @cortina2016]
+
+<br>
+
+### Qual é a relação entre graus de liberdade, tamanho amostral e parâmetros estimados?
+
+- Os graus de liberdade dependem da quantidade de informações distintas disponíveis e do número de parâmetros livres estimados, não sendo determinados exclusivamente pelo tamanho amostral.[@rigdon1994; @cortina2016]
+
+- Em modelos de equações estruturais baseados em covariâncias, $gl=k(k+1)/2-p$, onde $k$ é o número de variáveis observadas e $p$ é o número de parâmetros livres estimados.[@rigdon1994; @cortina2016]
+
+<br>
+
+### Como os graus de liberdade variam entre diferentes modelos estatísticos?
+
+- Dependem da estrutura do modelo, da quantidade de informações distintas disponíveis e do número de parâmetros livres estimados.[@rigdon1994; @cortina2016]
+
+- A inclusão de parâmetros livres reduz os graus de liberdade, enquanto a imposição de restrições independentes pode aumentá-los.[@rigdon1994]
+
+<br>
+
 ## Tendência central
 
 <br>
 
 ### Que parâmetros de tendência central podem ser estimados?
 
--   Média aritmética \@ref(eq:media-aritm), ponderada \@ref(eq:media-pond), geométrica \@ref(eq:media-geom) ou harmônica \@ref(eq:media-harm).[@kanji2006; @Ali2016; @s.2011a]
+- Média aritmética \@ref(eq:media-aritm), ponderada \@ref(eq:media-pond), geométrica \@ref(eq:media-geom) ou harmônica \@ref(eq:media-harm).[@kanji2006; @Ali2016; @s.2011a]
 
 <br>
 
@@ -980,7 +1011,7 @@ O pacote *base*[@base] fornece a função `summary` para calcular diversos parâ
 
 <br>
 
--   Mediana \@ref(eq:mediana).[@kanji2006; @Ali2016; @s.2011]
+- Mediana \@ref(eq:mediana).[@kanji2006; @Ali2016; @s.2011]
 
 <br>
 
@@ -994,7 +1025,7 @@ x_{\left(\frac{n+1}{2}\right)}, & \text{se } n \text{ é ímpar} \\
 
 <br>
 
--   Moda \@ref(eq:moda), onde $f(x)$ é a função de frequência absoluta ou relativa e $x_1, x_2, \ldots, x_n$ são os valores observados.[@kanji2006; @Ali2016; @s.2011]
+- Moda \@ref(eq:moda), onde $f(x)$ é a função de frequência absoluta ou relativa e $x_1, x_2, \ldots, x_n$ são os valores observados.[@kanji2006; @Ali2016; @s.2011]
 
 <br>
 
@@ -1005,7 +1036,7 @@ x_{\left(\frac{n+1}{2}\right)}, & \text{se } n \text{ é ímpar} \\
 
 <br>
 
--   Moda (dados agrupados) \@ref(eq:moda-agrupada), onde: $L$ = limite inferior da classe modal; $f_1$ = frequência da classe modal; $f_0$ = frequência da classe anterior à classe modal; $f_2$ = frequência da classe posterior à classe modal; $h$ = amplitude da classe modal.
+- Moda (dados agrupados) \@ref(eq:moda-agrupada), onde: $L$ = limite inferior da classe modal; $f_1$ = frequência da classe modal; $f_0$ = frequência da classe anterior à classe modal; $f_2$ = frequência da classe posterior à classe modal; $h$ = amplitude da classe modal.
 
 <br>
 
@@ -1016,17 +1047,17 @@ x_{\left(\frac{n+1}{2}\right)}, & \text{se } n \text{ é ímpar} \\
 
 <br>
 
--   A posição relativa das medidas de tendência central (média, mediana e moda) depende da forma da distribuição.[@s.2011]
+- A posição relativa das medidas de tendência central (média, mediana e moda) depende da forma da distribuição.[@s.2011]
 
--   Em uma distribuição normal, as três medidas são idênticas.[@s.2011]
+- Em uma distribuição normal, as três medidas são idênticas.[@s.2011]
 
--   A média é sempre puxada para os valores extremos, por isso é deslocada para a cauda em distribuições assimétricas.[@s.2011]
+- A média é sempre puxada para os valores extremos, por isso é deslocada para a cauda em distribuições assimétricas.[@s.2011]
 
--   A mediana fica entre a média e a moda em distribuições assimétricas.[@s.2011]
+- A mediana fica entre a média e a moda em distribuições assimétricas.[@s.2011]
 
--   A moda é o valor mais frequente e, portanto, se localiza no pico da distribuição assimétrica.[@s.2011]
+- A moda é o valor mais frequente e, portanto, se localiza no pico da distribuição assimétrica.[@s.2011]
 
--   Uma distribuição pode uma moda (unimodal), duas modas (bimodal) ou três ou mais modas (multimodal), indicando a presença de mais de um valor com alta frequência.[@s.2011]
+- Uma distribuição pode uma moda (unimodal), duas modas (bimodal) ou três ou mais modas (multimodal), indicando a presença de mais de um valor com alta frequência.[@s.2011]
 
 <br>
 
@@ -1163,11 +1194,11 @@ O pacote *base*[@base] fornece a função `summary` para calcular diversos parâ
 
 ### Como escolher o parâmetro de tendência central?
 
--   A mediana é preferida à média quando existem poucos valores extremos na distribuição, alguns valores são indeterminados, ou há uma distribuição aberta, ou os dados são medidos em uma escala ordinal.[@s.2011]
+- A mediana é preferida à média quando existem poucos valores extremos na distribuição, alguns valores são indeterminados, ou há uma distribuição aberta, ou os dados são medidos em uma escala ordinal.[@s.2011]
 
--   A moda é preferida quando os dados são medidos em uma escala nominal.[@s.2011]
+- A moda é preferida quando os dados são medidos em uma escala nominal.[@s.2011]
 
--   A média geométrica é preferida quando os dados são medidos em uma escala logarítmica.[@s.2011]
+- A média geométrica é preferida quando os dados são medidos em uma escala logarítmica.[@s.2011]
 
 <br>
 
@@ -1177,7 +1208,7 @@ O pacote *base*[@base] fornece a função `summary` para calcular diversos parâ
 
 ### Que parâmetros de dispersão podem ser estimados?
 
--   Variância \@ref(eq:variancia).[@kanji2006; @Ali2016]
+- Variância \@ref(eq:variancia).[@kanji2006; @Ali2016]
 
 <br>
 
@@ -1188,7 +1219,7 @@ s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 
 <br>
 
--   Desvio-padrão \@ref(eq:desvpad).[@Curran-Everett2008; @krzywinski2013; @manikandan2011]
+- Desvio-padrão \@ref(eq:desvpad).[@Curran-Everett2008; @krzywinski2013; @manikandan2011]
 
 <br>
 
@@ -1199,7 +1230,7 @@ s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}}
 
 <br>
 
--   Amplitude \@ref(eq:amplitude).[@kanji2006; @Ali2016; @manikandan2011]
+- Amplitude \@ref(eq:amplitude).[@kanji2006; @Ali2016; @manikandan2011]
 
 <br>
 
@@ -1210,7 +1241,7 @@ A = x_{\max} - x_{\min}
 
 <br>
 
--   Intervalo interquartil \@ref(eq:iqr).[@kanji2006; @Ali2016; @manikandan2011]
+- Intervalo interquartil \@ref(eq:iqr).[@kanji2006; @Ali2016; @manikandan2011]
 
 <br>
 
@@ -1366,17 +1397,17 @@ O pacote *stats*[@stats] fornece a função `confint` para calcular o intervalo 
 
 ### Como escolher o parâmetro de dispersão?
 
--   Desvio-padrão $\sigma$ é apropriado quando a média é utilizada como parâmetro de tendência central em distribuições simétricas.[@manikandan2011]
+- Desvio-padrão $\sigma$ é apropriado quando a média é utilizada como parâmetro de tendência central em distribuições simétricas.[@manikandan2011]
 
--   Amplitude ou intervalo interquartil são apropriadas para variáveis ordinais ou distribuições assimétricas.[@manikandan2011]
+- Amplitude ou intervalo interquartil são apropriadas para variáveis ordinais ou distribuições assimétricas.[@manikandan2011]
 
 <br>
 
 ### O que é a correção de Bessel para variância?
 
--   Correção de Bessel é um ajuste feito no denominador da fórmula de variância da amostra --- ou seja, o número de graus de liberdade --- para evitar que a variância amostral seja menor do que a variância populacional.[@sahai1992]
+- Correção de Bessel é um ajuste feito no denominador da fórmula de variância da amostra --- ou seja, o número de graus de liberdade --- para evitar que a variância amostral seja menor do que a variância populacional.[@sahai1992]
 
--   A correção de Bessel é feita subtraindo-se 1 do número de observações da amostra, ou seja, $n - 1$ \@ref(eq:bessel).[@sahai1992]
+- A correção de Bessel é feita subtraindo-se 1 do número de observações da amostra, ou seja, $n - 1$ \@ref(eq:bessel).[@sahai1992]
 
 <br>
 
@@ -1389,9 +1420,9 @@ s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 
 ### Por que a correção de Bessel para variância é importante?
 
--   A correção de Bessel é importante porque a variância amostral tende a ser menor do que a variância populacional, especialmente em amostras pequenas.[@sahai1992]
+- A correção de Bessel é importante porque a variância amostral tende a ser menor do que a variância populacional, especialmente em amostras pequenas.[@sahai1992]
 
--   A correção de Bessel ajuda a garantir que a variância amostral seja uma estimativa mais precisa da variância populacional, o que é fundamental para a validade dos testes estatísticos e das inferências feitas a partir da amostra.[@sahai1992]
+- A correção de Bessel ajuda a garantir que a variância amostral seja uma estimativa mais precisa da variância populacional, o que é fundamental para a validade dos testes estatísticos e das inferências feitas a partir da amostra.[@sahai1992]
 
 <br>
 
@@ -1401,7 +1432,7 @@ s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 
 ### Que parâmetros de proporção podem ser estimados?
 
--   Frequência absoluta \@ref(eq:freq-absoluta).[@Altman1994; @kanji2006; @Ali2016]
+- Frequência absoluta \@ref(eq:freq-absoluta).[@Altman1994; @kanji2006; @Ali2016]
 
 <br>
 
@@ -1412,7 +1443,7 @@ f_i = n_i
 
 <br>
 
--   Frequência relativa \@ref(eq:freq-relativa).[@Altman1994; @kanji2006; @Ali2016]
+- Frequência relativa \@ref(eq:freq-relativa).[@Altman1994; @kanji2006; @Ali2016]
 
 <br>
 
@@ -1423,7 +1454,7 @@ fr_i = \frac{n_i}{N}
 
 <br>
 
--   Percentil \@ref(eq:percentil), onde $k$ é o percentil desejado (0 a 100) e $n$ é o número total de observações na amostra.[@Altman1994; @kanji2006; @Ali2016]
+- Percentil \@ref(eq:percentil), onde $k$ é o percentil desejado (0 a 100) e $n$ é o número total de observações na amostra.[@Altman1994; @kanji2006; @Ali2016]
 
 <br>
 
@@ -1434,15 +1465,15 @@ P_k = x_{\left(\frac{k}{100} \cdot (n+1)\right)}
 
 <br>
 
--   Quantil: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem:[@Altman1994]
+- Quantil: é o ponto de corte que define a divisão da amostra em grupos de tamanhos iguais. Portanto, não se referem aos grupos em si, mas aos valores que os dividem:[@Altman1994]
 
-    -   Tercil: 2 valores que dividem a amostra em 3 grupos de tamanhos iguais.[@Altman1994]
+  - Tercil: 2 valores que dividem a amostra em 3 grupos de tamanhos iguais.[@Altman1994]
 
-    -   Quartil: 3 valores que dividem a amostra em 4 grupos de tamanhos iguais.[@Altman1994]
+  - Quartil: 3 valores que dividem a amostra em 4 grupos de tamanhos iguais.[@Altman1994]
 
-    -   Quintil: 4 valores que dividem a amostra em 5 grupos de tamanhos iguais.[@Altman1994]
+  - Quintil: 4 valores que dividem a amostra em 5 grupos de tamanhos iguais.[@Altman1994]
 
-    -   Decil: 9 valores que dividem a amostra em 10 grupos de tamanhos iguais.[@Altman1994]
+  - Decil: 9 valores que dividem a amostra em 10 grupos de tamanhos iguais.[@Altman1994]
 
 <br>
 
@@ -1470,7 +1501,7 @@ O pacote *stats*[@base] fornece a função `quantile` para executar análise de 
 
 ### Que parâmetros extremos podem ser estimados?
 
--   Mínimo \@ref(eq:min).[@Ali2016]
+- Mínimo \@ref(eq:min).[@Ali2016]
 
 <br>
 
@@ -1481,7 +1512,7 @@ O pacote *stats*[@base] fornece a função `quantile` para executar análise de 
 
 <br>
 
--   Máximo \@ref(eq:max).[@Ali2016]
+- Máximo \@ref(eq:max).[@Ali2016]
 
 <br>
 
@@ -1557,7 +1588,7 @@ ggplot2::ggplot(data_ext, ggplot2::aes(x = X, y = Y)) +
 
 ### Que parâmetros de erro podem ser estimados?
 
--   Margem de erro (ME).\@ref(eq:me).
+- Margem de erro (ME).\@ref(eq:me).
 
 <br>
 
@@ -1568,7 +1599,7 @@ ME = z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
 
 <br>
 
--   Erro-padrão da média (EPM) \@ref(eq:sem) ($sigma$ conhecido) e \@ref(eq:sem-unk) ($sigma$ desconhecido).[@Curran-Everett2008; @krzywinski2013]
+- Erro-padrão da média (EPM) \@ref(eq:sem) ($sigma$ conhecido) e \@ref(eq:sem-unk) ($sigma$ desconhecido).[@Curran-Everett2008; @krzywinski2013]
 
 <br>
 
@@ -1592,7 +1623,7 @@ EPM = \frac{\sigma}{\sqrt{n}}
 
 ### Que parâmetros de distribuição podem ser estimados?
 
--   Assimetria \@ref(eq:skew).[@kanji2006]
+- Assimetria \@ref(eq:skew).[@kanji2006]
 
 <br>
 
@@ -1603,7 +1634,7 @@ EPM = \frac{\sigma}{\sqrt{n}}
 
 <br>
 
--   Curtose \@ref(eq:kurt).[@kanji2006]
+- Curtose \@ref(eq:kurt).[@kanji2006]
 
 <br>
 
@@ -1614,7 +1645,7 @@ EPM = \frac{\sigma}{\sqrt{n}}
 
 <br>
 
--   Excesso de Curtose \@ref(eq:exkurt).[@kanji2006]
+- Excesso de Curtose \@ref(eq:exkurt).[@kanji2006]
 
 <br>
 
@@ -1743,31 +1774,31 @@ g_kurt_hist
 
 ### O que são parâmetros robustos?
 
--   Parâmetros robustos são medidas de posição e dispersão que permanecem estáveis mesmo na presença de valores discrepantes.[@daszykowski2007]
+- Parâmetros robustos são medidas de posição e dispersão que permanecem estáveis mesmo na presença de valores discrepantes.[@daszykowski2007]
 
 <br>
 
 ### Por que utilizar parâmetros robustos?
 
--   Parâmetros robustos garantem maior confiabilidade quando os dados não seguem a normalidade ou apresentam contaminação por *outliers*.[@daszykowski2007]
+- Parâmetros robustos garantem maior confiabilidade quando os dados não seguem a normalidade ou apresentam contaminação por *outliers*.[@daszykowski2007]
 
--   Parâmetros robustos permitem análises mais estáveis em estudos exploratórios, evitando decisões equivocadas sobre variabilidade ou tendência central.[@daszykowski2007]
+- Parâmetros robustos permitem análises mais estáveis em estudos exploratórios, evitando decisões equivocadas sobre variabilidade ou tendência central.[@daszykowski2007]
 
 <br>
 
 ### O que é ponto de quebra?
 
--   É a menor proporção de contaminação que pode levar o estimador a resultados arbitrariamente errados; quanto maior, mais robusto.[@rousseeuw2011]
+- É a menor proporção de contaminação que pode levar o estimador a resultados arbitrariamente errados; quanto maior, mais robusto.[@rousseeuw2011]
 
 <br>
 
 ### Que parâmetros robustos podem ser estimados?
 
--   Média e variância Winsorizadas como opções intermediárias, reduzindo a influência dos *outliers*.[@daszykowski2007]
+- Média e variância Winsorizadas como opções intermediárias, reduzindo a influência dos *outliers*.[@daszykowski2007]
 
--   Mediana, com $~50%$ de ponto de quebra e função influência limitada.[@daszykowski2007; @rousseeuw2011]
+- Mediana, com $~50%$ de ponto de quebra e função influência limitada.[@daszykowski2007; @rousseeuw2011]
 
--   *Median Absolute Deviation* (MAD) \@ref(eq:mad), com correção 1,483 para normalidade, com $~50%$ de ponto de quebra.[@daszykowski2007; @rousseeuw2011]
+- *Median Absolute Deviation* (MAD) \@ref(eq:mad), com correção 1,483 para normalidade, com $~50%$ de ponto de quebra.[@daszykowski2007; @rousseeuw2011]
 
 <br>
 
@@ -1778,7 +1809,7 @@ MAD = 1.483 \cdot \text{median}(|x_i - \text{median}(x)|)
 
 <br>
 
--   Primeiro quartil das diferenças pareadas ($Qn$) \@ref(eq:qn), com $~50%$ de ponto de quebra.[@daszykowski2007; @rousseeuw2011]
+- Primeiro quartil das diferenças pareadas ($Qn$) \@ref(eq:qn), com $~50%$ de ponto de quebra.[@daszykowski2007; @rousseeuw2011]
 
 <br>
 
@@ -1789,7 +1820,7 @@ Qn = 2.2219 \cdot \text{first quartile}(|x_i - x_j|; i < j)
 
 <br>
 
--   O intervalo interquartil ($IQR$) \@ref(eq:iqr) é robusto, com ponto de quebra $~25%$, sendo simples de interpretar e útil em boxplots.[@rousseeuw2011]
+- O intervalo interquartil ($IQR$) \@ref(eq:iqr) é robusto, com ponto de quebra $~25%$, sendo simples de interpretar e útil em boxplots.[@rousseeuw2011]
 
 <br>
 

@@ -5,7 +5,8 @@
   </w:r>
 </w:p>
 ```
-# **Desempenho diagnóstico** {#desempenho-diagnostico}
+
+# **Desempenho de classificação** {#desempenho-classificacao}
 
 <br>
 
@@ -19,7 +20,7 @@
 
 <br>
 
-### Como analisar o desempenho diagnóstico em tabelas 2x2?
+### Como analisar o desempenho de classificação em tabelas 2x2?
 
 - Verdadeiro-positivo ($VP$): caso com a condição presente e corretamente identificado como tal.[@greenhalgh1997b]
 
@@ -31,7 +32,7 @@
 
 <br>
 
-```{r crosstable-2x2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas."}
+```{r crosstable-2x2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 2x2 para análise de desempenho de classificação de testes e variáveis dicotômicas."}
 library(dplyr)
 
 cross.table <-
@@ -81,7 +82,7 @@ knitr::kable(
 
 - Tabelas de confusão também podem ser visualizadas em formato de árvores de frequência.[@steckelberg2004]
 
-```{r frequency-tree, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Árvore de frequência do desempenho diagnóstico de uma tabela de confusão 2x2 representando um método novo (dicotômico) comparado ao método padrão-ouro ou referência (dicotômico)."}
+```{r frequency-tree, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Árvore de frequência do desempenho de classificação de uma tabela de confusão 2x2 representando um método novo (dicotômico) comparado ao método padrão-ouro ou referência (dicotômico)."}
 # Reprodutibilidade
 set.seed(123)
 
@@ -125,7 +126,7 @@ O pacote *riskyr*[@riskyr] fornece a função `plot_prism` para construir árvor
 
 <br>
 
-### Quais probabilidades caracterizam o desempenho diagnóstico de um teste em tabelas 2x2?
+### Quais probabilidades caracterizam o desempenho de classificação de um teste em tabelas 2x2?
 
 - Sensibilidade ($SEN$) \@ref(eq:sen): Proporção de verdadeiro-positivos dentre aqueles com a condição.[@greenhalgh1997b]
 
@@ -291,7 +292,7 @@ DOR = \dfrac{LR+}{LR-}
 
 <br>
 
-```{r crosstable-prob, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Probabilidades calculados a partir da tabela de confusão 2x2 para análise de desempenho diagnóstico de testes e variáveis dicotômicas."}
+```{r crosstable-prob, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Probabilidades calculados a partir da tabela de confusão 2x2 para análise de desempenho de classificação de testes e variáveis dicotômicas."}
 library(dplyr)
 
 cross.table <-
@@ -349,13 +350,13 @@ knitr::kable(
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *riskyr*[@riskyr] fornece a função `comp_prob` para estimar 13 probabilidades relacionadas ao desempenho diagnóstico em tabelas 2x2.
+O pacote *riskyr*[@riskyr] fornece a função `comp_prob` para estimar 13 probabilidades relacionadas ao desempenho de classificação em tabelas 2x2.
 :::
 
 <br>
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *caret*[@caret] fornece a função `confusionMatrix` para estimar 11 probabilidades relacionadas ao desempenho diagnóstico em tabelas 2x2.
+O pacote *caret*[@caret] fornece a função `confusionMatrix` para estimar 11 probabilidades relacionadas ao desempenho de classificação em tabelas 2x2.
 :::
 
 <br>
@@ -569,7 +570,7 @@ D = \sqrt{(1 - SEN)^2 + (1 - ESP)^2}
 
 ### O que é a área sob a curva (AUROC)?
 
-- A área sob a curva ROC (AUC ou AUROC) quantifica o poder de discriminação ou desempenho diagnóstico na classificação de uma variável dicotômica.[@de2022]
+- A área sob a curva ROC (AUC ou AUROC) quantifica o poder de discriminação ou desempenho de classificação na classificação de uma variável dicotômica.[@de2022]
 
 - A área sob a curva ($AUC$) resume o desempenho global e representa a probabilidade de o teste classificar corretamente um caso positivo selecionado aleatoriamente em relação a um caso negativo selecionado aleatoriamente.[@he2024]
 
@@ -802,9 +803,9 @@ print(p)
 
 <br>
 
-### Como analisar o desempenho diagnóstico em desfechos com distribuição trimodal na população?
+### Como analisar o desempenho de classificação em desfechos com distribuição trimodal na população?
 
-- Limiares duplos podem ser utilizados para análise de desempenho diagnóstico de testes com distribuição trimodal.[@ferreira2021]
+- Limiares duplos podem ser utilizados para análise de desempenho de classificação de testes com distribuição trimodal.[@ferreira2021]
 
 <br>
 
@@ -816,7 +817,7 @@ print(p)
 
 - O novo teste foi comparado junto ao método padrão-ouro.[@greenhalgh1997b]
 
-- As probabilidades pontuais estimadas que caracterizam o desempenho diagnóstico do novo teste são altas e adequadas para sua aplicação clínica.[@greenhalgh1997b]
+- As probabilidades pontuais estimadas que caracterizam o desempenho de classificação do novo teste são altas e adequadas para sua aplicação clínica.[@greenhalgh1997b]
 
 - Os intervalos de confiança estimados para as probabilidades do novo teste são estreitos e adequadas para sua aplicação clínica.[@greenhalgh1997b]
 
