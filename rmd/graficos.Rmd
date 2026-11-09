@@ -16,32 +16,183 @@
 
 ### Por que começar pela mensagem antes do gráfico?
 
-- A figura deve responder a uma pergunta clara (comparação? tendência? composição?) e isso orienta a escolha do tipo de gráfico, dados e anotações. Esboce a mensagem e a pergunta antes de abrir o software.[@midway2020]
+- A figura deve responder a uma pergunta clara (comparação? tendência? composição?) e isso orienta a escolha do tipo de gráfico, dados e anotações.[@midway2020]
 
-### Como escolher a geometria e “mostrar os dados”?
-
-- Prefira geometrias que revelem distribuição/variabilidade (pontos, *boxplots*, violinos) em vez de médias sozinhas. Sempre que possível, exiba os dados brutos (pontos com *jitter*) junto da estatística-resumo.[@midway2020]
+- Esboce a mensagem e a pergunta antes de abrir o software.[@midway2020]
 
 <br>
 
-```{r viz-geom-mostrar-dados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico que mostra os dados brutos junto com um resumo estatístico (média e dispersão)."}
-# Reprodutibilidade
-set.seed(1)
+### Como escolher a geometria e “mostrar os dados”?
 
-# Gerar dados de exemplo
-df <- tibble::tibble(
-  grupo = rep(c("Controle","Intervenção"), each = 40),
-  y = c(rnorm(40, 10, 2), rnorm(40, 11.5, 2.5))
-)
+- Prefira geometrias que revelem distribuição/variabilidade (pontos, *boxplots*, violinos) em vez de médias sozinhas.[@midway2020]
 
-ggplot2::ggplot(df, ggplot2::aes(grupo, y, fill = grupo)) +
-  ggplot2::geom_violin(alpha=.3, color=NA, trim=FALSE) +
-  ggplot2::geom_boxplot(width=.15, outlier.shape = NA) +
-  ggplot2::geom_jitter(width=.08, alpha=.6, size=1.6) +
-  ggplot2::labs(x=NULL, y="Desfecho") +
-  ggplot2::theme_minimal() +
-  ggplot2::guides(fill="none")
+- Sempre que possível, exiba os dados brutos (pontos com *jitter*) junto da estatística-resumo.[@midway2020]
+
+<br>
+
+## Quarteto de Anscombe
+
+<br>
+
+### O que é o Quarteto de Anscombe?
+
+- O Quarteto de Anscombe é um conjunto de quatro bancos de dados bivariados criado para demonstrar a importância da visualização gráfica na análise estatística.[@anscombe1973]
+
+- O conjunto de dados mostra que medidas numéricas isoladas podem ocultar padrões relevantes, *outliers* e estruturas não lineares.[@anscombe1973]
+
+<br>
+
+```{r anscombe-data, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Quarteto de Anscombe."}
+library(dplyr)
+anscombe.dt <- datasets::anscombe
+anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
+anscombe.dt <- anscombe.dt[c(9, 1:8)]
+
+# exibe a tabela de dados
+knitr::kable(
+  anscombe.dt,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), T, T),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(anscombe.dt)[1], extra_css = "border-bottom: 1px solid")
 ```
+
+<br>
+
+- Embora os quatro conjuntos apresentem estatísticas descritivas e modelos de regressão praticamente idênticos, seus gráficos de dispersão revelam relações completamente diferentes entre as variáveis.[@anscombe1973]
+
+<br>
+
+```{r anscombe-summary, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos."}
+library(dplyr)
+anscombe.dt <- datasets::anscombe
+anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
+anscombe.dt <- anscombe.dt[c(9, 1:8)]
+
+anscombe.dt <- anscombe.dt %>% dplyr::select(-ID)
+
+# exibe a tabela descritiva
+anscombe.summ <- data.frame(
+  "X1Y1" = c(NA, NA, NA, NA, NA, NA, NA, NA),
+  "X2Y2" = c(NA, NA, NA, NA, NA, NA, NA, NA),
+  "X3Y3" = c(NA, NA, NA, NA, NA, NA, NA, NA),
+  "X4Y4" = c(NA, NA, NA, NA, NA, NA, NA, NA)
+)
+ff <- y ~ x
+mods <- setNames(as.list(1:4), paste0("lm", 1:4))
+for (i in 1:4) {
+  ff[2:3] <- lapply(paste0(c("y", "x"), i), as.name)
+  mods[[i]] <- lmi <- lm(ff, data = anscombe.dt)
+  # observacoes
+  anscombe.summ[1, i] <- dim(anscombe.dt)[1]
+  # media x,y
+  anscombe.summ[2, i] <- mean(anscombe.dt[, paste0("x", i)])
+  anscombe.summ[3, i] <- mean(anscombe.dt[, paste0("y", i)])
+  # variancia x,y
+  anscombe.summ[4, i] <- var(anscombe.dt[, paste0("x", i)])
+  anscombe.summ[5, i] <- var(anscombe.dt[, paste0("y", i)])
+  # correlacao
+  anscombe.summ[6, i] <-
+    cor(anscombe.dt[, paste0("x", i)], anscombe.dt[, paste0("y", i)])
+  # coeficiente angular
+  anscombe.summ[7, i] <- coef(lmi)[2]
+  # coeficiente linear
+  anscombe.summ[8, i] <- coef(lmi)[1]
+  # coeficiente de determinacao
+  anscombe.summ[9, i] <- summary(lmi)$r.squared
+}
+rownames(anscombe.summ) <-
+  c(
+    "Observações",
+    "Média x",
+    "Média y",
+    "Variância x",
+    "Variância y",
+    "Correlação",
+    "Coeficiente angular",
+    "Coeficiente linear",
+    "Coeficiente de determinação"
+  )
+anscombe.summ <- round(anscombe.summ, 2)
+
+# exibe a tabela de dados
+knitr::kable(
+  anscombe.summ,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), T, T),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(anscombe.summ)[1], extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+```{r anscombe-plot, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico de dispersão do Quarteto de Anscombe para representação gráfica de conjuntos de dados bivariados com parâmetros quase idênticos e relações muito distintas."}
+library(dplyr)
+anscombe.dt <- datasets::anscombe
+anscombe.dt$ID <- seq(1, dim(anscombe.dt)[1])
+
+# exibe o gráfico
+datLong <- data.frame(
+  group  = paste0("Quarteto ", rep(1:4, each = 11)),
+  x = unlist(anscombe.dt[, c(1:4)]),
+  y = unlist(anscombe.dt[, c(5:8)])
+)
+rownames(datLong) <- NULL
+
+# compute common limits
+lims <- range(c(datLong$x, datLong$y), na.rm = TRUE)
+
+ggplot2::ggplot(
+  data = datLong,
+  mapping = ggplot2::aes(x = x, y = y, group = group)
+) +
+  ggplot2::geom_point(fill = "black") +
+  ggplot2::geom_smooth(
+    method = "lm",
+    se = FALSE,
+    fullrange = TRUE,
+    colour = "grey"
+  ) +
+  ggplot2::facet_wrap(~ group) +
+  ggplot2::scale_x_continuous(limits = lims) +
+  ggplot2::scale_y_continuous(limits = lims) +
+  ggplot2::coord_fixed() +
+  ggplot2::theme(
+    panel.background = ggplot2::element_blank(),
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    axis.line = ggplot2::element_line(colour = "black"),
+    legend.key = ggplot2::element_blank()
+  )
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *anscombiser*[@anscombiser] fornece a função `anscombise` para gerar bancos de dados que compartilham os mesmos valores de parâmetros do Quarteto de Anscombe.
+:::
 
 <br>
 
@@ -374,6 +525,27 @@ ggplot2::ggplot(dados, ggplot2::aes(x = grupo, y = medida, fill = grupo)) +
   ggplot2::geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA) +
   ggplot2::labs(x = "Grupo", y = "Medida") +
   ggplot2::theme_minimal()
+```
+
+<br>
+
+```{r viz-geom-mostrar-dados, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico que mostra os dados brutos junto com um resumo estatístico (média e dispersão)."}
+# Reprodutibilidade
+set.seed(1)
+
+# Gerar dados de exemplo
+df <- tibble::tibble(
+  grupo = rep(c("Controle","Intervenção"), each = 40),
+  y = c(rnorm(40, 10, 2), rnorm(40, 11.5, 2.5))
+)
+
+ggplot2::ggplot(df, ggplot2::aes(grupo, y, fill = grupo)) +
+  ggplot2::geom_violin(alpha=.3, color=NA, trim=FALSE) +
+  ggplot2::geom_boxplot(width=.15, outlier.shape = NA) +
+  ggplot2::geom_jitter(width=.08, alpha=.6, size=1.6) +
+  ggplot2::labs(x=NULL, y="Desfecho") +
+  ggplot2::theme_minimal() +
+  ggplot2::guides(fill="none")
 ```
 
 <br>
@@ -935,27 +1107,6 @@ ggplot2::ggplot(dados, ggplot2::aes(x = x, y = y)) +
   ggplot2::geom_smooth(method = "lm", color = "red", se = FALSE) +
   ggplot2::labs(x = "Variável X", y = "Variável Y") +
   ggplot2::theme_minimal()
-```
-
-<br>
-
-- Gráfico de matriz de dispersão: Mostra relações entre múltiplas variáveis quantitativas, útil para identificar padrões.[@REF]
-
-<br>
-
-```{r graficos-matriz-dispersao, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Matriz de dispersão representando relações entre múltiplas variáveis."}
-# Instalar se necessário: install.packages("GGally")
-library(GGally)
-
-# Simular dados multivariados
-dados <- data.frame(
-  var1 = stats::rnorm(100),
-  var2 = stats::rnorm(100, mean = 50, sd = 10),
-  var3 = stats::rnorm(100, mean = 100, sd = 25)
-)
-
-# Matriz de dispersão
-GGally::ggpairs(dados, title = "Matriz de Dispersão")
 ```
 
 <br>

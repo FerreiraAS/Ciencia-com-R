@@ -10,132 +10,6 @@
 
 <br>
 
-## Gráfico de correlação
-
-<br>
-
-```{r correlacao-grafico, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Diferentes forças e direção de correlação entre duas variáveis X e Y."}
-# Generate data with given correlation
-generate_data <- function(n, rho) {
-  Sigma <- base::matrix(c(1, rho, rho, 1), ncol = 2)
-  MASS::mvrnorm(n = n, mu = c(0, 0), Sigma = Sigma)
-}
-
-# Reproducibility
-base::set.seed(123)
-n <- 100
-
-# Define correlation matrix for 25 panels (5x5), center = 0
-rho_mat <- base::matrix(c(
-  -0.99, -0.95, -0.90, -0.85, -0.80,
-  -0.70, -0.60, -0.50, -0.40, -0.30,
-  -0.20, -0.10,  0.00,  0.10,  0.20,
-   0.30,  0.40,  0.50,  0.60,  0.70,
-   0.80,  0.85,  0.90,  0.95,  0.99
-), nrow = 5, byrow = TRUE)
-
-# Build dataframe
-layout_df <- base::do.call(base::rbind,
-  base::lapply(base::seq_len(base::nrow(rho_mat)), function(r) {
-    base::do.call(base::rbind,
-      base::lapply(base::seq_len(base::ncol(rho_mat)), function(c) {
-        rho <- rho_mat[r, c]
-        m <- generate_data(n, rho)
-        base::data.frame(
-          x = m[,1],
-          y = m[,2],
-          rho = rho,
-          row = base::factor(r, levels = 1:5),
-          col = base::factor(c, levels = 1:5),
-          label = base::sprintf("r = %.2f", rho)
-        )
-      })
-    )
-  })
-)
-
-# Plot
-ggplot2::ggplot(layout_df, ggplot2::aes(x = x, y = y)) +
-  ggplot2::geom_point(alpha = 0.7) +
-  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "gray40") +
-  ggplot2::facet_grid(rows = ggplot2::vars(row), cols = ggplot2::vars(col), drop = FALSE) +
-  ggplot2::labs(x = "X", y = "Y") +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(
-    strip.text        = ggplot2::element_blank(),
-    panel.grid.major  = ggplot2::element_blank(),
-    panel.grid.minor  = ggplot2::element_blank(),
-    axis.line         = ggplot2::element_line(color = "black"),
-    aspect.ratio      = 1,
-    panel.spacing     = grid::unit(0.35, "lines"),
-    plot.margin       = ggplot2::margin(10, 5, 10, 5)
-  ) +
-  ggplot2::geom_text(
-    data = stats::aggregate(cbind(x, y) ~ label + row + col, layout_df, function(z) NA)[, c("label","row","col")],
-    inherit.aes = FALSE,
-    ggplot2::aes(x = -Inf, y = Inf, label = label),
-    hjust = -0.05, vjust = 1.1
-  )
-```
-
-<br>
-
-## Matriz de correlação
-
-<br>
-
-```{r correlacao-matrix, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
-# Reprodutibilidade
-set.seed(1234)
-
-n <- 120L
-
-dados <-
-  tibble::tibble(
-    `Variável 1` = rnorm(n, mean = 50, sd = 10),
-    `Variável 2` = 40 + 0.6 * `Variável 1` + rnorm(n, sd = 8),
-    `Variável 3` = rnorm(n, mean = 1.70, sd = 0.08),
-    `Variável 4` = `Variável 2` / (`Variável 3`^2)
-  )
-
-mat <-
-  cor(
-    dados,
-    use = "pairwise.complete.obs"
-  )
-
-corrplot::corrplot(
-  mat,
-  method = "color",
-  type = "upper",
-  addCoef.col = "black",
-  number.digits = 2,
-  tl.col = "black",
-  tl.srt = 45,
-  diag = FALSE
-)
-```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats] fornece a função `cor` para calcular matrizes de correlação utilizando diferentes coeficientes, como Pearson, Spearman e Kendall.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *corrplot*[@corrplot] fornece a função `corrplot` para visualização da matriz de correlação.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *corrplot*[@corrplot] fornece a função `cor.mtest` para calcular os P-valores e intervalos de confiança da matriz de correlação.
-:::
-
-<br>
-
 ## Correlação de Pearson ($r$)
 
 <br>
@@ -985,6 +859,132 @@ O pacote *stats*[@stats] fornece a função `cancor` para calcular a correlaçã
 
 ::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
 O pacote *CCP*[@CCP] fornece a função `p.asym` para realizar o teste de significância da correlação canônica.
+:::
+
+<br>
+
+## Gráfico de dispersão
+
+<br>
+
+```{r correlacao-grafico, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Diferentes forças e direção de correlação entre duas variáveis X e Y."}
+# Generate data with given correlation
+generate_data <- function(n, rho) {
+  Sigma <- base::matrix(c(1, rho, rho, 1), ncol = 2)
+  MASS::mvrnorm(n = n, mu = c(0, 0), Sigma = Sigma)
+}
+
+# Reproducibility
+base::set.seed(123)
+n <- 100
+
+# Define correlation matrix for 25 panels (5x5), center = 0
+rho_mat <- base::matrix(c(
+  -0.99, -0.95, -0.90, -0.85, -0.80,
+  -0.70, -0.60, -0.50, -0.40, -0.30,
+  -0.20, -0.10,  0.00,  0.10,  0.20,
+   0.30,  0.40,  0.50,  0.60,  0.70,
+   0.80,  0.85,  0.90,  0.95,  0.99
+), nrow = 5, byrow = TRUE)
+
+# Build dataframe
+layout_df <- base::do.call(base::rbind,
+  base::lapply(base::seq_len(base::nrow(rho_mat)), function(r) {
+    base::do.call(base::rbind,
+      base::lapply(base::seq_len(base::ncol(rho_mat)), function(c) {
+        rho <- rho_mat[r, c]
+        m <- generate_data(n, rho)
+        base::data.frame(
+          x = m[,1],
+          y = m[,2],
+          rho = rho,
+          row = base::factor(r, levels = 1:5),
+          col = base::factor(c, levels = 1:5),
+          label = base::sprintf("r = %.2f", rho)
+        )
+      })
+    )
+  })
+)
+
+# Plot
+ggplot2::ggplot(layout_df, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(alpha = 0.7) +
+  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "gray40") +
+  ggplot2::facet_grid(rows = ggplot2::vars(row), cols = ggplot2::vars(col), drop = FALSE) +
+  ggplot2::labs(x = "X", y = "Y") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    strip.text        = ggplot2::element_blank(),
+    panel.grid.major  = ggplot2::element_blank(),
+    panel.grid.minor  = ggplot2::element_blank(),
+    axis.line         = ggplot2::element_line(color = "black"),
+    aspect.ratio      = 1,
+    panel.spacing     = grid::unit(0.35, "lines"),
+    plot.margin       = ggplot2::margin(10, 5, 10, 5)
+  ) +
+  ggplot2::geom_text(
+    data = stats::aggregate(cbind(x, y) ~ label + row + col, layout_df, function(z) NA)[, c("label","row","col")],
+    inherit.aes = FALSE,
+    ggplot2::aes(x = -Inf, y = Inf, label = label),
+    hjust = -0.05, vjust = 1.1
+  )
+```
+
+<br>
+
+## Matriz de correlação
+
+<br>
+
+```{r correlacao-matrix, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+# Reprodutibilidade
+set.seed(1234)
+
+n <- 120L
+
+dados <-
+  tibble::tibble(
+    `Variável 1` = rnorm(n, mean = 50, sd = 10),
+    `Variável 2` = 40 + 0.6 * `Variável 1` + rnorm(n, sd = 8),
+    `Variável 3` = rnorm(n, mean = 1.70, sd = 0.08),
+    `Variável 4` = `Variável 2` / (`Variável 3`^2)
+  )
+
+mat <-
+  cor(
+    dados,
+    use = "pairwise.complete.obs"
+  )
+
+corrplot::corrplot(
+  mat,
+  method = "color",
+  type = "upper",
+  addCoef.col = "black",
+  number.digits = 2,
+  tl.col = "black",
+  tl.srt = 45,
+  diag = FALSE
+)
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *stats*[@stats] fornece a função `cor` para calcular matrizes de correlação utilizando diferentes coeficientes, como Pearson, Spearman e Kendall.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *corrplot*[@corrplot] fornece a função `corrplot` para visualização da matriz de correlação.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *corrplot*[@corrplot] fornece a função `cor.mtest` para calcular os P-valores e intervalos de confiança da matriz de correlação.
 :::
 
 <br>
