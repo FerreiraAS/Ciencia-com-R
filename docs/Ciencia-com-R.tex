@@ -1323,7 +1323,7 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 \begin{itemize}
 \tightlist
 \item
-  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.499 e variância \(\sigma^{2}\) = 0.25. A distribuição amostral da média de 10000 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.499 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
+  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.5 e variância \(\sigma^{2}\) = 0.25. A distribuição amostral da média de 10000 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.5 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
 \end{itemize}
 
 \begin{figure}
@@ -5984,16 +5984,10 @@ O pacote \emph{equatiomatic}\textsuperscript{\citeproc{ref-equatiomatic}{216}} f
 \subsection{O que são análises de regressão simples?}\label{o-que-suxe3o-anuxe1lises-de-regressuxe3o-simples}
 
 \begin{itemize}
+\tightlist
 \item
   A análise de regressão simples consiste em modelos estatísticos com uma variável dependente (desfecho) e uma variável independente (preditor).\textsuperscript{\citeproc{ref-Hidalgo2013}{217}}
-\item
-  A equação de regressão simples é expressa como \eqref{eq:regressao-simples}, onde \(Y\) é a variável dependente, \(X\) é a variável independente, \(\beta_0\) é o intercepto (constante), \(\beta_1\) é o coeficiente de regressão da variável independente e \(\epsilon\) representa o erro aleatório do modelo.\textsuperscript{\citeproc{ref-Hidalgo2013}{217}}
 \end{itemize}
-
-\begin{equation}
-\label{eq:regressao-simples}
-Y = \beta_0 + \beta_1 X + \epsilon
-\end{equation}
 
 \begin{figure}
 
@@ -6004,19 +5998,24 @@ Y = \beta_0 + \beta_1 X + \epsilon
 \caption{Regressão simples (univariável): associação entre um preditor e uma variável resposta.}\label{fig:regressao-simples}
 \end{figure}
 
-\subsection{O que são análises de regressão múltipla (multivariável)?}\label{o-que-suxe3o-anuxe1lises-de-regressuxe3o-muxfaltipla-multivariuxe1vel}
-
 \begin{itemize}
+\tightlist
 \item
-  A análise múltipla (ou multivariável) consiste em modelos estatísticos com uma variável dependente (desfecho) e duas ou mais variáveis independentes.\textsuperscript{\citeproc{ref-Hidalgo2013}{217}}
-\item
-  A equação de regressão multivariável é expressa como \eqref{eq:regressao-multivariavel}, onde \(Y\) é a variável dependente, \(X_1, X_2, ..., X_n\) são as variáveis independentes, \(\beta_0\) é o intercepto (constante), \(\beta_1, \beta_2, ..., \beta_n\) são os coeficientes de regressão das variáveis independentes e \(\epsilon\) representa o erro aleatório do modelo.\textsuperscript{\citeproc{ref-Hidalgo2013}{217}}
+  A equação de regressão simples é expressa como \eqref{eq:regressao-simples}, onde \(Y\) é a variável dependente, \(X\) é a variável independente, \(\beta_0\) é o intercepto (constante), \(\beta_1\) é o coeficiente de regressão da variável independente e \(\epsilon\) representa o erro aleatório do modelo.\textsuperscript{\citeproc{ref-Hidalgo2013}{217}}
 \end{itemize}
 
 \begin{equation}
-\label{eq:regressao-multivariavel}
-Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n + \epsilon
+\label{eq:regressao-simples}
+Y = \beta_0 + \beta_1 X + \epsilon
 \end{equation}
+
+\subsection{O que são análises de regressão múltipla (multivariável)?}\label{o-que-suxe3o-anuxe1lises-de-regressuxe3o-muxfaltipla-multivariuxe1vel}
+
+\begin{itemize}
+\tightlist
+\item
+  A análise múltipla (ou multivariável) consiste em modelos estatísticos com uma variável dependente (desfecho) e duas ou mais variáveis independentes.\textsuperscript{\citeproc{ref-Hidalgo2013}{217}}
+\end{itemize}
 
 \begin{figure}
 
@@ -6027,11 +6026,36 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n + \epsilon
 \caption{Regressão múltipla (multivariável): associação entre múltiplos preditores e uma variável resposta.}\label{fig:regressao-multipla}
 \end{figure}
 
+\begin{itemize}
+\tightlist
+\item
+  A equação de regressão multivariável é expressa como \eqref{eq:regressao-multivariavel}, onde \(Y\) é a variável dependente, \(X_1, X_2, ..., X_n\) são as variáveis independentes, \(\beta_0\) é o intercepto (constante), \(\beta_1, \beta_2, ..., \beta_n\) são os coeficientes de regressão das variáveis independentes e \(\epsilon\) representa o erro aleatório do modelo.\textsuperscript{\citeproc{ref-Hidalgo2013}{217}}
+\end{itemize}
+
+\begin{equation}
+\label{eq:regressao-multivariavel}
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n + \epsilon
+\end{equation}
+
 \subsection{O que são análises de regressão multivariada?}\label{o-que-suxe3o-anuxe1lises-de-regressuxe3o-multivariada}
 
 \begin{itemize}
+\tightlist
 \item
   A análise multivariada consiste em modelos estatísticos com duas ou mais variáveis dependente (desfechos) e duas ou mais variáveis independentes.\textsuperscript{\citeproc{ref-Hidalgo2013}{217}}
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics{Ciencia-com-R_files/figure-latex/regressao-multivariada-1} 
+
+}
+
+\caption{Regressão multivariada: modelagem conjunta de múltiplas variáveis resposta em função de múltiplos preditores.}\label{fig:regressao-multivariada}
+\end{figure}
+
+\begin{itemize}
+\tightlist
 \item
   Na regressão multivariada \eqref{eq:regressao-multivariada}, \(Y_1, Y_2, ..., Y_m\) são as variáveis dependentes, \(X_1, X_2, ..., X_n\) são as variáveis independentes, \(\beta_{0j}\) é o intercepto de \(Y_j\), \(\beta_{ij}\) são os coeficientes de regressão de \(X_i\) para \(Y_j\), e \(\epsilon_j\) representa o erro aleatório associado a \(Y_j\).\textsuperscript{\citeproc{ref-Hidalgo2013}{217}}
 \end{itemize}
@@ -6043,15 +6067,6 @@ Y_2 &= \beta_{02} + \beta_{21} X_1 + \beta_{22} X_2 + \dots + \beta_{2n} X_n + \
 &\vdots \\
 Y_m &= \beta_{0m} + \beta_{m1} X_1 + \beta_{m2} X_2 + \dots + \beta_{mn} X_n + \epsilon_m
 \end{align}
-
-\begin{figure}
-
-{\centering \includegraphics{Ciencia-com-R_files/figure-latex/regressao-multivariada-1} 
-
-}
-
-\caption{Regressão multivariada: modelagem conjunta de múltiplas variáveis resposta em função de múltiplos preditores.}\label{fig:regressao-multivariada}
-\end{figure}
 
 \subsection{O que são análises de regressão segmentada?}\label{o-que-suxe3o-anuxe1lises-de-regressuxe3o-segmentada}
 
