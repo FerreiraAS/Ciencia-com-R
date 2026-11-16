@@ -246,7 +246,7 @@ p_pipeline <- ggplot2::ggplot(df_pipe, ggplot2::aes(x, y, label = etapa)) +
                linewidth = 0.6) +
   ggplot2::labs(title = "A) Funcionamento conceitual de um LLM") +
   ggplot2::theme_void() +
-  ggplot2::theme(plot.title = element_text(face = "bold", size = 12))
+  ggplot2::theme(plot.title = ggplot2::element_text(face = "bold", size = 12))
 
 # Painel B — Distribuição do próximo token
 tokens <- c("descoberta", "modelo", "artigo", "estudo", "teoria")

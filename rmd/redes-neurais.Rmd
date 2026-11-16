@@ -984,6 +984,32 @@ graphics::text(x_out, 0.85, "Saída",     cex = 0.9)
 
 <br>
 
+## Interpretabilidade e relevância das variáveis
+
+<br>
+
+### Como redes neurais podem indicar quais variáveis são relevantes?
+
+- Uma estratégia incorporada ao treinamento é inserir uma camada de ponderação das variáveis antes do classificador.[@SilveiraESilva2027]
+
+- Cada variável recebe um peso aprendido em conjunto com os demais parâmetros da rede; pesos maiores indicam maior relevância segundo o modelo ajustado.[@SilveiraESilva2027]
+
+- Em problemas com várias classes, uma única pontuação global pode ocultar diferenças na relevância das variáveis entre as classes, pois cada classe pode depender de um conjunto distinto de variáveis.[@SilveiraESilva2027]
+
+- Uma extensão da camada de seleção de variáveis pode aprender uma matriz de pesos específica por variável e classe, com dimensão correspondente ao número de variáveis vezes o número de classes.[@SilveiraESilva2027]
+
+<br>
+
+### Como avaliar se os pesos das variáveis são informativos?
+
+- Em dados sintéticos com variáveis relevantes conhecidas, pode-se verificar se o ranqueamento recupera essas variáveis e evita selecionar ruído.[@SilveiraESilva2027]
+
+- Também é possível remover ou mascarar variáveis em ordem de relevância e observar a mudança no desempenho preditivo. Se a remoção das variáveis mais bem ranqueadas prejudica a predição da classe correspondente, isso fornece evidência de que o modelo depende delas.[@SilveiraESilva2027]
+
+- Os pesos descrevem a dependência do modelo ajustado em relação às entradas; por si só, não demonstram que uma variável cause o desfecho nem garantem que a mesma relevância se mantenha em outros dados.[@SilveiraESilva2027]
+
+<br>
+
 ## Redes neurais convolucionais
 
 <br>
