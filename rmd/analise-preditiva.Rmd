@@ -5,6 +5,7 @@
   </w:r>
 </w:p>
 ```
+
 # **Análise preditiva** {#analise-preditiva}
 
 <br>
@@ -41,6 +42,10 @@
 
 - A calibração é especialmente importante quando o modelo será usado para definir limiares de decisão clínica, como indicar ou não uma intervenção, exame ou tratamento.[@vansmeden2021]
 
+- Para uma avaliação mais completa, além da discriminação e da calibração, convém apresentar a distribuição dos riscos previstos em cada categoria do desfecho e uma medida de utilidade clínica, como o benefício líquido em uma curva de decisão.[@vancalster2025]
+
+- Medidas de classificação como acurácia, índice de Youden e F1 dependem de um ponto de corte e podem confundir desempenho estatístico com consequências clínicas. Não devem substituir a avaliação separada da discriminação, da calibração e da utilidade clínica.[@vancalster2025]
+
 <br>
 
 ### O que é validação de um modelo preditivo?
@@ -50,6 +55,20 @@
 - Validação externa avalia o desempenho do modelo em novos pacientes, coletados em outro período, outro centro, outra região ou outro sistema de saúde.[@vancalster2023]
 
 - A validação interna está mais relacionada ao risco de sobreajuste, enquanto a validação externa está relacionada à transportabilidade do modelo para novos contextos clínicos.[@vancalster2023]
+
+- Dividir aleatoriamente uma amostra em conjuntos de treino e teste pode produzir uma avaliação otimista, pois os dois grupos tendem a compartilhar características do mesmo contexto. Quando há poucos dados, reamostragem por *bootstrap* ou validação cruzada permite aproveitar melhor a amostra, mas continua sendo validação interna.[@Altman2009]
+
+- Validação temporal usa pacientes atendidos posteriormente no mesmo serviço e fornece uma avaliação independente no tempo; validação externa em outro centro ou sistema é necessária para examinar a generalização para outros contextos.[@Altman2009]
+
+<br>
+
+### O que significa a instabilidade de um modelo preditivo?
+
+- Um modelo pode variar bastante quando o processo de desenvolvimento é repetido em amostras semelhantes. Essa instabilidade pode afetar desde os preditores selecionados e os coeficientes até os riscos estimados para cada pessoa.[@RileyCollins2023]
+
+- Para examiná-la, pode-se repetir todo o processo de desenvolvimento em amostras *bootstrap* e comparar as previsões de cada modelo com as do modelo original.[@RileyCollins2023]
+
+- Gráficos de instabilidade das previsões, erro absoluto médio e variação da calibração, da classificação e das curvas de decisão ajudam a mostrar se as conclusões dependem demais da amostra inicial.[@RileyCollins2023]
 
 <br>
 
@@ -70,6 +89,8 @@
 - Também pode ser afetada por diferenças na forma de medir preditores e desfechos, como exames laboratoriais, métodos de imagem, julgamento clínico, protocolos locais e disponibilidade de recursos.[@vancalster2023; @vancalster2026]
 
 - Mesmo quando a discriminação permanece aparentemente estável, a calibração pode se deteriorar com o tempo, fenômeno conhecido como *drift* de calibração.[@vancalster2023; @vancalster2026]
+
+- O bom desempenho dentro da amostra de desenvolvimento ou em uma divisão aleatória da mesma amostra não garante generalização.[@Chekroud2024]
 
 <br>
 
@@ -139,6 +160,20 @@ O pacote *ggeffects*[@ggeffects] fornece a função `test_response` para testar 
 
 <br>
 
+### Como escolher o limiar de risco para uma decisão clínica?
+
+- Não há, em geral, um limiar universalmente ótimo.[@Wynants2019]
+
+- O limiar deve refletir o contexto clínico e as consequências de falsos positivos e falsos negativos; escolher o ponto que maximiza acurácia ou outro critério puramente estatístico incorpora pressupostos sobre esses custos que podem não fazer sentido para pacientes e profissionais.[@Wynants2019]
+
+- Quando há espaço para aconselhamento e decisão compartilhada, comunicar o risco individual como uma probabilidade contínua pode ser mais informativo do que reduzi-lo às categorias “baixo” e “alto”.[@Wynants2019]
+
+- Se a decisão exige uma classificação, é preferível mostrar resultados em vários limiares clinicamente plausíveis.[@Wynants2019]
+
+- Limiar “ótimo” estimado em amostras pequenas ou moderadas pode ser instável. A escolha precisa ser justificada pela decisão que será tomada, e não apenas pelos dados disponíveis.[@Wynants2019]
+
+<br>
+
 ## Análise de curva de decisão
 
 <br>
@@ -183,6 +218,10 @@ O pacote *ggeffects*[@ggeffects] fornece a função `test_response` para testar 
 
 - Em casos ambíguos, serve como primeiro passo antes de análises mais detalhadas.[@vickers2019]
 
+- A curva deve ser interpretada na faixa de limiares plausível para a decisão clínica.[@Wynants2019; @vancalster2025]
+
+- A curva compara benefícios e danos relativos das estratégias ao longo desses limiares, mas não determina por si só qual limiar uma equipe ou paciente deve adotar.[@Wynants2019; @vancalster2025]
+
 <br>
 
 ### A análise de curva de decisão pode ser conduzida sem dados individuais de pacientes?
@@ -194,6 +233,16 @@ O pacote *ggeffects*[@ggeffects] fornece a função `test_response` para testar 
 ### Como funciona o cálculo do benefício líquido?
 
 - O benefício líquido é estimado contrastando verdadeiros positivos e falsos positivos em diferentes limiares de decisão.[@hozo2023]
+
+<br>
+
+### O que verificar antes de confiar em um modelo de aprendizado de máquina?
+
+- Verifique se a equação ou o software do modelo está acessível para avaliação e uso; se os preditores realmente utilizados estão descritos; e se explicações do modelo não são apresentadas como evidência de causalidade.[@Carriero2026]
+
+- Confira se técnicas para corrigir o desequilíbrio entre categorias foram usadas e se alteraram as previsões ou as métricas, especialmente a calibração. Também avalie se o método de validação fornece estimativas suficientemente precisas e se corresponde ao contexto em que o modelo será aplicado.[@Carriero2026]
+
+- Por fim, considere qual decisão o modelo pretende apoiar e se há uma via realista para que ele produza benefício para pacientes e profissionais. Um modelo tecnicamente sofisticado, mas indisponível, mal validado ou sem utilidade clínica, dificilmente será implementável.[@Carriero2026]
 
 <br>
 

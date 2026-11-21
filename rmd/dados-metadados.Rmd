@@ -23,13 +23,21 @@
 
 ### O que são dados estruturados?
 
--   Dados estruturados são dados organizados em um formato tabular, como planilhas eletrônicas ou bancos de dados relacionais, onde cada linha representa uma observação e cada coluna representa uma variável ou atributo.[@REF]
+-   Dados estruturados são organizados segundo um esquema predefinido, por exemplo em tabelas ou bancos relacionais.[@Wickham2014; @Miller2025]
+
+- Em uma tabela de análise, é importante declarar o que cada linha representa (a unidade observacional), o significado de cada coluna e quais variáveis identificam unicamente uma observação.[@Wickham2014; @Miller2025]
+
+-   Uma organização tabular consistente facilita a transformação e a análise dos dados: cada variável ocupa uma coluna, cada observação ocupa uma linha e cada tipo de unidade observacional ocupa uma tabela.[@Wickham2014]
+
+-   O formato chamado *tidy* é uma convenção útil, não uma exigência universal. Dados podem precisar ser reorganizados para diferentes análises; documente a unidade de observação e as transformações realizadas.[@Wickham2014]
 
 <br>
 
 ### O que são dados não estruturados?
 
--   Dados não estruturados são dados que não possuem um formato ou organização predefinidos, como textos, imagens, vídeos, áudios e sinais biomédicos, tornando sua análise mais complexa em comparação com dados estruturados.[@REF]
+-   Dados não estruturados não seguem, por si só, uma tabela fixa de linhas e colunas.[@CunhaOliveira2024]
+
+- Exemplos incluem textos, imagens, vídeos, áudio e sinais biomédicos. Podem ser analisados quantitativamente, mas exigem registrar informações adicionais sobre formato, origem, coleta, processamento e ferramentas necessárias para interpretá-los.[@CunhaOliveira2024]
 
 <br>
 
@@ -48,6 +56,50 @@
 -   Dados primários são dados originais coletados intencionalmente para uma determinada análise exploratória ou inferencial planejada a priori.[@vetter2017]
 
 -   Dados secundários compreendem dados coletados inicialmente para análises de um estudo, e são subsequentemente utilizados para outras análises.[@vetter2017]
+
+-   O uso de dados secundários requer verificar a população e o propósito originais, os critérios de inclusão, as definições das variáveis, o período de coleta, a qualidade da mensuração e as restrições de acesso.[@ChengPhillips2014]
+
+- Uma variável com o mesmo nome pode ter sido definida de forma diferente entre estudos.[@ChengPhillips2014]
+
+<br>
+
+### O que são dados coletados rotineiramente (*routinely collected data*)?
+
+-   São dados registrados no curso de atividades que não foram planejadas originalmente para responder a uma pergunta de pesquisa.[@Hoffmann2026]
+
+- Exemplos incluem prontuários eletrônicos, registros administrativos e de faturamento, registros clínicos, dados de dispositivos vestíveis e aplicativos.[@Hoffmann2026]
+
+-   O termo descreve a origem dos dados, não o delineamento do estudo nem, por si só, a força da evidência.[@Hoffmann2026]
+
+- Esses dados podem ser usados em diferentes delineamentos e para fins descritivos, explicativos ou preditivos; por isso, é importante declarar explicitamente o delineamento adotado.[@Hoffmann2026]
+
+-   Como os registros são produzidos para finalidades assistenciais ou administrativas, os pesquisadores geralmente não controlam quem entra na base, quais variáveis são registradas nem quando e como são medidas.[@Hoffmann2026]
+
+- A cobertura pode representar determinados serviços ou locais, em vez da população-alvo; compare a amostra observada com a população de interesse e descreva limites de generalização.[@Hoffmann2026]
+
+-   Definições, codificação, disponibilidade de exames e práticas de registro podem variar entre profissionais, serviços e períodos.[@Hoffmann2026]
+
+- Consulte documentação e pessoas familiarizadas com a geração dos dados; examine padrões de dados ausentes, mudanças de codificação e qualidade da mensuração por local e ao longo do tempo.[@Hoffmann2026]
+
+-   Alinhe a elegibilidade, o início do acompanhamento, as exposições, os tratamentos e os desfechos em uma linha do tempo comum.[@Hoffmann2026]
+
+- Datas ausentes ou imprecisas podem tornar impossível estabelecer a sequência temporal necessária para responder à pergunta de pesquisa.[@Hoffmann2026]
+
+- Análises explicativas devem explicitar os pressupostos causais e considerar confundimento residual.[@Hoffmann2026]
+
+-   Bases grandes não eliminam vieses e podem produzir estimativas muito precisas, porém enviesadas.[@Hoffmann2026]
+
+- Defina previamente a pergunta e as decisões analíticas quando possível, documente o processamento, faça análises de sensibilidade e, para modelos preditivos, avalie validação interna e externa e desempenho nos grupos relevantes.[@Hoffmann2026]
+
+<br>
+
+### O que significa qualidade dos dados?
+
+-   Qualidade dos dados depende da pergunta e do uso pretendido.[@Baillie2022; @CunhaOliveira2024]
+
+- Antes da análise, verifique duplicatas, valores ausentes, formatos, intervalos plausíveis, consistência entre variáveis e desvios do protocolo; registre regras e decisões de correção em vez de sobrescrever silenciosamente os valores originais.[@Baillie2022; @CunhaOliveira2024]
+
+-   Preserve uma cópia imutável dos dados recebidos ou coletados. Produza arquivos derivados por meio de procedimentos documentados e, quando possível, executáveis, registrando a origem, a data e as operações aplicadas.[@CunhaOliveira2024]
 
 <br>
 
@@ -74,6 +126,18 @@
 -   Na existência de versões de instrumentos publicadas em diferentes anos, use o ano de publicação das escalas no rótulo.[@buttliere2021]
 
 -   Divida o rótulo da variável ou fator em partes e ordene-as do mais geral para o mais particular geral (ex.: experimento -\> repetição -\> escala -\> item).[@buttliere2021]
+
+-   Registre, no mínimo, título e descrição do conjunto de dados; responsáveis e contatos; datas e local da coleta quando pertinentes; desenho e procedimentos; população e critérios de inclusão; dicionário de variáveis; unidades e códigos; definições de dados ausentes; transformações; versões de instrumentos e de arquivos; e condições de acesso e reutilização.[@CunhaOliveira2024]
+
+-   Metadados podem ser incorporados aos arquivos ou mantidos em arquivos de documentação, como um `README` e um dicionário de dados. Use padrões e vocabulários da área quando existirem e mantenha os metadados legíveis por pessoas e por ferramentas computacionais.[@Wilkinson2016; @CunhaOliveira2024]
+
+<br>
+
+### O que são os princípios FAIR?
+
+-   FAIR resume quatro objetivos para dados e metadados: encontráveis (*Findable*), acessíveis (*Accessible*), interoperáveis (*Interoperable*) e reutilizáveis (*Reusable*). Entre as práticas associadas estão identificadores persistentes, metadados ricos, protocolos de acesso padronizados, vocabulários compartilhados, proveniência documentada e licença explícita.[@Wilkinson2016]
+
+-   FAIR não significa necessariamente acesso público irrestrito. Dados sensíveis podem exigir autenticação, autorização ou restrições de uso; sempre que possível, os metadados que descrevem o conjunto devem continuar encontráveis mesmo quando os dados não puderem ser divulgados.[@Wilkinson2016]
 
 <br>
 
@@ -117,15 +181,21 @@ O pacote *Hmisc*[@Hmisc] fornece a função `contents` para criar um objeto com 
 
 <br>
 
-### Como armazenar dados?
+### Como organizar e armazenar dados?
 
-- Dados devem ser armazenados em três partes: dados brutos, *codebooks* e metadados ISO.[@reese2007]
+-   Mantenha separados os dados brutos, os dados processados e os produtos finais da análise. Preserve os dados brutos sem alterações e documente no código ou em um registro de processamento como cada arquivo derivado foi obtido.[@reese2007; @CunhaOliveira2024]
 
-- Os dados brutos são organizados em colunas com um identificador único --- o cabeçalho da coluna.[@reese2007]
+-   Um *codebook* ou dicionário de dados pode incluir nome e rótulo, definição, tipo, unidade, categorias e códigos de ausência; um `README` pode explicar a estrutura das pastas, a ordem de execução dos scripts e os requisitos de software.[@reese2007; @CunhaOliveira2024]
 
-- *Codebooks* são documentos que descrevem os dados brutos, incluindo seus cabeçalhos, e respectivos rótulos, tipos de variável, formatos, unidades de medida, códigos para dados categóricos e dados perdidos e limites de valores plausíveis.[@reese2007]
+-   Use nomes de arquivos informativos e consistentes, formatos abertos ou amplamente utilizados quando viável, e controle de versões para scripts e documentação.[@CunhaOliveira2024]
 
-- Metadados são informações sobre o estudo, como título, palavras-chave e outras informações relevantes, tais como delineamento, protocolo, recrutamento dos participantes e métodos de medição[@reese2007]
+- Faça cópias de segurança em locais distintos e verifique periodicamente se os arquivos podem ser recuperados.[@CunhaOliveira2024]
+
+-   Planeje a preservação e o compartilhamento desde o início: escolha um repositório adequado à área, atribua uma licença ou declare as restrições de reutilização, cite a versão do conjunto e forneça um identificador persistente quando disponível.[@Wilkinson2016; @CunhaOliveira2024]
+
+-   Antes de compartilhar microdados, verifique consentimento, confidencialidade, risco de identificação e regras éticas e legais aplicáveis.[@CunhaOliveira2024]
+
+- Quando o acesso aberto não for apropriado, descreva como solicitar acesso controlado e quais condições se aplicam.[@CunhaOliveira2024]
 
 <br>
 
