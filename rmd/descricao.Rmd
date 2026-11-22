@@ -55,6 +55,7 @@ tbl_desc_geral <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Descrição geral: tendência central e dispersão") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     "DP = desvio-padrão."
   )
@@ -107,6 +108,7 @@ tbl_desc_mediana <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Descrição de variáveis assimétricas") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     "Q1 = primeiro quartil; Q3 = terceiro quartil."
   )
@@ -171,7 +173,8 @@ tbl_cat <-
   ) %>%
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Descrição de variáveis categóricas") %>%
-  gtsummary::as_gt()
+  gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H")
 
 tbl_cat
 ```
@@ -234,6 +237,7 @@ tbl_grupo <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Descrição das características segundo grupo") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     "Variáveis contínuas descritas como média (DP); variáveis categóricas descritas como n (%)."
   )
@@ -295,6 +299,7 @@ tbl_missing <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Descrição com apresentação dos dados ausentes") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     "A linha 'Ausente' indica valores não observados para cada variável."
   )

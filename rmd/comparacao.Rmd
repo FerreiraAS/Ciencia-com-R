@@ -57,6 +57,7 @@ trial_t <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste t de Student") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     base::paste0(
       "Tamanho de efeito (d de Cohen): ",
@@ -121,6 +122,7 @@ trial_t <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste t de Student pareado") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     paste0(
       "Tamanho de efeito (d de Cohen pareado): ",
@@ -183,6 +185,7 @@ trial_t <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste t de Welch") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     base::paste0(
       "Tamanho de efeito (d de Cohen): ",
@@ -251,6 +254,7 @@ tbl_mw <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste de Mann–Whitney (Wilcoxon rank-sum)") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     base::paste0(
       "Tamanho de efeito (r): ",
@@ -371,6 +375,7 @@ tbl_bm <-
     "Teste de Brunner–Munzel"
   ) %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     base::paste0(
       "Estatística de Brunner–Munzel = ",
@@ -455,6 +460,7 @@ tbl_wilcox <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste de Wilcoxon pareado (signed-rank)") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     paste0(
       "Tamanho de efeito (r): ",
@@ -522,6 +528,7 @@ tbl_anova <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Análise de variância de um fator") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     base::paste0("Tamanho de efeito (eta²): ", base::round(eta2, 3))
   )
@@ -554,6 +561,7 @@ tukey_tbl <-
 
 tukey_tbl %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_caption("Post hoc de Tukey") %>%
   gt::cols_label(
     Comparação = "Comparação",
@@ -645,6 +653,7 @@ tbl_welch <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Análise de variância de Welch") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     base::paste0("Tamanho de efeito (eta², via SS): ", base::round(eta2, 3))
   )
@@ -666,6 +675,7 @@ gh <- rstatix::games_howell_test(trial_welch, Desfecho ~ Grupo) %>%
 gh %>%
   dplyr::select(group1, group2, estimate, conf.low, conf.high, p_fmt) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_caption("Post hoc de Games-Howell") %>%
   gt::cols_label(
     group1 = "Grupo 1",
@@ -739,6 +749,7 @@ tbl_kw <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste de Kruskal–Wallis") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     base::paste0(
       "Tamanho de efeito: epsilon² = ", base::round(eps2, 3)
@@ -768,6 +779,7 @@ posthoc_dunn <-
 posthoc_dunn %>%
   dplyr::select(group1, group2, statistic, p, p.adj) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_caption("Post hoc de Dunn (Bonferroni)") %>%
   gt::cols_label(
     group1        = "Grupo 1",

@@ -28,7 +28,7 @@
 
 <br>
 
-```{r abelson, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.cap='Simulação do paradoxo de Abelson. Mesmo com uma diferença pequena de habilidade entre dois jogadores (A e B), o jogador B tende a vencer a maioria das tentativas devido ao alto ruído por tentativa. No entanto, a análise por tentativa mostra um baixo valor de $R^2$, indicando que a habilidade explica pouco da variação no desempenho observado. Isso ilustra como um fator causal pode ser importante na prática, mesmo quando a variância explicada é baixa.'}
+```{r abelson, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.pos="H", fig.cap='Simulação do paradoxo de Abelson. Mesmo com uma diferença pequena de habilidade entre dois jogadores (A e B), o jogador B tende a vencer a maioria das tentativas devido ao alto ruído por tentativa. No entanto, a análise por tentativa mostra um baixo valor de $R^2$, indicando que a habilidade explica pouco da variação no desempenho observado. Isso ilustra como um fator causal pode ser importante na prática, mesmo quando a variância explicada é baixa.'}
 library("broom.helpers")
 
 # reprodutibilidade
@@ -103,7 +103,9 @@ gtsummary::tbl_stack(
   gtsummary::remove_abbreviation() %>%
   gtsummary::modify_footnote(
     conf.low ~ "IC = Intervalo de confiança"
-)
+) %>%
+  gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H")
 ```
 
 <br>
@@ -174,7 +176,7 @@ gtsummary::tbl_stack(
 
 <br>
 
-```{r simpson, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Os pontos representam observações individuais e as linhas de tendência representam as regressões lineares ajustadas para os dados desagregados da população e agregados por subpopulação."}
+```{r simpson, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.pos="H", fig.cap = "Os pontos representam observações individuais e as linhas de tendência representam as regressões lineares ajustadas para os dados desagregados da população e agregados por subpopulação."}
 # Define global shapes and colors
 global_shapes <- c(16, 16)  # Circle and triangle
 global_colors <- c("black", "gray50")  # Black and gray
@@ -288,7 +290,7 @@ cowplot::plot_grid(
 
 <br>
 
-```{r james-stein, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.cap='Simulação do paradoxo de Stein. Comparação do erro médio quadrático entre o estimador clássico (média amostral) e o estimador de James-Stein para diferentes números de médias (n=2 e n=5). Estimadores aparentemente piores localmente podem ser melhores globalmente quando o objetivo é reduzir o erro total.', fig.width=15, fig.height=4, dpi=300, out.width="100%"}
+```{r james-stein, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE, appendix=TRUE, fig.align='center', layout='Blank', ph=officer::ph_location_fullsize(), results='asis', fig.pos="H", fig.cap='Simulação do paradoxo de Stein. Comparação do erro médio quadrático entre o estimador clássico (média amostral) e o estimador de James-Stein para diferentes números de médias (n=2 e n=5). Estimadores aparentemente piores localmente podem ser melhores globalmente quando o objetivo é reduzir o erro total.', fig.width=15, fig.height=4, dpi=300, out.width="100%"}
 # Reprodutibilidade
 set.seed(123)
 

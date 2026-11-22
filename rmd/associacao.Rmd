@@ -59,6 +59,7 @@ tbl_no_yates <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste Qui-quadrado (sem correção de Yates)") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     paste0("Tamanho de efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
@@ -113,6 +114,7 @@ tbl_yates <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste Qui-quadrado (com correção de Yates)") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     paste0("Tamanho de efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
@@ -168,6 +170,7 @@ tbl_fisher <-
   gtsummary::bold_labels() %>%
   gtsummary::modify_caption("Teste exato de Fisher") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     paste0("Tamanho de efeito (Cramér's V): ", round(rstatix::cramer_v(trial$Tratamento, trial$Resposta), 3))
   )
@@ -279,6 +282,7 @@ tbl_ffh <-
     "Teste de Fisher–Freeman–Halton assintótico"
   ) %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     base::paste0(
       "Fisher–Freeman–Halton: T = ",
@@ -429,6 +433,7 @@ tbl_barnard <-
     "Teste Exato de Barnard"
   ) %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     source_note =
       paste0(
@@ -488,6 +493,7 @@ p_txt  <- if (mc$p.value < 0.001) "<0.001" else sprintf("%.3f", mc$p.value)
 # Converter para gt e acrescentar o rodapé com o p
 tab_cross %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     paste0(
       "McNemar χ² = ", round(unname(mc$statistic), 3),
@@ -539,6 +545,7 @@ p_txt  <- if (mc$p.value < 0.001) "<0.001" else sprintf("%.3f", mc$p.value)
 # Converter para gt e acrescentar o rodapé com o p
 tab_cross %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     paste0(
       "McNemar χ² = ", round(unname(mc$statistic), 3),
@@ -591,6 +598,7 @@ tbl_q <-
   ) %>%
   gtsummary::modify_caption("Teste Q de Cochran") %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     paste0(
       "Cochran Q χ²(", q_res$df, ") = ", round(q_res$statistic,3),
@@ -670,6 +678,7 @@ tbl_trend <-
   gtsummary::modify_caption("Teste de Cochran–Armitage") %>%
   gtsummary::bold_labels() %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     paste0(
       "χ²(", trend$parameter, ") = ", round(trend$statistic, 3),
@@ -730,6 +739,7 @@ tbl_phi <-
     Correlação = r
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -827,6 +837,7 @@ tbl_cramer <-
     )
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -919,6 +930,7 @@ nota_assoc <- paste0(
 # ---- exibir ----
 tbl_assoc %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(nota_assoc)
 ```
 
@@ -983,6 +995,7 @@ nota_assoc <- paste0(
 # ---- exibir ----
 tbl_assoc %>%
   gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(nota_assoc)
 ```
 

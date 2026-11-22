@@ -58,7 +58,7 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kableExtra::kable_styling(
-    latex_options = c("basic"),
+    latex_options = c("HOLD_position"),
     bootstrap_options = c("basic", "hover", "condensed", "responsive"),
     full_width = ifelse(knitr::is_html_output(), T, T),
     position = "center"
@@ -136,7 +136,7 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kableExtra::kable_styling(
-    latex_options = c("basic"),
+    latex_options = c("HOLD_position"),
     bootstrap_options = c("basic", "hover", "condensed", "responsive"),
     full_width = ifelse(knitr::is_html_output(), T, T),
     position = "center"
@@ -848,7 +848,7 @@ ggplot2::ggplot(dfp, ggplot2::aes(time, id, fill = value)) +
 
 <br>
 
-```{r}
+```{r graficos-longitudinais-swimmer, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Gráfico nadador representando a duração do acompanhamento individual de cada participante ao longo do tempo."}
 # reprodutibilidade
 set.seed(123)
 

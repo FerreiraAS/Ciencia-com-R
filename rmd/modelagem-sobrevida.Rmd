@@ -151,7 +151,7 @@
 
 <br>
 
-```{r kaplan-meier, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Curvas de Kaplan–Meier simuladas para dois grupos (controle e tratamento)."}
+```{r kaplan-meier, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.pos="H", fig.cap = "Curvas de Kaplan–Meier simuladas para dois grupos (controle e tratamento)."}
 # Reprodutibilidade
 set.seed(123)
 
@@ -194,7 +194,7 @@ survminer::ggsurvplot(
 
 <br>
 
-```{r km-tabela, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, results = "asis", fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), fig.fullwidth = TRUE, fig.cap = "Tabela resumo das curvas de Kaplan–Meier por grupo, incluindo número de eventos, censuras e mediana de sobrevida com IC 95%."}
+```{r km-tabela, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, results = "asis", fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), fig.fullwidth = TRUE, fig.pos="H", fig.cap = "Tabela resumo das curvas de Kaplan–Meier por grupo, incluindo número de eventos, censuras e mediana de sobrevida com IC 95%."}
 # Medianas e IC 95%
 medianas <- survminer::surv_median(ajuste_km)
 
@@ -233,6 +233,7 @@ p_logrank <- 1 - pchisq(teste_logrank$chisq, df = 1)
 tabela_final <-
   tabela_km %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     source_note = paste0("Teste log-rank: p = ",
                          signif(p_logrank,3))
@@ -267,7 +268,7 @@ tabela_final
 
 <br>
 
-```{r cox, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Curvas ajustadas pelo modelo de Cox para dois grupos (controle e tratamento)."}
+```{r cox, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.pos="H", fig.cap = "Curvas ajustadas pelo modelo de Cox para dois grupos (controle e tratamento)."}
 # Reprodutibilidade
 set.seed(123)
 
@@ -325,7 +326,7 @@ survminer::ggsurvplot(
 
 <br>
 
-```{r cox-tabela, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, results = "asis", fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), fig.fullwidth = TRUE, fig.cap = "Tabela resumo do modelo de Cox, incluindo Hazard Ratio (HR), IC 95% e p-valor para o efeito do grupo."}
+```{r cox-tabela, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, results = "asis", fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), fig.fullwidth = TRUE, fig.pos="H", fig.cap = "Tabela resumo do modelo de Cox, incluindo Hazard Ratio (HR), IC 95% e p-valor para o efeito do grupo."}
 library(dplyr)
 
 # Ajuste do modelo
@@ -363,7 +364,9 @@ tabela_cox <-
     conf.low ~ "**IC 95% (inf)**",
     conf.high ~ "**IC 95% (sup)**",
     p.value ~ "**p-valor**"
-  )
+  ) %>%
+  gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H")
 
 tabela_cox
 ```

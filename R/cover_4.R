@@ -1,13 +1,12 @@
 W <- 8.27
 H <- 11.69
 
-refs <- as.character(length(RefManageR::ReadBib("./bib/references.bib")))
-
 tex_file <- file.path("./docs", "Ciencia-com-R.tex")
 
 perguntas <- "N/D"
 respostas <- "N/D"
 figuras <- "N/D"
+refs <- as.character(length(RefManageR::ReadBib("./bib/references.bib")))
 
 if (file.exists(tex_file)) {
   
@@ -116,8 +115,8 @@ ggplot2::ggplot(df) +
   ggplot2::scale_discrete_identity(
     aesthetics = c("color", "fill", "orientation")
   ) +
-  ggplot2::xlim(0, 8.27) +
-  ggplot2::ylim(0, 11.69) +
+  ggplot2::xlim(0, W) +
+  ggplot2::ylim(0, H) +
   ggplot2::theme_void() +
   ggplot2::theme(
     legend.position = "none",

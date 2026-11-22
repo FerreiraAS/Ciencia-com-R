@@ -55,6 +55,7 @@ tbl_pearson <-
     Correlação = r
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -149,6 +150,7 @@ tbl_spearman <-
     Correlação = rho
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -231,6 +233,7 @@ tbl_kendall <-
     Correlação = tau
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -301,6 +304,7 @@ tbl_biserial <-
     `P-valor` = "—"
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -379,6 +383,7 @@ tbl_ponto_bisserial <-
     Correlação = r
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -446,6 +451,7 @@ tbl_tetracoric <-
     `P-valor` = "—"
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -523,6 +529,7 @@ tbl_policorica <-
     `P-valor` = "—"
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -591,6 +598,7 @@ tbl_polisserial <-
     `P-valor` = "—"
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -669,6 +677,7 @@ tbl_shepherd <-
     Correlação = rho
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -752,6 +761,7 @@ tbl_correlacao_parcial <-
     Correlação = r
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -832,6 +842,7 @@ tbl_canonica <-
     )
   ) %>%
   gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::fmt_number(
     columns = Correlação,
     decimals = 3
@@ -867,7 +878,7 @@ O pacote *CCP*[@CCP] fornece a função `p.asym` para realizar o teste de signif
 
 <br>
 
-```{r correlacao-grafico, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Diferentes forças e direção de correlação entre duas variáveis X e Y."}
+```{r correlacao-grafico, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.pos="H", fig.cap = "Diferentes forças e direção de correlação entre duas variáveis X e Y."}
 # Generate data with given correlation
 generate_data <- function(n, rho) {
   Sigma <- base::matrix(c(1, rho, rho, 1), ncol = 2)

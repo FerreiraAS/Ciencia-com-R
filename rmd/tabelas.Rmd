@@ -154,7 +154,9 @@ tbl1 <- dados %>%
   ) %>%
   gtsummary::add_n() %>%
   gtsummary::add_p() %>%
-  gtsummary::modify_caption("Características da amostra por grupo.")
+  gtsummary::modify_caption("Características da amostra por grupo.") %>%
+  gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H")
 
 tbl1
 ```
@@ -177,7 +179,7 @@ tbl1
 
 <br>
 
-```{r tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Tabela suscetível à Falácia da Tabela 2. A tabela apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis) e ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
+```{r tabela-2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.pos="H", fig.cap = "Tabela suscetível à Falácia da Tabela 2. A tabela apresenta a razão de chances (OR) bruta entre grupo e sexo (modelo sem covariáveis) e ajustada entre grupo e sexo, controlando por idade e IMC (modelo com covariáveis)."}
 library(dplyr)
 
 # Reprodutibilidade
@@ -216,6 +218,7 @@ tab_anti <- gtsummary::tbl_merge(list(tab_cru, tab_aj),
 
 # adiciona a nota de rodapé
 tab_anti_gt <- gtsummary::as_gt(tab_anti) %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
   gt::tab_source_note(
     gt::md(
       "*Nota.* Modelo ajustado por Idade (contínua) e IMC (contínuo).

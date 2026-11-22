@@ -63,7 +63,8 @@ tbl_linear <-
       "; RMSE: ",
       round(performance::rmse(modelo_linear), 3)
     )
-  )
+  ) %>%
+  gt::tab_options(latex.tbl.pos = "H")
 
 tbl_linear
 ```
@@ -119,7 +120,8 @@ tbl_logistico <-
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     "OR = razão de chances. Valores acima de 1 indicam aumento da chance do desfecho; valores abaixo de 1 indicam redução."
-  )
+  ) %>%
+  gt::tab_options(latex.tbl.pos = "H")
 
 tbl_logistico
 ```
@@ -174,7 +176,8 @@ tbl_poisson <-
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     "Modelo com offset para tempo de exposição. Estimativas exponenciadas representam razões de taxas."
-  )
+  ) %>%
+  gt::tab_options(latex.tbl.pos = "H")
 
 tbl_poisson
 ```
@@ -227,7 +230,8 @@ tbl_ordinal <-
     label = "**Variável**",
     estimate = "**OR acumulada**"
   ) %>%
-  gtsummary::as_gt()
+  gtsummary::as_gt() %>%
+  gt::tab_options(latex.tbl.pos = "H")
 
 tbl_ordinal
 ```
@@ -280,7 +284,8 @@ tbl_interacao <-
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     "O termo de interação estima se a diferença entre grupos varia conforme o tempo."
-  )
+  ) %>%
+  gt::tab_options(latex.tbl.pos = "H")
 
 tbl_interacao
 ```
@@ -333,7 +338,8 @@ tbl_misto <-
   gtsummary::as_gt() %>%
   gt::tab_source_note(
     "Modelo com intercepto aleatório por indivíduo, adequado para medidas repetidas ou dados agrupados."
-  )
+  ) %>%
+  gt::tab_options(latex.tbl.pos = "H")
 
 tbl_misto
 ```
@@ -394,7 +400,8 @@ tbl_comparacao <-
       "AIC: Modelo 1 = ", round(AIC(modelo_1), 1),
       "; Modelo 2 = ", round(AIC(modelo_2), 1), "."
     )
-  )
+  ) %>%
+  gt::tab_options(latex.tbl.pos = "H")
 
 tbl_comparacao
 ```

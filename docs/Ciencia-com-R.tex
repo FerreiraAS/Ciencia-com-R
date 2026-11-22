@@ -159,7 +159,9 @@
 \usepackage{amsmath}
 
 % Figuras e tabelas
+\usepackage{placeins}
 \usepackage{float}
+\floatplacement{figure}{H}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{graphicx}
@@ -170,6 +172,10 @@
 \definecolor{lightred}{HTML}{FFCDD2}
 \definecolor{lightyellow}{HTML}{FFF9C4}
 \definecolor{lightgreen}{HTML}{E8F5E9}
+
+% Manter figuras e tabelas dentro das respectivas seções
+\usepackage{etoolbox}
+\preto\section{\FloatBarrier}
 
 % Ficha / utilidades
 \usepackage{lastpage}
@@ -1413,7 +1419,7 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 \begin{itemize}
 \tightlist
 \item
-  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.501 e variância \(\sigma^{2}\) = 0.25. A distribuição amostral da média de 10000 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.501 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
+  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.499 e variância \(\sigma^{2}\) = 0.25. A distribuição amostral da média de 10000 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.499 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
 \end{itemize}
 
 \begin{figure}
@@ -2732,7 +2738,7 @@ O pacote \emph{questionr}\textsuperscript{\citeproc{ref-questionr}{104}} fornece
   Variáveis indicadoras não representam magnitude ou ordem, apenas a presença ou ausência de uma categoria.\textsuperscript{\citeproc{ref-suits1957}{105}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:variaveis-indicadoras}Tabela de variáveis indicadoras (*dummy variables*) criadas a partir de variáveis categóricas Sexo e Grupo.}
 \centering
@@ -2879,7 +2885,7 @@ O pacote \emph{base}\textsuperscript{\citeproc{ref-base}{80}} fornece as funçõ
   Na escala tipo Likert, cada resposta é associada a um valor numérico (por exemplo, 1 a 5), permitindo a quantificação das respostas.\textsuperscript{\citeproc{ref-norman2010a}{115}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:instrumento-likert}Instrumento simulado com 3 itens tipo Likert e 5 categorias de resposta.}
 \centering
@@ -2928,7 +2934,7 @@ Item 3 & Eu recomendaria este serviço a outras pessoas. & 1 = Discordo totalmen
 \caption{Gráfico de distribuição das respostas de N aplicações simuladas de um instrumento com 3 itens tipo Likert.}\label{fig:likert-plot}
 \end{figure}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:likert-plot}Descrição dos itens tipo Likert do instrumento.}
 \centering
@@ -3699,7 +3705,7 @@ O pacote \emph{data.table}\textsuperscript{\citeproc{ref-data.table}{142}} forne
   Dados perdidos são dados não coletados de um ou mais participantes, para uma ou mais variáveis.\textsuperscript{\citeproc{ref-Altman2007}{144}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:dados-perdidos}Simulação de uma amostra (n=10) de um ensaio clínico aleatorizado (dados com perdas aleatórias).}
 \centering
@@ -5347,7 +5353,7 @@ O pacote \emph{esquisse}\textsuperscript{\citeproc{ref-esquisse}{213}} fornece a
   A precisão é determinada pelo grau de arredondamento aplicado, medido em casas decimais ou dígitos significativos.\textsuperscript{\citeproc{ref-Cole2015a}{215},\citeproc{ref-cole2015b}{216}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:casas-decimais}Quantidade de casas decimais e dígitos significativos.}
 \centering
@@ -5370,7 +5376,7 @@ O pacote \emph{esquisse}\textsuperscript{\citeproc{ref-esquisse}{213}} fornece a
   O arredondamento também introduz erros, uma vez que aumenta a imprecisão (isto é, incerteza) em torno do valor original.\textsuperscript{\citeproc{ref-Cole2015a}{215},\citeproc{ref-cole2015b}{216}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:arredondamento}Valores originais, arredondamentos e erros de arredondamento por casas decimais.}
 \centering
@@ -6272,7 +6278,7 @@ O pacote \emph{performance}\textsuperscript{\citeproc{ref-performance}{246}} for
   Modelos estatísticos baseados em n-gramas estimam a probabilidade de ocorrência de uma palavra a partir das palavras precedentes, sendo amplamente empregados em tarefas de processamento de linguagem natural e reconhecimento de fala.\textsuperscript{\citeproc{ref-jardino1996}{249}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:token-grams}Tokenização, remoção de stopwords e geração de n-gramas}
 \centering
@@ -7319,7 +7325,7 @@ BIC = \ln(n)k - 2\ln(L)
   Desvio residual (\(\sigma\)): Mede a variabilidade dos resíduos do modelo. Valores menores indicam melhor ajuste.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:metricas-ajuste}Métricas de desempenho do modelo de regressão linear.}
 \centering
@@ -7664,7 +7670,7 @@ O pacote \emph{lavaan}\textsuperscript{\citeproc{ref-lavaan-2}{283}} fornece a f
   O teste log-rank pode ser usado para avaliar se as diferenças entre as curvas são estatisticamente significativas.\textsuperscript{\citeproc{ref-in2018}{284}}
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics{Ciencia-com-R_files/figure-latex/kaplan-meier-1} 
 
@@ -7673,7 +7679,7 @@ O pacote \emph{lavaan}\textsuperscript{\citeproc{ref-lavaan-2}{283}} fornece a f
 \caption{Curvas de Kaplan–Meier simuladas para dois grupos (controle e tratamento).}\label{fig:kaplan-meier}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}[H]
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrl}
 \toprule
@@ -7713,7 +7719,7 @@ Teste log-rank: p = 0.02\\
   Valores de \(HR > 1\) indicam aumento do risco.\textsuperscript{\citeproc{ref-in2018}{284}}
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics{Ciencia-com-R_files/figure-latex/cox-1} 
 
@@ -7722,7 +7728,7 @@ Teste log-rank: p = 0.02\\
 \caption{Curvas ajustadas pelo modelo de Cox para dois grupos (controle e tratamento).}\label{fig:cox}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}[H]
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
@@ -8033,7 +8039,7 @@ O pacote \emph{markovchain}\textsuperscript{\citeproc{ref-markovchain}{293}} for
   \emph{Count encoding}: substitui categorias por contagens de sua ocorrência no conjunto de dados, capturando a frequência relativa de cada categoria.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:hot-encoding}Codificação one-hot, multi-hot e count encoding para representação de texto.}
 \centering
@@ -8108,7 +8114,7 @@ Apesar de seu potencial, a interpretação dos resultados deve ser cuidadosa, es
   A presença ou ausência de uma relação entre as entidades é indicada por valores binários (0 ou 1) ou por pesos numéricos que refletem a intensidade da relação.\textsuperscript{\citeproc{ref-leme2020}{294}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:categorico-tabela-bruta}Exemplo de dados categóricos para criação de matriz de incidência.}
 \centering
@@ -8125,7 +8131,7 @@ Apesar de seu potencial, a interpretação dos resultados deve ser cuidadosa, es
 \end{tabularx}
 \end{table}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:matriz-incidencia}Matriz de incidência criada a partir de dados categóricos.}
 \centering
@@ -8247,7 +8253,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{113}} fornece a funç
 \caption{Grafo de rede com tamanho dos nodos proporcional à força.}\label{fig:rede-metricas}
 \end{figure}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:rede-metricas-tabela}Tabela com principais métricas de centralidade dos nodos.}
 \centering
@@ -9102,7 +9108,7 @@ d(x, y) = \sum_{i=1}^{n} \mathbf{1}(x_i \neq y_i)
   Falso-positivo (\(FP\)): instância negativa incorretamente classificada como positiva.\textsuperscript{\citeproc{ref-hicks2022}{320}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:crosstable-2x2-aprendizado}Tabela de confusão 2x2 para análise de desempenho de classificação de testes e variáveis dicotômicas.}
 \centering
@@ -10353,7 +10359,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{113}} fornece a funç
   Erro Tipo II significa a não rejeição de uma hipótese nula (\(H_{0}\)) quando esta é falsa.\textsuperscript{\citeproc{ref-Curran-Everett2009}{334}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:tabela-erros-I-II}Tabela de erros tipos I e II de inferência estatística.}
 \centering
@@ -10402,7 +10408,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{113}} fornece a funç
   Erro Tipo S (do inglês \emph{sign}) significa a identificação errônea da direção --- positiva ou negativa --- do efeito observado.\textsuperscript{\citeproc{ref-gelman2014}{351},\citeproc{ref-lu2018}{352}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:grafico-erro-tipo-S}Tabela de erro tipo S de inferência estatística.}
 \centering
@@ -10431,7 +10437,7 @@ O pacote \emph{stats}\textsuperscript{\citeproc{ref-stats}{113}} fornece a funç
   Erro Tipo M (do inglês \emph{magnitude}) significa a identificação errônea --- em geral, exagerada --- da magnitude do efeito observado.\textsuperscript{\citeproc{ref-gelman2014}{351},\citeproc{ref-lu2018}{352}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:tabela-erro-tipo-M}Tabela de erro tipo M de inferência estatística.}
 \centering
@@ -10881,7 +10887,7 @@ p_{\delta} = \frac{|\,I \cap H_0\,|}{|\,I\,|} \times \max\!\left\{ \frac{|\,I\,|
   Quando \(|I|>2|H_0|\), o SGPV reduz-se a \(\tfrac{1}{2}\times \dfrac{|,I\cap H_0,|}{|,H_0,|}\le \tfrac{1}{2}\), sinalizando inconclusão por imprecisão.\textsuperscript{\citeproc{ref-blume2018}{368}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:sgpv}Comparação entre p-valor (bicaudal, inferido do IC95\%) e SGPV ($p_{\delta}$) nos cenários simulados.}
 \centering
@@ -11199,7 +11205,7 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{371}} forne
 
 \section{\texorpdfstring{Teste de Cramér-von Mises (\(W^2\))}{Teste de Cramér-von Mises (W\^{}2)}}\label{teste-de-cramuxe9r-von-mises-w2}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:cvm}Teste de Cramér-von Mises}
 \centering
@@ -11214,7 +11220,7 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{371}} forne
 
 \section{\texorpdfstring{Teste de Kolmogorov-Smirnov (\(D\))}{Teste de Kolmogorov-Smirnov (D)}}\label{teste-de-kolmogorov-smirnov-d}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:ks}Teste de Kolmogorov-Smirnov}
 \centering
@@ -11229,7 +11235,7 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{371}} forne
 
 \section{\texorpdfstring{Teste de Anderson-Darling (\(A^2\))}{Teste de Anderson-Darling (A\^{}2)}}\label{teste-de-anderson-darling-a2}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:ad}Teste de Anderson-Darling}
 \centering
@@ -11244,7 +11250,7 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{371}} forne
 
 \section{\texorpdfstring{Teste de Shapiro-Wilk (\(W\))}{Teste de Shapiro-Wilk (W)}}\label{teste-de-shapiro-wilk-w}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:shapiro}Teste de Shapiro-Wilk}
 \centering
@@ -11259,7 +11265,7 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{371}} forne
 
 \section{\texorpdfstring{Teste de Lilliefors (\(D\))}{Teste de Lilliefors (D)}}\label{teste-de-lilliefors-d}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:lilliefors}Teste de Lilliefors}
 \centering
@@ -11274,7 +11280,7 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{371}} forne
 
 \section{\texorpdfstring{Teste de Jarque-Bera (\(JB\))}{Teste de Jarque-Bera (JB)}}\label{teste-de-jarque-bera-jb}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:jarquebera}Teste de Jarque-Bera}
 \centering
@@ -11291,7 +11297,7 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{371}} forne
 
 \section{Média e desvio-padrão}\label{muxe9dia-e-desvio-padruxe3o}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:media-dp}Descrição geral: tendência central e dispersão} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcc}
@@ -11313,7 +11319,7 @@ DP = desvio-padrão.\\
 
 \section{Mediana e intervalo interquartil}\label{mediana-e-intervalo-interquartil}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:mediana-iqr}Descrição de variáveis assimétricas} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcc}
@@ -11334,7 +11340,7 @@ Q1 = primeiro quartil; Q3 = terceiro quartil.\\
 
 \section{Variáveis categóricas}\label{variuxe1veis-categuxf3ricas}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:frequencia}Descrição de variáveis categóricas} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcc}
@@ -11361,7 +11367,7 @@ Q1 = primeiro quartil; Q3 = terceiro quartil.\\
 
 \section{Descrição por grupos}\label{descriuxe7uxe3o-por-grupos}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:descricao-grupos}Descrição das características segundo grupo} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -11387,7 +11393,7 @@ Variáveis contínuas descritas como média (DP); variáveis categóricas descri
 
 \section{Dados ausentes}\label{dados-ausentes}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:dados-ausentes}Descrição com apresentação dos dados ausentes} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcc}
@@ -11416,7 +11422,7 @@ A linha 'Ausente' indica valores não observados para cada variável.\\
 
 \section{\texorpdfstring{Teste \emph{t} de Student}{Teste t de Student}}\label{teste-t-de-student}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:t-student}Teste t de Student} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -11434,7 +11440,7 @@ Tamanho de efeito (d de Cohen): 0.943\\
 \end{minipage}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:t-student-pareado}Teste t de Student pareado} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -11454,7 +11460,7 @@ Tamanho de efeito (d de Cohen pareado): 0.504\\
 
 \section{\texorpdfstring{Teste \emph{t} de Welch}{Teste t de Welch}}\label{teste-t-de-welch}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:welch}Teste t de Welch} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -11474,7 +11480,7 @@ Tamanho de efeito (d de Cohen): 0.943\\
 
 \section{Teste de Mann-Whitney}\label{teste-de-mann-whitney}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:mann-whitney}Teste de Mann--Whitney (Wilcoxon rank-sum)} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -11494,7 +11500,7 @@ Tamanho de efeito (r): 0.208\\
 
 \section{Teste de Brunner-Munzel}\label{teste-de-brunner-munzel}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:brunner-munzel}Teste de Brunner--Munzel} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -11515,7 +11521,7 @@ Efeito probabilístico: P(A < B) − P(A > B) = 0.601 (IC95\%: 0.413 a 0.788).\\
 
 \section{Teste de Wilcoxon}\label{teste-de-wilcoxon}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:wilcoxon}Teste de Wilcoxon pareado (signed-rank)} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -11535,7 +11541,7 @@ Tamanho de efeito (r): 0.696\\
 
 \section{Análise de variância}\label{anuxe1lise-de-variuxe2ncia}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:anova}Análise de variância de um fator} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -11552,7 +11558,7 @@ Tamanho de efeito (r): 0.696\\
 Tamanho de efeito (eta²): 0.193\\
 \end{minipage}
 \end{table}
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:anova}Post hoc de Tukey} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr}
@@ -11568,7 +11574,7 @@ C-B & 6.01 & 0.63 & 11.39 & 0.025 \\
 
 \section{Análise de variância (Welch)}\label{anuxe1lise-de-variuxe2ncia-welch}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:anova-welch}Análise de variância de Welch} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -11585,7 +11591,7 @@ C-B & 6.01 & 0.63 & 11.39 & 0.025 \\
 Tamanho de efeito (eta², via SS): 0.025\\
 \end{minipage}
 \end{table}
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:anova-welch}Post hoc de Games-Howell} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrrrr}
@@ -11601,7 +11607,7 @@ B & C & 2.20 & -3.76 & 8.17 & 0.654 \\
 
 \section{Análise de variância (Kruskal-Wallis)}\label{anuxe1lise-de-variuxe2ncia-kruskal-wallis}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:kruskal-wallis}Teste de Kruskal--Wallis} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -11618,7 +11624,7 @@ B & C & 2.20 & -3.76 & 8.17 & 0.654 \\
 Tamanho de efeito: epsilon² = 0.14\\
 \end{minipage}
 \end{table}
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:kruskal-wallis}Post hoc de Dunn (Bonferroni)} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrll}
@@ -11636,7 +11642,7 @@ B & C & 4.213 & <0.001 & <0.001 \\
 
 \section{\texorpdfstring{Teste de Qui-quadrado (\(\chi^2\))}{Teste de Qui-quadrado (\textbackslash chi\^{}2)}}\label{teste-de-qui-quadrado-chi2}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:qui-quadrado}Teste Qui-quadrado (sem correção de Yates)} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -11658,7 +11664,7 @@ Tamanho de efeito (Cramér's V): 0.264\\
 \end{minipage}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:qui-quadrado-yates}Teste Qui-quadrado (com correção de Yates)} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -11682,7 +11688,7 @@ Tamanho de efeito (Cramér's V): 0.264\\
 
 \section{Teste exato (condicional) de Fisher}\label{teste-exato-condicional-de-fisher}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:fisher}Teste exato de Fisher} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -11706,7 +11712,7 @@ Tamanho de efeito (Cramér's V): 0.264\\
 
 \section{Teste de Fisher-Freeman-Halton (assintótico)}\label{teste-de-fisher-freeman-halton-assintuxf3tico}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:fisher-freeman-halton}Teste de Fisher--Freeman--Halton assintótico} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -11732,7 +11738,7 @@ O procedimento empregado é a versão assintótica do teste de Fisher–Freeman�
 
 \section{Teste exato (incondicional) de Barnard}\label{teste-exato-incondicional-de-barnard}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:barnard}Teste Exato de Barnard} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -11755,7 +11761,7 @@ Tamanho de efeito (Cramér's V): 0.264\\
 
 \section{Teste de McNemar}\label{teste-de-mcnemar}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:mcnemar}Teste de McNemar (sem correção de Yates)} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -11776,7 +11782,7 @@ McNemar χ² = 5.444; gl = 1; p = 0.020\\
 \end{minipage}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:mcnemar-yates}Teste de McNemar (com correção de Yates)} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -11799,7 +11805,7 @@ McNemar χ² = 4.694; gl = 1; p = 0.030\\
 
 \section{\texorpdfstring{Teste de Cochran (\(Q\))}{Teste de Cochran (Q)}}\label{teste-de-cochran-q}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:cochran-q}Teste Q de Cochran} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcc}
@@ -11823,7 +11829,7 @@ Cochran Q χ²(2) = 8.645, p = 0.013\\
 
 \section{Teste de Cochran--Armitage}\label{teste-de-cochranarmitage}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:cochran-armitage}Teste de Cochran--Armitage} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcc}
@@ -11847,7 +11853,7 @@ Cochran Q χ²(2) = 8.645, p = 0.013\\
 
 \section{\texorpdfstring{Coeficiente de Phi (\(\phi\))}{Coeficiente de Phi (\textbackslash phi)}}\label{coeficiente-de-phi-phi}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:phi}Correlação φ} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrll}
@@ -11865,7 +11871,7 @@ IC = intervalo de confiança de 95\%.\\
 
 \section{\texorpdfstring{Coeficiente de Cramér (\(V\))}{Coeficiente de Cramér (V)}}\label{coeficiente-de-cramuxe9r-v}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:cramers-v}Coeficiente V de Cramér} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrlr}
@@ -11888,7 +11894,7 @@ O pacote \emph{effectsize}\textsuperscript{\citeproc{ref-effectsize}{371}} forne
 
 \section{\texorpdfstring{Razão de chances (\(OR\)) e risco relativo (\(RR\))}{Razão de chances (OR) e risco relativo (RR)}}\label{razuxe3o-de-chances-or-e-risco-relativo-rr}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:or-rr}Medidas de associação; teste do qui-quadrado sem correção de Yates} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -11910,7 +11916,7 @@ OR = 2.1 [1.17, 3.79]; RR = 1.61 [1.1, 2.35]. \\
 \end{minipage}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:or-rr-yates}Medidas de associação; teste do qui-quadrado com correção de Yates} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -11936,7 +11942,7 @@ OR = 2.1 [1.17, 3.79]; RR = 1.61 [1.1, 2.35]. \\
 
 \section{\texorpdfstring{Correlação de Pearson (\(r\))}{Correlação de Pearson (r)}}\label{correlauxe7uxe3o-de-pearson-r}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:pearson}Correlação de Pearson} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrll}
@@ -11974,7 +11980,7 @@ O pacote \emph{psychmeta}\textsuperscript{\citeproc{ref-psychmeta}{377}} fornece
 
 \section{\texorpdfstring{Correlação de Spearman (\(\rho\))}{Correlação de Spearman (\textbackslash rho)}}\label{correlauxe7uxe3o-de-spearman-rho}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:spearman}Correlação de Spearman} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrll}
@@ -12002,7 +12008,7 @@ O pacote \emph{correlation}\textsuperscript{\citeproc{ref-correlation}{375}} do 
 
 \section{\texorpdfstring{Coeficiente de Kendall (\(\tau\))}{Coeficiente de Kendall (\textbackslash tau)}}\label{coeficiente-de-kendall-tau}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:kendall}Correlação de Kendall} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrlr}
@@ -12030,7 +12036,7 @@ O pacote \emph{correlation}\textsuperscript{\citeproc{ref-correlation}{375}} do 
 
 \section{\texorpdfstring{Correlação bisserial (\(r_{b}\))}{Correlação bisserial (r\_\{b\})}}\label{correlauxe7uxe3o-bisserial-r_b}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:biserial}Correlação bisserial} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llcll}
@@ -12053,7 +12059,7 @@ O pacote \emph{psych}\textsuperscript{\citeproc{ref-psych}{378}} fornece a funç
 
 \section{\texorpdfstring{Correlação ponto-bisserial (\(r_{pb}\))}{Correlação ponto-bisserial (r\_\{pb\})}}\label{correlauxe7uxe3o-ponto-bisserial-r_pb}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:point-biserial}Correlação ponto-bisserial} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrll}
@@ -12076,7 +12082,7 @@ O pacote \emph{correlation}\textsuperscript{\citeproc{ref-correlation}{375}} do 
 
 \section{\texorpdfstring{Correlação tetracórica (\(r_{tet}\))}{Correlação tetracórica (r\_\{tet\})}}\label{correlauxe7uxe3o-tetracuxf3rica-r_tet}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:tetrachoric}Correlação tetracórica} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrll}
@@ -12104,7 +12110,7 @@ O pacote \emph{statpsych}\textsuperscript{\citeproc{ref-statpsych}{379}} fornece
 
 \section{\texorpdfstring{Correlação policórica (\(r_{pol}\))}{Correlação policórica (r\_\{pol\})}}\label{correlauxe7uxe3o-policuxf3rica-r_pol}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:polychoric}Correlação policórica} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrll}
@@ -12127,7 +12133,7 @@ O pacote \emph{psych}\textsuperscript{\citeproc{ref-psych}{378}} fornece a funç
 
 \section{Correlação polisserial}\label{correlauxe7uxe3o-polisserial}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:polyserial}Correlação polisserial} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrll}
@@ -12150,7 +12156,7 @@ O pacote \emph{polycor}\textsuperscript{\citeproc{ref-polycor}{380}} fornece a f
 
 \section{\texorpdfstring{Coeficiente de Shepherd (\(\pi\))}{Coeficiente de Shepherd (\textbackslash pi)}}\label{coeficiente-de-shepherd-pi}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:shepherd}Correlação de Shepherd} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrll}
@@ -12173,7 +12179,7 @@ O pacote \emph{correlation}\textsuperscript{\citeproc{ref-correlation}{375}} do 
 
 \section{Correlação parcial}\label{correlauxe7uxe3o-parcial}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:partial}Correlação parcial} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrll}
@@ -12203,7 +12209,7 @@ stat approx df1 df2 p.value
 1 to 2: 0.9625698 0.7382004 6 230 0.6193541
 2 to 2: 0.9906922 0.5449237 2 116 0.5813631
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:canonical}Correlações canônicas} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}rrr}
@@ -12232,7 +12238,7 @@ O pacote \emph{CCP}\textsuperscript{\citeproc{ref-CCP}{381}} fornece a função 
 
 \section{Gráfico de dispersão}\label{gruxe1fico-de-dispersuxe3o}
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics{Ciencia-com-R_files/figure-latex/correlacao-grafico-1} 
 
@@ -12264,7 +12270,7 @@ O pacote \emph{corrplot}\textsuperscript{\citeproc{ref-corrplot}{382}} fornece a
 
 \section{Regressão linear}\label{regressuxe3o-linear}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:regressao-linear-gtsummary}Regressão linear múltipla} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -12290,7 +12296,7 @@ R² ajustado: 0.309; RMSE: 7.995\\
 
 \section{Regressão logística}\label{regressuxe3o-loguxedstica-1}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:regressao-logistica-gtsummary}Regressão logística binária} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -12315,7 +12321,7 @@ OR = razão de chances. Valores acima de 1 indicam aumento da chance do desfecho
 
 \section{Regressão de Poisson}\label{regressuxe3o-de-poisson}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:regressao-poisson-gtsummary}Regressão de Poisson} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -12337,7 +12343,7 @@ Modelo com offset para tempo de exposição. Estimativas exponenciadas represent
 
 \section{Regressão ordinal}\label{regressuxe3o-ordinal}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:regressao-ordinal-gtsummary}Regressão logística ordinal} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -12358,7 +12364,7 @@ Abbreviations: CI = Confidence Interval, OR = Odds Ratio\\
 
 \section{Regressão com interação}\label{regressuxe3o-com-interauxe7uxe3o}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:regressao-interacao-gtsummary}Regressão linear com termo de interação} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -12385,7 +12391,7 @@ O termo de interação estima se a diferença entre grupos varia conforme o temp
 
 \section{Regressão com efeitos mistos}\label{regressuxe3o-com-efeitos-mistos}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:regressao-mista-gtsummary}Modelo de regressão linear com efeitos mistos} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcc}
@@ -12407,7 +12413,7 @@ Modelo com intercepto aleatório por indivíduo, adequado para medidas repetidas
 
 \section{Comparação de modelos de regressão}\label{comparauxe7uxe3o-de-modelos-de-regressuxe3o}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:comparacao-modelos-regressao-gtsummary}Comparação de modelos de regressão linear} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccccc}
@@ -12439,7 +12445,7 @@ AIC: Modelo 1 = 1077.2; Modelo 2 = 1079.1.\\
 
 \section{Efeitos direto e indireto}\label{efeitos-direto-e-indireto}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption*{
 {\fontsize{20}{25}\selectfont  Análise de mediação em dados simulados\fontsize{12}{15}\selectfont }
 } 
@@ -12468,7 +12474,7 @@ Dados sintéticos; R 4.6.1; lavaan 0.7.3. Pressupostos do exemplo: temporalidade
 
 \section{Mediação ajustada por confundidor basal}\label{mediauxe7uxe3o-ajustada-por-confundidor-basal}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption*{
 {\fontsize{20}{25}\selectfont  Mediação ajustada por confundidor basal\fontsize{12}{15}\selectfont }
 } 
@@ -12771,7 +12777,7 @@ O pacote \emph{gtsummary}\textsuperscript{\citeproc{ref-gtsummary}{257}} fornece
 
 \end{infobox}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:tabela-1}Características da amostra por grupo.} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
@@ -12814,7 +12820,7 @@ IMC & 200 &  &  & 0.2 \\
   A Tabela 2 pode ser utilizada para apresentar estimativas de múltiplos efeitos ajustados de um mesmo modelo estatístico.\textsuperscript{\citeproc{ref-Westreich2013}{397}}
 \end{itemize}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:tabela-2}Exposição (OR; 95\% IC) com e sem ajuste.} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccccc}
@@ -12879,7 +12885,7 @@ O pacote \emph{gtsummary}\textsuperscript{\citeproc{ref-gtsummary}{257}} fornece
   O conjunto de dados mostra que medidas numéricas isoladas podem ocultar padrões relevantes, \emph{outliers} e estruturas não lineares.\textsuperscript{\citeproc{ref-anscombe1973}{402}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:anscombe-data}Quarteto de Anscombe.}
 \centering
@@ -12908,7 +12914,7 @@ O pacote \emph{gtsummary}\textsuperscript{\citeproc{ref-gtsummary}{257}} fornece
   Embora os quatro conjuntos apresentem estatísticas descritivas e modelos de regressão praticamente idênticos, seus gráficos de dispersão revelam relações completamente diferentes entre as variáveis.\textsuperscript{\citeproc{ref-anscombe1973}{402}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:anscombe-summary}Análise descritiva do Quarteto de Anscombe demostrando os conjuntos de dados bivariados com parâmetros quase idênticos.}
 \centering
@@ -13267,90 +13273,14 @@ Os pacotes \emph{ggplot2}\textsuperscript{\citeproc{ref-ggplot2}{171}}, \emph{pl
   Gráfico nadador (\emph{swimmer plot}): Representa a duração do acompanhamento individual de cada participante ao longo do tempo, destacando eventos clínicos importantes e pacientes ainda em seguimento.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# reprodutibilidade}
-\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\begin{figure}
 
-\CommentTok{\# 1. Criando dados simulados}
-\NormalTok{n\_patients }\OtherTok{\textless{}{-}} \DecValTok{25}
+{\centering \includegraphics{Ciencia-com-R_files/figure-latex/graficos-longitudinais-swimmer-1} 
 
-\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
-  \AttributeTok{patient =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"P"}\NormalTok{, }\FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%02d"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{n\_patients)),}
-  \CommentTok{\# início do acompanhamento}
-  \AttributeTok{start\_day =} \FunctionTok{sample}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{40}\NormalTok{, n\_patients, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{),}
-  \CommentTok{\# duração total}
-  \AttributeTok{duration =} \FunctionTok{sample}\NormalTok{(}\DecValTok{20}\SpecialCharTok{:}\DecValTok{140}\NormalTok{, n\_patients, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{),}
-  \CommentTok{\# evento intermediário}
-  \AttributeTok{event\_day =} \FunctionTok{sample}\NormalTok{(}\DecValTok{10}\SpecialCharTok{:}\DecValTok{120}\NormalTok{, n\_patients, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{),}
-  \CommentTok{\# paciente ainda em seguimento?}
-  \AttributeTok{ongoing =} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{), n\_patients, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{)}
+}
 
-\CommentTok{\# fim do acompanhamento}
-\NormalTok{df}\SpecialCharTok{$}\NormalTok{end\_day }\OtherTok{\textless{}{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{start\_day }\SpecialCharTok{+}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{duration}
-
-\CommentTok{\# ajustar evento para ficar dentro da linha}
-\NormalTok{df}\SpecialCharTok{$}\NormalTok{event\_day }\OtherTok{\textless{}{-}} \FunctionTok{pmin}\NormalTok{(}
-\NormalTok{  df}\SpecialCharTok{$}\NormalTok{start\_day }\SpecialCharTok{+}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{event\_day,}
-\NormalTok{  df}\SpecialCharTok{$}\NormalTok{end\_day }\SpecialCharTok{{-}} \DecValTok{5}
-\NormalTok{)}
-
-\CommentTok{\# ordenar pacientes pela duração}
-\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(duration)) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{patient =} \FunctionTok{factor}\NormalTok{(patient, }\AttributeTok{levels =}\NormalTok{ patient))}
-
-\CommentTok{\# 2. Construção do Swimmer Plot}
-\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(df) }\SpecialCharTok{+}
-  \CommentTok{\# linha principal de cada paciente}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_segment}\NormalTok{(}
-\NormalTok{    ggplot2}\SpecialCharTok{::}\FunctionTok{aes}\NormalTok{(}
-      \AttributeTok{x =}\NormalTok{ start\_day,}
-      \AttributeTok{xend =}\NormalTok{ end\_day,}
-      \AttributeTok{y =}\NormalTok{ patient,}
-      \AttributeTok{yend =}\NormalTok{ patient}
-\NormalTok{    ),}
-    \AttributeTok{linewidth =} \DecValTok{1}
-\NormalTok{  ) }\SpecialCharTok{+}
-  \CommentTok{\# ponto do evento clínico}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_point}\NormalTok{(}
-\NormalTok{    ggplot2}\SpecialCharTok{::}\FunctionTok{aes}\NormalTok{(}
-      \AttributeTok{x =}\NormalTok{ event\_day,}
-      \AttributeTok{y =}\NormalTok{ patient}
-\NormalTok{    ),}
-    \AttributeTok{shape =} \DecValTok{18}\NormalTok{,}
-    \AttributeTok{size =} \DecValTok{3}
-\NormalTok{  ) }\SpecialCharTok{+}
-  \CommentTok{\# seta para pacientes ainda em seguimento}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_segment}\NormalTok{(}
-    \AttributeTok{data =} \FunctionTok{subset}\NormalTok{(df, ongoing }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{),}
-\NormalTok{    ggplot2}\SpecialCharTok{::}\FunctionTok{aes}\NormalTok{(}
-      \AttributeTok{x =}\NormalTok{ end\_day }\SpecialCharTok{{-}} \DecValTok{5}\NormalTok{,}
-      \AttributeTok{xend =}\NormalTok{ end\_day,}
-      \AttributeTok{y =}\NormalTok{ patient,}
-      \AttributeTok{yend =}\NormalTok{ patient}
-\NormalTok{    ),}
-    \AttributeTok{arrow =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{arrow}\NormalTok{(}\AttributeTok{length =}\NormalTok{ grid}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\FloatTok{0.15}\NormalTok{, }\StringTok{"cm"}\NormalTok{)),}
-    \AttributeTok{linewidth =} \DecValTok{1}
-\NormalTok{  ) }\SpecialCharTok{+}
-  \CommentTok{\# tema}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{theme\_bw}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{x =} \StringTok{"Dias após início do tratamento"}\NormalTok{,}
-    \AttributeTok{y =} \StringTok{"Paciente"}
-\NormalTok{  ) }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{panel.grid.major.y =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{element\_blank}\NormalTok{(),}
-    \AttributeTok{panel.grid.minor =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{element\_blank}\NormalTok{()}
-\NormalTok{  )}
-
-\CommentTok{\# 3. Exibir gráfico}
-\FunctionTok{print}\NormalTok{(p)}
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{Ciencia-com-R_files/figure-latex/unnamed-chunk-49-1.pdf}}
+\caption{Gráfico nadador representando a duração do acompanhamento individual de cada participante ao longo do tempo.}\label{fig:graficos-longitudinais-swimmer}
+\end{figure}
 
 \subsection{Quais são os tipos de gráficos para séries temporais?}\label{quais-suxe3o-os-tipos-de-gruxe1ficos-para-suxe9ries-temporais}
 
@@ -15020,12 +14950,12 @@ n' = \dfrac{n}{1-d}
 
 \cftaddtitleline{toc}{chapter}{\rule{\textwidth}{0.4pt}}{}
 
-\chapter*{\texorpdfstring{\emph{PARTE 10: ESTUDOS PRMÁRIOS}}{PARTE 10: ESTUDOS PRMÁRIOS}}\label{parte-10}
-\addcontentsline{toc}{chapter}{\emph{PARTE 10: ESTUDOS PRMÁRIOS}}
+\chapter*{\texorpdfstring{\emph{PARTE 10: ESTUDOS PRIMÁRIOS}}{PARTE 10: ESTUDOS PRIMÁRIOS}}\label{parte-10}
+\addcontentsline{toc}{chapter}{\emph{PARTE 10: ESTUDOS PRIMÁRIOS}}
 
 \par\noindent\rule{\textwidth}{0.05in}
 
-\section*{Delineando estudos envolvendo coleta ou simulações de dados}\label{delineando-estudos-envolvendo-coleta-ou-simulauxe7uxf5es-de-dados}
+\section*{Delineando estudos envolvendo simulações ou coleta de dados}\label{delineando-estudos-envolvendo-simulauxe7uxf5es-ou-coleta-de-dados}
 
 \markboth{}{}
 
@@ -16587,7 +16517,7 @@ O pacote \emph{lattice}\textsuperscript{\citeproc{ref-lattice}{515}} fornece a f
   Falso-positivo (\(FP\)): controle sem a condição presente e erroneamente identificado como presente.\textsuperscript{\citeproc{ref-greenhalgh1997b}{517}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:crosstable-2x2}Tabela de confusão 2x2 para análise de desempenho de classificação de testes e variáveis dicotômicas.}
 \centering
@@ -16731,7 +16661,7 @@ DOR = \dfrac{SEN/(1-SEN)}{(1-ESP)/ESP} = \dfrac{SEN \cdot ESP}{(1-SEN) \cdot (1-
 DOR = \dfrac{LR+}{LR-}
 \end{equation}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:crosstable-prob}Probabilidades calculados a partir da tabela de confusão 2x2 para análise de desempenho de classificação de testes e variáveis dicotômicas.}
 \centering
@@ -17111,7 +17041,7 @@ ESP = P(X < T_L \;\text{ou}\; X > T_U \mid Y = 0)
   Coeficiente de Cohen \(\kappa\): mede a concordância corrigida pelo acaso.\textsuperscript{\citeproc{ref-scott1955}{529},\citeproc{ref-cohen1960}{530}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:crosstable-kappa-2x2}Tabela de confusão 2x2 para análise de concordância de testes e variáveis dicotômicas.}
 \centering
@@ -17155,7 +17085,7 @@ O pacote \emph{irr}\textsuperscript{\citeproc{ref-irr}{531}} fornece a função 
   Coeficiente de Cohen ponderado \(\kappa_{w}\): mede a concordância corrigida pelo acaso.\textsuperscript{\citeproc{ref-scott1955}{529},\citeproc{ref-cohen1960}{530}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:crosstable-kappa-3x3}Tabela de confusão 3x3 para análise de concordância de testes e variáveis dicotômicas.}
 \centering
@@ -17296,7 +17226,7 @@ O pacote \emph{irr}\textsuperscript{\citeproc{ref-irr}{531}} fornece a função 
   .\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
 \end{itemize}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \caption{\label{tab:crosstable-psicometria}Tabela de confusão sobre propriedades psicométricas de instrumentos.}
 \centering
@@ -19234,7 +19164,7 @@ O pacote \emph{gemtc}\textsuperscript{\citeproc{ref-gemtc}{589}} fornece a funç
   Esse paradoxo alerta contra o uso ingênuo de medidas como \(R^2\) ou ``\% de explicação'' para julgar a importância prática de um fator.\textsuperscript{\citeproc{ref-REF}{\textbf{REF?}}}
 \end{itemize}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:abelson}Modelo micro (por tentativa): Desempenho \textasciitilde{} Habilidade} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc}
@@ -19343,7 +19273,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
   É possível que em alguns contextos nem a análise agregada ou a desagregada podem oferecer a resposta correta, sendo necessário o uso de outras (mais) covariáveis.\textsuperscript{\citeproc{ref-pearl2014}{613}}
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics{Ciencia-com-R_files/figure-latex/simpson-1} 
 
@@ -19361,7 +19291,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
   O resultado é paradoxal porque essa melhoria exige ``misturar'' as estimativas entre si (como no estimador de James--Stein), introduzindo um viés controlado que reduz o erro global, algo impossível quando \(n \leq 2\).\textsuperscript{\citeproc{ref-stein1956}{614},\citeproc{ref-james_estimation_1961}{615}}
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=1\linewidth]{Ciencia-com-R_files/figure-latex/james-stein-1} 
 
@@ -19541,7 +19471,7 @@ Habilidade & 152.675 & 0.918, 304.432 & 0.049 \\
   A falácia da Tabela 2 pode ser evitada limitando-se a tabela a estimativas das medidas primárias do efeito de exposição nos diferentes modelos, com as covariáveis secundárias de ``ajuste'' relatadas em uma nota de rodapé, juntamente com a forma como foram categorizadas ou modeladas.\textsuperscript{\citeproc{ref-Westreich2013}{397}}
 \end{itemize}
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{\label{tab:falacia-tabela-2}Tabela suscetível à Falácia da `Tabela 2'.} 
 \fontsize{12.0pt}{14.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccccc}
