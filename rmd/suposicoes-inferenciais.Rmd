@@ -5,352 +5,286 @@
   </w:r>
 </w:p>
 ```
+
 # **Suposições inferenciais** {#suposicoes-inferenciais}
 
 <br>
 
-## Suposições gerais em análises inferenciais
+## O que as suposições inferenciais fazem?
 
 <br>
 
-### Quais são as suposições gerais em análises inferenciais?
+### O que é uma suposição inferencial?
 
-- .[@REF]
+- É uma condição adotada para relacionar os dados observados ao alvo da análise — por exemplo, uma média, uma associação, uma previsão ou um efeito causal.[@Zhao2025; @Greenland1989]
 
-<br>
+- As suposições podem descrever aspectos do processo que gerou os dados, definir a forma matemática do modelo ou delimitar a interpretação que será dada ao resultado.[@Zhao2025; @Greenland1989]
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *AssumpSure*[@AssumpSure] fornece um Shiny App para validação de suposições estatísticas.
-:::
+- Suposições não formam uma lista universal: dependem da pergunta, do desenho do estudo e do método escolhido.[@Zhao2025; @zuur2009]
 
-<br>
+- Uma suposição pode ser uma aproximação útil, e não uma descrição perfeita do mundo.[@Zhao2025]
 
-### Quais são as suposições ao nível dos dados (condicionais ao modelo)?
-
-- Independência (ou dependência corretamente modelada) das observações.[@REF]
-
-- Forma da distribuição dos erros ou resíduos (normalidade, assimetria, caudas).[@REF]
-
-- homoscedasticidade  (igualdade de variâncias condicionais).[@REF]
+- Avaliar uma suposição envolve perguntar se a perspectiva que o modelo impõe produz informação adequada ao objetivo científico, além de examinar sua compatibilidade com os dados.[@Zhao2025]
 
 <br>
 
-### Quais são as suposições ao nível do modelo?
+### Quais perguntas ajudam a identificar as suposições relevantes?
 
-- Linearidade da relação entre variáveis.[@REF]
+- Qual é o alvo da inferência? Defina a população, o parâmetro ou efeito, o horizonte temporal e a comparação de interesse.[@zuur2009]
 
-- Multicolinearidade ausente ou controlada.[@REF]
+- Como os dados foram produzidos? Considere amostragem, alocação, agrupamento, medidas repetidas, perdas de seguimento e possíveis erros de mensuração.[@zuur2009; @vetter2017]
 
-- Especificação funcional correta do modelo.[@REF]
+- Que estrutura o método impõe? Identifique as condições sobre a distribuição, a relação entre variáveis, a variância e a dependência entre observações.[@Greenland1989; @zuur2009]
 
-<br>
-
-### Quais são as suposições ao nível do estudo?
-
-- Ausência de confundimento relevante não controlado.[@REF]
-
-- Estabilidade do processo gerador de dados (invariância temporal, populacional ou contextual).[@REF]
+- O que muda se uma condição for apenas aproximadamente válida? Examine a direção e a magnitude do possível impacto nas estimativas, nos intervalos e nas decisões.[@Zhao2025]
 
 <br>
 
-## Suposições implícitas e explícitas nos testes
+### Como distinguir suposições do desenho, do modelo e da interpretação?
+
+- Desenho e dados: dizem respeito a como participantes e observações foram selecionados, atribuídos e medidos. A randomização, por exemplo, pode justificar certas comparações no desenho; não garante que perdas, desvios do protocolo ou erros de mensuração sejam irrelevantes.[@Zhao2025; @zuur2009; @vetter2017]
+
+- Modelo estatístico: especifica como a resposta varia com os preditores e como a incerteza é representada. Linearidade, variância constante ou uma distribuição de erros particular são exemplos que podem ser necessários em alguns modelos e desnecessários em outros.[@Greenland1989; @zuur2009]
+
+- Interpretação: estabelece o alcance da conclusão. Um modelo associativo, por si só, não transforma uma associação em efeito causal nem garante generalização para outras populações ou períodos.[@vickers2023; @Zhao2025]
 
 <br>
 
-### Quais suposições implícitas são feitas nos testes estatísticos?
-
-- Amostragem aleatória ou ignorabilidade condicional.[@REF]
-
-- Medição sem erro relevante.[@REF]
-
-- Correspondência entre modelo estatístico e processo gerador de dados.[@REF]
-
-- Ausência de múltiplas comparações não ajustadas.[@REF]
+## Suposições de modelos e testes
 
 <br>
 
-### Quais suposições explícitas são feitas nos testes estatísticos?
+### Quais suposições aparecem com frequência em modelos de regressão?
 
-- Normalidade dos erros ou da estatística de teste.[@REF]
+- Forma da média condicional: a relação entre preditores e resposta precisa ser representada de modo adequado. Uma reta é uma escolha de modelo, não uma propriedade que todo conjunto de dados deve obedecer.[@Greenland1989; @zuur2009]
 
-- homoscedasticidade .[@REF]
+- Dependência: observações independentes podem ser requeridas por um método simples. Dados agrupados, longitudinais ou temporais precisam de uma estrutura que represente essa dependência ou de uma estratégia de análise compatível com o desenho.[@zuur2009]
 
-- Independência das observações.[@REF]
+- Variância condicional: alguns procedimentos assumem variância constante; outros permitem variância diferente entre níveis dos preditores, grupos ou momentos.[@zuur2009; @car]
 
-<br>
+- Distribuição para a inferência: a normalidade dos erros pode sustentar testes e intervalos exatos em modelos específicos, sobretudo em amostras pequenas. Outras inferências podem depender de aproximações assintóticas ou de métodos de reamostragem.[@CurranEverett2017; @zuur2009]
 
-## Suposições causais que conectam dados observados a efeitos causais
-
-<br>
-
-### Quais são as suposições causais que conectam dados observados a efeitos causais?
-
-- Ausência de correlação espúria: associações observadas refletem relações sistemáticas e não flutuações aleatórias; quanto maior a amostra, mais plausível essa condição.[@REF]
-
-- Consistência: os valores observados do tratamento correspondem a intervenções bem definidas e coincidem com os valores dos contrafactuais relevantes.[@REF]
-
-- Intercambialidade: condicionalmente às covariáveis medidas, a atribuição do tratamento é independente dos desfechos potenciais.[@REF]
-
-- Positividade: para todos os valores das covariáveis consideradas, a probabilidade de receber cada nível do tratamento é maior que zero.[@REF]
-
-- Fidelidade: efeitos causais não se cancelam sistematicamente no agregado populacional, de modo que efeitos médios nulos correspondem à ausência de efeito causal relevante.[@REF]
+- Identificabilidade: os dados e o modelo devem conter informação suficiente para distinguir os parâmetros de interesse. Colinearidade intensa pode tornar estimativas imprecisas, embora não seja uma violação genérica de normalidade ou independência.[@Kim2019]
 
 <br>
 
-### Qual a relação dessas suposições com as demais suposições inferenciais?
+```{r diagnosticos-regressao, echo=FALSE, warning=FALSE, message=FALSE, fig.align='center', fig.cap="Simulações de resíduos e forma funcional: padrões nos resíduos podem indicar inadequação da média linear ou variância não constante."}
+set.seed(2026)
+n <- 240
+x <- runif(n, 0, 10)
 
-- Essas suposições operam antes do modelo estatístico.[@REF]
+# Cenario 1: media linear e variancia constante.
+y_linear <- 2 + 1.5 * x + rnorm(n, sd = 2)
+ajuste_linear <- lm(y_linear ~ x)
 
-- Não são verificáveis por diagnóstico residual ou testes de ajuste.[@REF]
+# Cenario 2: media curva e variancia crescente com x.
+erro_hetero <- rnorm(n, sd = 0.5 + 0.35 * x)
+y_hetero <- 2 + 0.45 * x + 0.18 * x^2 + erro_hetero
+ajuste_hetero <- lm(y_hetero ~ x)
 
-- Mesmo com todas as suposições estatísticas satisfeitas, a inferência causal pode falhar se qualquer uma dessas suposições não for atendida.[@REF]
+par(mfrow = c(2, 2), mar = c(4, 4, 2, 1))
 
-<br>
+plot(fitted(ajuste_linear), resid(ajuste_linear),
+     xlab = "Valores ajustados", ylab = "Residuos",
+     main = "Linearidade e variancia constantes")
+abline(h = 0, lty = 2, col = "gray40")
 
-## Diagnóstico e verificação
+qqnorm(resid(ajuste_linear), main = "QQ-plot: cenario linear")
+qqline(resid(ajuste_linear), col = "firebrick", lwd = 2)
 
-<br>
+plot(fitted(ajuste_hetero), resid(ajuste_hetero),
+     xlab = "Valores ajustados", ylab = "Residuos",
+     main = "Curvatura e heteroscedasticidade")
+abline(h = 0, lty = 2, col = "gray40")
 
-### O que fazer quando suposições gerais falham?
+plot(x, y_hetero, pch = 19, col = "gray55",
+     xlab = "x", ylab = "y", main = "Dados e reta ajustada")
+abline(ajuste_hetero, col = "firebrick", lwd = 2)
+x_ordenado <- sort(x)
+lines(x_ordenado, 2 + 0.45 * x_ordenado + 0.18 * x_ordenado^2,
+      col = "navy", lwd = 2)
+legend("topleft", c("Reta ajustada", "Media geradora"),
+       col = c("firebrick", "navy"), lty = 1, bty = "n")
 
-- Transformações.[@REF]
-
-- Métodos robustos (estimadores e testes).[@REF]
-
-- Reamostragem.[@REF]
-
-- Modelos alternativos.[@REF]
-
-<br>
-
-### O que fazer quando as suposições causais falham?
-
-- Clarificar o alvo causal: redefinir a população, o tratamento ou o efeito de interesse.[@REF]
-
-- Análise de sensibilidade: avaliar quanto confundimento não medido seria necessário para invalidar as conclusões.[@REF]
-
-- Restringir o suporte: limitar a análise a regiões com positividade plausível (suporte comum).[@REF]
-
-- Estratificação ou ajuste enriquecido: incluir covariáveis adicionais relevantes, quando disponíveis.[@REF]
-
-- Modelagem causal explícita: usar diagramas acíclicos direcionados para tornar suposições transparentes e discutíveis.[@REF]
-
-- Estimativas parciais ou locais: reportar efeitos condicionais ou locais quando o efeito médio não é identificável.[@REF]
-
-- Conclusões mais fracas: interpretar resultados como associações ajustadas, não como efeitos causais.[@REF]
-
-- Relato explícito das falhas: documentar quais suposições não são plausíveis e por quê.[@REF]
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *performance*[@performance] fornece a função `check_model` para analisar a colinearidade entre variáveis, a normalidade da distribuição das variáveis e a heteroscedasticidade.
-:::
-
-<br>
-
-### Como avaliar as suposições de uma regressão?
-
-- Usando diagnóstico de regressão (ex.: análise de resíduos, gráficos de valores observados vs. preditos) e comparação com análises estratificadas.[@Greenland1989]
-
-<br>
-
-```{r suposicoes, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Diagnóstico de regressão para avaliar suposições do modelo: linearidade, normalidade dos resíduos, homoscedasticidade  e alavancagem."}
-library(dplyr)
-
-# Definir semente
-set.seed(123)
-
-# Simular dados
-n <- 100
-x1 <- stats::rnorm(n, mean = 50, sd = 10)
-x2 <- stats::rnorm(n, mean = 30, sd = 5)
-erro <- stats::rnorm(n, mean = 0, sd = 5)
-y <- 10 + 0.5 * x1 - 0.3 * x2 + erro
-
-# Data frame
-dados <- data.frame(y = y, x1 = x1, x2 = x2)
-
-# Modelo
-modelo <- stats::lm(y ~ x1 + x2, data = dados)
-
-# Dados auxiliares para gráficos
-dados_diag <- dados %>%
-  dplyr::mutate(
-    Ajustado = stats::fitted(modelo),
-    Resíduo = stats::resid(modelo),
-    Resíduo_pad = stats::rstandard(modelo),
-    Raiz_Resíduo_pad = sqrt(abs(Resíduo_pad)),
-    Cook = stats::cooks.distance(modelo),
-    Alavancagem = stats::hatvalues(modelo)
-  )
-
-# Gráfico 1: Resíduos versus Ajustados
-g1 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = Ajustado, y = Resíduo)) +
-  ggplot2::geom_point(color = "blue") +
-  ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
-  ggplot2::labs(title = "Resíduos versus Ajustados", subtitle = "--- Resíduo = 0",
-                x = "Valores Ajustados", y = "Resíduos") +
-  ggplot2::theme_minimal()
-
-# Gráfico 2: QQ Plot
-g2 <- ggplot2::ggplot(dados_diag, ggplot2::aes(sample = Resíduo)) +
-  ggplot2::stat_qq(color = "darkgreen") +
-  ggplot2::stat_qq_line(color = "black", linetype = "dashed") +
-  ggplot2::labs(title = "Normal Q-Q", subtitle = "--- Distribuição Normal Teórica",
-                x = "Quantis Teóricos", y = "Resíduos") +
-  ggplot2::theme_minimal()
-
-# Gráfico 3: Scale-Location
-g3 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = Ajustado, y = Raiz_Resíduo_pad)) +
-  ggplot2::geom_point(color = "orange") +
-  ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
-  ggplot2::labs(title = "Scale-Location", subtitle = "--- Referência visual",
-                x = "Valores Ajustados", y = "√|Resíduos Padronizados|") +
-  ggplot2::theme_minimal()
-
-# Gráfico 4: Distância de Cook
-g4 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = seq_along(Cook), y = Cook)) +
-  ggplot2::geom_segment(ggplot2::aes(xend = seq_along(Cook), yend = 0), color = "purple") +
-  ggplot2::geom_hline(yintercept = 4/n, linetype = "dashed", color = "black") +
-  ggplot2::labs(title = "Distância de Cook", subtitle = "--- Limite sugerido (4/n)",
-                x = "Observação", y = "Distância") +
-  ggplot2::theme_minimal()
-
-# Gráfico 5: Observado versus Ajustado
-lim <- range(c(dados_diag$y, dados_diag$Ajustado))
-g5 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = y, y = Ajustado)) +
-  ggplot2::geom_point(color = "darkblue") +
-  ggplot2::geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "black") +
-  ggplot2::coord_cartesian(xlim = lim, ylim = lim) +
-  ggplot2::labs(title = "Observado versus Ajustado", subtitle = "--- y = x",
-                x = "Valores Observados", y = "Valores Ajustados") +
-  ggplot2::theme_minimal()
-
-# Gráfico 6: Alavancagem
-g6 <- ggplot2::ggplot(dados_diag, ggplot2::aes(x = seq_along(Alavancagem), y = Alavancagem)) +
-  ggplot2::geom_point(color = "darkred") +
-  ggplot2::geom_hline(yintercept = 2 * mean(dados_diag$Alavancagem), linetype = "dashed", color = "black") +
-  ggplot2::labs(title = "Alavancagem", subtitle = "--- 2 × média",
-                x = "Observação", y = "Valores de Alavancagem") +
-  ggplot2::theme_minimal()
-
-# Organizar os 6 gráficos em 2x3
-gridExtra::grid.arrange(g1, g2, g3, g4, g5, g6, nrow = 2)
+par(mfrow = c(1, 1))
 ```
 
 <br>
 
-### Como avaliar a independência entre variáveis?
+### O que significa assumir monotonicidade?
 
-- Verifique por dependência entre variáveis de um modelo de regressão:[@zuur2009]
+- Significa restringir uma função para que ela não diminua (ou não aumente) à medida que o preditor cresce.[@HuynhParast2026]
 
-  - Gráfico de série temporal das variáveis
+- A monotonicidade não deve ser presumida só porque uma curva crescente parece plausível. Precisa ser justificada pelo conhecimento do problema e examinada em relação aos dados e ao objetivo inferencial.[@HuynhParast2026]
 
-  - Gráfico de autocorrelação entre as variáveis
+- O teste apresentado abaixo avalia a hipótese nula de que a função de regressão seja não decrescente. Rejeitar a hipótese nula é evidência contra essa condição; não rejeitá-la não demonstra que ela seja verdadeira.[@HuynhParast2026; @MonotonicityTest]
 
 <br>
 
-```{r autocorrelacao, echo=FALSE, warning=FALSE, message=FALSE, fig.cap= "Séries temporais e autocorrelação de duas séries simuladas com fraca e forte autocorrelação.", out.width='80%', fig.align='center'}
-library(dplyr)
+```{r monotonicidade, echo=FALSE, warning=FALSE, message=FALSE, fig.align='center', fig.cap="Duas médias condicionais simuladas: uma não decrescente e outra com queda local."}
+set.seed(2026)
+n <- 400
+x <- runif(n, 0, 10)
 
-sim_ar1 <- function(n, phi = 0.8, mu = 0, sd = 1, x0 = 0) {
-  e <- rnorm(n, 0, sd)
-  x <- numeric(n)
-  x[1] <- x0
-  for (t in 2:n) x[t] <- mu + phi*(x[t-1] - mu) + e[t]
-  x
-}
+# Duas medias condicionais: uma nao decrescente e outra com queda local.
+media_monotona <- 1 + 0.7 * x
+media_nao_monotona <- 1 + 0.7 * x - 0.12 * pmax(x - 5, 0)^2
 
-acf_to_df <- function(x, lag.max = NULL) {
-  a <- stats::acf(x, lag.max = lag.max, plot = FALSE, na.action = na.omit)
-  n <- sum(!is.na(x))
-  tibble::tibble(lag = as.integer(a$lag),
-         acf = as.numeric(a$acf),
-         ci  = 1.96 / sqrt(n)) %>%
-    dplyr::filter(lag >= 0)
-}
+y_monotona <- media_monotona + rnorm(n, sd = 1.5)
+y_nao_monotona <- media_nao_monotona + rnorm(n, sd = 1.5)
 
-plot_ts <- function(x, titulo = "Série temporal") {
-  tibble::tibble(t = seq_along(x), y = x) %>%
-    ggplot2::ggplot(ggplot2::aes(t, y)) +
-    ggplot2::geom_line() +
-    ggplot2::labs(x = "Tempo", y = NULL, title = titulo) +
-    ggplot2::theme_minimal(base_size = 12)
-}
+par(mfrow = c(1, 2), mar = c(4, 4, 2, 1))
 
-plot_acf <- function(x, titulo = "ACF", lag.max = 40) {
-  acf_df <- acf_to_df(x, lag.max = lag.max)
-  ggplot2::ggplot(acf_df, ggplot2::aes(lag, acf)) +
-    ggplot2::geom_hline(yintercept = 0) +
-    ggplot2::geom_ribbon(ggplot2::aes(ymin = -ci, ymax = ci), alpha = 0.15) +
-    ggplot2::geom_segment(ggplot2::aes(xend = lag, yend = 0)) +
-    ggplot2::labs(x = "Defasagem (lag)", y = "ACF", title = titulo) +
-    ggplot2::theme_minimal(base_size = 12)
-}
+plot(x, y_monotona, pch = 19, col = "gray60",
+     xlab = "Preditor", ylab = "Resposta",
+     main = "Media condicional monotona")
+lines(sort(x), media_monotona[order(x)], col = "navy", lwd = 3)
 
-# Dados: fraca versus forte ACF
-set.seed(123)
-n <- 250
-serie_fraca <- sim_ar1(n, phi = 0.10, sd = 1.0)  # fraca autocorrelação
-serie_forte <- sim_ar1(n, phi = 0.90, sd = 1.0)  # forte autocorrelação
+plot(x, y_nao_monotona, pch = 19, col = "gray60",
+     xlab = "Preditor", ylab = "Resposta",
+     main = "Media com queda local")
+lines(sort(x), media_nao_monotona[order(x)], col = "firebrick", lwd = 3)
 
-# Gráficos individuais
-g_ts_fraca <- plot_ts(serie_fraca, "Série temporal — Fraca autocorrelação (φ = 0.10)")
-g_ts_forte <- plot_ts(serie_forte, "Série temporal — Forte autocorrelação (φ = 0.90)")
-g_acf_fraca <- plot_acf(serie_fraca, "ACF — Fraca autocorrelação", lag.max = 40)
-g_acf_forte <- plot_acf(serie_forte, "ACF — Forte autocorrelação", lag.max = 40)
-
-# Figura 2x2
-library(patchwork)
-fig_2x2 <- (g_ts_fraca | g_ts_forte) / (g_acf_fraca | g_acf_forte)
-fig_2x2
+par(mfrow = c(1, 1))
 ```
 
 <br>
 
-## Normalidade
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *MonotonicityTest*[@MonotonicityTest] oferece a função `monotonicity_test` para testar se uma função de regressão é monotônica.
+:::
 
 <br>
 
-### Devemos testar as suposições de normalidade?
+```{r teste-monotonicidade-pacote, echo=FALSE, warning=FALSE, message=FALSE}
+teste_crescente <- MonotonicityTest::monotonicity_test(
+  X = x,
+  Y = y_monotona,
+  boot_num = 200,
+  m = floor(0.05 * length(x)),
+  ncores = 1,
+  negative = FALSE,
+  seed = 2026
+)
 
-- Normalidade da distribuição deve ser estabelecida para a população.[@rochon2012]
+teste_com_viola <- MonotonicityTest::monotonicity_test(
+  X = x,
+  Y = y_nao_monotona,
+  boot_num = 200,
+  m = floor(0.05 * length(x)),
+  ncores = 1,
+  negative = FALSE,
+  seed = 2026
+)
 
-- Testes preliminares de normalidade não são necessários para a maioria dos testes paramétricos de comparação, pois eles são robustos contra desvios moderados da normalidade.[@rochon2012]
+print(teste_crescente)
+print(teste_com_viola)
+```
 
 <br>
 
-## Escolha entre métodos paramétricos e não paramétricos
+### A normalidade dos dados é necessária para um teste *t*?
+
+- Nem sempre. Em um teste *t*, a condição de normalidade se refere à distribuição teórica da estatística usada na inferência (por exemplo, da média ou da diferença entre médias). A normalidade da população é uma forma de obter esse resultado; sob condições usuais, como observações independentes e variância finita, a distribuição amostral pode ser aproximadamente normal mesmo quando os dados individuais não o são.[@CurranEverett2017]
+
+- O tamanho de amostra considerado suficiente depende da forma da distribuição, de valores extremos, da assimetria, do desenho e do estimador. Não existe um único limite que garanta robustez em todas as situações.[@CurranEverett2017]
+
+- Antes de testar normalidade, identifique qual quantidade precisa ter distribuição aproximadamente normal para que o procedimento escolhido seja válido. Em regressão, por exemplo, a inspeção costuma se concentrar nos erros ou resíduos condicionais, não na distribuição marginal de cada variável.[@CurranEverett2017; @zuur2009]
 
 <br>
 
-### O que é análise paramétrica?
+```{r normalidade-media, echo=FALSE, warning=FALSE, message=FALSE, fig.align='center', fig.cap="População assimétrica e distribuições amostrais da média para diferentes tamanhos de amostra."}
+set.seed(2026)
+n_sim <- 4000
+tam_amostral <- c(3, 10, 40)
 
-- Testes não paramétricos fazem suposições sobre a forma da distribuição, as características e/ou parâmetros da distribuição dos dados na população.[@Ali2016; @vetter2017]
+# Populacao fortemente assimetrica a direita.
+populacao <- rexp(100000, rate = 1)
 
-- Testes paramétricos são baseados na suposição de que os dados amostrais provêm de uma população com parâmetros fixos determinando sua distribuição de probabilidade.[@kwak2017]
+# Medias de amostras independentes para cada tamanho n.
+medias <- lapply(tam_amostral, function(n) {
+  replicate(n_sim, mean(rexp(n, rate = 1)))
+})
+
+par(mfrow = c(2, 2), mar = c(4, 4, 2, 1))
+hist(populacao, probability = TRUE, breaks = 60,
+     main = "Distribuicao dos dados individuais",
+     xlab = "Valor", col = "gray85", border = "white")
+curve(dexp(x), add = TRUE, col = "firebrick", lwd = 2)
+
+for (i in seq_along(tam_amostral)) {
+  hist(medias[[i]], probability = TRUE, breaks = 35,
+       main = paste("Distribuicao da media: n =", tam_amostral[i]),
+       xlab = "Media amostral", col = "lightblue", border = "white")
+  curve(dnorm(x, mean = 1, sd = 1 / sqrt(tam_amostral[i])),
+        add = TRUE, col = "firebrick", lwd = 2)
+}
+
+par(mfrow = c(1, 1))
+```
 
 <br>
 
-### O que é análise não paramétrica?
+### Devemos aplicar um teste de normalidade antes de cada análise?
 
-- Testes não-paramétricos fazem poucas suposições, ou menos rigorosas, sobre as características e/ou parâmetros da distribuição dos dados na população.[@Ali2016; @vetter2017]
+- Não como etapa automática para escolher entre métodos.[@CurranEverett2017; @rochon2012]
 
-- Testes não-paramétricos são úteis quando as suposições de normalidade não podem ser sustentadas.[@Ali2016]
+- Testes formais podem ter pouco poder em amostras pequenas e detectar desvios pouco relevantes em amostras grandes.[@CurranEverett2017; @rochon2012]
+
+- Um valor de *p* não mede o tamanho nem a consequência prática do desvio.[@CurranEverett2017; @rochon2012]
+
+- Inspecione gráficos adequados ao modelo e ao estimador — como gráfico quantil-quantil e resíduos versus valores ajustados — e considere o desenho, o tamanho amostral e a influência de observações extremas.[@zuur2009; @Zhao2025]
+
+- Diagnósticos indicam aspectos a investigar; não provam que uma suposição seja verdadeira.[@zuur2009; @Zhao2025]
+
+- Quando a distribuição da estatística de interesse for duvidosa, bootstrap ou métodos de permutação podem ser alternativas, desde que a reamostragem respeite a estrutura do estudo e as condições do método.[@CurranEverett2017]
 
 <br>
 
-### Por que análises paramétricas são preferidas?
+### A bimodalidade é sempre uma violação das suposições inferenciais?
 
-- Quando as suposições são atendidas, testes paramétricos tendem a apresentar maior poder estatístico que testes não-paramétricos correspondentes.[@greenhalgh1997; @schmider2010; @vetter2017]
+- Não. A bimodalidade descreve a forma de uma distribuição; ela só compromete uma análise quando entra em conflito com uma suposição necessária para o método e para a quantidade que está sendo modelada.[@CurranEverett2017; @zuur2009]
 
-- Testes não-paramétricos apresentam menor poder estatístico (maior erro tipo II) comparados aos testes paramétricos correspondentes.[@Ali2016]
+- A forma marginal de um preditor não é, por si só, uma violação da normalidade dos erros de uma regressão.[@CurranEverett2017; @zuur2009]
+
+- Índices como o $D$ de Ashman e o índice de Zhang podem resumir a separação entre modos em distribuições bimodais.[@ashman1994; @zhang2003]
+
+<br>
+
+### Um diagnóstico visual ou teste confirma que o modelo está correto?
+
+- Não. Diagnósticos podem revelar incompatibilidades importantes, mas não identificam todas as maneiras pelas quais o desenho, a medição ou a forma funcional podem ser inadequados.[@zuur2009; @Zhao2025]
+
+- A avaliação combina conhecimento do estudo, gráficos, estimativas de incerteza e análises de sensibilidade. Em muitos casos, é mais informativo comparar conclusões sob modelos plausíveis do que buscar um único modelo que passe por todos os testes de diagnóstico.[@Zhao2025]
+
+<br>
+
+## Suposições causais e alcance das conclusões
+
+<br>
+
+### As suposições causais são iguais às suposições do modelo estatístico?
+
+- Não. Um modelo pode descrever bem uma associação e, ainda assim, não identificar um efeito causal. A identificação causal requer condições sobre o tratamento, os desfechos potenciais e o processo de atribuição — por exemplo, consistência, intercambialidade e positividade, conforme o desenho e o alvo definidos.[@lee2021b; @vickers2023]
+
+- Essas condições não são verificadas por gráficos de resíduos ou testes de normalidade. Elas exigem justificativa substantiva e de desenho; quando sua plausibilidade é incerta, análises de sensibilidade ajudam a mostrar como a conclusão depende delas.[@lee2021b; @vickers2023]
+
+- Em estudos observacionais, ausência de confundimento não medido geralmente não pode ser demonstrada apenas pelos dados observados. Descreva quais variáveis foram consideradas, por que foram escolhidas e o que permanece fora do alcance da análise.[@vickers2023]
+
+<br>
+
+### O que fazer quando uma suposição parece pouco plausível?
+
+- Primeiro, identifique qual resultado pode ser afetado: estimativa pontual, erro-padrão, intervalo, valor de *p*, interpretação causal ou generalização.[@Zhao2025; @zuur2009]
+
+- Considere uma especificação alternativa coerente com o problema: incluir não linearidade, modelar agrupamentos ou dependência temporal, usar métodos robustos, transformar a escala ou adotar outro modelo de resposta.[@Greenland1989; @zuur2009; @car; @WRS2-2]
+
+- Use bootstrap, permutação ou outros métodos de reamostragem somente quando suas condições forem apropriadas ao estimando e ao desenho. Reamostrar observações independentes, por exemplo, não corrige por si só uma amostra agrupada.[@CurranEverett2017; @zuur2009]
+
+- Compare as conclusões entre escolhas plausíveis e relate as diferenças. Se a identificação causal não for defensável, limite a conclusão à associação estimada; não apresente uma correção estatística como substituto de uma condição causal ausente.[@Zhao2025; @vickers2023]
 
 <br>
 
 ```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
 cat(readLines("citation.html"), sep = "\n")
 ```
-
-<br>

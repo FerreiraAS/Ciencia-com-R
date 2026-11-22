@@ -1,0 +1,891 @@
+```{=openxml}
+<w:p>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
+</w:p>
+```
+
+# **Desempenho de classificação** {#desempenho-classificacao}
+
+<br>
+
+## Tabelas 2x2
+
+<br>
+
+### O que é uma tabela de confusão 2x2?
+
+- Tabela de confusão é uma matriz de 2 linhas por 2 colunas que permite analisar o desempenho de classificação de uma variável dicotômica (padrão-ouro ou referência) versus outra variável dicotômica (novo teste).[@steckelberg2004]
+
+<br>
+
+### Como analisar o desempenho de classificação em tabelas 2x2?
+
+- Verdadeiro-positivo ($VP$): caso com a condição presente e corretamente identificado como tal.[@greenhalgh1997b]
+
+- Falso-negativo ($FN$): caso com a condição presente e erroneamente identificado como ausente.[@greenhalgh1997b]
+
+- Verdadeiro-negativo ($VN$): controle sem a condição presente e corretamente identificados como tal.[@greenhalgh1997b]
+
+- Falso-positivo ($FP$): controle sem a condição presente e erroneamente identificado como presente.[@greenhalgh1997b]
+
+<br>
+
+```{r crosstable-2x2, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 2x2 para análise de desempenho de classificação de testes e variáveis dicotômicas."}
+library(dplyr)
+
+cross.table <-
+  matrix(
+    c(
+      '$VP$',
+      '$FN$',
+      '$VP+FN$',
+      '$FP$',
+      '$VN$',
+      '$FP+VN$',
+      '$VP+FP$',
+      '$FN+VN$',
+      '$N=VP+VN+FP+FN$'
+    ),
+    nrow = 3,
+    ncol = 3,
+    byrow = FALSE
+  )
+rownames(cross.table) <-
+  c("Teste positivo", "Teste negativo", "Total")
+colnames(cross.table) <-
+  c("Condição presente", "Condição ausente", "Total")
+
+# exibe a tabela de dados
+knitr::kable(
+  cross.table,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec((dim(cross.table)[1] - 1), bold = TRUE, extra_css = "border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(cross.table)[1], extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+- Tabelas de confusão também podem ser visualizadas em formato de árvores de frequência.[@steckelberg2004]
+
+```{r frequency-tree, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Árvore de frequência do desempenho de classificação de uma tabela de confusão 2x2 representando um método novo (dicotômico) comparado ao método padrão-ouro ou referência (dicotômico)."}
+# Reprodutibilidade
+set.seed(123)
+
+# generate data
+gold.std <- rbinom(n = 100, size = 1, prob = 0.5)
+new.test <- rbinom(n = 100, size = 1, prob = 0.5)
+dataset <- data.frame("Padrão-ouro" = gold.std, "Novo teste" = new.test)
+
+# change labels
+my_txt <-
+  riskyr::init_txt(
+    cond_lbl = "Padrão-ouro",
+    cond_true_lbl = "Presente",
+    cond_false_lbl = "Ausente",
+    hi_lbl = "VP",
+    mi_lbl = "FN",
+    fa_lbl = "FP",
+    cr_lbl = "VN"
+  )
+
+# plot the frequency tree
+riskyr::plot_prism(
+  dataset,
+  by = "cd",
+  show_accu = TRUE,
+  main = NULL,
+  sub = NULL,
+  col_pal = riskyr::pal_bw,
+  f_lbl = "nam",
+  p_lbl = "no",
+  lbl_txt = my_txt,
+  f_lwd = .5
+)
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *riskyr*[@riskyr] fornece a função `plot_prism` para construir árvores de frequência a partir de diferentes cenários.
+:::
+
+<br>
+
+### Quais probabilidades caracterizam o desempenho de classificação de um teste em tabelas 2x2?
+
+- Sensibilidade ($SEN$) \@ref(eq:sen): Proporção de verdadeiro-positivos dentre aqueles com a condição.[@greenhalgh1997b]
+
+<br>
+
+\begin{equation}
+(\#eq:sen)
+SEN = \dfrac{VP}{VP+FN}
+\end{equation}
+
+<br>
+
+- Especificidade ($ESP$) \@ref(eq:esp): Proporção de verdadeiro-negativos dentre aqueles sem a condição.[@greenhalgh1997b]
+
+<br>
+
+\begin{equation}
+(\#eq:esp)
+ESP = \dfrac{VN}{VN+FP}
+\end{equation}
+
+<br>
+
+```{r sensibilidade-especificidade, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Trade-off entre sensibilidade e especificidade em função do limiar de probabilidade (t) para um modelo de classificação."}
+library(dplyr)
+
+# ---- Parâmetros dos grupos (ajuste à sua realidade) ----
+# "doente": previsões tendem a ser altas
+alpha_d   <- 9;  beta_d   <- 3   # média ≈ 0.75
+# "não-doente": previsões tendem a ser baixas
+alpha_nd  <- 3;  beta_nd  <- 9   # média ≈ 0.25
+
+# ---- Grade de limiares (probabilidade no eixo x) ----
+t <- seq(0, 1, length.out = 1001)
+
+# ---- Curvas: Sensibilidade(t) e Especificidade(t) ----
+sens <- 1 - pbeta(t, shape1 = alpha_d,  shape2 = beta_d)   # P(score >= t | doente)
+spec <-     pbeta(t, shape1 = alpha_nd, shape2 = beta_nd)  # P(score <  t | não-doente)
+
+df <- tibble::tibble(
+  threshold = t,
+  Sensibilidade = sens,
+  Especificidade = spec,
+  Youden = sens + spec - 1
+)
+
+# ---- Limiar ótimo (Youden J) ----
+opt <- df %>%
+  dplyr::slice_max(Youden, n = 1)
+
+# Texto do rótulo no ponto de Youden
+lbl <- sprintf("t* = %.1f%%\nSens = %.1f%%\nEsp = %.1f%%",
+               100*opt$threshold, 100*opt$Sensibilidade, 100*opt$Especificidade)
+
+# ---- Plot ----
+ggplot2::ggplot(df, ggplot2::aes(x = threshold)) +
+  ggplot2::geom_line(ggplot2::aes(y = Sensibilidade), linewidth = 1) +
+  ggplot2::geom_line(ggplot2::aes(y = Especificidade), linetype = 2, linewidth = 1) +
+  ggplot2::geom_vline(xintercept = opt$threshold, linetype = 3) +
+  ggplot2::annotate("point",
+                    x = opt$threshold,
+                    y = 0.5*(opt$Sensibilidade + opt$Especificidade),
+                    size = 2
+  ) +
+  # 👉 rótulo com t* (ajuste hjust/vjust conforme preferir)
+  ggplot2::annotate("text",
+                    x = opt$threshold,
+                    y = 0.75,                 # posição vertical do texto
+                    label = lbl,
+                    hjust = -0.1, vjust = 1,  # empurra um pouco para a direita do t*
+                    size = 3.5
+  ) +
+  ggplot2::scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0,1)) +
+  ggplot2::labs(
+    x = "Limiar de probabilidade (t)",
+    y = "Proporção de casos corretamente identificados",
+    title = "Trade-off entre Sensibilidade e Especificidade",
+    caption = "Linhas: sólida = Sensibilidade; tracejada = Especificidade; pontilhada = Limiar ótimo (Youden J)"
+  ) +
+  ggplot2::theme_minimal(base_size = 12)
+```
+
+<br>
+
+- Valor preditivo positivo ($VPP$) \@ref(eq:vpp): Proporção de casos corretamente identificados como verdadeiro-positivos.[@greenhalgh1997b]
+
+<br>
+
+\begin{equation}
+(\#eq:vpp)
+VPP = \dfrac{VP}{VP+FP}
+\end{equation}
+
+<br>
+
+- Valor preditivo negativo ($VPN$) \@ref(eq:vpn): Proporção de controles corretamente identificados como verdadeiro-negativos.[@greenhalgh1997b]
+
+<br>
+
+\begin{equation}
+(\#eq:vpn)
+VPN = \dfrac{VN}{VN+FN}
+\end{equation}
+
+<br>
+
+- Razão de verossimilhança positiva ($LR+$) \@ref(eq:lrplus): Quantifica o quanto a probabilidade de a condição estar presente aumenta quando o teste é positivo.[@Deeks2004]
+
+<br>
+
+\begin{equation}
+(\#eq:lrplus)
+LR+ = \dfrac{SEN}{1 - ESP} = \dfrac{VP/(VP+FN)}{FP/(FP+VN)}
+\end{equation}
+
+<br>
+
+- Razão de verossimilhança negativa ($LR-$) \@ref(eq:lrminus): Quantifica o quanto a probabilidade de a condição estar presente diminui quando o teste é negativo.[@Deeks2004]
+
+<br>
+
+\begin{equation}
+(\#eq:lrminus)
+LR- = \dfrac{1 - SEN}{ESP} = \dfrac{FN/(VP+FN)}{VN/(FP+VN)}
+\end{equation}
+
+<br>
+
+- Acurácia ($ACU$), \@ref(eq:acu): Proporção de casos e controles corretamente identificados.[@greenhalgh1997b]
+
+<br>
+
+\begin{equation}
+(\#eq:acu)
+ACU = \dfrac{VP+VN}{VP+VN+FP+FN}
+\end{equation}
+
+<br>
+
+- Razão de chances diagnóstica ($DOR$) \@ref(eq:dor1), \@ref(eq:dor2) e \@ref(eq:dor3): Razão entre a chance de um teste ser positivo quando a condição está presente e a chance de um teste ser positivo quando a condição está ausente.[@Glas2003]
+
+<br>
+
+\begin{equation}
+(\#eq:dor1)
+DOR = \dfrac{VP}{FN} \div \dfrac{FP}{VN} = \dfrac{VP \cdot VN}{FP \cdot FN}
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:dor2)
+DOR = \dfrac{SEN/(1-SEN)}{(1-ESP)/ESP} = \dfrac{SEN \cdot ESP}{(1-SEN) \cdot (1-ESP)}
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:dor3)
+DOR = \dfrac{LR+}{LR-}
+\end{equation}
+
+<br>
+
+```{r crosstable-prob, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Probabilidades calculados a partir da tabela de confusão 2x2 para análise de desempenho de classificação de testes e variáveis dicotômicas."}
+library(dplyr)
+
+cross.table <-
+  matrix(
+    c(
+      '$VP$',
+      '$FN$',
+      '$VP+FN$',
+      '$SEN = \\frac{VP}{VP+FN}$',
+      '$FP$',
+      '$VN$',
+      '$FP+VN$',
+      '$ESP = \\frac{VN}{VN+FP}$',
+      '$VP+FP$',
+      '$FN+VN$',
+      '$N=VP+VN+FP+FN$',
+      '',
+      '$VPP = \\frac{VP}{VP+FP}$',
+      '$VPN = \\frac{VN}{VN+FN}$',
+      '',
+      '$ACU = \\frac{VP+VN}{VP+VN+FP+FN}$ \\ $DOR = \\frac{VP \\cdot VN}{FP \\cdot FN}$'
+    ),
+    nrow = 4,
+    ncol = 4,
+    byrow = FALSE
+  )
+
+rownames(cross.table) <- c("Teste positivo", "Teste negativo", "Total", "Probabilidades")
+colnames(cross.table) <- c("Condição presente",
+                           "Condição ausente",
+                           "Total",
+                           "Probabilidades")
+
+# exibe a tabela de dados
+knitr::kable(
+  cross.table,
+  align = "c",
+  format = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  linesep = "",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width = ifelse(knitr::is_html_output(), TRUE, TRUE),
+    position = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec((dim(cross.table)[1] - 1), bold = TRUE, extra_css = "border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(dim(cross.table)[1], extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *riskyr*[@riskyr] fornece a função `comp_prob` para estimar 13 probabilidades relacionadas ao desempenho de classificação em tabelas 2x2.
+:::
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *caret*[@caret] fornece a função `confusionMatrix` para estimar 11 probabilidades relacionadas ao desempenho de classificação em tabelas 2x2.
+:::
+
+<br>
+
+## Tabelas 2x3
+
+<br>
+
+### O que é uma tabela de confusão 2x3?
+
+- É a extensão da tabela 2×2 que inclui uma terceira decisão (deferimento/*boundary*) além de aceitar (positivo) e rejeitar (negativo).[@xu2020]
+
+- As colunas\*\* representam as decisões\*\* ($POS$, $BND$, $NEG$) e as linhas representam a verdade de referência (condição presente versus ausente).[@xu2020]
+
+- Essa formulação vem do arcabouço de *Three-Way Decisions (3WD)*, que particiona o universo em três regiões por dois limiares $\alpha$ e $\beta$.[@xu2020]
+
+<br>
+
+### Como as regiões POS, BND e NEG são definidas?
+
+- Dado um escore ou probabilidade condicional $Pr(C\mid[x])$ para a classe $C$, classifica-se como $POS$ (aceitar) quando $Pr(C\mid[x]) \ge \alpha$, como $BND$ (deferir) quando $\beta < Pr(C\mid[x]) < \alpha$ e como $NEG$ (rejeitar) quando $Pr(C\mid[x]) \le \beta$, sendo que os limiares $(\alpha,\beta)$ determinam simultaneamente as três regiões e os *trade-offs* entre acurácia e comprometimento.[@xu2020]
+
+<br>
+
+### Qual é o formato de uma tabela 2×3?
+
+- Estrutura geral (linhas = condição real; colunas = decisão):
+
+```{r crosstable-2x3, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, tab.cap = "Tabela de confusão 3-vias (2×3) com totais: referência versus decisão (3WD)."}
+library(dplyr)
+
+# matriz 2x3 (referência versus decisão) — células simbólicas
+cross3 <- matrix(
+  c("$|POS\\cap C|$",   "$|BND\\cap C|$",   "$|NEG\\cap C|$",
+    "$|POS\\cap C^c|$", "$|BND\\cap C^c|$", "$|NEG\\cap C^c|$"),
+  nrow = 2, byrow = TRUE
+)
+rownames(cross3) <- c("Condição presente (C)", "Condição ausente ($C^c$)")
+colnames(cross3) <- c("POS (aceitar)", "BND (deferir)", "NEG (rejeitar)")
+
+# ---- adicionar totais (simbólicos) ----
+# adiciona coluna "Total"
+cross3_totais <- cbind(
+  cross3,
+  "Total" = c(
+    "$|POS\\cap C|+|BND\\cap C|+|NEG\\cap C|$",
+    "$|POS\\cap C^c|+|BND\\cap C^c|+|NEG\\cap C^c|$"
+  )
+)
+
+# adiciona linha "Total"
+linha_total <- matrix(
+  c(
+    "$|POS\\cap C|+|POS\\cap C^c|$",
+    "$|BND\\cap C|+|BND\\cap C^c|$",
+    "$|NEG\\cap C|+|NEG\\cap C^c|$",
+    "$N$"
+  ),
+  nrow = 1
+)
+rownames(linha_total) <- "Total"
+colnames(linha_total) <- colnames(cross3_totais)
+
+cross3_totais <- rbind(cross3_totais, linha_total)
+
+# ---- renderização kable/kableExtra ----
+knitr::kable(
+  cross3_totais,
+  align   = "c",
+  format  = ifelse(knitr::is_html_output(), "html", "latex"),
+  booktabs = TRUE,
+  escape  = FALSE
+) %>%
+  kableExtra::kable_styling(
+    latex_options     = c("basic"),
+    bootstrap_options = c("basic", "hover", "condensed", "responsive"),
+    full_width        = ifelse(knitr::is_html_output(), TRUE, TRUE),
+    position          = "center"
+  ) %>%
+  kableExtra::row_spec(0, bold = TRUE, extra_css = "border-top: 1px solid; border-bottom: 1px solid") %>%
+  kableExtra::row_spec(nrow(cross3_totais)-1, bold = TRUE, extra_css = "border-bottom: 1px solid") %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::row_spec(nrow(cross3_totais), extra_css = "border-bottom: 1px solid")
+```
+
+<br>
+
+### Quais são as medidas básicas na 2×3?
+
+- Acurácia em POS ($M_{PT}$), equação \@ref(eq:mpt): Proporção de positivos corretamente identificados na região POS.[@xu2020]
+
+<br>
+
+\begin{equation}
+(\#eq:mpt)
+M_{PT} = \dfrac{|POS \cap C|}{|POS|}
+\end{equation}
+
+<br>
+
+- Erro em POS ($M_{PF}$), equação \@ref(eq:mpf): Proporção de negativos incorretamente classificados na região POS.[@xu2020]
+
+<br>
+
+\begin{equation}
+(\#eq:mpf)
+M_{PF} = \dfrac{|POS \cap C^{c}|}{|POS|}
+\end{equation}
+
+<br>
+
+- Acurácia em NEG ($M_{NF}$), equação \@ref(eq:mnf): Proporção de negativos corretamente identificados na região NEG.[@xu2020]
+
+<br>
+
+\begin{equation}
+(\#eq:mnf)
+M_{NF} = \dfrac{|NEG \cap C^{c}|}{|NEG|}
+\end{equation}
+
+- Erro em NEG ($M_{NT}$), equação \@ref(eq:mnt): Proporção de positivos incorretamente classificados na região NEG.[@xu2020]
+
+<br>
+
+\begin{equation}
+(\#eq:mnt)
+M_{NT} = \dfrac{|NEG \cap C|}{|NEG|}
+\end{equation}
+
+<br>
+
+- Frações em BND ($M_{BT}$ e $M_{BF}$), equações \@ref(eq:mbt) e \@ref(eq:mbf): Proporção de deferimentos verdadeiros e falsos.[@xu2020]
+
+<br>
+
+\begin{equation}
+(\#eq:mbt)
+M_{BT} = \dfrac{|BND \cap C|}{|BND|}
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:mbf)
+M_{BF} = \dfrac{|BND \cap C^{c}|}{|BND|}
+\end{equation}
+
+<br>
+
+### Como escolher os limiares $\alpha$ e $\beta$?
+
+- Os limiares $(\alpha,\beta)$ controlam o tamanho das regiões $POS$, $NEG$ e $BND$ e, portanto, os *trade-offs* entre “acertar mais” (acurácia nas regiões) e “decidir mais” (comprometimento; menos deferimentos).[@xu2020]
+
+<br>
+
+### Quando preferir 3-vias em vez de 2×2?
+
+- Quando o custo de erro é assimétrico e/ou há incerteza relevante.[@xu2020]
+
+- O deferimento ($BND$) evita decisões precipitadas e permite avaliação adicional, equilibrando acurácia e cobertura.[@xu2020]
+
+- É particularmente útil em triagens diagnósticas com etapas confirmatórias.[@xu2020]
+
+<br>
+
+## Curvas ROC
+
+<br>
+
+### O que representa a curva ROC?
+
+- A curva característica de operação do receptor (ROC) apresenta a relação entre sensibilidade ($SEN$) no eixo vertical e $1 - ESP$ no eixo horizontal.[@he2024]
+
+- Cada ponto na curva corresponde a um ponto de corte possível do teste.[@he2024]
+
+<br>
+
+### Quais são os tipos de curva ROC?
+
+- Curva empírica: conecta diretamente os pontos obtidos a partir dos diferentes pontos de corte observados.[@park2004]
+
+- Curva suavizada (paramétrica): assume uma distribuição binormal e gera uma curva ajustada por máxima verossimilhança.[@park2004]
+
+<br>
+
+### Como definir o melhor ponto de corte?
+
+- O ponto de corte em uma curva ROC representa um balanço entre sensibilidade e especificidade, ou seja, a taxa de verdadeiros positivos e a taxa de falsos positivos.[@he2024; @park2004]
+
+- O método de Youden \@ref(eq:youden) maximiza a diferença entre a taxa de verdadeiros positivos e a taxa de falsos positivos. O ponto de corte ideal será aquele com maior valor de $Y$.[@YOUDEN1950]
+
+<br>
+
+\begin{equation}
+(\#eq:youden)
+Y = SEN + ESP - 1
+\end{equation}
+
+<br>
+
+- O método da distância Euclidiana \@ref(eq:euclidean) minimiza a distância entre um ponto da curva ROC e o ponto (0,1), que representa sensibilidade perfeita ($SEN = 100%$) e especificidade perfeita ($ESP = 100%$). O ponto de corte ideal será aquele com menor valor de $D$.[@yarnold2014]
+
+<br>
+
+\begin{equation}
+(\#eq:euclidean)
+D = \sqrt{(1 - SEN)^2 + (1 - ESP)^2}
+\end{equation}
+
+<br>
+
+### O que é a área sob a curva (AUROC)?
+
+- A área sob a curva ROC (AUC ou AUROC) quantifica o poder de discriminação ou desempenho de classificação na classificação de uma variável dicotômica.[@de2022]
+
+- A área sob a curva ($AUC$) resume o desempenho global e representa a probabilidade de o teste classificar corretamente um caso positivo selecionado aleatoriamente em relação a um caso negativo selecionado aleatoriamente.[@he2024]
+
+<br>
+
+### Como calcular a AUC?
+
+- Método não paramétrico: soma das áreas trapezoidais sob a curva empírica \@ref(eq:auc). Pode subestimar AUC quando os dados são discretos.[@park2004]
+
+<br>
+
+\begin{equation}
+(\#eq:auc)
+AUC = \sum_{i=1}^{n-1} (x_{i+1} - x_i) \cdot \dfrac{y_i + y_{i+1}}{2}
+\end{equation}
+
+<br>
+
+- Método paramétrico (binormal): mais robusto para dados em escala ordinal, com viés reduzido \@ref(eq:auc-binormal), onde$\Phi$ é a função de distribuição acumulada da Normal padrão, $\mu_1$ e $\mu_0$ são as médias dos escores para os grupos positivo e negativo, respectivamente, e $\sigma_1^2$ e $\sigma_0^2$ são as variâncias dos escores para os grupos positivo e negativo, respectivamente.[@park2004]
+
+<br>
+
+\begin{equation}
+(\#eq:auc-binormal)
+AUC = \Phi\left(\dfrac{\mu_1 - \mu_0}{\sqrt{\sigma_1^2 + \sigma_0^2}}\right)
+\end{equation}
+
+<br>
+
+- AUC deve sempre vir acompanhada de intervalo de confiança (IC95%).[@park2004]
+
+<br>
+
+::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
+O pacote *proc*[@pROC] fornece a função `plot.roc` para criar uma curva ROC.
+:::
+
+<br>
+
+### Como interpretar a área sob a curva (ROC)?
+
+- A área sob a curva AUC varia no intervalo $[0.5; 1]$, com valores mais elevados indicando melhor discriminação ou desempenho do modelo de classificação.[@de2022]
+
+- As interpretações qualitativas (isto é: pobre/fraca/baixa, moderada/razoável/aceitável, boa ou muito boa/alta/excelente) dos valores de área sob a curva são arbitrários e não devem ser considerados isoladamente.[@de2022]
+
+- Modelos de classificação com valores altos de área sob a curva podem ser enganosos se os valores preditos por esses modelos não estiverem adequadamente calibrados.[@de2022]
+
+- Diferenças pequenas entre AUCs podem não ser estatisticamente significativas.[@he2024]
+
+- A interpretação clínica pode ser equivocada se não houver teste estatístico adequado.[@he2024]
+
+- Se as curvas vêm do mesmo conjunto de pacientes, aplique o teste de DeLong.[@he2024]
+
+- Se as curvas vêm de amostras independentes, use métodos como Dorfman-Alf.[@he2024]
+
+<br>
+
+### Por que uma AUC menor que 0.5 está errada?
+
+- Porque indica desempenho pior que o acaso.[@he2024]
+
+- Geralmente decorre de seleção incorreta da direção do teste ou da variável de estado.[@he2024]
+
+- Verifique se o software está configurado para maiores valores indicam presença do evento ou o inverso.[@he2024]
+
+- Ajuste a direção do teste para que $AUC \geq 0.5$.[@he2024]
+
+<br>
+
+```{r roc, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Curva ROC (Receiver Operating Characteristic) para um modelos de classificação com diferentes desempenhos diagnósticos.", fig.width=15, fig.height=4, dpi=300, out.width="100%"}
+library(dplyr)
+
+# reproduzível
+set.seed(123)
+
+# AUC alvo -> d' (duas Normais com mesma variância: AUC = Phi(d'/sqrt(2)))
+dprime_from_auc <- function(target_auc) sqrt(2) * stats::qnorm(target_auc)
+
+simulate_scores <- function(n_pos = 1000, n_neg = 1000, target_auc = 0.75) {
+  dprime <- dprime_from_auc(target_auc)
+  scores_neg <- stats::rnorm(n_neg, mean = 0, sd = 1)
+  scores_pos <- stats::rnorm(n_pos, mean = dprime, sd = 1)
+  tibble::tibble(
+    y = c(rep(0L, n_neg), rep(1L, n_pos)),
+    score = c(scores_neg, scores_pos)
+  )
+}
+
+threshold_metrics <- function(df, thr) {
+  y <- df$y
+  pred <- as.integer(df$score >= thr)
+  TP <- sum(pred == 1 & y == 1)
+  FP <- sum(pred == 1 & y == 0)
+  TN <- sum(pred == 0 & y == 0)
+  FN <- sum(pred == 0 & y == 1)
+
+  sens <- ifelse((TP + FN) > 0, TP / (TP + FN), NA_real_)
+  spec <- ifelse((TN + FP) > 0, TN / (TN + FP), NA_real_)
+  ppv  <- ifelse((TP + FP) > 0, TP / (TP + FP), NA_real_)
+  npv  <- ifelse((TN + FN) > 0, TN / (TN + FN), NA_real_)
+  acc  <- (TP + TN) / (TP + TN + FP + FN)
+  f1   <- ifelse((2*TP + FP + FN) > 0, 2*TP / (2*TP + FP + FN), NA_real_)
+
+  tibble::tibble(
+    threshold = thr,
+    TP = TP, FP = FP, TN = TN, FN = FN,
+    Sensitivity = sens, Specificity = spec,
+    PPV = ppv, NPV = npv, Accuracy = acc, F1 = f1
+  )
+}
+
+build_roc_summary <- function(df, label_auc) {
+  # Primeiro tenta com direction=">"
+  roc_obj <- pROC::roc(
+    response  = factor(df$y, levels = c(0,1)),
+    predictor = df$score,
+    quiet     = TRUE,
+    direction = ">"
+  )
+  # Se por qualquer motivo ficar < 0.5, recalcula invertendo
+  if (as.numeric(pROC::auc(roc_obj)) < 0.5) {
+    roc_obj <- pROC::roc(
+      response  = factor(df$y, levels = c(0,1)),
+      predictor = df$score,
+      quiet     = TRUE,
+      direction = "<"
+    )
+  }
+
+  # Cutoffs
+  youden <- pROC::coords(
+    roc_obj, x = "best", best.method = "youden",
+    ret = c("threshold","sensitivity","specificity"), transpose = FALSE
+  )
+  euclid <- pROC::coords(
+    roc_obj, x = "best", best.method = "closest.topleft",
+    ret = c("threshold","sensitivity","specificity"), transpose = FALSE
+  )
+
+  met_youden <- threshold_metrics(df, youden$threshold) %>%
+    dplyr::mutate(Cutoff = "Youden")
+  met_euclid <- threshold_metrics(df, euclid$threshold) %>%
+    dplyr::mutate(Cutoff = "Euclidean")
+
+  cut_table <- dplyr::bind_rows(
+    tibble::tibble(Cutoff = "Youden",
+      threshold = youden$threshold,
+      Sensitivity = youden$sensitivity,
+      Specificity = youden$specificity),
+    tibble::tibble(Cutoff = "Euclidean",
+      threshold = euclid$threshold,
+      Sensitivity = euclid$sensitivity,
+      Specificity = euclid$specificity)
+  )
+
+  list(
+    auc_label   = label_auc,
+    roc         = roc_obj,
+    df          = df,
+    coords_tbl  = cut_table,
+    metrics_tbl = dplyr::bind_rows(met_youden, met_euclid)
+  )
+}
+
+targets <- c(0.50, 0.75, 0.90)
+
+data_list <- purrr::map(
+  targets,
+  ~{ d <- simulate_scores(n_pos = 1500, n_neg = 1500, target_auc = .x)
+     build_roc_summary(d, label_auc = sprintf("AUC %.2f", .x)) }
+)
+
+cutoffs_tbl <- purrr::map_dfr(
+  data_list,
+  ~ .x$coords_tbl %>%
+    dplyr::mutate(Model = .x$auc_label) %>%
+    dplyr::relocate(Model, Cutoff)
+)
+
+metrics_tbl <- purrr::map_dfr(
+  data_list,
+  ~ .x$metrics_tbl %>%
+    dplyr::mutate(Model = .x$auc_label) %>%
+    dplyr::relocate(Model, Cutoff)
+)
+
+# --------- Curvas ROC (acima da diagonal) ----------
+roc_df <- purrr::map_dfr(
+  data_list,
+  function(x) {
+    gdat <- pROC::ggroc(x$roc)$data
+    dplyr::mutate(gdat, Model = x$auc_label)
+  }
+)
+
+cut_points <- cutoffs_tbl %>%
+  dplyr::mutate(FPR = 1 - Specificity,
+                TPR = Sensitivity)
+
+p <- ggplot2::ggplot() +
+  ggplot2::geom_line(
+    data = roc_df,
+    ggplot2::aes(x = 1 - specificity, y = sensitivity, color = Model),
+    linewidth = 1
+  ) +
+  ggplot2::geom_abline(
+    intercept = 0, slope = 1,
+    linewidth = 0.6, alpha = 0.6, linetype = "dashed"
+  ) +
+  ggplot2::geom_point(
+    data = cut_points,
+    ggplot2::aes(x = FPR, y = TPR, shape = Cutoff),
+    size = 2.8
+  ) +
+  ggplot2::geom_hline(yintercept = 0, color = "black") +
+  ggplot2::geom_vline(xintercept = 0, color = "black") +
+  ggplot2::facet_wrap(~ Model) +
+  ggplot2::labs(
+    title = "Curva Característica de Operação do Receptor (Curva ROC)",
+    x = "1 - Especificidade", y = "Sensibilidade",
+    color = "Modelo", shape = "Cutoff"
+  ) +
+  ggplot2::theme_minimal(base_size = 12) +
+  ggplot2::coord_equal(xlim = c(0,1), ylim = c(0,1)) +   # garante quadrado
+  ggplot2::scale_x_continuous(limits = c(0,1), expand = c(0,0)) +
+  ggplot2::scale_y_continuous(limits = c(0,1), expand = c(0,0))
+
+print(p)
+```
+
+<br>
+
+### Como analisar a classificação quando o preditor tem distribuição trimodal?
+
+- A curva ROC convencional usa um único ponto de corte: valores acima (ou abaixo) dele são classificados como positivos. Nessa situação, a curva ROC convencional pode indicar discriminação próxima ao acaso, mesmo quando há informação útil no teste.[@ferreira2021]
+
+- A curva ROC com limiar duplo (*double-threshold ROC*) avalia um intervalo definido por dois limiares, inferior ($T_L$) e superior ($T_U$). Os resultados dentro do intervalo ($T_L \leq X \leq T_U$) são classificados como positivos; os resultados fora dele, como negativos.[@ferreira2021]
+
+- A função indicadora que define a classificação por intervalo \@ref(eq:dtroc-indicator).
+
+<br>
+
+\begin{equation}
+(\#eq:dtroc-indicator)
+I(X,T_L,T_U) =
+\begin{cases}
+1, & T_L \leq X \leq T_U \\
+0, & \text{caso contrário}
+\end{cases}, \quad T_L < T_U
+\end{equation}
+
+<br>
+
+- A sensibilidade é a probabilidade de um indivíduo positivo apresentar um resultado dentro do intervalo \@ref(eq:dtroc-sensibilidade), e a especificidade é a probabilidade de um indivíduo negativo apresentar um resultado fora dele \@ref(eq:dtroc-especificidade):
+
+<br>
+
+\begin{equation}
+(\#eq:dtroc-sensibilidade)
+SEN = P(T_L \leq X \leq T_U \mid Y = 1)
+\end{equation}
+
+<br>
+
+\begin{equation}
+(\#eq:dtroc-especificidade)
+ESP = P(X < T_L \;\text{ou}\; X > T_U \mid Y = 0)
+\end{equation}
+
+<br>
+
+- Antes de escolher entre a curva ROC convencional e a curva ROC com limiar duplo, examine graficamente a distribuição do preditor, tanto no conjunto total quanto segundo o desfecho de referência.[@ferreira2021]
+
+- A curva ROC com limiar duplo é uma alternativa quando a forma trimodal e a relação entre os valores do teste e o desfecho justificam uma regra de classificação por intervalo; a trimodalidade, por si só, não determina automaticamente qual método usar.[@ferreira2021]
+
+- A escolha dos dois limiares pode ser instável, e avaliar muitos pares aumenta o custo computacional. Interprete a AUROC com cautela e relate os limiares e suas incertezas.[@ferreira2021]
+
+<br>
+
+## Interpretação da validade de um teste
+
+<br>
+
+### Que itens devem ser verificados na interpretação de um estudo de validade?
+
+- O novo teste foi comparado junto ao método padrão-ouro.[@greenhalgh1997b]
+
+- As probabilidades pontuais estimadas que caracterizam o desempenho de classificação do novo teste são altas e adequadas para sua aplicação clínica.[@greenhalgh1997b]
+
+- Os intervalos de confiança estimados para as probabilidades do novo teste são estreitos e adequadas para sua aplicação clínica.[@greenhalgh1997b]
+
+- O novo teste possui adequada confiabilidade intra/inter examinadores.[@greenhalgh1997b]
+
+- O estudo de validação incluiu um espectro adequado da amostra.[@greenhalgh1997b]
+
+- Todos os participantes realizaram ambos o novo teste e o padrão-ouro no estudo de validação.[@greenhalgh1997b]
+
+- Os examinadores do novo teste estavam cegados para o resultado do teste padrão-ouro.[@greenhalgh1997b]
+
+<br>
+
+## Diretrizes para redação
+
+<br>
+
+### Quais são as diretrizes para redação de estudos diagnósticos?
+
+- Visite a rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) para encontrar diretrizes específicas.
+
+- *STARD 2015: An Updated List of Essential Items for Reporting Diagnostic Accuracy Studies*.[@bossuyt2015]
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>

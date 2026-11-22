@@ -5,6 +5,7 @@
   </w:r>
 </w:p>
 ```
+
 # **Distribuições e parâmetros** {#distribuicoes-parametros}
 
 <br>
@@ -208,6 +209,38 @@ O pacote *ggplot2*[@ggplot2] fornece a função `geom_freqpoly` para criar polí
 
 <br>
 
+### Como avaliar a bimodalidade e a separação entre modos?
+
+- Comece pela inspeção gráfica da distribuição, por exemplo com histogramas e curvas de densidade. Índices numéricos complementam essa avaliação, mas não substituem a inspeção dos dados nem demonstram que a população seja bimodal.[@ashman1994; @zhang2003]
+
+- O índice $D$ de Ashman quantifica a separação entre duas componentes Gaussianas em relação à dispersão dentro das componentes. Para médias $\mu_1$ e $\mu_2$ e desvios-padrão $\sigma_1$ e $\sigma_2$ \@ref(eq:ashman-d):
+
+<br>
+
+\begin{equation}
+(\#eq:ashman-d)
+D = \dfrac{\sqrt{2}\,|\mu_1-\mu_2|}{\sqrt{\sigma_1^2+\sigma_2^2}}
+\end{equation}
+
+<br>
+
+- Valores maiores de $D$ indicam maior separação relativa entre as componentes. Para uma mistura de duas componentes Gaussianas, $D > 2$ é uma referência proposta para separação clara, mas não é um teste geral que prove bimodalidade.[@ashman1994]
+
+- O índice de separação de Zhang \@ref(eq:zhang-bimodality compara a distância entre as médias das duas componentes Gaussianas com a soma de seus desvios-padrão.[@zhang2003]
+
+<br>
+
+\begin{equation}
+(\#eq:zhang-bimodality)
+S = \dfrac{\mu_2 - \mu_1}{2\sigma_1 + 2\sigma_2}, \quad \mu_2 > \mu_1
+\end{equation}
+
+<br>
+
+- Valores de $S > 1$ indicam que as duas componentes Gaussianas praticamente não se sobrepõem. Esse índice descreve separação entre componentes ajustadas; a identificação de bimodalidade deve considerar também a inspeção da distribuição e evidências apropriadas, como um teste de multimodalidade.[@zhang2003]
+
+<br>
+
 ## Tipos de distribuições
 
 <br>
@@ -264,9 +297,9 @@ O pacote *ggplot2*[@ggplot2] fornece a função `geom_freqpoly` para criar polí
 
   - Poisson: número de eventos em um intervalo de tempo fixo.[@REF]
 
-  - Uniforme: resultados (finitos) que são igualmente prováveis. [@REF]
+  - Uniforme: resultados (finitos) que são igualmente prováveis.[@REF]
 
-  - Multinomial: resultados de múltiplos testes com mais de dois possíveis desfechos. [@REF]
+  - Multinomial: resultados de múltiplos testes com mais de dois possíveis desfechos.[@REF]
 
 <br>
 
@@ -696,11 +729,17 @@ ggpubr::ggarrange(
 
 - Testes de hipótese nula:[@vetter2017]
 
-  - Kolmogorov-Smirnov
+  - Cramér-von Mises.[@cramér1928; @vonMises1928]
 
-  - Shapiro-Wilk
+  - Kolmogorov-Smirnov.[@KolmogorovSmirnov1933; @Smirnov1948]
 
-  - Anderson-Darling
+  - Anderson-Darling.[@anderson1952]
+
+  - Shapiro-Wilk.[@shapiro1965]
+  
+  - Lilliefors.[@Lilliefors1967]
+
+  - Jarque-Bera.[@jarque1980]
 
 <br>
 

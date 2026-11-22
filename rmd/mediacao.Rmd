@@ -10,11 +10,352 @@
 
 <br>
 
-## Mediação
+## Efeitos direto e indireto
 
 <br>
 
-##
+```{r tabela-mediacao, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(1234)
+
+# Dados simulados: X influencia M, e X e M influenciam Y
+n <- 300L
+
+dados_mediacao <- tibble::tibble(
+  X = stats::rnorm(n)
+) %>%
+  dplyr::mutate(
+    M = 0.60 * X + stats::rnorm(n, sd = 0.80),
+    Y = 0.25 * X + 0.55 * M + stats::rnorm(n, sd = 0.80)
+  )
+
+# Modelo de mediação com intervalo de confiança bootstrap
+modelo_mediacao <- lavaan::sem(
+  model = '
+    M ~ a*X
+    Y ~ cprime*X + b*M
+    indireto := a*b
+    total    := cprime + (a*b)
+  ',
+  data = dados_mediacao,
+  se = "bootstrap",
+  bootstrap = 5000L
+)
+
+n_bootstrap_validos <- sum(
+  stats::complete.cases(lavaan::lavInspect(modelo_mediacao, "boot"))
+)
+
+resultado_mediacao <-
+  lavaan::parameterEstimates(
+    modelo_mediacao,
+    ci = TRUE,
+    boot.ci.type = "perc"
+  ) %>%
+  dplyr::filter(
+    label %in% c("a", "b", "cprime") |
+      lhs %in% c("indireto", "total")
+  ) %>%
+  dplyr::mutate(
+    Efeito = dplyr::case_when(
+      label == "a" ~ "X → M (a)",
+      label == "b" ~ "M → Y (b)",
+      label == "cprime" ~ "X → Y (direto, c′)",
+      lhs == "indireto" ~ "Efeito indireto (a × b)",
+      lhs == "total" ~ "Efeito total (c′ + a × b)"
+    ),
+    `IC 95%` = sprintf("[%.3f, %.3f]", ci.lower, ci.upper)
+  ) %>%
+  dplyr::select(
+    Efeito,
+    Estimativa = est,
+    `Erro-padrão` = se,
+    `IC 95%`
+  )
+
+resultado_mediacao %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = c(Estimativa, `Erro-padrão`),
+    decimals = 3
+  ) %>%
+  gt::tab_header(
+    title = "Análise de mediação em dados simulados"
+  ) %>%
+  gt::tab_source_note(
+    paste0(
+      "N = ", nrow(dados_mediacao),
+      "; estimativas não padronizadas; modelo linear sem covariáveis ou interação; ",
+      "sem dados ausentes. EE bootstrap; IC 95% percentil; ",
+      n_bootstrap_validos, " de 5.000 reamostragens completas."
+    )
+  ) %>%
+  gt::tab_source_note(
+    paste0(
+      "Dados sintéticos; R ", getRversion(),
+      "; lavaan ", as.character(utils::packageVersion("lavaan")),
+      ". Pressupostos do exemplo: temporalidade X → M → Y e ausência de confundimento não medido nos caminhos X–M, X–Y e M–Y."
+    )
+  )
+```
+
+<br>
+
+## Diagrama do modelo de mediação
+
+<br>
+
+```{r grafo-mediacao, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Coeficientes das três relações entre as variáveis
+coeficientes <-
+  lavaan::parameterEstimates(modelo_mediacao) %>%
+  dplyr::filter(label %in% c("a", "b", "cprime")) %>%
+  dplyr::mutate(
+    rotulo = dplyr::case_when(
+      label == "a" ~ sprintf("a = %.2f", est),
+      label == "b" ~ sprintf("b = %.2f", est),
+      label == "cprime" ~ sprintf("c' = %.2f", est)
+    )
+  )
+
+ggplot2::ggplot() +
+  ggplot2::geom_curve(
+    data = data.frame(x = 0.22, y = 0.83, xend = 1.78, yend = 0.83),
+    ggplot2::aes(x = x, y = y, xend = xend, yend = yend),
+    curvature = -0.30,
+    linewidth = 0.8,
+    arrow = grid::arrow(length = grid::unit(0.18, "cm"))
+  ) +
+  ggplot2::geom_segment(
+    data = data.frame(x = c(0.28, 1.12), y = c(1.08, 1.75),
+                      xend = c(0.88, 1.72), yend = c(1.75, 1.08)),
+    ggplot2::aes(x = x, y = y, xend = xend, yend = yend),
+    linewidth = 0.8,
+    arrow = grid::arrow(length = grid::unit(0.18, "cm"))
+  ) +
+  ggplot2::geom_label(
+    data = data.frame(x = c(0, 1, 2), y = c(1, 2, 1),
+                      variavel = c("X\nExposição", "M\nMediador", "Y\nDesfecho")),
+    ggplot2::aes(x = x, y = y, label = variavel),
+    size = 4,
+    linewidth = 0.4,
+    fill = "white"
+  ) +
+  ggplot2::geom_text(
+    data = data.frame(
+      x = c(0.48, 1.52, 1),
+      y = c(1.52, 1.52, 0.68),
+      rotulo = coeficientes$rotulo[match(c("a", "b", "cprime"), coeficientes$label)]
+    ),
+    ggplot2::aes(x = x, y = y, label = rotulo),
+    size = 4
+  ) +
+  ggplot2::coord_cartesian(xlim = c(-0.4, 2.4), ylim = c(0.25, 2.35)) +
+  ggplot2::labs(
+    title = "Modelo de mediação em dados simulados",
+    subtitle = "O efeito de X sobre Y é decomposto em caminho direto e indireto via M",
+    x = NULL,
+    y = NULL
+  ) +
+  ggplot2::theme_void() +
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(hjust = 0.5, face = "bold"),
+    plot.subtitle = ggplot2::element_text(hjust = 0.5),
+    plot.background = ggplot2::element_rect(fill = "white", color = NA)
+  )
+```
+
+<br>
+
+## Mediação ajustada por confundidor basal
+
+<br>
+
+```{r tabela-mediacao-ajustada, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Reprodutibilidade
+set.seed(5678)
+
+# Dados observacionais simulados com um confundidor basal medido
+n_ajustado <- 500L
+
+dados_mediacao_ajustada <- tibble::tibble(
+  C = stats::rnorm(n_ajustado)
+) %>%
+  dplyr::mutate(
+    X = 0.50 * C + stats::rnorm(n_ajustado, sd = 0.80),
+    M = 0.60 * X + 0.35 * C + stats::rnorm(n_ajustado, sd = 0.80),
+    Y = 0.25 * X + 0.55 * M + 0.40 * C + stats::rnorm(n_ajustado, sd = 0.80)
+  )
+
+# Modelo linear de mediação ajustado por C
+modelo_mediacao_ajustada <- lavaan::sem(
+  model = '
+    X ~ d_x*C
+    M ~ a*X + d_m*C
+    Y ~ cprime*X + b*M + d_y*C
+    indireto := a*b
+    total    := cprime + (a*b)
+  ',
+  data = dados_mediacao_ajustada,
+  se = "bootstrap",
+  bootstrap = 5000L
+)
+
+n_bootstrap_validos_ajustado <- sum(
+  stats::complete.cases(lavaan::lavInspect(modelo_mediacao_ajustada, "boot"))
+)
+
+resultado_mediacao_ajustada <-
+  lavaan::parameterEstimates(
+    modelo_mediacao_ajustada,
+    ci = TRUE,
+    boot.ci.type = "perc"
+  ) %>%
+  dplyr::filter(
+    label %in% c("a", "b", "cprime", "d_x", "d_m", "d_y") |
+      lhs %in% c("indireto", "total")
+  ) %>%
+  dplyr::mutate(
+    Efeito = dplyr::case_when(
+      label == "a" ~ "X → M (a)",
+      label == "b" ~ "M → Y (b)",
+      label == "cprime" ~ "X → Y (direto, c′)",
+      label == "d_x" ~ "C → X (dX)",
+      label == "d_m" ~ "C → M (dM)",
+      label == "d_y" ~ "C → Y (dY)",
+      lhs == "indireto" ~ "Efeito indireto (a × b)",
+      lhs == "total" ~ "Efeito total (c′ + a × b)"
+    ),
+    `IC 95%` = sprintf("[%.3f, %.3f]", ci.lower, ci.upper)
+  ) %>%
+  dplyr::select(
+    Efeito,
+    Estimativa = est,
+    `Erro-padrão` = se,
+    `IC 95%`
+  )
+
+resultado_mediacao_ajustada %>%
+  gt::gt() %>%
+  gt::fmt_number(
+    columns = c(Estimativa, `Erro-padrão`),
+    decimals = 3
+  ) %>%
+  gt::tab_header(
+    title = "Mediação ajustada por confundidor basal"
+  ) %>%
+  gt::tab_source_note(
+    paste0(
+      "N = ", nrow(dados_mediacao_ajustada),
+      "; estimativas não padronizadas; regressões lineares aditivas; ",
+      "C ajustado nos modelos de M e Y; sem interação ou dados ausentes. ",
+      "Erro-padrão bootstrap; IC 95% percentil; ",
+      n_bootstrap_validos_ajustado, " de 5.000 reamostragens completas."
+    )
+  ) %>%
+  gt::tab_source_note(
+    paste0(
+      "Dados sintéticos; R ", getRversion(),
+      "; lavaan ", as.character(utils::packageVersion("lavaan")),
+      ". O exemplo assume C medido antes de X, ausência de confundimento não medido nos caminhos X–M, X–Y e M–Y, e ausência de confundidor M–Y causado por X."
+    )
+  )
+```
+
+<br>
+
+## Diagrama com confundidor basal
+
+<br>
+
+```{r grafo-mediacao-ajustada, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Coeficientes dos caminhos do modelo ajustado
+coeficientes_ajustados <-
+  lavaan::parameterEstimates(modelo_mediacao_ajustada) %>%
+  dplyr::filter(label %in% c("a", "b", "cprime", "d_x", "d_m", "d_y")) %>%
+  dplyr::mutate(
+    rotulo = dplyr::case_when(
+      label == "a" ~ sprintf("a = %.2f", est),
+      label == "b" ~ sprintf("b = %.2f", est),
+      label == "cprime" ~ sprintf("c' = %.2f", est),
+      label == "d_x" ~ sprintf("dX = %.2f", est),
+      label == "d_m" ~ sprintf("dM = %.2f", est),
+      label == "d_y" ~ sprintf("dY = %.2f", est)
+    )
+  )
+
+parametro_curva <- seq(0, 1, length.out = 100)
+curva_direta <- data.frame(
+  x = (1 - parametro_curva)^2 * 1.58 +
+    2 * (1 - parametro_curva) * parametro_curva * 3.10 +
+    parametro_curva^2 * 4.75,
+  y = (1 - parametro_curva)^2 * 2.18 +
+    2 * (1 - parametro_curva) * parametro_curva * 4.80 +
+    parametro_curva^2 * 0.82
+)
+
+ggplot2::ggplot() +
+  ggplot2::geom_path(
+    data = curva_direta,
+    ggplot2::aes(x = x, y = y),
+    linewidth = 0.8,
+    arrow = grid::arrow(length = grid::unit(0.18, "cm"))
+  ) +
+  ggplot2::geom_segment(
+    data = data.frame(
+      x = c(0.40, 0.40, 0.40, 1.78, 3.63),
+      y = c(0.72, 0.55, 0.42, 2.35, 2.18),
+      xend = c(1.10, 3.02, 4.34, 3.02, 4.39),
+      yend = c(2.18, 2.18, 0.42, 2.35, 0.74)
+    ),
+    ggplot2::aes(x = x, y = y, xend = xend, yend = yend),
+    linewidth = 0.8,
+    arrow = grid::arrow(length = grid::unit(0.18, "cm"))
+  ) +
+  ggplot2::geom_label(
+    data = data.frame(
+      x = c(0, 1.45, 3.35, 4.75),
+      y = c(0.5, 2.5, 2.5, 0.5),
+      variavel = c("C\nConfundidor basal", "X\nExposição", "M\nMediador", "Y\nDesfecho")
+    ),
+    ggplot2::aes(x = x, y = y, label = variavel),
+    size = 3.8,
+    linewidth = 0.4,
+    fill = "white"
+  ) +
+  ggplot2::geom_text(
+    data = data.frame(
+      x = c(2.40, 4.05, 3.00, 0.70, 1.62, 2.45),
+      y = c(2.72, 1.62, 3.55, 1.32, 1.52, 0.18),
+      rotulo = coeficientes_ajustados$rotulo[
+        match(c("a", "b", "cprime", "d_x", "d_m", "d_y"), coeficientes_ajustados$label)
+      ]
+    ),
+    ggplot2::aes(x = x, y = y, label = rotulo),
+    size = 3.7
+  ) +
+  ggplot2::coord_cartesian(xlim = c(-0.65, 5.45), ylim = c(-0.05, 4.10)) +
+  ggplot2::labs(
+    title = "Modelo de mediação ajustado por C",
+    subtitle = "C é um confundidor basal dos caminhos entre X, M e Y",
+    x = NULL,
+    y = NULL
+  ) +
+  ggplot2::theme_void() +
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(hjust = 0.5, face = "bold"),
+    plot.subtitle = ggplot2::element_text(hjust = 0.5),
+    plot.background = ggplot2::element_rect(fill = "white", color = NA)
+  )
+```
 
 <br>
 

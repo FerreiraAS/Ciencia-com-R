@@ -1,0 +1,213 @@
+```{=openxml}
+<w:p>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
+</w:p>
+```
+
+# **Estudo de mediação** {#estudo-mediacao}
+
+<br>
+
+## Fundamentos da mediação
+
+<br>
+
+### O que é análise de mediação?
+
+- Análise de mediação investiga se, e por quais caminhos, uma exposição ou intervenção ($X$) afeta um desfecho ($Y$) por meio de uma variável intermediária ($M$), chamada mediador.[@AglerDeBoeck2017; @Lee2021AGReMA]
+
+- A hipótese de mediação deve ser fundamentada em uma teoria ou evidência sobre a relação entre exposição, mediador e desfecho; a associação observada entre essas variáveis, por si só, não comprova um mecanismo causal.[@AglerDeBoeck2017; @BullockGreen2021]
+
+<br>
+
+### Quais são os componentes de um modelo de mediação?
+
+- Exposição ou intervenção ($X$): variável cujo efeito sobre o desfecho está sendo investigado.[@Lee2021AGReMA]
+
+- Mediador ($M$): variável intermediária que representa um possível mecanismo pelo qual $X$ afeta $Y$.[@Bours2023]
+
+- Desfecho ($Y$): resultado de interesse que pode ser afetado por $X$ diretamente ou por caminhos que passam por $M$.[@AglerDeBoeck2017]
+
+- Confundidores: causas comuns de pares de variáveis que podem distorcer as relações $X$–$M$, $X$–$Y$ ou $M$–$Y$.[@Lee2021AGReMA]
+
+<br>
+
+### O que são efeitos total, direto e indireto?
+
+- O efeito total descreve a mudança em $Y$ associada à mudança em $X$, sem separar os caminhos que passam pelo mediador.[@AglerDeBoeck2017]
+
+- O efeito indireto descreve a parte do efeito de $X$ sobre $Y$ transmitida por um ou mais mediadores.[@Bours2023]
+
+- O efeito direto descreve a parte do efeito de $X$ sobre $Y$ que não passa pelo mediador especificado na análise.[@Bours2023]
+
+- Em modelos lineares aditivos sem interação entre $X$ e $M$ e com a mesma especificação de covariáveis, o efeito total pode ser decomposto como $c = c' + ab$, em que $a$ representa o caminho $X \rightarrow M$, $b$ representa o caminho $M \rightarrow Y$ ajustado por $X$, e $c'$ representa o caminho direto $X \rightarrow Y$.[@AglerDeBoeck2017]
+
+- Essa decomposição algébrica não deve ser transportada automaticamente para modelos não lineares, outras escalas de efeito ou modelos com interação.[@YuLi2017]
+
+<br>
+
+### É necessário haver um efeito total estatisticamente significativo?
+
+- Não necessariamente. Efeitos indiretos em direções opostas podem se compensar, de modo que o efeito total seja pequeno mesmo quando há caminhos indiretos relevantes.[@AglerDeBoeck2017]
+
+- A interpretação deve se concentrar na estimativa do efeito de interesse e em sua incerteza, sem reduzir a conclusão a uma sequência de testes de significância.[@AglerDeBoeck2017; @Lee2021AGReMA]
+
+<br>
+
+## Modelos e estimandos
+
+<br>
+
+### Quais abordagens podem ser usadas para estimar efeitos de mediação?
+
+- Abordagens baseadas em regressão estimam caminhos entre exposição, mediador e desfecho e podem quantificar efeitos indiretos sob condições específicas do modelo.[@AglerDeBoeck2017]
+
+- Abordagens baseadas em resultados potenciais definem efeitos diretos e indiretos contrafactuais e explicitam os pressupostos necessários para interpretá-los causalmente.[@Lee2021AGReMA; @YuLi2017]
+
+- A escolha da abordagem deve corresponder à pergunta científica e ao efeito de interesse; estimativas de abordagens diferentes não são necessariamente equivalentes.[@Lee2021AGReMA]
+
+<br>
+
+### Como analisar modelos com mais de um mediador?
+
+- Mediadores paralelos representam caminhos distintos entre $X$ e $Y$ que podem ocorrer sem uma ordem causal especificada entre eles.[@YuLi2017]
+
+- Mediadores seriais representam uma sequência em que um mediador afeta outro, formando caminhos como $X \rightarrow M_1 \rightarrow M_2 \rightarrow Y$.[@AglerDeBoeck2017]
+
+- A análise deve especificar quais efeitos indiretos serão estimados e justificar teoricamente a ordem dos mediadores; separar efeitos individuais requer considerar a dependência entre eles.[@YuLi2017]
+
+- O pacote *mma* apresenta métodos para estimar efeitos mediados por múltiplos mediadores e permite considerar variáveis de diferentes tipos e modelos preditivos flexíveis; a escolha da implementação deve respeitar o estimando e os pressupostos do estudo.[@YuLi2017]
+
+<br>
+
+### Como a mediação muda em modelos não lineares?
+
+- Em modelos logísticos, probit ou outros modelos não lineares, os coeficientes podem estar em escalas diferentes quando mediadores são adicionados ao modelo.[@YuLi2017]
+
+- Por isso, o produto de coeficientes $ab$ não deve ser usado automaticamente como medida de efeito indireto; é necessário especificar a escala e um método compatível com o estimando.[@YuLi2017]
+
+<br>
+
+## Interpretação causal e limitações
+
+<br>
+
+### Quais pressupostos sustentam uma interpretação causal?
+
+- A exposição deve preceder o mediador, e o mediador deve preceder o desfecho, para sustentar a direção temporal proposta.[@Lee2021AGReMA]
+
+- Devem ser consideradas causas comuns dos caminhos exposição–mediador, exposição–desfecho e mediador–desfecho, incluindo confundidores que não foram medidos.[@Lee2021AGReMA; @Fritz2016]
+
+- Em análises de efeitos naturais, é especialmente importante avaliar confundidores da relação mediador–desfecho que possam ter sido causados pela exposição, pois o ajuste convencional pode não identificar o efeito pretendido.[@Lee2021AGReMA]
+
+- Consistência, positividade, ausência de confundimento não controlado e especificação adequada dos modelos também sustentam a interpretação causal.[@Lee2021AGReMA]
+
+- Randomizar $X$ pode reduzir o confundimento da relação exposição–desfecho, mas não randomiza $M$ nem elimina automaticamente o confundimento da relação mediador–desfecho.[@BullockGreen2021; @Lee2021AGReMA]
+
+<br>
+
+### Como representar o modelo causal?
+
+- Um diagrama acíclico direcionado deve representar exposição, mediador, desfecho, confundidores relevantes e os caminhos causais assumidos.[@Lee2021AGReMA]
+
+- O diagrama deve indicar quais confundidores foram medidos e ajustados e quais permaneceram sem controle.[@Lee2021AGReMA]
+
+- Ajustar por um colisor pode introduzir viés; a seleção de covariáveis deve se basear no modelo causal e no estimando, não apenas em associações observadas.[@Lee2021AGReMA]
+
+- A identificação de confundidores, mediadores e colisores em diagramas é apresentada no capítulo \@ref(analise-causal).
+
+<br>
+
+### Como erro de mensuração e confundimento podem afetar as estimativas?
+
+- Erro de mensuração no mediador e omissão de confundidores da relação mediador–desfecho podem enviesar os coeficientes e o efeito indireto estimado.[@Fritz2016]
+
+- Em algumas condições, o erro de mensuração no mediador tende a reduzir o efeito mediado estimado, enquanto a omissão de confundidores pode aumentar esse efeito; quando ocorrem juntos, o viés resultante depende da magnitude de cada problema.[@Fritz2016]
+
+- A direção do viés não é universal; a qualidade das medidas e as fontes de confundimento devem ser discutidas para cada estudo.[@Fritz2016]
+
+<br>
+
+### Quais são os limites da mediação convencional por regressão?
+
+- A associação entre mediador e desfecho pode estar confundida, mesmo quando a exposição foi randomizada; por isso, a decomposição de regressão não demonstra, sozinha, que o mediador transmitiu causalmente o efeito.[@BullockGreen2021]
+
+- Bullock e Green discutem uma alternativa baseada em desenho experimental, na qual intervenções são planejadas para alterar mecanismos candidatos e seus efeitos são avaliados com pressupostos próprios.[@BullockGreen2021]
+
+- Essa proposta é uma alternativa metodológica, não uma solução universal; o desenho deve ser viável e adequado à pergunta, e os pressupostos de cada abordagem precisam ser explicitados.[@BullockGreen2021; @Lee2021AGReMA]
+
+<br>
+
+### Mediação é o mesmo que modificação de efeito ou interação?
+
+- Não. Mediação descreve um caminho intermediário pelo qual $X$ pode afetar $Y$.[@Bours2023]
+
+- Modificação de efeito descreve a variação do efeito de $X$ sobre $Y$ entre níveis de uma terceira variável.[@Bours2023]
+
+- Interação descreve uma situação em que, na escala de efeito escolhida, o efeito conjunto de duas exposições difere do esperado a partir dos efeitos de cada uma isoladamente.[@Bours2023]
+
+- Mediação, modificação de efeito e interação podem coexistir, mas respondem a perguntas diferentes e exigem estimandos distintos.[@Bours2023]
+
+<br>
+
+## Planejamento e interpretação
+
+<br>
+
+### O que deve ser definido antes da análise?
+
+- A hipótese sobre o mecanismo e a ordem temporal esperada entre exposição, mediador e desfecho.[@Lee2021AGReMA]
+
+- O efeito de interesse, como efeito indireto natural, efeito direto natural, efeito direto controlado ou efeito interventional.[@Lee2021AGReMA]
+
+- As medidas, possíveis confundidores, moderadores, interações, modelo estatístico e estratégia para dados ausentes.[@Lee2021AGReMA]
+
+- O tamanho da amostra incluído na análise e se houve cálculo específico de poder para os efeitos mediados.[@Lee2021AGReMA]
+
+<br>
+
+### Para que servem as análises de sensibilidade?
+
+- Avaliam quanto as conclusões mudariam sob violações plausíveis de pressupostos causais ou estatísticos, como confundimento não medido, erro de mensuração ou diferentes estratégias para dados ausentes.[@Lee2021AGReMA; @Fritz2016]
+
+- Não provam que os pressupostos são verdadeiros; ajudam a mostrar a robustez das estimativas e a magnitude de viés que poderia alterar a interpretação.[@Lee2021AGReMA]
+
+<br>
+
+### Como interpretar um efeito indireto estimado?
+
+- A interpretação deve considerar magnitude, escala, intervalo de confiança, plausibilidade do mecanismo e robustez aos pressupostos causais.[@AglerDeBoeck2017; @Lee2021AGReMA]
+
+- Um intervalo que não inclua o valor nulo não elimina viés por confundimento, erro de mensuração, seleção ou especificação inadequada do modelo.[@Fritz2016; @Lee2021AGReMA]
+
+- A ausência de evidência de mediação para um mediador específico não demonstra que nenhum mecanismo intermediário exista; a conclusão se limita aos mediadores, medidas, desenho e precisão avaliados.[@Paz2023; @Lee2021AGReMA]
+
+<br>
+
+### Que exemplo aplicado ilustra uma análise de mediação?
+
+- Paz e colaboradores realizaram uma análise secundária de um ensaio clínico randomizado de três braços em terapia manual, investigando se intensidade e duração da dor e mudança na pressão arterial sistólica mediavam efeitos sobre medidas de variabilidade da frequência cardíaca.[@Paz2023]
+
+- O artigo pode ser usado para discutir como formular uma hipótese de mecanismo e como interpretar resultados para mediadores candidatos sem transformar uma análise secundária em prova definitiva do mecanismo causal.[@Paz2023; @Lee2021AGReMA]
+
+<br>
+
+## Diretrizes para redação
+
+<br>
+
+### Quais diretrizes devem ser consultadas para relatar uma análise de mediação?
+
+- A rede *Enhancing the QUAlity and Transparency Of health Research* ([EQUATOR Network](https://www.equator-network.org/)) reúne diretrizes de relato para diferentes desenhos de estudo.
+
+- *A Guideline for Reporting Mediation Analyses of Randomized Trials and Observational Studies: The AGReMA Statement*.[@Lee2021AGReMA]
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>

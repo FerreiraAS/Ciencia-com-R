@@ -1267,7 +1267,130 @@ O pacote *regtomean*[@regtomean] fornece as funções `cordata` para calcular a 
 
 ### O que é pensamento Bayesiano?
 
-- .[@REF]
+-   O pensamento Bayesiano representa a incerteza sobre hipóteses ou parâmetros por meio de probabilidades. Quando novos dados são observados, essas probabilidades são atualizadas pelo teorema de Bayes.[@Goligher2024; @SennBayes2011]
+
+-   A probabilidade *a priori* representa a incerteza antes dos dados; a verossimilhança descreve quão compatíveis os dados são com cada valor ou hipótese; e a probabilidade *a posteriori* representa a incerteza após combinar as duas informações.[@grami2023; @Goligher2024]
+
+<br>
+
+\begin{equation}
+P(H \mid D) = \frac{P(D \mid H)P(H)}{P(D)}
+\end{equation}
+
+<br>
+
+-   A probabilidade $P(D)$ considera a evidência sob todas as hipóteses possíveis e funciona como fator de normalização. Em um conjunto discreto de hipóteses, $P(D)=\sum_i P(D \mid H_i)P(H_i)$.[@grami2023]
+
+-   A probabilidade *a posteriori* é condicional ao modelo e à distribuição *a priori* escolhidos. Por isso, uma análise Bayesiana exige explicitar essas escolhas e avaliar se as conclusões mudam sob alternativas plausíveis.[@SennBayes2011; @Goligher2024; @Lee2026]
+
+<br>
+
+### Como a probabilidade de um evento muda diante de uma evidência?
+
+-   O teorema de Bayes ajuda a responder perguntas do tipo “qual é a probabilidade da hipótese depois de observar este resultado?”. Essa probabilidade inversa não é igual à probabilidade de observar o resultado se a hipótese for verdadeira.[@SennBayes2011; @grami2023]
+
+<br>
+
+### Como uma distribuição *a priori* é atualizada?
+
+-   Para uma proporção desconhecida $\theta$, uma distribuição Beta pode representar a incerteza *a priori*. Se os dados forem binomiais, a atualização resulta em outra distribuição Beta: os sucessos observados são somados ao primeiro parâmetro, e as falhas ao segundo.[@Goligher2024]
+
+-   Considere uma distribuição *a priori* $\operatorname{Beta}(2,2)$ e uma amostra com 8 sucessos em 10 tentativas. A distribuição *a posteriori* é $\operatorname{Beta}(10,4)$. A média posterior é 10/14, aproximadamente 71,4%.
+
+```{r bayes-beta-binomial, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Distribuições a priori e a posteriori", fig.width=15, fig.height=4, out.width="100%"}
+alpha_prior <- 2
+beta_prior <- 2
+sucessos <- 8
+tentativas <- 10
+falhas <- tentativas - sucessos
+
+alpha_posterior <- alpha_prior + sucessos
+beta_posterior <- beta_prior + falhas
+
+curve(dbeta(x, alpha_prior, beta_prior), from = 0, to = 1,
+      lwd = 2, col = "steelblue", xlab = expression(theta),
+      ylab = "Densidade", main = "Distribuições a priori e a posteriori")
+curve(dbeta(x, alpha_posterior, beta_posterior), from = 0, to = 1,
+      lwd = 2, col = "firebrick", add = TRUE)
+legend("topright", c("A priori", "A posteriori"),
+       col = c("steelblue", "firebrick"), lwd = 2, bty = "n")
+```
+
+<br>
+
+### O que é um intervalo de credibilidade?
+
+-   Um intervalo de credibilidade de 95% contém 95% da probabilidade posterior de $\theta$, dadas a distribuição *a priori*, a verossimilhança e os dados observados e descreve diretamente a incerteza posterior sobre o parâmetro.[@Goligher2024]
+
+-   Um intervalo de credibilidade não deve ser interpretado como se fosse um intervalo de confiança frequentista: os dois procedimentos usam definições de probabilidade diferentes e respondem a perguntas diferentes.[@Goligher2024]
+
+-   A interpretação posterior não elimina a necessidade de definir o efeito de interesse. Se valores muito próximos de zero forem irrelevantes na prática, a pergunta pode ser sobre a probabilidade de o efeito estar dentro de uma região de equivalência ou de ultrapassar um limiar de importância, em vez de perguntar apenas se ele é exatamente zero.[@Lassance2025; @lakens2020; @Kline2024]
+
+<br>
+
+### Como comparar uma hipótese nula e uma alternativa?
+
+-   O fator de Bayes compara a probabilidade dos dados sob duas hipóteses: $BF_{10}=P(D\mid H_1)/P(D\mid H_0)$. Valores acima de 1 favorecem $H_1$; valores abaixo de 1 favorecem $H_0$.[@Dienes2014; @SennBayes2011]
+
+-   O fator de Bayes não é a probabilidade posterior de uma hipótese. Para obter probabilidades posteriores, ele deve ser combinado com as probabilidades *a priori* das hipóteses. Em termos de chances, $\text{chances posteriores}=BF_{10}\times\text{chances a priori}$.[@Dienes2014]
+
+-   Um resultado não significativo, por si só, não demonstra que a hipótese nula seja verdadeira. A análise pode quantificar evidência relativa entre hipóteses, mas o resultado depende de como a alternativa foi especificada.[@Dienes2014; @Kline2024]
+
+<br>
+
+### Como avaliar a sensibilidade à distribuição *a priori*?
+
+-   Uma análise de sensibilidade repete a atualização com distribuições *a priori* alternativas que sejam defensáveis. Se as conclusões mudarem muito, essa dependência deve fazer parte da interpretação e do relato.[@Goligher2024; @Lee2026]
+
+-   A escolha não deve ser feita apenas para obter uma conclusão desejada. Em aplicações clínicas, por exemplo, é importante justificar a informação prévia e examinar como diferentes escolhas alteram as estimativas e as decisões.[@Lee2026]
+
+<br>
+
+### Como verificar se o modelo consegue reproduzir os dados?
+
+-   Uma verificação preditiva posterior simula novos dados a partir do modelo ajustado e os compara com os dados observados. Diferenças sistemáticas indicam que a distribuição escolhida pode não representar aspectos importantes dos dados.[@burkner2026]
+
+```{r bayes-verificacao-preditiva, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.cap = "Distribuição preditiva posterior", fig.width=15, fig.height=4, out.width="100%"}
+set.seed(1234)
+alpha_posterior <- 10
+beta_posterior <- 4
+tentativas <- 10
+sucessos <- 8
+
+theta_simulada <- rbeta(5000, alpha_posterior, beta_posterior)
+sucessos_replicados <- rbinom(5000, size = tentativas, prob = theta_simulada)
+
+hist(sucessos_replicados, breaks = seq(-0.5, tentativas + 0.5, by = 1),
+     xlab = "Número de sucessos em 10 tentativas",
+     main = "Distribuição preditiva posterior", col = "grey85",
+     border = "white")
+abline(v = sucessos, col = "firebrick", lwd = 2)
+legend("topright", "Valor observado", col = "firebrick", lwd = 2, bty = "n")
+```
+
+<br>
+
+### Como distinguir relevância estatística de relevância prática?
+
+-   Uma hipótese pode incluir uma faixa de valores considerados praticamente equivalentes, em vez de testar apenas uma igualdade pontual. A largura dessa faixa deve ser justificada pela área de aplicação e definida antes de interpretar os resultados.[@lakens2020; @Lassance2025]
+
+-   Com a distribuição posterior, podemos calcular diretamente a probabilidade de o parâmetro estar em uma região de equivalência. No exemplo abaixo, a região de 45% a 55% representa valores próximos de 50%; o limite é apenas ilustrativo e deve ser escolhido com justificativa substantiva.[@Lassance2025]
+
+-   Em contextos não paramétricos, hipóteses práticas também podem ser construídas em torno de regiões de tolerância ou de desvios considerados irrelevantes, como ilustra a abordagem PROTEST.[@Lassance2025]
+
+<br>
+
+### O que o pensamento Bayesiano não resolve sozinho?
+
+-   Uma distribuição posterior não corrige um desenho de estudo inadequado, uma medida enviesada ou um modelo incompatível com os dados. As conclusões continuam condicionadas ao modelo de observação e às escolhas feitas na análise.[@SennBayes2011; @Goligher2024]
+
+-   Em estudos causais, randomizar a alocação ajuda a proteger a comparação contra desequilíbrios de causas conhecidas e desconhecidas. A randomização também pode fundamentar inferências Bayesianas; ela não é exclusiva de análises frequentistas.[@Leavitt2024]
+
+-   Em análises de mediação, incorporar uma distribuição posterior não elimina problemas como confundimento ou erro de mensuração. Esses problemas dizem respeito ao desenho e às medidas, e podem enviesar a estimativa do efeito mediado.[@Fritz2016; @Paz2023]
+
+-   Em ensaios clínicos, a distribuição posterior pode apoiar decisões sobre benefício, dano ou futilidade e também análises adaptativas. Essas decisões exigem critérios explícitos e planejamento das propriedades operacionais do estudo.[@Goligher2024; @Lee2026]
+
+-   O pensamento Bayesiano é uma forma de quantificar e atualizar incerteza, não uma garantia automática de objetividade ou de certeza. A transparência sobre modelo, distribuição *a priori*, análise de sensibilidade e limites da evidência é parte essencial da interpretação.[@SennBayes2011; @Goligher2024; @Lee2026]
 
 <br>
 

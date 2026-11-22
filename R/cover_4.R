@@ -3,27 +3,37 @@ H <- 11.69
 
 refs <- as.character(length(RefManageR::ReadBib("./bib/references.bib")))
 
-tex_data <- TeXCheckR::read_tex_document(
-  file.path("./docs", "Ciencia-com-R.tex")
-)
-source(file.path("R", "tex_to_df.R"), local = knitr::knit_global())
-df <- parse_tex_structure(tex_data)
+tex_file <- file.path("./docs", "Ciencia-com-R.tex")
 
-# unique questions in subsection column
-perguntas <- df |>
-  dplyr::distinct(subsection) |>
-  dplyr::filter(!is.na(subsection)) |>
-  nrow()
+perguntas <- "N/D"
+respostas <- "N/D"
+figuras <- "N/D"
 
-# unique respostas in item column
-respostas <- df |>
-  dplyr::distinct(item) |>
-  dplyr::filter(!is.na(item)) |>
-  nrow()
-
-figuras <- df |>
-  dplyr::filter(!is.na(graphic)) |>
-  nrow()
+if (file.exists(tex_file)) {
+  
+  tex_data <- TeXCheckR::read_tex_document(tex_file)
+  
+  source(
+    file.path("R", "tex_to_df.R"),
+    local = knitr::knit_global()
+  )
+  
+  tex_df <- parse_tex_structure(tex_data)
+  
+  stopifnot(is.data.frame(tex_df))
+  
+  perguntas <- dplyr::n_distinct(
+    tex_df$subsection,
+    na.rm = TRUE
+  )
+  
+  respostas <- dplyr::n_distinct(
+    tex_df$item,
+    na.rm = TRUE
+  )
+  
+  figuras <- sum(!is.na(tex_df$graphic))
+}
 
 texto <- paste0('
   <p style=\"font-size: 60px;\"><b>Ciência com R</b></p>
