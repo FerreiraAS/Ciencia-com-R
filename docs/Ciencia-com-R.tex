@@ -1419,7 +1419,7 @@ P(d) = \log_{10}(d + 1) - \log_{10}(d) = \log_{10}\left(1 + \frac{1}{d}\right)
 \begin{itemize}
 \tightlist
 \item
-  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.499 e variância \(\sigma^{2}\) = 0.25. A distribuição amostral da média de 10000 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.499 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
+  Mais um exemplo, o lançamento de uma moeda com distribuição uniforme no espaço amostral \(S=\{0,1\}\) --- codificado para \(sucesso = 1\) e \(insucesso = 0\) --- tem média \(\mu\) = 0.493 e variância \(\sigma^{2}\) = 0.25. A distribuição amostral da média de 10000 amostras de tamanho 5, 50, 500 e 5000 tomadas da população com reposição e igual probabilidade se aproxima de uma distribuição normal com média \(\mu\) = 0.493 e variância \(\sigma^{2}\) = 0, independentemente da distribuição da população:
 \end{itemize}
 
 \begin{figure}
@@ -11638,6 +11638,106 @@ B & C & 4.213 & <0.001 & <0.001 \\
 \end{tabular*}
 \end{table}
 
+\chapter{\texorpdfstring{\textbf{Concordância}}{Concordância}}\label{concordancia}
+
+\section{Frequência absoluta e percentual}\label{frequuxeancia-absoluta-e-percentual}
+
+\begin{table}[H]
+\caption{\label{tab:concordancia-frequencias}Concordância entre dois avaliadores: frequências absolutas e percentuais} 
+\fontsize{12.0pt}{14.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ccrr}
+\toprule
+Avaliador 1 & Avaliador 2 & Frequência absoluta & Percentual (\%) \\ 
+\midrule\addlinespace[2.5pt]
+Negativo & Negativo & 67 & 67.0 \\ 
+Negativo & Positivo & 14 & 14.0 \\ 
+Positivo & Negativo & 3 & 3.0 \\ 
+Positivo & Positivo & 16 & 16.0 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\begin{center}\includegraphics{Ciencia-com-R_files/figure-latex/concordancia-frequencias-1} \end{center}
+
+\section{Kappa de Cohen}\label{kappa-de-cohen}
+
+\begin{table}[H]
+\caption{\label{tab:concordancia-kappa}Concordância observada e kappa de Cohen} 
+\fontsize{12.0pt}{14.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrl}
+\toprule
+Medida & Estimativa & IC 95\% & P-valor \\ 
+\midrule\addlinespace[2.5pt]
+Concordância observada & 83.0\% & (0.755,0.905) & <0,001 \\ 
+Kappa de Cohen & 0.548 & (0.362,0.734) & <0,001 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\section{Kappa ponderado}\label{kappa-ponderado}
+
+\begin{table}[H]
+\caption{\label{tab:concordancia-kappa-ponderado}Kappa ponderado para categorias ordinais} 
+\fontsize{12.0pt}{14.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrl}
+\toprule
+Medida & Kappa & IC 95\% & P-valor \\ 
+\midrule\addlinespace[2.5pt]
+Kappa ponderado de Cohen (pesos quadráticos) & 0.854 & (0.804,0.905) & <0,001 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\begin{center}\includegraphics{Ciencia-com-R_files/figure-latex/concordancia-kappa-ponderado-1} \end{center}
+
+\section{AC1 de Gwet}\label{ac1-de-gwet}
+
+\begin{table}[H]
+\caption{\label{tab:concordancia-ac1}Coeficiente AC1 de Gwet} 
+\fontsize{12.0pt}{14.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr}
+\toprule
+Medida & Estimativa & IC 95\% \\ 
+\midrule\addlinespace[2.5pt]
+AC1 de Gwet & 0.730 & (0.597,0.863) \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\section{Coeficiente de correlação intraclasse (ICC)}\label{coeficiente-de-correlauxe7uxe3o-intraclasse-icc}
+
+\begin{table}[H]
+\caption{\label{tab:concordancia-icc}ICC estimado segundo três modelos} 
+\fontsize{12.0pt}{14.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}rllll}
+\toprule
+ICC & Modelo & Especificação & IC 95\% & P-valor \\ 
+\midrule\addlinespace[2.5pt]
+0.941 & ICC(1,1) & Uma via, medida individual & [0.891, 0.968] & <0.001 \\ 
+0.941 & ICC(2,1) & Duas vias, concordância absoluta, medida individual & [0.891, 0.968] & <0.001 \\ 
+0.941 & ICC(3,1) & Duas vias, consistência, medida individual & [0.891, 0.968] & <0.001 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\section{Gráfico de Bland--Altman}\label{gruxe1fico-de-blandaltman}
+
+\begin{center}\includegraphics{Ciencia-com-R_files/figure-latex/concordancia-bland-altman-1} \end{center}
+
+\begin{table}[H]
+\caption{\label{tab:concordancia-bland-altman}Resumo da análise de Bland–Altman} 
+\fontsize{12.0pt}{14.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrl}
+\toprule
+Estatística & Estimativa & IC 95\% \\ 
+\midrule\addlinespace[2.5pt]
+Viés médio & 0.64 & [-0.62, 1.9] \\ 
+Limite inferior de concordância & -7.09 & [-9.27, -4.92] \\ 
+Limite superior de concordância & 8.37 & [6.19, 10.54] \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
 \chapter{\texorpdfstring{\textbf{Associação}}{Associação}}\label{associacao}
 
 \section{\texorpdfstring{Teste de Qui-quadrado (\(\chi^2\))}{Teste de Qui-quadrado (\textbackslash chi\^{}2)}}\label{teste-de-qui-quadrado-chi2}
@@ -20239,8 +20339,12 @@ O pacote \emph{retractcheck}\textsuperscript{\citeproc{ref-retractcheck}{654}} f
   Monteiro ER, Aguilera LM, Ruá-Alonso M, et al.~Effect of Manual Massage, Foam Rolling, and Strength Training on Cardiovascular Responses in Adults: A Scoping Review. , org. fevereiro 2025. \url{doi:10.20944/preprints202502.1932.v1}
 \item
   Menezes K, B. Lima MA, Xerez DR, et al.~RETURN OF VOLUNTARY MOTOR CONTRACTION AFTER COMPLETE SPINAL CORD INJURY: A PILOT HUMAN STUDY ON POLYLAMININ. , org. fevereiro 2024. \url{doi:10.1101/2024.02.19.24301010}
-\item
-  Alaparthi GK, Gatty AP, Isa H, et al.~Reference Values for the Grocery Shelving Test among United Arab Emirates Population: A Cross Sectional Study. , org. maio 2023. \url{doi:10.20944/preprints202305.1684.v1}
+\end{enumerate}
+
+NULL
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \item
   Alaparthi GK, Gatty AP, Isa H, et al.~Reference Values for the Grocery Shelving Test among United Arab Emirates Population: A Cross Sectional Study. , org. maio 2023. \url{doi:10.20944/preprints202305.1684.v2}
 \item
