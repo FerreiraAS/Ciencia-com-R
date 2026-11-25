@@ -66,40 +66,10 @@ tbl_pearson <-
     Correlação = "r de Pearson",
     `IC 95%` = "IC 95%",
     p = "P-valor"
-  ) %>%
-  gt::tab_caption(
-    "Correlação de Pearson"
-  ) %>%
-  gt::tab_source_note(
-    "IC = intervalo de confiança de 95%."
   )
 
 tbl_pearson
 ```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats] fornece a função `cor.test` para calcular o coeficiente de correlação de Pearson ($r$).
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece a função `correlation` para calcular o coeficiente de correlação de Pearson ($r$).
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psychmeta*[@psychmeta] fornece a função `correct_r_coarseness` para calcular o coeficiente de correlação desatenuado ($r_{x'y'}$).
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psychmeta*[@psychmeta] fornece a função `correct_r` para calcular o coeficiente de correlação em escala restrita e/ou com erro de mensuração ($r_{x'y'}$).
-:::
 
 <br>
 
@@ -161,28 +131,10 @@ tbl_spearman <-
     Correlação = "ρ de Spearman",
     `IC 95%` = "IC 95%",
     p = "P-valor"
-  ) %>%
-  gt::tab_caption(
-    "Correlação de Spearman"
-  ) %>%
-  gt::tab_source_note(
-    "IC = intervalo de confiança de 95%."
   )
 
 tbl_spearman
 ```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats] fornece a função `cor.test` para calcular o coeficiente de correlação de Spearman ($\rho$).
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece a função `correlation` para calcular o coeficiente de correlação de Spearman ($\rho$).
-:::
 
 <br>
 
@@ -244,28 +196,10 @@ tbl_kendall <-
     Correlação = "τ de Kendall",
     `IC 95%` = "IC 95%",
     p = "P-valor"
-  ) %>%
-  gt::tab_caption(
-    "Correlação de Kendall"
-  ) %>%
-  gt::tab_source_note(
-    "IC = intervalo de confiança de 95%."
   )
 
 tbl_kendall
 ```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats] fornece a função `cor.test` para calcular o coeficiente de correlação de Kendall $\tau$.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece a função `correlation` para calcular o coeficiente de correlação de Kendall $\tau$.
-:::
 
 <br>
 
@@ -315,22 +249,10 @@ tbl_biserial <-
     Correlação = "r bisserial",
     `IC 95%` = "IC 95%",
     `P-valor` = "P-valor"
-  ) %>%
-  gt::tab_caption(
-    "Correlação bisserial"
-  ) %>%
-  gt::tab_source_note(
-    "IC = intervalo de confiança de 95%. O pacote psych não fornece intervalo de confiança nem valor de p para a correlação bisserial."
   )
 
 tbl_biserial
 ```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psych*[@psych] fornece a função `biserial` para calcular o coeficiente de correlação bisserial ($r_{b}$).
-:::
 
 <br>
 
@@ -394,22 +316,10 @@ tbl_ponto_bisserial <-
     Correlação = "r ponto-bisserial",
     `IC 95%` = "IC 95%",
     p = "P-valor"
-  ) %>%
-  gt::tab_caption(
-    "Correlação ponto-bisserial"
-  ) %>%
-  gt::tab_source_note(
-    "IC = intervalo de confiança de 95%."
   )
 
 tbl_ponto_bisserial
 ```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece a função `correlation` para calcular o coeficiente de correlação ponto-bisserial ($r_{pb}$).
-:::
 
 <br>
 
@@ -462,28 +372,10 @@ tbl_tetracoric <-
     Correlação = "r tetracórico",
     `IC 95%` = "IC 95%",
     `P-valor` = "P-valor"
-  ) %>%
-  gt::tab_caption(
-    "Correlação tetracórica"
-  ) %>%
-  gt::tab_source_note(
-    "IC = intervalo de confiança de 95%. O valor de p não é fornecido para a correlação tetracórica."
   )
 
 tbl_tetracoric
 ```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psych*[@psych] fornece a função `tetrachoric` para calcular o coeficiente de correlação tetracórica ($r_{tet}$).
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *statpsych*[@statpsych] fornece a função `ci.tetra` para calcular o intervalo de confiança do coeficiente de correlação tetracórica ($r_{tet}$).
-:::
 
 <br>
 
@@ -540,22 +432,10 @@ tbl_policorica <-
     Correlação = "r policórico",
     `IC 95%` = "IC 95%",
     `P-valor` = "P-valor"
-  ) %>%
-  gt::tab_caption(
-    "Correlação policórica"
-  ) %>%
-  gt::tab_source_note(
-    "IC = intervalo de confiança de 95%. O pacote psych não fornece IC nem valor de p para a correlação policórica."
   )
 
 tbl_policorica
 ```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *psych*[@psych] fornece a função `polychoric` para calcular o coeficiente de correlação policórica ($r_{pol}$).
-:::
 
 <br>
 
@@ -609,22 +489,10 @@ tbl_polisserial <-
     Correlação = "r polisserial",
     `IC 95%` = "IC 95%",
     `P-valor` = "P-valor"
-  ) %>%
-  gt::tab_caption(
-    "Correlação polisserial"
-  ) %>%
-  gt::tab_source_note(
-    "IC = intervalo de confiança de 95%. O pacote polycor não fornece IC nem valor de p para a correlação polisserial."
   )
 
 tbl_polisserial
 ```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *polycor*[@polycor] fornece a função `polyserial` para calcular o coeficiente de correlação polisserial.
-:::
 
 <br>
 
@@ -688,22 +556,10 @@ tbl_shepherd <-
     Correlação = "π de Shepherd",
     `IC 95%` = "IC 95%",
     p = "P-valor"
-  ) %>%
-  gt::tab_caption(
-    "Correlação de Shepherd"
-  ) %>%
-  gt::tab_source_note(
-    "IC = intervalo de confiança de 95%."
   )
 
 tbl_shepherd
 ```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] fornece a função `correlation` para calcular o coeficiente de correlação de Shepherd $\pi$.
-:::
 
 <br>
 
@@ -772,22 +628,10 @@ tbl_correlacao_parcial <-
     Correlação = "r parcial",
     `IC 95%` = "IC 95%",
     p = "P-valor"
-  ) %>%
-  gt::tab_caption(
-    "Correlação parcial"
-  ) %>%
-  gt::tab_source_note(
-    "IC = intervalo de confiança de 95%."
   )
 
 tbl_correlacao_parcial
 ```
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *correlation*[@correlation] do projeto *easystats*[@easystats] permite calcular correlações parciais por meio do argumento `partial = TRUE`.
-:::
 
 <br>
 
@@ -849,12 +693,6 @@ tbl_canonica <-
   ) %>%
   gt::cols_label(
     Correlação = "Correlação canônica"
-  ) %>%
-  gt::tab_caption(
-    "Correlações canônicas"
-  ) %>%
-  gt::tab_source_note(
-    "Os P-valores foram obtidos pelo teste Lambda de Wilks. A função stats::cancor() não fornece intervalos de confiança para as correlações canônicas."
   )
 
 tbl_canonica
@@ -862,23 +700,11 @@ tbl_canonica
 
 <br>
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats] fornece a função `cancor` para calcular a correlação canônica entre dois conjuntos de variáveis.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *CCP*[@CCP] fornece a função `p.asym` para realizar o teste de significância da correlação canônica.
-:::
-
-<br>
-
 ## Gráfico de dispersão
 
 <br>
 
-```{r correlacao-grafico, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.pos="H", fig.cap = "Diferentes forças e direção de correlação entre duas variáveis X e Y."}
+```{r correlacao-grafico, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.pos="H"}
 # Generate data with given correlation
 generate_data <- function(n, rho) {
   Sigma <- base::matrix(c(1, rho, rho, 1), ncol = 2)
@@ -982,26 +808,9 @@ corrplot::corrplot(
 
 <br>
 
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *stats*[@stats] fornece a função `cor` para calcular matrizes de correlação utilizando diferentes coeficientes, como Pearson, Spearman e Kendall.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *corrplot*[@corrplot] fornece a função `corrplot` para visualização da matriz de correlação.
-:::
-
-<br>
-
-::: {.infobox .Rlogo data-latex="{images/Rlogo}"}
-O pacote *corrplot*[@corrplot] fornece a função `cor.mtest` para calcular os P-valores e intervalos de confiança da matriz de correlação.
-:::
-
-<br>
-
 ```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
 cat(readLines("citation.html"), sep = "\n")
 ```
 
 <br>
+

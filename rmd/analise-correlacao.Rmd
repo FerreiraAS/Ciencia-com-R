@@ -1,0 +1,260 @@
+```{=openxml}
+<w:p>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
+</w:p>
+```
+
+# **Análise de correlação** {#analise-correlacao}
+
+<br>
+
+## Fundamentos da análise de correlação
+
+<br>
+
+### O que a análise correlacional avalia?
+
+-   A análise correlacional quantifica a direção e a intensidade da associação entre variáveis, sem especificar uma variável como resposta e outra como preditora.[@Schober2018; @Zou2003Correlation]
+
+<br>
+
+### Como escolher entre Pearson, Spearman e Kendall?
+
+-   Pearson descreve associação linear entre variáveis quantitativas, enquanto Spearman e Kendall avaliam associação monotônica por meio das posições relativas dos valores.[@Schober2018; @Makowski2020Correlation]
+
+-   Spearman ou Kendall são alternativas quando a relação é monotônica, mas não linear, quando há dados ordinais ou quando valores extremos tornam a associação baseada nos valores originais pouco representativa.[@Schober2018; @Liu2016Correlation]
+
+-   Um coeficiente de Pearson próximo de zero indica ausência de associação linear, mas não exclui uma associação não linear entre as variáveis.[@Liu2016Correlation; @Zou2003Correlation]
+
+<br>
+
+```{r analise-correlacao-nao-linear, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+library(dplyr)
+
+# Exemplo de relação não linear em formato de U
+set.seed(2026)
+x <- seq(-3, 3, length.out = 100)
+y <- x^2 + rnorm(length(x), sd = 0.35)
+
+testes <- list(
+  Pearson = stats::cor.test(x, y, method = "pearson"),
+  Spearman = stats::cor.test(x, y, method = "spearman"),
+  Kendall = stats::cor.test(x, y, method = "kendall")
+)
+
+tibble::tibble(
+  Método = names(testes),
+  Coeficiente = vapply(testes, function(teste) unname(teste$estimate), numeric(1)),
+  `P-valor` = vapply(testes, function(teste) teste$p.value, numeric(1))
+) %>%
+  dplyr::mutate(
+    `P-valor` = dplyr::if_else(
+      `P-valor` < 0.001,
+      "<0,001",
+      sub("\\.", ",", sprintf("%.3f", `P-valor`))
+    )
+  ) %>%
+  gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
+  gt::fmt_number(columns = Coeficiente, decimals = 3) %>%
+  gt::cols_label(
+    Método = "Método",
+    Coeficiente = "Coeficiente",
+    `P-valor` = "P-valor"
+  ) %>%
+  gt::tab_caption("Coeficientes em uma relação não linear em formato de U")
+```
+
+<br>
+
+```{r analise-correlacao-nao-linear-grafico, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Relação não linear em formato de U."}
+plot(x, y,
+  xlab = "X", ylab = "Y",
+  main = "Uma relação não linear pode não ser monotônica"
+)
+lines(x, x^2, col = "steelblue", lwd = 2)
+```
+
+<br>
+
+## Interpretação dos resultados
+
+<br>
+
+### Como interpretar o coeficiente de correlação?
+
+-   O sinal do coeficiente indica a direção da associação e seu valor absoluto expressa a intensidade da relação capturada pelo método escolhido, em uma escala de −1 a 1.[@Schober2018]
+
+-   A interpretação deve considerar o gráfico de dispersão, a forma da relação, a distribuição dos dados e a presença de observações influentes, pois um único coeficiente pode ocultar padrões distintos.[@Zou2003Correlation; @CurranEverett2010]
+
+-   A restrição da variabilidade de uma das variáveis pode reduzir a magnitude observada da correlação e limitar sua interpretação para populações com maior amplitude de valores.[@CurranEverett2010]
+
+<br>
+
+```{r analise-correlacao-outlier, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+set.seed(2026)
+x <- rnorm(40)
+y <- 0.6 * x + rnorm(40, sd = 0.5)
+
+# Compara as estimativas antes e depois de incluir uma observação influente
+dados <- data.frame(x = x, y = y)
+dados_com_outlier <- rbind(dados, data.frame(x = 4, y = -6))
+
+tibble::tibble(
+  Método = c("Pearson", "Spearman"),
+  `Sem observação influente` = c(
+    stats::cor(dados$x, dados$y, method = "pearson"),
+    stats::cor(dados$x, dados$y, method = "spearman")
+  ),
+  `Com observação influente` = c(
+    stats::cor(dados_com_outlier$x, dados_com_outlier$y, method = "pearson"),
+    stats::cor(dados_com_outlier$x, dados_com_outlier$y, method = "spearman")
+  )
+) %>%
+  gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
+  gt::fmt_number(
+    columns = c(`Sem observação influente`, `Com observação influente`),
+    decimals = 3
+  ) %>%
+  gt::tab_caption("Efeito de uma observação influente sobre a correlação")
+```
+
+<br>
+
+```{r analise-correlacao-outlier-grafico, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Observação influente em um gráfico de dispersão."}
+graphics::plot(dados_com_outlier$x, dados_com_outlier$y,
+  xlab = "X", ylab = "Y",
+  main = "Uma observação influente pode alterar a correlação"
+)
+graphics::points(4, -6, col = "red", pch = 19)
+```
+
+<br>
+
+### Correlação demonstra causalidade ou concordância?
+
+-   Uma correlação observada não demonstra que uma variável causa a outra, pois a associação também pode refletir causalidade reversa, causas comuns ou outras estruturas do estudo.[@Zou2003Correlation; @CurranEverett2010]
+
+-   Correlação e concordância respondem a perguntas diferentes: a primeira mede como duas variáveis variam conjuntamente e a segunda avalia se medidas do mesmo construto produzem valores suficientemente semelhantes.[@Liu2016Correlation]
+
+<br>
+
+```{r analise-correlacao-inferencia, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+set.seed(2026)
+n <- 80
+x <- rnorm(n)
+y <- 0.5 * x + rnorm(n, sd = 0.8)
+
+teste <- stats::cor.test(x, y, method = "pearson", conf.level = 0.95)
+
+tibble::tibble(
+  Método = "Pearson",
+  n = length(x),
+  Coeficiente = unname(teste$estimate),
+  `IC 95%` = sprintf("[%.3f; %.3f]", teste$conf.int[1], teste$conf.int[2]),
+  `P-valor` = if (teste$p.value < 0.001) {
+    "<0,001"
+  } else {
+    sub("\\.", ",", sprintf("%.3f", teste$p.value))
+  }
+) %>%
+  gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
+  gt::fmt_number(columns = Coeficiente, decimals = 3) %>%
+  gt::cols_label(
+    Método = "Método",
+    n = "Tamanho amostral",
+    Coeficiente = "r de Pearson",
+    `IC 95%` = "IC 95%",
+    `P-valor` = "P-valor"
+  ) %>%
+  gt::tab_caption("Estimativa e incerteza da correlação de Pearson") %>%
+  gt::tab_source_note("IC = intervalo de confiança de 95%.")
+```
+
+<br>
+
+## Inferência e planejamento
+
+<br>
+
+### Como relatar a incerteza e a significância?
+
+-   O coeficiente deve ser acompanhado por intervalo de confiança e tamanho amostral, pois o intervalo descreve a precisão da estimativa e o valor de *p* avalia compatibilidade dos dados com uma hipótese nula especificada.[@Schober2018]
+
+-   Um valor de *p* pequeno não implica que a associação seja importante na prática, e sua interpretação deve ser feita junto à magnitude estimada e ao intervalo de confiança.[@CurranEverett2010; @KnudsonLindsey2014]
+
+-   Amostras pequenas podem produzir baixa potência e estimativas instáveis, de modo que a ausência de significância não deve ser interpretada como evidência de ausência de associação.[@KnudsonLindsey2014]
+
+<br>
+
+### Como planejar o tamanho amostral e comparar correlações?
+
+-   O planejamento amostral deve definir a associação de interesse, o nível de significância e a potência desejada, e cálculos para correlação múltipla podem ser feitos sob pressupostos distribucionais explícitos.[@GatsonisSampson1989]
+
+-   Comparações entre coeficientes exigem métodos que considerem se as correlações vêm de amostras independentes, de variáveis medidas nas mesmas pessoas ou de estratos distintos.[@RubensteinDavis1999; @Schober2018]
+
+-   Em dados estratificados, uma estimativa média ajustada pode resumir a associação entre estratos, desde que sua interpretação e o método de estimação sejam compatíveis com as diferenças entre eles.[@RubensteinDavis1999]
+
+-   Em amostras pequenas, o coeficiente amostral de Pearson pode apresentar viés, embora existam estimadores corrigidos sob condições específicas, como a normalidade bivariada.[@OlkinPratt1958]
+
+<br>
+
+```{r analise-correlacao-parcial, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE}
+set.seed(2026)
+n <- 300
+z <- rnorm(n)
+x <- 0.8 * z + rnorm(n)
+y <- 0.8 * z + rnorm(n)
+
+# Associação bruta entre X e Y
+dados <- data.frame(X = x, Y = y, Z = z)
+
+# Associação entre X e Y ajustada por Z
+resultado_parcial <- correlation::correlation(dados, partial = TRUE) %>%
+  dplyr::filter(
+    (Parameter1 == "X" & Parameter2 == "Y") |
+      (Parameter1 == "Y" & Parameter2 == "X")
+  )
+
+teste_bruto <- stats::cor.test(dados$X, dados$Y)
+
+tibble::tibble(
+  Análise = c("Correlação bruta", "Correlação parcial ajustada por Z"),
+  Coeficiente = c(unname(teste_bruto$estimate), resultado_parcial$r),
+  `IC 95%` = c(
+    sprintf("[%.3f; %.3f]", teste_bruto$conf.int[1], teste_bruto$conf.int[2]),
+    sprintf("[%.3f; %.3f]", resultado_parcial$CI_low, resultado_parcial$CI_high)
+  ),
+  `P-valor` = c(teste_bruto$p.value, resultado_parcial$p)
+) %>%
+  dplyr::mutate(
+    `P-valor` = dplyr::if_else(
+      `P-valor` < 0.001,
+      "<0,001",
+      sub("\\.", ",", sprintf("%.3f", `P-valor`))
+    )
+  ) %>%
+  gt::gt() %>%
+  gt::tab_options(latex.tbl.pos = "H") %>%
+  gt::fmt_number(columns = Coeficiente, decimals = 3) %>%
+  gt::cols_label(
+    Análise = "Análise",
+    Coeficiente = "Coeficiente",
+    `IC 95%` = "IC 95%",
+    `P-valor` = "P-valor"
+  ) %>%
+  gt::tab_caption("Associação bruta e associação ajustada por Z") %>%
+  gt::tab_source_note("IC = intervalo de confiança de 95%.")
+```
+
+<br>
+
+```{r, echo=FALSE, warning=FALSE, results='asis', eval=knitr::is_html_output()}
+cat(readLines("citation.html"), sep = "\n")
+```
+
+<br>
