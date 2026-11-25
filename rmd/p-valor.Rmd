@@ -28,7 +28,7 @@
 
 -   P-valor não mede o tamanho de efeito ou a relevância da sua observação.[@wasserstein2016]
 
--   P-valor sozinho não provê informação suficiente sobre a evidência sobre um modelo teórico. A sua interpretação correta requer uma descrição ampla sobre o delineamento, métodos e análises estatísticas aplicados no estudo.[@wasserstein2016]
+-   P-valor sozinho não provê informação suficiente sobre a evidência sobre um modelo teórico, e sua interpretação requer considerar a pergunta científica, o delineamento, os métodos e as análises estatísticas do estudo.[@wasserstein2016; @ChenEtAl2023]
 
 -   Evidência estatística de significância não provê informação sobre a magnitude do efeito observado e não necessariamente implica que o efeito é robusto.[@Landis2012; @altman2017]
 
@@ -40,7 +40,7 @@
 
 ### O que é significância estatística?
 
--   A expressão "significância estatística"[@latter1902] ou "evidência estatística de significância" sugere apenas que um experimento merece ser repetido.[@aylmerfisher1926]
+-   A expressão "significância estatística"[@latter1902] ou "evidência estatística de significância" sugere que um resultado merece atenção e investigação adicional, mas não constitui prova definitiva.[@aylmerfisher1926; @goodman2008]
 
 - Um baixo P-valor (calculado a partir dos dados, modelos e demais suposições do estudo) sugere ser improvável que os dados coletados sejam coletados no contexto de que a hipótese nula ($H_{0}$) assumida é verdadeira.[@aylmerfisher1926]
 
@@ -52,13 +52,98 @@
 
 ### Como interpretar o P-valor?
 
--   P-valores abaixo de um nível de significância estatística pré-especificado representam que um experimento merece ser repetido, com a rejeição da hipótese nula ($H_{0}$) justificada apenas quando experimentos adicionais frequentemente reportem igualmente resultados positivos (rejeição da hipótese nula ($H_{0}$).[@goodman2016]
+-   Um P-valor abaixo do nível de significância pré-especificado indica incompatibilidade dos dados com o modelo sob $H_0$, mas não constitui prova definitiva nem dispensa a interpretação da estimativa, da incerteza e da evidência de replicação.[@goodman2008; @senn2002; @greenland2016]
 
 -   P-valor resulta da coleta e análise de dados, e assim quantifica a plausibilidade dos dados observados sob a hipótese nula ($H_{0}$).[@heinze2016]
 
 -   P-valores podem indicar quantitativamente a incompatibilidade entre os dados obtidos e o modelo estatístico especificado a priori (geralmente constituído pela hipótese nula ($H_{0}$).[@wasserstein2016]
 
 -   P-valores menores/maiores do que o nível de significância estatístico pré-estabelecido não devem ser utilizados como única fonte de informação para tomada de decisão em ciência.[@wasserstein2016]
+
+<br>
+
+### Um P-valor acima de 0,05 demonstra ausência de efeito?
+
+-   Não, pois um resultado não significativo representa incerteza e não demonstra equivalência nem ausência de efeito, que devem ser avaliadas por estimativas, intervalos de confiança e testes de equivalência quando pertinentes.[@Ranstam2021; @WangLong2022]
+
+<br>
+
+### Um P-valor abaixo de 0,05 demonstra importância científica ou clínica?
+
+-   Não, pois a significância estatística não informa a magnitude nem a importância prática do efeito, que devem ser avaliadas pela estimativa e por sua incerteza à luz do contexto científico ou clínico.[@Ranstam2021; @WangLong2022; @Rovetta2025]
+
+<br>
+
+### Como o tamanho amostral pode alterar o P-valor para um efeito fixo?
+
+-   Com a mesma estimativa de efeito, amostras maiores reduzem o erro-padrão e podem produzir P-valores menores sem aumentar a magnitude do efeito.[@greenland2016; @WangLong2022]
+
+<br>
+
+```{r efeito-fixo-tamanho-amostral, echo = FALSE, warning = FALSE, message = FALSE, appendix = TRUE, fig.align = 'center', layout='Blank', ph=officer::ph_location_fullsize(), results = "asis", fig.fullwidth = TRUE, fig.cap = "Estimativa padronizada fixa (d = 0,30), intervalos de confiança de 95% aproximados e P-valores bilaterais aproximados por teste normal para diferentes tamanhos amostrais por grupo."}
+# Efeito padronizado observado mantido constante
+efeito <- 0.30
+n_grupo <- c(20, 50, 100, 500)
+
+# Aproximação normal para o teste bilateral e o intervalo de confiança
+demonstracao <- data.frame(n = n_grupo) |>
+  dplyr::mutate(
+    estimativa = efeito,
+    erro_padrao = sqrt(2 / n),
+    estatistica = efeito / erro_padrao,
+    p_valor = 2 * stats::pnorm(-abs(estatistica)),
+    limite_inferior = efeito - stats::qnorm(0.975) * erro_padrao,
+    limite_superior = efeito + stats::qnorm(0.975) * erro_padrao,
+    resultado = dplyr::if_else(p_valor < 0.05, "P < 0,05", "P ≥ 0,05"),
+    rotulo_p = dplyr::if_else(
+      p_valor < 0.001,
+      "P < 0,001",
+      paste0("P = ", formatC(p_valor, format = "f", digits = 3, decimal.mark = ","))
+    ),
+    n = factor(n, levels = n_grupo)
+  )
+
+ggplot2::ggplot(demonstracao, ggplot2::aes(y = n, color = resultado)) +
+  ggplot2::geom_vline(xintercept = 0, linetype = "dashed", color = "gray40") +
+  ggplot2::geom_segment(
+    ggplot2::aes(x = limite_inferior, xend = limite_superior, yend = n),
+    linewidth = 0.9
+  ) +
+  ggplot2::geom_point(ggplot2::aes(x = estimativa), size = 3) +
+  ggplot2::geom_text(
+    ggplot2::aes(x = 0.95, label = rotulo_p),
+    hjust = 0,
+    show.legend = FALSE,
+    color = "gray20"
+  ) +
+  ggplot2::scale_color_manual(values = c("P < 0,05" = "#0072B2", "P ≥ 0,05" = "#D55E00")) +
+  ggplot2::coord_cartesian(xlim = c(-0.5, 1.35), clip = "off") +
+  ggplot2::labs(
+    x = "Diferença padronizada estimada (d)",
+    y = "Tamanho amostral por grupo",
+    color = "Resultado do teste"
+  ) +
+  ggplot2::theme_minimal(base_size = 13) +
+  ggplot2::theme(legend.position = "bottom", panel.grid.minor = ggplot2::element_blank())
+```
+
+<br>
+
+### P-valores próximos de 0,05 devem ser classificados como conclusões opostas?
+
+-   Não, pois valores como 0,049 e 0,051 são praticamente equivalentes e a dicotomização em “significativo” e “não significativo” descarta a informação gradual contida nos dados.[@Lakens2021; @Rovetta2025; @VidgenYasseri2016]
+
+<br>
+
+### Como relatar resultados acompanhados por P-valores?
+
+-   Relate a estimativa do efeito e seu intervalo de confiança, descreva as hipóteses, o modelo e as decisões analíticas relevantes e interprete o resultado conforme a pergunta científica e o desenho do estudo.[@greenland2016; @Lakens2021; @WangLong2022; @Rovetta2025]
+
+<br>
+
+### O que pode comprometer a interpretação de um P-valor?
+
+-   Especificação inadequada do modelo, violações de pressupostos, vieses na coleta, comparações múltiplas e seleção de análises podem tornar o P-valor pouco informativo ou inválido.[@greenland2016; @WangLong2022; @VidgenYasseri2016]
 
 <br>
 
@@ -116,7 +201,7 @@ O pacote *Superpower*[@Superpower] fornece a função `ANOVA_compromise` para ca
 
 -   O P\<0,05 foi sugerido por Ronald A. Fisher como um limiar prático para indicar que um resultado era “estatisticamente significativo”.[@goodman2016]
 
--   Para Ronald A. Fisher, a significância estatística não era prova definitiva, mas um sinal de que o resultado merecia investigação adicional. A rejeição da hipótese nula só deveria ocorrer após repetidas observações significativas, e não com base em um único teste.[@goodman2016]
+-   Para Ronald A. Fisher, o limiar de 0,05 era uma convenção prática para sinalizar resultados que mereciam investigação adicional, e não uma fronteira que separasse conclusões científicas opostas.[@goodman2008; @Lakens2021]
 
 <br>
 
@@ -148,11 +233,11 @@ ggplot2::ggplot(grid, ggplot2::aes(x = x, y = y, fill = cor)) +
 
 ### Quais são os complementos ou alternativas ao P-valor?
 
--   Intervalos de confiança, credibilidade ou predição.[@wasserstein2016]
+-   Intervalos de confiança, credibilidade e predição complementam o P-valor ao descrever diferentes aspectos da incerteza sobre os parâmetros ou previsões.[@wasserstein2016]
 
--   Razão de verossimilhança.[@wasserstein2016]
+-   Razões de verossimilhança oferecem uma medida comparativa do apoio relativo dos dados a modelos estatísticos.[@wasserstein2016]
 
--   Métodos Bayesianos, fator Bayes.[@wasserstein2016]
+-   Métodos Bayesianos, incluindo fatores de Bayes, fornecem uma estrutura inferencial alternativa baseada em probabilidades condicionais dos parâmetros.[@wasserstein2016]
 
 <br>
 
@@ -355,7 +440,7 @@ knitr::kable(
 
 ### O que é distribuição de confiança?
 
--   Distribuição de confiança é uma representação contínua da evidência inferencial sobre um parâmetro de interesse. Ela mostra, para cada valor possível do tamanho de efeito, o nível de confiança associado.[@REF]
+-   Distribuição de confiança é uma distribuição frequentista que representa a incerteza inferencial sobre os valores possíveis de um parâmetro.[@XieSingh2013]
 
 <br>
 

@@ -553,9 +553,9 @@ ggplot2::annotate(
 
 ### O que reportar após um teste de hipótese?
 
-- P-valores, como estimativa da significância estatística.[@Sullivan2012]
+- P-valores, como medida de incompatibilidade entre os dados e o modelo especificado, interpretados à luz da pergunta científica.[@Sullivan2012; @greenland2016; @ChenEtAl2023]
 
-- Tamanho de efeito, como estimativa de significância substantiva.[@Sullivan2012]
+- Tamanho de efeito e intervalo de confiança, para avaliar a magnitude, a incerteza e a relevância substantiva dos resultados.[@Sullivan2012; @Ranstam2021; @WangLong2022]
 
 <br>
 
@@ -817,7 +817,7 @@ O pacote *stats*[@stats] fornece a função `p.adjust` para ajustar o P-valor ut
 
 - Testes de hipótese nula ($H_{0}$) vs. alternativa ($H_{1}$) a partir de um nível de significância ($\alpha$) pré-especificado.[@goodman2016]
 
-- P-valor como evidência estatística sobre ($H_{0}$).[@goodman2016]
+- P-valor como medida da compatibilidade dos dados com o modelo estatístico especificado sob $H_{0}$, sem interpretá-lo como probabilidade de a hipótese ser verdadeira.[@goodman2016; @greenland2016; @ChenEtAl2023]
 
 - Estimação de intervalos de confiança de um nível de significância ($\alpha$) pré-especificado bicaudal ($IC_{1-\alpha/2}$) ou unicaudal ($IC_{1-\alpha}$).[@goodman2016]
 
@@ -831,9 +831,9 @@ O pacote *stats*[@stats] fornece a função `p.adjust` para ajustar o P-valor ut
 
 - Resultados "positivos" sugerem que os autores rejeitem a hipótese nula ($H_{0}$), confirmando assim sua hipótese científica.[@greenhalgh1997a]
 
-- Em estudos (geralmente com amostras grandes), resultados estatisticamente significativos (com P-valores menores do limiar pré-estabelecido, $P<\alpha$) podem não ser clinicamente relevantes.[@altman1995]
+- Em estudos (geralmente com amostras grandes), resultados estatisticamente significativos (com P-valores menores do limiar pré-estabelecido, $P<\alpha$) podem não ser clinicamente relevantes.[@altman1995; @Ranstam2021; @WangLong2022; @Rovetta2025]
 
-- Resultados "negativos" ou inconclusivos compreendem um P-valor fora da zona crítica estatisticamente significativa (ex.: $P \geq 0,05$ ou outro ponto de corte).[@greenhalgh1997a]
+- Resultados "negativos" ou inconclusivos compreendem um P-valor fora da zona crítica estatisticamente significativa (ex.: $P \geq 0,05$ ou outro ponto de corte), mas não demonstram por si só ausência de efeito ou equivalência.[@greenhalgh1997a; @Ranstam2021; @WangLong2022]
 
 - Resultados "negativos" sugerem que os autores não rejeitam a hipótese nula ($H_{0}$) porque o efeito observado é nulo (negativo) ou o estudo não possui poder suficiente para detectá-lo, não permitindo afirmar a hipótese científica (inconclusivo).[@greenhalgh1997a]
 
